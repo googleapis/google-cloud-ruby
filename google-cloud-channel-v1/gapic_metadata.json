@@ -1,0 +1,117 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.channel.v1",
+  "libraryPackage": "::Google::Cloud::Channel::V1",
+  "services": {
+    "CloudChannelService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Channel::V1::CloudChannelService::Client",
+          "methods": {
+            "ListCustomers": [
+              "list_customers"
+            ],
+            "GetCustomer": [
+              "get_customer"
+            ],
+            "CheckCloudIdentityAccountsExist": [
+              "check_cloud_identity_accounts_exist"
+            ],
+            "CreateCustomer": [
+              "create_customer"
+            ],
+            "UpdateCustomer": [
+              "update_customer"
+            ],
+            "DeleteCustomer": [
+              "delete_customer"
+            ],
+            "ProvisionCloudIdentity": [
+              "provision_cloud_identity"
+            ],
+            "ListEntitlements": [
+              "list_entitlements"
+            ],
+            "ListTransferableSkus": [
+              "list_transferable_skus"
+            ],
+            "ListTransferableOffers": [
+              "list_transferable_offers"
+            ],
+            "GetEntitlement": [
+              "get_entitlement"
+            ],
+            "CreateEntitlement": [
+              "create_entitlement"
+            ],
+            "ChangeParameters": [
+              "change_parameters"
+            ],
+            "ChangeRenewalSettings": [
+              "change_renewal_settings"
+            ],
+            "ChangeOffer": [
+              "change_offer"
+            ],
+            "StartPaidService": [
+              "start_paid_service"
+            ],
+            "SuspendEntitlement": [
+              "suspend_entitlement"
+            ],
+            "CancelEntitlement": [
+              "cancel_entitlement"
+            ],
+            "ActivateEntitlement": [
+              "activate_entitlement"
+            ],
+            "TransferEntitlements": [
+              "transfer_entitlements"
+            ],
+            "TransferEntitlementsToGoogle": [
+              "transfer_entitlements_to_google"
+            ],
+            "ListChannelPartnerLinks": [
+              "list_channel_partner_links"
+            ],
+            "GetChannelPartnerLink": [
+              "get_channel_partner_link"
+            ],
+            "CreateChannelPartnerLink": [
+              "create_channel_partner_link"
+            ],
+            "UpdateChannelPartnerLink": [
+              "update_channel_partner_link"
+            ],
+            "ListProducts": [
+              "list_products"
+            ],
+            "ListSkus": [
+              "list_skus"
+            ],
+            "ListOffers": [
+              "list_offers"
+            ],
+            "ListPurchasableSkus": [
+              "list_purchasable_skus"
+            ],
+            "ListPurchasableOffers": [
+              "list_purchasable_offers"
+            ],
+            "RegisterSubscriber": [
+              "register_subscriber"
+            ],
+            "UnregisterSubscriber": [
+              "unregister_subscriber"
+            ],
+            "ListSubscribers": [
+              "list_subscribers"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

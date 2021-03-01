@@ -1,0 +1,21 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.policytroubleshooter.v1",
+  "libraryPackage": "::Google::Cloud::PolicyTroubleshooter::V1",
+  "services": {
+    "IamChecker": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::Client",
+          "methods": {
+            "TroubleshootIamPolicy": [
+              "troubleshoot_iam_policy"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

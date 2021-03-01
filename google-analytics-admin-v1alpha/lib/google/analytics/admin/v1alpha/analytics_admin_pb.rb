@@ -10,6 +10,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
+require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/analytics/admin/v1alpha/analytics_admin.proto", :syntax => :proto3) do
     add_message "google.analytics.admin.v1alpha.GetAccountRequest" do
@@ -208,9 +209,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.analytics.admin.v1alpha.ListFirebaseLinksRequest" do
       optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
     end
     add_message "google.analytics.admin.v1alpha.ListFirebaseLinksResponse" do
       repeated :firebase_links, :message, 1, "google.analytics.admin.v1alpha.FirebaseLink"
+      optional :next_page_token, :string, 2
     end
     add_message "google.analytics.admin.v1alpha.GetGlobalSiteTagRequest" do
       optional :name, :string, 1

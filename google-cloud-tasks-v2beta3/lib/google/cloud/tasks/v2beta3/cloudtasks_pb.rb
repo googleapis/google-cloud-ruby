@@ -20,6 +20,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :filter, :string, 2
       optional :page_size, :int32, 3
       optional :page_token, :string, 4
+      optional :read_mask, :message, 5, "google.protobuf.FieldMask"
     end
     add_message "google.cloud.tasks.v2beta3.ListQueuesResponse" do
       repeated :queues, :message, 1, "google.cloud.tasks.v2beta3.Queue"
@@ -27,6 +28,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.tasks.v2beta3.GetQueueRequest" do
       optional :name, :string, 1
+      optional :read_mask, :message, 2, "google.protobuf.FieldMask"
     end
     add_message "google.cloud.tasks.v2beta3.CreateQueueRequest" do
       optional :parent, :string, 1

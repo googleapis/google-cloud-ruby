@@ -226,6 +226,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Dataset#create_materialized_view" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :insert_table, view_full_gapi, ["my-project", "my_dataset", Google::Apis::BigqueryV2::Table]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigquery::Dataset#delete" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
@@ -1422,7 +1429,8 @@ def random_routine_hash dataset, id = nil, project: "my-project", etag: "etag123
     returnType: { typeKind: "INT64" },
     importedLibraries: ["gs://cloud-samples-data/bigquery/udfs/max-value.js"],
     definitionBody: "x * 3",
-    description: "My routine description"
+    description: "My routine description",
+    determinismLevel: "NOT_DETERMINISTIC"
   }
   h[:etag] = etag if etag
   h[:creationTime] = creation_time if creation_time

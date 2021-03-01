@@ -1,5 +1,23 @@
 # Release History
 
+### 0.4.0 / 2021-02-25
+
+#### Features
+
+* Support for Customer Managed Encryption Keys on clusters
+
+### 0.3.0 / 2021-02-02
+
+#### Features
+
+* Use self-signed JWT credentials when possible
+
+### 0.2.1 / 2021-01-26
+
+#### Bug Fixes
+
+* Update default timeout and retry configuration
+
 ### 0.2.0 / 2020-10-29
 
 #### Features

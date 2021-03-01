@@ -294,6 +294,9 @@ module Google
 
             # FedRAMP Moderate data protection controls
             FEDRAMP_MODERATE = 4
+
+            # Assured Workloads For US Regions data protection controls
+            US_REGIONAL_ACCESS = 5
           end
         end
 

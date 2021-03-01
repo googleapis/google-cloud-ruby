@@ -194,8 +194,8 @@ table = bigtable.table("my-instance", "my-table")
 
 entry = table.new_mutation_entry("user-1")
 entry.set_cell(
-  "cf-1",
-  "field-1",
+  "cf1",
+  "field1",
   "XYZ",
   timestamp: (Time.now.to_f * 1000000).round(-3) # microseconds
 ).delete_cells("cf2", "field02")
@@ -245,8 +245,8 @@ table = bigtable.table("my-instance", "my-table")
 predicate_filter = Google::Cloud::Bigtable::RowFilter.key("user-10")
 on_match_mutations = Google::Cloud::Bigtable::MutationEntry.new
 on_match_mutations.set_cell(
-  "cf-1",
-  "field-1",
+  "cf1",
+  "field1",
   "XYZ",
   timestamp: (Time.now.to_f * 1000000).round(-3) # microseconds
 ).delete_cells("cf2", "field02")

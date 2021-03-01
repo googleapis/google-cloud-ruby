@@ -285,21 +285,6 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     mock.verify
   end
 
-  def load_job_resp_gapi table, load_url
-    hash = random_job_hash
-    hash["configuration"]["load"] = {
-      "sourceUris" => [load_url],
-      "destinationTable" => {
-        "projectId" => table.project_id,
-        "datasetId" => table.dataset_id,
-        "tableId" => table.table_id
-      },
-    }
-    resp = Google::Apis::BigqueryV2::Job.from_json hash.to_json
-    resp.status = status "done"
-    resp
-  end
-
   # Borrowed from MockStorage, load to a common module?
 
   def random_bucket_hash name=random_bucket_name

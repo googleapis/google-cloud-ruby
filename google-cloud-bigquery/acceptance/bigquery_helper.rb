@@ -133,6 +133,15 @@ module Acceptance
       refute_nil data.count
     end
 
+    def assert_table_ref table_ref, dataset_id, table_id, exists: true
+      _(table_ref).must_be_kind_of Google::Cloud::Bigquery::Table
+      _(table_ref.project_id).must_equal bigquery.project
+      _(table_ref.dataset_id).must_equal dataset_id
+      _(table_ref.table_id).must_equal table_id
+      _(table_ref.reference?).must_equal true
+      _(table_ref.exists?).must_equal exists
+    end
+
     # Add spec DSL
     extend Minitest::Spec::DSL
 

@@ -103,6 +103,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CHIN_GNATHION, 32
       value :CHIN_LEFT_GONION, 33
       value :CHIN_RIGHT_GONION, 34
+      value :LEFT_CHEEK_CENTER, 35
+      value :RIGHT_CHEEK_CENTER, 36
     end
     add_message "google.cloud.vision.v1.LocationInfo" do
       optional :lat_lng, :message, 1, "google.type.LatLng"

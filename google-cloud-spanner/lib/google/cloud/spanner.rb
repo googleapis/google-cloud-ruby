@@ -49,6 +49,8 @@ module Google
       # @param [String, Hash, Google::Auth::Credentials] credentials The path to
       #   the keyfile as a String, the contents of the keyfile as a Hash, or a
       #   Google::Auth::Credentials object. (See {Spanner::Credentials})
+      #   If `emulator_host` is present, this becomes optional and the value is
+      #   internally overriden with `:this_channel_is_insecure`.
       # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
       #   See [Using OAuth 2.0 to Access Google
@@ -60,7 +62,7 @@ module Google
       #   * `https://www.googleapis.com/auth/spanner.data`
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
-      #   If the param is nil, uses the default endpoint.
+      #   If the param is nil, uses `emulator_host` or the default endpoint.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -91,19 +93,19 @@ module Google
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
                    endpoint: nil, project: nil, keyfile: nil,
                    emulator_host: nil, lib_name: nil, lib_version: nil
-        project_id    ||= (project || default_project_id)
+        project_id    ||= project || default_project_id
         scope         ||= configure.scope
         timeout       ||= configure.timeout
-        endpoint      ||= configure.endpoint
-        credentials   ||= (keyfile || default_credentials(scope: scope))
         emulator_host ||= configure.emulator_host
+        endpoint      ||= emulator_host || configure.endpoint
+        credentials   ||= keyfile
         lib_name      ||= configure.lib_name
         lib_version   ||= configure.lib_version
 
         if emulator_host
           credentials = :this_channel_is_insecure
-          endpoint = emulator_host
         else
+          credentials ||= default_credentials scope: scope
           unless credentials.is_a? Google::Auth::Credentials
             credentials = Spanner::Credentials.new credentials, scope: scope
           end

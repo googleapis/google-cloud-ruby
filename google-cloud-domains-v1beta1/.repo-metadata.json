@@ -1,0 +1,11 @@
+{
+    "api_id": "domains.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-domains-v1beta1/latest",
+    "distribution_name": "google-cloud-domains-v1beta1",
+    "language": "ruby",
+    "name": "domains",
+    "name_pretty": "Cloud Domains V1beta1 API",
+    "product_documentation": "https://cloud.google.com/domains",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}

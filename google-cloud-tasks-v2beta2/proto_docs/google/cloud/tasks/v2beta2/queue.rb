@@ -106,6 +106,37 @@ module Google
         #
         #     Purge time will be truncated to the nearest microsecond. Purge
         #     time will be unset if the queue has never been purged.
+        # @!attribute [rw] task_ttl
+        #   @return [::Google::Protobuf::Duration]
+        #     The maximum amount of time that a task will be retained in
+        #     this queue.
+        #
+        #     Queues created by Cloud Tasks have a default `task_ttl` of 31 days.
+        #     After a task has lived for `task_ttl`, the task will be deleted
+        #     regardless of whether it was dispatched or not.
+        #
+        #     The `task_ttl` for queues created via queue.yaml/xml is equal to the
+        #     maximum duration because there is a
+        #     [storage quota](https://cloud.google.com/appengine/quotas#Task_Queue) for
+        #     these queues. To view the maximum valid duration, see the documentation for
+        #     {::Google::Protobuf::Duration Duration}.
+        # @!attribute [rw] tombstone_ttl
+        #   @return [::Google::Protobuf::Duration]
+        #     The task tombstone time to live (TTL).
+        #
+        #     After a task is deleted or completed, the task's tombstone is
+        #     retained for the length of time specified by `tombstone_ttl`.
+        #     The tombstone is used by task de-duplication; another task with the same
+        #     name can't be created until the tombstone has expired. For more information
+        #     about task de-duplication, see the documentation for
+        #     {::Google::Cloud::Tasks::V2beta2::CreateTaskRequest#task CreateTaskRequest}.
+        #
+        #     Queues created by Cloud Tasks have a default `tombstone_ttl` of 1 hour.
+        # @!attribute [r] stats
+        #   @return [::Google::Cloud::Tasks::V2beta2::QueueStats]
+        #     Output only. The realtime, informational statistics for a queue. In order
+        #     to receive the statistics the caller should include this field in the
+        #     FieldMask.
         class Queue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -178,7 +209,7 @@ module Google
         #     queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#rate).
         # @!attribute [rw] max_burst_size
         #   @return [::Integer]
-        #     Output only. The max burst size.
+        #     The max burst size.
         #
         #     Max burst size limits how fast tasks in queue are processed when
         #     many tasks are in the queue and the rate is high. This field
@@ -193,23 +224,23 @@ module Google
         #     token is removed from the bucket. Tasks will be dispatched until
         #     the queue's bucket runs out of tokens. The bucket will be
         #     continuously refilled with new tokens based on
-        #     {::Google::Cloud::Tasks::V2beta2::RateLimits#max_tasks_dispatched_per_second max_tasks_dispatched_per_second}.
+        #     [max_dispatches_per_second][RateLimits.max_dispatches_per_second].
         #
-        #     Cloud Tasks will pick the value of `max_burst_size` based on the
-        #     value of
-        #     {::Google::Cloud::Tasks::V2beta2::RateLimits#max_tasks_dispatched_per_second max_tasks_dispatched_per_second}.
+        #     The default value of `max_burst_size` is picked by Cloud Tasks
+        #     based on the value of
+        #     [max_dispatches_per_second][RateLimits.max_dispatches_per_second].
+        #
+        #     The maximum value of `max_burst_size` is 500.
         #
         #     For App Engine queues that were created or updated using
         #     `queue.yaml/xml`, `max_burst_size` is equal to
         #     [bucket_size](https://cloud.google.com/appengine/docs/standard/python/config/queueref#bucket_size).
-        #     Since `max_burst_size` is output only, if
-        #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#update_queue UpdateQueue} is called on a queue
-        #     created by `queue.yaml/xml`, `max_burst_size` will be reset based
-        #     on the value of
-        #     {::Google::Cloud::Tasks::V2beta2::RateLimits#max_tasks_dispatched_per_second max_tasks_dispatched_per_second},
-        #     regardless of whether
-        #     {::Google::Cloud::Tasks::V2beta2::RateLimits#max_tasks_dispatched_per_second max_tasks_dispatched_per_second}
-        #     is updated.
+        #     If
+        #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#update_queue UpdateQueue} is called on a queue without
+        #     explicitly setting a value for `max_burst_size`,
+        #     `max_burst_size` value will get updated if
+        #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#update_queue UpdateQueue} is updating
+        #     [max_dispatches_per_second][RateLimits.max_dispatches_per_second].
         # @!attribute [rw] max_concurrent_tasks
         #   @return [::Integer]
         #     The maximum number of concurrent tasks that Cloud Tasks allows
@@ -316,7 +347,7 @@ module Google
         #     A task's retry interval starts at
         #     {::Google::Cloud::Tasks::V2beta2::RetryConfig#min_backoff min_backoff}, then doubles
         #     `max_doublings` times, then increases linearly, and finally
-        #     retries retries at intervals of
+        #     retries at intervals of
         #     {::Google::Cloud::Tasks::V2beta2::RetryConfig#max_backoff max_backoff} up to
         #     {::Google::Cloud::Tasks::V2beta2::RetryConfig#max_attempts max_attempts} times.
         #
@@ -340,6 +371,37 @@ module Google
         #     [max_doublings in
         #     queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters).
         class RetryConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Statistics for a queue.
+        # @!attribute [r] tasks_count
+        #   @return [::Integer]
+        #     Output only. An estimation of the number of tasks in the queue, that is, the tasks in
+        #     the queue that haven't been executed, the tasks in the queue which the
+        #     queue has dispatched but has not yet received a reply for, and the failed
+        #     tasks that the queue is retrying.
+        # @!attribute [r] oldest_estimated_arrival_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. An estimation of the nearest time in the future where a task in the queue
+        #     is scheduled to be executed.
+        # @!attribute [r] executed_last_minute_count
+        #   @return [::Integer]
+        #     Output only. The number of tasks that the queue has dispatched and received a reply for
+        #     during the last minute. This variable counts both successful and
+        #     non-successful executions.
+        # @!attribute [r] concurrent_dispatches_count
+        #   @return [::Integer]
+        #     Output only. The number of requests that the queue has dispatched but has not received
+        #     a reply for yet.
+        # @!attribute [r] effective_execution_rate
+        #   @return [::Float]
+        #     Output only. The current maximum number of tasks per second executed by the queue.
+        #     The maximum value of this variable is controlled by the RateLimits of the
+        #     Queue. However, this value could be less to avoid overloading the endpoints
+        #     tasks in the queue are targeting.
+        class QueueStats
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

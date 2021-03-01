@@ -1,5 +1,24 @@
 # Release History
 
+### 0.4.0 / 2021-02-23
+
+#### Features
+
+* Add CMEK fields to backup and database
+
+### 0.3.0 / 2021-02-02
+
+#### Features
+
+* Support point-in-time-recovery fields
+* Use self-signed JWT credentials when possible
+
+### 0.2.1 / 2021-01-20
+
+#### Documentation
+
+* Timeout config description correctly gives the units as seconds.
+
 ### 0.2.0 / 2020-12-02
 
 #### Features

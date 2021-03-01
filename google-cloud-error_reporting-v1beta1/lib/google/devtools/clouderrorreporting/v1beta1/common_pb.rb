@@ -3,15 +3,16 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/devtools/clouderrorreporting/v1beta1/common.proto", :syntax => :proto3) do
     add_message "google.devtools.clouderrorreporting.v1beta1.ErrorGroup" do
       optional :name, :string, 1
       optional :group_id, :string, 2
       repeated :tracking_issues, :message, 3, "google.devtools.clouderrorreporting.v1beta1.TrackingIssue"
+      optional :resolution_status, :enum, 5, "google.devtools.clouderrorreporting.v1beta1.ResolutionStatus"
     end
     add_message "google.devtools.clouderrorreporting.v1beta1.TrackingIssue" do
       optional :url, :string, 1
@@ -45,6 +46,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :line_number, :int32, 2
       optional :function_name, :string, 4
     end
+    add_enum "google.devtools.clouderrorreporting.v1beta1.ResolutionStatus" do
+      value :RESOLUTION_STATUS_UNSPECIFIED, 0
+      value :OPEN, 1
+      value :ACKNOWLEDGED, 2
+      value :RESOLVED, 3
+      value :MUTED, 4
+    end
   end
 end
 
@@ -59,6 +67,7 @@ module Google
         ErrorContext = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ErrorContext").msgclass
         HttpRequestContext = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.HttpRequestContext").msgclass
         SourceLocation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.SourceLocation").msgclass
+        ResolutionStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.clouderrorreporting.v1beta1.ResolutionStatus").enummodule
       end
     end
   end

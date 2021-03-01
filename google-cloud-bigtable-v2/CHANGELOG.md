@@ -1,5 +1,23 @@
 # Release History
 
+### 0.2.0 / 2021-02-03
+
+#### Features
+
+* Use self-signed JWT credentials when possible
+
+### 0.1.4 / 2021-01-26
+
+#### Bug Fixes
+
+* Update default timeout and retry configuration
+
+### 0.1.3 / 2021-01-13
+
+#### Bug Fixes
+
+* Update keepalive configuration
+
 ### 0.1.2 / 2020-08-10
 
 #### Bug Fixes

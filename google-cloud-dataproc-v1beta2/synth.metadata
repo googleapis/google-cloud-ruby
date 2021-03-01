@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "244b7ae3fec68b2d1a46c2693bc2849dd945f4ec"
+        "sha": "c830c7d6f7b45ddb90cafc77707b1ecf323e600b"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "269083b6ed01aa5a1f445462fcc61e05471cd8f8",
-        "internalRef": "345127100"
+        "sha": "bddb3d7479894576e61a6c88fa745bb24f4c98f7",
+        "internalRef": "347029491"
       }
     }
   ],
@@ -38,6 +38,7 @@
     "LICENSE.md",
     "README.md",
     "Rakefile",
+    "gapic_metadata.json",
     "google-cloud-dataproc-v1beta2.gemspec",
     "lib/google-cloud-dataproc-v1beta2.rb",
     "lib/google/cloud/dataproc/v1beta2.rb",
@@ -51,6 +52,7 @@
     "lib/google/cloud/dataproc/v1beta2/cluster_controller/client.rb",
     "lib/google/cloud/dataproc/v1beta2/cluster_controller/credentials.rb",
     "lib/google/cloud/dataproc/v1beta2/cluster_controller/operations.rb",
+    "lib/google/cloud/dataproc/v1beta2/cluster_controller/paths.rb",
     "lib/google/cloud/dataproc/v1beta2/clusters_pb.rb",
     "lib/google/cloud/dataproc/v1beta2/clusters_services_pb.rb",
     "lib/google/cloud/dataproc/v1beta2/job_controller.rb",
@@ -88,6 +90,7 @@
     "test/google/cloud/dataproc/v1beta2/autoscaling_policy_service_paths_test.rb",
     "test/google/cloud/dataproc/v1beta2/autoscaling_policy_service_test.rb",
     "test/google/cloud/dataproc/v1beta2/cluster_controller_operations_test.rb",
+    "test/google/cloud/dataproc/v1beta2/cluster_controller_paths_test.rb",
     "test/google/cloud/dataproc/v1beta2/cluster_controller_test.rb",
     "test/google/cloud/dataproc/v1beta2/job_controller_operations_test.rb",
     "test/google/cloud/dataproc/v1beta2/job_controller_test.rb",

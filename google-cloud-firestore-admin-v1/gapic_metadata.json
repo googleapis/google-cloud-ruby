@@ -1,0 +1,45 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.firestore.admin.v1",
+  "libraryPackage": "::Google::Cloud::Firestore::Admin::V1",
+  "services": {
+    "FirestoreAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client",
+          "methods": {
+            "CreateIndex": [
+              "create_index"
+            ],
+            "ListIndexes": [
+              "list_indexes"
+            ],
+            "GetIndex": [
+              "get_index"
+            ],
+            "DeleteIndex": [
+              "delete_index"
+            ],
+            "GetField": [
+              "get_field"
+            ],
+            "UpdateField": [
+              "update_field"
+            ],
+            "ListFields": [
+              "list_fields"
+            ],
+            "ExportDocuments": [
+              "export_documents"
+            ],
+            "ImportDocuments": [
+              "import_documents"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

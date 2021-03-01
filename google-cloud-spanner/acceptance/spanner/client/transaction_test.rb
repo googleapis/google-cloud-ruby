@@ -197,6 +197,19 @@ describe "Spanner Client", :transaction, :spanner do
     end
   end
 
+  it "execute transaction and return commit stats" do
+    skip if emulator_enabled?
+
+    commit_options = { return_commit_stats: true }
+    commit_resp = db.transaction commit_options: commit_options do |tx|
+      _(tx.transaction_id).wont_be :nil?
+
+      tx.insert "accounts", additional_account
+    end
+
+    assert_commit_response commit_resp, commit_options
+  end
+
   def read_and_update db
     db.transaction do |tx|
       tx_results = tx.read "accounts", [:reputation], keys: 1, limit: 1

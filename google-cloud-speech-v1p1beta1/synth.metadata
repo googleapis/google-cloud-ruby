@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "244b7ae3fec68b2d1a46c2693bc2849dd945f4ec"
+        "sha": "c830c7d6f7b45ddb90cafc77707b1ecf323e600b"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
-        "internalRef": "326288259"
+        "sha": "56c65edc8b946c95fa7ea0e4458412d3a8219c83",
+        "internalRef": "358182033"
       }
     }
   ],
@@ -38,9 +38,16 @@
     "LICENSE.md",
     "README.md",
     "Rakefile",
+    "gapic_metadata.json",
     "google-cloud-speech-v1p1beta1.gemspec",
     "lib/google-cloud-speech-v1p1beta1.rb",
     "lib/google/cloud/speech/v1p1beta1.rb",
+    "lib/google/cloud/speech/v1p1beta1/adaptation.rb",
+    "lib/google/cloud/speech/v1p1beta1/adaptation/client.rb",
+    "lib/google/cloud/speech/v1p1beta1/adaptation/credentials.rb",
+    "lib/google/cloud/speech/v1p1beta1/adaptation/paths.rb",
+    "lib/google/cloud/speech/v1p1beta1/cloud_speech_adaptation_pb.rb",
+    "lib/google/cloud/speech/v1p1beta1/cloud_speech_adaptation_services_pb.rb",
     "lib/google/cloud/speech/v1p1beta1/cloud_speech_pb.rb",
     "lib/google/cloud/speech/v1p1beta1/cloud_speech_services_pb.rb",
     "lib/google/cloud/speech/v1p1beta1/resource_pb.rb",
@@ -54,13 +61,17 @@
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/cloud/speech/v1p1beta1/cloud_speech.rb",
+    "proto_docs/google/cloud/speech/v1p1beta1/cloud_speech_adaptation.rb",
     "proto_docs/google/cloud/speech/v1p1beta1/resource.rb",
     "proto_docs/google/longrunning/operations.rb",
     "proto_docs/google/protobuf/any.rb",
     "proto_docs/google/protobuf/duration.rb",
     "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
+    "test/google/cloud/speech/v1p1beta1/adaptation_paths_test.rb",
+    "test/google/cloud/speech/v1p1beta1/adaptation_test.rb",
     "test/google/cloud/speech/v1p1beta1/speech_operations_test.rb",
     "test/google/cloud/speech/v1p1beta1/speech_paths_test.rb",
     "test/google/cloud/speech/v1p1beta1/speech_test.rb",

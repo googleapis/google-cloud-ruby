@@ -1,5 +1,23 @@
 # Release History
 
+### 0.5.0 / 2021-02-10
+
+#### Features
+
+* Support LEFT_CHEEK_CENTER and RIGHT_CHEEK_CENTER facial landmark types
+
+### 0.4.0 / 2021-02-02
+
+#### Features
+
+* Use self-signed JWT credentials when possible
+
+### 0.3.1 / 2021-01-19
+
+#### Documentation
+
+* Timeout config description correctly gives the units as seconds.
+
 ### 0.3.0 / 2020-12-02
 
 #### Features

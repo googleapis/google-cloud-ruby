@@ -1,0 +1,66 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.tasks.v2beta3",
+  "libraryPackage": "::Google::Cloud::Tasks::V2beta3",
+  "services": {
+    "CloudTasks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Tasks::V2beta3::CloudTasks::Client",
+          "methods": {
+            "ListQueues": [
+              "list_queues"
+            ],
+            "GetQueue": [
+              "get_queue"
+            ],
+            "CreateQueue": [
+              "create_queue"
+            ],
+            "UpdateQueue": [
+              "update_queue"
+            ],
+            "DeleteQueue": [
+              "delete_queue"
+            ],
+            "PurgeQueue": [
+              "purge_queue"
+            ],
+            "PauseQueue": [
+              "pause_queue"
+            ],
+            "ResumeQueue": [
+              "resume_queue"
+            ],
+            "GetIamPolicy": [
+              "get_iam_policy"
+            ],
+            "SetIamPolicy": [
+              "set_iam_policy"
+            ],
+            "TestIamPermissions": [
+              "test_iam_permissions"
+            ],
+            "ListTasks": [
+              "list_tasks"
+            ],
+            "GetTask": [
+              "get_task"
+            ],
+            "CreateTask": [
+              "create_task"
+            ],
+            "DeleteTask": [
+              "delete_task"
+            ],
+            "RunTask": [
+              "run_task"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

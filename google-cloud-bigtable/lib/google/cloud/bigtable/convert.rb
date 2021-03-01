@@ -77,6 +77,18 @@ module Google
 
           Google::Protobuf::Timestamp.new seconds: time.to_i, nanos: time.nsec
         end
+
+        ##
+        # Converts an Integer to 64-bit signed big-endian integer data.
+        # Returns a string argument unchanged.
+        #
+        # @param value [String, Integer]
+        # @return [String]
+        #
+        def integer_to_signed_be_64 value
+          return [value].pack "q>" if value.is_a? Integer
+          value
+        end
       end
     end
   end

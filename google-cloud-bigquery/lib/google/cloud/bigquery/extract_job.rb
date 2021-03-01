@@ -103,8 +103,7 @@ module Google
         #   table extraction.
         def compression?
           return false unless table?
-          val = @gapi.configuration.extract.compression
-          val == "GZIP"
+          @gapi.configuration.extract.compression == "GZIP"
         end
 
         ##
@@ -117,8 +116,7 @@ module Google
         #
         def json?
           return false unless table?
-          val = @gapi.configuration.extract.destination_format
-          val == "NEWLINE_DELIMITED_JSON"
+          @gapi.configuration.extract.destination_format == "NEWLINE_DELIMITED_JSON"
         end
 
         ##
@@ -146,8 +144,7 @@ module Google
         #
         def avro?
           return false unless table?
-          val = @gapi.configuration.extract.destination_format
-          val == "AVRO"
+          @gapi.configuration.extract.destination_format == "AVRO"
         end
 
         ##
@@ -173,8 +170,7 @@ module Google
         #
         def ml_xgboost_booster?
           return false unless model?
-          val = @gapi.configuration.extract.destination_format
-          val == "ML_XGBOOST_BOOSTER"
+          @gapi.configuration.extract.destination_format == "ML_XGBOOST_BOOSTER"
         end
 
         ##

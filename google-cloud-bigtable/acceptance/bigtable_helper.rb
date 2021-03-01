@@ -149,7 +149,7 @@ end
 
 $table_list_for_cleanup = []
 
-def create_test_table instance_id, table_id, row_count: nil, qualifiers: ["field1"]
+def create_test_table instance_id, table_id, row_count: nil
   table = $bigtable.create_table(instance_id, table_id) do |cfs|
     cfs.add('cf', gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(1))
   end
@@ -160,10 +160,8 @@ def create_test_table instance_id, table_id, row_count: nil, qualifiers: ["field
 
   entries = row_count.times.map do |i|
     entry = table.new_mutation_entry("test-#{i+1}")
-
-    qualifiers.each do |q|
-      entry.set_cell("cf", q, "value-#{i+1}")
-    end
+    entry.set_cell("cf", "field1", "value-#{i+1}")
+    entry.set_cell("cf", "field2", i+1)
     entry
   end
 
@@ -199,12 +197,7 @@ create_test_instance(
   $bigtable_cluster_location
 )
 
-create_test_table(
-  $bigtable_instance_id,
-  $bigtable_read_table_id,
-  row_count: 5,
-  qualifiers: ["field1", "field2"]
-)
+create_test_table($bigtable_instance_id, $bigtable_read_table_id, row_count: 5)
 create_test_table($bigtable_instance_id, $bigtable_mutation_table_id)
 
 Minitest.after_run do

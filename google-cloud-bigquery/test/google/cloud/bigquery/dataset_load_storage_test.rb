@@ -41,7 +41,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
   it "can specify a storage file" do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi(table_reference, load_url)
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, load_url),
       [project, job_gapi]
     dataset.service.mocked_service = mock
 
@@ -57,7 +57,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     it "can specify a storage file" do
       mock = Minitest::Mock.new
       job_gapi = load_job_url_gapi(table_reference, load_url, location: nil)
-      mock.expect :insert_job, load_job_resp_gapi(load_url),
+      mock.expect :insert_job, load_job_resp_gapi(table_reference, load_url),
         [project, job_gapi]
       dataset.service.mocked_service = mock
 
@@ -75,7 +75,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, special_url
     job_gapi.configuration.load.source_format = "CSV"
-    mock.expect :insert_job, load_job_resp_gapi(special_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, special_url),
       [project, job_gapi]
     dataset.service.mocked_service = mock
 
@@ -92,7 +92,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, special_url
     job_gapi.configuration.load.source_format = "CSV"
-    mock.expect :insert_job, load_job_resp_gapi(special_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, special_url),
       [project, job_gapi]
     dataset.service.mocked_service = mock
 
@@ -109,7 +109,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     mock = Minitest::Mock.new
     job_gapi = load_job_csv_options_gapi table_reference
     job_gapi.configuration.load.source_uris = [special_url]
-    mock.expect :insert_job, load_job_resp_gapi(special_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, special_url),
       [project, job_gapi]
     dataset.service.mocked_service = mock
 
@@ -128,7 +128,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, special_url
     job_gapi.configuration.load.source_format = "AVRO"
-    mock.expect :insert_job, load_job_resp_gapi(special_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, special_url),
       [project, job_gapi]
     dataset.service.mocked_service = mock
 
@@ -145,7 +145,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, special_url
     job_gapi.configuration.load.source_format = "ORC"
-    mock.expect :insert_job, load_job_resp_gapi(special_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, special_url),
                 [project, job_gapi]
     dataset.service.mocked_service = mock
 
@@ -162,7 +162,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, special_url
     job_gapi.configuration.load.source_format = "PARQUET"
-    mock.expect :insert_job, load_job_resp_gapi(special_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, special_url),
                 [project, job_gapi]
     dataset.service.mocked_service = mock
 
@@ -179,7 +179,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, special_url
     job_gapi.configuration.load.source_format = "DATASTORE_BACKUP"
-    mock.expect :insert_job, load_job_resp_gapi(special_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, special_url),
       [project, job_gapi]
     dataset.service.mocked_service = mock
 
@@ -198,7 +198,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     job_gapi = load_job_url_gapi table_reference, special_url
     job_gapi.configuration.load.source_format = "DATASTORE_BACKUP"
     job_gapi.configuration.load.projection_fields = projection_fields
-    mock.expect :insert_job, load_job_resp_gapi(special_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, special_url),
       [project, job_gapi]
     dataset.service.mocked_service = mock
 
@@ -211,7 +211,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
   it "can specify a storage url as a string" do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, load_url
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, load_url),
       [project, job_gapi]
     dataset.service.mocked_service = mock
 
@@ -224,7 +224,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
   it "can specify a storage url as a URI" do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, load_url
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, load_url),
                 [project, job_gapi]
     dataset.service.mocked_service = mock
 
@@ -238,7 +238,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     load_url2 = storage_file("more-kittens").to_gs_url
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, [load_url, load_url2]
-    mock.expect :insert_job, load_job_resp_gapi([load_url, load_url2]),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, [load_url, load_url2]),
                 [project, job_gapi]
     dataset.service.mocked_service = mock
 
@@ -252,7 +252,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, load_url
     job_gapi.configuration.load.create_disposition = "CREATE_NEVER"
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, load_url),
       [project, job_gapi]
     dataset.service.mocked_service = mock
 
@@ -266,7 +266,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, load_url
     job_gapi.configuration.load.create_disposition = "CREATE_NEVER"
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, load_url),
       [project, job_gapi]
     dataset.service.mocked_service = mock
 
@@ -280,7 +280,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, load_url
     job_gapi.configuration.load.write_disposition = "WRITE_TRUNCATE"
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, load_url),
       [project, job_gapi]
     dataset.service.mocked_service = mock
 
@@ -294,7 +294,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :storage, :mock_bigquery do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, load_url
     job_gapi.configuration.load.write_disposition = "WRITE_TRUNCATE"
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, load_url),
       [project, job_gapi]
     dataset.service.mocked_service = mock
 

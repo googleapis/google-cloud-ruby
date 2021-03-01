@@ -89,8 +89,8 @@ module Google
       #   The library version as recorded in instrumentation and logging.
       # * `interceptors` (*type:* `Array<GRPC::ClientInterceptor>`) -
       #   An array of interceptors that are run before calls are executed.
-      # * `timeout` (*type:* `Integer`) -
-      #   Default timeout in milliseconds.
+      # * `timeout` (*type:* `Numeric`) -
+      #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
       #   Additional gRPC headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -

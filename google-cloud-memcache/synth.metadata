@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "e1d661afe7586d44a29821d44fe8a4cc6d0a34a9"
+        "sha": "0b1cef6e1d017857956ae480e1255615af576b51"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
-        "internalRef": "326288259"
+        "sha": "eabec5a21219401bad79e1cc7d900c1658aee5fd",
+        "internalRef": "359130387"
       }
     }
   ],
@@ -32,6 +32,7 @@
     ".repo-metadata.json",
     ".rubocop.yml",
     ".yardopts",
+    ".yardopts-cloudrad",
     "AUTHENTICATION.md",
     "CHANGELOG.md",
     "Gemfile",

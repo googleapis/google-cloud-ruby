@@ -1,0 +1,75 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.bigquery.reservation.v1",
+  "libraryPackage": "::Google::Cloud::Bigquery::Reservation::V1",
+  "services": {
+    "ReservationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client",
+          "methods": {
+            "CreateReservation": [
+              "create_reservation"
+            ],
+            "ListReservations": [
+              "list_reservations"
+            ],
+            "GetReservation": [
+              "get_reservation"
+            ],
+            "DeleteReservation": [
+              "delete_reservation"
+            ],
+            "UpdateReservation": [
+              "update_reservation"
+            ],
+            "CreateCapacityCommitment": [
+              "create_capacity_commitment"
+            ],
+            "ListCapacityCommitments": [
+              "list_capacity_commitments"
+            ],
+            "GetCapacityCommitment": [
+              "get_capacity_commitment"
+            ],
+            "DeleteCapacityCommitment": [
+              "delete_capacity_commitment"
+            ],
+            "UpdateCapacityCommitment": [
+              "update_capacity_commitment"
+            ],
+            "SplitCapacityCommitment": [
+              "split_capacity_commitment"
+            ],
+            "MergeCapacityCommitments": [
+              "merge_capacity_commitments"
+            ],
+            "CreateAssignment": [
+              "create_assignment"
+            ],
+            "ListAssignments": [
+              "list_assignments"
+            ],
+            "DeleteAssignment": [
+              "delete_assignment"
+            ],
+            "SearchAssignments": [
+              "search_assignments"
+            ],
+            "MoveAssignment": [
+              "move_assignment"
+            ],
+            "GetBiReservation": [
+              "get_bi_reservation"
+            ],
+            "UpdateBiReservation": [
+              "update_bi_reservation"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

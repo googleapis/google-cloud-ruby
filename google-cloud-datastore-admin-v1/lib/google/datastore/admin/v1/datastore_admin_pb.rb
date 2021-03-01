@@ -65,6 +65,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :kinds, :string, 1
       repeated :namespace_ids, :string, 2
     end
+    add_message "google.datastore.admin.v1.CreateIndexRequest" do
+      optional :project_id, :string, 1
+      optional :index, :message, 3, "google.datastore.admin.v1.Index"
+    end
+    add_message "google.datastore.admin.v1.DeleteIndexRequest" do
+      optional :project_id, :string, 1
+      optional :index_id, :string, 3
+    end
     add_message "google.datastore.admin.v1.GetIndexRequest" do
       optional :project_id, :string, 1
       optional :index_id, :string, 3
@@ -108,6 +116,8 @@ module Google
           ExportEntitiesMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.admin.v1.ExportEntitiesMetadata").msgclass
           ImportEntitiesMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.admin.v1.ImportEntitiesMetadata").msgclass
           EntityFilter = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.admin.v1.EntityFilter").msgclass
+          CreateIndexRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.admin.v1.CreateIndexRequest").msgclass
+          DeleteIndexRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.admin.v1.DeleteIndexRequest").msgclass
           GetIndexRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.admin.v1.GetIndexRequest").msgclass
           ListIndexesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.admin.v1.ListIndexesRequest").msgclass
           ListIndexesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.admin.v1.ListIndexesResponse").msgclass

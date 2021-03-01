@@ -397,7 +397,7 @@ module Google
         end
 
         def commit session_name, mutations = [], transaction_id: nil,
-                   call_options: nil
+                   commit_options: nil, call_options: nil
           tx_opts = nil
           if transaction_id.nil?
             tx_opts = V1::TransactionOptions.new(
@@ -410,6 +410,11 @@ module Google
             session: session_name, transaction_id: transaction_id,
             single_use_transaction: tx_opts, mutations: mutations
           }
+
+          if commit_options
+            request[:return_commit_stats] = commit_options[:return_commit_stats]
+          end
+
           service.commit request, opts
         end
 
@@ -459,11 +464,12 @@ module Google
         end
 
         def create_backup instance_id, database_id, backup_id, expire_time,
-                          call_options: nil
+                          version_time, call_options: nil
           opts = default_options call_options: call_options
           backup = {
             database: database_path(instance_id, database_id),
-            expire_time: expire_time
+            expire_time: expire_time,
+            version_time: version_time
           }
           request = {
             parent:    instance_path(instance_id),

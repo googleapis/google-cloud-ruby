@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative "helper.rb"
-require_relative "../query_data.rb"
-require_relative "../transactions_and_batched_writes.rb"
+require_relative "helper"
+require_relative "../query_data"
+require_relative "../transactions_and_batched_writes"
 
 describe "Google Cloud Firestore API samples - Transactions and Batched Writes" do
   before do

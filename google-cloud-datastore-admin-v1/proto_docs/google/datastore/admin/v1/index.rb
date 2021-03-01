@@ -22,7 +22,7 @@ module Google
     module Datastore
       module Admin
         module V1
-          # A minimal index definition.
+          # Datastore composite index definition.
           # @!attribute [r] project_id
           #   @return [::String]
           #     Output only. Project ID.

@@ -94,8 +94,7 @@ module Google
         #   otherwise.
         #
         def batch?
-          val = @gapi.configuration.query.priority
-          val == "BATCH"
+          @gapi.configuration.query.priority == "BATCH"
         end
 
         ##

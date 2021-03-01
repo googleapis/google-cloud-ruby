@@ -34,7 +34,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     SQL
   end
 
-  it "can create from SQL, list, read, update, and delete a routine" do
+  it "can create from SQL, list, read, update, and delete an SQL routine" do
     # create from sql
     job = dataset.query_job routine_sql
     job.wait_until_done!
@@ -115,7 +115,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     _(dataset.routine(routine_id)).must_be_nil
   end
 
-  it "can create, update and delete a routine" do
+  it "can create, update and delete an SQL routine" do
     # create
     routine = dataset.create_routine routine_id do |r|
       r.routine_type = "SCALAR_FUNCTION"
@@ -132,10 +132,10 @@ describe Google::Cloud::Bigquery, :bigquery do
     _(routine.dataset_id).must_equal dataset.dataset_id
     _(routine.routine_id).must_equal routine_id
 
-    _(routine.description).must_equal "my description"
     _(routine.routine_type).must_equal "SCALAR_FUNCTION"
     _(routine.language).must_equal "SQL"
     _(routine.body).must_equal "x * 3"
+    _(routine.description).must_equal "my description"
 
     arguments = routine.arguments
     _(arguments).must_be_kind_of Array
@@ -221,6 +221,55 @@ describe Google::Cloud::Bigquery, :bigquery do
     routine.reload!
     _(routine.body).must_equal new_body
     _(routine.arguments.first.data_type.array_element_type.struct_type.fields.last.type.type_kind).must_equal "INT64"
+
+    # delete
+    _(routine.delete).must_equal true
+
+    _(dataset.routine(routine_id)).must_be_nil
+  end
+
+  it "can create and delete a JavaScript routine" do
+    # create
+    routine = dataset.create_routine routine_id do |r|
+      r.routine_type = "SCALAR_FUNCTION"
+      r.language = :JAVASCRIPT
+      r.arguments = [
+        Google::Cloud::Bigquery::Argument.new(name: "x", data_type: "INT64")
+      ]
+      r.body = "return x * 3;"
+      r.return_type = "INT64"
+      r.description = "my description"
+      r.determinism_level = "DETERMINISTIC"
+    end
+
+    _(routine).must_be_kind_of Google::Cloud::Bigquery::Routine
+    _(routine.project_id).must_equal bigquery.project
+    _(routine.dataset_id).must_equal dataset.dataset_id
+    _(routine.routine_id).must_equal routine_id
+
+    _(routine.routine_type).must_equal "SCALAR_FUNCTION"
+    _(routine.language).must_equal "JAVASCRIPT"
+    _(routine.body).must_equal "return x * 3;"
+    _(routine.description).must_equal "my description"
+    _(routine.determinism_level).must_equal "DETERMINISTIC"
+    _(routine.determinism_level_deterministic?).must_equal true
+    _(routine.determinism_level_not_deterministic?).must_equal false
+
+    arguments = routine.arguments
+    _(arguments).must_be_kind_of Array
+    _(arguments.size).must_equal 1
+
+    argument = arguments.first
+    _(argument).must_be_kind_of Google::Cloud::Bigquery::Argument
+    _(argument.argument_kind).must_be :nil?
+    _(argument.mode).must_be :nil?
+    _(argument.name).must_equal "x"
+
+    data_type = argument.data_type
+    _(data_type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(data_type.type_kind).must_equal "INT64"
+    _(data_type.array_element_type).must_be :nil?
+    _(data_type.struct_type).must_be :nil?
 
     # delete
     _(routine.delete).must_equal true

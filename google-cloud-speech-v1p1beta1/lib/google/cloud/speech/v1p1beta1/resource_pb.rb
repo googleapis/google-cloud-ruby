@@ -3,8 +3,8 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/resource_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/speech/v1p1beta1/resource.proto", :syntax => :proto3) do
     add_message "google.cloud.speech.v1p1beta1.CustomClass" do
@@ -26,7 +26,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.speech.v1p1beta1.SpeechAdaptation" do
       repeated :phrase_sets, :message, 1, "google.cloud.speech.v1p1beta1.PhraseSet"
-      repeated :custom_classes, :message, 2, "google.cloud.speech.v1p1beta1.CustomClass"
+      repeated :phrase_set_references, :string, 2
+      repeated :custom_classes, :message, 3, "google.cloud.speech.v1p1beta1.CustomClass"
     end
   end
 end

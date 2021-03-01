@@ -20,7 +20,7 @@ def list_intents project_id:
   require "google/cloud/dialogflow"
 
   intents_client = Google::Cloud::Dialogflow.intents
-  parent = intents_client.class.agent_path project: project_id
+  parent = intents_client.agent_path project: project_id
 
   intents = intents_client.list_intents parent: parent
 

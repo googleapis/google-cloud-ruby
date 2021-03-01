@@ -23,6 +23,7 @@ require "gapic/config/method"
 require "google/cloud/dataproc/v1beta2/version"
 
 require "google/cloud/dataproc/v1beta2/cluster_controller/credentials"
+require "google/cloud/dataproc/v1beta2/cluster_controller/paths"
 require "google/cloud/dataproc/v1beta2/cluster_controller/operations"
 require "google/cloud/dataproc/v1beta2/cluster_controller/client"
 

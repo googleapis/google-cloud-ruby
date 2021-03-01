@@ -683,6 +683,17 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  # CommitResponse
+
+  doctest.before "Google::Cloud::Spanner::CommitResponse" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), [{database: "projects/my-project/instances/my-instance/databases/my-database", session_count: 10, session_template: nil }, Hash]
+      mock.expect :commit, commit_resp do |req|
+        verify_mock_params(req, session: "session-name", mutations: Array)
+      end
+    end
+  end
+
   # Commit
 
   doctest.before "Google::Cloud::Spanner::Commit" do
@@ -1564,7 +1575,12 @@ def commit_timestamp
 end
 
 def commit_resp
-  Google::Cloud::Spanner::V1::CommitResponse.new commit_timestamp: commit_timestamp
+  Google::Cloud::Spanner::V1::CommitResponse.new(
+    commit_timestamp: commit_timestamp,
+    commit_stats: Google::Cloud::Spanner::V1::CommitResponse::CommitStats.new(
+      mutation_count: 5
+    )
+  )
 end
 
 def backup_hash \

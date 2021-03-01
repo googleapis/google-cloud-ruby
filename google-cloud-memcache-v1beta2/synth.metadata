@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "244b7ae3fec68b2d1a46c2693bc2849dd945f4ec"
+        "sha": "c830c7d6f7b45ddb90cafc77707b1ecf323e600b"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
-        "internalRef": "326288259"
+        "sha": "84cf54e45ed5970980ae868e0a1e5ad1266a8830",
+        "internalRef": "356380191"
       }
     }
   ],
@@ -38,6 +38,7 @@
     "LICENSE.md",
     "README.md",
     "Rakefile",
+    "gapic_metadata.json",
     "google-cloud-memcache-v1beta2.gemspec",
     "lib/google-cloud-memcache-v1beta2.rb",
     "lib/google/cloud/memcache/v1beta2.rb",
@@ -55,6 +56,7 @@
     "proto_docs/google/cloud/memcache/v1beta2/cloud_memcache.rb",
     "proto_docs/google/longrunning/operations.rb",
     "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/duration.rb",
     "proto_docs/google/protobuf/empty.rb",
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",

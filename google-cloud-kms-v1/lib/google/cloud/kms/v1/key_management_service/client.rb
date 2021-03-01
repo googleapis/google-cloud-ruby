@@ -81,7 +81,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.list_crypto_keys.timeout = 60.0
@@ -89,7 +89,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.list_crypto_key_versions.timeout = 60.0
@@ -97,7 +97,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.list_import_jobs.timeout = 60.0
@@ -105,7 +105,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.get_key_ring.timeout = 60.0
@@ -113,7 +113,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.get_crypto_key.timeout = 60.0
@@ -121,7 +121,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.get_crypto_key_version.timeout = 60.0
@@ -129,7 +129,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.get_public_key.timeout = 60.0
@@ -137,7 +137,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.get_import_job.timeout = 60.0
@@ -145,7 +145,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.create_key_ring.timeout = 60.0
@@ -153,7 +153,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.create_crypto_key.timeout = 60.0
@@ -161,7 +161,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.create_crypto_key_version.timeout = 60.0
@@ -173,7 +173,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.update_crypto_key.timeout = 60.0
@@ -181,7 +181,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.update_crypto_key_version.timeout = 60.0
@@ -189,7 +189,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.encrypt.timeout = 60.0
@@ -197,7 +197,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.decrypt.timeout = 60.0
@@ -205,7 +205,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.asymmetric_sign.timeout = 60.0
@@ -213,7 +213,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.asymmetric_decrypt.timeout = 60.0
@@ -221,7 +221,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.update_crypto_key_primary_version.timeout = 60.0
@@ -229,7 +229,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.destroy_crypto_key_version.timeout = 60.0
@@ -237,7 +237,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config.rpcs.restore_crypto_key_version.timeout = 60.0
@@ -245,7 +245,7 @@ module Google
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
-                  retry_codes:   [13, 14, 4]
+                  retry_codes:   [14, 4]
                 }
 
                 default_config
@@ -309,7 +309,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              credentials ||= Credentials.default scope: @config.scope
+              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # but only if the default endpoint does not have a region prefix.
+              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
+                                       @config.endpoint == Client.configure.endpoint &&
+                                       !@config.endpoint.split(".").first.include?("-")
+              credentials ||= Credentials.default scope:                  @config.scope,
+                                                  enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
@@ -2308,7 +2314,7 @@ module Google
               # Each configuration object is of type `Gapic::Config::Method` and includes
               # the following configuration fields:
               #
-              #  *  `timeout` (*type:* `Numeric`) - The call timeout in milliseconds
+              #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
               #  *  `metadata` (*type:* `Hash{Symbol=>String}`) - Additional gRPC headers
               #  *  `retry_policy (*type:* `Hash`) - The retry policy. The policy fields
               #     include the following keys:

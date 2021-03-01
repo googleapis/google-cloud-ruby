@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "244b7ae3fec68b2d1a46c2693bc2849dd945f4ec"
+        "sha": "c830c7d6f7b45ddb90cafc77707b1ecf323e600b"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "6c0f55f33f882cf97fd3135e93b144ad9c94ebab",
-        "internalRef": "341478628"
+        "sha": "dd89b0cc1bffc39d1fb5c91c6c2bb3532f237792",
+        "internalRef": "356991675"
       }
     }
   ],
@@ -38,6 +38,7 @@
     "LICENSE.md",
     "README.md",
     "Rakefile",
+    "gapic_metadata.json",
     "google-cloud-billing-budgets-v1beta1.gemspec",
     "lib/google-cloud-billing-budgets-v1beta1.rb",
     "lib/google/cloud/billing/budgets/v1beta1.rb",

@@ -36,13 +36,9 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. Human-readable display name for this account.
-        # @!attribute [rw] country_code
+        # @!attribute [rw] region_code
         #   @return [::String]
-        #     Country of business. Must be a non-deprecated code for a UN M.49 region.
-        #
-        #     https:
-        #     //unicode.org/cldr/charts/latest/supplem
-        #     // ental/territory_containment_un_m_49.html
+        #     Country of business. Must be a Unicode CLDR region code.
         # @!attribute [r] deleted
         #   @return [::Boolean]
         #     Output only. Indicates whether this Account is soft-deleted or not. Deleted
@@ -100,9 +96,8 @@ module Google
         #     Examples: "USD", "EUR", "JPY"
         # @!attribute [r] deleted
         #   @return [::Boolean]
-        #     Output only. Indicates whether this Property is soft-deleted or not.
-        #     Deleted properties are excluded from List results unless specifically
-        #     requested.
+        #     Output only. Indicates whether this Property is soft-deleted or not. Deleted properties
+        #     are excluded from List results unless specifically requested.
         class Property
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -262,7 +257,6 @@ module Google
         #   @return [::String]
         #     Output only. Resource name of this Data Stream.
         #     Format:
-        #
         #     properties/\\{property_id}/webDataStreams/\\{stream_id}/enhancedMeasurementSettings
         #     Example: "properties/1000/webDataStreams/2000/enhancedMeasurementSettings"
         # @!attribute [rw] stream_enabled
@@ -274,8 +268,8 @@ module Google
         #     whether they are respected.
         # @!attribute [r] page_views_enabled
         #   @return [::Boolean]
-        #     Output only. If enabled, capture a page view event each time a page loads
-        #     or the website changes the browser history state.
+        #     Output only. If enabled, capture a page view event each time a page loads or the
+        #     website changes the browser history state.
         # @!attribute [rw] scrolls_enabled
         #   @return [::Boolean]
         #     If enabled, capture scroll events each time a visitor gets to the bottom of
@@ -284,18 +278,10 @@ module Google
         #   @return [::Boolean]
         #     If enabled, capture an outbound click event each time a visitor clicks a
         #     link that leads them away from your domain.
-        # @!attribute [rw] content_views_enabled
-        #   @return [::Boolean]
-        #     Capture events when your visitors view content on your site that has
-        #     structured data (eg, articles, blog posts, product details screens, etc.).
         # @!attribute [rw] site_search_enabled
         #   @return [::Boolean]
         #     If enabled, capture a view search results event each time a visitor
         #     performs a search on your site (based on a query parameter).
-        # @!attribute [rw] form_interactions_enabled
-        #   @return [::Boolean]
-        #     If enabled, capture a view search results event each time a visitor
-        #     interacts with a form on your site.
         # @!attribute [rw] video_engagement_enabled
         #   @return [::Boolean]
         #     If enabled, capture video play, progress, and complete events as visitors
@@ -304,36 +290,21 @@ module Google
         #   @return [::Boolean]
         #     If enabled, capture a file download event each time a link is clicked with
         #     a common document, compressed file, application, video, or audio extension.
-        # @!attribute [rw] data_tagged_element_clicks_enabled
+        # @!attribute [r] page_loads_enabled
         #   @return [::Boolean]
-        #     If enabled, capture a click event each time a visitor clicks a link or
-        #     element that has data attributes beginning with "data-ga".
-        # @!attribute [rw] page_loads_enabled
-        #   @return [::Boolean]
-        #     If enabled, capture a page view event each time a page loads.
+        #     Output only. If enabled, capture a page view event each time a page loads.
         # @!attribute [rw] page_changes_enabled
         #   @return [::Boolean]
         #     If enabled, capture a page view event each time the website changes the
         #     browser history state.
-        # @!attribute [rw] articles_and_blogs_enabled
-        #   @return [::Boolean]
-        #     Capture events when your visitors view content on your site that has
-        #     articles or blog posts.
-        # @!attribute [rw] products_and_ecommerce_enabled
-        #   @return [::Boolean]
-        #     Capture events when your visitors view content on your site that has
-        #     product details screens, etc.
         # @!attribute [rw] search_query_parameter
         #   @return [::String]
         #     Required. URL query parameters to interpret as site search parameters.
         #     Max length is 1024 characters. Must not be empty.
-        # @!attribute [rw] url_query_parameter
+        # @!attribute [rw] uri_query_parameter
         #   @return [::String]
         #     Additional URL query parameters.
         #     Max length is 1024 characters.
-        # @!attribute [rw] excluded_domains
-        #   @return [::String]
-        #     Domains to exclude from measurement. Max length is 1024 characters.
         class EnhancedMeasurementSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -345,9 +316,9 @@ module Google
         #     Output only. Example format: properties/1234/firebaseLinks/5678
         # @!attribute [rw] project
         #   @return [::String]
-        #     Immutable. Firebase project resource name. When creating a FirebaseLink,
-        #     you may provide this resource name using either a project number or project
-        #     ID. Once this resource has been created, returned FirebaseLinks will always
+        #     Immutable. Firebase project resource name. When creating a FirebaseLink, you may
+        #     provide this resource name using either a project number or project ID.
+        #     Once this resource has been created, returned FirebaseLinks will always
         #     have a project_name that contains a project number.
         #
         #     Format: 'projects/\\{project number}'
@@ -366,13 +337,14 @@ module Google
 
         # Read-only resource with the tag for sending data from a website to a
         # WebDataStream.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name for this GlobalSiteTag resource.
+        #     Format: properties/\\{propertyId}/globalSiteTag
         # @!attribute [rw] snippet
         #   @return [::String]
-        #     Immutable. JavaScript code snippet to be pasted as the first item into the
-        #     head tag of every webpage to measure.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     The resource name of this tag.
+        #     Immutable. JavaScript code snippet to be pasted as the first item into the head tag of
+        #     every webpage to measure.
         class GlobalSiteTag
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -381,13 +353,9 @@ module Google
         # A link between an GA4 property and a Google Ads account.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. Format:
-        #     properties/\\{propertyId}/googleAdsLinks/\\{googleAdsLinkId}
+        #     Output only. Format: properties/\\{propertyId}/googleAdsLinks/\\{googleAdsLinkId}
         #
         #     Note: googleAdsLinkId is not the Google Ads customer ID.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Immutable. Format: properties/\\{propertyId}
         # @!attribute [rw] customer_id
         #   @return [::String]
         #     Immutable. Google Ads customer ID.

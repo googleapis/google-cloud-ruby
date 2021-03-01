@@ -1,5 +1,23 @@
 # Release History
 
+### 0.3.0 / 2021-02-23
+
+#### Features
+
+* Support error group resolution status
+
+### 0.2.0 / 2021-02-02
+
+#### Features
+
+* Use self-signed JWT credentials when possible
+
+### 0.1.3 / 2021-01-19
+
+#### Documentation
+
+* Timeout config description correctly gives the units as seconds.
+
 ### 0.1.2 / 2020-08-10
 
 #### Bug Fixes

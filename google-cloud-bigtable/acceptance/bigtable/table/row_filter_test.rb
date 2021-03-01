@@ -20,6 +20,8 @@ require "bigtable_helper"
 describe "DataClient Read Rows Filters", :bigtable do
   let(:family) { "cf" }
   let(:table) { bigtable_read_table }
+  let(:integer_encoded_1) { "\x00\x00\x00\x00\x00\x00\x00\x01".encode "ASCII-8BIT" }
+  let(:integer_encoded_2) { "\x00\x00\x00\x00\x00\x00\x00\x02".encode "ASCII-8BIT" }
 
   it "strip value filter" do
     filter = table.filter.strip_value
@@ -81,6 +83,19 @@ describe "DataClient Read Rows Filters", :bigtable do
     end
   end
 
+  it "value filter with integer" do
+    filter = table.filter.value 1
+    rows = table.read_rows(filter: filter, limit: 2).to_a
+    _(rows.count).must_equal 1
+    row = rows.first
+
+    rows.each do |row|
+      row.cells[family].each do |cell|
+        _(cell.value).must_equal integer_encoded_1
+      end
+    end
+  end
+
   it "cells per row offset filter" do
     filter = table.filter.cells_per_row_offset(1)
     rows = table.read_rows(filter: filter, limit: 2).to_a
@@ -129,18 +144,25 @@ describe "DataClient Read Rows Filters", :bigtable do
   end
 
   it "value range filter" do
-    range = table.new_value_range.from("value-1").to('value-2')
+    range = table.new_value_range.from("value-1").to('value-2', inclusive: true)
 
     filter = table.filter.value_range(range)
     rows = table.read_rows(filter: filter).to_a
-    _(rows).wont_be :empty?
+    _(rows.count).must_equal 2
 
-    rows.each do |row|
-      row.cells[family].each do |cell|
-        _(cell.value).must_be :>=, "value-1"
-        _(cell.value).must_be :<=, "value-2"
-      end
-    end
+    _(rows[0].cells[family][0].value).must_equal "value-1"
+    _(rows[1].cells[family][0].value).must_equal "value-2"
+  end
+
+  it "value range filter with integers" do
+    range = table.new_value_range.from(1).to(2, inclusive: true)
+
+    filter = table.filter.value_range(range)
+    rows = table.read_rows(filter: filter).to_a
+    _(rows.count).must_equal 2
+
+    _(rows[0].cells[family][0].value).must_equal integer_encoded_1
+    _(rows[1].cells[family][0].value).must_equal integer_encoded_2
   end
 
   it "column range filter" do

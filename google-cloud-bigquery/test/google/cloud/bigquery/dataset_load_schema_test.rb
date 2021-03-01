@@ -64,7 +64,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :schema, :mock_bigquery do
     job_gapi = load_job_url_gapi table_reference, load_url
     job_gapi.configuration.load.schema = table_schema_gapi
     job_gapi.configuration.load.create_disposition = "CREATE_IF_NEEDED"
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, load_url),
       [project, job_gapi]
     dataset.service.mocked_service = mock
 
@@ -85,7 +85,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :schema, :mock_bigquery do
     job_gapi = load_job_url_gapi table_reference, load_url
     job_gapi.configuration.load.schema = table_schema_gapi
     job_gapi.configuration.load.create_disposition = "CREATE_IF_NEEDED"
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, load_url),
       [project, job_gapi]
     dataset.service.mocked_service = mock
 
@@ -107,7 +107,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :schema, :mock_bigquery do
     job_gapi = load_job_url_gapi table_reference, load_url
     job_gapi.configuration.load.schema = table_schema_gapi
     job_gapi.configuration.load.create_disposition = "CREATE_IF_NEEDED"
-    mock.expect :insert_job, load_job_resp_gapi(load_url),
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, load_url),
       [project, job_gapi]
     dataset.service.mocked_service = mock
 

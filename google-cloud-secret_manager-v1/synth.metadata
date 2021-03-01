@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "244b7ae3fec68b2d1a46c2693bc2849dd945f4ec"
+        "sha": "c581599a79816c2b36d20657f1e83898a0d409dc"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "f17ea338b502b967101ca71e4ff0f11d8d1e4518",
-        "internalRef": "330793532"
+        "sha": "8b3d36daaf5561496b7d4075fba4f2c52d18ca1c",
+        "internalRef": "359285402"
       }
     }
   ],
@@ -38,6 +38,7 @@
     "LICENSE.md",
     "README.md",
     "Rakefile",
+    "gapic_metadata.json",
     "google-cloud-secret_manager-v1.gemspec",
     "lib/google-cloud-secret_manager-v1.rb",
     "lib/google/cloud/secret_manager/v1.rb",
@@ -57,6 +58,7 @@
     "proto_docs/google/iam/v1/iam_policy.rb",
     "proto_docs/google/iam/v1/options.rb",
     "proto_docs/google/iam/v1/policy.rb",
+    "proto_docs/google/protobuf/duration.rb",
     "proto_docs/google/protobuf/empty.rb",
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",

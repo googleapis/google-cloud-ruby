@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-require_relative "./helper.rb"
+require_relative "./helper"
 
 ##
 # Setup the app.yaml file and deploy this directory to GAE. When run from repo

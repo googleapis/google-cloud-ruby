@@ -733,6 +733,23 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     _(job.labels).must_equal labels
     _(job).wont_be :autodetect?
     _(job.null_marker).must_equal ""
+
+    _(job.hive_partitioning?).must_equal false
+    _(job.hive_partitioning_mode).must_be_nil
+    _(job.hive_partitioning_source_uri_prefix).must_be_nil
+
+    _(job.range_partitioning?).must_equal false
+    _(job.range_partitioning_field).must_be_nil
+    _(job.range_partitioning_start).must_be_nil
+    _(job.range_partitioning_interval).must_be_nil
+    _(job.range_partitioning_end).must_be_nil
+
+    _(job.time_partitioning?).must_equal false
+    _(job.time_partitioning_type).must_be :nil?
+    _(job.time_partitioning_field).must_be :nil?
+    _(job.time_partitioning_expiration).must_be :nil?
+    _(job.time_partitioning_require_filter?).must_equal false
+
     job.wait_until_done!
     _(job.output_rows).must_equal 3
   end

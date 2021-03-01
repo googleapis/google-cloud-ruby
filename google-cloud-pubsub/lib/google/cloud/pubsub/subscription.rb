@@ -77,7 +77,9 @@ module Google
         ##
         # The name of the subscription.
         #
-        # @return [String]
+        # @return [String] A fully-qualified subscription name in the form
+        #   `projects/{project_id}/subscriptions/{subscription_id}`.
+        #
         def name
           return @resource_name if reference?
           @grpc.name
@@ -330,7 +332,7 @@ module Google
         # If {#expires_in=} is not set, a *default* value of of 31 days will be
         # used. The minimum allowed value is 1 day.
         #
-        # Makes an API call to retrieve the value when called on a
+        # Makes an API call to retrieve the expires_in value when called on a
         # reference object. See {#reference?}.
         #
         # @return [Numeric, nil] The expiration duration, or `nil` if unset.
@@ -364,6 +366,9 @@ module Google
         # An expression written in the Cloud Pub/Sub filter language. If non-empty, then only {Message} instances whose
         # `attributes` field matches the filter are delivered on this subscription. If empty, then no messages are
         # filtered out.
+        #
+        # Makes an API call to retrieve the filter value when called on a reference
+        # object. See {#reference?}.
         #
         # @return [String] The frozen filter string.
         #
@@ -409,6 +414,9 @@ module Google
         # The operation will fail if the topic does not exist. Users should ensure that there is a subscription attached
         # to this topic since messages published to a topic with no subscriptions are lost.
         #
+        # Makes an API call to retrieve the dead_letter_policy value when called on a
+        # reference object. See {#reference?}.
+        #
         # See also {#dead_letter_topic}, {#dead_letter_max_delivery_attempts=}, {#dead_letter_max_delivery_attempts}
         # and {#remove_dead_letter_policy}.
         #
@@ -448,7 +456,7 @@ module Google
         # See also {#dead_letter_max_delivery_attempts=}, {#dead_letter_topic=}, {#dead_letter_topic}
         # and {#remove_dead_letter_policy}.
         #
-        # Makes an API call to retrieve the value when called on a reference object. See {#reference?}.
+        # Makes an API call to retrieve the dead_letter_policy when called on a reference object. See {#reference?}.
         #
         # @return [Integer, nil] A value between `5` and `100`, or `nil` if no dead letter policy is configured.
         #
@@ -476,6 +484,8 @@ module Google
         # deadline. Note that client libraries may automatically extend ack_deadlines.
         #
         # This field will be honored on a best effort basis. If this parameter is 0, a default value of 5 is used.
+        #
+        # Makes an API call to retrieve the dead_letter_policy when called on a reference object. See {#reference?}.
         #
         # The dead letter topic must be set first. See {#dead_letter_topic=}, {#dead_letter_topic} and
         # {#remove_dead_letter_policy}.
@@ -512,6 +522,8 @@ module Google
         # Removes an existing dead letter policy. A dead letter policy specifies the conditions for dead lettering
         # messages in the subscription. If a dead letter policy is not set, dead lettering is disabled.
         #
+        # Makes an API call to retrieve the dead_letter_policy when called on a reference object. See {#reference?}.
+        #
         # See {#dead_letter_topic}, {#dead_letter_topic=}, {#dead_letter_max_delivery_attempts} and
         # {#dead_letter_max_delivery_attempts=}.
         #
@@ -546,6 +558,8 @@ module Google
         # default retry policy is applied. This generally implies that messages will be retried as soon as possible
         # for healthy subscribers. Retry Policy will be triggered on NACKs or acknowledgement deadline exceeded events
         # for a given message.
+        #
+        # Makes an API call to retrieve the retry_policy when called on a reference object. See {#reference?}.
         #
         # @return [RetryPolicy, nil] The retry policy for the subscription, or `nil`.
         #
@@ -588,10 +602,11 @@ module Google
         #   sub.retry_policy.maximum_backoff #=> 300
         #
         def retry_policy= new_retry_policy
-          ensure_grpc!
+          ensure_service!
           new_retry_policy = new_retry_policy.to_grpc if new_retry_policy
           update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, retry_policy: new_retry_policy
           @grpc = service.update_subscription update_grpc, :retry_policy
+          @resource_name = nil
         end
 
         ##
@@ -623,7 +638,7 @@ module Google
         #
         # See {Topic#subscribe} and {#detach}.
         #
-        # Makes an API call to retrieve the value when called on a
+        # Makes an API call to retrieve the detached value when called on a
         # reference object. See {#reference?}.
         #
         # @return [Boolean]
@@ -1051,14 +1066,19 @@ module Google
         # * Any messages published to the subscription's topic following the
         #   successful completion of the `create_snapshot` operation.
         #
-        # @param [String, nil] snapshot_name Name of the new snapshot. If the
-        #   name is not provided, the server will assign a random name
-        #   for this snapshot on the same project as the subscription. The
-        #   format is `projects/{project}/snapshots/{snap}`. The name must start
-        #   with a letter, and contain only letters ([A-Za-z]), numbers
-        #   ([0-9], dashes (-), underscores (_), periods (.), tildes (~), plus
-        #   (+) or percent signs (%). It must be between 3 and 255 characters in
-        #   length, and it must not start with "goog". Optional.
+        # @param [String, nil] snapshot_name Name of the new snapshot. Optional.
+        #   If the name is not provided, the server will assign a random name
+        #   for this snapshot on the same project as the subscription.
+        #   The value can be a simple snapshot ID (relative name), in which
+        #   case the current project ID will be supplied, or a fully-qualified
+        #   snapshot name in the form
+        #   `projects/{project_id}/snapshots/{snapshot_id}`.
+        #
+        #   The snapshot ID (relative name) must start with a letter, and
+        #   contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
+        #   underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
+        #   signs (`%`). It must be between 3 and 255 characters in length, and
+        #   it must not start with `goog`.
         # @param [Hash] labels A hash of user-provided labels associated with
         #   the snapshot. You can use these to organize and group your
         #   snapshots. Label keys and values can be no longer than 63

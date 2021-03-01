@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-area120-tables-v1alpha1", path: "../google-area120-tables-v1alpha1"

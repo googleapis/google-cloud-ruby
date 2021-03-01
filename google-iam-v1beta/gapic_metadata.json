@@ -1,0 +1,54 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.iam.v1beta",
+  "libraryPackage": "::Google::Iam::V1beta",
+  "services": {
+    "WorkloadIdentityPools": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Iam::V1beta::WorkloadIdentityPools::Client",
+          "methods": {
+            "ListWorkloadIdentityPools": [
+              "list_workload_identity_pools"
+            ],
+            "GetWorkloadIdentityPool": [
+              "get_workload_identity_pool"
+            ],
+            "CreateWorkloadIdentityPool": [
+              "create_workload_identity_pool"
+            ],
+            "UpdateWorkloadIdentityPool": [
+              "update_workload_identity_pool"
+            ],
+            "DeleteWorkloadIdentityPool": [
+              "delete_workload_identity_pool"
+            ],
+            "UndeleteWorkloadIdentityPool": [
+              "undelete_workload_identity_pool"
+            ],
+            "ListWorkloadIdentityPoolProviders": [
+              "list_workload_identity_pool_providers"
+            ],
+            "GetWorkloadIdentityPoolProvider": [
+              "get_workload_identity_pool_provider"
+            ],
+            "CreateWorkloadIdentityPoolProvider": [
+              "create_workload_identity_pool_provider"
+            ],
+            "UpdateWorkloadIdentityPoolProvider": [
+              "update_workload_identity_pool_provider"
+            ],
+            "DeleteWorkloadIdentityPoolProvider": [
+              "delete_workload_identity_pool_provider"
+            ],
+            "UndeleteWorkloadIdentityPoolProvider": [
+              "undelete_workload_identity_pool_provider"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,17 @@
 # Release History
 
+### 0.6.0 / 2021-02-02
+
+#### Features
+
+* Use self-signed JWT credentials when possible
+
+### 0.5.6 / 2021-01-19
+
+#### Documentation
+
+* Timeout config description correctly gives the units as seconds.
+
 ### 0.5.5 / 2020-08-10
 
 #### Bug Fixes

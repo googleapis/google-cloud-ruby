@@ -227,17 +227,10 @@ class MockBigquery < Minitest::Spec
     id ||= "my_table"
     name ||= "Table Name"
 
-    {
-      "kind" => "bigquery#table",
+    base = random_table_partial_hash dataset, id, name, project_id
+    base.merge({
       "etag" => "etag123456789",
-      "id" => "#{project}:#{dataset}.#{id}",
       "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{id}",
-      "tableReference" => {
-        "projectId" => (project_id || project),
-        "datasetId" => dataset,
-        "tableId" => id
-      },
-      "friendlyName" => name,
       "description" => description,
       "schema" => random_schema_hash,
       "numBytes" => "1000", # String per google/google-api-ruby-client#439
@@ -245,7 +238,6 @@ class MockBigquery < Minitest::Spec
       "creationTime" => time_millis,
       "expirationTime" => time_millis,
       "lastModifiedTime" => time_millis,
-      "type" => "TABLE",
       "location" => "US",
       "labels" => { "foo" => "bar" },
       "streamingBuffer" => {
@@ -254,10 +246,10 @@ class MockBigquery < Minitest::Spec
         "oldestEntryTime" => time_millis
       },
       "requirePartitionFilter" => true
-    }
+    })
   end
 
-  def random_table_partial_hash dataset, id = nil, name = nil
+  def random_table_partial_hash dataset, id = nil, name = nil, project_id = nil, type: "TABLE"
     id ||= "my_table"
     name ||= "Table Name"
 
@@ -265,12 +257,12 @@ class MockBigquery < Minitest::Spec
       "kind" => "bigquery#table",
       "id" => "#{project}:#{dataset}.#{id}",
       "tableReference" => {
-        "projectId" => project,
+        "projectId" => (project_id || project),
         "datasetId" => dataset,
         "tableId" => id
       },
       "friendlyName" => name,
-      "type" => "TABLE"
+      "type" => type
     }
   end
 
@@ -351,45 +343,43 @@ class MockBigquery < Minitest::Spec
     id ||= "my_view"
     name ||= "View Name"
 
-    {
-      "kind" => "bigquery#table",
+    base = random_table_partial_hash dataset, id, name, type: "VIEW"
+    base.merge({
       "etag" => "etag123456789",
-      "id" => "#{project}:#{dataset}.#{id}",
       "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{id}",
-      "tableReference" => {
-        "projectId" => project,
-        "datasetId" => dataset,
-        "tableId" => id
-      },
-      "friendlyName" => name,
       "description" => description,
       "schema" => random_schema_hash,
       "creationTime" => time_millis,
       "expirationTime" => time_millis,
       "lastModifiedTime" => time_millis,
-      "type" => "VIEW",
       "view" => {
         "query" => "SELECT name, age, score, active FROM `external.publicdata.users`"
       },
       "location" => "US"
-    }
+    })
   end
 
-  def random_view_partial_hash dataset, id = nil, name = nil
-    id ||= "my_view"
-    name ||= "View Name"
+  def random_materialized_view_hash dataset, id = nil, name = nil, description = nil
+    id ||= "my_materialized_view"
+    name ||= "Materialized View Name"
 
-    {
-      "kind" => "bigquery#table",
-      "id" => "#{project}:#{dataset}.#{id}",
-      "tableReference" => {
-        "projectId" => project,
-        "datasetId" => dataset,
-        "tableId" => id
+    base = random_table_partial_hash dataset, id, name, type: "MATERIALIZED_VIEW"
+    base.merge({
+      "etag" => "etag123456789",
+      "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{id}",
+      "description" => description,
+      "schema" => random_schema_hash,
+      "creationTime" => time_millis,
+      "expirationTime" => time_millis,
+      "lastModifiedTime" => time_millis,
+      "materializedView" => {
+        "enableRefresh" => true,
+        "lastRefreshTime" => time_millis,
+        "query" => "SELECT name, age, score, active FROM `external.publicdata.users`",
+        "refreshIntervalMs" => 3_600_000
       },
-      "friendlyName" => name,
-      "type" => "VIEW"
-    }
+      "location" => "US"
+    })
   end
 
   def source_model_json
@@ -479,8 +469,14 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
-  def random_routine_hash dataset, id = nil, project_id: nil, etag: "etag123456789", description: "This is my routine", 
-                                             creation_time: time_millis, last_modified_time: time_millis
+  def random_routine_hash dataset,
+                          id = nil,
+                          project_id: nil,
+                          etag: "etag123456789",
+                          description: "This is my routine", 
+                          creation_time: time_millis,
+                          last_modified_time: time_millis,
+                          determinism_level: nil
     id ||= "my_routine"
 
     h = {
@@ -534,6 +530,7 @@ class MockBigquery < Minitest::Spec
       definitionBody: "x * 3",
       description: description
     }
+    h[:determinismLevel] = determinism_level if determinism_level
     h[:etag] = etag if etag
     h[:creationTime] = creation_time if creation_time
     h[:lastModifiedTime] = last_modified_time if last_modified_time
@@ -592,6 +589,12 @@ class MockBigquery < Minitest::Spec
         "endTime" => time_millis,
         "numChildJobs" => 2,
         "parentJobId" => "2222222222",
+        "reservationUsage": [
+          {
+            "name" => "unreserved",
+            "slotMs" => 12345
+          }
+        ],
         "scriptStatistics": {
           "evaluationKind" => "EXPRESSION",
           "stackFrames" => [
@@ -867,7 +870,7 @@ class MockBigquery < Minitest::Spec
       dry_run: nil,
       max_results: nil,
       query: "SELECT * FROM `some_project.some_dataset.users`",
-      timeout_ms: 10000,
+      timeout_ms: 10_000,
       use_query_cache: true,
       use_legacy_sql: false,
     )
@@ -920,7 +923,10 @@ class MockBigquery < Minitest::Spec
     h.to_json
   end
 
-  def load_job_gapi table_reference, source_format = "NEWLINE_DELIMITED_JSON", job_id: "job_9876543210", location: "US"
+  def load_job_gapi table_reference,
+                    source_format = "NEWLINE_DELIMITED_JSON",
+                    job_id: "job_9876543210",
+                    location: "US"
     Google::Apis::BigqueryV2::Job.new(
       job_reference: job_reference_gapi(project, job_id, location: location),
       configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
@@ -956,31 +962,42 @@ class MockBigquery < Minitest::Spec
     )
   end
 
-  def load_job_url_gapi table_reference, urls, job_id: "job_9876543210", location: "US"
+  def load_job_url_gapi table_reference, urls, job_id: "job_9876543210", location: "US", hive_partitioning_options: nil
+    load = Google::Apis::BigqueryV2::JobConfigurationLoad.new(
+      destination_table: table_reference,
+      source_uris: [urls].flatten
+    )
+    load.hive_partitioning_options = hive_partitioning_options if hive_partitioning_options
     Google::Apis::BigqueryV2::Job.new(
       job_reference: job_reference_gapi(project, job_id, location: location),
       configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
-        load: Google::Apis::BigqueryV2::JobConfigurationLoad.new(
-          destination_table: table_reference,
-          source_uris: [urls].flatten,
-        ),
+        load: load,
         dry_run: nil
       )
     )
   end
 
-  def load_job_resp_gapi load_url, job_id: "job_9876543210", location: "US"
+  def load_job_resp_gapi table,
+                         load_url,
+                         job_id: "job_9876543210",
+                         location: "US",
+                         labels: nil,
+                         source_format: nil,
+                         hive_partitioning_options: nil
     hash = random_job_hash job_id, location: location
     hash["configuration"]["load"] = {
+      "sourceFormat" => source_format,
       "sourceUris" => [load_url],
       "destinationTable" => {
-        "projectId" => project,
-        "datasetId" => dataset_id,
-        "tableId" => table_id
+        "projectId" => table.project_id,
+        "datasetId" => table.dataset_id,
+        "tableId" => table.table_id
       }
     }
     resp = Google::Apis::BigqueryV2::Job.from_json hash.to_json
     resp.status = status "done"
+    resp.configuration.labels = labels if labels
+    resp.configuration.load.hive_partitioning_options = hive_partitioning_options if hive_partitioning_options
     resp
   end
 

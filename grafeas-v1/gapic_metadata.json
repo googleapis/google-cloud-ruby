@@ -1,0 +1,60 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "grafeas.v1",
+  "libraryPackage": "::Grafeas::V1",
+  "services": {
+    "Grafeas": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Grafeas::V1::Grafeas::Client",
+          "methods": {
+            "GetOccurrence": [
+              "get_occurrence"
+            ],
+            "ListOccurrences": [
+              "list_occurrences"
+            ],
+            "DeleteOccurrence": [
+              "delete_occurrence"
+            ],
+            "CreateOccurrence": [
+              "create_occurrence"
+            ],
+            "BatchCreateOccurrences": [
+              "batch_create_occurrences"
+            ],
+            "UpdateOccurrence": [
+              "update_occurrence"
+            ],
+            "GetOccurrenceNote": [
+              "get_occurrence_note"
+            ],
+            "GetNote": [
+              "get_note"
+            ],
+            "ListNotes": [
+              "list_notes"
+            ],
+            "DeleteNote": [
+              "delete_note"
+            ],
+            "CreateNote": [
+              "create_note"
+            ],
+            "BatchCreateNotes": [
+              "batch_create_notes"
+            ],
+            "UpdateNote": [
+              "update_note"
+            ],
+            "ListNoteOccurrences": [
+              "list_note_occurrences"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

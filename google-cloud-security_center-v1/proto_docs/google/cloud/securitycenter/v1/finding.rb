@@ -83,6 +83,10 @@ module Google
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time at which the finding was created in Security Command Center.
+        # @!attribute [rw] severity
+        #   @return [::Google::Cloud::SecurityCenter::V1::Finding::Severity]
+        #     The severity of the finding. This field is managed by the source that
+        #     writes the finding.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -107,6 +111,65 @@ module Google
             # The finding has been fixed, triaged as a non-issue or otherwise addressed
             # and is no longer active.
             INACTIVE = 2
+          end
+
+          # The severity of the finding.
+          module Severity
+            # This value is used for findings when a source doesn't write a severity
+            # value.
+            SEVERITY_UNSPECIFIED = 0
+
+            # Vulnerability:
+            # A critical vulnerability is easily discoverable by an external actor,
+            # exploitable, and results in the direct ability to execute arbitrary code,
+            # exfiltrate data, and otherwise gain additional access and privileges to
+            # cloud resources and workloads. Examples include publicly accessible
+            # unprotected user data, public SSH access with weak or no passwords, etc.
+            #
+            # Threat:
+            # Indicates a threat that is able to access, modify, or delete data or
+            # execute unauthorized code within existing resources.
+            CRITICAL = 1
+
+            # Vulnerability:
+            # A high risk vulnerability can be easily discovered and exploited in
+            # combination with other vulnerabilities in order to gain direct access and
+            # the ability to execute arbitrary code, exfiltrate data, and otherwise
+            # gain additional access and privileges to cloud resources and workloads.
+            # An example is a database with weak or no passwords that is only
+            # accessible internally. This database could easily be compromised by an
+            # actor that had access to the internal network.
+            #
+            # Threat:
+            # Indicates a threat that is able to create new computational resources in
+            # an environment but not able to access data or execute code in existing
+            # resources.
+            HIGH = 2
+
+            # Vulnerability:
+            # A medium risk vulnerability could be used by an actor to gain access to
+            # resources or privileges that enable them to eventually (through multiple
+            # steps or a complex exploit) gain access and the ability to execute
+            # arbitrary code or exfiltrate data. An example is a service account with
+            # access to more projects than it should have. If an actor gains access to
+            # the service account, they could potentially use that access to manipulate
+            # a project the service account was not intended to.
+            #
+            # Threat:
+            # Indicates a threat that is able to cause operational impact but may not
+            # access data or execute unauthorized code.
+            MEDIUM = 3
+
+            # Vulnerability:
+            # A low risk vulnerability hampers a security organization’s ability to
+            # detect vulnerabilities or active threats in their deployment, or prevents
+            # the root cause investigation of security issues. An example is monitoring
+            # and logs being disabled for resource configurations and access.
+            #
+            # Threat:
+            # Indicates a threat that has obtained minimal access to an environment but
+            # is not able to access data, execute code, or create resources.
+            LOW = 4
           end
         end
       end

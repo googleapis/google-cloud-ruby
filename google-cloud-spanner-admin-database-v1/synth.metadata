@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "244b7ae3fec68b2d1a46c2693bc2849dd945f4ec"
+        "sha": "c830c7d6f7b45ddb90cafc77707b1ecf323e600b"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "370e9f9ac14dbc73f56e15257bccc06dfebd4196",
-        "internalRef": "344883170"
+        "sha": "f829b1334cce86aa3738f3c0698d814b56664445",
+        "internalRef": "358725120"
       }
     }
   ],
@@ -38,6 +38,7 @@
     "LICENSE.md",
     "README.md",
     "Rakefile",
+    "gapic_metadata.json",
     "google-cloud-spanner-admin-database-v1.gemspec",
     "lib/google-cloud-spanner-admin-database-v1.rb",
     "lib/google/cloud/spanner/admin/database/v1.rb",
@@ -59,6 +60,7 @@
     "proto_docs/google/iam/v1/policy.rb",
     "proto_docs/google/longrunning/operations.rb",
     "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/duration.rb",
     "proto_docs/google/protobuf/empty.rb",
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",

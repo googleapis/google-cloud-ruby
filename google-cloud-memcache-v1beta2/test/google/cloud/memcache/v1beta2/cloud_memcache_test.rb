@@ -505,6 +505,73 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientTest < Minitest::
     end
   end
 
+  def test_apply_software_update
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    instance = "hello world"
+    node_ids = ["hello world"]
+    apply_all = true
+
+    apply_software_update_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :apply_software_update, name
+      assert_kind_of ::Google::Cloud::Memcache::V1beta2::ApplySoftwareUpdateRequest, request
+      assert_equal "hello world", request["instance"]
+      assert_equal ["hello world"], request["node_ids"]
+      assert_equal true, request["apply_all"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, apply_software_update_client_stub do
+      # Create client
+      client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.apply_software_update({ instance: instance, node_ids: node_ids, apply_all: apply_all }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.apply_software_update instance: instance, node_ids: node_ids, apply_all: apply_all do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.apply_software_update ::Google::Cloud::Memcache::V1beta2::ApplySoftwareUpdateRequest.new(instance: instance, node_ids: node_ids, apply_all: apply_all) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.apply_software_update({ instance: instance, node_ids: node_ids, apply_all: apply_all }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.apply_software_update ::Google::Cloud::Memcache::V1beta2::ApplySoftwareUpdateRequest.new(instance: instance, node_ids: node_ids, apply_all: apply_all), grpc_options do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, apply_software_update_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

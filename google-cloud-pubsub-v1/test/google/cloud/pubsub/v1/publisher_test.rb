@@ -59,6 +59,8 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
     labels = {}
     message_storage_policy = {}
     kms_key_name = "hello world"
+    schema_settings = {}
+    satisfies_pzs = true
 
     create_topic_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_topic, name
@@ -67,6 +69,8 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
       assert_equal({}, request["labels"].to_h)
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::PubSub::V1::MessageStoragePolicy), request["message_storage_policy"]
       assert_equal "hello world", request["kms_key_name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::PubSub::V1::SchemaSettings), request["schema_settings"]
+      assert_equal true, request["satisfies_pzs"]
       refute_nil options
     end
 
@@ -77,31 +81,31 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.create_topic({ name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name }) do |response, operation|
+      client.create_topic({ name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name, schema_settings: schema_settings, satisfies_pzs: satisfies_pzs }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_topic name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name do |response, operation|
+      client.create_topic name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name, schema_settings: schema_settings, satisfies_pzs: satisfies_pzs do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_topic ::Google::Cloud::PubSub::V1::Topic.new(name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name) do |response, operation|
+      client.create_topic ::Google::Cloud::PubSub::V1::Topic.new(name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name, schema_settings: schema_settings, satisfies_pzs: satisfies_pzs) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_topic({ name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name }, grpc_options) do |response, operation|
+      client.create_topic({ name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name, schema_settings: schema_settings, satisfies_pzs: satisfies_pzs }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_topic ::Google::Cloud::PubSub::V1::Topic.new(name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name), grpc_options do |response, operation|
+      client.create_topic ::Google::Cloud::PubSub::V1::Topic.new(name: name, labels: labels, message_storage_policy: message_storage_policy, kms_key_name: kms_key_name, schema_settings: schema_settings, satisfies_pzs: satisfies_pzs), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

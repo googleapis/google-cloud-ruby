@@ -1,0 +1,42 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.recommender.v1",
+  "libraryPackage": "::Google::Cloud::Recommender::V1",
+  "services": {
+    "Recommender": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Recommender::V1::Recommender::Client",
+          "methods": {
+            "ListInsights": [
+              "list_insights"
+            ],
+            "GetInsight": [
+              "get_insight"
+            ],
+            "MarkInsightAccepted": [
+              "mark_insight_accepted"
+            ],
+            "ListRecommendations": [
+              "list_recommendations"
+            ],
+            "GetRecommendation": [
+              "get_recommendation"
+            ],
+            "MarkRecommendationClaimed": [
+              "mark_recommendation_claimed"
+            ],
+            "MarkRecommendationSucceeded": [
+              "mark_recommendation_succeeded"
+            ],
+            "MarkRecommendationFailed": [
+              "mark_recommendation_failed"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

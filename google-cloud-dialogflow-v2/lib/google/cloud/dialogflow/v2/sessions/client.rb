@@ -147,7 +147,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              credentials ||= Credentials.default scope: @config.scope
+              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # but only if the default endpoint does not have a region prefix.
+              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
+                                       @config.endpoint == Client.configure.endpoint &&
+                                       !@config.endpoint.split(".").first.include?("-")
+              credentials ||= Credentials.default scope:                  @config.scope,
+                                                  enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
@@ -195,9 +201,10 @@ module Google
             #     `projects/<Project ID>/agent/sessions/<Session ID>`, or
             #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
             #     ID>/sessions/<Session ID>`. If `Environment ID` is not specified, we assume
-            #     default 'draft' environment. If `User ID` is not specified, we are using
-            #     "-". It's up to the API caller to choose an appropriate `Session ID` and
-            #     `User Id`. They can be a random number or some type of user and session
+            #     default 'draft' environment (`Environment ID` might be referred to as
+            #     environment name at some places). If `User ID` is not specified, we are
+            #     using "-". It's up to the API caller to choose an appropriate `Session ID`
+            #     and `User Id`. They can be a random number or some type of user and session
             #     identifiers (preferably hashed). The length of the `Session ID` and
             #     `User ID` must not exceed 36 characters.
             #
@@ -223,14 +230,12 @@ module Google
             #     audio. If this field is not set and agent-level speech synthesizer is not
             #     configured, no output audio is generated.
             #   @param output_audio_config_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Mask for
-            #     {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config}
-            #     indicating which settings in this request-level config should override
-            #     speech synthesizer settings defined at agent-level.
+            #     Mask for {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} indicating which settings in this
+            #     request-level config should override speech synthesizer settings defined at
+            #     agent-level.
             #
-            #     If unspecified or empty,
-            #     {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config}
-            #     replaces the agent-level config in its entirety.
+            #     If unspecified or empty, {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} replaces the agent-level
+            #     config in its entirety.
             #   @param input_audio [::String]
             #     The natural language speech audio to be processed. This field
             #     should be populated iff `query_input` is set to an input audio config.
@@ -464,7 +469,7 @@ module Google
               # Each configuration object is of type `Gapic::Config::Method` and includes
               # the following configuration fields:
               #
-              #  *  `timeout` (*type:* `Numeric`) - The call timeout in milliseconds
+              #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
               #  *  `metadata` (*type:* `Hash{Symbol=>String}`) - Additional gRPC headers
               #  *  `retry_policy (*type:* `Hash`) - The retry policy. The policy fields
               #     include the following keys:

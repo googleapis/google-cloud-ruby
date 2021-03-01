@@ -85,8 +85,8 @@ task :acceptance, :project, :keyfile do |t, args|
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or PUBSUB_TEST_PROJECT=test123 PUBSUB_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
-  require "google/cloud/pubsub/v1/publisher/credentials"
-  ::Google::Cloud::PubSub::V1::Publisher::Credentials.env_vars.each do |path|
+  require "google/cloud/pubsub/v1/schema_service/credentials"
+  ::Google::Cloud::PubSub::V1::SchemaService::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["PUBSUB_PROJECT"] = project
@@ -157,6 +157,11 @@ end
 desc "Run yard-doctest example tests."
 task :doctest do
   puts "The google-cloud-pubsub-v1 gem does not have doctest tests."
+end
+
+task :cloudrad do
+  ENV["CLOUDRAD_GEM_NAME"] = "google-cloud-pubsub-v1"
+  sh "bundle exec yard doc --fail-on-warning --yardopts .yardopts-cloudrad"
 end
 
 desc "Run the CI build"

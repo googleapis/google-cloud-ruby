@@ -1,0 +1,57 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.websecurityscanner.v1beta",
+  "libraryPackage": "::Google::Cloud::WebSecurityScanner::V1beta",
+  "services": {
+    "WebSecurityScanner": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client",
+          "methods": {
+            "CreateScanConfig": [
+              "create_scan_config"
+            ],
+            "DeleteScanConfig": [
+              "delete_scan_config"
+            ],
+            "GetScanConfig": [
+              "get_scan_config"
+            ],
+            "ListScanConfigs": [
+              "list_scan_configs"
+            ],
+            "UpdateScanConfig": [
+              "update_scan_config"
+            ],
+            "StartScanRun": [
+              "start_scan_run"
+            ],
+            "GetScanRun": [
+              "get_scan_run"
+            ],
+            "ListScanRuns": [
+              "list_scan_runs"
+            ],
+            "StopScanRun": [
+              "stop_scan_run"
+            ],
+            "ListCrawledUrls": [
+              "list_crawled_urls"
+            ],
+            "GetFinding": [
+              "get_finding"
+            ],
+            "ListFindings": [
+              "list_findings"
+            ],
+            "ListFindingTypeStats": [
+              "list_finding_type_stats"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

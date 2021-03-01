@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "244b7ae3fec68b2d1a46c2693bc2849dd945f4ec"
+        "sha": "c830c7d6f7b45ddb90cafc77707b1ecf323e600b"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "9bdc6e729faad989b2a6c3994281b8304908f32c",
-        "internalRef": "339319071"
+        "sha": "c99f76d57aaaf8597772f3576966636c5b699eff",
+        "internalRef": "353048801"
       }
     }
   ],
@@ -38,6 +38,7 @@
     "LICENSE.md",
     "README.md",
     "Rakefile",
+    "gapic_metadata.json",
     "google-cloud-recommender-v1.gemspec",
     "lib/google-cloud-recommender-v1.rb",
     "lib/google/cloud/recommender/v1.rb",

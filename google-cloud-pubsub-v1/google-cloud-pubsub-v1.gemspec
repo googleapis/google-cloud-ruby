@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Cloud Pub/Sub is a fully-managed real-time messaging service that allows you to send and receive messages between independent applications."
+  gem.description   = "Cloud Pub/Sub is a fully-managed real-time messaging service that allows you to send and receive messages between independent applications. Note that google-cloud-pubsub-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-pubsub instead. See the readme for more details."
   gem.summary       = "API Client library for the Cloud Pub/Sub V1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"

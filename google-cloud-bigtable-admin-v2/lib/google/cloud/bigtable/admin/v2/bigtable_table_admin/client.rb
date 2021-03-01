@@ -72,8 +72,6 @@ module Google
 
                   default_config.rpcs.create_table.timeout = 300.0
 
-                  default_config.rpcs.create_table_from_snapshot.timeout = 60.0
-
                   default_config.rpcs.list_tables.timeout = 60.0
                   default_config.rpcs.list_tables.retry_policy = {
                     initial_delay: 1.0,
@@ -112,8 +110,6 @@ module Google
                     retry_codes:   [14, 4]
                   }
 
-                  default_config.rpcs.snapshot_table.timeout = 60.0
-
                   default_config.rpcs.get_snapshot.timeout = 60.0
                   default_config.rpcs.get_snapshot.retry_policy = {
                     initial_delay: 1.0,
@@ -131,6 +127,26 @@ module Google
                   }
 
                   default_config.rpcs.delete_snapshot.timeout = 60.0
+
+                  default_config.rpcs.get_backup.timeout = 60.0
+                  default_config.rpcs.get_backup.retry_policy = {
+                    initial_delay: 1.0,
+                    max_delay:     60.0,
+                    multiplier:    2,
+                    retry_codes:   [14, 4]
+                  }
+
+                  default_config.rpcs.update_backup.timeout = 60.0
+
+                  default_config.rpcs.delete_backup.timeout = 60.0
+
+                  default_config.rpcs.list_backups.timeout = 60.0
+                  default_config.rpcs.list_backups.retry_policy = {
+                    initial_delay: 1.0,
+                    max_delay:     60.0,
+                    multiplier:    2,
+                    retry_codes:   [14, 4]
+                  }
 
                   default_config.rpcs.get_iam_policy.timeout = 60.0
                   default_config.rpcs.get_iam_policy.retry_policy = {
@@ -211,7 +227,13 @@ module Google
 
                 # Create credentials
                 credentials = @config.credentials
-                credentials ||= Credentials.default scope: @config.scope
+                # Use self-signed JWT if the scope and endpoint are unchanged from default,
+                # but only if the default endpoint does not have a region prefix.
+                enable_self_signed_jwt = @config.scope == Client.configure.scope &&
+                                         @config.endpoint == Client.configure.endpoint &&
+                                         !@config.endpoint.split(".").first.include?("-")
+                credentials ||= Credentials.default scope:                  @config.scope,
+                                                    enable_self_signed_jwt: enable_self_signed_jwt
                 if credentials.is_a?(String) || credentials.is_a?(Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
@@ -2109,7 +2131,7 @@ module Google
                 # Each configuration object is of type `Gapic::Config::Method` and includes
                 # the following configuration fields:
                 #
-                #  *  `timeout` (*type:* `Numeric`) - The call timeout in milliseconds
+                #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
                 #  *  `metadata` (*type:* `Hash{Symbol=>String}`) - Additional gRPC headers
                 #  *  `retry_policy (*type:* `Hash`) - The retry policy. The policy fields
                 #     include the following keys:

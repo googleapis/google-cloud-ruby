@@ -20,7 +20,7 @@ def synthesize_text text:, output_file:
 
   input_text = { text: text }
 
-  # Note: the voice can also be specified by name.
+  # NOTE: the voice can also be specified by name.
   # Names of voices can be retrieved with client.list_voices
   voice = {
     language_code: "en-US",
@@ -53,7 +53,7 @@ def synthesize_ssml ssml:, output_file:
 
   input_text = { ssml: ssml }
 
-  # Note: the voice can also be specified by name.
+  # NOTE: the voice can also be specified by name.
   # Names of voices can be retrieved with client.list_voices
   voice = {
     language_code: "en-US",
@@ -82,9 +82,10 @@ if $PROGRAM_NAME == __FILE__
   command = ARGV.shift
   text    = ARGV.shift
 
-  if command == "text"
+  case command
+  when "text"
     synthesize_ssml ssml: text
-  elsif command == "ssml"
+  when "ssml"
     synthesize_text ssml: text
   else
     puts <<~USAGE

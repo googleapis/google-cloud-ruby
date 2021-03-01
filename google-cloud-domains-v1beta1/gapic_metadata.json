@@ -1,0 +1,57 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.domains.v1beta1",
+  "libraryPackage": "::Google::Cloud::Domains::V1beta1",
+  "services": {
+    "Domains": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Domains::V1beta1::Domains::Client",
+          "methods": {
+            "SearchDomains": [
+              "search_domains"
+            ],
+            "RetrieveRegisterParameters": [
+              "retrieve_register_parameters"
+            ],
+            "RegisterDomain": [
+              "register_domain"
+            ],
+            "ListRegistrations": [
+              "list_registrations"
+            ],
+            "GetRegistration": [
+              "get_registration"
+            ],
+            "UpdateRegistration": [
+              "update_registration"
+            ],
+            "ConfigureManagementSettings": [
+              "configure_management_settings"
+            ],
+            "ConfigureDnsSettings": [
+              "configure_dns_settings"
+            ],
+            "ConfigureContactSettings": [
+              "configure_contact_settings"
+            ],
+            "ExportRegistration": [
+              "export_registration"
+            ],
+            "DeleteRegistration": [
+              "delete_registration"
+            ],
+            "RetrieveAuthorizationCode": [
+              "retrieve_authorization_code"
+            ],
+            "ResetAuthorizationCode": [
+              "reset_authorization_code"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

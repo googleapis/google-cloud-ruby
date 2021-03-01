@@ -259,7 +259,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              credentials ||= Credentials.default scope: @config.scope
+              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # but only if the default endpoint does not have a region prefix.
+              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
+                                       @config.endpoint == Client.configure.endpoint &&
+                                       !@config.endpoint.split(".").first.include?("-")
+              credentials ||= Credentials.default scope:                  @config.scope,
+                                                  enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
@@ -2178,7 +2184,7 @@ module Google
               # Each configuration object is of type `Gapic::Config::Method` and includes
               # the following configuration fields:
               #
-              #  *  `timeout` (*type:* `Numeric`) - The call timeout in milliseconds
+              #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
               #  *  `metadata` (*type:* `Hash{Symbol=>String}`) - Additional gRPC headers
               #  *  `retry_policy (*type:* `Hash`) - The retry policy. The policy fields
               #     include the following keys:

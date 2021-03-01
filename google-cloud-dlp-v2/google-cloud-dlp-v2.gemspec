@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories."
+  gem.description   = "Provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories. Note that google-cloud-dlp-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-dlp instead. See the readme for more details."
   gem.summary       = "API Client library for the Cloud Data Loss Prevention (DLP) V2 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"

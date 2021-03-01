@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.1 / 2021-02-02
+
+#### Documentation
+
+* Clarify the role of main vs versioned clients in the readme
+
 ### 1.0.0 / 2020-06-17
 
 This is a major update with significant new features, improved documentation, and a fair number of breaking changes.

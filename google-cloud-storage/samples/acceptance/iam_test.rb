@@ -13,12 +13,12 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../storage_add_bucket_conditional_iam_binding.rb"
-require_relative "../storage_add_bucket_iam_member.rb"
-require_relative "../storage_remove_bucket_conditional_iam_binding.rb"
-require_relative "../storage_remove_bucket_iam_member.rb"
-require_relative "../storage_set_bucket_public_iam.rb"
-require_relative "../storage_view_bucket_iam_members.rb"
+require_relative "../storage_add_bucket_conditional_iam_binding"
+require_relative "../storage_add_bucket_iam_member"
+require_relative "../storage_remove_bucket_conditional_iam_binding"
+require_relative "../storage_remove_bucket_iam_member"
+require_relative "../storage_set_bucket_public_iam"
+require_relative "../storage_view_bucket_iam_members"
 
 describe "IAM Snippets" do
   let(:member) { "group:example@google.com" }

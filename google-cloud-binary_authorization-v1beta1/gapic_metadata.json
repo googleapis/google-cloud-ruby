@@ -1,0 +1,39 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.binaryauthorization.v1beta1",
+  "libraryPackage": "::Google::Cloud::BinaryAuthorization::V1beta1",
+  "services": {
+    "BinauthzManagementServiceV1Beta1": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client",
+          "methods": {
+            "GetPolicy": [
+              "get_policy"
+            ],
+            "UpdatePolicy": [
+              "update_policy"
+            ],
+            "CreateAttestor": [
+              "create_attestor"
+            ],
+            "GetAttestor": [
+              "get_attestor"
+            ],
+            "UpdateAttestor": [
+              "update_attestor"
+            ],
+            "ListAttestors": [
+              "list_attestors"
+            ],
+            "DeleteAttestor": [
+              "delete_attestor"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

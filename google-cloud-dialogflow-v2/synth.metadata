@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "244b7ae3fec68b2d1a46c2693bc2849dd945f4ec"
+        "sha": "c830c7d6f7b45ddb90cafc77707b1ecf323e600b"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "519e9dcdff23cc14d48f85e9e00b6214ec57967e",
-        "internalRef": "345742559"
+        "sha": "54020365f5a790dcff0bbcff5643adea2a199ccb",
+        "internalRef": "358315519"
       }
     }
   ],
@@ -38,6 +38,7 @@
     "LICENSE.md",
     "README.md",
     "Rakefile",
+    "gapic_metadata.json",
     "google-cloud-dialogflow-v2.gemspec",
     "lib/google-cloud-dialogflow-v2.rb",
     "lib/google/cloud/dialogflow/v2.rb",

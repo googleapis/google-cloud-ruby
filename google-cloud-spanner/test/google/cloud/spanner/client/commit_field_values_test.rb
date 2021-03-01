@@ -22,6 +22,16 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
   let(:commit_time) { Time.now }
   let(:commit_timestamp) { Google::Cloud::Spanner::Convert.time_to_timestamp commit_time }
   let(:commit_resp) { Google::Cloud::Spanner::V1::CommitResponse.new commit_timestamp: commit_timestamp }
+  let(:commit_stats_grpc) {
+    Google::Cloud::Spanner::V1::CommitResponse::CommitStats.new(
+      mutation_count: 5
+    )
+  }
+  let(:commit_stats_resp_grpc) {
+    Google::Cloud::Spanner::V1::CommitResponse.new(
+      commit_timestamp: commit_timestamp, commit_stats: commit_stats_grpc
+    )
+  }
   let(:tx_opts) { Google::Cloud::Spanner::V1::TransactionOptions.new(
     read_write: Google::Cloud::Spanner::V1::TransactionOptions::ReadWrite.new)
   }

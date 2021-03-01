@@ -1,5 +1,11 @@
 # Release History
 
+### 0.34.0 / 2021-01-13
+
+#### Features
+
+* Replace google-api-client with google-apis-dns_v1
+
 ### 0.33.0 / 2020-09-16
 
 #### Features

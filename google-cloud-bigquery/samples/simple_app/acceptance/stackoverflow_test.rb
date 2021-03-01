@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require "minitest/autorun"
-require_relative "../stackoverflow.rb"
+require_relative "../stackoverflow"
 
 describe "BigQuery Stack Overflow" do
   it "queries stackoverflow dataset" do

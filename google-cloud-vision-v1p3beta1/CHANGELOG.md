@@ -1,5 +1,17 @@
 # Release History
 
+### 0.4.0 / 2021-02-02
+
+#### Features
+
+* Use self-signed JWT credentials when possible, and support the wait_operation RPC for long-running operations
+
+### 0.3.1 / 2021-01-19
+
+#### Documentation
+
+* Timeout config description correctly gives the units as seconds.
+
 ### 0.3.0 / 2020-12-02
 
 #### Features

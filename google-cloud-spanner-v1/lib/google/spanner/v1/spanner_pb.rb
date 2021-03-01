@@ -7,6 +7,7 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
@@ -133,6 +134,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.spanner.v1.CommitRequest" do
       optional :session, :string, 1
       repeated :mutations, :message, 4, "google.spanner.v1.Mutation"
+      optional :return_commit_stats, :bool, 5
       oneof :transaction do
         optional :transaction_id, :bytes, 2
         optional :single_use_transaction, :message, 3, "google.spanner.v1.TransactionOptions"
@@ -140,6 +142,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.spanner.v1.CommitResponse" do
       optional :commit_timestamp, :message, 1, "google.protobuf.Timestamp"
+      optional :commit_stats, :message, 2, "google.spanner.v1.CommitResponse.CommitStats"
+    end
+    add_message "google.spanner.v1.CommitResponse.CommitStats" do
+      optional :mutation_count, :int64, 1
     end
     add_message "google.spanner.v1.RollbackRequest" do
       optional :session, :string, 1
@@ -175,6 +181,7 @@ module Google
         BeginTransactionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.BeginTransactionRequest").msgclass
         CommitRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.CommitRequest").msgclass
         CommitResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.CommitResponse").msgclass
+        CommitResponse::CommitStats = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.CommitResponse.CommitStats").msgclass
         RollbackRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.RollbackRequest").msgclass
       end
     end

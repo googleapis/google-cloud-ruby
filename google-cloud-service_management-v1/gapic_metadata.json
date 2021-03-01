@@ -1,0 +1,63 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.api.servicemanagement.v1",
+  "libraryPackage": "::Google::Cloud::ServiceManagement::V1",
+  "services": {
+    "ServiceManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ServiceManagement::V1::ServiceManager::Client",
+          "methods": {
+            "ListServices": [
+              "list_services"
+            ],
+            "GetService": [
+              "get_service"
+            ],
+            "CreateService": [
+              "create_service"
+            ],
+            "DeleteService": [
+              "delete_service"
+            ],
+            "UndeleteService": [
+              "undelete_service"
+            ],
+            "ListServiceConfigs": [
+              "list_service_configs"
+            ],
+            "GetServiceConfig": [
+              "get_service_config"
+            ],
+            "CreateServiceConfig": [
+              "create_service_config"
+            ],
+            "SubmitConfigSource": [
+              "submit_config_source"
+            ],
+            "ListServiceRollouts": [
+              "list_service_rollouts"
+            ],
+            "GetServiceRollout": [
+              "get_service_rollout"
+            ],
+            "CreateServiceRollout": [
+              "create_service_rollout"
+            ],
+            "GenerateConfigReport": [
+              "generate_config_report"
+            ],
+            "EnableService": [
+              "enable_service"
+            ],
+            "DisableService": [
+              "disable_service"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

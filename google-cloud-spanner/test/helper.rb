@@ -91,11 +91,13 @@ class MockSpanner < Minitest::Spec
   end
 
   def database_hash instance_id: "my-instance-id", database_id: "database-#{rand(9999)}",
-                    state: "READY", restore_info: {}
+                    state: "READY", restore_info: {}, version_retention_period: "", earliest_version_time: nil
     {
       name: "projects/#{project}/instances/#{instance_id}/databases/#{database_id}",
       state: state,
-      restore_info: restore_info
+      restore_info: restore_info,
+      version_retention_period: version_retention_period,
+      earliest_version_time: earliest_version_time
     }
   end
 
@@ -117,12 +119,14 @@ class MockSpanner < Minitest::Spec
 
   def backup_hash instance_id: "my-instance-id", database_id: "database-#{rand(9999)}",
                   backup_id: "backup-#{rand(9999)}", state: "READY", expire_time: Time.now + 36000,
-                  create_time: Time.now, size_bytes: 1024, referencing_databases: ["db1"]
+                  version_time: Time.now - 3600, create_time: Time.now, size_bytes: 1024, 
+                  referencing_databases: ["db1"]
     {
       name: "projects/#{project}/instances/#{instance_id}/backups/#{backup_id}",
       database: "projects/#{project}/instances/#{instance_id}/databases/#{database_id}",
       state: state,
       expire_time: expire_time,
+      version_time: version_time,
       create_time: create_time,
       size_bytes: size_bytes,
       referencing_databases: referencing_databases.map do |database|
@@ -191,6 +195,18 @@ class MockSpanner < Minitest::Spec
     spanner.service.mocked_service.expect :begin_transaction, transaction do |request, gapic_options|
       request[:session].instance_of?(String) && request[:options] == tx_opts && gapic_options == options
     end
+  end
+
+  def assert_commit_response expected, actual
+    timestamp = Google::Cloud::Spanner::Convert.timestamp_to_time actual.commit_timestamp
+    _(expected.timestamp).must_equal timestamp
+
+    unless actual.commit_stats
+      _(expected.stats).must_be :nil?
+      return
+    end
+
+    _(expected.stats.mutation_count).must_equal actual.commit_stats.mutation_count
   end
 end
 

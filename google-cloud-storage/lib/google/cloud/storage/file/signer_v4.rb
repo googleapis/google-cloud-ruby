@@ -177,7 +177,7 @@ module Google
             # Add the bucket to the head of the base_fields. This is not returned in the PostObject fields.
             conditions.unshift "bucket" => @bucket_name
             # Add user-provided conditions to the head of the conditions array.
-            conditions.unshift user_conditions if user_conditions && !user_conditions.empty?
+            conditions = user_conditions + conditions if user_conditions
             if user_fields
               # Convert each pair in fields hash to a single-entry hash and add it to the head of the conditions array.
               user_fields.to_a.reverse.each { |f| conditions.unshift Hash[*f] }

@@ -1,0 +1,36 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.oslogin.v1beta",
+  "libraryPackage": "::Google::Cloud::OsLogin::V1beta",
+  "services": {
+    "OsLoginService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::OsLogin::V1beta::OsLoginService::Client",
+          "methods": {
+            "DeletePosixAccount": [
+              "delete_posix_account"
+            ],
+            "DeleteSshPublicKey": [
+              "delete_ssh_public_key"
+            ],
+            "GetLoginProfile": [
+              "get_login_profile"
+            ],
+            "GetSshPublicKey": [
+              "get_ssh_public_key"
+            ],
+            "ImportSshPublicKey": [
+              "import_ssh_public_key"
+            ],
+            "UpdateSshPublicKey": [
+              "update_ssh_public_key"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

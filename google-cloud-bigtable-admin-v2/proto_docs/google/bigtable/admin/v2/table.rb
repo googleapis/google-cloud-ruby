@@ -39,8 +39,8 @@ module Google
           # Each table is served using the resources of its parent cluster.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Output only. The unique name of the table. Values are of the form
-          #     `projects/<project>/instances/<instance>/tables/[_a-zA-Z0-9][-_.a-zA-Z0-9]*`.
+          #     The unique name of the table. Values are of the form
+          #     `projects/{project}/instances/{instance}/tables/[_a-zA-Z0-9][-_.a-zA-Z0-9]*`.
           #     Views: `NAME_ONLY`, `SCHEMA_VIEW`, `REPLICATION_VIEW`, `FULL`
           # @!attribute [rw] cluster_states
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Bigtable::Admin::V2::Table::ClusterState}]
@@ -48,7 +48,7 @@ module Google
           #     If it could not be determined whether or not the table has data in a
           #     particular cluster (for example, if its zone is unavailable), then
           #     there will be an entry for the cluster with UNKNOWN `replication_status`.
-          #     Views: `REPLICATION_VIEW`, `FULL`
+          #     Views: `REPLICATION_VIEW`, `ENCRYPTION_VIEW`, `FULL`
           # @!attribute [rw] column_families
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Bigtable::Admin::V2::ColumnFamily}]
           #     (`CreationOnly`)
@@ -73,6 +73,13 @@ module Google
             # @!attribute [rw] replication_state
             #   @return [::Google::Cloud::Bigtable::Admin::V2::Table::ClusterState::ReplicationState]
             #     Output only. The state of replication for the table in this cluster.
+            # @!attribute [r] encryption_info
+            #   @return [::Array<::Google::Cloud::Bigtable::Admin::V2::EncryptionInfo>]
+            #     Output only. The encryption information for the table in this cluster.
+            #     If the encryption key protecting this resource is customer managed, then
+            #     its version can be rotated in Cloud Key Management Service (Cloud KMS).
+            #     The primary version of the key and its status will be reflected here when
+            #     changes propagate from Cloud KMS.
             class ClusterState
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -151,6 +158,9 @@ module Google
               # state.
               REPLICATION_VIEW = 3
 
+              # Only populates 'name' and fields related to the table's encryption state.
+              ENCRYPTION_VIEW = 5
+
               # Populates all fields.
               FULL = 4
             end
@@ -208,6 +218,47 @@ module Google
             end
           end
 
+          # Encryption information for a given resource.
+          # If this resource is protected with customer managed encryption, the in-use
+          # Cloud Key Management Service (Cloud KMS) key version is specified along with
+          # its status.
+          # @!attribute [r] encryption_type
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::EncryptionInfo::EncryptionType]
+          #     Output only. The type of encryption used to protect this resource.
+          # @!attribute [r] encryption_status
+          #   @return [::Google::Rpc::Status]
+          #     Output only. The status of encrypt/decrypt calls on underlying data for
+          #     this resource. Regardless of status, the existing data is always encrypted
+          #     at rest.
+          # @!attribute [r] kms_key_version
+          #   @return [::String]
+          #     Output only. The version of the Cloud KMS key specified in the parent
+          #     cluster that is in use for the data underlying this table.
+          class EncryptionInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Possible encryption types for a resource.
+            module EncryptionType
+              # Encryption type was not specified, though data at rest remains encrypted.
+              ENCRYPTION_TYPE_UNSPECIFIED = 0
+
+              # The data backing this resource is encrypted at rest with a key that is
+              # fully managed by Google. No key version or status will be populated.
+              # This is the default state.
+              GOOGLE_DEFAULT_ENCRYPTION = 1
+
+              # The data backing this resource is encrypted at rest with a key that is
+              # managed by the customer.
+              # The in-use version of the key and its status are populated for
+              # CMEK-protected tables.
+              # CMEK-protected backups are pinned to the key version that was in use at
+              # the time the backup was taken. This key version is populated but its
+              # status is not tracked and is reported as `UNKNOWN`.
+              CUSTOMER_MANAGED_ENCRYPTION = 2
+            end
+          end
+
           # A snapshot of a table at a particular time. A snapshot can be used as a
           # checkpoint for data restoration or a data source for a new table.
           #
@@ -219,7 +270,7 @@ module Google
           #   @return [::String]
           #     Output only. The unique name of the snapshot.
           #     Values are of the form
-          #     `projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>`.
+          #     `projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/{snapshot}`.
           # @!attribute [rw] source_table
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Table]
           #     Output only. The source table at the time the snapshot was taken.
@@ -304,6 +355,9 @@ module Google
           # @!attribute [r] state
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Backup::State]
           #     Output only. The current state of the backup.
+          # @!attribute [r] encryption_info
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::EncryptionInfo]
+          #     Output only. The encryption information for the backup.
           class Backup
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

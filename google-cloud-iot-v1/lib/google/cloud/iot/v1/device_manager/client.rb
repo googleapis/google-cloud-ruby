@@ -224,7 +224,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              credentials ||= Credentials.default scope: @config.scope
+              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # but only if the default endpoint does not have a region prefix.
+              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
+                                       @config.endpoint == Client.configure.endpoint &&
+                                       !@config.endpoint.split(".").first.include?("-")
+              credentials ||= Credentials.default scope:                  @config.scope,
+                                                  enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
@@ -694,7 +700,8 @@ module Google
             #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
             #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The fields of the `Device` resource to be returned in the response. If the
-            #     field mask is unset or empty, all fields are returned.
+            #     field mask is unset or empty, all fields are returned. Fields have to be
+            #     provided in snake_case format, for example: `last_heartbeat_time`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Iot::V1::Device]
@@ -913,7 +920,8 @@ module Google
             #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The fields of the `Device` resource to be returned in the response. The
             #     fields `id` and `num_id` are always returned, along with any
-            #     other fields specified.
+            #     other fields specified in snake_case format, for example:
+            #     `last_heartbeat_time`.
             #   @param gateway_list_options [::Google::Cloud::Iot::V1::GatewayListOptions, ::Hash]
             #     Options related to gateways.
             #   @param page_size [::Integer]
@@ -1776,7 +1784,7 @@ module Google
               # Each configuration object is of type `Gapic::Config::Method` and includes
               # the following configuration fields:
               #
-              #  *  `timeout` (*type:* `Numeric`) - The call timeout in milliseconds
+              #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
               #  *  `metadata` (*type:* `Hash{Symbol=>String}`) - Additional gRPC headers
               #  *  `retry_policy (*type:* `Hash`) - The retry policy. The policy fields
               #     include the following keys:

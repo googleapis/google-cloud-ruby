@@ -41,20 +41,18 @@ describe "Google Cloud Security Center Notifications Sample" do
   def create_fixture!
     last_error = nil
     3.times do
-      begin
-        create_notification_config org_id:       @org_id,
-                                   config_id:    @config_id,
-                                   pubsub_topic: @pubsub_topic
-        return
-      rescue Google::Cloud::FailedPreconditionError => e
-        # Creating this fixture occasionally raises a precondition error.
-        # I'm not certain why, but because we can have tests running
-        # concurrently, I suspect it happens when multiple fixtures are being
-        # created simultaneously. Retry with a random delay if this happens.
-        puts "Got precondition error when creating fixture #{@config_id}"
-        sleep rand(2.0..7.0)
-        last_error = e
-      end
+      create_notification_config org_id:       @org_id,
+                                  config_id:    @config_id,
+                                  pubsub_topic: @pubsub_topic
+      return
+    rescue Google::Cloud::FailedPreconditionError => e
+      # Creating this fixture occasionally raises a precondition error.
+      # I'm not certain why, but because we can have tests running
+      # concurrently, I suspect it happens when multiple fixtures are being
+      # created simultaneously. Retry with a random delay if this happens.
+      puts "Got precondition error when creating fixture #{@config_id}"
+      sleep rand(2.0..7.0)
+      last_error = e
     end
     raise last_error
   end

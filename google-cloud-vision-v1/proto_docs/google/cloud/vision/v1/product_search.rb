@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] bounding_poly
         #   @return [::Google::Cloud::Vision::V1::BoundingPoly]
         #     The bounding polygon around the area of interest in the image.
-        #     Optional. If it is not specified, system discretion will be applied.
+        #     If it is not specified, system discretion will be applied.
         # @!attribute [rw] product_set
         #   @return [::String]
         #     The resource name of a {::Google::Cloud::Vision::V1::ProductSet ProductSet} to be searched for similar images.

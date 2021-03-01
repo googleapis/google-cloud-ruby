@@ -35,20 +35,18 @@ describe "Google Cloud Video API sample" do
   end
 
   it "can analyze labels from a local file" do
-    begin
-      local_tempfile = Tempfile.new "temp_video"
-      File.open local_tempfile.path, "w" do |file|
-        file_contents = Net::HTTP.get URI("http://storage.googleapis.com/#{@transcription_file}")
-        file.write file_contents
-        file.flush
-      end
-      assert_output(/Finished Processing./) do
-        analyze_labels_local path: local_tempfile.path
-      end
-    ensure
-      local_tempfile.close
-      local_tempfile.unlink
+    local_tempfile = Tempfile.new "temp_video"
+    File.open local_tempfile.path, "w" do |file|
+      file_contents = Net::HTTP.get URI("http://storage.googleapis.com/#{@transcription_file}")
+      file.write file_contents
+      file.flush
     end
+    assert_output(/Finished Processing./) do
+      analyze_labels_local path: local_tempfile.path
+    end
+  ensure
+    local_tempfile.close
+    local_tempfile.unlink
   end
 
   it "can analyze explicit content from a gcs file" do
@@ -76,20 +74,18 @@ describe "Google Cloud Video API sample" do
   end
 
   it "can detect texts from a local file" do
-    begin
-      local_tempfile = Tempfile.new "temp_video"
-      File.open local_tempfile.path, "w" do |file|
-        file_contents = Net::HTTP.get URI("http://storage.googleapis.com/#{@transcription_file}")
-        file.write file_contents
-        file.flush
-      end
-      assert_output(/GOOGLE/) do
-        detect_text_local path: local_tempfile.path
-      end
-    ensure
-      local_tempfile.close
-      local_tempfile.unlink
+    local_tempfile = Tempfile.new "temp_video"
+    File.open local_tempfile.path, "w" do |file|
+      file_contents = Net::HTTP.get URI("http://storage.googleapis.com/#{@transcription_file}")
+      file.write file_contents
+      file.flush
     end
+    assert_output(/GOOGLE/) do
+      detect_text_local path: local_tempfile.path
+    end
+  ensure
+    local_tempfile.close
+    local_tempfile.unlink
   end
 
   it "can track objects from a gcs file" do
@@ -99,19 +95,17 @@ describe "Google Cloud Video API sample" do
   end
 
   it "can track objects from a local file" do
-    begin
-      local_tempfile = Tempfile.new "temp_video"
-      File.open local_tempfile.path, "w" do |file|
-        file_contents = Net::HTTP.get URI("http://storage.googleapis.com/#{@transcription_file}")
-        file.write file_contents
-        file.flush
-      end
-      assert_output(/Finished Processing./) do
-        track_objects_local path: local_tempfile.path
-      end
-    ensure
-      local_tempfile.close
-      local_tempfile.unlink
+    local_tempfile = Tempfile.new "temp_video"
+    File.open local_tempfile.path, "w" do |file|
+      file_contents = Net::HTTP.get URI("http://storage.googleapis.com/#{@transcription_file}")
+      file.write file_contents
+      file.flush
     end
+    assert_output(/Finished Processing./) do
+      track_objects_local path: local_tempfile.path
+    end
+  ensure
+    local_tempfile.close
+    local_tempfile.unlink
   end
 end

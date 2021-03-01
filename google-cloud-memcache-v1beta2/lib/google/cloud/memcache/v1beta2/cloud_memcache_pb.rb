@@ -29,6 +29,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :memcache_full_version, :string, 18
       repeated :instance_messages, :message, 19, "google.cloud.memcache.v1beta2.Instance.InstanceMessage"
       optional :discovery_endpoint, :string, 20
+      optional :update_available, :bool, 21
     end
     add_message "google.cloud.memcache.v1beta2.Instance.NodeConfig" do
       optional :cpu_count, :int32, 1
@@ -41,6 +42,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :host, :string, 4
       optional :port, :int32, 5
       optional :parameters, :message, 6, "google.cloud.memcache.v1beta2.MemcacheParameters"
+      optional :update_available, :bool, 7
     end
     add_enum "google.cloud.memcache.v1beta2.Instance.Node.State" do
       value :STATE_UNSPECIFIED, 0
@@ -101,6 +103,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
       optional :parameters, :message, 3, "google.cloud.memcache.v1beta2.MemcacheParameters"
     end
+    add_message "google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest" do
+      optional :instance, :string, 1
+      repeated :node_ids, :string, 2
+      optional :apply_all, :bool, 3
+    end
     add_message "google.cloud.memcache.v1beta2.MemcacheParameters" do
       optional :id, :string, 1
       map :params, :string, :string, 3
@@ -145,6 +152,7 @@ module Google
         DeleteInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.DeleteInstanceRequest").msgclass
         ApplyParametersRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.ApplyParametersRequest").msgclass
         UpdateParametersRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.UpdateParametersRequest").msgclass
+        ApplySoftwareUpdateRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.ApplySoftwareUpdateRequest").msgclass
         MemcacheParameters = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.MemcacheParameters").msgclass
         OperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.OperationMetadata").msgclass
         LocationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.memcache.v1beta2.LocationMetadata").msgclass

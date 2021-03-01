@@ -1,0 +1,69 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.spanner.admin.database.v1",
+  "libraryPackage": "::Google::Cloud::Spanner::Admin::Database::V1",
+  "services": {
+    "DatabaseAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client",
+          "methods": {
+            "ListDatabases": [
+              "list_databases"
+            ],
+            "CreateDatabase": [
+              "create_database"
+            ],
+            "GetDatabase": [
+              "get_database"
+            ],
+            "UpdateDatabaseDdl": [
+              "update_database_ddl"
+            ],
+            "DropDatabase": [
+              "drop_database"
+            ],
+            "GetDatabaseDdl": [
+              "get_database_ddl"
+            ],
+            "SetIamPolicy": [
+              "set_iam_policy"
+            ],
+            "GetIamPolicy": [
+              "get_iam_policy"
+            ],
+            "TestIamPermissions": [
+              "test_iam_permissions"
+            ],
+            "CreateBackup": [
+              "create_backup"
+            ],
+            "GetBackup": [
+              "get_backup"
+            ],
+            "UpdateBackup": [
+              "update_backup"
+            ],
+            "DeleteBackup": [
+              "delete_backup"
+            ],
+            "ListBackups": [
+              "list_backups"
+            ],
+            "RestoreDatabase": [
+              "restore_database"
+            ],
+            "ListDatabaseOperations": [
+              "list_database_operations"
+            ],
+            "ListBackupOperations": [
+              "list_backup_operations"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

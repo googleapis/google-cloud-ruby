@@ -26,6 +26,7 @@ describe Google::Cloud::Spanner::Backup, :mock_spanner do
         database_id: database_id,
         backup_id: backup_id,
         expire_time: Time.now + 36000,
+        version_time: Time.now - 7200,
         create_time: Time.now,
         size_bytes: 1024
       )
@@ -45,6 +46,7 @@ describe Google::Cloud::Spanner::Backup, :mock_spanner do
     _(backup).wont_be :creating?
 
     _(backup.expire_time).must_be_kind_of Time
+    _(backup.version_time).must_be_kind_of Time
     _(backup.create_time).must_be_kind_of Time
     _(backup.size_in_bytes).must_be :>, 0
   end

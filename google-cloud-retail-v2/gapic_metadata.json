@@ -1,0 +1,84 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.retail.v2",
+  "libraryPackage": "::Google::Cloud::Retail::V2",
+  "services": {
+    "CatalogService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::CatalogService::Client",
+          "methods": {
+            "ListCatalogs": [
+              "list_catalogs"
+            ],
+            "UpdateCatalog": [
+              "update_catalog"
+            ]
+          }
+        }
+      }
+    },
+    "PredictionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::PredictionService::Client",
+          "methods": {
+            "Predict": [
+              "predict"
+            ]
+          }
+        }
+      }
+    },
+    "ProductService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::ProductService::Client",
+          "methods": {
+            "CreateProduct": [
+              "create_product"
+            ],
+            "GetProduct": [
+              "get_product"
+            ],
+            "UpdateProduct": [
+              "update_product"
+            ],
+            "DeleteProduct": [
+              "delete_product"
+            ],
+            "ImportProducts": [
+              "import_products"
+            ]
+          }
+        }
+      }
+    },
+    "UserEventService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::UserEventService::Client",
+          "methods": {
+            "WriteUserEvent": [
+              "write_user_event"
+            ],
+            "CollectUserEvent": [
+              "collect_user_event"
+            ],
+            "PurgeUserEvents": [
+              "purge_user_events"
+            ],
+            "ImportUserEvents": [
+              "import_user_events"
+            ],
+            "RejoinUserEvents": [
+              "rejoin_user_events"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

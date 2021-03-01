@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Pre-release client for the WorkloadIdentityPools service."
+  gem.description   = "Pre-release client for the WorkloadIdentityPools service. Note that google-iam-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-iam instead. See the readme for more details."
   gem.summary       = "API Client library for the Google IAM V1beta API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"

@@ -1,0 +1,126 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.gaming.v1",
+  "libraryPackage": "::Google::Cloud::Gaming::V1",
+  "services": {
+    "GameServerClustersService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Gaming::V1::GameServerClustersService::Client",
+          "methods": {
+            "ListGameServerClusters": [
+              "list_game_server_clusters"
+            ],
+            "GetGameServerCluster": [
+              "get_game_server_cluster"
+            ],
+            "CreateGameServerCluster": [
+              "create_game_server_cluster"
+            ],
+            "PreviewCreateGameServerCluster": [
+              "preview_create_game_server_cluster"
+            ],
+            "DeleteGameServerCluster": [
+              "delete_game_server_cluster"
+            ],
+            "PreviewDeleteGameServerCluster": [
+              "preview_delete_game_server_cluster"
+            ],
+            "UpdateGameServerCluster": [
+              "update_game_server_cluster"
+            ],
+            "PreviewUpdateGameServerCluster": [
+              "preview_update_game_server_cluster"
+            ]
+          }
+        }
+      }
+    },
+    "GameServerConfigsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Gaming::V1::GameServerConfigsService::Client",
+          "methods": {
+            "ListGameServerConfigs": [
+              "list_game_server_configs"
+            ],
+            "GetGameServerConfig": [
+              "get_game_server_config"
+            ],
+            "CreateGameServerConfig": [
+              "create_game_server_config"
+            ],
+            "DeleteGameServerConfig": [
+              "delete_game_server_config"
+            ]
+          }
+        }
+      }
+    },
+    "GameServerDeploymentsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client",
+          "methods": {
+            "ListGameServerDeployments": [
+              "list_game_server_deployments"
+            ],
+            "GetGameServerDeployment": [
+              "get_game_server_deployment"
+            ],
+            "CreateGameServerDeployment": [
+              "create_game_server_deployment"
+            ],
+            "DeleteGameServerDeployment": [
+              "delete_game_server_deployment"
+            ],
+            "UpdateGameServerDeployment": [
+              "update_game_server_deployment"
+            ],
+            "GetGameServerDeploymentRollout": [
+              "get_game_server_deployment_rollout"
+            ],
+            "UpdateGameServerDeploymentRollout": [
+              "update_game_server_deployment_rollout"
+            ],
+            "PreviewGameServerDeploymentRollout": [
+              "preview_game_server_deployment_rollout"
+            ],
+            "FetchDeploymentState": [
+              "fetch_deployment_state"
+            ]
+          }
+        }
+      }
+    },
+    "RealmsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Gaming::V1::RealmsService::Client",
+          "methods": {
+            "ListRealms": [
+              "list_realms"
+            ],
+            "GetRealm": [
+              "get_realm"
+            ],
+            "CreateRealm": [
+              "create_realm"
+            ],
+            "DeleteRealm": [
+              "delete_realm"
+            ],
+            "UpdateRealm": [
+              "update_realm"
+            ],
+            "PreviewRealmUpdate": [
+              "preview_realm_update"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

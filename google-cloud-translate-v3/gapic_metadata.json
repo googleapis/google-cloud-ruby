@@ -1,0 +1,42 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.translation.v3",
+  "libraryPackage": "::Google::Cloud::Translate::V3",
+  "services": {
+    "TranslationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Translate::V3::TranslationService::Client",
+          "methods": {
+            "TranslateText": [
+              "translate_text"
+            ],
+            "DetectLanguage": [
+              "detect_language"
+            ],
+            "GetSupportedLanguages": [
+              "get_supported_languages"
+            ],
+            "BatchTranslateText": [
+              "batch_translate_text"
+            ],
+            "CreateGlossary": [
+              "create_glossary"
+            ],
+            "ListGlossaries": [
+              "list_glossaries"
+            ],
+            "GetGlossary": [
+              "get_glossary"
+            ],
+            "DeleteGlossary": [
+              "delete_glossary"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

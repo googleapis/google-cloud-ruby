@@ -15,6 +15,8 @@
 # limitations under the License.
 
 
+require "google/cloud/bigtable/convert"
+
 module Google
   module Cloud
     module Bigtable
@@ -84,8 +86,9 @@ module Google
         # @param qualifier [String] Column qualifier name.
         #   The qualifier of the column into which new data should be written.
         #   Can be any byte string, including an empty string.
-        # @param value [String, Integer] Cell value data.
-        #   The value to be written into the specified cell.
+        # @param value [String, Integer] Cell value data. The value to be written
+        #   into the specified cell. If the argument is an Integer, it will be
+        #   encoded as a 64-bit signed big-endian integer.
         # @param timestamp [Integer] Timestamp value in microseconds.
         #   The timestamp of the cell into which new data should be written.
         #   Use -1 for current Bigtable server time.
@@ -104,15 +107,15 @@ module Google
         # @example With timestamp.
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
         #   entry.set_cell(
-        #     "cf-1",
-        #     "field-1",
+        #     "cf1",
+        #     "field1",
         #     "XYZ",
         #     timestamp: (Time.now.to_f * 1000000).round(-3) # microseconds
         #   )
         #
         def set_cell family, qualifier, value, timestamp: nil
           # If value is integer, covert it to a 64-bit signed big-endian integer.
-          value = [value].pack "q>" if value.is_a? Integer
+          value = Convert.integer_to_signed_be_64 value
           options = {
             family_name:      family,
             column_qualifier: qualifier,
@@ -156,14 +159,14 @@ module Google
         #
         # @example Without timestamp range.
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
-        #   entry.delete_cells("cf-1", "field-1")
+        #   entry.delete_cells("cf1", "field1")
         #
         # @example With timestamp range.
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
         #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
         #   entry.delete_cells(
         #     "cf1",
-        #     "field-1",
+        #     "field1",
         #     timestamp_from: timestamp_micros - 5000000,
         #     timestamp_to: timestamp_micros
         #   )
@@ -172,7 +175,7 @@ module Google
         #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
         #   entry.delete_cells(
         #     "cf1",
-        #     "field-1",
+        #     "field1",
         #     timestamp_from: timestamp_micros - 5000000
         #   )
         #
@@ -201,7 +204,7 @@ module Google
         #
         # @example
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
-        #   entry.delete_from_family("cf-1")
+        #   entry.delete_from_family("cf1")
         #
         def delete_from_family family
           @mutations << Google::Cloud::Bigtable::V2::Mutation.new(delete_from_family: { family_name: family })

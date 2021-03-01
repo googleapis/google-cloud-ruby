@@ -11,16 +11,23 @@ require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/pubsub/v1/schema_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/pubsub/v1/pubsub.proto", :syntax => :proto3) do
     add_message "google.pubsub.v1.MessageStoragePolicy" do
       repeated :allowed_persistence_regions, :string, 1
+    end
+    add_message "google.pubsub.v1.SchemaSettings" do
+      optional :schema, :string, 1
+      optional :encoding, :enum, 2, "google.pubsub.v1.Encoding"
     end
     add_message "google.pubsub.v1.Topic" do
       optional :name, :string, 1
       map :labels, :string, :string, 2
       optional :message_storage_policy, :message, 3, "google.pubsub.v1.MessageStoragePolicy"
       optional :kms_key_name, :string, 5
+      optional :schema_settings, :message, 6, "google.pubsub.v1.SchemaSettings"
+      optional :satisfies_pzs, :bool, 7
     end
     add_message "google.pubsub.v1.PubsubMessage" do
       optional :data, :bytes, 1
@@ -220,6 +227,7 @@ module Google
     module PubSub
       module V1
         MessageStoragePolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.MessageStoragePolicy").msgclass
+        SchemaSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.SchemaSettings").msgclass
         Topic = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.Topic").msgclass
         PubsubMessage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PubsubMessage").msgclass
         GetTopicRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.GetTopicRequest").msgclass

@@ -34,8 +34,6 @@ module Google
             self.service_name = 'google.analytics.admin.v1alpha.AnalyticsAdminService'
 
             # Lookup for a single Account.
-            # Throws "Target not found" if no such account found, or if caller does not
-            # have permissions to access it.
             rpc :GetAccount, ::Google::Analytics::Admin::V1alpha::GetAccountRequest, ::Google::Analytics::Admin::V1alpha::Account
             # Returns all accounts accessible by the caller.
             #
@@ -62,9 +60,6 @@ module Google
             # Returns summaries of all accounts accessible by the caller.
             rpc :ListAccountSummaries, ::Google::Analytics::Admin::V1alpha::ListAccountSummariesRequest, ::Google::Analytics::Admin::V1alpha::ListAccountSummariesResponse
             # Lookup for a single "GA4" Property.
-            #
-            # Throws "Target not found" if no such property found, if property is not
-            # of the type "GA4", or if caller does not have permissions to access it.
             rpc :GetProperty, ::Google::Analytics::Admin::V1alpha::GetPropertyRequest, ::Google::Analytics::Admin::V1alpha::Property
             # Returns child Properties under the specified parent Account.
             #
@@ -125,9 +120,6 @@ module Google
             # Deletes information about multiple users' links to an account or property.
             rpc :BatchDeleteUserLinks, ::Google::Analytics::Admin::V1alpha::BatchDeleteUserLinksRequest, ::Google::Protobuf::Empty
             # Lookup for a single WebDataStream
-            #
-            # Throws "Target not found" if no such web data stream found, or if the
-            # caller does not have permissions to access it.
             rpc :GetWebDataStream, ::Google::Analytics::Admin::V1alpha::GetWebDataStreamRequest, ::Google::Analytics::Admin::V1alpha::WebDataStream
             # Deletes a web stream on a property.
             rpc :DeleteWebDataStream, ::Google::Analytics::Admin::V1alpha::DeleteWebDataStreamRequest, ::Google::Protobuf::Empty
@@ -141,15 +133,20 @@ module Google
             # Returns an empty list if no relevant web data streams are found.
             rpc :ListWebDataStreams, ::Google::Analytics::Admin::V1alpha::ListWebDataStreamsRequest, ::Google::Analytics::Admin::V1alpha::ListWebDataStreamsResponse
             # Lookup for a single IosAppDataStream
-            #
-            # Throws "Target not found" if no such iOS app data stream found, or if the
-            # caller does not have permissions to access it.
             rpc :GetIosAppDataStream, ::Google::Analytics::Admin::V1alpha::GetIosAppDataStreamRequest, ::Google::Analytics::Admin::V1alpha::IosAppDataStream
             # Deletes an iOS app stream on a property.
             rpc :DeleteIosAppDataStream, ::Google::Analytics::Admin::V1alpha::DeleteIosAppDataStreamRequest, ::Google::Protobuf::Empty
             # Updates an iOS app stream on a property.
             rpc :UpdateIosAppDataStream, ::Google::Analytics::Admin::V1alpha::UpdateIosAppDataStreamRequest, ::Google::Analytics::Admin::V1alpha::IosAppDataStream
-            # Creates an iOS app data stream with the specified location and attributes.
+            # Creates an iOS app stream with the specified location and attributes.
+            #
+            # Note that an iOS app stream must be linked to a Firebase app to receive
+            # traffic.
+            #
+            # To create a working app stream, make sure your property is linked to a
+            # Firebase project. Then, use the Firebase API to create a Firebase app,
+            # which will also create an appropriate data stream in Analytics (may take up
+            # to 24 hours).
             rpc :CreateIosAppDataStream, ::Google::Analytics::Admin::V1alpha::CreateIosAppDataStreamRequest, ::Google::Analytics::Admin::V1alpha::IosAppDataStream
             # Returns child iOS app data streams under the specified parent property.
             #
@@ -157,15 +154,20 @@ module Google
             # Returns an empty list if no relevant iOS app data streams are found.
             rpc :ListIosAppDataStreams, ::Google::Analytics::Admin::V1alpha::ListIosAppDataStreamsRequest, ::Google::Analytics::Admin::V1alpha::ListIosAppDataStreamsResponse
             # Lookup for a single AndroidAppDataStream
-            #
-            # Throws "Target not found" if no such android app data stream found, or if
-            # the caller does not have permissions to access it.
             rpc :GetAndroidAppDataStream, ::Google::Analytics::Admin::V1alpha::GetAndroidAppDataStreamRequest, ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream
             # Deletes an android app stream on a property.
             rpc :DeleteAndroidAppDataStream, ::Google::Analytics::Admin::V1alpha::DeleteAndroidAppDataStreamRequest, ::Google::Protobuf::Empty
             # Updates an android app stream on a property.
             rpc :UpdateAndroidAppDataStream, ::Google::Analytics::Admin::V1alpha::UpdateAndroidAppDataStreamRequest, ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream
-            # Creates an android app stream with the specified location and attributes.
+            # Creates an Android app stream with the specified location and attributes.
+            #
+            # Note that an Android app stream must be linked to a Firebase app to receive
+            # traffic.
+            #
+            # To create a working app stream, make sure your property is linked to a
+            # Firebase project. Then, use the Firebase API to create a Firebase app,
+            # which will also create an appropriate data stream in Analytics (may take up
+            # to 24 hours).
             rpc :CreateAndroidAppDataStream, ::Google::Analytics::Admin::V1alpha::CreateAndroidAppDataStreamRequest, ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream
             # Returns child android app streams under the specified parent property.
             #

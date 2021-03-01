@@ -36,12 +36,12 @@ module Google
         #     The description of the notification config (max of 1024 characters).
         # @!attribute [rw] pubsub_topic
         #   @return [::String]
-        #     The PubSub topic to send notifications to. Its format is
+        #     The Pub/Sub topic to send notifications to. Its format is
         #     "projects/[project_id]/topics/[topic]".
         # @!attribute [r] service_account
         #   @return [::String]
         #     Output only. The service account that needs "pubsub.topics.publish"
-        #     permission to publish to the PubSub topic.
+        #     permission to publish to the Pub/Sub topic.
         # @!attribute [rw] streaming_config
         #   @return [::Google::Cloud::SecurityCenter::V1::NotificationConfig::StreamingConfig]
         #     The config for triggering streaming-based notifications.

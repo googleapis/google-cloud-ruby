@@ -1,0 +1,36 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.api.servicecontrol.v1",
+  "libraryPackage": "::Google::Cloud::ServiceControl::V1",
+  "services": {
+    "QuotaController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ServiceControl::V1::QuotaController::Client",
+          "methods": {
+            "AllocateQuota": [
+              "allocate_quota"
+            ]
+          }
+        }
+      }
+    },
+    "ServiceController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ServiceControl::V1::ServiceController::Client",
+          "methods": {
+            "Check": [
+              "check"
+            ],
+            "Report": [
+              "report"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.area120.tables.v1alpha1",
+  "libraryPackage": "::Google::Area120::Tables::V1alpha1",
+  "services": {
+    "TablesService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Area120::Tables::V1alpha1::TablesService::Client",
+          "methods": {
+            "GetTable": [
+              "get_table"
+            ],
+            "ListTables": [
+              "list_tables"
+            ],
+            "GetWorkspace": [
+              "get_workspace"
+            ],
+            "ListWorkspaces": [
+              "list_workspaces"
+            ],
+            "GetRow": [
+              "get_row"
+            ],
+            "ListRows": [
+              "list_rows"
+            ],
+            "CreateRow": [
+              "create_row"
+            ],
+            "BatchCreateRows": [
+              "batch_create_rows"
+            ],
+            "UpdateRow": [
+              "update_row"
+            ],
+            "BatchUpdateRows": [
+              "batch_update_rows"
+            ],
+            "DeleteRow": [
+              "delete_row"
+            ],
+            "BatchDeleteRows": [
+              "batch_delete_rows"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

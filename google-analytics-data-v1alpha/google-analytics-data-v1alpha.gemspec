@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The Google Analytics Data API provides programmatic methods to access report data in Google Analytics App+Web properties. With the Google Analytics Data API, you can build custom dashboards to display Google Analytics data, automate complex reporting tasks to save time, and integrate your Google Analytics data with other business applications."
+  gem.description   = "The Google Analytics Data API provides programmatic methods to access report data in Google Analytics App+Web properties. With the Google Analytics Data API, you can build custom dashboards to display Google Analytics data, automate complex reporting tasks to save time, and integrate your Google Analytics data with other business applications. Note that google-analytics-data-v1alpha is a version-specific client library. For most uses, we recommend installing the main client library google-analytics-data instead. See the readme for more details."
   gem.summary       = "API Client library for the Google Analytics Data V1alpha API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"

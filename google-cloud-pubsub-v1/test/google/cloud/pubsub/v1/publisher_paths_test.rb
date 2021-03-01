@@ -35,6 +35,18 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_schema_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::PubSub::V1::Publisher::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.schema_path project: "value0", schema: "value1"
+      assert_equal "projects/value0/schemas/value1", path
+    end
+  end
+
   def test_subscription_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

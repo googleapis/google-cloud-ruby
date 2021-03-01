@@ -618,14 +618,16 @@ module Google
         end
 
         ##
-        # Creates a new [view](https://cloud.google.com/bigquery/docs/views)
-        # table, which is a virtual table defined by the given SQL query.
+        # Creates a new view, which is a virtual table defined by the given SQL query.
         #
-        # BigQuery's views are logical views, not materialized views, which
-        # means that the query that defines the view is re-executed every time
-        # the view is queried. Queries are billed according to the total amount
+        # With BigQuery's logical views, the query that defines the view is re-executed
+        # every time the view is queried. Queries are billed according to the total amount
         # of data in all table fields referenced directly or indirectly by the
         # top-level query. (See {Table#view?} and {Table#query}.)
+        #
+        # For materialized views, see {#create_materialized_view}.
+        #
+        # @see https://cloud.google.com/bigquery/docs/views Creating views
         #
         # @param [String] table_id The ID of the view table. The ID must contain
         #   only letters (a-z, A-Z), numbers (0-9), or underscores (_). The
@@ -667,7 +669,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   view = dataset.create_view "my_view",
-        #             "SELECT name, age FROM proj.dataset.users"
+        #                              "SELECT name, age FROM proj.dataset.users"
         #
         # @example A name and description can be provided:
         #   require "google/cloud/bigquery"
@@ -676,13 +678,18 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #
         #   view = dataset.create_view "my_view",
-        #             "SELECT name, age FROM proj.dataset.users",
-        #             name: "My View", description: "This is my view"
+        #                              "SELECT name, age FROM proj.dataset.users",
+        #                              name: "My View", description: "This is my view"
         #
         # @!group Table
         #
-        def create_view table_id, query, name: nil, description: nil,
-                        standard_sql: nil, legacy_sql: nil, udfs: nil
+        def create_view table_id,
+                        query,
+                        name: nil,
+                        description: nil,
+                        standard_sql: nil,
+                        legacy_sql: nil,
+                        udfs: nil
           use_legacy_sql = Convert.resolve_legacy_sql standard_sql, legacy_sql
           new_view_opts = {
             table_reference: Google::Apis::BigqueryV2::TableReference.new(
@@ -696,6 +703,80 @@ module Google
               query:                           query,
               use_legacy_sql:                  use_legacy_sql,
               user_defined_function_resources: udfs_gapi(udfs)
+            )
+          }.delete_if { |_, v| v.nil? }
+          new_view = Google::Apis::BigqueryV2::Table.new new_view_opts
+
+          gapi = service.insert_table dataset_id, new_view
+          Table.from_gapi gapi, service
+        end
+
+        ##
+        # Creates a new materialized view.
+        #
+        # Materialized views are precomputed views that periodically cache results of a query for increased performance
+        # and efficiency. BigQuery leverages precomputed results from materialized views and whenever possible reads
+        # only delta changes from the base table to compute up-to-date results.
+        #
+        # Queries that use materialized views are generally faster and consume less resources than queries that retrieve
+        # the same data only from the base table. Materialized views are helpful to significantly boost performance of
+        # workloads that have the characteristic of common and repeated queries.
+        #
+        # For logical views, see {#create_view}.
+        #
+        # @see https://cloud.google.com/bigquery/docs/materialized-views-intro Introduction to materialized views
+        #
+        # @param [String] table_id The ID of the materialized view table. The ID must contain only letters (a-z, A-Z),
+        #   numbers (0-9), or underscores (_). The maximum length is 1,024 characters.
+        # @param [String] query The query that BigQuery executes when the materialized view is referenced.
+        # @param [String] name A descriptive name for the table.
+        # @param [String] description A user-friendly description of the table.
+        # @param [Boolean] enable_refresh Enable automatic refresh of the materialized view when the base table is
+        #   updated. Optional. The default value is true.
+        # @param [Integer] refresh_interval_ms The maximum frequency in milliseconds at which this materialized view
+        #   will be refreshed. Optional. The default value is `1_800_000` (30 minutes).
+        #
+        # @return [Google::Cloud::Bigquery::Table] A new table object.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   materialized_view = dataset.create_materialized_view "my_materialized_view",
+        #                                                        "SELECT name, age FROM proj.dataset.users"
+        #
+        # @example Automatic refresh can be disabled:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   materialized_view = dataset.create_materialized_view "my_materialized_view",
+        #                                                        "SELECT name, age FROM proj.dataset.users",
+        #                                                        enable_refresh: false
+        #
+        # @!group Table
+        #
+        def create_materialized_view table_id,
+                                     query,
+                                     name: nil,
+                                     description: nil,
+                                     enable_refresh: nil,
+                                     refresh_interval_ms: nil
+          new_view_opts = {
+            table_reference:   Google::Apis::BigqueryV2::TableReference.new(
+              project_id: project_id,
+              dataset_id: dataset_id,
+              table_id:   table_id
+            ),
+            friendly_name:     name,
+            description:       description,
+            materialized_view: Google::Apis::BigqueryV2::MaterializedViewDefinition.new(
+              enable_refresh:      enable_refresh,
+              query:               query,
+              refresh_interval_ms: refresh_interval_ms
             )
           }.delete_if { |_, v| v.nil? }
           new_view = Google::Apis::BigqueryV2::Table.new new_view_opts
@@ -2753,6 +2834,12 @@ module Google
           ##
           # @raise [RuntimeError] not implemented
           def create_view(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def create_materialized_view(*)
             raise "not implemented in #{self.class}"
           end
 

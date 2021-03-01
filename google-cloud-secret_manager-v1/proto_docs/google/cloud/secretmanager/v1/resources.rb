@@ -50,6 +50,17 @@ module Google
         #     regular expression: `[\p{Ll}\p{Lo}\p{N}_-]{0,63}`
         #
         #     No more than 64 labels can be assigned to a given resource.
+        # @!attribute [rw] topics
+        #   @return [::Array<::Google::Cloud::SecretManager::V1::Topic>]
+        #     Optional. A list of up to 10 Pub/Sub topics to which messages are published when
+        #     control plane operations are called on the secret or its versions.
+        # @!attribute [rw] expire_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Timestamp in UTC when the {::Google::Cloud::SecretManager::V1::Secret Secret} is scheduled to expire. This is
+        #     always provided on output, regardless of what was sent on input.
+        # @!attribute [rw] ttl
+        #   @return [::Google::Protobuf::Duration]
+        #     Input only. The TTL for the {::Google::Cloud::SecretManager::V1::Secret Secret}.
         class Secret
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -254,6 +265,18 @@ module Google
         #     secret payload, in the following format:
         #     `projects/*/locations/*/keyRings/*/cryptoKeys/*/versions/*`.
         class CustomerManagedEncryptionStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Pub/Sub topic which Secret Manager will publish to when control plane
+        # events occur on this secret.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the Pub/Sub topic that will be published to, in the
+        #     following format: `projects/*/topics/*`. For publication to succeed, the
+        #     Secret Manager P4SA must have `pubsub.publisher` permissions on the topic.
+        class Topic
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

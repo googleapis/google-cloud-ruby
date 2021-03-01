@@ -436,7 +436,7 @@ describe "Cloud KMS samples" do
       )
 
       assert signature
-      # Note: we can't verify the signature because we can't customize the
+      # NOTE: we can't verify the signature because we can't customize the
       # padding.
     end
     assert_match(/Signature/, out.first)

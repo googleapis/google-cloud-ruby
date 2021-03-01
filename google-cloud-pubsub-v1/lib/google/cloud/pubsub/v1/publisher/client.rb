@@ -199,7 +199,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              credentials ||= Credentials.default scope: @config.scope
+              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # but only if the default endpoint does not have a region prefix.
+              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
+                                       @config.endpoint == Client.configure.endpoint &&
+                                       !@config.endpoint.split(".").first.include?("-")
+              credentials ||= Credentials.default scope:                  @config.scope,
+                                                  enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
@@ -218,8 +224,8 @@ module Google
             # Service calls
 
             ##
-            # Creates the given topic with the given name. See the [resource name rules](
-            # https://cloud.google.com/pubsub/docs/admin#resource_names).
+            # Creates the given topic with the given name. See the [resource name rules]
+            # (https://cloud.google.com/pubsub/docs/admin#resource_names).
             #
             # @overload create_topic(request, options = nil)
             #   Pass arguments to `create_topic` via a request object, either of type
@@ -231,7 +237,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_topic(name: nil, labels: nil, message_storage_policy: nil, kms_key_name: nil)
+            # @overload create_topic(name: nil, labels: nil, message_storage_policy: nil, kms_key_name: nil, schema_settings: nil, satisfies_pzs: nil)
             #   Pass arguments to `create_topic` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -255,6 +261,13 @@ module Google
             #     to messages published on this topic.
             #
             #     The expected format is `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+            #   @param schema_settings [::Google::Cloud::PubSub::V1::SchemaSettings, ::Hash]
+            #     Settings for validating messages published against a schema.
+            #
+            #     EXPERIMENTAL: Schema support is in development and may not work yet.
+            #   @param satisfies_pzs [::Boolean]
+            #     Reserved for future use. This field is set only in responses from the
+            #     server; it is ignored if it is set in any requests.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Topic]
@@ -1001,7 +1014,7 @@ module Google
               # Each configuration object is of type `Gapic::Config::Method` and includes
               # the following configuration fields:
               #
-              #  *  `timeout` (*type:* `Numeric`) - The call timeout in milliseconds
+              #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
               #  *  `metadata` (*type:* `Hash{Symbol=>String}`) - Additional gRPC headers
               #  *  `retry_policy (*type:* `Hash`) - The retry policy. The policy fields
               #     include the following keys:

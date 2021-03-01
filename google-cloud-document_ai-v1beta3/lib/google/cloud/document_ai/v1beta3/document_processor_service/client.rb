@@ -153,7 +153,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              credentials ||= Credentials.default scope: @config.scope
+              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # but only if the default endpoint does not have a region prefix.
+              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
+                                       @config.endpoint == Client.configure.endpoint &&
+                                       !@config.endpoint.split(".").first.include?("-")
+              credentials ||= Credentials.default scope:                  @config.scope,
+                                                  enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
@@ -196,11 +202,15 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload process_document(name: nil, document: nil, skip_human_review: nil)
+            # @overload process_document(inline_document: nil, raw_document: nil, name: nil, document: nil, skip_human_review: nil)
             #   Pass arguments to `process_document` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param inline_document [::Google::Cloud::DocumentAI::V1beta3::Document, ::Hash]
+            #     An inline document proto.
+            #   @param raw_document [::Google::Cloud::DocumentAI::V1beta3::RawDocument, ::Hash]
+            #     A raw document content (bytes).
             #   @param name [::String]
             #     Required. The processor resource name.
             #   @param document [::Google::Cloud::DocumentAI::V1beta3::Document, ::Hash]
@@ -268,7 +278,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload batch_process_documents(name: nil, input_configs: nil, output_config: nil)
+            # @overload batch_process_documents(name: nil, input_configs: nil, output_config: nil, input_documents: nil, document_output_config: nil, skip_human_review: nil)
             #   Pass arguments to `batch_process_documents` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -279,6 +289,13 @@ module Google
             #     The input config for each single document in the batch process.
             #   @param output_config [::Google::Cloud::DocumentAI::V1beta3::BatchProcessRequest::BatchOutputConfig, ::Hash]
             #     The overall output config for batch process.
+            #   @param input_documents [::Google::Cloud::DocumentAI::V1beta3::BatchDocumentsInputConfig, ::Hash]
+            #     The input documents for batch process.
+            #   @param document_output_config [::Google::Cloud::DocumentAI::V1beta3::DocumentOutputConfig, ::Hash]
+            #     The overall output config for batch process.
+            #   @param skip_human_review [::Boolean]
+            #     Whether Human Review feature should be skipped for this request. Default to
+            #     false.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -340,11 +357,13 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload review_document(human_review_config: nil, document: nil)
+            # @overload review_document(inline_document: nil, human_review_config: nil, document: nil)
             #   Pass arguments to `review_document` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param inline_document [::Google::Cloud::DocumentAI::V1beta3::Document, ::Hash]
+            #     An inline document proto.
             #   @param human_review_config [::String]
             #     Required. The resource name of the HumanReviewConfig that the document will be
             #     reviewed with.
@@ -522,7 +541,7 @@ module Google
               # Each configuration object is of type `Gapic::Config::Method` and includes
               # the following configuration fields:
               #
-              #  *  `timeout` (*type:* `Numeric`) - The call timeout in milliseconds
+              #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
               #  *  `metadata` (*type:* `Hash{Symbol=>String}`) - Additional gRPC headers
               #  *  `retry_policy (*type:* `Hash`) - The retry policy. The policy fields
               #     include the following keys:

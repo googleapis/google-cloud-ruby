@@ -1,0 +1,162 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.analytics.admin.v1alpha",
+  "libraryPackage": "::Google::Analytics::Admin::V1alpha",
+  "services": {
+    "AnalyticsAdminService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client",
+          "methods": {
+            "GetAccount": [
+              "get_account"
+            ],
+            "ListAccounts": [
+              "list_accounts"
+            ],
+            "DeleteAccount": [
+              "delete_account"
+            ],
+            "UpdateAccount": [
+              "update_account"
+            ],
+            "ProvisionAccountTicket": [
+              "provision_account_ticket"
+            ],
+            "ListAccountSummaries": [
+              "list_account_summaries"
+            ],
+            "GetProperty": [
+              "get_property"
+            ],
+            "ListProperties": [
+              "list_properties"
+            ],
+            "CreateProperty": [
+              "create_property"
+            ],
+            "DeleteProperty": [
+              "delete_property"
+            ],
+            "UpdateProperty": [
+              "update_property"
+            ],
+            "GetUserLink": [
+              "get_user_link"
+            ],
+            "BatchGetUserLinks": [
+              "batch_get_user_links"
+            ],
+            "ListUserLinks": [
+              "list_user_links"
+            ],
+            "AuditUserLinks": [
+              "audit_user_links"
+            ],
+            "CreateUserLink": [
+              "create_user_link"
+            ],
+            "BatchCreateUserLinks": [
+              "batch_create_user_links"
+            ],
+            "UpdateUserLink": [
+              "update_user_link"
+            ],
+            "BatchUpdateUserLinks": [
+              "batch_update_user_links"
+            ],
+            "DeleteUserLink": [
+              "delete_user_link"
+            ],
+            "BatchDeleteUserLinks": [
+              "batch_delete_user_links"
+            ],
+            "GetWebDataStream": [
+              "get_web_data_stream"
+            ],
+            "DeleteWebDataStream": [
+              "delete_web_data_stream"
+            ],
+            "UpdateWebDataStream": [
+              "update_web_data_stream"
+            ],
+            "CreateWebDataStream": [
+              "create_web_data_stream"
+            ],
+            "ListWebDataStreams": [
+              "list_web_data_streams"
+            ],
+            "GetIosAppDataStream": [
+              "get_ios_app_data_stream"
+            ],
+            "DeleteIosAppDataStream": [
+              "delete_ios_app_data_stream"
+            ],
+            "UpdateIosAppDataStream": [
+              "update_ios_app_data_stream"
+            ],
+            "CreateIosAppDataStream": [
+              "create_ios_app_data_stream"
+            ],
+            "ListIosAppDataStreams": [
+              "list_ios_app_data_streams"
+            ],
+            "GetAndroidAppDataStream": [
+              "get_android_app_data_stream"
+            ],
+            "DeleteAndroidAppDataStream": [
+              "delete_android_app_data_stream"
+            ],
+            "UpdateAndroidAppDataStream": [
+              "update_android_app_data_stream"
+            ],
+            "CreateAndroidAppDataStream": [
+              "create_android_app_data_stream"
+            ],
+            "ListAndroidAppDataStreams": [
+              "list_android_app_data_streams"
+            ],
+            "GetEnhancedMeasurementSettings": [
+              "get_enhanced_measurement_settings"
+            ],
+            "UpdateEnhancedMeasurementSettings": [
+              "update_enhanced_measurement_settings"
+            ],
+            "CreateFirebaseLink": [
+              "create_firebase_link"
+            ],
+            "UpdateFirebaseLink": [
+              "update_firebase_link"
+            ],
+            "DeleteFirebaseLink": [
+              "delete_firebase_link"
+            ],
+            "ListFirebaseLinks": [
+              "list_firebase_links"
+            ],
+            "GetGlobalSiteTag": [
+              "get_global_site_tag"
+            ],
+            "CreateGoogleAdsLink": [
+              "create_google_ads_link"
+            ],
+            "UpdateGoogleAdsLink": [
+              "update_google_ads_link"
+            ],
+            "DeleteGoogleAdsLink": [
+              "delete_google_ads_link"
+            ],
+            "ListGoogleAdsLinks": [
+              "list_google_ads_links"
+            ],
+            "GetDataSharingSettings": [
+              "get_data_sharing_settings"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

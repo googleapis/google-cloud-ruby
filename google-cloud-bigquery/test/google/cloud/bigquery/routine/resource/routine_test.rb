@@ -27,6 +27,7 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
   let(:imported_libraries) { ["gs://cloud-samples-data/bigquery/udfs/max-value.js"] }
   let(:body) { "x * 3" }
   let(:description) { "This is my routine" }
+  let(:determinism_level) { "DETERMINISTIC" }
   let(:new_routine_type) { "PROCEDURE" }
   let(:new_language) { "JAVASCRIPT" }
   let(:new_arguments_gapi) do
@@ -65,7 +66,8 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
   let(:new_imported_libraries) { ["gs://cloud-samples-data/bigquery/udfs/max-value-2.js"] }
   let(:new_body) { "x * 4" }
   let(:new_description) { "This is my updated routine" }
-  let(:routine_hash) { random_routine_hash dataset, routine_id }
+  let(:new_determinism_level) { "NOT_DETERMINISTIC" }
+  let(:routine_hash) { random_routine_hash dataset, routine_id, determinism_level: determinism_level }
   let(:routine_gapi) { Google::Apis::BigqueryV2::Routine.from_json routine_hash.to_json }
   let(:routine) { Google::Cloud::Bigquery::Routine.from_gapi routine_gapi, bigquery.service }
 
@@ -132,6 +134,9 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
     _(routine.imported_libraries).must_be :frozen?
     _(routine.body).must_equal "x * 3"
     _(routine.description).must_equal description
+    _(routine.determinism_level).must_equal determinism_level
+    _(routine.determinism_level_deterministic?).must_equal true
+    _(routine.determinism_level_not_deterministic?).must_equal false
   end
 
   it "can test its existence" do
@@ -330,8 +335,32 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
     _(routine.description).must_equal new_description
   end
 
+  it "updates its determinism_level" do
+    _(routine.determinism_level).must_equal determinism_level
+    _(routine.determinism_level_deterministic?).must_equal true
+    _(routine.determinism_level_not_deterministic?).must_equal false
+
+    mock = Minitest::Mock.new
+    updated_routine_gapi = routine_gapi.dup
+    updated_routine_gapi.determinism_level = new_determinism_level
+    mock.expect :update_routine, updated_routine_gapi,
+      [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
+    routine.service.mocked_service = mock
+
+    routine.determinism_level = new_determinism_level
+
+    mock.verify
+
+    _(routine.determinism_level).must_equal new_determinism_level
+    _(routine.determinism_level_deterministic?).must_equal false
+    _(routine.determinism_level_not_deterministic?).must_equal true
+  end
+
   it "updates its attributes in a block" do
     _(routine.description).must_equal description
+    _(routine.determinism_level).must_equal determinism_level
+    _(routine.determinism_level_deterministic?).must_equal true
+    _(routine.determinism_level_not_deterministic?).must_equal false
 
     mock = Minitest::Mock.new
     updated_routine_gapi = routine_gapi.dup
@@ -342,6 +371,7 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
     updated_routine_gapi.imported_libraries = new_imported_libraries
     updated_routine_gapi.definition_body = new_body
     updated_routine_gapi.description = new_description
+    updated_routine_gapi.determinism_level = new_determinism_level
     mock.expect :update_routine, updated_routine_gapi,
       [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
     routine.service.mocked_service = mock
@@ -354,6 +384,7 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
       r.imported_libraries = new_imported_libraries
       r.body = new_body
       r.description = new_description
+      r.determinism_level = new_determinism_level
     end
 
     mock.verify
@@ -365,6 +396,9 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
     _(routine.imported_libraries).must_equal new_imported_libraries
     _(routine.body).must_equal new_body
     _(routine.description).must_equal new_description
+    _(routine.determinism_level).must_equal new_determinism_level
+    _(routine.determinism_level_deterministic?).must_equal false
+    _(routine.determinism_level_not_deterministic?).must_equal true
   end
 
   it "skips update when no updates are made in a block" do

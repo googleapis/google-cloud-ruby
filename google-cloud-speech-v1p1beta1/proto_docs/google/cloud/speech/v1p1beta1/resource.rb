@@ -30,7 +30,7 @@ module Google
         # @!attribute [rw] custom_class_id
         #   @return [::String]
         #     If this custom class is a resource, the custom_class_id is the resource id
-        #     of the CustomClass.
+        #     of the CustomClass. Case sensitive.
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Speech::V1p1beta1::CustomClass::ClassItem>]
         #     A collection of class items.
@@ -117,6 +117,9 @@ module Google
         #     A collection of phrase sets. To specify the hints inline, leave the
         #     phrase set's `name` blank and fill in the rest of its fields. Any
         #     phrase set can use any custom class.
+        # @!attribute [rw] phrase_set_references
+        #   @return [::Array<::String>]
+        #     A collection of phrase set resource names to use.
         # @!attribute [rw] custom_classes
         #   @return [::Array<::Google::Cloud::Speech::V1p1beta1::CustomClass>]
         #     A collection of custom classes. To specify the classes inline, leave the

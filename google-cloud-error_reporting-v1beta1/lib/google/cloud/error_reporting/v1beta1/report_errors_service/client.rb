@@ -128,7 +128,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              credentials ||= Credentials.default scope: @config.scope
+              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # but only if the default endpoint does not have a region prefix.
+              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
+                                       @config.endpoint == Client.configure.endpoint &&
+                                       !@config.endpoint.split(".").first.include?("-")
+              credentials ||= Credentials.default scope:                  @config.scope,
+                                                  enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
@@ -147,7 +153,7 @@ module Google
             # Service calls
 
             ##
-            # Report an individual error event.
+            # Report an individual error event and record the event to a log.
             #
             # This endpoint accepts **either** an OAuth token,
             # **or** an [API key](https://support.google.com/cloud/answer/6158862)
@@ -155,7 +161,15 @@ module Google
             # a `key` parameter. For example:
             #
             # `POST
-            # https://clouderrorreporting.googleapis.com/v1beta1/projects/example-project/events:report?key=123ABC456`
+            # https://clouderrorreporting.googleapis.com/v1beta1/\\{projectName}/events:report?key=123ABC456`
+            #
+            # **Note:** [Error Reporting](/error-reporting) is a global service built
+            # on Cloud Logging and doesn't analyze logs stored
+            # in regional log buckets or logs routed to other Google Cloud projects.
+            #
+            # For more information, see
+            # [Using Error Reporting with regionalized
+            # logs](/error-reporting/docs/regionalization).
             #
             # @overload report_error_event(request, options = nil)
             #   Pass arguments to `report_error_event` via a request object, either of type
@@ -174,10 +188,11 @@ module Google
             #
             #   @param project_name [::String]
             #     Required. The resource name of the Google Cloud Platform project. Written
-            #     as `projects/` plus the
+            #     as `projects/{projectId}`, where `{projectId}` is the
             #     [Google Cloud Platform project
-            #     ID](https://support.google.com/cloud/answer/6158840). Example:
-            #     `projects/my-project-123`.
+            #     ID](https://support.google.com/cloud/answer/6158840).
+            #
+            #     Example: // `projects/my-project-123`.
             #   @param event [::Google::Cloud::ErrorReporting::V1beta1::ReportedErrorEvent, ::Hash]
             #     Required. The error event to be reported.
             #
@@ -351,7 +366,7 @@ module Google
               # Each configuration object is of type `Gapic::Config::Method` and includes
               # the following configuration fields:
               #
-              #  *  `timeout` (*type:* `Numeric`) - The call timeout in milliseconds
+              #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
               #  *  `metadata` (*type:* `Hash{Symbol=>String}`) - Additional gRPC headers
               #  *  `retry_policy (*type:* `Hash`) - The retry policy. The policy fields
               #     include the following keys:

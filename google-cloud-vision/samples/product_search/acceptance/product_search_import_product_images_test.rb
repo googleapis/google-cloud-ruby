@@ -35,7 +35,7 @@ describe "Import product sets and retrieve reference images", :product_search do
         output = `ruby #{snippet_filepath} #{@project_id} #{@location}`
 
         # Verify console output
-        product_images.values.each do |image_uri|
+        product_images.each_value do |image_uri|
           _(output).must_include image_uri
         end
 

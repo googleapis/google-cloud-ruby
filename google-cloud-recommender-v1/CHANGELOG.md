@@ -1,5 +1,21 @@
 # Release History
 
+### 0.7.0 / 2021-02-02
+
+#### Features
+
+* Use self-signed JWT credentials when possible
+
+### 0.6.0 / 2021-01-26
+
+#### Features
+
+* Support for additional forms of insight and recommendation paths
+
+#### Documentation
+
+* Timeout config description correctly gives the units as seconds.
+
 ### 0.5.3 / 2020-10-29
 
 #### Bug Fixes

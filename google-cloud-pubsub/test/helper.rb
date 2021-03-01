@@ -144,7 +144,8 @@ class MockPubsub < Minitest::Spec
     data
   end
 
-  def subscription_hash topic_name, sub_name,
+  def subscription_hash topic_name,
+                        sub_name,
                         deadline = 60,
                         endpoint = "http://example.com/callback",
                         labels: nil,
@@ -177,11 +178,24 @@ class MockPubsub < Minitest::Spec
       dead_letter_topic: dead_letter_topic,
       max_delivery_attempts: max_delivery_attempts
     } if dead_letter_topic
-    hsh[:retry_policy] = {
-      minimum_backoff: retry_minimum_backoff,
-      maximum_backoff: retry_maximum_backoff
-    } if retry_minimum_backoff || retry_maximum_backoff
+    if retry_minimum_backoff || retry_maximum_backoff
+      hsh[:retry_policy] = retry_policy_hash retry_minimum_backoff, retry_maximum_backoff
+    end
     hsh
+  end
+
+  def retry_policy_hash minimum_backoff, maximum_backoff
+    {
+      minimum_backoff: number_to_duration_hash(minimum_backoff),
+      maximum_backoff: number_to_duration_hash(maximum_backoff)
+    }
+  end
+
+  def retry_policy_grpc minimum_backoff, maximum_backoff
+    Google::Cloud::PubSub::V1::RetryPolicy.new(
+      minimum_backoff: Google::Cloud::PubSub::Convert.number_to_duration(minimum_backoff),
+      maximum_backoff: Google::Cloud::PubSub::Convert.number_to_duration(maximum_backoff)
+    )
   end
 
   def create_subscription_args sub_name,
@@ -255,19 +269,31 @@ class MockPubsub < Minitest::Spec
   end
 
   def topic_path topic_name
+    return topic_name if topic_name.to_s.include? "/"
     "#{project_path}/topics/#{topic_name}"
   end
 
   def subscription_path subscription_name
+    return subscription_name if subscription_name.to_s.include? "/"
     "#{project_path}/subscriptions/#{subscription_name}"
   end
 
   def snapshot_path snapshot_name
+    return snapshot_name if snapshot_name.to_s.include?("/")
     "#{project_path}/snapshots/#{snapshot_name}"
   end
 
   def paged_enum_struct response
     OpenStruct.new response: response
+  end
+
+  def number_to_duration_hash number
+    return nil if number.nil?
+    duration = Google::Cloud::PubSub::Convert.number_to_duration number
+    {
+      seconds: duration.seconds,
+      nanos: duration.nanos
+    }
   end
 
   # Register this spec type for when :storage is used.

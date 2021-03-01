@@ -34,8 +34,8 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.pubsub.v1.Publisher'
 
-            # Creates the given topic with the given name. See the [resource name rules](
-            # https://cloud.google.com/pubsub/docs/admin#resource_names).
+            # Creates the given topic with the given name. See the [resource name rules]
+            # (https://cloud.google.com/pubsub/docs/admin#resource_names).
             rpc :CreateTopic, ::Google::Cloud::PubSub::V1::Topic, ::Google::Cloud::PubSub::V1::Topic
             # Updates an existing topic. Note that certain properties of a
             # topic are not modifiable.
@@ -187,8 +187,8 @@ module Google
             # snapshot or its subscription, unless the same subscription is specified.
             rpc :DeleteSnapshot, ::Google::Cloud::PubSub::V1::DeleteSnapshotRequest, ::Google::Protobuf::Empty
             # Seeks an existing subscription to a point in time or to a given snapshot,
-            # whichever is provided in the request. Snapshots are used in [Seek](
-            # https://cloud.google.com/pubsub/docs/replay-overview) operations, which
+            # whichever is provided in the request. Snapshots are used in [Seek]
+            # (https://cloud.google.com/pubsub/docs/replay-overview) operations, which
             # allow you to manage message acknowledgments in bulk. That is, you can set
             # the acknowledgment state of messages in an existing subscription to the
             # state captured by a snapshot. Note that both the subscription and the

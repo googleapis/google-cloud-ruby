@@ -1,0 +1,48 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.networkconnectivity.v1alpha1",
+  "libraryPackage": "::Google::Cloud::NetworkConnectivity::V1alpha1",
+  "services": {
+    "HubService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client",
+          "methods": {
+            "ListHubs": [
+              "list_hubs"
+            ],
+            "GetHub": [
+              "get_hub"
+            ],
+            "CreateHub": [
+              "create_hub"
+            ],
+            "UpdateHub": [
+              "update_hub"
+            ],
+            "DeleteHub": [
+              "delete_hub"
+            ],
+            "ListSpokes": [
+              "list_spokes"
+            ],
+            "GetSpoke": [
+              "get_spoke"
+            ],
+            "CreateSpoke": [
+              "create_spoke"
+            ],
+            "UpdateSpoke": [
+              "update_spoke"
+            ],
+            "DeleteSpoke": [
+              "delete_spoke"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

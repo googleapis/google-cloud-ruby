@@ -162,19 +162,4 @@ describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
 
     mock.verify
   end
-
-  def load_job_resp_gapi table, load_url, job_id: "job_9876543210", labels: nil
-    hash = random_job_hash job_id
-    hash["configuration"]["load"] = {
-      "sourceUris" => [load_url],
-      "destinationTable" => {
-        "projectId" => table.project_id,
-        "datasetId" => table.dataset_id,
-        "tableId" => table.table_id
-      },
-    }
-    resp = Google::Apis::BigqueryV2::Job.from_json hash.to_json
-    resp.configuration.labels = labels if labels
-    resp
-  end
 end

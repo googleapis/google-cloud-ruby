@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require_relative "helper.rb"
-require_relative "../distributed_counters.rb"
+require_relative "helper"
+require_relative "../distributed_counters"
 
 describe "Google Cloud Firestore API samples - Distributed Counter" do
   before do

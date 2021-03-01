@@ -1,0 +1,11 @@
+{
+    "api_id": "retail.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-retail-v2/latest",
+    "distribution_name": "google-cloud-retail-v2",
+    "language": "ruby",
+    "name": "retail",
+    "name_pretty": "Retail V2 API",
+    "product_documentation": "https://cloud.google.com/retail/docs/apis",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}

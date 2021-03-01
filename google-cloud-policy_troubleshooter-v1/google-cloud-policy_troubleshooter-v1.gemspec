@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Policy Troubleshooter makes it easier to understand why a user has access to a resource or doesn't have permission to call an API. Given an email, resource, and permission, Policy Troubleshooter will examine all IAM policies that apply to the resource. It then reveals whether the member's roles include the permission on that resource and, if so, which policies bind the member to those roles."
+  gem.description   = "Policy Troubleshooter makes it easier to understand why a user has access to a resource or doesn't have permission to call an API. Given an email, resource, and permission, Policy Troubleshooter will examine all IAM policies that apply to the resource. It then reveals whether the member's roles include the permission on that resource and, if so, which policies bind the member to those roles. Note that google-cloud-policy_troubleshooter-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-policy_troubleshooter instead. See the readme for more details."
   gem.summary       = "API Client library for the IAM Policy Troubleshooter V1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"

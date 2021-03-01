@@ -1,0 +1,39 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.orgpolicy.v2",
+  "libraryPackage": "::Google::Cloud::OrgPolicy::V2",
+  "services": {
+    "OrgPolicy": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client",
+          "methods": {
+            "ListConstraints": [
+              "list_constraints"
+            ],
+            "ListPolicies": [
+              "list_policies"
+            ],
+            "GetPolicy": [
+              "get_policy"
+            ],
+            "GetEffectivePolicy": [
+              "get_effective_policy"
+            ],
+            "CreatePolicy": [
+              "create_policy"
+            ],
+            "UpdatePolicy": [
+              "update_policy"
+            ],
+            "DeletePolicy": [
+              "delete_policy"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

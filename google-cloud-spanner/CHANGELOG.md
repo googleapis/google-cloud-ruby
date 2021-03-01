@@ -1,5 +1,31 @@
 # Release History
 
+### 2.4.0 / 2021-02-18
+
+#### Features
+
+* Point In Time Recovery (PITR) ([#8169](https://www.github.com/googleapis/google-cloud-ruby/issues/8169))
+  * feat(spanner): support pitr-lite
+  * feature(spanner): adds test for throttled
+  * feat(spanner): adds version time to backup
+  * test(spanner): adds unit test for create backup
+  * feat(spanner): exposes version time in backup
+  * chore: fixes rubocop violations
+  * fix: addresses PR comments
+  * test: adds integration tests for pitr backup
+
+### 2.3.0 / 2021-02-09
+
+#### Features
+
+* CommitStats in CommitResponse ([#8058](https://www.github.com/googleapis/google-cloud-ruby/issues/8058))
+* optionalize `credentials` when using cloud spanner emulator host ([#8416](https://www.github.com/googleapis/google-cloud-ruby/issues/8416))
+  * Optionalize `credentials` when using Cloud Spanner Emulator
+  * Remove unnecessary credentials stub for emulator_host in Google::Cloud::Spanner.new
+  * Add test of explicit project_id in Google::Cloud::Spanner.new
+  * Update document for `emulator_host` without credentials
+  * Tidy code according to rubocop settings
+
 ### 2.2.0 / 2020-09-15
 
 #### Features

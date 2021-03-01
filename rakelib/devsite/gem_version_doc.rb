@@ -1,5 +1,5 @@
-require_relative "repo_metadata.rb"
-require_relative "repo_doc_common.rb"
+require_relative "repo_metadata"
+require_relative "repo_doc_common"
 
 class GemVersionDoc < RepoDocCommon
   def initialize input_dir, output_dir, metadata = nil

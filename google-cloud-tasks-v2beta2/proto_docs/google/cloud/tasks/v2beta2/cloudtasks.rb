@@ -58,6 +58,12 @@ module Google
         #     from the previous call to {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#list_queues ListQueues}
         #     method. It is an error to switch the value of the
         #     {::Google::Cloud::Tasks::V2beta2::ListQueuesRequest#filter filter} while iterating through pages.
+        # @!attribute [rw] read_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Read mask is used for a more granular control over what the API returns.
+        #     If the mask is not present all fields will be returned except
+        #     [Queue.stats]. [Queue.stats] will be returned only if it was  explicitly
+        #     specified in the mask.
         class ListQueuesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -88,6 +94,12 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the queue. For example:
         #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+        # @!attribute [rw] read_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Read mask is used for a more granular control over what the API returns.
+        #     If the mask is not present all fields will be returned except
+        #     [Queue.stats]. [Queue.stats] will be returned only if it was  explicitly
+        #     specified in the mask.
         class GetQueueRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

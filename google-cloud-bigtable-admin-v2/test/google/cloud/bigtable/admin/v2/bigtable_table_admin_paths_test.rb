@@ -47,6 +47,18 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientPathsTest 
     end
   end
 
+  def test_crypto_key_version_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.crypto_key_version_path project: "value0", location: "value1", key_ring: "value2", crypto_key: "value3", crypto_key_version: "value4"
+      assert_equal "projects/value0/locations/value1/keyRings/value2/cryptoKeys/value3/cryptoKeyVersions/value4", path
+    end
+  end
+
   def test_instance_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

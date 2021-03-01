@@ -145,6 +145,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
       expect { ds.delete }.must_raise RuntimeError
       expect { ds.create_table }.must_raise RuntimeError
       expect { ds.create_view }.must_raise RuntimeError
+      expect { ds.create_materialized_view }.must_raise RuntimeError
       expect { ds.table }.must_raise RuntimeError
       expect { ds.tables }.must_raise RuntimeError
       expect { ds.model }.must_raise RuntimeError

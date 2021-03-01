@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "google-api-client", "~> 0.36"
+gem "google-apis-core", "~> 0.2"
 gem "google-gax", "~> 1.8"
 
 gem "rake"

@@ -27,31 +27,15 @@ describe Google::Cloud::Bigquery, :bigquery do
   let(:labels) { { "prefix" => prefix } }
   let(:udfs) { [ "return x+1;", "gs://my-bucket/my-lib.js" ] }
   let(:filter) { "labels.prefix:#{prefix}" }
-  let(:dataset_2_id) { "#{prefix}_dataset_2" }
-  let(:dataset_2) do
-    d = bigquery.dataset dataset_2_id
+  let(:dataset_labels_id) { "#{prefix}_dataset_labels" }
+  let(:dataset_labels) do
+    d = bigquery.dataset dataset_labels_id
     if d.nil?
-      d = bigquery.create_dataset dataset_2_id do |ds|
+      d = bigquery.create_dataset dataset_labels_id do |ds|
         ds.labels = labels
       end
     end
     d
-  end
-  let(:table_id) { "bigquery_table" }
-  let(:table) do
-    t = dataset.table table_id
-    if t.nil?
-      t = dataset.create_table table_id
-    end
-    t
-  end
-  let(:view_id) { "bigquery_view" }
-  let(:view) do
-    t = dataset.table view_id
-    if t.nil?
-      t = dataset.create_view view_id, publicdata_query
-    end
-    t
   end
   let(:dataset_with_access_id) { "#{prefix}_dataset_with_access" }
   let(:model_id) { "model_#{SecureRandom.hex(4)}" }
@@ -72,9 +56,8 @@ describe Google::Cloud::Bigquery, :bigquery do
   end
 
   before do
-    dataset_2
-    table
-    view
+    dataset
+    dataset_labels
   end
 
   it "should get its project service account email" do
@@ -148,11 +131,13 @@ describe Google::Cloud::Bigquery, :bigquery do
     _(job.range_partitioning_start).must_be_nil
     _(job.range_partitioning_interval).must_be_nil
     _(job.range_partitioning_end).must_be_nil
+
     _(job.time_partitioning?).must_equal false
     _(job.time_partitioning_type).must_be :nil?
     _(job.time_partitioning_field).must_be :nil?
     _(job.time_partitioning_expiration).must_be :nil?
     _(job.time_partitioning_require_filter?).must_equal false
+
     _(job.clustering?).must_equal false
     _(job.clustering_fields).must_be :nil?
 

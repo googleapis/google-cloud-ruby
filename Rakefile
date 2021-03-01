@@ -200,7 +200,7 @@ task :rubocop, :bundleupdate do |t, args|
   end
 end
 
-require_relative "rakelib/devsite/devsite_builder.rb"
+require_relative "rakelib/devsite/devsite_builder"
 
 namespace :docs do
   desc "Builds documentation for all gems on current branch (assumes master)"
@@ -538,7 +538,7 @@ task :compile do
 end
 
 namespace :kokoro do
-  require_relative "rakelib/kokoro/kokoro.rb"
+  require_relative "rakelib/kokoro/kokoro"
   require "net/http"
   require "uri"
 

@@ -269,19 +269,34 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
     _(job.location).must_equal "US"
   end
 
-  def load_job_resp_gapi table, load_url, job_id: "job_9876543210", labels: nil
-    hash = random_job_hash job_id
-    hash["configuration"]["load"] = {
-      "sourceUris" => [load_url],
-      "destinationTable" => {
-        "projectId" => table.project_id,
-        "datasetId" => table.dataset_id,
-        "tableId" => table.table_id
-      },
-    }
-    resp = Google::Apis::BigqueryV2::Job.from_json hash.to_json
-    resp.configuration.labels = labels if labels
-    resp
+  it "can specify a storage URI with hive partitioning options" do
+    gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+    source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
+
+    mock = Minitest::Mock.new
+    hive_partitioning_options = Google::Apis::BigqueryV2::HivePartitioningOptions.new(
+      mode: "AUTO",
+      source_uri_prefix: source_uri_prefix
+    )
+    job_gapi = load_job_url_gapi table_gapi.table_reference, gcs_uri, hive_partitioning_options: hive_partitioning_options
+    job_gapi.configuration.load.source_format = "PARQUET"
+    mock.expect :insert_job,
+                load_job_resp_gapi(table, gcs_uri, source_format: "PARQUET", hive_partitioning_options: hive_partitioning_options),
+                [project, job_gapi]
+    table.service.mocked_service = mock
+
+    job = table.load_job gcs_uri do |j|
+      j.format = :parquet
+      j.hive_partitioning_mode = :auto
+      j.hive_partitioning_source_uri_prefix = source_uri_prefix
+    end
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.parquet?).must_equal true
+    _(job.hive_partitioning?).must_equal true
+    _(job.hive_partitioning_mode).must_equal "AUTO"
+    _(job.hive_partitioning_source_uri_prefix).must_equal source_uri_prefix
   end
 
   # Borrowed from MockStorage, load to a common module?

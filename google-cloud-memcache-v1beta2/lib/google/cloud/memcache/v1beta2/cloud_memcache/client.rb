@@ -40,7 +40,7 @@ module Google
           # * As such, Memcached instances are resources of the form:
           #   `/projects/{project_id}/locations/{location_id}/instances/{instance_id}`
           #
-          # Note that location_id must be refering to a GCP `region`; for example:
+          # Note that location_id must be a GCP `region`; for example:
           # * `projects/my-memcached-project/locations/us-central1/instances/my-memcached`
           #
           class Client
@@ -92,6 +92,8 @@ module Google
                 default_config.rpcs.delete_instance.timeout = 1200.0
 
                 default_config.rpcs.apply_parameters.timeout = 1200.0
+
+                default_config.rpcs.apply_software_update.timeout = 1200.0
 
                 default_config
               end
@@ -154,7 +156,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              credentials ||= Credentials.default scope: @config.scope
+              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # but only if the default endpoint does not have a region prefix.
+              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
+                                       @config.endpoint == Client.configure.endpoint &&
+                                       !@config.endpoint.split(".").first.include?("-")
+              credentials ||= Credentials.default scope:                  @config.scope,
+                                                  enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
@@ -185,7 +193,7 @@ module Google
             # Service calls
 
             ##
-            # Lists Instances in a given project and location.
+            # Lists Instances in a given location.
             #
             # @overload list_instances(request, options = nil)
             #   Pass arguments to `list_instances` via a request object, either of type
@@ -210,16 +218,15 @@ module Google
             #     The maximum number of items to return.
             #
             #     If not specified, a default value of 1000 will be used by the service.
-            #     Regardless of the page_size value, the response may include a partial list
-            #     and a caller should only rely on response's
-            #     [next_page_token][CloudMemcache.ListInstancesResponse.next_page_token]
+            #     Regardless of the `page_size` value, the response may include a partial
+            #     list and a caller should only rely on response's
+            #     {::Google::Cloud::Memcache::V1beta2::ListInstancesResponse#next_page_token `next_page_token`}
             #     to determine if there are more instances left to be queried.
             #   @param page_token [::String]
-            #     The next_page_token value returned from a previous List request,
-            #     if any.
+            #     The `next_page_token` value returned from a previous List request, if any.
             #   @param filter [::String]
             #     List filter. For example, exclude all Memcached instances with name as
-            #     my-instance by specifying "name != my-instance".
+            #     my-instance by specifying `"name != my-instance"`.
             #   @param order_by [::String]
             #     Sort results. Supported values are "name", "name desc" or "" (unsorted).
             #
@@ -338,7 +345,7 @@ module Google
             end
 
             ##
-            # Creates a new Instance in a given project and location.
+            # Creates a new Instance in a given location.
             #
             # @overload create_instance(request, options = nil)
             #   Pass arguments to `create_instance` via a request object, either of type
@@ -367,7 +374,9 @@ module Google
             #     * Must start with a letter.
             #     * Must be between 1-40 characters.
             #     * Must end with a number or a letter.
-            #     * Must be unique within the user project / location
+            #     * Must be unique within the user project / location.
+            #
+            #     If any of the above are not met, the API raises an invalid argument error.
             #   @param resource [::Google::Cloud::Memcache::V1beta2::Instance, ::Hash]
             #     Required. A Memcached [Instance] resource
             #
@@ -437,7 +446,7 @@ module Google
             #
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. Mask of fields to update.
-            #      *   `displayName`
+            #      *  `displayName`
             #   @param resource [::Google::Cloud::Memcache::V1beta2::Instance, ::Hash]
             #     Required. A Memcached [Instance] resource.
             #     Only fields specified in update_mask are updated.
@@ -489,9 +498,10 @@ module Google
             end
 
             ##
-            # Updates the defined Memcached Parameters for an existing Instance.
+            # Updates the defined Memcached parameters for an existing instance.
             # This method only stages the parameters, it must be followed by
-            # ApplyParameters to apply the parameters to nodes of the Memcached Instance.
+            # `ApplyParameters` to apply the parameters to nodes of the Memcached
+            # instance.
             #
             # @overload update_parameters(request, options = nil)
             #   Pass arguments to `update_parameters` via a request object, either of type
@@ -581,7 +591,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Memcached instance resource name in the format:
+            #     Required. Memcached instance resource name in the format:
             #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
             #     where `location_id` refers to a GCP region
             #
@@ -632,8 +642,8 @@ module Google
             end
 
             ##
-            # ApplyParameters will update current set of Parameters to the set of
-            # specified nodes of the Memcached Instance.
+            # `ApplyParameters` restarts the set of specified nodes in order to update
+            # them to the current set of parameters for the Memcached Instance.
             #
             # @overload apply_parameters(request, options = nil)
             #   Pass arguments to `apply_parameters` via a request object, either of type
@@ -654,11 +664,11 @@ module Google
             #     Required. Resource name of the Memcached instance for which parameter group updates
             #     should be applied.
             #   @param node_ids [::Array<::String>]
-            #     Nodes to which we should apply the instance-level parameter group.
+            #     Nodes to which the instance-level parameter group is applied.
             #   @param apply_all [::Boolean]
             #     Whether to apply instance-level parameter group to all nodes. If set to
-            #     true, will explicitly restrict users from specifying any nodes, and apply
-            #     parameter group updates to all nodes within the instance.
+            #     true, users are restricted from specifying individual nodes, and
+            #     `ApplyParameters` updates all nodes within the instance.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -698,6 +708,81 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_memcache_stub.call_rpc :apply_parameters, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates software on the selected nodes of the Instance.
+            #
+            # @overload apply_software_update(request, options = nil)
+            #   Pass arguments to `apply_software_update` via a request object, either of type
+            #   {::Google::Cloud::Memcache::V1beta2::ApplySoftwareUpdateRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Memcache::V1beta2::ApplySoftwareUpdateRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload apply_software_update(instance: nil, node_ids: nil, apply_all: nil)
+            #   Pass arguments to `apply_software_update` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param instance [::String]
+            #     Required. Resource name of the Memcached instance for which software update should be
+            #     applied.
+            #   @param node_ids [::Array<::String>]
+            #     Nodes to which we should apply the update to. Note all the selected nodes
+            #     are updated in parallel.
+            #   @param apply_all [::Boolean]
+            #     Whether to apply the update to all nodes. If set to
+            #     true, will explicitly restrict users from specifying any nodes, and apply
+            #     software update to all nodes (where applicable) within the instance.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def apply_software_update request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memcache::V1beta2::ApplySoftwareUpdateRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.apply_software_update.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Memcache::V1beta2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "instance" => request.instance
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.apply_software_update.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.apply_software_update.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_memcache_stub.call_rpc :apply_software_update, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
@@ -831,7 +916,7 @@ module Google
               # Each configuration object is of type `Gapic::Config::Method` and includes
               # the following configuration fields:
               #
-              #  *  `timeout` (*type:* `Numeric`) - The call timeout in milliseconds
+              #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
               #  *  `metadata` (*type:* `Hash{Symbol=>String}`) - Additional gRPC headers
               #  *  `retry_policy (*type:* `Hash`) - The retry policy. The policy fields
               #     include the following keys:
@@ -877,6 +962,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :apply_parameters
+                ##
+                # RPC-specific configuration for `apply_software_update`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :apply_software_update
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -894,6 +984,8 @@ module Google
                   @delete_instance = ::Gapic::Config::Method.new delete_instance_config
                   apply_parameters_config = parent_rpcs&.apply_parameters if parent_rpcs&.respond_to? :apply_parameters
                   @apply_parameters = ::Gapic::Config::Method.new apply_parameters_config
+                  apply_software_update_config = parent_rpcs&.apply_software_update if parent_rpcs&.respond_to? :apply_software_update
+                  @apply_software_update = ::Gapic::Config::Method.new apply_software_update_config
 
                   yield self if block_given?
                 end

@@ -31,6 +31,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :state, :enum, 3, "google.bigtable.admin.v2.Cluster.State"
       optional :serve_nodes, :int32, 4
       optional :default_storage_type, :enum, 5, "google.bigtable.admin.v2.StorageType"
+      optional :encryption_config, :message, 6, "google.bigtable.admin.v2.Cluster.EncryptionConfig"
+    end
+    add_message "google.bigtable.admin.v2.Cluster.EncryptionConfig" do
+      optional :kms_key_name, :string, 1
     end
     add_enum "google.bigtable.admin.v2.Cluster.State" do
       value :STATE_NOT_KNOWN, 0
@@ -66,6 +70,7 @@ module Google
           Instance::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Instance.State").enummodule
           Instance::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Instance.Type").enummodule
           Cluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Cluster").msgclass
+          Cluster::EncryptionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Cluster.EncryptionConfig").msgclass
           Cluster::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Cluster.State").enummodule
           AppProfile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AppProfile").msgclass
           AppProfile::MultiClusterRoutingUseAny = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AppProfile.MultiClusterRoutingUseAny").msgclass

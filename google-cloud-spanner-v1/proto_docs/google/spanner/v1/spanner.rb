@@ -62,10 +62,9 @@ module Google
         end
 
         # A session in the Cloud Spanner API.
-        # @!attribute [rw] name
+        # @!attribute [r] name
         #   @return [::String]
-        #     The name of the session. This is always system-assigned; values provided
-        #     when creating a session are ignored.
+        #     Output only. The name of the session. This is always system-assigned.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The labels for the session.
@@ -77,10 +76,10 @@ module Google
         #      * No more than 64 labels can be associated with a given session.
         #
         #     See https://goo.gl/xmQnxf for more information on and examples of labels.
-        # @!attribute [rw] create_time
+        # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp when the session is created.
-        # @!attribute [rw] approximate_last_use_time
+        # @!attribute [r] approximate_last_use_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The approximate timestamp when the session is last used. It is
         #     typically earlier than the actual last use time.
@@ -185,8 +184,9 @@ module Google
         #     Parameter names and values that bind to placeholders in the SQL string.
         #
         #     A parameter placeholder consists of the `@` character followed by the
-        #     parameter name (for example, `@firstName`). Parameter names can contain
-        #     letters, numbers, and underscores.
+        #     parameter name (for example, `@firstName`). Parameter names must conform
+        #     to the naming requirements of identifiers as specified at
+        #     https://cloud.google.com/spanner/docs/lexical#identifiers.
         #
         #     Parameters can appear anywhere that a literal value is expected.  The same
         #     parameter name can be used more than once, for example:
@@ -259,6 +259,9 @@ module Google
           #     SPANNER_SYS.SUPPORTED_OPTIMIZER_VERSIONS. Executing a SQL statement
           #     with an invalid optimizer version will fail with a syntax error
           #     (`INVALID_ARGUMENT`) status.
+          #     See
+          #     https://cloud.google.com/spanner/docs/query-optimizer/manage-query-optimizer
+          #     for more information on managing the query optimizer.
           #
           #     The `optimizer_version` statement hint has precedence over this setting.
           class QueryOptions
@@ -650,6 +653,11 @@ module Google
         #     The mutations to be executed when this transaction commits. All
         #     mutations are applied atomically, in the order they appear in
         #     this list.
+        # @!attribute [rw] return_commit_stats
+        #   @return [::Boolean]
+        #     If `true`, then statistics related to the transaction will be included in
+        #     the {::Google::Cloud::Spanner::V1::CommitResponse#commit_stats CommitResponse}. Default value is
+        #     `false`.
         class CommitRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -659,9 +667,29 @@ module Google
         # @!attribute [rw] commit_timestamp
         #   @return [::Google::Protobuf::Timestamp]
         #     The Cloud Spanner timestamp at which the transaction committed.
+        # @!attribute [rw] commit_stats
+        #   @return [::Google::Cloud::Spanner::V1::CommitResponse::CommitStats]
+        #     The statistics about this Commit. Not returned by default.
+        #     For more information, see
+        #     {::Google::Cloud::Spanner::V1::CommitRequest#return_commit_stats CommitRequest.return_commit_stats}.
         class CommitResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Additional statistics about a commit.
+          # @!attribute [rw] mutation_count
+          #   @return [::Integer]
+          #     The total number of mutations for the transaction. Knowing the
+          #     `mutation_count` value can help you maximize the number of mutations
+          #     in a transaction and minimize the number of API round trips. You can
+          #     also monitor this value to prevent transactions from exceeding the system
+          #     [limit](http://cloud.google.com/spanner/quotas#limits_for_creating_reading_updating_and_deleting_data).
+          #     If the number of mutations exceeds the limit, the server returns
+          #     [INVALID_ARGUMENT](http://cloud.google.com/spanner/docs/reference/rest/v1/Code#ENUM_VALUES.INVALID_ARGUMENT).
+          class CommitStats
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # The request for {::Google::Cloud::Spanner::V1::Spanner::Client#rollback Rollback}.

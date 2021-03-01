@@ -1,5 +1,26 @@
 # Release History
 
+### 1.27.0 / 2021-02-10
+
+#### Features
+
+* Add Job#reservation_usage
+* Add Routine#determinism_level
+  * Add Routine#determinism_level
+  * Add Routine#determinism_level=
+  * Add Routine#determinism_level_deterministic?
+  * Add Routine#determinism_level_not_deterministic?
+  * Add Routine::Updater#determinism_level=
+
+### 1.26.0 / 2021-01-13
+
+#### Features
+
+* Add support for Hive Partitioning
+  * Add hive partitioning options to External::DataSource
+  * Add hive partitioning options to LoadJob and LoadJob::Updater
+* Replace google-api-client with google-apis-bigquery_v2
+
 ### 1.25.0 / 2020-11-16
 
 #### Features

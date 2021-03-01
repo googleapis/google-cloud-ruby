@@ -78,6 +78,21 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     _(topic.persistence_regions).must_be :empty?
   end
 
+  it "creates a topic with fully-qualified topic path" do
+    new_topic_path = "projects/other-project/topics/new-topic-#{Time.now.to_i}"
+
+    create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_path)
+    mock = Minitest::Mock.new
+    mock.expect :create_topic, create_res, [name: new_topic_path, labels: nil, kms_key_name: nil, message_storage_policy: nil]
+    pubsub.service.mocked_publisher = mock
+
+    topic = pubsub.create_topic new_topic_path
+
+    mock.verify
+
+    _(topic.name).must_equal new_topic_path
+  end
+
   it "creates a topic with new_topic_alias" do
     new_topic_name = "new-topic-#{Time.now.to_i}"
 
@@ -171,6 +186,21 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     _(topic).must_be :resource?
   end
 
+  it "gets a topic with fully-qualified topic path" do
+    topic_full_path = "projects/other-project/topics/found-topic"
+
+    get_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_full_path)
+    mock = Minitest::Mock.new
+    mock.expect :get_topic, get_res, [topic: topic_path(topic_full_path)]
+    pubsub.service.mocked_publisher = mock
+
+    topic = pubsub.topic topic_full_path
+
+    mock.verify
+
+    _(topic.name).must_equal topic_full_path
+  end
+
   it "gets a topic with get_topic alias" do
     topic_name = "found-topic"
 
@@ -226,6 +256,21 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     _(topic.name).must_equal topic_path(topic_name)
     _(topic).must_be :reference?
     _(topic).wont_be :resource?
+  end
+
+  it "gets a topic with project option" do
+    topic_name = "found-topic"
+    topic_full_path = "projects/custom/topics/found-topic"
+
+    get_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_full_path)
+    mock = Minitest::Mock.new
+    mock.expect :get_topic, get_res, [topic: topic_full_path]
+    pubsub.service.mocked_publisher = mock
+
+    topic = pubsub.find_topic topic_name, project: "custom"
+    _(topic.name).must_equal topic_full_path
+    _(topic).wont_be :reference?
+    _(topic).must_be :resource?
   end
 
   it "gets a topic with skip_lookup and project options" do
@@ -431,6 +476,21 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     _(sub).must_be :resource?
   end
 
+  it "gets a subscription with fully-qualified subscription path" do
+    sub_full_path = "projects/other-project/subscriptions/found-sub-#{Time.now.to_i}"
+
+    get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash("random-topic", sub_full_path)
+    mock = Minitest::Mock.new
+    mock.expect :get_subscription, get_res, [subscription: sub_full_path]
+    pubsub.service.mocked_subscriber = mock
+
+    sub = pubsub.subscription sub_full_path
+
+    mock.verify
+
+    _(sub.name).must_equal sub_full_path
+  end
+
   it "gets a subscription with get_subscription alias" do
     sub_name = "found-sub-#{Time.now.to_i}"
 
@@ -492,6 +552,23 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     _(sub.name).must_equal subscription_path(sub_name)
     _(sub).must_be :reference?
     _(sub).wont_be :resource?
+  end
+
+  it "gets a subscription with project option" do
+    sub_name = "found-sub-#{Time.now.to_i}"
+    sub_full_path = "projects/custom/subscriptions/#{sub_name}"
+
+    get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash("random-topic", sub_full_path)
+    mock = Minitest::Mock.new
+    mock.expect :get_subscription, get_res, [subscription: sub_full_path]
+    pubsub.service.mocked_subscriber = mock
+
+    sub = pubsub.subscription sub_name, project: "custom"
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub.name).must_equal sub_full_path
+    _(sub).wont_be :reference?
+    _(sub).must_be :resource?
   end
 
   it "gets a subscription with skip_lookup and project options" do

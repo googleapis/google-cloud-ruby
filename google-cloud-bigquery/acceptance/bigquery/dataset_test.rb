@@ -181,6 +181,49 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     end
   end
 
+  it "imports parquet data from GCS uri using hive partitioning with auto layout with load_job" do
+    gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/*"
+    source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/autolayout/"
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    job = dataset.load_job "gcs_hive_table_#{SecureRandom.hex(21)}", gcs_uri, job_id: job_id do |job|
+      job.format = :parquet
+      job.hive_partitioning_mode = :auto
+      job.hive_partitioning_source_uri_prefix = source_uri_prefix
+    end
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.job_id).must_equal job_id
+    job.wait_until_done!
+    _(job).wont_be :failed?
+    _(job.output_rows).must_equal 100
+
+    _(job.parquet?).must_equal true
+    _(job.hive_partitioning?).must_equal true
+    _(job.hive_partitioning_mode).must_equal "AUTO"
+    _(job.hive_partitioning_source_uri_prefix).must_equal source_uri_prefix
+  end
+
+  it "imports parquet data from GCS uri using hive partitioning with custom layout with load_job" do
+    gcs_uri = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/customlayout/*"
+    source_uri_prefix = "gs://cloud-samples-data/bigquery/hive-partitioning-samples/customlayout/"
+    source_uri_prefix_with_schema = "#{source_uri_prefix}{pkey:STRING}/"
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    job = dataset.load_job "gcs_hive_table_#{SecureRandom.hex(21)}", gcs_uri, job_id: job_id do |job|
+      job.format = :parquet
+      job.hive_partitioning_mode = :custom
+      job.hive_partitioning_source_uri_prefix = source_uri_prefix_with_schema
+    end
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.job_id).must_equal job_id
+    job.wait_until_done!
+    _(job).wont_be :failed?
+    _(job.output_rows).must_equal 150
+
+    _(job.parquet?).must_equal true
+    _(job.hive_partitioning?).must_equal true
+    _(job.hive_partitioning_mode).must_equal "CUSTOM"
+    _(job.hive_partitioning_source_uri_prefix).must_equal source_uri_prefix
+  end
+
   it "imports data from a local file and creates a new table with schema and range partitioning in a block with load_job" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     job = dataset.load_job "local_file_table_#{SecureRandom.hex(21)}", local_file, job_id: job_id do |job|
@@ -243,6 +286,22 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     end
 
     job = dataset.load_job "local_file_table_2", local_file, schema: schema
+
+    _(job.hive_partitioning?).must_equal false
+    _(job.hive_partitioning_mode).must_be_nil
+    _(job.hive_partitioning_source_uri_prefix).must_be_nil
+
+    _(job.range_partitioning?).must_equal false
+    _(job.range_partitioning_field).must_be_nil
+    _(job.range_partitioning_start).must_be_nil
+    _(job.range_partitioning_interval).must_be_nil
+    _(job.range_partitioning_end).must_be_nil
+
+    _(job.time_partitioning?).must_equal false
+    _(job.time_partitioning_type).must_be :nil?
+    _(job.time_partitioning_field).must_be :nil?
+    _(job.time_partitioning_expiration).must_be :nil?
+    _(job.time_partitioning_require_filter?).must_equal false
 
     job.wait_until_done!
     _(job.output_rows).must_equal 3
