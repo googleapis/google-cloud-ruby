@@ -103,7 +103,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_constraints ::Google::Cloud::OrgPolicy::V2::ListConstraintsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_constraints(::Google::Cloud::OrgPolicy::V2::ListConstraintsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -170,7 +170,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_policies ::Google::Cloud::OrgPolicy::V2::ListPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_policies(::Google::Cloud::OrgPolicy::V2::ListPoliciesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -229,7 +229,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_policy ::Google::Cloud::OrgPolicy::V2::GetPolicyRequest.new(name: name), grpc_options do |response, operation|
+      client.get_policy(::Google::Cloud::OrgPolicy::V2::GetPolicyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -287,7 +287,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_effective_policy ::Google::Cloud::OrgPolicy::V2::GetEffectivePolicyRequest.new(name: name), grpc_options do |response, operation|
+      client.get_effective_policy(::Google::Cloud::OrgPolicy::V2::GetEffectivePolicyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -347,7 +347,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_policy ::Google::Cloud::OrgPolicy::V2::CreatePolicyRequest.new(parent: parent, policy: policy), grpc_options do |response, operation|
+      client.create_policy(::Google::Cloud::OrgPolicy::V2::CreatePolicyRequest.new(parent: parent, policy: policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -405,7 +405,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_policy ::Google::Cloud::OrgPolicy::V2::UpdatePolicyRequest.new(policy: policy), grpc_options do |response, operation|
+      client.update_policy(::Google::Cloud::OrgPolicy::V2::UpdatePolicyRequest.new(policy: policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -463,7 +463,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_policy ::Google::Cloud::OrgPolicy::V2::DeletePolicyRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_policy(::Google::Cloud::OrgPolicy::V2::DeletePolicyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

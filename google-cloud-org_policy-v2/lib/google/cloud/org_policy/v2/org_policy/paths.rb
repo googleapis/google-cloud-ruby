@@ -82,12 +82,12 @@ module Google
             # @return [::String]
             def policy_path **args
               resources = {
-                "policy:project"      => (proc do |project:, policy:|
+                "policy:project" => (proc do |project:, policy:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/policies/#{policy}"
                 end),
-                "folder:policy"       => (proc do |folder:, policy:|
+                "folder:policy" => (proc do |folder:, policy:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/policies/#{policy}"
