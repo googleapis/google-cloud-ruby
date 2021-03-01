@@ -48,7 +48,7 @@ module Google
               # @return [::String]
               def data_source_path **args
                 resources = {
-                  "data_source:project"          => (proc do |project:, data_source:|
+                  "data_source:project" => (proc do |project:, data_source:|
                     raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                     "projects/#{project}/dataSources/#{data_source}"
@@ -122,7 +122,7 @@ module Google
               # @return [::String]
               def run_path **args
                 resources = {
-                  "project:run:transfer_config"          => (proc do |project:, transfer_config:, run:|
+                  "project:run:transfer_config" => (proc do |project:, transfer_config:, run:|
                     raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
                     raise ::ArgumentError, "transfer_config cannot contain /" if transfer_config.to_s.include? "/"
 
@@ -165,7 +165,7 @@ module Google
               # @return [::String]
               def transfer_config_path **args
                 resources = {
-                  "project:transfer_config"          => (proc do |project:, transfer_config:|
+                  "project:transfer_config" => (proc do |project:, transfer_config:|
                     raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                     "projects/#{project}/transferConfigs/#{transfer_config}"

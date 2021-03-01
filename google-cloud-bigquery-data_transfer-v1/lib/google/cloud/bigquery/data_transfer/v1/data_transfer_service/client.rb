@@ -64,7 +64,7 @@ module Google
                   parent_config = while namespace.any?
                                     parent_name = namespace.join "::"
                                     parent_const = const_get parent_name
-                                    break parent_const.configure if parent_const&.respond_to? :configure
+                                    break parent_const.configure if parent_const.respond_to? :configure
                                     namespace.pop
                                   end
                   default_config = Client::Configuration.new parent_config
@@ -72,17 +72,17 @@ module Google
                   default_config.rpcs.get_data_source.timeout = 20.0
                   default_config.rpcs.get_data_source.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_data_sources.timeout = 20.0
                   default_config.rpcs.list_data_sources.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.create_transfer_config.timeout = 30.0
@@ -92,25 +92,25 @@ module Google
                   default_config.rpcs.delete_transfer_config.timeout = 20.0
                   default_config.rpcs.delete_transfer_config.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.get_transfer_config.timeout = 20.0
                   default_config.rpcs.get_transfer_config.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_transfer_configs.timeout = 20.0
                   default_config.rpcs.list_transfer_configs.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.schedule_transfer_runs.timeout = 30.0
@@ -118,41 +118,41 @@ module Google
                   default_config.rpcs.get_transfer_run.timeout = 20.0
                   default_config.rpcs.get_transfer_run.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.delete_transfer_run.timeout = 20.0
                   default_config.rpcs.delete_transfer_run.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_transfer_runs.timeout = 20.0
                   default_config.rpcs.list_transfer_runs.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_transfer_logs.timeout = 20.0
                   default_config.rpcs.list_transfer_logs.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.check_valid_creds.timeout = 20.0
                   default_config.rpcs.check_valid_creds.retry_policy = {
                     initial_delay: 0.1,
-                    max_delay:     60.0,
-                    multiplier:    1.3,
-                    retry_codes:   [14, 4]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
                   }
 
                   default_config
@@ -221,7 +221,7 @@ module Google
                 enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                          @config.endpoint == Client.configure.endpoint &&
                                          !@config.endpoint.split(".").first.include?("-")
-                credentials ||= Credentials.default scope:                  @config.scope,
+                credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
                 if credentials.is_a?(String) || credentials.is_a?(Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
@@ -1419,7 +1419,7 @@ module Google
                 config_attr :scope,         nil, ::String, ::Array, nil
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
-                config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+                config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
                 config_attr :interceptors,  nil, ::Array, nil
                 config_attr :timeout,       nil, ::Numeric, nil
                 config_attr :metadata,      nil, ::Hash, nil
@@ -1440,7 +1440,7 @@ module Google
                 def rpcs
                   @rpcs ||= begin
                     parent_rpcs = nil
-                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                     Rpcs.new parent_rpcs
                   end
                 end
@@ -1536,33 +1536,33 @@ module Google
 
                   # @private
                   def initialize parent_rpcs = nil
-                    get_data_source_config = parent_rpcs&.get_data_source if parent_rpcs&.respond_to? :get_data_source
+                    get_data_source_config = parent_rpcs.get_data_source if parent_rpcs.respond_to? :get_data_source
                     @get_data_source = ::Gapic::Config::Method.new get_data_source_config
-                    list_data_sources_config = parent_rpcs&.list_data_sources if parent_rpcs&.respond_to? :list_data_sources
+                    list_data_sources_config = parent_rpcs.list_data_sources if parent_rpcs.respond_to? :list_data_sources
                     @list_data_sources = ::Gapic::Config::Method.new list_data_sources_config
-                    create_transfer_config_config = parent_rpcs&.create_transfer_config if parent_rpcs&.respond_to? :create_transfer_config
+                    create_transfer_config_config = parent_rpcs.create_transfer_config if parent_rpcs.respond_to? :create_transfer_config
                     @create_transfer_config = ::Gapic::Config::Method.new create_transfer_config_config
-                    update_transfer_config_config = parent_rpcs&.update_transfer_config if parent_rpcs&.respond_to? :update_transfer_config
+                    update_transfer_config_config = parent_rpcs.update_transfer_config if parent_rpcs.respond_to? :update_transfer_config
                     @update_transfer_config = ::Gapic::Config::Method.new update_transfer_config_config
-                    delete_transfer_config_config = parent_rpcs&.delete_transfer_config if parent_rpcs&.respond_to? :delete_transfer_config
+                    delete_transfer_config_config = parent_rpcs.delete_transfer_config if parent_rpcs.respond_to? :delete_transfer_config
                     @delete_transfer_config = ::Gapic::Config::Method.new delete_transfer_config_config
-                    get_transfer_config_config = parent_rpcs&.get_transfer_config if parent_rpcs&.respond_to? :get_transfer_config
+                    get_transfer_config_config = parent_rpcs.get_transfer_config if parent_rpcs.respond_to? :get_transfer_config
                     @get_transfer_config = ::Gapic::Config::Method.new get_transfer_config_config
-                    list_transfer_configs_config = parent_rpcs&.list_transfer_configs if parent_rpcs&.respond_to? :list_transfer_configs
+                    list_transfer_configs_config = parent_rpcs.list_transfer_configs if parent_rpcs.respond_to? :list_transfer_configs
                     @list_transfer_configs = ::Gapic::Config::Method.new list_transfer_configs_config
-                    schedule_transfer_runs_config = parent_rpcs&.schedule_transfer_runs if parent_rpcs&.respond_to? :schedule_transfer_runs
+                    schedule_transfer_runs_config = parent_rpcs.schedule_transfer_runs if parent_rpcs.respond_to? :schedule_transfer_runs
                     @schedule_transfer_runs = ::Gapic::Config::Method.new schedule_transfer_runs_config
-                    start_manual_transfer_runs_config = parent_rpcs&.start_manual_transfer_runs if parent_rpcs&.respond_to? :start_manual_transfer_runs
+                    start_manual_transfer_runs_config = parent_rpcs.start_manual_transfer_runs if parent_rpcs.respond_to? :start_manual_transfer_runs
                     @start_manual_transfer_runs = ::Gapic::Config::Method.new start_manual_transfer_runs_config
-                    get_transfer_run_config = parent_rpcs&.get_transfer_run if parent_rpcs&.respond_to? :get_transfer_run
+                    get_transfer_run_config = parent_rpcs.get_transfer_run if parent_rpcs.respond_to? :get_transfer_run
                     @get_transfer_run = ::Gapic::Config::Method.new get_transfer_run_config
-                    delete_transfer_run_config = parent_rpcs&.delete_transfer_run if parent_rpcs&.respond_to? :delete_transfer_run
+                    delete_transfer_run_config = parent_rpcs.delete_transfer_run if parent_rpcs.respond_to? :delete_transfer_run
                     @delete_transfer_run = ::Gapic::Config::Method.new delete_transfer_run_config
-                    list_transfer_runs_config = parent_rpcs&.list_transfer_runs if parent_rpcs&.respond_to? :list_transfer_runs
+                    list_transfer_runs_config = parent_rpcs.list_transfer_runs if parent_rpcs.respond_to? :list_transfer_runs
                     @list_transfer_runs = ::Gapic::Config::Method.new list_transfer_runs_config
-                    list_transfer_logs_config = parent_rpcs&.list_transfer_logs if parent_rpcs&.respond_to? :list_transfer_logs
+                    list_transfer_logs_config = parent_rpcs.list_transfer_logs if parent_rpcs.respond_to? :list_transfer_logs
                     @list_transfer_logs = ::Gapic::Config::Method.new list_transfer_logs_config
-                    check_valid_creds_config = parent_rpcs&.check_valid_creds if parent_rpcs&.respond_to? :check_valid_creds
+                    check_valid_creds_config = parent_rpcs.check_valid_creds if parent_rpcs.respond_to? :check_valid_creds
                     @check_valid_creds = ::Gapic::Config::Method.new check_valid_creds_config
 
                     yield self if block_given?
