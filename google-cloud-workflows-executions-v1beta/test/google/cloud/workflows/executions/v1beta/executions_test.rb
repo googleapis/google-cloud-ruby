@@ -105,7 +105,7 @@ class ::Google::Cloud::Workflows::Executions::V1beta::Executions::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.list_executions ::Google::Cloud::Workflows::Executions::V1beta::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view), grpc_options do |response, operation|
+      client.list_executions(::Google::Cloud::Workflows::Executions::V1beta::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -166,7 +166,7 @@ class ::Google::Cloud::Workflows::Executions::V1beta::Executions::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.create_execution ::Google::Cloud::Workflows::Executions::V1beta::CreateExecutionRequest.new(parent: parent, execution: execution), grpc_options do |response, operation|
+      client.create_execution(::Google::Cloud::Workflows::Executions::V1beta::CreateExecutionRequest.new(parent: parent, execution: execution), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -226,7 +226,7 @@ class ::Google::Cloud::Workflows::Executions::V1beta::Executions::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.get_execution ::Google::Cloud::Workflows::Executions::V1beta::GetExecutionRequest.new(name: name, view: view), grpc_options do |response, operation|
+      client.get_execution(::Google::Cloud::Workflows::Executions::V1beta::GetExecutionRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -284,7 +284,7 @@ class ::Google::Cloud::Workflows::Executions::V1beta::Executions::ClientTest < M
       end
 
       # Use protobuf object with options
-      client.cancel_execution ::Google::Cloud::Workflows::Executions::V1beta::CancelExecutionRequest.new(name: name), grpc_options do |response, operation|
+      client.cancel_execution(::Google::Cloud::Workflows::Executions::V1beta::CancelExecutionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
