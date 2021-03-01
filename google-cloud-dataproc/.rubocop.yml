@@ -20,6 +20,3 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-dataproc.rb"
-
-Style/AsciiComments:
-  Enabled: false
