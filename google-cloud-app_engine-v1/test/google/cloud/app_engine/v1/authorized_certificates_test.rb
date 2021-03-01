@@ -105,7 +105,7 @@ class ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.list_authorized_certificates ::Google::Cloud::AppEngine::V1::ListAuthorizedCertificatesRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_authorized_certificates(::Google::Cloud::AppEngine::V1::ListAuthorizedCertificatesRequest.new(parent: parent, view: view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -166,7 +166,7 @@ class ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.get_authorized_certificate ::Google::Cloud::AppEngine::V1::GetAuthorizedCertificateRequest.new(name: name, view: view), grpc_options do |response, operation|
+      client.get_authorized_certificate(::Google::Cloud::AppEngine::V1::GetAuthorizedCertificateRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -226,7 +226,7 @@ class ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.create_authorized_certificate ::Google::Cloud::AppEngine::V1::CreateAuthorizedCertificateRequest.new(parent: parent, certificate: certificate), grpc_options do |response, operation|
+      client.create_authorized_certificate(::Google::Cloud::AppEngine::V1::CreateAuthorizedCertificateRequest.new(parent: parent, certificate: certificate), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -288,7 +288,7 @@ class ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.update_authorized_certificate ::Google::Cloud::AppEngine::V1::UpdateAuthorizedCertificateRequest.new(name: name, certificate: certificate, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_authorized_certificate(::Google::Cloud::AppEngine::V1::UpdateAuthorizedCertificateRequest.new(name: name, certificate: certificate, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -346,7 +346,7 @@ class ::Google::Cloud::AppEngine::V1::AuthorizedCertificates::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.delete_authorized_certificate ::Google::Cloud::AppEngine::V1::DeleteAuthorizedCertificateRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_authorized_certificate(::Google::Cloud::AppEngine::V1::DeleteAuthorizedCertificateRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

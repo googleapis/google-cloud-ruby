@@ -95,7 +95,7 @@ class ::Google::Cloud::AppEngine::V1::Applications::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_application ::Google::Cloud::AppEngine::V1::GetApplicationRequest.new(name: name), grpc_options do |response, operation|
+      client.get_application(::Google::Cloud::AppEngine::V1::GetApplicationRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -157,7 +157,7 @@ class ::Google::Cloud::AppEngine::V1::Applications::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_application ::Google::Cloud::AppEngine::V1::CreateApplicationRequest.new(application: application), grpc_options do |response, operation|
+      client.create_application(::Google::Cloud::AppEngine::V1::CreateApplicationRequest.new(application: application), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -224,7 +224,7 @@ class ::Google::Cloud::AppEngine::V1::Applications::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_application ::Google::Cloud::AppEngine::V1::UpdateApplicationRequest.new(name: name, application: application, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_application(::Google::Cloud::AppEngine::V1::UpdateApplicationRequest.new(name: name, application: application, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -287,7 +287,7 @@ class ::Google::Cloud::AppEngine::V1::Applications::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.repair_application ::Google::Cloud::AppEngine::V1::RepairApplicationRequest.new(name: name), grpc_options do |response, operation|
+      client.repair_application(::Google::Cloud::AppEngine::V1::RepairApplicationRequest.new(name: name), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
