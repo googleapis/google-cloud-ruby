@@ -107,7 +107,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.list_key_rings ::Google::Cloud::Kms::V1::ListKeyRingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options do |response, operation|
+      client.list_key_rings(::Google::Cloud::Kms::V1::ListKeyRingsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -180,7 +180,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.list_crypto_keys ::Google::Cloud::Kms::V1::ListCryptoKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by), grpc_options do |response, operation|
+      client.list_crypto_keys(::Google::Cloud::Kms::V1::ListCryptoKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token, version_view: version_view, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -253,7 +253,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.list_crypto_key_versions ::Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by), grpc_options do |response, operation|
+      client.list_crypto_key_versions(::Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -324,7 +324,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.list_import_jobs ::Google::Cloud::Kms::V1::ListImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options do |response, operation|
+      client.list_import_jobs(::Google::Cloud::Kms::V1::ListImportJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -383,7 +383,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.get_key_ring ::Google::Cloud::Kms::V1::GetKeyRingRequest.new(name: name), grpc_options do |response, operation|
+      client.get_key_ring(::Google::Cloud::Kms::V1::GetKeyRingRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -441,7 +441,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.get_crypto_key ::Google::Cloud::Kms::V1::GetCryptoKeyRequest.new(name: name), grpc_options do |response, operation|
+      client.get_crypto_key(::Google::Cloud::Kms::V1::GetCryptoKeyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -499,7 +499,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.get_crypto_key_version ::Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest.new(name: name), grpc_options do |response, operation|
+      client.get_crypto_key_version(::Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -557,7 +557,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.get_public_key ::Google::Cloud::Kms::V1::GetPublicKeyRequest.new(name: name), grpc_options do |response, operation|
+      client.get_public_key(::Google::Cloud::Kms::V1::GetPublicKeyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -615,7 +615,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.get_import_job ::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name), grpc_options do |response, operation|
+      client.get_import_job(::Google::Cloud::Kms::V1::GetImportJobRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -677,7 +677,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.create_key_ring ::Google::Cloud::Kms::V1::CreateKeyRingRequest.new(parent: parent, key_ring_id: key_ring_id, key_ring: key_ring), grpc_options do |response, operation|
+      client.create_key_ring(::Google::Cloud::Kms::V1::CreateKeyRingRequest.new(parent: parent, key_ring_id: key_ring_id, key_ring: key_ring), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -741,7 +741,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.create_crypto_key ::Google::Cloud::Kms::V1::CreateCryptoKeyRequest.new(parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation), grpc_options do |response, operation|
+      client.create_crypto_key(::Google::Cloud::Kms::V1::CreateCryptoKeyRequest.new(parent: parent, crypto_key_id: crypto_key_id, crypto_key: crypto_key, skip_initial_version_creation: skip_initial_version_creation), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -801,7 +801,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.create_crypto_key_version ::Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version), grpc_options do |response, operation|
+      client.create_crypto_key_version(::Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -866,7 +866,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.import_crypto_key_version ::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, algorithm: algorithm, import_job: import_job, rsa_aes_wrapped_key: rsa_aes_wrapped_key), grpc_options do |response, operation|
+      client.import_crypto_key_version(::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, algorithm: algorithm, import_job: import_job, rsa_aes_wrapped_key: rsa_aes_wrapped_key), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -928,7 +928,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.create_import_job ::Google::Cloud::Kms::V1::CreateImportJobRequest.new(parent: parent, import_job_id: import_job_id, import_job: import_job), grpc_options do |response, operation|
+      client.create_import_job(::Google::Cloud::Kms::V1::CreateImportJobRequest.new(parent: parent, import_job_id: import_job_id, import_job: import_job), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -988,7 +988,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.update_crypto_key ::Google::Cloud::Kms::V1::UpdateCryptoKeyRequest.new(crypto_key: crypto_key, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_crypto_key(::Google::Cloud::Kms::V1::UpdateCryptoKeyRequest.new(crypto_key: crypto_key, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1048,7 +1048,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.update_crypto_key_version ::Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest.new(crypto_key_version: crypto_key_version, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_crypto_key_version(::Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest.new(crypto_key_version: crypto_key_version, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1114,7 +1114,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.encrypt ::Google::Cloud::Kms::V1::EncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c), grpc_options do |response, operation|
+      client.encrypt(::Google::Cloud::Kms::V1::EncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1180,7 +1180,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.decrypt ::Google::Cloud::Kms::V1::DecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c), grpc_options do |response, operation|
+      client.decrypt(::Google::Cloud::Kms::V1::DecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1242,7 +1242,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.asymmetric_sign ::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c), grpc_options do |response, operation|
+      client.asymmetric_sign(::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1304,7 +1304,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.asymmetric_decrypt ::Google::Cloud::Kms::V1::AsymmetricDecryptRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c), grpc_options do |response, operation|
+      client.asymmetric_decrypt(::Google::Cloud::Kms::V1::AsymmetricDecryptRequest.new(name: name, ciphertext: ciphertext, ciphertext_crc32c: ciphertext_crc32c), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1364,7 +1364,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.update_crypto_key_primary_version ::Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest.new(name: name, crypto_key_version_id: crypto_key_version_id), grpc_options do |response, operation|
+      client.update_crypto_key_primary_version(::Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest.new(name: name, crypto_key_version_id: crypto_key_version_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1422,7 +1422,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.destroy_crypto_key_version ::Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest.new(name: name), grpc_options do |response, operation|
+      client.destroy_crypto_key_version(::Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1480,7 +1480,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.restore_crypto_key_version ::Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest.new(name: name), grpc_options do |response, operation|
+      client.restore_crypto_key_version(::Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
