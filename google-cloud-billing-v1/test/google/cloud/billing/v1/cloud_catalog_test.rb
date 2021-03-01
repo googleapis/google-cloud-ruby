@@ -101,7 +101,7 @@ class ::Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_services ::Google::Cloud::Billing::V1::ListServicesRequest.new(page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_services(::Google::Cloud::Billing::V1::ListServicesRequest.new(page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -174,7 +174,7 @@ class ::Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_skus ::Google::Cloud::Billing::V1::ListSkusRequest.new(parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_skus(::Google::Cloud::Billing::V1::ListSkusRequest.new(parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
