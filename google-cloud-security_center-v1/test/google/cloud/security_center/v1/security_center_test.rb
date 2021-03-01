@@ -97,7 +97,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.create_source ::Google::Cloud::SecurityCenter::V1::CreateSourceRequest.new(parent: parent, source: source), grpc_options do |response, operation|
+      client.create_source(::Google::Cloud::SecurityCenter::V1::CreateSourceRequest.new(parent: parent, source: source), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -159,7 +159,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.create_finding ::Google::Cloud::SecurityCenter::V1::CreateFindingRequest.new(parent: parent, finding_id: finding_id, finding: finding), grpc_options do |response, operation|
+      client.create_finding(::Google::Cloud::SecurityCenter::V1::CreateFindingRequest.new(parent: parent, finding_id: finding_id, finding: finding), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -221,7 +221,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.create_notification_config ::Google::Cloud::SecurityCenter::V1::CreateNotificationConfigRequest.new(parent: parent, config_id: config_id, notification_config: notification_config), grpc_options do |response, operation|
+      client.create_notification_config(::Google::Cloud::SecurityCenter::V1::CreateNotificationConfigRequest.new(parent: parent, config_id: config_id, notification_config: notification_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -279,7 +279,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.delete_notification_config ::Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_notification_config(::Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -339,7 +339,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options do |response, operation|
+      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -397,7 +397,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.get_notification_config ::Google::Cloud::SecurityCenter::V1::GetNotificationConfigRequest.new(name: name), grpc_options do |response, operation|
+      client.get_notification_config(::Google::Cloud::SecurityCenter::V1::GetNotificationConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -455,7 +455,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.get_organization_settings ::Google::Cloud::SecurityCenter::V1::GetOrganizationSettingsRequest.new(name: name), grpc_options do |response, operation|
+      client.get_organization_settings(::Google::Cloud::SecurityCenter::V1::GetOrganizationSettingsRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -513,7 +513,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.get_source ::Google::Cloud::SecurityCenter::V1::GetSourceRequest.new(name: name), grpc_options do |response, operation|
+      client.get_source(::Google::Cloud::SecurityCenter::V1::GetSourceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -587,7 +587,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.group_assets ::Google::Cloud::SecurityCenter::V1::GroupAssetsRequest.new(parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.group_assets(::Google::Cloud::SecurityCenter::V1::GroupAssetsRequest.new(parent: parent, filter: filter, group_by: group_by, compare_duration: compare_duration, read_time: read_time, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -662,7 +662,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.group_findings ::Google::Cloud::SecurityCenter::V1::GroupFindingsRequest.new(parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.group_findings(::Google::Cloud::SecurityCenter::V1::GroupFindingsRequest.new(parent: parent, filter: filter, group_by: group_by, read_time: read_time, compare_duration: compare_duration, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -739,7 +739,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.list_assets ::Google::Cloud::SecurityCenter::V1::ListAssetsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_assets(::Google::Cloud::SecurityCenter::V1::ListAssetsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -816,7 +816,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.list_findings ::Google::Cloud::SecurityCenter::V1::ListFindingsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_findings(::Google::Cloud::SecurityCenter::V1::ListFindingsRequest.new(parent: parent, filter: filter, order_by: order_by, read_time: read_time, compare_duration: compare_duration, field_mask: field_mask, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -883,7 +883,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.list_notification_configs ::Google::Cloud::SecurityCenter::V1::ListNotificationConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_notification_configs(::Google::Cloud::SecurityCenter::V1::ListNotificationConfigsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -950,7 +950,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.list_sources ::Google::Cloud::SecurityCenter::V1::ListSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_sources(::Google::Cloud::SecurityCenter::V1::ListSourcesRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1013,7 +1013,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.run_asset_discovery ::Google::Cloud::SecurityCenter::V1::RunAssetDiscoveryRequest.new(parent: parent), grpc_options do |response, operation|
+      client.run_asset_discovery(::Google::Cloud::SecurityCenter::V1::RunAssetDiscoveryRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1076,7 +1076,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.set_finding_state ::Google::Cloud::SecurityCenter::V1::SetFindingStateRequest.new(name: name, state: state, start_time: start_time), grpc_options do |response, operation|
+      client.set_finding_state(::Google::Cloud::SecurityCenter::V1::SetFindingStateRequest.new(name: name, state: state, start_time: start_time), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1136,7 +1136,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options do |response, operation|
+      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1196,7 +1196,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options do |response, operation|
+      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1256,7 +1256,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.update_finding ::Google::Cloud::SecurityCenter::V1::UpdateFindingRequest.new(finding: finding, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_finding(::Google::Cloud::SecurityCenter::V1::UpdateFindingRequest.new(finding: finding, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1316,7 +1316,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.update_notification_config ::Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest.new(notification_config: notification_config, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_notification_config(::Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest.new(notification_config: notification_config, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1376,7 +1376,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.update_organization_settings ::Google::Cloud::SecurityCenter::V1::UpdateOrganizationSettingsRequest.new(organization_settings: organization_settings, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_organization_settings(::Google::Cloud::SecurityCenter::V1::UpdateOrganizationSettingsRequest.new(organization_settings: organization_settings, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1436,7 +1436,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.update_source ::Google::Cloud::SecurityCenter::V1::UpdateSourceRequest.new(source: source, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_source(::Google::Cloud::SecurityCenter::V1::UpdateSourceRequest.new(source: source, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1498,7 +1498,7 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.update_security_marks ::Google::Cloud::SecurityCenter::V1::UpdateSecurityMarksRequest.new(security_marks: security_marks, update_mask: update_mask, start_time: start_time), grpc_options do |response, operation|
+      client.update_security_marks(::Google::Cloud::SecurityCenter::V1::UpdateSecurityMarksRequest.new(security_marks: security_marks, update_mask: update_mask, start_time: start_time), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
