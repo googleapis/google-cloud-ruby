@@ -90,7 +90,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -98,17 +98,17 @@ module Google
                 default_config.rpcs.list_approval_requests.timeout = 600.0
                 default_config.rpcs.list_approval_requests.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.get_approval_request.timeout = 600.0
                 default_config.rpcs.get_approval_request.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.approve_approval_request.timeout = 600.0
@@ -118,9 +118,9 @@ module Google
                 default_config.rpcs.get_access_approval_settings.timeout = 600.0
                 default_config.rpcs.get_access_approval_settings.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.update_access_approval_settings.timeout = 600.0
@@ -193,7 +193,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -814,7 +814,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -835,7 +835,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -896,19 +896,19 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  list_approval_requests_config = parent_rpcs&.list_approval_requests if parent_rpcs&.respond_to? :list_approval_requests
+                  list_approval_requests_config = parent_rpcs.list_approval_requests if parent_rpcs.respond_to? :list_approval_requests
                   @list_approval_requests = ::Gapic::Config::Method.new list_approval_requests_config
-                  get_approval_request_config = parent_rpcs&.get_approval_request if parent_rpcs&.respond_to? :get_approval_request
+                  get_approval_request_config = parent_rpcs.get_approval_request if parent_rpcs.respond_to? :get_approval_request
                   @get_approval_request = ::Gapic::Config::Method.new get_approval_request_config
-                  approve_approval_request_config = parent_rpcs&.approve_approval_request if parent_rpcs&.respond_to? :approve_approval_request
+                  approve_approval_request_config = parent_rpcs.approve_approval_request if parent_rpcs.respond_to? :approve_approval_request
                   @approve_approval_request = ::Gapic::Config::Method.new approve_approval_request_config
-                  dismiss_approval_request_config = parent_rpcs&.dismiss_approval_request if parent_rpcs&.respond_to? :dismiss_approval_request
+                  dismiss_approval_request_config = parent_rpcs.dismiss_approval_request if parent_rpcs.respond_to? :dismiss_approval_request
                   @dismiss_approval_request = ::Gapic::Config::Method.new dismiss_approval_request_config
-                  get_access_approval_settings_config = parent_rpcs&.get_access_approval_settings if parent_rpcs&.respond_to? :get_access_approval_settings
+                  get_access_approval_settings_config = parent_rpcs.get_access_approval_settings if parent_rpcs.respond_to? :get_access_approval_settings
                   @get_access_approval_settings = ::Gapic::Config::Method.new get_access_approval_settings_config
-                  update_access_approval_settings_config = parent_rpcs&.update_access_approval_settings if parent_rpcs&.respond_to? :update_access_approval_settings
+                  update_access_approval_settings_config = parent_rpcs.update_access_approval_settings if parent_rpcs.respond_to? :update_access_approval_settings
                   @update_access_approval_settings = ::Gapic::Config::Method.new update_access_approval_settings_config
-                  delete_access_approval_settings_config = parent_rpcs&.delete_access_approval_settings if parent_rpcs&.respond_to? :delete_access_approval_settings
+                  delete_access_approval_settings_config = parent_rpcs.delete_access_approval_settings if parent_rpcs.respond_to? :delete_access_approval_settings
                   @delete_access_approval_settings = ::Gapic::Config::Method.new delete_access_approval_settings_config
 
                   yield self if block_given?
