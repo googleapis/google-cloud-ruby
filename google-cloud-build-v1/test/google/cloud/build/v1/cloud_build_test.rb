@@ -103,7 +103,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_build ::Google::Cloud::Build::V1::CreateBuildRequest.new(parent: parent, project_id: project_id, build: build), grpc_options do |response, operation|
+      client.create_build(::Google::Cloud::Build::V1::CreateBuildRequest.new(parent: parent, project_id: project_id, build: build), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -166,7 +166,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_build ::Google::Cloud::Build::V1::GetBuildRequest.new(name: name, project_id: project_id, id: id), grpc_options do |response, operation|
+      client.get_build(::Google::Cloud::Build::V1::GetBuildRequest.new(name: name, project_id: project_id, id: id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -236,7 +236,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_builds ::Google::Cloud::Build::V1::ListBuildsRequest.new(parent: parent, project_id: project_id, page_size: page_size, page_token: page_token, filter: filter), grpc_options do |response, operation|
+      client.list_builds(::Google::Cloud::Build::V1::ListBuildsRequest.new(parent: parent, project_id: project_id, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -299,7 +299,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.cancel_build ::Google::Cloud::Build::V1::CancelBuildRequest.new(name: name, project_id: project_id, id: id), grpc_options do |response, operation|
+      client.cancel_build(::Google::Cloud::Build::V1::CancelBuildRequest.new(name: name, project_id: project_id, id: id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -365,7 +365,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.retry_build ::Google::Cloud::Build::V1::RetryBuildRequest.new(name: name, project_id: project_id, id: id), grpc_options do |response, operation|
+      client.retry_build(::Google::Cloud::Build::V1::RetryBuildRequest.new(name: name, project_id: project_id, id: id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -426,7 +426,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_build_trigger ::Google::Cloud::Build::V1::CreateBuildTriggerRequest.new(project_id: project_id, trigger: trigger), grpc_options do |response, operation|
+      client.create_build_trigger(::Google::Cloud::Build::V1::CreateBuildTriggerRequest.new(project_id: project_id, trigger: trigger), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -486,7 +486,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_build_trigger ::Google::Cloud::Build::V1::GetBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id), grpc_options do |response, operation|
+      client.get_build_trigger(::Google::Cloud::Build::V1::GetBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -552,7 +552,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_build_triggers ::Google::Cloud::Build::V1::ListBuildTriggersRequest.new(project_id: project_id, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_build_triggers(::Google::Cloud::Build::V1::ListBuildTriggersRequest.new(project_id: project_id, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -613,7 +613,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_build_trigger ::Google::Cloud::Build::V1::DeleteBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id), grpc_options do |response, operation|
+      client.delete_build_trigger(::Google::Cloud::Build::V1::DeleteBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -675,7 +675,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_build_trigger ::Google::Cloud::Build::V1::UpdateBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id, trigger: trigger), grpc_options do |response, operation|
+      client.update_build_trigger(::Google::Cloud::Build::V1::UpdateBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id, trigger: trigger), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -741,7 +741,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.run_build_trigger ::Google::Cloud::Build::V1::RunBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id, source: source), grpc_options do |response, operation|
+      client.run_build_trigger(::Google::Cloud::Build::V1::RunBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id, source: source), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -802,7 +802,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_worker_pool ::Google::Cloud::Build::V1::CreateWorkerPoolRequest.new(parent: parent, worker_pool: worker_pool), grpc_options do |response, operation|
+      client.create_worker_pool(::Google::Cloud::Build::V1::CreateWorkerPoolRequest.new(parent: parent, worker_pool: worker_pool), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -860,7 +860,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_worker_pool ::Google::Cloud::Build::V1::GetWorkerPoolRequest.new(name: name), grpc_options do |response, operation|
+      client.get_worker_pool(::Google::Cloud::Build::V1::GetWorkerPoolRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -918,7 +918,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_worker_pool ::Google::Cloud::Build::V1::DeleteWorkerPoolRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_worker_pool(::Google::Cloud::Build::V1::DeleteWorkerPoolRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -978,7 +978,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_worker_pool ::Google::Cloud::Build::V1::UpdateWorkerPoolRequest.new(name: name, worker_pool: worker_pool), grpc_options do |response, operation|
+      client.update_worker_pool(::Google::Cloud::Build::V1::UpdateWorkerPoolRequest.new(name: name, worker_pool: worker_pool), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1036,7 +1036,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_worker_pools ::Google::Cloud::Build::V1::ListWorkerPoolsRequest.new(parent: parent), grpc_options do |response, operation|
+      client.list_worker_pools(::Google::Cloud::Build::V1::ListWorkerPoolsRequest.new(parent: parent), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

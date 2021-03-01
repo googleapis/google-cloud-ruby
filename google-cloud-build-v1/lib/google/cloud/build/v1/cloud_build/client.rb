@@ -67,7 +67,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -77,17 +77,17 @@ module Google
                 default_config.rpcs.get_build.timeout = 600.0
                 default_config.rpcs.get_build.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_builds.timeout = 600.0
                 default_config.rpcs.list_builds.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.cancel_build.timeout = 600.0
@@ -99,25 +99,25 @@ module Google
                 default_config.rpcs.get_build_trigger.timeout = 600.0
                 default_config.rpcs.get_build_trigger.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_build_triggers.timeout = 600.0
                 default_config.rpcs.list_build_triggers.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_build_trigger.timeout = 600.0
                 default_config.rpcs.delete_build_trigger.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_build_trigger.timeout = 600.0
@@ -129,9 +129,9 @@ module Google
                 default_config.rpcs.get_worker_pool.timeout = 600.0
                 default_config.rpcs.get_worker_pool.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_worker_pool.timeout = 600.0
@@ -141,9 +141,9 @@ module Google
                 default_config.rpcs.list_worker_pools.timeout = 600.0
                 default_config.rpcs.list_worker_pools.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config
@@ -212,7 +212,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -375,7 +375,7 @@ module Google
 
               header_params = {
                 "project_id" => request.project_id,
-                "id"         => request.id
+                "id" => request.id
               }
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -526,7 +526,7 @@ module Google
 
               header_params = {
                 "project_id" => request.project_id,
-                "id"         => request.id
+                "id" => request.id
               }
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -624,7 +624,7 @@ module Google
 
               header_params = {
                 "project_id" => request.project_id,
-                "id"         => request.id
+                "id" => request.id
               }
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -1483,7 +1483,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1504,7 +1504,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -1610,37 +1610,37 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  create_build_config = parent_rpcs&.create_build if parent_rpcs&.respond_to? :create_build
+                  create_build_config = parent_rpcs.create_build if parent_rpcs.respond_to? :create_build
                   @create_build = ::Gapic::Config::Method.new create_build_config
-                  get_build_config = parent_rpcs&.get_build if parent_rpcs&.respond_to? :get_build
+                  get_build_config = parent_rpcs.get_build if parent_rpcs.respond_to? :get_build
                   @get_build = ::Gapic::Config::Method.new get_build_config
-                  list_builds_config = parent_rpcs&.list_builds if parent_rpcs&.respond_to? :list_builds
+                  list_builds_config = parent_rpcs.list_builds if parent_rpcs.respond_to? :list_builds
                   @list_builds = ::Gapic::Config::Method.new list_builds_config
-                  cancel_build_config = parent_rpcs&.cancel_build if parent_rpcs&.respond_to? :cancel_build
+                  cancel_build_config = parent_rpcs.cancel_build if parent_rpcs.respond_to? :cancel_build
                   @cancel_build = ::Gapic::Config::Method.new cancel_build_config
-                  retry_build_config = parent_rpcs&.retry_build if parent_rpcs&.respond_to? :retry_build
+                  retry_build_config = parent_rpcs.retry_build if parent_rpcs.respond_to? :retry_build
                   @retry_build = ::Gapic::Config::Method.new retry_build_config
-                  create_build_trigger_config = parent_rpcs&.create_build_trigger if parent_rpcs&.respond_to? :create_build_trigger
+                  create_build_trigger_config = parent_rpcs.create_build_trigger if parent_rpcs.respond_to? :create_build_trigger
                   @create_build_trigger = ::Gapic::Config::Method.new create_build_trigger_config
-                  get_build_trigger_config = parent_rpcs&.get_build_trigger if parent_rpcs&.respond_to? :get_build_trigger
+                  get_build_trigger_config = parent_rpcs.get_build_trigger if parent_rpcs.respond_to? :get_build_trigger
                   @get_build_trigger = ::Gapic::Config::Method.new get_build_trigger_config
-                  list_build_triggers_config = parent_rpcs&.list_build_triggers if parent_rpcs&.respond_to? :list_build_triggers
+                  list_build_triggers_config = parent_rpcs.list_build_triggers if parent_rpcs.respond_to? :list_build_triggers
                   @list_build_triggers = ::Gapic::Config::Method.new list_build_triggers_config
-                  delete_build_trigger_config = parent_rpcs&.delete_build_trigger if parent_rpcs&.respond_to? :delete_build_trigger
+                  delete_build_trigger_config = parent_rpcs.delete_build_trigger if parent_rpcs.respond_to? :delete_build_trigger
                   @delete_build_trigger = ::Gapic::Config::Method.new delete_build_trigger_config
-                  update_build_trigger_config = parent_rpcs&.update_build_trigger if parent_rpcs&.respond_to? :update_build_trigger
+                  update_build_trigger_config = parent_rpcs.update_build_trigger if parent_rpcs.respond_to? :update_build_trigger
                   @update_build_trigger = ::Gapic::Config::Method.new update_build_trigger_config
-                  run_build_trigger_config = parent_rpcs&.run_build_trigger if parent_rpcs&.respond_to? :run_build_trigger
+                  run_build_trigger_config = parent_rpcs.run_build_trigger if parent_rpcs.respond_to? :run_build_trigger
                   @run_build_trigger = ::Gapic::Config::Method.new run_build_trigger_config
-                  create_worker_pool_config = parent_rpcs&.create_worker_pool if parent_rpcs&.respond_to? :create_worker_pool
+                  create_worker_pool_config = parent_rpcs.create_worker_pool if parent_rpcs.respond_to? :create_worker_pool
                   @create_worker_pool = ::Gapic::Config::Method.new create_worker_pool_config
-                  get_worker_pool_config = parent_rpcs&.get_worker_pool if parent_rpcs&.respond_to? :get_worker_pool
+                  get_worker_pool_config = parent_rpcs.get_worker_pool if parent_rpcs.respond_to? :get_worker_pool
                   @get_worker_pool = ::Gapic::Config::Method.new get_worker_pool_config
-                  delete_worker_pool_config = parent_rpcs&.delete_worker_pool if parent_rpcs&.respond_to? :delete_worker_pool
+                  delete_worker_pool_config = parent_rpcs.delete_worker_pool if parent_rpcs.respond_to? :delete_worker_pool
                   @delete_worker_pool = ::Gapic::Config::Method.new delete_worker_pool_config
-                  update_worker_pool_config = parent_rpcs&.update_worker_pool if parent_rpcs&.respond_to? :update_worker_pool
+                  update_worker_pool_config = parent_rpcs.update_worker_pool if parent_rpcs.respond_to? :update_worker_pool
                   @update_worker_pool = ::Gapic::Config::Method.new update_worker_pool_config
-                  list_worker_pools_config = parent_rpcs&.list_worker_pools if parent_rpcs&.respond_to? :list_worker_pools
+                  list_worker_pools_config = parent_rpcs.list_worker_pools if parent_rpcs.respond_to? :list_worker_pools
                   @list_worker_pools = ::Gapic::Config::Method.new list_worker_pools_config
 
                   yield self if block_given?
