@@ -60,7 +60,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -68,49 +68,49 @@ module Google
                 default_config.rpcs.delete_log.timeout = 60.0
                 default_config.rpcs.delete_log.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 13, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.write_log_entries.timeout = 60.0
                 default_config.rpcs.write_log_entries.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 13, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.list_log_entries.timeout = 60.0
                 default_config.rpcs.list_log_entries.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 13, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.list_monitored_resource_descriptors.timeout = 60.0
                 default_config.rpcs.list_monitored_resource_descriptors.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 13, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.list_logs.timeout = 60.0
                 default_config.rpcs.list_logs.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 13, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.tail_log_entries.timeout = 3600.0
                 default_config.rpcs.tail_log_entries.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 13, 14]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 13, 14]
                 }
 
                 default_config
@@ -179,7 +179,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -818,7 +818,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -839,7 +839,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -895,17 +895,17 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  delete_log_config = parent_rpcs&.delete_log if parent_rpcs&.respond_to? :delete_log
+                  delete_log_config = parent_rpcs.delete_log if parent_rpcs.respond_to? :delete_log
                   @delete_log = ::Gapic::Config::Method.new delete_log_config
-                  write_log_entries_config = parent_rpcs&.write_log_entries if parent_rpcs&.respond_to? :write_log_entries
+                  write_log_entries_config = parent_rpcs.write_log_entries if parent_rpcs.respond_to? :write_log_entries
                   @write_log_entries = ::Gapic::Config::Method.new write_log_entries_config
-                  list_log_entries_config = parent_rpcs&.list_log_entries if parent_rpcs&.respond_to? :list_log_entries
+                  list_log_entries_config = parent_rpcs.list_log_entries if parent_rpcs.respond_to? :list_log_entries
                   @list_log_entries = ::Gapic::Config::Method.new list_log_entries_config
-                  list_monitored_resource_descriptors_config = parent_rpcs&.list_monitored_resource_descriptors if parent_rpcs&.respond_to? :list_monitored_resource_descriptors
+                  list_monitored_resource_descriptors_config = parent_rpcs.list_monitored_resource_descriptors if parent_rpcs.respond_to? :list_monitored_resource_descriptors
                   @list_monitored_resource_descriptors = ::Gapic::Config::Method.new list_monitored_resource_descriptors_config
-                  list_logs_config = parent_rpcs&.list_logs if parent_rpcs&.respond_to? :list_logs
+                  list_logs_config = parent_rpcs.list_logs if parent_rpcs.respond_to? :list_logs
                   @list_logs = ::Gapic::Config::Method.new list_logs_config
-                  tail_log_entries_config = parent_rpcs&.tail_log_entries if parent_rpcs&.respond_to? :tail_log_entries
+                  tail_log_entries_config = parent_rpcs.tail_log_entries if parent_rpcs.respond_to? :tail_log_entries
                   @tail_log_entries = ::Gapic::Config::Method.new tail_log_entries_config
 
                   yield self if block_given?
