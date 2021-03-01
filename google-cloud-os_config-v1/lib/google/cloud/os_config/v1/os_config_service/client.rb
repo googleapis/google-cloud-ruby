@@ -63,7 +63,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -71,9 +71,9 @@ module Google
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
                   initial_delay: 1.0,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14]
+                max_delay: 60.0,
+                multiplier: 1.3,
+                retry_codes: [14]
                 }
 
                 default_config
@@ -142,7 +142,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -910,7 +910,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -931,7 +931,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -1002,23 +1002,23 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  execute_patch_job_config = parent_rpcs&.execute_patch_job if parent_rpcs&.respond_to? :execute_patch_job
+                  execute_patch_job_config = parent_rpcs.execute_patch_job if parent_rpcs.respond_to? :execute_patch_job
                   @execute_patch_job = ::Gapic::Config::Method.new execute_patch_job_config
-                  get_patch_job_config = parent_rpcs&.get_patch_job if parent_rpcs&.respond_to? :get_patch_job
+                  get_patch_job_config = parent_rpcs.get_patch_job if parent_rpcs.respond_to? :get_patch_job
                   @get_patch_job = ::Gapic::Config::Method.new get_patch_job_config
-                  cancel_patch_job_config = parent_rpcs&.cancel_patch_job if parent_rpcs&.respond_to? :cancel_patch_job
+                  cancel_patch_job_config = parent_rpcs.cancel_patch_job if parent_rpcs.respond_to? :cancel_patch_job
                   @cancel_patch_job = ::Gapic::Config::Method.new cancel_patch_job_config
-                  list_patch_jobs_config = parent_rpcs&.list_patch_jobs if parent_rpcs&.respond_to? :list_patch_jobs
+                  list_patch_jobs_config = parent_rpcs.list_patch_jobs if parent_rpcs.respond_to? :list_patch_jobs
                   @list_patch_jobs = ::Gapic::Config::Method.new list_patch_jobs_config
-                  list_patch_job_instance_details_config = parent_rpcs&.list_patch_job_instance_details if parent_rpcs&.respond_to? :list_patch_job_instance_details
+                  list_patch_job_instance_details_config = parent_rpcs.list_patch_job_instance_details if parent_rpcs.respond_to? :list_patch_job_instance_details
                   @list_patch_job_instance_details = ::Gapic::Config::Method.new list_patch_job_instance_details_config
-                  create_patch_deployment_config = parent_rpcs&.create_patch_deployment if parent_rpcs&.respond_to? :create_patch_deployment
+                  create_patch_deployment_config = parent_rpcs.create_patch_deployment if parent_rpcs.respond_to? :create_patch_deployment
                   @create_patch_deployment = ::Gapic::Config::Method.new create_patch_deployment_config
-                  get_patch_deployment_config = parent_rpcs&.get_patch_deployment if parent_rpcs&.respond_to? :get_patch_deployment
+                  get_patch_deployment_config = parent_rpcs.get_patch_deployment if parent_rpcs.respond_to? :get_patch_deployment
                   @get_patch_deployment = ::Gapic::Config::Method.new get_patch_deployment_config
-                  list_patch_deployments_config = parent_rpcs&.list_patch_deployments if parent_rpcs&.respond_to? :list_patch_deployments
+                  list_patch_deployments_config = parent_rpcs.list_patch_deployments if parent_rpcs.respond_to? :list_patch_deployments
                   @list_patch_deployments = ::Gapic::Config::Method.new list_patch_deployments_config
-                  delete_patch_deployment_config = parent_rpcs&.delete_patch_deployment if parent_rpcs&.respond_to? :delete_patch_deployment
+                  delete_patch_deployment_config = parent_rpcs.delete_patch_deployment if parent_rpcs.respond_to? :delete_patch_deployment
                   @delete_patch_deployment = ::Gapic::Config::Method.new delete_patch_deployment_config
 
                   yield self if block_given?
