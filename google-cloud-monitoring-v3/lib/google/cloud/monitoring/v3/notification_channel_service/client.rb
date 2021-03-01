@@ -61,7 +61,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -69,33 +69,33 @@ module Google
                 default_config.rpcs.list_notification_channel_descriptors.timeout = 30.0
                 default_config.rpcs.list_notification_channel_descriptors.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_notification_channel_descriptor.timeout = 30.0
                 default_config.rpcs.get_notification_channel_descriptor.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_notification_channels.timeout = 30.0
                 default_config.rpcs.list_notification_channels.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_notification_channel.timeout = 30.0
                 default_config.rpcs.get_notification_channel.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_notification_channel.timeout = 30.0
@@ -105,9 +105,9 @@ module Google
                 default_config.rpcs.delete_notification_channel.timeout = 30.0
                 default_config.rpcs.delete_notification_channel.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.send_notification_channel_verification_code.timeout = 30.0
@@ -115,17 +115,17 @@ module Google
                 default_config.rpcs.get_notification_channel_verification_code.timeout = 30.0
                 default_config.rpcs.get_notification_channel_verification_code.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.verify_notification_channel.timeout = 30.0
                 default_config.rpcs.verify_notification_channel.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     30.0,
-                  multiplier:    1.3,
-                  retry_codes:   [4, 14]
+              max_delay: 30.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config
@@ -194,7 +194,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -1089,7 +1089,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1110,7 +1110,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -1186,25 +1186,25 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  list_notification_channel_descriptors_config = parent_rpcs&.list_notification_channel_descriptors if parent_rpcs&.respond_to? :list_notification_channel_descriptors
+                  list_notification_channel_descriptors_config = parent_rpcs.list_notification_channel_descriptors if parent_rpcs.respond_to? :list_notification_channel_descriptors
                   @list_notification_channel_descriptors = ::Gapic::Config::Method.new list_notification_channel_descriptors_config
-                  get_notification_channel_descriptor_config = parent_rpcs&.get_notification_channel_descriptor if parent_rpcs&.respond_to? :get_notification_channel_descriptor
+                  get_notification_channel_descriptor_config = parent_rpcs.get_notification_channel_descriptor if parent_rpcs.respond_to? :get_notification_channel_descriptor
                   @get_notification_channel_descriptor = ::Gapic::Config::Method.new get_notification_channel_descriptor_config
-                  list_notification_channels_config = parent_rpcs&.list_notification_channels if parent_rpcs&.respond_to? :list_notification_channels
+                  list_notification_channels_config = parent_rpcs.list_notification_channels if parent_rpcs.respond_to? :list_notification_channels
                   @list_notification_channels = ::Gapic::Config::Method.new list_notification_channels_config
-                  get_notification_channel_config = parent_rpcs&.get_notification_channel if parent_rpcs&.respond_to? :get_notification_channel
+                  get_notification_channel_config = parent_rpcs.get_notification_channel if parent_rpcs.respond_to? :get_notification_channel
                   @get_notification_channel = ::Gapic::Config::Method.new get_notification_channel_config
-                  create_notification_channel_config = parent_rpcs&.create_notification_channel if parent_rpcs&.respond_to? :create_notification_channel
+                  create_notification_channel_config = parent_rpcs.create_notification_channel if parent_rpcs.respond_to? :create_notification_channel
                   @create_notification_channel = ::Gapic::Config::Method.new create_notification_channel_config
-                  update_notification_channel_config = parent_rpcs&.update_notification_channel if parent_rpcs&.respond_to? :update_notification_channel
+                  update_notification_channel_config = parent_rpcs.update_notification_channel if parent_rpcs.respond_to? :update_notification_channel
                   @update_notification_channel = ::Gapic::Config::Method.new update_notification_channel_config
-                  delete_notification_channel_config = parent_rpcs&.delete_notification_channel if parent_rpcs&.respond_to? :delete_notification_channel
+                  delete_notification_channel_config = parent_rpcs.delete_notification_channel if parent_rpcs.respond_to? :delete_notification_channel
                   @delete_notification_channel = ::Gapic::Config::Method.new delete_notification_channel_config
-                  send_notification_channel_verification_code_config = parent_rpcs&.send_notification_channel_verification_code if parent_rpcs&.respond_to? :send_notification_channel_verification_code
+                  send_notification_channel_verification_code_config = parent_rpcs.send_notification_channel_verification_code if parent_rpcs.respond_to? :send_notification_channel_verification_code
                   @send_notification_channel_verification_code = ::Gapic::Config::Method.new send_notification_channel_verification_code_config
-                  get_notification_channel_verification_code_config = parent_rpcs&.get_notification_channel_verification_code if parent_rpcs&.respond_to? :get_notification_channel_verification_code
+                  get_notification_channel_verification_code_config = parent_rpcs.get_notification_channel_verification_code if parent_rpcs.respond_to? :get_notification_channel_verification_code
                   @get_notification_channel_verification_code = ::Gapic::Config::Method.new get_notification_channel_verification_code_config
-                  verify_notification_channel_config = parent_rpcs&.verify_notification_channel if parent_rpcs&.respond_to? :verify_notification_channel
+                  verify_notification_channel_config = parent_rpcs.verify_notification_channel if parent_rpcs.respond_to? :verify_notification_channel
                   @verify_notification_channel = ::Gapic::Config::Method.new verify_notification_channel_config
 
                   yield self if block_given?

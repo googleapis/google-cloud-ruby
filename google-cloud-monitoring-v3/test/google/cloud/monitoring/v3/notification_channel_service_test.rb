@@ -103,7 +103,7 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.list_notification_channel_descriptors ::Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_notification_channel_descriptors(::Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsRequest.new(name: name, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -162,7 +162,7 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.get_notification_channel_descriptor ::Google::Cloud::Monitoring::V3::GetNotificationChannelDescriptorRequest.new(name: name), grpc_options do |response, operation|
+      client.get_notification_channel_descriptor(::Google::Cloud::Monitoring::V3::GetNotificationChannelDescriptorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -232,7 +232,7 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.list_notification_channels ::Google::Cloud::Monitoring::V3::ListNotificationChannelsRequest.new(name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_notification_channels(::Google::Cloud::Monitoring::V3::ListNotificationChannelsRequest.new(name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -291,7 +291,7 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.get_notification_channel ::Google::Cloud::Monitoring::V3::GetNotificationChannelRequest.new(name: name), grpc_options do |response, operation|
+      client.get_notification_channel(::Google::Cloud::Monitoring::V3::GetNotificationChannelRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -351,7 +351,7 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.create_notification_channel ::Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest.new(name: name, notification_channel: notification_channel), grpc_options do |response, operation|
+      client.create_notification_channel(::Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest.new(name: name, notification_channel: notification_channel), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -411,7 +411,7 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.update_notification_channel ::Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest.new(update_mask: update_mask, notification_channel: notification_channel), grpc_options do |response, operation|
+      client.update_notification_channel(::Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest.new(update_mask: update_mask, notification_channel: notification_channel), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -471,7 +471,7 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.delete_notification_channel ::Google::Cloud::Monitoring::V3::DeleteNotificationChannelRequest.new(name: name, force: force), grpc_options do |response, operation|
+      client.delete_notification_channel(::Google::Cloud::Monitoring::V3::DeleteNotificationChannelRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -529,7 +529,7 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.send_notification_channel_verification_code ::Google::Cloud::Monitoring::V3::SendNotificationChannelVerificationCodeRequest.new(name: name), grpc_options do |response, operation|
+      client.send_notification_channel_verification_code(::Google::Cloud::Monitoring::V3::SendNotificationChannelVerificationCodeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -589,7 +589,7 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.get_notification_channel_verification_code ::Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeRequest.new(name: name, expire_time: expire_time), grpc_options do |response, operation|
+      client.get_notification_channel_verification_code(::Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeRequest.new(name: name, expire_time: expire_time), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -649,7 +649,7 @@ class ::Google::Cloud::Monitoring::V3::NotificationChannelService::ClientTest < 
       end
 
       # Use protobuf object with options
-      client.verify_notification_channel ::Google::Cloud::Monitoring::V3::VerifyNotificationChannelRequest.new(name: name, code: code), grpc_options do |response, operation|
+      client.verify_notification_channel(::Google::Cloud::Monitoring::V3::VerifyNotificationChannelRequest.new(name: name, code: code), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

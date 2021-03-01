@@ -96,7 +96,7 @@ module Google
             # @return [::String]
             def service_path **args
               resources = {
-                "project:service"      => (proc do |project:, service:|
+                "project:service" => (proc do |project:, service:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/services/#{service}"
@@ -106,7 +106,7 @@ module Google
 
                   "organizations/#{organization}/services/#{service}"
                 end),
-                "folder:service"       => (proc do |folder:, service:|
+                "folder:service" => (proc do |folder:, service:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/services/#{service}"
@@ -151,7 +151,7 @@ module Google
             # @return [::String]
             def service_level_objective_path **args
               resources = {
-                "project:service:service_level_objective"      => (proc do |project:, service:, service_level_objective:|
+                "project:service:service_level_objective" => (proc do |project:, service:, service_level_objective:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
                   raise ::ArgumentError, "service cannot contain /" if service.to_s.include? "/"
 
@@ -163,7 +163,7 @@ module Google
 
                   "organizations/#{organization}/services/#{service}/serviceLevelObjectives/#{service_level_objective}"
                 end),
-                "folder:service:service_level_objective"       => (proc do |folder:, service:, service_level_objective:|
+                "folder:service:service_level_objective" => (proc do |folder:, service:, service_level_objective:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
                   raise ::ArgumentError, "service cannot contain /" if service.to_s.include? "/"
 

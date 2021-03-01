@@ -107,7 +107,7 @@ class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.list_alert_policies ::Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest.new(name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_alert_policies(::Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest.new(name: name, filter: filter, order_by: order_by, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -166,7 +166,7 @@ class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.get_alert_policy ::Google::Cloud::Monitoring::V3::GetAlertPolicyRequest.new(name: name), grpc_options do |response, operation|
+      client.get_alert_policy(::Google::Cloud::Monitoring::V3::GetAlertPolicyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -226,7 +226,7 @@ class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.create_alert_policy ::Google::Cloud::Monitoring::V3::CreateAlertPolicyRequest.new(name: name, alert_policy: alert_policy), grpc_options do |response, operation|
+      client.create_alert_policy(::Google::Cloud::Monitoring::V3::CreateAlertPolicyRequest.new(name: name, alert_policy: alert_policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -284,7 +284,7 @@ class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.delete_alert_policy ::Google::Cloud::Monitoring::V3::DeleteAlertPolicyRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_alert_policy(::Google::Cloud::Monitoring::V3::DeleteAlertPolicyRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -344,7 +344,7 @@ class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.update_alert_policy ::Google::Cloud::Monitoring::V3::UpdateAlertPolicyRequest.new(update_mask: update_mask, alert_policy: alert_policy), grpc_options do |response, operation|
+      client.update_alert_policy(::Google::Cloud::Monitoring::V3::UpdateAlertPolicyRequest.new(update_mask: update_mask, alert_policy: alert_policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

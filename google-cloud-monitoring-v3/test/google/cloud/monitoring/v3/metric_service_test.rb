@@ -105,7 +105,7 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.list_monitored_resource_descriptors ::Google::Cloud::Monitoring::V3::ListMonitoredResourceDescriptorsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_monitored_resource_descriptors(::Google::Cloud::Monitoring::V3::ListMonitoredResourceDescriptorsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -164,7 +164,7 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.get_monitored_resource_descriptor ::Google::Cloud::Monitoring::V3::GetMonitoredResourceDescriptorRequest.new(name: name), grpc_options do |response, operation|
+      client.get_monitored_resource_descriptor(::Google::Cloud::Monitoring::V3::GetMonitoredResourceDescriptorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -232,7 +232,7 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.list_metric_descriptors ::Google::Cloud::Monitoring::V3::ListMetricDescriptorsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_metric_descriptors(::Google::Cloud::Monitoring::V3::ListMetricDescriptorsRequest.new(name: name, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -291,7 +291,7 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.get_metric_descriptor ::Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest.new(name: name), grpc_options do |response, operation|
+      client.get_metric_descriptor(::Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -351,7 +351,7 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.create_metric_descriptor ::Google::Cloud::Monitoring::V3::CreateMetricDescriptorRequest.new(name: name, metric_descriptor: metric_descriptor), grpc_options do |response, operation|
+      client.create_metric_descriptor(::Google::Cloud::Monitoring::V3::CreateMetricDescriptorRequest.new(name: name, metric_descriptor: metric_descriptor), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -409,7 +409,7 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.delete_metric_descriptor ::Google::Cloud::Monitoring::V3::DeleteMetricDescriptorRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_metric_descriptor(::Google::Cloud::Monitoring::V3::DeleteMetricDescriptorRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -485,7 +485,7 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.list_time_series ::Google::Cloud::Monitoring::V3::ListTimeSeriesRequest.new(name: name, filter: filter, interval: interval, aggregation: aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_time_series(::Google::Cloud::Monitoring::V3::ListTimeSeriesRequest.new(name: name, filter: filter, interval: interval, aggregation: aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -546,7 +546,7 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
       end
 
       # Use protobuf object with options
-      client.create_time_series ::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest.new(name: name, time_series: time_series), grpc_options do |response, operation|
+      client.create_time_series(::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest.new(name: name, time_series: time_series), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
