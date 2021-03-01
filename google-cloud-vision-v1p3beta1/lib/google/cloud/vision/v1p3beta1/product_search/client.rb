@@ -73,7 +73,7 @@ module Google
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
-                                  break parent_const.configure if parent_const&.respond_to? :configure
+                                  break parent_const.configure if parent_const.respond_to? :configure
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
@@ -81,145 +81,145 @@ module Google
                 default_config.rpcs.create_product_set.timeout = 600.0
                 default_config.rpcs.create_product_set.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   []
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: []
                 }
 
                 default_config.rpcs.list_product_sets.timeout = 600.0
                 default_config.rpcs.list_product_sets.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_product_set.timeout = 600.0
                 default_config.rpcs.get_product_set.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_product_set.timeout = 600.0
                 default_config.rpcs.update_product_set.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   []
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: []
                 }
 
                 default_config.rpcs.delete_product_set.timeout = 600.0
                 default_config.rpcs.delete_product_set.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_product.timeout = 600.0
                 default_config.rpcs.create_product.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   []
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: []
                 }
 
                 default_config.rpcs.list_products.timeout = 600.0
                 default_config.rpcs.list_products.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_product.timeout = 600.0
                 default_config.rpcs.get_product.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_product.timeout = 600.0
                 default_config.rpcs.update_product.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   []
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: []
                 }
 
                 default_config.rpcs.delete_product.timeout = 600.0
                 default_config.rpcs.delete_product.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_reference_image.timeout = 600.0
                 default_config.rpcs.create_reference_image.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   []
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: []
                 }
 
                 default_config.rpcs.delete_reference_image.timeout = 600.0
                 default_config.rpcs.delete_reference_image.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_reference_images.timeout = 600.0
                 default_config.rpcs.list_reference_images.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_reference_image.timeout = 600.0
                 default_config.rpcs.get_reference_image.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.add_product_to_product_set.timeout = 600.0
                 default_config.rpcs.add_product_to_product_set.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   []
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: []
                 }
 
                 default_config.rpcs.remove_product_from_product_set.timeout = 600.0
                 default_config.rpcs.remove_product_from_product_set.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   []
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: []
                 }
 
                 default_config.rpcs.list_products_in_product_set.timeout = 600.0
                 default_config.rpcs.list_products_in_product_set.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.import_product_sets.timeout = 600.0
                 default_config.rpcs.import_product_sets.retry_policy = {
                   initial_delay: 0.1,
-                  max_delay:     60.0,
-                  multiplier:    1.3,
-                  retry_codes:   []
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: []
                 }
 
                 default_config
@@ -288,7 +288,7 @@ module Google
               enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                        @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
-              credentials ||= Credentials.default scope:                  @config.scope,
+              credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
@@ -1845,7 +1845,7 @@ module Google
               config_attr :scope,         nil, ::String, ::Array, nil
               config_attr :lib_name,      nil, ::String, nil
               config_attr :lib_version,   nil, ::String, nil
-              config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
               config_attr :interceptors,  nil, ::Array, nil
               config_attr :timeout,       nil, ::Numeric, nil
               config_attr :metadata,      nil, ::Hash, nil
@@ -1866,7 +1866,7 @@ module Google
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
-                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                  parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                   Rpcs.new parent_rpcs
                 end
               end
@@ -1982,41 +1982,41 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
-                  create_product_set_config = parent_rpcs&.create_product_set if parent_rpcs&.respond_to? :create_product_set
+                  create_product_set_config = parent_rpcs.create_product_set if parent_rpcs.respond_to? :create_product_set
                   @create_product_set = ::Gapic::Config::Method.new create_product_set_config
-                  list_product_sets_config = parent_rpcs&.list_product_sets if parent_rpcs&.respond_to? :list_product_sets
+                  list_product_sets_config = parent_rpcs.list_product_sets if parent_rpcs.respond_to? :list_product_sets
                   @list_product_sets = ::Gapic::Config::Method.new list_product_sets_config
-                  get_product_set_config = parent_rpcs&.get_product_set if parent_rpcs&.respond_to? :get_product_set
+                  get_product_set_config = parent_rpcs.get_product_set if parent_rpcs.respond_to? :get_product_set
                   @get_product_set = ::Gapic::Config::Method.new get_product_set_config
-                  update_product_set_config = parent_rpcs&.update_product_set if parent_rpcs&.respond_to? :update_product_set
+                  update_product_set_config = parent_rpcs.update_product_set if parent_rpcs.respond_to? :update_product_set
                   @update_product_set = ::Gapic::Config::Method.new update_product_set_config
-                  delete_product_set_config = parent_rpcs&.delete_product_set if parent_rpcs&.respond_to? :delete_product_set
+                  delete_product_set_config = parent_rpcs.delete_product_set if parent_rpcs.respond_to? :delete_product_set
                   @delete_product_set = ::Gapic::Config::Method.new delete_product_set_config
-                  create_product_config = parent_rpcs&.create_product if parent_rpcs&.respond_to? :create_product
+                  create_product_config = parent_rpcs.create_product if parent_rpcs.respond_to? :create_product
                   @create_product = ::Gapic::Config::Method.new create_product_config
-                  list_products_config = parent_rpcs&.list_products if parent_rpcs&.respond_to? :list_products
+                  list_products_config = parent_rpcs.list_products if parent_rpcs.respond_to? :list_products
                   @list_products = ::Gapic::Config::Method.new list_products_config
-                  get_product_config = parent_rpcs&.get_product if parent_rpcs&.respond_to? :get_product
+                  get_product_config = parent_rpcs.get_product if parent_rpcs.respond_to? :get_product
                   @get_product = ::Gapic::Config::Method.new get_product_config
-                  update_product_config = parent_rpcs&.update_product if parent_rpcs&.respond_to? :update_product
+                  update_product_config = parent_rpcs.update_product if parent_rpcs.respond_to? :update_product
                   @update_product = ::Gapic::Config::Method.new update_product_config
-                  delete_product_config = parent_rpcs&.delete_product if parent_rpcs&.respond_to? :delete_product
+                  delete_product_config = parent_rpcs.delete_product if parent_rpcs.respond_to? :delete_product
                   @delete_product = ::Gapic::Config::Method.new delete_product_config
-                  create_reference_image_config = parent_rpcs&.create_reference_image if parent_rpcs&.respond_to? :create_reference_image
+                  create_reference_image_config = parent_rpcs.create_reference_image if parent_rpcs.respond_to? :create_reference_image
                   @create_reference_image = ::Gapic::Config::Method.new create_reference_image_config
-                  delete_reference_image_config = parent_rpcs&.delete_reference_image if parent_rpcs&.respond_to? :delete_reference_image
+                  delete_reference_image_config = parent_rpcs.delete_reference_image if parent_rpcs.respond_to? :delete_reference_image
                   @delete_reference_image = ::Gapic::Config::Method.new delete_reference_image_config
-                  list_reference_images_config = parent_rpcs&.list_reference_images if parent_rpcs&.respond_to? :list_reference_images
+                  list_reference_images_config = parent_rpcs.list_reference_images if parent_rpcs.respond_to? :list_reference_images
                   @list_reference_images = ::Gapic::Config::Method.new list_reference_images_config
-                  get_reference_image_config = parent_rpcs&.get_reference_image if parent_rpcs&.respond_to? :get_reference_image
+                  get_reference_image_config = parent_rpcs.get_reference_image if parent_rpcs.respond_to? :get_reference_image
                   @get_reference_image = ::Gapic::Config::Method.new get_reference_image_config
-                  add_product_to_product_set_config = parent_rpcs&.add_product_to_product_set if parent_rpcs&.respond_to? :add_product_to_product_set
+                  add_product_to_product_set_config = parent_rpcs.add_product_to_product_set if parent_rpcs.respond_to? :add_product_to_product_set
                   @add_product_to_product_set = ::Gapic::Config::Method.new add_product_to_product_set_config
-                  remove_product_from_product_set_config = parent_rpcs&.remove_product_from_product_set if parent_rpcs&.respond_to? :remove_product_from_product_set
+                  remove_product_from_product_set_config = parent_rpcs.remove_product_from_product_set if parent_rpcs.respond_to? :remove_product_from_product_set
                   @remove_product_from_product_set = ::Gapic::Config::Method.new remove_product_from_product_set_config
-                  list_products_in_product_set_config = parent_rpcs&.list_products_in_product_set if parent_rpcs&.respond_to? :list_products_in_product_set
+                  list_products_in_product_set_config = parent_rpcs.list_products_in_product_set if parent_rpcs.respond_to? :list_products_in_product_set
                   @list_products_in_product_set = ::Gapic::Config::Method.new list_products_in_product_set_config
-                  import_product_sets_config = parent_rpcs&.import_product_sets if parent_rpcs&.respond_to? :import_product_sets
+                  import_product_sets_config = parent_rpcs.import_product_sets if parent_rpcs.respond_to? :import_product_sets
                   @import_product_sets = ::Gapic::Config::Method.new import_product_sets_config
 
                   yield self if block_given?
