@@ -20,6 +20,3 @@ Metrics/BlockLength:
 Naming/FileName:
   Exclude:
     - "lib/google-iam-credentials.rb"
-
-Style/AsciiComments:
-  Enabled: false
