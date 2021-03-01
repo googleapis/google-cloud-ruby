@@ -101,7 +101,7 @@ module Google
             # @return [::String]
             def workflow_template_path **args
               resources = {
-                "project:region:workflow_template"   => (proc do |project:, region:, workflow_template:|
+                "project:region:workflow_template" => (proc do |project:, region:, workflow_template:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
                   raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
 
