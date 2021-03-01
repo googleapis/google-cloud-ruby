@@ -97,7 +97,7 @@ class ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.create_workflow_template ::Google::Cloud::Dataproc::V1::CreateWorkflowTemplateRequest.new(parent: parent, template: template), grpc_options do |response, operation|
+      client.create_workflow_template(::Google::Cloud::Dataproc::V1::CreateWorkflowTemplateRequest.new(parent: parent, template: template), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -157,7 +157,7 @@ class ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.get_workflow_template ::Google::Cloud::Dataproc::V1::GetWorkflowTemplateRequest.new(name: name, version: version), grpc_options do |response, operation|
+      client.get_workflow_template(::Google::Cloud::Dataproc::V1::GetWorkflowTemplateRequest.new(name: name, version: version), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -225,7 +225,7 @@ class ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.instantiate_workflow_template ::Google::Cloud::Dataproc::V1::InstantiateWorkflowTemplateRequest.new(name: name, version: version, request_id: request_id, parameters: parameters), grpc_options do |response, operation|
+      client.instantiate_workflow_template(::Google::Cloud::Dataproc::V1::InstantiateWorkflowTemplateRequest.new(name: name, version: version, request_id: request_id, parameters: parameters), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -292,7 +292,7 @@ class ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.instantiate_inline_workflow_template ::Google::Cloud::Dataproc::V1::InstantiateInlineWorkflowTemplateRequest.new(parent: parent, template: template, request_id: request_id), grpc_options do |response, operation|
+      client.instantiate_inline_workflow_template(::Google::Cloud::Dataproc::V1::InstantiateInlineWorkflowTemplateRequest.new(parent: parent, template: template, request_id: request_id), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -351,7 +351,7 @@ class ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.update_workflow_template ::Google::Cloud::Dataproc::V1::UpdateWorkflowTemplateRequest.new(template: template), grpc_options do |response, operation|
+      client.update_workflow_template(::Google::Cloud::Dataproc::V1::UpdateWorkflowTemplateRequest.new(template: template), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -417,7 +417,7 @@ class ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.list_workflow_templates ::Google::Cloud::Dataproc::V1::ListWorkflowTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_workflow_templates(::Google::Cloud::Dataproc::V1::ListWorkflowTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -478,7 +478,7 @@ class ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::ClientTest < Minit
       end
 
       # Use protobuf object with options
-      client.delete_workflow_template ::Google::Cloud::Dataproc::V1::DeleteWorkflowTemplateRequest.new(name: name, version: version), grpc_options do |response, operation|
+      client.delete_workflow_template(::Google::Cloud::Dataproc::V1::DeleteWorkflowTemplateRequest.new(name: name, version: version), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
