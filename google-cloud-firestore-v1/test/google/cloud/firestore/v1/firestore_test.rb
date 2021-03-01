@@ -100,7 +100,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_document ::Google::Cloud::Firestore::V1::GetDocumentRequest.new(name: name, mask: mask, transaction: transaction), grpc_options do |response, operation|
+      client.get_document(::Google::Cloud::Firestore::V1::GetDocumentRequest.new(name: name, mask: mask, transaction: transaction), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -177,7 +177,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_documents ::Google::Cloud::Firestore::V1::ListDocumentsRequest.new(parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing), grpc_options do |response, operation|
+      client.list_documents(::Google::Cloud::Firestore::V1::ListDocumentsRequest.new(parent: parent, collection_id: collection_id, page_size: page_size, page_token: page_token, order_by: order_by, mask: mask, transaction: transaction, show_missing: show_missing), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -242,7 +242,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_document ::Google::Cloud::Firestore::V1::UpdateDocumentRequest.new(document: document, update_mask: update_mask, mask: mask, current_document: current_document), grpc_options do |response, operation|
+      client.update_document(::Google::Cloud::Firestore::V1::UpdateDocumentRequest.new(document: document, update_mask: update_mask, mask: mask, current_document: current_document), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -302,7 +302,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_document ::Google::Cloud::Firestore::V1::DeleteDocumentRequest.new(name: name, current_document: current_document), grpc_options do |response, operation|
+      client.delete_document(::Google::Cloud::Firestore::V1::DeleteDocumentRequest.new(name: name, current_document: current_document), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -379,7 +379,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.batch_get_documents ::Google::Cloud::Firestore::V1::BatchGetDocumentsRequest.new(database: database, documents: documents, mask: mask, transaction: transaction), grpc_options do |response, operation|
+      client.batch_get_documents(::Google::Cloud::Firestore::V1::BatchGetDocumentsRequest.new(database: database, documents: documents, mask: mask, transaction: transaction), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse, r
@@ -442,7 +442,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.begin_transaction ::Google::Cloud::Firestore::V1::BeginTransactionRequest.new(database: database, options: options), grpc_options do |response, operation|
+      client.begin_transaction(::Google::Cloud::Firestore::V1::BeginTransactionRequest.new(database: database, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -504,7 +504,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.commit ::Google::Cloud::Firestore::V1::CommitRequest.new(database: database, writes: writes, transaction: transaction), grpc_options do |response, operation|
+      client.commit(::Google::Cloud::Firestore::V1::CommitRequest.new(database: database, writes: writes, transaction: transaction), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -564,7 +564,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.rollback ::Google::Cloud::Firestore::V1::RollbackRequest.new(database: database, transaction: transaction), grpc_options do |response, operation|
+      client.rollback(::Google::Cloud::Firestore::V1::RollbackRequest.new(database: database, transaction: transaction), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -640,7 +640,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.run_query ::Google::Cloud::Firestore::V1::RunQueryRequest.new(parent: parent, structured_query: structured_query, transaction: transaction), grpc_options do |response, operation|
+      client.run_query(::Google::Cloud::Firestore::V1::RunQueryRequest.new(parent: parent, structured_query: structured_query, transaction: transaction), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Firestore::V1::RunQueryResponse, r
@@ -714,7 +714,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.partition_query ::Google::Cloud::Firestore::V1::PartitionQueryRequest.new(parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.partition_query(::Google::Cloud::Firestore::V1::PartitionQueryRequest.new(parent: parent, structured_query: structured_query, partition_count: partition_count, page_token: page_token, page_size: page_size), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -966,7 +966,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_collection_ids ::Google::Cloud::Firestore::V1::ListCollectionIdsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_collection_ids(::Google::Cloud::Firestore::V1::ListCollectionIdsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1028,7 +1028,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.batch_write ::Google::Cloud::Firestore::V1::BatchWriteRequest.new(database: database, writes: writes, labels: labels), grpc_options do |response, operation|
+      client.batch_write(::Google::Cloud::Firestore::V1::BatchWriteRequest.new(database: database, writes: writes, labels: labels), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1094,7 +1094,7 @@ class ::Google::Cloud::Firestore::V1::Firestore::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_document ::Google::Cloud::Firestore::V1::CreateDocumentRequest.new(parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask), grpc_options do |response, operation|
+      client.create_document(::Google::Cloud::Firestore::V1::CreateDocumentRequest.new(parent: parent, collection_id: collection_id, document_id: document_id, document: document, mask: mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
