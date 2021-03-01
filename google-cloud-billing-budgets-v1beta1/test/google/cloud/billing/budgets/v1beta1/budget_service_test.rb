@@ -97,7 +97,7 @@ class ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.create_budget ::Google::Cloud::Billing::Budgets::V1beta1::CreateBudgetRequest.new(parent: parent, budget: budget), grpc_options do |response, operation|
+      client.create_budget(::Google::Cloud::Billing::Budgets::V1beta1::CreateBudgetRequest.new(parent: parent, budget: budget), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -157,7 +157,7 @@ class ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.update_budget ::Google::Cloud::Billing::Budgets::V1beta1::UpdateBudgetRequest.new(budget: budget, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_budget(::Google::Cloud::Billing::Budgets::V1beta1::UpdateBudgetRequest.new(budget: budget, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -215,7 +215,7 @@ class ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.get_budget ::Google::Cloud::Billing::Budgets::V1beta1::GetBudgetRequest.new(name: name), grpc_options do |response, operation|
+      client.get_budget(::Google::Cloud::Billing::Budgets::V1beta1::GetBudgetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -281,7 +281,7 @@ class ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.list_budgets ::Google::Cloud::Billing::Budgets::V1beta1::ListBudgetsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_budgets(::Google::Cloud::Billing::Budgets::V1beta1::ListBudgetsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -340,7 +340,7 @@ class ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.delete_budget ::Google::Cloud::Billing::Budgets::V1beta1::DeleteBudgetRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_budget(::Google::Cloud::Billing::Budgets::V1beta1::DeleteBudgetRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
