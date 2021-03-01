@@ -67,7 +67,7 @@ module Google
                     parent_config = while namespace.any?
                                       parent_name = namespace.join "::"
                                       parent_const = const_get parent_name
-                                      break parent_const.configure if parent_const&.respond_to? :configure
+                                      break parent_const.configure if parent_const.respond_to? :configure
                                       namespace.pop
                                     end
                     default_config = Client::Configuration.new parent_config
@@ -75,9 +75,9 @@ module Google
                     default_config.rpcs.list_databases.timeout = 3600.0
                     default_config.rpcs.list_databases.retry_policy = {
                       initial_delay: 1.0,
-                      max_delay:     32.0,
-                      multiplier:    1.3,
-                      retry_codes:   [14, 4]
+                  max_delay: 32.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.create_database.timeout = 3600.0
@@ -85,33 +85,33 @@ module Google
                     default_config.rpcs.get_database.timeout = 3600.0
                     default_config.rpcs.get_database.retry_policy = {
                       initial_delay: 1.0,
-                      max_delay:     32.0,
-                      multiplier:    1.3,
-                      retry_codes:   [14, 4]
+                  max_delay: 32.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.update_database_ddl.timeout = 3600.0
                     default_config.rpcs.update_database_ddl.retry_policy = {
                       initial_delay: 1.0,
-                      max_delay:     32.0,
-                      multiplier:    1.3,
-                      retry_codes:   [14, 4]
+                  max_delay: 32.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.drop_database.timeout = 3600.0
                     default_config.rpcs.drop_database.retry_policy = {
                       initial_delay: 1.0,
-                      max_delay:     32.0,
-                      multiplier:    1.3,
-                      retry_codes:   [14, 4]
+                  max_delay: 32.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.get_database_ddl.timeout = 3600.0
                     default_config.rpcs.get_database_ddl.retry_policy = {
                       initial_delay: 1.0,
-                      max_delay:     32.0,
-                      multiplier:    1.3,
-                      retry_codes:   [14, 4]
+                  max_delay: 32.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.set_iam_policy.timeout = 30.0
@@ -119,9 +119,9 @@ module Google
                     default_config.rpcs.get_iam_policy.timeout = 30.0
                     default_config.rpcs.get_iam_policy.retry_policy = {
                       initial_delay: 1.0,
-                      max_delay:     32.0,
-                      multiplier:    1.3,
-                      retry_codes:   [14, 4]
+                  max_delay: 32.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.test_iam_permissions.timeout = 30.0
@@ -131,33 +131,33 @@ module Google
                     default_config.rpcs.get_backup.timeout = 3600.0
                     default_config.rpcs.get_backup.retry_policy = {
                       initial_delay: 1.0,
-                      max_delay:     32.0,
-                      multiplier:    1.3,
-                      retry_codes:   [14, 4]
+                  max_delay: 32.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.update_backup.timeout = 3600.0
                     default_config.rpcs.update_backup.retry_policy = {
                       initial_delay: 1.0,
-                      max_delay:     32.0,
-                      multiplier:    1.3,
-                      retry_codes:   [14, 4]
+                  max_delay: 32.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.delete_backup.timeout = 3600.0
                     default_config.rpcs.delete_backup.retry_policy = {
                       initial_delay: 1.0,
-                      max_delay:     32.0,
-                      multiplier:    1.3,
-                      retry_codes:   [14, 4]
+                  max_delay: 32.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.list_backups.timeout = 3600.0
                     default_config.rpcs.list_backups.retry_policy = {
                       initial_delay: 1.0,
-                      max_delay:     32.0,
-                      multiplier:    1.3,
-                      retry_codes:   [14, 4]
+                  max_delay: 32.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.restore_database.timeout = 3600.0
@@ -165,17 +165,17 @@ module Google
                     default_config.rpcs.list_database_operations.timeout = 3600.0
                     default_config.rpcs.list_database_operations.retry_policy = {
                       initial_delay: 1.0,
-                      max_delay:     32.0,
-                      multiplier:    1.3,
-                      retry_codes:   [14, 4]
+                  max_delay: 32.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.list_backup_operations.timeout = 3600.0
                     default_config.rpcs.list_backup_operations.retry_policy = {
                       initial_delay: 1.0,
-                      max_delay:     32.0,
-                      multiplier:    1.3,
-                      retry_codes:   [14, 4]
+                  max_delay: 32.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                     }
 
                     default_config
@@ -244,7 +244,7 @@ module Google
                   enable_self_signed_jwt = @config.scope == Client.configure.scope &&
                                            @config.endpoint == Client.configure.endpoint &&
                                            !@config.endpoint.split(".").first.include?("-")
-                  credentials ||= Credentials.default scope:                  @config.scope,
+                  credentials ||= Credentials.default scope: @config.scope,
                                                       enable_self_signed_jwt: enable_self_signed_jwt
                   if credentials.is_a?(String) || credentials.is_a?(Hash)
                     credentials = Credentials.new credentials, scope: @config.scope
@@ -1858,7 +1858,7 @@ module Google
                   config_attr :scope,         nil, ::String, ::Array, nil
                   config_attr :lib_name,      nil, ::String, nil
                   config_attr :lib_version,   nil, ::String, nil
-                  config_attr(:channel_args,  { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+                  config_attr(:channel_args,  { "grpc.service_config_disable_resolution" => 1 }, ::Hash, nil)
                   config_attr :interceptors,  nil, ::Array, nil
                   config_attr :timeout,       nil, ::Numeric, nil
                   config_attr :metadata,      nil, ::Hash, nil
@@ -1879,7 +1879,7 @@ module Google
                   def rpcs
                     @rpcs ||= begin
                       parent_rpcs = nil
-                      parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config&.respond_to?(:rpcs)
+                      parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
                       Rpcs.new parent_rpcs
                     end
                   end
@@ -1990,39 +1990,39 @@ module Google
 
                     # @private
                     def initialize parent_rpcs = nil
-                      list_databases_config = parent_rpcs&.list_databases if parent_rpcs&.respond_to? :list_databases
+                      list_databases_config = parent_rpcs.list_databases if parent_rpcs.respond_to? :list_databases
                       @list_databases = ::Gapic::Config::Method.new list_databases_config
-                      create_database_config = parent_rpcs&.create_database if parent_rpcs&.respond_to? :create_database
+                      create_database_config = parent_rpcs.create_database if parent_rpcs.respond_to? :create_database
                       @create_database = ::Gapic::Config::Method.new create_database_config
-                      get_database_config = parent_rpcs&.get_database if parent_rpcs&.respond_to? :get_database
+                      get_database_config = parent_rpcs.get_database if parent_rpcs.respond_to? :get_database
                       @get_database = ::Gapic::Config::Method.new get_database_config
-                      update_database_ddl_config = parent_rpcs&.update_database_ddl if parent_rpcs&.respond_to? :update_database_ddl
+                      update_database_ddl_config = parent_rpcs.update_database_ddl if parent_rpcs.respond_to? :update_database_ddl
                       @update_database_ddl = ::Gapic::Config::Method.new update_database_ddl_config
-                      drop_database_config = parent_rpcs&.drop_database if parent_rpcs&.respond_to? :drop_database
+                      drop_database_config = parent_rpcs.drop_database if parent_rpcs.respond_to? :drop_database
                       @drop_database = ::Gapic::Config::Method.new drop_database_config
-                      get_database_ddl_config = parent_rpcs&.get_database_ddl if parent_rpcs&.respond_to? :get_database_ddl
+                      get_database_ddl_config = parent_rpcs.get_database_ddl if parent_rpcs.respond_to? :get_database_ddl
                       @get_database_ddl = ::Gapic::Config::Method.new get_database_ddl_config
-                      set_iam_policy_config = parent_rpcs&.set_iam_policy if parent_rpcs&.respond_to? :set_iam_policy
+                      set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
                       @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
-                      get_iam_policy_config = parent_rpcs&.get_iam_policy if parent_rpcs&.respond_to? :get_iam_policy
+                      get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
                       @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
-                      test_iam_permissions_config = parent_rpcs&.test_iam_permissions if parent_rpcs&.respond_to? :test_iam_permissions
+                      test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                       @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
-                      create_backup_config = parent_rpcs&.create_backup if parent_rpcs&.respond_to? :create_backup
+                      create_backup_config = parent_rpcs.create_backup if parent_rpcs.respond_to? :create_backup
                       @create_backup = ::Gapic::Config::Method.new create_backup_config
-                      get_backup_config = parent_rpcs&.get_backup if parent_rpcs&.respond_to? :get_backup
+                      get_backup_config = parent_rpcs.get_backup if parent_rpcs.respond_to? :get_backup
                       @get_backup = ::Gapic::Config::Method.new get_backup_config
-                      update_backup_config = parent_rpcs&.update_backup if parent_rpcs&.respond_to? :update_backup
+                      update_backup_config = parent_rpcs.update_backup if parent_rpcs.respond_to? :update_backup
                       @update_backup = ::Gapic::Config::Method.new update_backup_config
-                      delete_backup_config = parent_rpcs&.delete_backup if parent_rpcs&.respond_to? :delete_backup
+                      delete_backup_config = parent_rpcs.delete_backup if parent_rpcs.respond_to? :delete_backup
                       @delete_backup = ::Gapic::Config::Method.new delete_backup_config
-                      list_backups_config = parent_rpcs&.list_backups if parent_rpcs&.respond_to? :list_backups
+                      list_backups_config = parent_rpcs.list_backups if parent_rpcs.respond_to? :list_backups
                       @list_backups = ::Gapic::Config::Method.new list_backups_config
-                      restore_database_config = parent_rpcs&.restore_database if parent_rpcs&.respond_to? :restore_database
+                      restore_database_config = parent_rpcs.restore_database if parent_rpcs.respond_to? :restore_database
                       @restore_database = ::Gapic::Config::Method.new restore_database_config
-                      list_database_operations_config = parent_rpcs&.list_database_operations if parent_rpcs&.respond_to? :list_database_operations
+                      list_database_operations_config = parent_rpcs.list_database_operations if parent_rpcs.respond_to? :list_database_operations
                       @list_database_operations = ::Gapic::Config::Method.new list_database_operations_config
-                      list_backup_operations_config = parent_rpcs&.list_backup_operations if parent_rpcs&.respond_to? :list_backup_operations
+                      list_backup_operations_config = parent_rpcs.list_backup_operations if parent_rpcs.respond_to? :list_backup_operations
                       @list_backup_operations = ::Gapic::Config::Method.new list_backup_operations_config
 
                       yield self if block_given?
