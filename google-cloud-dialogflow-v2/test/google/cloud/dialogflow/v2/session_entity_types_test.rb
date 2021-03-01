@@ -103,7 +103,7 @@ class ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.list_session_entity_types ::Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_session_entity_types(::Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -162,7 +162,7 @@ class ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.get_session_entity_type ::Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest.new(name: name), grpc_options do |response, operation|
+      client.get_session_entity_type(::Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -222,7 +222,7 @@ class ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.create_session_entity_type ::Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest.new(parent: parent, session_entity_type: session_entity_type), grpc_options do |response, operation|
+      client.create_session_entity_type(::Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest.new(parent: parent, session_entity_type: session_entity_type), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -282,7 +282,7 @@ class ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.update_session_entity_type ::Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest.new(session_entity_type: session_entity_type, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_session_entity_type(::Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest.new(session_entity_type: session_entity_type, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -340,7 +340,7 @@ class ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest
       end
 
       # Use protobuf object with options
-      client.delete_session_entity_type ::Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_session_entity_type(::Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -105,7 +105,7 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_entity_types ::Google::Cloud::Dialogflow::V2::ListEntityTypesRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_entity_types(::Google::Cloud::Dialogflow::V2::ListEntityTypesRequest.new(parent: parent, language_code: language_code, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -166,7 +166,7 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_entity_type ::Google::Cloud::Dialogflow::V2::GetEntityTypeRequest.new(name: name, language_code: language_code), grpc_options do |response, operation|
+      client.get_entity_type(::Google::Cloud::Dialogflow::V2::GetEntityTypeRequest.new(name: name, language_code: language_code), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -228,7 +228,7 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_entity_type ::Google::Cloud::Dialogflow::V2::CreateEntityTypeRequest.new(parent: parent, entity_type: entity_type, language_code: language_code), grpc_options do |response, operation|
+      client.create_entity_type(::Google::Cloud::Dialogflow::V2::CreateEntityTypeRequest.new(parent: parent, entity_type: entity_type, language_code: language_code), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -290,7 +290,7 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_entity_type ::Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest.new(entity_type: entity_type, language_code: language_code, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_entity_type(::Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest.new(entity_type: entity_type, language_code: language_code, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -348,7 +348,7 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_entity_type ::Google::Cloud::Dialogflow::V2::DeleteEntityTypeRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_entity_type(::Google::Cloud::Dialogflow::V2::DeleteEntityTypeRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -417,7 +417,7 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.batch_update_entity_types ::Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest.new(parent: parent, entity_type_batch_uri: entity_type_batch_uri, language_code: language_code, update_mask: update_mask), grpc_options do |response, operation|
+      client.batch_update_entity_types(::Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest.new(parent: parent, entity_type_batch_uri: entity_type_batch_uri, language_code: language_code, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -482,7 +482,7 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.batch_delete_entity_types ::Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest.new(parent: parent, entity_type_names: entity_type_names), grpc_options do |response, operation|
+      client.batch_delete_entity_types(::Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest.new(parent: parent, entity_type_names: entity_type_names), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -549,7 +549,7 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.batch_create_entities ::Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest.new(parent: parent, entities: entities, language_code: language_code), grpc_options do |response, operation|
+      client.batch_create_entities(::Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest.new(parent: parent, entities: entities, language_code: language_code), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -618,7 +618,7 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.batch_update_entities ::Google::Cloud::Dialogflow::V2::BatchUpdateEntitiesRequest.new(parent: parent, entities: entities, language_code: language_code, update_mask: update_mask), grpc_options do |response, operation|
+      client.batch_update_entities(::Google::Cloud::Dialogflow::V2::BatchUpdateEntitiesRequest.new(parent: parent, entities: entities, language_code: language_code, update_mask: update_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -685,7 +685,7 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.batch_delete_entities ::Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest.new(parent: parent, entity_values: entity_values, language_code: language_code), grpc_options do |response, operation|
+      client.batch_delete_entities(::Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest.new(parent: parent, entity_values: entity_values, language_code: language_code), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

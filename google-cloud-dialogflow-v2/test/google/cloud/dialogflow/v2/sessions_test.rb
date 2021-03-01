@@ -105,7 +105,7 @@ class ::Google::Cloud::Dialogflow::V2::Sessions::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.detect_intent ::Google::Cloud::Dialogflow::V2::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio), grpc_options do |response, operation|
+      client.detect_intent(::Google::Cloud::Dialogflow::V2::DetectIntentRequest.new(session: session, query_params: query_params, query_input: query_input, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

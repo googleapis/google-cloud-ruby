@@ -107,7 +107,7 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_intents ::Google::Cloud::Dialogflow::V2::ListIntentsRequest.new(parent: parent, language_code: language_code, intent_view: intent_view, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_intents(::Google::Cloud::Dialogflow::V2::ListIntentsRequest.new(parent: parent, language_code: language_code, intent_view: intent_view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -170,7 +170,7 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_intent ::Google::Cloud::Dialogflow::V2::GetIntentRequest.new(name: name, language_code: language_code, intent_view: intent_view), grpc_options do |response, operation|
+      client.get_intent(::Google::Cloud::Dialogflow::V2::GetIntentRequest.new(name: name, language_code: language_code, intent_view: intent_view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -234,7 +234,7 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_intent ::Google::Cloud::Dialogflow::V2::CreateIntentRequest.new(parent: parent, intent: intent, language_code: language_code, intent_view: intent_view), grpc_options do |response, operation|
+      client.create_intent(::Google::Cloud::Dialogflow::V2::CreateIntentRequest.new(parent: parent, intent: intent, language_code: language_code, intent_view: intent_view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -298,7 +298,7 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_intent ::Google::Cloud::Dialogflow::V2::UpdateIntentRequest.new(intent: intent, language_code: language_code, update_mask: update_mask, intent_view: intent_view), grpc_options do |response, operation|
+      client.update_intent(::Google::Cloud::Dialogflow::V2::UpdateIntentRequest.new(intent: intent, language_code: language_code, update_mask: update_mask, intent_view: intent_view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -356,7 +356,7 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_intent ::Google::Cloud::Dialogflow::V2::DeleteIntentRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_intent(::Google::Cloud::Dialogflow::V2::DeleteIntentRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -427,7 +427,7 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.batch_update_intents ::Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest.new(parent: parent, intent_batch_uri: intent_batch_uri, language_code: language_code, update_mask: update_mask, intent_view: intent_view), grpc_options do |response, operation|
+      client.batch_update_intents(::Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest.new(parent: parent, intent_batch_uri: intent_batch_uri, language_code: language_code, update_mask: update_mask, intent_view: intent_view), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -492,7 +492,7 @@ class ::Google::Cloud::Dialogflow::V2::Intents::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.batch_delete_intents ::Google::Cloud::Dialogflow::V2::BatchDeleteIntentsRequest.new(parent: parent, intents: intents), grpc_options do |response, operation|
+      client.batch_delete_intents(::Google::Cloud::Dialogflow::V2::BatchDeleteIntentsRequest.new(parent: parent, intents: intents), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
