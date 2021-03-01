@@ -103,7 +103,7 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.list_instance_configs ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_instance_configs(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstanceConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -162,7 +162,7 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.get_instance_config ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest.new(name: name), grpc_options do |response, operation|
+      client.get_instance_config(::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceConfigRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -230,7 +230,7 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.list_instances ::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options do |response, operation|
+      client.list_instances(::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -291,7 +291,7 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.get_instance ::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceRequest.new(name: name, field_mask: field_mask), grpc_options do |response, operation|
+      client.get_instance(::Google::Cloud::Spanner::Admin::Instance::V1::GetInstanceRequest.new(name: name, field_mask: field_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -357,7 +357,7 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.create_instance ::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), grpc_options do |response, operation|
+      client.create_instance(::Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -422,7 +422,7 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.update_instance ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceRequest.new(instance: instance, field_mask: field_mask), grpc_options do |response, operation|
+      client.update_instance(::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceRequest.new(instance: instance, field_mask: field_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -481,7 +481,7 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.delete_instance ::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_instance(::Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceRequest.new(name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -541,7 +541,7 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options do |response, operation|
+      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -601,7 +601,7 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options do |response, operation|
+      client.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -661,7 +661,7 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientTest <
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options do |response, operation|
+      client.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
