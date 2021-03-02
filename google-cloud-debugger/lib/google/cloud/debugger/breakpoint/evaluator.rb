@@ -849,20 +849,18 @@ module Google
             # do evaluation in a new thread, where function calls can be
             # traced.
             thr = Thread.new do
-              begin
-                Thread.current.thread_variable_set EVALUATOR_REFERENCE, self
-                binding.eval wrap_expression(expression)
-              rescue StandardError, EvaluationError => e
-                # Treat all StandardError as mutation and set @mutation_cause
-                unless e.instance_variable_get :@mutation_cause
-                  e.instance_variable_set(
-                    :@mutation_cause,
-                    Google::Cloud::Debugger::EvaluationError::UNKNOWN_CAUSE
-                  )
-                end
-
-                e
+              Thread.current.thread_variable_set EVALUATOR_REFERENCE, self
+              binding.eval wrap_expression(expression)
+            rescue StandardError, EvaluationError => e
+              # Treat all StandardError as mutation and set @mutation_cause
+              unless e.instance_variable_get :@mutation_cause
+                e.instance_variable_set(
+                  :@mutation_cause,
+                  Google::Cloud::Debugger::EvaluationError::UNKNOWN_CAUSE
+                )
               end
+
+              e
             end
 
             thr.join @time_limit
@@ -942,7 +940,7 @@ module Google
           ##
           # @private Wraps expression with tracing code
           def wrap_expression expression
-            """
+            <<~CODE
               begin
                 ::Google::Cloud::Debugger::Breakpoint::Evaluator.send(
                   :enable_method_trace_for_thread)
@@ -951,10 +949,8 @@ module Google
                 ::Google::Cloud::Debugger::Breakpoint::Evaluator.send(
                   :disable_method_trace_for_thread)
               end
-            """
+            CODE
           end
-
-          # rubocop:disable Layout/RescueEnsureAlignment
 
           ##
           # @private Evaluation tracing callback function. This is called
@@ -994,8 +990,6 @@ module Google
             )
           end
 
-          # rubocop:enable Layout/RescueEnsureAlignment
-
           ##
           # @private Evaluation tracing callback function. This is called
           # everytime a C function is called during evaluation of
@@ -1011,12 +1005,12 @@ module Google
           #
           def trace_c_func_callback receiver, defined_class, mid
             return if @allow_mutating_methods
-            if receiver.is_a?(Class) || receiver.is_a?(Module)
-              invalid_op =
+            invalid_op =
+              if receiver.is_a?(Class) || receiver.is_a?(Module)
                 !validate_c_class_method(defined_class, receiver, mid)
-            else
-              invalid_op = !validate_c_instance_method(defined_class, mid)
-            end
+              else
+                !validate_c_instance_method(defined_class, mid)
+              end
 
             return unless invalid_op
 

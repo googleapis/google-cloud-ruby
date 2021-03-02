@@ -33,11 +33,11 @@ module Google
 
         ##
         # Max size of payload a Snappoint collects
-        MAX_PAYLOAD_SIZE = 32768 # 32KB
+        MAX_PAYLOAD_SIZE = 32_768 # 32KB
 
         ##
         # @private Max size an evaluated expression variable is allowed to be
-        MAX_EXPRESSION_LIMIT = 32768 # 32KB
+        MAX_EXPRESSION_LIMIT = 32_768 # 32KB
 
         ##
         # @private Max size a normal evaluated variable is allowed to be
@@ -56,8 +56,7 @@ module Google
         # variable at index 0. This variable will be shared by other variable
         # evaluations if this Snappoint exceeds size limit.
         def init_var_table
-          return if @variable_table[0] &&
-                    @variable_table[0].buffer_full_variable?
+          return if @variable_table[0]&.buffer_full_variable?
 
           buffer_full_var = Variable.buffer_full_variable
           @variable_table.variables.unshift buffer_full_var
@@ -179,11 +178,9 @@ module Google
             end
           end
 
-          result = variable_table.variables.inject result do |sum, var|
+          variable_table.variables.inject result do |sum, var|
             sum + var.payload_size
           end
-
-          result
         end
 
         ##

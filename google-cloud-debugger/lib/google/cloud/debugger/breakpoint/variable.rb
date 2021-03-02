@@ -244,7 +244,7 @@ module Google
 
             # If source is a non-empty Array or Hash, or source has instance
             # variables, evaluate source as a compound variable.
-            if compound_var?(source) && depth > 0
+            if compound_var?(source) && depth.positive?
               from_compound_var source, name: name, depth: depth,
                                         var_table: var_table, limit: limit
             else
@@ -358,9 +358,7 @@ module Google
 
               limit = deduct_limit limit, member_var.total_size
 
-              buffer_full = (limit && limit < 0) ||
-                            i >= MAX_MEMBERS ||
-                            member_var.buffer_full_variable?
+              buffer_full = limit&.negative? || i >= MAX_MEMBERS || member_var.buffer_full_variable?
 
               if buffer_full
                 var.members << Variable.new.tap do |last_var|
@@ -384,8 +382,7 @@ module Google
             new.tap do |var|
               var.name = name if name
 
-              if var_table && var_table.first &&
-                 var_table.first.buffer_full_variable?
+              if var_table&.first&.buffer_full_variable?
                 var.var_table = var_table
                 var.var_table_index = 0
               else

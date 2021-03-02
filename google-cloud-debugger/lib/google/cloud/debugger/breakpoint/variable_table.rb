@@ -68,7 +68,7 @@ module Google
           # object_id, return the array index if found.
           def rb_var_index rb_var
             variables.each_with_index do |var, i|
-              return i if var.source_var.object_id == rb_var.object_id
+              return i if var.source_var.equal? rb_var
             end
 
             nil

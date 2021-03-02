@@ -14,10 +14,6 @@ AllCops:
 Documentation:
   Enabled: false
 
-Layout/AlignHash:
-  Enabled: false
-Layout/SpaceInsideStringInterpolation:
-  Enabled: false
 Lint/UnifiedInteger:
   Exclude:
     - "lib/google/cloud/debugger/breakpoint/evaluator.rb"
@@ -32,19 +28,12 @@ Metrics/ClassLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-debugger.rb"
-Style/ConditionalAssignment:
-  Enabled: false
-Style/EmptyMethod:
-  Enabled: false
-Style/IfUnlessModifier:
-  Enabled: false
-Style/NumericLiterals:
-  Enabled: false
-Style/NumericPredicate:
-  Enabled: false
-Style/SafeNavigation:
-  Enabled: false
+Style/IfWithBooleanLiteralBranches:
+  Exclude:
+    - "lib/google/cloud/debugger/breakpoint/variable.rb"
 Style/SymbolArray:
-  Enabled: false
+  Exclude:
+    - "lib/google/cloud/debugger/breakpoint/evaluator.rb"
 Style/WordArray:
-  Enabled: false
+  Exclude:
+    - "lib/google/cloud/debugger/breakpoint/evaluator.rb"

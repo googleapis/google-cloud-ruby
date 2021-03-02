@@ -120,7 +120,10 @@ module Google
         # @param [String] app_root Absolute path to the root directory of
         #   the debuggee application. Default to Rack root.
         #
-        def initialize service, logger: nil, service_name:, service_version:,
+        def initialize service,
+                       service_name:,
+                       service_version:,
+                       logger: nil,
                        app_root: nil
           super()
 
