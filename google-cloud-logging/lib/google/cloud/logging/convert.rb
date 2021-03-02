@@ -39,14 +39,19 @@ module Google
         # @private Convert an Object to a Google::Protobuf::Value.
         def self.object_to_value obj
           case obj
-          when NilClass then Google::Protobuf::Value.new null_value: :NULL_VALUE
-          when Numeric then Google::Protobuf::Value.new number_value: obj
-          when String then Google::Protobuf::Value.new string_value: obj
-          when TrueClass then Google::Protobuf::Value.new bool_value: true
-          when FalseClass then Google::Protobuf::Value.new bool_value: false
-          when Hash then
+          when NilClass
+            Google::Protobuf::Value.new null_value: :NULL_VALUE
+          when Numeric
+            Google::Protobuf::Value.new number_value: obj
+          when String
+            Google::Protobuf::Value.new string_value: obj
+          when TrueClass
+            Google::Protobuf::Value.new bool_value: true
+          when FalseClass
+            Google::Protobuf::Value.new bool_value: false
+          when Hash
             Google::Protobuf::Value.new struct_value: hash_to_struct(obj)
-          when Array then
+          when Array
             Google::Protobuf::Value.new list_value: array_to_list(obj)
           else
             # TODO: Could raise ArgumentError here, or convert to a string

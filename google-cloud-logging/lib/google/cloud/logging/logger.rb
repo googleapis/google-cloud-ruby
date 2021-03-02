@@ -313,14 +313,8 @@ module Google
           severity = derive_severity(severity) || ::Logger::UNKNOWN
           return true if severity < @level
 
-          if message.nil?
-            if block_given?
-              message = yield
-            else
-              message = progname
-              # progname = nil # TODO: Figure out what to do with the progname
-            end
-          end
+          message ||= block_given? ? yield : progname
+          # TODO: Figure out what to do with the progname
 
           write_entry severity, message unless @closed
           true
@@ -570,7 +564,7 @@ module Google
             end
           end
 
-          request_env = info && info.env || {}
+          request_env = info&.env || {}
 
           compute_labels(request_env).merge merged_labels
         end
@@ -594,7 +588,7 @@ module Google
         ##
         # @private Get Google Cloud deverity from logger level number.
         def gcloud_severity severity_int
-          %i[DEBUG INFO WARNING ERROR CRITICAL DEFAULT][severity_int]
+          [:DEBUG, :INFO, :WARNING, :ERROR, :CRITICAL, :DEFAULT][severity_int]
         rescue StandardError
           :DEFAULT
         end
@@ -610,11 +604,9 @@ module Google
         ##
         # @private Compute values for labels
         def compute_labels request_env
-          Hash[
-            labels.map do |k, value_or_proc|
-              [k, compute_label_value(request_env, value_or_proc)]
-            end
-          ]
+          labels.to_h.transform_values do |value_or_proc|
+            compute_label_value request_env, value_or_proc
+          end
         end
 
         ##

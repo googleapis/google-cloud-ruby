@@ -27,7 +27,8 @@ module Google
         class HttpRequest
           ##
           # @private Create an empty HttpRequest object.
-          def initialize; end
+          def initialize
+          end
 
           ##
           # The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`, `"POST"`.

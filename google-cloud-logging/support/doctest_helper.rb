@@ -558,7 +558,7 @@ def object_access_control_gapi
 end
 
 def bucket_gapi name = "my-bucket"
-  Google::Apis::StorageV1::Bucket.new random_bucket_hash(name)
+  Google::Apis::StorageV1::Bucket.new(**random_bucket_hash(name))
 end
 
 def random_bucket_hash(name = "my-bucket",

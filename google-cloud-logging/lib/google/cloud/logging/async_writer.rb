@@ -65,7 +65,7 @@ module Google
 
         ##
         # @private Creates a new AsyncWriter instance.
-        def initialize logging, max_count: 10000, max_bytes: 10000000,
+        def initialize logging, max_count: 10_000, max_bytes: 10_000_000,
                        max_queue: 100, interval: 5, threads: 10,
                        partial_success: false
           # init MonitorMixin
@@ -210,7 +210,7 @@ module Google
             @stopped = true
             publish_batch!
             @cond.broadcast
-            @thread_pool.shutdown if @thread_pool
+            @thread_pool&.shutdown
           end
 
           self
@@ -457,7 +457,8 @@ module Google
         ##
         # @private
         class Batch
-          attr_reader :created_at, :entries
+          attr_reader :created_at
+          attr_reader :entries
 
           def initialize writer
             @writer = writer
@@ -499,7 +500,7 @@ module Google
 
           def publish_wait
             publish_wait = publish_at - Time.now
-            return 0 if publish_wait < 0
+            return 0 if publish_wait.negative?
             publish_wait
           end
 

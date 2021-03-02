@@ -57,7 +57,7 @@ module Google
         def initialize app, logger: nil, on_init: nil, **kwargs
           @app = app
 
-          load_config kwargs
+          load_config(**kwargs)
 
           logger ||= Middleware.logger
           logger ||= begin
@@ -71,7 +71,7 @@ module Google
             Middleware.logger = logging.logger log_name, resource
           end
 
-          on_init.call if on_init
+          on_init&.call
 
           @logger = logger
         end
