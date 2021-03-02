@@ -1,5 +1,18 @@
 # Release History
 
+### 1.28.0 / 2021-03-02
+
+#### Features
+
+* Add Materialized View support
+  * Add Dataset#create_materialized_view
+  * Add Table#materialized_view?
+  * Add Table#enable_refresh?
+  * Add Table#enable_refresh=
+  * Add Table#last_refresh_time
+  * Add Table#refresh_interval_ms
+  * Add Table#refresh_interval_ms=
+
 ### 1.27.0 / 2021-02-10
 
 #### Features
