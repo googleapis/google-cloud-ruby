@@ -13,8 +13,6 @@ AllCops:
 Documentation:
   Enabled: false
 
-Layout/AlignHash:
-  Enabled: false
 Lint/RescueException:
   Exclude:
     - "lib/google/cloud/error_reporting/middleware.rb"
@@ -29,11 +27,3 @@ Metrics/ClassLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-error_reporting.rb"
-Naming/RescuedExceptionsVariableName:
-  Enabled: false
-Style/IfUnlessModifier:
-  Enabled: false
-Style/NumericPredicate:
-  Enabled: false
-Style/SafeNavigation:
-  Enabled: false

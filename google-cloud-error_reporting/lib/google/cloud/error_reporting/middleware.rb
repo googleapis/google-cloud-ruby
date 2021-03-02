@@ -50,7 +50,7 @@ module Google
           require "rack/request"
           @app = app
 
-          load_config kwargs
+          load_config(**kwargs)
 
           @error_reporting =
             error_reporting ||
@@ -86,11 +86,11 @@ module Google
           end
 
           response
-        rescue Exception => exception
-          report_exception env, exception
+        rescue Exception => e
+          report_exception env, e
 
           # Always raise exception backup
-          raise exception
+          raise e
         end
 
         ##
@@ -112,7 +112,7 @@ module Google
           # If this exception maps to a HTTP status code less than 500, do
           # not report it.
           status_code = error_event.http_status.to_i
-          return if status_code > 0 && status_code < 500
+          return if status_code.positive? && status_code < 500
 
           error_reporting.report error_event
         end

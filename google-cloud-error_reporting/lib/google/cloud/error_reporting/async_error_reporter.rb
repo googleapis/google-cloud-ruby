@@ -108,7 +108,7 @@ module Google
         #
         # @return [AsyncErrorReporter] returns self so calls can be chained.
         def stop
-          @thread_pool.shutdown if @thread_pool
+          @thread_pool&.shutdown
 
           self
         end
@@ -145,7 +145,7 @@ module Google
         # @return [boolean] `true` when started, `false` otherwise.
         #
         def started?
-          @thread_pool.running? if @thread_pool
+          @thread_pool&.running?
         end
 
         ##
