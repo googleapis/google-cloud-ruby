@@ -14,7 +14,6 @@
 
 def create_notification_config org_id:, config_id:, pubsub_topic:
   # [START securitycenter_create_notification_config]
-  # [START scc_create_notification_config]
   require "google/cloud/security_center"
 
   # Your organization id. e.g. for "organizations/123", this would be "123".
@@ -43,13 +42,11 @@ def create_notification_config org_id:, config_id:, pubsub_topic:
     notification_config: notification_config
   )
   puts "Created notification config #{config_id}: #{response}."
-  # [END scc_create_notification_config]
   # [END securitycenter_create_notification_config]
 end
 
 def update_notification_config org_id:, config_id:, description: nil, pubsub_topic: nil, filter: nil
   # [START securitycenter_update_notification_config]
-  # [START scc_update_notification_config]
   require "google/cloud/security_center"
 
   # Your organization id. e.g. for "organizations/123", this would be "123".
@@ -88,13 +85,11 @@ def update_notification_config org_id:, config_id:, description: nil, pubsub_top
     update_mask:         update_mask
   )
   puts response
-  # [END scc_update_notification_config]
   # [END securitycenter_update_notification_config]
 end
 
 def delete_notification_config org_id:, config_id:
   # [START securitycenter_delete_notification_config]
-  # [START scc_delete_notification_config]
   require "google/cloud/security_center"
 
   # Your organization id. e.g. for "organizations/123", this would be "123".
@@ -111,13 +106,11 @@ def delete_notification_config org_id:, config_id:
 
   response = client.delete_notification_config name: config_path
   puts "Deleted notification config #{config_id} with response: #{response}"
-  # [END scc_delete_notification_config]
   # [END securitycenter_delete_notification_config]
 end
 
 def get_notification_config org_id:, config_id:
   # [START securitycenter_get_notification_config]
-  # [START scc_get_notification_config]
   require "google/cloud/security_center"
 
   # Your organization id. e.g. for "organizations/123", this would be "123".
@@ -134,13 +127,11 @@ def get_notification_config org_id:, config_id:
 
   response = client.get_notification_config name: config_path
   puts "Notification config fetched: #{response}"
-  # [END scc_get_notification_config]
   # [END securitycenter_get_notification_config]
 end
 
 def list_notification_configs org_id:
   # [START securitycenter_list_notification_configs]
-  # [START scc_list_notification_configs]
   require "google/cloud/security_center"
 
   # Your organization id. e.g. for "organizations/123", this would be "123".
@@ -155,7 +146,6 @@ def list_notification_configs org_id:
       puts element
     end
   end
-  # [END scc_list_notification_configs]
   # [END securitycenter_list_notification_configs]
 end
 
