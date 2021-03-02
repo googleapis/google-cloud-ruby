@@ -368,7 +368,7 @@ module Google
         #
         # The Google Cloud DNS service requires that record names and data use
         # fully-qualified addresses. The @ symbol is not accepted, nor are
-        # unqualified subdomain addresses like www. If your zone file contains
+        # unqualified subdomain addresses like `www`. If your zone file contains
         # such values, you may need to pre-process it in order for the import
         # operation to succeed.
         #
