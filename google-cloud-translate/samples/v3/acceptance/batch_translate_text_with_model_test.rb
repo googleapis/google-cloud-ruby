@@ -32,7 +32,7 @@ describe "translate_v3_batch_translate_text_with_model", :translate do
     @mock_operation.expect :wait_until_done!, nil
     @mock_operation.expect :response, response
     @mock_grpc_stub = Minitest::Mock.new
-    @mock_grpc_stub.expect :call_rpc, @mock_operation do |rpc, request, options:|
+    @mock_grpc_stub.expect :call_rpc, @mock_operation do |rpc, request, keywords = {}|
       assert_equal :batch_translate_text, rpc
       assert_instance_of Google::Cloud::Translate::V3::BatchTranslateTextRequest, request
       refute_nil options

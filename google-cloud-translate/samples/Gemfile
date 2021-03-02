@@ -21,7 +21,7 @@ gem "google-cloud-translate-v2", path: master ? "../../google-cloud-translate-v2
 gem "google-cloud-translate-v3", path: master ? "../../google-cloud-translate-v3" : nil
 
 group :test do
-  gem "google-style", "~> 1.24.0"
+  gem "google-style", "~> 1.25.1"
   gem "irb"
   gem "minitest", "~> 5.14"
   gem "minitest-focus", "~> 1.1"
