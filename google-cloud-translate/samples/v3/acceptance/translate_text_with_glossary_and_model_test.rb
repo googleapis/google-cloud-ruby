@@ -29,7 +29,7 @@ describe "translate_v3_translate_text_with_glossary_and_model", :translate do
     @mock_grpc_stub = Minitest::Mock.new
     translation = OpenStruct.new translated_text: "Bonjour le monde!"
     response = OpenStruct.new glossary_translations: [translation]
-    @mock_grpc_stub.expect :call_rpc, response do |rpc, request, keywords = {}|
+    @mock_grpc_stub.expect :call_rpc, response do |rpc, request, _keywords = {}|
       assert_equal :translate_text, rpc
       assert_instance_of Google::Cloud::Translate::V3::TranslateTextRequest, request
       refute_nil options
