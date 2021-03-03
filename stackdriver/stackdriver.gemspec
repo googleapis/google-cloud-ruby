@@ -16,15 +16,15 @@ Gem::Specification.new do |gem|
                        "CODE_OF_CONDUCT.md", "LICENSE", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 2.4"
+  gem.required_ruby_version = ">= 2.5"
 
   gem.add_runtime_dependency "google-cloud-error_reporting", "~> 0.41"
   gem.add_runtime_dependency "google-cloud-logging", "~> 2.1"
   gem.add_runtime_dependency "google-cloud-trace", "~> 0.40"
 
   gem.add_development_dependency "autotest-suffix", "~> 1.1"
-  gem.add_development_dependency "google-style", "~> 1.24.0"
-  gem.add_development_dependency "minitest", "~> 5.10"
+  gem.add_development_dependency "google-style", "~> 1.25.1"
+  gem.add_development_dependency "minitest", "~> 5.14"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"
