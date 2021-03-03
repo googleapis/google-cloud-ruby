@@ -101,9 +101,12 @@ describe "Document", :firestore_acceptance do
     timestamp = Time.now
 
     doc_ref = root_col.doc
-    doc_ref.set a: :bar,
-                b: { keep: "bar"},
-                d: firestore.field_server_time
+    data_2 = {
+      a: :bar,
+      b: { keep: "bar"},
+      d: firestore.field_server_time
+    }
+    doc_ref.set data_2
     doc_snp = doc_ref.get
 
     set_timestamp = doc_snp.get "d"
@@ -114,9 +117,13 @@ describe "Document", :firestore_acceptance do
       d: set_timestamp,
     })
 
-    doc_ref.update a: firestore.field_server_time,
-                   b: { c: firestore.field_server_time },
-                   "e.f" => firestore.field_server_time
+    data_3 = {
+      a: firestore.field_server_time,
+      b: { c: firestore.field_server_time },
+      "e.f" => firestore.field_server_time
+    }
+
+    doc_ref.update data_3
     doc_snp = doc_ref.get
 
     update_timestamp = doc_snp[:a]

@@ -86,8 +86,7 @@ module Google
           def next
             return nil unless next?
             ensure_client!
-            options = { token: token, max: @max }
-            grpc = @client.service.list_documents @parent, @collection_id, options
+            grpc = @client.service.list_documents @parent, @collection_id, token: token, max: @max
             self.class.from_grpc grpc, @client, @parent, @collection_id, @max
           end
 
