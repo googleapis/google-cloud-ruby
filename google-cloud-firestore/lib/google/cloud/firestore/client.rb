@@ -256,7 +256,7 @@ module Google
           ensure_service!
 
           unless block_given?
-            return enum_for :get_all, docs, field_mask: field_mask
+            return enum_for :get_all, *docs, field_mask: field_mask
           end
 
           doc_paths = Array(docs).flatten.map do |doc_path|
