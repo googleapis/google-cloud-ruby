@@ -72,13 +72,13 @@ describe Google::Cloud::ResourceManager::Project, :iam, :mock_res_man do
     policy = project.policy
     mock.verify
 
-    policy.must_be_kind_of Google::Cloud::ResourceManager::Policy
-    policy.etag.must_equal "CAE="
-    policy.roles.must_be_kind_of Hash
-    policy.roles.size.must_equal 1
-    policy.roles["roles/viewer"].must_be_kind_of Array
-    policy.roles["roles/viewer"].count.must_equal 1
-    policy.roles["roles/viewer"].first.must_equal "user:viewer@example.com"
+    _(policy).must_be_kind_of Google::Cloud::ResourceManager::Policy
+    _(policy.etag).must_equal "CAE="
+    _(policy.roles).must_be_kind_of Hash
+    _(policy.roles.size).must_equal 1
+    _(policy.roles["roles/viewer"]).must_be_kind_of Array
+    _(policy.roles["roles/viewer"].count).must_equal 1
+    _(policy.roles["roles/viewer"].first).must_equal "user:viewer@example.com"
   end
 
   it "sets the policy" do
@@ -90,14 +90,14 @@ describe Google::Cloud::ResourceManager::Project, :iam, :mock_res_man do
     policy = project.update_policy updated_policy
     mock.verify
 
-    policy.must_be_kind_of Google::Cloud::ResourceManager::Policy
-    policy.etag.must_equal "CAF="
-    policy.roles.must_be_kind_of Hash
-    policy.roles.size.must_equal 1
-    policy.roles["roles/viewer"].must_be_kind_of Array
-    policy.roles["roles/viewer"].count.must_equal 2
-    policy.roles["roles/viewer"].first.must_equal "user:viewer@example.com"
-    policy.roles["roles/viewer"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
+    _(policy).must_be_kind_of Google::Cloud::ResourceManager::Policy
+    _(policy.etag).must_equal "CAF="
+    _(policy.roles).must_be_kind_of Hash
+    _(policy.roles.size).must_equal 1
+    _(policy.roles["roles/viewer"]).must_be_kind_of Array
+    _(policy.roles["roles/viewer"].count).must_equal 2
+    _(policy.roles["roles/viewer"].first).must_equal "user:viewer@example.com"
+    _(policy.roles["roles/viewer"].last).must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
   end
 
   it "sets the policy in a block" do
@@ -113,14 +113,14 @@ describe Google::Cloud::ResourceManager::Project, :iam, :mock_res_man do
     end
     mock.verify
 
-    policy.must_be_kind_of Google::Cloud::ResourceManager::Policy
-    policy.etag.must_equal "CAF="
-    policy.roles.must_be_kind_of Hash
-    policy.roles.size.must_equal 1
-    policy.roles["roles/viewer"].must_be_kind_of Array
-    policy.roles["roles/viewer"].count.must_equal 2
-    policy.roles["roles/viewer"].first.must_equal "user:viewer@example.com"
-    policy.roles["roles/viewer"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
+    _(policy).must_be_kind_of Google::Cloud::ResourceManager::Policy
+    _(policy.etag).must_equal "CAF="
+    _(policy.roles).must_be_kind_of Hash
+    _(policy.roles.size).must_equal 1
+    _(policy.roles["roles/viewer"]).must_be_kind_of Array
+    _(policy.roles["roles/viewer"].count).must_equal 2
+    _(policy.roles["roles/viewer"].first).must_equal "user:viewer@example.com"
+    _(policy.roles["roles/viewer"].last).must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
   end
 
   it "tests the permissions available" do
@@ -134,6 +134,6 @@ describe Google::Cloud::ResourceManager::Project, :iam, :mock_res_man do
                                            "resourcemanager.projects.delete"
     mock.verify
 
-    permissions.must_equal ["resourcemanager.projects.get"]
+    _(permissions).must_equal ["resourcemanager.projects.get"]
   end
 end

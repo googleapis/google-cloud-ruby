@@ -24,8 +24,8 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
     project = resource_manager.project "example-project-123"
     mock.verify
 
-    project.must_be_kind_of Google::Cloud::ResourceManager::Project
-    project.project_id.must_equal "example-project-123"
+    _(project).must_be_kind_of Google::Cloud::ResourceManager::Project
+    _(project.project_id).must_equal "example-project-123"
   end
 
   it "creates a project" do
@@ -37,11 +37,11 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
     project = resource_manager.create_project "new-project-456"
     mock.verify
 
-    project.must_be_kind_of Google::Cloud::ResourceManager::Project
-    project.project_id.must_equal "new-project-456"
-    project.name.must_be :nil?
-    project.labels.must_be :empty?
-    project.parent.must_be :nil?
+    _(project).must_be_kind_of Google::Cloud::ResourceManager::Project
+    _(project.project_id).must_equal "new-project-456"
+    _(project.name).must_be :nil?
+    _(project.labels).must_be :empty?
+    _(project.parent).must_be :nil?
   end
 
   it "creates a project with a name and labels and parent" do
@@ -57,15 +57,15 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
                                               parent: folder
     mock.verify
 
-    project.must_be_kind_of Google::Cloud::ResourceManager::Project
-    project.project_id.must_equal "new-project-789"
-    project.name.must_equal "My New Project"
-    project.labels.must_equal("env" => "development")
-    project.parent.must_be_kind_of Google::Cloud::ResourceManager::Resource
-    project.parent.type.must_equal "folder"
-    project.parent.id.must_equal "1234"
-    project.parent.must_be :folder?
-    project.parent.wont_be :organization?
+    _(project).must_be_kind_of Google::Cloud::ResourceManager::Project
+    _(project.project_id).must_equal "new-project-789"
+    _(project.name).must_equal "My New Project"
+    _(project.labels).must_equal("env" => "development")
+    _(project.parent).must_be_kind_of Google::Cloud::ResourceManager::Resource
+    _(project.parent.type).must_equal "folder"
+    _(project.parent.id).must_equal "1234"
+    _(project.parent).must_be :folder?
+    _(project.parent).wont_be :organization?
   end
 
   it "lists projects" do
@@ -76,8 +76,8 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
     projects = resource_manager.projects
     mock.verify
 
-    projects.size.must_equal 3
-    projects.each { |z| z.must_be_kind_of Google::Cloud::ResourceManager::Project }
+    _(projects.size).must_equal 3
+    projects.each { |z| _(z).must_be_kind_of Google::Cloud::ResourceManager::Project }
   end
 
   it "lists projects with max set" do
@@ -88,10 +88,10 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
     projects = resource_manager.projects max: 3
     mock.verify
 
-    projects.count.must_equal 3
-    projects.each { |z| z.must_be_kind_of Google::Cloud::ResourceManager::Project }
-    projects.token.wont_be :nil?
-    projects.token.must_equal "next_page_token"
+    _(projects.count).must_equal 3
+    projects.each { |z| _(z).must_be_kind_of Google::Cloud::ResourceManager::Project }
+    _(projects.token).wont_be :nil?
+    _(projects.token).must_equal "next_page_token"
   end
 
   it "lists projects with filter set" do
@@ -102,10 +102,10 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
     projects = resource_manager.projects filter: "labels.env:production"
     mock.verify
 
-    projects.count.must_equal 3
-    projects.each { |z| z.must_be_kind_of Google::Cloud::ResourceManager::Project }
-    projects.token.wont_be :nil?
-    projects.token.must_equal "next_page_token"
+    _(projects.count).must_equal 3
+    projects.each { |z| _(z).must_be_kind_of Google::Cloud::ResourceManager::Project }
+    _(projects.token).wont_be :nil?
+    _(projects.token).must_equal "next_page_token"
   end
 
   it "paginates projects" do
@@ -118,14 +118,14 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
     second_projects = resource_manager.projects token: first_projects.token
     mock.verify
 
-    first_projects.count.must_equal 3
-    first_projects.each { |z| z.must_be_kind_of Google::Cloud::ResourceManager::Project }
-    first_projects.token.wont_be :nil?
-    first_projects.token.must_equal "next_page_token"
+    _(first_projects.count).must_equal 3
+    first_projects.each { |z| _(z).must_be_kind_of Google::Cloud::ResourceManager::Project }
+    _(first_projects.token).wont_be :nil?
+    _(first_projects.token).must_equal "next_page_token"
 
-    second_projects.count.must_equal 2
-    second_projects.each { |z| z.must_be_kind_of Google::Cloud::ResourceManager::Project }
-    second_projects.token.must_be :nil?
+    _(second_projects.count).must_equal 2
+    second_projects.each { |z| _(z).must_be_kind_of Google::Cloud::ResourceManager::Project }
+    _(second_projects.token).must_be :nil?
   end
 
   it "paginates projects with next? and next" do
@@ -138,13 +138,13 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
     second_projects = first_projects.next
     mock.verify
 
-    first_projects.count.must_equal 3
-    first_projects.each { |z| z.must_be_kind_of Google::Cloud::ResourceManager::Project }
-    first_projects.next?.must_equal true
+    _(first_projects.count).must_equal 3
+    first_projects.each { |z| _(z).must_be_kind_of Google::Cloud::ResourceManager::Project }
+    _(first_projects.next?).must_equal true
 
-    second_projects.count.must_equal 2
-    second_projects.each { |z| z.must_be_kind_of Google::Cloud::ResourceManager::Project }
-    second_projects.next?.must_equal false
+    _(second_projects.count).must_equal 2
+    second_projects.each { |z| _(z).must_be_kind_of Google::Cloud::ResourceManager::Project }
+    _(second_projects.next?).must_equal false
   end
 
   it "paginates projects with next? and next and max set" do
@@ -157,13 +157,13 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
     second_projects = first_projects.next
     mock.verify
 
-    first_projects.count.must_equal 3
-    first_projects.each { |z| z.must_be_kind_of Google::Cloud::ResourceManager::Project }
-    first_projects.next?.must_equal true
+    _(first_projects.count).must_equal 3
+    first_projects.each { |z| _(z).must_be_kind_of Google::Cloud::ResourceManager::Project }
+    _(first_projects.next?).must_equal true
 
-    second_projects.count.must_equal 2
-    second_projects.each { |z| z.must_be_kind_of Google::Cloud::ResourceManager::Project }
-    second_projects.next?.must_equal false
+    _(second_projects.count).must_equal 2
+    second_projects.each { |z| _(z).must_be_kind_of Google::Cloud::ResourceManager::Project }
+    _(second_projects.next?).must_equal false
   end
 
   it "paginates projects with next? and next and filter set" do
@@ -176,13 +176,13 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
     second_projects = first_projects.next
     mock.verify
 
-    first_projects.count.must_equal 3
-    first_projects.each { |z| z.must_be_kind_of Google::Cloud::ResourceManager::Project }
-    first_projects.next?.must_equal true
+    _(first_projects.count).must_equal 3
+    first_projects.each { |z| _(z).must_be_kind_of Google::Cloud::ResourceManager::Project }
+    _(first_projects.next?).must_equal true
 
-    second_projects.count.must_equal 2
-    second_projects.each { |z| z.must_be_kind_of Google::Cloud::ResourceManager::Project }
-    second_projects.next?.must_equal false
+    _(second_projects.count).must_equal 2
+    second_projects.each { |z| _(z).must_be_kind_of Google::Cloud::ResourceManager::Project }
+    _(second_projects.next?).must_equal false
   end
 
   it "paginates projects with all" do
@@ -194,8 +194,8 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
     projects = resource_manager.projects.all.to_a
     mock.verify
 
-    projects.count.must_equal 5
-    projects.each { |z| z.must_be_kind_of Google::Cloud::ResourceManager::Project }
+    _(projects.count).must_equal 5
+    projects.each { |z| _(z).must_be_kind_of Google::Cloud::ResourceManager::Project }
   end
 
   it "paginates projects with all and max set" do
@@ -207,8 +207,8 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
     projects = resource_manager.projects(max: 3).all.to_a
     mock.verify
 
-    projects.count.must_equal 5
-    projects.each { |z| z.must_be_kind_of Google::Cloud::ResourceManager::Project }
+    _(projects.count).must_equal 5
+    projects.each { |z| _(z).must_be_kind_of Google::Cloud::ResourceManager::Project }
   end
 
   it "paginates projects with all and filter set" do
@@ -220,8 +220,8 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
     projects = resource_manager.projects(filter: "labels.env:production").all.to_a
     mock.verify
 
-    projects.count.must_equal 5
-    projects.each { |z| z.must_be_kind_of Google::Cloud::ResourceManager::Project }
+    _(projects.count).must_equal 5
+    projects.each { |z| _(z).must_be_kind_of Google::Cloud::ResourceManager::Project }
   end
 
   it "paginates projects with all using Enumerator" do
@@ -233,8 +233,8 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
     projects = resource_manager.projects.all.take(5)
     mock.verify
 
-    projects.count.must_equal 5
-    projects.each { |z| z.must_be_kind_of Google::Cloud::ResourceManager::Project }
+    _(projects.count).must_equal 5
+    projects.each { |z| _(z).must_be_kind_of Google::Cloud::ResourceManager::Project }
   end
 
   it "paginates projects with all and request_limit set" do
@@ -246,8 +246,8 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
     projects = resource_manager.projects.all(request_limit: 1).to_a
     mock.verify
 
-    projects.count.must_equal 6
-    projects.each { |z| z.must_be_kind_of Google::Cloud::ResourceManager::Project }
+    _(projects.count).must_equal 6
+    projects.each { |z| _(z).must_be_kind_of Google::Cloud::ResourceManager::Project }
   end
 
   it "deletes a project" do
@@ -272,30 +272,30 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
 
   it "creates a resource" do
     folder = resource_manager.resource "folder", "1234"
-    folder.must_be_kind_of Google::Cloud::ResourceManager::Resource
-    folder.type.must_equal "folder"
-    folder.id.must_equal "1234"
-    folder.must_be :folder?
-    folder.wont_be :organization?
+    _(folder).must_be_kind_of Google::Cloud::ResourceManager::Resource
+    _(folder.type).must_equal "folder"
+    _(folder.id).must_equal "1234"
+    _(folder).must_be :folder?
+    _(folder).wont_be :organization?
 
     organization = resource_manager.resource "organization", "7890"
-    organization.must_be_kind_of Google::Cloud::ResourceManager::Resource
-    organization.type.must_equal "organization"
-    organization.id.must_equal "7890"
-    organization.wont_be :folder?
-    organization.must_be :organization?
+    _(organization).must_be_kind_of Google::Cloud::ResourceManager::Resource
+    _(organization.type).must_equal "organization"
+    _(organization.id).must_equal "7890"
+    _(organization).wont_be :folder?
+    _(organization).must_be :organization?
   end
 
   it "creating a resource without type or id raises" do
     error = expect do
       resource_manager.resource "folder", nil
     end.must_raise ArgumentError
-    error.message.must_equal "id is required"
+    _(error.message).must_equal "id is required"
 
     error = expect do
       resource_manager.resource nil, "1234"
     end.must_raise ArgumentError
-    error.message.must_equal "type is required"
+    _(error.message).must_equal "type is required"
   end
 
   def create_project_gapi project_id = nil, name = nil, labels = {}, parent = nil
