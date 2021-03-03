@@ -37,10 +37,8 @@ def key_with_parent task_list_name:, task_name:
   # [START datastore_key_with_parent]
   # task_list_name = "default"
   # task_name = "sampleTask"
-  task_key = datastore.key [["TaskList", task_list_name], ["Task", task_name]]
+  datastore.key [["TaskList", task_list_name], ["Task", task_name]]
   # [END datastore_key_with_parent]
-
-  task_key
 end
 
 def key_with_multilevel_parent user_name:, task_list_name:, task_name:
@@ -50,14 +48,12 @@ def key_with_multilevel_parent user_name:, task_list_name:, task_name:
   # user_name = "alice"
   # task_list_name = "default"
   # task_name = "sampleTask"
-  task_key = datastore.key([
-                             ["User", user_name],
-                             ["TaskList", task_list_name],
-                             ["Task", task_name]
-                           ])
+  datastore.key([
+                  ["User", user_name],
+                  ["TaskList", task_list_name],
+                  ["Task", task_name]
+                ])
   # [END datastore_key_with_multilevel_parent]
-
-  task_key
 end
 
 def entity_with_parent task_list_name:, task_name:
@@ -68,22 +64,20 @@ def entity_with_parent task_list_name:, task_name:
   # task_name = "sampleTask"
   task_key = datastore.key [["TaskList", task_list_name], ["Task", task_name]]
 
-  task = datastore.entity task_key do |t|
+  datastore.entity task_key do |t|
     t["category"] = "Personal"
     t["done"] = false
     t["priority"] = 4
     t["description"] = "Learn Cloud Datastore"
   end
   # [END datastore_entity_with_parent]
-
-  task
 end
 
 def properties
   datastore = Google::Cloud::Datastore.new
 
   # [START datastore_properties]
-  task = datastore.entity "Task" do |t|
+  datastore.entity "Task" do |t|
     t["category"] = "Personal"
     t["created"] = Time.now
     t["done"] = false
@@ -93,8 +87,6 @@ def properties
     t.exclude_from_indexes! "description", true
   end
   # [END datastore_properties]
-
-  task
 end
 
 def array_value task_name:
@@ -113,15 +105,13 @@ def basic_entity
   datastore = Google::Cloud::Datastore.new
 
   # [START datastore_basic_entity]
-  task = datastore.entity "Task" do |t|
+  datastore.entity "Task" do |t|
     t["category"] = "Personal"
     t["done"] = false
     t["priority"] = 4
     t["description"] = "Learn Cloud Datastore"
   end
   # [END datastore_basic_entity]
-
-  task
 end
 
 def upsert task_name:
@@ -166,10 +156,8 @@ def lookup task_name:
   # [START datastore_lookup]
   # task_name = "sampleTask"
   task_key = datastore.key "Task", task_name
-  task = datastore.find task_key
+  datastore.find task_key
   # [END datastore_lookup]
-
-  task
 end
 
 def update task_name:
@@ -515,10 +503,8 @@ def eventual_consistent_query task_list_name:
   query = datastore.query("Task")
                    .ancestor(ancestor_key)
 
-  tasks = datastore.run query, consistency: :eventual
+  datastore.run query, consistency: :eventual
   # [END datastore_eventual_consistent_query]
-
-  tasks
 end
 
 def unindexed_property_query
@@ -557,11 +543,9 @@ end
 def transactional_retry from_key, to_key, amount
   # [START datastore_transactional_retry]
   (1..5).each do |i|
-    begin
-      return transfer_funds from_key, to_key, amount
-    rescue Google::Cloud::Error => e
-      raise e if i == 5
-    end
+    return transfer_funds from_key, to_key, amount
+  rescue Google::Cloud::Error => e
+    raise e if i == 5
   end
   # [END datastore_transactional_retry]
 end

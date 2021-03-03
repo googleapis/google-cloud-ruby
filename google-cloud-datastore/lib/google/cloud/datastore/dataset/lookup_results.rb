@@ -167,14 +167,14 @@ module Google
           #     puts "Task #{t.key.id} (#cursor)"
           #   end
           #
-          def all request_limit: nil
+          def all request_limit: nil, &block
             request_limit = request_limit.to_i if request_limit
             unless block_given?
               return enum_for :all, request_limit: request_limit
             end
             results = self
             loop do
-              results.each { |r| yield r }
+              results.each(&block)
               if request_limit
                 request_limit -= 1
                 break if request_limit < 0

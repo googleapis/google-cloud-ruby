@@ -58,7 +58,7 @@ module Google
           # The end_cursor of the QueryResults.
           #
           # @return [Google::Cloud::Datastore::Cursor]
-          attr_reader :end_cursor
+          attr_accessor :end_cursor
           alias cursor end_cursor
 
           ##
@@ -70,7 +70,7 @@ module Google
           # * `:MORE_RESULTS_AFTER_LIMIT`
           # * `:MORE_RESULTS_AFTER_CURSOR`
           # * `:NO_MORE_RESULTS`
-          attr_reader :more_results
+          attr_accessor :more_results
 
           ##
           # @private
@@ -78,7 +78,7 @@ module Google
 
           ##
           # @private
-          attr_writer :end_cursor, :more_results
+
 
           ##
           # Convenience method for determining if the `more_results` value
@@ -266,14 +266,14 @@ module Google
           #     puts "Task #{t.key.id} (#cursor)"
           #   end
           #
-          def all request_limit: nil
+          def all request_limit: nil, &block
             request_limit = request_limit.to_i if request_limit
             unless block_given?
               return enum_for :all, request_limit: request_limit
             end
             results = self
             loop do
-              results.each { |r| yield r }
+              results.each(&block)
               if request_limit
                 request_limit -= 1
                 break if request_limit < 0
@@ -335,7 +335,7 @@ module Google
           #     puts "Task #{task.key.id} (#cursor)"
           #   end
           #
-          def all_with_cursor request_limit: nil
+          def all_with_cursor request_limit: nil, &block
             request_limit = request_limit.to_i if request_limit
             unless block_given?
               return enum_for :all_with_cursor, request_limit: request_limit
@@ -343,7 +343,7 @@ module Google
             results = self
 
             loop do
-              results.zip(results.cursors).each { |r, c| yield r, c }
+              results.zip(results.cursors).each(&block)
               if request_limit
                 request_limit -= 1
                 break if request_limit < 0

@@ -25,7 +25,10 @@ module Google
       # @private Represents the GAX Datastore service, including all the API
       # methods.
       class Service
-        attr_accessor :project, :credentials, :host, :timeout
+        attr_accessor :project
+        attr_accessor :credentials
+        attr_accessor :host
+        attr_accessor :timeout
 
         ##
         # Creates a new Service instance.
