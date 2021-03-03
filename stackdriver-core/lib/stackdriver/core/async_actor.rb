@@ -74,12 +74,12 @@ module Stackdriver
       def async_stop
         ensure_thread
         synchronize do
-          if async_state != :stopped
+          if async_state == :stopped
+            false
+          else
             @async_state = :stopping
             async_state_change
             true
-          else
-            false
           end
         end
       end
