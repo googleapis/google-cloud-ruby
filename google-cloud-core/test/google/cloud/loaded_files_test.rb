@@ -28,7 +28,7 @@ describe Google::Cloud, :loaded_files do
 
   it "gives real paths of files that exist" do
     Google::Cloud.stub :caller, loaded_files do
-      Google::Cloud.loaded_files.must_equal [
+      _(Google::Cloud.loaded_files).must_equal [
         File.realpath("#{parent_dir}/../../../lib/google/cloud.rb"),
         File.realpath("#{parent_dir}/../../../lib/google/cloud/config.rb"),
         File.realpath("#{parent_dir}/../../../lib/google/cloud/credentials.rb")
@@ -59,7 +59,7 @@ describe Google::Cloud, :loaded_files do
     File.stub :file?, (proc { |file| expected_windows_files.include?(file) }) do
       File.stub :realpath, (proc { |file| file }) do 
         Google::Cloud.stub :caller, loaded_windows_files do
-          Google::Cloud.loaded_files.must_equal expected_windows_files
+          _(Google::Cloud.loaded_files).must_equal expected_windows_files
         end
       end
     end
