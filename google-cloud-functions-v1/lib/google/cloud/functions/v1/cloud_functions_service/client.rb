@@ -65,6 +65,42 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
+                default_config.rpcs.list_functions.timeout = 600.0
+                default_config.rpcs.list_functions.retry_policy = {
+                  initial_delay: 0.1,
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.get_function.timeout = 600.0
+                default_config.rpcs.get_function.retry_policy = {
+                  initial_delay: 0.1,
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.create_function.timeout = 600.0
+
+                default_config.rpcs.update_function.timeout = 600.0
+                default_config.rpcs.update_function.retry_policy = {
+                  initial_delay: 0.1,
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.delete_function.timeout = 600.0
+                default_config.rpcs.delete_function.retry_policy = {
+                  initial_delay: 0.1,
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.call_function.timeout = 600.0
+
                 default_config
               end
               yield @configure if block_given?
