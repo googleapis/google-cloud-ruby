@@ -263,7 +263,6 @@ class Kokoro < Command
         puts "#{gem} tests took #{(end_time - start_time).to_i} seconds"
       end
     end
-    verify_in_gemfile gem unless local
   end
 
   def sample_dirs
@@ -280,14 +279,6 @@ class Kokoro < Command
         gem.include? dir
       end
     end
-  end
-
-  def verify_in_gemfile gem = nil
-    gem ||= @gem
-    return if Bundler.environment.gems.map(&:name).include? gem
-    return if ["gcloud", "google-cloud"].include? gem
-    header_2 "#{gem} does not appear in the top-level Gemfile. Please add it."
-    @failed = true
   end
 
   def version gem = nil
