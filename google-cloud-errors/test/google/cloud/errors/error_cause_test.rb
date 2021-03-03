@@ -31,38 +31,38 @@ describe Google::Cloud::Error, :cause do
   it "always has a cause" do
     error = wrapped_std_error "yo"
 
-    error.must_be_kind_of Google::Cloud::Error
-    error.message.must_equal "yo"
+    _(error).must_be_kind_of Google::Cloud::Error
+    _(error.message).must_equal "yo"
 
-    error.status_code.must_be :nil?
-    error.body.must_be :nil?
-    error.header.must_be :nil?
-    error.code.must_be :nil?
-    error.details.must_be :nil?
-    error.metadata.must_be :nil?
-    error.status_details.must_be :nil?
+    _(error.status_code).must_be :nil?
+    _(error.body).must_be :nil?
+    _(error.header).must_be :nil?
+    _(error.code).must_be :nil?
+    _(error.details).must_be :nil?
+    _(error.metadata).must_be :nil?
+    _(error.status_details).must_be :nil?
 
-    error.cause.wont_be :nil?
-    error.cause.must_be_kind_of StandardError
-    error.cause.message.must_equal "yo"
+    _(error.cause).wont_be :nil?
+    _(error.cause).must_be_kind_of StandardError
+    _(error.cause.message).must_equal "yo"
   end
 
   it "can have a nil cause" do
     error = Google::Cloud::Error.new "sup"
 
-    error.must_be_kind_of Google::Cloud::Error
-    error.message.must_equal "sup"
+    _(error).must_be_kind_of Google::Cloud::Error
+    _(error.message).must_equal "sup"
 
-    error.status_code.must_be :nil?
-    error.body.must_be :nil?
-    error.header.must_be :nil?
-    error.code.must_be :nil?
-    error.details.must_be :nil?
-    error.metadata.must_be :nil?
-    error.status_details.must_be :nil?
+    _(error.status_code).must_be :nil?
+    _(error.body).must_be :nil?
+    _(error.header).must_be :nil?
+    _(error.code).must_be :nil?
+    _(error.details).must_be :nil?
+    _(error.metadata).must_be :nil?
+    _(error.status_details).must_be :nil?
 
-    error.cause.must_be :nil?
+    _(error.cause).must_be :nil?
 
-    error.instance_variable_get(:@cause).must_be :nil?
+    _(error.instance_variable_get(:@cause)).must_be :nil?
   end
 end
