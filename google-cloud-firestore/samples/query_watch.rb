@@ -33,11 +33,13 @@ def listen_document project_id:, collection_path: "cities", document_path: "SF"
 
   # Create the document.
   doc_ref.set(
-    name:       "San Francisco",
-    state:      "CA",
-    country:    "USA",
-    capital:    false,
-    population: 860_000
+    {
+      name:       "San Francisco",
+      state:      "CA",
+      country:    "USA",
+      capital:    false,
+      population: 860_000
+    }
   )
 
   # Wait for the callback.
@@ -82,22 +84,26 @@ def listen_changes project_id:, collection_path: "cities"
 
   # Create the document.
   mtv_doc.set(
-    name:       "Mountain View",
-    state:      "CA",
-    country:    "USA",
-    capital:    false,
-    population: 80_000
+    {
+      name:       "Mountain View",
+      state:      "CA",
+      country:    "USA",
+      capital:    false,
+      population: 80_000
+    }
   )
 
   wait_until { !added.empty? }
 
   # Update the document.
   mtv_doc.update(
-    name:       "Mountain View",
-    state:      "CA",
-    country:    "USA",
-    capital:    false,
-    population: 90_000
+    {
+      name:       "Mountain View",
+      state:      "CA",
+      country:    "USA",
+      capital:    false,
+      population: 90_000
+    }
   )
 
   wait_until { !modified.empty? }
@@ -153,11 +159,13 @@ def listen_multiple project_id:, collection_path: "cities"
 
   # Create the document.
   firestore.col(collection_path).doc("SF").set(
-    name:       "San Francisco",
-    state:      "CA",
-    country:    "USA",
-    capital:    false,
-    population: 860_000
+    {
+      name:       "San Francisco",
+      state:      "CA",
+      country:    "USA",
+      capital:    false,
+      population: 860_000
+    }
   )
 
   # Wait for the callback.

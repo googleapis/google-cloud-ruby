@@ -143,7 +143,7 @@ def update_doc project_id:, collection_path: "cities"
   doc_ref.set data
   # [START fs_update_doc]
   city_ref = firestore.doc "#{collection_path}/DC"
-  city_ref.update capital: true
+  city_ref.update({ capital: true })
   # [END fs_update_doc]
   puts "Updated the capital field of the DC document in the cities collection."
 end
@@ -157,17 +157,19 @@ def update_nested_fields project_id:, collection_path: "users"
   # Create an initial document to update
   frank_ref = firestore.doc "#{collection_path}/frank"
   frank_ref.set(
-    name:      "Frank",
-    favorites: {
-      food:    "Pizza",
-      color:   "Blue",
-      subject: "Recess"
-    },
-    age:       12
+    {
+      name:      "Frank",
+      favorites: {
+        food:    "Pizza",
+        color:   "Blue",
+        subject: "Recess"
+      },
+      age:       12
+    }
   )
 
   # Update age and favorite color
-  frank_ref.update age: 13, "favorites.color": "Red"
+  frank_ref.update({ age: 13, "favorites.color": "Red" })
   # [END fs_update_nested_fields]
   puts "Updated the age and favorite color fields of the frank document in the users collection."
 end
@@ -178,15 +180,17 @@ def update_server_timestamp project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   firestore.doc("#{collection_path}/new-city-id").set(
-    name:       "new city",
-    state:      nil,
-    country:    "country",
-    capital:    false,
-    population: 85
+    {
+      name:       "new city",
+      state:      nil,
+      country:    "country",
+      capital:    false,
+      population: 85
+    }
   )
   # [START fs_update_server_timestamp]
   city_ref = firestore.doc "#{collection_path}/new-city-id"
-  city_ref.update timestamp: firestore.field_server_time
+  city_ref.update({ timestamp: firestore.field_server_time })
   # [END fs_update_server_timestamp]
   puts "Updated the timestamp field of the new-city-id document in the cities collection."
 end
@@ -197,15 +201,17 @@ def update_document_increment project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   firestore.doc("#{collection_path}/DC").set(
-    name:       "Washington D.C.",
-    state:      nil,
-    country:    "USA",
-    capital:    true,
-    population: 680_000
+    {
+      name:       "Washington D.C.",
+      state:      nil,
+      country:    "USA",
+      capital:    true,
+      population: 680_000
+    }
   )
   # [START fs_update_document_increment]
   city_ref = firestore.doc "#{collection_path}/DC"
-  city_ref.update population: firestore.field_increment(50)
+  city_ref.update({ population: firestore.field_increment(50) })
   # [END fs_update_document_increment]
   puts "Updated the population of the DC document in the cities collection."
 end

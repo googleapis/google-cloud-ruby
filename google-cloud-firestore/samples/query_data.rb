@@ -22,44 +22,54 @@ def query_create_examples project_id:, collection_path: "cities"
   # [START fs_query_create_examples]
   cities_ref = firestore.col collection_path
   cities_ref.doc("SF").set(
-    name:       "San Francisco",
-    state:      "CA",
-    country:    "USA",
-    capital:    false,
-    population: 860_000,
-    regions:    ["west_coast", "norcal"]
+    {
+      name:       "San Francisco",
+      state:      "CA",
+      country:    "USA",
+      capital:    false,
+      population: 860_000,
+      regions:    ["west_coast", "norcal"]
+    }
   )
   cities_ref.doc("LA").set(
-    name:       "Los Angeles",
-    state:      "CA",
-    country:    "USA",
-    capital:    false,
-    population: 3_900_000,
-    regions:    ["west_coast", "socal"]
+    {
+      name:       "Los Angeles",
+      state:      "CA",
+      country:    "USA",
+      capital:    false,
+      population: 3_900_000,
+      regions:    ["west_coast", "socal"]
+    }
   )
   cities_ref.doc("DC").set(
-    name:       "Washington D.C.",
-    state:      nil,
-    country:    "USA",
-    capital:    true,
-    population: 680_000,
-    regions:    ["east_coast"]
+    {
+      name:       "Washington D.C.",
+      state:      nil,
+      country:    "USA",
+      capital:    true,
+      population: 680_000,
+      regions:    ["east_coast"]
+    }
   )
   cities_ref.doc("TOK").set(
-    name:       "Tokyo",
-    state:      nil,
-    country:    "Japan",
-    capital:    true,
-    population: 9_000_000,
-    regions:    ["kanto", "honshu"]
+    {
+      name:       "Tokyo",
+      state:      nil,
+      country:    "Japan",
+      capital:    true,
+      population: 9_000_000,
+      regions:    ["kanto", "honshu"]
+    }
   )
   cities_ref.doc("BJ").set(
-    name:       "Beijing",
-    state:      nil,
-    country:    "China",
-    capital:    true,
-    population: 21_500_000,
-    regions:    ["jingjinji", "hebei"]
+    {
+      name:       "Beijing",
+      state:      nil,
+      country:    "China",
+      capital:    true,
+      population: 21_500_000,
+      regions:    ["jingjinji", "hebei"]
+    }
   )
   # [END fs_query_create_examples]
   puts "Added example cities data to the cities collection."
@@ -267,52 +277,72 @@ def collection_group_query project_id:, collection_path: "cities"
 
   sf_landmarks = cities_ref.document("SF").collection("landmarks")
   sf_landmarks.document.set(
-    name: "Golden Gate Bridge",
-    type: "bridge"
+    {
+      name: "Golden Gate Bridge",
+      type: "bridge"
+    }
   )
   sf_landmarks.document.set(
-    name: "Legion of Honor",
-    type: "museum"
+    {
+      name: "Legion of Honor",
+      type: "museum"
+    }
   )
 
   la_landmarks = cities_ref.document("LA").collection("landmarks")
   la_landmarks.document.set(
-    name: "Griffith Park",
-    type: "park"
+    {
+      name: "Griffith Park",
+      type: "park"
+    }
   )
   la_landmarks.document.set(
-    name: "The Getty",
-    type: "museum"
+    {
+      name: "The Getty",
+      type: "museum"
+    }
   )
 
   dc_landmarks = cities_ref.document("DC").collection("landmarks")
   dc_landmarks.document.set(
-    name: "Lincoln Memorial",
-    type: "memorial"
+    {
+      name: "Lincoln Memorial",
+      type: "memorial"
+    }
   )
   dc_landmarks.document.set(
-    name: "National Air and Space Museum",
-    type: "museum"
+    {
+      name: "National Air and Space Museum",
+      type: "museum"
+    }
   )
 
   tok_landmarks = cities_ref.document("TOK").collection("landmarks")
   tok_landmarks.document.set(
-    name: "Ueno Park",
-    type: "park"
+    {
+      name: "Ueno Park",
+      type: "park"
+    }
   )
   tok_landmarks.document.set(
-    name: "National Museum of Nature and Science",
-    type: "museum"
+    {
+      name: "National Museum of Nature and Science",
+      type: "museum"
+    }
   )
 
   bj_landmarks = cities_ref.document("BJ").collection("landmarks")
   bj_landmarks.document.set(
-    name: "Jingshan Park",
-    type: "park"
+    {
+      name: "Jingshan Park",
+      type: "park"
+    }
   )
   bj_landmarks.document.set(
-    name: "Beijing Ancient Observatory",
-    type: "museum"
+    {
+      name: "Beijing Ancient Observatory",
+      type: "museum"
+    }
   )
   # [END fs_collection_group_query_data_setup]
 

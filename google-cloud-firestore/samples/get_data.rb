@@ -22,39 +22,49 @@ def retrieve_create_examples project_id:, collection_path: "cities"
   # [START fs_retrieve_create_examples]
   cities_ref = firestore.col collection_path
   cities_ref.doc("SF").set(
-    name:       "San Francisco",
-    state:      "CA",
-    country:    "USA",
-    capital:    false,
-    population: 860_000
+    {
+      name:       "San Francisco",
+      state:      "CA",
+      country:    "USA",
+      capital:    false,
+      population: 860_000
+    }
   )
   cities_ref.doc("LA").set(
-    name:       "Los Angeles",
-    state:      "CA",
-    country:    "USA",
-    capital:    false,
-    population: 3_900_000
+    {
+      name:       "Los Angeles",
+      state:      "CA",
+      country:    "USA",
+      capital:    false,
+      population: 3_900_000
+    }
   )
   cities_ref.doc("DC").set(
-    name:       "Washington D.C.",
-    state:      nil,
-    country:    "USA",
-    capital:    true,
-    population: 680_000
+    {
+      name:       "Washington D.C.",
+      state:      nil,
+      country:    "USA",
+      capital:    true,
+      population: 680_000
+    }
   )
   cities_ref.doc("TOK").set(
-    name:       "Tokyo",
-    state:      nil,
-    country:    "Japan",
-    capital:    true,
-    population: 9_000_000
+    {
+      name:       "Tokyo",
+      state:      nil,
+      country:    "Japan",
+      capital:    true,
+      population: 9_000_000
+    }
   )
   cities_ref.doc("BJ").set(
-    name:       "Beijing",
-    state:      nil,
-    country:    "China",
-    capital:    true,
-    population: 21_500_000
+    {
+      name:       "Beijing",
+      state:      nil,
+      country:    "China",
+      capital:    true,
+      population: 21_500_000
+    }
   )
   # [END fs_retrieve_create_examples]
   puts "Added example cities data to the cities collection."

@@ -33,9 +33,11 @@ def add_data_1 project_id:, collection_path: "users"
   doc_ref = firestore.doc "#{collection_path}/alovelace"
 
   doc_ref.set(
-    first: "Ada",
-    last:  "Lovelace",
-    born:  1815
+    {
+      first: "Ada",
+      last:  "Lovelace",
+      born:  1815
+    }
   )
 
   puts "Added data to the alovelace document in the users collection."
@@ -51,10 +53,12 @@ def add_data_2 project_id:, collection_path: "users"
   doc_ref = firestore.doc "#{collection_path}/aturing"
 
   doc_ref.set(
-    first:  "Alan",
-    middle: "Mathison",
-    last:   "Turing",
-    born:   1912
+    {
+      first:  "Alan",
+      middle: "Mathison",
+      last:   "Turing",
+      born:   1912
+    }
   )
 
   puts "Added data to the aturing document in the users collection."

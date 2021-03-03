@@ -26,7 +26,7 @@ def run_simple_transaction project_id:, collection_path: "cities"
   firestore.transaction do |tx|
     new_population = tx.get(city_ref).data[:population] + 1
     puts "New population is #{new_population}."
-    tx.update city_ref, population: new_population
+    tx.update city_ref, { population: new_population }
   end
   puts "Ran a simple transaction to update the population field in the SF document in the cities collection."
 end
@@ -44,7 +44,7 @@ def return_info_transaction project_id:, collection_path: "cities"
   updated = firestore.transaction do |tx|
     new_population = tx.get(city_ref).data[:population] + 1
     if new_population < 1_000_000
-      tx.update city_ref, population: new_population
+      tx.update city_ref, { population: new_population }
       true
     else
       false
@@ -67,10 +67,10 @@ def batch_write project_id:, collection_path: "cities"
   # [START fs_batch_write]
   firestore.batch do |b|
     # Set the data for NYC
-    b.set "#{collection_path}/NYC", name: "New York City"
+    b.set "#{collection_path}/NYC", { name: "New York City" }
 
     # Update the population for SF
-    b.update "#{collection_path}/SF", population: 1_000_000
+    b.update "#{collection_path}/SF", { population: 1_000_000 }
 
     # Delete LA
     b.delete "#{collection_path}/LA"

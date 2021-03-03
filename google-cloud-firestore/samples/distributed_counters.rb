@@ -27,7 +27,7 @@ def create_counter project_id:, num_shards:, collection_path: "shards"
 
   # Initialize each shard with count=0
   num_shards.times do |i|
-    shards_ref.doc(i).set(count: 0)
+    shards_ref.doc(i).set({ count: 0 })
   end
 
   puts "Distributed counter shards collection created."
@@ -49,7 +49,7 @@ def increment_counter project_id:, num_shards:, collection_path: "shards"
   shard_ref = firestore.doc "#{collection_path}/#{shard_id}"
 
   # increment counter
-  shard_ref.update count: firestore.field_increment(1)
+  shard_ref.update({ count: firestore.field_increment(1) })
 
   puts "Counter incremented."
   # [END fs_increment_counter]
