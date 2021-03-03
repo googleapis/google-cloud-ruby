@@ -83,6 +83,7 @@ task :acceptance, :project, :keyfile do |t, args|
   ENV["LOGGING_PROJECT"] = project
   ENV["LOGGING_KEYFILE_JSON"] = keyfile
 
+  Rake::Task[:compile].invoke
   Rake::Task["acceptance:run"].invoke
 end
 
