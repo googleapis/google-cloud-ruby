@@ -39,14 +39,8 @@ module Google
         #   faraday.adapter  Faraday.default_adapter  # use Net::HTTP adapter
         # end
         # ```
-
-        def initialize app, opts = {}, enable_cross_project_tracing: false
-          # Allow enable_cross_project_tracing to be passed in either in an
-          # options hash or as a keyword argument. This may seem redundant, but
-          # it's necessary to work around a Faraday bug where the `new` class
-          # method doesn't pass down keyword arguments correctly under Ruby 3.
-          enable_cross_project_tracing = opts[:enable_cross_project_tracing] if opts.key? :enable_cross_project_tracing
-          @enable_cross_project_tracing = enable_cross_project_tracing || false
+        def initialize app, opts = {}
+          @enable_cross_project_tracing = opts[:enable_cross_project_tracing] || false
           super app
         end
 
