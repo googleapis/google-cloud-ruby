@@ -371,12 +371,13 @@ module Google
           def field_value_nested? obj, field_value_type = nil
             return obj if obj.is_a?(FieldValue) && (field_value_type.nil? || obj.type == field_value_type)
 
-            if obj.is_a? Array
+            case obj
+            when Array
               obj.each do |o|
                 val = field_value_nested? o, field_value_type
                 return val if val
               end
-            elsif obj.is_a? Hash
+            when Hash
               obj.each do |_k, v|
                 val = field_value_nested? v, field_value_type
                 return val if val
@@ -564,32 +565,33 @@ module Google
           end
 
           def to_field_transform field_path, field_value
-            if field_value.type == :server_time
+            case field_value.type
+            when :server_time
               Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
                 field_path:          field_path.formatted_string,
                 set_to_server_value: :REQUEST_TIME
               )
-            elsif field_value.type == :array_union
+            when :array_union
               Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
                 field_path:              field_path.formatted_string,
                 append_missing_elements: raw_to_value(Array(field_value.value)).array_value
               )
-            elsif field_value.type == :array_delete
+            when :array_delete
               Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
                 field_path:            field_path.formatted_string,
                 remove_all_from_array: raw_to_value(Array(field_value.value)).array_value
               )
-            elsif field_value.type == :increment
+            when :increment
               Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
                 field_path: field_path.formatted_string,
                 increment:  raw_to_value(field_value.value)
               )
-            elsif field_value.type == :maximum
+            when :maximum
               Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
                 field_path: field_path.formatted_string,
                 maximum:    raw_to_value(field_value.value)
               )
-            elsif field_value.type == :minimum
+            when :minimum
               Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform.new(
                 field_path: field_path.formatted_string,
                 minimum:    raw_to_value(field_value.value)

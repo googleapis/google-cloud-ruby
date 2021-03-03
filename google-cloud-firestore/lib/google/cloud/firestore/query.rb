@@ -1037,9 +1037,10 @@ module Google
           raise ArgumentError, "unknown operator #{op}" if operator.nil?
 
           if value_unary? value
-            operator = if operator == :EQUAL
+            operator = case operator
+                       when :EQUAL
                          value_nan?(value) ? :IS_NAN : :IS_NULL
-                       elsif operator == :NOT_EQUAL
+                       when :NOT_EQUAL
                          value_nan?(value) ? :IS_NOT_NAN : :IS_NOT_NULL
                        else
                          raise ArgumentError, "can only perform '==' and '!=' comparisons on #{value} values"
