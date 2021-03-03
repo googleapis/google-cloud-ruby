@@ -33,7 +33,8 @@ module Google
         # make inserting and removing objects much more efficent.
         class Inventory
           attr_accessor :current
-          attr_reader :resume_token, :read_time
+          attr_reader :resume_token
+          attr_reader :read_time
 
           def initialize client, query
             @client = client

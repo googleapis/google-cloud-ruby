@@ -30,7 +30,6 @@ module Google
         # rubocop:disable Metrics/MethodLength
         # rubocop:disable Metrics/ModuleLength
         # rubocop:disable Metrics/PerceivedComplexity
-        # rubocop:disable Style/CaseEquality
         module ClassMethods
           def time_to_timestamp time
             return nil if time.nil?
@@ -263,10 +262,8 @@ module Google
             # Restore delete paths
             field_paths += delete_field_paths_and_values.keys
 
-            if data.empty? && !allow_empty
-              if field_paths_and_values.empty? && delete_field_paths_and_values.empty?
-                raise ArgumentError, "data required for set with merge"
-              end
+            if data.empty? && !allow_empty && (field_paths_and_values.empty? && delete_field_paths_and_values.empty?)
+              raise ArgumentError, "data required for set with merge"
             end
 
             doc = Google::Cloud::Firestore::V1::Document.new(
@@ -531,8 +528,8 @@ module Google
           end
 
           START_FIELD_PATH_CHARS = /\A[a-zA-Z_]/.freeze
-          INVALID_FIELD_PATH_CHARS = %r{[\~\*/\[\]]}.freeze
-          ESCAPED_FIELD_PATH = /\A\`(.*)\`\z/.freeze
+          INVALID_FIELD_PATH_CHARS = %r{[~*/\[\]]}.freeze
+          ESCAPED_FIELD_PATH = /\A`(.*)`\z/.freeze
 
           def build_hash_from_field_paths_and_values pairs
             pairs.each do |field_path, _value|
@@ -611,7 +608,6 @@ module Google
       # rubocop:enable Metrics/MethodLength
       # rubocop:enable Metrics/ModuleLength
       # rubocop:enable Metrics/PerceivedComplexity
-      # rubocop:enable Style/CaseEquality
     end
   end
 end

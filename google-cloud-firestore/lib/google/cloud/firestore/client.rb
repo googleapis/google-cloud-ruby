@@ -100,11 +100,11 @@ module Google
         #     puts col.collection_id
         #   end
         #
-        def cols
+        def cols &block
           ensure_service!
           grpc = service.list_collections "#{path}/documents"
           cols_enum = CollectionReferenceList.from_grpc(grpc, self, "#{path}/documents").all
-          cols_enum.each { |c| yield c } if block_given?
+          cols_enum.each(&block) if block_given?
           cols_enum
         end
         alias collections cols
