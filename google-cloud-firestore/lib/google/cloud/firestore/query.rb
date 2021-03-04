@@ -1010,11 +1010,11 @@ module Google
         }.freeze
         ##
         # @private
-        INEQUALITY_FILTERS = %i[
-          LESS_THAN
-          LESS_THAN_OR_EQUAL
-          GREATER_THAN
-          GREATER_THAN_OR_EQUAL
+        INEQUALITY_FILTERS = [
+          :LESS_THAN,
+          :LESS_THAN_OR_EQUAL,
+          :GREATER_THAN,
+          :GREATER_THAN_OR_EQUAL
         ].freeze
 
         def value_nil? value
@@ -1031,10 +1031,10 @@ module Google
           value_nil?(value) || value_nan?(value)
         end
 
-        def filter name, op, value
+        def filter name, op_key, value
           field = StructuredQuery::FieldReference.new field_path: name.to_s
-          operator = FILTER_OPS[op.to_s.downcase]
-          raise ArgumentError, "unknown operator #{op}" if operator.nil?
+          operator = FILTER_OPS[op_key.to_s.downcase]
+          raise ArgumentError, "unknown operator #{op_key}" if operator.nil?
 
           if value_unary? value
             operator = case operator

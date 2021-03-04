@@ -26,15 +26,3 @@ Metrics/PerceivedComplexity:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-firestore.rb"
-Naming/RescuedExceptionsVariableName:
-  Enabled: false
-Naming/MethodParameterName:
-  Enabled: false
-Style/IfUnlessModifier:
-  Enabled: false
-Style/NumericPredicate:
-  Enabled: false
-Style/SafeNavigation:
-  Enabled: false
-Style/SymbolArray:
-  Enabled: false

@@ -156,24 +156,24 @@ module Google
 
           protected
 
-          def query_comparison_proc a, b
+          def query_comparison_proc left, right
             # TODO: Remove this when done benchmarking
             @comp_proc_counter += 1
 
-            return Order.compare_field_values a.ref, b.ref if @query.nil?
+            return Order.compare_field_values left.ref, right.ref if @query.nil?
 
             @directions ||= @query.query.order_by.map(&:direction)
 
-            a_comps = a.query_comparisons_for @query.query
-            b_comps = b.query_comparisons_for @query.query
-            @directions.zip(a_comps, b_comps).each do |dir, a_comp, b_comp|
-              comp = a_comp <=> b_comp
+            left_comps = left.query_comparisons_for @query.query
+            right_comps = right.query_comparisons_for @query.query
+            @directions.zip(left_comps, right_comps).each do |dir, left_comp, right_comp|
+              comp = left_comp <=> right_comp
               comp = 0 - comp if dir == :DESCENDING
               return comp unless comp.zero?
             end
 
             # Compare paths when everything else is equal
-            ref_comp = Order.compare_field_values a.ref, b.ref
+            ref_comp = Order.compare_field_values left.ref, right.ref
             ref_comp = 0 - ref_comp if @directions.last == :DESCENDING
             ref_comp
           end

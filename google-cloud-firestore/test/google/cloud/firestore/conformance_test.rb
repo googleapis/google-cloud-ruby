@@ -214,7 +214,7 @@ class ConformanceDelete < ConformanceTest
         exists = test.precondition.exists
       end
       if test.precondition && test.precondition.update_time
-        update_time = Time.at(test.precondition.update_time.seconds)
+        update_time = Time.at test.precondition.update_time.seconds
       end
       if test.is_error
         expect do

@@ -262,7 +262,7 @@ module Google
             # Restore delete paths
             field_paths += delete_field_paths_and_values.keys
 
-            if data.empty? && !allow_empty && (field_paths_and_values.empty? && delete_field_paths_and_values.empty?)
+            if data.empty? && !allow_empty && field_paths_and_values.empty? && delete_field_paths_and_values.empty?
               raise ArgumentError, "data required for set with merge"
             end
 
