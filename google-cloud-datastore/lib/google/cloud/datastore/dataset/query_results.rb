@@ -58,7 +58,7 @@ module Google
           # The end_cursor of the QueryResults.
           #
           # @return [Google::Cloud::Datastore::Cursor]
-          attr_accessor :end_cursor
+          attr_reader :end_cursor
           alias cursor end_cursor
 
           ##
@@ -70,7 +70,7 @@ module Google
           # * `:MORE_RESULTS_AFTER_LIMIT`
           # * `:MORE_RESULTS_AFTER_CURSOR`
           # * `:NO_MORE_RESULTS`
-          attr_accessor :more_results
+          attr_reader :more_results
 
           ##
           # @private
@@ -78,7 +78,7 @@ module Google
 
           ##
           # @private
-
+          attr_writer :end_cursor, :more_results
 
           ##
           # Convenience method for determining if the `more_results` value

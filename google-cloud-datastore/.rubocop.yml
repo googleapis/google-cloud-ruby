@@ -21,3 +21,6 @@ Metrics/PerceivedComplexity:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-datastore.rb"
+Style/BisectedAttrAccessor:
+  Exclude:
+    - "lib/google/cloud/datastore/dataset/query_results.rb"
