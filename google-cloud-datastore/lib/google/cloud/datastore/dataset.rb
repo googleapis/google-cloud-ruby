@@ -535,9 +535,9 @@ module Google
           begin
             yield tx
             tx.commit
-          rescue Google::Cloud::UnavailableError => err
+          rescue Google::Cloud::UnavailableError => e
             # Re-raise if deadline has passed
-            raise err if Time.now - start_time > deadline
+            raise e if Time.now - start_time > deadline
 
             # Sleep with incremental backoff
             sleep backoff *= 1.3
@@ -878,7 +878,7 @@ module Google
 
         def validate_deadline deadline
           return 60 unless deadline.is_a? Numeric
-          return 60 if deadline < 0
+          return 60 if deadline.negative?
           deadline
         end
 

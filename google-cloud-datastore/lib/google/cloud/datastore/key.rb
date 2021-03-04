@@ -306,7 +306,7 @@ module Google
             key.project = key_grpc.partition_id.project_id
             key.namespace = key_grpc.partition_id.namespace_id
           end
-          key.parent = Key.from_grpc key_grpc if key_grpc.path.count > 0
+          key.parent = Key.from_grpc key_grpc if key_grpc.path.count.positive?
           # Freeze the key to make it immutable.
           key.freeze
           key

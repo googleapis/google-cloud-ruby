@@ -9,25 +9,15 @@ AllCops:
     - "support/**/*"
     - "test/**/*"
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
-Layout/HashAlignment:
-  Enabled: false
 Metrics/ClassLength:
   Enabled: false
+Metrics/CyclomaticComplexity:
+  Max: 15
+Metrics/PerceivedComplexity:
+  Max: 15
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-datastore.rb"
-Naming/RescuedExceptionsVariableName:
-  Enabled: false
-Naming/MethodParameterName:
-  Enabled: false
-Style/ConditionalAssignment:
-  Enabled: false
-Style/IfUnlessModifier:
-  Enabled: false
-Style/NumericPredicate:
-  Enabled: false
-Style/SafeNavigation:
-  Enabled: false

@@ -276,7 +276,7 @@ module Google
               results.each(&block)
               if request_limit
                 request_limit -= 1
-                break if request_limit < 0
+                break if request_limit.negative?
               end
               break unless results.next?
               results = results.next
@@ -346,7 +346,7 @@ module Google
               results.zip(results.cursors).each(&block)
               if request_limit
                 request_limit -= 1
-                break if request_limit < 0
+                break if request_limit.negative?
               end
               break unless results.next?
               results = results.next

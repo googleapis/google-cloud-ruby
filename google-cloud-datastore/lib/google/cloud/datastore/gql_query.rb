@@ -157,17 +157,15 @@ module Google
         def named_bindings= new_named_bindings
           @grpc.named_bindings.clear
           new_named_bindings.map do |name, value|
-            if value.is_a? Google::Cloud::Datastore::Cursor
-              @grpc.named_bindings[name.to_s] = \
-                Google::Cloud::Datastore::V1::GqlQueryParameter.new(
-                  cursor: value.to_grpc
-                )
-            else
-              @grpc.named_bindings[name.to_s] = \
-                Google::Cloud::Datastore::V1::GqlQueryParameter.new(
-                  value: Convert.to_value(value)
-                )
-            end
+            @grpc.named_bindings[name.to_s] = if value.is_a? Google::Cloud::Datastore::Cursor
+                                                Google::Cloud::Datastore::V1::GqlQueryParameter.new(
+                                                  cursor: value.to_grpc
+                                                )
+                                              else
+                                                Google::Cloud::Datastore::V1::GqlQueryParameter.new(
+                                                  value: Convert.to_value(value)
+                                                )
+                                              end
           end
         end
 
@@ -208,17 +206,15 @@ module Google
         def positional_bindings= new_positional_bindings
           @grpc.positional_bindings.clear
           new_positional_bindings.map do |value|
-            if value.is_a? Google::Cloud::Datastore::Cursor
-              @grpc.positional_bindings << \
-                Google::Cloud::Datastore::V1::GqlQueryParameter.new(
-                  cursor: value.to_grpc
-                )
-            else
-              @grpc.positional_bindings << \
-                Google::Cloud::Datastore::V1::GqlQueryParameter.new(
-                  value: Convert.to_value(value)
-                )
-            end
+            @grpc.positional_bindings << if value.is_a? Google::Cloud::Datastore::Cursor
+                                           Google::Cloud::Datastore::V1::GqlQueryParameter.new(
+                                             cursor: value.to_grpc
+                                           )
+                                         else
+                                           Google::Cloud::Datastore::V1::GqlQueryParameter.new(
+                                             value: Convert.to_value(value)
+                                           )
+                                         end
           end
         end
 
