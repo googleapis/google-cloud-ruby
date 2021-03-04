@@ -692,8 +692,11 @@ module Google
           end
           ensure_schema!
 
-          options = { token: token, max: max, start: start }
-          data_hash = service.list_tabledata destination_table_dataset_id, destination_table_table_id, options
+          data_hash = service.list_tabledata destination_table_dataset_id,
+                                             destination_table_table_id,
+                                             token: token,
+                                             max: max,
+                                             start: start
           Data.from_gapi_json data_hash, destination_table_gapi, @gapi, service
         end
         alias query_results data

@@ -1194,7 +1194,7 @@ module Google
             @rules.reject!(&find_by_scope_and_value(scope, value))
             # Add new rule for this role, scope, and value
             opts = { role: role, scope => value }
-            @rules << Google::Apis::BigqueryV2::Dataset::Access.new(opts)
+            @rules << Google::Apis::BigqueryV2::Dataset::Access.new(**opts)
           end
 
           # @private
@@ -1204,7 +1204,7 @@ module Google
             @rules.reject!(&find_by_scope_and_resource_ref(:routine, value))
             # Add new rule for this role, scope, and value
             opts = { routine: value }
-            @rules << Google::Apis::BigqueryV2::Dataset::Access.new(opts)
+            @rules << Google::Apis::BigqueryV2::Dataset::Access.new(**opts)
           end
 
           # @private
@@ -1215,7 +1215,7 @@ module Google
             @rules.reject!(&find_by_scope_and_resource_ref(:view, value))
             # Add new rule for this role, scope, and value
             opts = { view: value }
-            @rules << Google::Apis::BigqueryV2::Dataset::Access.new(opts)
+            @rules << Google::Apis::BigqueryV2::Dataset::Access.new(**opts)
           end
 
           # @private

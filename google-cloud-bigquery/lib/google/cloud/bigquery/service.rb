@@ -483,7 +483,7 @@ module Google
             table_id:   m["tbl"]
           }.delete_if { |_, v| v.nil? }
           str_table_ref_hash = default_ref.to_h.merge str_table_ref_hash
-          ref = Google::Apis::BigqueryV2::TableReference.new str_table_ref_hash
+          ref = Google::Apis::BigqueryV2::TableReference.new(**str_table_ref_hash)
           validate_table_ref ref
           ref
         end

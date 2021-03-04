@@ -72,8 +72,8 @@ module Google
             return nil unless next?
             ensure_service!
             next_kwargs = @kwargs.merge token: token
-            next_gapi = @service.list_jobs next_kwargs
-            self.class.from_gapi next_gapi, @service, next_kwargs
+            next_gapi = @service.list_jobs(**next_kwargs)
+            self.class.from_gapi next_gapi, @service, **next_kwargs
           end
 
           ##

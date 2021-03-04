@@ -2374,8 +2374,12 @@ module Google
           end
 
           ensure_service!
-          options = { skip_invalid: skip_invalid, ignore_unknown: ignore_unknown, insert_ids: insert_ids }
-          gapi = service.insert_tabledata dataset_id, table_id, rows, options
+          gapi = service.insert_tabledata dataset_id,
+                                          table_id,
+                                          rows,
+                                          skip_invalid: skip_invalid,
+                                          ignore_unknown: ignore_unknown,
+                                          insert_ids: insert_ids
           InsertResponse.from_gapi rows, gapi
         end
 
@@ -2674,7 +2678,7 @@ module Google
           return if attributes.empty?
           ensure_service!
           patch_args = Hash[attributes.map { |attr| [attr, @gapi.send(attr)] }]
-          patch_gapi = Google::Apis::BigqueryV2::Table.new patch_args
+          patch_gapi = Google::Apis::BigqueryV2::Table.new(**patch_args)
           patch_gapi.etag = etag if etag
           @gapi = service.patch_table dataset_id, table_id, patch_gapi
 
