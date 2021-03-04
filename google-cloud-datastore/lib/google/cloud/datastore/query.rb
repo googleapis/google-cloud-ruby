@@ -340,9 +340,10 @@ module Google
         #   tasks = datastore.run query
         #
         def start cursor
-          if cursor.is_a? Cursor
+          case cursor
+          when Cursor
             @grpc.start_cursor = cursor.to_grpc
-          elsif cursor.is_a? String
+          when String
             @grpc.start_cursor = Convert.decode_bytes cursor
           else
             raise ArgumentError, "Can't set a cursor using a #{cursor.class}."
