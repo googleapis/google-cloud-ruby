@@ -67,6 +67,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.spanner.v1.ExecuteSqlRequest.QueryOptions" do
       optional :optimizer_version, :string, 1
+      optional :optimizer_statistics_package, :string, 2
     end
     add_enum "google.spanner.v1.ExecuteSqlRequest.QueryMode" do
       value :NORMAL, 0
