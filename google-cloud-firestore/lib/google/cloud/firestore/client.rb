@@ -651,7 +651,7 @@ module Google
             retry
           rescue Google::Cloud::InvalidArgumentError => e
             # Return if a previous call was retried but ultimately succeeded
-            return nil if (backoff[:current]).positive?
+            return nil if backoff[:current].positive?
 
             # Re-raise error.
             raise e
