@@ -1,5 +1,12 @@
 # Release History
 
+### 0.5.0 / 2021-03-04
+
+#### Features
+
+* Drop support for Ruby 2.4 and add support for Ruby 3.0
+* Support setting a billing account for an offer payment plan
+
 ### 0.4.0 / 2021-02-23
 
 #### Bug Fixes
