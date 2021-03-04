@@ -2581,11 +2581,8 @@ module Google
             create_table table_id do |tbl_updater|
               yield tbl_updater if block_given?
             end
-          # rubocop:disable Lint/HandleExceptions
           rescue Google::Cloud::AlreadyExistsError
           end
-          # rubocop:enable Lint/HandleExceptions
-
           sleep 60
           retry
         end
@@ -2757,12 +2754,11 @@ module Google
 
         def load_local_or_uri file, updater
           job_gapi = updater.to_gapi
-          job = if local_file? file
-                  load_local file, job_gapi
-                else
-                  load_storage file, job_gapi
-                end
-          job
+          if local_file? file
+            load_local file, job_gapi
+          else
+            load_storage file, job_gapi
+          end
         end
 
         def storage_url? files

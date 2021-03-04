@@ -401,11 +401,12 @@ module Google
           # @private New Google::Apis::BigqueryV2::StandardSqlDataType from a String or StandardSql::DataType object.
           def self.gapi_from_string_or_data_type data_type
             return if data_type.nil?
-            if data_type.is_a? StandardSql::DataType
+            case data_type
+            when StandardSql::DataType
               data_type.to_gapi
-            elsif data_type.is_a? Hash
+            when Hash
               data_type
-            elsif data_type.is_a?(String) || data_type.is_a?(Symbol)
+            when String, Symbol
               Google::Apis::BigqueryV2::StandardSqlDataType.new type_kind: data_type.to_s.upcase
             else
               raise ArgumentError, "Unable to convert #{data_type} to Google::Apis::BigqueryV2::StandardSqlDataType"

@@ -263,9 +263,10 @@ module Google
             extract_config = Google::Apis::BigqueryV2::JobConfigurationExtract.new(
               destination_uris: Array(storage_urls)
             )
-            if source.is_a? Google::Apis::BigqueryV2::TableReference
+            case source
+            when Google::Apis::BigqueryV2::TableReference
               extract_config.source_table = source
-            elsif source.is_a? Google::Apis::BigqueryV2::ModelReference
+            when Google::Apis::BigqueryV2::ModelReference
               extract_config.source_model = source
             end
             job = Google::Apis::BigqueryV2::Job.new(

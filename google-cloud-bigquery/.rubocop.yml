@@ -8,7 +8,7 @@ AllCops:
     - "benchmark/**/*"
     - "test/**/*"
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
 Metrics/BlockLength:
@@ -20,6 +20,3 @@ Metrics/ClassLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-bigquery.rb"
-Naming/UncommunicativeMethodParamName:
-  Exclude:
-    - "lib/google/cloud/bigquery/external.rb"

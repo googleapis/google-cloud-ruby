@@ -935,13 +935,13 @@ module Google
             raise ArgumentError, "types must use the same format as params" if types.class != params.class
 
             case params
-            when Array then
+            when Array
               @gapi.configuration.query.use_legacy_sql = false
               @gapi.configuration.query.parameter_mode = "POSITIONAL"
               @gapi.configuration.query.query_parameters = params.zip(types).map do |param, type|
                 Convert.to_query_param param, type
               end
-            when Hash then
+            when Hash
               @gapi.configuration.query.use_legacy_sql = false
               @gapi.configuration.query.parameter_mode = "NAMED"
               @gapi.configuration.query.query_parameters = params.map do |name, param|
@@ -1592,9 +1592,20 @@ module Google
         #   end
         #
         class Stage
-          attr_reader :compute_ratio_avg, :compute_ratio_max, :id, :name, :read_ratio_avg, :read_ratio_max,
-                      :records_read, :records_written, :status, :steps, :wait_ratio_avg, :wait_ratio_max,
-                      :write_ratio_avg, :write_ratio_max
+          attr_reader :compute_ratio_avg
+          attr_reader :compute_ratio_max
+          attr_reader :id
+          attr_reader :name
+          attr_reader :read_ratio_avg
+          attr_reader :read_ratio_max
+          attr_reader :records_read
+          attr_reader :records_written
+          attr_reader :status
+          attr_reader :steps
+          attr_reader :wait_ratio_avg
+          attr_reader :wait_ratio_max
+          attr_reader :write_ratio_avg
+          attr_reader :write_ratio_max
 
           ##
           # @private Creates a new Stage instance.
@@ -1657,7 +1668,8 @@ module Google
         #   end
         #
         class Step
-          attr_reader :kind, :substeps
+          attr_reader :kind
+          attr_reader :substeps
 
           ##
           # @private Creates a new Stage instance.

@@ -554,9 +554,9 @@ module Google
           nil
         end
 
-        def execute backoff: nil
+        def execute backoff: nil, &block
           if backoff
-            Backoff.new(retries: retries).execute { yield }
+            Backoff.new(retries: retries).execute(&block)
           else
             yield
           end
@@ -590,22 +590,20 @@ module Google
           def execute
             current_retries = 0
             loop do
-              begin
-                return yield
-              rescue Google::Apis::Error => e
-                raise e unless retry? e.body, current_retries
+              return yield
+            rescue Google::Apis::Error => e
+              raise e unless retry? e.body, current_retries
 
-                @backoff.call current_retries
-                current_retries += 1
-              end
+              @backoff.call current_retries
+              current_retries += 1
             end
           end
 
           protected
 
           def retry? result, current_retries #:nodoc:
-            if current_retries < @retries
-              return true if retry_error_reason? result
+            if current_retries < (@retries) && (retry_error_reason? result)
+              return true
             end
             false
           end

@@ -104,12 +104,10 @@ namespace :acceptance do
     require "google/cloud/bigquery"
     puts "Cleaning up BigQuery datasets and tables"
     Google::Cloud.bigquery.datasets.all do |ds|
-      begin
-        ds.tables.all(&:delete)
-        ds.delete force: true
-      rescue Google::Cloud::Error => e
-        puts e.message
-      end
+      ds.tables.all(&:delete)
+      ds.delete force: true
+    rescue Google::Cloud::Error => e
+      puts e.message
     end
   end
 

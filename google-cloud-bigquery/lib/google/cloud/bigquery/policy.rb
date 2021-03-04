@@ -96,7 +96,8 @@ module Google
       #   end
       #
       class Policy
-        attr_reader :etag, :bindings
+        attr_reader :etag
+        attr_reader :bindings
 
         # @private
         def initialize etag, bindings

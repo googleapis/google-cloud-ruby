@@ -56,7 +56,8 @@ module Google
         # @private The Service object.
         attr_accessor :service
 
-        attr_reader :name, :numeric_id
+        attr_reader :name
+        attr_reader :numeric_id
 
         ##
         # Creates a new Service instance.
