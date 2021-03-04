@@ -704,6 +704,7 @@ module Google
           ##
           # @private Create an Updater object.
           def initialize service, gapi
+            super()
             @service = service
             @gapi = gapi
           end

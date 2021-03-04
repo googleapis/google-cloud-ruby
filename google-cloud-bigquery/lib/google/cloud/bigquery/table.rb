@@ -2857,6 +2857,7 @@ module Google
           ##
           # @private Create an Updater object.
           def initialize gapi
+            super()
             @updates = []
             @gapi = gapi
             @schema = nil

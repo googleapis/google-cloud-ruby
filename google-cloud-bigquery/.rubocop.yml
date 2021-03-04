@@ -11,12 +11,21 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
+Lint/MixedRegexpCaptureTypes:
+  Enabled: false
+Metrics/AbcSize:
+  Max: 40
 Metrics/BlockLength:
   Exclude:
     - "google-cloud-bigquery.gemspec"
     - "Rakefile"
 Metrics/ClassLength:
   Enabled: false
+Metrics/PerceivedComplexity:
+  Max: 12
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-bigquery.rb"
+Naming/MethodParameterName:
+  Exclude:
+    - "lib/google/cloud/bigquery/external.rb"

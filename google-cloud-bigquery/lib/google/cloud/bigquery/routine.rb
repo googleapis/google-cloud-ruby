@@ -1006,6 +1006,7 @@ module Google
           ##
           # @private Create an Updater object.
           def initialize gapi
+            super()
             @original_gapi = gapi
             @gapi = gapi.dup
           end

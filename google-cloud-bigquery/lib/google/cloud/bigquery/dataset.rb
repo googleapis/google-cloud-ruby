@@ -2573,6 +2573,8 @@ module Google
 
         protected
 
+        # rubocop:disable Lint/SuppressedException
+
         def insert_data_with_autocreate table_id, rows, skip_invalid: nil, ignore_unknown: nil, insert_ids: nil
           insert_data table_id, rows, skip_invalid: skip_invalid, ignore_unknown: ignore_unknown, insert_ids: insert_ids
         rescue Google::Cloud::NotFoundError
@@ -2586,6 +2588,8 @@ module Google
           sleep 60
           retry
         end
+
+        # rubocop:enable Lint/SuppressedException
 
         def insert_data table_id, rows, skip_invalid: nil, ignore_unknown: nil, insert_ids: nil
           rows = [rows] if rows.is_a? Hash
@@ -2798,6 +2802,7 @@ module Google
           ##
           # @private Create an Updater object.
           def initialize gapi
+            super()
             @updates = []
             @gapi = gapi
           end
