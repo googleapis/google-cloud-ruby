@@ -27,6 +27,8 @@ module Google
           ##
           # Client for the SchemaService service.
           #
+          # Service for doing schema-related operations.
+          #
           class Client
             include Paths
 

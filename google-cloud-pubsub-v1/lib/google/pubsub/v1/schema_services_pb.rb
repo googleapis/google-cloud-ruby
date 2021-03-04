@@ -25,9 +25,6 @@ module Google
       module V1
         module SchemaService
           # Service for doing schema-related operations.
-          #
-          # EXPERIMENTAL: The Schema service is in development and may not work yet.
-          #
           class Service
 
             include GRPC::GenericService

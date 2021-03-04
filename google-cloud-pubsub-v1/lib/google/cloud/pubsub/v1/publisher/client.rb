@@ -263,8 +263,6 @@ module Google
             #     The expected format is `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
             #   @param schema_settings [::Google::Cloud::PubSub::V1::SchemaSettings, ::Hash]
             #     Settings for validating messages published against a schema.
-            #
-            #     EXPERIMENTAL: Schema support is in development and may not work yet.
             #   @param satisfies_pzs [::Boolean]
             #     Reserved for future use. This field is set only in responses from the
             #     server; it is ignored if it is set in any requests.
