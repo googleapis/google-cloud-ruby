@@ -76,8 +76,6 @@ module Google
         # @!attribute [rw] schema_settings
         #   @return [::Google::Cloud::PubSub::V1::SchemaSettings]
         #     Settings for validating messages published against a schema.
-        #
-        #     EXPERIMENTAL: Schema support is in development and may not work yet.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
         #     Reserved for future use. This field is set only in responses from the

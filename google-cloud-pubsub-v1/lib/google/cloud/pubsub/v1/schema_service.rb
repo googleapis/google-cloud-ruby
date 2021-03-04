@@ -31,6 +31,8 @@ module Google
     module PubSub
       module V1
         ##
+        # Service for doing schema-related operations.
+        #
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/pubsub/v1/schema_service"
