@@ -10,11 +10,9 @@ AllCops:
     - "test/**/*"
     - "support/**/*"
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
-Layout/AlignHash:
-  Enabled: false
 Layout/SpaceAroundOperators:
   Enabled: false
 Metrics/ClassLength:
@@ -24,8 +22,6 @@ Metrics/MethodLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-storage.rb"
-Style/IfUnlessModifier:
-  Enabled: false
 Style/MethodDefParentheses:
   Exclude:
     - "lib/google/cloud/storage/policy.rb"

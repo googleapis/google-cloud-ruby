@@ -12,9 +12,6 @@ Metrics/BlockLength:
     Enabled: false
 Metrics/CyclomaticComplexity:
     Enabled: false
-Metrics/LineLength:
-    Exclude:
-        - "acceptance/*.rb"
 Metrics/MethodLength:
     Enabled: false
 Naming/AccessorMethodName:
