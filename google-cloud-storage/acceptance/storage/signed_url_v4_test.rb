@@ -124,13 +124,15 @@ describe Google::Cloud::Storage, :signed_url, :v4, :storage do
           "payload": string_to_sign,
         }
         resource = "projects/-/serviceAccounts/#{issuer}"
-        response = iam_client.sign_service_account_blob resource, request, {}
+        response = iam_client.sign_service_account_blob resource, request
         response.signed_blob
       end
 
       five_min_from_now = 5 * 60
-      url = bucket.signed_url file.name, method: "GET",
-                              expires: five_min_from_now, version: :v4,
+      url = bucket.signed_url file.name,
+                              method: "GET",
+                              expires: five_min_from_now,
+                              version: :v4,
                               issuer: issuer,
                               signer: signer
 

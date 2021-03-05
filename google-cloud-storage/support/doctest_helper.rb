@@ -39,19 +39,44 @@ module Google
   module Cloud
     module Storage
       class Project
-        def signed_url bucket, path, method: nil, expires: nil,
-                       content_type: nil, content_md5: nil, headers: nil,
-                       issuer: nil, client_email: nil, signing_key: nil,
-                       signer: nil, private_key: nil, version: nil
-          # no-op stub, but ensures that calls match this copied signature
+        # no-op stub, but ensures that calls match this copied signature
+        def signed_url bucket,
+                       path,
+                       method: "GET",
+                       expires: nil,
+                       content_type: nil,
+                       content_md5: nil,
+                       headers: nil,
+                       issuer: nil,
+                       client_email: nil,
+                       signing_key: nil,
+                       private_key: nil,
+                       signer: nil,
+                       query: nil,
+                       scheme: "HTTPS",
+                       virtual_hosted_style: nil,
+                       bucket_bound_hostname: nil,
+                       version: nil
         end
       end
       class Bucket
-        def signed_url path, method: nil, expires: nil, content_type: nil,
-                       content_md5: nil, headers: nil, issuer: nil,
-                       client_email: nil, signing_key: nil, private_key: nil,
+        # no-op stub, but ensures that calls match this copied signature
+        def signed_url path = nil,
+                       method: "GET",
+                       expires: nil,
+                       content_type: nil,
+                       content_md5: nil,
+                       headers: nil,
+                       issuer: nil,
+                       client_email: nil,
+                       signing_key: nil,
+                       private_key: nil,
+                       signer: nil,
+                       query: nil,
+                       scheme: "HTTPS",
+                       virtual_hosted_style: nil,
+                       bucket_bound_hostname: nil,
                        version: nil
-          # no-op stub, but ensures that calls match this copied signature
         end
 
         def post_object path,
