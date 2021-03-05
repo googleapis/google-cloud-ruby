@@ -71,7 +71,7 @@ module Google
             return nil unless next?
             ensure_service!
             options = { token: token, max: @max }
-            grpc = @service.list_instances options
+            grpc = @service.list_instances(**options)
             self.class.from_grpc grpc, @service, @max
           end
 

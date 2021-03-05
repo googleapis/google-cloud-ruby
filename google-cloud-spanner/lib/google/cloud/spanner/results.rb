@@ -251,14 +251,14 @@ module Google
             @service.execute_streaming_sql(
               @session_path,
               @sql,
-              @execute_query_options.merge(resume_token: resume_token)
+              **@execute_query_options.merge(resume_token: resume_token)
             )
           else
             @service.streaming_read_table(
               @session_path,
               @table,
               @columns,
-              @read_options.merge(resume_token: resume_token)
+              **@read_options.merge(resume_token: resume_token)
             )
           end
         end
@@ -268,9 +268,9 @@ module Google
         # Retries a request, by re-executing it from scratch.
         def retry_request
           if @execute_query_options
-            @service.execute_streaming_sql @session_path, @sql, @execute_query_options
+            @service.execute_streaming_sql @session_path, @sql, **@execute_query_options
           else
-            @service.streaming_read_table @session_path, @table, @columns, @read_options
+            @service.streaming_read_table @session_path, @table, @columns, **@read_options
           end
         end
 
@@ -326,7 +326,7 @@ module Google
             query_options: query_options, call_options: call_options
           }
           enum = service.execute_streaming_sql session_path, sql,
-                                               execute_query_options
+                                               **execute_query_options
           from_enum(enum, service).tap do |results|
             results.instance_variable_set :@session_path, session_path
             results.instance_variable_set :@sql,          sql
@@ -346,7 +346,7 @@ module Google
             call_options: call_options
           }
           enum = service.streaming_read_table \
-            session_path, table, columns, read_options
+            session_path, table, columns, **read_options
           from_enum(enum, service).tap do |results|
             results.instance_variable_set :@session_path, session_path
             results.instance_variable_set :@table,        table

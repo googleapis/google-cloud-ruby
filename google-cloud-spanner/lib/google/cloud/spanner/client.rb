@@ -59,7 +59,7 @@ module Google
           @instance_id = instance_id
           @database_id = database_id
           @session_labels = session_labels
-          @pool = Pool.new self, pool_opts
+          @pool = Pool.new self, **pool_opts
           @query_options = query_options
         end
 

@@ -39,7 +39,7 @@ module Google
         #
         #   database = spanner.database "my-instance", "my-database"
         #   expire_time = Time.now + 36000
-        #   job = database.create_backup "my-backup", expire_time: expire_time
+        #   job = database.create_backup "my-backup", expire_time
         #
         #   job.done? #=> false
         #   job.reload! # API call
@@ -80,7 +80,7 @@ module Google
           #
           #   database = spanner.database "my-instance", "my-database"
           #   expire_time = Time.now + 36000
-          #   job = database.create_backup "my-backup", expire_time: expire_time
+          #   job = database.create_backup "my-backup", expire_time
           #
           #   job.done? #=> false
           #   job.reload!
@@ -105,7 +105,7 @@ module Google
           #
           #   database = spanner.database "my-instance", "my-database"
           #   expire_time = Time.now + 36000
-          #   job = database.create_backup "my-backup", expire_time: expire_time
+          #   job = database.create_backup "my-backup", expire_time
           #
           #   job.done? #=> false
           #
@@ -125,7 +125,7 @@ module Google
           #
           #   database = spanner.database "my-instance", "my-database"
           #   expire_time = Time.now + 36000
-          #   job = database.create_backup "my-backup", expire_time: expire_time
+          #   job = database.create_backup "my-backup", expire_time
           #
           #   job.error? #=> false
           #
@@ -147,7 +147,7 @@ module Google
           #
           #   database = spanner.database "my-instance", "my-database"
           #   expire_time = Time.now + 36000
-          #   job = database.create_backup "my-backup", expire_time: expire_time
+          #   job = database.create_backup "my-backup", expire_time
           #
           #   job.error? # true
           #
@@ -172,7 +172,7 @@ module Google
           #
           #   database = spanner.database "my-instance", "my-database"
           #   expire_time = Time.now + 36000
-          #   job = database.create_backup "my-backup", expire_time: expire_time
+          #   job = database.create_backup "my-backup", expire_time
           #
           #   job.done? #=> false
           #   job.reload! # API call
@@ -195,7 +195,7 @@ module Google
           #
           #   database = spanner.database "my-instance", "my-database"
           #   expire_time = Time.now + 36000
-          #   job = database.create_backup "my-backup", expire_time: expire_time
+          #   job = database.create_backup "my-backup", expire_time
           #
           #   job.done? #=> false
           #   job.wait_until_done!
@@ -215,7 +215,7 @@ module Google
           #
           #   database = spanner.database "my-instance", "my-database"
           #   expire_time = Time.now + 36000
-          #   job = database.create_backup "my-backup", expire_time: expire_time
+          #   job = database.create_backup "my-backup", expire_time
           #
           #   job.done? #=> false
           #   job.cancel
