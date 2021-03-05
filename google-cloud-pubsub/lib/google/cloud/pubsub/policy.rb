@@ -162,10 +162,9 @@ module Google
           Google::Iam::V1::Policy.new(
             etag:     etag,
             bindings: roles.keys.map do |role_name|
-              next if roles[role_name].empty?
               Google::Iam::V1::Binding.new(
                 role:    role_name,
-                members: roles[role_name]
+                members: roles[role_name].compact
               )
             end
           )

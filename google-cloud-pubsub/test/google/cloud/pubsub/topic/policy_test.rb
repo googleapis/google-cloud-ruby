@@ -184,7 +184,7 @@ describe Google::Cloud::PubSub::Topic, :policy, :mock_pubsub do
 
     _(permissions).must_equal ["pubsub.topics.get"]
   end
-focus
+
   it "removes the only member in the IAM Policy" do
     policy_hash = {
       "etag"=>"CAE=",
