@@ -1,5 +1,11 @@
 # Release History
 
+### 1.2.0 / 2021-03-05
+
+#### Features
+
+* Drop support for Ruby 2.4 and add support for Ruby 3.0
+
 ### 1.1.3 / 2021-02-02
 
 #### Documentation
