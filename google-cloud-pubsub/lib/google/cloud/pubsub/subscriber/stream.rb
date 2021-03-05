@@ -58,7 +58,7 @@ module Google
             @paused  = nil
             @pause_cond = new_cond
 
-            @inventory = Inventory.new self, @subscriber.stream_inventory
+            @inventory = Inventory.new self, **@subscriber.stream_inventory
 
             @sequencer = Sequencer.new(&method(:perform_callback_async)) if subscriber.message_ordering
 
