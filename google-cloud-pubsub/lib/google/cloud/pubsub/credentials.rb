@@ -14,7 +14,7 @@
 
 
 require "googleauth"
-require "google/cloud/pubsub/v1/publisher/credentials.rb"
+require "google/cloud/pubsub/v1/publisher/credentials"
 
 module Google
   module Cloud

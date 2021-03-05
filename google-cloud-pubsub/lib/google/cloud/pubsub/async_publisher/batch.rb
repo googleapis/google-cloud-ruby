@@ -25,7 +25,8 @@ module Google
         class Batch
           include MonitorMixin
 
-          attr_reader :items, :ordering_key
+          attr_reader :items
+          attr_reader :ordering_key
 
           def initialize publisher, ordering_key
             # init MonitorMixin

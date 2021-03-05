@@ -64,8 +64,13 @@ module Google
       class Subscriber
         include MonitorMixin
 
-        attr_reader :subscription_name, :callback, :deadline, :streams, :message_ordering, :callback_threads,
-                    :push_threads
+        attr_reader :subscription_name
+        attr_reader :callback
+        attr_reader :deadline
+        attr_reader :streams
+        attr_reader :message_ordering
+        attr_reader :callback_threads
+        attr_reader :push_threads
 
         ##
         # @private Implementation attributes.

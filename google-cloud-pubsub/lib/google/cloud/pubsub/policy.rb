@@ -68,7 +68,8 @@ module Google
       #   end
       #
       class Policy
-        attr_reader :etag, :roles
+        attr_reader :etag
+        attr_reader :roles
 
         ##
         # @private Creates a Policy object.
