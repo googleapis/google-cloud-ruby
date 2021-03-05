@@ -184,4 +184,70 @@ describe Google::Cloud::PubSub::Topic, :policy, :mock_pubsub do
 
     _(permissions).must_equal ["pubsub.topics.get"]
   end
+focus
+  it "removes the only member in the IAM Policy" do
+    policy_hash = {
+      "etag"=>"CAE=",
+      "bindings" => [{
+        "role" => "roles/owner",
+        "members" => [
+          "user:owner@example.com"
+        ]
+      }]
+    }
+    get_res = Google::Iam::V1::Policy.decode_json policy_hash.to_json
+    mock = Minitest::Mock.new
+    mock.expect :get_iam_policy, get_res, [resource: topic_path(topic_name)]
+
+    updated_policy = {
+      "etag"=>"CAE=",
+      "bindings" => [{
+        "role" => "roles/owner",
+        "members" => []
+      }]
+    }
+    new_policy = {
+      "etag"=>"CBD=",
+      "bindings" => [{
+        "role" => "roles/owner",
+        "members" => []
+      }]
+    }
+
+    set_req = Google::Iam::V1::Policy.decode_json JSON.dump(updated_policy)
+    set_res = Google::Iam::V1::Policy.decode_json JSON.dump(new_policy)
+    mock.expect :set_iam_policy, set_res, [resource: topic_path(topic_name), policy: set_req]
+    topic.service.mocked_iam = mock
+
+    policy = topic.policy do |p|
+      p.remove "roles/owner", "user:owner@example.com"
+    end
+
+    mock.verify
+
+    _(policy).must_be_kind_of Google::Cloud::PubSub::Policy
+    _(policy.etag).must_equal "\b\x10"
+    _(policy.roles).must_be_kind_of Hash
+    _(policy.roles.size).must_equal 1
+    _(policy.roles["roles/viewer"]).must_be :nil?
+    _(policy.roles["roles/owner"]).must_be_kind_of Array
+    _(policy.roles["roles/owner"]).must_be :empty?
+  end
+
+  it "tests the available permissions" do
+    permissions = ["pubsub.topics.get", "pubsub.topics.publish"]
+    test_res = Google::Iam::V1::TestIamPermissionsResponse.new(
+      permissions: ["pubsub.topics.get"]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :test_iam_permissions, test_res, [resource: topic_path(topic_name), permissions: permissions]
+    topic.service.mocked_iam = mock
+
+    permissions = topic.test_permissions "pubsub.topics.get",
+                                         "pubsub.topics.publish"
+
+    mock.verify
+
+    _(permissions).must_equal ["pubsub.topics.get"]
+  end
 end
