@@ -155,9 +155,9 @@ module Google
           @grpc.expire_time = Convert.time_to_timestamp time
           update_mask = Google::Protobuf::FieldMask.new paths: ["expire_time"]
           @grpc = service.update_backup @grpc, update_mask
-        rescue Google::Cloud::Error => error
+        rescue Google::Cloud::Error => e
           @grpc.expire_time = expire_time_was
-          raise error
+          raise e
         end
 
         ##

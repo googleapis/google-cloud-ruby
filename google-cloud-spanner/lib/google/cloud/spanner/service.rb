@@ -28,8 +28,12 @@ module Google
       # @private Represents the gRPC Spanner service, including all the API
       # methods.
       class Service
-        attr_accessor :project, :credentials, :timeout, :host, :lib_name,
-                      :lib_version
+        attr_accessor :project
+        attr_accessor :credentials
+        attr_accessor :timeout
+        attr_accessor :host
+        attr_accessor :lib_name
+        attr_accessor :lib_version
 
         ##
         # Creates a new Service instance.

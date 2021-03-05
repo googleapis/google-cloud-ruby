@@ -49,7 +49,10 @@ module Google
       #   end
       #
       class Status
-        attr_reader :code, :description, :message, :details
+        attr_reader :code
+        attr_reader :description
+        attr_reader :message
+        attr_reader :details
 
         ##
         # @private Creates a Status object.

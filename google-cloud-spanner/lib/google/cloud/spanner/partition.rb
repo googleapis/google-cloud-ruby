@@ -45,11 +45,13 @@ module Google
       #
       class Partition
         # @ private
-        attr_reader :execute, :read
+        attr_reader :execute
+        attr_reader :read
 
         ##
         # @private Creates a Partition object.
-        def initialize; end
+        def initialize
+        end
 
         ##
         # Whether the partition was created for an execute_query/query

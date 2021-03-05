@@ -1248,7 +1248,6 @@ module Google
         end
 
         # rubocop:disable Metrics/AbcSize
-        # rubocop:disable Metrics/BlockLength
         # rubocop:disable Metrics/MethodLength
 
         ##
@@ -1362,44 +1361,41 @@ module Google
           start_time = current_time
 
           @pool.with_transaction do |tx|
-            begin
-              Thread.current[:transaction_id] = tx.transaction_id
-              yield tx
-              commit_resp = @project.service.commit \
-                tx.session.path, tx.mutations,
-                transaction_id: tx.transaction_id,
-                commit_options: commit_options,
-                call_options: call_options
-              resp = CommitResponse.from_grpc commit_resp
-              commit_options ? resp : resp.timestamp
-            rescue GRPC::Aborted, Google::Cloud::AbortedError => err
-              # Re-raise if deadline has passed
-              if current_time - start_time > deadline
-                if err.is_a? GRPC::BadStatus
-                  err = Google::Cloud::Error.from_error err
-                end
-                raise err
+            Thread.current[:transaction_id] = tx.transaction_id
+            yield tx
+            commit_resp = @project.service.commit \
+              tx.session.path, tx.mutations,
+              transaction_id: tx.transaction_id,
+              commit_options: commit_options,
+              call_options: call_options
+            resp = CommitResponse.from_grpc commit_resp
+            commit_options ? resp : resp.timestamp
+          rescue GRPC::Aborted, Google::Cloud::AbortedError => e
+            # Re-raise if deadline has passed
+            if current_time - start_time > deadline
+              if e.is_a? GRPC::BadStatus
+                e = Google::Cloud::Error.from_error e
               end
-              # Sleep the amount from RetryDelay, or incremental backoff
-              sleep(delay_from_aborted(err) || backoff *= 1.3)
-              # Create new transaction on the session and retry the block
-              tx = tx.session.create_transaction
-              retry
-            rescue StandardError => err
-              # Rollback transaction when handling unexpected error
-              tx.session.rollback tx.transaction_id
-              # Return nil if raised with rollback.
-              return nil if err.is_a? Rollback
-              # Re-raise error.
-              raise err
-            ensure
-              Thread.current[:transaction_id] = nil
+              raise e
             end
+            # Sleep the amount from RetryDelay, or incremental backoff
+            sleep(delay_from_aborted(e) || backoff *= 1.3)
+            # Create new transaction on the session and retry the block
+            tx = tx.session.create_transaction
+            retry
+          rescue StandardError => e
+            # Rollback transaction when handling unexpected error
+            tx.session.rollback tx.transaction_id
+            # Return nil if raised with rollback.
+            return nil if e.is_a? Rollback
+            # Re-raise error.
+            raise e
+          ensure
+            Thread.current[:transaction_id] = nil
           end
         end
 
         # rubocop:enable Metrics/AbcSize
-        # rubocop:enable Metrics/BlockLength
         # rubocop:enable Metrics/MethodLength
 
         ##
@@ -1481,18 +1477,16 @@ module Google
           end
 
           @pool.with_session do |session|
-            begin
-              snp_grpc = @project.service.create_snapshot \
-                session.path, strong: strong,
-                              timestamp: (timestamp || read_timestamp),
-                              staleness: (staleness || exact_staleness),
-                              call_options: call_options
-              Thread.current[:transaction_id] = snp_grpc.id
-              snp = Snapshot.from_grpc snp_grpc, session
-              yield snp if block_given?
-            ensure
-              Thread.current[:transaction_id] = nil
-            end
+            snp_grpc = @project.service.create_snapshot \
+              session.path, strong: strong,
+                            timestamp: (timestamp || read_timestamp),
+                            staleness: (staleness || exact_staleness),
+                            call_options: call_options
+            Thread.current[:transaction_id] = snp_grpc.id
+            snp = Snapshot.from_grpc snp_grpc, session
+            yield snp if block_given?
+          ensure
+            Thread.current[:transaction_id] = nil
           end
           nil
         end
@@ -1691,7 +1685,7 @@ module Google
         def batch_create_new_sessions total
           sessions = []
           remaining = total
-          while remaining > 0
+          while remaining.positive?
             sessions += batch_create_sessions remaining
             remaining = total - sessions.count
           end
@@ -1795,7 +1789,7 @@ module Google
 
         def validate_deadline deadline
           return 120 unless deadline.is_a? Numeric
-          return 120 if deadline < 0
+          return 120 if deadline.negative?
           deadline
         end
 
@@ -1816,7 +1810,7 @@ module Google
             seconds = err.metadata["retryDelay"]["seconds"].to_i
             nanos = err.metadata["retryDelay"]["nanos"].to_i
             return seconds if nanos.zero?
-            return seconds + (nanos / 1000000000.0)
+            return seconds + (nanos / 1_000_000_000.0)
           end
           # No metadata? Try the inner error
           delay_from_aborted err.cause

@@ -139,9 +139,10 @@ module Google
         #
         def to_a skip_dup_check: nil
           values.map do |value|
-            if value.is_a? Data
+            case value
+            when Data
               value.to_h skip_dup_check: skip_dup_check
-            elsif value.is_a? Array
+            when Array
               value.map do |v|
                 v.is_a?(Data) ? v.to_h(skip_dup_check: skip_dup_check) : v
               end
@@ -169,9 +170,7 @@ module Google
         #   or indexes and corresponding values.
         #
         def to_h skip_dup_check: nil
-          unless skip_dup_check
-            raise DuplicateNameError if fields.duplicate_names?
-          end
+          raise DuplicateNameError if !skip_dup_check && fields.duplicate_names?
 
           Hash[keys.zip to_a(skip_dup_check: skip_dup_check)]
         end
