@@ -170,7 +170,7 @@ module Google
                 role: role_name,
                 members: roles[role_name]
               )
-            end
+            end.compact
           )
         end
 
