@@ -7,7 +7,7 @@ AllCops:
     - "support/**/*"
     - "test/**/*"
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
 Metrics/BlockLength:
@@ -16,9 +16,13 @@ Metrics/BlockLength:
     - "Rakefile"
 Metrics/ClassLength:
   Enabled: false
+Metrics/CyclomaticComplexity:
+  Max: 15
 Metrics/MethodLength:
   Exclude:
     - "lib/google/cloud/pubsub.rb"
+Metrics/PerceivedComplexity:
+  Max: 15
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-pubsub.rb"
