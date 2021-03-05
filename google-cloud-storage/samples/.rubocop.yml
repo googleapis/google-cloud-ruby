@@ -21,6 +21,13 @@ Naming/AccessorMethodName:
 Style/GlobalVars:
     Exclude:
         - "acceptance/helper.rb"
+Style/KeywordParametersOrder:
+    Exclude:
+        - "storage_upload_encrypted_file.rb"
+        - "storage_upload_with_kms_key.rb"
+Style/NegatedIfElseCondition:
+    Exclude:
+        - "storage_remove_retention_policy.rb"
 Style/Next:
     Enabled: false
 Style/SymbolProc:

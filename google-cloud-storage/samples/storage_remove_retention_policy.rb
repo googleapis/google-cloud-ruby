@@ -22,11 +22,11 @@ def remove_retention_policy bucket_name:
   storage = Google::Cloud::Storage.new
   bucket  = storage.bucket bucket_name
 
-  if bucket.retention_policy_locked?
-    puts "Policy is locked and retention policy can't be removed."
-  else
+  if !bucket.retention_policy_locked?
     bucket.retention_period = nil
     puts "Retention policy for #{bucket_name} has been removed."
+  else
+    puts "Policy is locked and retention policy can't be removed."
   end
 end
 # [END storage_remove_retention_policy]
