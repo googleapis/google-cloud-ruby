@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START storage_upload_with_kms_key]
-def upload_with_kms_key bucket_name:, local_file_path:, file_name: nil, kms_key:
+def upload_with_kms_key bucket_name:, local_file_path:, kms_key:, file_name: nil
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 

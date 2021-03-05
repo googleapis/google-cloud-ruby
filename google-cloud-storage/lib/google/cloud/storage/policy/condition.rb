@@ -70,7 +70,9 @@ module Google
         #   end
         #
         class Condition
-          attr_reader :title, :description, :expression
+          attr_reader :title
+          attr_reader :description
+          attr_reader :expression
 
           ##
           # Creates a Condition object.
@@ -83,7 +85,7 @@ module Google
           #   one attributes, and statements are combined using logic operators,
           #   following CEL language specification. Required.
           #
-          def initialize title:, description: nil, expression:
+          def initialize title:, expression:, description: nil
             @title = String title
             @description = String description
             @expression = String expression

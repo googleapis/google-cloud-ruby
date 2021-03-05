@@ -83,7 +83,9 @@ describe "IAM Snippets" do
     bucket.uniform_bucket_level_access = true
 
     # add_bucket_conditional_iam_binding
-    assert_output "Added #{member} with role #{role} to #{bucket.name} with condition #{title} #{description} #{expression}\n" do
+    expected = "Added #{member} with role #{role} to #{bucket.name} with condition" \
+               " #{title} #{description} #{expression}\n"
+    assert_output expected do
       add_bucket_conditional_iam_binding bucket_name: bucket.name
     end
 

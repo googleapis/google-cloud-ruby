@@ -23,7 +23,8 @@ describe "Storage Quickstart" do
     out, _err = capture_io do
       email = get_service_account
     end
-    assert_includes out, "The GCS service account for project #{project.project_id} is: #{project.service_account_email}"
+    assert_includes out,
+                    "The GCS service account for project #{project.project_id} is: #{project.service_account_email}"
     assert_includes out, "@gs-project-accounts.iam.gserviceaccount.com"
   end
 end

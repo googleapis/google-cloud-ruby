@@ -13,8 +13,10 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
-Layout/SpaceAroundOperators:
+Lint/DeprecatedOpenSSLConstant:
   Enabled: false
+Metrics/AbcSize:
+    Max: 40
 Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:
@@ -25,13 +27,3 @@ Naming/FileName:
 Style/MethodDefParentheses:
   Exclude:
     - "lib/google/cloud/storage/policy.rb"
-Style/NumericPredicate:
-  Enabled: false
-Style/SafeNavigation:
-  Enabled: false
-Style/SymbolArray:
-  Enabled: false
-Style/UnpackFirst:
-  Enabled: false
-Style/WordArray:
-  Enabled: false

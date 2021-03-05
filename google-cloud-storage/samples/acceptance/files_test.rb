@@ -119,7 +119,7 @@ describe "Files Snippets" do
     end
 
     def mock_cipher.random_key
-      @key ||= OpenSSL::Cipher.new("aes-256-cfb").encrypt.random_key
+      @random_key ||= OpenSSL::Cipher.new("aes-256-cfb").encrypt.random_key
     end
 
     encryption_key_base64 = Base64.encode64 mock_cipher.random_key

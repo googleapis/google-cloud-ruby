@@ -172,7 +172,10 @@ module Google
           #   rule.max_age #=> 3600
           #
           class Rule
-            attr_accessor :origin, :methods, :headers, :max_age
+            attr_accessor :origin
+            attr_accessor :methods
+            attr_accessor :headers
+            attr_accessor :max_age
 
             # @private
             def initialize origin, methods, headers: nil, max_age: nil

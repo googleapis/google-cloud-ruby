@@ -59,7 +59,8 @@ module Google
       #   post.fields["x-goog-signature"] #=> "4893a0e...cd82"
       #
       class PostObject
-        attr_reader :url, :fields
+        attr_reader :url
+        attr_reader :fields
 
         # @private
         def initialize url, fields

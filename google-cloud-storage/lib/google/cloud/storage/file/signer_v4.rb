@@ -60,7 +60,7 @@ module Google
 
             p = {}
             p["conditions"] = policy_conditions base_fields, conditions, fields
-            expires ||= 60*60*24
+            expires ||= 60 * 60 * 24
             p["expiration"] = (now + expires).strftime "%Y-%m-%dT%H:%M:%SZ"
 
             policy_str = escape_characters p.to_json
@@ -100,7 +100,7 @@ module Google
 
             algorithm = "GOOG4-RSA-SHA256"
             expires = determine_expires expires
-            credential = issuer + "/" + scope
+            credential = "#{issuer}/#{scope}"
             canonical_query_str = canonical_query query, algorithm, credential, goog_date, expires, signed_headers_str
 
             # From AWS: You don't include a payload hash in the Canonical
@@ -131,9 +131,7 @@ module Google
           # methods below are public visibility only for unit testing
           def escape_characters str
             str.split("").map do |s|
-              if !s.ascii_only?
-                escape_special_unicode s
-              else
+              if s.ascii_only?
                 case s
                 when "\\"
                   '\\'
@@ -152,12 +150,14 @@ module Google
                 else
                   s
                 end
+              else
+                escape_special_unicode s
               end
             end.join
           end
 
           def escape_special_unicode str
-            str.unpack("U*").map { |i| '\u' + i.to_s(16).rjust(4, "0") }.join
+            str.unpack("U*").map { |i| "\\u#{i.to_s(16).rjust(4, '0')}" }.join
           end
 
           protected
@@ -212,14 +212,14 @@ module Google
             if signer.is_a? Proc
               lambda do |string_to_sign|
                 sig = signer.call string_to_sign
-                sig.unpack("H*").first
+                sig.unpack1 "H*"
               end
             else
               signer = OpenSSL::PKey::RSA.new signer unless signer.respond_to? :sign
               # Sign string to sign
               lambda do |string_to_sign|
                 sig = signer.sign OpenSSL::Digest::SHA256.new, string_to_sign
-                sig.unpack("H*").first
+                sig.unpack1 "H*"
               end
             end
           end
@@ -359,7 +359,7 @@ module Google
               end
               packed_signature = signing_key.sign OpenSSL::Digest::SHA256.new, data
             end
-            packed_signature.unpack("H*").first.force_encoding "utf-8"
+            packed_signature.unpack1("H*").force_encoding "utf-8"
           end
         end
       end

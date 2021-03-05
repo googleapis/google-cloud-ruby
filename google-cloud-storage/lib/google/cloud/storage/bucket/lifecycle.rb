@@ -371,17 +371,17 @@ module Google
           #   end
           #
           class Rule
-            attr_accessor :action,
-                          :storage_class,
-                          :age,
-                          :created_before,
-                          :custom_time_before,
-                          :days_since_custom_time,
-                          :days_since_noncurrent_time,
-                          :is_live,
-                          :matches_storage_class,
-                          :noncurrent_time_before,
-                          :num_newer_versions
+            attr_accessor :action
+            attr_accessor :storage_class
+            attr_accessor :age
+            attr_accessor :created_before
+            attr_accessor :custom_time_before
+            attr_accessor :days_since_custom_time
+            attr_accessor :days_since_noncurrent_time
+            attr_accessor :is_live
+            attr_accessor :matches_storage_class
+            attr_accessor :noncurrent_time_before
+            attr_accessor :num_newer_versions
 
             # @private
             def initialize action,

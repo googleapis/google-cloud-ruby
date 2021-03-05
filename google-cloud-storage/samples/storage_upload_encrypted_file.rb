@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START storage_upload_encrypted_file]
-def upload_encrypted_file bucket_name:, local_file_path:, file_name: nil, encryption_key:
+def upload_encrypted_file bucket_name:, local_file_path:, encryption_key:, file_name: nil
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
