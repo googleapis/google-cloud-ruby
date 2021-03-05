@@ -29,6 +29,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :model, :string, 7
       optional :model_variant, :enum, 10, "google.cloud.dialogflow.v2.SpeechModelVariant"
       optional :single_utterance, :bool, 8
+      optional :disable_no_speech_recognized_event, :bool, 14
     end
     add_message "google.cloud.dialogflow.v2.VoiceSelectionParams" do
       optional :name, :string, 1
@@ -45,6 +46,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :audio_encoding, :enum, 1, "google.cloud.dialogflow.v2.OutputAudioEncoding"
       optional :sample_rate_hertz, :int32, 2
       optional :synthesize_speech_config, :message, 3, "google.cloud.dialogflow.v2.SynthesizeSpeechConfig"
+    end
+    add_message "google.cloud.dialogflow.v2.TelephonyDtmfEvents" do
+      repeated :dtmf_events, :enum, 1, "google.cloud.dialogflow.v2.TelephonyDtmf"
+    end
+    add_message "google.cloud.dialogflow.v2.SpeechToTextConfig" do
+      optional :speech_model_variant, :enum, 1, "google.cloud.dialogflow.v2.SpeechModelVariant"
     end
     add_enum "google.cloud.dialogflow.v2.AudioEncoding" do
       value :AUDIO_ENCODING_UNSPECIFIED, 0
@@ -74,6 +81,25 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :OUTPUT_AUDIO_ENCODING_MP3, 2
       value :OUTPUT_AUDIO_ENCODING_OGG_OPUS, 3
     end
+    add_enum "google.cloud.dialogflow.v2.TelephonyDtmf" do
+      value :TELEPHONY_DTMF_UNSPECIFIED, 0
+      value :DTMF_ONE, 1
+      value :DTMF_TWO, 2
+      value :DTMF_THREE, 3
+      value :DTMF_FOUR, 4
+      value :DTMF_FIVE, 5
+      value :DTMF_SIX, 6
+      value :DTMF_SEVEN, 7
+      value :DTMF_EIGHT, 8
+      value :DTMF_NINE, 9
+      value :DTMF_ZERO, 10
+      value :DTMF_A, 11
+      value :DTMF_B, 12
+      value :DTMF_C, 13
+      value :DTMF_D, 14
+      value :DTMF_STAR, 15
+      value :DTMF_POUND, 16
+    end
   end
 end
 
@@ -87,10 +113,13 @@ module Google
         VoiceSelectionParams = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.VoiceSelectionParams").msgclass
         SynthesizeSpeechConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SynthesizeSpeechConfig").msgclass
         OutputAudioConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.OutputAudioConfig").msgclass
+        TelephonyDtmfEvents = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.TelephonyDtmfEvents").msgclass
+        SpeechToTextConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SpeechToTextConfig").msgclass
         AudioEncoding = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.AudioEncoding").enummodule
         SpeechModelVariant = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SpeechModelVariant").enummodule
         SsmlVoiceGender = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SsmlVoiceGender").enummodule
         OutputAudioEncoding = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.OutputAudioEncoding").enummodule
+        TelephonyDtmf = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.TelephonyDtmf").enummodule
       end
     end
   end
