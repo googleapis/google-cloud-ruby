@@ -18,11 +18,17 @@
 
 require "google/cloud/dialogflow/v2/agents"
 require "google/cloud/dialogflow/v2/contexts"
-require "google/cloud/dialogflow/v2/entity_types"
-require "google/cloud/dialogflow/v2/environments"
 require "google/cloud/dialogflow/v2/intents"
+require "google/cloud/dialogflow/v2/entity_types"
 require "google/cloud/dialogflow/v2/session_entity_types"
 require "google/cloud/dialogflow/v2/sessions"
+require "google/cloud/dialogflow/v2/participants"
+require "google/cloud/dialogflow/v2/answer_records"
+require "google/cloud/dialogflow/v2/conversations"
+require "google/cloud/dialogflow/v2/conversation_profiles"
+require "google/cloud/dialogflow/v2/documents"
+require "google/cloud/dialogflow/v2/environments"
+require "google/cloud/dialogflow/v2/knowledge_bases"
 require "google/cloud/dialogflow/v2/version"
 
 module Google

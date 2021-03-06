@@ -153,6 +153,12 @@ module Google
         #     Note: This setting is relevant only for streaming methods.
         #     Note: When specified, InputAudioConfig.single_utterance takes precedence
         #     over StreamingDetectIntentRequest.single_utterance.
+        # @!attribute [rw] disable_no_speech_recognized_event
+        #   @return [::Boolean]
+        #     Only used in {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent} and
+        #     {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content Participants.StreamingAnalyzeContent}.
+        #     If `false` and recognition doesn't return any result, trigger
+        #     `NO_SPEECH_RECOGNIZED` event to Dialogflow agent.
         class InputAudioConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -228,6 +234,27 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::SynthesizeSpeechConfig]
         #     Configuration of how speech should be synthesized.
         class OutputAudioConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A wrapper of repeated TelephonyDtmf digits.
+        # @!attribute [rw] dtmf_events
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::TelephonyDtmf>]
+        #     A sequence of TelephonyDtmf digits.
+        class TelephonyDtmfEvents
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configures speech transcription for {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfile}.
+        # @!attribute [rw] speech_model_variant
+        #   @return [::Google::Cloud::Dialogflow::V2::SpeechModelVariant]
+        #     Optional. The speech model used in speech to text.
+        #     `SPEECH_MODEL_VARIANT_UNSPECIFIED`, `USE_BEST_AVAILABLE` will be treated as
+        #     `USE_ENHANCED`. It can be overridden in {::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest AnalyzeContentRequest} and
+        #     {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest StreamingAnalyzeContentRequest} request.
+        class SpeechToTextConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -358,6 +385,61 @@ module Google
           # Chrome and Firefox). The quality of the encoding is considerably higher
           # than MP3 while using approximately the same bitrate.
           OUTPUT_AUDIO_ENCODING_OGG_OPUS = 3
+        end
+
+        # [DTMF](https://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling)
+        # digit in Telephony Gateway.
+        module TelephonyDtmf
+          # Not specified. This value may be used to indicate an absent digit.
+          TELEPHONY_DTMF_UNSPECIFIED = 0
+
+          # Number: '1'.
+          DTMF_ONE = 1
+
+          # Number: '2'.
+          DTMF_TWO = 2
+
+          # Number: '3'.
+          DTMF_THREE = 3
+
+          # Number: '4'.
+          DTMF_FOUR = 4
+
+          # Number: '5'.
+          DTMF_FIVE = 5
+
+          # Number: '6'.
+          DTMF_SIX = 6
+
+          # Number: '7'.
+          DTMF_SEVEN = 7
+
+          # Number: '8'.
+          DTMF_EIGHT = 8
+
+          # Number: '9'.
+          DTMF_NINE = 9
+
+          # Number: '0'.
+          DTMF_ZERO = 10
+
+          # Letter: 'A'.
+          DTMF_A = 11
+
+          # Letter: 'B'.
+          DTMF_B = 12
+
+          # Letter: 'C'.
+          DTMF_C = 13
+
+          # Letter: 'D'.
+          DTMF_D = 14
+
+          # Asterisk/star: '*'.
+          DTMF_STAR = 15
+
+          # Pound/diamond/hash/square/gate/octothorpe: '#'.
+          DTMF_POUND = 16
         end
       end
     end
