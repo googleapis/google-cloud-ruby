@@ -41,7 +41,7 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
       parent: instance_path(instance_id),
       table_id: table_id,
       table: req_table,
-      initial_splits: nil
+      initial_splits: []
     ]
 
     get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
@@ -109,7 +109,7 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
       parent: instance_path(instance_id),
       table_id: table_id,
       table: req_table,
-      initial_splits: nil
+      initial_splits: []
     ]
 
     get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(

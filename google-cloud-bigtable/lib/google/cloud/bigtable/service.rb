@@ -279,7 +279,7 @@ module Google
         # @return [Google::Cloud::Bigtable::Admin::V2::Table]
         #
         def create_table instance_id, table_id, table, initial_splits: nil
-          initial_splits = initial_splits.map { |key| { key: key } } if initial_splits
+          initial_splits = Array(initial_splits).map { |key| { key: key } }
 
           tables.create_table parent: instance_path(instance_id),
                               table_id: table_id,
