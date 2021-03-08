@@ -31,8 +31,7 @@ def sentiment_from_text text_content:
   sentences = response.sentences
 
   sentences.each do |sentence|
-    sentiment = sentence.sentiment
-    puts "#{sentence.text.content}: (#{sentiment.score})"
+    puts "#{sentence.text.content}: (#{sentence.sentiment.score})"
   end
   # [END language_sentiment_text]
 end
@@ -56,8 +55,7 @@ def sentiment_from_cloud_storage_file storage_path:
   sentences = response.sentences
 
   sentences.each do |sentence|
-    sentiment = sentence.sentiment
-    puts "#{sentence.text.content}: (#{sentiment.score})"
+    puts "#{sentence.text.content}: (#{sentence.sentiment.score})"
   end
   # [END language_sentiment_gcs]
 end
