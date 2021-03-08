@@ -600,9 +600,9 @@ module Google
         # {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#query_params DetectIntentRequest.query_params}. For
         # [Participants.StreamingDetectIntent][], it needs to be configured in
         # {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_params StreamingDetectIntentRequest.query_params}.
-        # And for [Participants.AnalyzeContent][google.cloud.dialogflow.v2.Participants.AnalyzeContent] and
-        # [Participants.StreamingAnalyzeContent][google.cloud.dialogflow.v2.Participants.StreamingAnalyzeContent], it needs to be configured in
-        # [ConversationProfile.human_agent_assistant_config][google.cloud.dialogflow.v2.ConversationProfile.human_agent_assistant_config]
+        # And for {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent} and
+        # {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content Participants.StreamingAnalyzeContent}, it needs to be configured in
+        # {::Google::Cloud::Dialogflow::V2::ConversationProfile#human_agent_assistant_config ConversationProfile.human_agent_assistant_config}
         # @!attribute [rw] query_text_sentiment
         #   @return [::Google::Cloud::Dialogflow::V2::Sentiment]
         #     The sentiment analysis result for `query_text`.
