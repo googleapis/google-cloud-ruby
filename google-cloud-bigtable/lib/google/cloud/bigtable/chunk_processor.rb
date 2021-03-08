@@ -57,11 +57,12 @@ module Google
 
           raise_if chunk.value_size.positive?, "Commit rows cannot have a non-zero value_size." if chunk.commit_row
 
-          if state == NEW_ROW
+          case state
+          when NEW_ROW
             process_new_row
-          elsif state == CELL_IN_PROGRESS
+          when CELL_IN_PROGRESS
             process_cell_in_progress
-          elsif state == ROW_IN_PROGRESS
+          when ROW_IN_PROGRESS
             process_row_in_progress
           end
         end

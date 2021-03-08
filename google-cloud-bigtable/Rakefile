@@ -122,11 +122,9 @@ namespace :acceptance do
     gcloud = Google::Cloud.new
     bigtable = gcloud.bigtable
     bigtable.instances.each do |instance|
-      begin
-        instance.delete
-      rescue StandardError => e
-        puts "Error while cleaning up #{instance.instance_id} instance.\n\n#{e}"
-      end
+      instance.delete
+    rescue StandardError => e
+      puts "Error while cleaning up #{instance.instance_id} instance.\n\n#{e}"
     end
   end
 end

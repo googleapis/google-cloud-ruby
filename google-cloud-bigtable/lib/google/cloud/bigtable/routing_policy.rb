@@ -141,7 +141,8 @@ module Google
       #     Default value is false.
       #
       class SingleClusterRouting < RoutingPolicy
-        attr_reader :cluster_id, :allow_transactional_writes
+        attr_reader :cluster_id
+        attr_reader :allow_transactional_writes
 
         ##
         # Creates a new single-cluster routing policy.
@@ -155,6 +156,7 @@ module Google
         #   Default value is false.
         #
         def initialize cluster_id, allow_transactional_writes
+          super()
           @cluster_id = cluster_id
           @allow_transactional_writes = allow_transactional_writes
         end

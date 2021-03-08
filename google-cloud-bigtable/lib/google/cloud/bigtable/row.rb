@@ -30,7 +30,11 @@ module Google
         # Row cell built from data chunks.
         #
         class Cell
-          attr_reader :family, :qualifier, :value, :labels, :timestamp
+          attr_reader :family
+          attr_reader :qualifier
+          attr_reader :value
+          attr_reader :labels
+          attr_reader :timestamp
 
           ##
           # Creates a row cell instance.
