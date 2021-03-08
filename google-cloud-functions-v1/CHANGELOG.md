@@ -1,5 +1,15 @@
 # Release History
 
+### 0.3.0 / 2021-03-08
+
+#### Features
+
+* Drop support for Ruby 2.4 and add support for Ruby 3.0
+
+#### Bug Fixes
+
+* Fixed timeout and retry settings
+
 ### 0.2.0 / 2021-02-03
 
 #### Features
