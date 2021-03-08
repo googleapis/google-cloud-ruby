@@ -1,8 +1,8 @@
-  - uid: <%= constant.path %>
-    fullName: <%= constant.path %>
+  - uid: <%= @constant.path %>
+    fullName: <%= @constant.path %>
     langs:
       - ruby
     module: <%= ENV["CLOUDRAD_GEM_NAME"] %>
-    id: <%= constant.name %>
-    summary: "<%= constant.docstring.to_str.chomp.sub("--- ", "").sub("|-\n", "").gsub '"', "'" %>"
-    type: '<%= constant.type %>'
+    id: <%= @constant.name %>
+    summary: "<%= docstring @constant %>"
+    type: '<%= @constant.type %>'

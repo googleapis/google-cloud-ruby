@@ -1,19 +1,9 @@
   - uid: <%= @object.path %>
-    children: <%=
-      if !@object.children || @object.children.empty?
-        "[]"
-      else
-        children = "\n"
-        children += @object.children.map { |child|
-          "      - #{child.path}"
-        }.join("\n")
-        children
-      end
-    %>
+    children: <%= children %>
     fullName: <%= @object.path %>
     langs:
       - ruby
     module: <%= ENV["CLOUDRAD_GEM_NAME"] %>
     id: <%= @object.name %>
-    summary: "<%= @object.docstring.to_str.chomp.sub("--- ", "").sub("|-\n", "").gsub '"', "'" %>"
+    summary: "<%= docstring @object %>"
     type: '<%= @object.type %>'

@@ -1,7 +1,7 @@
-  - uid: <%= reference.path %>
-    fullName: <%= reference.path %>
-    name: <%= reference.name %>
+  - uid: <%= @reference.path %>
+    fullName: <%= @reference.path %>
+    name: <%= @reference.name %>
     module: <%= ENV["CLOUDRAD_GEM_NAME"] %>
-    id: <%= reference.name %>
-    summary: "<%= reference.docstring.to_str.chomp.sub("--- ", "").sub("|-\n", "").gsub '"', "'" %>"
-    parent: <%= reference.parent %>
+    id: <%= @reference.name %>
+    summary: "<%= docstring @reference %>"
+    parent: <%= @reference.parent %>
