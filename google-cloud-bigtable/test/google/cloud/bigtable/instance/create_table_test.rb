@@ -63,18 +63,25 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
         granularity: :MILLIS
       )
     )
-
     req_table = Google::Cloud::Bigtable::Admin::V2::Table.new(
       column_families: column_families,
       granularity: :MILLIS
     )
-
     mock.expect :create_table, create_res.dup, [
       parent: instance_path(instance_id),
       table_id: table_id,
       table: req_table
     ]
-    mock.expect :get_table, create_res.dup, [
+
+    get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
+      table_hash(
+        name: table_path(instance_id, table_id),
+        cluster_states: cluster_states.dup,
+        column_families: column_families.dup,
+        granularity: :MILLIS
+      )
+    )
+    mock.expect :get_table, get_res, [
       name: table_path(instance_id, table_id),
       view: :REPLICATION_VIEW
     ]
@@ -114,21 +121,28 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
         granularity: :MILLIS
       )
     )
-
     req_table = Google::Cloud::Bigtable::Admin::V2::Table.new(
       column_families: column_families,
       granularity: :MILLIS
     )
-
     mock.expect :create_table, create_res.dup, [
       parent: instance_path(instance_id),
       table_id: table_id,
       table: req_table
     ]
-    mock.expect :get_table, create_res.dup, [
-                            name: table_path(instance_id, table_id),
-                            view: :REPLICATION_VIEW
-                          ]
+
+    get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
+      table_hash(
+        name: table_path(instance_id, table_id),
+        cluster_states: cluster_states.dup,
+        column_families: column_families.dup,
+        granularity: :MILLIS
+      )
+    )
+    mock.expect :get_table, get_res, [
+      name: table_path(instance_id, table_id),
+      view: :REPLICATION_VIEW
+    ]
     bigtable.service.mocked_tables = mock
 
     table = instance.create_table(table_id, granularity: :MILLIS) do |cfm|
