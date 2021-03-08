@@ -28,6 +28,8 @@ module Google
       # so it is possible for reads to return a cell even if it matches the
       # active GC expression for its column family.
       #
+      # @see https://cloud.google.com/bigtable/docs/garbage-collection Garbage collection
+      #
       # GC Rule types:
       #   * `max_num_versions` - A garbage-collection rule that explicitly
       #     states the maximum number of cells to keep for all columns in a

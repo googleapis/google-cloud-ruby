@@ -45,7 +45,11 @@ module Google
         ##
         # The garbage collection rule to be used for the column family.
         # Optional. The service default value will be used when not specified.
+        #
+        # @see https://cloud.google.com/bigtable/docs/garbage-collection Garbage collection
+        #
         # @return [Google::Cloud::Bigtable::GcRule, nil]
+        #
         attr_accessor :gc_rule
 
         # @private
