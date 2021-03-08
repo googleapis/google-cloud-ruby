@@ -128,6 +128,8 @@ module Google
 
                   default_config.rpcs.delete_snapshot.timeout = 60.0
 
+                  default_config.rpcs.create_backup.timeout = 60.0
+
                   default_config.rpcs.get_backup.timeout = 60.0
                   default_config.rpcs.get_backup.retry_policy = {
                     initial_delay: 1.0,
@@ -147,6 +149,8 @@ module Google
                 multiplier: 2,
                 retry_codes: [14, 4]
                   }
+
+                  default_config.rpcs.restore_table.timeout = 60.0
 
                   default_config.rpcs.get_iam_policy.timeout = 60.0
                   default_config.rpcs.get_iam_policy.retry_policy = {
