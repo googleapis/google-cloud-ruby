@@ -43,11 +43,11 @@ module Google
             self.service_name = 'google.cloud.compute.v1.AcceleratorTypes'
 
             # Retrieves an aggregated list of accelerator types.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListAcceleratorTypesRequest, Google::Cloud::Compute::V1::AcceleratorTypeAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListAcceleratorTypesRequest, ::Google::Cloud::Compute::V1::AcceleratorTypeAggregatedList
             # Returns the specified accelerator type.
-            rpc :Get, Google::Cloud::Compute::V1::GetAcceleratorTypeRequest, Google::Cloud::Compute::V1::AcceleratorType
+            rpc :Get, ::Google::Cloud::Compute::V1::GetAcceleratorTypeRequest, ::Google::Cloud::Compute::V1::AcceleratorType
             # Retrieves a list of accelerator types that are available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListAcceleratorTypesRequest, Google::Cloud::Compute::V1::AcceleratorTypeList
+            rpc :List, ::Google::Cloud::Compute::V1::ListAcceleratorTypesRequest, ::Google::Cloud::Compute::V1::AcceleratorTypeList
           end
 
           Stub = Service.rpc_stub_class
@@ -63,15 +63,15 @@ module Google
             self.service_name = 'google.cloud.compute.v1.Addresses'
 
             # Retrieves an aggregated list of addresses.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListAddressesRequest, Google::Cloud::Compute::V1::AddressAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListAddressesRequest, ::Google::Cloud::Compute::V1::AddressAggregatedList
             # Deletes the specified address resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteAddressRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteAddressRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified address resource.
-            rpc :Get, Google::Cloud::Compute::V1::GetAddressRequest, Google::Cloud::Compute::V1::Address
+            rpc :Get, ::Google::Cloud::Compute::V1::GetAddressRequest, ::Google::Cloud::Compute::V1::Address
             # Creates an address resource in the specified project by using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertAddressRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertAddressRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of addresses contained within the specified region.
-            rpc :List, Google::Cloud::Compute::V1::ListAddressesRequest, Google::Cloud::Compute::V1::AddressList
+            rpc :List, ::Google::Cloud::Compute::V1::ListAddressesRequest, ::Google::Cloud::Compute::V1::AddressList
           end
 
           Stub = Service.rpc_stub_class
@@ -87,19 +87,19 @@ module Google
             self.service_name = 'google.cloud.compute.v1.Autoscalers'
 
             # Retrieves an aggregated list of autoscalers.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListAutoscalersRequest, Google::Cloud::Compute::V1::AutoscalerAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListAutoscalersRequest, ::Google::Cloud::Compute::V1::AutoscalerAggregatedList
             # Deletes the specified autoscaler.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteAutoscalerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteAutoscalerRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified autoscaler resource. Gets a list of available autoscalers by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetAutoscalerRequest, Google::Cloud::Compute::V1::Autoscaler
+            rpc :Get, ::Google::Cloud::Compute::V1::GetAutoscalerRequest, ::Google::Cloud::Compute::V1::Autoscaler
             # Creates an autoscaler in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertAutoscalerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertAutoscalerRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of autoscalers contained within the specified zone.
-            rpc :List, Google::Cloud::Compute::V1::ListAutoscalersRequest, Google::Cloud::Compute::V1::AutoscalerList
+            rpc :List, ::Google::Cloud::Compute::V1::ListAutoscalersRequest, ::Google::Cloud::Compute::V1::AutoscalerList
             # Updates an autoscaler in the specified project using the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchAutoscalerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchAutoscalerRequest, ::Google::Cloud::Compute::V1::Operation
             # Updates an autoscaler in the specified project using the data included in the request.
-            rpc :Update, Google::Cloud::Compute::V1::UpdateAutoscalerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Update, ::Google::Cloud::Compute::V1::UpdateAutoscalerRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -115,21 +115,21 @@ module Google
             self.service_name = 'google.cloud.compute.v1.BackendBuckets'
 
             # Adds a key for validating requests with signed URLs for this backend bucket.
-            rpc :AddSignedUrlKey, Google::Cloud::Compute::V1::AddSignedUrlKeyBackendBucketRequest, Google::Cloud::Compute::V1::Operation
+            rpc :AddSignedUrlKey, ::Google::Cloud::Compute::V1::AddSignedUrlKeyBackendBucketRequest, ::Google::Cloud::Compute::V1::Operation
             # Deletes the specified BackendBucket resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteBackendBucketRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteBackendBucketRequest, ::Google::Cloud::Compute::V1::Operation
             # Deletes a key for validating requests with signed URLs for this backend bucket.
-            rpc :DeleteSignedUrlKey, Google::Cloud::Compute::V1::DeleteSignedUrlKeyBackendBucketRequest, Google::Cloud::Compute::V1::Operation
+            rpc :DeleteSignedUrlKey, ::Google::Cloud::Compute::V1::DeleteSignedUrlKeyBackendBucketRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified BackendBucket resource. Gets a list of available backend buckets by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetBackendBucketRequest, Google::Cloud::Compute::V1::BackendBucket
+            rpc :Get, ::Google::Cloud::Compute::V1::GetBackendBucketRequest, ::Google::Cloud::Compute::V1::BackendBucket
             # Creates a BackendBucket resource in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertBackendBucketRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertBackendBucketRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of BackendBucket resources available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListBackendBucketsRequest, Google::Cloud::Compute::V1::BackendBucketList
+            rpc :List, ::Google::Cloud::Compute::V1::ListBackendBucketsRequest, ::Google::Cloud::Compute::V1::BackendBucketList
             # Updates the specified BackendBucket resource with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchBackendBucketRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchBackendBucketRequest, ::Google::Cloud::Compute::V1::Operation
             # Updates the specified BackendBucket resource with the data included in the request.
-            rpc :Update, Google::Cloud::Compute::V1::UpdateBackendBucketRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Update, ::Google::Cloud::Compute::V1::UpdateBackendBucketRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -145,31 +145,31 @@ module Google
             self.service_name = 'google.cloud.compute.v1.BackendServices'
 
             # Adds a key for validating requests with signed URLs for this backend service.
-            rpc :AddSignedUrlKey, Google::Cloud::Compute::V1::AddSignedUrlKeyBackendServiceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :AddSignedUrlKey, ::Google::Cloud::Compute::V1::AddSignedUrlKeyBackendServiceRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of all BackendService resources, regional and global, available to the specified project.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListBackendServicesRequest, Google::Cloud::Compute::V1::BackendServiceAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListBackendServicesRequest, ::Google::Cloud::Compute::V1::BackendServiceAggregatedList
             # Deletes the specified BackendService resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteBackendServiceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteBackendServiceRequest, ::Google::Cloud::Compute::V1::Operation
             # Deletes a key for validating requests with signed URLs for this backend service.
-            rpc :DeleteSignedUrlKey, Google::Cloud::Compute::V1::DeleteSignedUrlKeyBackendServiceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :DeleteSignedUrlKey, ::Google::Cloud::Compute::V1::DeleteSignedUrlKeyBackendServiceRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified BackendService resource. Gets a list of available backend services.
-            rpc :Get, Google::Cloud::Compute::V1::GetBackendServiceRequest, Google::Cloud::Compute::V1::BackendService
+            rpc :Get, ::Google::Cloud::Compute::V1::GetBackendServiceRequest, ::Google::Cloud::Compute::V1::BackendService
             # Gets the most recent health check results for this BackendService.
             #
             # Example request body:
             #
             # { "group": "/zones/us-east1-b/instanceGroups/lb-backend-example" }
-            rpc :GetHealth, Google::Cloud::Compute::V1::GetHealthBackendServiceRequest, Google::Cloud::Compute::V1::BackendServiceGroupHealth
+            rpc :GetHealth, ::Google::Cloud::Compute::V1::GetHealthBackendServiceRequest, ::Google::Cloud::Compute::V1::BackendServiceGroupHealth
             # Creates a BackendService resource in the specified project using the data included in the request. For more information, see  Backend services overview.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertBackendServiceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertBackendServiceRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of BackendService resources available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListBackendServicesRequest, Google::Cloud::Compute::V1::BackendServiceList
+            rpc :List, ::Google::Cloud::Compute::V1::ListBackendServicesRequest, ::Google::Cloud::Compute::V1::BackendServiceList
             # Patches the specified BackendService resource with the data included in the request. For more information, see  Backend services overview. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchBackendServiceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchBackendServiceRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets the security policy for the specified backend service.
-            rpc :SetSecurityPolicy, Google::Cloud::Compute::V1::SetSecurityPolicyBackendServiceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetSecurityPolicy, ::Google::Cloud::Compute::V1::SetSecurityPolicyBackendServiceRequest, ::Google::Cloud::Compute::V1::Operation
             # Updates the specified BackendService resource with the data included in the request. For more information, see Backend services overview.
-            rpc :Update, Google::Cloud::Compute::V1::UpdateBackendServiceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Update, ::Google::Cloud::Compute::V1::UpdateBackendServiceRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -185,11 +185,11 @@ module Google
             self.service_name = 'google.cloud.compute.v1.DiskTypes'
 
             # Retrieves an aggregated list of disk types.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListDiskTypesRequest, Google::Cloud::Compute::V1::DiskTypeAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListDiskTypesRequest, ::Google::Cloud::Compute::V1::DiskTypeAggregatedList
             # Returns the specified disk type. Gets a list of available disk types by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetDiskTypeRequest, Google::Cloud::Compute::V1::DiskType
+            rpc :Get, ::Google::Cloud::Compute::V1::GetDiskTypeRequest, ::Google::Cloud::Compute::V1::DiskType
             # Retrieves a list of disk types available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListDiskTypesRequest, Google::Cloud::Compute::V1::DiskTypeList
+            rpc :List, ::Google::Cloud::Compute::V1::ListDiskTypesRequest, ::Google::Cloud::Compute::V1::DiskTypeList
           end
 
           Stub = Service.rpc_stub_class
@@ -205,31 +205,31 @@ module Google
             self.service_name = 'google.cloud.compute.v1.Disks'
 
             # Adds existing resource policies to a disk. You can only add one policy which will be applied to this disk for scheduling snapshot creation.
-            rpc :AddResourcePolicies, Google::Cloud::Compute::V1::AddResourcePoliciesDiskRequest, Google::Cloud::Compute::V1::Operation
+            rpc :AddResourcePolicies, ::Google::Cloud::Compute::V1::AddResourcePoliciesDiskRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves an aggregated list of persistent disks.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListDisksRequest, Google::Cloud::Compute::V1::DiskAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListDisksRequest, ::Google::Cloud::Compute::V1::DiskAggregatedList
             # Creates a snapshot of a specified persistent disk.
-            rpc :CreateSnapshot, Google::Cloud::Compute::V1::CreateSnapshotDiskRequest, Google::Cloud::Compute::V1::Operation
+            rpc :CreateSnapshot, ::Google::Cloud::Compute::V1::CreateSnapshotDiskRequest, ::Google::Cloud::Compute::V1::Operation
             # Deletes the specified persistent disk. Deleting a disk removes its data permanently and is irreversible. However, deleting a disk does not delete any snapshots previously made from the disk. You must separately delete snapshots.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteDiskRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteDiskRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns a specified persistent disk. Gets a list of available persistent disks by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetDiskRequest, Google::Cloud::Compute::V1::Disk
+            rpc :Get, ::Google::Cloud::Compute::V1::GetDiskRequest, ::Google::Cloud::Compute::V1::Disk
             # Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-            rpc :GetIamPolicy, Google::Cloud::Compute::V1::GetIamPolicyDiskRequest, Google::Cloud::Compute::V1::Policy
+            rpc :GetIamPolicy, ::Google::Cloud::Compute::V1::GetIamPolicyDiskRequest, ::Google::Cloud::Compute::V1::Policy
             # Creates a persistent disk in the specified project using the data in the request. You can create a disk from a source (sourceImage, sourceSnapshot, or sourceDisk) or create an empty 500 GB data disk by omitting all properties. You can also create a disk that is larger than the default size by specifying the sizeGb property.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertDiskRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertDiskRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of persistent disks contained within the specified zone.
-            rpc :List, Google::Cloud::Compute::V1::ListDisksRequest, Google::Cloud::Compute::V1::DiskList
+            rpc :List, ::Google::Cloud::Compute::V1::ListDisksRequest, ::Google::Cloud::Compute::V1::DiskList
             # Removes resource policies from a disk.
-            rpc :RemoveResourcePolicies, Google::Cloud::Compute::V1::RemoveResourcePoliciesDiskRequest, Google::Cloud::Compute::V1::Operation
+            rpc :RemoveResourcePolicies, ::Google::Cloud::Compute::V1::RemoveResourcePoliciesDiskRequest, ::Google::Cloud::Compute::V1::Operation
             # Resizes the specified persistent disk. You can only increase the size of the disk.
-            rpc :Resize, Google::Cloud::Compute::V1::ResizeDiskRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Resize, ::Google::Cloud::Compute::V1::ResizeDiskRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets the access control policy on the specified resource. Replaces any existing policy.
-            rpc :SetIamPolicy, Google::Cloud::Compute::V1::SetIamPolicyDiskRequest, Google::Cloud::Compute::V1::Policy
+            rpc :SetIamPolicy, ::Google::Cloud::Compute::V1::SetIamPolicyDiskRequest, ::Google::Cloud::Compute::V1::Policy
             # Sets the labels on a disk. To learn more about labels, read the Labeling Resources documentation.
-            rpc :SetLabels, Google::Cloud::Compute::V1::SetLabelsDiskRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetLabels, ::Google::Cloud::Compute::V1::SetLabelsDiskRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns permissions that a caller has on the specified resource.
-            rpc :TestIamPermissions, Google::Cloud::Compute::V1::TestIamPermissionsDiskRequest, Google::Cloud::Compute::V1::TestPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Cloud::Compute::V1::TestIamPermissionsDiskRequest, ::Google::Cloud::Compute::V1::TestPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -245,17 +245,17 @@ module Google
             self.service_name = 'google.cloud.compute.v1.ExternalVpnGateways'
 
             # Deletes the specified externalVpnGateway.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteExternalVpnGatewayRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteExternalVpnGatewayRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified externalVpnGateway. Get a list of available externalVpnGateways by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetExternalVpnGatewayRequest, Google::Cloud::Compute::V1::ExternalVpnGateway
+            rpc :Get, ::Google::Cloud::Compute::V1::GetExternalVpnGatewayRequest, ::Google::Cloud::Compute::V1::ExternalVpnGateway
             # Creates a ExternalVpnGateway in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertExternalVpnGatewayRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertExternalVpnGatewayRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of ExternalVpnGateway available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListExternalVpnGatewaysRequest, Google::Cloud::Compute::V1::ExternalVpnGatewayList
+            rpc :List, ::Google::Cloud::Compute::V1::ListExternalVpnGatewaysRequest, ::Google::Cloud::Compute::V1::ExternalVpnGatewayList
             # Sets the labels on an ExternalVpnGateway. To learn more about labels, read the Labeling Resources documentation.
-            rpc :SetLabels, Google::Cloud::Compute::V1::SetLabelsExternalVpnGatewayRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetLabels, ::Google::Cloud::Compute::V1::SetLabelsExternalVpnGatewayRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns permissions that a caller has on the specified resource.
-            rpc :TestIamPermissions, Google::Cloud::Compute::V1::TestIamPermissionsExternalVpnGatewayRequest, Google::Cloud::Compute::V1::TestPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Cloud::Compute::V1::TestIamPermissionsExternalVpnGatewayRequest, ::Google::Cloud::Compute::V1::TestPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -271,17 +271,17 @@ module Google
             self.service_name = 'google.cloud.compute.v1.Firewalls'
 
             # Deletes the specified firewall.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteFirewallRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteFirewallRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified firewall.
-            rpc :Get, Google::Cloud::Compute::V1::GetFirewallRequest, Google::Cloud::Compute::V1::Firewall
+            rpc :Get, ::Google::Cloud::Compute::V1::GetFirewallRequest, ::Google::Cloud::Compute::V1::Firewall
             # Creates a firewall rule in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertFirewallRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertFirewallRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of firewall rules available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListFirewallsRequest, Google::Cloud::Compute::V1::FirewallList
+            rpc :List, ::Google::Cloud::Compute::V1::ListFirewallsRequest, ::Google::Cloud::Compute::V1::FirewallList
             # Updates the specified firewall rule with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchFirewallRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchFirewallRequest, ::Google::Cloud::Compute::V1::Operation
             # Updates the specified firewall rule with the data included in the request. Note that all fields will be updated if using PUT, even fields that are not specified. To update individual fields, please use PATCH instead.
-            rpc :Update, Google::Cloud::Compute::V1::UpdateFirewallRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Update, ::Google::Cloud::Compute::V1::UpdateFirewallRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -297,19 +297,19 @@ module Google
             self.service_name = 'google.cloud.compute.v1.ForwardingRules'
 
             # Retrieves an aggregated list of forwarding rules.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListForwardingRulesRequest, Google::Cloud::Compute::V1::ForwardingRuleAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListForwardingRulesRequest, ::Google::Cloud::Compute::V1::ForwardingRuleAggregatedList
             # Deletes the specified ForwardingRule resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteForwardingRuleRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteForwardingRuleRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified ForwardingRule resource.
-            rpc :Get, Google::Cloud::Compute::V1::GetForwardingRuleRequest, Google::Cloud::Compute::V1::ForwardingRule
+            rpc :Get, ::Google::Cloud::Compute::V1::GetForwardingRuleRequest, ::Google::Cloud::Compute::V1::ForwardingRule
             # Creates a ForwardingRule resource in the specified project and region using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertForwardingRuleRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertForwardingRuleRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of ForwardingRule resources available to the specified project and region.
-            rpc :List, Google::Cloud::Compute::V1::ListForwardingRulesRequest, Google::Cloud::Compute::V1::ForwardingRuleList
+            rpc :List, ::Google::Cloud::Compute::V1::ListForwardingRulesRequest, ::Google::Cloud::Compute::V1::ForwardingRuleList
             # Updates the specified forwarding rule with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules. Currently, you can only patch the network_tier field.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchForwardingRuleRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchForwardingRuleRequest, ::Google::Cloud::Compute::V1::Operation
             # Changes target URL for forwarding rule. The new target should be of the same type as the old target.
-            rpc :SetTarget, Google::Cloud::Compute::V1::SetTargetForwardingRuleRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetTarget, ::Google::Cloud::Compute::V1::SetTargetForwardingRuleRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -325,13 +325,13 @@ module Google
             self.service_name = 'google.cloud.compute.v1.GlobalAddresses'
 
             # Deletes the specified address resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteGlobalAddressRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteGlobalAddressRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified address resource. Gets a list of available addresses by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetGlobalAddressRequest, Google::Cloud::Compute::V1::Address
+            rpc :Get, ::Google::Cloud::Compute::V1::GetGlobalAddressRequest, ::Google::Cloud::Compute::V1::Address
             # Creates an address resource in the specified project by using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertGlobalAddressRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertGlobalAddressRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of global addresses.
-            rpc :List, Google::Cloud::Compute::V1::ListGlobalAddressesRequest, Google::Cloud::Compute::V1::AddressList
+            rpc :List, ::Google::Cloud::Compute::V1::ListGlobalAddressesRequest, ::Google::Cloud::Compute::V1::AddressList
           end
 
           Stub = Service.rpc_stub_class
@@ -347,17 +347,17 @@ module Google
             self.service_name = 'google.cloud.compute.v1.GlobalForwardingRules'
 
             # Deletes the specified GlobalForwardingRule resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteGlobalForwardingRuleRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteGlobalForwardingRuleRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified GlobalForwardingRule resource. Gets a list of available forwarding rules by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetGlobalForwardingRuleRequest, Google::Cloud::Compute::V1::ForwardingRule
+            rpc :Get, ::Google::Cloud::Compute::V1::GetGlobalForwardingRuleRequest, ::Google::Cloud::Compute::V1::ForwardingRule
             # Creates a GlobalForwardingRule resource in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertGlobalForwardingRuleRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertGlobalForwardingRuleRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of GlobalForwardingRule resources available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListGlobalForwardingRulesRequest, Google::Cloud::Compute::V1::ForwardingRuleList
+            rpc :List, ::Google::Cloud::Compute::V1::ListGlobalForwardingRulesRequest, ::Google::Cloud::Compute::V1::ForwardingRuleList
             # Updates the specified forwarding rule with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules. Currently, you can only patch the network_tier field.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchGlobalForwardingRuleRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchGlobalForwardingRuleRequest, ::Google::Cloud::Compute::V1::Operation
             # Changes target URL for the GlobalForwardingRule resource. The new target should be of the same type as the old target.
-            rpc :SetTarget, Google::Cloud::Compute::V1::SetTargetGlobalForwardingRuleRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetTarget, ::Google::Cloud::Compute::V1::SetTargetGlobalForwardingRuleRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -373,19 +373,19 @@ module Google
             self.service_name = 'google.cloud.compute.v1.GlobalNetworkEndpointGroups'
 
             # Attach a network endpoint to the specified network endpoint group.
-            rpc :AttachNetworkEndpoints, Google::Cloud::Compute::V1::AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :AttachNetworkEndpoints, ::Google::Cloud::Compute::V1::AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Deletes the specified network endpoint group.Note that the NEG cannot be deleted if there are backend services referencing it.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteGlobalNetworkEndpointGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteGlobalNetworkEndpointGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Detach the network endpoint from the specified network endpoint group.
-            rpc :DetachNetworkEndpoints, Google::Cloud::Compute::V1::DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :DetachNetworkEndpoints, ::Google::Cloud::Compute::V1::DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified network endpoint group. Gets a list of available network endpoint groups by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetGlobalNetworkEndpointGroupRequest, Google::Cloud::Compute::V1::NetworkEndpointGroup
+            rpc :Get, ::Google::Cloud::Compute::V1::GetGlobalNetworkEndpointGroupRequest, ::Google::Cloud::Compute::V1::NetworkEndpointGroup
             # Creates a network endpoint group in the specified project using the parameters that are included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertGlobalNetworkEndpointGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertGlobalNetworkEndpointGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of network endpoint groups that are located in the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListGlobalNetworkEndpointGroupsRequest, Google::Cloud::Compute::V1::NetworkEndpointGroupList
+            rpc :List, ::Google::Cloud::Compute::V1::ListGlobalNetworkEndpointGroupsRequest, ::Google::Cloud::Compute::V1::NetworkEndpointGroupList
             # Lists the network endpoints in the specified network endpoint group.
-            rpc :ListNetworkEndpoints, Google::Cloud::Compute::V1::ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest, Google::Cloud::Compute::V1::NetworkEndpointGroupsListNetworkEndpoints
+            rpc :ListNetworkEndpoints, ::Google::Cloud::Compute::V1::ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest, ::Google::Cloud::Compute::V1::NetworkEndpointGroupsListNetworkEndpoints
           end
 
           Stub = Service.rpc_stub_class
@@ -401,19 +401,19 @@ module Google
             self.service_name = 'google.cloud.compute.v1.GlobalOperations'
 
             # Retrieves an aggregated list of all operations.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListGlobalOperationsRequest, Google::Cloud::Compute::V1::OperationAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListGlobalOperationsRequest, ::Google::Cloud::Compute::V1::OperationAggregatedList
             # Deletes the specified Operations resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteGlobalOperationRequest, Google::Cloud::Compute::V1::DeleteGlobalOperationResponse
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteGlobalOperationRequest, ::Google::Cloud::Compute::V1::DeleteGlobalOperationResponse
             # Retrieves the specified Operations resource. Gets a list of operations by making a `list()` request.
-            rpc :Get, Google::Cloud::Compute::V1::GetGlobalOperationRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Get, ::Google::Cloud::Compute::V1::GetGlobalOperationRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of Operation resources contained within the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListGlobalOperationsRequest, Google::Cloud::Compute::V1::OperationList
+            rpc :List, ::Google::Cloud::Compute::V1::ListGlobalOperationsRequest, ::Google::Cloud::Compute::V1::OperationList
             # Waits for the specified Operation resource to return as `DONE` or for the request to approach the 2 minute deadline, and retrieves the specified Operation resource. This method differs from the `GET` method in that it waits for no more than the default deadline (2 minutes) and then returns the current state of the operation, which might be `DONE` or still in progress.
             #
             # This method is called on a best-effort basis. Specifically:
             # - In uncommon cases, when the server is overloaded, the request might return before the default deadline is reached, or might return after zero seconds.
             # - If the default deadline is reached, there is no guarantee that the operation is actually done when the method returns. Be prepared to retry if the operation is not `DONE`.
-            rpc :Wait, Google::Cloud::Compute::V1::WaitGlobalOperationRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Wait, ::Google::Cloud::Compute::V1::WaitGlobalOperationRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -429,11 +429,11 @@ module Google
             self.service_name = 'google.cloud.compute.v1.GlobalOrganizationOperations'
 
             # Deletes the specified Operations resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteGlobalOrganizationOperationRequest, Google::Cloud::Compute::V1::DeleteGlobalOrganizationOperationResponse
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteGlobalOrganizationOperationRequest, ::Google::Cloud::Compute::V1::DeleteGlobalOrganizationOperationResponse
             # Retrieves the specified Operations resource. Gets a list of operations by making a `list()` request.
-            rpc :Get, Google::Cloud::Compute::V1::GetGlobalOrganizationOperationRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Get, ::Google::Cloud::Compute::V1::GetGlobalOrganizationOperationRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of Operation resources contained within the specified organization.
-            rpc :List, Google::Cloud::Compute::V1::ListGlobalOrganizationOperationsRequest, Google::Cloud::Compute::V1::OperationList
+            rpc :List, ::Google::Cloud::Compute::V1::ListGlobalOrganizationOperationsRequest, ::Google::Cloud::Compute::V1::OperationList
           end
 
           Stub = Service.rpc_stub_class
@@ -449,19 +449,19 @@ module Google
             self.service_name = 'google.cloud.compute.v1.HealthChecks'
 
             # Retrieves the list of all HealthCheck resources, regional and global, available to the specified project.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListHealthChecksRequest, Google::Cloud::Compute::V1::HealthChecksAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListHealthChecksRequest, ::Google::Cloud::Compute::V1::HealthChecksAggregatedList
             # Deletes the specified HealthCheck resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteHealthCheckRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteHealthCheckRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified HealthCheck resource. Gets a list of available health checks by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetHealthCheckRequest, Google::Cloud::Compute::V1::HealthCheck
+            rpc :Get, ::Google::Cloud::Compute::V1::GetHealthCheckRequest, ::Google::Cloud::Compute::V1::HealthCheck
             # Creates a HealthCheck resource in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertHealthCheckRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertHealthCheckRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of HealthCheck resources available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListHealthChecksRequest, Google::Cloud::Compute::V1::HealthCheckList
+            rpc :List, ::Google::Cloud::Compute::V1::ListHealthChecksRequest, ::Google::Cloud::Compute::V1::HealthCheckList
             # Updates a HealthCheck resource in the specified project using the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchHealthCheckRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchHealthCheckRequest, ::Google::Cloud::Compute::V1::Operation
             # Updates a HealthCheck resource in the specified project using the data included in the request.
-            rpc :Update, Google::Cloud::Compute::V1::UpdateHealthCheckRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Update, ::Google::Cloud::Compute::V1::UpdateHealthCheckRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -477,29 +477,29 @@ module Google
             self.service_name = 'google.cloud.compute.v1.Images'
 
             # Deletes the specified image.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteImageRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteImageRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets the deprecation status of an image.
             #
             # If an empty request body is given, clears the deprecation status instead.
-            rpc :Deprecate, Google::Cloud::Compute::V1::DeprecateImageRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Deprecate, ::Google::Cloud::Compute::V1::DeprecateImageRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified image. Gets a list of available images by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetImageRequest, Google::Cloud::Compute::V1::Image
+            rpc :Get, ::Google::Cloud::Compute::V1::GetImageRequest, ::Google::Cloud::Compute::V1::Image
             # Returns the latest image that is part of an image family and is not deprecated.
-            rpc :GetFromFamily, Google::Cloud::Compute::V1::GetFromFamilyImageRequest, Google::Cloud::Compute::V1::Image
+            rpc :GetFromFamily, ::Google::Cloud::Compute::V1::GetFromFamilyImageRequest, ::Google::Cloud::Compute::V1::Image
             # Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-            rpc :GetIamPolicy, Google::Cloud::Compute::V1::GetIamPolicyImageRequest, Google::Cloud::Compute::V1::Policy
+            rpc :GetIamPolicy, ::Google::Cloud::Compute::V1::GetIamPolicyImageRequest, ::Google::Cloud::Compute::V1::Policy
             # Creates an image in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertImageRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertImageRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of custom images available to the specified project. Custom images are images you create that belong to your project. This method does not get any images that belong to other projects, including publicly-available images, like Debian 8. If you want to get a list of publicly-available images, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.
-            rpc :List, Google::Cloud::Compute::V1::ListImagesRequest, Google::Cloud::Compute::V1::ImageList
+            rpc :List, ::Google::Cloud::Compute::V1::ListImagesRequest, ::Google::Cloud::Compute::V1::ImageList
             # Patches the specified image with the data included in the request. Only the following fields can be modified: family, description, deprecation status.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchImageRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchImageRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets the access control policy on the specified resource. Replaces any existing policy.
-            rpc :SetIamPolicy, Google::Cloud::Compute::V1::SetIamPolicyImageRequest, Google::Cloud::Compute::V1::Policy
+            rpc :SetIamPolicy, ::Google::Cloud::Compute::V1::SetIamPolicyImageRequest, ::Google::Cloud::Compute::V1::Policy
             # Sets the labels on an image. To learn more about labels, read the Labeling Resources documentation.
-            rpc :SetLabels, Google::Cloud::Compute::V1::SetLabelsImageRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetLabels, ::Google::Cloud::Compute::V1::SetLabelsImageRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns permissions that a caller has on the specified resource.
-            rpc :TestIamPermissions, Google::Cloud::Compute::V1::TestIamPermissionsImageRequest, Google::Cloud::Compute::V1::TestPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Cloud::Compute::V1::TestIamPermissionsImageRequest, ::Google::Cloud::Compute::V1::TestPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -519,47 +519,47 @@ module Google
             # If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
             #
             # You can specify a maximum of 1000 instances with this method per request.
-            rpc :AbandonInstances, Google::Cloud::Compute::V1::AbandonInstancesInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :AbandonInstances, ::Google::Cloud::Compute::V1::AbandonInstancesInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of managed instance groups and groups them by zone.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListInstanceGroupManagersRequest, Google::Cloud::Compute::V1::InstanceGroupManagerAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListInstanceGroupManagersRequest, ::Google::Cloud::Compute::V1::InstanceGroupManagerAggregatedList
             # Applies changes to selected instances on the managed instance group. This method can be used to apply new overrides and/or new versions.
-            rpc :ApplyUpdatesToInstances, Google::Cloud::Compute::V1::ApplyUpdatesToInstancesInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :ApplyUpdatesToInstances, ::Google::Cloud::Compute::V1::ApplyUpdatesToInstancesInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Creates instances with per-instance configs in this managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.
-            rpc :CreateInstances, Google::Cloud::Compute::V1::CreateInstancesInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :CreateInstances, ::Google::Cloud::Compute::V1::CreateInstancesInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Deletes the specified managed instance group and all of the instances in that group. Note that the instance group must not belong to a backend service. Read  Deleting an instance group for more information.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Flags the specified instances in the managed instance group for immediate deletion. The instances are also removed from any target pools of which they were a member. This method reduces the targetSize of the managed instance group by the number of instances that you delete. This operation is marked as DONE when the action is scheduled even if the instances are still being deleted. You must separately verify the status of the deleting action with the listmanagedinstances method.
             #
             # If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
             #
             # You can specify a maximum of 1000 instances with this method per request.
-            rpc :DeleteInstances, Google::Cloud::Compute::V1::DeleteInstancesInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :DeleteInstances, ::Google::Cloud::Compute::V1::DeleteInstancesInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Deletes selected per-instance configs for the managed instance group.
-            rpc :DeletePerInstanceConfigs, Google::Cloud::Compute::V1::DeletePerInstanceConfigsInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :DeletePerInstanceConfigs, ::Google::Cloud::Compute::V1::DeletePerInstanceConfigsInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns all of the details about the specified managed instance group. Gets a list of available managed instance groups by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetInstanceGroupManagerRequest, Google::Cloud::Compute::V1::InstanceGroupManager
+            rpc :Get, ::Google::Cloud::Compute::V1::GetInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::InstanceGroupManager
             # Creates a managed instance group using the information that you specify in the request. After the group is created, instances in the group are created using the specified instance template. This operation is marked as DONE when the group is created even if the instances in the group have not yet been created. You must separately verify the status of the individual instances with the listmanagedinstances method.
             #
             # A managed instance group can have up to 1000 VM instances per group. Please contact Cloud Support if you need an increase in this limit.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of managed instance groups that are contained within the specified project and zone.
-            rpc :List, Google::Cloud::Compute::V1::ListInstanceGroupManagersRequest, Google::Cloud::Compute::V1::InstanceGroupManagerList
+            rpc :List, ::Google::Cloud::Compute::V1::ListInstanceGroupManagersRequest, ::Google::Cloud::Compute::V1::InstanceGroupManagerList
             # Lists all errors thrown by actions on instances for a given managed instance group. The filter and orderBy query parameters are not supported.
-            rpc :ListErrors, Google::Cloud::Compute::V1::ListErrorsInstanceGroupManagersRequest, Google::Cloud::Compute::V1::InstanceGroupManagersListErrorsResponse
+            rpc :ListErrors, ::Google::Cloud::Compute::V1::ListErrorsInstanceGroupManagersRequest, ::Google::Cloud::Compute::V1::InstanceGroupManagersListErrorsResponse
             # Lists all of the instances in the managed instance group. Each instance in the list has a currentAction, which indicates the action that the managed instance group is performing on the instance. For example, if the group is still creating an instance, the currentAction is CREATING. If a previous action failed, the list displays the errors for that failed action. The orderBy query parameter is not supported.
-            rpc :ListManagedInstances, Google::Cloud::Compute::V1::ListManagedInstancesInstanceGroupManagersRequest, Google::Cloud::Compute::V1::InstanceGroupManagersListManagedInstancesResponse
+            rpc :ListManagedInstances, ::Google::Cloud::Compute::V1::ListManagedInstancesInstanceGroupManagersRequest, ::Google::Cloud::Compute::V1::InstanceGroupManagersListManagedInstancesResponse
             # Lists all of the per-instance configs defined for the managed instance group. The orderBy query parameter is not supported.
-            rpc :ListPerInstanceConfigs, Google::Cloud::Compute::V1::ListPerInstanceConfigsInstanceGroupManagersRequest, Google::Cloud::Compute::V1::InstanceGroupManagersListPerInstanceConfigsResp
+            rpc :ListPerInstanceConfigs, ::Google::Cloud::Compute::V1::ListPerInstanceConfigsInstanceGroupManagersRequest, ::Google::Cloud::Compute::V1::InstanceGroupManagersListPerInstanceConfigsResp
             # Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is patched even if the instances in the group are still in the process of being patched. You must separately verify the status of the individual instances with the listManagedInstances method. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Inserts or patches per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
-            rpc :PatchPerInstanceConfigs, Google::Cloud::Compute::V1::PatchPerInstanceConfigsInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :PatchPerInstanceConfigs, ::Google::Cloud::Compute::V1::PatchPerInstanceConfigsInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Flags the specified instances in the managed instance group to be immediately recreated. The instances are deleted and recreated using the current instance template for the managed instance group. This operation is marked as DONE when the flag is set even if the instances have not yet been recreated. You must separately verify the status of the recreating action with the listmanagedinstances method.
             #
             # If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
             #
             # You can specify a maximum of 1000 instances with this method per request.
-            rpc :RecreateInstances, Google::Cloud::Compute::V1::RecreateInstancesInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :RecreateInstances, ::Google::Cloud::Compute::V1::RecreateInstancesInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Resizes the managed instance group. If you increase the size, the group creates new instances using the current instance template. If you decrease the size, the group deletes instances. The resize operation is marked DONE when the resize actions are scheduled even if the group has not yet added or deleted any instances. You must separately verify the status of the creating or deleting actions with the listmanagedinstances method.
             #
             # When resizing down, the instance group arbitrarily chooses the order in which VMs are deleted. The group takes into account some VM attributes when making the selection including:
@@ -569,13 +569,13 @@ module Google
             # This list is subject to change.
             #
             # If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
-            rpc :Resize, Google::Cloud::Compute::V1::ResizeInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Resize, ::Google::Cloud::Compute::V1::ResizeInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Specifies the instance template to use when creating new instances in this group. The templates for existing instances in the group do not change unless you run recreateInstances, run applyUpdatesToInstances, or set the group's updatePolicy.type to PROACTIVE.
-            rpc :SetInstanceTemplate, Google::Cloud::Compute::V1::SetInstanceTemplateInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetInstanceTemplate, ::Google::Cloud::Compute::V1::SetInstanceTemplateInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Modifies the target pools to which all instances in this managed instance group are assigned. The target pools automatically apply to all of the instances in the managed instance group. This operation is marked DONE when you make the request even if the instances have not yet been added to their target pools. The change might take some time to apply to all of the instances in the group depending on the size of the group.
-            rpc :SetTargetPools, Google::Cloud::Compute::V1::SetTargetPoolsInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetTargetPools, ::Google::Cloud::Compute::V1::SetTargetPoolsInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Inserts or updates per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
-            rpc :UpdatePerInstanceConfigs, Google::Cloud::Compute::V1::UpdatePerInstanceConfigsInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :UpdatePerInstanceConfigs, ::Google::Cloud::Compute::V1::UpdatePerInstanceConfigsInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -591,29 +591,29 @@ module Google
             self.service_name = 'google.cloud.compute.v1.InstanceGroups'
 
             # Adds a list of instances to the specified instance group. All of the instances in the instance group must be in the same network/subnetwork. Read  Adding instances for more information.
-            rpc :AddInstances, Google::Cloud::Compute::V1::AddInstancesInstanceGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :AddInstances, ::Google::Cloud::Compute::V1::AddInstancesInstanceGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of instance groups and sorts them by zone.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListInstanceGroupsRequest, Google::Cloud::Compute::V1::InstanceGroupAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListInstanceGroupsRequest, ::Google::Cloud::Compute::V1::InstanceGroupAggregatedList
             # Deletes the specified instance group. The instances in the group are not deleted. Note that instance group must not belong to a backend service. Read  Deleting an instance group for more information.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteInstanceGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteInstanceGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified zonal instance group. Get a list of available zonal instance groups by making a list() request.
             #
             # For managed instance groups, use the instanceGroupManagers or regionInstanceGroupManagers methods instead.
-            rpc :Get, Google::Cloud::Compute::V1::GetInstanceGroupRequest, Google::Cloud::Compute::V1::InstanceGroup
+            rpc :Get, ::Google::Cloud::Compute::V1::GetInstanceGroupRequest, ::Google::Cloud::Compute::V1::InstanceGroup
             # Creates an instance group in the specified project using the parameters that are included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertInstanceGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertInstanceGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of zonal instance group resources contained within the specified zone.
             #
             # For managed instance groups, use the instanceGroupManagers or regionInstanceGroupManagers methods instead.
-            rpc :List, Google::Cloud::Compute::V1::ListInstanceGroupsRequest, Google::Cloud::Compute::V1::InstanceGroupList
+            rpc :List, ::Google::Cloud::Compute::V1::ListInstanceGroupsRequest, ::Google::Cloud::Compute::V1::InstanceGroupList
             # Lists the instances in the specified instance group. The orderBy query parameter is not supported.
-            rpc :ListInstances, Google::Cloud::Compute::V1::ListInstancesInstanceGroupsRequest, Google::Cloud::Compute::V1::InstanceGroupsListInstances
+            rpc :ListInstances, ::Google::Cloud::Compute::V1::ListInstancesInstanceGroupsRequest, ::Google::Cloud::Compute::V1::InstanceGroupsListInstances
             # Removes one or more instances from the specified instance group, but does not delete those instances.
             #
             # If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration before the VM instance is removed or deleted.
-            rpc :RemoveInstances, Google::Cloud::Compute::V1::RemoveInstancesInstanceGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :RemoveInstances, ::Google::Cloud::Compute::V1::RemoveInstancesInstanceGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets the named ports for the specified instance group.
-            rpc :SetNamedPorts, Google::Cloud::Compute::V1::SetNamedPortsInstanceGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetNamedPorts, ::Google::Cloud::Compute::V1::SetNamedPortsInstanceGroupRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -629,19 +629,19 @@ module Google
             self.service_name = 'google.cloud.compute.v1.InstanceTemplates'
 
             # Deletes the specified instance template. Deleting an instance template is permanent and cannot be undone. It is not possible to delete templates that are already in use by a managed instance group.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteInstanceTemplateRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteInstanceTemplateRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified instance template. Gets a list of available instance templates by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetInstanceTemplateRequest, Google::Cloud::Compute::V1::InstanceTemplate
+            rpc :Get, ::Google::Cloud::Compute::V1::GetInstanceTemplateRequest, ::Google::Cloud::Compute::V1::InstanceTemplate
             # Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-            rpc :GetIamPolicy, Google::Cloud::Compute::V1::GetIamPolicyInstanceTemplateRequest, Google::Cloud::Compute::V1::Policy
+            rpc :GetIamPolicy, ::Google::Cloud::Compute::V1::GetIamPolicyInstanceTemplateRequest, ::Google::Cloud::Compute::V1::Policy
             # Creates an instance template in the specified project using the data that is included in the request. If you are creating a new template to update an existing instance group, your new instance template must use the same network or, if applicable, the same subnetwork as the original template.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertInstanceTemplateRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertInstanceTemplateRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of instance templates that are contained within the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListInstanceTemplatesRequest, Google::Cloud::Compute::V1::InstanceTemplateList
+            rpc :List, ::Google::Cloud::Compute::V1::ListInstanceTemplatesRequest, ::Google::Cloud::Compute::V1::InstanceTemplateList
             # Sets the access control policy on the specified resource. Replaces any existing policy.
-            rpc :SetIamPolicy, Google::Cloud::Compute::V1::SetIamPolicyInstanceTemplateRequest, Google::Cloud::Compute::V1::Policy
+            rpc :SetIamPolicy, ::Google::Cloud::Compute::V1::SetIamPolicyInstanceTemplateRequest, ::Google::Cloud::Compute::V1::Policy
             # Returns permissions that a caller has on the specified resource.
-            rpc :TestIamPermissions, Google::Cloud::Compute::V1::TestIamPermissionsInstanceTemplateRequest, Google::Cloud::Compute::V1::TestPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Cloud::Compute::V1::TestIamPermissionsInstanceTemplateRequest, ::Google::Cloud::Compute::V1::TestPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -657,85 +657,85 @@ module Google
             self.service_name = 'google.cloud.compute.v1.Instances'
 
             # Adds an access config to an instance's network interface.
-            rpc :AddAccessConfig, Google::Cloud::Compute::V1::AddAccessConfigInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :AddAccessConfig, ::Google::Cloud::Compute::V1::AddAccessConfigInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Adds existing resource policies to an instance. You can only add one policy right now which will be applied to this instance for scheduling live migrations.
-            rpc :AddResourcePolicies, Google::Cloud::Compute::V1::AddResourcePoliciesInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :AddResourcePolicies, ::Google::Cloud::Compute::V1::AddResourcePoliciesInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves aggregated list of all of the instances in your project across all regions and zones.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListInstancesRequest, Google::Cloud::Compute::V1::InstanceAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListInstancesRequest, ::Google::Cloud::Compute::V1::InstanceAggregatedList
             # Attaches an existing Disk resource to an instance. You must first create the disk before you can attach it. It is not possible to create and attach a disk at the same time. For more information, read Adding a persistent disk to your instance.
-            rpc :AttachDisk, Google::Cloud::Compute::V1::AttachDiskInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :AttachDisk, ::Google::Cloud::Compute::V1::AttachDiskInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Deletes the specified Instance resource. For more information, see Stopping or Deleting an Instance.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Deletes an access config from an instance's network interface.
-            rpc :DeleteAccessConfig, Google::Cloud::Compute::V1::DeleteAccessConfigInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :DeleteAccessConfig, ::Google::Cloud::Compute::V1::DeleteAccessConfigInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Detaches a disk from an instance.
-            rpc :DetachDisk, Google::Cloud::Compute::V1::DetachDiskInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :DetachDisk, ::Google::Cloud::Compute::V1::DetachDiskInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified Instance resource. Gets a list of available instances by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetInstanceRequest, Google::Cloud::Compute::V1::Instance
+            rpc :Get, ::Google::Cloud::Compute::V1::GetInstanceRequest, ::Google::Cloud::Compute::V1::Instance
             # Returns the specified guest attributes entry.
-            rpc :GetGuestAttributes, Google::Cloud::Compute::V1::GetGuestAttributesInstanceRequest, Google::Cloud::Compute::V1::GuestAttributes
+            rpc :GetGuestAttributes, ::Google::Cloud::Compute::V1::GetGuestAttributesInstanceRequest, ::Google::Cloud::Compute::V1::GuestAttributes
             # Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-            rpc :GetIamPolicy, Google::Cloud::Compute::V1::GetIamPolicyInstanceRequest, Google::Cloud::Compute::V1::Policy
+            rpc :GetIamPolicy, ::Google::Cloud::Compute::V1::GetIamPolicyInstanceRequest, ::Google::Cloud::Compute::V1::Policy
             # Returns the screenshot from the specified instance.
-            rpc :GetScreenshot, Google::Cloud::Compute::V1::GetScreenshotInstanceRequest, Google::Cloud::Compute::V1::Screenshot
+            rpc :GetScreenshot, ::Google::Cloud::Compute::V1::GetScreenshotInstanceRequest, ::Google::Cloud::Compute::V1::Screenshot
             # Returns the last 1 MB of serial port output from the specified instance.
-            rpc :GetSerialPortOutput, Google::Cloud::Compute::V1::GetSerialPortOutputInstanceRequest, Google::Cloud::Compute::V1::SerialPortOutput
+            rpc :GetSerialPortOutput, ::Google::Cloud::Compute::V1::GetSerialPortOutputInstanceRequest, ::Google::Cloud::Compute::V1::SerialPortOutput
             # Returns the Shielded Instance Identity of an instance
-            rpc :GetShieldedInstanceIdentity, Google::Cloud::Compute::V1::GetShieldedInstanceIdentityInstanceRequest, Google::Cloud::Compute::V1::ShieldedInstanceIdentity
+            rpc :GetShieldedInstanceIdentity, ::Google::Cloud::Compute::V1::GetShieldedInstanceIdentityInstanceRequest, ::Google::Cloud::Compute::V1::ShieldedInstanceIdentity
             # Creates an instance resource in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of instances contained within the specified zone.
-            rpc :List, Google::Cloud::Compute::V1::ListInstancesRequest, Google::Cloud::Compute::V1::InstanceList
+            rpc :List, ::Google::Cloud::Compute::V1::ListInstancesRequest, ::Google::Cloud::Compute::V1::InstanceList
             # Retrieves a list of resources that refer to the VM instance specified in the request. For example, if the VM instance is part of a managed or unmanaged instance group, the referrers list includes the instance group. For more information, read Viewing referrers to VM instances.
-            rpc :ListReferrers, Google::Cloud::Compute::V1::ListReferrersInstancesRequest, Google::Cloud::Compute::V1::InstanceListReferrers
+            rpc :ListReferrers, ::Google::Cloud::Compute::V1::ListReferrersInstancesRequest, ::Google::Cloud::Compute::V1::InstanceListReferrers
             # Removes resource policies from an instance.
-            rpc :RemoveResourcePolicies, Google::Cloud::Compute::V1::RemoveResourcePoliciesInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :RemoveResourcePolicies, ::Google::Cloud::Compute::V1::RemoveResourcePoliciesInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Performs a reset on the instance. This is a hard reset the VM does not do a graceful shutdown. For more information, see Resetting an instance.
-            rpc :Reset, Google::Cloud::Compute::V1::ResetInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Reset, ::Google::Cloud::Compute::V1::ResetInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets deletion protection on the instance.
-            rpc :SetDeletionProtection, Google::Cloud::Compute::V1::SetDeletionProtectionInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetDeletionProtection, ::Google::Cloud::Compute::V1::SetDeletionProtectionInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets the auto-delete flag for a disk attached to an instance.
-            rpc :SetDiskAutoDelete, Google::Cloud::Compute::V1::SetDiskAutoDeleteInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetDiskAutoDelete, ::Google::Cloud::Compute::V1::SetDiskAutoDeleteInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets the access control policy on the specified resource. Replaces any existing policy.
-            rpc :SetIamPolicy, Google::Cloud::Compute::V1::SetIamPolicyInstanceRequest, Google::Cloud::Compute::V1::Policy
+            rpc :SetIamPolicy, ::Google::Cloud::Compute::V1::SetIamPolicyInstanceRequest, ::Google::Cloud::Compute::V1::Policy
             # Sets labels on an instance. To learn more about labels, read the Labeling Resources documentation.
-            rpc :SetLabels, Google::Cloud::Compute::V1::SetLabelsInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetLabels, ::Google::Cloud::Compute::V1::SetLabelsInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Changes the number and/or type of accelerator for a stopped instance to the values specified in the request.
-            rpc :SetMachineResources, Google::Cloud::Compute::V1::SetMachineResourcesInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetMachineResources, ::Google::Cloud::Compute::V1::SetMachineResourcesInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Changes the machine type for a stopped instance to the machine type specified in the request.
-            rpc :SetMachineType, Google::Cloud::Compute::V1::SetMachineTypeInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetMachineType, ::Google::Cloud::Compute::V1::SetMachineTypeInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets metadata for the specified instance to the data included in the request.
-            rpc :SetMetadata, Google::Cloud::Compute::V1::SetMetadataInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetMetadata, ::Google::Cloud::Compute::V1::SetMetadataInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Changes the minimum CPU platform that this instance should use. This method can only be called on a stopped instance. For more information, read Specifying a Minimum CPU Platform.
-            rpc :SetMinCpuPlatform, Google::Cloud::Compute::V1::SetMinCpuPlatformInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetMinCpuPlatform, ::Google::Cloud::Compute::V1::SetMinCpuPlatformInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets an instance's scheduling options. You can only call this method on a stopped instance, that is, a VM instance that is in a `TERMINATED` state. See Instance Life Cycle for more information on the possible instance states.
-            rpc :SetScheduling, Google::Cloud::Compute::V1::SetSchedulingInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetScheduling, ::Google::Cloud::Compute::V1::SetSchedulingInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets the service account on the instance. For more information, read Changing the service account and access scopes for an instance.
-            rpc :SetServiceAccount, Google::Cloud::Compute::V1::SetServiceAccountInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetServiceAccount, ::Google::Cloud::Compute::V1::SetServiceAccountInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets the Shielded Instance integrity policy for an instance. You can only use this method on a running instance. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-            rpc :SetShieldedInstanceIntegrityPolicy, Google::Cloud::Compute::V1::SetShieldedInstanceIntegrityPolicyInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetShieldedInstanceIntegrityPolicy, ::Google::Cloud::Compute::V1::SetShieldedInstanceIntegrityPolicyInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets network tags for the specified instance to the data included in the request.
-            rpc :SetTags, Google::Cloud::Compute::V1::SetTagsInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetTags, ::Google::Cloud::Compute::V1::SetTagsInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Simulates a maintenance event on the instance.
-            rpc :SimulateMaintenanceEvent, Google::Cloud::Compute::V1::SimulateMaintenanceEventInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SimulateMaintenanceEvent, ::Google::Cloud::Compute::V1::SimulateMaintenanceEventInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Starts an instance that was stopped using the instances().stop method. For more information, see Restart an instance.
-            rpc :Start, Google::Cloud::Compute::V1::StartInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Start, ::Google::Cloud::Compute::V1::StartInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Starts an instance that was stopped using the instances().stop method. For more information, see Restart an instance.
-            rpc :StartWithEncryptionKey, Google::Cloud::Compute::V1::StartWithEncryptionKeyInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :StartWithEncryptionKey, ::Google::Cloud::Compute::V1::StartWithEncryptionKeyInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Stops a running instance, shutting it down cleanly, and allows you to restart the instance at a later time. Stopped instances do not incur VM usage charges while they are stopped. However, resources that the VM is using, such as persistent disks and static IP addresses, will continue to be charged until they are deleted. For more information, see Stopping an instance.
-            rpc :Stop, Google::Cloud::Compute::V1::StopInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Stop, ::Google::Cloud::Compute::V1::StopInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns permissions that a caller has on the specified resource.
-            rpc :TestIamPermissions, Google::Cloud::Compute::V1::TestIamPermissionsInstanceRequest, Google::Cloud::Compute::V1::TestPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Cloud::Compute::V1::TestIamPermissionsInstanceRequest, ::Google::Cloud::Compute::V1::TestPermissionsResponse
             # Updates an instance only if the necessary resources are available. This method can update only a specific set of instance properties. See  Updating a running instance for a list of updatable instance properties.
-            rpc :Update, Google::Cloud::Compute::V1::UpdateInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Update, ::Google::Cloud::Compute::V1::UpdateInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Updates the specified access config from an instance's network interface with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-            rpc :UpdateAccessConfig, Google::Cloud::Compute::V1::UpdateAccessConfigInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :UpdateAccessConfig, ::Google::Cloud::Compute::V1::UpdateAccessConfigInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Updates the Display config for a VM instance. You can only use this method on a stopped VM instance. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-            rpc :UpdateDisplayDevice, Google::Cloud::Compute::V1::UpdateDisplayDeviceInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :UpdateDisplayDevice, ::Google::Cloud::Compute::V1::UpdateDisplayDeviceInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Updates an instance's network interface. This method follows PATCH semantics.
-            rpc :UpdateNetworkInterface, Google::Cloud::Compute::V1::UpdateNetworkInterfaceInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :UpdateNetworkInterface, ::Google::Cloud::Compute::V1::UpdateNetworkInterfaceInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Updates the Shielded Instance config for an instance. You can only use this method on a stopped instance. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-            rpc :UpdateShieldedInstanceConfig, Google::Cloud::Compute::V1::UpdateShieldedInstanceConfigInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :UpdateShieldedInstanceConfig, ::Google::Cloud::Compute::V1::UpdateShieldedInstanceConfigInstanceRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -751,17 +751,17 @@ module Google
             self.service_name = 'google.cloud.compute.v1.InterconnectAttachments'
 
             # Retrieves an aggregated list of interconnect attachments.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListInterconnectAttachmentsRequest, Google::Cloud::Compute::V1::InterconnectAttachmentAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListInterconnectAttachmentsRequest, ::Google::Cloud::Compute::V1::InterconnectAttachmentAggregatedList
             # Deletes the specified interconnect attachment.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteInterconnectAttachmentRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteInterconnectAttachmentRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified interconnect attachment.
-            rpc :Get, Google::Cloud::Compute::V1::GetInterconnectAttachmentRequest, Google::Cloud::Compute::V1::InterconnectAttachment
+            rpc :Get, ::Google::Cloud::Compute::V1::GetInterconnectAttachmentRequest, ::Google::Cloud::Compute::V1::InterconnectAttachment
             # Creates an InterconnectAttachment in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertInterconnectAttachmentRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertInterconnectAttachmentRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of interconnect attachments contained within the specified region.
-            rpc :List, Google::Cloud::Compute::V1::ListInterconnectAttachmentsRequest, Google::Cloud::Compute::V1::InterconnectAttachmentList
+            rpc :List, ::Google::Cloud::Compute::V1::ListInterconnectAttachmentsRequest, ::Google::Cloud::Compute::V1::InterconnectAttachmentList
             # Updates the specified interconnect attachment with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchInterconnectAttachmentRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchInterconnectAttachmentRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -777,9 +777,9 @@ module Google
             self.service_name = 'google.cloud.compute.v1.InterconnectLocations'
 
             # Returns the details for the specified interconnect location. Gets a list of available interconnect locations by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetInterconnectLocationRequest, Google::Cloud::Compute::V1::InterconnectLocation
+            rpc :Get, ::Google::Cloud::Compute::V1::GetInterconnectLocationRequest, ::Google::Cloud::Compute::V1::InterconnectLocation
             # Retrieves the list of interconnect locations available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListInterconnectLocationsRequest, Google::Cloud::Compute::V1::InterconnectLocationList
+            rpc :List, ::Google::Cloud::Compute::V1::ListInterconnectLocationsRequest, ::Google::Cloud::Compute::V1::InterconnectLocationList
           end
 
           Stub = Service.rpc_stub_class
@@ -795,17 +795,17 @@ module Google
             self.service_name = 'google.cloud.compute.v1.Interconnects'
 
             # Deletes the specified interconnect.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteInterconnectRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteInterconnectRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified interconnect. Get a list of available interconnects by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetInterconnectRequest, Google::Cloud::Compute::V1::Interconnect
+            rpc :Get, ::Google::Cloud::Compute::V1::GetInterconnectRequest, ::Google::Cloud::Compute::V1::Interconnect
             # Returns the interconnectDiagnostics for the specified interconnect.
-            rpc :GetDiagnostics, Google::Cloud::Compute::V1::GetDiagnosticsInterconnectRequest, Google::Cloud::Compute::V1::InterconnectsGetDiagnosticsResponse
+            rpc :GetDiagnostics, ::Google::Cloud::Compute::V1::GetDiagnosticsInterconnectRequest, ::Google::Cloud::Compute::V1::InterconnectsGetDiagnosticsResponse
             # Creates a Interconnect in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertInterconnectRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertInterconnectRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of interconnect available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListInterconnectsRequest, Google::Cloud::Compute::V1::InterconnectList
+            rpc :List, ::Google::Cloud::Compute::V1::ListInterconnectsRequest, ::Google::Cloud::Compute::V1::InterconnectList
             # Updates the specified interconnect with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchInterconnectRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchInterconnectRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -821,9 +821,9 @@ module Google
             self.service_name = 'google.cloud.compute.v1.LicenseCodes'
 
             # Return a specified license code. License codes are mirrored across all projects that have permissions to read the License Code.  Caution This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
-            rpc :Get, Google::Cloud::Compute::V1::GetLicenseCodeRequest, Google::Cloud::Compute::V1::LicenseCode
+            rpc :Get, ::Google::Cloud::Compute::V1::GetLicenseCodeRequest, ::Google::Cloud::Compute::V1::LicenseCode
             # Returns permissions that a caller has on the specified resource.  Caution This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
-            rpc :TestIamPermissions, Google::Cloud::Compute::V1::TestIamPermissionsLicenseCodeRequest, Google::Cloud::Compute::V1::TestPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Cloud::Compute::V1::TestIamPermissionsLicenseCodeRequest, ::Google::Cloud::Compute::V1::TestPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -839,19 +839,19 @@ module Google
             self.service_name = 'google.cloud.compute.v1.Licenses'
 
             # Deletes the specified license.  Caution This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteLicenseRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteLicenseRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified License resource.  Caution This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
-            rpc :Get, Google::Cloud::Compute::V1::GetLicenseRequest, Google::Cloud::Compute::V1::License
+            rpc :Get, ::Google::Cloud::Compute::V1::GetLicenseRequest, ::Google::Cloud::Compute::V1::License
             # Gets the access control policy for a resource. May be empty if no such policy or resource exists.  Caution This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
-            rpc :GetIamPolicy, Google::Cloud::Compute::V1::GetIamPolicyLicenseRequest, Google::Cloud::Compute::V1::Policy
+            rpc :GetIamPolicy, ::Google::Cloud::Compute::V1::GetIamPolicyLicenseRequest, ::Google::Cloud::Compute::V1::Policy
             # Create a License resource in the specified project.  Caution This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertLicenseRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertLicenseRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of licenses available in the specified project. This method does not get any licenses that belong to other projects, including licenses attached to publicly-available images, like Debian 9. If you want to get a list of publicly-available licenses, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.  Caution This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
-            rpc :List, Google::Cloud::Compute::V1::ListLicensesRequest, Google::Cloud::Compute::V1::LicensesListResponse
+            rpc :List, ::Google::Cloud::Compute::V1::ListLicensesRequest, ::Google::Cloud::Compute::V1::LicensesListResponse
             # Sets the access control policy on the specified resource. Replaces any existing policy.  Caution This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
-            rpc :SetIamPolicy, Google::Cloud::Compute::V1::SetIamPolicyLicenseRequest, Google::Cloud::Compute::V1::Policy
+            rpc :SetIamPolicy, ::Google::Cloud::Compute::V1::SetIamPolicyLicenseRequest, ::Google::Cloud::Compute::V1::Policy
             # Returns permissions that a caller has on the specified resource.  Caution This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
-            rpc :TestIamPermissions, Google::Cloud::Compute::V1::TestIamPermissionsLicenseRequest, Google::Cloud::Compute::V1::TestPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Cloud::Compute::V1::TestIamPermissionsLicenseRequest, ::Google::Cloud::Compute::V1::TestPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -867,11 +867,11 @@ module Google
             self.service_name = 'google.cloud.compute.v1.MachineTypes'
 
             # Retrieves an aggregated list of machine types.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListMachineTypesRequest, Google::Cloud::Compute::V1::MachineTypeAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListMachineTypesRequest, ::Google::Cloud::Compute::V1::MachineTypeAggregatedList
             # Returns the specified machine type. Gets a list of available machine types by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetMachineTypeRequest, Google::Cloud::Compute::V1::MachineType
+            rpc :Get, ::Google::Cloud::Compute::V1::GetMachineTypeRequest, ::Google::Cloud::Compute::V1::MachineType
             # Retrieves a list of machine types available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListMachineTypesRequest, Google::Cloud::Compute::V1::MachineTypeList
+            rpc :List, ::Google::Cloud::Compute::V1::ListMachineTypesRequest, ::Google::Cloud::Compute::V1::MachineTypeList
           end
 
           Stub = Service.rpc_stub_class
@@ -887,23 +887,23 @@ module Google
             self.service_name = 'google.cloud.compute.v1.NetworkEndpointGroups'
 
             # Retrieves the list of network endpoint groups and sorts them by zone.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListNetworkEndpointGroupsRequest, Google::Cloud::Compute::V1::NetworkEndpointGroupAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListNetworkEndpointGroupsRequest, ::Google::Cloud::Compute::V1::NetworkEndpointGroupAggregatedList
             # Attach a list of network endpoints to the specified network endpoint group.
-            rpc :AttachNetworkEndpoints, Google::Cloud::Compute::V1::AttachNetworkEndpointsNetworkEndpointGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :AttachNetworkEndpoints, ::Google::Cloud::Compute::V1::AttachNetworkEndpointsNetworkEndpointGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Deletes the specified network endpoint group. The network endpoints in the NEG and the VM instances they belong to are not terminated when the NEG is deleted. Note that the NEG cannot be deleted if there are backend services referencing it.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteNetworkEndpointGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteNetworkEndpointGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Detach a list of network endpoints from the specified network endpoint group.
-            rpc :DetachNetworkEndpoints, Google::Cloud::Compute::V1::DetachNetworkEndpointsNetworkEndpointGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :DetachNetworkEndpoints, ::Google::Cloud::Compute::V1::DetachNetworkEndpointsNetworkEndpointGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified network endpoint group. Gets a list of available network endpoint groups by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetNetworkEndpointGroupRequest, Google::Cloud::Compute::V1::NetworkEndpointGroup
+            rpc :Get, ::Google::Cloud::Compute::V1::GetNetworkEndpointGroupRequest, ::Google::Cloud::Compute::V1::NetworkEndpointGroup
             # Creates a network endpoint group in the specified project using the parameters that are included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertNetworkEndpointGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertNetworkEndpointGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of network endpoint groups that are located in the specified project and zone.
-            rpc :List, Google::Cloud::Compute::V1::ListNetworkEndpointGroupsRequest, Google::Cloud::Compute::V1::NetworkEndpointGroupList
+            rpc :List, ::Google::Cloud::Compute::V1::ListNetworkEndpointGroupsRequest, ::Google::Cloud::Compute::V1::NetworkEndpointGroupList
             # Lists the network endpoints in the specified network endpoint group.
-            rpc :ListNetworkEndpoints, Google::Cloud::Compute::V1::ListNetworkEndpointsNetworkEndpointGroupsRequest, Google::Cloud::Compute::V1::NetworkEndpointGroupsListNetworkEndpoints
+            rpc :ListNetworkEndpoints, ::Google::Cloud::Compute::V1::ListNetworkEndpointsNetworkEndpointGroupsRequest, ::Google::Cloud::Compute::V1::NetworkEndpointGroupsListNetworkEndpoints
             # Returns permissions that a caller has on the specified resource.
-            rpc :TestIamPermissions, Google::Cloud::Compute::V1::TestIamPermissionsNetworkEndpointGroupRequest, Google::Cloud::Compute::V1::TestPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Cloud::Compute::V1::TestIamPermissionsNetworkEndpointGroupRequest, ::Google::Cloud::Compute::V1::TestPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -919,25 +919,25 @@ module Google
             self.service_name = 'google.cloud.compute.v1.Networks'
 
             # Adds a peering to the specified network.
-            rpc :AddPeering, Google::Cloud::Compute::V1::AddPeeringNetworkRequest, Google::Cloud::Compute::V1::Operation
+            rpc :AddPeering, ::Google::Cloud::Compute::V1::AddPeeringNetworkRequest, ::Google::Cloud::Compute::V1::Operation
             # Deletes the specified network.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteNetworkRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteNetworkRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified network. Gets a list of available networks by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetNetworkRequest, Google::Cloud::Compute::V1::Network
+            rpc :Get, ::Google::Cloud::Compute::V1::GetNetworkRequest, ::Google::Cloud::Compute::V1::Network
             # Creates a network in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertNetworkRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertNetworkRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of networks available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListNetworksRequest, Google::Cloud::Compute::V1::NetworkList
+            rpc :List, ::Google::Cloud::Compute::V1::ListNetworksRequest, ::Google::Cloud::Compute::V1::NetworkList
             # Lists the peering routes exchanged over peering connection.
-            rpc :ListPeeringRoutes, Google::Cloud::Compute::V1::ListPeeringRoutesNetworksRequest, Google::Cloud::Compute::V1::ExchangedPeeringRoutesList
+            rpc :ListPeeringRoutes, ::Google::Cloud::Compute::V1::ListPeeringRoutesNetworksRequest, ::Google::Cloud::Compute::V1::ExchangedPeeringRoutesList
             # Patches the specified network with the data included in the request. Only the following fields can be modified: routingConfig.routingMode.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchNetworkRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchNetworkRequest, ::Google::Cloud::Compute::V1::Operation
             # Removes a peering from the specified network.
-            rpc :RemovePeering, Google::Cloud::Compute::V1::RemovePeeringNetworkRequest, Google::Cloud::Compute::V1::Operation
+            rpc :RemovePeering, ::Google::Cloud::Compute::V1::RemovePeeringNetworkRequest, ::Google::Cloud::Compute::V1::Operation
             # Switches the network mode from auto subnet mode to custom subnet mode.
-            rpc :SwitchToCustomMode, Google::Cloud::Compute::V1::SwitchToCustomModeNetworkRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SwitchToCustomMode, ::Google::Cloud::Compute::V1::SwitchToCustomModeNetworkRequest, ::Google::Cloud::Compute::V1::Operation
             # Updates the specified network peering with the data included in the request Only the following fields can be modified: NetworkPeering.export_custom_routes, and NetworkPeering.import_custom_routes
-            rpc :UpdatePeering, Google::Cloud::Compute::V1::UpdatePeeringNetworkRequest, Google::Cloud::Compute::V1::Operation
+            rpc :UpdatePeering, ::Google::Cloud::Compute::V1::UpdatePeeringNetworkRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -953,31 +953,31 @@ module Google
             self.service_name = 'google.cloud.compute.v1.NodeGroups'
 
             # Adds specified number of nodes to the node group.
-            rpc :AddNodes, Google::Cloud::Compute::V1::AddNodesNodeGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :AddNodes, ::Google::Cloud::Compute::V1::AddNodesNodeGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves an aggregated list of node groups. Note: use nodeGroups.listNodes for more details about each group.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListNodeGroupsRequest, Google::Cloud::Compute::V1::NodeGroupAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListNodeGroupsRequest, ::Google::Cloud::Compute::V1::NodeGroupAggregatedList
             # Deletes the specified NodeGroup resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteNodeGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteNodeGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Deletes specified nodes from the node group.
-            rpc :DeleteNodes, Google::Cloud::Compute::V1::DeleteNodesNodeGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :DeleteNodes, ::Google::Cloud::Compute::V1::DeleteNodesNodeGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified NodeGroup. Get a list of available NodeGroups by making a list() request. Note: the "nodes" field should not be used. Use nodeGroups.listNodes instead.
-            rpc :Get, Google::Cloud::Compute::V1::GetNodeGroupRequest, Google::Cloud::Compute::V1::NodeGroup
+            rpc :Get, ::Google::Cloud::Compute::V1::GetNodeGroupRequest, ::Google::Cloud::Compute::V1::NodeGroup
             # Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-            rpc :GetIamPolicy, Google::Cloud::Compute::V1::GetIamPolicyNodeGroupRequest, Google::Cloud::Compute::V1::Policy
+            rpc :GetIamPolicy, ::Google::Cloud::Compute::V1::GetIamPolicyNodeGroupRequest, ::Google::Cloud::Compute::V1::Policy
             # Creates a NodeGroup resource in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertNodeGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertNodeGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of node groups available to the specified project. Note: use nodeGroups.listNodes for more details about each group.
-            rpc :List, Google::Cloud::Compute::V1::ListNodeGroupsRequest, Google::Cloud::Compute::V1::NodeGroupList
+            rpc :List, ::Google::Cloud::Compute::V1::ListNodeGroupsRequest, ::Google::Cloud::Compute::V1::NodeGroupList
             # Lists nodes in the node group.
-            rpc :ListNodes, Google::Cloud::Compute::V1::ListNodesNodeGroupsRequest, Google::Cloud::Compute::V1::NodeGroupsListNodes
+            rpc :ListNodes, ::Google::Cloud::Compute::V1::ListNodesNodeGroupsRequest, ::Google::Cloud::Compute::V1::NodeGroupsListNodes
             # Updates the specified node group.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchNodeGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchNodeGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets the access control policy on the specified resource. Replaces any existing policy.
-            rpc :SetIamPolicy, Google::Cloud::Compute::V1::SetIamPolicyNodeGroupRequest, Google::Cloud::Compute::V1::Policy
+            rpc :SetIamPolicy, ::Google::Cloud::Compute::V1::SetIamPolicyNodeGroupRequest, ::Google::Cloud::Compute::V1::Policy
             # Updates the node template of the node group.
-            rpc :SetNodeTemplate, Google::Cloud::Compute::V1::SetNodeTemplateNodeGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetNodeTemplate, ::Google::Cloud::Compute::V1::SetNodeTemplateNodeGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns permissions that a caller has on the specified resource.
-            rpc :TestIamPermissions, Google::Cloud::Compute::V1::TestIamPermissionsNodeGroupRequest, Google::Cloud::Compute::V1::TestPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Cloud::Compute::V1::TestIamPermissionsNodeGroupRequest, ::Google::Cloud::Compute::V1::TestPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -993,21 +993,21 @@ module Google
             self.service_name = 'google.cloud.compute.v1.NodeTemplates'
 
             # Retrieves an aggregated list of node templates.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListNodeTemplatesRequest, Google::Cloud::Compute::V1::NodeTemplateAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListNodeTemplatesRequest, ::Google::Cloud::Compute::V1::NodeTemplateAggregatedList
             # Deletes the specified NodeTemplate resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteNodeTemplateRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteNodeTemplateRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified node template. Gets a list of available node templates by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetNodeTemplateRequest, Google::Cloud::Compute::V1::NodeTemplate
+            rpc :Get, ::Google::Cloud::Compute::V1::GetNodeTemplateRequest, ::Google::Cloud::Compute::V1::NodeTemplate
             # Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-            rpc :GetIamPolicy, Google::Cloud::Compute::V1::GetIamPolicyNodeTemplateRequest, Google::Cloud::Compute::V1::Policy
+            rpc :GetIamPolicy, ::Google::Cloud::Compute::V1::GetIamPolicyNodeTemplateRequest, ::Google::Cloud::Compute::V1::Policy
             # Creates a NodeTemplate resource in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertNodeTemplateRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertNodeTemplateRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of node templates available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListNodeTemplatesRequest, Google::Cloud::Compute::V1::NodeTemplateList
+            rpc :List, ::Google::Cloud::Compute::V1::ListNodeTemplatesRequest, ::Google::Cloud::Compute::V1::NodeTemplateList
             # Sets the access control policy on the specified resource. Replaces any existing policy.
-            rpc :SetIamPolicy, Google::Cloud::Compute::V1::SetIamPolicyNodeTemplateRequest, Google::Cloud::Compute::V1::Policy
+            rpc :SetIamPolicy, ::Google::Cloud::Compute::V1::SetIamPolicyNodeTemplateRequest, ::Google::Cloud::Compute::V1::Policy
             # Returns permissions that a caller has on the specified resource.
-            rpc :TestIamPermissions, Google::Cloud::Compute::V1::TestIamPermissionsNodeTemplateRequest, Google::Cloud::Compute::V1::TestPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Cloud::Compute::V1::TestIamPermissionsNodeTemplateRequest, ::Google::Cloud::Compute::V1::TestPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -1023,11 +1023,11 @@ module Google
             self.service_name = 'google.cloud.compute.v1.NodeTypes'
 
             # Retrieves an aggregated list of node types.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListNodeTypesRequest, Google::Cloud::Compute::V1::NodeTypeAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListNodeTypesRequest, ::Google::Cloud::Compute::V1::NodeTypeAggregatedList
             # Returns the specified node type. Gets a list of available node types by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetNodeTypeRequest, Google::Cloud::Compute::V1::NodeType
+            rpc :Get, ::Google::Cloud::Compute::V1::GetNodeTypeRequest, ::Google::Cloud::Compute::V1::NodeType
             # Retrieves a list of node types available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListNodeTypesRequest, Google::Cloud::Compute::V1::NodeTypeList
+            rpc :List, ::Google::Cloud::Compute::V1::ListNodeTypesRequest, ::Google::Cloud::Compute::V1::NodeTypeList
           end
 
           Stub = Service.rpc_stub_class
@@ -1043,19 +1043,19 @@ module Google
             self.service_name = 'google.cloud.compute.v1.PacketMirrorings'
 
             # Retrieves an aggregated list of packetMirrorings.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListPacketMirroringsRequest, Google::Cloud::Compute::V1::PacketMirroringAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListPacketMirroringsRequest, ::Google::Cloud::Compute::V1::PacketMirroringAggregatedList
             # Deletes the specified PacketMirroring resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeletePacketMirroringRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeletePacketMirroringRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified PacketMirroring resource.
-            rpc :Get, Google::Cloud::Compute::V1::GetPacketMirroringRequest, Google::Cloud::Compute::V1::PacketMirroring
+            rpc :Get, ::Google::Cloud::Compute::V1::GetPacketMirroringRequest, ::Google::Cloud::Compute::V1::PacketMirroring
             # Creates a PacketMirroring resource in the specified project and region using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertPacketMirroringRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertPacketMirroringRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of PacketMirroring resources available to the specified project and region.
-            rpc :List, Google::Cloud::Compute::V1::ListPacketMirroringsRequest, Google::Cloud::Compute::V1::PacketMirroringList
+            rpc :List, ::Google::Cloud::Compute::V1::ListPacketMirroringsRequest, ::Google::Cloud::Compute::V1::PacketMirroringList
             # Patches the specified PacketMirroring resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchPacketMirroringRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchPacketMirroringRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns permissions that a caller has on the specified resource.
-            rpc :TestIamPermissions, Google::Cloud::Compute::V1::TestIamPermissionsPacketMirroringRequest, Google::Cloud::Compute::V1::TestPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Cloud::Compute::V1::TestIamPermissionsPacketMirroringRequest, ::Google::Cloud::Compute::V1::TestPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -1071,31 +1071,31 @@ module Google
             self.service_name = 'google.cloud.compute.v1.Projects'
 
             # Disable this project as a shared VPC host project.
-            rpc :DisableXpnHost, Google::Cloud::Compute::V1::DisableXpnHostProjectRequest, Google::Cloud::Compute::V1::Operation
+            rpc :DisableXpnHost, ::Google::Cloud::Compute::V1::DisableXpnHostProjectRequest, ::Google::Cloud::Compute::V1::Operation
             # Disable a service resource (also known as service project) associated with this host project.
-            rpc :DisableXpnResource, Google::Cloud::Compute::V1::DisableXpnResourceProjectRequest, Google::Cloud::Compute::V1::Operation
+            rpc :DisableXpnResource, ::Google::Cloud::Compute::V1::DisableXpnResourceProjectRequest, ::Google::Cloud::Compute::V1::Operation
             # Enable this project as a shared VPC host project.
-            rpc :EnableXpnHost, Google::Cloud::Compute::V1::EnableXpnHostProjectRequest, Google::Cloud::Compute::V1::Operation
+            rpc :EnableXpnHost, ::Google::Cloud::Compute::V1::EnableXpnHostProjectRequest, ::Google::Cloud::Compute::V1::Operation
             # Enable service resource (a.k.a service project) for a host project, so that subnets in the host project can be used by instances in the service project.
-            rpc :EnableXpnResource, Google::Cloud::Compute::V1::EnableXpnResourceProjectRequest, Google::Cloud::Compute::V1::Operation
+            rpc :EnableXpnResource, ::Google::Cloud::Compute::V1::EnableXpnResourceProjectRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified Project resource.
-            rpc :Get, Google::Cloud::Compute::V1::GetProjectRequest, Google::Cloud::Compute::V1::Project
+            rpc :Get, ::Google::Cloud::Compute::V1::GetProjectRequest, ::Google::Cloud::Compute::V1::Project
             # Gets the shared VPC host project that this project links to. May be empty if no link exists.
-            rpc :GetXpnHost, Google::Cloud::Compute::V1::GetXpnHostProjectRequest, Google::Cloud::Compute::V1::Project
+            rpc :GetXpnHost, ::Google::Cloud::Compute::V1::GetXpnHostProjectRequest, ::Google::Cloud::Compute::V1::Project
             # Gets service resources (a.k.a service project) associated with this host project.
-            rpc :GetXpnResources, Google::Cloud::Compute::V1::GetXpnResourcesProjectsRequest, Google::Cloud::Compute::V1::ProjectsGetXpnResources
+            rpc :GetXpnResources, ::Google::Cloud::Compute::V1::GetXpnResourcesProjectsRequest, ::Google::Cloud::Compute::V1::ProjectsGetXpnResources
             # Lists all shared VPC host projects visible to the user in an organization.
-            rpc :ListXpnHosts, Google::Cloud::Compute::V1::ListXpnHostsProjectsRequest, Google::Cloud::Compute::V1::XpnHostList
+            rpc :ListXpnHosts, ::Google::Cloud::Compute::V1::ListXpnHostsProjectsRequest, ::Google::Cloud::Compute::V1::XpnHostList
             # Moves a persistent disk from one zone to another.
-            rpc :MoveDisk, Google::Cloud::Compute::V1::MoveDiskProjectRequest, Google::Cloud::Compute::V1::Operation
+            rpc :MoveDisk, ::Google::Cloud::Compute::V1::MoveDiskProjectRequest, ::Google::Cloud::Compute::V1::Operation
             # Moves an instance and its attached persistent disks from one zone to another.
-            rpc :MoveInstance, Google::Cloud::Compute::V1::MoveInstanceProjectRequest, Google::Cloud::Compute::V1::Operation
+            rpc :MoveInstance, ::Google::Cloud::Compute::V1::MoveInstanceProjectRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets metadata common to all instances within the specified project using the data included in the request.
-            rpc :SetCommonInstanceMetadata, Google::Cloud::Compute::V1::SetCommonInstanceMetadataProjectRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetCommonInstanceMetadata, ::Google::Cloud::Compute::V1::SetCommonInstanceMetadataProjectRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets the default network tier of the project. The default network tier is used when an address/forwardingRule/instance is created without specifying the network tier field.
-            rpc :SetDefaultNetworkTier, Google::Cloud::Compute::V1::SetDefaultNetworkTierProjectRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetDefaultNetworkTier, ::Google::Cloud::Compute::V1::SetDefaultNetworkTierProjectRequest, ::Google::Cloud::Compute::V1::Operation
             # Enables the usage export feature and sets the usage export bucket where reports are stored. If you provide an empty request body using this method, the usage export feature will be disabled.
-            rpc :SetUsageExportBucket, Google::Cloud::Compute::V1::SetUsageExportBucketProjectRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetUsageExportBucket, ::Google::Cloud::Compute::V1::SetUsageExportBucketProjectRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -1111,17 +1111,17 @@ module Google
             self.service_name = 'google.cloud.compute.v1.RegionAutoscalers'
 
             # Deletes the specified autoscaler.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteRegionAutoscalerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteRegionAutoscalerRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified autoscaler.
-            rpc :Get, Google::Cloud::Compute::V1::GetRegionAutoscalerRequest, Google::Cloud::Compute::V1::Autoscaler
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRegionAutoscalerRequest, ::Google::Cloud::Compute::V1::Autoscaler
             # Creates an autoscaler in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertRegionAutoscalerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertRegionAutoscalerRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of autoscalers contained within the specified region.
-            rpc :List, Google::Cloud::Compute::V1::ListRegionAutoscalersRequest, Google::Cloud::Compute::V1::RegionAutoscalerList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRegionAutoscalersRequest, ::Google::Cloud::Compute::V1::RegionAutoscalerList
             # Updates an autoscaler in the specified project using the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchRegionAutoscalerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchRegionAutoscalerRequest, ::Google::Cloud::Compute::V1::Operation
             # Updates an autoscaler in the specified project using the data included in the request.
-            rpc :Update, Google::Cloud::Compute::V1::UpdateRegionAutoscalerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Update, ::Google::Cloud::Compute::V1::UpdateRegionAutoscalerRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -1137,19 +1137,19 @@ module Google
             self.service_name = 'google.cloud.compute.v1.RegionBackendServices'
 
             # Deletes the specified regional BackendService resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteRegionBackendServiceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteRegionBackendServiceRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified regional BackendService resource.
-            rpc :Get, Google::Cloud::Compute::V1::GetRegionBackendServiceRequest, Google::Cloud::Compute::V1::BackendService
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRegionBackendServiceRequest, ::Google::Cloud::Compute::V1::BackendService
             # Gets the most recent health check results for this regional BackendService.
-            rpc :GetHealth, Google::Cloud::Compute::V1::GetHealthRegionBackendServiceRequest, Google::Cloud::Compute::V1::BackendServiceGroupHealth
+            rpc :GetHealth, ::Google::Cloud::Compute::V1::GetHealthRegionBackendServiceRequest, ::Google::Cloud::Compute::V1::BackendServiceGroupHealth
             # Creates a regional BackendService resource in the specified project using the data included in the request. For more information, see  Backend services overview.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertRegionBackendServiceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertRegionBackendServiceRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of regional BackendService resources available to the specified project in the given region.
-            rpc :List, Google::Cloud::Compute::V1::ListRegionBackendServicesRequest, Google::Cloud::Compute::V1::BackendServiceList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRegionBackendServicesRequest, ::Google::Cloud::Compute::V1::BackendServiceList
             # Updates the specified regional BackendService resource with the data included in the request. For more information, see  Understanding backend services This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchRegionBackendServiceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchRegionBackendServiceRequest, ::Google::Cloud::Compute::V1::Operation
             # Updates the specified regional BackendService resource with the data included in the request. For more information, see  Backend services overview.
-            rpc :Update, Google::Cloud::Compute::V1::UpdateRegionBackendServiceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Update, ::Google::Cloud::Compute::V1::UpdateRegionBackendServiceRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -1165,13 +1165,13 @@ module Google
             self.service_name = 'google.cloud.compute.v1.RegionCommitments'
 
             # Retrieves an aggregated list of commitments.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListRegionCommitmentsRequest, Google::Cloud::Compute::V1::CommitmentAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListRegionCommitmentsRequest, ::Google::Cloud::Compute::V1::CommitmentAggregatedList
             # Returns the specified commitment resource. Gets a list of available commitments by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetRegionCommitmentRequest, Google::Cloud::Compute::V1::Commitment
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRegionCommitmentRequest, ::Google::Cloud::Compute::V1::Commitment
             # Creates a commitment in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertRegionCommitmentRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertRegionCommitmentRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of commitments contained within the specified region.
-            rpc :List, Google::Cloud::Compute::V1::ListRegionCommitmentsRequest, Google::Cloud::Compute::V1::CommitmentList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRegionCommitmentsRequest, ::Google::Cloud::Compute::V1::CommitmentList
           end
 
           Stub = Service.rpc_stub_class
@@ -1187,9 +1187,9 @@ module Google
             self.service_name = 'google.cloud.compute.v1.RegionDiskTypes'
 
             # Returns the specified regional disk type. Gets a list of available disk types by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetRegionDiskTypeRequest, Google::Cloud::Compute::V1::DiskType
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRegionDiskTypeRequest, ::Google::Cloud::Compute::V1::DiskType
             # Retrieves a list of regional disk types available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListRegionDiskTypesRequest, Google::Cloud::Compute::V1::RegionDiskTypeList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRegionDiskTypesRequest, ::Google::Cloud::Compute::V1::RegionDiskTypeList
           end
 
           Stub = Service.rpc_stub_class
@@ -1205,29 +1205,29 @@ module Google
             self.service_name = 'google.cloud.compute.v1.RegionDisks'
 
             # Adds existing resource policies to a regional disk. You can only add one policy which will be applied to this disk for scheduling snapshot creation.
-            rpc :AddResourcePolicies, Google::Cloud::Compute::V1::AddResourcePoliciesRegionDiskRequest, Google::Cloud::Compute::V1::Operation
+            rpc :AddResourcePolicies, ::Google::Cloud::Compute::V1::AddResourcePoliciesRegionDiskRequest, ::Google::Cloud::Compute::V1::Operation
             # Creates a snapshot of this regional disk.
-            rpc :CreateSnapshot, Google::Cloud::Compute::V1::CreateSnapshotRegionDiskRequest, Google::Cloud::Compute::V1::Operation
+            rpc :CreateSnapshot, ::Google::Cloud::Compute::V1::CreateSnapshotRegionDiskRequest, ::Google::Cloud::Compute::V1::Operation
             # Deletes the specified regional persistent disk. Deleting a regional disk removes all the replicas of its data permanently and is irreversible. However, deleting a disk does not delete any snapshots previously made from the disk. You must separately delete snapshots.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteRegionDiskRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteRegionDiskRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns a specified regional persistent disk.
-            rpc :Get, Google::Cloud::Compute::V1::GetRegionDiskRequest, Google::Cloud::Compute::V1::Disk
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRegionDiskRequest, ::Google::Cloud::Compute::V1::Disk
             # Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-            rpc :GetIamPolicy, Google::Cloud::Compute::V1::GetIamPolicyRegionDiskRequest, Google::Cloud::Compute::V1::Policy
+            rpc :GetIamPolicy, ::Google::Cloud::Compute::V1::GetIamPolicyRegionDiskRequest, ::Google::Cloud::Compute::V1::Policy
             # Creates a persistent regional disk in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertRegionDiskRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertRegionDiskRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of persistent disks contained within the specified region.
-            rpc :List, Google::Cloud::Compute::V1::ListRegionDisksRequest, Google::Cloud::Compute::V1::DiskList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRegionDisksRequest, ::Google::Cloud::Compute::V1::DiskList
             # Removes resource policies from a regional disk.
-            rpc :RemoveResourcePolicies, Google::Cloud::Compute::V1::RemoveResourcePoliciesRegionDiskRequest, Google::Cloud::Compute::V1::Operation
+            rpc :RemoveResourcePolicies, ::Google::Cloud::Compute::V1::RemoveResourcePoliciesRegionDiskRequest, ::Google::Cloud::Compute::V1::Operation
             # Resizes the specified regional persistent disk.
-            rpc :Resize, Google::Cloud::Compute::V1::ResizeRegionDiskRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Resize, ::Google::Cloud::Compute::V1::ResizeRegionDiskRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets the access control policy on the specified resource. Replaces any existing policy.
-            rpc :SetIamPolicy, Google::Cloud::Compute::V1::SetIamPolicyRegionDiskRequest, Google::Cloud::Compute::V1::Policy
+            rpc :SetIamPolicy, ::Google::Cloud::Compute::V1::SetIamPolicyRegionDiskRequest, ::Google::Cloud::Compute::V1::Policy
             # Sets the labels on the target regional disk.
-            rpc :SetLabels, Google::Cloud::Compute::V1::SetLabelsRegionDiskRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetLabels, ::Google::Cloud::Compute::V1::SetLabelsRegionDiskRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns permissions that a caller has on the specified resource.
-            rpc :TestIamPermissions, Google::Cloud::Compute::V1::TestIamPermissionsRegionDiskRequest, Google::Cloud::Compute::V1::TestPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Cloud::Compute::V1::TestIamPermissionsRegionDiskRequest, ::Google::Cloud::Compute::V1::TestPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -1243,15 +1243,15 @@ module Google
             self.service_name = 'google.cloud.compute.v1.RegionHealthCheckServices'
 
             # Deletes the specified regional HealthCheckService.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteRegionHealthCheckServiceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteRegionHealthCheckServiceRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified regional HealthCheckService resource.
-            rpc :Get, Google::Cloud::Compute::V1::GetRegionHealthCheckServiceRequest, Google::Cloud::Compute::V1::HealthCheckService
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRegionHealthCheckServiceRequest, ::Google::Cloud::Compute::V1::HealthCheckService
             # Creates a regional HealthCheckService resource in the specified project and region using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertRegionHealthCheckServiceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertRegionHealthCheckServiceRequest, ::Google::Cloud::Compute::V1::Operation
             # Lists all the HealthCheckService resources that have been configured for the specified project in the given region.
-            rpc :List, Google::Cloud::Compute::V1::ListRegionHealthCheckServicesRequest, Google::Cloud::Compute::V1::HealthCheckServicesList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRegionHealthCheckServicesRequest, ::Google::Cloud::Compute::V1::HealthCheckServicesList
             # Updates the specified regional HealthCheckService resource with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchRegionHealthCheckServiceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchRegionHealthCheckServiceRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -1267,17 +1267,17 @@ module Google
             self.service_name = 'google.cloud.compute.v1.RegionHealthChecks'
 
             # Deletes the specified HealthCheck resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteRegionHealthCheckRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteRegionHealthCheckRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified HealthCheck resource. Gets a list of available health checks by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetRegionHealthCheckRequest, Google::Cloud::Compute::V1::HealthCheck
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRegionHealthCheckRequest, ::Google::Cloud::Compute::V1::HealthCheck
             # Creates a HealthCheck resource in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertRegionHealthCheckRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertRegionHealthCheckRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of HealthCheck resources available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListRegionHealthChecksRequest, Google::Cloud::Compute::V1::HealthCheckList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRegionHealthChecksRequest, ::Google::Cloud::Compute::V1::HealthCheckList
             # Updates a HealthCheck resource in the specified project using the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchRegionHealthCheckRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchRegionHealthCheckRequest, ::Google::Cloud::Compute::V1::Operation
             # Updates a HealthCheck resource in the specified project using the data included in the request.
-            rpc :Update, Google::Cloud::Compute::V1::UpdateRegionHealthCheckRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Update, ::Google::Cloud::Compute::V1::UpdateRegionHealthCheckRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -1297,57 +1297,57 @@ module Google
             # If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
             #
             # You can specify a maximum of 1000 instances with this method per request.
-            rpc :AbandonInstances, Google::Cloud::Compute::V1::AbandonInstancesRegionInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :AbandonInstances, ::Google::Cloud::Compute::V1::AbandonInstancesRegionInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Apply updates to selected instances the managed instance group.
-            rpc :ApplyUpdatesToInstances, Google::Cloud::Compute::V1::ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :ApplyUpdatesToInstances, ::Google::Cloud::Compute::V1::ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Creates instances with per-instance configs in this regional managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.
-            rpc :CreateInstances, Google::Cloud::Compute::V1::CreateInstancesRegionInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :CreateInstances, ::Google::Cloud::Compute::V1::CreateInstancesRegionInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Deletes the specified managed instance group and all of the instances in that group.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteRegionInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteRegionInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Flags the specified instances in the managed instance group to be immediately deleted. The instances are also removed from any target pools of which they were a member. This method reduces the targetSize of the managed instance group by the number of instances that you delete. The deleteInstances operation is marked DONE if the deleteInstances request is successful. The underlying actions take additional time. You must separately verify the status of the deleting action with the listmanagedinstances method.
             #
             # If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
             #
             # You can specify a maximum of 1000 instances with this method per request.
-            rpc :DeleteInstances, Google::Cloud::Compute::V1::DeleteInstancesRegionInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :DeleteInstances, ::Google::Cloud::Compute::V1::DeleteInstancesRegionInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Deletes selected per-instance configs for the managed instance group.
-            rpc :DeletePerInstanceConfigs, Google::Cloud::Compute::V1::DeletePerInstanceConfigsRegionInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :DeletePerInstanceConfigs, ::Google::Cloud::Compute::V1::DeletePerInstanceConfigsRegionInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns all of the details about the specified managed instance group.
-            rpc :Get, Google::Cloud::Compute::V1::GetRegionInstanceGroupManagerRequest, Google::Cloud::Compute::V1::InstanceGroupManager
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRegionInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::InstanceGroupManager
             # Creates a managed instance group using the information that you specify in the request. After the group is created, instances in the group are created using the specified instance template. This operation is marked as DONE when the group is created even if the instances in the group have not yet been created. You must separately verify the status of the individual instances with the listmanagedinstances method.
             #
             # A regional managed instance group can contain up to 2000 instances.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertRegionInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertRegionInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of managed instance groups that are contained within the specified region.
-            rpc :List, Google::Cloud::Compute::V1::ListRegionInstanceGroupManagersRequest, Google::Cloud::Compute::V1::RegionInstanceGroupManagerList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRegionInstanceGroupManagersRequest, ::Google::Cloud::Compute::V1::RegionInstanceGroupManagerList
             # Lists all errors thrown by actions on instances for a given regional managed instance group. The filter and orderBy query parameters are not supported.
-            rpc :ListErrors, Google::Cloud::Compute::V1::ListErrorsRegionInstanceGroupManagersRequest, Google::Cloud::Compute::V1::RegionInstanceGroupManagersListErrorsResponse
+            rpc :ListErrors, ::Google::Cloud::Compute::V1::ListErrorsRegionInstanceGroupManagersRequest, ::Google::Cloud::Compute::V1::RegionInstanceGroupManagersListErrorsResponse
             # Lists the instances in the managed instance group and instances that are scheduled to be created. The list includes any current actions that the group has scheduled for its instances. The orderBy query parameter is not supported.
-            rpc :ListManagedInstances, Google::Cloud::Compute::V1::ListManagedInstancesRegionInstanceGroupManagersRequest, Google::Cloud::Compute::V1::RegionInstanceGroupManagersListInstancesResponse
+            rpc :ListManagedInstances, ::Google::Cloud::Compute::V1::ListManagedInstancesRegionInstanceGroupManagersRequest, ::Google::Cloud::Compute::V1::RegionInstanceGroupManagersListInstancesResponse
             # Lists all of the per-instance configs defined for the managed instance group. The orderBy query parameter is not supported.
-            rpc :ListPerInstanceConfigs, Google::Cloud::Compute::V1::ListPerInstanceConfigsRegionInstanceGroupManagersRequest, Google::Cloud::Compute::V1::RegionInstanceGroupManagersListInstanceConfigsResp
+            rpc :ListPerInstanceConfigs, ::Google::Cloud::Compute::V1::ListPerInstanceConfigsRegionInstanceGroupManagersRequest, ::Google::Cloud::Compute::V1::RegionInstanceGroupManagersListInstanceConfigsResp
             # Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is patched even if the instances in the group are still in the process of being patched. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchRegionInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchRegionInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Inserts or patches per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
-            rpc :PatchPerInstanceConfigs, Google::Cloud::Compute::V1::PatchPerInstanceConfigsRegionInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :PatchPerInstanceConfigs, ::Google::Cloud::Compute::V1::PatchPerInstanceConfigsRegionInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Flags the specified instances in the managed instance group to be immediately recreated. The instances are deleted and recreated using the current instance template for the managed instance group. This operation is marked as DONE when the flag is set even if the instances have not yet been recreated. You must separately verify the status of the recreating action with the listmanagedinstances method.
             #
             # If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
             #
             # You can specify a maximum of 1000 instances with this method per request.
-            rpc :RecreateInstances, Google::Cloud::Compute::V1::RecreateInstancesRegionInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :RecreateInstances, ::Google::Cloud::Compute::V1::RecreateInstancesRegionInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Changes the intended size of the managed instance group. If you increase the size, the group creates new instances using the current instance template. If you decrease the size, the group deletes one or more instances.
             #
             # The resize operation is marked DONE if the resize request is successful. The underlying actions take additional time. You must separately verify the status of the creating or deleting actions with the listmanagedinstances method.
             #
             # If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
-            rpc :Resize, Google::Cloud::Compute::V1::ResizeRegionInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Resize, ::Google::Cloud::Compute::V1::ResizeRegionInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets the instance template to use when creating new instances or recreating instances in this group. Existing instances are not affected.
-            rpc :SetInstanceTemplate, Google::Cloud::Compute::V1::SetInstanceTemplateRegionInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetInstanceTemplate, ::Google::Cloud::Compute::V1::SetInstanceTemplateRegionInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Modifies the target pools to which all new instances in this group are assigned. Existing instances in the group are not affected.
-            rpc :SetTargetPools, Google::Cloud::Compute::V1::SetTargetPoolsRegionInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetTargetPools, ::Google::Cloud::Compute::V1::SetTargetPoolsRegionInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
             # Inserts or updates per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
-            rpc :UpdatePerInstanceConfigs, Google::Cloud::Compute::V1::UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest, Google::Cloud::Compute::V1::Operation
+            rpc :UpdatePerInstanceConfigs, ::Google::Cloud::Compute::V1::UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -1363,13 +1363,13 @@ module Google
             self.service_name = 'google.cloud.compute.v1.RegionInstanceGroups'
 
             # Returns the specified instance group resource.
-            rpc :Get, Google::Cloud::Compute::V1::GetRegionInstanceGroupRequest, Google::Cloud::Compute::V1::InstanceGroup
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRegionInstanceGroupRequest, ::Google::Cloud::Compute::V1::InstanceGroup
             # Retrieves the list of instance group resources contained within the specified region.
-            rpc :List, Google::Cloud::Compute::V1::ListRegionInstanceGroupsRequest, Google::Cloud::Compute::V1::RegionInstanceGroupList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRegionInstanceGroupsRequest, ::Google::Cloud::Compute::V1::RegionInstanceGroupList
             # Lists the instances in the specified instance group and displays information about the named ports. Depending on the specified options, this method can list all instances or only the instances that are running. The orderBy query parameter is not supported.
-            rpc :ListInstances, Google::Cloud::Compute::V1::ListInstancesRegionInstanceGroupsRequest, Google::Cloud::Compute::V1::RegionInstanceGroupsListInstances
+            rpc :ListInstances, ::Google::Cloud::Compute::V1::ListInstancesRegionInstanceGroupsRequest, ::Google::Cloud::Compute::V1::RegionInstanceGroupsListInstances
             # Sets the named ports for the specified regional instance group.
-            rpc :SetNamedPorts, Google::Cloud::Compute::V1::SetNamedPortsRegionInstanceGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetNamedPorts, ::Google::Cloud::Compute::V1::SetNamedPortsRegionInstanceGroupRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -1385,13 +1385,13 @@ module Google
             self.service_name = 'google.cloud.compute.v1.RegionNetworkEndpointGroups'
 
             # Deletes the specified network endpoint group. Note that the NEG cannot be deleted if it is configured as a backend of a backend service.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteRegionNetworkEndpointGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteRegionNetworkEndpointGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified network endpoint group. Gets a list of available network endpoint groups by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetRegionNetworkEndpointGroupRequest, Google::Cloud::Compute::V1::NetworkEndpointGroup
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRegionNetworkEndpointGroupRequest, ::Google::Cloud::Compute::V1::NetworkEndpointGroup
             # Creates a network endpoint group in the specified project using the parameters that are included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertRegionNetworkEndpointGroupRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertRegionNetworkEndpointGroupRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of regional network endpoint groups available to the specified project in the given region.
-            rpc :List, Google::Cloud::Compute::V1::ListRegionNetworkEndpointGroupsRequest, Google::Cloud::Compute::V1::NetworkEndpointGroupList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRegionNetworkEndpointGroupsRequest, ::Google::Cloud::Compute::V1::NetworkEndpointGroupList
           end
 
           Stub = Service.rpc_stub_class
@@ -1407,13 +1407,13 @@ module Google
             self.service_name = 'google.cloud.compute.v1.RegionNotificationEndpoints'
 
             # Deletes the specified NotificationEndpoint in the given region
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteRegionNotificationEndpointRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteRegionNotificationEndpointRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified NotificationEndpoint resource in the given region.
-            rpc :Get, Google::Cloud::Compute::V1::GetRegionNotificationEndpointRequest, Google::Cloud::Compute::V1::NotificationEndpoint
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRegionNotificationEndpointRequest, ::Google::Cloud::Compute::V1::NotificationEndpoint
             # Create a NotificationEndpoint in the specified project in the given region using the parameters that are included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertRegionNotificationEndpointRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertRegionNotificationEndpointRequest, ::Google::Cloud::Compute::V1::Operation
             # Lists the NotificationEndpoints for a project in the given region.
-            rpc :List, Google::Cloud::Compute::V1::ListRegionNotificationEndpointsRequest, Google::Cloud::Compute::V1::NotificationEndpointList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRegionNotificationEndpointsRequest, ::Google::Cloud::Compute::V1::NotificationEndpointList
           end
 
           Stub = Service.rpc_stub_class
@@ -1429,17 +1429,17 @@ module Google
             self.service_name = 'google.cloud.compute.v1.RegionOperations'
 
             # Deletes the specified region-specific Operations resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteRegionOperationRequest, Google::Cloud::Compute::V1::DeleteRegionOperationResponse
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteRegionOperationRequest, ::Google::Cloud::Compute::V1::DeleteRegionOperationResponse
             # Retrieves the specified region-specific Operations resource.
-            rpc :Get, Google::Cloud::Compute::V1::GetRegionOperationRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRegionOperationRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of Operation resources contained within the specified region.
-            rpc :List, Google::Cloud::Compute::V1::ListRegionOperationsRequest, Google::Cloud::Compute::V1::OperationList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRegionOperationsRequest, ::Google::Cloud::Compute::V1::OperationList
             # Waits for the specified Operation resource to return as `DONE` or for the request to approach the 2 minute deadline, and retrieves the specified Operation resource. This method differs from the `GET` method in that it waits for no more than the default deadline (2 minutes) and then returns the current state of the operation, which might be `DONE` or still in progress.
             #
             # This method is called on a best-effort basis. Specifically:
             # - In uncommon cases, when the server is overloaded, the request might return before the default deadline is reached, or might return after zero seconds.
             # - If the default deadline is reached, there is no guarantee that the operation is actually done when the method returns. Be prepared to retry if the operation is not `DONE`.
-            rpc :Wait, Google::Cloud::Compute::V1::WaitRegionOperationRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Wait, ::Google::Cloud::Compute::V1::WaitRegionOperationRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -1455,13 +1455,13 @@ module Google
             self.service_name = 'google.cloud.compute.v1.RegionSslCertificates'
 
             # Deletes the specified SslCertificate resource in the region.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteRegionSslCertificateRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteRegionSslCertificateRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified SslCertificate resource in the specified region. Get a list of available SSL certificates by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetRegionSslCertificateRequest, Google::Cloud::Compute::V1::SslCertificate
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRegionSslCertificateRequest, ::Google::Cloud::Compute::V1::SslCertificate
             # Creates a SslCertificate resource in the specified project and region using the data included in the request
-            rpc :Insert, Google::Cloud::Compute::V1::InsertRegionSslCertificateRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertRegionSslCertificateRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of SslCertificate resources available to the specified project in the specified region.
-            rpc :List, Google::Cloud::Compute::V1::ListRegionSslCertificatesRequest, Google::Cloud::Compute::V1::SslCertificateList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRegionSslCertificatesRequest, ::Google::Cloud::Compute::V1::SslCertificateList
           end
 
           Stub = Service.rpc_stub_class
@@ -1477,15 +1477,15 @@ module Google
             self.service_name = 'google.cloud.compute.v1.RegionTargetHttpProxies'
 
             # Deletes the specified TargetHttpProxy resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteRegionTargetHttpProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteRegionTargetHttpProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified TargetHttpProxy resource in the specified region. Gets a list of available target HTTP proxies by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetRegionTargetHttpProxyRequest, Google::Cloud::Compute::V1::TargetHttpProxy
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRegionTargetHttpProxyRequest, ::Google::Cloud::Compute::V1::TargetHttpProxy
             # Creates a TargetHttpProxy resource in the specified project and region using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertRegionTargetHttpProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertRegionTargetHttpProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of TargetHttpProxy resources available to the specified project in the specified region.
-            rpc :List, Google::Cloud::Compute::V1::ListRegionTargetHttpProxiesRequest, Google::Cloud::Compute::V1::TargetHttpProxyList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRegionTargetHttpProxiesRequest, ::Google::Cloud::Compute::V1::TargetHttpProxyList
             # Changes the URL map for TargetHttpProxy.
-            rpc :SetUrlMap, Google::Cloud::Compute::V1::SetUrlMapRegionTargetHttpProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetUrlMap, ::Google::Cloud::Compute::V1::SetUrlMapRegionTargetHttpProxyRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -1501,17 +1501,17 @@ module Google
             self.service_name = 'google.cloud.compute.v1.RegionTargetHttpsProxies'
 
             # Deletes the specified TargetHttpsProxy resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteRegionTargetHttpsProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteRegionTargetHttpsProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified TargetHttpsProxy resource in the specified region. Gets a list of available target HTTP proxies by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetRegionTargetHttpsProxyRequest, Google::Cloud::Compute::V1::TargetHttpsProxy
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRegionTargetHttpsProxyRequest, ::Google::Cloud::Compute::V1::TargetHttpsProxy
             # Creates a TargetHttpsProxy resource in the specified project and region using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertRegionTargetHttpsProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertRegionTargetHttpsProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of TargetHttpsProxy resources available to the specified project in the specified region.
-            rpc :List, Google::Cloud::Compute::V1::ListRegionTargetHttpsProxiesRequest, Google::Cloud::Compute::V1::TargetHttpsProxyList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRegionTargetHttpsProxiesRequest, ::Google::Cloud::Compute::V1::TargetHttpsProxyList
             # Replaces SslCertificates for TargetHttpsProxy.
-            rpc :SetSslCertificates, Google::Cloud::Compute::V1::SetSslCertificatesRegionTargetHttpsProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetSslCertificates, ::Google::Cloud::Compute::V1::SetSslCertificatesRegionTargetHttpsProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Changes the URL map for TargetHttpsProxy.
-            rpc :SetUrlMap, Google::Cloud::Compute::V1::SetUrlMapRegionTargetHttpsProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetUrlMap, ::Google::Cloud::Compute::V1::SetUrlMapRegionTargetHttpsProxyRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -1527,19 +1527,19 @@ module Google
             self.service_name = 'google.cloud.compute.v1.RegionUrlMaps'
 
             # Deletes the specified UrlMap resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteRegionUrlMapRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteRegionUrlMapRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified UrlMap resource. Gets a list of available URL maps by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetRegionUrlMapRequest, Google::Cloud::Compute::V1::UrlMap
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRegionUrlMapRequest, ::Google::Cloud::Compute::V1::UrlMap
             # Creates a UrlMap resource in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertRegionUrlMapRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertRegionUrlMapRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of UrlMap resources available to the specified project in the specified region.
-            rpc :List, Google::Cloud::Compute::V1::ListRegionUrlMapsRequest, Google::Cloud::Compute::V1::UrlMapList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRegionUrlMapsRequest, ::Google::Cloud::Compute::V1::UrlMapList
             # Patches the specified UrlMap resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchRegionUrlMapRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchRegionUrlMapRequest, ::Google::Cloud::Compute::V1::Operation
             # Updates the specified UrlMap resource with the data included in the request.
-            rpc :Update, Google::Cloud::Compute::V1::UpdateRegionUrlMapRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Update, ::Google::Cloud::Compute::V1::UpdateRegionUrlMapRequest, ::Google::Cloud::Compute::V1::Operation
             # Runs static validation for the UrlMap. In particular, the tests of the provided UrlMap will be run. Calling this method does NOT create the UrlMap.
-            rpc :Validate, Google::Cloud::Compute::V1::ValidateRegionUrlMapRequest, Google::Cloud::Compute::V1::UrlMapsValidateResponse
+            rpc :Validate, ::Google::Cloud::Compute::V1::ValidateRegionUrlMapRequest, ::Google::Cloud::Compute::V1::UrlMapsValidateResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -1555,9 +1555,9 @@ module Google
             self.service_name = 'google.cloud.compute.v1.Regions'
 
             # Returns the specified Region resource. Gets a list of available regions by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetRegionRequest, Google::Cloud::Compute::V1::Region
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRegionRequest, ::Google::Cloud::Compute::V1::Region
             # Retrieves the list of region resources available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListRegionsRequest, Google::Cloud::Compute::V1::RegionList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRegionsRequest, ::Google::Cloud::Compute::V1::RegionList
           end
 
           Stub = Service.rpc_stub_class
@@ -1573,23 +1573,23 @@ module Google
             self.service_name = 'google.cloud.compute.v1.Reservations'
 
             # Retrieves an aggregated list of reservations.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListReservationsRequest, Google::Cloud::Compute::V1::ReservationAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListReservationsRequest, ::Google::Cloud::Compute::V1::ReservationAggregatedList
             # Deletes the specified reservation.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteReservationRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteReservationRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves information about the specified reservation.
-            rpc :Get, Google::Cloud::Compute::V1::GetReservationRequest, Google::Cloud::Compute::V1::Reservation
+            rpc :Get, ::Google::Cloud::Compute::V1::GetReservationRequest, ::Google::Cloud::Compute::V1::Reservation
             # Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-            rpc :GetIamPolicy, Google::Cloud::Compute::V1::GetIamPolicyReservationRequest, Google::Cloud::Compute::V1::Policy
+            rpc :GetIamPolicy, ::Google::Cloud::Compute::V1::GetIamPolicyReservationRequest, ::Google::Cloud::Compute::V1::Policy
             # Creates a new reservation. For more information, read Reserving zonal resources.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertReservationRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertReservationRequest, ::Google::Cloud::Compute::V1::Operation
             # A list of all the reservations that have been configured for the specified project in specified zone.
-            rpc :List, Google::Cloud::Compute::V1::ListReservationsRequest, Google::Cloud::Compute::V1::ReservationList
+            rpc :List, ::Google::Cloud::Compute::V1::ListReservationsRequest, ::Google::Cloud::Compute::V1::ReservationList
             # Resizes the reservation (applicable to standalone reservations only). For more information, read Modifying reservations.
-            rpc :Resize, Google::Cloud::Compute::V1::ResizeReservationRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Resize, ::Google::Cloud::Compute::V1::ResizeReservationRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets the access control policy on the specified resource. Replaces any existing policy.
-            rpc :SetIamPolicy, Google::Cloud::Compute::V1::SetIamPolicyReservationRequest, Google::Cloud::Compute::V1::Policy
+            rpc :SetIamPolicy, ::Google::Cloud::Compute::V1::SetIamPolicyReservationRequest, ::Google::Cloud::Compute::V1::Policy
             # Returns permissions that a caller has on the specified resource.
-            rpc :TestIamPermissions, Google::Cloud::Compute::V1::TestIamPermissionsReservationRequest, Google::Cloud::Compute::V1::TestPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Cloud::Compute::V1::TestIamPermissionsReservationRequest, ::Google::Cloud::Compute::V1::TestPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -1605,21 +1605,21 @@ module Google
             self.service_name = 'google.cloud.compute.v1.ResourcePolicies'
 
             # Retrieves an aggregated list of resource policies.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListResourcePoliciesRequest, Google::Cloud::Compute::V1::ResourcePolicyAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListResourcePoliciesRequest, ::Google::Cloud::Compute::V1::ResourcePolicyAggregatedList
             # Deletes the specified resource policy.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteResourcePolicyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteResourcePolicyRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves all information of the specified resource policy.
-            rpc :Get, Google::Cloud::Compute::V1::GetResourcePolicyRequest, Google::Cloud::Compute::V1::ResourcePolicy
+            rpc :Get, ::Google::Cloud::Compute::V1::GetResourcePolicyRequest, ::Google::Cloud::Compute::V1::ResourcePolicy
             # Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-            rpc :GetIamPolicy, Google::Cloud::Compute::V1::GetIamPolicyResourcePolicyRequest, Google::Cloud::Compute::V1::Policy
+            rpc :GetIamPolicy, ::Google::Cloud::Compute::V1::GetIamPolicyResourcePolicyRequest, ::Google::Cloud::Compute::V1::Policy
             # Creates a new resource policy.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertResourcePolicyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertResourcePolicyRequest, ::Google::Cloud::Compute::V1::Operation
             # A list all the resource policies that have been configured for the specified project in specified region.
-            rpc :List, Google::Cloud::Compute::V1::ListResourcePoliciesRequest, Google::Cloud::Compute::V1::ResourcePolicyList
+            rpc :List, ::Google::Cloud::Compute::V1::ListResourcePoliciesRequest, ::Google::Cloud::Compute::V1::ResourcePolicyList
             # Sets the access control policy on the specified resource. Replaces any existing policy.
-            rpc :SetIamPolicy, Google::Cloud::Compute::V1::SetIamPolicyResourcePolicyRequest, Google::Cloud::Compute::V1::Policy
+            rpc :SetIamPolicy, ::Google::Cloud::Compute::V1::SetIamPolicyResourcePolicyRequest, ::Google::Cloud::Compute::V1::Policy
             # Returns permissions that a caller has on the specified resource.
-            rpc :TestIamPermissions, Google::Cloud::Compute::V1::TestIamPermissionsResourcePolicyRequest, Google::Cloud::Compute::V1::TestPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Cloud::Compute::V1::TestIamPermissionsResourcePolicyRequest, ::Google::Cloud::Compute::V1::TestPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -1635,25 +1635,25 @@ module Google
             self.service_name = 'google.cloud.compute.v1.Routers'
 
             # Retrieves an aggregated list of routers.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListRoutersRequest, Google::Cloud::Compute::V1::RouterAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListRoutersRequest, ::Google::Cloud::Compute::V1::RouterAggregatedList
             # Deletes the specified Router resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteRouterRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteRouterRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified Router resource. Gets a list of available routers by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetRouterRequest, Google::Cloud::Compute::V1::Router
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRouterRequest, ::Google::Cloud::Compute::V1::Router
             # Retrieves runtime Nat mapping information of VM endpoints.
-            rpc :GetNatMappingInfo, Google::Cloud::Compute::V1::GetNatMappingInfoRoutersRequest, Google::Cloud::Compute::V1::VmEndpointNatMappingsList
+            rpc :GetNatMappingInfo, ::Google::Cloud::Compute::V1::GetNatMappingInfoRoutersRequest, ::Google::Cloud::Compute::V1::VmEndpointNatMappingsList
             # Retrieves runtime information of the specified router.
-            rpc :GetRouterStatus, Google::Cloud::Compute::V1::GetRouterStatusRouterRequest, Google::Cloud::Compute::V1::RouterStatusResponse
+            rpc :GetRouterStatus, ::Google::Cloud::Compute::V1::GetRouterStatusRouterRequest, ::Google::Cloud::Compute::V1::RouterStatusResponse
             # Creates a Router resource in the specified project and region using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertRouterRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertRouterRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of Router resources available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListRoutersRequest, Google::Cloud::Compute::V1::RouterList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRoutersRequest, ::Google::Cloud::Compute::V1::RouterList
             # Patches the specified Router resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchRouterRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchRouterRequest, ::Google::Cloud::Compute::V1::Operation
             # Preview fields auto-generated during router create and update operations. Calling this method does NOT create or update the router.
-            rpc :Preview, Google::Cloud::Compute::V1::PreviewRouterRequest, Google::Cloud::Compute::V1::RoutersPreviewResponse
+            rpc :Preview, ::Google::Cloud::Compute::V1::PreviewRouterRequest, ::Google::Cloud::Compute::V1::RoutersPreviewResponse
             # Updates the specified Router resource with the data included in the request. This method conforms to PUT semantics, which requests that the state of the target resource be created or replaced with the state defined by the representation enclosed in the request message payload.
-            rpc :Update, Google::Cloud::Compute::V1::UpdateRouterRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Update, ::Google::Cloud::Compute::V1::UpdateRouterRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -1669,13 +1669,13 @@ module Google
             self.service_name = 'google.cloud.compute.v1.Routes'
 
             # Deletes the specified Route resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteRouteRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteRouteRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified Route resource. Gets a list of available routes by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetRouteRequest, Google::Cloud::Compute::V1::Route
+            rpc :Get, ::Google::Cloud::Compute::V1::GetRouteRequest, ::Google::Cloud::Compute::V1::Route
             # Creates a Route resource in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertRouteRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertRouteRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of Route resources available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListRoutesRequest, Google::Cloud::Compute::V1::RouteList
+            rpc :List, ::Google::Cloud::Compute::V1::ListRoutesRequest, ::Google::Cloud::Compute::V1::RouteList
           end
 
           Stub = Service.rpc_stub_class
@@ -1691,25 +1691,25 @@ module Google
             self.service_name = 'google.cloud.compute.v1.SecurityPolicies'
 
             # Inserts a rule into a security policy.
-            rpc :AddRule, Google::Cloud::Compute::V1::AddRuleSecurityPolicyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :AddRule, ::Google::Cloud::Compute::V1::AddRuleSecurityPolicyRequest, ::Google::Cloud::Compute::V1::Operation
             # Deletes the specified policy.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteSecurityPolicyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteSecurityPolicyRequest, ::Google::Cloud::Compute::V1::Operation
             # List all of the ordered rules present in a single specified policy.
-            rpc :Get, Google::Cloud::Compute::V1::GetSecurityPolicyRequest, Google::Cloud::Compute::V1::SecurityPolicy
+            rpc :Get, ::Google::Cloud::Compute::V1::GetSecurityPolicyRequest, ::Google::Cloud::Compute::V1::SecurityPolicy
             # Gets a rule at the specified priority.
-            rpc :GetRule, Google::Cloud::Compute::V1::GetRuleSecurityPolicyRequest, Google::Cloud::Compute::V1::SecurityPolicyRule
+            rpc :GetRule, ::Google::Cloud::Compute::V1::GetRuleSecurityPolicyRequest, ::Google::Cloud::Compute::V1::SecurityPolicyRule
             # Creates a new policy in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertSecurityPolicyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertSecurityPolicyRequest, ::Google::Cloud::Compute::V1::Operation
             # List all the policies that have been configured for the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListSecurityPoliciesRequest, Google::Cloud::Compute::V1::SecurityPolicyList
+            rpc :List, ::Google::Cloud::Compute::V1::ListSecurityPoliciesRequest, ::Google::Cloud::Compute::V1::SecurityPolicyList
             # Gets the current list of preconfigured Web Application Firewall (WAF) expressions.
-            rpc :ListPreconfiguredExpressionSets, Google::Cloud::Compute::V1::ListPreconfiguredExpressionSetsSecurityPoliciesRequest, Google::Cloud::Compute::V1::SecurityPoliciesListPreconfiguredExpressionSetsResponse
+            rpc :ListPreconfiguredExpressionSets, ::Google::Cloud::Compute::V1::ListPreconfiguredExpressionSetsSecurityPoliciesRequest, ::Google::Cloud::Compute::V1::SecurityPoliciesListPreconfiguredExpressionSetsResponse
             # Patches the specified policy with the data included in the request. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchSecurityPolicyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchSecurityPolicyRequest, ::Google::Cloud::Compute::V1::Operation
             # Patches a rule at the specified priority.
-            rpc :PatchRule, Google::Cloud::Compute::V1::PatchRuleSecurityPolicyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :PatchRule, ::Google::Cloud::Compute::V1::PatchRuleSecurityPolicyRequest, ::Google::Cloud::Compute::V1::Operation
             # Deletes a rule at the specified priority.
-            rpc :RemoveRule, Google::Cloud::Compute::V1::RemoveRuleSecurityPolicyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :RemoveRule, ::Google::Cloud::Compute::V1::RemoveRuleSecurityPolicyRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -1727,19 +1727,19 @@ module Google
             # Deletes the specified Snapshot resource. Keep in mind that deleting a single snapshot might not necessarily delete all the data on that snapshot. If any data on the snapshot that is marked for deletion is needed for subsequent snapshots, the data will be moved to the next corresponding snapshot.
             #
             # For more information, see Deleting snapshots.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteSnapshotRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteSnapshotRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified Snapshot resource. Gets a list of available snapshots by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetSnapshotRequest, Google::Cloud::Compute::V1::Snapshot
+            rpc :Get, ::Google::Cloud::Compute::V1::GetSnapshotRequest, ::Google::Cloud::Compute::V1::Snapshot
             # Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-            rpc :GetIamPolicy, Google::Cloud::Compute::V1::GetIamPolicySnapshotRequest, Google::Cloud::Compute::V1::Policy
+            rpc :GetIamPolicy, ::Google::Cloud::Compute::V1::GetIamPolicySnapshotRequest, ::Google::Cloud::Compute::V1::Policy
             # Retrieves the list of Snapshot resources contained within the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListSnapshotsRequest, Google::Cloud::Compute::V1::SnapshotList
+            rpc :List, ::Google::Cloud::Compute::V1::ListSnapshotsRequest, ::Google::Cloud::Compute::V1::SnapshotList
             # Sets the access control policy on the specified resource. Replaces any existing policy.
-            rpc :SetIamPolicy, Google::Cloud::Compute::V1::SetIamPolicySnapshotRequest, Google::Cloud::Compute::V1::Policy
+            rpc :SetIamPolicy, ::Google::Cloud::Compute::V1::SetIamPolicySnapshotRequest, ::Google::Cloud::Compute::V1::Policy
             # Sets the labels on a snapshot. To learn more about labels, read the Labeling Resources documentation.
-            rpc :SetLabels, Google::Cloud::Compute::V1::SetLabelsSnapshotRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetLabels, ::Google::Cloud::Compute::V1::SetLabelsSnapshotRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns permissions that a caller has on the specified resource.
-            rpc :TestIamPermissions, Google::Cloud::Compute::V1::TestIamPermissionsSnapshotRequest, Google::Cloud::Compute::V1::TestPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Cloud::Compute::V1::TestIamPermissionsSnapshotRequest, ::Google::Cloud::Compute::V1::TestPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -1755,15 +1755,15 @@ module Google
             self.service_name = 'google.cloud.compute.v1.SslCertificates'
 
             # Retrieves the list of all SslCertificate resources, regional and global, available to the specified project.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListSslCertificatesRequest, Google::Cloud::Compute::V1::SslCertificateAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListSslCertificatesRequest, ::Google::Cloud::Compute::V1::SslCertificateAggregatedList
             # Deletes the specified SslCertificate resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteSslCertificateRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteSslCertificateRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified SslCertificate resource. Gets a list of available SSL certificates by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetSslCertificateRequest, Google::Cloud::Compute::V1::SslCertificate
+            rpc :Get, ::Google::Cloud::Compute::V1::GetSslCertificateRequest, ::Google::Cloud::Compute::V1::SslCertificate
             # Creates a SslCertificate resource in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertSslCertificateRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertSslCertificateRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of SslCertificate resources available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListSslCertificatesRequest, Google::Cloud::Compute::V1::SslCertificateList
+            rpc :List, ::Google::Cloud::Compute::V1::ListSslCertificatesRequest, ::Google::Cloud::Compute::V1::SslCertificateList
           end
 
           Stub = Service.rpc_stub_class
@@ -1779,17 +1779,17 @@ module Google
             self.service_name = 'google.cloud.compute.v1.SslPolicies'
 
             # Deletes the specified SSL policy. The SSL policy resource can be deleted only if it is not in use by any TargetHttpsProxy or TargetSslProxy resources.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteSslPolicyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteSslPolicyRequest, ::Google::Cloud::Compute::V1::Operation
             # Lists all of the ordered rules present in a single specified policy.
-            rpc :Get, Google::Cloud::Compute::V1::GetSslPolicyRequest, Google::Cloud::Compute::V1::SslPolicy
+            rpc :Get, ::Google::Cloud::Compute::V1::GetSslPolicyRequest, ::Google::Cloud::Compute::V1::SslPolicy
             # Returns the specified SSL policy resource. Gets a list of available SSL policies by making a list() request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertSslPolicyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertSslPolicyRequest, ::Google::Cloud::Compute::V1::Operation
             # Lists all the SSL policies that have been configured for the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListSslPoliciesRequest, Google::Cloud::Compute::V1::SslPoliciesList
+            rpc :List, ::Google::Cloud::Compute::V1::ListSslPoliciesRequest, ::Google::Cloud::Compute::V1::SslPoliciesList
             # Lists all features that can be specified in the SSL policy when using custom profile.
-            rpc :ListAvailableFeatures, Google::Cloud::Compute::V1::ListAvailableFeaturesSslPoliciesRequest, Google::Cloud::Compute::V1::SslPoliciesListAvailableFeaturesResponse
+            rpc :ListAvailableFeatures, ::Google::Cloud::Compute::V1::ListAvailableFeaturesSslPoliciesRequest, ::Google::Cloud::Compute::V1::SslPoliciesListAvailableFeaturesResponse
             # Patches the specified SSL policy with the data included in the request.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchSslPolicyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchSslPolicyRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -1805,29 +1805,29 @@ module Google
             self.service_name = 'google.cloud.compute.v1.Subnetworks'
 
             # Retrieves an aggregated list of subnetworks.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListSubnetworksRequest, Google::Cloud::Compute::V1::SubnetworkAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListSubnetworksRequest, ::Google::Cloud::Compute::V1::SubnetworkAggregatedList
             # Deletes the specified subnetwork.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteSubnetworkRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteSubnetworkRequest, ::Google::Cloud::Compute::V1::Operation
             # Expands the IP CIDR range of the subnetwork to a specified value.
-            rpc :ExpandIpCidrRange, Google::Cloud::Compute::V1::ExpandIpCidrRangeSubnetworkRequest, Google::Cloud::Compute::V1::Operation
+            rpc :ExpandIpCidrRange, ::Google::Cloud::Compute::V1::ExpandIpCidrRangeSubnetworkRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified subnetwork. Gets a list of available subnetworks list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetSubnetworkRequest, Google::Cloud::Compute::V1::Subnetwork
+            rpc :Get, ::Google::Cloud::Compute::V1::GetSubnetworkRequest, ::Google::Cloud::Compute::V1::Subnetwork
             # Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-            rpc :GetIamPolicy, Google::Cloud::Compute::V1::GetIamPolicySubnetworkRequest, Google::Cloud::Compute::V1::Policy
+            rpc :GetIamPolicy, ::Google::Cloud::Compute::V1::GetIamPolicySubnetworkRequest, ::Google::Cloud::Compute::V1::Policy
             # Creates a subnetwork in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertSubnetworkRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertSubnetworkRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of subnetworks available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListSubnetworksRequest, Google::Cloud::Compute::V1::SubnetworkList
+            rpc :List, ::Google::Cloud::Compute::V1::ListSubnetworksRequest, ::Google::Cloud::Compute::V1::SubnetworkList
             # Retrieves an aggregated list of all usable subnetworks in the project.
-            rpc :ListUsable, Google::Cloud::Compute::V1::ListUsableSubnetworksRequest, Google::Cloud::Compute::V1::UsableSubnetworksAggregatedList
+            rpc :ListUsable, ::Google::Cloud::Compute::V1::ListUsableSubnetworksRequest, ::Google::Cloud::Compute::V1::UsableSubnetworksAggregatedList
             # Patches the specified subnetwork with the data included in the request. Only certain fields can be updated with a patch request as indicated in the field descriptions. You must specify the current fingerprint of the subnetwork resource being patched.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchSubnetworkRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchSubnetworkRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets the access control policy on the specified resource. Replaces any existing policy.
-            rpc :SetIamPolicy, Google::Cloud::Compute::V1::SetIamPolicySubnetworkRequest, Google::Cloud::Compute::V1::Policy
+            rpc :SetIamPolicy, ::Google::Cloud::Compute::V1::SetIamPolicySubnetworkRequest, ::Google::Cloud::Compute::V1::Policy
             # Set whether VMs in this subnet can access Google services without assigning external IP addresses through Private Google Access.
-            rpc :SetPrivateIpGoogleAccess, Google::Cloud::Compute::V1::SetPrivateIpGoogleAccessSubnetworkRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetPrivateIpGoogleAccess, ::Google::Cloud::Compute::V1::SetPrivateIpGoogleAccessSubnetworkRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns permissions that a caller has on the specified resource.
-            rpc :TestIamPermissions, Google::Cloud::Compute::V1::TestIamPermissionsSubnetworkRequest, Google::Cloud::Compute::V1::TestPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Cloud::Compute::V1::TestIamPermissionsSubnetworkRequest, ::Google::Cloud::Compute::V1::TestPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -1843,15 +1843,15 @@ module Google
             self.service_name = 'google.cloud.compute.v1.TargetGrpcProxies'
 
             # Deletes the specified TargetGrpcProxy in the given scope
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteTargetGrpcProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteTargetGrpcProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified TargetGrpcProxy resource in the given scope.
-            rpc :Get, Google::Cloud::Compute::V1::GetTargetGrpcProxyRequest, Google::Cloud::Compute::V1::TargetGrpcProxy
+            rpc :Get, ::Google::Cloud::Compute::V1::GetTargetGrpcProxyRequest, ::Google::Cloud::Compute::V1::TargetGrpcProxy
             # Creates a TargetGrpcProxy in the specified project in the given scope using the parameters that are included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertTargetGrpcProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertTargetGrpcProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Lists the TargetGrpcProxies for a project in the given scope.
-            rpc :List, Google::Cloud::Compute::V1::ListTargetGrpcProxiesRequest, Google::Cloud::Compute::V1::TargetGrpcProxyList
+            rpc :List, ::Google::Cloud::Compute::V1::ListTargetGrpcProxiesRequest, ::Google::Cloud::Compute::V1::TargetGrpcProxyList
             # Patches the specified TargetGrpcProxy resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchTargetGrpcProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchTargetGrpcProxyRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -1867,19 +1867,19 @@ module Google
             self.service_name = 'google.cloud.compute.v1.TargetHttpProxies'
 
             # Retrieves the list of all TargetHttpProxy resources, regional and global, available to the specified project.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListTargetHttpProxiesRequest, Google::Cloud::Compute::V1::TargetHttpProxyAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListTargetHttpProxiesRequest, ::Google::Cloud::Compute::V1::TargetHttpProxyAggregatedList
             # Deletes the specified TargetHttpProxy resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteTargetHttpProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteTargetHttpProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified TargetHttpProxy resource. Gets a list of available target HTTP proxies by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetTargetHttpProxyRequest, Google::Cloud::Compute::V1::TargetHttpProxy
+            rpc :Get, ::Google::Cloud::Compute::V1::GetTargetHttpProxyRequest, ::Google::Cloud::Compute::V1::TargetHttpProxy
             # Creates a TargetHttpProxy resource in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertTargetHttpProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertTargetHttpProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of TargetHttpProxy resources available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListTargetHttpProxiesRequest, Google::Cloud::Compute::V1::TargetHttpProxyList
+            rpc :List, ::Google::Cloud::Compute::V1::ListTargetHttpProxiesRequest, ::Google::Cloud::Compute::V1::TargetHttpProxyList
             # Patches the specified TargetHttpProxy resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules. (== suppress_warning http-rest-shadowed ==)
-            rpc :Patch, Google::Cloud::Compute::V1::PatchTargetHttpProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchTargetHttpProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Changes the URL map for TargetHttpProxy.
-            rpc :SetUrlMap, Google::Cloud::Compute::V1::SetUrlMapTargetHttpProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetUrlMap, ::Google::Cloud::Compute::V1::SetUrlMapTargetHttpProxyRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -1895,23 +1895,23 @@ module Google
             self.service_name = 'google.cloud.compute.v1.TargetHttpsProxies'
 
             # Retrieves the list of all TargetHttpsProxy resources, regional and global, available to the specified project.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListTargetHttpsProxiesRequest, Google::Cloud::Compute::V1::TargetHttpsProxyAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListTargetHttpsProxiesRequest, ::Google::Cloud::Compute::V1::TargetHttpsProxyAggregatedList
             # Deletes the specified TargetHttpsProxy resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteTargetHttpsProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteTargetHttpsProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified TargetHttpsProxy resource. Gets a list of available target HTTPS proxies by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetTargetHttpsProxyRequest, Google::Cloud::Compute::V1::TargetHttpsProxy
+            rpc :Get, ::Google::Cloud::Compute::V1::GetTargetHttpsProxyRequest, ::Google::Cloud::Compute::V1::TargetHttpsProxy
             # Creates a TargetHttpsProxy resource in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertTargetHttpsProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertTargetHttpsProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of TargetHttpsProxy resources available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListTargetHttpsProxiesRequest, Google::Cloud::Compute::V1::TargetHttpsProxyList
+            rpc :List, ::Google::Cloud::Compute::V1::ListTargetHttpsProxiesRequest, ::Google::Cloud::Compute::V1::TargetHttpsProxyList
             # Sets the QUIC override policy for TargetHttpsProxy.
-            rpc :SetQuicOverride, Google::Cloud::Compute::V1::SetQuicOverrideTargetHttpsProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetQuicOverride, ::Google::Cloud::Compute::V1::SetQuicOverrideTargetHttpsProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Replaces SslCertificates for TargetHttpsProxy.
-            rpc :SetSslCertificates, Google::Cloud::Compute::V1::SetSslCertificatesTargetHttpsProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetSslCertificates, ::Google::Cloud::Compute::V1::SetSslCertificatesTargetHttpsProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets the SSL policy for TargetHttpsProxy. The SSL policy specifies the server-side support for SSL features. This affects connections between clients and the HTTPS proxy load balancer. They do not affect the connection between the load balancer and the backends.
-            rpc :SetSslPolicy, Google::Cloud::Compute::V1::SetSslPolicyTargetHttpsProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetSslPolicy, ::Google::Cloud::Compute::V1::SetSslPolicyTargetHttpsProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Changes the URL map for TargetHttpsProxy.
-            rpc :SetUrlMap, Google::Cloud::Compute::V1::SetUrlMapTargetHttpsProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetUrlMap, ::Google::Cloud::Compute::V1::SetUrlMapTargetHttpsProxyRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -1927,15 +1927,15 @@ module Google
             self.service_name = 'google.cloud.compute.v1.TargetInstances'
 
             # Retrieves an aggregated list of target instances.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListTargetInstancesRequest, Google::Cloud::Compute::V1::TargetInstanceAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListTargetInstancesRequest, ::Google::Cloud::Compute::V1::TargetInstanceAggregatedList
             # Deletes the specified TargetInstance resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteTargetInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteTargetInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified TargetInstance resource. Gets a list of available target instances by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetTargetInstanceRequest, Google::Cloud::Compute::V1::TargetInstance
+            rpc :Get, ::Google::Cloud::Compute::V1::GetTargetInstanceRequest, ::Google::Cloud::Compute::V1::TargetInstance
             # Creates a TargetInstance resource in the specified project and zone using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertTargetInstanceRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertTargetInstanceRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of TargetInstance resources available to the specified project and zone.
-            rpc :List, Google::Cloud::Compute::V1::ListTargetInstancesRequest, Google::Cloud::Compute::V1::TargetInstanceList
+            rpc :List, ::Google::Cloud::Compute::V1::ListTargetInstancesRequest, ::Google::Cloud::Compute::V1::TargetInstanceList
           end
 
           Stub = Service.rpc_stub_class
@@ -1951,27 +1951,27 @@ module Google
             self.service_name = 'google.cloud.compute.v1.TargetPools'
 
             # Adds health check URLs to a target pool.
-            rpc :AddHealthCheck, Google::Cloud::Compute::V1::AddHealthCheckTargetPoolRequest, Google::Cloud::Compute::V1::Operation
+            rpc :AddHealthCheck, ::Google::Cloud::Compute::V1::AddHealthCheckTargetPoolRequest, ::Google::Cloud::Compute::V1::Operation
             # Adds an instance to a target pool.
-            rpc :AddInstance, Google::Cloud::Compute::V1::AddInstanceTargetPoolRequest, Google::Cloud::Compute::V1::Operation
+            rpc :AddInstance, ::Google::Cloud::Compute::V1::AddInstanceTargetPoolRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves an aggregated list of target pools.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListTargetPoolsRequest, Google::Cloud::Compute::V1::TargetPoolAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListTargetPoolsRequest, ::Google::Cloud::Compute::V1::TargetPoolAggregatedList
             # Deletes the specified target pool.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteTargetPoolRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteTargetPoolRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified target pool. Gets a list of available target pools by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetTargetPoolRequest, Google::Cloud::Compute::V1::TargetPool
+            rpc :Get, ::Google::Cloud::Compute::V1::GetTargetPoolRequest, ::Google::Cloud::Compute::V1::TargetPool
             # Gets the most recent health check results for each IP for the instance that is referenced by the given target pool.
-            rpc :GetHealth, Google::Cloud::Compute::V1::GetHealthTargetPoolRequest, Google::Cloud::Compute::V1::TargetPoolInstanceHealth
+            rpc :GetHealth, ::Google::Cloud::Compute::V1::GetHealthTargetPoolRequest, ::Google::Cloud::Compute::V1::TargetPoolInstanceHealth
             # Creates a target pool in the specified project and region using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertTargetPoolRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertTargetPoolRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of target pools available to the specified project and region.
-            rpc :List, Google::Cloud::Compute::V1::ListTargetPoolsRequest, Google::Cloud::Compute::V1::TargetPoolList
+            rpc :List, ::Google::Cloud::Compute::V1::ListTargetPoolsRequest, ::Google::Cloud::Compute::V1::TargetPoolList
             # Removes health check URL from a target pool.
-            rpc :RemoveHealthCheck, Google::Cloud::Compute::V1::RemoveHealthCheckTargetPoolRequest, Google::Cloud::Compute::V1::Operation
+            rpc :RemoveHealthCheck, ::Google::Cloud::Compute::V1::RemoveHealthCheckTargetPoolRequest, ::Google::Cloud::Compute::V1::Operation
             # Removes instance URL from a target pool.
-            rpc :RemoveInstance, Google::Cloud::Compute::V1::RemoveInstanceTargetPoolRequest, Google::Cloud::Compute::V1::Operation
+            rpc :RemoveInstance, ::Google::Cloud::Compute::V1::RemoveInstanceTargetPoolRequest, ::Google::Cloud::Compute::V1::Operation
             # Changes a backup target pool's configurations.
-            rpc :SetBackup, Google::Cloud::Compute::V1::SetBackupTargetPoolRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetBackup, ::Google::Cloud::Compute::V1::SetBackupTargetPoolRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -1987,21 +1987,21 @@ module Google
             self.service_name = 'google.cloud.compute.v1.TargetSslProxies'
 
             # Deletes the specified TargetSslProxy resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteTargetSslProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteTargetSslProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified TargetSslProxy resource. Gets a list of available target SSL proxies by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetTargetSslProxyRequest, Google::Cloud::Compute::V1::TargetSslProxy
+            rpc :Get, ::Google::Cloud::Compute::V1::GetTargetSslProxyRequest, ::Google::Cloud::Compute::V1::TargetSslProxy
             # Creates a TargetSslProxy resource in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertTargetSslProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertTargetSslProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of TargetSslProxy resources available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListTargetSslProxiesRequest, Google::Cloud::Compute::V1::TargetSslProxyList
+            rpc :List, ::Google::Cloud::Compute::V1::ListTargetSslProxiesRequest, ::Google::Cloud::Compute::V1::TargetSslProxyList
             # Changes the BackendService for TargetSslProxy.
-            rpc :SetBackendService, Google::Cloud::Compute::V1::SetBackendServiceTargetSslProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetBackendService, ::Google::Cloud::Compute::V1::SetBackendServiceTargetSslProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Changes the ProxyHeaderType for TargetSslProxy.
-            rpc :SetProxyHeader, Google::Cloud::Compute::V1::SetProxyHeaderTargetSslProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetProxyHeader, ::Google::Cloud::Compute::V1::SetProxyHeaderTargetSslProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Changes SslCertificates for TargetSslProxy.
-            rpc :SetSslCertificates, Google::Cloud::Compute::V1::SetSslCertificatesTargetSslProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetSslCertificates, ::Google::Cloud::Compute::V1::SetSslCertificatesTargetSslProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Sets the SSL policy for TargetSslProxy. The SSL policy specifies the server-side support for SSL features. This affects connections between clients and the SSL proxy load balancer. They do not affect the connection between the load balancer and the backends.
-            rpc :SetSslPolicy, Google::Cloud::Compute::V1::SetSslPolicyTargetSslProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetSslPolicy, ::Google::Cloud::Compute::V1::SetSslPolicyTargetSslProxyRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -2017,17 +2017,17 @@ module Google
             self.service_name = 'google.cloud.compute.v1.TargetTcpProxies'
 
             # Deletes the specified TargetTcpProxy resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteTargetTcpProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteTargetTcpProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified TargetTcpProxy resource. Gets a list of available target TCP proxies by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetTargetTcpProxyRequest, Google::Cloud::Compute::V1::TargetTcpProxy
+            rpc :Get, ::Google::Cloud::Compute::V1::GetTargetTcpProxyRequest, ::Google::Cloud::Compute::V1::TargetTcpProxy
             # Creates a TargetTcpProxy resource in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertTargetTcpProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertTargetTcpProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of TargetTcpProxy resources available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListTargetTcpProxiesRequest, Google::Cloud::Compute::V1::TargetTcpProxyList
+            rpc :List, ::Google::Cloud::Compute::V1::ListTargetTcpProxiesRequest, ::Google::Cloud::Compute::V1::TargetTcpProxyList
             # Changes the BackendService for TargetTcpProxy.
-            rpc :SetBackendService, Google::Cloud::Compute::V1::SetBackendServiceTargetTcpProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetBackendService, ::Google::Cloud::Compute::V1::SetBackendServiceTargetTcpProxyRequest, ::Google::Cloud::Compute::V1::Operation
             # Changes the ProxyHeaderType for TargetTcpProxy.
-            rpc :SetProxyHeader, Google::Cloud::Compute::V1::SetProxyHeaderTargetTcpProxyRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetProxyHeader, ::Google::Cloud::Compute::V1::SetProxyHeaderTargetTcpProxyRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -2043,15 +2043,15 @@ module Google
             self.service_name = 'google.cloud.compute.v1.TargetVpnGateways'
 
             # Retrieves an aggregated list of target VPN gateways.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListTargetVpnGatewaysRequest, Google::Cloud::Compute::V1::TargetVpnGatewayAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListTargetVpnGatewaysRequest, ::Google::Cloud::Compute::V1::TargetVpnGatewayAggregatedList
             # Deletes the specified target VPN gateway.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteTargetVpnGatewayRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteTargetVpnGatewayRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified target VPN gateway. Gets a list of available target VPN gateways by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetTargetVpnGatewayRequest, Google::Cloud::Compute::V1::TargetVpnGateway
+            rpc :Get, ::Google::Cloud::Compute::V1::GetTargetVpnGatewayRequest, ::Google::Cloud::Compute::V1::TargetVpnGateway
             # Creates a target VPN gateway in the specified project and region using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertTargetVpnGatewayRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertTargetVpnGatewayRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of target VPN gateways available to the specified project and region.
-            rpc :List, Google::Cloud::Compute::V1::ListTargetVpnGatewaysRequest, Google::Cloud::Compute::V1::TargetVpnGatewayList
+            rpc :List, ::Google::Cloud::Compute::V1::ListTargetVpnGatewaysRequest, ::Google::Cloud::Compute::V1::TargetVpnGatewayList
           end
 
           Stub = Service.rpc_stub_class
@@ -2067,25 +2067,25 @@ module Google
             self.service_name = 'google.cloud.compute.v1.UrlMaps'
 
             # Retrieves the list of all UrlMap resources, regional and global, available to the specified project.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListUrlMapsRequest, Google::Cloud::Compute::V1::UrlMapsAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListUrlMapsRequest, ::Google::Cloud::Compute::V1::UrlMapsAggregatedList
             # Deletes the specified UrlMap resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteUrlMapRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteUrlMapRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified UrlMap resource. Gets a list of available URL maps by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetUrlMapRequest, Google::Cloud::Compute::V1::UrlMap
+            rpc :Get, ::Google::Cloud::Compute::V1::GetUrlMapRequest, ::Google::Cloud::Compute::V1::UrlMap
             # Creates a UrlMap resource in the specified project using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertUrlMapRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertUrlMapRequest, ::Google::Cloud::Compute::V1::Operation
             # Initiates a cache invalidation operation, invalidating the specified path, scoped to the specified UrlMap.
             #
             # For more information, see [Invalidating cached content](/cdn/docs/invalidating-cached-content).
-            rpc :InvalidateCache, Google::Cloud::Compute::V1::InvalidateCacheUrlMapRequest, Google::Cloud::Compute::V1::Operation
+            rpc :InvalidateCache, ::Google::Cloud::Compute::V1::InvalidateCacheUrlMapRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves the list of UrlMap resources available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListUrlMapsRequest, Google::Cloud::Compute::V1::UrlMapList
+            rpc :List, ::Google::Cloud::Compute::V1::ListUrlMapsRequest, ::Google::Cloud::Compute::V1::UrlMapList
             # Patches the specified UrlMap resource with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-            rpc :Patch, Google::Cloud::Compute::V1::PatchUrlMapRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Patch, ::Google::Cloud::Compute::V1::PatchUrlMapRequest, ::Google::Cloud::Compute::V1::Operation
             # Updates the specified UrlMap resource with the data included in the request.
-            rpc :Update, Google::Cloud::Compute::V1::UpdateUrlMapRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Update, ::Google::Cloud::Compute::V1::UpdateUrlMapRequest, ::Google::Cloud::Compute::V1::Operation
             # Runs static validation for the UrlMap. In particular, the tests of the provided UrlMap will be run. Calling this method does NOT create the UrlMap.
-            rpc :Validate, Google::Cloud::Compute::V1::ValidateUrlMapRequest, Google::Cloud::Compute::V1::UrlMapsValidateResponse
+            rpc :Validate, ::Google::Cloud::Compute::V1::ValidateUrlMapRequest, ::Google::Cloud::Compute::V1::UrlMapsValidateResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -2101,21 +2101,21 @@ module Google
             self.service_name = 'google.cloud.compute.v1.VpnGateways'
 
             # Retrieves an aggregated list of VPN gateways.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListVpnGatewaysRequest, Google::Cloud::Compute::V1::VpnGatewayAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListVpnGatewaysRequest, ::Google::Cloud::Compute::V1::VpnGatewayAggregatedList
             # Deletes the specified VPN gateway.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteVpnGatewayRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteVpnGatewayRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified VPN gateway. Gets a list of available VPN gateways by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetVpnGatewayRequest, Google::Cloud::Compute::V1::VpnGateway
+            rpc :Get, ::Google::Cloud::Compute::V1::GetVpnGatewayRequest, ::Google::Cloud::Compute::V1::VpnGateway
             # Returns the status for the specified VPN gateway.
-            rpc :GetStatus, Google::Cloud::Compute::V1::GetStatusVpnGatewayRequest, Google::Cloud::Compute::V1::VpnGatewaysGetStatusResponse
+            rpc :GetStatus, ::Google::Cloud::Compute::V1::GetStatusVpnGatewayRequest, ::Google::Cloud::Compute::V1::VpnGatewaysGetStatusResponse
             # Creates a VPN gateway in the specified project and region using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertVpnGatewayRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertVpnGatewayRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of VPN gateways available to the specified project and region.
-            rpc :List, Google::Cloud::Compute::V1::ListVpnGatewaysRequest, Google::Cloud::Compute::V1::VpnGatewayList
+            rpc :List, ::Google::Cloud::Compute::V1::ListVpnGatewaysRequest, ::Google::Cloud::Compute::V1::VpnGatewayList
             # Sets the labels on a VpnGateway. To learn more about labels, read the Labeling Resources documentation.
-            rpc :SetLabels, Google::Cloud::Compute::V1::SetLabelsVpnGatewayRequest, Google::Cloud::Compute::V1::Operation
+            rpc :SetLabels, ::Google::Cloud::Compute::V1::SetLabelsVpnGatewayRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns permissions that a caller has on the specified resource.
-            rpc :TestIamPermissions, Google::Cloud::Compute::V1::TestIamPermissionsVpnGatewayRequest, Google::Cloud::Compute::V1::TestPermissionsResponse
+            rpc :TestIamPermissions, ::Google::Cloud::Compute::V1::TestIamPermissionsVpnGatewayRequest, ::Google::Cloud::Compute::V1::TestPermissionsResponse
           end
 
           Stub = Service.rpc_stub_class
@@ -2131,15 +2131,15 @@ module Google
             self.service_name = 'google.cloud.compute.v1.VpnTunnels'
 
             # Retrieves an aggregated list of VPN tunnels.
-            rpc :AggregatedList, Google::Cloud::Compute::V1::AggregatedListVpnTunnelsRequest, Google::Cloud::Compute::V1::VpnTunnelAggregatedList
+            rpc :AggregatedList, ::Google::Cloud::Compute::V1::AggregatedListVpnTunnelsRequest, ::Google::Cloud::Compute::V1::VpnTunnelAggregatedList
             # Deletes the specified VpnTunnel resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteVpnTunnelRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteVpnTunnelRequest, ::Google::Cloud::Compute::V1::Operation
             # Returns the specified VpnTunnel resource. Gets a list of available VPN tunnels by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetVpnTunnelRequest, Google::Cloud::Compute::V1::VpnTunnel
+            rpc :Get, ::Google::Cloud::Compute::V1::GetVpnTunnelRequest, ::Google::Cloud::Compute::V1::VpnTunnel
             # Creates a VpnTunnel resource in the specified project and region using the data included in the request.
-            rpc :Insert, Google::Cloud::Compute::V1::InsertVpnTunnelRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Insert, ::Google::Cloud::Compute::V1::InsertVpnTunnelRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of VpnTunnel resources contained in the specified project and region.
-            rpc :List, Google::Cloud::Compute::V1::ListVpnTunnelsRequest, Google::Cloud::Compute::V1::VpnTunnelList
+            rpc :List, ::Google::Cloud::Compute::V1::ListVpnTunnelsRequest, ::Google::Cloud::Compute::V1::VpnTunnelList
           end
 
           Stub = Service.rpc_stub_class
@@ -2155,17 +2155,17 @@ module Google
             self.service_name = 'google.cloud.compute.v1.ZoneOperations'
 
             # Deletes the specified zone-specific Operations resource.
-            rpc :Delete, Google::Cloud::Compute::V1::DeleteZoneOperationRequest, Google::Cloud::Compute::V1::DeleteZoneOperationResponse
+            rpc :Delete, ::Google::Cloud::Compute::V1::DeleteZoneOperationRequest, ::Google::Cloud::Compute::V1::DeleteZoneOperationResponse
             # Retrieves the specified zone-specific Operations resource.
-            rpc :Get, Google::Cloud::Compute::V1::GetZoneOperationRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Get, ::Google::Cloud::Compute::V1::GetZoneOperationRequest, ::Google::Cloud::Compute::V1::Operation
             # Retrieves a list of Operation resources contained within the specified zone.
-            rpc :List, Google::Cloud::Compute::V1::ListZoneOperationsRequest, Google::Cloud::Compute::V1::OperationList
+            rpc :List, ::Google::Cloud::Compute::V1::ListZoneOperationsRequest, ::Google::Cloud::Compute::V1::OperationList
             # Waits for the specified Operation resource to return as `DONE` or for the request to approach the 2 minute deadline, and retrieves the specified Operation resource. This method differs from the `GET` method in that it waits for no more than the default deadline (2 minutes) and then returns the current state of the operation, which might be `DONE` or still in progress.
             #
             # This method is called on a best-effort basis. Specifically:
             # - In uncommon cases, when the server is overloaded, the request might return before the default deadline is reached, or might return after zero seconds.
             # - If the default deadline is reached, there is no guarantee that the operation is actually done when the method returns. Be prepared to retry if the operation is not `DONE`.
-            rpc :Wait, Google::Cloud::Compute::V1::WaitZoneOperationRequest, Google::Cloud::Compute::V1::Operation
+            rpc :Wait, ::Google::Cloud::Compute::V1::WaitZoneOperationRequest, ::Google::Cloud::Compute::V1::Operation
           end
 
           Stub = Service.rpc_stub_class
@@ -2181,9 +2181,9 @@ module Google
             self.service_name = 'google.cloud.compute.v1.Zones'
 
             # Returns the specified Zone resource. Gets a list of available zones by making a list() request.
-            rpc :Get, Google::Cloud::Compute::V1::GetZoneRequest, Google::Cloud::Compute::V1::Zone
+            rpc :Get, ::Google::Cloud::Compute::V1::GetZoneRequest, ::Google::Cloud::Compute::V1::Zone
             # Retrieves the list of Zone resources available to the specified project.
-            rpc :List, Google::Cloud::Compute::V1::ListZonesRequest, Google::Cloud::Compute::V1::ZoneList
+            rpc :List, ::Google::Cloud::Compute::V1::ListZonesRequest, ::Google::Cloud::Compute::V1::ZoneList
           end
 
           Stub = Service.rpc_stub_class

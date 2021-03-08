@@ -61,7 +61,7 @@ module Google
                   parent_config = while namespace.any?
                                     parent_name = namespace.join "::"
                                     parent_const = const_get parent_name
-                                    break parent_const.configure if parent_const&.respond_to? :configure
+                                    break parent_const.configure if parent_const.respond_to? :configure
                                     namespace.pop
                                   end
                   default_config = Client::Configuration.new parent_config
@@ -184,8 +184,8 @@ module Google
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION
 
-                options.apply_defaults timeout:  @config.timeout,
-                                       metadata: call_metadata
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     call_metadata
 
                 (uri, body, _query_string_params) = transcode_add_rule request
                 response = @client_stub.make_post_request(
@@ -255,8 +255,8 @@ module Google
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION
 
-                options.apply_defaults timeout:  @config.timeout,
-                                       metadata: call_metadata
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     call_metadata
 
                 (uri, _body, query_string_params) = transcode_delete request
                 response = @client_stub.make_delete_request(
@@ -320,8 +320,8 @@ module Google
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION
 
-                options.apply_defaults timeout:  @config.timeout,
-                                       metadata: call_metadata
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     call_metadata
 
                 (uri, _body, _query_string_params) = transcode_get request
                 response = @client_stub.make_get_request(
@@ -386,8 +386,8 @@ module Google
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION
 
-                options.apply_defaults timeout:  @config.timeout,
-                                       metadata: call_metadata
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     call_metadata
 
                 (uri, _body, query_string_params) = transcode_get_rule request
                 response = @client_stub.make_get_request(
@@ -457,8 +457,8 @@ module Google
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION
 
-                options.apply_defaults timeout:  @config.timeout,
-                                       metadata: call_metadata
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     call_metadata
 
                 (uri, body, _query_string_params) = transcode_insert request
                 response = @client_stub.make_post_request(
@@ -540,8 +540,8 @@ module Google
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION
 
-                options.apply_defaults timeout:  @config.timeout,
-                                       metadata: call_metadata
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     call_metadata
 
                 (uri, _body, query_string_params) = transcode_list request
                 response = @client_stub.make_get_request(
@@ -623,8 +623,8 @@ module Google
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION
 
-                options.apply_defaults timeout:  @config.timeout,
-                                       metadata: call_metadata
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     call_metadata
 
                 (uri, _body, query_string_params) = transcode_list_preconfigured_expression_sets request
                 response = @client_stub.make_get_request(
@@ -696,8 +696,8 @@ module Google
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION
 
-                options.apply_defaults timeout:  @config.timeout,
-                                       metadata: call_metadata
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     call_metadata
 
                 (uri, body, _query_string_params) = transcode_patch request
                 response = @client_stub.make_patch_request(
@@ -765,8 +765,8 @@ module Google
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION
 
-                options.apply_defaults timeout:  @config.timeout,
-                                       metadata: call_metadata
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     call_metadata
 
                 (uri, body, _query_string_params) = transcode_patch_rule request
                 response = @client_stub.make_post_request(
@@ -832,8 +832,8 @@ module Google
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION
 
-                options.apply_defaults timeout:  @config.timeout,
-                                       metadata: call_metadata
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     call_metadata
 
                 (uri, _body, query_string_params) = transcode_remove_rule request
                 response = @client_stub.make_post_request(

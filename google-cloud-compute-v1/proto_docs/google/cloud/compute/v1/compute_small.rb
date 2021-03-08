@@ -105,7 +105,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] accelerator_types
         #   @return [::Array<::Google::Cloud::Compute::V1::AcceleratorType>]
         #     [Output Only] A list of accelerator types contained in this scope.
@@ -116,7 +115,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] key
         #   @return [::String]
@@ -200,7 +198,6 @@ module Google
             UNREACHABLE = 13328052
           end
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -461,7 +458,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] addresses
         #   @return [::Array<::Google::Cloud::Compute::V1::Address>]
         #     [Output Only] A list of addresses contained in this scope.
@@ -472,7 +468,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -545,7 +540,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] disk_size_gb
         #   @return [::String]
         #     Specifies the size of the disk in base-2 GB.
@@ -599,7 +593,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] kms_key_name
         #   @return [::String]
@@ -983,7 +976,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] message
         #   @return [::String]
         #     The status message.
@@ -1148,7 +1140,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] autoscalers
         #   @return [::Array<::Google::Cloud::Compute::V1::Autoscaler>]
         #     [Output Only] A list of autoscalers contained in this scope.
@@ -1159,7 +1150,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -2028,7 +2018,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] backend_services
         #   @return [::Array<::Google::Cloud::Compute::V1::BackendService>]
         #     A list of BackendServices contained in this scope.
@@ -2097,7 +2086,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Metadata defined as annotations for network endpoint.
@@ -2140,7 +2128,6 @@ module Google
             UNHEALTHY = 193682628
           end
 
-
           module WeightError
             # A value indicating that the enum field is not set.
             UNDEFINED_WEIGHT_ERROR = 0
@@ -2154,7 +2141,6 @@ module Google
             WEIGHT_NONE = 233993375
           end
         end
-
 
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
@@ -2202,7 +2188,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] backend_service
         #   @return [::String]
@@ -2291,7 +2276,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] host
         #   @return [::String]
@@ -2498,7 +2482,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] commitments
         #   @return [::Array<::Google::Cloud::Compute::V1::Commitment>]
         #     [Output Only] A list of commitments contained in this scope.
@@ -2509,7 +2492,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -2659,7 +2641,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] disk_encryption_key
         #   @return [::Google::Cloud::Compute::V1::CustomerEncryptionKey]
@@ -2840,7 +2821,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] disks
         #   @return [::Array<::Google::Cloud::Compute::V1::Disk>]
         #     [Output Only] A list of disks contained in this scope.
@@ -2851,7 +2831,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -2960,7 +2939,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] destination_zone
         #   @return [::String]
         #     The URL of the destination zone to move the disk. This can be a full or partial URL. For example, the following are all valid URLs to a zone:
@@ -3027,7 +3005,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] disk_types
         #   @return [::Array<::Google::Cloud::Compute::V1::DiskType>]
         #     [Output Only] A list of disk types contained in this scope.
@@ -3038,7 +3015,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -3099,7 +3075,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Resource policies to be added to this disk. Currently you can only specify one policy here.
@@ -3108,7 +3083,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Resource policies to be removed from this disk.
@@ -3116,7 +3090,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] size_gb
         #   @return [::String]
@@ -3135,7 +3108,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] zone
         #   @return [::String]
         #     The URL of the zone. The zone must exist in the region where the managed instance group is located.
@@ -3144,7 +3116,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] zones
         #   @return [::Array<::Google::Cloud::Compute::V1::DistributionPolicyZoneConfiguration>]
         #     Zones where the regional managed instance group will create and manage its instances.
@@ -3152,7 +3123,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] dest_range
         #   @return [::String]
@@ -3185,7 +3155,6 @@ module Google
             SUBNET_PEERING_ROUTE = 197347048
           end
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -3313,7 +3282,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] content
         #   @return [::String]
         #     The raw content in the secure keys file.
@@ -3337,7 +3305,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] i_p_protocol
         #   @return [::String]
         #     The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, ipip, sctp) or the IP protocol number.
@@ -3350,7 +3317,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] i_p_protocol
         #   @return [::String]
@@ -3786,7 +3752,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] forwarding_rules
         #   @return [::Array<::Google::Cloud::Compute::V1::ForwardingRule>]
         #     A list of forwarding rules contained in this scope.
@@ -3797,7 +3762,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -3858,14 +3822,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] forwarding_rule
         #   @return [::String]
         class ForwardingRuleReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] grpc_service_name
         #   @return [::String]
@@ -3943,7 +3905,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] network_endpoints
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkEndpoint>]
         #     The list of network endpoints to be attached.
@@ -3952,7 +3913,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] network_endpoints
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkEndpoint>]
         #     The list of network endpoints to be detached.
@@ -3960,7 +3920,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
@@ -4035,7 +3994,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] bindings
         #   @return [::Array<::Google::Cloud::Compute::V1::Binding>]
         #     Flatten Policy to create a backward compatible wire-format. Deprecated. Use 'policy' to specify bindings.
@@ -4097,7 +4055,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] host
         #   @return [::String]
         #     The value of the host header in the HTTP/2 health check request. If left empty (default value), the IP on behalf of which this health check is performed will be used.
@@ -4158,7 +4115,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] host
         #   @return [::String]
         #     The value of the host header in the HTTP health check request. If left empty (default value), the IP on behalf of which this health check is performed will be used.
@@ -4218,7 +4174,6 @@ module Google
             PROXY_V1 = 65917484
           end
         end
-
 
         # @!attribute [rw] host
         #   @return [::String]
@@ -4289,7 +4244,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] port
         #   @return [::Integer]
         #     The TCP port number for the health check request. The default value is 443. Valid values are 1 through 65535.
@@ -4346,7 +4300,6 @@ module Google
             PROXY_V1 = 65917484
           end
         end
-
 
         # @!attribute [rw] port
         #   @return [::Integer]
@@ -4602,7 +4555,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -4626,7 +4578,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] health_checks
         #   @return [::Array<::Google::Cloud::Compute::V1::HealthCheck>]
         #     A list of HealthChecks contained in this scope.
@@ -4637,7 +4588,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -4673,7 +4623,6 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
-
 
         # @!attribute [rw] backend_service
         #   @return [::Google::Cloud::Compute::V1::BackendServiceReference]
@@ -5008,7 +4957,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] cors_policy
         #   @return [::Google::Cloud::Compute::V1::CorsPolicy]
@@ -5688,7 +5636,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Cloud::Compute::V1::Instance>]
         #     [Output Only] A list of instances contained in this scope.
@@ -5699,7 +5646,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -5809,7 +5755,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] instance_groups
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceGroup>]
         #     [Output Only] The list of instance groups that are contained in this scope.
@@ -5820,7 +5765,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -5881,7 +5825,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] health_check
         #   @return [::String]
         #     The URL for the health check that signals autohealing.
@@ -5892,7 +5835,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] abandoning
         #   @return [::Integer]
@@ -5928,14 +5870,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] preserved_state
         #   @return [::Google::Cloud::Compute::V1::StatefulPolicyPreservedState]
         class StatefulPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] autoscaler
         #   @return [::String]
@@ -5953,7 +5893,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] instance_redistribution_type
         #   @return [::String]
@@ -5987,7 +5926,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] instance_template
         #   @return [::String]
@@ -6087,7 +6025,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] instance_group_managers
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceGroupManager>]
         #     [Output Only] The list of managed instance groups that are contained in the specified project and zone.
@@ -6098,7 +6035,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -6159,7 +6095,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] has_stateful_config
         #   @return [::Boolean]
         #     [Output Only] A bit indicating whether the managed instance group has stateful configuration, that is, if you have configured any items in a stateful policy or in per-instance configs. The group might report that it has no stateful config even when there is still some preserved state on a managed instance, for example, if you have deleted all PICs but not yet applied those deletions.
@@ -6171,7 +6106,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] is_reached
         #   @return [::Boolean]
         #     [Output Only] A bit indicating whether version target has been reached in this managed instance group, i.e. all instances are in their target version. Instances' target version are specified by version field on Instance Group Manager.
@@ -6180,7 +6114,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] all_effective
         #   @return [::Boolean]
         #     A bit indicating if all of the group's per-instance configs (listed in the output of a listPerInstanceConfigs API call) have status EFFECTIVE or there are no per-instance-configs.
@@ -6188,7 +6121,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
@@ -6223,7 +6155,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] fingerprint
         #   @return [::String]
@@ -6269,7 +6200,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
         #     The URLs of one or more instances to delete. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
@@ -6287,7 +6217,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] error
         #   @return [::Google::Cloud::Compute::V1::InstanceManagedByIgmErrorManagedInstanceError]
         #     [Output Only] Contents of the error.
@@ -6301,7 +6230,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceManagedByIgmError>]
@@ -6415,7 +6343,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] managed_instances
         #   @return [::Array<::Google::Cloud::Compute::V1::ManagedInstance>]
         #     [Output Only] The list of instances in the managed instance group.
@@ -6426,7 +6353,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::PerInstanceConfig>]
@@ -6451,7 +6377,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
         #     The URLs of one or more instances to recreate. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
@@ -6460,7 +6385,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] instance_template
         #   @return [::String]
         #     The URL of the instance template that is specified for this managed instance group. The group uses this template to create all new instances in the managed instance group. The templates for existing instances in the group do not change unless you run recreateInstances, run applyUpdatesToInstances, or set the group's updatePolicy.type to PROACTIVE.
@@ -6468,7 +6392,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] fingerprint
         #   @return [::String]
@@ -6490,7 +6413,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] instance
         #   @return [::String]
         #     The URL for a specific instance.
@@ -6499,7 +6421,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceReference>]
         #     The list of instances to add to the instance group.
@@ -6507,7 +6428,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] instance
         #   @return [::String]
@@ -6549,7 +6469,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -6573,7 +6492,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] instance_state
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupsListInstancesRequest::InstanceState]
         #     A filter for the state of the instances in the instance group. Valid options are ALL or RUNNING. If you do not specify this parameter the list includes all instances regardless of their state.
@@ -6592,7 +6510,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceReference>]
         #     The list of instances to remove from the instance group.
@@ -6600,7 +6517,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] fingerprint
         #   @return [::String]
@@ -6680,7 +6596,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] code
         #   @return [::String]
         #     [Output Only] Error code.
@@ -6691,7 +6606,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] action
         #   @return [::Google::Cloud::Compute::V1::InstanceManagedByIgmErrorInstanceActionDetails::Action]
@@ -6731,7 +6645,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] instance_template
         #   @return [::String]
         #     [Output Only] The intended template of the instance. This field is empty when current_action is one of { DELETING, ABANDONING }.
@@ -6742,7 +6655,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] destination_zone
         #   @return [::String]
@@ -6760,7 +6672,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] can_ip_forward
         #   @return [::Boolean]
@@ -6908,7 +6819,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Resource policies to be added to this instance.
@@ -6917,7 +6827,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Resource policies to be removed from this instance.
@@ -6925,7 +6834,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
@@ -6946,7 +6854,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] guest_accelerators
         #   @return [::Array<::Google::Cloud::Compute::V1::AcceleratorConfig>]
         #     A list of the type and count of accelerator cards attached to the instance.
@@ -6954,7 +6861,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] machine_type
         #   @return [::String]
@@ -6964,7 +6870,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] min_cpu_platform
         #   @return [::String]
         #     Minimum cpu/platform this instance should be started at.
@@ -6972,7 +6877,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] email
         #   @return [::String]
@@ -6984,7 +6888,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] disks
         #   @return [::Array<::Google::Cloud::Compute::V1::CustomerEncryptionKeyProtectedDisk>]
@@ -7475,7 +7378,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] interconnect_attachments
         #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectAttachment>]
         #     A list of interconnect attachments contained in this scope.
@@ -7486,7 +7388,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -7559,7 +7460,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] arp_caches
         #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectDiagnosticsARPEntry>]
         #     A list of InterconnectDiagnostics.ARPEntry objects, describing the ARP neighbor entries seen on this link. This will be empty if the link is bundled
@@ -7597,7 +7497,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] google_system_id
         #   @return [::String]
         #     System ID of the port on Google's side of the LACP exchange.
@@ -7625,7 +7524,6 @@ module Google
             DETACHED = 216562546
           end
         end
-
 
         # @!attribute [rw] state
         #   @return [::Google::Cloud::Compute::V1::InterconnectDiagnosticsLinkOpticalPower::State]
@@ -7852,7 +7750,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] min_guest_cpu_count
         #   @return [::Integer]
         #     Minimum number of guest cpus required to use the Instance. Enforced at Instance creation and Instance start.
@@ -7900,7 +7797,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] description
         #   @return [::String]
@@ -7964,7 +7860,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -7984,7 +7879,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] disk_count
         #   @return [::Integer]
@@ -8092,7 +7986,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] guest_accelerator_count
         #   @return [::Integer]
         #     Number of accelerator cards exposed to the guest.
@@ -8103,7 +7996,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] disk_gb
         #   @return [::Integer]
@@ -8169,7 +8061,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] machine_types
         #   @return [::Array<::Google::Cloud::Compute::V1::MachineType>]
         #     [Output Only] A list of machine types contained in this scope.
@@ -8180,7 +8071,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -8241,7 +8131,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] detailed_health_state
         #   @return [::Google::Cloud::Compute::V1::ManagedInstanceInstanceHealth::DetailedHealthState]
         #     [Output Only] The current detailed instance health state.
@@ -8268,7 +8157,6 @@ module Google
             UNKNOWN = 164706346
           end
         end
-
 
         # @!attribute [rw] errors
         #   @return [::Google::Cloud::Compute::V1::Errors]
@@ -8308,7 +8196,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] code
         #   @return [::String]
         #     [Output Only] The error type identifier for this error.
@@ -8322,7 +8209,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] key
         #   @return [::String]
@@ -8628,7 +8514,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] network_endpoint_groups
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkEndpointGroup>]
         #     [Output Only] The list of network endpoint groups that are contained in this scope.
@@ -8639,7 +8524,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -8676,7 +8560,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -8700,7 +8583,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] network_endpoints
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkEndpoint>]
         #     The list of network endpoints to be attached.
@@ -8709,7 +8591,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] network_endpoints
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkEndpoint>]
         #     The list of network endpoints to be detached.
@@ -8717,7 +8598,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] health_status
         #   @return [::Google::Cloud::Compute::V1::NetworkEndpointGroupsListEndpointsRequest::HealthStatus]
@@ -8737,7 +8617,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] healths
         #   @return [::Array<::Google::Cloud::Compute::V1::HealthStatusForNetworkEndpoint>]
         #     [Output only] The health status of network endpoint;
@@ -8748,7 +8627,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -8794,7 +8672,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] auto_create_routes
         #   @return [::Boolean]
         #     This field will be deprecated soon. Use exchange_subnet_routes in network_peering instead. Indicates whether full mesh connectivity is created and managed automatically between peered networks. Currently this field should always be true since Google Compute Engine will automatically create and manage subnetwork routes between two networks when peering state is ACTIVE.
@@ -8812,7 +8689,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the peering, which should conform to RFC1035.
@@ -8821,14 +8697,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] network_peering
         #   @return [::Google::Cloud::Compute::V1::NetworkPeering]
         class NetworksUpdatePeeringRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] max_nodes
         #   @return [::Integer]
@@ -8930,7 +8804,6 @@ module Google
             RESTART_IN_PLACE = 228647325
           end
 
-
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
@@ -8945,7 +8818,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] node_groups
         #   @return [::Array<::Google::Cloud::Compute::V1::NodeGroup>]
         #     [Output Only] A list of node groups contained in this scope.
@@ -8956,7 +8828,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -9017,7 +8888,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] type
         #   @return [::Google::Cloud::Compute::V1::ServerBinding::Type]
         class ServerBinding
@@ -9036,7 +8906,6 @@ module Google
             SERVER_BINDING_TYPE_UNSPECIFIED = 180825512
           end
         end
-
 
         # @!attribute [rw] accelerators
         #   @return [::Array<::Google::Cloud::Compute::V1::AcceleratorConfig>]
@@ -9080,7 +8949,6 @@ module Google
             NONE = 2402104
           end
 
-
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
@@ -9097,7 +8965,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] additional_node_count
         #   @return [::Integer]
         #     Count of additional nodes to be added to the node group.
@@ -9106,7 +8973,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] nodes
         #   @return [::Array<::String>]
         #     Names of the nodes to delete.
@@ -9114,7 +8980,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -9139,7 +9004,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] node_template
         #   @return [::String]
         #     Full or partial URL of the node template resource to be updated for this node group.
@@ -9147,7 +9011,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] cpus
         #   @return [::String]
@@ -9255,7 +9118,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] node_templates
         #   @return [::Array<::Google::Cloud::Compute::V1::NodeTemplate>]
         #     [Output Only] A list of node templates contained in this scope.
@@ -9266,7 +9128,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -9371,7 +9232,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] node_types
         #   @return [::Array<::Google::Cloud::Compute::V1::NodeType>]
         #     [Output Only] A list of node types contained in this scope.
@@ -9382,7 +9242,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -9498,7 +9357,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -9530,7 +9388,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] code
         #   @return [::Google::Cloud::Compute::V1::Warnings::Code]
@@ -9703,7 +9560,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] operations
         #   @return [::Array<::Google::Cloud::Compute::V1::Operation>]
         #     [Output Only] A list of operations contained in this scope.
@@ -9714,7 +9570,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -9775,7 +9630,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] canonical_url
         #   @return [::String]
         #     [Output Only] Unique identifier for the forwarding rule; defined by the server.
@@ -9786,7 +9640,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] cidr_ranges
         #   @return [::Array<::String>]
@@ -9814,7 +9667,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Cloud::Compute::V1::PacketMirroringMirroredResourceInfoInstanceInfo>]
         #     A set of virtual machine instances that are being mirrored. They must live in zones contained in the same region as this packetMirroring.
@@ -9834,7 +9686,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] canonical_url
         #   @return [::String]
@@ -9910,7 +9761,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] packet_mirrorings
         #   @return [::Array<::Google::Cloud::Compute::V1::PacketMirroring>]
         #     A list of packetMirrorings contained in this scope.
@@ -9982,7 +9832,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] canonical_url
         #   @return [::String]
         #     [Output Only] Unique identifier for the instance; defined by the server.
@@ -9993,7 +9842,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] canonical_url
         #   @return [::String]
@@ -10121,7 +9969,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] aliases
         #   @return [::Array<::String>]
         #     A list of alternate IDs. The format should be: - E.g. XSS-stable Generic suffix like "stable" is particularly useful if a policy likes to avail newer set of expressions without having to change the policy. A given alias name can't be used for more than one entity set.
@@ -10136,7 +9983,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] expression_sets
         #   @return [::Array<::Google::Cloud::Compute::V1::WafExpressionSet>]
         #     List of entities that are currently supported for WAF rules.
@@ -10144,7 +9990,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] auto_delete
         #   @return [::Google::Cloud::Compute::V1::PreservedStatePreservedDisk::AutoDelete]
@@ -10521,7 +10366,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] xpn_resource
         #   @return [::Google::Cloud::Compute::V1::XpnResourceId]
         #     Service resource (a.k.a service project) ID.
@@ -10530,7 +10374,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] xpn_resource
         #   @return [::Google::Cloud::Compute::V1::XpnResourceId]
         #     Service resource (a.k.a service project) ID.
@@ -10538,7 +10381,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] kind
         #   @return [::String]
@@ -10554,7 +10396,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] organization
         #   @return [::String]
         #     Optional organization ID managed by Cloud Resource Manager, for which to list shared VPC host projects. If not specified, the organization will be inferred from the project.
@@ -10562,7 +10403,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] network_tier
         #   @return [::Google::Cloud::Compute::V1::ProjectsSetDefaultNetworkTierRequest::NetworkTier]
@@ -10654,7 +10494,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -10678,7 +10517,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Resource policies to be added to this disk.
@@ -10687,7 +10525,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Resource policies to be removed from this disk.
@@ -10695,7 +10532,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] size_gb
         #   @return [::String]
@@ -10780,7 +10616,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
         #     The URLs of one or more instances to abandon. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
@@ -10824,7 +10659,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
         #     The URLs of one or more instances to delete. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
@@ -10832,7 +10666,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceManagedByIgmError>]
@@ -10844,7 +10677,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] items
         #   @return [::Array<::Google::Cloud::Compute::V1::PerInstanceConfig>]
@@ -10860,7 +10692,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] managed_instances
         #   @return [::Array<::Google::Cloud::Compute::V1::ManagedInstance>]
         #     A list of managed instances.
@@ -10872,7 +10703,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
         #     The URLs of one or more instances to recreate. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
@@ -10880,7 +10710,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] fingerprint
         #   @return [::String]
@@ -10893,7 +10722,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] instance_template
         #   @return [::String]
         #     URL of the InstanceTemplate resource from which all new instances will be created.
@@ -10901,7 +10729,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -10926,7 +10753,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] instance_state
         #   @return [::Google::Cloud::Compute::V1::RegionInstanceGroupsListInstancesRequest::InstanceState]
         #     Instances in which state should be returned. Valid options are: 'ALL', 'RUNNING'. By default, it lists all instances.
@@ -10947,7 +10773,6 @@ module Google
             RUNNING = 121282975
           end
         end
-
 
         # @!attribute [rw] fingerprint
         #   @return [::String]
@@ -10984,7 +10809,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
         #     The fingerprint of the previous set of labels for this resource, used to detect conflicts. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels. Make a get() request to the resource to get the latest fingerprint.
@@ -11005,7 +10829,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] bindings
         #   @return [::Array<::Google::Cloud::Compute::V1::Binding>]
         #     Flatten Policy to create a backwacd compatible wire-format. Deprecated. Use 'policy' to specify bindings.
@@ -11019,7 +10842,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] ssl_certificates
         #   @return [::Array<::String>]
@@ -11109,7 +10931,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] resource
         #   @return [::Google::Cloud::Compute::V1::UrlMap]
         #     Content of the UrlMap to be validated.
@@ -11117,7 +10938,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] reservations
         #   @return [::Array<::Google::Cloud::Compute::V1::Reservation>]
@@ -11166,7 +10986,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
@@ -11190,7 +11009,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] specific_sku_count
         #   @return [::String]
         #     Number of allocated resources can be resized with minimum = 1 and maximum = 1000.
@@ -11198,7 +11016,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] group
         #   @return [::String]
@@ -11257,7 +11074,6 @@ module Google
             READY = 77848963
           end
         end
-
 
         # @!attribute [rw] resource_policies
         #   @return [::Array<::Google::Cloud::Compute::V1::ResourcePolicy>]
@@ -11378,7 +11194,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] etag
         #   @return [::String]
         # @!attribute [rw] id
@@ -11475,7 +11290,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] day
         #   @return [::Google::Cloud::Compute::V1::ResourcePolicyWeeklyCycleDayOfWeek::Day]
@@ -11603,7 +11417,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] advertise_mode
         #   @return [::Google::Cloud::Compute::V1::RouterBgp::AdvertiseMode]
         #     User-specified flag to indicate which mode to use for advertisement. The options are DEFAULT or CUSTOM.
@@ -11630,7 +11443,6 @@ module Google
             DEFAULT = 115302945
           end
 
-
           module AdvertisedGroups
             # A value indicating that the enum field is not set.
             UNDEFINED_ADVERTISED_GROUPS = 0
@@ -11638,7 +11450,6 @@ module Google
             ALL_SUBNETS = 3622872
           end
         end
-
 
         # @!attribute [rw] advertise_mode
         #   @return [::Google::Cloud::Compute::V1::RouterBgpPeer::AdvertiseMode]
@@ -11689,7 +11500,6 @@ module Google
             DEFAULT = 115302945
           end
 
-
           module AdvertisedGroups
             # A value indicating that the enum field is not set.
             UNDEFINED_ADVERTISED_GROUPS = 0
@@ -11709,7 +11519,6 @@ module Google
             MANAGED_BY_USER = 48858611
           end
         end
-
 
         # @!attribute [rw] ip_range
         #   @return [::String]
@@ -11877,7 +11686,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] routers
         #   @return [::Array<::Google::Cloud::Compute::V1::Router>]
         #     A list of routers contained in this scope.
@@ -12006,7 +11814,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] advertised_routes
         #   @return [::Array<::Google::Cloud::Compute::V1::Route>]
         #     Routes that were advertised to the remote BGP peer
@@ -12084,7 +11891,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] best_routes
         #   @return [::Array<::Google::Cloud::Compute::V1::Route>]
         #     Best routes for this router's network.
@@ -12103,7 +11909,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] kind
         #   @return [::String]
         #     Type of resource.
@@ -12113,7 +11918,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] resource
         #   @return [::Google::Cloud::Compute::V1::Router]
@@ -12162,14 +11966,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] waf_rules
         #   @return [::Google::Cloud::Compute::V1::PreconfiguredWafSet]
         class SecurityPoliciesWafConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] preconfigured_expression_sets
         #   @return [::Google::Cloud::Compute::V1::SecurityPoliciesWafConfig]
@@ -12236,7 +12038,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -12256,7 +12057,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] security_policy
         #   @return [::String]
@@ -12287,7 +12087,6 @@ module Google
             SRC_IPS_V1 = 70925961
           end
         end
-
 
         # @!attribute [rw] src_ip_ranges
         #   @return [::Array<::String>]
@@ -12626,7 +12425,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] ssl_certificates
         #   @return [::Array<::Google::Cloud::Compute::V1::SslCertificate>]
         #     List of SslCertificates contained in this scope.
@@ -12637,7 +12435,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -12771,7 +12568,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] id
         #   @return [::String]
         #     [Output Only] Unique identifier for the resource; defined by the server.
@@ -12795,14 +12591,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] features
         #   @return [::Array<::String>]
         class SslPoliciesListAvailableFeaturesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] ssl_policy
         #   @return [::String]
@@ -12829,7 +12623,6 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
-
 
         # @!attribute [rw] auto_delete
         #   @return [::Google::Cloud::Compute::V1::StatefulPolicyPreservedStateDiskDevice::AutoDelete]
@@ -13033,7 +12826,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] subnetworks
         #   @return [::Array<::Google::Cloud::Compute::V1::Subnetwork>]
         #     A list of subnetworks contained in this scope.
@@ -13044,7 +12836,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -13105,7 +12896,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] ip_cidr_range
         #   @return [::String]
         #     The IP (in CIDR format or netmask) of internal addresses that are legal on this Subnetwork. This range should be disjoint from other subnetworks within this network. This range can only be larger than (i.e. a superset of) the range previously defined before the update.
@@ -13113,7 +12903,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] private_ip_google_access
         #   @return [::Boolean]
@@ -13159,7 +12948,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -13234,7 +13022,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] target_http_proxies
         #   @return [::Array<::Google::Cloud::Compute::V1::TargetHttpProxy>]
         #     A list of TargetHttpProxies contained in this scope.
@@ -13245,7 +13032,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -13396,7 +13182,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] target_https_proxies
         #   @return [::Array<::Google::Cloud::Compute::V1::TargetHttpsProxy>]
         #     A list of TargetHttpsProxies contained in this scope.
@@ -13407,7 +13192,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] quic_override
         #   @return [::Google::Cloud::Compute::V1::TargetHttpsProxiesSetQuicOverrideRequest::QuicOverride]
@@ -13429,7 +13213,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] ssl_certificates
         #   @return [::Array<::String>]
         #     New set of SslCertificate resources to associate with this TargetHttpsProxy resource. Currently exactly one SslCertificate resource must be specified.
@@ -13437,7 +13220,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -13544,7 +13326,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] target_instances
         #   @return [::Array<::Google::Cloud::Compute::V1::TargetInstance>]
         #     A list of target instances contained in this scope.
@@ -13555,7 +13336,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -13694,7 +13474,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] target_pools
         #   @return [::Array<::Google::Cloud::Compute::V1::TargetPool>]
         #     A list of target pools contained in this scope.
@@ -13705,7 +13484,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -13742,7 +13520,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] health_status
         #   @return [::Array<::Google::Cloud::Compute::V1::HealthStatus>]
         # @!attribute [rw] kind
@@ -13777,7 +13554,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] health_checks
         #   @return [::Array<::Google::Cloud::Compute::V1::HealthCheckReference>]
         #     The HttpHealthCheck to add to the target pool.
@@ -13785,7 +13561,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceReference>]
@@ -13798,7 +13573,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] health_checks
         #   @return [::Array<::Google::Cloud::Compute::V1::HealthCheckReference>]
         #     Health check URL to be removed. This can be a full or valid partial URL. For example, the following are valid URLs:
@@ -13810,7 +13584,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceReference>]
         #     URLs of the instances to be removed from target pool.
@@ -13819,14 +13592,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] target
         #   @return [::String]
         class TargetReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] service
         #   @return [::String]
@@ -13835,7 +13606,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] proxy_header
         #   @return [::Google::Cloud::Compute::V1::TargetSslProxiesSetProxyHeaderRequest::ProxyHeader]
@@ -13854,7 +13624,6 @@ module Google
             PROXY_V1 = 65917484
           end
         end
-
 
         # @!attribute [rw] ssl_certificates
         #   @return [::Array<::String>]
@@ -13936,7 +13705,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] service
         #   @return [::String]
         #     The URL of the new BackendService resource for the targetTcpProxy.
@@ -13944,7 +13712,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] proxy_header
         #   @return [::Google::Cloud::Compute::V1::TargetTcpProxiesSetProxyHeaderRequest::ProxyHeader]
@@ -14085,7 +13852,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] target_vpn_gateways
         #   @return [::Array<::Google::Cloud::Compute::V1::TargetVpnGateway>]
         #     [Output Only] A list of target VPN gateways contained in this scope.
@@ -14096,7 +13862,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -14157,7 +13922,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] actual_service
         #   @return [::String]
         #     BackendService or BackendBucket returned by load balancer.
@@ -14175,7 +13939,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] permissions
         #   @return [::Array<::String>]
         #     The set of permissions to check for the 'resource'. Permissions with wildcards (such as '*' or 'storage.*') are not allowed.
@@ -14183,7 +13946,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] permissions
         #   @return [::Array<::String>]
@@ -14236,7 +13998,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] url_map
         #   @return [::String]
         class UrlMapReference
@@ -14260,7 +14021,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] url_maps
         #   @return [::Array<::Google::Cloud::Compute::V1::UrlMap>]
         #     A list of UrlMaps contained in this scope.
@@ -14271,7 +14031,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -14308,7 +14067,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] resource
         #   @return [::Google::Cloud::Compute::V1::UrlMap]
         #     Content of the UrlMap to be validated.
@@ -14316,7 +14074,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] result
         #   @return [::Google::Cloud::Compute::V1::UrlMapValidationResult]
@@ -14354,7 +14111,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -14502,7 +14258,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] vpn_gateways
         #   @return [::Array<::Google::Cloud::Compute::V1::VpnGateway>]
         #     [Output Only] A list of VPN gateways contained in this scope.
@@ -14513,7 +14268,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -14592,7 +14346,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] vpn_connections
         #   @return [::Array<::Google::Cloud::Compute::V1::VpnGatewayStatusVpnConnection>]
         #     List of VPN connection for this VpnGateway.
@@ -14645,7 +14398,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] result
         #   @return [::Google::Cloud::Compute::V1::VpnGatewayStatus]
@@ -14790,7 +14542,6 @@ module Google
           end
         end
 
-
         # @!attribute [rw] vpn_tunnels
         #   @return [::Array<::Google::Cloud::Compute::V1::VpnTunnel>]
         #     A list of VPN tunnels contained in this scope.
@@ -14801,7 +14552,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -14862,7 +14612,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] id
         #   @return [::String]
         #     Expression ID should uniquely identify the origin of the expression. E.g. owasp-crs-v020901-id973337 identifies Owasp core rule set version 2.9.1 rule id 973337. The ID could be used to determine the individual attack definition that has been detected. It could also be used to exclude it from the policy in case of false positive.
@@ -14870,7 +14619,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
-
 
         # @!attribute [rw] id
         #   @return [::String]
@@ -14967,7 +14715,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
         #     The fingerprint of the previous set of labels for this resource, used to detect conflicts. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels. Make a get() request to the resource to get the latest fingerprint.
@@ -14987,7 +14734,6 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
-
 
         # @!attribute [rw] bindings
         #   @return [::Array<::Google::Cloud::Compute::V1::Binding>]
