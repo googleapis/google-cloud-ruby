@@ -52,7 +52,9 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
       [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
     table.service.mocked_service = mock
 
-    inserter = table.insert_async
+    inserter = table.insert_async do |result|
+      puts "table.insert_async: #{result.error.inspect}" if result.error
+    end
 
     SecureRandom.stub :uuid, insert_id do
       inserter.insert rows.first
@@ -84,7 +86,9 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
       [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
     table.service.mocked_service = mock
 
-    inserter = table.insert_async
+    inserter = table.insert_async do |result|
+      puts "table.insert_async: #{result.error.inspect}" if result.error
+    end
 
     SecureRandom.stub :uuid, insert_id do
       inserter.insert rows
@@ -116,7 +120,9 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
       [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
     table.service.mocked_service = mock
 
-    inserter = table.insert_async
+    inserter = table.insert_async do |result|
+      puts "table.insert_async: #{result.error.inspect}" if result.error
+    end
 
     SecureRandom.stub :uuid, insert_id do
       rows.each do |row|
@@ -154,6 +160,7 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
     insert_result = nil
 
     inserter = table.insert_async do |result|
+      puts "table.insert_async: #{result.error.inspect}" if result.error
       insert_result = result
       callback_called = true
     end
@@ -252,6 +259,7 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
     callbacks = 0
 
     inserter = table.insert_async max_bytes: 150 do |response|
+      puts "table.insert_async: #{result.error.inspect}" if result.error
       callbacks += 1
     end
 
@@ -290,6 +298,7 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
     callbacks = 0
 
     inserter = table.insert_async max_rows: 2 do |response|
+      puts "table.insert_async: #{result.error.inspect}" if result.error
       callbacks += 1
     end
 
@@ -324,7 +333,9 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
                 [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
     table.service.mocked_service = mock
 
-    inserter = table.insert_async
+    inserter = table.insert_async do |result|
+      puts "table.insert_async: #{result.error.inspect}" if result.error
+    end
 
     inserter.insert rows, insert_ids: insert_ids
 
@@ -354,7 +365,9 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
                 [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
     table.service.mocked_service = mock
 
-    inserter = table.insert_async
+    inserter = table.insert_async do |result|
+      puts "table.insert_async: #{result.error.inspect}" if result.error
+    end
 
     rows.zip(insert_ids).each do |row, insert_id|
       inserter.insert row, insert_ids: insert_id
@@ -380,7 +393,9 @@ describe Google::Cloud::Bigquery::Table::AsyncInserter, :mock_bigquery do
   it "raises if the insert_ids option is provided but size does not match rows" do
     insert_ids.pop # Remove one of the insert_ids to cause error.
 
-    inserter = table.insert_async
+    inserter = table.insert_async do |result|
+      puts "table.insert_async: #{result.error.inspect}" if result.error
+    end
 
     expect { inserter.insert rows, insert_ids: insert_ids }.must_raise ArgumentError
 

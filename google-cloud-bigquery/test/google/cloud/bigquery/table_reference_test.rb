@@ -332,7 +332,9 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
       [table.project_id, table.dataset_id, table.table_id, insert_req, options: { skip_serialization: true }]
     table.service.mocked_service = mock
 
-    inserter = table.insert_async
+    inserter = table.insert_async do |result|
+      puts "table.insert_async: #{result.error.inspect}" if result.error
+    end
 
     SecureRandom.stub :uuid, insert_id do
       rows.each do |row|

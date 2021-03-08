@@ -269,10 +269,13 @@ module Google
             insert_ids = @batch.insert_ids
             Concurrent::Future.new executor: @thread_pool do
               raise ArgumentError, "No rows provided" if json_rows.empty?
-              options = { skip_invalid: @skip_invalid, ignore_unknown: @ignore_unknown, insert_ids: insert_ids }
-              insert_resp = @table.service.insert_tabledata_json_rows(
-                @table.dataset_id, @table.table_id, json_rows, options
-              )
+              insert_resp = @table.service.insert_tabledata_json_rows @table.dataset_id,
+                                                                      @table.table_id,
+                                                                      json_rows,
+                                                                      skip_invalid: @skip_invalid,
+                                                                      ignore_unknown: @ignore_unknown,
+                                                                      insert_ids: insert_ids
+
               result = Result.new InsertResponse.from_gapi(orig_rows, insert_resp)
             rescue StandardError => e
               result = Result.new nil, e
