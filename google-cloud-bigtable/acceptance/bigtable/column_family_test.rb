@@ -101,21 +101,20 @@ describe Google::Cloud::Bigtable::Table, :column_families, :bigtable do
     _(cf.gc_rule.max_age).must_equal 300
   end
 
-  it "updates a column family without gc_rule" do
+  it "raises when updating a column family with age-based gc_rule to no rule" do
+    # https://cloud.google.com/bigtable/docs/garbage-collection#changes
+    # "Cloud Bigtable will not allow you to delete an age-based garbage-collection
+    # policy for a column family in a replicated table."
     cf = table.column_families["cf1"]
-    _(cf.gc_rule).wont_be :nil?
+    _(cf.gc_rule).must_be_kind_of Google::Cloud::Bigtable::GcRule
+    _(cf.gc_rule.max_age).wont_be :nil?
 
-    column_families = table.column_families do |cfs|
-      cfs.update "cf1"
-    end
-
-    cf = column_families["cf1"]
-    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    _(cf.gc_rule).must_be :nil?
-
-    cf = table.column_families["cf1"]
-    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    _(cf.gc_rule).must_be :nil?
+    err = expect do
+      column_families = table.column_families do |cfs|
+        cfs.update "cf1"
+      end
+    end.must_raise Google::Cloud::FailedPreconditionError
+    assert_match /Cannot relax pure age-based GC for a replicated family/, err.message
   end
 
   it "deletes a column family" do

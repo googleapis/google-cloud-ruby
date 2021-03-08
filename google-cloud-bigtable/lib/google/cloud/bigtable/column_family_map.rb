@@ -222,6 +222,8 @@ module Google
         ##
         # Updates an existing column family in the table.
         #
+        # @see https://cloud.google.com/bigtable/docs/garbage-collection Garbage collection
+        #
         # @param name [String] Column family name.
         # @param gc_rule [Google::Cloud::Bigtable::GcRule] The new garbage
         #   collection rule to be used for the column family. Optional. The

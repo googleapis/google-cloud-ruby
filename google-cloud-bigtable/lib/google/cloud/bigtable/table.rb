@@ -155,6 +155,8 @@ module Google
         # updated with the changes, and the updated column families will be
         # returned.
         #
+        # @see https://cloud.google.com/bigtable/docs/garbage-collection Garbage collection
+        #
         # @yield [column_families] A block for modifying the table's column
         #   families. Applies multiple column modifications. Performs a series
         #   of column family modifications on the specified table. Either all or
