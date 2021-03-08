@@ -1,5 +1,12 @@
 # Release History
 
+### 0.5.0 / 2021-03-08
+
+#### Features
+
+* Drop support for Ruby 2.4 and add support for Ruby 3.0
+* Support setting of the query optimizer statistics package
+
 ### 0.4.0 / 2021-02-02
 
 #### Features
