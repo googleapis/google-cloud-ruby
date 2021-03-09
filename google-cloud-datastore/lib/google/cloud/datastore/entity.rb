@@ -293,7 +293,7 @@ module Google
         #   task.persisted? #=> true
         #
         def persisted?
-          @key && @key.frozen?
+          @key&.frozen?
         end
 
         ##

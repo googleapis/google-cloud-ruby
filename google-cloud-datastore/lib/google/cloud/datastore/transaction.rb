@@ -50,7 +50,7 @@ module Google
         # @private Creates a new Transaction instance.
         # Takes a Service instead of project and Credentials.
         def initialize service, previous_transaction: nil
-          @service = service
+          super service
           @previous_transaction = previous_transaction
           reset!
           start

@@ -8,3 +8,7 @@ Metrics/BlockLength:
         - "acceptance/*.rb"
 Style/IfUnlessModifier:
     Enabled: false
+Style/RedundantAssignment:
+    Enabled: false
+Style/RedundantBegin:
+    Enabled: false

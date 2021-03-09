@@ -167,17 +167,17 @@ module Google
           #     puts "Task #{t.key.id} (#cursor)"
           #   end
           #
-          def all request_limit: nil
+          def all request_limit: nil, &block
             request_limit = request_limit.to_i if request_limit
             unless block_given?
               return enum_for :all, request_limit: request_limit
             end
             results = self
             loop do
-              results.each { |r| yield r }
+              results.each(&block)
               if request_limit
                 request_limit -= 1
-                break if request_limit < 0
+                break if request_limit.negative?
               end
               break unless results.next?
               results = results.next
@@ -187,14 +187,14 @@ module Google
           ##
           # @private New Dataset::LookupResults from a
           # Google::Dataset::V1::LookupResponse object.
-          def self.from_grpc lookup_res, service, consistency = nil, tx = nil
+          def self.from_grpc lookup_res, service, consistency = nil, transaction = nil
             entities = to_gcloud_entities lookup_res.found
             deferred = to_gcloud_keys lookup_res.deferred
             missing  = to_gcloud_entities lookup_res.missing
             new(entities).tap do |lr|
               lr.instance_variable_set :@service,     service
               lr.instance_variable_set :@consistency, consistency
-              lr.instance_variable_set :@transaction, tx
+              lr.instance_variable_set :@transaction, transaction
               lr.instance_variable_set :@deferred,    deferred
               lr.instance_variable_set :@missing,     missing
             end

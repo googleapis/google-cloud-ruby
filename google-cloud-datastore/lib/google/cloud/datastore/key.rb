@@ -272,9 +272,10 @@ module Google
         def to_grpc
           grpc_path = path.map do |pe_kind, pe_id_or_name|
             path_args = { kind: pe_kind }
-            if pe_id_or_name.is_a? Integer
+            case pe_id_or_name
+            when Integer
               path_args[:id] = pe_id_or_name
-            elsif pe_id_or_name.is_a? String
+            when String
               path_args[:name] = pe_id_or_name unless pe_id_or_name.empty?
             end
             Google::Cloud::Datastore::V1::Key::PathElement.new path_args
@@ -305,7 +306,7 @@ module Google
             key.project = key_grpc.partition_id.project_id
             key.namespace = key_grpc.partition_id.namespace_id
           end
-          key.parent = Key.from_grpc key_grpc if key_grpc.path.count > 0
+          key.parent = Key.from_grpc key_grpc if key_grpc.path.count.positive?
           # Freeze the key to make it immutable.
           key.freeze
           key
