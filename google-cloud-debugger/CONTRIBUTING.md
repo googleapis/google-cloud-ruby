@@ -24,9 +24,9 @@ be able to accept your pull requests.
 In order to use the google-cloud-debugger console and run the project's tests,
 there is a small amount of setup:
 
-1. Install Ruby. google-cloud-debugger requires Ruby 2.4+. You may choose to
-   manage your Ruby and gem installations with [RVM](https://rvm.io/),
-   [rbenv](https://github.com/rbenv/rbenv), or
+1. Install Ruby. google-cloud-debugger requires Ruby 2.5+. It is not currently
+   supported on Ruby 3. You may choose to manage your Ruby and gem installations
+   with [RVM](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv), or
    [chruby](https://github.com/postmodern/chruby).
 
 2. Install [Bundler](http://bundler.io/).

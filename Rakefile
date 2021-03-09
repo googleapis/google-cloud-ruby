@@ -2,94 +2,46 @@ require "bundler/setup"
 require "fileutils"
 
 task :bundleupdate do
-  valid_gems.each do |gem|
-    Dir.chdir gem do
-      Bundler.with_clean_env do
-        header "BUNDLE UPDATE FOR #{gem}"
-        sh "bundle update"
-      end
-    end
-  end
+  each_valid_gem bundleupdate: true, name: "BUNDLE UPDATE"
 end
 
 desc "Runs rubocop, jsodoc, and tests for all gems individually."
 task :each, :bundleupdate do |t, args|
-  bundleupdate = args[:bundleupdate]
-  Rake::Task["bundleupdate"].invoke if bundleupdate
-  valid_gems.each do |gem|
-    Dir.chdir gem do
-      Bundler.with_clean_env do
-        header "RUNNING #{gem}"
-        sh "bundle update" if bundleupdate
-        header "#{gem} rubocop", "*"
-        run_task_if_exists "rubocop"
-        header "#{gem} doctest", "*"
-        run_task_if_exists "doctest"
-        header "#{gem} test", "*"
-        run_task_if_exists "test"
-      end
-    end
+  each_valid_gem bundleupdate: args[:bundleupdate] do |gem|
+    header "#{gem} rubocop", "*"
+    run_task_if_exists "rubocop"
+    header "#{gem} doctest", "*"
+    run_task_if_exists "doctest"
+    header "#{gem} test", "*"
+    run_task_if_exists "test"
   end
 end
 
 desc "Runs tests for all gems."
 task :test => :compile do
-  require "active_support/all"
-  valid_gems.each do |gem|
-    $LOAD_PATH.unshift "#{gem}/lib", "#{gem}/test"
-    Dir.glob("#{gem}/test/**/*_test.rb").each { |file| require_relative file }
-    $LOAD_PATH.delete "#{gem}/lib"
-    $LOAD_PATH.delete "#{gem}/test"
-  end
+  Rake::Task["test:each"].invoke
 end
 
 namespace :test do
   desc "Runs tests for all gems individually."
   task :each, :bundleupdate do |t, args|
-    bundleupdate = args[:bundleupdate]
-    Rake::Task["bundleupdate"].invoke if bundleupdate
-    valid_gems.each do |gem|
-      Dir.chdir gem do
-        Bundler.with_clean_env do
-          header "RUNNING TESTS FOR #{gem}"
-          run_task_if_exists "test"
-        end
-      end
+    each_valid_gem bundleupdate: args[:bundleupdate], name: "RUNNING TESTS" do |gem|
+      header "#{gem} test", "*"
+      run_task_if_exists "test"
     end
   end
 
   desc "Runs tests with coverage for all gems."
   task :coverage do
-    FileUtils.remove_dir "coverage", force: true
-    FileUtils.mkdir "coverage"
-
-    require "simplecov"
-    SimpleCov.start do
-      command_name :coverage
-      track_files "lib/**/*.rb"
-      add_filter "test/"
-      valid_gems_with_coverage_filters.each do |gem, filters|
-        filters.each { |filter| add_filter filter }
-        add_group gem, "#{gem}/lib"
-      end
+    each_valid_gem bundleupdate: args[:bundleupdate], name: "RUNNING TESTS" do |gem|
+      header "#{gem} test", "*"
+      run_task_if_exists "test:coverage"
     end
-
-    # Increase the time limit from the default of 0.05 secs because coverage
-    # may run slowly.
-    coverage_timeout = ENV["GCLOUD_TEST_COVERAGE_DEBUGGER_TIMEOUT"] || "0.3"
-    ENV["GCLOUD_TEST_DEBUGGER_TIMEOUT"] = coverage_timeout
-
-    header "Running tests and coverage report"
-    Rake::Task[:test].invoke
   end
 
   desc "Runs codecov report for all gems."
   task :codecov do
-    require "simplecov"
-    require "codecov"
-    SimpleCov.formatter = SimpleCov::Formatter::Codecov
-
-    Rake::Task["test:coverage"].invoke
+    abort "**** Codecov disabled ****"
   end
 end
 
@@ -116,87 +68,52 @@ task :acceptance, [:project, :keyfile, :key] => :compile do |t, args|
   end  # always overwrite when running tests
   ENV["GCLOUD_TEST_KEY"] = key
 
-  valid_gems.each do |gem|
-    $LOAD_PATH.unshift "#{gem}/lib", "#{gem}/acceptance"
-    Dir.glob("#{gem}/acceptance/**/*_test.rb").each { |file| require_relative file }
-    $LOAD_PATH.delete "#{gem}/lib"
-    $LOAD_PATH.delete "#{gem}/acceptance"
+  each_valid_gem name: "RUNNING ACCEPTANCE TESTS" do |gem|
+    header "#{gem} test", "*"
+    run_task_if_exists "acceptance", "#{project},#{keyfile}"
   end
 end
 
 namespace :acceptance do
   desc "Runs acceptance tests for all gems individually."
   task :each, :bundleupdate do |t, args|
-    bundleupdate = args[:bundleupdate]
-    Rake::Task["bundleupdate"].invoke if bundleupdate
-    valid_gems.each do |gem|
-      Dir.chdir gem do
-        Bundler.with_clean_env do
-          header "ACCEPTANCE TESTS FOR #{gem}"
-          run_task_if_exists "acceptance"
-        end
-      end
+    each_valid_gem bundleupdate: args[:bundleupdate], name: "RUNNING ACCEPTANCE TESTS" do |gem|
+      header "#{gem} test", "*"
+      run_task_if_exists "acceptance"
     end
   end
 
   # Runs each gem's acceptance tests without verifying that a test environment
   # is used. May delete production data! Use only with caution!
   task :unsafe, :bundleupdate do |t, args|
-    bundleupdate = args[:bundleupdate]
-    Rake::Task["bundleupdate"].invoke if bundleupdate
-    valid_gems.each do |gem|
-      Dir.chdir gem do
-        Bundler.with_clean_env do
-          header "UNSAFE ACCEPTANCE TESTS FOR #{gem}"
-          sh "bundle exec rake acceptance:run -v"
-        end
-      end
+    each_valid_gem bundleupdate: args[:bundleupdate], name: "RUNNING UNSAFE ACCEPTANCE TESTS" do |gem|
+      header "UNSAFE ACCEPTANCE TESTS FOR #{gem}"
+      sh "bundle exec rake acceptance:run -v"
     end
   end
 
   desc "Runs acceptance tests with coverage for all gems."
   task :coverage do
-    FileUtils.remove_dir "coverage", force: true
-    FileUtils.mkdir "coverage"
-
-    require "simplecov"
-    SimpleCov.start do
-      command_name :coverage
-      track_files "lib/**/*.rb"
-      add_filter "acceptance/"
-      valid_gems.each { |gem| add_group gem, "#{gem}/lib" }
+    each_valid_gem do |gem|
+      header "#{gem} test", "*"
+      sh "bundle exec rake acceptance:coverage"
     end
-
-    header "Running acceptance tests and coverage report"
-    Rake::Task[:acceptance].invoke
   end
 
   desc "Runs acceptance:cleanup for all gems."
   task :cleanup, :bundleupdate do |t, args|
-    bundleupdate = args[:bundleupdate]
-    Rake::Task["bundleupdate"].invoke if bundleupdate
-    valid_gems.each do |gem|
-      cd gem do
-        Bundler.with_clean_env do
-          run_task_if_exists "acceptance:cleanup"
-        end
-      end
+    each_valid_gem bundleupdate: args[:bundleupdate] do |gem|
+      header "#{gem} cleanup", "*"
+      run_task_if_exists "acceptance:cleanup"
     end
   end
 end
 
 desc "Runs rubocop report for all gems individually."
 task :rubocop, :bundleupdate do |t, args|
-  bundleupdate = args[:bundleupdate]
-  Rake::Task["bundleupdate"].invoke if bundleupdate
-  header "Running rubocop reports"
-  valid_gems.each do |gem|
-    Dir.chdir gem do
-      Bundler.with_clean_env do
-        header "RUBOCOP REPORT FOR #{gem}"
-        run_task_if_exists "rubocop"
-      end
-    end
+  each_valid_gem bundleupdate: args[:bundleupdate] do |gem|
+    header "RUBOCOP REPORT FOR #{gem}"
+    run_task_if_exists "rubocop"
   end
 end
 
@@ -228,16 +145,9 @@ end
 
 desc "Runs yard-doctest example tests for all gems individually."
 task :doctest, :bundleupdate do |t, args|
-  bundleupdate = args[:bundleupdate]
-  Rake::Task["bundleupdate"].invoke if bundleupdate
-  header "Running yard-doctest example code tests"
-  valid_gems.each do |gem|
-    Dir.chdir gem do
-      Bundler.with_clean_env do
-        header "DOCTEST FOR #{gem}"
-        run_task_if_exists "doctest"
-      end
-    end
+  each_valid_gem bundleupdate: args[:bundleupdate] do |gem|
+    header "DOCTEST FOR #{gem}"
+    run_task_if_exists "doctest"
   end
 end
 
@@ -254,27 +164,18 @@ end
 
 desc "Run the CI build for all gems."
 task :ci, :bundleupdate do |t, args|
-  bundleupdate = args[:bundleupdate]
-  valid_gems.each do |gem|
-    Dir.chdir gem do
-      Bundler.with_clean_env do
-        sh "bundle update" if bundleupdate
-        sh "bundle exec rake ci"
-      end
-    end
+  each_valid_gem bundleupdate: args[:bundleupdate] do |gem|
+    header "CI FOR #{gem}"
+    run_task_if_exists "ci"
   end
 end
+
 namespace :ci do
   desc "Run the CI build, with acceptance tests, for all gems."
   task :acceptance, :bundleupdate do |t, args|
-    bundleupdate = args[:bundleupdate]
-    valid_gems.each do |gem|
-      Dir.chdir gem do
-        Bundler.with_clean_env do
-          sh "bundle update" if bundleupdate
-          sh "bundle exec rake ci:acceptance"
-        end
-      end
+    each_valid_gem bundleupdate: args[:bundleupdate] do |gem|
+      header "CI ACCEPTANCE FOR #{gem}"
+      run_task_if_exists "ci:acceptance"
     end
   end
   task :a do
@@ -526,14 +427,9 @@ task :compile do
     spec = Gem::Specification::load("#{gem}/#{gem}.gemspec")
     !spec.extensions.empty?
   }
-  gems_with_ext.each do |gem|
-    Dir.chdir gem do
-      Bundler.with_clean_env do
-        header "Compile C extension for #{gem}"
-        sh "bundle update"
-        sh "bundle exec rake compile"
-      end
-    end
+  each_valid_gem bundleupdate: true, gem_list: gems_with_ext do |gem|
+    header "Compile C extension for #{gem}"
+    sh "bundle exec rake compile"
   end
 end
 
@@ -630,13 +526,9 @@ end
 
 desc "Runs python -m synthtool for each gem containing a synth.py file (see https://github.com/googleapis/synthtool)"
 task :synthtool do
-  gapic_gems.each do |gem|
-    Dir.chdir gem do
-      Bundler.with_clean_env do
-        header "Run `python -m synthtool` for #{gem}"
-        sh "python -m synthtool"
-      end
-    end
+  each_valid_gem gem_list: gapic_gems do |gem|
+    header "Run `python -m synthtool` for #{gem}"
+    sh "python -m synthtool"
   end
 end
 
@@ -647,7 +539,7 @@ end
 def updated_gems
   updated_directories = `git --no-pager diff --name-only HEAD^ HEAD | grep "/" | cut -d/ -f1 | sort | uniq || true`
   updated_directories = updated_directories.split("\n")
-  gems.select { |gem| updated_directories.include? gem }
+  valid_gems.select { |gem| updated_directories.include? gem }
 end
 
 def valid_gems
@@ -655,6 +547,23 @@ def valid_gems
     spec = Gem::Specification::load("#{gem}/#{gem}.gemspec")
     spec.required_ruby_version.satisfied_by? Gem::Version.new(RUBY_VERSION)
   }
+end
+
+def each_valid_gem bundleupdate: false, name: "RUNNING", gem_list: nil
+  (gem_list || valid_gems).each do |gem|
+    Dir.chdir gem do
+      block = proc do
+        header "#{name}: #{gem}"
+        sh "bundle update" if bundleupdate
+        yield gem if block_given?
+      end
+      if Bundler.respond_to? :with_unbundled_env
+        Bundler.with_unbundled_env(&block)
+      else
+        Bundler.with_clean_env(&block)
+      end
+    end
+  end
 end
 
 def gapic_gems
@@ -703,7 +612,7 @@ end
 # subdirectories.
 def run_task_if_exists task_name, params = ""
   if `bundle exec rake --tasks #{task_name}` =~ /#{task_name}[^:]/
-    sh "bundle exec rake #{task_name}[#{params}]"
+    sh "bundle exec rake '#{task_name}[#{params}]'"
   end
 end
 

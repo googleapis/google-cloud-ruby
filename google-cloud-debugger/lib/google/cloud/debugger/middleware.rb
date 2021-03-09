@@ -154,7 +154,7 @@ module Google
           @debugger.agent.tracer.disable_traces_for_thread
 
           # Reset quotas after each request finishes.
-          @debugger.agent.quota_manager.reset if @debugger.agent.quota_manager
+          @debugger.agent.quota_manager&.reset
         end
 
         private

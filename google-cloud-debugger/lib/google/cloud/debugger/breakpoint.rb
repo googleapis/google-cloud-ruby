@@ -265,7 +265,7 @@ module Google
         def valid?
           Validator.validate self unless complete?
 
-          status && status.is_error ? false : true
+          status&.is_error ? false : true
         end
 
         ##

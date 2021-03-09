@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
                       ["OVERVIEW.md", "AUTHENTICATION.md", "INSTRUMENTATION.md", "LOGGING.md", "CONTRIBUTING.md", "TROUBLESHOOTING.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md", "LICENSE", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 2.4"
+  gem.required_ruby_version = "~> 2.5"
 
   gem.extensions << "ext/google/cloud/debugger/debugger_c/extconf.rb"
 
@@ -27,7 +27,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "stackdriver-core", "~> 1.3"
   gem.add_dependency "concurrent-ruby", "~> 1.1"
 
-  gem.add_development_dependency "google-style", "~> 1.24.0"
+  gem.add_development_dependency "google-style", "~> 1.25.1"
   gem.add_development_dependency "minitest", "~> 5.14"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
   gem.add_development_dependency "minitest-focus", "~> 1.1"

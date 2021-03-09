@@ -132,7 +132,7 @@ module Google
         # @return [boolean] `true` when started, `false` otherwise.
         #
         def started?
-          @thread_pool.running? if @thread_pool
+          @thread_pool&.running?
         end
 
         ##
