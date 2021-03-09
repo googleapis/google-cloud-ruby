@@ -30,8 +30,12 @@ describe "Table drop rows", :bigtable do
   it "delete rows by prefix" do
     table_id = "test-table-#{random_str}"
     table = create_table(table_id, row_count: 2)
+    rows = table.read_rows.to_a
+    _(rows.length).must_equal 2
+
     _(table.delete_rows_by_prefix("test-1", timeout: 300)).must_equal true
 
+    sleep 2
     rows = table.read_rows.to_a
     _(rows.length).must_equal 1
   end
