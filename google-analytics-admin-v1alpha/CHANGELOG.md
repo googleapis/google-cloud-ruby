@@ -1,5 +1,15 @@
 # Release History
 
+### 0.6.0 / 2021-03-08
+
+#### Features
+
+* Drop support for Ruby 2.4 and add support for Ruby 3.0
+
+#### Documentation
+
+* Clarify field name formats, and note that app streams must be linked to a Firebase app
+
 ### 0.5.0 / 2021-02-02
 
 #### Features
