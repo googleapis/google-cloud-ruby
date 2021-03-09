@@ -208,21 +208,22 @@ class ConformanceDelete < ConformanceTest
   def self.build_test_for description, test, file_path
     define_method("test_#{file_path}: #{description}") do
       doc_ref = doc_ref_from_path test.doc_ref_path
-      opts = {}
+      exists = nil
+      update_time = nil
       if test.precondition && test.precondition.exists
-        opts[:exists] = test.precondition.exists
+        exists = test.precondition.exists
       end
       if test.precondition && test.precondition.update_time
-        opts[:update_time] = Time.at(test.precondition.update_time.seconds)
+        update_time = Time.at test.precondition.update_time.seconds
       end
       if test.is_error
         expect do
-          doc_ref.delete opts
+          doc_ref.delete exists: exists, update_time: update_time
         end.must_raise ArgumentError
       else
         firestore_mock.expect :commit, commit_resp, commit_args(database: test.request.database, writes: test.request.writes)
 
-        doc_ref.delete opts
+        doc_ref.delete exists: exists, update_time: update_time
       end
     end
   end

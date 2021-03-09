@@ -100,11 +100,11 @@ module Google
         #     puts col.collection_id
         #   end
         #
-        def cols
+        def cols &block
           ensure_service!
           grpc = service.list_collections "#{path}/documents"
           cols_enum = CollectionReferenceList.from_grpc(grpc, self, "#{path}/documents").all
-          cols_enum.each { |c| yield c } if block_given?
+          cols_enum.each(&block) if block_given?
           cols_enum
         end
         alias collections cols
@@ -256,7 +256,7 @@ module Google
           ensure_service!
 
           unless block_given?
-            return enum_for :get_all, docs, field_mask: field_mask
+            return enum_for :get_all, *docs, field_mask: field_mask
           end
 
           doc_paths = Array(docs).flatten.map do |doc_path|
@@ -634,9 +634,9 @@ module Google
             commit_return = transaction.commit
             # Conditional return value, depending on truthy commit_response
             commit_response ? commit_return : transaction_return
-          rescue Google::Cloud::UnavailableError => err
+          rescue Google::Cloud::UnavailableError => e
             # Re-raise if retried more than the max
-            raise err if backoff[:current] > backoff[:max]
+            raise e if backoff[:current] > backoff[:max]
 
             # Sleep with incremental backoff before restarting
             sleep backoff[:delay]
@@ -649,18 +649,18 @@ module Google
             transaction = Transaction.from_client \
               self, previous_transaction: transaction.transaction_id
             retry
-          rescue Google::Cloud::InvalidArgumentError => err
+          rescue Google::Cloud::InvalidArgumentError => e
             # Return if a previous call was retried but ultimately succeeded
-            return nil if backoff[:current] > 0
+            return nil if backoff[:current].positive?
 
             # Re-raise error.
-            raise err
-          rescue StandardError => err
+            raise e
+          rescue StandardError => e
             # Rollback transaction when handling unexpected error
             transaction.rollback rescue nil
 
             # Re-raise error.
-            raise err
+            raise e
           end
         end
 

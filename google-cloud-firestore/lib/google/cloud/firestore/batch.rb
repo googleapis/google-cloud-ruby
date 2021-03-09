@@ -322,8 +322,7 @@ module Google
 
           doc_path = coalesce_doc_path_argument doc
 
-          @writes << Convert.write_for_update(doc_path, data,
-                                              update_time: update_time)
+          @writes << Convert.write_for_update(doc_path, data, update_time: update_time)
 
           nil
         end

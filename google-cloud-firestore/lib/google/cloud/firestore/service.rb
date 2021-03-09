@@ -26,7 +26,10 @@ module Google
       # @private Represents the gRPC Firestore service, including all the API
       # methods.
       class Service
-        attr_accessor :project, :credentials, :timeout, :host
+        attr_accessor :project
+        attr_accessor :credentials
+        attr_accessor :timeout
+        attr_accessor :host
 
         ##
         # Creates a new Service instance.

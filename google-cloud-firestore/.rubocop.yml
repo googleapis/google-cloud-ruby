@@ -11,27 +11,18 @@ AllCops:
     - "conformance/**/*"
     - "test/**/*"
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
+Metrics/AbcSize:
+  Exclude:
+    - "lib/google/cloud/firestore/query.rb"
 Metrics/ClassLength:
   Enabled: false
 Metrics/CyclomaticComplexity:
-  Max: 15
+  Max: 17
 Metrics/PerceivedComplexity:
-  Max: 15
+  Max: 17
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-firestore.rb"
-Naming/RescuedExceptionsVariableName:
-  Enabled: false
-Naming/UncommunicativeMethodParamName:
-  Enabled: false
-Style/IfUnlessModifier:
-  Enabled: false
-Style/NumericPredicate:
-  Enabled: false
-Style/SafeNavigation:
-  Enabled: false
-Style/SymbolArray:
-  Enabled: false

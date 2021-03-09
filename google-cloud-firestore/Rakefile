@@ -114,7 +114,7 @@ namespace :acceptance do
     puts "Cleaning up Firestore documents and collections."
 
     firestore = Google::Cloud::Firestore.new
-    firestore.cols.all do |col|
+    firestore.cols.each do |col|
       begin
         col.select(firestore.document_id).all_descendants.run.each_slice(500).with_index do |slice, index|
           firestore.batch do |b|
@@ -145,7 +145,7 @@ namespace :samples do
   task :latest do
     if File.directory? "samples"
       Dir.chdir "samples" do
-        Bundler.with_clean_env do
+        Bundler.with_unbundled_env do
           ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
           sh "bundle update"
           sh "bundle exec rake test"
@@ -159,7 +159,7 @@ namespace :samples do
   task :master do
     if File.directory? "samples"
       Dir.chdir "samples" do
-        Bundler.with_clean_env do
+        Bundler.with_unbundled_env do
           ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
           sh "bundle update"
           sh "bundle exec rake test"

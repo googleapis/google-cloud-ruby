@@ -34,7 +34,7 @@ describe "Batch", :firestore_acceptance do
     doc_ref = rand_batch_col.add foo: "bar"
 
     firestore.batch do |b|
-      b.set doc_ref, foo: "baz"
+      b.set doc_ref, { foo: "baz" }
     end
 
     _(doc_ref.get[:foo]).must_equal "baz"
@@ -45,7 +45,7 @@ describe "Batch", :firestore_acceptance do
     doc_ref = rand_batch_col.add foo: "bar"
 
     firestore.batch do |b|
-      b.update doc_ref, foo: "baz"
+      b.update doc_ref, { foo: "baz" }
     end
 
     _(doc_ref.get[:foo]).must_equal "baz"
@@ -58,7 +58,7 @@ describe "Batch", :firestore_acceptance do
 
     expect do
       firestore.batch do |b|
-        b.update doc_ref, foo: "baz"
+        b.update doc_ref, { foo: "baz" }
       end
     end.must_raise Google::Cloud::NotFoundError
   end

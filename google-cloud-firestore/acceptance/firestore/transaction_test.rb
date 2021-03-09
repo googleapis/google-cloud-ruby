@@ -57,7 +57,7 @@ describe "Transaction", :firestore_acceptance do
     doc_ref = rand_tx_col.doc
 
     resp = firestore.transaction do |tx|
-      tx.set doc_ref, foo: "bar"
+      tx.set doc_ref, { foo: "bar" }
     end
 
     _(resp).must_be :nil?
@@ -70,7 +70,7 @@ describe "Transaction", :firestore_acceptance do
     doc_ref.create foo: "bar"
 
     resp = firestore.transaction do |tx|
-      tx.update doc_ref, foo: "baz"
+      tx.update doc_ref, { foo: "baz" }
     end
 
     _(resp).must_be :nil?
@@ -84,7 +84,7 @@ describe "Transaction", :firestore_acceptance do
 
     expect do
       firestore.transaction do |tx|
-        tx.update doc_ref, foo: "baz"
+        tx.update doc_ref, { foo: "baz" }
       end
     end.must_raise Google::Cloud::NotFoundError
   end
@@ -92,7 +92,7 @@ describe "Transaction", :firestore_acceptance do
   it "has delete method" do
     rand_tx_col = firestore.col "#{root_path}/tx/#{SecureRandom.hex(4)}"
     doc_ref = rand_tx_col.doc
-    doc_ref.create({foo: "bar"})
+    doc_ref.create foo: "bar"
 
     resp = firestore.transaction do |tx|
       tx.delete doc_ref

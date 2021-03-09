@@ -16,11 +16,11 @@ require "firestore_helper"
 
 describe "Watch", :firestore_acceptance do
   it "watches a limit query" do
-    watch_col = root_col.doc("watch-limit").col("watch-query")
+    watch_col = root_col.doc("watch-limit-#{SecureRandom.hex(4)}").col("watch-query")
 
-    watch_col.doc("int 5").create(val: 5)
-    watch_col.doc("int 4").create(val: 4)
-    watch_col.doc("int 3").create(val: 3)
+    watch_col.doc("int 5").create val: 5
+    watch_col.doc("int 4").create val: 4
+    watch_col.doc("int 3").create val: 3
 
     snps = []
     listener = watch_col.order(:val).limit(2).listen { |snp| snps << snp }
@@ -28,8 +28,8 @@ describe "Watch", :firestore_acceptance do
     wait_until { snps.count == 1 }
 
     firestore.batch do |b|
-      b.create(watch_col.doc("int 2"), { val: 1 })
-      b.create(watch_col.doc("int 1"), { val: 0 })
+      b.create watch_col.doc("int 2"), { val: 1 }
+      b.create watch_col.doc("int 1"), { val: 0 }
     end
 
     wait_until { snps.count == 2 }
@@ -48,11 +48,11 @@ describe "Watch", :firestore_acceptance do
   end
 
   it "watches a limit_to_last query" do
-    watch_col = root_col.doc("watch-limit_to_last").col("watch-query")
+    watch_col = root_col.doc("watch-limit_to_last-#{SecureRandom.hex(4)}").col("watch-query")
 
-    watch_col.doc("int 3").create(val: 3)
-    watch_col.doc("int 2").create(val: 2)
-    watch_col.doc("int 1").create(val: 1)
+    watch_col.doc("int 3").create val: 3
+    watch_col.doc("int 2").create val: 2
+    watch_col.doc("int 1").create val: 1
 
     snps = []
     listener = watch_col.order(:val).limit_to_last(2).listen { |snp| snps << snp }
@@ -60,8 +60,8 @@ describe "Watch", :firestore_acceptance do
     wait_until { snps.count == 1 }
 
     firestore.batch do |b|
-      b.create(watch_col.doc("int 5"), { val: 5 })
-      b.create(watch_col.doc("int 4"), { val: 4 })
+      b.create watch_col.doc("int 5"), { val: 5 }
+      b.create watch_col.doc("int 4"), { val: 4 }
     end
 
     wait_until { snps.count == 2 }
@@ -80,27 +80,27 @@ describe "Watch", :firestore_acceptance do
   end
 
   it "watches a query" do
-    watch_col = root_col.doc("watch").col("watch-query")
+    watch_col = root_col.doc("watch-#{SecureRandom.hex(4)}").col("watch-query")
 
-    watch_col.doc("nil").create(val: nil)
-    watch_col.doc("int").create(val: 0)
-    watch_col.doc("true").create(val: true)
-    watch_col.doc("false").create(val: false)
-    watch_col.doc("num").create(val: 0.0)
-    watch_col.doc("str").create(val: "")
-    watch_col.doc("time").create(val: Time.now)
-    watch_col.doc("array").create(val: [])
-    watch_col.doc("hash").create(val: {})
-    watch_col.doc("ref").create(val: root_col.doc("ref"))
-    watch_col.doc("geo").create(val: { longitude: 45, latitude: 45 })
-    watch_col.doc("io").create(val: StringIO.new)
+    watch_col.doc("nil").create val: nil
+    watch_col.doc("int").create val: 0
+    watch_col.doc("true").create val: true
+    watch_col.doc("false").create val: false
+    watch_col.doc("num").create val: 0.0
+    watch_col.doc("str").create val: ""
+    watch_col.doc("time").create val: Time.now
+    watch_col.doc("array").create val: []
+    watch_col.doc("hash").create val: {}
+    watch_col.doc("ref").create val: root_col.doc("ref")
+    watch_col.doc("geo").create val: { longitude: 45, latitude: 45 }
+    watch_col.doc("io").create val: StringIO.new
 
     snps = []
     listener = watch_col.order(:val, :desc).listen { |snp| snps << snp }
 
     wait_until { snps.count == 1 }
 
-    watch_col.doc("added").create(val: false)
+    watch_col.doc("added").create val: false
 
     wait_until { snps.count == 2 }
 
@@ -108,7 +108,7 @@ describe "Watch", :firestore_acceptance do
 
     wait_until { snps.count == 3 }
 
-    watch_col.doc("added").update(val: true)
+    watch_col.doc("added").update({val: true})
 
     wait_until { snps.count == 4 }
 
@@ -143,16 +143,16 @@ describe "Watch", :firestore_acceptance do
   end
 
   it "watches a document" do
-    watch_col = root_col.doc("watch").col("watch-docs")
+    watch_col = root_col.doc("watch-#{SecureRandom.hex(4)}").col("watch-docs")
 
-    watch_col.doc("watch-doc").create(val: true)
+    watch_col.doc("watch-doc").create val: true
 
     snps = []
     listener = watch_col.doc("watch-doc").listen { |snp| snps << snp }
 
     wait_until { snps.count == 1 }
 
-    watch_col.doc("watch-doc").update(val: false)
+    watch_col.doc("watch-doc").update({val: false})
 
     wait_until { snps.count == 2 }
 
@@ -160,7 +160,7 @@ describe "Watch", :firestore_acceptance do
 
     wait_until { snps.count == 3 }
 
-    watch_col.doc("watch-doc").set(val: 1)
+    watch_col.doc("watch-doc").set({val: 1})
 
     wait_until { snps.count == 4 }
 

@@ -34,7 +34,7 @@ def delete_field project_id:, collection_path: "cities"
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START fs_delete_field]
   city_ref = firestore.doc "#{collection_path}/BJ"
-  city_ref.update capital: firestore.field_delete
+  city_ref.update({ capital: firestore.field_delete })
   # [END fs_delete_field]
   puts "Deleted the capital field from the BJ document in the cities collection."
 end

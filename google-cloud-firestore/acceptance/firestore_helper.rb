@@ -94,6 +94,7 @@ def clean_up_firestore
           b.delete doc
         end
       end
+      puts "Deleted batch #{index+1} of #{slice.count} documents"
     end
   end
 rescue => e

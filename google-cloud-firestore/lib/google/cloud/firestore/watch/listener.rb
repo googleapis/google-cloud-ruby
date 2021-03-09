@@ -83,7 +83,7 @@ module Google
           def stop
             synchronize do
               @stopped = true
-              @request_queue.push self if @request_queue
+              @request_queue&.push self
             end
           end
 
