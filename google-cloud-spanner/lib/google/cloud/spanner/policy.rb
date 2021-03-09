@@ -70,7 +70,8 @@ module Google
       #   end
       #
       class Policy
-        attr_reader :etag, :roles
+        attr_reader :etag
+        attr_reader :roles
 
         ##
         # @private Creates a Policy object.
@@ -169,7 +170,7 @@ module Google
                 role: role_name,
                 members: roles[role_name]
               )
-            end
+            end.compact
           )
         end
 

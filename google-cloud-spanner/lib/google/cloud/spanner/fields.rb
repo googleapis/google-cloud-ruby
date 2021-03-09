@@ -133,13 +133,14 @@ module Google
         #
         def types
           @grpc_fields.map(&:type).map do |type|
-            if type.code == :ARRAY
+            case type.code
+            when :ARRAY
               if type.array_element_type.code == :STRUCT
                 [Fields.from_grpc(type.array_element_type.struct_type.fields)]
               else
                 [type.array_element_type.code]
               end
-            elsif type.code == :STRUCT
+            when :STRUCT
               Fields.from_grpc type.struct_type.fields
             else
               type.code

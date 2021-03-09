@@ -71,7 +71,7 @@ module Google
             return nil unless next?
             ensure_service!
             options = { token: token, max: @max }
-            grpc = @service.list_databases @instance_id, options
+            grpc = @service.list_databases @instance_id, **options
             self.class.from_grpc grpc, @service, @max
           end
 
@@ -123,17 +123,17 @@ module Google
           #     puts database.database_id
           #   end
           #
-          def all request_limit: nil
+          def all request_limit: nil, &block
             request_limit = request_limit.to_i if request_limit
             unless block_given?
               return enum_for :all, request_limit: request_limit
             end
             results = self
             loop do
-              results.each { |r| yield r }
+              results.each(&block)
               if request_limit
                 request_limit -= 1
-                break if request_limit < 0
+                break if request_limit.negative?
               end
               break unless results.next?
               results = results.next

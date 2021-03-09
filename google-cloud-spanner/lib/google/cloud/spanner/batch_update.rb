@@ -142,7 +142,9 @@ module Google
 
         # @private
         class Statement
-          attr_reader :sql, :params, :types
+          attr_reader :sql
+          attr_reader :params
+          attr_reader :types
 
           def initialize sql, params: nil, types: nil
             @sql = sql

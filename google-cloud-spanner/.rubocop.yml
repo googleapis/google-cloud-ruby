@@ -13,25 +13,17 @@ AllCops:
 Documentation:
   Enabled: false
 
-Layout/AlignHash:
-  Enabled: false
 Metrics/ClassLength:
   Enabled: false
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - "lib/google/cloud/spanner.rb"
+Metrics/PerceivedComplexity:
+  Exclude:
+    - "lib/google/cloud/spanner.rb"
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-spanner.rb"
-Naming/RescuedExceptionsVariableName:
-  Enabled: false
-Naming/UncommunicativeMethodParamName:
-  Enabled: false
-Style/EmptyMethod:
-  Enabled: false
-Style/IfUnlessModifier:
-  Enabled: false
-Style/NumericLiterals:
-  Enabled: false
-Style/NumericPredicate:
-  Enabled: false
 Style/SymbolArray:
   Enabled: false
 Style/WordArray:

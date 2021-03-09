@@ -373,9 +373,9 @@ module Google
 
           opts = { call_options: call_options }
           if partition.execute?
-            execute_partition_query partition, opts
+            execute_partition_query partition, **opts
           elsif partition.read?
-            execute_partition_read partition, opts
+            execute_partition_read partition, **opts
           end
         end
 

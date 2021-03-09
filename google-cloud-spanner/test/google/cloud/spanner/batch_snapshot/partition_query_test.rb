@@ -392,7 +392,7 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
   end
 
   it "can execute a simple query with query options (query-level)" do
-    expect_query_options = { optimizer_version: "1" }
+    expect_query_options = { optimizer_version: "1", optimizer_statistics_package: "" }
     mock = Minitest::Mock.new
     sql = "SELECT * FROM users"
     mock.expect :partition_query, partitions_resp, [{ session: session.path, sql: sql, transaction: tx_selector, params: nil, param_types: nil, partition_options: nil }, default_options]

@@ -639,7 +639,7 @@ module Google
             commit_options: commit_options,
             call_options: call_options
           }
-          commit opts do |c|
+          commit(**opts) do |c|
             c.upsert table, rows
           end
         end
@@ -728,7 +728,7 @@ module Google
             commit_options: commit_options,
             call_options: call_options
           }
-          commit opts do |c|
+          commit(**opts) do |c|
             c.insert table, rows
           end
         end
@@ -816,7 +816,7 @@ module Google
             commit_options: commit_options,
             call_options: call_options
           }
-          commit opts do |c|
+          commit(**opts) do |c|
             c.update table, rows
           end
         end
@@ -906,7 +906,7 @@ module Google
             commit_options: commit_options,
             call_options: call_options
           }
-          commit opts do |c|
+          commit(**opts) do |c|
             c.replace table, rows
           end
         end
@@ -974,7 +974,7 @@ module Google
             commit_options: commit_options,
             call_options: call_options
           }
-          commit opts do |c|
+          commit(**opts) do |c|
             c.delete table, keys
           end
         end

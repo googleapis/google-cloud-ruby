@@ -29,7 +29,9 @@ module Google
       # {Google::Cloud::Spanner::Session} instances.
       #
       class Pool
-        attr_accessor :all_sessions, :session_queue, :transaction_queue
+        attr_accessor :all_sessions
+        attr_accessor :session_queue
+        attr_accessor :transaction_queue
 
         def initialize client, min: 10, max: 100, keepalive: 1800,
                        write_ratio: 0.3, fail: true, threads: nil
@@ -38,7 +40,7 @@ module Google
           @max = max
           @keepalive = keepalive
           @write_ratio = write_ratio
-          @write_ratio = 0 if write_ratio < 0
+          @write_ratio = 0 if write_ratio.negative?
           @write_ratio = 1 if write_ratio > 1
           @fail = fail
           @threads = threads || [2, Concurrent.processor_count * 2].max
@@ -143,13 +145,13 @@ module Google
           return new_transaction! if action == :new
         end
 
-        def checkin_transaction tx
+        def checkin_transaction txn
           @mutex.synchronize do
-            unless all_sessions.include? tx.session
+            unless all_sessions.include? txn.session
               raise ArgumentError, "Cannot checkin session"
             end
 
-            transaction_queue.push tx
+            transaction_queue.push txn
 
             @resource.signal
           end
@@ -182,7 +184,7 @@ module Google
           @mutex.synchronize do
             available_count = session_queue.count + transaction_queue.count
             release_count = @min - available_count
-            release_count = 0 if release_count < 0
+            release_count = 0 if release_count.negative?
 
             to_keepalive += (session_queue + transaction_queue).select do |x|
               x.idle_since? @keepalive
@@ -282,10 +284,8 @@ module Google
           @keepalive_task.execute
         end
 
-        def future
-          Concurrent::Future.new executor: @thread_pool do
-            yield
-          end.execute
+        def future &block
+          Concurrent::Future.new(executor: @thread_pool, &block).execute
         end
       end
     end
