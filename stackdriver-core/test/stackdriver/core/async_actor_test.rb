@@ -44,14 +44,14 @@ describe Stackdriver::Core::AsyncActor do
   describe "#async_start" do
     it "starts the thread" do
       thr = actor.instance_variable_get("@thread")
-      thr.must_be_nil
+      _(thr).must_be_nil
 
       actor.async_start
       thr = actor.instance_variable_get("@thread")
-      thr.must_be_kind_of Thread
-      thr.status.must_equal "run"
+      _(thr).must_be_kind_of Thread
+      _(thr.status).must_equal "run"
 
-      actor.async_state.must_equal :running
+      _(actor.async_state).must_equal :running
 
       thr.kill
       thr.join
@@ -76,16 +76,16 @@ describe Stackdriver::Core::AsyncActor do
   describe "#async_stop" do
     it "sets the state to :stopping" do
       stopping = actor.async_stop
-      stopping.must_equal true
+      _(stopping).must_equal true
 
       # Wait for child thread to fully stop
       wait_result = wait_until_true do
         actor.async_state != :stopping
       end
-      wait_result.must_equal :completed
+      _(wait_result).must_equal :completed
 
       stopping = actor.async_stop
-      stopping.must_equal false
+      _(stopping).must_equal false
     end
 
     it "calls #on_async_state_change" do
@@ -107,14 +107,14 @@ describe Stackdriver::Core::AsyncActor do
   describe "#async_suspend" do
     it "sets the state to :stopping" do
       actor.async_start
-      actor.async_state.must_equal :running
+      _(actor.async_state).must_equal :running
 
       suspended = actor.async_suspend
-      suspended.must_equal true
-      actor.async_state.must_equal :suspended
+      _(suspended).must_equal true
+      _(actor.async_state).must_equal :suspended
 
       suspended = actor.async_suspend
-      suspended.must_equal false
+      _(suspended).must_equal false
 
       actor.async_stop
     end
@@ -140,14 +140,14 @@ describe Stackdriver::Core::AsyncActor do
       actor.async_start
 
       actor.async_suspend
-      actor.async_state.must_equal :suspended
+      _(actor.async_state).must_equal :suspended
 
       resumed = actor.async_resume
-      actor.async_state.must_equal :running
-      resumed.must_equal true
+      _(actor.async_state).must_equal :running
+      _(resumed).must_equal true
 
       resumed = actor.async_resume
-      resumed.must_equal false
+      _(resumed).must_equal false
 
       actor.async_stop
     end
@@ -170,80 +170,80 @@ describe Stackdriver::Core::AsyncActor do
 
   describe "#async_running?" do
     it "returns true only when async job is running" do
-      actor.async_running?.must_equal false
+      _(actor.async_running?).must_equal false
 
       actor.async_start
-      actor.async_running?.must_equal true
+      _(actor.async_running?).must_equal true
 
       actor.async_suspend
-      actor.async_running?.must_equal false
+      _(actor.async_running?).must_equal false
 
       actor.async_resume
-      actor.async_running?.must_equal true
+      _(actor.async_running?).must_equal true
 
       actor.async_stop
-      actor.async_running?.must_equal false
+      _(actor.async_running?).must_equal false
     end
   end
 
   describe "#async_suspended?" do
     it "returns true only when async job is suspended" do
-      actor.async_suspended?.must_equal false
+      _(actor.async_suspended?).must_equal false
 
       actor.async_start
-      actor.async_suspended?.must_equal false
+      _(actor.async_suspended?).must_equal false
 
       actor.async_suspend
-      actor.async_suspended?.must_equal true
+      _(actor.async_suspended?).must_equal true
 
       actor.async_resume
-      actor.async_suspended?.must_equal false
+      _(actor.async_suspended?).must_equal false
 
       actor.async_stop
-      actor.async_suspended?.must_equal false
+      _(actor.async_suspended?).must_equal false
     end
   end
 
   describe "#async_working?" do
     it "returns true only when async job is running or suspended" do
-      actor.async_working?.must_equal false
+      _(actor.async_working?).must_equal false
 
       actor.async_start
-      actor.async_working?.must_equal true
+      _(actor.async_working?).must_equal true
 
       actor.async_suspend
-      actor.async_working?.must_equal true
+      _(actor.async_working?).must_equal true
 
       actor.async_resume
-      actor.async_working?.must_equal true
+      _(actor.async_working?).must_equal true
 
       actor.async_stop
-      actor.async_working?.must_equal false
+      _(actor.async_working?).must_equal false
     end
   end
 
   describe "#async_stopped?" do
     it "returns true only when async job is stopped" do
-      actor.async_stopped?.must_equal false
+      _(actor.async_stopped?).must_equal false
 
       actor.async_start
-      actor.async_stopped?.must_equal false
+      _(actor.async_stopped?).must_equal false
 
       actor.async_suspend
-      actor.async_stopped?.must_equal false
+      _(actor.async_stopped?).must_equal false
 
       actor.async_resume
-      actor.async_stopped?.must_equal false
+      _(actor.async_stopped?).must_equal false
 
       actor.async_stop
-      actor.async_state.must_equal :stopping
+      _(actor.async_state).must_equal :stopping
 
       wait_result = wait_until_true do
         actor.async_state != :stopping
       end
 
-      wait_result.must_equal :completed
-      actor.async_stopped?.must_equal true
+      _(wait_result).must_equal :completed
+      _(actor.async_stopped?).must_equal true
     end
   end
 
@@ -253,10 +253,10 @@ describe Stackdriver::Core::AsyncActor do
 
       actor.send :set_cleanup_options, force: false
 
-      actor.async_stopped?.must_equal false
+      _(actor.async_stopped?).must_equal false
       stop = actor.async_stop!
-      stop.must_equal :waited
-      actor.async_stopped?.must_equal true
+      _(stop).must_equal :waited
+      _(actor.async_stopped?).must_equal true
     end
 
     it "forces the async job to stop" do
@@ -270,12 +270,12 @@ describe Stackdriver::Core::AsyncActor do
       wait_result = wait_until_true do
         thread_running
       end
-      wait_result.must_equal :completed
+      _(wait_result).must_equal :completed
 
-      actor.async_stopped?.must_equal false
+      _(actor.async_stopped?).must_equal false
       stop = actor.async_stop!
-      stop.must_equal :forced
-      actor.async_stopped?.must_equal true
+      _(stop).must_equal :forced
+      _(actor.async_stopped?).must_equal true
     end
 
     it "doesn't wait if timeout is 0" do
@@ -289,13 +289,13 @@ describe Stackdriver::Core::AsyncActor do
       wait_result = wait_until_true do
         thread_running
       end
-      wait_result.must_equal :completed
-      actor.async_stopped?.must_equal false
+      _(wait_result).must_equal :completed
+      _(actor.async_stopped?).must_equal false
 
       actor.send :set_cleanup_options, timeout: 0
       stop = actor.async_stop!
-      stop.must_equal :forced
-      actor.async_stopped?.must_equal true
+      _(stop).must_equal :forced
+      _(actor.async_stopped?).must_equal true
     end
 
     it "calls #on_async_state_change" do
@@ -318,7 +318,7 @@ describe Stackdriver::Core::AsyncActor do
     it "adds actor to cleanup_list" do
       klass = Stackdriver::Core::AsyncActor
       actor.async_start
-      klass.instance_variable_get("@cleanup_list").must_include actor
+      _(klass.instance_variable_get("@cleanup_list")).must_include actor
       actor.async_stop
     end
   end

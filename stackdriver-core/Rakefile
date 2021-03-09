@@ -38,6 +38,7 @@ namespace :acceptance do
 
   desc "Run acceptance cleanup."
   task :cleanup do
+    # Do nothing
   end
 end
 
