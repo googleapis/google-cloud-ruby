@@ -118,7 +118,7 @@ module Google
           json_frames = []
           collecting_frames = !truncate_stack
           stack_frames.each do |frame|
-            collecting_frames ||= truncate_stack.call(frame)
+            collecting_frames ||= truncate_stack.call frame
             next unless collecting_frames
             next unless !filter_stack || filter_stack.call(frame)
             json_frames <<

@@ -32,7 +32,7 @@ module Google
         attr_reader :traces
 
         def initialize message, traces = nil
-          super(message)
+          super message
           @traces = traces if traces
         end
       end
@@ -50,7 +50,7 @@ module Google
         attr_reader :traces
 
         def initialize message, traces = nil
-          super(message)
+          super message
           @traces = traces if traces
         end
       end

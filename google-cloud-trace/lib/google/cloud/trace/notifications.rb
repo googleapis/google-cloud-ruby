@@ -71,7 +71,7 @@ module Google
                             label_namespace: DEFAULT_LABEL_NAMESPACE,
                             capture_stack: false
           require "active_support/notifications"
-          ActiveSupport::Notifications.subscribe(type) do |*args|
+          ActiveSupport::Notifications.subscribe type do |*args|
             event = ActiveSupport::Notifications::Event.new(*args)
             handle_notification_event event, max_length, label_namespace,
                                       capture_stack
@@ -83,19 +83,18 @@ module Google
         def self.handle_notification_event event, maxlen, label_namespace,
                                            capture_stack
           cur_span = Google::Cloud::Trace.get
-          if cur_span && event.time && event.end
-            labels = payload_to_labels event, maxlen, label_namespace
-            if capture_stack
-              Google::Cloud::Trace::LabelKey.set_stack_trace \
-                labels,
-                skip_frames: 2,
-                truncate_stack: REMOVE_NOTIFICATION_FRAMEWORK
-            end
-            cur_span.create_span event.name,
-                                 start_time: event.time,
-                                 end_time: event.end,
-                                 labels: labels
+          return unless cur_span && event.time && event.end
+          labels = payload_to_labels event, maxlen, label_namespace
+          if capture_stack
+            Google::Cloud::Trace::LabelKey.set_stack_trace \
+              labels,
+              skip_frames: 2,
+              truncate_stack: REMOVE_NOTIFICATION_FRAMEWORK
           end
+          cur_span.create_span event.name,
+                               start_time: event.time,
+                               end_time: event.end,
+                               labels: labels
         end
 
         ##
@@ -104,7 +103,7 @@ module Google
           labels = {}
           event.payload.each do |k, v|
             if v.is_a? ::String
-              v = v[0, maxlen - 3] + "..." if maxlen && v.size > maxlen
+              v = "#{v[0, maxlen - 3]}..." if maxlen && v.size > maxlen
               labels["#{label_namespace}#{k}"] = v.to_s
             end
           end

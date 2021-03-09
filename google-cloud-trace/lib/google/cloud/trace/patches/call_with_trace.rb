@@ -84,6 +84,6 @@ module GRPC
     end
 
     # Patch GRPC::Core::Call#run_batch method
-    ::GRPC::Core::Call.send(:prepend, CallWithTrace)
+    ::GRPC::Core::Call.prepend CallWithTrace
   end
 end

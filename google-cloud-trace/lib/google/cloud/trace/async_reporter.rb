@@ -36,7 +36,7 @@ module Google
 
         ##
         # @private Creates a new AsyncReporter instance.
-        def initialize service, max_count: 1000, max_bytes: 4000000,
+        def initialize service, max_count: 1000, max_bytes: 4_000_000,
                        max_queue: 100, interval: 5, threads: 10
           # init MonitorMixin
           super()
@@ -111,7 +111,7 @@ module Google
             @stopped = true
             patch_batch!
             @cond.broadcast
-            @thread_pool.shutdown if @thread_pool
+            @thread_pool&.shutdown
           end
 
           self
@@ -219,7 +219,7 @@ module Google
                 @cond.wait
               else
                 # still waiting for the interval to publish the batch...
-                @cond.wait(@batch.publish_wait)
+                @cond.wait @batch.publish_wait
               end
             end
           end
@@ -295,7 +295,8 @@ module Google
         ##
         # @private
         class Batch
-          attr_reader :created_at, :traces
+          attr_reader :created_at
+          attr_reader :traces
 
           def initialize reporter
             @reporter = reporter
@@ -337,7 +338,7 @@ module Google
 
           def publish_wait
             publish_wait = publish_at - Time.now
-            return 0 if publish_wait < 0
+            return 0 if publish_wait.negative?
             publish_wait
           end
 

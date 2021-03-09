@@ -56,8 +56,7 @@ module Google
           @trace_context = trace_context || Stackdriver::Core::TraceContext.new
           @root_spans = []
           @spans_by_id = {}
-          @span_id_generator =
-            span_id_generator || ::Proc.new { rand(1..0xffffffffffffffff) }
+          @span_id_generator = span_id_generator || proc { rand(1..0xffffffffffffffff) }
         end
 
         ##

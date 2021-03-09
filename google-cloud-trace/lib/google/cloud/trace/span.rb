@@ -323,7 +323,7 @@ module Google
           ensure_exists!
           unless start_time
             self.start_time = ::Time.now.utc
-            parent.ensure_started if parent
+            parent&.ensure_started
           end
           self
         end
@@ -350,8 +350,8 @@ module Google
         def delete
           ensure_exists!
           @children.each(&:delete)
-          parent.remove_child(self) if parent
-          trace.remove_span(self)
+          parent&.remove_child self
+          trace.remove_span self
           @trace = nil
           @parent = nil
           self
@@ -428,7 +428,7 @@ module Google
         def ensure_no_cycle! new_parent
           ptr = new_parent
           until ptr.nil?
-            raise "Move would result in a cycle" if ptr.equal?(self)
+            raise "Move would result in a cycle" if ptr.equal? self
             ptr = ptr.parent
           end
         end

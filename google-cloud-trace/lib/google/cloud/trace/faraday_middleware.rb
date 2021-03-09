@@ -39,10 +39,9 @@ module Google
         #   faraday.adapter  Faraday.default_adapter  # use Net::HTTP adapter
         # end
         # ```
-
-        def initialize app, enable_cross_project_tracing: false
-          super(app)
-          @enable_cross_project_tracing = enable_cross_project_tracing || false
+        def initialize app, opts = {}
+          @enable_cross_project_tracing = opts[:enable_cross_project_tracing] || false
+          super app
         end
 
         ##
@@ -114,9 +113,8 @@ module Google
         ##
         # @private Add X-Cloud-Trace-Context for request header
         def add_trace_context_header env
-          if (trace_ctx = Stackdriver::Core::TraceContext.get)
-            env[:request_headers]["X-Cloud-Trace-Context"] = trace_ctx.to_string
-          end
+          trace_ctx = Stackdriver::Core::TraceContext.get
+          env[:request_headers]["X-Cloud-Trace-Context"] = trace_ctx.to_string if trace_ctx
         end
       end
     end

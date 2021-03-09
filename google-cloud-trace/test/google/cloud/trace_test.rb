@@ -25,12 +25,12 @@ describe Google::Cloud do
   describe "#trace" do
     it "calls out to Google::Cloud.trace" do
       gcloud = Google::Cloud.new
-      stubbed_trace = ->(project, keyfile, scope: nil, timeout: nil, host: nil) {
+      stubbed_trace = ->(project, keyfile, opts = {}) {
         project.must_be :nil?
         keyfile.must_be :nil?
-        scope.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
+        opts[:scope].must_be :nil?
+        opts[:timeout].must_be :nil?
+        opts[:host].must_be :nil?
         "trace-project-object-empty"
       }
       Google::Cloud.stub :trace, stubbed_trace do
@@ -41,12 +41,12 @@ describe Google::Cloud do
 
     it "passes project and keyfile to Google::Cloud.trace" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_trace = ->(project, keyfile, scope: nil, timeout: nil, host: nil) {
+      stubbed_trace = ->(project, keyfile, opts = {}) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
-        scope.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
+        opts[:scope].must_be :nil?
+        opts[:timeout].must_be :nil?
+        opts[:host].must_be :nil?
         "trace-project-object"
       }
       Google::Cloud.stub :trace, stubbed_trace do
@@ -57,12 +57,12 @@ describe Google::Cloud do
 
     it "passes project and keyfile and options to Google::Cloud.trace" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
-      stubbed_trace = ->(project, keyfile, scope: nil, timeout: nil, host: nil) {
+      stubbed_trace = ->(project, keyfile, opts = {}) {
         project.must_equal "project-id"
         keyfile.must_equal "keyfile-path"
-        scope.must_equal "http://example.com/scope"
-        timeout.must_equal 60
-        host.must_be :nil?
+        opts[:scope].must_equal "http://example.com/scope"
+        opts[:timeout].must_equal 60
+        opts[:host].must_be :nil?
         "trace-project-object-scoped"
       }
       Google::Cloud.stub :trace, stubbed_trace do
@@ -98,16 +98,16 @@ describe Google::Cloud do
     end
 
     it "uses provided project_id and keyfile" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, opts = {}) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_equal default_scopes
+        opts[:scope].must_equal default_scopes
         "trace-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, opts = {}) {
         project.must_equal "project-id"
         credentials.must_equal "trace-credentials"
-        timeout.must_be :nil?
-        host.must_equal default_endpoint
+        opts[:timeout].must_be :nil?
+        opts[:host].must_equal default_endpoint
         OpenStruct.new project: project
       }
 
@@ -155,16 +155,16 @@ describe Google::Cloud do
     end
 
     it "uses provided project_id and credentials" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, opts = {}) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_equal default_scopes
+        opts[:scope].must_equal default_scopes
         "trace-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, opts = {}) {
         project.must_equal "project-id"
         credentials.must_equal "trace-credentials"
-        timeout.must_be :nil?
-        host.must_equal default_endpoint
+        opts[:timeout].must_be :nil?
+        opts[:host].must_equal default_endpoint
         OpenStruct.new project: project
       }
 
@@ -187,11 +187,11 @@ describe Google::Cloud do
 
     it "uses provided endpoint" do
       endpoint = "trace-endpoint2.example.com"
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, opts = {}) {
         project.must_equal "project-id"
         credentials.must_equal default_credentials
-        timeout.must_be :nil?
-        host.must_equal endpoint
+        opts[:timeout].must_be :nil?
+        opts[:host].must_equal endpoint
         OpenStruct.new project: project
       }
 
@@ -207,16 +207,16 @@ describe Google::Cloud do
     end
 
     it "uses provided project and keyfile aliases" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, opts = {}) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_equal default_scopes
+        opts[:scope].must_equal default_scopes
         "trace-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, opts = {}) {
         project.must_equal "project-id"
         credentials.must_equal "trace-credentials"
-        timeout.must_be :nil?
-        host.must_equal default_endpoint
+        opts[:timeout].must_be :nil?
+        opts[:host].must_equal default_endpoint
         OpenStruct.new project: project
       }
 
@@ -238,17 +238,17 @@ describe Google::Cloud do
     end
 
     it "gets project_id from credentials" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, opts = {}) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_equal default_scopes
+        opts[:scope].must_equal default_scopes
         OpenStruct.new project_id: "project-id"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, opts = {}) {
         project.must_equal "project-id"
         credentials.must_be_kind_of OpenStruct
         credentials.project_id.must_equal "project-id"
-        timeout.must_be :nil?
-        host.must_equal default_endpoint
+        opts[:timeout].must_be :nil?
+        opts[:host].must_equal default_endpoint
         OpenStruct.new project: project
       }
       empty_env = OpenStruct.new
@@ -281,16 +281,16 @@ describe Google::Cloud do
     end
 
     it "uses shared config for project and keyfile" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, opts = {}) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_equal default_scopes
+        opts[:scope].must_equal default_scopes
         "trace-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, opts = {}) {
         project.must_equal "project-id"
         credentials.must_equal "trace-credentials"
-        timeout.must_be :nil?
-        host.must_equal default_endpoint
+        opts[:timeout].must_be :nil?
+        opts[:host].must_equal default_endpoint
         OpenStruct.new project: project
       }
 
@@ -318,16 +318,16 @@ describe Google::Cloud do
     end
 
     it "uses shared config for project_id and credentials" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, opts = {}) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_equal default_scopes
+        opts[:scope].must_equal default_scopes
         "trace-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, opts = {}) {
         project.must_equal "project-id"
         credentials.must_equal "trace-credentials"
-        timeout.must_be :nil?
-        host.must_equal default_endpoint
+        opts[:timeout].must_be :nil?
+        opts[:host].must_equal default_endpoint
         OpenStruct.new project: project
       }
 
@@ -355,16 +355,16 @@ describe Google::Cloud do
     end
 
     it "uses trace config for project and keyfile" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, opts = {}) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_equal default_scopes
+        opts[:scope].must_equal default_scopes
         "trace-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, opts = {}) {
         project.must_equal "project-id"
         credentials.must_equal "trace-credentials"
-        timeout.must_equal 42
-        host.must_equal default_endpoint
+        opts[:timeout].must_equal 42
+        opts[:host].must_equal default_endpoint
         OpenStruct.new project: project
       }
 
@@ -393,16 +393,16 @@ describe Google::Cloud do
     end
 
     it "uses trace config for project_id and credentials" do
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, opts = {}) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_equal default_scopes
+        opts[:scope].must_equal default_scopes
         "trace-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, opts = {}) {
         project.must_equal "project-id"
         credentials.must_equal "trace-credentials"
-        timeout.must_equal 42
-        host.must_equal default_endpoint
+        opts[:timeout].must_equal 42
+        opts[:host].must_equal default_endpoint
         OpenStruct.new project: project
       }
 
@@ -432,16 +432,16 @@ describe Google::Cloud do
 
     it "uses trace config for endpoint" do
       endpoint = "trace-endpoint2.example.com"
-      stubbed_credentials = ->(keyfile, scope: nil) {
+      stubbed_credentials = ->(keyfile, opts = {}) {
         keyfile.must_equal "path/to/keyfile.json"
-        scope.must_equal default_scopes
+        opts[:scope].must_equal default_scopes
         "trace-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+      stubbed_service = ->(project, credentials, opts = {}) {
         project.must_equal "project-id"
         credentials.must_equal "trace-credentials"
-        timeout.must_be :nil?
-        host.must_equal endpoint
+        opts[:timeout].must_be :nil?
+        opts[:host].must_equal endpoint
         OpenStruct.new project: project
       }
 
