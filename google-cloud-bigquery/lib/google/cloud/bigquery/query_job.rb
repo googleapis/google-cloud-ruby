@@ -712,8 +712,6 @@ module Google
             @gapi = gapi
           end
 
-          # rubocop:disable all
-
           ##
           # @private Create an Updater from an options hash.
           #
@@ -751,8 +749,6 @@ module Google
             updater.udfs = options[:udfs]
             updater
           end
-
-          # rubocop:enable all
 
           ##
           # Sets the geographic location where the job should run. Required

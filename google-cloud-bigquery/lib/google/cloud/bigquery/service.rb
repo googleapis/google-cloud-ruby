@@ -602,7 +602,7 @@ module Google
           protected
 
           def retry? result, current_retries #:nodoc:
-            if current_retries < (@retries) && (retry_error_reason? result)
+            if current_retries < @retries && retry_error_reason?(result)
               return true
             end
             false
