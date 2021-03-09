@@ -184,7 +184,7 @@ Guide](https://googleapis.dev/ruby/google-cloud-error_reporting/latest/file.AUTH
 To enable logging for this library, set the logger for the underlying
 [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library. The logger
 that you set may be a Ruby stdlib
-[`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as
+[`Logger`](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html) as
 shown below, or a
 [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
 that will write logs to [Stackdriver
@@ -214,11 +214,11 @@ end
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 2.4+.
+This library is supported on Ruby 2.5+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or in
-security maintenance, and not end of life. Currently, this means Ruby 2.4 and
+security maintenance, and not end of life. Currently, this means Ruby 2.5 and
 later. Older versions of Ruby _may_ still work, but are unsupported and not
 recommended. See https://www.ruby-lang.org/en/downloads/branches/ for details
 about the Ruby support schedule.

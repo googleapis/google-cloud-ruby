@@ -151,13 +151,13 @@ module Google
               ErrorReporting::Credentials.new credentials
             end
           rescue StandardError => e
-            STDOUT.puts "Note: Google::Cloud::ErrorReporting is disabled " \
+            $stdout.puts "Note: Google::Cloud::ErrorReporting is disabled " \
               "because it failed to authorize with the service. (#{e.message})"
             return false
           end
 
           if project_id.to_s.empty?
-            STDOUT.puts "Note: Google::Cloud::ErrorReporting is disabled " \
+            $stdout.puts "Note: Google::Cloud::ErrorReporting is disabled " \
               "because the project ID could not be determined."
             return false
           end
