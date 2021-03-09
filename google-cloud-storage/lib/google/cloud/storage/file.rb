@@ -191,7 +191,7 @@ module Google
         # @return [Integer]
         #
         def size
-          @gapi.size.to_i if @gapi.size
+          @gapi.size&.to_i
         end
 
         ##
@@ -1873,7 +1873,7 @@ module Google
 
           ensure_service!
 
-          rewrite_attrs = %i[storage_class kms_key_name]
+          rewrite_attrs = [:storage_class, :kms_key_name]
           @gapi = if attributes.any? { |a| rewrite_attrs.include? a }
                     rewrite_gapi \
                       bucket, name, update_gapi, user_project: user_project
@@ -1972,6 +1972,7 @@ module Google
           ##
           # @private Create an Updater object.
           def initialize gapi
+            super()
             @updates = []
             @gapi = gapi
             @metadata ||= @gapi.metadata.to_h.dup

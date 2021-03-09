@@ -309,7 +309,7 @@ module Google
         # @see https://cloud.google.com/storage/docs/access-logs Access Logs
         #
         def logging_bucket
-          @gapi.logging.log_bucket if @gapi.logging
+          @gapi.logging&.log_bucket
         end
 
         ##
@@ -333,7 +333,7 @@ module Google
         # @return [String]
         #
         def logging_prefix
-          @gapi.logging.log_object_prefix if @gapi.logging
+          @gapi.logging&.log_object_prefix
         end
 
         ##
@@ -392,7 +392,7 @@ module Google
         # @return [Boolean]
         #
         def versioning?
-          @gapi.versioning.enabled? unless @gapi.versioning.nil?
+          @gapi.versioning&.enabled?
         end
 
         ##
@@ -422,7 +422,7 @@ module Google
         # @return [String] The main page suffix.
         #
         def website_main
-          @gapi.website.main_page_suffix if @gapi.website
+          @gapi.website&.main_page_suffix
         end
 
         ##
@@ -449,7 +449,7 @@ module Google
         # @return [String]
         #
         def website_404
-          @gapi.website.not_found_page if @gapi.website
+          @gapi.website&.not_found_page
         end
 
         ##
@@ -498,7 +498,7 @@ module Google
         #   the bucket.
         #
         def requester_pays
-          @gapi.billing.requester_pays if @gapi.billing
+          @gapi.billing&.requester_pays
         end
         alias requester_pays? requester_pays
 
@@ -550,7 +550,7 @@ module Google
         #   bucket.default_kms_key #=> kms_key_name
         #
         def default_kms_key
-          @gapi.encryption && @gapi.encryption.default_kms_key_name
+          @gapi.encryption&.default_kms_key_name
         end
 
         ##
@@ -599,7 +599,7 @@ module Google
         #   retention policy exists for the bucket.
         #
         def retention_period
-          @gapi.retention_policy && @gapi.retention_policy.retention_period
+          @gapi.retention_policy&.retention_period
         end
 
         ##
@@ -658,7 +658,7 @@ module Google
         #   policy, if a policy exists.
         #
         def retention_effective_at
-          @gapi.retention_policy && @gapi.retention_policy.effective_time
+          @gapi.retention_policy&.effective_time
         end
 
         ##
@@ -808,7 +808,7 @@ module Google
         #   bucket.uniform_bucket_level_access? # true
         #
         def uniform_bucket_level_access?
-          return false unless @gapi.iam_configuration && @gapi.iam_configuration.uniform_bucket_level_access
+          return false unless @gapi.iam_configuration&.uniform_bucket_level_access
           !@gapi.iam_configuration.uniform_bucket_level_access.enabled.nil? &&
             @gapi.iam_configuration.uniform_bucket_level_access.enabled
         end
@@ -870,7 +870,7 @@ module Google
         #   puts bucket.uniform_bucket_level_access_locked_at
         #
         def uniform_bucket_level_access_locked_at
-          return nil unless @gapi.iam_configuration && @gapi.iam_configuration.uniform_bucket_level_access
+          return nil unless @gapi.iam_configuration&.uniform_bucket_level_access
           @gapi.iam_configuration.uniform_bucket_level_access.locked_time
         end
 
@@ -2572,9 +2572,11 @@ module Google
         # Yielded to a block to accumulate changes for a patch request.
         class Updater < Bucket
           attr_reader :updates
+
           ##
           # Create an Updater object.
           def initialize gapi
+            super()
             @updates = []
             @gapi = gapi
             @labels = @gapi.labels.to_h.dup

@@ -10,13 +10,13 @@ AllCops:
     - "test/**/*"
     - "support/**/*"
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
-Layout/AlignHash:
+Lint/DeprecatedOpenSSLConstant:
   Enabled: false
-Layout/SpaceAroundOperators:
-  Enabled: false
+Metrics/AbcSize:
+    Max: 40
 Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:
@@ -24,18 +24,6 @@ Metrics/MethodLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-storage.rb"
-Style/IfUnlessModifier:
-  Enabled: false
 Style/MethodDefParentheses:
   Exclude:
     - "lib/google/cloud/storage/policy.rb"
-Style/NumericPredicate:
-  Enabled: false
-Style/SafeNavigation:
-  Enabled: false
-Style/SymbolArray:
-  Enabled: false
-Style/UnpackFirst:
-  Enabled: false
-Style/WordArray:
-  Enabled: false

@@ -76,7 +76,7 @@ describe Google::Cloud::Storage::Bucket, :post_object, :v2, :storage do
         "payload": string_to_sign,
       }
       resource = "projects/-/serviceAccounts/#{issuer}"
-      response = iam_client.sign_service_account_blob resource, request, {}
+      response = iam_client.sign_service_account_blob resource, request
       response.signed_blob
     end
 

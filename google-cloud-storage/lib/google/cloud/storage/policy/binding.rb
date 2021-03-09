@@ -89,7 +89,9 @@ module Google
         #   end
         #
         class Binding
-          attr_reader :role, :members, :condition
+          attr_reader :role
+          attr_reader :members
+          attr_reader :condition
 
           ##
           # Creates a Binding object.
@@ -128,8 +130,8 @@ module Google
             raise ArgumentError, "members is empty, must be provided" if @members.empty?
 
             condition = Condition.new(**condition) if condition.is_a? Hash
-            if condition
-              raise ArgumentError, "expected Condition, not #{condition.inspect}" unless condition.is_a? Condition
+            if condition && !(condition.is_a? Condition)
+              raise ArgumentError, "expected Condition, not #{condition.inspect}"
             end
             @condition = condition
           end

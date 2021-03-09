@@ -198,7 +198,7 @@ module Google
             gapi = @service.insert_bucket_acl @bucket, entity, "OWNER",
                                               user_project: user_project
             entity = gapi.entity
-            @owners.push entity unless @owners.nil?
+            @owners&.push entity
             entity
           end
 
@@ -243,7 +243,7 @@ module Google
             gapi = @service.insert_bucket_acl @bucket, entity, "WRITER",
                                               user_project: user_project
             entity = gapi.entity
-            @writers.push entity unless @writers.nil?
+            @writers&.push entity
             entity
           end
 
@@ -288,7 +288,7 @@ module Google
             gapi = @service.insert_bucket_acl @bucket, entity, "READER",
                                               user_project: user_project
             entity = gapi.entity
-            @readers.push entity unless @readers.nil?
+            @readers&.push entity
             entity
           end
 
@@ -323,9 +323,9 @@ module Google
           def delete entity
             @service.delete_bucket_acl @bucket, entity,
                                        user_project: user_project
-            @owners.delete entity  unless @owners.nil?
-            @writers.delete entity unless @writers.nil?
-            @readers.delete entity unless @readers.nil?
+            @owners&.delete entity
+            @writers&.delete entity
+            @readers&.delete entity
             true
           end
 
@@ -445,8 +445,7 @@ module Google
 
           def entities_from_acls acls, role
             selected = acls.select { |acl| acl.role == role }
-            entities = selected.map(&:entity)
-            entities
+            selected.map(&:entity)
           end
         end
 
@@ -614,7 +613,7 @@ module Google
             gapi = @service.insert_default_acl @bucket, entity, "OWNER",
                                                user_project: user_project
             entity = gapi.entity
-            @owners.push entity unless @owners.nil?
+            @owners&.push entity
             entity
           end
 
@@ -657,7 +656,7 @@ module Google
             gapi = @service.insert_default_acl @bucket, entity, "READER",
                                                user_project: user_project
             entity = gapi.entity
-            @readers.push entity unless @readers.nil?
+            @readers&.push entity
             entity
           end
 
@@ -690,8 +689,8 @@ module Google
           def delete entity
             @service.delete_default_acl @bucket, entity,
                                         user_project: user_project
-            @owners.delete entity  unless @owners.nil?
-            @readers.delete entity unless @readers.nil?
+            @owners&.delete entity
+            @readers&.delete entity
             true
           end
 
@@ -829,8 +828,7 @@ module Google
 
           def entities_from_acls acls, role
             selected = acls.select { |acl| acl.role == role }
-            entities = selected.map(&:entity)
-            entities
+            selected.map(&:entity)
           end
         end
       end

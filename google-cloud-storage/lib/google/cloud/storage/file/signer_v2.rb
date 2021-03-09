@@ -147,10 +147,8 @@ module Google
               "&Expires=#{expires}" \
               "&Signature=#{url_escape signed_string}"
 
-            if query
-              query.each do |name, value|
-                url << "&#{url_escape name}=#{url_escape value}"
-              end
+            query&.each do |name, value|
+              url << "&#{url_escape name}=#{url_escape value}"
             end
 
             url

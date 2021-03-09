@@ -440,14 +440,13 @@ describe Google::Cloud::Storage::File, :storage do
   end
 
   it "should write metadata" do
-    meta = { content_type: "x-image/x-png",
-             metadata: { title: "Logo Image" } }
     uploaded = bucket.create_file files[:logo][:path],
                                   "CloudLogo",
-                                  meta
+                                  content_type: "x-image/x-png",
+                                  metadata: { title: "Logo Image" }
 
-    _(uploaded.content_type).must_equal meta[:content_type]
-    _(uploaded.metadata["title"]).must_equal meta[:metadata][:title]
+    _(uploaded.content_type).must_equal "x-image/x-png"
+    _(uploaded.metadata["title"]).must_equal "Logo Image"
   end
 
   it "should list generations" do

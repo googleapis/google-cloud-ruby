@@ -190,7 +190,7 @@ module Google
                                             generation: generation,
                                             user_project: user_project
             entity = gapi.entity
-            @owners.push entity unless @owners.nil?
+            @owners&.push entity
             entity
           end
 
@@ -241,7 +241,7 @@ module Google
                                             generation: generation,
                                             user_project: user_project
             entity = gapi.entity
-            @readers.push entity unless @readers.nil?
+            @readers&.push entity
             entity
           end
 
@@ -281,8 +281,8 @@ module Google
             @service.delete_file_acl \
               @bucket, @file, entity,
               generation: generation, user_project: user_project
-            @owners.delete entity  unless @owners.nil?
-            @readers.delete entity unless @readers.nil?
+            @owners&.delete entity
+            @readers&.delete entity
             true
           end
 
@@ -428,8 +428,7 @@ module Google
 
           def entities_from_acls acls, role
             selected = acls.select { |acl| acl.role == role }
-            entities = selected.map(&:entity)
-            entities
+            selected.map(&:entity)
           end
         end
       end

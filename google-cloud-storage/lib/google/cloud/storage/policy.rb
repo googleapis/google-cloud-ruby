@@ -212,8 +212,8 @@ module Google
         def deep_dup
           warn "DEPRECATED: Storage::PolicyV1#deep_dup"
           dup.tap do |p|
-            roles_dup = p.roles.each_with_object({}) do |(k, v), memo|
-              memo[k] = v.dup rescue value
+            roles_dup = p.roles.transform_values do |v|
+              v.dup rescue value
             end
             p.instance_variable_set :@roles, roles_dup
           end

@@ -168,10 +168,10 @@ module Google
           #     puts binding.role
           #   end
           #
-          def each
+          def each &block
             return enum_for :each unless block_given?
 
-            @bindings.each { |binding| yield binding }
+            @bindings.each(&block)
           end
 
           ##
