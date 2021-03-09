@@ -158,7 +158,7 @@ module Google
         ##
         # @private Merge Rails configuration into Logging instrumentation
         # configuration.
-        def self.merge_rails_config rails_config # rubocop:disable AbcSize
+        def self.merge_rails_config rails_config
           gcp_config = rails_config.google_cloud
           log_config = gcp_config.logging
 
@@ -175,13 +175,10 @@ module Google
             config.log_name ||= log_config.log_name
             config.labels ||= log_config.labels
             config.log_name_map ||= log_config.log_name_map
-            config.monitored_resource.type ||=
-              log_config.monitored_resource.type
-            config.monitored_resource.labels ||=
-              log_config.monitored_resource.labels.to_h
+            config.monitored_resource.type ||= log_config.monitored_resource.type
+            config.monitored_resource.labels ||= log_config.monitored_resource.labels.to_h
             if config.set_default_logger_on_rails_init.nil?
-              config.set_default_logger_on_rails_init = \
-                log_config.set_default_logger_on_rails_init
+              config.set_default_logger_on_rails_init = log_config.set_default_logger_on_rails_init
             end
           end
         end
@@ -206,15 +203,15 @@ module Google
               # if credentials is not a Credentials object, create one
               Logging::Credentials.new credentials
             end
-          rescue Exception => e
-            STDOUT.puts "Note: Google::Cloud::Logging is disabled because " \
+          rescue Exception => e # rubocop:disable Lint/RescueException
+            $stdout.puts "Note: Google::Cloud::Logging is disabled because " \
               "it failed to authorize with the service. (#{e.message}) " \
               "Falling back to the default Rails logger."
             return false
           end
 
           if project_id.to_s.empty?
-            STDOUT.puts "Note: Google::Cloud::Logging is disabled because " \
+            $stdout.puts "Note: Google::Cloud::Logging is disabled because " \
               "the project ID could not be determined. " \
               "Falling back to the default Rails logger."
             return false

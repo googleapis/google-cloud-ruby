@@ -28,7 +28,8 @@ module Google
         class Operation
           ##
           # @private Create an empty Operation object.
-          def initialize; end
+          def initialize
+          end
 
           ##
           # An arbitrary operation identifier. Log entries with the same
