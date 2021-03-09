@@ -1,5 +1,11 @@
 # Release History
 
+### 2.3.1 / 2021-03-09
+
+#### Documentation
+
+* Add link to Garbage collection docs
+
 ### 2.3.0 / 2021-02-04
 
 #### Features
