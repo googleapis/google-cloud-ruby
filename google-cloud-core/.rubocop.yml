@@ -8,9 +8,18 @@ AllCops:
 Documentation:
   Enabled: false
 
+Lint/UnreachableLoop:
+  Exclude:
+    - "lib/google/cloud/credentials.rb"
 Metrics/ClassLength:
   Exclude:
     - "lib/google/cloud/config.rb"
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - "lib/google/cloud/credentials.rb"
+Metrics/PerceivedComplexity:
+  Exclude:
+    - "lib/google/cloud/credentials.rb"
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-core.rb"

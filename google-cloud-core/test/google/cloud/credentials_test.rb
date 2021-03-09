@@ -35,11 +35,11 @@ describe Google::Cloud::Credentials, :private do
     mocked_signet.expect :fetch_access_token!, true
 
     stubbed_signet = ->(options, scope: nil) {
-      options[:token_credential_uri].must_equal "https://oauth2.googleapis.com/token"
-      options[:audience].must_equal "https://oauth2.googleapis.com/token"
-      options[:scope].must_equal []
-      options[:issuer].must_equal default_keyfile_hash["client_email"]
-      options[:signing_key].must_be_kind_of OpenSSL::PKey::RSA
+      _(options[:token_credential_uri]).must_equal "https://oauth2.googleapis.com/token"
+      _(options[:audience]).must_equal "https://oauth2.googleapis.com/token"
+      _(options[:scope]).must_equal []
+      _(options[:issuer]).must_equal default_keyfile_hash["client_email"]
+      _(options[:signing_key]).must_be_kind_of OpenSSL::PKey::RSA
 
       mocked_signet
     }
@@ -56,11 +56,11 @@ describe Google::Cloud::Credentials, :private do
     mocked_signet.expect :fetch_access_token!, true
 
     stubbed_signet = ->(options, scope: nil) {
-      options[:token_credential_uri].must_equal "https://oauth2.googleapis.com/token"
-      options[:audience].must_equal "https://oauth2.googleapis.com/token"
-      options[:scope].must_equal ["http://example.com/scope"]
-      options[:issuer].must_equal default_keyfile_hash["client_email"]
-      options[:signing_key].must_be_kind_of OpenSSL::PKey::RSA
+      _(options[:token_credential_uri]).must_equal "https://oauth2.googleapis.com/token"
+      _(options[:audience]).must_equal "https://oauth2.googleapis.com/token"
+      _(options[:scope]).must_equal ["http://example.com/scope"]
+      _(options[:issuer]).must_equal default_keyfile_hash["client_email"]
+      _(options[:signing_key]).must_be_kind_of OpenSSL::PKey::RSA
 
       mocked_signet
     }

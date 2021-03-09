@@ -48,9 +48,10 @@ module Google
 
       def initialize keyfile, scope: nil
         verify_keyfile_provided! keyfile
-        if keyfile.is_a? Signet::OAuth2::Client
+        case keyfile
+        when Signet::OAuth2::Client
           @client = keyfile
-        elsif keyfile.is_a? Hash
+        when Hash
           hash = stringify_hash_keys keyfile
           hash["scope"] ||= scope
           @client = init_client hash
@@ -114,7 +115,7 @@ module Google
       ##
       # returns a new Hash with string keys instead of symbol keys.
       def stringify_hash_keys hash
-        Hash[hash.map { |k, v| [k.to_s, v] }]
+        hash.transform_keys(&:to_s)
       end
 
       def client_options options
