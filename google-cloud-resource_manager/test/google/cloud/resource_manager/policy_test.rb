@@ -20,19 +20,19 @@ describe Google::Cloud::ResourceManager::Policy do
   let(:policy)    { Google::Cloud::ResourceManager::Policy.new etag, roles }
 
   it "knows its etag" do
-    policy.etag.must_equal etag
+    _(policy.etag).must_equal etag
   end
 
   it "knows its roles" do
-    policy.roles.keys.sort.must_equal   roles.keys.sort
-    policy.roles.values.sort.must_equal roles.values.sort
+    _(policy.roles.keys.sort).must_equal   roles.keys.sort
+    _(policy.roles.values.sort).must_equal roles.values.sort
   end
 
   it "returns an empty array for missing role" do
     role = policy.role "roles/does-not-exist"
-    role.must_be_kind_of Array
-    role.must_be :empty?
-    role.frozen?.must_equal false
+    _(role).must_be_kind_of Array
+    _(role).must_be :empty?
+    _(role.frozen?).must_equal false
   end
 
   describe :to_gapi do
@@ -43,10 +43,10 @@ describe Google::Cloud::ResourceManager::Policy do
 
       gapi_policy = policy.to_gapi
 
-      gapi_policy.class.must_equal  Google::Apis::CloudresourcemanagerV1::Policy
-      gapi_policy.bindings.size.must_equal policy.roles.size
+      _(gapi_policy.class).must_equal  Google::Apis::CloudresourcemanagerV1::Policy
+      _(gapi_policy.bindings.size).must_equal policy.roles.size
       gapi_policy.bindings.each do |binding|
-        binding.members.sort.must_equal policy.roles[binding.role].uniq.sort
+        _(binding.members.sort).must_equal policy.roles[binding.role].uniq.sort
       end
     end
   end
@@ -65,10 +65,10 @@ describe Google::Cloud::ResourceManager::Policy do
 
       policy = Google::Cloud::ResourceManager::Policy.from_gapi gapi
 
-      policy.must_be_kind_of Google::Cloud::ResourceManager::Policy
-      policy.etag.must_equal etag
-      policy.roles.keys.sort.must_equal   roles.keys.sort
-      policy.roles.values.sort.must_equal roles.values.sort
+      _(policy).must_be_kind_of Google::Cloud::ResourceManager::Policy
+      _(policy.etag).must_equal etag
+      _(policy.roles.keys.sort).must_equal   roles.keys.sort
+      _(policy.roles.values.sort).must_equal roles.values.sort
     end
 
     it "creates from an empty Google::Apis::CloudresourcemanagerV1::Policy object" do
@@ -76,9 +76,9 @@ describe Google::Cloud::ResourceManager::Policy do
 
       policy = Google::Cloud::ResourceManager::Policy.from_gapi gapi
 
-      policy.must_be_kind_of Google::Cloud::ResourceManager::Policy
-      policy.etag.must_be :nil?
-      policy.roles.must_be :empty?
+      _(policy).must_be_kind_of Google::Cloud::ResourceManager::Policy
+      _(policy.etag).must_be :nil?
+      _(policy.roles).must_be :empty?
     end
   end
 end

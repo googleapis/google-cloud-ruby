@@ -17,47 +17,47 @@ require "helper"
 describe Google::Cloud::ResourceManager::Resource do
   it "creates a resource" do
     folder = Google::Cloud::ResourceManager::Resource.new "folder", "1234"
-    folder.must_be_kind_of Google::Cloud::ResourceManager::Resource
-    folder.type.must_equal "folder"
-    folder.id.must_equal "1234"
-    folder.must_be :folder?
-    folder.wont_be :organization?
+    _(folder).must_be_kind_of Google::Cloud::ResourceManager::Resource
+    _(folder.type).must_equal "folder"
+    _(folder.id).must_equal "1234"
+    _(folder).must_be :folder?
+    _(folder).wont_be :organization?
 
     organization = Google::Cloud::ResourceManager::Resource.new "organization", "7890"
-    organization.must_be_kind_of Google::Cloud::ResourceManager::Resource
-    organization.type.must_equal "organization"
-    organization.id.must_equal "7890"
-    organization.wont_be :folder?
-    organization.must_be :organization?
+    _(organization).must_be_kind_of Google::Cloud::ResourceManager::Resource
+    _(organization.type).must_equal "organization"
+    _(organization.id).must_equal "7890"
+    _(organization).wont_be :folder?
+    _(organization).must_be :organization?
   end
 
   it "creating a resource without type or id raises" do
     error = expect do
       Google::Cloud::ResourceManager::Resource.new "folder", nil
     end.must_raise ArgumentError
-    error.message.must_equal "id is required"
+    _(error.message).must_equal "id is required"
 
     error = expect do
       Google::Cloud::ResourceManager::Resource.new nil, "1234"
     end.must_raise ArgumentError
-    error.message.must_equal "type is required"
+    _(error.message).must_equal "type is required"
   end
 
   it "creates a folder" do
     folder = Google::Cloud::ResourceManager::Resource.folder "1234"
-    folder.must_be_kind_of Google::Cloud::ResourceManager::Resource
-    folder.type.must_equal "folder"
-    folder.id.must_equal "1234"
-    folder.must_be :folder?
-    folder.wont_be :organization?
+    _(folder).must_be_kind_of Google::Cloud::ResourceManager::Resource
+    _(folder.type).must_equal "folder"
+    _(folder.id).must_equal "1234"
+    _(folder).must_be :folder?
+    _(folder).wont_be :organization?
   end
 
   it "creates an organization" do
     organization = Google::Cloud::ResourceManager::Resource.organization "7890"
-    organization.must_be_kind_of Google::Cloud::ResourceManager::Resource
-    organization.type.must_equal "organization"
-    organization.id.must_equal "7890"
-    organization.wont_be :folder?
-    organization.must_be :organization?
+    _(organization).must_be_kind_of Google::Cloud::ResourceManager::Resource
+    _(organization.type).must_equal "organization"
+    _(organization.id).must_equal "7890"
+    _(organization).wont_be :folder?
+    _(organization).must_be :organization?
   end
 end

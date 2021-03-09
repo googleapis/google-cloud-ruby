@@ -81,7 +81,7 @@ module Google
           project_attrs = {
             project_id: project_id, name: name, labels: labels, parent: parent
           }.delete_if { |_, v| v.nil? }
-          execute { service.create_project API::Project.new(project_attrs) }
+          execute { service.create_project API::Project.new(**project_attrs) }
         end
 
         ##

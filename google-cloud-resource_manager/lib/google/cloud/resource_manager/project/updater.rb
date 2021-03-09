@@ -38,12 +38,6 @@ module Google
         #
         class Updater < DelegateClass(Project)
           ##
-          # @private Create an Updater object.
-          def initialize project
-            super project
-          end
-
-          ##
           # Updates the user-assigned name of the project. This field is
           # optional and can remain unset.
           #
@@ -146,7 +140,7 @@ module Google
           ##
           # @private Create an Updater object.
           def self.from_project project
-            dupe_gapi = project.gapi.class.new project.gapi.to_h
+            dupe_gapi = project.gapi.class.new(**project.gapi.to_h)
             dupe_project = Project.from_gapi dupe_gapi, nil # no way to update
             Updater.new dupe_project
           end

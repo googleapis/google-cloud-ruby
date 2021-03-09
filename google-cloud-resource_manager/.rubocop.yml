@@ -14,16 +14,8 @@ AllCops:
 Documentation:
   Enabled: false
 
-Layout/AlignHash:
-  Enabled: false
 Metrics/ClassLength:
   Enabled: false
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-resource_manager.rb"
-Style/IfUnlessModifier:
-  Enabled: false
-Style/NumericPredicate:
-  Enabled: false
-Style/WordArray:
-  Enabled: false

@@ -21,16 +21,16 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
                                                              resource_manager.service }
 
   it "knows its attributes" do
-    project.project_id.must_equal "example-project-123"
-    project.project_number.must_equal "123456789123"
-    project.name.must_equal "Example Project 123"
-    project.labels["env"].must_equal "production"
-    project.parent.must_be_kind_of Google::Cloud::ResourceManager::Resource
-    project.parent.type.must_equal "folder"
-    project.parent.id.must_equal "123"
-    project.parent.must_be :folder?
-    project.parent.wont_be :organization?
-    project.created_at.must_equal Time.new(2015, 9, 1, 12, 0, 0, 0)
+    _(project.project_id).must_equal "example-project-123"
+    _(project.project_number).must_equal "123456789123"
+    _(project.name).must_equal "Example Project 123"
+    _(project.labels["env"]).must_equal "production"
+    _(project.parent).must_be_kind_of Google::Cloud::ResourceManager::Resource
+    _(project.parent.type).must_equal "folder"
+    _(project.parent.id).must_equal "123"
+    _(project.parent).must_be :folder?
+    _(project.parent).wont_be :organization?
+    _(project.created_at).must_equal Time.new(2015, 9, 1, 12, 0, 0, 0)
   end
 
   it "updates the name" do
@@ -38,13 +38,13 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
     updated_project = random_project_gapi seed, "Updated Project 123"
     mock.expect :update_project, updated_project, [updated_project.project_id, updated_project]
 
-    project.name.must_equal "Example Project 123"
+    _(project.name).must_equal "Example Project 123"
 
     resource_manager.service.mocked_service = mock
     project.name = "Updated Project 123"
     mock.verify
 
-    project.name.must_equal "Updated Project 123"
+    _(project.name).must_equal "Updated Project 123"
   end
 
   it "can't update labels directly" do
@@ -58,13 +58,13 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
     updated_project = random_project_gapi seed, nil, { "env" => "testing" }
     mock.expect :update_project, updated_project, [updated_project.project_id, updated_project]
 
-    project.labels["env"].must_equal "production"
+    _(project.labels["env"]).must_equal "production"
 
     resource_manager.service.mocked_service = mock
     project.labels = { "env" => "testing" }
     mock.verify
 
-    project.labels["env"].must_equal "testing"
+    _(project.labels["env"]).must_equal "testing"
   end
 
   it "can update labels by using a block" do
@@ -72,7 +72,7 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
     updated_project = random_project_gapi seed, nil, { "env" => "testing" }
     mock.expect :update_project, updated_project, [updated_project.project_id, updated_project]
 
-    project.labels["env"].must_equal "production"
+    _(project.labels["env"]).must_equal "production"
 
     resource_manager.service.mocked_service = mock
     project.labels do |labels|
@@ -80,7 +80,7 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
     end
     mock.verify
 
-    project.labels["env"].must_equal "testing"
+    _(project.labels["env"]).must_equal "testing"
   end
 
   it "does not update labels if they are not changed" do
@@ -88,7 +88,7 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
     updated_project = random_project_gapi seed, nil, { "env" => "testing" }
     # No expect, will fail if a call is actually made.
 
-    project.labels["env"].must_equal "production"
+    _(project.labels["env"]).must_equal "production"
 
     resource_manager.service.mocked_service = mock
     project.labels do |labels|
@@ -96,7 +96,7 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
     end
     mock.verify
 
-    project.labels["env"].must_equal "production"
+    _(project.labels["env"]).must_equal "production"
   end
 
   it "updates the parent" do
@@ -104,21 +104,21 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
     updated_project = random_project_gapi seed, nil, nil, "798"
     mock.expect :update_project, updated_project, [updated_project.project_id, updated_project]
 
-    project.parent.must_be_kind_of Google::Cloud::ResourceManager::Resource
-    project.parent.type.must_equal "folder"
-    project.parent.id.must_equal "123"
-    project.parent.must_be :folder?
-    project.parent.wont_be :organization?
+    _(project.parent).must_be_kind_of Google::Cloud::ResourceManager::Resource
+    _(project.parent.type).must_equal "folder"
+    _(project.parent.id).must_equal "123"
+    _(project.parent).must_be :folder?
+    _(project.parent).wont_be :organization?
 
     resource_manager.service.mocked_service = mock
     project.parent = resource_manager.resource "folder", "798"
     mock.verify
 
-    project.parent.must_be_kind_of Google::Cloud::ResourceManager::Resource
-    project.parent.type.must_equal "folder"
-    project.parent.id.must_equal "798"
-    project.parent.must_be :folder?
-    project.parent.wont_be :organization?
+    _(project.parent).must_be_kind_of Google::Cloud::ResourceManager::Resource
+    _(project.parent.type).must_equal "folder"
+    _(project.parent.id).must_equal "798"
+    _(project.parent).must_be :folder?
+    _(project.parent).wont_be :organization?
   end
 
   it "can update name and labels in a single API call" do
@@ -126,8 +126,8 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
     updated_project = random_project_gapi seed, "Updated Project 123", { "env" => "testing" }
     mock.expect :update_project, updated_project, [updated_project.project_id, updated_project]
 
-    project.name.must_equal "Example Project 123"
-    project.labels["env"].must_equal "production"
+    _(project.name).must_equal "Example Project 123"
+    _(project.labels["env"]).must_equal "production"
 
     resource_manager.service.mocked_service = mock
     project.update do |tx|
@@ -136,8 +136,8 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
     end
     mock.verify
 
-    project.name.must_equal "Updated Project 123"
-    project.labels["env"].must_equal "testing"
+    _(project.name).must_equal "Updated Project 123"
+    _(project.labels["env"]).must_equal "testing"
   end
 
   it "can update name and override labels in a single API call" do
@@ -145,8 +145,8 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
     updated_project = random_project_gapi seed, "Updated Project 123", { "env" => "testing" }
     mock.expect :update_project, updated_project, [updated_project.project_id, updated_project]
 
-    project.name.must_equal "Example Project 123"
-    project.labels["env"].must_equal "production"
+    _(project.name).must_equal "Example Project 123"
+    _(project.labels["env"]).must_equal "production"
 
     resource_manager.service.mocked_service = mock
     project.update do |tx|
@@ -155,8 +155,8 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
     end
     mock.verify
 
-    project.name.must_equal "Updated Project 123"
-    project.labels["env"].must_equal "testing"
+    _(project.name).must_equal "Updated Project 123"
+    _(project.labels["env"]).must_equal "testing"
   end
 
   it "does not update name and labels if they are not changed" do
@@ -164,8 +164,8 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
     updated_project = random_project_gapi seed, "Updated Project 123", { "env" => "testing" }
     # No expect, will fail if a call is actually made.
 
-    project.name.must_equal "Example Project 123"
-    project.labels["env"].must_equal "production"
+    _(project.name).must_equal "Example Project 123"
+    _(project.labels["env"]).must_equal "production"
 
     resource_manager.service.mocked_service = mock
     project.update do |tx|
@@ -174,8 +174,8 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
     end
     mock.verify
 
-    project.name.must_equal "Example Project 123"
-    project.labels["env"].must_equal "production"
+    _(project.name).must_equal "Example Project 123"
+    _(project.labels["env"]).must_equal "production"
   end
 
   it "reloads itself" do
@@ -184,13 +184,13 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
     unspecified_project.lifecycle_state = "LIFECYCLE_STATE_UNSPECIFIED"
     mock.expect :get_project, unspecified_project, [project.project_id]
 
-    project.must_be :active?
+    _(project).must_be :active?
 
     resource_manager.service.mocked_service = mock
     project.reload!
     mock.verify
 
-    project.must_be :unspecified?
+    _(project).must_be :unspecified?
   end
 
   it "deletes itself" do
@@ -203,13 +203,13 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
     # The reload request
     mock.expect :get_project,    deleted_project, [project.project_id]
 
-    project.must_be :active?
+    _(project).must_be :active?
 
     resource_manager.service.mocked_service = mock
     project.delete
     mock.verify
 
-    project.must_be :delete_requested?
+    _(project).must_be :delete_requested?
   end
 
   it "undeletes itself" do
@@ -226,22 +226,22 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
     # The reload request
     mock.expect :get_project,      active_project, [project.project_id]
 
-    project.must_be :delete_requested?
+    _(project).must_be :delete_requested?
 
     resource_manager.service.mocked_service = mock
     project.undelete
     mock.verify
 
-    project.must_be :active?
+    _(project).must_be :active?
   end
 
   describe :state do
     it "knows its state" do
-      project.state.must_equal "ACTIVE"
-      project.must_be :active?
-      project.wont_be :unspecified?
-      project.wont_be :delete_requested?
-      project.wont_be :delete_in_progress?
+      _(project.state).must_equal "ACTIVE"
+      _(project).must_be :active?
+      _(project).wont_be :unspecified?
+      _(project).wont_be :delete_requested?
+      _(project).wont_be :delete_in_progress?
     end
 
     describe :unspecified do
@@ -252,11 +252,11 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
       end
 
       it "can be unspecified" do
-        project.state.must_equal "LIFECYCLE_STATE_UNSPECIFIED"
-        project.wont_be :active?
-        project.must_be :unspecified?
-        project.wont_be :delete_requested?
-        project.wont_be :delete_in_progress?
+        _(project.state).must_equal "LIFECYCLE_STATE_UNSPECIFIED"
+        _(project).wont_be :active?
+        _(project).must_be :unspecified?
+        _(project).wont_be :delete_requested?
+        _(project).wont_be :delete_in_progress?
       end
     end
 
@@ -268,11 +268,11 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
       end
 
       it "can be delete_requested" do
-        project.state.must_equal "DELETE_REQUESTED"
-        project.wont_be :active?
-        project.wont_be :unspecified?
-        project.must_be :delete_requested?
-        project.wont_be :delete_in_progress?
+        _(project.state).must_equal "DELETE_REQUESTED"
+        _(project).wont_be :active?
+        _(project).wont_be :unspecified?
+        _(project).must_be :delete_requested?
+        _(project).wont_be :delete_in_progress?
       end
     end
 
@@ -284,11 +284,11 @@ describe Google::Cloud::ResourceManager::Project, :mock_res_man do
       end
 
       it "can be DELETE_IN_PROGRESS" do
-        project.state.must_equal "DELETE_IN_PROGRESS"
-        project.wont_be :active?
-        project.wont_be :unspecified?
-        project.wont_be :delete_requested?
-        project.must_be :delete_in_progress?
+        _(project.state).must_equal "DELETE_IN_PROGRESS"
+        _(project).wont_be :active?
+        _(project).wont_be :unspecified?
+        _(project).wont_be :delete_requested?
+        _(project).must_be :delete_in_progress?
       end
     end
   end
