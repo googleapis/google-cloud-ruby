@@ -150,7 +150,7 @@ module Google
         ##
         # Raise an error unless an active service is available.
         def ensure_service!
-          raise "Must have active connection" unless zone && zone.service
+          raise "Must have active connection" unless zone&.service
         end
       end
     end

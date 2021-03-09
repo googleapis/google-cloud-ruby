@@ -84,7 +84,7 @@ module Google
             type = r.first
             type = :aaaa if type == :a4
             r.last.each do |zf_record|
-              name = Service.fqdn(zf_record[:name], @zonefile.origin)
+              name = Service.fqdn zf_record[:name], @zonefile.origin
               key = [name, type]
               (@merged_zf_records[key] ||= []) << zf_record
             end
@@ -99,7 +99,7 @@ module Google
           @records = @merged_zf_records.map do |key, zf_records|
             ttl = ttl_from_zonefile_records zf_records
             data = zf_records.map do |zf_record|
-              data_from_zonefile_record(key[1], zf_record)
+              data_from_zonefile_record key[1], zf_record
             end
             @zone.record key[0], key[1], ttl, data
           end
@@ -116,7 +116,7 @@ module Google
         # From a collection of records, take the lowest ttl
         def ttl_from_zonefile_records zf_records
           ttls = zf_records.map do |zf_record|
-            ttl_to_i(zf_record[:ttl])
+            ttl_to_i zf_record[:ttl]
           end
           min_ttl = ttls.compact.min
           min_ttl || ttl_to_i(@zonefile.ttl)

@@ -159,9 +159,9 @@ module Google
         #   zone.clear!
         #
         def clear!
-          non_essential = records.all.reject { |r| %w[SOA NS].include?(r.type) }
+          non_essential = records.all.reject { |r| ["SOA", "NS"].include? r.type }
           change = update [], non_essential
-          change.wait_until_done! unless change.nil?
+          change&.wait_until_done!
         end
 
         ##
@@ -297,7 +297,7 @@ module Google
         def records name = nil, type = nil, token: nil, max: nil
           ensure_service!
 
-          name = fqdn(name) if name
+          name = fqdn name if name
 
           gapi = service.list_records id, name, type, token: token, max: max
           Record::List.from_gapi gapi, self, name, type, max
@@ -368,7 +368,7 @@ module Google
         #
         # The Google Cloud DNS service requires that record names and data use
         # fully-qualified addresses. The @ symbol is not accepted, nor are
-        # unqualified subdomain addresses like www. If your zone file contains
+        # unqualified subdomain addresses like `www`. If your zone file contains
         # such values, you may need to pre-process it in order for the import
         # operation to succeed.
         #
@@ -396,7 +396,7 @@ module Google
         #
         def import path_or_io, only: nil, except: nil,
                    skip_soa: nil, soa_serial: nil
-          except = (Array(except).map(&:to_s).map(&:upcase) + %w[SOA NS]).uniq
+          except = (Array(except).map(&:to_s).map(&:upcase) + ["SOA", "NS"]).uniq
           importer = Google::Cloud::Dns::Importer.new self, path_or_io
           additions = importer.records only: only, except: except
           update additions, [], skip_soa: skip_soa, soa_serial: soa_serial
@@ -650,10 +650,10 @@ module Google
         #     mx.ttl = 3600 # change only the TTL
         #   end
         #
-        def modify name, type, skip_soa: nil, soa_serial: nil
+        def modify name, type, skip_soa: nil, soa_serial: nil, &block
           existing = records(name, type).all.to_a
           updated = existing.map(&:dup)
-          updated.each { |r| yield r }
+          updated.each(&block)
           update updated, existing, skip_soa: skip_soa, soa_serial: soa_serial
         end
 
@@ -721,7 +721,7 @@ module Google
         end
 
         def replace_soa_serial soa_data, soa_serial
-          soa_data = soa_data.split " "
+          soa_data = soa_data.split
           current_serial = soa_data[2].to_i
           soa_data[2] = if soa_serial && soa_serial.respond_to?(:call)
                           soa_serial.call current_serial
