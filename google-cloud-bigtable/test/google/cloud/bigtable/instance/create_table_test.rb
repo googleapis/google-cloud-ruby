@@ -37,8 +37,7 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
     mock.expect :create_table, create_res, [
       parent: instance_path(instance_id),
       table_id: table_id,
-      table: req_table,
-      initial_splits: []
+      table: req_table
     ]
     bigtable.service.mocked_tables = mock
 
@@ -71,8 +70,7 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
     mock.expect :create_table, create_res.dup, [
       parent: instance_path(instance_id),
       table_id: table_id,
-      table: req_table,
-      initial_splits: []
+      table: req_table
     ]
 
     get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
@@ -130,8 +128,7 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
     mock.expect :create_table, create_res.dup, [
       parent: instance_path(instance_id),
       table_id: table_id,
-      table: req_table,
-      initial_splits: []
+      table: req_table
     ]
 
     get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(

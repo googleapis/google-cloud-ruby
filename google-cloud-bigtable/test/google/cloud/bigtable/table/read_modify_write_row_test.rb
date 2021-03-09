@@ -52,7 +52,6 @@ describe Google::Cloud::Bigtable::Table, :read_modify_write_row, :mock_bigtable 
 
     mock.expect :read_modify_write_row, res, [
       table_name: table_path(instance_id, table_id),
-      app_profile_id: nil,
       row_key: row_key,
       rules: [rule]
     ]
@@ -104,7 +103,6 @@ describe Google::Cloud::Bigtable::Table, :read_modify_write_row, :mock_bigtable 
 
     mock.expect :read_modify_write_row, res, [
       table_name: table_path(instance_id, table_id),
-      app_profile_id: nil,
       row_key: row_key,
       rules: [rule_1, rule_2]
     ]
