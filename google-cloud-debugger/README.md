@@ -255,6 +255,12 @@ later. Older versions of Ruby _may_ still work, but are unsupported and not
 recommended. See https://www.ruby-lang.org/en/downloads/branches/ for details
 about the Ruby support schedule.
 
+The google-cloud-debugger agent has dependencies on libraries that are not
+compatible with Ruby 3, and thus is itself not supported on Ruby 3. There are
+no immediate plans to update it with Ruby 3 support. If you are using the agent
+and require support for Ruby 3, please open an issue at
+https://github.com/googleapis/google-cloud-ruby/issues.
+
 This library follows [Semantic Versioning](http://semver.org/). It is currently
 in major version zero (0.y.z), which means that anything may change at any time
 and the public API should not be considered stable.
