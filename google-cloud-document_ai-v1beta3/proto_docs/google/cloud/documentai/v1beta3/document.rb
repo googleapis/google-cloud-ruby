@@ -59,10 +59,6 @@ module Google
         # @!attribute [rw] entity_relations
         #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::EntityRelation>]
         #     Relationship among {::Google::Cloud::DocumentAI::V1beta3::Document#entities Document.entities}.
-        # @!attribute [rw] translations
-        #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::Translation>]
-        #     A list of translations on {::Google::Cloud::DocumentAI::V1beta3::Document#text Document.text}. For document shards,
-        #     translations in this list may cross shard boundaries.
         # @!attribute [rw] text_changes
         #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::TextChange>]
         #     A list of text corrections made to [Document.text].  This is usually
@@ -586,30 +582,6 @@ module Google
           #   @return [::String]
           #     Relationship description.
           class EntityRelation
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # A translation of the text segment.
-          # @!attribute [rw] text_anchor
-          #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::TextAnchor]
-          #     Provenance of the translation.
-          #     Text anchor indexing into the {::Google::Cloud::DocumentAI::V1beta3::Document#text Document.text}.  There can only be a
-          #     single `TextAnchor.text_segments` element.  If the start and
-          #     end index of the text segment are the same, the text change is inserted
-          #     before that index.
-          # @!attribute [rw] language_code
-          #   @return [::String]
-          #     The BCP-47 language code, such as "en-US" or "sr-Latn". For more
-          #     information, see
-          #     http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
-          # @!attribute [rw] translated_text
-          #   @return [::String]
-          #     Text translated into the target language.
-          # @!attribute [rw] provenance
-          #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::Provenance>]
-          #     The history of this annotation.
-          class Translation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
