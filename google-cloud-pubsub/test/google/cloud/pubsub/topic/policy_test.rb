@@ -201,17 +201,11 @@ describe Google::Cloud::PubSub::Topic, :policy, :mock_pubsub do
 
     updated_policy = {
       "etag"=>"CAE=",
-      "bindings" => [{
-        "role" => "roles/owner",
-        "members" => []
-      }]
+      "bindings" => []
     }
     new_policy = {
       "etag"=>"CBD=",
-      "bindings" => [{
-        "role" => "roles/owner",
-        "members" => []
-      }]
+      "bindings" => []
     }
 
     set_req = Google::Iam::V1::Policy.decode_json JSON.dump(updated_policy)
@@ -228,10 +222,7 @@ describe Google::Cloud::PubSub::Topic, :policy, :mock_pubsub do
     _(policy).must_be_kind_of Google::Cloud::PubSub::Policy
     _(policy.etag).must_equal "\b\x10"
     _(policy.roles).must_be_kind_of Hash
-    _(policy.roles.size).must_equal 1
-    _(policy.roles["roles/viewer"]).must_be :nil?
-    _(policy.roles["roles/owner"]).must_be_kind_of Array
-    _(policy.roles["roles/owner"]).must_be :empty?
+    _(policy.roles).must_be :empty?
   end
 
   it "tests the available permissions" do
