@@ -2374,8 +2374,12 @@ module Google
           end
 
           ensure_service!
-          options = { skip_invalid: skip_invalid, ignore_unknown: ignore_unknown, insert_ids: insert_ids }
-          gapi = service.insert_tabledata dataset_id, table_id, rows, options
+          gapi = service.insert_tabledata dataset_id,
+                                          table_id,
+                                          rows,
+                                          skip_invalid: skip_invalid,
+                                          ignore_unknown: ignore_unknown,
+                                          insert_ids: insert_ids
           InsertResponse.from_gapi rows, gapi
         end
 
@@ -2674,7 +2678,7 @@ module Google
           return if attributes.empty?
           ensure_service!
           patch_args = Hash[attributes.map { |attr| [attr, @gapi.send(attr)] }]
-          patch_gapi = Google::Apis::BigqueryV2::Table.new patch_args
+          patch_gapi = Google::Apis::BigqueryV2::Table.new(**patch_args)
           patch_gapi.etag = etag if etag
           @gapi = service.patch_table dataset_id, table_id, patch_gapi
 
@@ -2800,12 +2804,11 @@ module Google
 
         def load_local_or_uri file, updater
           job_gapi = updater.to_gapi
-          job = if local_file? file
-                  load_local file, job_gapi
-                else
-                  load_storage file, job_gapi
-                end
-          job
+          if local_file? file
+            load_local file, job_gapi
+          else
+            load_storage file, job_gapi
+          end
         end
 
         def storage_url? files
@@ -2858,6 +2861,7 @@ module Google
           ##
           # @private Create an Updater object.
           def initialize gapi
+            super()
             @updates = []
             @gapi = gapi
             @schema = nil

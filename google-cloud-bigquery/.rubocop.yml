@@ -8,18 +8,31 @@ AllCops:
     - "benchmark/**/*"
     - "test/**/*"
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
+Lint/MixedRegexpCaptureTypes:
+  Enabled: false
+Metrics/AbcSize:
+  Max: 50
 Metrics/BlockLength:
   Exclude:
     - "google-cloud-bigquery.gemspec"
     - "Rakefile"
 Metrics/ClassLength:
   Enabled: false
+Metrics/CyclomaticComplexity:
+  Max: 14
+Metrics/MethodLength:
+  Max: 50
+Metrics/ModuleLength:
+  Exclude:
+    - "lib/google/cloud/bigquery/convert.rb"
+Metrics/PerceivedComplexity:
+  Max: 14
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-bigquery.rb"
-Naming/UncommunicativeMethodParamName:
+Naming/MethodParameterName:
   Exclude:
     - "lib/google/cloud/bigquery/external.rb"

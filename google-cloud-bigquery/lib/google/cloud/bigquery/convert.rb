@@ -23,8 +23,6 @@ require "date"
 module Google
   module Cloud
     module Bigquery
-      # rubocop:disable Metrics/ModuleLength
-
       ##
       # @private
       #
@@ -378,8 +376,6 @@ module Google
           (time_obj.to_i * 1000) + (time_obj.nsec / 1_000_000)
         end
       end
-
-      # rubocop:enable Metrics/ModuleLength
     end
   end
 end

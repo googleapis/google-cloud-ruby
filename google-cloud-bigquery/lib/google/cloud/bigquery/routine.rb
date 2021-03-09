@@ -1006,6 +1006,7 @@ module Google
           ##
           # @private Create an Updater object.
           def initialize gapi
+            super()
             @original_gapi = gapi
             @gapi = gapi.dup
           end
@@ -1210,14 +1211,10 @@ module Google
           end
           alias refresh! reload!
 
-          # rubocop:disable Style/CaseEquality
-
           # @private
           def updates?
             !(@gapi === @original_gapi)
           end
-
-          # rubocop:enable Style/CaseEquality
 
           # @private
           def to_gapi

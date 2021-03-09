@@ -64,7 +64,10 @@ module Google
         class AsyncInserter
           include MonitorMixin
 
-          attr_reader :max_bytes, :max_rows, :interval, :threads
+          attr_reader :max_bytes
+          attr_reader :max_rows
+          attr_reader :interval
+          attr_reader :threads
           ##
           # @private Implementation accessors
           attr_reader :table, :batch
@@ -265,18 +268,19 @@ module Google
             json_rows = @batch.json_rows
             insert_ids = @batch.insert_ids
             Concurrent::Future.new executor: @thread_pool do
-              begin
-                raise ArgumentError, "No rows provided" if json_rows.empty?
-                options = { skip_invalid: @skip_invalid, ignore_unknown: @ignore_unknown, insert_ids: insert_ids }
-                insert_resp = @table.service.insert_tabledata_json_rows(
-                  @table.dataset_id, @table.table_id, json_rows, options
-                )
-                result = Result.new InsertResponse.from_gapi(orig_rows, insert_resp)
-              rescue StandardError => e
-                result = Result.new nil, e
-              ensure
-                @callback&.call result
-              end
+              raise ArgumentError, "No rows provided" if json_rows.empty?
+              insert_resp = @table.service.insert_tabledata_json_rows @table.dataset_id,
+                                                                      @table.table_id,
+                                                                      json_rows,
+                                                                      skip_invalid: @skip_invalid,
+                                                                      ignore_unknown: @ignore_unknown,
+                                                                      insert_ids: insert_ids
+
+              result = Result.new InsertResponse.from_gapi(orig_rows, insert_resp)
+            rescue StandardError => e
+              result = Result.new nil, e
+            ensure
+              @callback&.call result
             end.execute
 
             @batch = nil
@@ -286,7 +290,11 @@ module Google
           ##
           # @private
           class Batch
-            attr_reader :max_bytes, :max_rows, :rows, :json_rows, :insert_ids
+            attr_reader :max_bytes
+            attr_reader :max_rows
+            attr_reader :rows
+            attr_reader :json_rows
+            attr_reader :insert_ids
 
             def initialize max_bytes: 10_000_000, max_rows: 500
               @max_bytes = max_bytes
@@ -395,7 +403,8 @@ module Google
               @error = error
             end
 
-            attr_reader :insert_response, :error
+            attr_reader :insert_response
+            attr_reader :error
 
             ##
             # Checks if an error is present, meaning that the insert operation

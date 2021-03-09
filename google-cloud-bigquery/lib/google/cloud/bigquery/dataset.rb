@@ -705,7 +705,7 @@ module Google
               user_defined_function_resources: udfs_gapi(udfs)
             )
           }.delete_if { |_, v| v.nil? }
-          new_view = Google::Apis::BigqueryV2::Table.new new_view_opts
+          new_view = Google::Apis::BigqueryV2::Table.new(**new_view_opts)
 
           gapi = service.insert_table dataset_id, new_view
           Table.from_gapi gapi, service
@@ -779,7 +779,7 @@ module Google
               refresh_interval_ms: refresh_interval_ms
             )
           }.delete_if { |_, v| v.nil? }
-          new_view = Google::Apis::BigqueryV2::Table.new new_view_opts
+          new_view = Google::Apis::BigqueryV2::Table.new(**new_view_opts)
 
           gapi = service.insert_table dataset_id, new_view
           Table.from_gapi gapi, service
@@ -2581,11 +2581,9 @@ module Google
             create_table table_id do |tbl_updater|
               yield tbl_updater if block_given?
             end
-          # rubocop:disable Lint/HandleExceptions
           rescue Google::Cloud::AlreadyExistsError
+            # Do nothing if it already exists
           end
-          # rubocop:enable Lint/HandleExceptions
-
           sleep 60
           retry
         end
@@ -2628,7 +2626,7 @@ module Google
           return if attributes.empty?
           ensure_service!
           patch_args = Hash[attributes.map { |attr| [attr, @gapi.send(attr)] }]
-          patch_gapi = Google::Apis::BigqueryV2::Dataset.new patch_args
+          patch_gapi = Google::Apis::BigqueryV2::Dataset.new(**patch_args)
           patch_gapi.etag = etag if etag
           @gapi = service.patch_dataset dataset_id, patch_gapi
         end
@@ -2757,12 +2755,11 @@ module Google
 
         def load_local_or_uri file, updater
           job_gapi = updater.to_gapi
-          job = if local_file? file
-                  load_local file, job_gapi
-                else
-                  load_storage file, job_gapi
-                end
-          job
+          if local_file? file
+            load_local file, job_gapi
+          else
+            load_storage file, job_gapi
+          end
         end
 
         def storage_url? files
@@ -2802,6 +2799,7 @@ module Google
           ##
           # @private Create an Updater object.
           def initialize gapi
+            super()
             @updates = []
             @gapi = gapi
           end

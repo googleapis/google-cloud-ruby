@@ -507,7 +507,8 @@ module Google
         # @attr_reader [Fixnum] slot_ms The slot-milliseconds the job spent in the given reservation.
         #
         class ReservationUsage
-          attr_reader :name, :slot_ms
+          attr_reader :name
+          attr_reader :slot_ms
 
           ##
           # @private Creates a new ReservationUsage instance.
@@ -571,7 +572,8 @@ module Google
         #   end
         #
         class ScriptStatistics
-          attr_reader :evaluation_kind, :stack_frames
+          attr_reader :evaluation_kind
+          attr_reader :stack_frames
 
           ##
           # @private Creates a new ScriptStatistics instance.
@@ -636,7 +638,11 @@ module Google
         #   end
         #
         class ScriptStackFrame
-          attr_reader :start_line, :start_column, :end_line, :end_column, :text
+          attr_reader :start_line
+          attr_reader :start_column
+          attr_reader :end_line
+          attr_reader :end_column
+          attr_reader :text
 
           ##
           # @private Creates a new ScriptStackFrame instance.
