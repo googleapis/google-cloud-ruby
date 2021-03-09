@@ -36,7 +36,7 @@ module Google
       #
       # @return [Object, nil]
       def status_code
-        return nil unless cause&.respond_to? :status_code
+        return nil unless cause.respond_to? :status_code
         cause.status_code
       end
 
@@ -49,7 +49,7 @@ module Google
       #
       # @return [Object, nil]
       def body
-        return nil unless cause&.respond_to? :body
+        return nil unless cause.respond_to? :body
         cause.body
       end
 
@@ -62,7 +62,7 @@ module Google
       #
       # @return [Object, nil]
       def header
-        return nil unless cause&.respond_to? :header
+        return nil unless cause.respond_to? :header
         cause.header
       end
 
@@ -75,7 +75,7 @@ module Google
       #
       # @return [Object, nil]
       def code
-        return nil unless cause&.respond_to? :code
+        return nil unless cause.respond_to? :code
         cause.code
       end
 
@@ -88,7 +88,7 @@ module Google
       #
       # @return [Object, nil]
       def details
-        return nil unless cause&.respond_to? :details
+        return nil unless cause.respond_to? :details
         cause.details
       end
 
@@ -101,7 +101,7 @@ module Google
       #
       # @return [Object, nil]
       def metadata
-        return nil unless cause&.respond_to? :metadata
+        return nil unless cause.respond_to? :metadata
         cause.metadata
       end
 
@@ -114,7 +114,7 @@ module Google
       #
       # @return [Object, nil]
       def status_details
-        return nil unless cause&.respond_to? :status_details
+        return nil unless cause.respond_to? :status_details
         cause.status_details
       end
 
