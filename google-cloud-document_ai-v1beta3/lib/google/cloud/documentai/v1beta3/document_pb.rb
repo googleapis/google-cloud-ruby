@@ -22,7 +22,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :pages, :message, 6, "google.cloud.documentai.v1beta3.Document.Page"
       repeated :entities, :message, 7, "google.cloud.documentai.v1beta3.Document.Entity"
       repeated :entity_relations, :message, 8, "google.cloud.documentai.v1beta3.Document.EntityRelation"
-      repeated :translations, :message, 12, "google.cloud.documentai.v1beta3.Document.Translation"
       repeated :text_changes, :message, 14, "google.cloud.documentai.v1beta3.Document.TextChange"
       optional :shard_info, :message, 9, "google.cloud.documentai.v1beta3.Document.ShardInfo"
       optional :error, :message, 10, "google.rpc.Status"
@@ -184,12 +183,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :object_id, :string, 2
       optional :relation, :string, 3
     end
-    add_message "google.cloud.documentai.v1beta3.Document.Translation" do
-      optional :text_anchor, :message, 1, "google.cloud.documentai.v1beta3.Document.TextAnchor"
-      optional :language_code, :string, 2
-      optional :translated_text, :string, 3
-      repeated :provenance, :message, 4, "google.cloud.documentai.v1beta3.Document.Provenance"
-    end
     add_message "google.cloud.documentai.v1beta3.Document.TextAnchor" do
       repeated :text_segments, :message, 1, "google.cloud.documentai.v1beta3.Document.TextAnchor.TextSegment"
       optional :content, :string, 2
@@ -286,7 +279,6 @@ module Google
         Document::Entity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.Document.Entity").msgclass
         Document::Entity::NormalizedValue = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.Document.Entity.NormalizedValue").msgclass
         Document::EntityRelation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.Document.EntityRelation").msgclass
-        Document::Translation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.Document.Translation").msgclass
         Document::TextAnchor = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.Document.TextAnchor").msgclass
         Document::TextAnchor::TextSegment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.Document.TextAnchor.TextSegment").msgclass
         Document::PageAnchor = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.Document.PageAnchor").msgclass
