@@ -25,7 +25,8 @@ module Google
         class TimedUnaryBuffer
           include MonitorMixin
 
-          attr_reader :max_bytes, :interval
+          attr_reader :max_bytes
+          attr_reader :interval
 
           def initialize subscriber, max_bytes: 500_000, interval: 1.0
             super() # to init MonitorMixin
@@ -138,7 +139,7 @@ module Google
               end
 
             groups = prev_reg.each_pair.group_by { |_ack_id, delay| delay }
-            req_hash = Hash[groups.map { |k, v| [k, v.map(&:first)] }]
+            req_hash = groups.transform_values { |v| v.map(&:first) }
 
             requests = { acknowledge: [] }
             ack_ids = Array(req_hash.delete(:ack)) # ack has no deadline set
@@ -215,11 +216,9 @@ module Google
 
           def add_future pool
             Concurrent::Promises.future_on pool do
-              begin
-                yield
-              rescue StandardError => e
-                error! e
-              end
+              yield
+            rescue StandardError => e
+              error! e
             end
           end
         end

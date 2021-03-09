@@ -186,4 +186,60 @@ describe Google::Cloud::PubSub::Subscription, :policy, :mock_pubsub do
 
     _(permissions).must_equal ["pubsub.subscriptions.get"]
   end
+
+  it "removes the only member in the IAM Policy" do
+    policy_hash = {
+      "etag"=>"CAE=",
+      "bindings" => [{
+        "role" => "roles/owner",
+        "members" => [
+          "user:owner@example.com"
+        ]
+      }]
+    }
+    get_res = Google::Iam::V1::Policy.decode_json policy_hash.to_json
+    mock = Minitest::Mock.new
+    mock.expect :get_iam_policy, get_res, [resource: subscription_path(sub_name)]
+
+    updated_policy = {
+      "etag"=>"CAE=",
+      "bindings" => []
+    }
+    new_policy = {
+      "etag"=>"CBA=",
+      "bindings" => []
+    }
+    set_req = Google::Iam::V1::Policy.decode_json JSON.dump(updated_policy)
+    set_res = Google::Iam::V1::Policy.decode_json JSON.dump(new_policy)
+    mock.expect :set_iam_policy, set_res, [resource: subscription_path(sub_name), policy: set_req]
+    subscription.service.mocked_iam = mock
+
+    policy = subscription.policy do |p|
+      p.remove "roles/owner", "user:owner@example.com"
+    end
+
+    mock.verify
+
+    _(policy).must_be_kind_of Google::Cloud::PubSub::Policy
+    _(policy.etag).must_equal "\b\x10"
+    _(policy.roles).must_be_kind_of Hash
+    _(policy.roles).must_be :empty?
+  end
+
+  it "tests the available permissions" do
+    permissions = ["pubsub.subscriptions.get", "pubsub.subscriptions.consume"]
+    test_res = Google::Iam::V1::TestIamPermissionsResponse.new(
+      permissions: ["pubsub.subscriptions.get"]
+    )
+    mock = Minitest::Mock.new
+    mock.expect :test_iam_permissions, test_res, [resource: subscription_path(sub_name), permissions: permissions]
+    subscription.service.mocked_iam = mock
+
+    permissions = subscription.test_permissions "pubsub.subscriptions.get",
+                                                "pubsub.subscriptions.consume"
+
+    mock.verify
+
+    _(permissions).must_equal ["pubsub.subscriptions.get"]
+  end
 end

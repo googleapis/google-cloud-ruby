@@ -26,7 +26,10 @@ module Google
       ##
       # @private Represents the Pub/Sub service API, including IAM mixins.
       class Service
-        attr_accessor :project, :credentials, :host, :timeout
+        attr_accessor :project
+        attr_accessor :credentials
+        attr_accessor :host
+        attr_accessor :timeout
         ###
         # The same client_id is used across all streaming pull connections that are created by this client. This is
         # intentional, as it indicates to the server that any guarantees, such as message ordering, made for a stream

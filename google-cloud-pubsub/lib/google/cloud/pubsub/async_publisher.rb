@@ -59,8 +59,12 @@ module Google
       class AsyncPublisher
         include MonitorMixin
 
-        attr_reader :topic_name, :max_bytes, :max_messages, :interval,
-                    :publish_threads, :callback_threads
+        attr_reader :topic_name
+        attr_reader :max_bytes
+        attr_reader :max_messages
+        attr_reader :interval
+        attr_reader :publish_threads
+        attr_reader :callback_threads
         ##
         # @private Implementation accessors
         attr_reader :service, :batch, :publish_thread_pool,
@@ -303,7 +307,7 @@ module Google
 
         def publish_batches! stop: nil
           @batches.reject! { |_ordering_key, batch| batch.empty? }
-          @batches.values.each do |batch|
+          @batches.each_value do |batch|
             ready = batch.publish! stop: stop
             publish_batch_async @topic_name, batch if ready
           end

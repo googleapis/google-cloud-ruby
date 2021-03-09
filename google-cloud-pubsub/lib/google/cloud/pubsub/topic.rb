@@ -677,7 +677,7 @@ module Google
         def publish_async data = nil, attributes = nil, ordering_key: nil, **extra_attrs, &callback
           ensure_service!
 
-          @async_publisher ||= AsyncPublisher.new name, service, @async_opts
+          @async_publisher ||= AsyncPublisher.new name, service, **@async_opts
           @async_publisher.publish data, attributes, ordering_key: ordering_key, **extra_attrs, &callback
         end
 
@@ -693,7 +693,7 @@ module Google
         # {Subscription#listen}, and {Message#ordering_key}.
         #
         def enable_message_ordering!
-          @async_publisher ||= AsyncPublisher.new name, service, @async_opts
+          @async_publisher ||= AsyncPublisher.new name, service, **@async_opts
           @async_publisher.enable_message_ordering!
         end
 
@@ -709,7 +709,7 @@ module Google
         # @return [Boolean]
         #
         def message_ordering?
-          @async_publisher ||= AsyncPublisher.new name, service, @async_opts
+          @async_publisher ||= AsyncPublisher.new name, service, **@async_opts
           @async_publisher.message_ordering?
         end
 
@@ -722,7 +722,7 @@ module Google
         # @return [boolean] `true` when resumed, `false` otherwise.
         #
         def resume_publish ordering_key
-          @async_publisher ||= AsyncPublisher.new name, service, @async_opts
+          @async_publisher ||= AsyncPublisher.new name, service, **@async_opts
           @async_publisher.resume_publish ordering_key
         end
 

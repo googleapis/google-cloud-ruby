@@ -49,7 +49,8 @@ module Google
       #   sub.retry_policy.maximum_backoff #=> 300
       #
       class RetryPolicy
-        attr_reader :minimum_backoff, :maximum_backoff
+        attr_reader :minimum_backoff
+        attr_reader :maximum_backoff
 
         ##
         # Creates a new, immutable RetryPolicy value object.
