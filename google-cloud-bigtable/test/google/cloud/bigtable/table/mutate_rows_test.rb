@@ -153,10 +153,10 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
       req_retry_entries: retry_entries,
       req_retry_response: retry_responses
     )
-    def mock.mutate_rows table_name: nil, app_profile_id: nil, entries: nil
-      t._(table_name).must_equal expected_table_path
-      t._(entries).must_equal req_retry_entries[self.retry_count]
-      t._(app_profile_id).must_equal expected_req_app_profile_id
+    def mock.mutate_rows request
+      t._(request[:table_name]).must_equal expected_table_path
+      t._(request[:entries]).must_equal req_retry_entries[self.retry_count]
+      t._(request[:app_profile_id]).must_equal expected_req_app_profile_id
 
       res = req_retry_response[self.retry_count]
       self.retry_count += 1
@@ -220,10 +220,10 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
       req_retry_entries: retry_entries,
       req_retry_response: retry_responses
     )
-    def mock.mutate_rows table_name: nil, app_profile_id: nil, entries: nil
-      t._(table_name).must_equal expected_table_path
-      t._(entries).must_equal req_retry_entries[self.retry_count]
-      t._(app_profile_id).must_equal expected_req_app_profile_id
+    def mock.mutate_rows request
+      t._(request[:table_name]).must_equal expected_table_path
+      t._(request[:entries]).must_equal req_retry_entries[self.retry_count]
+      t._(request[:app_profile_id]).must_equal expected_req_app_profile_id
 
       res = req_retry_response[self.retry_count]
       self.retry_count += 1

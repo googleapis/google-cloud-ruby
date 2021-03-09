@@ -54,7 +54,8 @@ module Google
       #   policy.roles["roles/viewer"] = ["allUsers"]
       #
       class Policy
-        attr_reader :etag, :roles
+        attr_reader :etag
+        attr_reader :roles
 
         # Creates a Policy instance.
         # @param etag [String]

@@ -170,10 +170,10 @@ module Google
         # @return [Boolean]
         #
         def start_key_read? range
-          start_key = if !range.start_key_closed.empty?
-                        range.start_key_closed
-                      else
+          start_key = if range.start_key_closed.empty?
                         range.start_key_open
+                      else
+                        range.start_key_closed
                       end
 
           start_key.empty? || last_key >= start_key
@@ -186,10 +186,10 @@ module Google
         # @return [Boolean]
         #
         def end_key_read? range
-          end_key = if !range.end_key_closed.empty?
-                      range.end_key_closed
-                    else
+          end_key = if range.end_key_closed.empty?
                       range.end_key_open
+                    else
+                      range.end_key_closed
                     end
 
           end_key && end_key <= last_key

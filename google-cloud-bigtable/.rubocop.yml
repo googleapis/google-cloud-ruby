@@ -9,10 +9,18 @@ AllCops:
     - "support/**/*"
     - "test/**/*"
 
-Documentation:
+Style/Documentation:
   Exclude:
     - "lib/google-cloud-bigtable.rb"
 
+Lint/EmptyClass:
+  Exclude:
+    - "lib/google/cloud/bigtable/routing_policy.rb"
+Metrics/BlockLength:
+  Exclude:
+    - "google-cloud-bigtable.gemspec"
+    - "Rakefile"
+    - "lib/google-cloud-bigtable.rb"
 Metrics/ClassLength:
   Exclude:
     - "lib/google/cloud/bigtable/chunk_processor.rb"
@@ -21,11 +29,8 @@ Metrics/ClassLength:
     - "lib/google/cloud/bigtable/project.rb"
     - "lib/google/cloud/bigtable/service.rb"
     - "lib/google/cloud/bigtable/table.rb"
-Metrics/BlockLength:
-  Exclude:
-    - "google-cloud-bigtable.gemspec"
-    - "Rakefile"
-    - "lib/google-cloud-bigtable.rb"
+Metrics/PerceivedComplexity:
+  Max: 12
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-bigtable.rb"

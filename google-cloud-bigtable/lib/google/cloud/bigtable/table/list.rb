@@ -114,12 +114,12 @@ module Google
           #     puts table.table_id
           #   end
           #
-          def all
+          def all &block
             return enum_for :all unless block_given?
 
             results = self
             loop do
-              results.each { |r| yield r }
+              results.each(&block)
               break unless next?
               grpc.next_page
               results = self.class.from_grpc grpc, service

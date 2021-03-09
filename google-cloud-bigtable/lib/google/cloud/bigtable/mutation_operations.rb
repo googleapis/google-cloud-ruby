@@ -335,7 +335,8 @@ module Google
         #   end
         #
         class Response
-          attr_reader :index, :status
+          attr_reader :index
+          attr_reader :status
 
           ##
           # @private Creates a MutationEntry::Response object.
