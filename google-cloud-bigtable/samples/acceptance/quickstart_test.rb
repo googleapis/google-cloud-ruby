@@ -12,17 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-source "https://rubygems.org"
+require_relative "helper"
+require_relative "../quickstart"
 
-git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
-
-gem "google-cloud-bigtable", "~> 1.0", ">= 1.0.2"
-
-group :test do
-  gem "google-style", "~> 1.25.1"
-  gem "minitest", "~> 5.14"
-  gem "minitest-focus", "~> 1.1"
-  gem "minitest-hooks", "~> 1.5"
-  gem "minitest-junit"
-  gem "rake"
+describe Google::Cloud::Bigtable, "Quickstart", :bigtable do
+  it "quickstart" do
+    out, _err = capture_io do
+      quickstart bigtable_instance_id, bigtable_read_table_id
+    end
+    assert_includes out, "@key=\"user0000001\""
+  end
 end

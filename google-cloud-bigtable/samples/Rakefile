@@ -12,17 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-source "https://rubygems.org"
+require "rake/testtask"
+require "rubocop/rake_task"
 
-git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
-
-gem "google-cloud-bigtable", "~> 1.0", ">= 1.0.2"
-
-group :test do
-  gem "google-style", "~> 1.25.1"
-  gem "minitest", "~> 5.14"
-  gem "minitest-focus", "~> 1.1"
-  gem "minitest-hooks", "~> 1.5"
-  gem "minitest-junit"
-  gem "rake"
+Rake::TestTask.new "test" do |t|
+  t.test_files = FileList["**/*_test.rb"]
+  t.warning = false
 end
+
+RuboCop::RakeTask.new
