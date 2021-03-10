@@ -1,5 +1,11 @@
 # Release History
 
+### 1.5.0 / 2021-03-10
+
+#### Features
+
+* Drop support for Ruby 2.4 and add support for Ruby 3.0
+
 ### 1.4.0 / 2019-10-23
 
 Now requires Ruby 2.4 or later.
