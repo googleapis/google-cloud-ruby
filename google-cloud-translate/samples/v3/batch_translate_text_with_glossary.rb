@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# rubocop:disable Metrics/MethodLength
-
 def translate_v3_batch_translate_text_with_glossary \
   input_uri:, output_uri:, project_id:, location_id:, glossary_id:
 
@@ -66,5 +64,3 @@ def translate_v3_batch_translate_text_with_glossary \
   puts "Translated Characters: #{response.translated_characters}"
   # [END translate_v3_batch_translate_text_with_glossary]
 end
-
-# rubocop:enable Metrics/MethodLength
