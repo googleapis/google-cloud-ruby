@@ -1,5 +1,11 @@
 # Release History
 
+### 1.6.0 / 2021-03-10
+
+#### Features
+
+* Drop support for Ruby 2.4 and add support for Ruby 3.0
+
 ### 1.5.0 / 2020-01-09
 
 * Extract error classes into a separate gem, google-cloud-errors.
