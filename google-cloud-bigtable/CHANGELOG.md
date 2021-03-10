@@ -1,5 +1,15 @@
 # Release History
 
+### 2.4.0 / 2021-03-10
+
+#### Features
+
+* Drop support for Ruby 2.4 and add support for Ruby 3.0
+
+#### Documentation
+
+* Add link to Garbage collection docs
+
 ### 2.3.0 / 2021-02-04
 
 #### Features
