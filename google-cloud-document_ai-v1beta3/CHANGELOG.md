@@ -1,5 +1,15 @@
 # Release History
 
+### 0.6.0 / 2021-03-10
+
+#### ⚠ BREAKING CHANGES
+
+* **document_ai-v1beta3:** Remove the document translations field
+
+#### Features
+
+* Remove the document translations field
+
 ### 0.5.0 / 2021-03-08
 
 #### Features
