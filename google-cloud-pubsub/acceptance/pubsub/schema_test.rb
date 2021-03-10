@@ -42,28 +42,15 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
     }
   end
   let(:definition) { definition_hash.to_json }
-  let(:message_data) { { "name" => "Alaska", "post_abbr" => "AK" }.to_json }
-  let(:message_data_invalid) { { "BAD_VALUE" => nil }.to_json }
+  let(:message_data) { { "name" => "Alaska", "post_abbr" => "AK" } }
+  let(:bad_value) { { "BAD_VALUE" => nil } }
 
-  it "should publish an AVRO message to a topic with an AVRO schema" do
-    file = File.open('sightings.avro', 'wb')
-    schema = Avro::Schema.parse definition
-    writer = Avro::IO::DatumWriter.new(schema)
-    dw = Avro::DataFile::Writer.new(file, writer, schema)
-    dw << { "name" => "Alaska", "post_abbr" => "AK" }
-    dw.close
-    file = File.open('sightings.avro', 'r+')
-    reader = Avro::IO::DatumReader.new(nil, schema)
-    dr = Avro::DataFile::Reader.new(file, reader)
-    dr.each { |record| p record }
-  end
-
-  it "should validate schema, create, list, get, validate message with, create topic with, and delete a schema" do
+  it "should validate, create, list, get, validate message, create topic, publish binary message, receive binary message, and delete a schema" do
     # validate schema
     _(pubsub.valid_schema? :avro, definition).must_equal true
     _(pubsub.valid_schema? :TYPE_UNSPECIFIED, definition).must_equal false
     _(pubsub.valid_schema? :avro, nil).must_equal false
-    _(pubsub.valid_schema? :avro, { "BAD_VALUE" => nil }.to_json).must_equal false
+    _(pubsub.valid_schema? :avro, bad_value.to_json).must_equal false
 
     # create
     schema = pubsub.create_schema schema_name, :avro, definition
@@ -89,17 +76,59 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
     _(schema.definition).must_equal definition
 
     # validate message
-    _(schema.validate_message message_data, :json).must_equal true
-    _(schema.validate_message message_data_invalid, :json).must_equal false
+    _(schema.validate_message message_data.to_json, :json).must_equal true
+    _(schema.validate_message bad_value.to_json, :json).must_equal false
 
     # create topic with schema
-    topic = pubsub.create_topic topic_name, schema_name: schema_name, schema_encoding: :json
+    topic = pubsub.create_topic topic_name, schema_name: schema_name, schema_encoding: :binary
     _(topic.schema_name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
-    _(topic.schema_encoding).must_equal :JSON
+    _(topic.schema_encoding).must_equal :BINARY
 
     topic = pubsub.topic topic.name
     _(topic.schema_name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
-    _(topic.schema_encoding).must_equal :JSON
+    _(topic.schema_encoding).must_equal :BINARY
+
+    begin
+      subscription = topic.subscribe "#{$topic_prefix}-sub-avro-1"
+      _(subscription).wont_be :nil?
+      _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(subscription.retry_policy).must_be :nil?
+      # No messages, should be empty
+      received_messages = subscription.pull
+      _(received_messages).must_be :empty?
+
+      # Encode and publish a message
+      avro_schema = Avro::Schema.parse definition
+      writer = Avro::IO::DatumWriter.new avro_schema
+      buffer = StringIO.new
+      encoder = Avro::IO::BinaryEncoder.new buffer
+      writer.write message_data, encoder
+      msg = topic.publish buffer
+      _(msg).wont_be :nil?
+
+      # Check it received the published message
+      received_messages = pull_with_retry subscription
+      _(received_messages).wont_be :empty?
+      _(received_messages.count).must_equal 1
+      received_message = received_messages.first
+      _(received_message).wont_be :nil?
+      _(received_message.delivery_attempt).must_be :nil?
+      _(received_message.msg.data).must_equal msg.data
+      _(received_message.msg.published_at).wont_be :nil?
+      # Acknowledge the message
+      subscription.ack received_message.ack_id
+
+      # Decode the message data
+      buffer = StringIO.new received_message.data
+      decoder = Avro::IO::BinaryDecoder.new buffer
+      reader = Avro::IO::DatumReader.new avro_schema
+      decoded_message_data = reader.read decoder
+      _(decoded_message_data).must_be_kind_of Hash
+      _(decoded_message_data).must_equal message_data
+    ensure
+      # Remove the subscription
+      subscription.delete
+    end
 
     # delete
     schema.delete
@@ -109,10 +138,10 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
 
     topic = pubsub.topic topic.name
     _(topic.schema_name).must_equal "_deleted-schema_"
-    _(topic.schema_encoding).must_equal :JSON
+    _(topic.schema_encoding).must_equal :BINARY
 
     expect do 
-      pubsub.create_topic topic_name_2, schema_name: schema_name, schema_encoding: :json
+      pubsub.create_topic topic_name_2, schema_name: schema_name, schema_encoding: :binary
     end.must_raise Google::Cloud::NotFoundError
   end
 end

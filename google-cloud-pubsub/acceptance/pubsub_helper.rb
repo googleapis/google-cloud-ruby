@@ -60,6 +60,19 @@ module Acceptance
       super
     end
 
+    def pull_with_retry sub
+      received_messages = []
+      retries = 0
+      while retries <= 5 do
+        received_messages = sub.pull
+        break if received_messages.any?
+        retries += 1
+        puts "the subscription does not have the message yet. sleeping for #{retries*retries} second(s) and retrying."
+        sleep retries*retries
+      end
+      received_messages
+    end
+
     # Add spec DSL
     extend Minitest::Spec::DSL
 
