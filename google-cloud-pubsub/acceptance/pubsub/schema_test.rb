@@ -44,7 +44,7 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
   let(:definition) { definition_hash.to_json }
   let(:message_data) { { "name" => "Alaska", "post_abbr" => "AK" }.to_json }
   let(:message_data_invalid) { { "BAD_VALUE" => nil }.to_json }
-focus
+
   it "should publish an AVRO message to a topic with an AVRO schema" do
     file = File.open('sightings.avro', 'wb')
     schema = Avro::Schema.parse definition
