@@ -1,5 +1,11 @@
 # Release History
 
+### 0.41.0 / 2021-03-11
+
+#### Features
+
+* Drop support for Ruby 2.4 and add support for Ruby 3.0
+
 ### 0.40.0 / 2020-07-23
 
 This is a major update that removes the "low-level" client interface code, and
