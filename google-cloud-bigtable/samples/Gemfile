@@ -14,7 +14,7 @@
 
 source "https://rubygems.org"
 
-gem "google-cloud-bigtable", "~> 2.3"
+gem "google-cloud-bigtable", "~> 2.4"
 
 group :test do
   gem "google-style", "~> 1.25.1"
