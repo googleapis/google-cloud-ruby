@@ -1,0 +1,63 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.apigateway.v1",
+  "libraryPackage": "::Google::Cloud::APIGateway::V1",
+  "services": {
+    "ApiGatewayService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::APIGateway::V1::ApiGatewayService::Client",
+          "methods": {
+            "ListGateways": [
+              "list_gateways"
+            ],
+            "GetGateway": [
+              "get_gateway"
+            ],
+            "CreateGateway": [
+              "create_gateway"
+            ],
+            "UpdateGateway": [
+              "update_gateway"
+            ],
+            "DeleteGateway": [
+              "delete_gateway"
+            ],
+            "ListApis": [
+              "list_apis"
+            ],
+            "GetApi": [
+              "get_api"
+            ],
+            "CreateApi": [
+              "create_api"
+            ],
+            "UpdateApi": [
+              "update_api"
+            ],
+            "DeleteApi": [
+              "delete_api"
+            ],
+            "ListApiConfigs": [
+              "list_api_configs"
+            ],
+            "GetApiConfig": [
+              "get_api_config"
+            ],
+            "CreateApiConfig": [
+              "create_api_config"
+            ],
+            "UpdateApiConfig": [
+              "update_api_config"
+            ],
+            "DeleteApiConfig": [
+              "delete_api_config"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
