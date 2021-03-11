@@ -2,32 +2,55 @@
 
 # Cloud Bigtable Ruby Samples
 
-[![Open in Cloud Shell][shell_img]][shell_link]
+This directory contains samples for google-cloud-bigtable.
 
 [Cloud Bigtable](https://cloud.google.com/bigtable/docs/) is Google&#x27;s NoSQL Big Data database service. It&#x27;s the same database that powers many core Google services, including Search, Analytics, Maps, and Gmail.
 
-## Table of Contents
+## Setup
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+### Authentication
 
+Authentication is typically done through [Application Default Credentials](https://cloud.google.com/docs/authentication#getting_credentials_for_server-centric_flow)
+, which means you do not have to change the code to authenticate as long as your
+environment has credentials. You have a few options for setting up
+authentication:
 
-- [Before you begin](#before-you-begin)
-- [Samples](#samples)
-  - [Hello World](#hello-world)
-  - [Instance Admin](#instance-admin)
-  - [Table and column family management](#table-and-column-family-management)
+1. When running locally, use the [Google Cloud SDK](https://cloud.google.com/sdk/)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+    `gcloud auth application-default login`
 
+1. When running on App Engine or Compute Engine, credentials are already set-up.
+However, you may need to configure your Compute Engine instance with
+[additional scopes](https://cloud.google.com/compute/docs/authentication#using).
 
-## Before you begin
+1. You can create a [Service Account key file](https://cloud.google.com/docs/authentication#service_accounts)
+. This file can be used to authenticate to Google Cloud Platform services from
+any environment. To use the file, set the `GOOGLE_APPLICATION_CREDENTIALS`
+environment variable to the path to the key file, for example:
 
-Before running the samples, make sure you've followed the steps in the
-[Before you begin section](../README.md#before-you-begin) of the client
-library's README.
+    `export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service_account.json`
 
-## Samples
+### Set Project ID
+
+Next, set the *GOOGLE_CLOUD_PROJECT* environment variable to the project name
+set in the
+[Google Cloud Platform Developer Console](https://console.cloud.google.com):
+
+    `export GOOGLE_CLOUD_PROJECT="YOUR-PROJECT-ID"`
+
+### Install Dependencies
+
+1. Install the [Bundler](http://bundler.io/) gem.
+
+1. Install dependencies using:
+
+    `bundle install`
+
+## Run tests
+
+Run the tests for these samples by running `bundle exec rake test`.
+
+## Run samples
 
 ### Quickstart
 The [Quick start](quickstart.rb) sample shows a basic usage of the Cloud Bigtable client library: reading rows from a table.
@@ -61,12 +84,12 @@ Expected output similar to:
 
 ### Hello World
 
-View the [Hello World][hello_world_directory] sample to see a basic usage of
+View the [Hello World][hello_world.rb] sample to see a basic usage of
 the Cloud Bigtable client library.
 
 ### Instance Admin
 
-View the [source code][instances_0_code].
+View the [source code][instanceadmin.rb].
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-ruby&page=editor&open_in_editor=google-cloud-bigtable/samples/instanceadmin.rb)
 
@@ -95,7 +118,7 @@ For more information, see https://cloud.google.com/bigtable/docs
 
 ### Table and column family management
 
-View the [source code](tableadmin_code).
+View the [source code](tableadmin.rb).
 This sample showcases the basic table / column family operations:
 1. Create a table (if does not exist)
 2. List tables in the current project
@@ -105,8 +128,6 @@ This sample showcases the basic table / column family operations:
 6. Update a column family GC rule
 7. Delete a column family
 8. Delete a table
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-ruby&page=editor&page=editor&open_in_editor=google-cloud-bigtable/samples/tableadmin.rb)
 
 __Usage:__ `bundle exec ruby tableadmin.rb --help`
 
@@ -121,11 +142,3 @@ Examples:
 
 For more information, see https://cloud.google.com/bigtable/docs
 ```
-[instances_0_docs]: https://cloud.google.com/bigtable/docs/
-[instances_0_code]: instanceadmin.rb
-[tableadmin_code]: tableadmin.rb
-
-[hello_world_directory]: hello-world
-
-[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
-[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-ruby&page=editor&open_in_editor=google-cloud-bigtable/samples/README.md
