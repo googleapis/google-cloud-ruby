@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,15 +14,12 @@
 
 source "https://rubygems.org"
 
-git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
-
-gem "google-cloud-bigtable", "~> 1.0", ">= 1.0.2"
+gem "google-cloud-bigtable", "~> 2.3"
 
 group :test do
   gem "google-style", "~> 1.25.1"
   gem "minitest", "~> 5.14"
   gem "minitest-focus", "~> 1.1"
   gem "minitest-hooks", "~> 1.5"
-  gem "minitest-junit"
   gem "rake"
 end
