@@ -12,24 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def quickstart instance_id, table_id
-  # [START bigtable_quickstart]
-  # Import google bigtable client lib
-  require "google/cloud/bigtable"
+require_relative "helper"
+require_relative "../quickstart"
 
-  # Instantiates a client
-  bigtable = Google::Cloud::Bigtable.new
-
-  # Your Cloud Bigtable instance ID
-  # instance_id = "my-instance"
-
-  # Your Cloud Bigtable table ID
-  # table_id = "my-table"
-
-  # Get table client
-  table = bigtable.table instance_id, table_id
-
-  # Read and print row
-  p table.read_row "user0000001"
-  # [END bigtable_quickstart]
+describe Google::Cloud::Bigtable, "Quickstart", :bigtable do
+  it "quickstart" do
+    out, _err = capture_io do
+      quickstart bigtable_instance_id, bigtable_read_table_id
+    end
+    assert_includes out, "@key=\"user0000001\""
+  end
 end

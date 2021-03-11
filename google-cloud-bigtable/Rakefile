@@ -135,11 +135,31 @@ end
 
 namespace :samples do
   task :latest do
-    puts "The google-cloud-bigtable gem has no sample tests."
+    if File.directory? "samples"
+      Dir.chdir "samples" do
+        Bundler.with_unbundled_env do
+          ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
+          sh "bundle update"
+          sh "bundle exec rake test"
+        end
+      end
+    else
+      puts "The google-cloud-bigtable gem has no samples to test."
+    end
   end
 
   task :master do
-    puts "The google-cloud-bigtable gem has no sample tests."
+    if File.directory? "samples"
+      Dir.chdir "samples" do
+        Bundler.with_unbundled_env do
+          ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
+          sh "bundle update"
+          sh "bundle exec rake test"
+        end
+      end
+    else
+      puts "The google-cloud-bigtable gem has no samples to test."
+    end
   end
 end
 

@@ -12,24 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def quickstart instance_id, table_id
-  # [START bigtable_quickstart]
-  # Import google bigtable client lib
-  require "google/cloud/bigtable"
+require "rake/testtask"
+require "rubocop/rake_task"
 
-  # Instantiates a client
-  bigtable = Google::Cloud::Bigtable.new
-
-  # Your Cloud Bigtable instance ID
-  # instance_id = "my-instance"
-
-  # Your Cloud Bigtable table ID
-  # table_id = "my-table"
-
-  # Get table client
-  table = bigtable.table instance_id, table_id
-
-  # Read and print row
-  p table.read_row "user0000001"
-  # [END bigtable_quickstart]
+Rake::TestTask.new "test" do |t|
+  t.test_files = FileList["**/*_test.rb"]
+  t.warning = false
 end
+
+RuboCop::RakeTask.new

@@ -3,9 +3,8 @@ inherit_gem:
 
 AllCops:
   Exclude:
-    - "acceptance/**/*"
+    - "**/acceptance/**/*"
     - "conformance/**/*"
-    - "samples/**/*"
     - "support/**/*"
     - "test/**/*"
 
