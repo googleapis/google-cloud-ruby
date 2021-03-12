@@ -15,8 +15,6 @@
 
 require "securerandom"
 
-# rubocop:disable Metrics/AbcSize
-# rubocop:disable Metrics/MethodLength
 
 def detect_intent_stream project_id:, session_id:, audio_file_path:,
                          language_code:
@@ -86,9 +84,6 @@ def detect_intent_stream project_id:, session_id:, audio_file_path:,
   response_thread.join
   # [END dialogflow_detect_intent_streaming]
 end
-
-# rubocop:enable Metrics/AbcSize
-# rubocop:enable Metrics/MethodLength
 
 
 if $PROGRAM_NAME == __FILE__
