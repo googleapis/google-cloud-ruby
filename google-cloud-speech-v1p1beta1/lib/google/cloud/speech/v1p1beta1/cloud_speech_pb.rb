@@ -6,7 +6,6 @@ require 'google/protobuf'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
-require 'google/api/resource_pb'
 require 'google/cloud/speech/v1p1beta1/resource_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/any_pb'
@@ -22,6 +21,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest" do
       optional :config, :message, 1, "google.cloud.speech.v1p1beta1.RecognitionConfig"
       optional :audio, :message, 2, "google.cloud.speech.v1p1beta1.RecognitionAudio"
+      optional :output_config, :message, 4, "google.cloud.speech.v1p1beta1.TranscriptOutputConfig"
+    end
+    add_message "google.cloud.speech.v1p1beta1.TranscriptOutputConfig" do
+      oneof :output_type do
+        optional :gcs_uri, :string, 1
+      end
     end
     add_message "google.cloud.speech.v1p1beta1.StreamingRecognizeRequest" do
       oneof :streaming_request do
@@ -179,6 +184,7 @@ module Google
       module V1p1beta1
         RecognizeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1p1beta1.RecognizeRequest").msgclass
         LongRunningRecognizeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1p1beta1.LongRunningRecognizeRequest").msgclass
+        TranscriptOutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1p1beta1.TranscriptOutputConfig").msgclass
         StreamingRecognizeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1p1beta1.StreamingRecognizeRequest").msgclass
         StreamingRecognitionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1p1beta1.StreamingRecognitionConfig").msgclass
         RecognitionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1p1beta1.RecognitionConfig").msgclass
