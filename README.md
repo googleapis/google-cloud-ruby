@@ -1,5 +1,7 @@
 # Google Cloud Ruby Client
 
+HELLO!
+
 Idiomatic Ruby client for [Google Cloud Platform](https://cloud.google.com/) services.
 
 [![Coverage Status](https://codecov.io/gh/googleapis/google-cloud-ruby/branch/master/graph/badge.svg)](https://codecov.io/gh/googleapis/google-cloud-ruby)
