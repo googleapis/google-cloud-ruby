@@ -22,6 +22,10 @@ def random_topic_id
   "ruby-pubsub-samples-test-topic-#{SecureRandom.hex 4}"
 end
 
+def random_schema_id
+  "ruby-pubsub-samples-test-schema-#{SecureRandom.hex 4}"
+end
+
 def random_subscription_id
   "ruby-pubsub-samples-test-subscription-#{SecureRandom.hex 4}"
 end
