@@ -35,7 +35,8 @@ module Google
         # @!attribute [rw] automatic_scaling
         #   @return [::Google::Cloud::AppEngine::V1::AutomaticScaling]
         #     Automatic scaling is based on request rate, response latencies, and other
-        #     application metrics.
+        #     application metrics. Instances are dynamically created and destroyed as
+        #     needed in order to handle traffic.
         # @!attribute [rw] basic_scaling
         #   @return [::Google::Cloud::AppEngine::V1::BasicScaling]
         #     A service with basic scaling will create an instance when the application
@@ -46,6 +47,7 @@ module Google
         #   @return [::Google::Cloud::AppEngine::V1::ManualScaling]
         #     A service with manual scaling runs continuously, allowing you to perform
         #     complex initialization and rely on the state of its memory over time.
+        #     Manually scaled versions are sometimes referred to as "backends".
         # @!attribute [rw] inbound_services
         #   @return [::Array<::Google::Cloud::AppEngine::V1::InboundServiceType>]
         #     Before an application can receive email or XMPP messages, the application
@@ -117,6 +119,11 @@ module Google
         # @!attribute [rw] runtime_main_executable_path
         #   @return [::String]
         #     The path or name of the app's main executable.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     The identity that the deployed version will run as.
+        #     Admin API will use the App Engine Appspot service account as default if
+        #     this field is neither provided in app.yaml file nor through CLI flag.
         # @!attribute [rw] handlers
         #   @return [::Array<::Google::Cloud::AppEngine::V1::UrlMap>]
         #     An ordered list of URL-matching patterns that should be applied to incoming
@@ -144,6 +151,11 @@ module Google
         # @!attribute [rw] env_variables
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Environment variables available to the application.
+        #
+        #     Only returned in `GET` requests if `view=FULL` is set.
+        # @!attribute [rw] build_env_variables
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Environment variables available to the build environment.
         #
         #     Only returned in `GET` requests if `view=FULL` is set.
         # @!attribute [rw] default_expiration
@@ -218,6 +230,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class EnvVariablesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class BuildEnvVariablesEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -522,6 +543,10 @@ module Google
         # @!attribute [rw] volumes
         #   @return [::Array<::Google::Cloud::AppEngine::V1::Volume>]
         #     User specified volumes.
+        # @!attribute [rw] kms_key_reference
+        #   @return [::String]
+        #     The name of the encryption key that is stored in Google Cloud KMS.
+        #     Only should be used by Cloud Composer to encrypt the vm disk
         class Resources
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

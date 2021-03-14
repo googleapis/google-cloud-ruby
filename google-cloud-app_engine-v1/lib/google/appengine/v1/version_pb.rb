@@ -5,6 +5,7 @@ require 'google/protobuf'
 
 require 'google/appengine/v1/app_yaml_pb'
 require 'google/appengine/v1/deploy_pb'
+require 'google/appengine/v1/network_settings_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/api/annotations_pb'
@@ -30,11 +31,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :disk_usage_bytes, :int64, 18
       optional :runtime_api_version, :string, 21
       optional :runtime_main_executable_path, :string, 22
+      optional :service_account, :string, 127
       repeated :handlers, :message, 100, "google.appengine.v1.UrlMap"
       repeated :error_handlers, :message, 101, "google.appengine.v1.ErrorHandler"
       repeated :libraries, :message, 102, "google.appengine.v1.Library"
       optional :api_config, :message, 103, "google.appengine.v1.ApiConfigHandler"
       map :env_variables, :string, :string, 104
+      map :build_env_variables, :string, :string, 125
       optional :default_expiration, :message, 105, "google.protobuf.Duration"
       optional :health_check, :message, 106, "google.appengine.v1.HealthCheck"
       optional :readiness_check, :message, 112, "google.appengine.v1.ReadinessCheck"
@@ -127,6 +130,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :disk_gb, :double, 2
       optional :memory_gb, :double, 3
       repeated :volumes, :message, 4, "google.appengine.v1.Volume"
+      optional :kms_key_reference, :string, 5
     end
     add_message "google.appengine.v1.VpcAccessConnector" do
       optional :name, :string, 1

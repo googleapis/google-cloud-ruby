@@ -3,6 +3,8 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -24,6 +26,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :vm_status, :string, 14
       optional :vm_debug_enabled, :bool, 15
       optional :vm_ip, :string, 16
+      optional :vm_liveness, :enum, 17, "google.appengine.v1.Instance.Liveness.LivenessState"
+    end
+    add_message "google.appengine.v1.Instance.Liveness" do
+    end
+    add_enum "google.appengine.v1.Instance.Liveness.LivenessState" do
+      value :LIVENESS_STATE_UNSPECIFIED, 0
+      value :UNKNOWN, 1
+      value :HEALTHY, 2
+      value :UNHEALTHY, 3
+      value :DRAINING, 4
+      value :TIMEOUT, 5
     end
     add_enum "google.appengine.v1.Instance.Availability" do
       value :UNSPECIFIED, 0
@@ -38,6 +51,8 @@ module Google
     module AppEngine
       module V1
         Instance = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.appengine.v1.Instance").msgclass
+        Instance::Liveness = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.appengine.v1.Instance.Liveness").msgclass
+        Instance::Liveness::LivenessState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.appengine.v1.Instance.Liveness.LivenessState").enummodule
         Instance::Availability = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.appengine.v1.Instance.Availability").enummodule
       end
     end
