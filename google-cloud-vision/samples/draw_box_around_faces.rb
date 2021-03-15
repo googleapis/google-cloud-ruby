@@ -19,8 +19,6 @@ require "google/cloud/vision"
 require "rmagick"
 # [END vision_face_detection_tutorial_process_response]
 
-# rubocop:disable Metrics/AbcSize
-
 def draw_box_around_faces path_to_image_file:, path_to_output_file:
   # [START vision_face_detection_tutorial_client]
   image_annotator = Google::Cloud::Vision.image_annotator
@@ -58,8 +56,6 @@ def draw_box_around_faces path_to_image_file:, path_to_output_file:
   puts "Output file: #{path_to_output_file}"
   # [END vision_face_detection_tutorial_process_response]
 end
-
-# rubocop:enable Metrics/AbcSize
 
 # [START vision_face_detection_tutorial_run_application]
 if $PROGRAM_NAME == __FILE__
