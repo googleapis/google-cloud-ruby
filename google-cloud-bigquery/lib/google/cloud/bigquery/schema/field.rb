@@ -40,8 +40,8 @@ module Google
           MODES = ["NULLABLE", "REQUIRED", "REPEATED"].freeze
 
           # @private
-          TYPES = ["STRING", "INTEGER", "INT64", "FLOAT", "FLOAT64", "NUMERIC", "BOOLEAN", "BOOL", "BYTES", "TIMESTAMP",
-                   "TIME", "DATETIME", "DATE", "RECORD", "STRUCT"].freeze
+          TYPES = ["STRING", "INTEGER", "INT64", "FLOAT", "FLOAT64", "NUMERIC", "BIGNUMERIC", "BOOLEAN", "BOOL",
+                   "BYTES", "TIMESTAMP", "TIME", "DATETIME", "DATE", "RECORD", "STRUCT"].freeze
 
           ##
           # The name of the field.
@@ -72,10 +72,10 @@ module Google
           #
           # @return [String] The field data type. Possible values include
           #   `STRING`, `BYTES`, `INTEGER`, `INT64` (same as `INTEGER`),
-          #   `FLOAT`, `FLOAT64` (same as `FLOAT`), `NUMERIC`, `BOOLEAN`, `BOOL`
-          #   (same as `BOOLEAN`), `TIMESTAMP`, `DATE`, `TIME`, `DATETIME`,
-          #   `RECORD` (where `RECORD` indicates that the field contains a
-          #   nested schema) or `STRUCT` (same as `RECORD`).
+          #   `FLOAT`, `FLOAT64` (same as `FLOAT`), `NUMERIC`, `BIGNUMERIC`,
+          #   `BOOLEAN`, `BOOL` (same as `BOOLEAN`), `TIMESTAMP`, `DATE`,
+          #   `TIME`, `DATETIME`, `RECORD` (where `RECORD` indicates that the
+          #   field contains a nested schema) or `STRUCT` (same as `RECORD`).
           #
           def type
             @gapi.type
@@ -86,10 +86,10 @@ module Google
           #
           # @param [String] new_type The data type. Possible values include
           #   `STRING`, `BYTES`, `INTEGER`, `INT64` (same as `INTEGER`),
-          #   `FLOAT`, `FLOAT64` (same as `FLOAT`), `NUMERIC`, `BOOLEAN`, `BOOL`
-          #   (same as `BOOLEAN`), `TIMESTAMP`, `DATE`, `TIME`, `DATETIME`,
-          #   `RECORD` (where `RECORD` indicates that the field contains a
-          #   nested schema) or `STRUCT` (same as `RECORD`).
+          #   `FLOAT`, `FLOAT64` (same as `FLOAT`), `NUMERIC`, `BIGNUMERIC`,
+          #   `BOOLEAN`, `BOOL` (same as `BOOLEAN`), `TIMESTAMP`, `DATE`,
+          #   `TIME`, `DATETIME`, `RECORD` (where `RECORD` indicates that the
+          #   field contains a nested schema) or `STRUCT` (same as `RECORD`).
           #
           def type= new_type
             @gapi.update! type: verify_type(new_type)
@@ -200,6 +200,15 @@ module Google
           end
 
           ##
+          # Checks if the type of the field is `BIGNUMERIC`.
+          #
+          # @return [Boolean] `true` when `BIGNUMERIC`, `false` otherwise.
+          #
+          def bignumeric?
+            type == "BIGNUMERIC"
+          end
+
+          ##
           # Checks if the type of the field is `BOOLEAN`.
           #
           # @return [Boolean] `true` when `BOOLEAN`, `false` otherwise.
@@ -299,6 +308,7 @@ module Google
           # * `:INT64`
           # * `:FLOAT64`
           # * `:NUMERIC`
+          # * `:BIGNUMERIC`
           # * `:STRING`
           # * `:DATETIME`
           # * `:DATE`
