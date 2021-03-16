@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2021-03-16
+
+#### Features
+
+* Support output transcript to GCS for LongRunningRecognize
+
 ### 0.6.0 / 2021-03-08
 
 #### Features
