@@ -167,11 +167,8 @@ module Google
               # Service calls
 
               ##
-              # Creates a new custom dashboard.
-              #
-              # This method requires the `monitoring.dashboards.create` permission
-              # on the specified project. For more information, see
-              # [Google Cloud IAM](https://cloud.google.com/iam).
+              # Creates a new custom dashboard. For examples on how you can use this API to create dashboards, see [Managing dashboards by API](/monitoring/dashboards/api-dashboard).
+              # This method requires the `monitoring.dashboards.create` permission on the specified project. For more information about permissions, see [Cloud Identity and Access Management](/iam).
               #
               # @overload create_dashboard(request, options = nil)
               #   Pass arguments to `create_dashboard` via a request object, either of type
@@ -247,7 +244,7 @@ module Google
               #
               # This method requires the `monitoring.dashboards.list` permission
               # on the specified project. For more information, see
-              # [Google Cloud IAM](https://cloud.google.com/iam).
+              # [Cloud Identity and Access Management](https://cloud.google.com/iam).
               #
               # @overload list_dashboards(request, options = nil)
               #   Pass arguments to `list_dashboards` via a request object, either of type
@@ -327,7 +324,7 @@ module Google
               #
               # This method requires the `monitoring.dashboards.get` permission
               # on the specified dashboard. For more information, see
-              # [Google Cloud IAM](https://cloud.google.com/iam).
+              # [Cloud Identity and Access Management](https://cloud.google.com/iam).
               #
               # @overload get_dashboard(request, options = nil)
               #   Pass arguments to `get_dashboard` via a request object, either of type
@@ -401,7 +398,7 @@ module Google
               #
               # This method requires the `monitoring.dashboards.delete` permission
               # on the specified dashboard. For more information, see
-              # [Google Cloud IAM](https://cloud.google.com/iam).
+              # [Cloud Identity and Access Management](https://cloud.google.com/iam).
               #
               # @overload delete_dashboard(request, options = nil)
               #   Pass arguments to `delete_dashboard` via a request object, either of type
@@ -473,7 +470,7 @@ module Google
               #
               # This method requires the `monitoring.dashboards.update` permission
               # on the specified dashboard. For more information, see
-              # [Google Cloud IAM](https://cloud.google.com/iam).
+              # [Cloud Identity and Access Management](https://cloud.google.com/iam).
               #
               # @overload update_dashboard(request, options = nil)
               #   Pass arguments to `update_dashboard` via a request object, either of type

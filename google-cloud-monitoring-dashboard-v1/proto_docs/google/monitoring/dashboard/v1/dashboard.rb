@@ -43,6 +43,10 @@ module Google
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::GridLayout]
           #     Content is arranged with a basic layout that re-flows a simple list of
           #     informational elements like widgets or tiles.
+          # @!attribute [rw] mosaic_layout
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::MosaicLayout]
+          #     The content is arranged as a grid of tiles, with each content widget
+          #     occupying one or more grid blocks.
           # @!attribute [rw] row_layout
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::RowLayout]
           #     The content is divided into equally spaced rows and the widgets are

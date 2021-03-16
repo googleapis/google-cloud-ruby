@@ -36,6 +36,48 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # A mosaic layout divides the available space into a grid of blocks, and
+          # overlays the grid with tiles. Unlike `GridLayout`, tiles may span multiple
+          # grid blocks and can be placed at arbitrary locations in the grid.
+          # @!attribute [rw] columns
+          #   @return [::Integer]
+          #     The number of columns in the mosaic grid. The number of columns must be
+          #     between 1 and 12, inclusive.
+          # @!attribute [rw] tiles
+          #   @return [::Array<::Google::Cloud::Monitoring::Dashboard::V1::MosaicLayout::Tile>]
+          #     The tiles to display.
+          class MosaicLayout
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # A single tile in the mosaic. The placement and size of the tile are
+            # configurable.
+            # @!attribute [rw] x_pos
+            #   @return [::Integer]
+            #     The zero-indexed position of the tile in grid blocks relative to the
+            #     left edge of the grid. Tiles must be contained within the specified
+            #     number of columns. `x_pos` cannot be negative.
+            # @!attribute [rw] y_pos
+            #   @return [::Integer]
+            #     The zero-indexed position of the tile in grid blocks relative to the
+            #     top edge of the grid. `y_pos` cannot be negative.
+            # @!attribute [rw] width
+            #   @return [::Integer]
+            #     The width of the tile, measured in grid blocks. Tiles must have a
+            #     minimum width of 1.
+            # @!attribute [rw] height
+            #   @return [::Integer]
+            #     The height of the tile, measured in grid blocks. Tiles must have a
+            #     minimum height of 1.
+            # @!attribute [rw] widget
+            #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Widget]
+            #     The informational widget contained in the tile. For example an `XyChart`.
+            class Tile
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
           # A simplified layout that divides the available space into rows
           # and arranges a set of widgets horizontally in each row.
           # @!attribute [rw] rows
