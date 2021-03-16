@@ -55,6 +55,8 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
   it "accesses schema_settings without making an API call" do
     _(topic.schema_name).must_equal schema_name
     _(topic.schema_encoding).must_equal schema_encoding
+    _(topic.schema_encoding_json?).must_equal true
+    _(topic.schema_encoding_binary?).must_equal false
   end
 
   describe "reference topic" do
@@ -135,6 +137,8 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
 
       _(topic.schema_name).must_equal schema_name
       _(topic.schema_encoding).must_equal schema_encoding
+      _(topic.schema_encoding_json?).must_equal true
+      _(topic.schema_encoding_binary?).must_equal false
 
       _(topic).wont_be :reference?
       _(topic).must_be :resource?
@@ -155,6 +159,8 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
 
         _(topic.schema_name).must_be :nil?
         _(topic.schema_encoding).must_be :nil?
+        _(topic.schema_encoding_json?).must_equal false
+        _(topic.schema_encoding_binary?).must_equal false
 
         _(topic).wont_be :reference?
         _(topic).must_be :resource?

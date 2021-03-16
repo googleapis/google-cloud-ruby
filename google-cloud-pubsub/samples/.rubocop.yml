@@ -10,3 +10,5 @@ Lint/RescueException:
     - "subscriptions.rb"
 Lint/UselessAssignment:
   Enabled: false
+Metrics/MethodLength:
+  Max: 26

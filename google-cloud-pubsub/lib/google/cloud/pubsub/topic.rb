@@ -284,6 +284,28 @@ module Google
         end
 
         ##
+        # Checks if the encoding of messages in the schema settings is `BINARY`. See {#schema_encoding}.
+        #
+        # Makes an API call to retrieve the schema settings when called on a reference object. See {#reference?}.
+        #
+        # @return [Boolean] `true` when `BINARY`, `false` if not `BINARY` or schema settings is not set.
+        #
+        def schema_encoding_binary?
+          schema_encoding.to_s.upcase == "BINARY"
+        end
+
+        ##
+        # Checks if the encoding of messages in the schema settings is `JSON`. See {#schema_encoding}.
+        #
+        # Makes an API call to retrieve the schema settings when called on a reference object. See {#reference?}.
+        #
+        # @return [Boolean] `true` when `JSON`, `false` if not `JSON` or schema settings is not set.
+        #
+        def schema_encoding_json?
+          schema_encoding.to_s.upcase == "JSON"
+        end
+
+        ##
         # Permanently deletes the topic.
         #
         # @return [Boolean] Returns `true` if the topic was deleted.

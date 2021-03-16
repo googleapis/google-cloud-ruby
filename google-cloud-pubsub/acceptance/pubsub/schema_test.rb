@@ -44,7 +44,7 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
   let(:definition) { definition_hash.to_json }
   let(:message_data) { { "name" => "Alaska", "post_abbr" => "AK" } }
   let(:bad_value) { { "BAD_VALUE" => nil } }
-
+focus
   it "should validate, create, list, get, validate message, create topic, publish binary message, receive binary message, and delete a schema" do
     # validate schema
     _(pubsub.valid_schema? :avro, definition).must_equal true
@@ -83,16 +83,18 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
     topic = pubsub.create_topic topic_name, schema_name: schema_name, schema_encoding: :binary
     _(topic.schema_name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
     _(topic.schema_encoding).must_equal :BINARY
+    _(topic.schema_encoding_json?).must_equal false
+    _(topic.schema_encoding_binary?).must_equal true
 
     topic = pubsub.topic topic.name
     _(topic.schema_name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
     _(topic.schema_encoding).must_equal :BINARY
+    _(topic.schema_encoding_json?).must_equal false
+    _(topic.schema_encoding_binary?).must_equal true
 
     begin
       subscription = topic.subscribe "#{$topic_prefix}-sub-avro-1"
-      _(subscription).wont_be :nil?
       _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
-      _(subscription.retry_policy).must_be :nil?
       # No messages, should be empty
       received_messages = subscription.pull
       _(received_messages).must_be :empty?
@@ -108,13 +110,9 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
 
       # Check it received the published message
       received_messages = pull_with_retry subscription
-      _(received_messages).wont_be :empty?
       _(received_messages.count).must_equal 1
       received_message = received_messages.first
-      _(received_message).wont_be :nil?
-      _(received_message.delivery_attempt).must_be :nil?
-      _(received_message.msg.data).must_equal msg.data
-      _(received_message.msg.published_at).wont_be :nil?
+      _(received_message.data).must_equal msg.data
       # Acknowledge the message
       subscription.ack received_message.ack_id
 

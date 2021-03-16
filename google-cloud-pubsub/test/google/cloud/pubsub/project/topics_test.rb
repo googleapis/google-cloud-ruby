@@ -52,6 +52,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.persistence_regions).must_be :empty?
     _(topic.schema_name).must_be :nil?
     _(topic.schema_encoding).must_be :nil?
+    _(topic.schema_encoding_json?).must_equal false
+    _(topic.schema_encoding_binary?).must_equal false
   end
 
   it "creates a topic with fully-qualified topic path" do
@@ -88,6 +90,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.persistence_regions).must_be :empty?
     _(topic.schema_name).must_be :nil?
     _(topic.schema_encoding).must_be :nil?
+    _(topic.schema_encoding_json?).must_equal false
+    _(topic.schema_encoding_binary?).must_equal false
   end
 
   it "creates a topic with labels" do
@@ -109,6 +113,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.persistence_regions).must_be :empty?
     _(topic.schema_name).must_be :nil?
     _(topic.schema_encoding).must_be :nil?
+    _(topic.schema_encoding_json?).must_equal false
+    _(topic.schema_encoding_binary?).must_equal false
   end
 
   it "creates a topic with kms_key" do
@@ -130,6 +136,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.persistence_regions).must_be :empty?
     _(topic.schema_name).must_be :nil?
     _(topic.schema_encoding).must_be :nil?
+    _(topic.schema_encoding_json?).must_equal false
+    _(topic.schema_encoding_binary?).must_equal false
   end
 
   it "creates a topic with persistence_regions" do
@@ -152,6 +160,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.persistence_regions).must_equal persistence_regions
     _(topic.schema_name).must_be :nil?
     _(topic.schema_encoding).must_be :nil?
+    _(topic.schema_encoding_json?).must_equal false
+    _(topic.schema_encoding_binary?).must_equal false
   end
 
   it "creates a topic with schema_name and schema_encoding" do
