@@ -40,6 +40,9 @@ module Google
         #   @return [::Google::Cloud::AppEngine::V1::TrafficSplit]
         #     Mapping that defines fractional HTTP traffic diversion to
         #     different versions within the service.
+        # @!attribute [rw] network_settings
+        #   @return [::Google::Cloud::AppEngine::V1::NetworkSettings]
+        #     Ingress settings for this service. Will apply to all versions.
         class Service
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

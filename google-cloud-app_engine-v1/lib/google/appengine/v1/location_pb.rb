@@ -3,12 +3,14 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/appengine/v1/location.proto", :syntax => :proto3) do
     add_message "google.appengine.v1.LocationMetadata" do
       optional :standard_environment_available, :bool, 2
       optional :flexible_environment_available, :bool, 4
+      optional :search_api_available, :bool, 6
     end
   end
 end

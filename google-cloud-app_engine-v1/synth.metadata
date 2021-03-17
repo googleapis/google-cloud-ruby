@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "940404e086b1ea483ee79fd879d67c1c368790df"
+        "sha": "723285b3edc4ae9abbd435283b3f08ee8cbcac9e"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "eabec5a21219401bad79e1cc7d900c1658aee5fd",
-        "internalRef": "359130387"
+        "sha": "a0d282daa691e95ec51131c81c3777fc95abf7f8",
+        "internalRef": "362664085"
       }
     }
   ],
@@ -91,6 +91,7 @@
     "lib/google/cloud/app_engine/v1/versions/credentials.rb",
     "lib/google/cloud/app_engine/v1/versions/operations.rb",
     "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/appengine/v1/app_yaml.rb",
     "proto_docs/google/appengine/v1/appengine.rb",
@@ -103,6 +104,7 @@
     "proto_docs/google/appengine/v1/firewall.rb",
     "proto_docs/google/appengine/v1/instance.rb",
     "proto_docs/google/appengine/v1/location.rb",
+    "proto_docs/google/appengine/v1/network_settings.rb",
     "proto_docs/google/appengine/v1/operation.rb",
     "proto_docs/google/appengine/v1/service.rb",
     "proto_docs/google/appengine/v1/version.rb",

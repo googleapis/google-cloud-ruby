@@ -28,6 +28,10 @@ module Google
         # @!attribute [rw] flexible_environment_available
         #   @return [::Boolean]
         #     App Engine flexible environment is available in the given location.
+        # @!attribute [r] search_api_available
+        #   @return [::Boolean]
+        #     Output only. [Search API](https://cloud.google.com/appengine/docs/standard/python/search)
+        #     is available in the given location.
         class LocationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

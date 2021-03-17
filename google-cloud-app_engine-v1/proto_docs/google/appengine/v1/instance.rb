@@ -23,65 +23,104 @@ module Google
       module V1
         # An Instance resource is the computing unit that App Engine uses to
         # automatically scale an application.
-        # @!attribute [rw] name
+        # @!attribute [r] name
         #   @return [::String]
-        #     Full path to the Instance resource in the API.
+        #     Output only. Full path to the Instance resource in the API.
         #     Example: `apps/myapp/services/default/versions/v1/instances/instance-1`.
-        # @!attribute [rw] id
+        # @!attribute [r] id
         #   @return [::String]
-        #     Relative name of the instance within the version.
+        #     Output only. Relative name of the instance within the version.
         #     Example: `instance-1`.
-        # @!attribute [rw] app_engine_release
+        # @!attribute [r] app_engine_release
         #   @return [::String]
-        #     App Engine release this instance is running on.
-        # @!attribute [rw] availability
+        #     Output only. App Engine release this instance is running on.
+        # @!attribute [r] availability
         #   @return [::Google::Cloud::AppEngine::V1::Instance::Availability]
-        #     Availability of the instance.
-        # @!attribute [rw] vm_name
+        #     Output only. Availability of the instance.
+        # @!attribute [r] vm_name
         #   @return [::String]
-        #     Name of the virtual machine where this instance lives. Only applicable
+        #     Output only. Name of the virtual machine where this instance lives. Only applicable
         #     for instances in App Engine flexible environment.
-        # @!attribute [rw] vm_zone_name
+        # @!attribute [r] vm_zone_name
         #   @return [::String]
-        #     Zone where the virtual machine is located. Only applicable for instances
+        #     Output only. Zone where the virtual machine is located. Only applicable for instances
         #     in App Engine flexible environment.
-        # @!attribute [rw] vm_id
+        # @!attribute [r] vm_id
         #   @return [::String]
-        #     Virtual machine ID of this instance. Only applicable for instances in
+        #     Output only. Virtual machine ID of this instance. Only applicable for instances in
         #     App Engine flexible environment.
-        # @!attribute [rw] start_time
+        # @!attribute [r] start_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Time that this instance was started.
-        # @!attribute [rw] requests
+        #     Output only. Time that this instance was started.
+        # @!attribute [r] requests
         #   @return [::Integer]
-        #     Number of requests since this instance was started.
-        # @!attribute [rw] errors
+        #     Output only. Number of requests since this instance was started.
+        # @!attribute [r] errors
         #   @return [::Integer]
-        #     Number of errors since this instance was started.
-        # @!attribute [rw] qps
+        #     Output only. Number of errors since this instance was started.
+        # @!attribute [r] qps
         #   @return [::Float]
-        #     Average queries per second (QPS) over the last minute.
-        # @!attribute [rw] average_latency
+        #     Output only. Average queries per second (QPS) over the last minute.
+        # @!attribute [r] average_latency
         #   @return [::Integer]
-        #     Average latency (ms) over the last minute.
-        # @!attribute [rw] memory_usage
+        #     Output only. Average latency (ms) over the last minute.
+        # @!attribute [r] memory_usage
         #   @return [::Integer]
-        #     Total memory in use (bytes).
-        # @!attribute [rw] vm_status
+        #     Output only. Total memory in use (bytes).
+        # @!attribute [r] vm_status
         #   @return [::String]
-        #     Status of the virtual machine where this instance lives. Only applicable
+        #     Output only. Status of the virtual machine where this instance lives. Only applicable
         #     for instances in App Engine flexible environment.
-        # @!attribute [rw] vm_debug_enabled
+        # @!attribute [r] vm_debug_enabled
         #   @return [::Boolean]
-        #     Whether this instance is in debug mode. Only applicable for instances in
+        #     Output only. Whether this instance is in debug mode. Only applicable for instances in
         #     App Engine flexible environment.
-        # @!attribute [rw] vm_ip
+        # @!attribute [r] vm_ip
         #   @return [::String]
-        #     The IP address of this instance. Only applicable for instances in App
+        #     Output only. The IP address of this instance. Only applicable for instances in App
         #     Engine flexible environment.
+        # @!attribute [r] vm_liveness
+        #   @return [::Google::Cloud::AppEngine::V1::Instance::Liveness::LivenessState]
+        #     Output only. The liveness health check of this instance. Only applicable for instances
+        #     in App Engine flexible environment.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Wrapper for LivenessState enum.
+          class Liveness
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Liveness health check status for Flex instances.
+            module LivenessState
+              # There is no liveness health check for the instance. Only applicable for
+              # instances in App Engine standard environment.
+              LIVENESS_STATE_UNSPECIFIED = 0
+
+              # The health checking system is aware of the instance but its health is
+              # not known at the moment.
+              UNKNOWN = 1
+
+              # The instance is reachable i.e. a connection to the application health
+              # checking endpoint can be established, and conforms to the requirements
+              # defined by the health check.
+              HEALTHY = 2
+
+              # The instance is reachable, but does not conform to the requirements
+              # defined by the health check.
+              UNHEALTHY = 3
+
+              # The instance is being drained. The existing connections to the instance
+              # have time to complete, but the new ones are being refused.
+              DRAINING = 4
+
+              # The instance is unreachable i.e. a connection to the application health
+              # checking endpoint cannot be established, or the server does not respond
+              # within the specified timeout.
+              TIMEOUT = 5
+            end
+          end
 
           # Availability of the instance.
           module Availability
