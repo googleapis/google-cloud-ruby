@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2021-03-17
+
+#### Features
+
+* Added support for the mosaic layout
+
 ### 0.4.0 / 2021-03-08
 
 #### Features
