@@ -35,35 +35,32 @@ module Google
               self.unmarshal_class_method = :decode
               self.service_name = 'google.monitoring.dashboard.v1.DashboardsService'
 
-              # Creates a new custom dashboard.
-              #
-              # This method requires the `monitoring.dashboards.create` permission
-              # on the specified project. For more information, see
-              # [Google Cloud IAM](https://cloud.google.com/iam).
+              # Creates a new custom dashboard. For examples on how you can use this API to create dashboards, see [Managing dashboards by API](/monitoring/dashboards/api-dashboard).
+              # This method requires the `monitoring.dashboards.create` permission on the specified project. For more information about permissions, see [Cloud Identity and Access Management](/iam).
               rpc :CreateDashboard, ::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest, ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard
               # Lists the existing dashboards.
               #
               # This method requires the `monitoring.dashboards.list` permission
               # on the specified project. For more information, see
-              # [Google Cloud IAM](https://cloud.google.com/iam).
+              # [Cloud Identity and Access Management](https://cloud.google.com/iam).
               rpc :ListDashboards, ::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest, ::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsResponse
               # Fetches a specific dashboard.
               #
               # This method requires the `monitoring.dashboards.get` permission
               # on the specified dashboard. For more information, see
-              # [Google Cloud IAM](https://cloud.google.com/iam).
+              # [Cloud Identity and Access Management](https://cloud.google.com/iam).
               rpc :GetDashboard, ::Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest, ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard
               # Deletes an existing custom dashboard.
               #
               # This method requires the `monitoring.dashboards.delete` permission
               # on the specified dashboard. For more information, see
-              # [Google Cloud IAM](https://cloud.google.com/iam).
+              # [Cloud Identity and Access Management](https://cloud.google.com/iam).
               rpc :DeleteDashboard, ::Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest, ::Google::Protobuf::Empty
               # Replaces an existing custom dashboard with a new definition.
               #
               # This method requires the `monitoring.dashboards.update` permission
               # on the specified dashboard. For more information, see
-              # [Google Cloud IAM](https://cloud.google.com/iam).
+              # [Cloud Identity and Access Management](https://cloud.google.com/iam).
               rpc :UpdateDashboard, ::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest, ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard
             end
 

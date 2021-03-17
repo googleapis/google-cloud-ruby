@@ -10,6 +10,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :columns, :int64, 1
       repeated :widgets, :message, 2, "google.monitoring.dashboard.v1.Widget"
     end
+    add_message "google.monitoring.dashboard.v1.MosaicLayout" do
+      optional :columns, :int32, 1
+      repeated :tiles, :message, 3, "google.monitoring.dashboard.v1.MosaicLayout.Tile"
+    end
+    add_message "google.monitoring.dashboard.v1.MosaicLayout.Tile" do
+      optional :x_pos, :int32, 1
+      optional :y_pos, :int32, 2
+      optional :width, :int32, 3
+      optional :height, :int32, 4
+      optional :widget, :message, 5, "google.monitoring.dashboard.v1.Widget"
+    end
     add_message "google.monitoring.dashboard.v1.RowLayout" do
       repeated :rows, :message, 1, "google.monitoring.dashboard.v1.RowLayout.Row"
     end
@@ -33,6 +44,8 @@ module Google
       module Dashboard
         module V1
           GridLayout = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.GridLayout").msgclass
+          MosaicLayout = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.MosaicLayout").msgclass
+          MosaicLayout::Tile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.MosaicLayout.Tile").msgclass
           RowLayout = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.RowLayout").msgclass
           RowLayout::Row = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.RowLayout.Row").msgclass
           ColumnLayout = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.ColumnLayout").msgclass

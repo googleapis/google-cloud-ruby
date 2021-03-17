@@ -14,6 +14,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :etag, :string, 4
       oneof :layout do
         optional :grid_layout, :message, 5, "google.monitoring.dashboard.v1.GridLayout"
+        optional :mosaic_layout, :message, 6, "google.monitoring.dashboard.v1.MosaicLayout"
         optional :row_layout, :message, 8, "google.monitoring.dashboard.v1.RowLayout"
         optional :column_layout, :message, 9, "google.monitoring.dashboard.v1.ColumnLayout"
       end
