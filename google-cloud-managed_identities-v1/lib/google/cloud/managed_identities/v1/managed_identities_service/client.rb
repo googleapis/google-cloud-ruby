@@ -27,7 +27,7 @@ module Google
           ##
           # Client for the ManagedIdentitiesService service.
           #
-          # ## API Overview
+          # API Overview
           #
           # The `managedidentites.googleapis.com` service implements the Google Cloud
           # Managed Identites API for identity services
@@ -37,7 +37,7 @@ module Google
           # (create/read/update/delete) domains, reset managed identities admin password,
           # add/remove domain controllers in GCP regions and add/remove VPC peering.
           #
-          # ## Data Model
+          # Data Model
           #
           # The Managed Identities service exposes the following resources:
           #
