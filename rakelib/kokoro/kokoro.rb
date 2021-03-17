@@ -72,7 +72,7 @@ class Kokoro < Command
         "--metadata-file=./docs.metadata",
         "--destination-prefix docfx"
       ]
-      run "python3 -m docuploader upload . #{opts.join ' '}"
+      run "python3 -m docuploader upload doc #{opts.join ' '}"
     end
   end
 
