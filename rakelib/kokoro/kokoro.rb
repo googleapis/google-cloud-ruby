@@ -62,7 +62,7 @@ class Kokoro < Command
   def cloudrad
     run_ci @gem, true do
       header "Building Doc YAMLs"
-      FileUtils.remove_dir  "doc" if Dir.exists?  "doc"
+      FileUtils.remove_dir "doc" if Dir.exists? "doc"
       run "bundle exec rake cloudrad", 1800
       RepoMetadata.from_source(".repo-metadata.json").build "."
       header "Uploading Doc YAMLs"
