@@ -752,6 +752,70 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     end
   end
 
+  def test_receive_trigger_webhook
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Build::V1::ReceiveTriggerWebhookResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    body = {}
+    project_id = "hello world"
+    trigger = "hello world"
+    secret = "hello world"
+
+    receive_trigger_webhook_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :receive_trigger_webhook, name
+      assert_kind_of ::Google::Cloud::Build::V1::ReceiveTriggerWebhookRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Api::HttpBody), request["body"]
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["trigger"]
+      assert_equal "hello world", request["secret"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, receive_trigger_webhook_client_stub do
+      # Create client
+      client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.receive_trigger_webhook({ body: body, project_id: project_id, trigger: trigger, secret: secret }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.receive_trigger_webhook body: body, project_id: project_id, trigger: trigger, secret: secret do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.receive_trigger_webhook ::Google::Cloud::Build::V1::ReceiveTriggerWebhookRequest.new(body: body, project_id: project_id, trigger: trigger, secret: secret) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.receive_trigger_webhook({ body: body, project_id: project_id, trigger: trigger, secret: secret }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.receive_trigger_webhook(::Google::Cloud::Build::V1::ReceiveTriggerWebhookRequest.new(body: body, project_id: project_id, trigger: trigger, secret: secret), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, receive_trigger_webhook_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_worker_pool
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Build::V1::WorkerPool.new

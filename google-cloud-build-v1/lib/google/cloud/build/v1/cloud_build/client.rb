@@ -423,7 +423,15 @@ module Google
             #   @param page_size [::Integer]
             #     Number of results to return in the list.
             #   @param page_token [::String]
-            #     Token to provide to skip to a particular spot in the list.
+            #     The page token for the next page of Builds.
+            #
+            #     If unspecified, the first page of results is returned.
+            #
+            #     If the token is rejected for any reason, INVALID_ARGUMENT will be thrown.
+            #     In this case, the token should be discarded, and pagination should be
+            #     restarted from the first page of results.
+            #
+            #     See https://google.aip.dev/158 for more.
             #   @param filter [::String]
             #     The raw filter text to constrain the results.
             #
@@ -492,7 +500,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     The name of the `Build` to retrieve.
+            #     The name of the `Build` to cancel.
             #     Format: `projects/{project}/locations/{location}/builds/{build}`
             #   @param project_id [::String]
             #     Required. ID of the project.
@@ -1025,7 +1033,7 @@ module Google
             #   @param trigger_id [::String]
             #     Required. ID of the trigger.
             #   @param source [::Google::Cloud::Build::V1::RepoSource, ::Hash]
-            #     Required. Source to build against this trigger.
+            #     Source to build against this trigger.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1067,6 +1075,80 @@ module Google
 
               @cloud_build_stub.call_rpc :run_build_trigger, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # ReceiveTriggerWebhook [Experimental] is called when the API receives a
+            # webhook request targeted at a specific trigger.
+            #
+            # @overload receive_trigger_webhook(request, options = nil)
+            #   Pass arguments to `receive_trigger_webhook` via a request object, either of type
+            #   {::Google::Cloud::Build::V1::ReceiveTriggerWebhookRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Build::V1::ReceiveTriggerWebhookRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload receive_trigger_webhook(body: nil, project_id: nil, trigger: nil, secret: nil)
+            #   Pass arguments to `receive_trigger_webhook` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param body [::Google::Api::HttpBody, ::Hash]
+            #     HTTP request body.
+            #   @param project_id [::String]
+            #     Project in which the specified trigger lives
+            #   @param trigger [::String]
+            #     Name of the trigger to run the payload against
+            #   @param secret [::String]
+            #     Secret token used for authorization if an OAuth token isn't provided.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Build::V1::ReceiveTriggerWebhookResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Build::V1::ReceiveTriggerWebhookResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def receive_trigger_webhook request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Build::V1::ReceiveTriggerWebhookRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.receive_trigger_webhook.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Build::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "project_id" => request.project_id,
+                "trigger" => request.trigger
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.receive_trigger_webhook.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.receive_trigger_webhook.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_build_stub.call_rpc :receive_trigger_webhook, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -1583,6 +1665,11 @@ module Google
                 #
                 attr_reader :run_build_trigger
                 ##
+                # RPC-specific configuration for `receive_trigger_webhook`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :receive_trigger_webhook
+                ##
                 # RPC-specific configuration for `create_worker_pool`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1632,6 +1719,8 @@ module Google
                   @update_build_trigger = ::Gapic::Config::Method.new update_build_trigger_config
                   run_build_trigger_config = parent_rpcs.run_build_trigger if parent_rpcs.respond_to? :run_build_trigger
                   @run_build_trigger = ::Gapic::Config::Method.new run_build_trigger_config
+                  receive_trigger_webhook_config = parent_rpcs.receive_trigger_webhook if parent_rpcs.respond_to? :receive_trigger_webhook
+                  @receive_trigger_webhook = ::Gapic::Config::Method.new receive_trigger_webhook_config
                   create_worker_pool_config = parent_rpcs.create_worker_pool if parent_rpcs.respond_to? :create_worker_pool
                   @create_worker_pool = ::Gapic::Config::Method.new create_worker_pool_config
                   get_worker_pool_config = parent_rpcs.get_worker_pool if parent_rpcs.respond_to? :get_worker_pool
