@@ -608,6 +608,12 @@ module Google
         #   @return [::Array<::Google::Cloud::Speech::V1p1beta1::SpeechRecognitionResult>]
         #     Sequential list of transcription results corresponding to
         #     sequential portions of audio.
+        # @!attribute [rw] output_config
+        #   @return [::Google::Cloud::Speech::V1p1beta1::TranscriptOutputConfig]
+        #     Original output config if present in the request.
+        # @!attribute [rw] output_error
+        #   @return [::Google::Rpc::Status]
+        #     If the transcript output fails this field contains the relevant error.
         class LongRunningRecognizeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -630,6 +636,9 @@ module Google
         #   @return [::String]
         #     Output only. The URI of the audio file being transcribed. Empty if the audio was sent
         #     as byte content.
+        # @!attribute [r] output_config
+        #   @return [::Google::Cloud::Speech::V1p1beta1::TranscriptOutputConfig]
+        #     Output only. A copy of the TranscriptOutputConfig if it was set in the request.
         class LongRunningRecognizeMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

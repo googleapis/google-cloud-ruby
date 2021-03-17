@@ -134,12 +134,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse" do
       repeated :results, :message, 2, "google.cloud.speech.v1p1beta1.SpeechRecognitionResult"
+      optional :output_config, :message, 6, "google.cloud.speech.v1p1beta1.TranscriptOutputConfig"
+      optional :output_error, :message, 7, "google.rpc.Status"
     end
     add_message "google.cloud.speech.v1p1beta1.LongRunningRecognizeMetadata" do
       optional :progress_percent, :int32, 1
       optional :start_time, :message, 2, "google.protobuf.Timestamp"
       optional :last_update_time, :message, 3, "google.protobuf.Timestamp"
       optional :uri, :string, 4
+      optional :output_config, :message, 5, "google.cloud.speech.v1p1beta1.TranscriptOutputConfig"
     end
     add_message "google.cloud.speech.v1p1beta1.StreamingRecognizeResponse" do
       optional :error, :message, 1, "google.rpc.Status"
