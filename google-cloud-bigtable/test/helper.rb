@@ -77,13 +77,15 @@ class MockBigtable < Minitest::Spec
     { instances: instances }
   end
 
-  def cluster_hash name: nil, nodes: nil, location: nil, storage_type: nil, state: nil
+  def cluster_hash name: nil, nodes: nil, location: nil, storage_type: nil, state: nil, kms_key: nil
+    encryption_config = { kms_key_name: kms_key } if kms_key
     {
       name: name,
       serve_nodes: nodes,
       location: location ? location_path(location) : nil,
       default_storage_type: storage_type,
-      state: state
+      state: state,
+      encryption_config: encryption_config
     }.delete_if { |_, v| v.nil? }
   end
 

@@ -43,6 +43,7 @@ describe Google::Cloud::Bigtable::Project, :create_instance, :mock_bigtable do
       instance_grpc
     )
   end
+  let(:kms_key) { "path/to/encryption_key_name" }
 
   it "creates an empty instance" do
     instance = Google::Cloud::Bigtable::Admin::V2::Instance.new(
@@ -94,8 +95,8 @@ describe Google::Cloud::Bigtable::Project, :create_instance, :mock_bigtable do
     )
     instance = Google::Cloud::Bigtable::Admin::V2::Instance.new(new_instance_fields)
     clusters_map = Google::Cloud::Bigtable::Instance::ClusterMap.new.tap do |c|
-      c.add("test-cluster-1", location_path("us-east1-b"), nodes: 3, storage_type: :SSD)
-      c.add("test-cluster-2", location_path("us-east1-b"), nodes: 3, storage_type: :SSD)
+      c.add("test-cluster-1", location_path("us-east1-b"), nodes: 3, storage_type: :SSD, kms_key: kms_key)
+      c.add("test-cluster-2", location_path("us-east1-b"), nodes: 3, storage_type: :SSD, kms_key: kms_key)
     end
 
     mock = Minitest::Mock.new
@@ -115,8 +116,8 @@ describe Google::Cloud::Bigtable::Project, :create_instance, :mock_bigtable do
       type: type,
       labels: labels
     ) do |clusters|
-      clusters.add("test-cluster-1", "us-east1-b", nodes: 3, storage_type: :SSD)
-      clusters.add("test-cluster-2", "us-east1-b", nodes: 3, storage_type: :SSD)
+      clusters.add("test-cluster-1", "us-east1-b", nodes: 3, storage_type: :SSD, kms_key: kms_key)
+      clusters.add("test-cluster-2", "us-east1-b", nodes: 3, storage_type: :SSD, kms_key: kms_key)
     end
 
     _(job).must_be_kind_of Google::Cloud::Bigtable::Instance::Job

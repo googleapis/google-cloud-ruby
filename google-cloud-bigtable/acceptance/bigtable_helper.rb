@@ -49,11 +49,16 @@ module Acceptance
   #
   class BigtableTest < Minitest::Test
     attr_accessor :bigtable
+    attr_accessor :kms_key
 
     # Setup project based on available ENV variables
     def setup
       @bigtable = $bigtable
+      @kms_key = $kms_key
+
       refute_nil @bigtable, "You do not have an active bigtable to run the tests."
+      refute_nil @kms_key, "You do not have a kms key to run the tests."
+
       super
     end
 
@@ -190,6 +195,10 @@ $bigtable_cluster_location_2 = "us-east1-c"
 $bigtable_cluster_id = "#{$bigtable_instance_id}-clstr"
 $bigtable_read_table_id = "r-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(2)}"
 $bigtable_mutation_table_id = "r-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(2)}"
+
+# Allow overriding the KMS key used for tests via an environment variable. These keys are public, but access may be
+# restricted when tests are run from a VPC project.
+$kms_key = ENV["BIGTABLE_TEST_KMS_KEY"] || "projects/helical-zone-771/locations/us-east1/keyRings/bigtable-test/cryptoKeys/bigtable-test-1"
 
 create_test_instance(
   $bigtable_instance_id,
