@@ -60,7 +60,7 @@ class Kokoro < Command
   end
 
   def cloudrad
-    run_ci @gem, true do
+    run_ci @gem do
       header "Building Doc YAMLs"
       FileUtils.remove_dir "doc" if Dir.exists? "doc"
       run "bundle exec rake cloudrad", 1800
