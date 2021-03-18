@@ -24,15 +24,8 @@ namespace :fixtures do
     bucket ||= storage.create_bucket bucket_name,
                                      acl: "public", default_acl: "public"
 
-    upload_fixture_file bucket, "otter_crossing.jpg"
     upload_fixture_file bucket, "face_no_surprise.png"
     upload_fixture_file bucket, "face_surprise.jpg"
-    upload_fixture_file bucket, "palace_of_fine_arts.jpg"
-    upload_fixture_file bucket, "logos.png"
-    upload_fixture_file bucket, "pdf_ocr.pdf"
-    upload_fixture_file bucket, "puppies.jpg"
-    upload_fixture_file bucket, "kafka.pdf"
-    upload_fixture_file bucket, "wakeupcat.jpg"
   end
 end
 
