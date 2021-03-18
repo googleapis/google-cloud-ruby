@@ -51,6 +51,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :labels, :string, :string, 10
       optional :provisioned_resources_parent, :string, 13
       optional :kms_settings, :message, 14, "google.cloud.assuredworkloads.v1beta1.Workload.KMSSettings"
+      repeated :resource_settings, :message, 15, "google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings"
       oneof :compliance_regime_settings do
         optional :il4_settings, :message, 7, "google.cloud.assuredworkloads.v1beta1.Workload.IL4Settings"
         optional :cjis_settings, :message, 8, "google.cloud.assuredworkloads.v1beta1.Workload.CJISSettings"
@@ -82,6 +83,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.assuredworkloads.v1beta1.Workload.FedrampModerateSettings" do
       optional :kms_settings, :message, 1, "google.cloud.assuredworkloads.v1beta1.Workload.KMSSettings"
+    end
+    add_message "google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings" do
+      optional :resource_id, :string, 1
+      optional :resource_type, :enum, 2, "google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType"
     end
     add_enum "google.cloud.assuredworkloads.v1beta1.Workload.ComplianceRegime" do
       value :COMPLIANCE_REGIME_UNSPECIFIED, 0
@@ -118,6 +123,7 @@ module Google
         Workload::CJISSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.Workload.CJISSettings").msgclass
         Workload::FedrampHighSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.Workload.FedrampHighSettings").msgclass
         Workload::FedrampModerateSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.Workload.FedrampModerateSettings").msgclass
+        Workload::ResourceSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings").msgclass
         Workload::ComplianceRegime = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.Workload.ComplianceRegime").enummodule
         CreateWorkloadOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.CreateWorkloadOperationMetadata").msgclass
       end
