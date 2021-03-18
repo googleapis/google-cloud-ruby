@@ -45,13 +45,3 @@ library = gapic.ruby_library(
 )
 
 s.copy(library, merge=ruby.global_merge)
-
-# Include the local (git master) copy of grafeas-v1 in the bundle for now.
-# This should remain here until the integration between the grafeas and
-# container_analysis clients is stable, or until the two clients are split into
-# separate repos, whichever comes first.
-s.replace(
-    'Gemfile',
-    '\ngem "google-cloud-container_analysis-v1", path: "\\.\\./google-cloud-container_analysis-v1"\n',
-    '\ngem "google-cloud-container_analysis-v1", path: "../google-cloud-container_analysis-v1"\ngem "grafeas-v1", path: "../grafeas-v1"\n'
-)
