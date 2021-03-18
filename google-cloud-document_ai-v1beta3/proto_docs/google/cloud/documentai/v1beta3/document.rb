@@ -28,14 +28,14 @@ module Google
         # optimize for quality.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     Currently supports Google Cloud Storage URI of the form
+        #     Optional. Currently supports Google Cloud Storage URI of the form
         #        `gs://bucket_name/object_name`. Object versioning is not supported.
         #        See [Google Cloud Storage Request
         #        URIs](https://cloud.google.com/storage/docs/reference-uris) for more
         #        info.
         # @!attribute [rw] content
         #   @return [::String]
-        #     Inline document content, represented as a stream of bytes.
+        #     Optional. Inline document content, represented as a stream of bytes.
         #     Note: As with all `bytes` fields, protobuffers use a pure binary
         #     representation, whereas JSON representations use base64.
         # @!attribute [rw] mime_type
@@ -45,7 +45,7 @@ module Google
         #     https://www.iana.org/assignments/media-types/media-types.xhtml.
         # @!attribute [rw] text
         #   @return [::String]
-        #     UTF-8 encoded text in reading order from the document.
+        #     Optional. UTF-8 encoded text in reading order from the document.
         # @!attribute [rw] text_styles
         #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::Style>]
         #     Styles for the {::Google::Cloud::DocumentAI::V1beta3::Document#text Document.text}.
@@ -485,17 +485,17 @@ module Google
           # organization, or location.
           # @!attribute [rw] text_anchor
           #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::TextAnchor]
-          #     Provenance of the entity.
+          #     Optional. Provenance of the entity.
           #     Text anchor indexing into the {::Google::Cloud::DocumentAI::V1beta3::Document#text Document.text}.
           # @!attribute [rw] type
           #   @return [::String]
           #     Entity type from a schema e.g. `Address`.
           # @!attribute [rw] mention_text
           #   @return [::String]
-          #     Text value in the document e.g. `1600 Amphitheatre Pkwy`.
+          #     Optional. Text value in the document e.g. `1600 Amphitheatre Pkwy`.
           # @!attribute [rw] mention_id
           #   @return [::String]
-          #     Deprecated.  Use `id` field instead.
+          #     Optional. Deprecated.  Use `id` field instead.
           # @!attribute [rw] confidence
           #   @return [::Float]
           #     Optional. Confidence of detected Schema entity. Range [0, 1].
@@ -531,27 +531,19 @@ module Google
             # @!attribute [rw] money_value
             #   @return [::Google::Type::Money]
             #     Money value. See also:
-            #
-            #     https:
-            #     github.com/googleapis/googleapis/blob/master/google/type/money.proto
+            #     https://github.com/googleapis/googleapis/blob/master/google/type/money.proto
             # @!attribute [rw] date_value
             #   @return [::Google::Type::Date]
             #     Date value. Includes year, month, day. See also:
-            #
-            #     https:
-            #     github.com/googleapis/googleapis/blob/master/google/type/date.proto
+            #     https://github.com/googleapis/googleapis/blob/master/google/type/date.proto
             # @!attribute [rw] datetime_value
             #   @return [::Google::Type::DateTime]
             #     DateTime value. Includes date, time, and timezone. See also:
-            #
-            #     https:
-            #     github.com/googleapis/googleapis/blob/master/google/type/datetime.proto
+            #     https://github.com/googleapis/googleapis/blob/master/google/type/datetime.proto
             # @!attribute [rw] address_value
             #   @return [::Google::Type::PostalAddress]
             #     Postal address. See also:
-            #
-            #     https:
-            #     github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto
+            #     https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto
             # @!attribute [rw] boolean_value
             #   @return [::Boolean]
             #     Boolean value. Can be used for entities with binary values, or for
@@ -721,9 +713,12 @@ module Google
               # Element is requested for human review.
               EVAL_REQUESTED = 4
 
-              # Element is review and approved at human review, confidence will be set
-              # to 1.0
+              # Element is reviewed and approved at human review, confidence will be
+              # set to 1.0.
               EVAL_APPROVED = 5
+
+              # Element is skipped in the validation process.
+              EVAL_SKIPPED = 6
             end
           end
 
