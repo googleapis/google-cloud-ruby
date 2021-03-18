@@ -95,6 +95,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :FEDRAMP_HIGH, 3
       value :FEDRAMP_MODERATE, 4
       value :US_REGIONAL_ACCESS, 5
+      value :HIPAA, 6
+      value :HITRUST, 7
     end
     add_message "google.cloud.assuredworkloads.v1beta1.CreateWorkloadOperationMetadata" do
       optional :create_time, :message, 1, "google.protobuf.Timestamp"
