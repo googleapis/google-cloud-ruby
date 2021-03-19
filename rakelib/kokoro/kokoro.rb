@@ -6,6 +6,7 @@ require "open3"
 
 require_relative "command"
 require_relative "kokoro_builder"
+require_relative "../devsite/repo_metadata"
 
 class Kokoro < Command
   # Normally true. Set to false temporarily when releases are frozen.
@@ -56,6 +57,23 @@ class Kokoro < Command
       local_docs_test if should_link_check?
     end
     release_please if @should_release && @updated
+  end
+
+  def cloudrad
+    run_ci @gem do
+      header "Building Doc YAMLs"
+      FileUtils.remove_dir "doc" if Dir.exists? "doc"
+      run "bundle exec rake cloudrad", 1800
+      RepoMetadata.from_source(".repo-metadata.json").build "."
+      header "Uploading Doc YAMLs"
+      opts = [
+        "--credentials=#{ENV['KOKORO_KEYSTORE_DIR']}/73713_docuploader_service_account",
+        "--staging-bucket=#{ENV.fetch 'V2_STAGING_BUCKET', 'docs-staging-v2-dev'}",
+        "--metadata-file=./docs.metadata",
+        "--destination-prefix docfx"
+      ]
+      run "python3 -m docuploader upload doc #{opts.join ' '}"
+    end
   end
 
   def samples_presubmit

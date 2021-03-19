@@ -482,6 +482,7 @@ namespace :kokoro do
   task :release do
     kokoro.release
     Rake::Task["release"].invoke kokoro.tag
+    kokoro.cloudrad
   end
 
   task :release_please, :gem, :token do |t, args|
