@@ -88,7 +88,8 @@ module Google
         # Validates a message against a schema.
         #
         # @param message_data [String] Message to validate against the provided `schema_spec`.
-        # @param encoding [Symbol, String] The encoding of the message validated against the schema. Values include:
+        # @param message_encoding [Symbol, String] The encoding of the message validated against the schema. Values
+        #   include:
         #
         #   * `JSON` - JSON encoding.
         #   * `BINARY` - Binary encoding, as defined by the schema type. For some schema types, binary encoding may not
@@ -105,9 +106,9 @@ module Google
         #   message_data = { "name" => "Alaska", "post_abbr" => "AK" }.to_json
         #   schema.validate_message message_data, :json
         #
-        def validate_message message_data, encoding
-          encoding = encoding.to_s.upcase
-          service.validate_message message_data, encoding, schema_name: name
+        def validate_message message_data, message_encoding
+          message_encoding = message_encoding.to_s.upcase
+          service.validate_message message_data, message_encoding, schema_name: name
           true
         rescue Google::Cloud::InvalidArgumentError
           false
