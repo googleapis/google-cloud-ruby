@@ -23,21 +23,6 @@ require "gapic/grpc/service_stub"
 require "google/cloud/dialogflow/v2/conversations"
 
 class ::Google::Cloud::Dialogflow::V2::Conversations::ClientPathsTest < Minitest::Test
-  def test_call_matcher_path
-    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::Dialogflow::V2::Conversations::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      path = client.call_matcher_path project: "value0", conversation: "value1", call_matcher: "value2"
-      assert_equal "projects/value0/conversations/value1/callMatchers/value2", path
-
-      path = client.call_matcher_path project: "value0", location: "value1", conversation: "value2", call_matcher: "value3"
-      assert_equal "projects/value0/locations/value1/conversations/value2/callMatchers/value3", path
-    end
-  end
-
   def test_conversation_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

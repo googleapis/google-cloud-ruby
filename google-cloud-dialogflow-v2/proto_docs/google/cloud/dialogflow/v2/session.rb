@@ -601,7 +601,7 @@ module Google
         # [Participants.StreamingDetectIntent][], it needs to be configured in
         # {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_params StreamingDetectIntentRequest.query_params}.
         # And for {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent} and
-        # {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content Participants.StreamingAnalyzeContent}, it needs to be configured in
+        # [Participants.StreamingAnalyzeContent][google.cloud.dialogflow.v2.Participants.StreamingAnalyzeContent], it needs to be configured in
         # {::Google::Cloud::Dialogflow::V2::ConversationProfile#human_agent_assistant_config ConversationProfile.human_agent_assistant_config}
         # @!attribute [rw] query_text_sentiment
         #   @return [::Google::Cloud::Dialogflow::V2::Sentiment]

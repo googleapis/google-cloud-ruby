@@ -98,72 +98,6 @@ module Google
           end
         end
 
-        # Represents a call matcher that describes criteria for matching incoming SIP
-        # calls to a conversation. When Dialogflow get a SIP call from a third-party
-        # carrier, Dialogflow matches the call to an existing conversation by either:
-        #
-        # * Extracting the conversation id from the
-        #   [Call-Info header](https://tools.ietf.org/html/rfc3261#section-20.9), e.g.
-        #   `Call-Info:
-        #   <http://dialogflow.googleapis.com/v2/projects/111/conversations/222>
-        #   ;purpose=Goog-ContactCenter-Conversation`.
-        # * Or, if that doesn't work, matching incoming [SIP
-        # headers](https://tools.ietf.org/html/rfc3261#section-7.3)
-        #   against any {::Google::Cloud::Dialogflow::V2::CallMatcher CallMatcher} for the conversation.
-        #
-        # If an incoming SIP call without valid `Call-Info` header matches to zero or
-        # multiple conversations with `CallMatcher`, we reject it.
-        #
-        # A call matcher contains equality conditions for SIP headers that all have
-        # to be fulfilled in order for a SIP call to match.
-        #
-        # The matched SIP headers consist of well-known headers (`To`, `From`,
-        # `Call-ID`) and custom headers. A {::Google::Cloud::Dialogflow::V2::CallMatcher CallMatcher} is only valid if it
-        # specifies:
-        #
-        # * At least 1 custom header,
-        # * or at least 2 well-known headers.
-        # @!attribute [r] name
-        #   @return [::String]
-        #     Output only. The unique identifier of this call matcher.
-        #     Format: `projects/<Project ID>/locations/<Location
-        #     ID>/conversations/<Conversation ID>/callMatchers/<Call Matcher ID>`.
-        # @!attribute [rw] to_header
-        #   @return [::String]
-        #     Value of the [`To`
-        #     header](https://tools.ietf.org/html/rfc3261#section-8.1.1.2) to match. If
-        #     empty or unspecified, we don't match to the
-        #     [`To` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.2).
-        # @!attribute [rw] from_header
-        #   @return [::String]
-        #     Value of the [`From`
-        #     header](https://tools.ietf.org/html/rfc3261#section-8.1.1.3) to match. If
-        #     empty or unspecified, we don't match to the
-        #     [`From` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.3).
-        # @!attribute [rw] call_id_header
-        #   @return [::String]
-        #     Value of the [`Call-ID`
-        #     header](https://tools.ietf.org/html/rfc3261#section-8.1.1.4) to match. If
-        #     empty or unspecified, we don't match to the
-        #     [`Call-ID` header](https://tools.ietf.org/html/rfc3261#section-8.1.1.4).
-        # @!attribute [rw] custom_headers
-        #   @return [::Google::Cloud::Dialogflow::V2::CallMatcher::CustomHeaders]
-        #     Custom SIP headers that must match.
-        class CallMatcher
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # Custom SIP headers. See the [description of headers in
-          # the RFC](https://tools.ietf.org/html/rfc3261#section-7.3).
-          # @!attribute [rw] cisco_guid
-          #   @return [::String]
-          #     Cisco's proprietary `Cisco-Guid` header.
-          class CustomHeaders
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-        end
-
         # The request message for {::Google::Cloud::Dialogflow::V2::Conversations::Client#create_conversation Conversations.CreateConversation}.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -257,63 +191,6 @@ module Google
         #     Format: `projects/<Project ID>/locations/<Location
         #     ID>/conversations/<Conversation ID>`.
         class CompleteConversationRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The request message for {::Google::Cloud::Dialogflow::V2::Conversations::Client#create_call_matcher Conversations.CreateCallMatcher}.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. Resource identifier of the conversation adding the call matcher.
-        #     Format: `projects/<Project ID>/locations/<Location
-        #     ID>/conversations/<Conversation ID>`.
-        # @!attribute [rw] call_matcher
-        #   @return [::Google::Cloud::Dialogflow::V2::CallMatcher]
-        #     Required. The call matcher to create.
-        class CreateCallMatcherRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The request message for {::Google::Cloud::Dialogflow::V2::Conversations::Client#list_call_matchers Conversations.ListCallMatchers}.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The conversation to list all call matchers from.
-        #     Format: `projects/<Project ID>/locations/<Location
-        #     ID>/conversations/<Conversation ID>`.
-        # @!attribute [rw] page_size
-        #   @return [::Integer]
-        #     Optional. The maximum number of items to return in a single page. By
-        #     default 100 and at most 1000.
-        # @!attribute [rw] page_token
-        #   @return [::String]
-        #     Optional. The next_page_token value returned from a previous list request.
-        class ListCallMatchersRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The response message for {::Google::Cloud::Dialogflow::V2::Conversations::Client#list_call_matchers Conversations.ListCallMatchers}.
-        # @!attribute [rw] call_matchers
-        #   @return [::Array<::Google::Cloud::Dialogflow::V2::CallMatcher>]
-        #     The list of call matchers. There is a maximum number of items
-        #     returned based on the page_size field in the request.
-        # @!attribute [rw] next_page_token
-        #   @return [::String]
-        #     Token to retrieve the next page of results or empty if there are no
-        #     more results in the list.
-        class ListCallMatchersResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The request message for {::Google::Cloud::Dialogflow::V2::Conversations::Client#delete_call_matcher Conversations.DeleteCallMatcher}.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The unique identifier of the {::Google::Cloud::Dialogflow::V2::CallMatcher CallMatcher} to delete.
-        #     Format: `projects/<Project ID>/locations/<Location
-        #     ID>/conversations/<Conversation ID>/callMatchers/<CallMatcher ID>`.
-        class DeleteCallMatcherRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

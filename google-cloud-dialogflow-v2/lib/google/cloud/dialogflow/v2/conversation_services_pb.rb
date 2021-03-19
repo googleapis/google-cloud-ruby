@@ -59,13 +59,6 @@ module Google
             # Completes the specified conversation. Finished conversations are purged
             # from the database after 30 days.
             rpc :CompleteConversation, ::Google::Cloud::Dialogflow::V2::CompleteConversationRequest, ::Google::Cloud::Dialogflow::V2::Conversation
-            # Creates a call matcher that links incoming SIP calls to the specified
-            # conversation if they fulfill specified criteria.
-            rpc :CreateCallMatcher, ::Google::Cloud::Dialogflow::V2::CreateCallMatcherRequest, ::Google::Cloud::Dialogflow::V2::CallMatcher
-            # Returns the list of all call matchers in the specified conversation.
-            rpc :ListCallMatchers, ::Google::Cloud::Dialogflow::V2::ListCallMatchersRequest, ::Google::Cloud::Dialogflow::V2::ListCallMatchersResponse
-            # Requests deletion of a call matcher.
-            rpc :DeleteCallMatcher, ::Google::Cloud::Dialogflow::V2::DeleteCallMatcherRequest, ::Google::Protobuf::Empty
             # Lists messages that belong to a given conversation.
             # `messages` are ordered by `create_time` in descending order. To fetch
             # updates without duplication, send request with filter
