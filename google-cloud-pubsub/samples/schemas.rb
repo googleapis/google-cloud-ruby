@@ -133,6 +133,30 @@ def publish_avro_records topic_id:, avsc_file:
   # [END pubsub_publish_avro_records]
 end
 
+def publish_proto_messages topic_id:
+  # [START pubsub_publish_proto_messages]
+  # topic_id = "your-topic-id"
+  require "google/cloud/pubsub"
+  require_relative "utilities/us-states_pb"
+
+  pubsub = Google::Cloud::Pubsub.new
+
+  topic = pubsub.topic topic_id
+
+  state = Utilities::StateProto.new name: "Alaska", post_abbr: "AK"
+
+  if topic.schema_encoding_binary?
+    topic.publish Utilities::StateProto.encode(state)
+    puts "Published binary-encoded protobuf message."
+  elsif topic.schema_encoding_json?
+    topic.publish Utilities::StateProto.encode_json(state)
+    puts "Published JSON-encoded protobuf message."
+  else
+    raise "No encoding specified in #{topic.name}."
+  end
+  # [END pubsub_publish_proto_messages]
+end
+
 def subscribe_avro_records subscription_id:, avsc_file:
   # [START pubsub_subscribe_avro_records]
   # subscription_id = "your-subscription-id"
@@ -172,6 +196,40 @@ def subscribe_avro_records subscription_id:, avsc_file:
   # [END pubsub_subscribe_avro_records]
 end
 
+def subscribe_proto_messages subscription_id:
+  # [START pubsub_subscribe_proto_messages]
+  # subscription_id = "your-subscription-id"
+  require "google/cloud/pubsub"
+  require_relative "utilities/us-states_pb"
+
+  pubsub = Google::Cloud::Pubsub.new
+
+  subscription = pubsub.subscription subscription_id
+
+  subscriber = subscription.listen do |received_message|
+    encoding = received_message.attributes["googclient_schemaencoding"]
+    case encoding
+    when "BINARY"
+      state = Utilities::StateProto.decode received_message.data
+      puts "Received a binary-encoded message:\n#{state}"
+    when "JSON"
+      require "json"
+      state = Utilities::StateProto.decode_json received_message.data
+      puts "Received a JSON-encoded message:\n#{state}"
+    else
+      "Received a message with no encoding:\n#{received_message.message_id}"
+    end
+    received_message.acknowledge!
+  end
+
+  subscriber.start
+  # Let the main thread sleep for 60 seconds so the thread for listening
+  # messages does not quit
+  sleep 60
+  subscriber.stop.wait!
+  # [END pubsub_subscribe_proto_messages]
+end
+
 if $PROGRAM_NAME == __FILE__
   case ARGV.shift
   when "create_avro_schema"
@@ -184,16 +242,31 @@ if $PROGRAM_NAME == __FILE__
     list_schemas
   when "delete_schema"
     delete_schema schema_id: ARGV.shift
+  when "create_topic_with_schema"
+    create_topic_with_schema topic_id: ARGV.shift, schema_id: ARGV.shift, message_encoding: ARGV.shift
+  when "publish_avro_records"
+    publish_avro_records topic_id: ARGV.shift, avsc_file: ARGV.shift
+  when "publish_proto_messages"
+    publish_proto_messages topic_id: ARGV.shift
+  when "subscribe_avro_records"
+    subscribe_avro_records subscription_id: ARGV.shift, avsc_file: ARGV.shift
+  when "subscribe_proto_messages"
+    subscribe_proto_messages subscription_id: ARGV.shift
   else
     puts <<~USAGE
       Usage: bundle exec ruby schemas.rb [command] [arguments]
 
       Commands:
-        create_avro_schema  <schema_id> Create an AVRO schema
-        create_proto_schema <schema_id> Create a protobufa schema
-        get_schema          <schema_id> Get a schema
-        list_schemas                    List schemas in a project
-        delete_schema       <schema_id> Delete a schema
+        create_avro_schema       <schema_id> <avsc_file>                   Create an AVRO schema
+        create_proto_schema      <schema_id> <proto_file>                  Create a protobuf schema
+        get_schema               <schema_id>                               Get a schema
+        list_schemas                                                       List schemas in a project
+        delete_schema            <schema_id>                               Delete a schema
+        create_topic_with_schema <topic_id> <schema_id> <message_encoding> Create a topic with a schema
+        publish_avro_records     <topic_id> <avsc_file>                    Publish an AVRO message
+        publish_proto_messages   <topic_id>                                Publish a protobuf message
+        subscribe_avro_records   <subscription_id> <avsc_file>             Receive an AVRO message
+        subscribe_proto_messages <subscription_id>                         Receive a protobuf message
     USAGE
   end
 end

@@ -4,6 +4,7 @@ inherit_gem:
 AllCops:
   Exclude:
     - "acceptance/**/*"
+    - "utilities/**/*"
 
 Lint/RescueException:
   Exclude:
