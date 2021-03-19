@@ -186,11 +186,11 @@ describe "schemas" do
       sleep 5
 
       # pubsub_subscribe_proto_messages
-      #expect_with_retry "pubsub_subscribe_proto_messages" do
+      expect_with_retry "pubsub_subscribe_proto_messages" do
         assert_output "Received a binary-encoded message:\n<Utilities::StateProto: name: \"Alaska\", post_abbr: \"AK\">\n" do
           subscribe_proto_messages subscription_id: @subscription.name
         end
-      #end
+      end
     end
 
     it "supports pubsub_subscribe_proto_messages with JSON encoding" do
@@ -204,11 +204,11 @@ describe "schemas" do
       sleep 5
 
       # pubsub_subscribe_proto_messages
-      #expect_with_retry "pubsub_subscribe_proto_messages" do
+      expect_with_retry "pubsub_subscribe_proto_messages" do
         assert_output "Received a JSON-encoded message:\n<Utilities::StateProto: name: \"Alaska\", post_abbr: \"AK\">\n" do
           subscribe_proto_messages subscription_id: @subscription.name
         end
-      #end
+      end
     end
   end
 end
