@@ -134,7 +134,7 @@ module Google
                          kms_key_name: nil,
                          persistence_regions: nil,
                          schema_name: nil,
-                         schema_encoding: nil,
+                         message_encoding: nil,
                          options: {}
           if persistence_regions
             message_storage_policy = Google::Cloud::PubSub::V1::MessageStoragePolicy.new(
@@ -142,13 +142,13 @@ module Google
             )
           end
 
-          if schema_name || schema_encoding
-            unless schema_name && schema_encoding
-              raise ArgumentError, "Schema settings must include both schema_name and schema_encoding."
+          if schema_name || message_encoding
+            unless schema_name && message_encoding
+              raise ArgumentError, "Schema settings must include both schema_name and message_encoding."
             end
             schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new(
               schema:   schema_path(schema_name),
-              encoding: schema_encoding.to_s.upcase
+              encoding: message_encoding.to_s.upcase
             )
           end
 

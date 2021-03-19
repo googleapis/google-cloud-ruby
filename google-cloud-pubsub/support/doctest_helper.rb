@@ -686,7 +686,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::PubSub::Topic#schema_" do
+  doctest.before "Google::Cloud::PubSub::Topic#schema_name" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      this_topic = topic_resp "my-topic", schema_settings: { schema: schema_path("my-schema"), encoding: :JSON }
+      mock_publisher.expect :get_topic, this_topic, [Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Topic#message_encoding" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       this_topic = topic_resp "my-topic", schema_settings: { schema: schema_path("my-schema"), encoding: :JSON }
       mock_publisher.expect :get_topic, this_topic, [Hash]

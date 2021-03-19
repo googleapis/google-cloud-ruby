@@ -20,13 +20,13 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
   let(:kms_key_name) { "projects/a/locations/b/keyRings/c/cryptoKeys/d" }
   let(:persistence_regions) { ["us-central1", "us-central2"] }
   let(:schema_name) { schema_path("my-schema") }
-  let(:schema_encoding) { :JSON }
+  let(:message_encoding) { :JSON }
   let(:topic_hsh) do
     topic_hash topic_name,
                labels: labels,
                kms_key_name: kms_key_name,
                persistence_regions: persistence_regions,
-               schema_settings: { schema: schema_name, encoding: schema_encoding }
+               schema_settings: { schema: schema_name, encoding: message_encoding }
   end
   let(:topic_grpc) { Google::Cloud::PubSub::V1::Topic.new topic_hsh }
   let(:topic) { Google::Cloud::PubSub::Topic.from_grpc topic_grpc, pubsub.service }
@@ -54,9 +54,9 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
 
   it "accesses schema_settings without making an API call" do
     _(topic.schema_name).must_equal schema_name
-    _(topic.schema_encoding).must_equal schema_encoding
-    _(topic.schema_encoding_json?).must_equal true
-    _(topic.schema_encoding_binary?).must_equal false
+    _(topic.message_encoding).must_equal message_encoding
+    _(topic.message_encoding_json?).must_equal true
+    _(topic.message_encoding_binary?).must_equal false
   end
 
   describe "reference topic" do
@@ -136,9 +136,9 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
       topic.service.mocked_publisher = mock
 
       _(topic.schema_name).must_equal schema_name
-      _(topic.schema_encoding).must_equal schema_encoding
-      _(topic.schema_encoding_json?).must_equal true
-      _(topic.schema_encoding_binary?).must_equal false
+      _(topic.message_encoding).must_equal message_encoding
+      _(topic.message_encoding_json?).must_equal true
+      _(topic.message_encoding_binary?).must_equal false
 
       _(topic).wont_be :reference?
       _(topic).must_be :resource?
@@ -158,9 +158,9 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
         topic.service.mocked_publisher = mock
 
         _(topic.schema_name).must_be :nil?
-        _(topic.schema_encoding).must_be :nil?
-        _(topic.schema_encoding_json?).must_equal false
-        _(topic.schema_encoding_binary?).must_equal false
+        _(topic.message_encoding).must_be :nil?
+        _(topic.message_encoding_json?).must_equal false
+        _(topic.message_encoding_binary?).must_equal false
 
         _(topic).wont_be :reference?
         _(topic).must_be :resource?

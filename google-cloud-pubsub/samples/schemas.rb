@@ -96,7 +96,7 @@ def create_topic_with_schema topic_id:, schema_id:, message_encoding:
 
   pubsub = Google::Cloud::Pubsub.new
 
-  topic = pubsub.create_topic topic_id, schema_name: schema_id, schema_encoding: message_encoding
+  topic = pubsub.create_topic topic_id, schema_name: schema_id, message_encoding: message_encoding
 
   puts "Topic #{topic.name} created."
   # [END pubsub_create_topic_with_schema]
@@ -114,7 +114,7 @@ def publish_avro_records topic_id:, avsc_file:
 
   record = { "name" => "Alaska", "post_abbr" => "AK" }
 
-  if topic.schema_encoding_binary?
+  if topic.message_encoding_binary?
     require "avro"
     avro_schema = Avro::Schema.parse File.read(avsc_file)
     writer = Avro::IO::DatumWriter.new avro_schema
@@ -123,7 +123,7 @@ def publish_avro_records topic_id:, avsc_file:
     writer.write record, encoder
     topic.publish buffer
     puts "Published binary-encoded AVRO message."
-  elsif topic.schema_encoding_json?
+  elsif topic.message_encoding_json?
     require "json"
     topic.publish record.to_json
     puts "Published JSON-encoded AVRO message."
@@ -145,10 +145,10 @@ def publish_proto_messages topic_id:
 
   state = Utilities::StateProto.new name: "Alaska", post_abbr: "AK"
 
-  if topic.schema_encoding_binary?
+  if topic.message_encoding_binary?
     topic.publish Utilities::StateProto.encode(state)
     puts "Published binary-encoded protobuf message."
-  elsif topic.schema_encoding_json?
+  elsif topic.message_encoding_json?
     topic.publish Utilities::StateProto.encode_json(state)
     puts "Published JSON-encoded protobuf message."
   else

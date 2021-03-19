@@ -100,7 +100,7 @@ describe "schemas" do
 
     it "supports pubsub_subscribe_avro_records with binary encoding" do
       @schema = pubsub.create_schema schema_id, :avro, avsc_definition
-      @topic = pubsub.create_topic random_topic_id, schema_name: schema_id, schema_encoding: :binary
+      @topic = pubsub.create_topic random_topic_id, schema_name: schema_id, message_encoding: :binary
 
       @subscription = @topic.subscribe random_subscription_id
 
@@ -120,7 +120,7 @@ describe "schemas" do
 
     it "supports pubsub_subscribe_avro_records with JSON encoding" do
       @schema = pubsub.create_schema schema_id, :avro, avsc_definition
-      @topic = pubsub.create_topic random_topic_id, schema_name: schema_id, schema_encoding: :json
+      @topic = pubsub.create_topic random_topic_id, schema_name: schema_id, message_encoding: :json
 
       @subscription = @topic.subscribe random_subscription_id
 
@@ -177,7 +177,7 @@ describe "schemas" do
 
     it "supports pubsub_subscribe_proto_messages with binary encoding" do
       @schema = pubsub.create_schema schema_id, :protocol_buffer, proto_definition
-      @topic = pubsub.create_topic random_topic_id, schema_name: schema_id, schema_encoding: :binary
+      @topic = pubsub.create_topic random_topic_id, schema_name: schema_id, message_encoding: :binary
 
       @subscription = @topic.subscribe random_subscription_id
 
@@ -195,7 +195,7 @@ describe "schemas" do
 
     it "supports pubsub_subscribe_proto_messages with JSON encoding" do
       @schema = pubsub.create_schema schema_id, :protocol_buffer, proto_definition
-      @topic = pubsub.create_topic random_topic_id, schema_name: schema_id, schema_encoding: :json
+      @topic = pubsub.create_topic random_topic_id, schema_name: schema_id, message_encoding: :json
 
       @subscription = @topic.subscribe random_subscription_id
 

@@ -80,17 +80,17 @@ focus
     _(schema.validate_message bad_value.to_json, :json).must_equal false
 
     # create topic with schema
-    topic = pubsub.create_topic topic_name, schema_name: schema_name, schema_encoding: :binary
+    topic = pubsub.create_topic topic_name, schema_name: schema_name, message_encoding: :binary
     _(topic.schema_name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
-    _(topic.schema_encoding).must_equal :BINARY
-    _(topic.schema_encoding_json?).must_equal false
-    _(topic.schema_encoding_binary?).must_equal true
+    _(topic.message_encoding).must_equal :BINARY
+    _(topic.message_encoding_json?).must_equal false
+    _(topic.message_encoding_binary?).must_equal true
 
     topic = pubsub.topic topic.name
     _(topic.schema_name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
-    _(topic.schema_encoding).must_equal :BINARY
-    _(topic.schema_encoding_json?).must_equal false
-    _(topic.schema_encoding_binary?).must_equal true
+    _(topic.message_encoding).must_equal :BINARY
+    _(topic.message_encoding_json?).must_equal false
+    _(topic.message_encoding_binary?).must_equal true
 
     begin
       subscription = topic.subscribe "#{$topic_prefix}-sub-avro-1"
@@ -136,10 +136,10 @@ focus
 
     topic = pubsub.topic topic.name
     _(topic.schema_name).must_equal "_deleted-schema_"
-    _(topic.schema_encoding).must_equal :BINARY
+    _(topic.message_encoding).must_equal :BINARY
 
     expect do 
-      pubsub.create_topic topic_name_2, schema_name: schema_name, schema_encoding: :binary
+      pubsub.create_topic topic_name_2, schema_name: schema_name, message_encoding: :binary
     end.must_raise Google::Cloud::NotFoundError
   end
 end

@@ -211,8 +211,8 @@ module Google
         #   simple schema ID (relative name), in which case the current project
         #   ID will be supplied, or a fully-qualified schema name in the form
         #   `projects/{project_id}/schemas/{schema_id}`. If provided,
-        #   `schema_encoding` must also be provided.
-        # @param [String, Symbol] schema_encoding The encoding of messages validated
+        #   `message_encoding` must also be provided.
+        # @param [String, Symbol] message_encoding The encoding of messages validated
         #   against the schema identified by `schema_name`. Optional. Values include:
         #
         #   * `JSON` - JSON encoding.
@@ -233,14 +233,14 @@ module Google
                          persistence_regions: nil,
                          async: nil,
                          schema_name: nil,
-                         schema_encoding: nil
+                         message_encoding: nil
           ensure_service!
           grpc = service.create_topic topic_name,
                                       labels:              labels,
                                       kms_key_name:        kms_key,
                                       persistence_regions: persistence_regions,
                                       schema_name:         schema_name,
-                                      schema_encoding:     schema_encoding
+                                      message_encoding:     message_encoding
           Topic.from_grpc grpc, service, async: async
         end
         alias new_topic create_topic

@@ -236,7 +236,7 @@ module Google
         ##
         # The name of the schema that messages published should be validated against, if schema settings are configured
         # for the topic. The value is a fully-qualified schema name in the form
-        # `projects/{project_id}/schemas/{schema_id}`. If present, {#schema_encoding} should also be present. The value
+        # `projects/{project_id}/schemas/{schema_id}`. If present, {#message_encoding} should also be present. The value
         # of this field will be `_deleted-schema_` if the schema has been deleted.
         #
         # Makes an API call to retrieve the schema settings when called on a reference object. See {#reference?}.
@@ -276,33 +276,33 @@ module Google
         #
         #   topic = pubsub.topic "my-topic"
         #
-        #   topic.schema_encoding #=> :JSON
+        #   topic.message_encoding #=> :JSON
         #
-        def schema_encoding
+        def message_encoding
           ensure_grpc!
           @grpc.schema_settings&.encoding
         end
 
         ##
-        # Checks if the encoding of messages in the schema settings is `BINARY`. See {#schema_encoding}.
+        # Checks if the encoding of messages in the schema settings is `BINARY`. See {#message_encoding}.
         #
         # Makes an API call to retrieve the schema settings when called on a reference object. See {#reference?}.
         #
         # @return [Boolean] `true` when `BINARY`, `false` if not `BINARY` or schema settings is not set.
         #
-        def schema_encoding_binary?
-          schema_encoding.to_s.upcase == "BINARY"
+        def message_encoding_binary?
+          message_encoding.to_s.upcase == "BINARY"
         end
 
         ##
-        # Checks if the encoding of messages in the schema settings is `JSON`. See {#schema_encoding}.
+        # Checks if the encoding of messages in the schema settings is `JSON`. See {#message_encoding}.
         #
         # Makes an API call to retrieve the schema settings when called on a reference object. See {#reference?}.
         #
         # @return [Boolean] `true` when `JSON`, `false` if not `JSON` or schema settings is not set.
         #
-        def schema_encoding_json?
-          schema_encoding.to_s.upcase == "JSON"
+        def message_encoding_json?
+          message_encoding.to_s.upcase == "JSON"
         end
 
         ##

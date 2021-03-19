@@ -31,7 +31,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
   let(:kms_key) { "projects/a/locations/b/keyRings/c/cryptoKeys/d" }
   let(:persistence_regions) { ["us-west1", "us-west2"] }
   let(:schema_name) { "my-schema" }
-  let(:schema_encoding) { :JSON }
+  let(:message_encoding) { :JSON }
 
   it "creates a topic" do
     new_topic_name = "new-topic-#{Time.now.to_i}"
@@ -51,9 +51,9 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.kms_key).must_be :empty?
     _(topic.persistence_regions).must_be :empty?
     _(topic.schema_name).must_be :nil?
-    _(topic.schema_encoding).must_be :nil?
-    _(topic.schema_encoding_json?).must_equal false
-    _(topic.schema_encoding_binary?).must_equal false
+    _(topic.message_encoding).must_be :nil?
+    _(topic.message_encoding_json?).must_equal false
+    _(topic.message_encoding_binary?).must_equal false
   end
 
   it "creates a topic with fully-qualified topic path" do
@@ -89,9 +89,9 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.kms_key).must_be :empty?
     _(topic.persistence_regions).must_be :empty?
     _(topic.schema_name).must_be :nil?
-    _(topic.schema_encoding).must_be :nil?
-    _(topic.schema_encoding_json?).must_equal false
-    _(topic.schema_encoding_binary?).must_equal false
+    _(topic.message_encoding).must_be :nil?
+    _(topic.message_encoding_json?).must_equal false
+    _(topic.message_encoding_binary?).must_equal false
   end
 
   it "creates a topic with labels" do
@@ -112,9 +112,9 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.kms_key).must_be :empty?
     _(topic.persistence_regions).must_be :empty?
     _(topic.schema_name).must_be :nil?
-    _(topic.schema_encoding).must_be :nil?
-    _(topic.schema_encoding_json?).must_equal false
-    _(topic.schema_encoding_binary?).must_equal false
+    _(topic.message_encoding).must_be :nil?
+    _(topic.message_encoding_json?).must_equal false
+    _(topic.message_encoding_binary?).must_equal false
   end
 
   it "creates a topic with kms_key" do
@@ -135,9 +135,9 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.kms_key).must_equal kms_key
     _(topic.persistence_regions).must_be :empty?
     _(topic.schema_name).must_be :nil?
-    _(topic.schema_encoding).must_be :nil?
-    _(topic.schema_encoding_json?).must_equal false
-    _(topic.schema_encoding_binary?).must_equal false
+    _(topic.message_encoding).must_be :nil?
+    _(topic.message_encoding_json?).must_equal false
+    _(topic.message_encoding_binary?).must_equal false
   end
 
   it "creates a topic with persistence_regions" do
@@ -159,22 +159,22 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.kms_key).must_be :empty?
     _(topic.persistence_regions).must_equal persistence_regions
     _(topic.schema_name).must_be :nil?
-    _(topic.schema_encoding).must_be :nil?
-    _(topic.schema_encoding_json?).must_equal false
-    _(topic.schema_encoding_binary?).must_equal false
+    _(topic.message_encoding).must_be :nil?
+    _(topic.message_encoding_json?).must_equal false
+    _(topic.message_encoding_binary?).must_equal false
   end
 
-  it "creates a topic with schema_name and schema_encoding" do
+  it "creates a topic with schema_name and message_encoding" do
     new_topic_name = "new-topic-#{Time.now.to_i}"
 
-    schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new schema: schema_path(schema_name), encoding: schema_encoding
+    schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new schema: schema_path(schema_name), encoding: message_encoding
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name)
     create_res.schema_settings = schema_settings
     mock = Minitest::Mock.new
     mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: schema_settings]
     pubsub.service.mocked_publisher = mock
 
-    topic = pubsub.create_topic new_topic_name, schema_name: schema_name, schema_encoding: schema_encoding
+    topic = pubsub.create_topic new_topic_name, schema_name: schema_name, message_encoding: message_encoding
 
     mock.verify
 
@@ -183,21 +183,21 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.labels).must_be :frozen?
     _(topic.kms_key).must_be :empty?
     _(topic.schema_name).must_equal schema_path(schema_name)
-    _(topic.schema_encoding).must_equal schema_encoding
+    _(topic.message_encoding).must_equal message_encoding
   end
 
-  it "raises when creating a topic with schema_name but without schema_encoding" do
+  it "raises when creating a topic with schema_name but without message_encoding" do
     err = expect do
       topic = pubsub.create_topic "new-topic", schema_name: schema_name
     end.must_raise ArgumentError
-    _(err.message).must_equal "Schema settings must include both schema_name and schema_encoding."
+    _(err.message).must_equal "Schema settings must include both schema_name and message_encoding."
   end
 
-  it "raises when creating a topic without schema_name but with schema_encoding" do
+  it "raises when creating a topic without schema_name but with message_encoding" do
     err = expect do
-      topic = pubsub.create_topic "new-topic", schema_encoding: schema_encoding
+      topic = pubsub.create_topic "new-topic", message_encoding: message_encoding
     end.must_raise ArgumentError
-    _(err.message).must_equal "Schema settings must include both schema_name and schema_encoding."
+    _(err.message).must_equal "Schema settings must include both schema_name and message_encoding."
   end
 
   it "gets a topic" do
