@@ -270,7 +270,8 @@ module Google
       #
       # ## About AnswerRecords
       #
-      # Service for managing AnswerRecords.
+      # Service for managing
+      # AnswerRecords.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
