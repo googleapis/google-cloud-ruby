@@ -240,7 +240,7 @@ module Google
                                       kms_key_name:        kms_key,
                                       persistence_regions: persistence_regions,
                                       schema_name:         schema_name,
-                                      message_encoding:     message_encoding
+                                      message_encoding:    message_encoding
           Topic.from_grpc grpc, service, async: async
         end
         alias new_topic create_topic
