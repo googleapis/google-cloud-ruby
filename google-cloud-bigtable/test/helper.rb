@@ -200,7 +200,11 @@ class MockBigtable < Minitest::Spec
                   start_time: nil,
                   end_time: nil,
                   size_bytes: 123456,
-                  state: :READY
+                  state: :READY,
+                  encryption_type: Google::Cloud::Bigtable::Admin::V2::EncryptionInfo::EncryptionType::GOOGLE_DEFAULT_ENCRYPTION,
+                  encryption_status: nil,
+                  kms_key_version: nil
+
     now = Time.now.round 0
     start_time ||= now + 60
     end_time ||= now + 120
@@ -212,7 +216,12 @@ class MockBigtable < Minitest::Spec
       start_time: start_time,
       end_time: end_time,
       size_bytes: size_bytes,
-      state: state
+      state: state,
+      encryption_info: Google::Cloud::Bigtable::Admin::V2::EncryptionInfo.new(
+        encryption_type: encryption_type,
+        encryption_status: encryption_status,
+        kms_key_version: kms_key_version
+      )
     )
   end
 
