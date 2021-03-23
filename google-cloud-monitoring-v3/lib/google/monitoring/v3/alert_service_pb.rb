@@ -29,6 +29,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.monitoring.v3.ListAlertPoliciesResponse" do
       repeated :alert_policies, :message, 3, "google.monitoring.v3.AlertPolicy"
       optional :next_page_token, :string, 2
+      optional :total_size, :int32, 4
     end
     add_message "google.monitoring.v3.UpdateAlertPolicyRequest" do
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"

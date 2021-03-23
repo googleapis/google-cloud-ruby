@@ -41,7 +41,7 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.monitoring.v3.AlertPolicyService'
 
-            # Lists the existing alerting policies for the project.
+            # Lists the existing alerting policies for the workspace.
             rpc :ListAlertPolicies, ::Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest, ::Google::Cloud::Monitoring::V3::ListAlertPoliciesResponse
             # Gets a single alerting policy.
             rpc :GetAlertPolicy, ::Google::Cloud::Monitoring::V3::GetAlertPolicyRequest, ::Google::Cloud::Monitoring::V3::AlertPolicy

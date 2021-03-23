@@ -53,20 +53,6 @@ module Google
             end
 
             ##
-            # Create a fully-qualified Project resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}`
-            #
-            # @param project [String]
-            #
-            # @return [::String]
-            def project_path project:
-              "projects/#{project}"
-            end
-
-            ##
             # Create a fully-qualified UptimeCheckConfig resource string.
             #
             # @overload uptime_check_config_path(project:, uptime_check_config:)
@@ -110,6 +96,39 @@ module Google
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/uptimeCheckConfigs/#{uptime_check_config}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified Workspace resource string.
+            #
+            # @overload workspace_path(project:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}`
+            #
+            #   @param project [String]
+            #
+            # @overload workspace_path(workspace:)
+            #   The resource will be in the following format:
+            #
+            #   `workspaces/{workspace}`
+            #
+            #   @param workspace [String]
+            #
+            # @return [::String]
+            def workspace_path **args
+              resources = {
+                "project" => (proc do |project:|
+                  "projects/#{project}"
+                end),
+                "workspace" => (proc do |workspace:|
+                  "workspaces/#{workspace}"
                 end)
               }
 

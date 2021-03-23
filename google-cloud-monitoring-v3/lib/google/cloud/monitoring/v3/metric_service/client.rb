@@ -670,15 +670,18 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_time_series(name: nil, filter: nil, interval: nil, aggregation: nil, order_by: nil, view: nil, page_size: nil, page_token: nil)
+            # @overload list_time_series(name: nil, filter: nil, interval: nil, aggregation: nil, secondary_aggregation: nil, order_by: nil, view: nil, page_size: nil, page_token: nil)
             #   Pass arguments to `list_time_series` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The project on which to execute the request. The format is:
+            #     Required. The project, organization or folder on which to execute the request. The
+            #     format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
+            #         organizations/[ORGANIZATION_ID]
+            #         folders/[FOLDER_ID]
             #   @param filter [::String]
             #     Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
             #     that specifies which time series should be returned.  The filter must
@@ -697,6 +700,9 @@ module Google
             #
             #     By default (if no `aggregation` is explicitly specified), the raw time
             #     series data is returned.
+            #   @param secondary_aggregation [::Google::Cloud::Monitoring::V3::Aggregation, ::Hash]
+            #     Apply a second aggregation after `aggregation` is applied. May only be
+            #     specified if `aggregation` is specified.
             #   @param order_by [::String]
             #     Unsupported: must be left blank. The points in each time series are
             #     currently returned in reverse time order (most recent to oldest).

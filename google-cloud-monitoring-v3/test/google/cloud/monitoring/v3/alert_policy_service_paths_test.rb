@@ -83,15 +83,18 @@ class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientPathsTest < Min
     end
   end
 
-  def test_project_path
+  def test_workspace_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
       client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
-      path = client.project_path project: "value0"
+      path = client.workspace_path project: "value0"
       assert_equal "projects/value0", path
+
+      path = client.workspace_path workspace: "value0"
+      assert_equal "workspaces/value0", path
     end
   end
 end
