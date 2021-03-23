@@ -41,6 +41,8 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
         schema.string    "breed", description: "breed description", mode: :required
         schema.string    "name",  description: "name description",  mode: :required
         schema.timestamp "dob",   description: "dob description",   mode: :required
+        schema.numeric "my_numeric", mode: :nullable
+        schema.bignumeric "my_bignumeric", mode: :nullable
       end
     end
     t
@@ -84,6 +86,8 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
 
   let(:schema_update_options) { ["ALLOW_FIELD_ADDITION", "ALLOW_FIELD_RELAXATION"] }
   let(:clustering_fields) { ["breed", "name"] }
+  let(:bigdecimal_numeric) { BigDecimal("0.123456789") }
+  let(:bigdecimal_bignumeric) { BigDecimal("0.12345678901234567890123456789012345678") }
 
   before do
     table
@@ -471,6 +475,25 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     _(insert_response.error_rows).must_be :empty?
 
     assert_data table_with_schema.data(max: 1)
+  end
+
+  it "inserts row with max scale numeric and bignumeric values" do
+    row = {
+      name: "cat 5",
+      breed: "the cat kind",
+      id: 5,
+      dob: Time.now.utc,
+      my_numeric: bigdecimal_numeric,
+      my_bignumeric: bigdecimal_bignumeric
+    }
+    insert_response = dataset.insert table_with_schema.table_id, row
+    _(insert_response).must_be :success?
+    _(insert_response.insert_count).must_equal 1
+    _(insert_response.insert_errors).must_be :empty?
+    _(insert_response.error_rows).must_be :empty?
+
+    # TODO: add BIGNUMERIC -> BigDecimal conversion to data
+    # assert_data table_with_schema.data(max: 1)
   end
 
   it "creates missing table while inserts rows with autocreate option" do

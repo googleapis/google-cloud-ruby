@@ -52,6 +52,7 @@ describe Google::Cloud::Bigquery::External::JsonSource do
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score",         type: "FLOAT", description: "A score from 0.0 to 10.0", fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "pi",            type: "NUMERIC", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_bignumeric", type: "BIGNUMERIC", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar",        type: "BYTES", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "started_at",    type: "TIMESTAMP", description: nil, fields: []),
@@ -69,6 +70,7 @@ describe Google::Cloud::Bigquery::External::JsonSource do
       s.integer "age"
       s.float "score", description: "A score from 0.0 to 10.0"
       s.numeric "pi"
+      s.bignumeric "my_bignumeric"
       s.boolean "active"
       s.bytes "avatar"
       s.timestamp "started_at"
@@ -80,9 +82,9 @@ describe Google::Cloud::Bigquery::External::JsonSource do
     _(table.schema).wont_be :empty?
     _(table.fields).must_equal table.schema.fields
     _(table.headers).must_equal table.schema.headers
-    _(table.headers).must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    _(table.headers).must_equal [:name, :age, :score, :pi, :my_bignumeric, :active, :avatar, :started_at, :duration, :target_end, :birthday]
     _(table.param_types).must_equal table.schema.param_types
-    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
+    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, my_bignumeric: :BIGNUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
 
     _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
@@ -100,6 +102,7 @@ describe Google::Cloud::Bigquery::External::JsonSource do
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score",         type: "FLOAT", description: "A score from 0.0 to 10.0", fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "pi",            type: "NUMERIC", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_bignumeric", type: "BIGNUMERIC", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar",        type: "BYTES", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "started_at",    type: "TIMESTAMP", description: nil, fields: []),
@@ -118,6 +121,7 @@ describe Google::Cloud::Bigquery::External::JsonSource do
     schema.integer "age"
     schema.float "score", description: "A score from 0.0 to 10.0"
     schema.numeric "pi"
+    schema.bignumeric "my_bignumeric"
     schema.boolean "active"
     schema.bytes "avatar"
     schema.timestamp "started_at"
@@ -130,9 +134,9 @@ describe Google::Cloud::Bigquery::External::JsonSource do
     _(table.schema).wont_be :empty?
     _(table.fields).must_equal table.schema.fields
     _(table.headers).must_equal table.schema.headers
-    _(table.headers).must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    _(table.headers).must_equal [:name, :age, :score, :pi, :my_bignumeric, :active, :avatar, :started_at, :duration, :target_end, :birthday]
     _(table.param_types).must_equal table.schema.param_types
-    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
+    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, my_bignumeric: :BIGNUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
 
     _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end

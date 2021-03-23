@@ -38,6 +38,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:field_integer_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", mode: "NULLABLE", fields: [] }
   let(:field_float_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "accuracy", type: "FLOAT", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_numeric_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "pi", type: "NUMERIC", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_bignumeric_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "my_bignumeric", type: "BIGNUMERIC", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_boolean_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "approved", type: "BOOLEAN", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_bytes_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "avatar", type: "BYTES", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_timestamp_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "started_at", type: "TIMESTAMP", mode: "NULLABLE", description: nil, fields: [] }
@@ -72,7 +73,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   it "gets the schema, fields, and headers" do
     _(table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
     _(table.schema).must_be :frozen?
-    _(table.schema.fields.count).must_equal 10
+    _(table.schema.fields.count).must_equal 11
 
     _(table.schema.fields[0].name).must_equal "name"
     _(table.schema.fields[0].type).must_equal "STRING"
@@ -94,40 +95,45 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     _(table.schema.fields[3].description).must_be :nil?
     _(table.schema.fields[3].mode).must_equal "NULLABLE"
 
-    _(table.schema.fields[4].name).must_equal "active"
-    _(table.schema.fields[4].type).must_equal "BOOLEAN"
+    _(table.schema.fields[4].name).must_equal "my_bignumeric"
+    _(table.schema.fields[4].type).must_equal "BIGNUMERIC"
     _(table.schema.fields[4].description).must_be :nil?
     _(table.schema.fields[4].mode).must_equal "NULLABLE"
 
-    _(table.schema.fields[5].name).must_equal "avatar"
-    _(table.schema.fields[5].type).must_equal "BYTES"
+    _(table.schema.fields[5].name).must_equal "active"
+    _(table.schema.fields[5].type).must_equal "BOOLEAN"
     _(table.schema.fields[5].description).must_be :nil?
     _(table.schema.fields[5].mode).must_equal "NULLABLE"
 
-    _(table.schema.fields[6].name).must_equal "started_at"
-    _(table.schema.fields[6].type).must_equal "TIMESTAMP"
+    _(table.schema.fields[6].name).must_equal "avatar"
+    _(table.schema.fields[6].type).must_equal "BYTES"
     _(table.schema.fields[6].description).must_be :nil?
     _(table.schema.fields[6].mode).must_equal "NULLABLE"
 
-    _(table.schema.fields[7].name).must_equal "duration"
-    _(table.schema.fields[7].type).must_equal "TIME"
+    _(table.schema.fields[7].name).must_equal "started_at"
+    _(table.schema.fields[7].type).must_equal "TIMESTAMP"
     _(table.schema.fields[7].description).must_be :nil?
     _(table.schema.fields[7].mode).must_equal "NULLABLE"
 
-    _(table.schema.fields[8].name).must_equal "target_end"
-    _(table.schema.fields[8].type).must_equal "DATETIME"
+    _(table.schema.fields[8].name).must_equal "duration"
+    _(table.schema.fields[8].type).must_equal "TIME"
     _(table.schema.fields[8].description).must_be :nil?
     _(table.schema.fields[8].mode).must_equal "NULLABLE"
 
-    _(table.schema.fields[9].name).must_equal "birthday"
-    _(table.schema.fields[9].type).must_equal "DATE"
+    _(table.schema.fields[9].name).must_equal "target_end"
+    _(table.schema.fields[9].type).must_equal "DATETIME"
     _(table.schema.fields[9].description).must_be :nil?
     _(table.schema.fields[9].mode).must_equal "NULLABLE"
 
-    _(table.fields.count).must_equal 10
+    _(table.schema.fields[10].name).must_equal "birthday"
+    _(table.schema.fields[10].type).must_equal "DATE"
+    _(table.schema.fields[10].description).must_be :nil?
+    _(table.schema.fields[10].mode).must_equal "NULLABLE"
+
+    _(table.fields.count).must_equal 11
     _(table.fields.map(&:name)).must_equal table.schema.fields.map(&:name)
-    _(table.headers).must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
-    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
+    _(table.headers).must_equal [:name, :age, :score, :pi, :my_bignumeric, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, my_bignumeric: :BIGNUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
   end
 
   it "sets a flat schema via a block with replace option true" do
@@ -136,6 +142,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
                field_integer_gapi,
                field_float_gapi,
                field_numeric_gapi,
+               field_bignumeric_gapi,
                field_boolean_gapi,
                field_bytes_gapi,
                field_timestamp_gapi,
@@ -157,6 +164,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
       schema.integer "rank", description: "An integer value from 1 to 100"
       schema.float "accuracy"
       schema.numeric "pi"
+      schema.bignumeric "my_bignumeric"
       schema.boolean "approved"
       schema.bytes "avatar"
       schema.timestamp "started_at"

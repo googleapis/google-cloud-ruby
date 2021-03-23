@@ -773,9 +773,18 @@ module Google
           end
 
           ##
-          # Adds a numeric number field to the schema. Numeric is a
-          # fixed-precision numeric type with 38 decimal digits, 9 that follow
-          # the decimal point.
+          # Adds a numeric number field to the schema. `NUMERIC` is a decimal
+          # type with fixed precision and scale. Precision is the number of
+          # digits that the number contains. Scale is how many of these
+          # digits appear after the decimal point. It supports:
+          #
+          # Precision: 38
+          # Scale: 9
+          # Min: -9.9999999999999999999999999999999999999E+28
+          # Max: 9.9999999999999999999999999999999999999E+28
+          #
+          # This type can represent decimal fractions exactly, and is suitable
+          # for financial calculations.
           #
           # See {Schema#numeric}
           #
@@ -800,6 +809,45 @@ module Google
           # @!group Schema
           def numeric name, description: nil, mode: :nullable
             schema.numeric name, description: description, mode: mode
+          end
+
+          ##
+          # Adds a bignumeric number field to the schema. `BIGNUMERIC` is a
+          # decimal type with fixed precision and scale. Precision is the
+          # number of digits that the number contains. Scale is how many of
+          # these digits appear after the decimal point. It supports:
+          #
+          # Precision: 76.76 (the 77th digit is partial)
+          # Scale: 38
+          # Min: -5.7896044618658097711785492504343953926634992332820282019728792003956564819968E+38
+          # Max: 5.7896044618658097711785492504343953926634992332820282019728792003956564819967E+38
+          #
+          # This type can represent decimal fractions exactly, and is suitable
+          # for financial calculations.
+          #
+          # See {Schema#bignumeric}
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   job = dataset.load_job "my_table", "gs://abc/file" do |schema|
+          #     schema.bignumeric "total_cost", mode: :required
+          #   end
+          #
+          # @!group Schema
+          def bignumeric name, description: nil, mode: :nullable
+            schema.bignumeric name, description: description, mode: mode
           end
 
           ##

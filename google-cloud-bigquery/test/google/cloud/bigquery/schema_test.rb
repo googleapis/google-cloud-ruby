@@ -39,6 +39,11 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
           "mode" => "NULLABLE"
         },
         {
+          "name" => "my_bignumeric",
+          "type" => "BIGNUMERIC",
+          "mode" => "NULLABLE"
+        },
+        {
           "name" => "active",
           "type" => "BOOLEAN",
           "mode" => "NULLABLE"
@@ -121,7 +126,7 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
   it "has basic values" do
     _(schema).must_be_kind_of Google::Cloud::Bigquery::Schema
     _(schema.fields).wont_be :empty?
-    _(schema.fields.map(&:name)).must_equal ["name", "age", "score", "pi", "active", "avatar", "started_at", "duration", "target_end", "birthday", "alts"]
+    _(schema.fields.map(&:name)).must_equal ["name", "age", "score", "pi", "my_bignumeric", "active", "avatar", "started_at", "duration", "target_end", "birthday", "alts"]
   end
 
   it "can access fields with a symbol" do
@@ -152,6 +157,13 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
     _(schema.field(:pi).mode).must_equal "NULLABLE"
     _(schema.field(:pi)).must_be :numeric?
     _(schema.field(:pi)).must_be :nullable?
+
+    _(schema.field(:my_bignumeric)).must_be_kind_of Google::Cloud::Bigquery::Schema::Field
+    _(schema.field(:my_bignumeric).name).must_equal "my_bignumeric"
+    _(schema.field(:my_bignumeric).type).must_equal "BIGNUMERIC"
+    _(schema.field(:my_bignumeric).mode).must_equal "NULLABLE"
+    _(schema.field(:my_bignumeric)).must_be :bignumeric?
+    _(schema.field(:my_bignumeric)).must_be :nullable?
 
     _(schema.field(:active)).must_be_kind_of Google::Cloud::Bigquery::Schema::Field
     _(schema.field(:active).name).must_equal "active"
@@ -261,6 +273,13 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
     _(schema.field("pi").mode).must_equal "NULLABLE"
     _(schema.field("pi")).must_be :numeric?
     _(schema.field("pi")).must_be :nullable?
+
+    _(schema.field("my_bignumeric")).must_be_kind_of Google::Cloud::Bigquery::Schema::Field
+    _(schema.field("my_bignumeric").name).must_equal "my_bignumeric"
+    _(schema.field("my_bignumeric").type).must_equal "BIGNUMERIC"
+    _(schema.field("my_bignumeric").mode).must_equal "NULLABLE"
+    _(schema.field("my_bignumeric")).must_be :bignumeric?
+    _(schema.field("my_bignumeric")).must_be :nullable?
 
     _(schema.field("active")).must_be_kind_of Google::Cloud::Bigquery::Schema::Field
     _(schema.field("active").name).must_equal "active"
@@ -528,7 +547,7 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
         file.delete
       end
     end
-    _(json.length).must_equal 11
+    _(json.length).must_equal 12
 
     name = json.find { |record| record["name"] == "name" }
     _(name["type"]).must_equal "STRING"
@@ -544,6 +563,10 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
 
     score = json.find { |record| record["name"] == "pi" }
     _(score["type"]).must_equal "NUMERIC"
+    _(score["mode"]).must_equal "NULLABLE"
+
+    score = json.find { |record| record["name"] == "my_bignumeric" }
+    _(score["type"]).must_equal "BIGNUMERIC"
     _(score["mode"]).must_equal "NULLABLE"
 
     active = json.find { |record| record["name"] == "active" }
@@ -608,7 +631,7 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
         file.delete
       end
     end
-    _(json.length).must_equal 11
+    _(json.length).must_equal 12
 
     name = json.find { |record| record["name"] == "name" }
     _(name["type"]).must_equal "STRING"
@@ -624,6 +647,10 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
 
     score = json.find { |record| record["name"] == "pi" }
     _(score["type"]).must_equal "NUMERIC"
+    _(score["mode"]).must_equal "NULLABLE"
+
+    score = json.find { |record| record["name"] == "my_bignumeric" }
+    _(score["type"]).must_equal "BIGNUMERIC"
     _(score["mode"]).must_equal "NULLABLE"
 
     active = json.find { |record| record["name"] == "active" }
@@ -696,10 +723,10 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
         file.delete
       end
     end
-    _(json.length).must_equal 11
+    _(json.length).must_equal 12
 
     fields = json.map { |record| record["name"] }
     _(fields).wont_be :empty?
-    _(fields).must_equal %w[name age score pi active avatar started_at duration target_end birthday alts]
+    _(fields).must_equal %w[name age score pi my_bignumeric active avatar started_at duration target_end birthday alts]
   end
 end

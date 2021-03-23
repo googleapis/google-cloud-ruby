@@ -42,6 +42,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
         { mode: "NULLABLE", name: "age", type: "INTEGER", description: nil, fields: [] },
         { mode: "NULLABLE", name: "score", type: "FLOAT", description: "A score from 0.0 to 10.0", fields: [] },
         { mode: "NULLABLE", name: "price", type: "NUMERIC", description: nil, fields: [] },
+        { mode: "NULLABLE", name: "my_bignumeric", type: "BIGNUMERIC", description: nil, fields: [] },
         { mode: "NULLABLE", name: "active", type: "BOOLEAN", description: nil, fields: [] },
         { mode: "NULLABLE", name: "avatar", type: "BYTES", description: nil, fields: [] },
         { mode: "REQUIRED", name: "dob", type: "TIMESTAMP", description: nil, fields: [] }
@@ -100,6 +101,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
       job.schema.integer "age"
       job.schema.float "score", description: "A score from 0.0 to 10.0"
       job.schema.numeric "price"
+      job.schema.bignumeric "my_bignumeric"
       job.schema.boolean "active"
       job.schema.bytes "avatar"
       job.schema.timestamp "dob", mode: :required
@@ -148,6 +150,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
       job.schema.integer "age"
       job.schema.float "score", description: "A score from 0.0 to 10.0"
       job.schema.numeric "price"
+      job.schema.bignumeric "my_bignumeric"
       job.schema.boolean "active"
       job.schema.bytes "avatar"
       job.schema.timestamp "dob", mode: :required
@@ -191,6 +194,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     schema.integer "age"
     schema.float "score", description: "A score from 0.0 to 10.0"
     schema.numeric "price"
+    schema.bignumeric "my_bignumeric"
     schema.boolean "active"
     schema.bytes "avatar"
     schema.timestamp "dob", mode: :required
@@ -234,6 +238,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     job = dataset.load_job table_id, load_file, create: :needed, schema: schema do |schema|
       schema.float "score", description: "A score from 0.0 to 10.0"
       schema.numeric "price"
+      schema.bignumeric "my_bignumeric"
       schema.boolean "active"
       schema.bytes "avatar"
       schema.timestamp "dob", mode: :required
