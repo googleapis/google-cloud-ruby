@@ -24,7 +24,7 @@ module Google
     module ServiceControl
       module V1
         module ServiceController
-          # [Google Service Control API](/service-control/overview)
+          # [Google Service Control API](https://cloud.google.com/service-control/overview)
           #
           # Lets clients check and report operations against a [managed
           # service](https://cloud.google.com/service-management/reference/rpc/google.api/servicemanagement.v1#google.api.servicemanagement.v1.ManagedService).
