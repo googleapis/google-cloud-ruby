@@ -227,6 +227,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :REPLACE, 3
       value :EVAL_REQUESTED, 4
       value :EVAL_APPROVED, 5
+      value :EVAL_SKIPPED, 6
     end
     add_message "google.cloud.documentai.v1beta3.Document.Revision" do
       optional :id, :string, 1
