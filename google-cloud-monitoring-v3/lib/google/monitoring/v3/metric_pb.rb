@@ -22,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :metric_kind, :enum, 3, "google.api.MetricDescriptor.MetricKind"
       optional :value_type, :enum, 4, "google.api.MetricDescriptor.ValueType"
       repeated :points, :message, 5, "google.monitoring.v3.Point"
+      optional :unit, :string, 8
     end
     add_message "google.monitoring.v3.TimeSeriesDescriptor" do
       repeated :label_descriptors, :message, 1, "google.api.LabelDescriptor"
@@ -31,6 +32,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :key, :string, 1
       optional :value_type, :enum, 2, "google.api.MetricDescriptor.ValueType"
       optional :metric_kind, :enum, 3, "google.api.MetricDescriptor.MetricKind"
+      optional :unit, :string, 4
     end
     add_message "google.monitoring.v3.TimeSeriesData" do
       repeated :label_values, :message, 1, "google.monitoring.v3.LabelValue"

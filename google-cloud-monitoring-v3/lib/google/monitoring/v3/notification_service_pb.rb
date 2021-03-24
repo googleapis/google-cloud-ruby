@@ -40,6 +40,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.monitoring.v3.ListNotificationChannelsResponse" do
       repeated :notification_channels, :message, 3, "google.monitoring.v3.NotificationChannel"
       optional :next_page_token, :string, 2
+      optional :total_size, :int32, 4
     end
     add_message "google.monitoring.v3.GetNotificationChannelRequest" do
       optional :name, :string, 3

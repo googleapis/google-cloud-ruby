@@ -168,6 +168,10 @@ module Google
           #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::MetricAbsence]
           #     A condition that checks that a time series continues to
           #     receive new data points.
+          # @!attribute [rw] condition_monitoring_query_language
+          #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::MonitoringQueryLanguageCondition]
+          #     A condition that uses the Monitoring Query Language to define
+          #     alerts.
           class Condition
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -191,16 +195,16 @@ module Google
             # against a threshold.
             # @!attribute [rw] filter
             #   @return [::String]
-            #     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that
+            #     Required. A [filter](https://cloud.google.com/monitoring/api/v3/filters) that
             #     identifies which time series should be compared with the threshold.
             #
             #     The filter is similar to the one that is specified in the
             #     [`ListTimeSeries`
             #     request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list)
             #     (that call is useful to verify the time series that will be retrieved /
-            #     processed) and must specify the metric type and optionally may contain
-            #     restrictions on resource type, resource labels, and metric labels.
-            #     This field may not exceed 2048 Unicode characters in length.
+            #     processed). The filter must specify the metric type and the resource
+            #     type. Optionally, it can specify resource labels and metric labels.
+            #     This field must not exceed 2048 Unicode characters in length.
             # @!attribute [rw] aggregations
             #   @return [::Array<::Google::Cloud::Monitoring::V3::Aggregation>]
             #     Specifies the alignment of data points in individual time series as
@@ -280,16 +284,16 @@ module Google
             # resource does not include any data in the specified `duration`.
             # @!attribute [rw] filter
             #   @return [::String]
-            #     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that
+            #     Required. A [filter](https://cloud.google.com/monitoring/api/v3/filters) that
             #     identifies which time series should be compared with the threshold.
             #
             #     The filter is similar to the one that is specified in the
             #     [`ListTimeSeries`
             #     request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list)
             #     (that call is useful to verify the time series that will be retrieved /
-            #     processed) and must specify the metric type and optionally may contain
-            #     restrictions on resource type, resource labels, and metric labels.
-            #     This field may not exceed 2048 Unicode characters in length.
+            #     processed). The filter must specify the metric type and the resource
+            #     type. Optionally, it can specify resource labels and metric labels.
+            #     This field must not exceed 2048 Unicode characters in length.
             # @!attribute [rw] aggregations
             #   @return [::Array<::Google::Cloud::Monitoring::V3::Aggregation>]
             #     Specifies the alignment of data points in individual time series as
@@ -306,9 +310,10 @@ module Google
             # @!attribute [rw] duration
             #   @return [::Google::Protobuf::Duration]
             #     The amount of time that a time series must fail to report new
-            #     data to be considered failing. Currently, only values that
-            #     are a multiple of a minute--e.g.  60, 120, or 300
-            #     seconds--are supported. If an invalid value is given, an
+            #     data to be considered failing. The minimum value of this field
+            #     is 120 seconds. Larger values that are a multiple of a
+            #     minute--for example, 240 or 300 seconds--are supported.
+            #     If an invalid value is given, an
             #     error will be returned. The `Duration.nanos` field is
             #     ignored.
             # @!attribute [rw] trigger
@@ -318,6 +323,37 @@ module Google
             #     condition will trigger if the comparison is true for any of the
             #     time series that have been identified by `filter` and `aggregations`.
             class MetricAbsence
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # A condition type that allows alert policies to be defined using
+            # [Monitoring Query Language](https://cloud.google.com/monitoring/mql).
+            # @!attribute [rw] query
+            #   @return [::String]
+            #     [Monitoring Query Language](https://cloud.google.com/monitoring/mql)
+            #     query that outputs a boolean stream.
+            # @!attribute [rw] duration
+            #   @return [::Google::Protobuf::Duration]
+            #     The amount of time that a time series must violate the
+            #     threshold to be considered failing. Currently, only values
+            #     that are a multiple of a minute--e.g., 0, 60, 120, or 300
+            #     seconds--are supported. If an invalid value is given, an
+            #     error will be returned. When choosing a duration, it is useful to
+            #     keep in mind the frequency of the underlying time series data
+            #     (which may also be affected by any alignments specified in the
+            #     `aggregations` field); a good duration is long enough so that a single
+            #     outlier does not generate spurious alerts, but short enough that
+            #     unhealthy states are detected and alerted on quickly.
+            # @!attribute [rw] trigger
+            #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::Trigger]
+            #     The number/percent of time series for which the comparison must hold
+            #     in order for the condition to trigger. If unspecified, then the
+            #     condition will trigger if the comparison is true for any of the
+            #     time series that have been identified by `filter` and `aggregations`,
+            #     or by the ratio, if `denominator_filter` and `denominator_aggregations`
+            #     are specified.
+            class MonitoringQueryLanguageCondition
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end

@@ -33,7 +33,10 @@ module Google
         #     In the above, `[TYPE]` is the value of the `type` field.
         # @!attribute [rw] type
         #   @return [::String]
-        #     The type of notification channel, such as "email", "sms", etc.
+        #     The type of notification channel, such as "email" and "sms". To view the
+        #     full list of channels, see
+        #     [Channel
+        #     descriptors](https://cloud.google.com/monitoring/alerts/using-channels-api#ncd).
         #     Notification channel types are globally unique.
         # @!attribute [rw] display_name
         #   @return [::String]
@@ -134,6 +137,12 @@ module Google
         #     the channel. This is a more convenient approach when the change is
         #     temporary and you want to receive notifications from the same set
         #     of alerting policies on the channel at some point in the future.
+        # @!attribute [rw] creation_record
+        #   @return [::Google::Cloud::Monitoring::V3::MutationRecord]
+        #     Record of the creation of this channel.
+        # @!attribute [rw] mutation_records
+        #   @return [::Array<::Google::Cloud::Monitoring::V3::MutationRecord>]
+        #     Records of the modification of this channel.
         class NotificationChannel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

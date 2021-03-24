@@ -431,6 +431,7 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
     filter = "hello world"
     interval = {}
     aggregation = {}
+    secondary_aggregation = {}
     order_by = "hello world"
     view = :FULL
     page_size = 42
@@ -443,6 +444,7 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
       assert_equal "hello world", request["filter"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::TimeInterval), request["interval"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::Aggregation), request["aggregation"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::V3::Aggregation), request["secondary_aggregation"]
       assert_equal "hello world", request["order_by"]
       assert_equal :FULL, request["view"]
       assert_equal 42, request["page_size"]
@@ -457,35 +459,35 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.list_time_series({ name: name, filter: filter, interval: interval, aggregation: aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_time_series({ name: name, filter: filter, interval: interval, aggregation: aggregation, secondary_aggregation: secondary_aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_time_series name: name, filter: filter, interval: interval, aggregation: aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_time_series name: name, filter: filter, interval: interval, aggregation: aggregation, secondary_aggregation: secondary_aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_time_series ::Google::Cloud::Monitoring::V3::ListTimeSeriesRequest.new(name: name, filter: filter, interval: interval, aggregation: aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_time_series ::Google::Cloud::Monitoring::V3::ListTimeSeriesRequest.new(name: name, filter: filter, interval: interval, aggregation: aggregation, secondary_aggregation: secondary_aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_time_series({ name: name, filter: filter, interval: interval, aggregation: aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_time_series({ name: name, filter: filter, interval: interval, aggregation: aggregation, secondary_aggregation: secondary_aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_time_series(::Google::Cloud::Monitoring::V3::ListTimeSeriesRequest.new(name: name, filter: filter, interval: interval, aggregation: aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_time_series(::Google::Cloud::Monitoring::V3::ListTimeSeriesRequest.new(name: name, filter: filter, interval: interval, aggregation: aggregation, secondary_aggregation: secondary_aggregation, order_by: order_by, view: view, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

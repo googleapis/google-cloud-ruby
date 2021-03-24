@@ -55,6 +55,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :filter, :string, 2
       optional :interval, :message, 4, "google.monitoring.v3.TimeInterval"
       optional :aggregation, :message, 5, "google.monitoring.v3.Aggregation"
+      optional :secondary_aggregation, :message, 11, "google.monitoring.v3.Aggregation"
       optional :order_by, :string, 6
       optional :view, :enum, 7, "google.monitoring.v3.ListTimeSeriesRequest.TimeSeriesView"
       optional :page_size, :int32, 8
@@ -68,6 +69,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :time_series, :message, 1, "google.monitoring.v3.TimeSeries"
       optional :next_page_token, :string, 2
       repeated :execution_errors, :message, 3, "google.rpc.Status"
+      optional :unit, :string, 5
     end
     add_message "google.monitoring.v3.CreateTimeSeriesRequest" do
       optional :name, :string, 3

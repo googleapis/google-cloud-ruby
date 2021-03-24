@@ -128,6 +128,18 @@
         }
       }
     },
+    "QueryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Monitoring::V3::QueryService::Client",
+          "methods": {
+            "QueryTimeSeries": [
+              "query_time_series"
+            ]
+          }
+        }
+      }
+    },
     "ServiceMonitoringService": {
       "clients": {
         "grpc": {

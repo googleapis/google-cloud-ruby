@@ -7,6 +7,7 @@ require 'google/api/label_pb'
 require 'google/api/launch_stage_pb'
 require 'google/api/resource_pb'
 require 'google/monitoring/v3/common_pb'
+require 'google/monitoring/v3/mutation_record_pb'
 require 'google/protobuf/wrappers_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/monitoring/v3/notification.proto", :syntax => :proto3) do
@@ -28,6 +29,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :user_labels, :string, :string, 8
       optional :verification_status, :enum, 9, "google.monitoring.v3.NotificationChannel.VerificationStatus"
       optional :enabled, :message, 11, "google.protobuf.BoolValue"
+      optional :creation_record, :message, 12, "google.monitoring.v3.MutationRecord"
+      repeated :mutation_records, :message, 13, "google.monitoring.v3.MutationRecord"
     end
     add_enum "google.monitoring.v3.NotificationChannel.VerificationStatus" do
       value :VERIFICATION_STATUS_UNSPECIFIED, 0

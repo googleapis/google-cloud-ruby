@@ -170,6 +170,39 @@ module Google
               "projects/#{project}"
             end
 
+            ##
+            # Create a fully-qualified Workspace resource string.
+            #
+            # @overload workspace_path(project:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}`
+            #
+            #   @param project [String]
+            #
+            # @overload workspace_path(workspace:)
+            #   The resource will be in the following format:
+            #
+            #   `workspaces/{workspace}`
+            #
+            #   @param workspace [String]
+            #
+            # @return [::String]
+            def workspace_path **args
+              resources = {
+                "project" => (proc do |project:|
+                  "projects/#{project}"
+                end),
+                "workspace" => (proc do |workspace:|
+                  "workspaces/#{workspace}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
             extend self
           end
         end

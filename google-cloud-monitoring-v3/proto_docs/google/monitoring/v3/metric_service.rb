@@ -167,9 +167,12 @@ module Google
         # The `ListTimeSeries` request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The project on which to execute the request. The format is:
+        #     Required. The project, organization or folder on which to execute the request. The
+        #     format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
+        #         organizations/[ORGANIZATION_ID]
+        #         folders/[FOLDER_ID]
         # @!attribute [rw] filter
         #   @return [::String]
         #     Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
@@ -191,6 +194,10 @@ module Google
         #
         #     By default (if no `aggregation` is explicitly specified), the raw time
         #     series data is returned.
+        # @!attribute [rw] secondary_aggregation
+        #   @return [::Google::Cloud::Monitoring::V3::Aggregation]
+        #     Apply a second aggregation after `aggregation` is applied. May only be
+        #     specified if `aggregation` is specified.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Unsupported: must be left blank. The points in each time series are
@@ -239,6 +246,14 @@ module Google
         #   @return [::Array<::Google::Rpc::Status>]
         #     Query execution errors that may have caused the time series data returned
         #     to be incomplete.
+        # @!attribute [rw] unit
+        #   @return [::String]
+        #     The unit in which all `time_series` point values are reported. `unit`
+        #     follows the UCUM format for units as seen in
+        #     https://unitsofmeasure.org/ucum.html.
+        #     If different `time_series` have different units (for example, because they
+        #     come from different metric types, or a unit is absent), then `unit` will be
+        #     "\\{not_a_unit}".
         class ListTimeSeriesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -311,8 +326,9 @@ module Google
         #         projects/[PROJECT_ID_OR_NUMBER]
         # @!attribute [rw] query
         #   @return [::String]
-        #     Required. The query in the monitoring query language format. The default
-        #     time zone is in UTC.
+        #     Required. The query in the [Monitoring Query
+        #     Language](https://cloud.google.com/monitoring/mql/reference) format.
+        #     The default time zone is in UTC.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     A positive number that is the maximum number of time_series_data to return.
