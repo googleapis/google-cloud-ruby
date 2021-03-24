@@ -74,6 +74,7 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
   let(:database) { Google::Cloud::Spanner::Database.from_grpc database_grpc, spanner.service }
   let(:expire_time) { Time.now + 36000 }
   let(:version_time) { Time.now }
+  let(:kms_key_name){ "projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>"}
 
   it "create a database backup" do
     mock = Minitest::Mock.new
@@ -92,20 +93,19 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
       result_type: Google::Cloud::Spanner::Admin::Database::V1::Backup,
       metadata_type:  Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata
     )
-    kms_key_name = "projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>"
 
     mock.expect :create_backup, create_res, [{
       parent: instance_path(instance_id),
       backup_id: backup_id,
       backup: create_req,
-      encryption_config: { kms_key_name: kms_key_name }
+      encryption_config: { kms_key_name: kms_key_name, encryption_type: :CUSTOMER_MANAGED_ENCRYPTION }
     }, nil]
     mock.expect :get_operation, operation_done, [{ name: "1234567890" }, Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
     job = database.create_backup backup_id, expire_time,
                                  version_time: version_time,
-                                 encryption_config: { kms_key_name: kms_key_name }
+                                 encryption_config: { kms_key_name: kms_key_name, encryption_type: :CUSTOMER_MANAGED_ENCRYPTION }
 
     _(job).must_be_kind_of Google::Cloud::Spanner::Backup::Job
     _(job).wont_be :done?
@@ -182,6 +182,20 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
 
     assert_raises Google::Cloud::Error do
       database.create_backup backup_id, Time.now - 36000
+    end
+  end
+
+  it "raise an error on create database backup for kms key without customer managed encryption type" do
+    assert_raises Google::Cloud::Error do
+      database.create_backup backup_id, Time.now - 36000, encryption_config: { kms_key_name: kms_key_name }
+    end
+  end
+
+  it "raise an error on create database backup with invalid encryption config" do
+    assert_raises Google::Cloud::Error do
+      database.create_backup backup_id, Time.now - 36000, encryption_config: {
+          kms_key_name: kms_key_name, encryption_type: :GOOGLE_DEFAULT_ENCRYPTION
+      }
     end
   end
 end
