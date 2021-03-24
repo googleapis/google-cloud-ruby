@@ -25,7 +25,7 @@ module Google
         # Google Service Management.
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     The name of the service. See the [overview](/service-management/overview)
+        #     The name of the service. See the [overview](https://cloud.google.com/service-management/overview)
         #     for naming requirements.
         # @!attribute [rw] producer_project_id
         #   @return [::String]
