@@ -92,14 +92,15 @@ class MockSpanner < Minitest::Spec
 
   def database_hash instance_id: "my-instance-id", database_id: "database-#{rand(9999)}",
                     state: "READY", restore_info: {}, version_retention_period: "", earliest_version_time: nil,
-                    encryption_config: {}
+                    encryption_config: {}, encryption_info: []
     {
       name: "projects/#{project}/instances/#{instance_id}/databases/#{database_id}",
       state: state,
       restore_info: restore_info,
       version_retention_period: version_retention_period,
       earliest_version_time: earliest_version_time,
-      encryption_config: encryption_config
+      encryption_config: encryption_config,
+      encryption_info: encryption_info
     }
   end
 
