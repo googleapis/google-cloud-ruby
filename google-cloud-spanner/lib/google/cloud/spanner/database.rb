@@ -449,13 +449,15 @@ module Google
         #   * `:kms_key_name` (String) The name of KMS key to use which should
         #     be the full path, e.g., `projects/<project>/locations/<location>\
         #     /keyRings/<key_ring>/cryptoKeys/<kms_key_name>`
+        #     This field should be set only when encryptioon type
+        #     `:CUSTOMER_MANAGED_ENCRYPTION`.
         #   * `:encryption_type` (Symbol) The encryption type of the backup.
         #     Valid values are:
         #       1. `:USE_DATABASE_ENCRYPTION` - Use the same encryption configuration as
         #         the database.
         #       2. `:GOOGLE_DEFAULT_ENCRYPTION` - Google default encryption.
         #       3. `:CUSTOMER_MANAGED_ENCRYPTION` - Use customer managed encryption.
-        #         If specified, `kms_key_name` must contain a valid Cloud KMS key.
+        #         If specified, `:kms_key_name` must contain a valid Cloud KMS key.
         #
         # @raise [ArgumentError] if `:CUSTOMER_MANAGED_ENCRYPTION` specified without
         #   customer managed kms key.

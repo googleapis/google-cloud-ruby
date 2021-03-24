@@ -28,8 +28,13 @@ describe "Spanner Database Backup", :spanner do
     database = spanner.database instance_id, database_id
     _(database).wont_be :nil?
 
+    encryption_config = { encryption_type: :GOOGLE_DEFAULT_ENCRYPTION }
+
     # Create
-    job = database.create_backup backup_id, expire_time, version_time: version_time
+    job = database.create_backup backup_id,
+                                 expire_time,
+                                 version_time: version_time,
+                                 encryption_config: encryption_config
 
     _(job).must_be_kind_of Google::Cloud::Spanner::Backup::Job
     _(job).wont_be :done?
@@ -49,6 +54,8 @@ describe "Spanner Database Backup", :spanner do
     _(backup.version_time.to_i).must_equal version_time.to_i
     _(backup.create_time).must_be_kind_of Time
     _(backup.size_in_bytes).must_be :>, 0
+    _(backup.encryption_info).must_be_kind_of Google::Cloud::Spanner::Admin::Database::V1::EncryptionInfo
+    _(backup.encryption_info.encryption_type).must_equal :GOOGLE_DEFAULT_ENCRYPTION
 
     # Get
     instance = spanner.instance instance_id
@@ -78,7 +85,7 @@ describe "Spanner Database Backup", :spanner do
     # Restore
     restore_database_id = "restore-#{database_id}"
     backup = instance.backup backup_id
-    job = backup.restore restore_database_id
+    job = backup.restore restore_database_id, encryption_config: encryption_config
     _(job).wont_be :done?
 
     job.wait_until_done!

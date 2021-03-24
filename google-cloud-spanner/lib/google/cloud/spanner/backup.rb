@@ -251,6 +251,29 @@ module Google
         #   project and have the same instance configuration as the instance
         #   containing the source backup. Optional. Default value is same as a
         #   backup instance.
+        # @param [Hash] encryption_config An encryption configuration describing
+        #   the encryption type and key resources in Cloud KMS used to
+        #   encrypt/decrypt the database to restore to. If this field is not
+        #   specified, the restored database will use the sam encryption
+        #   configuration as the backup by default. Optional. The following
+        #   settings can be provided:
+        #
+        #   * `:kms_key_name` (String) The name of KMS key to use which should
+        #     be the full path, e.g., `projects/<project>/locations/<location>\
+        #     /keyRings/<key_ring>/cryptoKeys/<kms_key_name>`
+        #      This field should be set only when encryptioon type
+        #     `:CUSTOMER_MANAGED_ENCRYPTION`.
+        #   * `:encryption_type` (Symbol) The encryption type of the backup.
+        #     Valid values are:
+        #       1. `:USE_CONFIG_DEFAULT_OR_BACKUP_ENCRYPTION` - This is the default
+        #         option when config is not specified.
+        #       2. `:GOOGLE_DEFAULT_ENCRYPTION` - Google default encryption.
+        #       3. `:CUSTOMER_MANAGED_ENCRYPTION` - Use customer managed encryption.
+        #         If specified, `:kms_key_name` must contain a valid Cloud KMS key.
+        #
+        #  @raise [ArgumentError] if `:CUSTOMER_MANAGED_ENCRYPTION` specified without
+        #   customer managed kms key.
+        #
         # @return [Database] Restored database.
         #
         # @example
@@ -294,10 +317,43 @@ module Google
         #     database = job.database
         #   end
         #
+        # @example Restore database with encryption config
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   instance = spanner.instance "my-instance"
+        #   backup = instance.backup "my-backup"
+        #   kms_key_name = "projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>"
+        #   encryption_config = {
+        #     kms_key_name: kms_key_name,
+        #     encryption_type: :CUSTOMER_MANAGED_ENCRYPTION
+        #   }
+        #   job = backup.restore(
+        #     "my-restored-database",
+        #     encryption_config: encryption_config
+        #   )
+        #
+        #   job.done? #=> false
+        #   job.reload! # API call
+        #   job.done? #=> true
+        #
+        #   if job.error?
+        #     status = job.error
+        #   else
+        #     database = job.database
+        #   end
+        #
         def restore database_id, instance_id: nil, encryption_config: nil
           ensure_service!
 
           instance_id ||= self.instance_id
+
+          if encryption_config&.include?(:kms_key_name) &&
+             encryption_config[:encryption_type] != :CUSTOMER_MANAGED_ENCRYPTION
+            raise Google::Cloud::InvalidArgumentError,
+                  "kms_key_name only used with CUSTOMER_MANAGED_ENCRYPTION"
+          end
 
           grpc = service.restore_database \
             self.instance_id,

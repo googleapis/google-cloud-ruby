@@ -186,13 +186,13 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
   end
 
   it "raise an error on create database backup for kms key without customer managed encryption type" do
-    assert_raises Google::Cloud::Error do
+    assert_raises Google::Cloud::InvalidArgumentError do
       database.create_backup backup_id, Time.now - 36000, encryption_config: { kms_key_name: kms_key_name }
     end
   end
 
   it "raise an error on create database backup with invalid encryption config" do
-    assert_raises Google::Cloud::Error do
+    assert_raises Google::Cloud::InvalidArgumentError do
       database.create_backup backup_id, Time.now - 36000, encryption_config: {
           kms_key_name: kms_key_name, encryption_type: :GOOGLE_DEFAULT_ENCRYPTION
       }
