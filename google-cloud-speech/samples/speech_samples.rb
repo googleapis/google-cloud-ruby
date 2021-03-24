@@ -164,7 +164,6 @@ def speech_async_recognize_gcs storage_path: nil
   # [END speech_transcribe_async_gcs]
 end
 
-# rubocop:disable Metrics/AbcSize
 def speech_async_recognize_gcs_words storage_path: nil
   # [START speech_transcribe_async_word_time_offsets_gcs]
   # storage_path = "Path to file in Cloud Storage, eg. gs://bucket/audio.raw"
@@ -201,9 +200,7 @@ def speech_async_recognize_gcs_words storage_path: nil
   end
   # [END speech_transcribe_async_word_time_offsets_gcs]
 end
-# rubocop:enable Metrics/AbcSize
 
-# rubocop:disable Metrics/MethodLength
 def speech_streaming_recognize audio_file_path: nil
   # [START speech_transcribe_streaming]
   # audio_file_path = "Path to file on which to perform speech recognition"
@@ -252,7 +249,6 @@ def speech_streaming_recognize audio_file_path: nil
   # [END speech_ruby_migration_streaming_response]
   # [END speech_transcribe_streaming]
 end
-# rubocop:enable Metrics/MethodLength
 
 def speech_transcribe_auto_punctuation audio_file_path: nil
   # [START speech_transcribe_auto_punctuation]
