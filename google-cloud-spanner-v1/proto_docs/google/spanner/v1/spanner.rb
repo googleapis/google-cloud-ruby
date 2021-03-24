@@ -159,6 +159,45 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Common request options for various APIs.
+        # @!attribute [rw] priority
+        #   @return [::Google::Cloud::Spanner::V1::RequestOptions::Priority]
+        #     Priority for the request.
+        class RequestOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The relative priority for requests. Note that priority is not applicable
+          # for {::Google::Cloud::Spanner::V1::Spanner::Client#begin_transaction BeginTransaction}.
+          #
+          # The priority acts as a hint to the Cloud Spanner scheduler and does not
+          # guarantee priority or order of execution. For example:
+          #
+          # * Some parts of a write operation always execute at `PRIORITY_HIGH`,
+          #   regardless of the specified priority. This may cause you to see an
+          #   increase in high priority workload even when executing a low priority
+          #   request. This can also potentially cause a priority inversion where a
+          #   lower priority request will be fulfilled ahead of a higher priority
+          #   request.
+          # * If a transaction contains multiple operations with different priorities,
+          #   Cloud Spanner does not guarantee to process the higher priority
+          #   operations first. There may be other constraints to satisfy, such as
+          #   order of operations.
+          module Priority
+            # `PRIORITY_UNSPECIFIED` is equivalent to `PRIORITY_HIGH`.
+            PRIORITY_UNSPECIFIED = 0
+
+            # This specifies that the request is low priority.
+            PRIORITY_LOW = 1
+
+            # This specifies that the request is medium priority.
+            PRIORITY_MEDIUM = 2
+
+            # This specifies that the request is high priority.
+            PRIORITY_HIGH = 3
+          end
+        end
+
         # The request for {::Google::Cloud::Spanner::V1::Spanner::Client#execute_sql ExecuteSql} and
         # {::Google::Cloud::Spanner::V1::Spanner::Client#execute_streaming_sql ExecuteStreamingSql}.
         # @!attribute [rw] session
@@ -238,6 +277,9 @@ module Google
         # @!attribute [rw] query_options
         #   @return [::Google::Cloud::Spanner::V1::ExecuteSqlRequest::QueryOptions]
         #     Query optimizer configuration to use for the given query.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Spanner::V1::RequestOptions]
+        #     Common options for this request.
         class ExecuteSqlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -351,6 +393,9 @@ module Google
         #     transaction. If a request arrives for the first time with an out-of-order
         #     sequence number, the transaction may be aborted. Replays of previously
         #     handled requests will yield the same response as the first execution.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Spanner::V1::RequestOptions]
+        #     Common options for this request.
         class ExecuteBatchDmlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -642,6 +687,9 @@ module Google
         #     previously created using PartitionRead().    There must be an exact
         #     match for the values of fields common to this message and the
         #     PartitionReadRequest message used to create this partition_token.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Spanner::V1::RequestOptions]
+        #     Common options for this request.
         class ReadRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -654,6 +702,13 @@ module Google
         # @!attribute [rw] options
         #   @return [::Google::Cloud::Spanner::V1::TransactionOptions]
         #     Required. Options for the new transaction.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Spanner::V1::RequestOptions]
+        #     Common options for this request.
+        #     Priority is ignored for this request. Setting the priority in this
+        #     request_options struct will not do anything. To set the priority for a
+        #     transaction, set it on the reads and writes that are part of this
+        #     transaction instead.
         class BeginTransactionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -687,6 +742,9 @@ module Google
         #     If `true`, then statistics related to the transaction will be included in
         #     the {::Google::Cloud::Spanner::V1::CommitResponse#commit_stats CommitResponse}. Default value is
         #     `false`.
+        # @!attribute [rw] request_options
+        #   @return [::Google::Cloud::Spanner::V1::RequestOptions]
+        #     Common options for this request.
         class CommitRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

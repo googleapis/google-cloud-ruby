@@ -53,6 +53,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.spanner.v1.DeleteSessionRequest" do
       optional :name, :string, 1
     end
+    add_message "google.spanner.v1.RequestOptions" do
+      optional :priority, :enum, 1, "google.spanner.v1.RequestOptions.Priority"
+    end
+    add_enum "google.spanner.v1.RequestOptions.Priority" do
+      value :PRIORITY_UNSPECIFIED, 0
+      value :PRIORITY_LOW, 1
+      value :PRIORITY_MEDIUM, 2
+      value :PRIORITY_HIGH, 3
+    end
     add_message "google.spanner.v1.ExecuteSqlRequest" do
       optional :session, :string, 1
       optional :transaction, :message, 2, "google.spanner.v1.TransactionSelector"
@@ -64,6 +73,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :partition_token, :bytes, 8
       optional :seqno, :int64, 9
       optional :query_options, :message, 10, "google.spanner.v1.ExecuteSqlRequest.QueryOptions"
+      optional :request_options, :message, 11, "google.spanner.v1.RequestOptions"
     end
     add_message "google.spanner.v1.ExecuteSqlRequest.QueryOptions" do
       optional :optimizer_version, :string, 1
@@ -79,6 +89,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :transaction, :message, 2, "google.spanner.v1.TransactionSelector"
       repeated :statements, :message, 3, "google.spanner.v1.ExecuteBatchDmlRequest.Statement"
       optional :seqno, :int64, 4
+      optional :request_options, :message, 5, "google.spanner.v1.RequestOptions"
     end
     add_message "google.spanner.v1.ExecuteBatchDmlRequest.Statement" do
       optional :sql, :string, 1
@@ -127,15 +138,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :limit, :int64, 8
       optional :resume_token, :bytes, 9
       optional :partition_token, :bytes, 10
+      optional :request_options, :message, 11, "google.spanner.v1.RequestOptions"
     end
     add_message "google.spanner.v1.BeginTransactionRequest" do
       optional :session, :string, 1
       optional :options, :message, 2, "google.spanner.v1.TransactionOptions"
+      optional :request_options, :message, 3, "google.spanner.v1.RequestOptions"
     end
     add_message "google.spanner.v1.CommitRequest" do
       optional :session, :string, 1
       repeated :mutations, :message, 4, "google.spanner.v1.Mutation"
       optional :return_commit_stats, :bool, 5
+      optional :request_options, :message, 6, "google.spanner.v1.RequestOptions"
       oneof :transaction do
         optional :transaction_id, :bytes, 2
         optional :single_use_transaction, :message, 3, "google.spanner.v1.TransactionOptions"
@@ -167,6 +181,8 @@ module Google
         ListSessionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ListSessionsRequest").msgclass
         ListSessionsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ListSessionsResponse").msgclass
         DeleteSessionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.DeleteSessionRequest").msgclass
+        RequestOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.RequestOptions").msgclass
+        RequestOptions::Priority = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.RequestOptions.Priority").enummodule
         ExecuteSqlRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteSqlRequest").msgclass
         ExecuteSqlRequest::QueryOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteSqlRequest.QueryOptions").msgclass
         ExecuteSqlRequest::QueryMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteSqlRequest.QueryMode").enummodule

@@ -668,7 +668,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload execute_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil)
+            # @overload execute_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil, request_options: nil)
             #   Pass arguments to `execute_sql` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -740,6 +740,8 @@ module Google
             #     Required for DML statements. Ignored for queries.
             #   @param query_options [::Google::Cloud::Spanner::V1::ExecuteSqlRequest::QueryOptions, ::Hash]
             #     Query optimizer configuration to use for the given query.
+            #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
+            #     Common options for this request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::ResultSet]
@@ -803,7 +805,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload execute_streaming_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil)
+            # @overload execute_streaming_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil, request_options: nil)
             #   Pass arguments to `execute_streaming_sql` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -875,6 +877,8 @@ module Google
             #     Required for DML statements. Ignored for queries.
             #   @param query_options [::Google::Cloud::Spanner::V1::ExecuteSqlRequest::QueryOptions, ::Hash]
             #     Query optimizer configuration to use for the given query.
+            #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
+            #     Common options for this request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Spanner::V1::PartialResultSet>]
@@ -944,7 +948,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload execute_batch_dml(session: nil, transaction: nil, statements: nil, seqno: nil)
+            # @overload execute_batch_dml(session: nil, transaction: nil, statements: nil, seqno: nil, request_options: nil)
             #   Pass arguments to `execute_batch_dml` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -973,6 +977,8 @@ module Google
             #     transaction. If a request arrives for the first time with an out-of-order
             #     sequence number, the transaction may be aborted. Replays of previously
             #     handled requests will yield the same response as the first execution.
+            #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
+            #     Common options for this request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::ExecuteBatchDmlResponse]
@@ -1044,7 +1050,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil)
+            # @overload read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil, request_options: nil)
             #   Pass arguments to `read` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1092,6 +1098,8 @@ module Google
             #     previously created using PartitionRead().    There must be an exact
             #     match for the values of fields common to this message and the
             #     PartitionReadRequest message used to create this partition_token.
+            #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
+            #     Common options for this request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::ResultSet]
@@ -1155,7 +1163,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload streaming_read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil)
+            # @overload streaming_read(session: nil, transaction: nil, table: nil, index: nil, columns: nil, key_set: nil, limit: nil, resume_token: nil, partition_token: nil, request_options: nil)
             #   Pass arguments to `streaming_read` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1203,6 +1211,8 @@ module Google
             #     previously created using PartitionRead().    There must be an exact
             #     match for the values of fields common to this message and the
             #     PartitionReadRequest message used to create this partition_token.
+            #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
+            #     Common options for this request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Spanner::V1::PartialResultSet>]
@@ -1265,7 +1275,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload begin_transaction(session: nil, options: nil)
+            # @overload begin_transaction(session: nil, options: nil, request_options: nil)
             #   Pass arguments to `begin_transaction` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1274,6 +1284,12 @@ module Google
             #     Required. The session in which the transaction runs.
             #   @param options [::Google::Cloud::Spanner::V1::TransactionOptions, ::Hash]
             #     Required. Options for the new transaction.
+            #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
+            #     Common options for this request.
+            #     Priority is ignored for this request. Setting the priority in this
+            #     request_options struct will not do anything. To set the priority for a
+            #     transaction, set it on the reads and writes that are part of this
+            #     transaction instead.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::Transaction]
@@ -1346,7 +1362,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload commit(session: nil, transaction_id: nil, single_use_transaction: nil, mutations: nil, return_commit_stats: nil)
+            # @overload commit(session: nil, transaction_id: nil, single_use_transaction: nil, mutations: nil, return_commit_stats: nil, request_options: nil)
             #   Pass arguments to `commit` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1373,6 +1389,8 @@ module Google
             #     If `true`, then statistics related to the transaction will be included in
             #     the {::Google::Cloud::Spanner::V1::CommitResponse#commit_stats CommitResponse}. Default value is
             #     `false`.
+            #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
+            #     Common options for this request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::CommitResponse]
