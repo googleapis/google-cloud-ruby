@@ -135,7 +135,7 @@ module Google
         #
         # @return [Array<Google::Cloud::Spanner::Admin::Database::V1::EncryptionInfo>]
         def encryption_info
-          @grpc.encryption_info
+          @grpc.encryption_info.to_a
         end
 
         ##

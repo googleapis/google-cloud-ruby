@@ -73,6 +73,7 @@ describe Google::Cloud::Spanner::Instance, :mock_spanner do
     _(database.encryption_config).must_be_kind_of Google::Cloud::Spanner::Admin::Database::V1::EncryptionConfig
 
     _(database.encryption_info).wont_be :empty?
+    _(database.encryption_info).must_be_kind_of Array
     _(database.encryption_info.first).must_be_kind_of Google::Cloud::Spanner::Admin::Database::V1::EncryptionInfo
   end
 end
