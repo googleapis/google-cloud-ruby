@@ -27,7 +27,8 @@ module Google
           ##
           # Client for the AnswerRecords service.
           #
-          # Service for managing {::Google::Cloud::Dialogflow::V2::AnswerRecord AnswerRecords}.
+          # Service for managing
+          # {::Google::Cloud::Dialogflow::V2::AnswerRecord AnswerRecords}.
           #
           class Client
             include Paths
