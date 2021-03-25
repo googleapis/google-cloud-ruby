@@ -9,16 +9,22 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Speech::V1::Speech::Client",
-          "methods": {
-            "Recognize": [
-              "recognize"
-            ],
-            "LongRunningRecognize": [
-              "long_running_recognize"
-            ],
-            "StreamingRecognize": [
-              "streaming_recognize"
-            ]
+          "rpcs": {
+            "Recognize": {
+              "methods": [
+                "recognize"
+              ]
+            },
+            "LongRunningRecognize": {
+              "methods": [
+                "long_running_recognize"
+              ]
+            },
+            "StreamingRecognize": {
+              "methods": [
+                "streaming_recognize"
+              ]
+            }
           }
         }
       }

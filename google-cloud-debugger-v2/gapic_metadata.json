@@ -9,16 +9,22 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Debugger::V2::Controller::Client",
-          "methods": {
-            "RegisterDebuggee": [
-              "register_debuggee"
-            ],
-            "ListActiveBreakpoints": [
-              "list_active_breakpoints"
-            ],
-            "UpdateActiveBreakpoint": [
-              "update_active_breakpoint"
-            ]
+          "rpcs": {
+            "RegisterDebuggee": {
+              "methods": [
+                "register_debuggee"
+              ]
+            },
+            "ListActiveBreakpoints": {
+              "methods": [
+                "list_active_breakpoints"
+              ]
+            },
+            "UpdateActiveBreakpoint": {
+              "methods": [
+                "update_active_breakpoint"
+              ]
+            }
           }
         }
       }
@@ -27,22 +33,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Debugger::V2::Debugger::Client",
-          "methods": {
-            "SetBreakpoint": [
-              "set_breakpoint"
-            ],
-            "GetBreakpoint": [
-              "get_breakpoint"
-            ],
-            "DeleteBreakpoint": [
-              "delete_breakpoint"
-            ],
-            "ListBreakpoints": [
-              "list_breakpoints"
-            ],
-            "ListDebuggees": [
-              "list_debuggees"
-            ]
+          "rpcs": {
+            "SetBreakpoint": {
+              "methods": [
+                "set_breakpoint"
+              ]
+            },
+            "GetBreakpoint": {
+              "methods": [
+                "get_breakpoint"
+              ]
+            },
+            "DeleteBreakpoint": {
+              "methods": [
+                "delete_breakpoint"
+              ]
+            },
+            "ListBreakpoints": {
+              "methods": [
+                "list_breakpoints"
+              ]
+            },
+            "ListDebuggees": {
+              "methods": [
+                "list_debuggees"
+              ]
+            }
           }
         }
       }

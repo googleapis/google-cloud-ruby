@@ -9,22 +9,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Talent::V4beta1::ApplicationService::Client",
-          "methods": {
-            "CreateApplication": [
-              "create_application"
-            ],
-            "GetApplication": [
-              "get_application"
-            ],
-            "UpdateApplication": [
-              "update_application"
-            ],
-            "DeleteApplication": [
-              "delete_application"
-            ],
-            "ListApplications": [
-              "list_applications"
-            ]
+          "rpcs": {
+            "CreateApplication": {
+              "methods": [
+                "create_application"
+              ]
+            },
+            "GetApplication": {
+              "methods": [
+                "get_application"
+              ]
+            },
+            "UpdateApplication": {
+              "methods": [
+                "update_application"
+              ]
+            },
+            "DeleteApplication": {
+              "methods": [
+                "delete_application"
+              ]
+            },
+            "ListApplications": {
+              "methods": [
+                "list_applications"
+              ]
+            }
           }
         }
       }
@@ -33,22 +43,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Talent::V4beta1::CompanyService::Client",
-          "methods": {
-            "CreateCompany": [
-              "create_company"
-            ],
-            "GetCompany": [
-              "get_company"
-            ],
-            "UpdateCompany": [
-              "update_company"
-            ],
-            "DeleteCompany": [
-              "delete_company"
-            ],
-            "ListCompanies": [
-              "list_companies"
-            ]
+          "rpcs": {
+            "CreateCompany": {
+              "methods": [
+                "create_company"
+              ]
+            },
+            "GetCompany": {
+              "methods": [
+                "get_company"
+              ]
+            },
+            "UpdateCompany": {
+              "methods": [
+                "update_company"
+              ]
+            },
+            "DeleteCompany": {
+              "methods": [
+                "delete_company"
+              ]
+            },
+            "ListCompanies": {
+              "methods": [
+                "list_companies"
+              ]
+            }
           }
         }
       }
@@ -57,10 +77,12 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Talent::V4beta1::Completion::Client",
-          "methods": {
-            "CompleteQuery": [
-              "complete_query"
-            ]
+          "rpcs": {
+            "CompleteQuery": {
+              "methods": [
+                "complete_query"
+              ]
+            }
           }
         }
       }
@@ -69,10 +91,12 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Talent::V4beta1::EventService::Client",
-          "methods": {
-            "CreateClientEvent": [
-              "create_client_event"
-            ]
+          "rpcs": {
+            "CreateClientEvent": {
+              "methods": [
+                "create_client_event"
+              ]
+            }
           }
         }
       }
@@ -81,37 +105,57 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Talent::V4beta1::JobService::Client",
-          "methods": {
-            "CreateJob": [
-              "create_job"
-            ],
-            "BatchCreateJobs": [
-              "batch_create_jobs"
-            ],
-            "GetJob": [
-              "get_job"
-            ],
-            "UpdateJob": [
-              "update_job"
-            ],
-            "BatchUpdateJobs": [
-              "batch_update_jobs"
-            ],
-            "DeleteJob": [
-              "delete_job"
-            ],
-            "BatchDeleteJobs": [
-              "batch_delete_jobs"
-            ],
-            "ListJobs": [
-              "list_jobs"
-            ],
-            "SearchJobs": [
-              "search_jobs"
-            ],
-            "SearchJobsForAlert": [
-              "search_jobs_for_alert"
-            ]
+          "rpcs": {
+            "CreateJob": {
+              "methods": [
+                "create_job"
+              ]
+            },
+            "BatchCreateJobs": {
+              "methods": [
+                "batch_create_jobs"
+              ]
+            },
+            "GetJob": {
+              "methods": [
+                "get_job"
+              ]
+            },
+            "UpdateJob": {
+              "methods": [
+                "update_job"
+              ]
+            },
+            "BatchUpdateJobs": {
+              "methods": [
+                "batch_update_jobs"
+              ]
+            },
+            "DeleteJob": {
+              "methods": [
+                "delete_job"
+              ]
+            },
+            "BatchDeleteJobs": {
+              "methods": [
+                "batch_delete_jobs"
+              ]
+            },
+            "ListJobs": {
+              "methods": [
+                "list_jobs"
+              ]
+            },
+            "SearchJobs": {
+              "methods": [
+                "search_jobs"
+              ]
+            },
+            "SearchJobsForAlert": {
+              "methods": [
+                "search_jobs_for_alert"
+              ]
+            }
           }
         }
       }
@@ -120,25 +164,37 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Talent::V4beta1::ProfileService::Client",
-          "methods": {
-            "ListProfiles": [
-              "list_profiles"
-            ],
-            "CreateProfile": [
-              "create_profile"
-            ],
-            "GetProfile": [
-              "get_profile"
-            ],
-            "UpdateProfile": [
-              "update_profile"
-            ],
-            "DeleteProfile": [
-              "delete_profile"
-            ],
-            "SearchProfiles": [
-              "search_profiles"
-            ]
+          "rpcs": {
+            "ListProfiles": {
+              "methods": [
+                "list_profiles"
+              ]
+            },
+            "CreateProfile": {
+              "methods": [
+                "create_profile"
+              ]
+            },
+            "GetProfile": {
+              "methods": [
+                "get_profile"
+              ]
+            },
+            "UpdateProfile": {
+              "methods": [
+                "update_profile"
+              ]
+            },
+            "DeleteProfile": {
+              "methods": [
+                "delete_profile"
+              ]
+            },
+            "SearchProfiles": {
+              "methods": [
+                "search_profiles"
+              ]
+            }
           }
         }
       }
@@ -147,22 +203,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Talent::V4beta1::TenantService::Client",
-          "methods": {
-            "CreateTenant": [
-              "create_tenant"
-            ],
-            "GetTenant": [
-              "get_tenant"
-            ],
-            "UpdateTenant": [
-              "update_tenant"
-            ],
-            "DeleteTenant": [
-              "delete_tenant"
-            ],
-            "ListTenants": [
-              "list_tenants"
-            ]
+          "rpcs": {
+            "CreateTenant": {
+              "methods": [
+                "create_tenant"
+              ]
+            },
+            "GetTenant": {
+              "methods": [
+                "get_tenant"
+              ]
+            },
+            "UpdateTenant": {
+              "methods": [
+                "update_tenant"
+              ]
+            },
+            "DeleteTenant": {
+              "methods": [
+                "delete_tenant"
+              ]
+            },
+            "ListTenants": {
+              "methods": [
+                "list_tenants"
+              ]
+            }
           }
         }
       }

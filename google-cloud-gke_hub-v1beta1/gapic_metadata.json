@@ -9,31 +9,47 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client",
-          "methods": {
-            "ListMemberships": [
-              "list_memberships"
-            ],
-            "GetMembership": [
-              "get_membership"
-            ],
-            "CreateMembership": [
-              "create_membership"
-            ],
-            "DeleteMembership": [
-              "delete_membership"
-            ],
-            "UpdateMembership": [
-              "update_membership"
-            ],
-            "GenerateConnectManifest": [
-              "generate_connect_manifest"
-            ],
-            "ValidateExclusivity": [
-              "validate_exclusivity"
-            ],
-            "GenerateExclusivityManifest": [
-              "generate_exclusivity_manifest"
-            ]
+          "rpcs": {
+            "ListMemberships": {
+              "methods": [
+                "list_memberships"
+              ]
+            },
+            "GetMembership": {
+              "methods": [
+                "get_membership"
+              ]
+            },
+            "CreateMembership": {
+              "methods": [
+                "create_membership"
+              ]
+            },
+            "DeleteMembership": {
+              "methods": [
+                "delete_membership"
+              ]
+            },
+            "UpdateMembership": {
+              "methods": [
+                "update_membership"
+              ]
+            },
+            "GenerateConnectManifest": {
+              "methods": [
+                "generate_connect_manifest"
+              ]
+            },
+            "ValidateExclusivity": {
+              "methods": [
+                "validate_exclusivity"
+              ]
+            },
+            "GenerateExclusivityManifest": {
+              "methods": [
+                "generate_exclusivity_manifest"
+              ]
+            }
           }
         }
       }

@@ -9,46 +9,72 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client",
-          "methods": {
-            "CreateScanConfig": [
-              "create_scan_config"
-            ],
-            "DeleteScanConfig": [
-              "delete_scan_config"
-            ],
-            "GetScanConfig": [
-              "get_scan_config"
-            ],
-            "ListScanConfigs": [
-              "list_scan_configs"
-            ],
-            "UpdateScanConfig": [
-              "update_scan_config"
-            ],
-            "StartScanRun": [
-              "start_scan_run"
-            ],
-            "GetScanRun": [
-              "get_scan_run"
-            ],
-            "ListScanRuns": [
-              "list_scan_runs"
-            ],
-            "StopScanRun": [
-              "stop_scan_run"
-            ],
-            "ListCrawledUrls": [
-              "list_crawled_urls"
-            ],
-            "GetFinding": [
-              "get_finding"
-            ],
-            "ListFindings": [
-              "list_findings"
-            ],
-            "ListFindingTypeStats": [
-              "list_finding_type_stats"
-            ]
+          "rpcs": {
+            "CreateScanConfig": {
+              "methods": [
+                "create_scan_config"
+              ]
+            },
+            "DeleteScanConfig": {
+              "methods": [
+                "delete_scan_config"
+              ]
+            },
+            "GetScanConfig": {
+              "methods": [
+                "get_scan_config"
+              ]
+            },
+            "ListScanConfigs": {
+              "methods": [
+                "list_scan_configs"
+              ]
+            },
+            "UpdateScanConfig": {
+              "methods": [
+                "update_scan_config"
+              ]
+            },
+            "StartScanRun": {
+              "methods": [
+                "start_scan_run"
+              ]
+            },
+            "GetScanRun": {
+              "methods": [
+                "get_scan_run"
+              ]
+            },
+            "ListScanRuns": {
+              "methods": [
+                "list_scan_runs"
+              ]
+            },
+            "StopScanRun": {
+              "methods": [
+                "stop_scan_run"
+              ]
+            },
+            "ListCrawledUrls": {
+              "methods": [
+                "list_crawled_urls"
+              ]
+            },
+            "GetFinding": {
+              "methods": [
+                "get_finding"
+              ]
+            },
+            "ListFindings": {
+              "methods": [
+                "list_findings"
+              ]
+            },
+            "ListFindingTypeStats": {
+              "methods": [
+                "list_finding_type_stats"
+              ]
+            }
           }
         }
       }

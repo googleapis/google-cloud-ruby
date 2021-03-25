@@ -9,22 +9,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client",
-          "methods": {
-            "CreateAutoscalingPolicy": [
-              "create_autoscaling_policy"
-            ],
-            "UpdateAutoscalingPolicy": [
-              "update_autoscaling_policy"
-            ],
-            "GetAutoscalingPolicy": [
-              "get_autoscaling_policy"
-            ],
-            "ListAutoscalingPolicies": [
-              "list_autoscaling_policies"
-            ],
-            "DeleteAutoscalingPolicy": [
-              "delete_autoscaling_policy"
-            ]
+          "rpcs": {
+            "CreateAutoscalingPolicy": {
+              "methods": [
+                "create_autoscaling_policy"
+              ]
+            },
+            "UpdateAutoscalingPolicy": {
+              "methods": [
+                "update_autoscaling_policy"
+              ]
+            },
+            "GetAutoscalingPolicy": {
+              "methods": [
+                "get_autoscaling_policy"
+              ]
+            },
+            "ListAutoscalingPolicies": {
+              "methods": [
+                "list_autoscaling_policies"
+              ]
+            },
+            "DeleteAutoscalingPolicy": {
+              "methods": [
+                "delete_autoscaling_policy"
+              ]
+            }
           }
         }
       }
@@ -33,25 +43,37 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dataproc::V1beta2::ClusterController::Client",
-          "methods": {
-            "CreateCluster": [
-              "create_cluster"
-            ],
-            "UpdateCluster": [
-              "update_cluster"
-            ],
-            "DeleteCluster": [
-              "delete_cluster"
-            ],
-            "GetCluster": [
-              "get_cluster"
-            ],
-            "ListClusters": [
-              "list_clusters"
-            ],
-            "DiagnoseCluster": [
-              "diagnose_cluster"
-            ]
+          "rpcs": {
+            "CreateCluster": {
+              "methods": [
+                "create_cluster"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "update_cluster"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "delete_cluster"
+              ]
+            },
+            "GetCluster": {
+              "methods": [
+                "get_cluster"
+              ]
+            },
+            "ListClusters": {
+              "methods": [
+                "list_clusters"
+              ]
+            },
+            "DiagnoseCluster": {
+              "methods": [
+                "diagnose_cluster"
+              ]
+            }
           }
         }
       }
@@ -60,28 +82,42 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dataproc::V1beta2::JobController::Client",
-          "methods": {
-            "SubmitJob": [
-              "submit_job"
-            ],
-            "SubmitJobAsOperation": [
-              "submit_job_as_operation"
-            ],
-            "GetJob": [
-              "get_job"
-            ],
-            "ListJobs": [
-              "list_jobs"
-            ],
-            "UpdateJob": [
-              "update_job"
-            ],
-            "CancelJob": [
-              "cancel_job"
-            ],
-            "DeleteJob": [
-              "delete_job"
-            ]
+          "rpcs": {
+            "SubmitJob": {
+              "methods": [
+                "submit_job"
+              ]
+            },
+            "SubmitJobAsOperation": {
+              "methods": [
+                "submit_job_as_operation"
+              ]
+            },
+            "GetJob": {
+              "methods": [
+                "get_job"
+              ]
+            },
+            "ListJobs": {
+              "methods": [
+                "list_jobs"
+              ]
+            },
+            "UpdateJob": {
+              "methods": [
+                "update_job"
+              ]
+            },
+            "CancelJob": {
+              "methods": [
+                "cancel_job"
+              ]
+            },
+            "DeleteJob": {
+              "methods": [
+                "delete_job"
+              ]
+            }
           }
         }
       }
@@ -90,28 +126,42 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client",
-          "methods": {
-            "CreateWorkflowTemplate": [
-              "create_workflow_template"
-            ],
-            "GetWorkflowTemplate": [
-              "get_workflow_template"
-            ],
-            "InstantiateWorkflowTemplate": [
-              "instantiate_workflow_template"
-            ],
-            "InstantiateInlineWorkflowTemplate": [
-              "instantiate_inline_workflow_template"
-            ],
-            "UpdateWorkflowTemplate": [
-              "update_workflow_template"
-            ],
-            "ListWorkflowTemplates": [
-              "list_workflow_templates"
-            ],
-            "DeleteWorkflowTemplate": [
-              "delete_workflow_template"
-            ]
+          "rpcs": {
+            "CreateWorkflowTemplate": {
+              "methods": [
+                "create_workflow_template"
+              ]
+            },
+            "GetWorkflowTemplate": {
+              "methods": [
+                "get_workflow_template"
+              ]
+            },
+            "InstantiateWorkflowTemplate": {
+              "methods": [
+                "instantiate_workflow_template"
+              ]
+            },
+            "InstantiateInlineWorkflowTemplate": {
+              "methods": [
+                "instantiate_inline_workflow_template"
+              ]
+            },
+            "UpdateWorkflowTemplate": {
+              "methods": [
+                "update_workflow_template"
+              ]
+            },
+            "ListWorkflowTemplates": {
+              "methods": [
+                "list_workflow_templates"
+              ]
+            },
+            "DeleteWorkflowTemplate": {
+              "methods": [
+                "delete_workflow_template"
+              ]
+            }
           }
         }
       }

@@ -9,19 +9,27 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::AppEngine::V1::Applications::Client",
-          "methods": {
-            "GetApplication": [
-              "get_application"
-            ],
-            "CreateApplication": [
-              "create_application"
-            ],
-            "UpdateApplication": [
-              "update_application"
-            ],
-            "RepairApplication": [
-              "repair_application"
-            ]
+          "rpcs": {
+            "GetApplication": {
+              "methods": [
+                "get_application"
+              ]
+            },
+            "CreateApplication": {
+              "methods": [
+                "create_application"
+              ]
+            },
+            "UpdateApplication": {
+              "methods": [
+                "update_application"
+              ]
+            },
+            "RepairApplication": {
+              "methods": [
+                "repair_application"
+              ]
+            }
           }
         }
       }
@@ -30,19 +38,27 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::AppEngine::V1::Services::Client",
-          "methods": {
-            "ListServices": [
-              "list_services"
-            ],
-            "GetService": [
-              "get_service"
-            ],
-            "UpdateService": [
-              "update_service"
-            ],
-            "DeleteService": [
-              "delete_service"
-            ]
+          "rpcs": {
+            "ListServices": {
+              "methods": [
+                "list_services"
+              ]
+            },
+            "GetService": {
+              "methods": [
+                "get_service"
+              ]
+            },
+            "UpdateService": {
+              "methods": [
+                "update_service"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "delete_service"
+              ]
+            }
           }
         }
       }
@@ -51,22 +67,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::AppEngine::V1::Versions::Client",
-          "methods": {
-            "ListVersions": [
-              "list_versions"
-            ],
-            "GetVersion": [
-              "get_version"
-            ],
-            "CreateVersion": [
-              "create_version"
-            ],
-            "UpdateVersion": [
-              "update_version"
-            ],
-            "DeleteVersion": [
-              "delete_version"
-            ]
+          "rpcs": {
+            "ListVersions": {
+              "methods": [
+                "list_versions"
+              ]
+            },
+            "GetVersion": {
+              "methods": [
+                "get_version"
+              ]
+            },
+            "CreateVersion": {
+              "methods": [
+                "create_version"
+              ]
+            },
+            "UpdateVersion": {
+              "methods": [
+                "update_version"
+              ]
+            },
+            "DeleteVersion": {
+              "methods": [
+                "delete_version"
+              ]
+            }
           }
         }
       }
@@ -75,19 +101,27 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::AppEngine::V1::Instances::Client",
-          "methods": {
-            "ListInstances": [
-              "list_instances"
-            ],
-            "GetInstance": [
-              "get_instance"
-            ],
-            "DeleteInstance": [
-              "delete_instance"
-            ],
-            "DebugInstance": [
-              "debug_instance"
-            ]
+          "rpcs": {
+            "ListInstances": {
+              "methods": [
+                "list_instances"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "get_instance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "delete_instance"
+              ]
+            },
+            "DebugInstance": {
+              "methods": [
+                "debug_instance"
+              ]
+            }
           }
         }
       }
@@ -96,25 +130,37 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::AppEngine::V1::Firewall::Client",
-          "methods": {
-            "ListIngressRules": [
-              "list_ingress_rules"
-            ],
-            "BatchUpdateIngressRules": [
-              "batch_update_ingress_rules"
-            ],
-            "CreateIngressRule": [
-              "create_ingress_rule"
-            ],
-            "GetIngressRule": [
-              "get_ingress_rule"
-            ],
-            "UpdateIngressRule": [
-              "update_ingress_rule"
-            ],
-            "DeleteIngressRule": [
-              "delete_ingress_rule"
-            ]
+          "rpcs": {
+            "ListIngressRules": {
+              "methods": [
+                "list_ingress_rules"
+              ]
+            },
+            "BatchUpdateIngressRules": {
+              "methods": [
+                "batch_update_ingress_rules"
+              ]
+            },
+            "CreateIngressRule": {
+              "methods": [
+                "create_ingress_rule"
+              ]
+            },
+            "GetIngressRule": {
+              "methods": [
+                "get_ingress_rule"
+              ]
+            },
+            "UpdateIngressRule": {
+              "methods": [
+                "update_ingress_rule"
+              ]
+            },
+            "DeleteIngressRule": {
+              "methods": [
+                "delete_ingress_rule"
+              ]
+            }
           }
         }
       }
@@ -123,10 +169,12 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::AppEngine::V1::AuthorizedDomains::Client",
-          "methods": {
-            "ListAuthorizedDomains": [
-              "list_authorized_domains"
-            ]
+          "rpcs": {
+            "ListAuthorizedDomains": {
+              "methods": [
+                "list_authorized_domains"
+              ]
+            }
           }
         }
       }
@@ -135,22 +183,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client",
-          "methods": {
-            "ListAuthorizedCertificates": [
-              "list_authorized_certificates"
-            ],
-            "GetAuthorizedCertificate": [
-              "get_authorized_certificate"
-            ],
-            "CreateAuthorizedCertificate": [
-              "create_authorized_certificate"
-            ],
-            "UpdateAuthorizedCertificate": [
-              "update_authorized_certificate"
-            ],
-            "DeleteAuthorizedCertificate": [
-              "delete_authorized_certificate"
-            ]
+          "rpcs": {
+            "ListAuthorizedCertificates": {
+              "methods": [
+                "list_authorized_certificates"
+              ]
+            },
+            "GetAuthorizedCertificate": {
+              "methods": [
+                "get_authorized_certificate"
+              ]
+            },
+            "CreateAuthorizedCertificate": {
+              "methods": [
+                "create_authorized_certificate"
+              ]
+            },
+            "UpdateAuthorizedCertificate": {
+              "methods": [
+                "update_authorized_certificate"
+              ]
+            },
+            "DeleteAuthorizedCertificate": {
+              "methods": [
+                "delete_authorized_certificate"
+              ]
+            }
           }
         }
       }
@@ -159,22 +217,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::AppEngine::V1::DomainMappings::Client",
-          "methods": {
-            "ListDomainMappings": [
-              "list_domain_mappings"
-            ],
-            "GetDomainMapping": [
-              "get_domain_mapping"
-            ],
-            "CreateDomainMapping": [
-              "create_domain_mapping"
-            ],
-            "UpdateDomainMapping": [
-              "update_domain_mapping"
-            ],
-            "DeleteDomainMapping": [
-              "delete_domain_mapping"
-            ]
+          "rpcs": {
+            "ListDomainMappings": {
+              "methods": [
+                "list_domain_mappings"
+              ]
+            },
+            "GetDomainMapping": {
+              "methods": [
+                "get_domain_mapping"
+              ]
+            },
+            "CreateDomainMapping": {
+              "methods": [
+                "create_domain_mapping"
+              ]
+            },
+            "UpdateDomainMapping": {
+              "methods": [
+                "update_domain_mapping"
+              ]
+            },
+            "DeleteDomainMapping": {
+              "methods": [
+                "delete_domain_mapping"
+              ]
+            }
           }
         }
       }

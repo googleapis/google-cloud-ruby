@@ -9,31 +9,47 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Recommender::V1::Recommender::Client",
-          "methods": {
-            "ListInsights": [
-              "list_insights"
-            ],
-            "GetInsight": [
-              "get_insight"
-            ],
-            "MarkInsightAccepted": [
-              "mark_insight_accepted"
-            ],
-            "ListRecommendations": [
-              "list_recommendations"
-            ],
-            "GetRecommendation": [
-              "get_recommendation"
-            ],
-            "MarkRecommendationClaimed": [
-              "mark_recommendation_claimed"
-            ],
-            "MarkRecommendationSucceeded": [
-              "mark_recommendation_succeeded"
-            ],
-            "MarkRecommendationFailed": [
-              "mark_recommendation_failed"
-            ]
+          "rpcs": {
+            "ListInsights": {
+              "methods": [
+                "list_insights"
+              ]
+            },
+            "GetInsight": {
+              "methods": [
+                "get_insight"
+              ]
+            },
+            "MarkInsightAccepted": {
+              "methods": [
+                "mark_insight_accepted"
+              ]
+            },
+            "ListRecommendations": {
+              "methods": [
+                "list_recommendations"
+              ]
+            },
+            "GetRecommendation": {
+              "methods": [
+                "get_recommendation"
+              ]
+            },
+            "MarkRecommendationClaimed": {
+              "methods": [
+                "mark_recommendation_claimed"
+              ]
+            },
+            "MarkRecommendationSucceeded": {
+              "methods": [
+                "mark_recommendation_succeeded"
+              ]
+            },
+            "MarkRecommendationFailed": {
+              "methods": [
+                "mark_recommendation_failed"
+              ]
+            }
           }
         }
       }

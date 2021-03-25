@@ -9,13 +9,17 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Trace::V2::TraceService::Client",
-          "methods": {
-            "BatchWriteSpans": [
-              "batch_write_spans"
-            ],
-            "CreateSpan": [
-              "create_span"
-            ]
+          "rpcs": {
+            "BatchWriteSpans": {
+              "methods": [
+                "batch_write_spans"
+              ]
+            },
+            "CreateSpan": {
+              "methods": [
+                "create_span"
+              ]
+            }
           }
         }
       }

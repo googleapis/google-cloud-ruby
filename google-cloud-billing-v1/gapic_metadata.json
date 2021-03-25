@@ -9,37 +9,57 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Billing::V1::CloudBilling::Client",
-          "methods": {
-            "GetBillingAccount": [
-              "get_billing_account"
-            ],
-            "ListBillingAccounts": [
-              "list_billing_accounts"
-            ],
-            "UpdateBillingAccount": [
-              "update_billing_account"
-            ],
-            "CreateBillingAccount": [
-              "create_billing_account"
-            ],
-            "ListProjectBillingInfo": [
-              "list_project_billing_info"
-            ],
-            "GetProjectBillingInfo": [
-              "get_project_billing_info"
-            ],
-            "UpdateProjectBillingInfo": [
-              "update_project_billing_info"
-            ],
-            "GetIamPolicy": [
-              "get_iam_policy"
-            ],
-            "SetIamPolicy": [
-              "set_iam_policy"
-            ],
-            "TestIamPermissions": [
-              "test_iam_permissions"
-            ]
+          "rpcs": {
+            "GetBillingAccount": {
+              "methods": [
+                "get_billing_account"
+              ]
+            },
+            "ListBillingAccounts": {
+              "methods": [
+                "list_billing_accounts"
+              ]
+            },
+            "UpdateBillingAccount": {
+              "methods": [
+                "update_billing_account"
+              ]
+            },
+            "CreateBillingAccount": {
+              "methods": [
+                "create_billing_account"
+              ]
+            },
+            "ListProjectBillingInfo": {
+              "methods": [
+                "list_project_billing_info"
+              ]
+            },
+            "GetProjectBillingInfo": {
+              "methods": [
+                "get_project_billing_info"
+              ]
+            },
+            "UpdateProjectBillingInfo": {
+              "methods": [
+                "update_project_billing_info"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
           }
         }
       }
@@ -48,13 +68,17 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Billing::V1::CloudCatalog::Client",
-          "methods": {
-            "ListServices": [
-              "list_services"
-            ],
-            "ListSkus": [
-              "list_skus"
-            ]
+          "rpcs": {
+            "ListServices": {
+              "methods": [
+                "list_services"
+              ]
+            },
+            "ListSkus": {
+              "methods": [
+                "list_skus"
+              ]
+            }
           }
         }
       }

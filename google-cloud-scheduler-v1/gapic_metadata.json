@@ -9,31 +9,47 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Scheduler::V1::CloudScheduler::Client",
-          "methods": {
-            "ListJobs": [
-              "list_jobs"
-            ],
-            "GetJob": [
-              "get_job"
-            ],
-            "CreateJob": [
-              "create_job"
-            ],
-            "UpdateJob": [
-              "update_job"
-            ],
-            "DeleteJob": [
-              "delete_job"
-            ],
-            "PauseJob": [
-              "pause_job"
-            ],
-            "ResumeJob": [
-              "resume_job"
-            ],
-            "RunJob": [
-              "run_job"
-            ]
+          "rpcs": {
+            "ListJobs": {
+              "methods": [
+                "list_jobs"
+              ]
+            },
+            "GetJob": {
+              "methods": [
+                "get_job"
+              ]
+            },
+            "CreateJob": {
+              "methods": [
+                "create_job"
+              ]
+            },
+            "UpdateJob": {
+              "methods": [
+                "update_job"
+              ]
+            },
+            "DeleteJob": {
+              "methods": [
+                "delete_job"
+              ]
+            },
+            "PauseJob": {
+              "methods": [
+                "pause_job"
+              ]
+            },
+            "ResumeJob": {
+              "methods": [
+                "resume_job"
+              ]
+            },
+            "RunJob": {
+              "methods": [
+                "run_job"
+              ]
+            }
           }
         }
       }

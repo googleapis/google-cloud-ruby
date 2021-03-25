@@ -9,10 +9,12 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client",
-          "methods": {
-            "ResolveService": [
-              "resolve_service"
-            ]
+          "rpcs": {
+            "ResolveService": {
+              "methods": [
+                "resolve_service"
+              ]
+            }
           }
         }
       }
@@ -21,61 +23,97 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client",
-          "methods": {
-            "CreateNamespace": [
-              "create_namespace"
-            ],
-            "ListNamespaces": [
-              "list_namespaces"
-            ],
-            "GetNamespace": [
-              "get_namespace"
-            ],
-            "UpdateNamespace": [
-              "update_namespace"
-            ],
-            "DeleteNamespace": [
-              "delete_namespace"
-            ],
-            "CreateService": [
-              "create_service"
-            ],
-            "ListServices": [
-              "list_services"
-            ],
-            "GetService": [
-              "get_service"
-            ],
-            "UpdateService": [
-              "update_service"
-            ],
-            "DeleteService": [
-              "delete_service"
-            ],
-            "CreateEndpoint": [
-              "create_endpoint"
-            ],
-            "ListEndpoints": [
-              "list_endpoints"
-            ],
-            "GetEndpoint": [
-              "get_endpoint"
-            ],
-            "UpdateEndpoint": [
-              "update_endpoint"
-            ],
-            "DeleteEndpoint": [
-              "delete_endpoint"
-            ],
-            "GetIamPolicy": [
-              "get_iam_policy"
-            ],
-            "SetIamPolicy": [
-              "set_iam_policy"
-            ],
-            "TestIamPermissions": [
-              "test_iam_permissions"
-            ]
+          "rpcs": {
+            "CreateNamespace": {
+              "methods": [
+                "create_namespace"
+              ]
+            },
+            "ListNamespaces": {
+              "methods": [
+                "list_namespaces"
+              ]
+            },
+            "GetNamespace": {
+              "methods": [
+                "get_namespace"
+              ]
+            },
+            "UpdateNamespace": {
+              "methods": [
+                "update_namespace"
+              ]
+            },
+            "DeleteNamespace": {
+              "methods": [
+                "delete_namespace"
+              ]
+            },
+            "CreateService": {
+              "methods": [
+                "create_service"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "list_services"
+              ]
+            },
+            "GetService": {
+              "methods": [
+                "get_service"
+              ]
+            },
+            "UpdateService": {
+              "methods": [
+                "update_service"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "delete_service"
+              ]
+            },
+            "CreateEndpoint": {
+              "methods": [
+                "create_endpoint"
+              ]
+            },
+            "ListEndpoints": {
+              "methods": [
+                "list_endpoints"
+              ]
+            },
+            "GetEndpoint": {
+              "methods": [
+                "get_endpoint"
+              ]
+            },
+            "UpdateEndpoint": {
+              "methods": [
+                "update_endpoint"
+              ]
+            },
+            "DeleteEndpoint": {
+              "methods": [
+                "delete_endpoint"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
           }
         }
       }

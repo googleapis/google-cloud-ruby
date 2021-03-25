@@ -9,13 +9,17 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Retail::V2::CatalogService::Client",
-          "methods": {
-            "ListCatalogs": [
-              "list_catalogs"
-            ],
-            "UpdateCatalog": [
-              "update_catalog"
-            ]
+          "rpcs": {
+            "ListCatalogs": {
+              "methods": [
+                "list_catalogs"
+              ]
+            },
+            "UpdateCatalog": {
+              "methods": [
+                "update_catalog"
+              ]
+            }
           }
         }
       }
@@ -24,10 +28,12 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Retail::V2::PredictionService::Client",
-          "methods": {
-            "Predict": [
-              "predict"
-            ]
+          "rpcs": {
+            "Predict": {
+              "methods": [
+                "predict"
+              ]
+            }
           }
         }
       }
@@ -36,22 +42,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Retail::V2::ProductService::Client",
-          "methods": {
-            "CreateProduct": [
-              "create_product"
-            ],
-            "GetProduct": [
-              "get_product"
-            ],
-            "UpdateProduct": [
-              "update_product"
-            ],
-            "DeleteProduct": [
-              "delete_product"
-            ],
-            "ImportProducts": [
-              "import_products"
-            ]
+          "rpcs": {
+            "CreateProduct": {
+              "methods": [
+                "create_product"
+              ]
+            },
+            "GetProduct": {
+              "methods": [
+                "get_product"
+              ]
+            },
+            "UpdateProduct": {
+              "methods": [
+                "update_product"
+              ]
+            },
+            "DeleteProduct": {
+              "methods": [
+                "delete_product"
+              ]
+            },
+            "ImportProducts": {
+              "methods": [
+                "import_products"
+              ]
+            }
           }
         }
       }
@@ -60,22 +76,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Retail::V2::UserEventService::Client",
-          "methods": {
-            "WriteUserEvent": [
-              "write_user_event"
-            ],
-            "CollectUserEvent": [
-              "collect_user_event"
-            ],
-            "PurgeUserEvents": [
-              "purge_user_events"
-            ],
-            "ImportUserEvents": [
-              "import_user_events"
-            ],
-            "RejoinUserEvents": [
-              "rejoin_user_events"
-            ]
+          "rpcs": {
+            "WriteUserEvent": {
+              "methods": [
+                "write_user_event"
+              ]
+            },
+            "CollectUserEvent": {
+              "methods": [
+                "collect_user_event"
+              ]
+            },
+            "PurgeUserEvents": {
+              "methods": [
+                "purge_user_events"
+              ]
+            },
+            "ImportUserEvents": {
+              "methods": [
+                "import_user_events"
+              ]
+            },
+            "RejoinUserEvents": {
+              "methods": [
+                "rejoin_user_events"
+              ]
+            }
           }
         }
       }

@@ -9,25 +9,37 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::PubSub::V1::SchemaService::Client",
-          "methods": {
-            "CreateSchema": [
-              "create_schema"
-            ],
-            "GetSchema": [
-              "get_schema"
-            ],
-            "ListSchemas": [
-              "list_schemas"
-            ],
-            "DeleteSchema": [
-              "delete_schema"
-            ],
-            "ValidateSchema": [
-              "validate_schema"
-            ],
-            "ValidateMessage": [
-              "validate_message"
-            ]
+          "rpcs": {
+            "CreateSchema": {
+              "methods": [
+                "create_schema"
+              ]
+            },
+            "GetSchema": {
+              "methods": [
+                "get_schema"
+              ]
+            },
+            "ListSchemas": {
+              "methods": [
+                "list_schemas"
+              ]
+            },
+            "DeleteSchema": {
+              "methods": [
+                "delete_schema"
+              ]
+            },
+            "ValidateSchema": {
+              "methods": [
+                "validate_schema"
+              ]
+            },
+            "ValidateMessage": {
+              "methods": [
+                "validate_message"
+              ]
+            }
           }
         }
       }
@@ -36,34 +48,52 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::PubSub::V1::Publisher::Client",
-          "methods": {
-            "CreateTopic": [
-              "create_topic"
-            ],
-            "UpdateTopic": [
-              "update_topic"
-            ],
-            "Publish": [
-              "publish"
-            ],
-            "GetTopic": [
-              "get_topic"
-            ],
-            "ListTopics": [
-              "list_topics"
-            ],
-            "ListTopicSubscriptions": [
-              "list_topic_subscriptions"
-            ],
-            "ListTopicSnapshots": [
-              "list_topic_snapshots"
-            ],
-            "DeleteTopic": [
-              "delete_topic"
-            ],
-            "DetachSubscription": [
-              "detach_subscription"
-            ]
+          "rpcs": {
+            "CreateTopic": {
+              "methods": [
+                "create_topic"
+              ]
+            },
+            "UpdateTopic": {
+              "methods": [
+                "update_topic"
+              ]
+            },
+            "Publish": {
+              "methods": [
+                "publish"
+              ]
+            },
+            "GetTopic": {
+              "methods": [
+                "get_topic"
+              ]
+            },
+            "ListTopics": {
+              "methods": [
+                "list_topics"
+              ]
+            },
+            "ListTopicSubscriptions": {
+              "methods": [
+                "list_topic_subscriptions"
+              ]
+            },
+            "ListTopicSnapshots": {
+              "methods": [
+                "list_topic_snapshots"
+              ]
+            },
+            "DeleteTopic": {
+              "methods": [
+                "delete_topic"
+              ]
+            },
+            "DetachSubscription": {
+              "methods": [
+                "detach_subscription"
+              ]
+            }
           }
         }
       }
@@ -72,55 +102,87 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::PubSub::V1::Subscriber::Client",
-          "methods": {
-            "CreateSubscription": [
-              "create_subscription"
-            ],
-            "GetSubscription": [
-              "get_subscription"
-            ],
-            "UpdateSubscription": [
-              "update_subscription"
-            ],
-            "ListSubscriptions": [
-              "list_subscriptions"
-            ],
-            "DeleteSubscription": [
-              "delete_subscription"
-            ],
-            "ModifyAckDeadline": [
-              "modify_ack_deadline"
-            ],
-            "Acknowledge": [
-              "acknowledge"
-            ],
-            "Pull": [
-              "pull"
-            ],
-            "StreamingPull": [
-              "streaming_pull"
-            ],
-            "ModifyPushConfig": [
-              "modify_push_config"
-            ],
-            "GetSnapshot": [
-              "get_snapshot"
-            ],
-            "ListSnapshots": [
-              "list_snapshots"
-            ],
-            "CreateSnapshot": [
-              "create_snapshot"
-            ],
-            "UpdateSnapshot": [
-              "update_snapshot"
-            ],
-            "DeleteSnapshot": [
-              "delete_snapshot"
-            ],
-            "Seek": [
-              "seek"
-            ]
+          "rpcs": {
+            "CreateSubscription": {
+              "methods": [
+                "create_subscription"
+              ]
+            },
+            "GetSubscription": {
+              "methods": [
+                "get_subscription"
+              ]
+            },
+            "UpdateSubscription": {
+              "methods": [
+                "update_subscription"
+              ]
+            },
+            "ListSubscriptions": {
+              "methods": [
+                "list_subscriptions"
+              ]
+            },
+            "DeleteSubscription": {
+              "methods": [
+                "delete_subscription"
+              ]
+            },
+            "ModifyAckDeadline": {
+              "methods": [
+                "modify_ack_deadline"
+              ]
+            },
+            "Acknowledge": {
+              "methods": [
+                "acknowledge"
+              ]
+            },
+            "Pull": {
+              "methods": [
+                "pull"
+              ]
+            },
+            "StreamingPull": {
+              "methods": [
+                "streaming_pull"
+              ]
+            },
+            "ModifyPushConfig": {
+              "methods": [
+                "modify_push_config"
+              ]
+            },
+            "GetSnapshot": {
+              "methods": [
+                "get_snapshot"
+              ]
+            },
+            "ListSnapshots": {
+              "methods": [
+                "list_snapshots"
+              ]
+            },
+            "CreateSnapshot": {
+              "methods": [
+                "create_snapshot"
+              ]
+            },
+            "UpdateSnapshot": {
+              "methods": [
+                "update_snapshot"
+              ]
+            },
+            "DeleteSnapshot": {
+              "methods": [
+                "delete_snapshot"
+              ]
+            },
+            "Seek": {
+              "methods": [
+                "seek"
+              ]
+            }
           }
         }
       }
@@ -129,16 +191,22 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::PubSub::V1::IAMPolicy::Client",
-          "methods": {
-            "SetIamPolicy": [
-              "set_iam_policy"
-            ],
-            "GetIamPolicy": [
-              "get_iam_policy"
-            ],
-            "TestIamPermissions": [
-              "test_iam_permissions"
-            ]
+          "rpcs": {
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
           }
         }
       }

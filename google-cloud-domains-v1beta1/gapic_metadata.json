@@ -9,46 +9,72 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Domains::V1beta1::Domains::Client",
-          "methods": {
-            "SearchDomains": [
-              "search_domains"
-            ],
-            "RetrieveRegisterParameters": [
-              "retrieve_register_parameters"
-            ],
-            "RegisterDomain": [
-              "register_domain"
-            ],
-            "ListRegistrations": [
-              "list_registrations"
-            ],
-            "GetRegistration": [
-              "get_registration"
-            ],
-            "UpdateRegistration": [
-              "update_registration"
-            ],
-            "ConfigureManagementSettings": [
-              "configure_management_settings"
-            ],
-            "ConfigureDnsSettings": [
-              "configure_dns_settings"
-            ],
-            "ConfigureContactSettings": [
-              "configure_contact_settings"
-            ],
-            "ExportRegistration": [
-              "export_registration"
-            ],
-            "DeleteRegistration": [
-              "delete_registration"
-            ],
-            "RetrieveAuthorizationCode": [
-              "retrieve_authorization_code"
-            ],
-            "ResetAuthorizationCode": [
-              "reset_authorization_code"
-            ]
+          "rpcs": {
+            "SearchDomains": {
+              "methods": [
+                "search_domains"
+              ]
+            },
+            "RetrieveRegisterParameters": {
+              "methods": [
+                "retrieve_register_parameters"
+              ]
+            },
+            "RegisterDomain": {
+              "methods": [
+                "register_domain"
+              ]
+            },
+            "ListRegistrations": {
+              "methods": [
+                "list_registrations"
+              ]
+            },
+            "GetRegistration": {
+              "methods": [
+                "get_registration"
+              ]
+            },
+            "UpdateRegistration": {
+              "methods": [
+                "update_registration"
+              ]
+            },
+            "ConfigureManagementSettings": {
+              "methods": [
+                "configure_management_settings"
+              ]
+            },
+            "ConfigureDnsSettings": {
+              "methods": [
+                "configure_dns_settings"
+              ]
+            },
+            "ConfigureContactSettings": {
+              "methods": [
+                "configure_contact_settings"
+              ]
+            },
+            "ExportRegistration": {
+              "methods": [
+                "export_registration"
+              ]
+            },
+            "DeleteRegistration": {
+              "methods": [
+                "delete_registration"
+              ]
+            },
+            "RetrieveAuthorizationCode": {
+              "methods": [
+                "retrieve_authorization_code"
+              ]
+            },
+            "ResetAuthorizationCode": {
+              "methods": [
+                "reset_authorization_code"
+              ]
+            }
           }
         }
       }

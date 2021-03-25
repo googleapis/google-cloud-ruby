@@ -9,52 +9,82 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Spanner::V1::Spanner::Client",
-          "methods": {
-            "CreateSession": [
-              "create_session"
-            ],
-            "BatchCreateSessions": [
-              "batch_create_sessions"
-            ],
-            "GetSession": [
-              "get_session"
-            ],
-            "ListSessions": [
-              "list_sessions"
-            ],
-            "DeleteSession": [
-              "delete_session"
-            ],
-            "ExecuteSql": [
-              "execute_sql"
-            ],
-            "ExecuteStreamingSql": [
-              "execute_streaming_sql"
-            ],
-            "ExecuteBatchDml": [
-              "execute_batch_dml"
-            ],
-            "Read": [
-              "read"
-            ],
-            "StreamingRead": [
-              "streaming_read"
-            ],
-            "BeginTransaction": [
-              "begin_transaction"
-            ],
-            "Commit": [
-              "commit"
-            ],
-            "Rollback": [
-              "rollback"
-            ],
-            "PartitionQuery": [
-              "partition_query"
-            ],
-            "PartitionRead": [
-              "partition_read"
-            ]
+          "rpcs": {
+            "CreateSession": {
+              "methods": [
+                "create_session"
+              ]
+            },
+            "BatchCreateSessions": {
+              "methods": [
+                "batch_create_sessions"
+              ]
+            },
+            "GetSession": {
+              "methods": [
+                "get_session"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "list_sessions"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "delete_session"
+              ]
+            },
+            "ExecuteSql": {
+              "methods": [
+                "execute_sql"
+              ]
+            },
+            "ExecuteStreamingSql": {
+              "methods": [
+                "execute_streaming_sql"
+              ]
+            },
+            "ExecuteBatchDml": {
+              "methods": [
+                "execute_batch_dml"
+              ]
+            },
+            "Read": {
+              "methods": [
+                "read"
+              ]
+            },
+            "StreamingRead": {
+              "methods": [
+                "streaming_read"
+              ]
+            },
+            "BeginTransaction": {
+              "methods": [
+                "begin_transaction"
+              ]
+            },
+            "Commit": {
+              "methods": [
+                "commit"
+              ]
+            },
+            "Rollback": {
+              "methods": [
+                "rollback"
+              ]
+            },
+            "PartitionQuery": {
+              "methods": [
+                "partition_query"
+              ]
+            },
+            "PartitionRead": {
+              "methods": [
+                "partition_read"
+              ]
+            }
           }
         }
       }

@@ -9,28 +9,42 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Datastore::V1::Datastore::Client",
-          "methods": {
-            "Lookup": [
-              "lookup"
-            ],
-            "RunQuery": [
-              "run_query"
-            ],
-            "BeginTransaction": [
-              "begin_transaction"
-            ],
-            "Commit": [
-              "commit"
-            ],
-            "Rollback": [
-              "rollback"
-            ],
-            "AllocateIds": [
-              "allocate_ids"
-            ],
-            "ReserveIds": [
-              "reserve_ids"
-            ]
+          "rpcs": {
+            "Lookup": {
+              "methods": [
+                "lookup"
+              ]
+            },
+            "RunQuery": {
+              "methods": [
+                "run_query"
+              ]
+            },
+            "BeginTransaction": {
+              "methods": [
+                "begin_transaction"
+              ]
+            },
+            "Commit": {
+              "methods": [
+                "commit"
+              ]
+            },
+            "Rollback": {
+              "methods": [
+                "rollback"
+              ]
+            },
+            "AllocateIds": {
+              "methods": [
+                "allocate_ids"
+              ]
+            },
+            "ReserveIds": {
+              "methods": [
+                "reserve_ids"
+              ]
+            }
           }
         }
       }

@@ -9,40 +9,62 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Asset::V1::AssetService::Client",
-          "methods": {
-            "ExportAssets": [
-              "export_assets"
-            ],
-            "BatchGetAssetsHistory": [
-              "batch_get_assets_history"
-            ],
-            "CreateFeed": [
-              "create_feed"
-            ],
-            "GetFeed": [
-              "get_feed"
-            ],
-            "ListFeeds": [
-              "list_feeds"
-            ],
-            "UpdateFeed": [
-              "update_feed"
-            ],
-            "DeleteFeed": [
-              "delete_feed"
-            ],
-            "SearchAllResources": [
-              "search_all_resources"
-            ],
-            "SearchAllIamPolicies": [
-              "search_all_iam_policies"
-            ],
-            "AnalyzeIamPolicy": [
-              "analyze_iam_policy"
-            ],
-            "AnalyzeIamPolicyLongrunning": [
-              "analyze_iam_policy_longrunning"
-            ]
+          "rpcs": {
+            "ExportAssets": {
+              "methods": [
+                "export_assets"
+              ]
+            },
+            "BatchGetAssetsHistory": {
+              "methods": [
+                "batch_get_assets_history"
+              ]
+            },
+            "CreateFeed": {
+              "methods": [
+                "create_feed"
+              ]
+            },
+            "GetFeed": {
+              "methods": [
+                "get_feed"
+              ]
+            },
+            "ListFeeds": {
+              "methods": [
+                "list_feeds"
+              ]
+            },
+            "UpdateFeed": {
+              "methods": [
+                "update_feed"
+              ]
+            },
+            "DeleteFeed": {
+              "methods": [
+                "delete_feed"
+              ]
+            },
+            "SearchAllResources": {
+              "methods": [
+                "search_all_resources"
+              ]
+            },
+            "SearchAllIamPolicies": {
+              "methods": [
+                "search_all_iam_policies"
+              ]
+            },
+            "AnalyzeIamPolicy": {
+              "methods": [
+                "analyze_iam_policy"
+              ]
+            },
+            "AnalyzeIamPolicyLongrunning": {
+              "methods": [
+                "analyze_iam_policy_longrunning"
+              ]
+            }
           }
         }
       }

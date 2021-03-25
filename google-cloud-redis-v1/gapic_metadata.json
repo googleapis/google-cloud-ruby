@@ -9,34 +9,52 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Redis::V1::CloudRedis::Client",
-          "methods": {
-            "ListInstances": [
-              "list_instances"
-            ],
-            "GetInstance": [
-              "get_instance"
-            ],
-            "CreateInstance": [
-              "create_instance"
-            ],
-            "UpdateInstance": [
-              "update_instance"
-            ],
-            "UpgradeInstance": [
-              "upgrade_instance"
-            ],
-            "ImportInstance": [
-              "import_instance"
-            ],
-            "ExportInstance": [
-              "export_instance"
-            ],
-            "FailoverInstance": [
-              "failover_instance"
-            ],
-            "DeleteInstance": [
-              "delete_instance"
-            ]
+          "rpcs": {
+            "ListInstances": {
+              "methods": [
+                "list_instances"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "get_instance"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "create_instance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "update_instance"
+              ]
+            },
+            "UpgradeInstance": {
+              "methods": [
+                "upgrade_instance"
+              ]
+            },
+            "ImportInstance": {
+              "methods": [
+                "import_instance"
+              ]
+            },
+            "ExportInstance": {
+              "methods": [
+                "export_instance"
+              ]
+            },
+            "FailoverInstance": {
+              "methods": [
+                "failover_instance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "delete_instance"
+              ]
+            }
           }
         }
       }

@@ -9,28 +9,42 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client",
-          "methods": {
-            "ListConstraints": [
-              "list_constraints"
-            ],
-            "ListPolicies": [
-              "list_policies"
-            ],
-            "GetPolicy": [
-              "get_policy"
-            ],
-            "GetEffectivePolicy": [
-              "get_effective_policy"
-            ],
-            "CreatePolicy": [
-              "create_policy"
-            ],
-            "UpdatePolicy": [
-              "update_policy"
-            ],
-            "DeletePolicy": [
-              "delete_policy"
-            ]
+          "rpcs": {
+            "ListConstraints": {
+              "methods": [
+                "list_constraints"
+              ]
+            },
+            "ListPolicies": {
+              "methods": [
+                "list_policies"
+              ]
+            },
+            "GetPolicy": {
+              "methods": [
+                "get_policy"
+              ]
+            },
+            "GetEffectivePolicy": {
+              "methods": [
+                "get_effective_policy"
+              ]
+            },
+            "CreatePolicy": {
+              "methods": [
+                "create_policy"
+              ]
+            },
+            "UpdatePolicy": {
+              "methods": [
+                "update_policy"
+              ]
+            },
+            "DeletePolicy": {
+              "methods": [
+                "delete_policy"
+              ]
+            }
           }
         }
       }

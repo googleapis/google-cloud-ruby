@@ -9,43 +9,67 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Area120::Tables::V1alpha1::TablesService::Client",
-          "methods": {
-            "GetTable": [
-              "get_table"
-            ],
-            "ListTables": [
-              "list_tables"
-            ],
-            "GetWorkspace": [
-              "get_workspace"
-            ],
-            "ListWorkspaces": [
-              "list_workspaces"
-            ],
-            "GetRow": [
-              "get_row"
-            ],
-            "ListRows": [
-              "list_rows"
-            ],
-            "CreateRow": [
-              "create_row"
-            ],
-            "BatchCreateRows": [
-              "batch_create_rows"
-            ],
-            "UpdateRow": [
-              "update_row"
-            ],
-            "BatchUpdateRows": [
-              "batch_update_rows"
-            ],
-            "DeleteRow": [
-              "delete_row"
-            ],
-            "BatchDeleteRows": [
-              "batch_delete_rows"
-            ]
+          "rpcs": {
+            "GetTable": {
+              "methods": [
+                "get_table"
+              ]
+            },
+            "ListTables": {
+              "methods": [
+                "list_tables"
+              ]
+            },
+            "GetWorkspace": {
+              "methods": [
+                "get_workspace"
+              ]
+            },
+            "ListWorkspaces": {
+              "methods": [
+                "list_workspaces"
+              ]
+            },
+            "GetRow": {
+              "methods": [
+                "get_row"
+              ]
+            },
+            "ListRows": {
+              "methods": [
+                "list_rows"
+              ]
+            },
+            "CreateRow": {
+              "methods": [
+                "create_row"
+              ]
+            },
+            "BatchCreateRows": {
+              "methods": [
+                "batch_create_rows"
+              ]
+            },
+            "UpdateRow": {
+              "methods": [
+                "update_row"
+              ]
+            },
+            "BatchUpdateRows": {
+              "methods": [
+                "batch_update_rows"
+              ]
+            },
+            "DeleteRow": {
+              "methods": [
+                "delete_row"
+              ]
+            },
+            "BatchDeleteRows": {
+              "methods": [
+                "batch_delete_rows"
+              ]
+            }
           }
         }
       }
