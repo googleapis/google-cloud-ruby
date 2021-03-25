@@ -43,6 +43,9 @@
             "RunBuildTrigger": [
               "run_build_trigger"
             ],
+            "ReceiveTriggerWebhook": [
+              "receive_trigger_webhook"
+            ],
             "CreateWorkerPool": [
               "create_worker_pool"
             ],
