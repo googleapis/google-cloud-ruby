@@ -254,14 +254,14 @@ module Google
         # @param [Hash] encryption_config An encryption configuration describing
         #   the encryption type and key resources in Cloud KMS used to
         #   encrypt/decrypt the database to restore to. If this field is not
-        #   specified, the restored database will use the sam encryption
+        #   specified, the restored database will use the same encryption
         #   configuration as the backup by default. Optional. The following
         #   settings can be provided:
         #
         #   * `:kms_key_name` (String) The name of KMS key to use which should
         #     be the full path, e.g., `projects/<project>/locations/<location>\
         #     /keyRings/<key_ring>/cryptoKeys/<kms_key_name>`
-        #      This field should be set only when encryptioon type
+        #      This field should be set only when encryption type
         #     `:CUSTOMER_MANAGED_ENCRYPTION`.
         #   * `:encryption_type` (Symbol) The encryption type of the backup.
         #     Valid values are:

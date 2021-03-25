@@ -449,7 +449,7 @@ module Google
         #   * `:kms_key_name` (String) The name of KMS key to use which should
         #     be the full path, e.g., `projects/<project>/locations/<location>\
         #     /keyRings/<key_ring>/cryptoKeys/<kms_key_name>`
-        #     This field should be set only when encryptioon type
+        #     This field should be set only when encryption type
         #     `:CUSTOMER_MANAGED_ENCRYPTION`.
         #   * `:encryption_type` (Symbol) The encryption type of the backup.
         #     Valid values are:
