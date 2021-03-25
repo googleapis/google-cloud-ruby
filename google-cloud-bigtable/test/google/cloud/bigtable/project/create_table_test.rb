@@ -22,7 +22,7 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
 
   it "creates a table with column_families arg" do
     mock = Minitest::Mock.new
-    cluster_states = clusters_state_grpc(num: 1)
+    cluster_states = cluster_states_grpc(num: 1)
     column_families = column_families_grpc num: 1, max_versions: 1
 
     create_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
@@ -89,7 +89,7 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
 
   it "creates a table with column families block" do
     mock = Minitest::Mock.new
-    cluster_states = clusters_state_grpc(num: 1)
+    cluster_states = cluster_states_grpc(num: 1)
     column_families = column_families_grpc num: 1, max_versions: 1
 
     create_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
@@ -153,7 +153,7 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
 
   it "creates a table with initial split keys" do
     mock = Minitest::Mock.new
-    cluster_states = clusters_state_grpc(num: 1)
+    cluster_states = cluster_states_grpc(num: 1)
     column_families = column_families_grpc num: 1, max_versions: 1
 
     create_res = Google::Cloud::Bigtable::Admin::V2::Table.new(

@@ -22,7 +22,7 @@ describe Google::Cloud::Bigtable::Project, :table, :mock_bigtable do
 
   it "gets a table" do
     table_id = "found-table"
-    cluster_states = clusters_state_grpc
+    cluster_states = cluster_states_grpc
     column_families = column_families_grpc
     get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
       table_hash(

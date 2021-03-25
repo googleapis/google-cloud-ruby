@@ -637,6 +637,11 @@ module Google
         end
 
         # @private
+        def loaded_views
+          @loaded_views || Set[@view]
+        end
+
+        # @private
         # Creates a new Table instance from a Google::Cloud::Bigtable::Admin::V2::Table.
         #
         # @param grpc [Google::Cloud::Bigtable::Admin::V2::Table]

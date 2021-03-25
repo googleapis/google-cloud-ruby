@@ -97,7 +97,7 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
   end
 
   it "returns its source_table with perform_lookup and view options" do
-    cluster_states = clusters_state_grpc
+    cluster_states = cluster_states_grpc
     column_families = column_families_grpc
     get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
       table_hash(

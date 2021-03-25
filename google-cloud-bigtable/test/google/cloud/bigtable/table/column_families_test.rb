@@ -18,7 +18,7 @@ require "helper"
 describe Google::Cloud::Bigtable::Table, :column_families, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:table_id) { "test-table" }
-  let(:cluster_states) { clusters_state_grpc }
+  let(:cluster_states) { cluster_states_grpc }
   let(:column_families) { column_families_grpc }
   let(:table_grpc) do
     Google::Cloud::Bigtable::Admin::V2::Table.new(
@@ -54,7 +54,7 @@ describe Google::Cloud::Bigtable::Table, :column_families, :mock_bigtable do
     column_families_resp = column_families.dup
     column_families_resp["cf4"] = Google::Cloud::Bigtable::Admin::V2::ColumnFamily.new(gc_rule: gc_rule_1)
     column_families_resp["cf2"] = Google::Cloud::Bigtable::Admin::V2::ColumnFamily.new(gc_rule: gc_rule_2)
-    cluster_states = clusters_state_grpc(num: 1)
+    cluster_states = cluster_states_grpc(num: 1)
     table_resp = Google::Cloud::Bigtable::Admin::V2::Table.new(
       table_hash(
         name: table_path(instance_id, table_id),

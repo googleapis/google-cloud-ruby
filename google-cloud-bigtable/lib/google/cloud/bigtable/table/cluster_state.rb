@@ -15,6 +15,8 @@
 # limitations under the License.
 
 
+require "google/cloud/bigtable/encryption_info"
+
 module Google
   module Cloud
     module Bigtable
@@ -107,6 +109,16 @@ module Google
           #
           def ready_optimizing?
             replication_state == :READY_OPTIMIZING
+          end
+
+          ##
+          # The encryption info value objects for the table in this cluster. `ENCRYPTION_VIEW`
+          #
+          # @return [Array<Google::Cloud::Bigtable::EncryptionInfo>, nil] The array of encryption info value objects, or
+          # `nil` if none are present.
+          #
+          def encryption_infos
+            @grpc.encryption_info.map { |ei_grpc| Google::Cloud::Bigtable::EncryptionInfo.from_grpc ei_grpc }
           end
 
           # @private

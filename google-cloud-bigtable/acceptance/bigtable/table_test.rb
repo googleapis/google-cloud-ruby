@@ -19,6 +19,7 @@ require "bigtable_helper"
 
 describe "Instance Tables", :bigtable do
   let(:instance_id) { bigtable_instance_id }
+  let(:cluster_id) { bigtable_cluster_id }
 
   it "create, list all, get table and delete table" do
     table_id = "test-table-#{random_str}"
@@ -28,6 +29,7 @@ describe "Instance Tables", :bigtable do
     end
 
     _(table).must_be_kind_of Google::Cloud::Bigtable::Table
+    _(table.table_id).must_equal table_id
 
     tables = bigtable.tables(instance_id).to_a
     _(tables).wont_be :empty?
@@ -190,15 +192,31 @@ describe "Instance Tables", :bigtable do
       _(table.grpc.granularity).must_equal :MILLIS
     end
 
+    it "reloads with view option ENCRYPTION_VIEW" do
+      table.reload! view: :ENCRYPTION_VIEW
+
+      _(table.loaded_views).must_equal Set[:ENCRYPTION_VIEW]
+    end
+
     it "reloads with view option REPLICATION_VIEW" do
       table.reload! view: :REPLICATION_VIEW
 
       _(table.loaded_views).must_equal Set[:REPLICATION_VIEW]
 
       _(table.grpc.name).wont_be :nil?
-      _(table.grpc.cluster_states.count).must_be :>, 0
       _(table.grpc.column_families.count).must_equal 0
       _(table.grpc.granularity).must_equal :TIMESTAMP_GRANULARITY_UNSPECIFIED
+      
+      cluster_states = table.cluster_states
+      _(cluster_states).must_be_instance_of Array
+      _(cluster_states).wont_be :empty?
+      cs = cluster_states.first
+      _(cs).must_be_instance_of Google::Cloud::Bigtable::Table::ClusterState
+      _(cs.replication_state).must_equal :READY
+
+      encryption_infos = cs.encryption_infos
+      _(encryption_infos).must_be_instance_of Array
+      _(encryption_infos).must_be :empty?
     end
 
     it "reloads with view option FULL" do
@@ -207,9 +225,21 @@ describe "Instance Tables", :bigtable do
       _(table.loaded_views).must_equal Set[:FULL]
 
       _(table.grpc.name).wont_be :nil?
-      _(table.grpc.cluster_states.count).must_be :>, 0
       _(table.grpc.column_families.count).must_be :>, 0
       _(table.grpc.granularity).must_equal :MILLIS
+
+      cluster_states = table.cluster_states
+      _(cluster_states).must_be_instance_of Array
+      _(cluster_states).wont_be :empty?
+      cs = cluster_states.first
+      _(cs).must_be_instance_of Google::Cloud::Bigtable::Table::ClusterState
+      _(cs.replication_state).must_equal :READY
+
+      encryption_infos = cs.encryption_infos
+      _(encryption_infos).must_be_instance_of Array
+      _(encryption_infos).wont_be :empty?
+      encryption_info = encryption_infos.first
+      _(encryption_info).must_be_instance_of Google::Cloud::Bigtable::EncryptionInfo
     end
   end
 

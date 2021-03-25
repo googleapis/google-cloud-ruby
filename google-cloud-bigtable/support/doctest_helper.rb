@@ -1004,7 +1004,7 @@ def cluster_state_grpc state = nil
   )
 end
 
-def clusters_state_grpc num: 3, start_id: 1
+def cluster_states_grpc num: 3, start_id: 1
   num.times.each_with_object({}) do |i, r|
     r["cluster-#{i + start_id }"] = cluster_state_grpc(:READY)
   end
@@ -1155,7 +1155,7 @@ def tables_hash instance_id, num: 3, start_id: 1
   tables = num.times.map do |i|
     table_hash(
       name: table_path(instance_id, "my-table-#{start_id + i}"),
-      cluster_states: clusters_state_grpc,
+      cluster_states: cluster_states_grpc,
       column_families: column_families_grpc,
       granularity: :MILLIS
     )
