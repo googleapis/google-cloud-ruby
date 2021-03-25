@@ -452,7 +452,7 @@ module Google
             #
             # Note: Always use agent versions for production traffic
             # sent to virtual agents. See [Versions and
-            # environments(https://cloud.google.com/dialogflow/es/docs/agents-versions).
+            # environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
             #
             # @overload analyze_content(request, options = nil)
             #   Pass arguments to `analyze_content` via a request object, either of type

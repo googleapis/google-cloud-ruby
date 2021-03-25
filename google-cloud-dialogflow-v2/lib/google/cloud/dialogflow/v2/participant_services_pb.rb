@@ -46,7 +46,7 @@ module Google
             #
             # Note: Always use agent versions for production traffic
             # sent to virtual agents. See [Versions and
-            # environments(https://cloud.google.com/dialogflow/es/docs/agents-versions).
+            # environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
             rpc :AnalyzeContent, ::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest, ::Google::Cloud::Dialogflow::V2::AnalyzeContentResponse
             # Gets suggested articles for a participant based on specific historical
             # messages.
