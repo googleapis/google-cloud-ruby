@@ -166,9 +166,6 @@ module Google
         # @!attribute [rw] text_input
         #   @return [::Google::Cloud::Dialogflow::V2::TextInput]
         #     The natural language text to be processed.
-        # @!attribute [rw] audio_input
-        #   @return [::Google::Cloud::Dialogflow::V2::AudioInput]
-        #     The natural language speech audio to be processed.
         # @!attribute [rw] event_input
         #   @return [::Google::Cloud::Dialogflow::V2::EventInput]
         #     An input event to send to Dialogflow.
@@ -243,138 +240,6 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::DtmfParameters]
         #     Indicates the parameters of DTMF.
         class AnalyzeContentResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The top-level message sent by the client to the
-        # {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content Participants.StreamingAnalyzeContent} method.
-        #
-        # Multiple request messages should be sent in order:
-        #
-        # 1.  The first message must contain
-        #     {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest#participant participant},
-        #     [config][google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest.config] and optionally
-        #     {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest#query_params query_params}. If you want
-        #     to receive an audio response, it should also contain
-        #     {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest#reply_audio_config reply_audio_config}.
-        #     The message must not contain
-        #     [input][google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest.input].
-        #
-        # 2.  If [config][google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest.config] in the first message
-        #     was set to {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest#audio_config audio_config},
-        #     all subsequent messages must contain
-        #     {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest#input_audio input_audio} to continue
-        #     with Speech recognition.
-        #     However, note that:
-        #
-        #     * Dialogflow will bill you for the audio so far.
-        #     * Dialogflow discards all Speech recognition results in favor of the
-        #       text input.
-        #
-        #  3. If [StreamingAnalyzeContentRequest.config][google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest.config] in the first message was set
-        #    to {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest#text_config StreamingAnalyzeContentRequest.text_config}, then the second message
-        #    must contain only {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest#input_text input_text}.
-        #    Moreover, you must not send more than two messages.
-        #
-        #  After you sent all input, you must half-close or abort the request stream.
-        # @!attribute [rw] participant
-        #   @return [::String]
-        #     Required. The name of the participant this text comes from.
-        #     Format: `projects/<Project ID>/locations/<Location
-        #     ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
-        # @!attribute [rw] audio_config
-        #   @return [::Google::Cloud::Dialogflow::V2::InputAudioConfig]
-        #     Instructs the speech recognizer how to process the speech audio.
-        # @!attribute [rw] text_config
-        #   @return [::Google::Cloud::Dialogflow::V2::InputTextConfig]
-        #     The natural language text to be processed.
-        # @!attribute [rw] reply_audio_config
-        #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioConfig]
-        #     Speech synthesis configuration.
-        #     The speech synthesis settings for a virtual agent that may be configured
-        #     for the associated conversation profile are not used when calling
-        #     StreamingAnalyzeContent. If this configuration is not supplied, speech
-        #     synthesis is disabled.
-        # @!attribute [rw] input_audio
-        #   @return [::String]
-        #     The input audio content to be recognized. Must be sent if `audio_config`
-        #     is set in the first message. The complete audio over all streaming
-        #     messages must not exceed 1 minute.
-        # @!attribute [rw] input_text
-        #   @return [::String]
-        #     The UTF-8 encoded natural language text to be processed. Must be sent if
-        #     `text_config` is set in the first message. Text length must not exceed
-        #     256 bytes. The `input_text` field can be only sent once.
-        # @!attribute [rw] input_dtmf
-        #   @return [::Google::Cloud::Dialogflow::V2::TelephonyDtmfEvents]
-        #     The DTMF digits used to invoke intent and fill in parameter value.
-        #
-        #     This input is ignored if the previous response indicated that DTMF input
-        #     is not accepted.
-        # @!attribute [rw] query_params
-        #   @return [::Google::Cloud::Dialogflow::V2::QueryParameters]
-        #     Parameters for a Dialogflow virtual-agent query.
-        class StreamingAnalyzeContentRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The top-level message returned from the `StreamingAnalyzeContent` method.
-        #
-        # Multiple response messages can be returned in order:
-        #
-        # 1.  If the input was set to streaming audio, the first one or more messages
-        #     contain `recognition_result`. Each `recognition_result` represents a more
-        #     complete transcript of what the user said. The last `recognition_result`
-        #     has `is_final` set to `true`.
-        #
-        # 2.  The next message contains `reply_text` and optionally `reply_audio`
-        #     returned by an agent. This message may also contain
-        #     `automated_agent_reply`.
-        # @!attribute [rw] recognition_result
-        #   @return [::Google::Cloud::Dialogflow::V2::StreamingRecognitionResult]
-        #     The result of speech recognition.
-        # @!attribute [rw] reply_text
-        #   @return [::String]
-        #     The output text content.
-        #     This field is set if an automated agent responded with a text for the user.
-        # @!attribute [rw] reply_audio
-        #   @return [::Google::Cloud::Dialogflow::V2::OutputAudio]
-        #     The audio data bytes encoded as specified in the request.
-        #     This field is set if:
-        #
-        #      - The `reply_audio_config` field is specified in the request.
-        #      - The automated agent, which this output comes from, responded with audio.
-        #        In such case, the `reply_audio.config` field contains settings used to
-        #        synthesize the speech.
-        #
-        #     In some scenarios, multiple output audio fields may be present in the
-        #     response structure. In these cases, only the top-most-level audio output
-        #     has content.
-        # @!attribute [rw] automated_agent_reply
-        #   @return [::Google::Cloud::Dialogflow::V2::AutomatedAgentReply]
-        #     Only set if a Dialogflow automated agent has responded.
-        #     Note that: [AutomatedAgentReply.detect_intent_response.output_audio][]
-        #     and [AutomatedAgentReply.detect_intent_response.output_audio_config][]
-        #     are always empty, use {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse#reply_audio reply_audio} instead.
-        # @!attribute [rw] message
-        #   @return [::Google::Cloud::Dialogflow::V2::Message]
-        #     Message analyzed by CCAI.
-        # @!attribute [rw] human_agent_suggestion_results
-        #   @return [::Array<::Google::Cloud::Dialogflow::V2::SuggestionResult>]
-        #     The suggestions for most recent human agent. The order is the same as
-        #     {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionConfig#feature_configs HumanAgentAssistantConfig.SuggestionConfig.feature_configs} of
-        #     {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig#human_agent_suggestion_config HumanAgentAssistantConfig.human_agent_suggestion_config}.
-        # @!attribute [rw] end_user_suggestion_results
-        #   @return [::Array<::Google::Cloud::Dialogflow::V2::SuggestionResult>]
-        #     The suggestions for end user. The order is the same as
-        #     {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionConfig#feature_configs HumanAgentAssistantConfig.SuggestionConfig.feature_configs} of
-        #     {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig#end_user_suggestion_config HumanAgentAssistantConfig.end_user_suggestion_config}.
-        # @!attribute [rw] dtmf_parameters
-        #   @return [::Google::Cloud::Dialogflow::V2::DtmfParameters]
-        #     Indicates the parameters of DTMF.
-        class StreamingAnalyzeContentResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -467,20 +332,6 @@ module Google
         #     {::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersRequest#context_size SuggestFaqAnswersRequest.context_size} field in the request if there
         #     aren't that many messages in the conversation.
         class SuggestFaqAnswersResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Represents the natural language speech audio to be processed.
-        # @!attribute [rw] config
-        #   @return [::Google::Cloud::Dialogflow::V2::InputAudioConfig]
-        #     Required. Instructs the speech recognizer how to process the speech audio.
-        # @!attribute [rw] audio
-        #   @return [::String]
-        #     Required. The natural language speech audio to be processed.
-        #     A single request can contain up to 1 minute of speech audio data.
-        #     The transcribed text cannot contain more than 256 bytes.
-        class AudioInput
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -600,17 +451,6 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersResponse]
         #     SuggestFaqAnswersResponse if request is for FAQ_ANSWER.
         class SuggestionResult
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Defines the language used in the input text.
-        # @!attribute [rw] language_code
-        #   @return [::String]
-        #     Required. The language of this conversational query. See [Language
-        #     Support](https://cloud.google.com/dialogflow/docs/reference/language)
-        #     for a list of the currently supported language codes.
-        class InputTextConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

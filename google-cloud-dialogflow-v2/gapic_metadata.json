@@ -196,9 +196,6 @@
             "AnalyzeContent": [
               "analyze_content"
             ],
-            "StreamingAnalyzeContent": [
-              "streaming_analyze_content"
-            ],
             "SuggestArticles": [
               "suggest_articles"
             ],
@@ -240,15 +237,6 @@
             ],
             "CompleteConversation": [
               "complete_conversation"
-            ],
-            "CreateCallMatcher": [
-              "create_call_matcher"
-            ],
-            "ListCallMatchers": [
-              "list_call_matchers"
-            ],
-            "DeleteCallMatcher": [
-              "delete_call_matcher"
             ],
             "ListMessages": [
               "list_messages"
