@@ -83,6 +83,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified CryptoKey resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{key}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param keyring [String]
+            # @param key [String]
+            #
+            # @return [::String]
+            def crypto_key_path project:, location:, keyring:, key:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "keyring cannot contain /" if keyring.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/keyRings/#{keyring}/cryptoKeys/#{key}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
@@ -111,6 +132,25 @@ module Google
             # @return [::String]
             def project_path project:
               "projects/#{project}"
+            end
+
+            ##
+            # Create a fully-qualified SecretVersion resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/secrets/{secret}/versions/{version}`
+            #
+            # @param project [String]
+            # @param secret [String]
+            # @param version [String]
+            #
+            # @return [::String]
+            def secret_version_path project:, secret:, version:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "secret cannot contain /" if secret.to_s.include? "/"
+
+              "projects/#{project}/secrets/#{secret}/versions/#{version}"
             end
 
             ##

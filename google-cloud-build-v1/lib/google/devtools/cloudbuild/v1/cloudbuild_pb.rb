@@ -6,6 +6,7 @@ require 'google/protobuf'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
+require 'google/api/httpbody_pb'
 require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
@@ -109,6 +110,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :secrets, :message, 32, "google.devtools.cloudbuild.v1.Secret"
       map :timing, :string, :message, 33, "google.devtools.cloudbuild.v1.TimeSpan"
       optional :service_account, :string, 42
+      optional :available_secrets, :message, 47, "google.devtools.cloudbuild.v1.Secrets"
     end
     add_enum "google.devtools.cloudbuild.v1.Build.Status" do
       value :STATUS_UNKNOWN, 0
@@ -153,6 +155,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :NONE, 0
       value :SHA256, 1
       value :MD5, 2
+    end
+    add_message "google.devtools.cloudbuild.v1.Secrets" do
+      repeated :secret_manager, :message, 1, "google.devtools.cloudbuild.v1.SecretManagerSecret"
+      repeated :inline, :message, 2, "google.devtools.cloudbuild.v1.InlineSecret"
+    end
+    add_message "google.devtools.cloudbuild.v1.InlineSecret" do
+      optional :kms_key_name, :string, 1
+      map :env_map, :string, :bytes, 2
+    end
+    add_message "google.devtools.cloudbuild.v1.SecretManagerSecret" do
+      optional :version_name, :string, 1
+      optional :env, :string, 2
     end
     add_message "google.devtools.cloudbuild.v1.Secret" do
       optional :kms_key_name, :string, 1
@@ -220,6 +234,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.devtools.cloudbuild.v1.PullRequestFilter.CommentControl" do
       value :COMMENTS_DISABLED, 0
       value :COMMENTS_ENABLED, 1
+      value :COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY, 2
     end
     add_message "google.devtools.cloudbuild.v1.PushFilter" do
       optional :invert_regex, :bool, 4
@@ -276,6 +291,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :UNSPECIFIED, 0
       value :N1_HIGHCPU_8, 1
       value :N1_HIGHCPU_32, 2
+      value :E2_HIGHCPU_8, 5
+      value :E2_HIGHCPU_32, 6
     end
     add_enum "google.devtools.cloudbuild.v1.BuildOptions.SubstitutionOption" do
       value :MUST_MATCH, 0
@@ -293,6 +310,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :STACKDRIVER_ONLY, 3
       value :CLOUD_LOGGING_ONLY, 5
       value :NONE, 4
+    end
+    add_message "google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest" do
+      optional :body, :message, 1, "google.api.HttpBody"
+      optional :project_id, :string, 2
+      optional :trigger, :string, 3
+      optional :secret, :string, 4
+    end
+    add_message "google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse" do
     end
     add_message "google.devtools.cloudbuild.v1.WorkerPool" do
       optional :name, :string, 14
@@ -378,6 +403,9 @@ module Google
         FileHashes = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.FileHashes").msgclass
         Hash = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Hash").msgclass
         Hash::HashType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Hash.HashType").enummodule
+        Secrets = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Secrets").msgclass
+        InlineSecret = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.InlineSecret").msgclass
+        SecretManagerSecret = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.SecretManagerSecret").msgclass
         Secret = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Secret").msgclass
         CreateBuildRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.CreateBuildRequest").msgclass
         GetBuildRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.GetBuildRequest").msgclass
@@ -401,6 +429,8 @@ module Google
         BuildOptions::SubstitutionOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildOptions.SubstitutionOption").enummodule
         BuildOptions::LogStreamingOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildOptions.LogStreamingOption").enummodule
         BuildOptions::LoggingMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildOptions.LoggingMode").enummodule
+        ReceiveTriggerWebhookRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest").msgclass
+        ReceiveTriggerWebhookResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse").msgclass
         WorkerPool = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.WorkerPool").msgclass
         WorkerPool::Region = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.WorkerPool.Region").enummodule
         WorkerPool::Status = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.WorkerPool.Status").enummodule
