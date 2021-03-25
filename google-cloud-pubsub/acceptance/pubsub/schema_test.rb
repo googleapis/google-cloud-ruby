@@ -44,7 +44,7 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
   let(:definition) { definition_hash.to_json }
   let(:message_data) { { "name" => "Alaska", "post_abbr" => "AK" } }
   let(:bad_value) { { "BAD_VALUE" => nil } }
-focus
+
   it "should validate, create, list, get, validate message, create topic, publish binary message, receive binary message, and delete a schema" do
     # validate schema
     _(pubsub.valid_schema? :avro, definition).must_equal true

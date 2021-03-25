@@ -136,13 +136,14 @@ module Google
         ##
         # Reloads the schema with current data from the Pub/Sub service.
         #
-        # @param view [Symbol, String, nil] Possible values:
-        #   * `:BASIC` - Include the `name` and `type` of the schema, but not the `definition`.
-        #   * `:FULL` - Include all Schema object fields.
-        #   The default value is `BASIC`.
+        # @param view [Symbol, String, nil] The set of fields to return in the response. Possible values:
+        #   * `BASIC` - Include the `name` and `type` of the schema, but not the `definition`.
+        #   * `FULL` - Include all Schema object fields.
         #
-        # @return [Google::Cloud::PubSub::Schema] Returns the reloaded
-        #   schema.
+        #   Optional. If not provided or `nil`, the last non-nil `view` argument to this method will be used if one has
+        #   been given, othewise `BASIC` will be used.
+        #
+        # @return [Google::Cloud::PubSub::Schema] Returns the reloaded schema.
         #
         # @example Skip retrieving the schema from the service, then load it:
         #   require "google/cloud/pubsub"
@@ -166,7 +167,7 @@ module Google
         #
         def reload! view: nil
           ensure_service!
-          @view = view || @view || :BASIC
+          @view = view || @view
           @grpc = service.get_schema name, @view
           @reference = nil
           @exists = nil
@@ -190,7 +191,7 @@ module Google
           return true unless reference?
           # If we have a value, return it
           return @exists unless @exists.nil?
-          ensure_grpc! # TODO
+          ensure_grpc!
           @exists = true
         rescue Google::Cloud::NotFoundError
           @exists = false

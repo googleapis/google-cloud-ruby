@@ -420,8 +420,9 @@ module Google
         #   will be supplied, or a fully-qualified schema name in the form
         #   `projects/{project_id}/schemas/{schema_id}`.
         # @param view [Symbol, String, nil] Possible values:
-        #   * `:BASIC` - Include the `name` and `type` of the schema, but not the `definition`.
-        #   * `:FULL` - Include all Schema object fields.
+        #   * `BASIC` - Include the `name` and `type` of the schema, but not the `definition`.
+        #   * `FULL` - Include all Schema object fields.
+        #
         #   The default value is `BASIC`.
         # @param [String] project If the schema belongs to a project other
         #   than the one currently connected to, the alternate project ID can be

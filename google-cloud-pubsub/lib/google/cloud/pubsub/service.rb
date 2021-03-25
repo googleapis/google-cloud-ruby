@@ -49,60 +49,52 @@ module Google
 
         def subscriber
           return mocked_subscriber if mocked_subscriber
-          @subscriber ||= begin
-            V1::Subscriber::Client.new do |config|
-              config.credentials = credentials if credentials
-              config.timeout = timeout if timeout
-              config.endpoint = host if host
-              config.lib_name = "gccl"
-              config.lib_version = Google::Cloud::PubSub::VERSION
-              config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
-            end
+          @subscriber ||= V1::Subscriber::Client.new do |config|
+            config.credentials = credentials if credentials
+            config.timeout = timeout if timeout
+            config.endpoint = host if host
+            config.lib_name = "gccl"
+            config.lib_version = Google::Cloud::PubSub::VERSION
+            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
           end
         end
         attr_accessor :mocked_subscriber
 
         def publisher
           return mocked_publisher if mocked_publisher
-          @publisher ||= begin
-            V1::Publisher::Client.new do |config|
-              config.credentials = credentials if credentials
-              config.timeout = timeout if timeout
-              config.endpoint = host if host
-              config.lib_name = "gccl"
-              config.lib_version = Google::Cloud::PubSub::VERSION
-              config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
-            end
+          @publisher ||= V1::Publisher::Client.new do |config|
+            config.credentials = credentials if credentials
+            config.timeout = timeout if timeout
+            config.endpoint = host if host
+            config.lib_name = "gccl"
+            config.lib_version = Google::Cloud::PubSub::VERSION
+            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
           end
         end
         attr_accessor :mocked_publisher
 
         def iam
           return mocked_iam if mocked_iam
-          @iam ||= begin
-            V1::IAMPolicy::Client.new do |config|
-              config.credentials = credentials if credentials
-              config.timeout = timeout if timeout
-              config.endpoint = host if host
-              config.lib_name = "gccl"
-              config.lib_version = Google::Cloud::PubSub::VERSION
-              config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
-            end
+          @iam ||= V1::IAMPolicy::Client.new do |config|
+            config.credentials = credentials if credentials
+            config.timeout = timeout if timeout
+            config.endpoint = host if host
+            config.lib_name = "gccl"
+            config.lib_version = Google::Cloud::PubSub::VERSION
+            config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
           end
         end
         attr_accessor :mocked_iam
 
         def schemas
           return mocked_schemas if mocked_schemas
-          @schemas ||= begin
-            V1::SchemaService::Client.new do |config|
-              config.credentials = credentials if credentials
-              config.timeout = timeout if timeout
-              config.endpoint = host if host
-              config.lib_name = "gccl"
-              config.lib_version = Google::Cloud::PubSub::VERSION
-              config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
-            end
+          @schemas ||= V1::SchemaService::Client.new do |config|
+            config.credentials = credentials if credentials
+            config.timeout = timeout if timeout
+            config.endpoint = host if host
+            config.lib_name = "gccl"
+            config.lib_version = Google::Cloud::PubSub::VERSION
+            config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
           end
         end
         attr_accessor :mocked_schemas
@@ -347,19 +339,19 @@ module Google
 
         ##
         # Creates a schema in the current (or given) project.
-        def create_schema schema_id, type, definition, project: nil
+        def create_schema schema_id, type, definition, options = {}
           schema = Google::Cloud::PubSub::V1::Schema.new(
             type:       type,
             definition: definition
           )
-          schemas.create_schema parent:    project_path(project: project),
+          schemas.create_schema parent:    project_path(options),
                                 schema:    schema,
                                 schema_id: schema_id
         end
 
         ##
         # Gets the details of a schema.
-        # @param view [String, Symbol, nil] Possible values:
+        # @param view [String, Symbol, nil] The set of fields to return in the response. Possible values:
         #   * `BASIC` - Include the name and type of the schema, but not the definition.
         #   * `FULL` - Include all Schema object fields.
         #
@@ -369,10 +361,14 @@ module Google
                              view: schema_view
         end
 
+        ##
+        # Delete a schema.
         def delete_schema schema_name
           schemas.delete_schema name: schema_path(schema_name)
         end
 
+        ##
+        # Validate the definition string intended for a schema.
         def validate_schema type, definition, options = {}
           schema = Google::Cloud::PubSub::V1::Schema.new(
             type:       type,
