@@ -62,6 +62,16 @@ class Google::Cloud::Monitoring::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_query_service
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Monitoring.query_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Monitoring::V3::QueryService::Client, client
+    end
+  end
+
   def test_service_monitoring_service
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
