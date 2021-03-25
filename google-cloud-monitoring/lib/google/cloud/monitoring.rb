@@ -186,6 +186,38 @@ module Google
       end
 
       ##
+      # Create a new client object for QueryService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Monitoring::V3::QueryService::Client](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest/Google/Cloud/Monitoring/V3/QueryService/Client.html)
+      # for version V3 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the QueryService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About QueryService
+      #
+      # The QueryService API is used to manage time series data in Stackdriver
+      # Monitoring. Time series data is a collection of data points that describes
+      # the time-varying values of a metric.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v3`.
+      # @return [QueryService::Client] A client object for the specified version.
+      #
+      def self.query_service version: :v3, &block
+        require "google/cloud/monitoring/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Monitoring
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Monitoring.const_get package_name
+        package_module.const_get(:QueryService).const_get(:Client).new(&block)
+      end
+
+      ##
       # Create a new client object for ServiceMonitoringService.
       #
       # By default, this returns an instance of
