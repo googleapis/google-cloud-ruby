@@ -18,9 +18,9 @@
 require "google/cloud/bigtable/backup/job"
 require "google/cloud/bigtable/backup/list"
 require "google/cloud/bigtable/convert"
+require "google/cloud/bigtable/encryption_info"
 require "google/cloud/bigtable/policy"
 require "google/cloud/bigtable/table/restore_job"
-
 
 module Google
   module Cloud
@@ -208,48 +208,24 @@ module Google
         end
 
         ##
-        # The type of encryption used to protect this resource. Possible values:
+        # The encryption information for the backup. See also {Instance::ClusterMap#add}.
         #
-        # * `ENCRYPTION_TYPE_UNSPECIFIED` - Encryption type was not specified, though data at rest remains encrypted.
-        # * `GOOGLE_DEFAULT_ENCRYPTION` - The data backing this resource is encrypted at rest with a key that is
-        #   fully managed by Google. No key version or status will be populated. This is the default state.
-        # * `CUSTOMER_MANAGED_ENCRYPTION` - The data backing this resource is encrypted at rest with a key that is
-        #   managed by the customer. The in-use version of the key and its status are populated for CMEK-protected
-        #   tables. CMEK-protected backups are pinned to the key version that was in use at the time the backup was
-        #   taken. This key version is populated but its status is not tracked and is reported as `UNKNOWN`.
+        # @return [Google::Cloud::Bigtable::EncryptionInfo] The encryption information for the backup.
         #
-        # See also {#encryption_status}, {#kms_key_version} and {Instance::ClusterMap#add}.
+        # @example
+        #   require "google/cloud/bigtable"
         #
-        # @return [Symbol] The encryption type code as an uppercase symbol.
+        #   bigtable = Google::Cloud::Bigtable.new
+        #   instance = bigtable.instance("my-instance")
+        #   cluster = instance.cluster("my-cluster")
         #
-        def encryption_type
-          @grpc.encryption_info.encryption_type
-        end
-
-        ##
-        # The status of encrypt/decrypt calls on underlying data for this resource. Regardless of status, the existing
-        # data is always encrypted at rest.
+        #   backup = cluster.backup("my-backup")
         #
-        # See also {#encryption_type}, {#kms_key_version} and {Instance::ClusterMap#add}.
+        #   encryption_info = backup.encryption_info
+        #   encryption_info.encryption_type #=> :GOOGLE_DEFAULT_ENCRYPTION
         #
-        # @return [Google::Cloud::Bigtable::Status, nil] The encryption status object, or `nil` if not present.
-        #
-        def encryption_status
-          status_grpc = @grpc.encryption_info.encryption_status
-          Status.from_grpc status_grpc if status_grpc
-        end
-
-        ##
-        # The version of the Cloud KMS key specified in the parent cluster that is in use for the data underlying the
-        # backup, if it is protected with customer managed encryption.
-        #
-        # See also {#encryption_type}, {#encryption_status} and {Instance::ClusterMap#add}.
-        #
-        # @return [String, nil] The Cloud KMS key version, or `nil` if this resource is not protected with customer
-        # managed encryption.
-        #
-        def kms_key_version
-          @grpc.encryption_info.kms_key_version unless @grpc.encryption_info.kms_key_version.empty?
+        def encryption_info
+          EncryptionInfo.from_grpc @grpc.encryption_info
         end
 
         ##

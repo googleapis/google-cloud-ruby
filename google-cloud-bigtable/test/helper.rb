@@ -201,13 +201,16 @@ class MockBigtable < Minitest::Spec
                   end_time: nil,
                   size_bytes: 123456,
                   state: :READY,
-                  encryption_type: Google::Cloud::Bigtable::Admin::V2::EncryptionInfo::EncryptionType::GOOGLE_DEFAULT_ENCRYPTION,
+                  encryption_type: nil,
                   encryption_status: nil,
                   kms_key_version: nil
 
     now = Time.now.round 0
     start_time ||= now + 60
     end_time ||= now + 120
+    encryption_info = encryption_info_grpc type: encryption_type,
+                                           status_code: encryption_status,
+                                           kms_key_version: kms_key_version
 
     Google::Cloud::Bigtable::Admin::V2::Backup.new(
       name: backup_path(instance_id, cluster_id, backup_id),
@@ -217,11 +220,7 @@ class MockBigtable < Minitest::Spec
       end_time: end_time,
       size_bytes: size_bytes,
       state: state,
-      encryption_info: Google::Cloud::Bigtable::Admin::V2::EncryptionInfo.new(
-        encryption_type: encryption_type,
-        encryption_status: encryption_status,
-        kms_key_version: kms_key_version
-      )
+      encryption_info: encryption_info
     )
   end
 
@@ -231,6 +230,18 @@ class MockBigtable < Minitest::Spec
       backup_grpc "my-instance", "my-cluster", "my-backup-#{i}", "my-source-table", expire_time
     end
     Google::Cloud::Bigtable::Admin::V2::ListBackupsResponse.new backups: arr
+  end
+
+
+  def encryption_info_grpc type: nil, status_code: nil, kms_key_version: nil
+    type ||= :GOOGLE_DEFAULT_ENCRYPTION
+    encryption_type = Google::Cloud::Bigtable::Admin::V2::EncryptionInfo::EncryptionType.const_get type
+    status = Google::Rpc::Status.new code: status_code if status_code
+    Google::Cloud::Bigtable::Admin::V2::EncryptionInfo.new(
+      encryption_type: type,
+      encryption_status: status,
+      kms_key_version: kms_key_version
+    )
   end
 
   def project_path

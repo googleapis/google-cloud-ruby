@@ -51,9 +51,10 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
       _(backup.state).must_equal :READY
       _(backup.creating?).must_equal false
       _(backup.ready?).must_equal true
-      _(backup.encryption_type).must_equal :GOOGLE_DEFAULT_ENCRYPTION
-      _(backup.encryption_status).must_be :nil?
-      _(backup.kms_key_version).must_be :nil?
+      encryption_info = backup.encryption_info
+      _(encryption_info.encryption_type).must_equal :GOOGLE_DEFAULT_ENCRYPTION
+      _(encryption_info.encryption_status).must_be :nil?
+      _(encryption_info.kms_key_version).must_be :nil?
 
       source_table = backup.source_table
       _(source_table).must_be_kind_of Google::Cloud::Bigtable::Table

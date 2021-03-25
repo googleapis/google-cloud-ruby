@@ -49,18 +49,6 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
                 state: state
   end
   let(:backup) { Google::Cloud::Bigtable::Backup.from_grpc backup_res, bigtable.service }
-  let(:kms_key_version) { "projects/my-proj/locations/my-loc/keyRings/my-ring/cryptoKeys/my-key/cryptoKeyVersions/1" }
-  let(:encryption_info_grpc) do
-    Google::Cloud::Bigtable::Admin::V2::EncryptionInfo.new(
-      encryption_type: Google::Cloud::Bigtable::Admin::V2::EncryptionInfo::EncryptionType::CUSTOMER_MANAGED_ENCRYPTION,
-      encryption_status: Google::Rpc::Status.new(code: 0),
-      kms_key_version: kms_key_version
-    )
-  end
-  let(:backup_encryption_info) do
-    backup_res.encryption_info = encryption_info_grpc
-    Google::Cloud::Bigtable::Backup.from_grpc backup_res, bigtable.service
-  end
   let(:ops_name) { "operations/1234567890" }
   let(:job_grpc) do
     operation_pending_grpc ops_name, "type.googleapis.com/google.bigtable.admin.v2.RestoreTableMetadata"
@@ -89,17 +77,14 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
     _(backup.state).must_equal state
     _(backup.creating?).must_equal false
     _(backup.ready?).must_equal true
-    _(backup.encryption_type).must_equal :GOOGLE_DEFAULT_ENCRYPTION
-    _(backup.encryption_status).must_be :nil?
-    _(backup.kms_key_version).must_be :nil?
   end
 
-  it "knows its encryption_info" do
-    _(backup_encryption_info.encryption_type).must_equal :CUSTOMER_MANAGED_ENCRYPTION
-    _(backup_encryption_info.encryption_status).must_be_kind_of Google::Cloud::Bigtable::Status
-    _(backup_encryption_info.encryption_status.code).must_equal 0
-    _(backup_encryption_info.encryption_status.description).must_equal "OK"
-    _(backup_encryption_info.kms_key_version).must_equal kms_key_version
+  it "knows its encryption info" do
+    encryption_info = backup.encryption_info
+    _(encryption_info).must_be_kind_of Google::Cloud::Bigtable::EncryptionInfo
+    _(encryption_info.encryption_type).must_equal :GOOGLE_DEFAULT_ENCRYPTION
+    _(encryption_info.encryption_status).must_be :nil?
+    _(encryption_info.kms_key_version).must_be :nil?
   end
 
   it "returns its source_table without options as view: :NAME_ONLY" do

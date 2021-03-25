@@ -358,6 +358,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigtable::EncryptionInfo" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, [name: "projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_tables.expect :get_backup, backup_resp, [name: "projects/my-project/instances/my-instance/clusters/my-cluster/backups/my-backup"]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigtable::GcRule" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_tables.expect :create_table, table_resp, [Hash]
@@ -921,7 +929,10 @@ def backup_hash name:, source_table:, expire_time: nil
   {
     name: name,
     source_table: source_table,
-    expire_time: expire_time
+    expire_time: expire_time,
+    encryption_info: {
+      encryption_type: :GOOGLE_DEFAULT_ENCRYPTION
+    }
   }.delete_if { |_, v| v.nil? }
 end
 
