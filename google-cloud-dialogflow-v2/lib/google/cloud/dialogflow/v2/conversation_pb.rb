@@ -31,16 +31,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :VIRTUAL_AGENT_STAGE, 1
       value :HUMAN_ASSIST_STAGE, 2
     end
-    add_message "google.cloud.dialogflow.v2.CallMatcher" do
-      optional :name, :string, 1
-      optional :to_header, :string, 2
-      optional :from_header, :string, 3
-      optional :call_id_header, :string, 4
-      optional :custom_headers, :message, 5, "google.cloud.dialogflow.v2.CallMatcher.CustomHeaders"
-    end
-    add_message "google.cloud.dialogflow.v2.CallMatcher.CustomHeaders" do
-      optional :cisco_guid, :string, 1
-    end
     add_message "google.cloud.dialogflow.v2.CreateConversationRequest" do
       optional :parent, :string, 1
       optional :conversation, :message, 2, "google.cloud.dialogflow.v2.Conversation"
@@ -60,22 +50,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
     end
     add_message "google.cloud.dialogflow.v2.CompleteConversationRequest" do
-      optional :name, :string, 1
-    end
-    add_message "google.cloud.dialogflow.v2.CreateCallMatcherRequest" do
-      optional :parent, :string, 1
-      optional :call_matcher, :message, 2, "google.cloud.dialogflow.v2.CallMatcher"
-    end
-    add_message "google.cloud.dialogflow.v2.ListCallMatchersRequest" do
-      optional :parent, :string, 1
-      optional :page_size, :int32, 2
-      optional :page_token, :string, 3
-    end
-    add_message "google.cloud.dialogflow.v2.ListCallMatchersResponse" do
-      repeated :call_matchers, :message, 1, "google.cloud.dialogflow.v2.CallMatcher"
-      optional :next_page_token, :string, 2
-    end
-    add_message "google.cloud.dialogflow.v2.DeleteCallMatcherRequest" do
       optional :name, :string, 1
     end
     add_message "google.cloud.dialogflow.v2.ListMessagesRequest" do
@@ -101,17 +75,11 @@ module Google
         Conversation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Conversation").msgclass
         Conversation::LifecycleState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Conversation.LifecycleState").enummodule
         Conversation::ConversationStage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.Conversation.ConversationStage").enummodule
-        CallMatcher = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.CallMatcher").msgclass
-        CallMatcher::CustomHeaders = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.CallMatcher.CustomHeaders").msgclass
         CreateConversationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.CreateConversationRequest").msgclass
         ListConversationsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ListConversationsRequest").msgclass
         ListConversationsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ListConversationsResponse").msgclass
         GetConversationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.GetConversationRequest").msgclass
         CompleteConversationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.CompleteConversationRequest").msgclass
-        CreateCallMatcherRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.CreateCallMatcherRequest").msgclass
-        ListCallMatchersRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ListCallMatchersRequest").msgclass
-        ListCallMatchersResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ListCallMatchersResponse").msgclass
-        DeleteCallMatcherRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.DeleteCallMatcherRequest").msgclass
         ListMessagesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ListMessagesRequest").msgclass
         ListMessagesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ListMessagesResponse").msgclass
         ConversationPhoneNumber = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ConversationPhoneNumber").msgclass
