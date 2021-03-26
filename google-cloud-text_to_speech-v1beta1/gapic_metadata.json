@@ -9,13 +9,17 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client",
-          "methods": {
-            "ListVoices": [
-              "list_voices"
-            ],
-            "SynthesizeSpeech": [
-              "synthesize_speech"
-            ]
+          "rpcs": {
+            "ListVoices": {
+              "methods": [
+                "list_voices"
+              ]
+            },
+            "SynthesizeSpeech": {
+              "methods": [
+                "synthesize_speech"
+              ]
+            }
           }
         }
       }
