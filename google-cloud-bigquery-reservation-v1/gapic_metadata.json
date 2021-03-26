@@ -9,64 +9,102 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client",
-          "methods": {
-            "CreateReservation": [
-              "create_reservation"
-            ],
-            "ListReservations": [
-              "list_reservations"
-            ],
-            "GetReservation": [
-              "get_reservation"
-            ],
-            "DeleteReservation": [
-              "delete_reservation"
-            ],
-            "UpdateReservation": [
-              "update_reservation"
-            ],
-            "CreateCapacityCommitment": [
-              "create_capacity_commitment"
-            ],
-            "ListCapacityCommitments": [
-              "list_capacity_commitments"
-            ],
-            "GetCapacityCommitment": [
-              "get_capacity_commitment"
-            ],
-            "DeleteCapacityCommitment": [
-              "delete_capacity_commitment"
-            ],
-            "UpdateCapacityCommitment": [
-              "update_capacity_commitment"
-            ],
-            "SplitCapacityCommitment": [
-              "split_capacity_commitment"
-            ],
-            "MergeCapacityCommitments": [
-              "merge_capacity_commitments"
-            ],
-            "CreateAssignment": [
-              "create_assignment"
-            ],
-            "ListAssignments": [
-              "list_assignments"
-            ],
-            "DeleteAssignment": [
-              "delete_assignment"
-            ],
-            "SearchAssignments": [
-              "search_assignments"
-            ],
-            "MoveAssignment": [
-              "move_assignment"
-            ],
-            "GetBiReservation": [
-              "get_bi_reservation"
-            ],
-            "UpdateBiReservation": [
-              "update_bi_reservation"
-            ]
+          "rpcs": {
+            "CreateReservation": {
+              "methods": [
+                "create_reservation"
+              ]
+            },
+            "ListReservations": {
+              "methods": [
+                "list_reservations"
+              ]
+            },
+            "GetReservation": {
+              "methods": [
+                "get_reservation"
+              ]
+            },
+            "DeleteReservation": {
+              "methods": [
+                "delete_reservation"
+              ]
+            },
+            "UpdateReservation": {
+              "methods": [
+                "update_reservation"
+              ]
+            },
+            "CreateCapacityCommitment": {
+              "methods": [
+                "create_capacity_commitment"
+              ]
+            },
+            "ListCapacityCommitments": {
+              "methods": [
+                "list_capacity_commitments"
+              ]
+            },
+            "GetCapacityCommitment": {
+              "methods": [
+                "get_capacity_commitment"
+              ]
+            },
+            "DeleteCapacityCommitment": {
+              "methods": [
+                "delete_capacity_commitment"
+              ]
+            },
+            "UpdateCapacityCommitment": {
+              "methods": [
+                "update_capacity_commitment"
+              ]
+            },
+            "SplitCapacityCommitment": {
+              "methods": [
+                "split_capacity_commitment"
+              ]
+            },
+            "MergeCapacityCommitments": {
+              "methods": [
+                "merge_capacity_commitments"
+              ]
+            },
+            "CreateAssignment": {
+              "methods": [
+                "create_assignment"
+              ]
+            },
+            "ListAssignments": {
+              "methods": [
+                "list_assignments"
+              ]
+            },
+            "DeleteAssignment": {
+              "methods": [
+                "delete_assignment"
+              ]
+            },
+            "SearchAssignments": {
+              "methods": [
+                "search_assignments"
+              ]
+            },
+            "MoveAssignment": {
+              "methods": [
+                "move_assignment"
+              ]
+            },
+            "GetBiReservation": {
+              "methods": [
+                "get_bi_reservation"
+              ]
+            },
+            "UpdateBiReservation": {
+              "methods": [
+                "update_bi_reservation"
+              ]
+            }
           }
         }
       }
