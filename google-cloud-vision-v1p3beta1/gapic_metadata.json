@@ -9,61 +9,97 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Vision::V1p3beta1::ProductSearch::Client",
-          "methods": {
-            "CreateProductSet": [
-              "create_product_set"
-            ],
-            "ListProductSets": [
-              "list_product_sets"
-            ],
-            "GetProductSet": [
-              "get_product_set"
-            ],
-            "UpdateProductSet": [
-              "update_product_set"
-            ],
-            "DeleteProductSet": [
-              "delete_product_set"
-            ],
-            "CreateProduct": [
-              "create_product"
-            ],
-            "ListProducts": [
-              "list_products"
-            ],
-            "GetProduct": [
-              "get_product"
-            ],
-            "UpdateProduct": [
-              "update_product"
-            ],
-            "DeleteProduct": [
-              "delete_product"
-            ],
-            "CreateReferenceImage": [
-              "create_reference_image"
-            ],
-            "DeleteReferenceImage": [
-              "delete_reference_image"
-            ],
-            "ListReferenceImages": [
-              "list_reference_images"
-            ],
-            "GetReferenceImage": [
-              "get_reference_image"
-            ],
-            "AddProductToProductSet": [
-              "add_product_to_product_set"
-            ],
-            "RemoveProductFromProductSet": [
-              "remove_product_from_product_set"
-            ],
-            "ListProductsInProductSet": [
-              "list_products_in_product_set"
-            ],
-            "ImportProductSets": [
-              "import_product_sets"
-            ]
+          "rpcs": {
+            "CreateProductSet": {
+              "methods": [
+                "create_product_set"
+              ]
+            },
+            "ListProductSets": {
+              "methods": [
+                "list_product_sets"
+              ]
+            },
+            "GetProductSet": {
+              "methods": [
+                "get_product_set"
+              ]
+            },
+            "UpdateProductSet": {
+              "methods": [
+                "update_product_set"
+              ]
+            },
+            "DeleteProductSet": {
+              "methods": [
+                "delete_product_set"
+              ]
+            },
+            "CreateProduct": {
+              "methods": [
+                "create_product"
+              ]
+            },
+            "ListProducts": {
+              "methods": [
+                "list_products"
+              ]
+            },
+            "GetProduct": {
+              "methods": [
+                "get_product"
+              ]
+            },
+            "UpdateProduct": {
+              "methods": [
+                "update_product"
+              ]
+            },
+            "DeleteProduct": {
+              "methods": [
+                "delete_product"
+              ]
+            },
+            "CreateReferenceImage": {
+              "methods": [
+                "create_reference_image"
+              ]
+            },
+            "DeleteReferenceImage": {
+              "methods": [
+                "delete_reference_image"
+              ]
+            },
+            "ListReferenceImages": {
+              "methods": [
+                "list_reference_images"
+              ]
+            },
+            "GetReferenceImage": {
+              "methods": [
+                "get_reference_image"
+              ]
+            },
+            "AddProductToProductSet": {
+              "methods": [
+                "add_product_to_product_set"
+              ]
+            },
+            "RemoveProductFromProductSet": {
+              "methods": [
+                "remove_product_from_product_set"
+              ]
+            },
+            "ListProductsInProductSet": {
+              "methods": [
+                "list_products_in_product_set"
+              ]
+            },
+            "ImportProductSets": {
+              "methods": [
+                "import_product_sets"
+              ]
+            }
           }
         }
       }
@@ -72,13 +108,17 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Vision::V1p3beta1::ImageAnnotator::Client",
-          "methods": {
-            "BatchAnnotateImages": [
-              "batch_annotate_images"
-            ],
-            "AsyncBatchAnnotateFiles": [
-              "async_batch_annotate_files"
-            ]
+          "rpcs": {
+            "BatchAnnotateImages": {
+              "methods": [
+                "batch_annotate_images"
+              ]
+            },
+            "AsyncBatchAnnotateFiles": {
+              "methods": [
+                "async_batch_annotate_files"
+              ]
+            }
           }
         }
       }
