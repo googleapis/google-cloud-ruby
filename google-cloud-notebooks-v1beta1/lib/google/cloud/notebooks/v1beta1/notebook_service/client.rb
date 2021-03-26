@@ -520,10 +520,10 @@ module Google
             #   @param type [::Google::Cloud::Notebooks::V1beta1::Instance::AcceleratorType]
             #     Required. Type of this accelerator.
             #   @param core_count [::Integer]
-            #     Required. Count of cores of this accelerator. Note that not all combinations
-            #     of `type` and `core_count` are valid. Check [GPUs on
-            #     Compute Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to
-            #     find a valid combination. TPUs are not supported.
+            #     Required. Count of cores of this accelerator. Note that not all
+            #     combinations of `type` and `core_count` are valid. Check [GPUs on Compute
+            #     Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to find a
+            #     valid combination. TPUs are not supported.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1429,10 +1429,10 @@ module Google
             #   @param parent [::String]
             #     Required. Format: `projects/{project_id}/locations/{location}`
             #   @param environment_id [::String]
-            #     Required. User-defined unique ID of this environment. The `environment_id` must
-            #     be 1 to 63 characters long and contain only lowercase letters,
-            #     numeric characters, and dashes. The first character must be a lowercase
-            #     letter and the last character cannot be a dash.
+            #     Required. User-defined unique ID of this environment. The `environment_id`
+            #     must be 1 to 63 characters long and contain only lowercase letters, numeric
+            #     characters, and dashes. The first character must be a lowercase letter and
+            #     the last character cannot be a dash.
             #   @param environment [::Google::Cloud::Notebooks::V1beta1::Environment, ::Hash]
             #     Required. The environment to be created.
             #
