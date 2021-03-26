@@ -9,16 +9,22 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Profiler::V2::ProfilerService::Client",
-          "methods": {
-            "CreateProfile": [
-              "create_profile"
-            ],
-            "CreateOfflineProfile": [
-              "create_offline_profile"
-            ],
-            "UpdateProfile": [
-              "update_profile"
-            ]
+          "rpcs": {
+            "CreateProfile": {
+              "methods": [
+                "create_profile"
+              ]
+            },
+            "CreateOfflineProfile": {
+              "methods": [
+                "create_offline_profile"
+              ]
+            },
+            "UpdateProfile": {
+              "methods": [
+                "update_profile"
+              ]
+            }
           }
         }
       }
