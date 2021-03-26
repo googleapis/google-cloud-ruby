@@ -9,25 +9,37 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::OsLogin::V1::OsLoginService::Client",
-          "methods": {
-            "DeletePosixAccount": [
-              "delete_posix_account"
-            ],
-            "DeleteSshPublicKey": [
-              "delete_ssh_public_key"
-            ],
-            "GetLoginProfile": [
-              "get_login_profile"
-            ],
-            "GetSshPublicKey": [
-              "get_ssh_public_key"
-            ],
-            "ImportSshPublicKey": [
-              "import_ssh_public_key"
-            ],
-            "UpdateSshPublicKey": [
-              "update_ssh_public_key"
-            ]
+          "rpcs": {
+            "DeletePosixAccount": {
+              "methods": [
+                "delete_posix_account"
+              ]
+            },
+            "DeleteSshPublicKey": {
+              "methods": [
+                "delete_ssh_public_key"
+              ]
+            },
+            "GetLoginProfile": {
+              "methods": [
+                "get_login_profile"
+              ]
+            },
+            "GetSshPublicKey": {
+              "methods": [
+                "get_ssh_public_key"
+              ]
+            },
+            "ImportSshPublicKey": {
+              "methods": [
+                "import_ssh_public_key"
+              ]
+            },
+            "UpdateSshPublicKey": {
+              "methods": [
+                "update_ssh_public_key"
+              ]
+            }
           }
         }
       }
