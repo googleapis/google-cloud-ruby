@@ -9,10 +9,12 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client",
-          "methods": {
-            "ReportPhishing": [
-              "report_phishing"
-            ]
+          "rpcs": {
+            "ReportPhishing": {
+              "methods": [
+                "report_phishing"
+              ]
+            }
           }
         }
       }
