@@ -9,31 +9,47 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client",
-          "methods": {
-            "ListInstances": [
-              "list_instances"
-            ],
-            "GetInstance": [
-              "get_instance"
-            ],
-            "CreateInstance": [
-              "create_instance"
-            ],
-            "UpdateInstance": [
-              "update_instance"
-            ],
-            "UpdateParameters": [
-              "update_parameters"
-            ],
-            "DeleteInstance": [
-              "delete_instance"
-            ],
-            "ApplyParameters": [
-              "apply_parameters"
-            ],
-            "ApplySoftwareUpdate": [
-              "apply_software_update"
-            ]
+          "rpcs": {
+            "ListInstances": {
+              "methods": [
+                "list_instances"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "get_instance"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "create_instance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "update_instance"
+              ]
+            },
+            "UpdateParameters": {
+              "methods": [
+                "update_parameters"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "delete_instance"
+              ]
+            },
+            "ApplyParameters": {
+              "methods": [
+                "apply_parameters"
+              ]
+            },
+            "ApplySoftwareUpdate": {
+              "methods": [
+                "apply_software_update"
+              ]
+            }
           }
         }
       }
