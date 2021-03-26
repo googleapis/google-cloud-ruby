@@ -9,70 +9,112 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client",
-          "methods": {
-            "ListRepositories": [
-              "list_repositories"
-            ],
-            "GetRepository": [
-              "get_repository"
-            ],
-            "CreateRepository": [
-              "create_repository"
-            ],
-            "UpdateRepository": [
-              "update_repository"
-            ],
-            "DeleteRepository": [
-              "delete_repository"
-            ],
-            "ListPackages": [
-              "list_packages"
-            ],
-            "GetPackage": [
-              "get_package"
-            ],
-            "DeletePackage": [
-              "delete_package"
-            ],
-            "ListVersions": [
-              "list_versions"
-            ],
-            "GetVersion": [
-              "get_version"
-            ],
-            "DeleteVersion": [
-              "delete_version"
-            ],
-            "ListFiles": [
-              "list_files"
-            ],
-            "GetFile": [
-              "get_file"
-            ],
-            "ListTags": [
-              "list_tags"
-            ],
-            "GetTag": [
-              "get_tag"
-            ],
-            "CreateTag": [
-              "create_tag"
-            ],
-            "UpdateTag": [
-              "update_tag"
-            ],
-            "DeleteTag": [
-              "delete_tag"
-            ],
-            "SetIamPolicy": [
-              "set_iam_policy"
-            ],
-            "GetIamPolicy": [
-              "get_iam_policy"
-            ],
-            "TestIamPermissions": [
-              "test_iam_permissions"
-            ]
+          "rpcs": {
+            "ListRepositories": {
+              "methods": [
+                "list_repositories"
+              ]
+            },
+            "GetRepository": {
+              "methods": [
+                "get_repository"
+              ]
+            },
+            "CreateRepository": {
+              "methods": [
+                "create_repository"
+              ]
+            },
+            "UpdateRepository": {
+              "methods": [
+                "update_repository"
+              ]
+            },
+            "DeleteRepository": {
+              "methods": [
+                "delete_repository"
+              ]
+            },
+            "ListPackages": {
+              "methods": [
+                "list_packages"
+              ]
+            },
+            "GetPackage": {
+              "methods": [
+                "get_package"
+              ]
+            },
+            "DeletePackage": {
+              "methods": [
+                "delete_package"
+              ]
+            },
+            "ListVersions": {
+              "methods": [
+                "list_versions"
+              ]
+            },
+            "GetVersion": {
+              "methods": [
+                "get_version"
+              ]
+            },
+            "DeleteVersion": {
+              "methods": [
+                "delete_version"
+              ]
+            },
+            "ListFiles": {
+              "methods": [
+                "list_files"
+              ]
+            },
+            "GetFile": {
+              "methods": [
+                "get_file"
+              ]
+            },
+            "ListTags": {
+              "methods": [
+                "list_tags"
+              ]
+            },
+            "GetTag": {
+              "methods": [
+                "get_tag"
+              ]
+            },
+            "CreateTag": {
+              "methods": [
+                "create_tag"
+              ]
+            },
+            "UpdateTag": {
+              "methods": [
+                "update_tag"
+              ]
+            },
+            "DeleteTag": {
+              "methods": [
+                "delete_tag"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
           }
         }
       }
