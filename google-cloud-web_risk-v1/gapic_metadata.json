@@ -9,19 +9,27 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::WebRisk::V1::WebRiskService::Client",
-          "methods": {
-            "ComputeThreatListDiff": [
-              "compute_threat_list_diff"
-            ],
-            "SearchUris": [
-              "search_uris"
-            ],
-            "SearchHashes": [
-              "search_hashes"
-            ],
-            "CreateSubmission": [
-              "create_submission"
-            ]
+          "rpcs": {
+            "ComputeThreatListDiff": {
+              "methods": [
+                "compute_threat_list_diff"
+              ]
+            },
+            "SearchUris": {
+              "methods": [
+                "search_uris"
+              ]
+            },
+            "SearchHashes": {
+              "methods": [
+                "search_hashes"
+              ]
+            },
+            "CreateSubmission": {
+              "methods": [
+                "create_submission"
+              ]
+            }
           }
         }
       }
