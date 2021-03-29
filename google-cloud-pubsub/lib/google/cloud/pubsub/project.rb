@@ -428,13 +428,13 @@ module Google
         #   than the one currently connected to, the alternate project ID can be
         #   specified here. Not used if a fully-qualified schema name is
         #   provided for `schema_name`.
-        # @param [Boolean] skip_lookup Optionally create a {Subscription} object
+        # @param [Boolean] skip_lookup Optionally create a {Schema} object
         #   without verifying the schema resource exists on the Pub/Sub
         #   service. Calls made on this object will raise errors if the service
         #   resource does not exist. Default is `false`.
         #
-        # @return [Google::Cloud::PubSub::Subscription, nil] Returns `nil` if
-        #   the schema does not exist
+        # @return [Google::Cloud::PubSub::Schema, nil] Returns `nil` if
+        #   the schema does not exist.
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -500,7 +500,7 @@ module Google
         # @param [String] definition  The definition of the schema. Required. This
         #   should be a string representing the full definition of the schema that
         #   is a valid schema definition of the type specified in `type`.
-        # @param [String] project If the subscription belongs to a project other
+        # @param [String] project If the schema belongs to a project other
         #   than the one currently connected to, the alternate project ID can be
         #   specified here. Optional.
         #
@@ -580,7 +580,7 @@ module Google
         # @param [String] definition  The definition of the schema. Required. This
         #   should be a string representing the full definition of the schema that
         #   is a valid schema definition of the type specified in `type`.
-        # @param [String] project If the subscription belongs to a project other
+        # @param [String] project If the schema belongs to a project other
         #   than the one currently connected to, the alternate project ID can be
         #   specified here. Optional.
         #
