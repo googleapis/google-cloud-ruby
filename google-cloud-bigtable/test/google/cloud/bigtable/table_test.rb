@@ -136,6 +136,7 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
       table.service.mocked_tables = mock
 
       _(table.column_families).wont_be :empty?
+      _(table.column_families).wont_be :empty? # No RPC on subsequent access
 
       mock.verify
     end
@@ -152,6 +153,7 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
       table.service.mocked_tables = mock
 
       _(table.granularity).must_equal :MILLIS
+      _(table.granularity).must_equal :MILLIS # No RPC on subsequent access
 
       mock.verify
     end
@@ -167,6 +169,7 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
       table.service.mocked_tables = mock
 
       _(table.cluster_states).wont_be :empty?
+      _(table.cluster_states).wont_be :empty? # No RPC on subsequent access
 
       mock.verify
     end
@@ -189,6 +192,8 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
 
       _(table.column_families).wont_be :empty?
       _(table.cluster_states).wont_be :empty?
+      _(table.column_families).wont_be :empty? # No RPC on subsequent access
+      _(table.cluster_states).wont_be :empty? # No RPC on subsequent access
 
       mock.verify
     end
