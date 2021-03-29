@@ -24,7 +24,7 @@ require "google/cloud/apigateway/v1/apigateway_service_pb"
 require "google/cloud/apigateway/v1/apigateway_service_services_pb"
 require "google/cloud/api_gateway/v1/api_gateway_service"
 
-class ::Google::Cloud::APIGateway::V1::ApiGatewayService::OperationsTest < Minitest::Test
+class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::OperationsTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -72,7 +72,7 @@ class ::Google::Cloud::APIGateway::V1::ApiGatewayService::OperationsTest < Minit
 
     Gapic::ServiceStub.stub :new, list_operations_client_stub do
       # Create client
-      client = ::Google::Cloud::APIGateway::V1::ApiGatewayService::Operations.new do |config|
+      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Operations.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -135,7 +135,7 @@ class ::Google::Cloud::APIGateway::V1::ApiGatewayService::OperationsTest < Minit
 
     Gapic::ServiceStub.stub :new, get_operation_client_stub do
       # Create client
-      client = ::Google::Cloud::APIGateway::V1::ApiGatewayService::Operations.new do |config|
+      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Operations.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -198,7 +198,7 @@ class ::Google::Cloud::APIGateway::V1::ApiGatewayService::OperationsTest < Minit
 
     Gapic::ServiceStub.stub :new, delete_operation_client_stub do
       # Create client
-      client = ::Google::Cloud::APIGateway::V1::ApiGatewayService::Operations.new do |config|
+      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Operations.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -256,7 +256,7 @@ class ::Google::Cloud::APIGateway::V1::ApiGatewayService::OperationsTest < Minit
 
     Gapic::ServiceStub.stub :new, cancel_operation_client_stub do
       # Create client
-      client = ::Google::Cloud::APIGateway::V1::ApiGatewayService::Operations.new do |config|
+      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Operations.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -316,7 +316,7 @@ class ::Google::Cloud::APIGateway::V1::ApiGatewayService::OperationsTest < Minit
 
     Gapic::ServiceStub.stub :new, wait_operation_client_stub do
       # Create client
-      client = ::Google::Cloud::APIGateway::V1::ApiGatewayService::Operations.new do |config|
+      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Operations.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -365,7 +365,7 @@ class ::Google::Cloud::APIGateway::V1::ApiGatewayService::OperationsTest < Minit
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::APIGateway::V1::ApiGatewayService::Operations.new do |config|
+      client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Operations.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -375,6 +375,6 @@ class ::Google::Cloud::APIGateway::V1::ApiGatewayService::OperationsTest < Minit
     end
 
     assert_same block_config, config
-    assert_kind_of ::Google::Cloud::APIGateway::V1::ApiGatewayService::Operations::Configuration, config
+    assert_kind_of ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Operations::Configuration, config
   end
 end

@@ -19,7 +19,7 @@
 
 module Google
   module Cloud
-    module APIGateway
+    module ApiGateway
       module V1
         module ApiGatewayService
           # Path helper methods for the ApiGatewayService API.

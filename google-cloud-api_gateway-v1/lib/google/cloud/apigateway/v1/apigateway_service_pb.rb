@@ -14,7 +14,7 @@ end
 
 module Google
   module Cloud
-    module APIGateway
+    module ApiGateway
       module V1
       end
     end

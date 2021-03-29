@@ -21,7 +21,7 @@ require "google/cloud/apigateway/v1/apigateway_service_pb"
 
 module Google
   module Cloud
-    module APIGateway
+    module ApiGateway
       module V1
         module ApiGatewayService
           ##
@@ -38,14 +38,14 @@ module Google
             ##
             # Configure the ApiGatewayService Client class.
             #
-            # See {::Google::Cloud::APIGateway::V1::ApiGatewayService::Client::Configuration}
+            # See {::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all ApiGatewayService clients:
             #
-            #     ::Google::Cloud::APIGateway::V1::ApiGatewayService::Client.configure do |config|
+            #     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.configure do |config|
             #       config.timeout = 10.0
             #     end
             #
@@ -56,7 +56,7 @@ module Google
             #
             def self.configure
               @configure ||= begin
-                namespace = ["Google", "Cloud", "APIGateway", "V1"]
+                namespace = ["Google", "Cloud", "ApiGateway", "V1"]
                 parent_config = while namespace.any?
                                   parent_name = namespace.join "::"
                                   parent_const = const_get parent_name
@@ -150,7 +150,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {::Google::Cloud::APIGateway::V1::ApiGatewayService::Client::Configuration}
+            # See {::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -171,12 +171,12 @@ module Google
             # To create a new ApiGatewayService client with the default
             # configuration:
             #
-            #     client = ::Google::Cloud::APIGateway::V1::ApiGatewayService::Client.new
+            #     client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
             #
             # To create a new ApiGatewayService client with a custom
             # configuration:
             #
-            #     client = ::Google::Cloud::APIGateway::V1::ApiGatewayService::Client.new do |config|
+            #     client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
             #       config.timeout = 10.0
             #     end
             #
@@ -217,7 +217,7 @@ module Google
               end
 
               @api_gateway_service_stub = ::Gapic::ServiceStub.new(
-                ::Google::Cloud::APIGateway::V1::ApiGatewayService::Stub,
+                ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -228,7 +228,7 @@ module Google
             ##
             # Get the associated client for long-running operations.
             #
-            # @return [::Google::Cloud::APIGateway::V1::ApiGatewayService::Operations]
+            # @return [::Google::Cloud::ApiGateway::V1::ApiGatewayService::Operations]
             #
             attr_reader :operations_client
 
@@ -239,9 +239,9 @@ module Google
             #
             # @overload list_gateways(request, options = nil)
             #   Pass arguments to `list_gateways` via a request object, either of type
-            #   {::Google::Cloud::APIGateway::V1::ListGatewaysRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ApiGateway::V1::ListGatewaysRequest} or an equivalent Hash.
             #
-            #   @param request [::Google::Cloud::APIGateway::V1::ListGatewaysRequest, ::Hash]
+            #   @param request [::Google::Cloud::ApiGateway::V1::ListGatewaysRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
             #   @param options [::Gapic::CallOptions, ::Hash]
@@ -265,17 +265,17 @@ module Google
             #     Order by parameters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::APIGateway::V1::Gateway>]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ApiGateway::V1::Gateway>]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [::Gapic::PagedEnumerable<::Google::Cloud::APIGateway::V1::Gateway>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::ApiGateway::V1::Gateway>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_gateways request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::APIGateway::V1::ListGatewaysRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiGateway::V1::ListGatewaysRequest
 
               # Converts hash and nil to an options object
               options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -286,7 +286,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::APIGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -315,9 +315,9 @@ module Google
             #
             # @overload get_gateway(request, options = nil)
             #   Pass arguments to `get_gateway` via a request object, either of type
-            #   {::Google::Cloud::APIGateway::V1::GetGatewayRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ApiGateway::V1::GetGatewayRequest} or an equivalent Hash.
             #
-            #   @param request [::Google::Cloud::APIGateway::V1::GetGatewayRequest, ::Hash]
+            #   @param request [::Google::Cloud::ApiGateway::V1::GetGatewayRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
             #   @param options [::Gapic::CallOptions, ::Hash]
@@ -333,17 +333,17 @@ module Google
             #     `projects/*/locations/*/gateways/*`
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Cloud::APIGateway::V1::Gateway]
+            # @yieldparam response [::Google::Cloud::ApiGateway::V1::Gateway]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [::Google::Cloud::APIGateway::V1::Gateway]
+            # @return [::Google::Cloud::ApiGateway::V1::Gateway]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_gateway request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::APIGateway::V1::GetGatewayRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiGateway::V1::GetGatewayRequest
 
               # Converts hash and nil to an options object
               options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -354,7 +354,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::APIGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -382,9 +382,9 @@ module Google
             #
             # @overload create_gateway(request, options = nil)
             #   Pass arguments to `create_gateway` via a request object, either of type
-            #   {::Google::Cloud::APIGateway::V1::CreateGatewayRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ApiGateway::V1::CreateGatewayRequest} or an equivalent Hash.
             #
-            #   @param request [::Google::Cloud::APIGateway::V1::CreateGatewayRequest, ::Hash]
+            #   @param request [::Google::Cloud::ApiGateway::V1::CreateGatewayRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
             #   @param options [::Gapic::CallOptions, ::Hash]
@@ -401,7 +401,7 @@ module Google
             #   @param gateway_id [::String]
             #     Required. Identifier to assign to the Gateway. Must be unique within scope of
             #     the parent resource.
-            #   @param gateway [::Google::Cloud::APIGateway::V1::Gateway, ::Hash]
+            #   @param gateway [::Google::Cloud::ApiGateway::V1::Gateway, ::Hash]
             #     Required. Gateway resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -415,7 +415,7 @@ module Google
             def create_gateway request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::APIGateway::V1::CreateGatewayRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiGateway::V1::CreateGatewayRequest
 
               # Converts hash and nil to an options object
               options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -426,7 +426,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::APIGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -455,9 +455,9 @@ module Google
             #
             # @overload update_gateway(request, options = nil)
             #   Pass arguments to `update_gateway` via a request object, either of type
-            #   {::Google::Cloud::APIGateway::V1::UpdateGatewayRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ApiGateway::V1::UpdateGatewayRequest} or an equivalent Hash.
             #
-            #   @param request [::Google::Cloud::APIGateway::V1::UpdateGatewayRequest, ::Hash]
+            #   @param request [::Google::Cloud::ApiGateway::V1::UpdateGatewayRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
             #   @param options [::Gapic::CallOptions, ::Hash]
@@ -474,7 +474,7 @@ module Google
             #     The fields specified in the update_mask are relative to the resource, not
             #     the full request. A field will be overwritten if it is in the mask. If the
             #     user does not provide a mask then all fields will be overwritten.
-            #   @param gateway [::Google::Cloud::APIGateway::V1::Gateway, ::Hash]
+            #   @param gateway [::Google::Cloud::ApiGateway::V1::Gateway, ::Hash]
             #     Required. Gateway resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -488,7 +488,7 @@ module Google
             def update_gateway request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::APIGateway::V1::UpdateGatewayRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiGateway::V1::UpdateGatewayRequest
 
               # Converts hash and nil to an options object
               options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -499,7 +499,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::APIGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -528,9 +528,9 @@ module Google
             #
             # @overload delete_gateway(request, options = nil)
             #   Pass arguments to `delete_gateway` via a request object, either of type
-            #   {::Google::Cloud::APIGateway::V1::DeleteGatewayRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ApiGateway::V1::DeleteGatewayRequest} or an equivalent Hash.
             #
-            #   @param request [::Google::Cloud::APIGateway::V1::DeleteGatewayRequest, ::Hash]
+            #   @param request [::Google::Cloud::ApiGateway::V1::DeleteGatewayRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
             #   @param options [::Gapic::CallOptions, ::Hash]
@@ -556,7 +556,7 @@ module Google
             def delete_gateway request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::APIGateway::V1::DeleteGatewayRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiGateway::V1::DeleteGatewayRequest
 
               # Converts hash and nil to an options object
               options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -567,7 +567,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::APIGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -596,9 +596,9 @@ module Google
             #
             # @overload list_apis(request, options = nil)
             #   Pass arguments to `list_apis` via a request object, either of type
-            #   {::Google::Cloud::APIGateway::V1::ListApisRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ApiGateway::V1::ListApisRequest} or an equivalent Hash.
             #
-            #   @param request [::Google::Cloud::APIGateway::V1::ListApisRequest, ::Hash]
+            #   @param request [::Google::Cloud::ApiGateway::V1::ListApisRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
             #   @param options [::Gapic::CallOptions, ::Hash]
@@ -622,17 +622,17 @@ module Google
             #     Order by parameters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::APIGateway::V1::Api>]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ApiGateway::V1::Api>]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [::Gapic::PagedEnumerable<::Google::Cloud::APIGateway::V1::Api>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::ApiGateway::V1::Api>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_apis request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::APIGateway::V1::ListApisRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiGateway::V1::ListApisRequest
 
               # Converts hash and nil to an options object
               options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -643,7 +643,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::APIGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -672,9 +672,9 @@ module Google
             #
             # @overload get_api(request, options = nil)
             #   Pass arguments to `get_api` via a request object, either of type
-            #   {::Google::Cloud::APIGateway::V1::GetApiRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ApiGateway::V1::GetApiRequest} or an equivalent Hash.
             #
-            #   @param request [::Google::Cloud::APIGateway::V1::GetApiRequest, ::Hash]
+            #   @param request [::Google::Cloud::ApiGateway::V1::GetApiRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
             #   @param options [::Gapic::CallOptions, ::Hash]
@@ -690,17 +690,17 @@ module Google
             #     `projects/*/locations/global/apis/*`
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Cloud::APIGateway::V1::Api]
+            # @yieldparam response [::Google::Cloud::ApiGateway::V1::Api]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [::Google::Cloud::APIGateway::V1::Api]
+            # @return [::Google::Cloud::ApiGateway::V1::Api]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_api request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::APIGateway::V1::GetApiRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiGateway::V1::GetApiRequest
 
               # Converts hash and nil to an options object
               options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -711,7 +711,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::APIGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -739,9 +739,9 @@ module Google
             #
             # @overload create_api(request, options = nil)
             #   Pass arguments to `create_api` via a request object, either of type
-            #   {::Google::Cloud::APIGateway::V1::CreateApiRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ApiGateway::V1::CreateApiRequest} or an equivalent Hash.
             #
-            #   @param request [::Google::Cloud::APIGateway::V1::CreateApiRequest, ::Hash]
+            #   @param request [::Google::Cloud::ApiGateway::V1::CreateApiRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
             #   @param options [::Gapic::CallOptions, ::Hash]
@@ -758,7 +758,7 @@ module Google
             #   @param api_id [::String]
             #     Required. Identifier to assign to the API. Must be unique within scope of
             #     the parent resource.
-            #   @param api [::Google::Cloud::APIGateway::V1::Api, ::Hash]
+            #   @param api [::Google::Cloud::ApiGateway::V1::Api, ::Hash]
             #     Required. API resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -772,7 +772,7 @@ module Google
             def create_api request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::APIGateway::V1::CreateApiRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiGateway::V1::CreateApiRequest
 
               # Converts hash and nil to an options object
               options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -783,7 +783,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::APIGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -812,9 +812,9 @@ module Google
             #
             # @overload update_api(request, options = nil)
             #   Pass arguments to `update_api` via a request object, either of type
-            #   {::Google::Cloud::APIGateway::V1::UpdateApiRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ApiGateway::V1::UpdateApiRequest} or an equivalent Hash.
             #
-            #   @param request [::Google::Cloud::APIGateway::V1::UpdateApiRequest, ::Hash]
+            #   @param request [::Google::Cloud::ApiGateway::V1::UpdateApiRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
             #   @param options [::Gapic::CallOptions, ::Hash]
@@ -831,7 +831,7 @@ module Google
             #     The fields specified in the update_mask are relative to the resource, not
             #     the full request. A field will be overwritten if it is in the mask. If the
             #     user does not provide a mask then all fields will be overwritten.
-            #   @param api [::Google::Cloud::APIGateway::V1::Api, ::Hash]
+            #   @param api [::Google::Cloud::ApiGateway::V1::Api, ::Hash]
             #     Required. API resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -845,7 +845,7 @@ module Google
             def update_api request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::APIGateway::V1::UpdateApiRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiGateway::V1::UpdateApiRequest
 
               # Converts hash and nil to an options object
               options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -856,7 +856,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::APIGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -885,9 +885,9 @@ module Google
             #
             # @overload delete_api(request, options = nil)
             #   Pass arguments to `delete_api` via a request object, either of type
-            #   {::Google::Cloud::APIGateway::V1::DeleteApiRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ApiGateway::V1::DeleteApiRequest} or an equivalent Hash.
             #
-            #   @param request [::Google::Cloud::APIGateway::V1::DeleteApiRequest, ::Hash]
+            #   @param request [::Google::Cloud::ApiGateway::V1::DeleteApiRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
             #   @param options [::Gapic::CallOptions, ::Hash]
@@ -913,7 +913,7 @@ module Google
             def delete_api request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::APIGateway::V1::DeleteApiRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiGateway::V1::DeleteApiRequest
 
               # Converts hash and nil to an options object
               options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -924,7 +924,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::APIGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -953,9 +953,9 @@ module Google
             #
             # @overload list_api_configs(request, options = nil)
             #   Pass arguments to `list_api_configs` via a request object, either of type
-            #   {::Google::Cloud::APIGateway::V1::ListApiConfigsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ApiGateway::V1::ListApiConfigsRequest} or an equivalent Hash.
             #
-            #   @param request [::Google::Cloud::APIGateway::V1::ListApiConfigsRequest, ::Hash]
+            #   @param request [::Google::Cloud::ApiGateway::V1::ListApiConfigsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
             #   @param options [::Gapic::CallOptions, ::Hash]
@@ -979,17 +979,17 @@ module Google
             #     Order by parameters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::APIGateway::V1::ApiConfig>]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ApiGateway::V1::ApiConfig>]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [::Gapic::PagedEnumerable<::Google::Cloud::APIGateway::V1::ApiConfig>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::ApiGateway::V1::ApiConfig>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_api_configs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::APIGateway::V1::ListApiConfigsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiGateway::V1::ListApiConfigsRequest
 
               # Converts hash and nil to an options object
               options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -1000,7 +1000,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::APIGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -1029,9 +1029,9 @@ module Google
             #
             # @overload get_api_config(request, options = nil)
             #   Pass arguments to `get_api_config` via a request object, either of type
-            #   {::Google::Cloud::APIGateway::V1::GetApiConfigRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ApiGateway::V1::GetApiConfigRequest} or an equivalent Hash.
             #
-            #   @param request [::Google::Cloud::APIGateway::V1::GetApiConfigRequest, ::Hash]
+            #   @param request [::Google::Cloud::ApiGateway::V1::GetApiConfigRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
             #   @param options [::Gapic::CallOptions, ::Hash]
@@ -1045,22 +1045,22 @@ module Google
             #   @param name [::String]
             #     Required. Resource name of the form:
             #     `projects/*/locations/global/apis/*/configs/*`
-            #   @param view [::Google::Cloud::APIGateway::V1::GetApiConfigRequest::ConfigView]
+            #   @param view [::Google::Cloud::ApiGateway::V1::GetApiConfigRequest::ConfigView]
             #     Specifies which fields of the API Config are returned in the response.
             #     Defaults to `BASIC` view.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Cloud::APIGateway::V1::ApiConfig]
+            # @yieldparam response [::Google::Cloud::ApiGateway::V1::ApiConfig]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [::Google::Cloud::APIGateway::V1::ApiConfig]
+            # @return [::Google::Cloud::ApiGateway::V1::ApiConfig]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_api_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::APIGateway::V1::GetApiConfigRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiGateway::V1::GetApiConfigRequest
 
               # Converts hash and nil to an options object
               options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -1071,7 +1071,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::APIGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -1099,9 +1099,9 @@ module Google
             #
             # @overload create_api_config(request, options = nil)
             #   Pass arguments to `create_api_config` via a request object, either of type
-            #   {::Google::Cloud::APIGateway::V1::CreateApiConfigRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ApiGateway::V1::CreateApiConfigRequest} or an equivalent Hash.
             #
-            #   @param request [::Google::Cloud::APIGateway::V1::CreateApiConfigRequest, ::Hash]
+            #   @param request [::Google::Cloud::ApiGateway::V1::CreateApiConfigRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
             #   @param options [::Gapic::CallOptions, ::Hash]
@@ -1118,7 +1118,7 @@ module Google
             #   @param api_config_id [::String]
             #     Required. Identifier to assign to the API Config. Must be unique within scope of
             #     the parent resource.
-            #   @param api_config [::Google::Cloud::APIGateway::V1::ApiConfig, ::Hash]
+            #   @param api_config [::Google::Cloud::ApiGateway::V1::ApiConfig, ::Hash]
             #     Required. API resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1132,7 +1132,7 @@ module Google
             def create_api_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::APIGateway::V1::CreateApiConfigRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiGateway::V1::CreateApiConfigRequest
 
               # Converts hash and nil to an options object
               options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -1143,7 +1143,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::APIGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -1172,9 +1172,9 @@ module Google
             #
             # @overload update_api_config(request, options = nil)
             #   Pass arguments to `update_api_config` via a request object, either of type
-            #   {::Google::Cloud::APIGateway::V1::UpdateApiConfigRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ApiGateway::V1::UpdateApiConfigRequest} or an equivalent Hash.
             #
-            #   @param request [::Google::Cloud::APIGateway::V1::UpdateApiConfigRequest, ::Hash]
+            #   @param request [::Google::Cloud::ApiGateway::V1::UpdateApiConfigRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
             #   @param options [::Gapic::CallOptions, ::Hash]
@@ -1191,7 +1191,7 @@ module Google
             #     The fields specified in the update_mask are relative to the resource, not
             #     the full request. A field will be overwritten if it is in the mask. If the
             #     user does not provide a mask then all fields will be overwritten.
-            #   @param api_config [::Google::Cloud::APIGateway::V1::ApiConfig, ::Hash]
+            #   @param api_config [::Google::Cloud::ApiGateway::V1::ApiConfig, ::Hash]
             #     Required. API Config resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1205,7 +1205,7 @@ module Google
             def update_api_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::APIGateway::V1::UpdateApiConfigRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiGateway::V1::UpdateApiConfigRequest
 
               # Converts hash and nil to an options object
               options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -1216,7 +1216,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::APIGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -1245,9 +1245,9 @@ module Google
             #
             # @overload delete_api_config(request, options = nil)
             #   Pass arguments to `delete_api_config` via a request object, either of type
-            #   {::Google::Cloud::APIGateway::V1::DeleteApiConfigRequest} or an equivalent Hash.
+            #   {::Google::Cloud::ApiGateway::V1::DeleteApiConfigRequest} or an equivalent Hash.
             #
-            #   @param request [::Google::Cloud::APIGateway::V1::DeleteApiConfigRequest, ::Hash]
+            #   @param request [::Google::Cloud::ApiGateway::V1::DeleteApiConfigRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
             #   @param options [::Gapic::CallOptions, ::Hash]
@@ -1273,7 +1273,7 @@ module Google
             def delete_api_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::APIGateway::V1::DeleteApiConfigRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ApiGateway::V1::DeleteApiConfigRequest
 
               # Converts hash and nil to an options object
               options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -1284,7 +1284,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::APIGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -1315,7 +1315,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {::Google::Cloud::APIGateway::V1::ApiGatewayService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -1326,14 +1326,14 @@ module Google
             # To modify the global config, setting the timeout for list_gateways
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     ::Google::Cloud::APIGateway::V1::ApiGatewayService::Client.configure do |config|
+            #     ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.configure do |config|
             #       config.timeout = 10.0
             #       config.rpcs.list_gateways.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = ::Google::Cloud::APIGateway::V1::ApiGatewayService::Client.new do |config|
+            #     client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new do |config|
             #       config.timeout = 10.0
             #       config.rpcs.list_gateways.timeout = 20.0
             #     end

@@ -29,7 +29,7 @@ require "google/cloud/api_gateway/v1/api_gateway_service/client"
 
 module Google
   module Cloud
-    module APIGateway
+    module ApiGateway
       module V1
         ##
         # The API Gateway Service is the interface for managing API Gateways.
@@ -37,7 +37,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/api_gateway/v1/api_gateway_service"
-        #     client = ::Google::Cloud::APIGateway::V1::ApiGatewayService::Client.new
+        #     client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
         #
         module ApiGatewayService
         end

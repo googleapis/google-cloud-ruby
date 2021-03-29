@@ -5,7 +5,7 @@ require File.expand_path("lib/google/cloud/api_gateway/v1/version", __dir__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-api_gateway-v1"
-  gem.version       = Google::Cloud::APIGateway::V1::VERSION
+  gem.version       = Google::Cloud::ApiGateway::V1::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.5"
 
-  gem.add_dependency "gapic-common", "~> 0.3"
+  gem.add_dependency "gapic-common", "~> 0.4"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
 
   gem.add_development_dependency "google-style", "~> 1.25.1"

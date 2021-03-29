@@ -21,12 +21,12 @@ require "google/cloud/api_gateway/v1/version"
 
 module Google
   module Cloud
-    module APIGateway
+    module ApiGateway
       ##
       # To load this package, including all its services, and instantiate a client:
       #
       #     require "google/cloud/api_gateway/v1"
-      #     client = ::Google::Cloud::APIGateway::V1::ApiGatewayService::Client.new
+      #     client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
       #
       module V1
       end

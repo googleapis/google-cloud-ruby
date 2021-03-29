@@ -20,7 +20,7 @@ require "googleauth"
 
 module Google
   module Cloud
-    module APIGateway
+    module ApiGateway
       module V1
         module ApiGatewayService
           # Credentials for the ApiGatewayService API.

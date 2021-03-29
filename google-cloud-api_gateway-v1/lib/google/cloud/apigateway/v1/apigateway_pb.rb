@@ -184,7 +184,7 @@ end
 
 module Google
   module Cloud
-    module APIGateway
+    module ApiGateway
       module V1
         Api = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.apigateway.v1.Api").msgclass
         Api::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.apigateway.v1.Api.State").enummodule
