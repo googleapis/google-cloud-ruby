@@ -1,0 +1,93 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.apigateway.v1",
+  "libraryPackage": "::Google::Cloud::ApiGateway::V1",
+  "services": {
+    "ApiGatewayService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client",
+          "rpcs": {
+            "ListGateways": {
+              "methods": [
+                "list_gateways"
+              ]
+            },
+            "GetGateway": {
+              "methods": [
+                "get_gateway"
+              ]
+            },
+            "CreateGateway": {
+              "methods": [
+                "create_gateway"
+              ]
+            },
+            "UpdateGateway": {
+              "methods": [
+                "update_gateway"
+              ]
+            },
+            "DeleteGateway": {
+              "methods": [
+                "delete_gateway"
+              ]
+            },
+            "ListApis": {
+              "methods": [
+                "list_apis"
+              ]
+            },
+            "GetApi": {
+              "methods": [
+                "get_api"
+              ]
+            },
+            "CreateApi": {
+              "methods": [
+                "create_api"
+              ]
+            },
+            "UpdateApi": {
+              "methods": [
+                "update_api"
+              ]
+            },
+            "DeleteApi": {
+              "methods": [
+                "delete_api"
+              ]
+            },
+            "ListApiConfigs": {
+              "methods": [
+                "list_api_configs"
+              ]
+            },
+            "GetApiConfig": {
+              "methods": [
+                "get_api_config"
+              ]
+            },
+            "CreateApiConfig": {
+              "methods": [
+                "create_api_config"
+              ]
+            },
+            "UpdateApiConfig": {
+              "methods": [
+                "update_api_config"
+              ]
+            },
+            "DeleteApiConfig": {
+              "methods": [
+                "delete_api_config"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
