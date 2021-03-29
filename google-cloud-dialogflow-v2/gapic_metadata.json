@@ -9,34 +9,52 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dialogflow::V2::Agents::Client",
-          "methods": {
-            "GetAgent": [
-              "get_agent"
-            ],
-            "SetAgent": [
-              "set_agent"
-            ],
-            "DeleteAgent": [
-              "delete_agent"
-            ],
-            "SearchAgents": [
-              "search_agents"
-            ],
-            "TrainAgent": [
-              "train_agent"
-            ],
-            "ExportAgent": [
-              "export_agent"
-            ],
-            "ImportAgent": [
-              "import_agent"
-            ],
-            "RestoreAgent": [
-              "restore_agent"
-            ],
-            "GetValidationResult": [
-              "get_validation_result"
-            ]
+          "rpcs": {
+            "GetAgent": {
+              "methods": [
+                "get_agent"
+              ]
+            },
+            "SetAgent": {
+              "methods": [
+                "set_agent"
+              ]
+            },
+            "DeleteAgent": {
+              "methods": [
+                "delete_agent"
+              ]
+            },
+            "SearchAgents": {
+              "methods": [
+                "search_agents"
+              ]
+            },
+            "TrainAgent": {
+              "methods": [
+                "train_agent"
+              ]
+            },
+            "ExportAgent": {
+              "methods": [
+                "export_agent"
+              ]
+            },
+            "ImportAgent": {
+              "methods": [
+                "import_agent"
+              ]
+            },
+            "RestoreAgent": {
+              "methods": [
+                "restore_agent"
+              ]
+            },
+            "GetValidationResult": {
+              "methods": [
+                "get_validation_result"
+              ]
+            }
           }
         }
       }
@@ -45,25 +63,37 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dialogflow::V2::Contexts::Client",
-          "methods": {
-            "ListContexts": [
-              "list_contexts"
-            ],
-            "GetContext": [
-              "get_context"
-            ],
-            "CreateContext": [
-              "create_context"
-            ],
-            "UpdateContext": [
-              "update_context"
-            ],
-            "DeleteContext": [
-              "delete_context"
-            ],
-            "DeleteAllContexts": [
-              "delete_all_contexts"
-            ]
+          "rpcs": {
+            "ListContexts": {
+              "methods": [
+                "list_contexts"
+              ]
+            },
+            "GetContext": {
+              "methods": [
+                "get_context"
+              ]
+            },
+            "CreateContext": {
+              "methods": [
+                "create_context"
+              ]
+            },
+            "UpdateContext": {
+              "methods": [
+                "update_context"
+              ]
+            },
+            "DeleteContext": {
+              "methods": [
+                "delete_context"
+              ]
+            },
+            "DeleteAllContexts": {
+              "methods": [
+                "delete_all_contexts"
+              ]
+            }
           }
         }
       }
@@ -72,28 +102,42 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dialogflow::V2::Intents::Client",
-          "methods": {
-            "ListIntents": [
-              "list_intents"
-            ],
-            "GetIntent": [
-              "get_intent"
-            ],
-            "CreateIntent": [
-              "create_intent"
-            ],
-            "UpdateIntent": [
-              "update_intent"
-            ],
-            "DeleteIntent": [
-              "delete_intent"
-            ],
-            "BatchUpdateIntents": [
-              "batch_update_intents"
-            ],
-            "BatchDeleteIntents": [
-              "batch_delete_intents"
-            ]
+          "rpcs": {
+            "ListIntents": {
+              "methods": [
+                "list_intents"
+              ]
+            },
+            "GetIntent": {
+              "methods": [
+                "get_intent"
+              ]
+            },
+            "CreateIntent": {
+              "methods": [
+                "create_intent"
+              ]
+            },
+            "UpdateIntent": {
+              "methods": [
+                "update_intent"
+              ]
+            },
+            "DeleteIntent": {
+              "methods": [
+                "delete_intent"
+              ]
+            },
+            "BatchUpdateIntents": {
+              "methods": [
+                "batch_update_intents"
+              ]
+            },
+            "BatchDeleteIntents": {
+              "methods": [
+                "batch_delete_intents"
+              ]
+            }
           }
         }
       }
@@ -102,37 +146,57 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dialogflow::V2::EntityTypes::Client",
-          "methods": {
-            "ListEntityTypes": [
-              "list_entity_types"
-            ],
-            "GetEntityType": [
-              "get_entity_type"
-            ],
-            "CreateEntityType": [
-              "create_entity_type"
-            ],
-            "UpdateEntityType": [
-              "update_entity_type"
-            ],
-            "DeleteEntityType": [
-              "delete_entity_type"
-            ],
-            "BatchUpdateEntityTypes": [
-              "batch_update_entity_types"
-            ],
-            "BatchDeleteEntityTypes": [
-              "batch_delete_entity_types"
-            ],
-            "BatchCreateEntities": [
-              "batch_create_entities"
-            ],
-            "BatchUpdateEntities": [
-              "batch_update_entities"
-            ],
-            "BatchDeleteEntities": [
-              "batch_delete_entities"
-            ]
+          "rpcs": {
+            "ListEntityTypes": {
+              "methods": [
+                "list_entity_types"
+              ]
+            },
+            "GetEntityType": {
+              "methods": [
+                "get_entity_type"
+              ]
+            },
+            "CreateEntityType": {
+              "methods": [
+                "create_entity_type"
+              ]
+            },
+            "UpdateEntityType": {
+              "methods": [
+                "update_entity_type"
+              ]
+            },
+            "DeleteEntityType": {
+              "methods": [
+                "delete_entity_type"
+              ]
+            },
+            "BatchUpdateEntityTypes": {
+              "methods": [
+                "batch_update_entity_types"
+              ]
+            },
+            "BatchDeleteEntityTypes": {
+              "methods": [
+                "batch_delete_entity_types"
+              ]
+            },
+            "BatchCreateEntities": {
+              "methods": [
+                "batch_create_entities"
+              ]
+            },
+            "BatchUpdateEntities": {
+              "methods": [
+                "batch_update_entities"
+              ]
+            },
+            "BatchDeleteEntities": {
+              "methods": [
+                "batch_delete_entities"
+              ]
+            }
           }
         }
       }
@@ -141,22 +205,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client",
-          "methods": {
-            "ListSessionEntityTypes": [
-              "list_session_entity_types"
-            ],
-            "GetSessionEntityType": [
-              "get_session_entity_type"
-            ],
-            "CreateSessionEntityType": [
-              "create_session_entity_type"
-            ],
-            "UpdateSessionEntityType": [
-              "update_session_entity_type"
-            ],
-            "DeleteSessionEntityType": [
-              "delete_session_entity_type"
-            ]
+          "rpcs": {
+            "ListSessionEntityTypes": {
+              "methods": [
+                "list_session_entity_types"
+              ]
+            },
+            "GetSessionEntityType": {
+              "methods": [
+                "get_session_entity_type"
+              ]
+            },
+            "CreateSessionEntityType": {
+              "methods": [
+                "create_session_entity_type"
+              ]
+            },
+            "UpdateSessionEntityType": {
+              "methods": [
+                "update_session_entity_type"
+              ]
+            },
+            "DeleteSessionEntityType": {
+              "methods": [
+                "delete_session_entity_type"
+              ]
+            }
           }
         }
       }
@@ -165,13 +239,17 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dialogflow::V2::Sessions::Client",
-          "methods": {
-            "DetectIntent": [
-              "detect_intent"
-            ],
-            "StreamingDetectIntent": [
-              "streaming_detect_intent"
-            ]
+          "rpcs": {
+            "DetectIntent": {
+              "methods": [
+                "detect_intent"
+              ]
+            },
+            "StreamingDetectIntent": {
+              "methods": [
+                "streaming_detect_intent"
+              ]
+            }
           }
         }
       }
@@ -180,28 +258,42 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dialogflow::V2::Participants::Client",
-          "methods": {
-            "CreateParticipant": [
-              "create_participant"
-            ],
-            "GetParticipant": [
-              "get_participant"
-            ],
-            "ListParticipants": [
-              "list_participants"
-            ],
-            "UpdateParticipant": [
-              "update_participant"
-            ],
-            "AnalyzeContent": [
-              "analyze_content"
-            ],
-            "SuggestArticles": [
-              "suggest_articles"
-            ],
-            "SuggestFaqAnswers": [
-              "suggest_faq_answers"
-            ]
+          "rpcs": {
+            "CreateParticipant": {
+              "methods": [
+                "create_participant"
+              ]
+            },
+            "GetParticipant": {
+              "methods": [
+                "get_participant"
+              ]
+            },
+            "ListParticipants": {
+              "methods": [
+                "list_participants"
+              ]
+            },
+            "UpdateParticipant": {
+              "methods": [
+                "update_participant"
+              ]
+            },
+            "AnalyzeContent": {
+              "methods": [
+                "analyze_content"
+              ]
+            },
+            "SuggestArticles": {
+              "methods": [
+                "suggest_articles"
+              ]
+            },
+            "SuggestFaqAnswers": {
+              "methods": [
+                "suggest_faq_answers"
+              ]
+            }
           }
         }
       }
@@ -210,13 +302,17 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dialogflow::V2::AnswerRecords::Client",
-          "methods": {
-            "ListAnswerRecords": [
-              "list_answer_records"
-            ],
-            "UpdateAnswerRecord": [
-              "update_answer_record"
-            ]
+          "rpcs": {
+            "ListAnswerRecords": {
+              "methods": [
+                "list_answer_records"
+              ]
+            },
+            "UpdateAnswerRecord": {
+              "methods": [
+                "update_answer_record"
+              ]
+            }
           }
         }
       }
@@ -225,22 +321,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dialogflow::V2::Conversations::Client",
-          "methods": {
-            "CreateConversation": [
-              "create_conversation"
-            ],
-            "ListConversations": [
-              "list_conversations"
-            ],
-            "GetConversation": [
-              "get_conversation"
-            ],
-            "CompleteConversation": [
-              "complete_conversation"
-            ],
-            "ListMessages": [
-              "list_messages"
-            ]
+          "rpcs": {
+            "CreateConversation": {
+              "methods": [
+                "create_conversation"
+              ]
+            },
+            "ListConversations": {
+              "methods": [
+                "list_conversations"
+              ]
+            },
+            "GetConversation": {
+              "methods": [
+                "get_conversation"
+              ]
+            },
+            "CompleteConversation": {
+              "methods": [
+                "complete_conversation"
+              ]
+            },
+            "ListMessages": {
+              "methods": [
+                "list_messages"
+              ]
+            }
           }
         }
       }
@@ -249,22 +355,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client",
-          "methods": {
-            "ListConversationProfiles": [
-              "list_conversation_profiles"
-            ],
-            "GetConversationProfile": [
-              "get_conversation_profile"
-            ],
-            "CreateConversationProfile": [
-              "create_conversation_profile"
-            ],
-            "UpdateConversationProfile": [
-              "update_conversation_profile"
-            ],
-            "DeleteConversationProfile": [
-              "delete_conversation_profile"
-            ]
+          "rpcs": {
+            "ListConversationProfiles": {
+              "methods": [
+                "list_conversation_profiles"
+              ]
+            },
+            "GetConversationProfile": {
+              "methods": [
+                "get_conversation_profile"
+              ]
+            },
+            "CreateConversationProfile": {
+              "methods": [
+                "create_conversation_profile"
+              ]
+            },
+            "UpdateConversationProfile": {
+              "methods": [
+                "update_conversation_profile"
+              ]
+            },
+            "DeleteConversationProfile": {
+              "methods": [
+                "delete_conversation_profile"
+              ]
+            }
           }
         }
       }
@@ -273,25 +389,37 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dialogflow::V2::Documents::Client",
-          "methods": {
-            "ListDocuments": [
-              "list_documents"
-            ],
-            "GetDocument": [
-              "get_document"
-            ],
-            "CreateDocument": [
-              "create_document"
-            ],
-            "DeleteDocument": [
-              "delete_document"
-            ],
-            "UpdateDocument": [
-              "update_document"
-            ],
-            "ReloadDocument": [
-              "reload_document"
-            ]
+          "rpcs": {
+            "ListDocuments": {
+              "methods": [
+                "list_documents"
+              ]
+            },
+            "GetDocument": {
+              "methods": [
+                "get_document"
+              ]
+            },
+            "CreateDocument": {
+              "methods": [
+                "create_document"
+              ]
+            },
+            "DeleteDocument": {
+              "methods": [
+                "delete_document"
+              ]
+            },
+            "UpdateDocument": {
+              "methods": [
+                "update_document"
+              ]
+            },
+            "ReloadDocument": {
+              "methods": [
+                "reload_document"
+              ]
+            }
           }
         }
       }
@@ -300,10 +428,12 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dialogflow::V2::Environments::Client",
-          "methods": {
-            "ListEnvironments": [
-              "list_environments"
-            ]
+          "rpcs": {
+            "ListEnvironments": {
+              "methods": [
+                "list_environments"
+              ]
+            }
           }
         }
       }
@@ -312,22 +442,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dialogflow::V2::KnowledgeBases::Client",
-          "methods": {
-            "ListKnowledgeBases": [
-              "list_knowledge_bases"
-            ],
-            "GetKnowledgeBase": [
-              "get_knowledge_base"
-            ],
-            "CreateKnowledgeBase": [
-              "create_knowledge_base"
-            ],
-            "DeleteKnowledgeBase": [
-              "delete_knowledge_base"
-            ],
-            "UpdateKnowledgeBase": [
-              "update_knowledge_base"
-            ]
+          "rpcs": {
+            "ListKnowledgeBases": {
+              "methods": [
+                "list_knowledge_bases"
+              ]
+            },
+            "GetKnowledgeBase": {
+              "methods": [
+                "get_knowledge_base"
+              ]
+            },
+            "CreateKnowledgeBase": {
+              "methods": [
+                "create_knowledge_base"
+              ]
+            },
+            "DeleteKnowledgeBase": {
+              "methods": [
+                "delete_knowledge_base"
+              ]
+            },
+            "UpdateKnowledgeBase": {
+              "methods": [
+                "update_knowledge_base"
+              ]
+            }
           }
         }
       }

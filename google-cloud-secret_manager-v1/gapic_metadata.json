@@ -9,52 +9,82 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::SecretManager::V1::SecretManagerService::Client",
-          "methods": {
-            "ListSecrets": [
-              "list_secrets"
-            ],
-            "CreateSecret": [
-              "create_secret"
-            ],
-            "AddSecretVersion": [
-              "add_secret_version"
-            ],
-            "GetSecret": [
-              "get_secret"
-            ],
-            "UpdateSecret": [
-              "update_secret"
-            ],
-            "DeleteSecret": [
-              "delete_secret"
-            ],
-            "ListSecretVersions": [
-              "list_secret_versions"
-            ],
-            "GetSecretVersion": [
-              "get_secret_version"
-            ],
-            "AccessSecretVersion": [
-              "access_secret_version"
-            ],
-            "DisableSecretVersion": [
-              "disable_secret_version"
-            ],
-            "EnableSecretVersion": [
-              "enable_secret_version"
-            ],
-            "DestroySecretVersion": [
-              "destroy_secret_version"
-            ],
-            "SetIamPolicy": [
-              "set_iam_policy"
-            ],
-            "GetIamPolicy": [
-              "get_iam_policy"
-            ],
-            "TestIamPermissions": [
-              "test_iam_permissions"
-            ]
+          "rpcs": {
+            "ListSecrets": {
+              "methods": [
+                "list_secrets"
+              ]
+            },
+            "CreateSecret": {
+              "methods": [
+                "create_secret"
+              ]
+            },
+            "AddSecretVersion": {
+              "methods": [
+                "add_secret_version"
+              ]
+            },
+            "GetSecret": {
+              "methods": [
+                "get_secret"
+              ]
+            },
+            "UpdateSecret": {
+              "methods": [
+                "update_secret"
+              ]
+            },
+            "DeleteSecret": {
+              "methods": [
+                "delete_secret"
+              ]
+            },
+            "ListSecretVersions": {
+              "methods": [
+                "list_secret_versions"
+              ]
+            },
+            "GetSecretVersion": {
+              "methods": [
+                "get_secret_version"
+              ]
+            },
+            "AccessSecretVersion": {
+              "methods": [
+                "access_secret_version"
+              ]
+            },
+            "DisableSecretVersion": {
+              "methods": [
+                "disable_secret_version"
+              ]
+            },
+            "EnableSecretVersion": {
+              "methods": [
+                "enable_secret_version"
+              ]
+            },
+            "DestroySecretVersion": {
+              "methods": [
+                "destroy_secret_version"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
           }
         }
       }

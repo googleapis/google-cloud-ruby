@@ -9,31 +9,47 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client",
-          "methods": {
-            "CreateConnection": [
-              "create_connection"
-            ],
-            "GetConnection": [
-              "get_connection"
-            ],
-            "ListConnections": [
-              "list_connections"
-            ],
-            "UpdateConnection": [
-              "update_connection"
-            ],
-            "DeleteConnection": [
-              "delete_connection"
-            ],
-            "GetIamPolicy": [
-              "get_iam_policy"
-            ],
-            "SetIamPolicy": [
-              "set_iam_policy"
-            ],
-            "TestIamPermissions": [
-              "test_iam_permissions"
-            ]
+          "rpcs": {
+            "CreateConnection": {
+              "methods": [
+                "create_connection"
+              ]
+            },
+            "GetConnection": {
+              "methods": [
+                "get_connection"
+              ]
+            },
+            "ListConnections": {
+              "methods": [
+                "list_connections"
+              ]
+            },
+            "UpdateConnection": {
+              "methods": [
+                "update_connection"
+              ]
+            },
+            "DeleteConnection": {
+              "methods": [
+                "delete_connection"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
           }
         }
       }

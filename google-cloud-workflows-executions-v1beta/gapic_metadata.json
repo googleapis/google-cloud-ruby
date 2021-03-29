@@ -9,19 +9,27 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Workflows::Executions::V1beta::Executions::Client",
-          "methods": {
-            "ListExecutions": [
-              "list_executions"
-            ],
-            "CreateExecution": [
-              "create_execution"
-            ],
-            "GetExecution": [
-              "get_execution"
-            ],
-            "CancelExecution": [
-              "cancel_execution"
-            ]
+          "rpcs": {
+            "ListExecutions": {
+              "methods": [
+                "list_executions"
+              ]
+            },
+            "CreateExecution": {
+              "methods": [
+                "create_execution"
+              ]
+            },
+            "GetExecution": {
+              "methods": [
+                "get_execution"
+              ]
+            },
+            "CancelExecution": {
+              "methods": [
+                "cancel_execution"
+              ]
+            }
           }
         }
       }

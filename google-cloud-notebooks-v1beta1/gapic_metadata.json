@@ -9,64 +9,102 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Notebooks::V1beta1::NotebookService::Client",
-          "methods": {
-            "ListInstances": [
-              "list_instances"
-            ],
-            "GetInstance": [
-              "get_instance"
-            ],
-            "CreateInstance": [
-              "create_instance"
-            ],
-            "RegisterInstance": [
-              "register_instance"
-            ],
-            "SetInstanceAccelerator": [
-              "set_instance_accelerator"
-            ],
-            "SetInstanceMachineType": [
-              "set_instance_machine_type"
-            ],
-            "SetInstanceLabels": [
-              "set_instance_labels"
-            ],
-            "DeleteInstance": [
-              "delete_instance"
-            ],
-            "StartInstance": [
-              "start_instance"
-            ],
-            "StopInstance": [
-              "stop_instance"
-            ],
-            "ResetInstance": [
-              "reset_instance"
-            ],
-            "ReportInstanceInfo": [
-              "report_instance_info"
-            ],
-            "IsInstanceUpgradeable": [
-              "is_instance_upgradeable"
-            ],
-            "UpgradeInstance": [
-              "upgrade_instance"
-            ],
-            "UpgradeInstanceInternal": [
-              "upgrade_instance_internal"
-            ],
-            "ListEnvironments": [
-              "list_environments"
-            ],
-            "GetEnvironment": [
-              "get_environment"
-            ],
-            "CreateEnvironment": [
-              "create_environment"
-            ],
-            "DeleteEnvironment": [
-              "delete_environment"
-            ]
+          "rpcs": {
+            "ListInstances": {
+              "methods": [
+                "list_instances"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "get_instance"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "create_instance"
+              ]
+            },
+            "RegisterInstance": {
+              "methods": [
+                "register_instance"
+              ]
+            },
+            "SetInstanceAccelerator": {
+              "methods": [
+                "set_instance_accelerator"
+              ]
+            },
+            "SetInstanceMachineType": {
+              "methods": [
+                "set_instance_machine_type"
+              ]
+            },
+            "SetInstanceLabels": {
+              "methods": [
+                "set_instance_labels"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "delete_instance"
+              ]
+            },
+            "StartInstance": {
+              "methods": [
+                "start_instance"
+              ]
+            },
+            "StopInstance": {
+              "methods": [
+                "stop_instance"
+              ]
+            },
+            "ResetInstance": {
+              "methods": [
+                "reset_instance"
+              ]
+            },
+            "ReportInstanceInfo": {
+              "methods": [
+                "report_instance_info"
+              ]
+            },
+            "IsInstanceUpgradeable": {
+              "methods": [
+                "is_instance_upgradeable"
+              ]
+            },
+            "UpgradeInstance": {
+              "methods": [
+                "upgrade_instance"
+              ]
+            },
+            "UpgradeInstanceInternal": {
+              "methods": [
+                "upgrade_instance_internal"
+              ]
+            },
+            "ListEnvironments": {
+              "methods": [
+                "list_environments"
+              ]
+            },
+            "GetEnvironment": {
+              "methods": [
+                "get_environment"
+              ]
+            },
+            "CreateEnvironment": {
+              "methods": [
+                "create_environment"
+              ]
+            },
+            "DeleteEnvironment": {
+              "methods": [
+                "delete_environment"
+              ]
+            }
           }
         }
       }

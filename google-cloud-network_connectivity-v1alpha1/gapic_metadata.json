@@ -9,37 +9,57 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client",
-          "methods": {
-            "ListHubs": [
-              "list_hubs"
-            ],
-            "GetHub": [
-              "get_hub"
-            ],
-            "CreateHub": [
-              "create_hub"
-            ],
-            "UpdateHub": [
-              "update_hub"
-            ],
-            "DeleteHub": [
-              "delete_hub"
-            ],
-            "ListSpokes": [
-              "list_spokes"
-            ],
-            "GetSpoke": [
-              "get_spoke"
-            ],
-            "CreateSpoke": [
-              "create_spoke"
-            ],
-            "UpdateSpoke": [
-              "update_spoke"
-            ],
-            "DeleteSpoke": [
-              "delete_spoke"
-            ]
+          "rpcs": {
+            "ListHubs": {
+              "methods": [
+                "list_hubs"
+              ]
+            },
+            "GetHub": {
+              "methods": [
+                "get_hub"
+              ]
+            },
+            "CreateHub": {
+              "methods": [
+                "create_hub"
+              ]
+            },
+            "UpdateHub": {
+              "methods": [
+                "update_hub"
+              ]
+            },
+            "DeleteHub": {
+              "methods": [
+                "delete_hub"
+              ]
+            },
+            "ListSpokes": {
+              "methods": [
+                "list_spokes"
+              ]
+            },
+            "GetSpoke": {
+              "methods": [
+                "get_spoke"
+              ]
+            },
+            "CreateSpoke": {
+              "methods": [
+                "create_spoke"
+              ]
+            },
+            "UpdateSpoke": {
+              "methods": [
+                "update_spoke"
+              ]
+            },
+            "DeleteSpoke": {
+              "methods": [
+                "delete_spoke"
+              ]
+            }
           }
         }
       }

@@ -9,28 +9,42 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client",
-          "methods": {
-            "CreateAssessment": [
-              "create_assessment"
-            ],
-            "AnnotateAssessment": [
-              "annotate_assessment"
-            ],
-            "CreateKey": [
-              "create_key"
-            ],
-            "ListKeys": [
-              "list_keys"
-            ],
-            "GetKey": [
-              "get_key"
-            ],
-            "UpdateKey": [
-              "update_key"
-            ],
-            "DeleteKey": [
-              "delete_key"
-            ]
+          "rpcs": {
+            "CreateAssessment": {
+              "methods": [
+                "create_assessment"
+              ]
+            },
+            "AnnotateAssessment": {
+              "methods": [
+                "annotate_assessment"
+              ]
+            },
+            "CreateKey": {
+              "methods": [
+                "create_key"
+              ]
+            },
+            "ListKeys": {
+              "methods": [
+                "list_keys"
+              ]
+            },
+            "GetKey": {
+              "methods": [
+                "get_key"
+              ]
+            },
+            "UpdateKey": {
+              "methods": [
+                "update_key"
+              ]
+            },
+            "DeleteKey": {
+              "methods": [
+                "delete_key"
+              ]
+            }
           }
         }
       }

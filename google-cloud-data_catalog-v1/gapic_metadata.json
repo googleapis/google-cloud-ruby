@@ -9,88 +9,142 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client",
-          "methods": {
-            "SearchCatalog": [
-              "search_catalog"
-            ],
-            "CreateEntryGroup": [
-              "create_entry_group"
-            ],
-            "GetEntryGroup": [
-              "get_entry_group"
-            ],
-            "UpdateEntryGroup": [
-              "update_entry_group"
-            ],
-            "DeleteEntryGroup": [
-              "delete_entry_group"
-            ],
-            "ListEntryGroups": [
-              "list_entry_groups"
-            ],
-            "CreateEntry": [
-              "create_entry"
-            ],
-            "UpdateEntry": [
-              "update_entry"
-            ],
-            "DeleteEntry": [
-              "delete_entry"
-            ],
-            "GetEntry": [
-              "get_entry"
-            ],
-            "LookupEntry": [
-              "lookup_entry"
-            ],
-            "ListEntries": [
-              "list_entries"
-            ],
-            "CreateTagTemplate": [
-              "create_tag_template"
-            ],
-            "GetTagTemplate": [
-              "get_tag_template"
-            ],
-            "UpdateTagTemplate": [
-              "update_tag_template"
-            ],
-            "DeleteTagTemplate": [
-              "delete_tag_template"
-            ],
-            "CreateTagTemplateField": [
-              "create_tag_template_field"
-            ],
-            "UpdateTagTemplateField": [
-              "update_tag_template_field"
-            ],
-            "RenameTagTemplateField": [
-              "rename_tag_template_field"
-            ],
-            "DeleteTagTemplateField": [
-              "delete_tag_template_field"
-            ],
-            "CreateTag": [
-              "create_tag"
-            ],
-            "UpdateTag": [
-              "update_tag"
-            ],
-            "DeleteTag": [
-              "delete_tag"
-            ],
-            "ListTags": [
-              "list_tags"
-            ],
-            "SetIamPolicy": [
-              "set_iam_policy"
-            ],
-            "GetIamPolicy": [
-              "get_iam_policy"
-            ],
-            "TestIamPermissions": [
-              "test_iam_permissions"
-            ]
+          "rpcs": {
+            "SearchCatalog": {
+              "methods": [
+                "search_catalog"
+              ]
+            },
+            "CreateEntryGroup": {
+              "methods": [
+                "create_entry_group"
+              ]
+            },
+            "GetEntryGroup": {
+              "methods": [
+                "get_entry_group"
+              ]
+            },
+            "UpdateEntryGroup": {
+              "methods": [
+                "update_entry_group"
+              ]
+            },
+            "DeleteEntryGroup": {
+              "methods": [
+                "delete_entry_group"
+              ]
+            },
+            "ListEntryGroups": {
+              "methods": [
+                "list_entry_groups"
+              ]
+            },
+            "CreateEntry": {
+              "methods": [
+                "create_entry"
+              ]
+            },
+            "UpdateEntry": {
+              "methods": [
+                "update_entry"
+              ]
+            },
+            "DeleteEntry": {
+              "methods": [
+                "delete_entry"
+              ]
+            },
+            "GetEntry": {
+              "methods": [
+                "get_entry"
+              ]
+            },
+            "LookupEntry": {
+              "methods": [
+                "lookup_entry"
+              ]
+            },
+            "ListEntries": {
+              "methods": [
+                "list_entries"
+              ]
+            },
+            "CreateTagTemplate": {
+              "methods": [
+                "create_tag_template"
+              ]
+            },
+            "GetTagTemplate": {
+              "methods": [
+                "get_tag_template"
+              ]
+            },
+            "UpdateTagTemplate": {
+              "methods": [
+                "update_tag_template"
+              ]
+            },
+            "DeleteTagTemplate": {
+              "methods": [
+                "delete_tag_template"
+              ]
+            },
+            "CreateTagTemplateField": {
+              "methods": [
+                "create_tag_template_field"
+              ]
+            },
+            "UpdateTagTemplateField": {
+              "methods": [
+                "update_tag_template_field"
+              ]
+            },
+            "RenameTagTemplateField": {
+              "methods": [
+                "rename_tag_template_field"
+              ]
+            },
+            "DeleteTagTemplateField": {
+              "methods": [
+                "delete_tag_template_field"
+              ]
+            },
+            "CreateTag": {
+              "methods": [
+                "create_tag"
+              ]
+            },
+            "UpdateTag": {
+              "methods": [
+                "update_tag"
+              ]
+            },
+            "DeleteTag": {
+              "methods": [
+                "delete_tag"
+              ]
+            },
+            "ListTags": {
+              "methods": [
+                "list_tags"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
           }
         }
       }

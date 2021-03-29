@@ -9,28 +9,42 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client",
-          "methods": {
-            "GetPolicy": [
-              "get_policy"
-            ],
-            "UpdatePolicy": [
-              "update_policy"
-            ],
-            "CreateAttestor": [
-              "create_attestor"
-            ],
-            "GetAttestor": [
-              "get_attestor"
-            ],
-            "UpdateAttestor": [
-              "update_attestor"
-            ],
-            "ListAttestors": [
-              "list_attestors"
-            ],
-            "DeleteAttestor": [
-              "delete_attestor"
-            ]
+          "rpcs": {
+            "GetPolicy": {
+              "methods": [
+                "get_policy"
+              ]
+            },
+            "UpdatePolicy": {
+              "methods": [
+                "update_policy"
+              ]
+            },
+            "CreateAttestor": {
+              "methods": [
+                "create_attestor"
+              ]
+            },
+            "GetAttestor": {
+              "methods": [
+                "get_attestor"
+              ]
+            },
+            "UpdateAttestor": {
+              "methods": [
+                "update_attestor"
+              ]
+            },
+            "ListAttestors": {
+              "methods": [
+                "list_attestors"
+              ]
+            },
+            "DeleteAttestor": {
+              "methods": [
+                "delete_attestor"
+              ]
+            }
           }
         }
       }

@@ -9,25 +9,37 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Bigtable::V2::Bigtable::Client",
-          "methods": {
-            "ReadRows": [
-              "read_rows"
-            ],
-            "SampleRowKeys": [
-              "sample_row_keys"
-            ],
-            "MutateRow": [
-              "mutate_row"
-            ],
-            "MutateRows": [
-              "mutate_rows"
-            ],
-            "CheckAndMutateRow": [
-              "check_and_mutate_row"
-            ],
-            "ReadModifyWriteRow": [
-              "read_modify_write_row"
-            ]
+          "rpcs": {
+            "ReadRows": {
+              "methods": [
+                "read_rows"
+              ]
+            },
+            "SampleRowKeys": {
+              "methods": [
+                "sample_row_keys"
+              ]
+            },
+            "MutateRow": {
+              "methods": [
+                "mutate_row"
+              ]
+            },
+            "MutateRows": {
+              "methods": [
+                "mutate_rows"
+              ]
+            },
+            "CheckAndMutateRow": {
+              "methods": [
+                "check_and_mutate_row"
+              ]
+            },
+            "ReadModifyWriteRow": {
+              "methods": [
+                "read_modify_write_row"
+              ]
+            }
           }
         }
       }

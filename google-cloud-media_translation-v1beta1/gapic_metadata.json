@@ -9,10 +9,12 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client",
-          "methods": {
-            "StreamingTranslateSpeech": [
-              "streaming_translate_speech"
-            ]
+          "rpcs": {
+            "StreamingTranslateSpeech": {
+              "methods": [
+                "streaming_translate_speech"
+              ]
+            }
           }
         }
       }

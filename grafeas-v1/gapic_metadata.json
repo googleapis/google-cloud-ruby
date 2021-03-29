@@ -9,49 +9,77 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Grafeas::V1::Grafeas::Client",
-          "methods": {
-            "GetOccurrence": [
-              "get_occurrence"
-            ],
-            "ListOccurrences": [
-              "list_occurrences"
-            ],
-            "DeleteOccurrence": [
-              "delete_occurrence"
-            ],
-            "CreateOccurrence": [
-              "create_occurrence"
-            ],
-            "BatchCreateOccurrences": [
-              "batch_create_occurrences"
-            ],
-            "UpdateOccurrence": [
-              "update_occurrence"
-            ],
-            "GetOccurrenceNote": [
-              "get_occurrence_note"
-            ],
-            "GetNote": [
-              "get_note"
-            ],
-            "ListNotes": [
-              "list_notes"
-            ],
-            "DeleteNote": [
-              "delete_note"
-            ],
-            "CreateNote": [
-              "create_note"
-            ],
-            "BatchCreateNotes": [
-              "batch_create_notes"
-            ],
-            "UpdateNote": [
-              "update_note"
-            ],
-            "ListNoteOccurrences": [
-              "list_note_occurrences"
-            ]
+          "rpcs": {
+            "GetOccurrence": {
+              "methods": [
+                "get_occurrence"
+              ]
+            },
+            "ListOccurrences": {
+              "methods": [
+                "list_occurrences"
+              ]
+            },
+            "DeleteOccurrence": {
+              "methods": [
+                "delete_occurrence"
+              ]
+            },
+            "CreateOccurrence": {
+              "methods": [
+                "create_occurrence"
+              ]
+            },
+            "BatchCreateOccurrences": {
+              "methods": [
+                "batch_create_occurrences"
+              ]
+            },
+            "UpdateOccurrence": {
+              "methods": [
+                "update_occurrence"
+              ]
+            },
+            "GetOccurrenceNote": {
+              "methods": [
+                "get_occurrence_note"
+              ]
+            },
+            "GetNote": {
+              "methods": [
+                "get_note"
+              ]
+            },
+            "ListNotes": {
+              "methods": [
+                "list_notes"
+              ]
+            },
+            "DeleteNote": {
+              "methods": [
+                "delete_note"
+              ]
+            },
+            "CreateNote": {
+              "methods": [
+                "create_note"
+              ]
+            },
+            "BatchCreateNotes": {
+              "methods": [
+                "batch_create_notes"
+              ]
+            },
+            "UpdateNote": {
+              "methods": [
+                "update_note"
+              ]
+            },
+            "ListNoteOccurrences": {
+              "methods": [
+                "list_note_occurrences"
+              ]
+            }
           }
         }
       }

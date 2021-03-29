@@ -9,52 +9,82 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::ServiceManagement::V1::ServiceManager::Client",
-          "methods": {
-            "ListServices": [
-              "list_services"
-            ],
-            "GetService": [
-              "get_service"
-            ],
-            "CreateService": [
-              "create_service"
-            ],
-            "DeleteService": [
-              "delete_service"
-            ],
-            "UndeleteService": [
-              "undelete_service"
-            ],
-            "ListServiceConfigs": [
-              "list_service_configs"
-            ],
-            "GetServiceConfig": [
-              "get_service_config"
-            ],
-            "CreateServiceConfig": [
-              "create_service_config"
-            ],
-            "SubmitConfigSource": [
-              "submit_config_source"
-            ],
-            "ListServiceRollouts": [
-              "list_service_rollouts"
-            ],
-            "GetServiceRollout": [
-              "get_service_rollout"
-            ],
-            "CreateServiceRollout": [
-              "create_service_rollout"
-            ],
-            "GenerateConfigReport": [
-              "generate_config_report"
-            ],
-            "EnableService": [
-              "enable_service"
-            ],
-            "DisableService": [
-              "disable_service"
-            ]
+          "rpcs": {
+            "ListServices": {
+              "methods": [
+                "list_services"
+              ]
+            },
+            "GetService": {
+              "methods": [
+                "get_service"
+              ]
+            },
+            "CreateService": {
+              "methods": [
+                "create_service"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "delete_service"
+              ]
+            },
+            "UndeleteService": {
+              "methods": [
+                "undelete_service"
+              ]
+            },
+            "ListServiceConfigs": {
+              "methods": [
+                "list_service_configs"
+              ]
+            },
+            "GetServiceConfig": {
+              "methods": [
+                "get_service_config"
+              ]
+            },
+            "CreateServiceConfig": {
+              "methods": [
+                "create_service_config"
+              ]
+            },
+            "SubmitConfigSource": {
+              "methods": [
+                "submit_config_source"
+              ]
+            },
+            "ListServiceRollouts": {
+              "methods": [
+                "list_service_rollouts"
+              ]
+            },
+            "GetServiceRollout": {
+              "methods": [
+                "get_service_rollout"
+              ]
+            },
+            "CreateServiceRollout": {
+              "methods": [
+                "create_service_rollout"
+              ]
+            },
+            "GenerateConfigReport": {
+              "methods": [
+                "generate_config_report"
+              ]
+            },
+            "EnableService": {
+              "methods": [
+                "enable_service"
+              ]
+            },
+            "DisableService": {
+              "methods": [
+                "disable_service"
+              ]
+            }
           }
         }
       }

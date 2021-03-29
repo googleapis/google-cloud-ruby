@@ -9,10 +9,12 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::VideoIntelligence::V1p1beta1::VideoIntelligenceService::Client",
-          "methods": {
-            "AnnotateVideo": [
-              "annotate_video"
-            ]
+          "rpcs": {
+            "AnnotateVideo": {
+              "methods": [
+                "annotate_video"
+              ]
+            }
           }
         }
       }
