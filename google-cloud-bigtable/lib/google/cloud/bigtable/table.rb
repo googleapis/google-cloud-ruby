@@ -61,10 +61,6 @@ module Google
         attr_accessor :grpc
 
         # @private
-        # The current view, for testing only. See #check_view_and_load, below.
-        attr_reader :view
-
-        # @private
         # The current loaded_views, for testing only. See #check_view_and_load, below.
         attr_reader :loaded_views
 
@@ -79,7 +75,7 @@ module Google
         def initialize grpc, service, view: nil
           @grpc = grpc
           @service = service
-          @view = view || :SCHEMA_VIEW
+          @loaded_views = Set[view || :SCHEMA_VIEW]
         end
 
         ##
@@ -121,7 +117,8 @@ module Google
         end
 
         ##
-        # Reloads table data.
+        # Reloads table data with the provided `view`, or with `SCHEMA_VIEW`
+        # if none is provided. Previously loaded data is not retained.
         #
         # @param view [Symbol] Table view type.
         #   Default view type is `:SCHEMA_VIEW`.
@@ -135,8 +132,9 @@ module Google
         # @return [Google::Cloud::Bigtable::Table]
         #
         def reload! view: nil
-          @view = view || :SCHEMA_VIEW
+          view ||= :SCHEMA_VIEW
           @grpc = service.get_table instance_id, name, view: view
+          @loaded_views = Set[view]
           self
         end
 
@@ -145,7 +143,10 @@ module Google
         # If it could not be determined whether or not the table has data in a
         # particular cluster (for example, if its zone is unavailable), then
         # there will be an entry for the cluster with UNKNOWN `replication_status`.
-        # Views: `FULL`.
+        #
+        # Reloads the table if necessary to retrieve the cluster states data,
+        # since it is only available in a table with view type `REPLICATION_VIEW`
+        # or `FULL`. Previously loaded data is retained.
         #
         # @return [Array<Google::Cloud::Bigtable::Table::ClusterState>]
         #
@@ -158,9 +159,11 @@ module Google
 
         ##
         # Returns a frozen object containing the column families configured for
-        # the table, mapped by column family name. Reloads the table if
-        # necessary to retrieve the column families data, since it is only
-        # available in a table with view type `SCHEMA_VIEW` or `FULL`.
+        # the table, mapped by column family name.
+        #
+        # Reloads the table if necessary to retrieve the column families data,
+        # since it is only available in a table with view type `SCHEMA_VIEW`
+        # or `FULL`. Previously loaded data is retained.
         #
         # Also accepts a block for making modifications to the table's column
         # families. After the modifications are completed, the table will be
@@ -236,7 +239,10 @@ module Google
         # The granularity (e.g. `MILLIS`, `MICROS`) at which timestamps are stored in
         # this table. Timestamps not matching the granularity will be rejected.
         # If unspecified at creation time, the value will be set to `MILLIS`.
-        # Views: `SCHEMA_VIEW`, `FULL`.
+        #
+        # Reloads the table if necessary to retrieve the column families data,
+        # since it is only available in a table with view type `SCHEMA_VIEW`
+        # or `FULL`. Previously loaded data is retained.
         #
         # @return [Symbol]
         #
@@ -678,7 +684,6 @@ module Google
         #
         def check_view_and_load view
           ensure_service!
-          @loaded_views ||= Set.new [@view]
 
           return if @loaded_views.include?(view) || @loaded_views.include?(:FULL)
 
