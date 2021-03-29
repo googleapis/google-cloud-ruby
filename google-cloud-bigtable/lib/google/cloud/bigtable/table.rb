@@ -56,6 +56,18 @@ module Google
         # The gRPC Service object.
         attr_accessor :service
 
+        # @private
+        # The current gRPC resource, for testing only.
+        attr_accessor :grpc
+
+        # @private
+        # The current view, for testing only. See #check_view_and_load, below.
+        attr_reader :view
+
+        # @private
+        # The current loaded_views, for testing only. See #check_view_and_load, below.
+        attr_reader :loaded_views
+
         ##
         # @return [String] App profile ID for request routing.
         #

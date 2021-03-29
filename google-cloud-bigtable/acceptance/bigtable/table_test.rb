@@ -105,6 +105,139 @@ describe "Instance Tables", :bigtable do
     table.delete
   end
 
+  describe "views" do
+    let(:table) { bigtable_read_table }
+
+    it "Project#table loads NAME_ONLY by default" do
+      _(table.view).must_equal :NAME_ONLY
+      _(table.loaded_views).must_be :nil?
+
+      _(table.name).wont_be :nil?
+
+      _(table.view).must_equal :NAME_ONLY
+      _(table.loaded_views).must_be :nil?
+
+      _(table.grpc.name).wont_be :nil?
+      _(table.grpc.cluster_states.count).must_equal 0 # Google::Protobuf::Map
+      _(table.grpc.column_families.count).must_equal 0 # Google::Protobuf::Map
+      _(table.grpc.granularity).must_equal :TIMESTAMP_GRANULARITY_UNSPECIFIED
+    end
+
+    it "column_families and granularity loads SCHEMA_VIEW" do
+      _(table.column_families).wont_be :empty?
+      _(table.granularity).must_equal :MILLIS
+
+      _(table.view).must_equal :NAME_ONLY
+      _(table.loaded_views).must_equal Set[:NAME_ONLY, :SCHEMA_VIEW]
+
+      _(table.grpc.name).wont_be :nil?
+      _(table.grpc.cluster_states.count).must_equal 0
+      _(table.grpc.column_families.count).must_be :>, 0
+      _(table.grpc.granularity).must_equal :MILLIS
+    end
+
+    it "cluster_states loads REPLICATION_VIEW" do
+      _(table.cluster_states).wont_be :empty?
+
+      _(table.view).must_equal :NAME_ONLY
+      _(table.loaded_views).must_equal Set[:NAME_ONLY, :REPLICATION_VIEW]
+
+      _(table.grpc.name).wont_be :nil?
+      _(table.grpc.cluster_states.count).must_be :>, 0
+      _(table.grpc.column_families.count).must_equal 0
+      _(table.grpc.granularity).must_equal :TIMESTAMP_GRANULARITY_UNSPECIFIED
+    end
+
+    it "column_families, granularity and cluster_states loads SCHEMA_VIEW, REPLICATION_VIEW" do
+      _(table.column_families).wont_be :empty?
+      _(table.granularity).must_equal :MILLIS
+      _(table.cluster_states).wont_be :empty?
+
+      _(table.view).must_equal :NAME_ONLY
+      _(table.loaded_views).must_equal Set[:NAME_ONLY, :SCHEMA_VIEW, :REPLICATION_VIEW]
+
+      _(table.grpc.name).wont_be :nil?
+      _(table.grpc.cluster_states.count).must_be :>, 0
+      _(table.grpc.column_families.count).must_be :>, 0
+      _(table.grpc.granularity).must_equal :MILLIS
+    end
+
+    it "reloads without view option" do
+      _(table.view).must_equal :NAME_ONLY
+      _(table.loaded_views).must_be :nil?
+
+      table.reload!
+
+      _(table.view).must_equal :SCHEMA_VIEW
+      _(table.loaded_views).must_be :nil?
+
+      _(table.grpc.name).wont_be :nil?
+      _(table.grpc.cluster_states.count).must_equal 0
+      _(table.grpc.column_families.count).must_be :>, 0
+      _(table.grpc.granularity).must_equal :MILLIS
+    end
+
+    it "reloads with view option NAME_ONLY" do
+      _(table.view).must_equal :NAME_ONLY
+      _(table.loaded_views).must_be :nil?
+
+      table.reload! view: :NAME_ONLY
+
+      _(table.view).must_equal :NAME_ONLY
+      _(table.loaded_views).must_be :nil?
+
+      _(table.grpc.name).wont_be :nil?
+      _(table.grpc.cluster_states.count).must_equal 0
+      _(table.grpc.column_families.count).must_equal 0
+      _(table.grpc.granularity).must_equal :TIMESTAMP_GRANULARITY_UNSPECIFIED
+    end
+
+    it "reloads with view option SCHEMA_VIEW" do
+      _(table.view).must_equal :NAME_ONLY
+      _(table.loaded_views).must_be :nil?
+
+      table.reload! view: :SCHEMA_VIEW
+
+      _(table.view).must_equal :SCHEMA_VIEW
+      _(table.loaded_views).must_be :nil?
+
+      _(table.grpc.name).wont_be :nil?
+      _(table.grpc.cluster_states.count).must_equal 0
+      _(table.grpc.column_families.count).must_be :>, 0
+      _(table.grpc.granularity).must_equal :MILLIS
+    end
+
+    it "reloads with view option REPLICATION_VIEW" do
+      _(table.view).must_equal :NAME_ONLY
+      _(table.loaded_views).must_be :nil?
+
+      table.reload! view: :REPLICATION_VIEW
+
+      _(table.view).must_equal :REPLICATION_VIEW
+      _(table.loaded_views).must_be :nil?
+
+      _(table.grpc.name).wont_be :nil?
+      _(table.grpc.cluster_states.count).must_be :>, 0
+      _(table.grpc.column_families.count).must_equal 0
+      _(table.grpc.granularity).must_equal :TIMESTAMP_GRANULARITY_UNSPECIFIED
+    end
+
+    it "reloads with view option FULL" do
+      _(table.view).must_equal :NAME_ONLY
+      _(table.loaded_views).must_be :nil?
+
+      table.reload! view: :FULL
+
+      _(table.view).must_equal :FULL
+      _(table.loaded_views).must_be :nil?
+
+      _(table.grpc.name).wont_be :nil?
+      _(table.grpc.cluster_states.count).must_be :>, 0
+      _(table.grpc.column_families.count).must_be :>, 0
+      _(table.grpc.granularity).must_equal :MILLIS
+    end
+  end
+
   describe "replication consistency" do
     let(:table) { bigtable_read_table }
 
