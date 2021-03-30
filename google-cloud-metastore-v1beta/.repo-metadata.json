@@ -1,0 +1,11 @@
+{
+    "api_id": "metastore.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-metastore-v1beta/latest",
+    "distribution_name": "google-cloud-metastore-v1beta",
+    "language": "ruby",
+    "name": "metastore",
+    "name_pretty": "Dataproc Metastore V1beta API",
+    "product_documentation": "https://cloud.google.com/dataproc-metastore/",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}
