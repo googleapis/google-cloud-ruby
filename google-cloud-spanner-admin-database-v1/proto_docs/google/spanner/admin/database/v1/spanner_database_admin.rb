@@ -418,7 +418,7 @@ module Google
             #     to. If this field is not specified, the restored database will use the same
             #     encryption configuration as the backup by default, namely
             #     {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseEncryptionConfig#encryption_type encryption_type}
-            #     = `USE_CONFIG_DEFAULT_OR_DATABASE_ENCRYPTION`.
+            #     = `USE_CONFIG_DEFAULT_OR_BACKUP_ENCRYPTION`.
             class RestoreDatabaseRequest
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
