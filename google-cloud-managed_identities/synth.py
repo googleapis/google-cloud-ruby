@@ -29,7 +29,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Managed Service for Microsoft Active Directory API",
         "ruby-cloud-description": "The Managed Service for Microsoft Active Directory API is used for managing a highly available, hardened service running Microsoft Active Directory.",
         "ruby-cloud-env-prefix": "MANAGED_IDENTITIES",
-        "ruby-cloud-wrapper-of": "v1:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.3,
         "ruby-cloud-product-url": "https://cloud.google.com/managed-microsoft-ad/",
         "ruby-cloud-api-id": "managedidentities.googleapis.com",
         "ruby-cloud-api-shortname": "managedidentities",
