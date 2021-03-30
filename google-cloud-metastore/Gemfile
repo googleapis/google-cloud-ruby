@@ -1,0 +1,6 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-metastore-v1", path: "../google-cloud-metastore-v1"
+gem "google-cloud-metastore-v1beta", path: "../google-cloud-metastore-v1beta"
