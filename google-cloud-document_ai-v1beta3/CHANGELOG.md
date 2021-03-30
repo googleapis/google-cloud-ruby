@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2021-03-30
+
+#### Features
+
+* Support for the EVAL_SKIPPED operation type
+
 ### 0.6.0 / 2021-03-10
 
 #### ⚠ BREAKING CHANGES
