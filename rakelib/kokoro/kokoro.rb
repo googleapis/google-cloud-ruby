@@ -61,16 +61,32 @@ class Kokoro < Command
 
   def cloudrad
     run_ci @gem do
-      header "Building Doc YAMLs"
-      FileUtils.remove_dir "doc" if Dir.exists? "doc"
+      header "Building Cloudrad Docs"
+      FileUtils.remove_dir "doc", true
       run "bundle exec rake cloudrad", 1800
       RepoMetadata.from_source(".repo-metadata.json").build "."
-      header "Uploading Doc YAMLs"
+      header "Uploading Cloudrad Docs"
       opts = [
         "--credentials=#{ENV['KOKORO_KEYSTORE_DIR']}/73713_docuploader_service_account",
         "--staging-bucket=#{ENV.fetch 'V2_STAGING_BUCKET', 'docs-staging-v2-dev'}",
         "--metadata-file=./docs.metadata",
         "--destination-prefix docfx"
+      ]
+      run "python3 -m docuploader upload doc #{opts.join ' '}"
+    end
+  end
+
+  def devsite
+    run_ci @gem do
+      header "Building Devsite Docs"
+      FileUtils.remove_dir "doc", true
+      run "bundle exec rake yard", 1800
+      RepoMetadata.from_source(".repo-metadata.json").build "."
+      header "Uploading Devsite Docs"
+      opts = [
+        "--credentials=#{ENV['KOKORO_KEYSTORE_DIR']}/73713_docuploader_service_account",
+        "--staging-bucket=#{ENV.fetch 'STAGING_BUCKET', 'docs-staging'}",
+        "--metadata-file=./docs.metadata"
       ]
       run "python3 -m docuploader upload doc #{opts.join ' '}"
     end
