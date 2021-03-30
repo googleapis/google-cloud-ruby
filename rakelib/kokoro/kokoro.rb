@@ -62,7 +62,7 @@ class Kokoro < Command
   def cloudrad
     run_ci @gem do
       header "Building Cloudrad Docs"
-      FileUtils.remove_dir "doc" if Dir.exists? "doc"
+      FileUtils.remove_dir "doc", true
       run "bundle exec rake cloudrad", 1800
       RepoMetadata.from_source(".repo-metadata.json").build "."
       header "Uploading Cloudrad Docs"
@@ -79,7 +79,7 @@ class Kokoro < Command
   def devsite
     run_ci @gem do
       header "Building Devsite Docs"
-      FileUtils.remove_dir "doc" if Dir.exists? "doc"
+      FileUtils.remove_dir "doc", true
       run "bundle exec rake yard", 1800
       RepoMetadata.from_source(".repo-metadata.json").build "."
       header "Uploading Devsite Docs"
