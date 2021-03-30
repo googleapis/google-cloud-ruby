@@ -71,8 +71,12 @@ def mock_pubsub
     pubsub.service.mocked_publisher = Minitest::Mock.new
     pubsub.service.mocked_subscriber = Minitest::Mock.new
     pubsub.service.mocked_iam = Minitest::Mock.new
+    pubsub.service.mocked_schemas = Minitest::Mock.new
     if block_given?
-      yield pubsub.service.mocked_publisher, pubsub.service.mocked_subscriber, pubsub.service.mocked_iam
+      yield pubsub.service.mocked_publisher,
+            pubsub.service.mocked_subscriber,
+            pubsub.service.mocked_iam,
+            pubsub.service.mocked_schemas
     end
 
     pubsub
@@ -95,6 +99,13 @@ YARD::Doctest.configure do |doctest|
   doctest.skip "Google::Cloud::PubSub::Project#list_subscriptions"
   doctest.skip "Google::Cloud::PubSub::Project#find_snapshots"
   doctest.skip "Google::Cloud::PubSub::Project#list_snapshots"
+  doctest.skip "Google::Cloud::PubSub::Project#get_schema"
+  doctest.skip "Google::Cloud::PubSub::Project#find_schema"
+  doctest.skip "Google::Cloud::PubSub::Project#new_schema"
+  doctest.skip "Google::Cloud::PubSub::Project#find_schemas"
+  doctest.skip "Google::Cloud::PubSub::Project#list_schemas"
+  doctest.skip "Google::Cloud::PubSub::Project#validate_schema"
+  doctest.skip "Google::Cloud::PubSub::Schema#refresh!"
   doctest.skip "Google::Cloud::PubSub::Subscription#ack"
   doctest.skip "Google::Cloud::PubSub::Subscription#new_snapshot"
   doctest.skip "Google::Cloud::PubSub::Topic#create_subscription"
@@ -216,6 +227,45 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::PubSub::Project#create_schema" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      schema = Google::Cloud::PubSub::V1::Schema.new type: "AVRO", definition: "..."
+      mock_schema.expect :create_schema, schema_resp("my-schema"), [parent: project_path, schema: schema, schema_id: "my-schema"]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Project#schema" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Project#schema@Skip the lookup against the service with `skip_lookup`:" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema", definition: "the schema definition"), [name: schema_path("my-schema"), view: 2]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Project#schema@Get the schema definition with `view: :full`:" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema", definition: "the schema definition"), [name: schema_path("my-schema"), view: 2]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Project#schemas" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :list_schemas, list_schemas_resp, [Hash]
+      mock_schema.expect :list_schemas, list_schemas_resp(nil), [Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Project#valid_schema?" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      schema = Google::Cloud::PubSub::V1::Schema.new type: "AVRO", definition: "..."
+      mock_schema.expect :validate_schema, schema_resp("my-schema"), [parent: project_path, schema: schema]
+    end
+  end
+
   ##
   # ReceivedMessage
 
@@ -292,6 +342,66 @@ YARD::Doctest.configure do |doctest|
   end
 
   ##
+  # Schema
+
+  doctest.before "Google::Cloud::PubSub::Schema" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Schema#delete" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
+      mock_schema.expect :delete_schema, nil, [name: schema_path("my-schema")]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Schema#reload!" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema", definition: "the schema definition"), [name: schema_path("my-schema"), view: 1]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Schema#reload!@Use the `view` option to load the full resource:" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
+      mock_schema.expect :get_schema, schema_resp("my-schema", definition: "the schema definition"), [name: schema_path("my-schema"), view: 2]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Schema#resource_full?" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema", definition: "the schema definition"), [name: schema_path("my-schema"), view: 2]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Schema#resource_partial?" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
+      mock_schema.expect :get_schema, schema_resp("my-schema", definition: "the schema definition"), [name: schema_path("my-schema"), view: 2]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Schema#validate_message" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
+      message_data = { "name" => "Alaska", "post_abbr" => "AK" }.to_json
+      mock_schema.expect :validate_message, nil, [parent: project_path, name: schema_path("my-schema"), schema: nil, message: message_data, encoding: "JSON"]
+    end
+  end
+
+  ##
+  # Schema::List
+
+  doctest.before "Google::Cloud::PubSub::Schema::List" do
+    mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
+      mock_schema.expect :list_schemas, list_schemas_resp, [Hash]
+      mock_schema.expect :list_schemas, list_schemas_resp(nil), [Hash]
+    end
+  end
+
+  ##
   # Snapshot
 
   doctest.before "Google::Cloud::PubSub::Snapshot" do
@@ -319,7 +429,6 @@ YARD::Doctest.configure do |doctest|
       mock_subscriber.expect :list_snapshots, list_snapshots_resp(nil), [Hash]
     end
   end
-
 
   ##
   # Subscription
@@ -577,6 +686,20 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::PubSub::Topic#schema_name" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      this_topic = topic_resp "my-topic", schema_settings: { schema: schema_path("my-schema"), encoding: :JSON }
+      mock_publisher.expect :get_topic, this_topic, [Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Topic#message_encoding" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      this_topic = topic_resp "my-topic", schema_settings: { schema: schema_path("my-schema"), encoding: :JSON }
+      mock_publisher.expect :get_topic, this_topic, [Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::PubSub::Topic#delete" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, [Hash]
@@ -734,7 +857,7 @@ def topics_hash num_topics, token = ""
   data
 end
 
-def topic_resp topic_name = "my-topic", kms_key_name: nil, persistence_regions: nil
+def topic_resp topic_name = "my-topic", kms_key_name: nil, persistence_regions: nil, schema_settings: nil
   topic = Google::Cloud::PubSub::V1::Topic.new name: topic_path(topic_name),
                                                kms_key_name: kms_key_name
   if persistence_regions
@@ -742,6 +865,7 @@ def topic_resp topic_name = "my-topic", kms_key_name: nil, persistence_regions: 
       allowed_persistence_regions: persistence_regions
     )
   end
+  topic.schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new schema_settings if schema_settings
   topic
 end
 
@@ -769,7 +893,8 @@ def subscription_hash topic_name, sub_name,
                       labels: nil,
                       dead_letter_topic: nil,
                       max_delivery_attempts: nil
-  hsh = { name: subscription_path(sub_name),
+  hsh = {
+    name: subscription_path(sub_name),
     topic: topic_path(topic_name),
     push_config: {
       push_endpoint: endpoint,
@@ -807,10 +932,28 @@ def snapshot_hash topic_name, snapshot_name, labels: nil
     seconds: time.to_i,
     nanos: time.nsec
   }
-  { name: snapshot_path(snapshot_name),
+  {
+    name: snapshot_path(snapshot_name),
     topic: topic_path(topic_name),
     expire_time: timestamp,
     labels: labels
+  }
+end
+
+def schemas_hash num_schemas, token = nil
+  schemas = num_schemas.times.map do
+    schema_hash("schema-#{rand 1000}")
+  end
+  data = { schemas: schemas }
+  data[:next_page_token] = token unless token.nil?
+  data
+end
+
+def schema_hash schema_name, type: "PROTOCOL_BUFFER", definition: nil
+  {
+    name: schema_path(schema_name),
+    type: type,
+    definition: definition
   }
 end
 
@@ -847,6 +990,10 @@ def snapshot_path snapshot_name
   "#{project_path}/snapshots/#{snapshot_name}"
 end
 
+def schema_path schema_name
+  "#{project_path}/schemas/#{schema_name}"
+end
+
 def paged_enum_struct response
   OpenStruct.new response: response
 end
@@ -874,6 +1021,15 @@ end
 
 def snapshot_resp snapshot_name = "my-snapshot"
   Google::Cloud::PubSub::V1::Snapshot.new snapshot_hash("my-topic", snapshot_name)
+end
+
+def list_schemas_resp token = "next_page_token"
+  response = Google::Cloud::PubSub::V1::ListSchemasResponse.new schemas_hash(3, token)
+  paged_enum_struct response
+end
+
+def schema_resp schema_name = "my-schema", definition: nil
+  Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_name, definition: definition)
 end
 
 def policy_resp

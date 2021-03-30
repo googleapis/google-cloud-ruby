@@ -234,6 +234,78 @@ module Google
         end
 
         ##
+        # The name of the schema that messages published should be validated against, if schema settings are configured
+        # for the topic. The value is a fully-qualified schema name in the form
+        # `projects/{project_id}/schemas/{schema_id}`. If present, {#message_encoding} should also be present. The value
+        # of this field will be `_deleted-schema_` if the schema has been deleted.
+        #
+        # Makes an API call to retrieve the schema settings when called on a reference object. See {#reference?}.
+        #
+        # @return [String, nil] The schema name, or `nil` if schema settings are not configured for the topic.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #
+        #   topic.schema_name #=> "projects/my-project/schemas/my-schema"
+        #
+        def schema_name
+          ensure_grpc!
+          @grpc.schema_settings&.schema
+        end
+
+        ##
+        # The encoding of messages validated against the schema identified by {#schema_name}. If present, {#schema_name}
+        # should also be present. Values include:
+        #
+        # * `JSON` - JSON encoding.
+        # * `BINARY` - Binary encoding, as defined by the schema type. For some schema types, binary encoding may not be
+        #   available.
+        #
+        # Makes an API call to retrieve the schema settings when called on a reference object. See {#reference?}.
+        #
+        # @return [Symbol, nil] The schema encoding, or `nil` if schema settings are not configured for the topic.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #
+        #   topic.message_encoding #=> :JSON
+        #
+        def message_encoding
+          ensure_grpc!
+          @grpc.schema_settings&.encoding
+        end
+
+        ##
+        # Checks if the encoding of messages in the schema settings is `BINARY`. See {#message_encoding}.
+        #
+        # Makes an API call to retrieve the schema settings when called on a reference object. See {#reference?}.
+        #
+        # @return [Boolean] `true` when `BINARY`, `false` if not `BINARY` or schema settings is not set.
+        #
+        def message_encoding_binary?
+          message_encoding.to_s.upcase == "BINARY"
+        end
+
+        ##
+        # Checks if the encoding of messages in the schema settings is `JSON`. See {#message_encoding}.
+        #
+        # Makes an API call to retrieve the schema settings when called on a reference object. See {#reference?}.
+        #
+        # @return [Boolean] `true` when `JSON`, `false` if not `JSON` or schema settings is not set.
+        #
+        def message_encoding_json?
+          message_encoding.to_s.upcase == "JSON"
+        end
+
+        ##
         # Permanently deletes the topic.
         #
         # @return [Boolean] Returns `true` if the topic was deleted.

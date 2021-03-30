@@ -49,48 +49,55 @@ module Google
 
         def subscriber
           return mocked_subscriber if mocked_subscriber
-          @subscriber ||= begin
-            V1::Subscriber::Client.new do |config|
-              config.credentials = credentials if credentials
-              config.timeout = timeout if timeout
-              config.endpoint = host if host
-              config.lib_name = "gccl"
-              config.lib_version = Google::Cloud::PubSub::VERSION
-              config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
-            end
+          @subscriber ||= V1::Subscriber::Client.new do |config|
+            config.credentials = credentials if credentials
+            config.timeout = timeout if timeout
+            config.endpoint = host if host
+            config.lib_name = "gccl"
+            config.lib_version = Google::Cloud::PubSub::VERSION
+            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
           end
         end
         attr_accessor :mocked_subscriber
 
         def publisher
           return mocked_publisher if mocked_publisher
-          @publisher ||= begin
-            V1::Publisher::Client.new do |config|
-              config.credentials = credentials if credentials
-              config.timeout = timeout if timeout
-              config.endpoint = host if host
-              config.lib_name = "gccl"
-              config.lib_version = Google::Cloud::PubSub::VERSION
-              config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
-            end
+          @publisher ||= V1::Publisher::Client.new do |config|
+            config.credentials = credentials if credentials
+            config.timeout = timeout if timeout
+            config.endpoint = host if host
+            config.lib_name = "gccl"
+            config.lib_version = Google::Cloud::PubSub::VERSION
+            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
           end
         end
         attr_accessor :mocked_publisher
 
         def iam
           return mocked_iam if mocked_iam
-          @iam ||= begin
-            V1::IAMPolicy::Client.new do |config|
-              config.credentials = credentials if credentials
-              config.timeout = timeout if timeout
-              config.endpoint = host if host
-              config.lib_name = "gccl"
-              config.lib_version = Google::Cloud::PubSub::VERSION
-              config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
-            end
+          @iam ||= V1::IAMPolicy::Client.new do |config|
+            config.credentials = credentials if credentials
+            config.timeout = timeout if timeout
+            config.endpoint = host if host
+            config.lib_name = "gccl"
+            config.lib_version = Google::Cloud::PubSub::VERSION
+            config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
           end
         end
         attr_accessor :mocked_iam
+
+        def schemas
+          return mocked_schemas if mocked_schemas
+          @schemas ||= V1::SchemaService::Client.new do |config|
+            config.credentials = credentials if credentials
+            config.timeout = timeout if timeout
+            config.endpoint = host if host
+            config.lib_name = "gccl"
+            config.lib_version = Google::Cloud::PubSub::VERSION
+            config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
+          end
+        end
+        attr_accessor :mocked_schemas
 
         ##
         # Gets the configuration of a topic.
@@ -114,18 +121,35 @@ module Google
 
         ##
         # Creates the given topic with the given name.
-        def create_topic topic_name, labels: nil, kms_key_name: nil, persistence_regions: nil, options: {}
+        def create_topic topic_name,
+                         labels: nil,
+                         kms_key_name: nil,
+                         persistence_regions: nil,
+                         schema_name: nil,
+                         message_encoding: nil,
+                         options: {}
           if persistence_regions
-            message_storage_policy = {
+            message_storage_policy = Google::Cloud::PubSub::V1::MessageStoragePolicy.new(
               allowed_persistence_regions: Array(persistence_regions)
-            }
+            )
+          end
+
+          if schema_name || message_encoding
+            unless schema_name && message_encoding
+              raise ArgumentError, "Schema settings must include both schema_name and message_encoding."
+            end
+            schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new(
+              schema:   schema_path(schema_name),
+              encoding: message_encoding.to_s.upcase
+            )
           end
 
           publisher.create_topic \
             name:                   topic_path(topic_name, options),
             labels:                 labels,
             kms_key_name:           kms_key_name,
-            message_storage_policy: message_storage_policy
+            message_storage_policy: message_storage_policy,
+            schema_settings:        schema_settings
         end
 
         def update_topic topic_obj, *fields
@@ -297,6 +321,89 @@ module Google
           end
         end
 
+        ##
+        # Lists schemas in the current (or given) project.
+        # @param view [String, Symbol, nil] Possible values:
+        #   * `BASIC` - Include the name and type of the schema, but not the definition.
+        #   * `FULL` - Include all Schema object fields.
+        #
+        def list_schemas view, options = {}
+          schema_view = Google::Cloud::PubSub::V1::SchemaView.const_get view.to_s.upcase
+          paged_enum = schemas.list_schemas parent:     project_path(options),
+                                            view:       schema_view,
+                                            page_size:  options[:max],
+                                            page_token: options[:token]
+
+          paged_enum.response
+        end
+
+        ##
+        # Creates a schema in the current (or given) project.
+        def create_schema schema_id, type, definition, options = {}
+          schema = Google::Cloud::PubSub::V1::Schema.new(
+            type:       type,
+            definition: definition
+          )
+          schemas.create_schema parent:    project_path(options),
+                                schema:    schema,
+                                schema_id: schema_id
+        end
+
+        ##
+        # Gets the details of a schema.
+        # @param view [String, Symbol, nil] The set of fields to return in the response. Possible values:
+        #   * `BASIC` - Include the name and type of the schema, but not the definition.
+        #   * `FULL` - Include all Schema object fields.
+        #
+        def get_schema schema_name, view, options = {}
+          schema_view = Google::Cloud::PubSub::V1::SchemaView.const_get view.to_s.upcase
+          schemas.get_schema name: schema_path(schema_name, options),
+                             view: schema_view
+        end
+
+        ##
+        # Delete a schema.
+        def delete_schema schema_name
+          schemas.delete_schema name: schema_path(schema_name)
+        end
+
+        ##
+        # Validate the definition string intended for a schema.
+        def validate_schema type, definition, options = {}
+          schema = Google::Cloud::PubSub::V1::Schema.new(
+            type:       type,
+            definition: definition
+          )
+          schemas.validate_schema parent: project_path(options),
+                                  schema: schema
+        end
+
+        ##
+        # Validates a message against a schema.
+        #
+        # @param message_data [String] Message to validate against the provided `schema_spec`.
+        # @param message_encoding [Google::Cloud::PubSub::V1::Encoding] The encoding expected for messages.
+        # @param schema_name [String] Name of the schema against which to validate.
+        # @param project [String] Name of the project if not the default project.
+        # @param type [String] Ad-hoc schema type against which to validate.
+        # @param definition [String] Ad-hoc schema definition against which to validate.
+        #
+        def validate_message message_data, message_encoding, schema_name: nil, project: nil, type: nil, definition: nil
+          if type && definition
+            schema = Google::Cloud::PubSub::V1::Schema.new(
+              type:       type,
+              definition: definition
+            )
+          end
+          schemas.validate_message parent:   project_path(project: project),
+                                   name:     schema_path(schema_name),
+                                   schema:   schema,
+                                   message:  message_data,
+                                   encoding: message_encoding
+        end
+
+        # Helper methods
+
         def get_topic_policy topic_name, options = {}
           iam.get_iam_policy resource: topic_path(topic_name, options)
         end
@@ -339,6 +446,11 @@ module Google
         def snapshot_path snapshot_name, options = {}
           return snapshot_name if snapshot_name.nil? || snapshot_name.to_s.include?("/")
           "#{project_path options}/snapshots/#{snapshot_name}"
+        end
+
+        def schema_path schema_name, options = {}
+          return schema_name if schema_name.nil? || schema_name.to_s.include?("/")
+          "#{project_path options}/schemas/#{schema_name}"
         end
 
         def inspect

@@ -60,6 +60,19 @@ module Acceptance
       super
     end
 
+    def pull_with_retry sub
+      received_messages = []
+      retries = 0
+      while retries <= 5 do
+        received_messages = sub.pull
+        break if received_messages.any?
+        retries += 1
+        puts "the subscription does not have the message yet. sleeping for #{retries*retries} second(s) and retrying."
+        sleep retries*retries
+      end
+      received_messages
+    end
+
     # Add spec DSL
     extend Minitest::Spec::DSL
 
@@ -93,9 +106,11 @@ require "time"
 require "securerandom"
 t = Time.now.utc.iso8601.gsub ":", "-"
 $topic_prefix = "ruby-topic-#{t}-#{SecureRandom.hex(4)}".downcase
-$topic_names = 10.times.map { "#{$topic_prefix}-#{SecureRandom.hex(4)}".downcase }
-$snapshot_prefix = "ruby-snp-#{t}-snapshot-#{SecureRandom.hex(4)}".downcase
+$topic_names = 12.times.map { "#{$topic_prefix}-#{SecureRandom.hex(4)}".downcase }
+$snapshot_prefix = "ruby-snp-#{t}-#{SecureRandom.hex(4)}".downcase
 $snapshot_names = 3.times.map { "#{$snapshot_prefix}-#{SecureRandom.hex(4)}".downcase }
+$schema_prefix = "ruby-schema-#{t}-#{SecureRandom.hex(4)}".downcase
+$schema_names = 3.times.map { "#{$schema_prefix}-#{SecureRandom.hex(4)}".downcase }
 
 def clean_up_pubsub_topics
   puts "Cleaning up pubsub topics after tests."
@@ -120,8 +135,20 @@ rescue => e
   puts "Error while cleaning up pubsub snapshots after tests.\n\n#{e}"
 end
 
+def clean_up_pubsub_schemas
+  puts "Cleaning up pubsub schemas after tests."
+  $pubsub.schemas.all do |schema|
+    if schema.name.include? $schema_prefix
+      schema.delete
+    end
+  end
+rescue => e
+  puts "Error while cleaning up pubsub schemas after tests.\n\n#{e}"
+end
+
 Minitest.after_run do
   clean_up_pubsub_topics
+  clean_up_pubsub_schemas
   clean_up_pubsub_snapshots
   unless $project_number
     puts "The Dead Letter Queue (DLQ) tests were not run. To enable, ensure that " \
