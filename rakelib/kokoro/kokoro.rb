@@ -60,11 +60,14 @@ class Kokoro < Command
   end
 
   def cloudrad
+    v = version
     run_ci @gem do
       header "Building Cloudrad Docs"
       FileUtils.remove_dir "doc", true
       run "bundle exec rake cloudrad", 1800
-      RepoMetadata.from_source(".repo-metadata.json").build "."
+      metadata = RepoMetadata.from_source(".repo-metadata.json")
+      metadata["version"] = v
+      metadata.build "."
       header "Uploading Cloudrad Docs"
       opts = [
         "--credentials=#{ENV['KOKORO_KEYSTORE_DIR']}/73713_docuploader_service_account",
@@ -77,11 +80,14 @@ class Kokoro < Command
   end
 
   def devsite
+    v = version
     run_ci @gem do
       header "Building Devsite Docs"
       FileUtils.remove_dir "doc", true
       run "bundle exec rake yard", 1800
-      RepoMetadata.from_source(".repo-metadata.json").build "."
+      metadata = RepoMetadata.from_source(".repo-metadata.json")
+      metadata["version"] = v
+      metadata.build "."
       header "Uploading Devsite Docs"
       opts = [
         "--credentials=#{ENV['KOKORO_KEYSTORE_DIR']}/73713_docuploader_service_account",
