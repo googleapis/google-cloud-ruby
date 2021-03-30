@@ -47,6 +47,25 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # Contains options specific to Arrow Serialization.
+          # @!attribute [rw] buffer_compression
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::ArrowSerializationOptions::CompressionCodec]
+          #     The compression codec to use for Arrow buffers in serialized record
+          #     batches.
+          class ArrowSerializationOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Compression codec's supported by Arrow.
+            module CompressionCodec
+              # If unspecified no compression will be used.
+              COMPRESSION_UNSPECIFIED = 0
+
+              # LZ4 Frame (https://github.com/lz4/lz4/blob/dev/doc/lz4_Frame_format.md)
+              LZ4_FRAME = 1
+            end
+          end
         end
       end
     end
