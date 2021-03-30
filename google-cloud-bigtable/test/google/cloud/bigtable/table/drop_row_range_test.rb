@@ -33,7 +33,7 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
     )
   end
   let(:table) do
-    Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service)
+    Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service, view: :FULL)
   end
 
   describe "drop_row_range" do

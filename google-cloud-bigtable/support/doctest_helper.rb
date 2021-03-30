@@ -352,7 +352,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Bigtable::ColumnFamilyMap" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
-      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: nil]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
       mocked_tables.expect :create_table, table_resp, [Hash]
       mocked_tables.expect :modify_column_families, table_resp, [Hash]
     end
@@ -472,7 +472,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigtable::Instance#table" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
-      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: nil]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
       mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :NAME_ONLY]
       mock.expect :mutate_row, mutate_row_resp, [Hash]
     end
@@ -627,7 +627,15 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Bigtable::Project#table" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
-      mocked_tables.expect :get_table, table_resp, [Hash]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
+      mock.expect :mutate_row, nil, [Hash]
+      mock.expect :read_rows, [], [Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Project#table@Retrieve a table with all fields, cluster states, and column families." do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :FULL]
       mock.expect :mutate_row, nil, [Hash]
       mock.expect :read_rows, [], [Hash]
     end
@@ -644,14 +652,14 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Bigtable::ReadOperations" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
-      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: nil]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
       mock.expect :read_rows, [], [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Bigtable::ReadOperations#sample_row_keys" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
-      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: nil]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
       mock.expect :sample_row_keys, [], [Hash]
     end
   end
@@ -665,7 +673,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Bigtable::SampleRowKey" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
-      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: nil]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
       mock.expect :sample_row_keys, [], [Hash]
     end
   end
@@ -692,7 +700,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigtable::Table#check_consistency" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
-      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: nil]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
       mocked_tables.expect :check_consistency, OpenStruct.new(consistent: true), [Hash]
     end
   end
@@ -700,7 +708,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigtable::Table#column_families" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
-      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: nil]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
       mocked_tables.expect :modify_column_families, table_resp, [Hash]
     end
   end
@@ -708,7 +716,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigtable::Table#column_family" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
-      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: nil]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
       mocked_tables.expect :modify_column_families, table_resp, [Hash]
       mocked_tables.expect :modify_column_families, table_resp, [Hash]
     end
@@ -716,7 +724,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Bigtable::Table#delete" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
-      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: nil]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
       mocked_tables.expect :delete_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table"]
     end
   end
@@ -724,7 +732,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigtable::Table#delete_all_rows" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
-      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: nil]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
       mocked_tables.expect :drop_row_range, nil, [Hash, nil]
       mocked_tables.expect :drop_row_range, nil, [Hash, Gapic::CallOptions]
     end
@@ -732,7 +740,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Bigtable::Table#delete_rows_by_prefix" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
-      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: nil]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
       mocked_tables.expect :drop_row_range, nil, [Hash, nil]
       mocked_tables.expect :drop_row_range, nil, [Hash, Gapic::CallOptions]
     end
@@ -740,7 +748,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Bigtable::Table#drop_row_range" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
-      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: nil]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
       mocked_tables.expect :drop_row_range, nil, [Hash, nil]
       mocked_tables.expect :drop_row_range, nil, [Hash, Gapic::CallOptions]
     end
@@ -749,7 +757,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigtable::Table#generate_consistency_token" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
-      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: nil]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
       mocked_tables.expect :generate_consistency_token, OpenStruct.new(consistency_token: ""), [name: "projects/my-project/instances/my-instance/tables/my-table"]
     end
   end
@@ -764,7 +772,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Bigtable::Table#policy" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
-      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: nil]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
       mocked_tables.expect :get_iam_policy, policy_resp, [resource: "projects/my-project/instances/my-instance/tables/my-table"]
       mocked_tables.expect :set_iam_policy, policy_resp, [Hash]
     end
@@ -772,14 +780,14 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Bigtable::Table#test_iam_permissions" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
-      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: nil]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
       mocked_tables.expect :test_iam_permissions, table_iam_permissions_resp, [Hash]
     end
   end
 
   doctest.before "Google::Cloud::Bigtable::Table#update_policy" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
-      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: nil]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
       mocked_tables.expect :get_iam_policy, policy_resp, [resource: "projects/my-project/instances/my-instance/tables/my-table"]
       mocked_tables.expect :set_iam_policy, policy_resp, [Hash]
     end
@@ -787,7 +795,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Bigtable::Table#wait_for_replication" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
-      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: nil]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
       mocked_tables.expect :generate_consistency_token, OpenStruct.new(consistency_token: "123"), [name: "projects/my-project/instances/my-instance/tables/my-table"]
       mocked_tables.expect :check_consistency, OpenStruct.new(consistent: true), [name: "projects/my-project/instances/my-instance/tables/my-table", consistency_token: "123"]
       mocked_tables.expect :generate_consistency_token, OpenStruct.new(consistency_token: "123"), [name: "projects/my-project/instances/my-instance/tables/my-table"]
@@ -797,7 +805,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Bigtable::Table::List" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
-      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: nil]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :SCHEMA_VIEW]
       mocked_tables.expect :list_tables, tables_resp, [parent: "projects/my-project/instances/my-instance", view: nil]
     end
   end

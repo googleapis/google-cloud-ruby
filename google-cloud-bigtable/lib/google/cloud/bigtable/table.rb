@@ -72,10 +72,11 @@ module Google
         # @private
         #
         # Creates a new Table instance.
-        def initialize grpc, service, view: nil
+        def initialize grpc, service, view:
           @grpc = grpc
           @service = service
-          @loaded_views = Set[view || :SCHEMA_VIEW]
+          raise ArgumentError, "view must not be nil" if view.nil?
+          @loaded_views = Set[view]
         end
 
         ##
@@ -457,7 +458,7 @@ module Google
           }.delete_if { |_, v| v.nil? })
 
           grpc = service.create_table instance_id, table_id, table, initial_splits: initial_splits
-          from_grpc grpc, service
+          from_grpc grpc, service, view: :SCHEMA_VIEW
         end
 
         ##
@@ -643,7 +644,7 @@ module Google
         # @param view [Symbol] View type.
         # @return [Google::Cloud::Bigtable::Table]
         #
-        def self.from_grpc grpc, service, view: nil
+        def self.from_grpc grpc, service, view:
           new grpc, service, view: view
         end
 

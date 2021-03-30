@@ -316,18 +316,18 @@ module Google
         #
         #   table = bigtable.table("my-instance", "my-table")
         #
-        # @example Get a table with schema-only view.
+        # @example Retrieve a table with a schema-only view.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true, view: :SCHEMA_VIEW)
+        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
         #   if table
         #     puts table.name
         #     puts table.column_families
         #   end
         #
-        # @example Get a table with all fields, cluster states, and column families.
+        # @example Retrieve a table with all fields, cluster states, and column families.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -342,6 +342,7 @@ module Google
         def table instance_id, table_id, view: nil, perform_lookup: nil, app_profile_id: nil
           ensure_service!
 
+          view ||= :SCHEMA_VIEW
           table = if perform_lookup
                     grpc = service.get_table instance_id, table_id, view: view
                     Table.from_grpc grpc, service, view: view

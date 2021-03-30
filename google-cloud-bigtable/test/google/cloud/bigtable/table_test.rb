@@ -61,7 +61,7 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
 
   describe "#helpers" do
     let(:table) do
-      Google::Cloud::Bigtable::Table.new(Object.new, Object.new)
+      Google::Cloud::Bigtable::Table.new(Object.new, Object.new, view: :NAME_ONLY)
     end
 
     it "create mutation entry instance" do
@@ -71,7 +71,6 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
     end
 
     it "create read modify write row rule instance" do
-      table = Google::Cloud::Bigtable::Table.new(Object.new, Object.new)
       rule = table.new_read_modify_write_rule("cf", "field1")
       _(rule).must_be_kind_of Google::Cloud::Bigtable::ReadModifyWriteRule
       _(rule.to_grpc.family_name).must_equal "cf"
