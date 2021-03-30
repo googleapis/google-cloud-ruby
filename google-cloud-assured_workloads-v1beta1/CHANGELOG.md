@@ -1,5 +1,13 @@
 # Release History
 
+### 0.6.0 / 2021-03-30
+
+#### Features
+
+* Support for workload resource settings
+  * feat: Add 'resource_settings' field to provide custom properties (ids) for the provisioned projects.
+  * feat: add HIPAA and HITRUST compliance regimes
+
 ### 0.5.0 / 2021-03-08
 
 #### Features
