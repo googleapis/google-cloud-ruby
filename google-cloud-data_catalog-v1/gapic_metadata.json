@@ -105,6 +105,11 @@
                 "rename_tag_template_field"
               ]
             },
+            "RenameTagTemplateFieldEnumValue": {
+              "methods": [
+                "rename_tag_template_field_enum_value"
+              ]
+            },
             "DeleteTagTemplateField": {
               "methods": [
                 "delete_tag_template_field"
@@ -143,6 +148,99 @@
             "TestIamPermissions": {
               "methods": [
                 "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PolicyTagManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client",
+          "rpcs": {
+            "CreateTaxonomy": {
+              "methods": [
+                "create_taxonomy"
+              ]
+            },
+            "DeleteTaxonomy": {
+              "methods": [
+                "delete_taxonomy"
+              ]
+            },
+            "UpdateTaxonomy": {
+              "methods": [
+                "update_taxonomy"
+              ]
+            },
+            "ListTaxonomies": {
+              "methods": [
+                "list_taxonomies"
+              ]
+            },
+            "GetTaxonomy": {
+              "methods": [
+                "get_taxonomy"
+              ]
+            },
+            "CreatePolicyTag": {
+              "methods": [
+                "create_policy_tag"
+              ]
+            },
+            "DeletePolicyTag": {
+              "methods": [
+                "delete_policy_tag"
+              ]
+            },
+            "UpdatePolicyTag": {
+              "methods": [
+                "update_policy_tag"
+              ]
+            },
+            "ListPolicyTags": {
+              "methods": [
+                "list_policy_tags"
+              ]
+            },
+            "GetPolicyTag": {
+              "methods": [
+                "get_policy_tag"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PolicyTagManagerSerialization": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client",
+          "rpcs": {
+            "ImportTaxonomies": {
+              "methods": [
+                "import_taxonomies"
+              ]
+            },
+            "ExportTaxonomies": {
+              "methods": [
+                "export_taxonomies"
               ]
             }
           }

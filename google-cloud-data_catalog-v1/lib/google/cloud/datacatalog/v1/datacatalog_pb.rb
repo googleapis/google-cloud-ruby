@@ -8,6 +8,7 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/datacatalog/v1/common_pb'
+require 'google/cloud/datacatalog/v1/data_source_pb'
 require 'google/cloud/datacatalog/v1/gcs_fileset_spec_pb'
 require 'google/cloud/datacatalog/v1/schema_pb'
 require 'google/cloud/datacatalog/v1/search_pb'
@@ -18,6 +19,7 @@ require 'google/iam/v1/iam_policy_pb'
 require 'google/iam/v1/policy_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
+require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/datacatalog/v1/datacatalog.proto", :syntax => :proto3) do
     add_message "google.cloud.datacatalog.v1.SearchCatalogRequest" do
@@ -83,15 +85,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :target_name do
         optional :linked_resource, :string, 1
         optional :sql_resource, :string, 3
+        optional :fully_qualified_name, :string, 5
       end
     end
     add_message "google.cloud.datacatalog.v1.Entry" do
       optional :name, :string, 1
       optional :linked_resource, :string, 9
+      optional :fully_qualified_name, :string, 29
       optional :display_name, :string, 3
       optional :description, :string, 4
       optional :schema, :message, 5, "google.cloud.datacatalog.v1.Schema"
       optional :source_system_timestamps, :message, 7, "google.cloud.datacatalog.v1.SystemTimestamps"
+      optional :data_source, :message, 20, "google.cloud.datacatalog.v1.DataSource"
       oneof :entry_type do
         optional :type, :enum, 2, "google.cloud.datacatalog.v1.EntryType"
         optional :user_specified_type, :string, 16
@@ -105,6 +110,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :bigquery_table_spec, :message, 12, "google.cloud.datacatalog.v1.BigQueryTableSpec"
         optional :bigquery_date_sharded_spec, :message, 15, "google.cloud.datacatalog.v1.BigQueryDateShardedSpec"
       end
+      oneof :spec do
+        optional :database_table_spec, :message, 24, "google.cloud.datacatalog.v1.DatabaseTableSpec"
+      end
+    end
+    add_message "google.cloud.datacatalog.v1.DatabaseTableSpec" do
+      optional :type, :enum, 1, "google.cloud.datacatalog.v1.DatabaseTableSpec.TableType"
+    end
+    add_enum "google.cloud.datacatalog.v1.DatabaseTableSpec.TableType" do
+      value :TABLE_TYPE_UNSPECIFIED, 0
+      value :NATIVE, 1
+      value :EXTERNAL, 2
     end
     add_message "google.cloud.datacatalog.v1.EntryGroup" do
       optional :name, :string, 1
@@ -153,6 +169,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :new_tag_template_field_id, :string, 2
     end
+    add_message "google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest" do
+      optional :name, :string, 1
+      optional :new_enum_value_display_name, :string, 2
+    end
     add_message "google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest" do
       optional :name, :string, 1
       optional :force, :bool, 2
@@ -182,6 +202,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :MODEL, 5
       value :DATA_STREAM, 3
       value :FILESET, 4
+      value :DATABASE, 7
+      value :SERVICE, 14
     end
   end
 end
@@ -205,6 +227,8 @@ module Google
         GetEntryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.GetEntryRequest").msgclass
         LookupEntryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.LookupEntryRequest").msgclass
         Entry = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.Entry").msgclass
+        DatabaseTableSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.DatabaseTableSpec").msgclass
+        DatabaseTableSpec::TableType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.DatabaseTableSpec.TableType").enummodule
         EntryGroup = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.EntryGroup").msgclass
         CreateTagTemplateRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.CreateTagTemplateRequest").msgclass
         GetTagTemplateRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.GetTagTemplateRequest").msgclass
@@ -216,6 +240,7 @@ module Google
         CreateTagTemplateFieldRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.CreateTagTemplateFieldRequest").msgclass
         UpdateTagTemplateFieldRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.UpdateTagTemplateFieldRequest").msgclass
         RenameTagTemplateFieldRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest").msgclass
+        RenameTagTemplateFieldEnumValueRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest").msgclass
         DeleteTagTemplateFieldRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest").msgclass
         ListTagsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ListTagsRequest").msgclass
         ListTagsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ListTagsResponse").msgclass

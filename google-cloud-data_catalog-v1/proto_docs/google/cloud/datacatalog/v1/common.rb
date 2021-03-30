@@ -32,6 +32,9 @@ module Google
 
           # Cloud Pub/Sub.
           CLOUD_PUBSUB = 2
+
+          # Dataproc Metastore.
+          DATAPROC_METASTORE = 3
         end
       end
     end

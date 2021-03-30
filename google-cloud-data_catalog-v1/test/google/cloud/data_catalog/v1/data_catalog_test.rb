@@ -1217,6 +1217,66 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     end
   end
 
+  def test_rename_tag_template_field_enum_value
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DataCatalog::V1::TagTemplateField.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    new_enum_value_display_name = "hello world"
+
+    rename_tag_template_field_enum_value_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :rename_tag_template_field_enum_value, name
+      assert_kind_of ::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldEnumValueRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["new_enum_value_display_name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, rename_tag_template_field_enum_value_client_stub do
+      # Create client
+      client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.rename_tag_template_field_enum_value({ name: name, new_enum_value_display_name: new_enum_value_display_name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.rename_tag_template_field_enum_value name: name, new_enum_value_display_name: new_enum_value_display_name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.rename_tag_template_field_enum_value ::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldEnumValueRequest.new(name: name, new_enum_value_display_name: new_enum_value_display_name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.rename_tag_template_field_enum_value({ name: name, new_enum_value_display_name: new_enum_value_display_name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.rename_tag_template_field_enum_value(::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldEnumValueRequest.new(name: name, new_enum_value_display_name: new_enum_value_display_name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, rename_tag_template_field_enum_value_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_tag_template_field
     # Create GRPC objects.
     grpc_response = ::Google::Protobuf::Empty.new
