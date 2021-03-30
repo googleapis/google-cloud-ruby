@@ -176,13 +176,14 @@ module Google
             #
             #   @param language_code [::String]
             #     Optional. Recommended.
-            #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. If
-            #     specified, the ListVoices call will only return voices that can be used to
-            #     synthesize this language_code. E.g. when specifying "en-NZ", you will get
-            #     supported "en-\*" voices; when specifying "no", you will get supported
+            #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
+            #     If not specified, the API will return all supported voices.
+            #     If specified, the ListVoices call will only return voices that can be used
+            #     to synthesize this language_code. E.g. when specifying "en-NZ", you will
+            #     get supported "en-NZ" voices; when specifying "no", you will get supported
             #     "no-\*" (Norwegian) and "nb-\*" (Norwegian Bokmal) voices; specifying "zh"
             #     will also get supported "cmn-\*" voices; specifying "zh-hk" will also get
-            #     supported "yue-\*" voices.
+            #     supported "yue-hk" voices.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::TextToSpeech::V1beta1::ListVoicesResponse]
@@ -249,7 +250,7 @@ module Google
             #   @param audio_config [::Google::Cloud::TextToSpeech::V1beta1::AudioConfig, ::Hash]
             #     Required. The configuration of the synthesized audio.
             #   @param enable_time_pointing [::Array<::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest::TimepointType>]
-            #     Whether and what timepoints should be returned in the response.
+            #     Whether and what timepoints are returned in the response.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechResponse]

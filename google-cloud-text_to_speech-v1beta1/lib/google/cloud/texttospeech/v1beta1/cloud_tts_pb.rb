@@ -71,6 +71,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :MP3_64_KBPS, 4
       value :OGG_OPUS, 3
       value :MULAW, 5
+      value :ALAW, 6
     end
   end
 end
