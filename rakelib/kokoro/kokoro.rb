@@ -66,7 +66,7 @@ class Kokoro < Command
       FileUtils.remove_dir "doc", true
       run "bundle exec rake cloudrad", 1800
       metadata = RepoMetadata.from_source(".repo-metadata.json")
-      metadata["version"] = version
+      metadata["version"] = v
       metadata.build "."
       header "Uploading Cloudrad Docs"
       opts = [
@@ -86,7 +86,7 @@ class Kokoro < Command
       FileUtils.remove_dir "doc", true
       run "bundle exec rake yard", 1800
       metadata = RepoMetadata.from_source(".repo-metadata.json")
-      metadata["version"] = version
+      metadata["version"] = v
       metadata.build "."
       header "Uploading Devsite Docs"
       opts = [
