@@ -25,7 +25,7 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
   let :source_table_grpc do
     Google::Cloud::Bigtable::Admin::V2::Table.new table_hash(name: table_path(instance_id, source_table_id))
   end
-  let(:source_table) { Google::Cloud::Bigtable::Table.from_grpc source_table_grpc, bigtable.service }
+  let(:source_table) { Google::Cloud::Bigtable::Table.from_grpc source_table_grpc, bigtable.service, view: :NAME_ONLY }
   let(:target_table_id) { "test-table-target" }
   let :target_table_grpc do
     Google::Cloud::Bigtable::Admin::V2::Table.new table_hash(name: table_path(instance_id, target_table_id))

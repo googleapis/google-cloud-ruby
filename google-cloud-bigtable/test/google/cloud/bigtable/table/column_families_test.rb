@@ -31,7 +31,7 @@ describe Google::Cloud::Bigtable::Table, :column_families, :mock_bigtable do
     )
   end
   let(:table) do
-    Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service)
+    Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service, view: :FULL)
   end
 
   it "modifies column families in the table" do

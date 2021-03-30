@@ -48,7 +48,7 @@ describe Google::Cloud::Bigtable::Cluster, :create_backup, :mock_bigtable do
   let :source_table_grpc do
     Google::Cloud::Bigtable::Admin::V2::Table.new table_hash(name: table_path(instance_id, source_table_id))
   end
-  let(:source_table) { Google::Cloud::Bigtable::Table.from_grpc source_table_grpc, bigtable.service }
+  let(:source_table) { Google::Cloud::Bigtable::Table.from_grpc source_table_grpc, bigtable.service, view: :NAME_ONLY }
   let(:expire_time) { Time.now.round(0) + 60 * 60 * 7 }
   let :backup_grpc do
     Google::Cloud::Bigtable::Admin::V2::Backup.new source_table: table_path(instance_id, source_table_id),

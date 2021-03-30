@@ -61,7 +61,7 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
 
   describe "#helpers" do
     let(:table) do
-      Google::Cloud::Bigtable::Table.new(Object.new, Object.new)
+      Google::Cloud::Bigtable::Table.new(Object.new, Object.new, view: :NAME_ONLY)
     end
 
     it "create mutation entry instance" do
@@ -71,7 +71,6 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
     end
 
     it "create read modify write row rule instance" do
-      table = Google::Cloud::Bigtable::Table.new(Object.new, Object.new)
       rule = table.new_read_modify_write_rule("cf", "field1")
       _(rule).must_be_kind_of Google::Cloud::Bigtable::ReadModifyWriteRule
       _(rule.to_grpc.family_name).must_equal "cf"
@@ -102,24 +101,100 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
 
   it "reloads its state" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_grpc, [name: table_path(instance_id, table_id), view: nil]
+    mock.expect :get_table, table_grpc, [name: table_path(instance_id, table_id), view: :SCHEMA_VIEW]
     table.service.mocked_tables = mock
 
     table.reload!
 
     mock.verify
+  end
 
-    _(table.project_id).must_equal project_id
-    _(table.instance_id).must_equal instance_id
-    _(table.name).must_equal table_id
-    _(table.path).must_equal table_path(instance_id, table_id)
-    _(table.granularity).must_equal :MILLIS
+  it "reloads its state with view option" do
+    mock = Minitest::Mock.new
+    mock.expect :get_table, table_grpc, [name: table_path(instance_id, table_id), view: :REPLICATION_VIEW]
+    table.service.mocked_tables = mock
 
-    _(table.column_families).must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
-    _(table.column_families).must_be :frozen?
-    _(table.column_families.names.sort).must_equal column_families.keys
-    table.column_families.each do |name, cf|
-      _(cf.gc_rule.to_grpc).must_equal column_families[cf.name].gc_rule
+    table.reload! view: :REPLICATION_VIEW
+
+    mock.verify
+  end
+
+  describe "views" do
+    let(:table_grpc) { Google::Cloud::Bigtable::Admin::V2::Table.new(name: table_path(instance_id, table_id)) }
+    let(:table) { Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service, view: :NAME_ONLY) }
+
+    it "loads SCHEMA_VIEW on access to column_families" do
+      get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
+        name: table_path(instance_id, table_id),
+        column_families: column_families_grpc,
+        granularity: :MILLIS
+      )
+
+      mock = Minitest::Mock.new
+      mock.expect :get_table, get_res, [name: table_path(instance_id, table_id), view: :SCHEMA_VIEW]
+      table.service.mocked_tables = mock
+
+      _(table.column_families).wont_be :empty?
+      _(table.column_families).wont_be :empty? # No RPC on subsequent access
+
+      mock.verify
+    end
+
+    it "loads SCHEMA_VIEW on access to granularity" do
+      get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
+        name: table_path(instance_id, table_id),
+        column_families: column_families_grpc,
+        granularity: :MILLIS
+      )
+
+      mock = Minitest::Mock.new
+      mock.expect :get_table, get_res, [name: table_path(instance_id, table_id), view: :SCHEMA_VIEW]
+      table.service.mocked_tables = mock
+
+      _(table.granularity).must_equal :MILLIS
+      _(table.granularity).must_equal :MILLIS # No RPC on subsequent access
+
+      mock.verify
+    end
+
+    it "loads REPLICATION_VIEW on access to cluster_states" do
+      get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
+        name: table_path(instance_id, table_id),
+        cluster_states: cluster_states
+      )
+
+      mock = Minitest::Mock.new
+      mock.expect :get_table, get_res, [name: table_path(instance_id, table_id), view: :REPLICATION_VIEW]
+      table.service.mocked_tables = mock
+
+      _(table.cluster_states).wont_be :empty?
+      _(table.cluster_states).wont_be :empty? # No RPC on subsequent access
+
+      mock.verify
+    end
+
+    it "loads SCHEMA_VIEW and REPLICATION_VIEW on access to column_families and cluster_states" do
+      get_res_schema = Google::Cloud::Bigtable::Admin::V2::Table.new(
+        name: table_path(instance_id, table_id),
+        column_families: column_families_grpc,
+        granularity: :MILLIS
+      )
+      get_res_replication = Google::Cloud::Bigtable::Admin::V2::Table.new(
+        name: table_path(instance_id, table_id),
+        cluster_states: cluster_states
+      )
+
+      mock = Minitest::Mock.new
+      mock.expect :get_table, get_res_schema, [name: table_path(instance_id, table_id), view: :SCHEMA_VIEW]
+      mock.expect :get_table, get_res_replication, [name: table_path(instance_id, table_id), view: :REPLICATION_VIEW]
+      table.service.mocked_tables = mock
+
+      _(table.column_families).wont_be :empty?
+      _(table.cluster_states).wont_be :empty?
+      _(table.column_families).wont_be :empty? # No RPC on subsequent access
+      _(table.cluster_states).wont_be :empty? # No RPC on subsequent access
+
+      mock.verify
     end
   end
 end
