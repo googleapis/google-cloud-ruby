@@ -27,7 +27,6 @@ class Kokoro < Command
                       ENV.fetch("OS", "") == "linux" &&
                       RUBY_VERSION == ruby_versions.sort.last
     @pr_number      = ENV["KOKORO_GITHUB_PULL_REQUEST_NUMBER"]
-    @version        = version
   end
 
   def build
@@ -61,12 +60,13 @@ class Kokoro < Command
   end
 
   def cloudrad
+    v = version
     run_ci @gem do
       header "Building Cloudrad Docs"
       FileUtils.remove_dir "doc", true
       run "bundle exec rake cloudrad", 1800
       metadata = RepoMetadata.from_source(".repo-metadata.json")
-      metadata["version"] = @version
+      metadata["version"] = version
       metadata.build "."
       header "Uploading Cloudrad Docs"
       opts = [
@@ -80,12 +80,13 @@ class Kokoro < Command
   end
 
   def devsite
+    v = version
     run_ci @gem do
       header "Building Devsite Docs"
       FileUtils.remove_dir "doc", true
       run "bundle exec rake yard", 1800
       metadata = RepoMetadata.from_source(".repo-metadata.json")
-      metadata["version"] = @version
+      metadata["version"] = version
       metadata.build "."
       header "Uploading Devsite Docs"
       opts = [
