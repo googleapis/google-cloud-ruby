@@ -41,6 +41,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :display_name, :string, 1
       optional :type, :message, 2, "google.cloud.datacatalog.v1.FieldType"
       optional :is_required, :bool, 3
+      optional :description, :string, 4
       optional :order, :int32, 5
     end
     add_message "google.cloud.datacatalog.v1.FieldType" do

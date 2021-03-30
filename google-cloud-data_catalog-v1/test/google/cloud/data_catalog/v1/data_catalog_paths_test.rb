@@ -94,4 +94,16 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientPathsTest < Minitest:
       assert_equal "projects/value0/locations/value1/tagTemplates/value2/fields/value3", path
     end
   end
+
+  def test_tag_template_field_enum_value_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.tag_template_field_enum_value_path project: "value0", location: "value1", tag_template: "value2", tag_template_field_id: "value3", enum_value_display_name: "value4"
+      assert_equal "projects/value0/locations/value1/tagTemplates/value2/fields/value3/enumValues/value4", path
+    end
+  end
 end

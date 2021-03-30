@@ -47,6 +47,9 @@ module Google
         #     Example:
         #
         #      * `//bigquery.googleapis.com/projects/projectId/datasets/datasetId/tables/tableId`
+        # @!attribute [rw] modify_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Last-modified timestamp of the entry from the managing system.
         # @!attribute [r] integrated_system
         #   @return [::Google::Cloud::DataCatalog::V1::IntegratedSystem]
         #     Output only. This field indicates the entry's source system that Data Catalog
@@ -55,6 +58,17 @@ module Google
         #   @return [::String]
         #     This field indicates the entry's source system that Data Catalog does not
         #     integrate with.
+        # @!attribute [rw] fully_qualified_name
+        #   @return [::String]
+        #     Fully Qualified Name of the resource.
+        #     There are two main forms of FQNs:
+        #     \\{system}:\\{project}.\\{dot-separated path to resource}
+        #         for non-regionalized resources
+        #     \\{system}:\\{project}.\\{location id}.\\{dot-separated path to resource}
+        #         for regionalized resources
+        #     Examples:
+        #     * dataproc_metastore:projectId.locationId.instanceId.databaseId.tableId
+        #     * bigquery:table.project_id.dataset_id.table_id
         class SearchCatalogResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

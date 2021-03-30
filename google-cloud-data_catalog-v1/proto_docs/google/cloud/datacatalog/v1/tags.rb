@@ -31,15 +31,17 @@ module Google
         #   @return [::String]
         #     The resource name of the tag in URL format. Example:
         #
-        #     * projects/\\{project_id}/locations/\\{location}/entrygroups/\\{entry_group_id}/entries/\\{entry_id}/tags/\\{tag_id}
+        #     `projects/{project_id}/locations/{location}/entrygroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}`
         #
         #     where `tag_id` is a system-generated identifier.
-        #     Note that this Tag may not actually be stored in the location in this name.
+        #
+        #     Note: The tag itself might not be stored in the location specified in its
+        #     name.
         # @!attribute [rw] template
         #   @return [::String]
         #     Required. The resource name of the tag template that this tag uses. Example:
         #
-        #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}
+        #     `projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}`
         #
         #     This field cannot be modified after creation.
         # @!attribute [r] template_display_name
@@ -47,13 +49,11 @@ module Google
         #     Output only. The display name of the tag template.
         # @!attribute [rw] column
         #   @return [::String]
-        #     Resources like Entry can have schemas associated with them. This scope
+        #     Resources like entry can have schemas associated with them. This scope
         #     allows users to attach tags to an individual column based on that schema.
         #
-        #     For attaching a tag to a nested column, use `.` to separate the column
-        #     names. Example:
-        #
-        #     * `outer_column.inner_column`
+        #     To attach a tag to a nested column, separate column names with a dot
+        #     (`.`). Example: `column.nested_column`.
         # @!attribute [rw] fields
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DataCatalog::V1::TagField}]
         #     Required. This maps the ID of a tag field to the value of and additional information
@@ -84,6 +84,7 @@ module Google
         # @!attribute [rw] string_value
         #   @return [::String]
         #     Holds the value for a tag field with string type.
+        #     The maximum length is 2000 UTF-8 characters.
         # @!attribute [rw] bool_value
         #   @return [::Boolean]
         #     Holds the value for a tag field with boolean type.
@@ -127,13 +128,17 @@ module Google
         #   @return [::String]
         #     The resource name of the tag template in URL format. Example:
         #
-        #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}
+        #     `projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}`
         #
-        #     Note that this TagTemplate and its child resources may not actually be
-        #     stored in the location in this name.
+        #     Note: The tag template itself and its child resources might not be
+        #     stored in the location specified in its name.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     The display name for this template. Defaults to an empty string.
+        #     Display name for this template. Defaults to an empty string.
+        #
+        #     The name must contain only Unicode letters, numbers (0-9), underscores (_),
+        #     dashes (-), spaces ( ), and can't start or end with spaces.
+        #     The maximum length is 200 characters.
         # @!attribute [rw] fields
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DataCatalog::V1::TagTemplateField}]
         #     Required. Map of tag template field IDs to the settings for the field.
@@ -163,19 +168,30 @@ module Google
         #   @return [::String]
         #     Output only. The resource name of the tag template field in URL format. Example:
         #
-        #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template}/fields/\\{field}
+        #     `projects/{project_id}/locations/{location}/tagTemplates/{tag_template}/fields/{field}`
         #
-        #     Note that this TagTemplateField may not actually be stored in the location
-        #     in this name.
+        #     Note: The `TagTemplateField` itself might not be stored in the location
+        #     specified in its name.
+        #
+        #     The name must contain only letters (a-z, A-Z), numbers (0-9),
+        #     or underscores (_), and must start with a letter or underscore.
+        #     The maximum length is 64 characters.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The display name for this field. Defaults to an empty string.
+        #
+        #     The name must contain only Unicode letters, numbers (0-9), underscores (_),
+        #     dashes (-), spaces ( ), and can't start or end with spaces.
+        #     The maximum length is 200 characters.
         # @!attribute [rw] type
         #   @return [::Google::Cloud::DataCatalog::V1::FieldType]
         #     Required. The type of value this tag field can contain.
         # @!attribute [rw] is_required
         #   @return [::Boolean]
         #     Whether this is a required field. Defaults to false.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     The description for this field. Defaults to an empty string.
         # @!attribute [rw] order
         #   @return [::Integer]
         #     The order of this field with respect to other fields in this tag
@@ -199,12 +215,15 @@ module Google
 
           # @!attribute [rw] allowed_values
           #   @return [::Array<::Google::Cloud::DataCatalog::V1::FieldType::EnumType::EnumValue>]
-          #     Required on create; optional on update. The set of allowed values for
-          #     this enum. This set must not be empty, the display names of the values in
-          #     this set must not be empty and the display names of the values must be
-          #     case-insensitively unique within this set. Currently, enum values can
-          #     only be added to the list of allowed values. Deletion and renaming of
-          #     enum values are not supported. Can have up to 500 allowed values.
+          #     The set of allowed values for this enum.
+          #
+          #     This set must not be empty and can include up to 100 allowed values.
+          #     The display names of the values in this set must not be empty and must
+          #     be case-insensitively unique within this set.
+          #
+          #     The order of items in this set is preserved. This field can be used to
+          #     create, remove and reorder enum values. To rename enum values, use the
+          #     `RenameTagTemplateFieldEnumValue` method.
           class EnumType
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -212,6 +231,10 @@ module Google
             # @!attribute [rw] display_name
             #   @return [::String]
             #     Required. The display name of the enum value. Must not be an empty string.
+            #
+            #     The name must contain only Unicode letters, numbers (0-9), underscores
+            #     (_), dashes (-), spaces ( ), and can't start or end with spaces. The
+            #     maximum length is 200 characters.
             class EnumValue
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
