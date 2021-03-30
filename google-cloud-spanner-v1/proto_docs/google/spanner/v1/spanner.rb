@@ -163,6 +163,27 @@ module Google
         # @!attribute [rw] priority
         #   @return [::Google::Cloud::Spanner::V1::RequestOptions::Priority]
         #     Priority for the request.
+        # @!attribute [rw] request_tag
+        #   @return [::String]
+        #     A per-request tag which can be applied to queries or reads, used for
+        #     statistics collection.
+        #     Both request_tag and transaction_tag can be specified for a read or query
+        #     that belongs to a transaction.
+        #     This field is ignored for requests where it's not applicable (e.g.
+        #     CommitRequest).
+        #     `request_tag` must be a valid identifier of the form:
+        #     `[a-zA-Z][a-zA-Z0-9_\-]` between 2 and 64 characters in length
+        # @!attribute [rw] transaction_tag
+        #   @return [::String]
+        #     A tag used for statistics collection about this transaction.
+        #     Both request_tag and transaction_tag can be specified for a read or query
+        #     that belongs to a transaction.
+        #     The value of transaction_tag should be the same for all requests belonging
+        #     to the same transaction.
+        #     If this request doesn’t belong to any transaction, transaction_tag will be
+        #     ignored.
+        #     `transaction_tag` must be a valid identifier of the format:
+        #     `[a-zA-Z][a-zA-Z0-9_\-]{0,49}`
         class RequestOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -311,15 +332,15 @@ module Google
           #     The `optimizer_version` statement hint has precedence over this setting.
           # @!attribute [rw] optimizer_statistics_package
           #   @return [::String]
-          #     Query optimizer statistics package to use.
+          #     An option to control the selection of optimizer statistics package.
           #
           #     This parameter allows individual queries to use a different query
-          #     optimizer statistics.
+          #     optimizer statistics package.
           #
           #     Specifying `latest` as a value instructs Cloud Spanner to use the latest
           #     generated statistics package. If not specified, Cloud Spanner uses
-          #     statistics package set at the database level options, or latest if
-          #     the database option is not set.
+          #     the statistics package set at the database level options, or the latest
+          #     package if the database option is not set.
           #
           #     The statistics package requested by the query has to be exempt from
           #     garbage collection. This can be achieved with the following DDL
@@ -330,10 +351,10 @@ module Google
           #     ```
           #
           #     The list of available statistics packages can be queried from
-          #     `SPANNER_SYS.OPTIMIZER_STATISTICS_PACKAGES`.
+          #     `INFORMATION_SCHEMA.SPANNER_STATISTICS`.
           #
           #     Executing a SQL statement with an invalid optimizer statistics package
-          #     or with statistics package that allows garbage collection fails with
+          #     or with a statistics package that allows garbage collection fails with
           #     an `INVALID_ARGUMENT` error.
           class QueryOptions
             include ::Google::Protobuf::MessageExts
