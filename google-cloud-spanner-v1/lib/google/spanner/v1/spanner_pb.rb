@@ -55,6 +55,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.spanner.v1.RequestOptions" do
       optional :priority, :enum, 1, "google.spanner.v1.RequestOptions.Priority"
+      optional :request_tag, :string, 2
+      optional :transaction_tag, :string, 3
     end
     add_enum "google.spanner.v1.RequestOptions.Priority" do
       value :PRIORITY_UNSPECIFIED, 0
