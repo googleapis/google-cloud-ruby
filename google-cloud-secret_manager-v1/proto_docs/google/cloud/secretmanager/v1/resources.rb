@@ -61,6 +61,10 @@ module Google
         # @!attribute [rw] ttl
         #   @return [::Google::Protobuf::Duration]
         #     Input only. The TTL for the {::Google::Cloud::SecretManager::V1::Secret Secret}.
+        # @!attribute [rw] rotation
+        #   @return [::Google::Cloud::SecretManager::V1::Rotation]
+        #     Optional. Rotation policy attached to the {::Google::Cloud::SecretManager::V1::Secret Secret}. May be excluded if there is no
+        #     rotation policy.
         class Secret
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -277,6 +281,27 @@ module Google
         #     following format: `projects/*/topics/*`. For publication to succeed, the
         #     Secret Manager P4SA must have `pubsub.publisher` permissions on the topic.
         class Topic
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The rotation time and period for a {::Google::Cloud::SecretManager::V1::Secret Secret}. At next_rotation_time, Secret
+        # Manager will send a Pub/Sub notification to the topics configured on the
+        # Secret. {::Google::Cloud::SecretManager::V1::Secret#topics Secret.topics} must be set to configure rotation.
+        # @!attribute [rw] next_rotation_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Timestamp in UTC at which the {::Google::Cloud::SecretManager::V1::Secret Secret} is scheduled to rotate.
+        #
+        #     {::Google::Cloud::SecretManager::V1::Rotation#next_rotation_time next_rotation_time} MUST  be set if {::Google::Cloud::SecretManager::V1::Rotation#rotation_period rotation_period} is set.
+        # @!attribute [rw] rotation_period
+        #   @return [::Google::Protobuf::Duration]
+        #     Input only. The Duration between rotation notifications. Must be in seconds
+        #     and at least 3600s (1h) and at most 3153600000s (100 years).
+        #
+        #     If {::Google::Cloud::SecretManager::V1::Rotation#rotation_period rotation_period} is set, {::Google::Cloud::SecretManager::V1::Rotation#next_rotation_time next_rotation_time} must be set.
+        #     {::Google::Cloud::SecretManager::V1::Rotation#next_rotation_time next_rotation_time} will be advanced by this period when the service
+        #     automatically sends rotation notifications.
+        class Rotation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
