@@ -29,7 +29,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Organization Policy",
         "ruby-cloud-description": "The Cloud Org Policy service provides a simple mechanism for organizations to restrict the allowed configurations across their entire Cloud Resource hierarchy.",
         "ruby-cloud-env-prefix": "ORG_POLICY",
-        "ruby-cloud-wrapper-of": "v2:0.0",
+        "ruby-cloud-wrapper-of": "v2:0.2",
         "ruby-cloud-product-url": "https://cloud.google.com/resource-manager/docs/organization-policy/overview",
         "ruby-cloud-api-id": "orgpolicy.googleapis.com",
         "ruby-cloud-api-shortname": "orgpolicy",
