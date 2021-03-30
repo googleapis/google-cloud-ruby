@@ -76,6 +76,73 @@ module Google
       end
 
       ##
+      # Create a new client object for PolicyTagManager.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::DataCatalog::V1::PolicyTagManager::Client](https://googleapis.dev/ruby/google-cloud-data_catalog-v1/latest/Google/Cloud/DataCatalog/V1/PolicyTagManager/Client.html)
+      # for version V1 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the PolicyTagManager service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About PolicyTagManager
+      #
+      # Policy Tag Manager API service allows clients to manage their policy tags and
+      # taxonomies.
+      #
+      # Policy tags are used to tag BigQuery columns and apply additional access
+      # control policies. A taxonomy is a hierarchical grouping of policy tags that
+      # classify data along a common axis.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [PolicyTagManager::Client] A client object for the specified version.
+      #
+      def self.policy_tag_manager version: :v1, &block
+        require "google/cloud/data_catalog/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::DataCatalog
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::DataCatalog.const_get package_name
+        package_module.const_get(:PolicyTagManager).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Create a new client object for PolicyTagManagerSerialization.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client](https://googleapis.dev/ruby/google-cloud-data_catalog-v1/latest/Google/Cloud/DataCatalog/V1/PolicyTagManagerSerialization/Client.html)
+      # for version V1 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the PolicyTagManagerSerialization service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About PolicyTagManagerSerialization
+      #
+      # Policy Tag Manager serialization API service allows clients to manipulate
+      # their policy tags and taxonomies in serialized format, where taxonomy is a
+      # hierarchical group of policy tags.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [PolicyTagManagerSerialization::Client] A client object for the specified version.
+      #
+      def self.policy_tag_manager_serialization version: :v1, &block
+        require "google/cloud/data_catalog/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::DataCatalog
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::DataCatalog.const_get package_name
+        package_module.const_get(:PolicyTagManagerSerialization).const_get(:Client).new(&block)
+      end
+
+      ##
       # Configure the google-cloud-data_catalog library.
       #
       # The following configuration parameters are supported:
