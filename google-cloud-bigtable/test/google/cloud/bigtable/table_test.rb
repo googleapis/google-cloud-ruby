@@ -164,7 +164,7 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
     it "loads REPLICATION_VIEW on access to cluster_states" do
       get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
         name: table_path(instance_id, table_id),
-        cluster_states: cluster_states
+        cluster_states: table_cluster_states
       )
 
       mock = Minitest::Mock.new
@@ -185,7 +185,7 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
       )
       get_res_replication = Google::Cloud::Bigtable::Admin::V2::Table.new(
         name: table_path(instance_id, table_id),
-        cluster_states: cluster_states
+        cluster_states: table_cluster_states
       )
 
       mock = Minitest::Mock.new
