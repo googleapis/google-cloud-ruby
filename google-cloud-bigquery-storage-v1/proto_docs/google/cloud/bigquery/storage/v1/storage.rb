@@ -119,6 +119,12 @@ module Google
           #   @return [::Google::Cloud::Bigquery::Storage::V1::ThrottleState]
           #     Throttling state. If unset, the latest response still describes
           #     the current throttling status.
+          # @!attribute [r] avro_schema
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::AvroSchema]
+          #     Output only. Avro schema.
+          # @!attribute [r] arrow_schema
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::ArrowSchema]
+          #     Output only. Arrow schema.
           class ReadRowsResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -39,6 +39,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :avro_rows, :message, 3, "google.cloud.bigquery.storage.v1.AvroRows"
         optional :arrow_record_batch, :message, 4, "google.cloud.bigquery.storage.v1.ArrowRecordBatch"
       end
+      oneof :schema do
+        optional :avro_schema, :message, 7, "google.cloud.bigquery.storage.v1.AvroSchema"
+        optional :arrow_schema, :message, 8, "google.cloud.bigquery.storage.v1.ArrowSchema"
+      end
     end
     add_message "google.cloud.bigquery.storage.v1.SplitReadStreamRequest" do
       optional :name, :string, 1

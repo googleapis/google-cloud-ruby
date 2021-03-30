@@ -29,6 +29,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions" do
       repeated :selected_fields, :string, 1
       optional :row_restriction, :string, 2
+      oneof :output_format_serialization_options do
+        optional :arrow_serialization_options, :message, 3, "google.cloud.bigquery.storage.v1.ArrowSerializationOptions"
+      end
     end
     add_message "google.cloud.bigquery.storage.v1.ReadStream" do
       optional :name, :string, 1
