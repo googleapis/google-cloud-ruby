@@ -29,7 +29,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Cloud Channel",
         "ruby-cloud-description": "You can use Channel Services to manage your relationships with your partners and your customers. Channel Services include a console and APIs to view and provision links between distributors and resellers, customers and entitlements.",
         "ruby-cloud-env-prefix": "CHANNEL",
-        "ruby-cloud-wrapper-of": "v1:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.5",
         "ruby-cloud-product-url": "https://cloud.google.com/channel",
         "ruby-cloud-api-id": "cloudchannel.googleapis.com",
         "ruby-cloud-api-shortname": "cloudchannel",
