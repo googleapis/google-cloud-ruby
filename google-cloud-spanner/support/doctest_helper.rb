@@ -128,7 +128,26 @@ YARD::Doctest.configure do |doctest|
       mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [{ name: "projects/my-project/instances/my-instance" }, nil]
       operation = job_grpc("google.spanner.admin.database.v1.CreateDatabaseMetadata", done: true)
       mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
-      mock_databases.expect :create_database, create_database_resp(client: mock_client), [{ parent: "projects/my-project/instances/my-instance", create_statement: "CREATE DATABASE `my-new-database`", extra_statements: [] }, nil]
+      mock_databases.expect :create_database, create_database_resp(client: mock_client), [{
+        parent: "projects/my-project/instances/my-instance",
+        create_statement: "CREATE DATABASE `my-new-database`", extra_statements: [],
+        encryption_config: nil
+      }, nil]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Instance#create_database@Create with encryption config" do
+    kms_key_name = "projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>"
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_client = Minitest::Mock.new
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [{ name: "projects/my-project/instances/my-instance" }, nil]
+      operation = job_grpc("google.spanner.admin.database.v1.CreateDatabaseMetadata", done: true)
+      mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
+      mock_databases.expect :create_database, create_database_resp(client: mock_client), [{
+        parent: "projects/my-project/instances/my-instance",
+        create_statement: "CREATE DATABASE `my-new-database`", extra_statements: [],
+        encryption_config: { kms_key_name: kms_key_name }
+      }, nil]
     end
   end
 
@@ -527,9 +546,28 @@ YARD::Doctest.configure do |doctest|
       mock_client = Minitest::Mock.new
       operation = job_grpc("google.spanner.admin.database.v1.CreateDatabaseMetadata", done: true)
       mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
-      mock_databases.expect :create_database, create_database_resp(client: mock_client), [{ parent: "projects/my-project/instances/my-instance", create_statement: "CREATE DATABASE `my-new-database`", extra_statements: [] }, nil]
+      mock_databases.expect :create_database, create_database_resp(client: mock_client), [{
+          parent: "projects/my-project/instances/my-instance",
+          create_statement: "CREATE DATABASE `my-new-database`",
+          extra_statements: [], encryption_config: nil
+      }, nil]
     end
   end
+
+   doctest.before "Google::Cloud::Spanner::Project#create_database@Create with encryption config" do
+    kms_key_name = "projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>"
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_client = Minitest::Mock.new
+      operation = job_grpc("google.spanner.admin.database.v1.CreateDatabaseMetadata", done: true)
+      mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
+      mock_databases.expect :create_database, create_database_resp(client: mock_client), [{
+          parent: "projects/my-project/instances/my-instance",
+          create_statement: "CREATE DATABASE `my-new-database`",
+          extra_statements: [], encryption_config: { kms_key_name: kms_key_name }
+      }, nil]
+    end
+  end
+
 
   doctest.before "Google::Cloud::Spanner::Project#databases" do
     mock_spanner do |mock, mock_instances, mock_databases|
@@ -729,7 +767,11 @@ YARD::Doctest.configure do |doctest|
       mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [{ name: "projects/my-project/instances/my-instance" }, nil]
       operation = job_grpc("google.spanner.admin.database.v1.CreateDatabaseMetadata", done: true)
       mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
-      mock_databases.expect :create_database, create_database_resp(client: mock_client), [{ parent: "projects/my-project/instances/my-instance", create_statement: "CREATE DATABASE `my-new-database`", extra_statements: [] }, nil]
+      mock_databases.expect :create_database, create_database_resp(client: mock_client), [{
+        parent: "projects/my-project/instances/my-instance",
+        create_statement: "CREATE DATABASE `my-new-database`", extra_statements: [],
+        encryption_config: nil
+      }, nil]
       mock_databases.expect :get_database, database_resp, [name: "projects/my-project/instances/my-instance/databases/my-new-database"]
     end
   end
@@ -963,7 +1005,11 @@ YARD::Doctest.configure do |doctest|
       mock_client = Minitest::Mock.new
       operation  = job_grpc("google.spanner.admin.database.v1.CreateDatabaseMetadata", done: true)
       mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
-      mock_databases.expect :create_database, create_database_resp(client: mock_client), [{ parent: "projects/my-project/instances/my-instance", create_statement: "CREATE DATABASE `my-new-database`", extra_statements: [] }, nil]
+      mock_databases.expect :create_database, create_database_resp(client: mock_client), [{
+        parent: "projects/my-project/instances/my-instance",
+        create_statement: "CREATE DATABASE `my-new-database`", extra_statements: [],
+        encryption_config: nil
+      }, nil]
     end
   end
 

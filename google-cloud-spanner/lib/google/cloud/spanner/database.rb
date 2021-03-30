@@ -113,6 +113,31 @@ module Google
           @grpc.state
         end
 
+        # An encryption configuration describing the encryption type and key
+        # resources in Cloud KMS.
+        #
+        # @return [Google::Cloud::Spanner::Admin::Database::V1::EncryptionConfig, nil]
+        def encryption_config
+          @grpc.encryption_config
+        end
+
+        # Encryption information for the database.
+        #
+        # For databases that are using customer managed encryption, this
+        # field contains the encryption information for the database, such as
+        # encryption state and the Cloud KMS key versions that are in use.
+        #
+        # For databases that are using Google default or other types of encryption,
+        # this field is empty.
+        #
+        # This field is propagated lazily from the backend. There might be a delay
+        # from when a key version is being used and when it appears in this field.
+        #
+        # @return [Array<Google::Cloud::Spanner::Admin::Database::V1::EncryptionInfo>]
+        def encryption_info
+          @grpc.encryption_info.to_a
+        end
+
         ##
         # The database is still being created. Operations on the database may
         # raise with `FAILED_PRECONDITION` in this state.

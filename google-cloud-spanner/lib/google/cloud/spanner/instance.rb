@@ -306,6 +306,13 @@ module Google
         #   These statements execute atomically with the creation of the
         #   database: if there is an error in any statement, the database is not
         #   created. Optional.
+        # @param [Hash] encryption_config An encryption configuration describing
+        #   the encryption type and key resources in Cloud KMS. Optional. The
+        #   following settings can be provided:
+        #
+        #   * `:kms_key_name` (String) The name of KMS key to use which should
+        #     be the full path, e.g., `projects/<project>/locations/<location>\
+        #     /keyRings/<key_ring>/cryptoKeys/<kms_key_name>`
         #
         # @return [Database::Job] The job representing the long-running,
         #   asynchronous processing of a database create operation.
@@ -328,9 +335,30 @@ module Google
         #     database = job.database
         #   end
         #
-        def create_database database_id, statements: []
+        # @example Create with encryption config
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   instance = spanner.instance "my-instance"
+        #
+        #   kms_key_name = "projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>"
+        #   job = instance.create_database "my-new-database", encryption_config: { kms_key_name: kms_key_name }
+        #
+        #   job.done? #=> false
+        #   job.reload! # API call
+        #   job.done? #=> true
+        #
+        #   if job.error?
+        #     status = job.error
+        #   else
+        #     database = job.database
+        #   end
+        #
+        def create_database database_id, statements: [], encryption_config: nil
           grpc = service.create_database instance_id, database_id,
-                                         statements: statements
+                                         statements: statements,
+                                         encryption_config: encryption_config
           Database::Job.from_grpc grpc, service
         end
 
