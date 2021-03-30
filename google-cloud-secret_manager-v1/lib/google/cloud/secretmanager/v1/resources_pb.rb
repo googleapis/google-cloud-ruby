@@ -16,6 +16,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       map :labels, :string, :string, 4
       repeated :topics, :message, 5, "google.cloud.secretmanager.v1.Topic"
+      optional :rotation, :message, 9, "google.cloud.secretmanager.v1.Rotation"
       oneof :expiration do
         optional :expire_time, :message, 6, "google.protobuf.Timestamp"
         optional :ttl, :message, 7, "google.protobuf.Duration"
@@ -75,6 +76,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.secretmanager.v1.Topic" do
       optional :name, :string, 1
     end
+    add_message "google.cloud.secretmanager.v1.Rotation" do
+      optional :next_rotation_time, :message, 1, "google.protobuf.Timestamp"
+      optional :rotation_period, :message, 2, "google.protobuf.Duration"
+    end
     add_message "google.cloud.secretmanager.v1.SecretPayload" do
       optional :data, :bytes, 1
     end
@@ -99,6 +104,7 @@ module Google
         ReplicationStatus::UserManagedStatus::ReplicaStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus").msgclass
         CustomerManagedEncryptionStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secretmanager.v1.CustomerManagedEncryptionStatus").msgclass
         Topic = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secretmanager.v1.Topic").msgclass
+        Rotation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secretmanager.v1.Rotation").msgclass
         SecretPayload = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secretmanager.v1.SecretPayload").msgclass
       end
     end
