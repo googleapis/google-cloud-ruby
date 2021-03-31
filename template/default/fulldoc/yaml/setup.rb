@@ -1,5 +1,5 @@
 def init
-  options.serializer = Serializers::FileSystemSerializer.new :extension => "yaml"
+  options.serializer = Serializers::FileSystemSerializer.new :extension => "yml"
   options.objects.each do |object|
     begin
       next if object.root?
@@ -14,7 +14,7 @@ def init
 end
 
 def serialize(object)
-  file_name = "#{object.path.gsub "::", "-"}.yaml"
+  file_name = "#{object.path.gsub "::", "-"}.yml"
 
   Templates::Engine.with_serializer(file_name, options.serializer) do
     T('layout').run(options.merge(:item => object))
@@ -23,7 +23,7 @@ end
 
 def serialize_index(options)
   return
-  Templates::Engine.with_serializer('index.yaml', options.serializer) do
+  Templates::Engine.with_serializer('index.yml', options.serializer) do
     T('layout').run(options.merge(:index => true))
   end
 end
