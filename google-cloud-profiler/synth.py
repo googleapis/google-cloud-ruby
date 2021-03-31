@@ -30,7 +30,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Cloud Profiler",
         "ruby-cloud-description": "Cloud Profiler is a statistical, low-overhead profiler that continuously gathers CPU usage and memory-allocation information from your production applications. It attributes that information to the application's source code, helping you identify the parts of the application consuming the most resources, and otherwise illuminating the performance characteristics of the code.",
         "ruby-cloud-env-prefix": "PROFILER",
-        "ruby-cloud-wrapper-of": "v2:0.0",
+        "ruby-cloud-wrapper-of": "v2:0.2",
         "ruby-cloud-product-url": "https://cloud.google.com/profiler/",
         "ruby-cloud-api-id": "cloudprofiler.googleapis.com",
         "ruby-cloud-api-shortname": "cloudprofiler",
