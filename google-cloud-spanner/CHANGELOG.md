@@ -1,5 +1,18 @@
 # Release History
 
+### 2.6.0 / 2021-03-31
+
+#### Features
+
+* add cmek backup support - ext of [#8142](https://www.github.com/googleapis/google-cloud-ruby/issues/8142) ([#8168](https://www.github.com/googleapis/google-cloud-ruby/issues/8168))
+  * feat(spanner): add cmek backup support
+  * Add encryption_config to restore database.
+  * doc example for backup create with encryption config
+  * create backup with encryption type
+  * backup restore with encryption type changes
+  * fix typo
+* add cmek db support
+
 ### 2.5.0 / 2021-03-10
 
 #### Features
