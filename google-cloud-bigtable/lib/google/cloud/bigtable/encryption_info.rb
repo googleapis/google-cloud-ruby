@@ -23,7 +23,9 @@ module Google
       ##
       # # EncryptionInfo
       #
-      # Encryption information for a given resource. See {Instance::ClusterMap#add}.
+      # Encryption information for a given resource.
+      #
+      # See #{Backup#encryption_info} and {Table::ClusterState#encryption_infos}.
       #
       # @example
       #   require "google/cloud/bigtable"
@@ -36,6 +38,18 @@ module Google
       #
       #   encryption_info = backup.encryption_info
       #   encryption_info.encryption_type #=> :GOOGLE_DEFAULT_ENCRYPTION
+      #
+      # @example Retrieve a table with cluster states containing encryption info.
+      #   require "google/cloud/bigtable"
+      #
+      #   bigtable = Google::Cloud::Bigtable.new
+      #
+      #   table = bigtable.table("my-instance", "my-table", view: :ENCRYPTION_VIEW, perform_lookup: true)
+      #
+      #   table.cluster_states.each do |cs|
+      #     puts cs.cluster_name
+      #     puts cs.encryption_infos.first.encryption_type
+      #   end
       #
       class EncryptionInfo
         # @private

@@ -25,6 +25,20 @@ module Google
         # Table::ClusterState is the state of a table's data in a particular cluster.
         #
         # @attr [String] cluster_name The name of the cluster.
+        #
+        # @example Retrieve a table with cluster states.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table", view: :FULL, perform_lookup: true)
+        #
+        #   table.cluster_states.each do |cs|
+        #     puts cs.cluster_name
+        #     puts cs.replication_state
+        #     puts cs.encryption_infos.first.encryption_type
+        #   end
+        #
         class ClusterState
           attr_reader :cluster_name
 
@@ -119,7 +133,8 @@ module Google
 
           ##
           # The encryption info value objects for the table in this cluster. The encryption info
-          # is only present when the table view is `ENCRYPTION_VIEW` or `FULL`.
+          # is only present when the table view is `ENCRYPTION_VIEW` or `FULL`. See also
+          # {Instance::ClusterMap#add}.
           #
           # @return [Array<Google::Cloud::Bigtable::EncryptionInfo>] The array of encryption info
           #   value objects, or an empty array if none are present.

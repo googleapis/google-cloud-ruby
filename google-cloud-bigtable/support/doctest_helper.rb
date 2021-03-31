@@ -366,6 +366,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigtable::EncryptionInfo@Retrieve a table with cluster states containing encryption info." do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :ENCRYPTION_VIEW]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigtable::GcRule" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_tables.expect :create_table, table_resp, [Hash]
@@ -713,6 +720,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigtable::Table#cluster_states" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :FULL]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigtable::Table#column_families" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
@@ -808,6 +822,13 @@ YARD::Doctest.configure do |doctest|
       mocked_tables.expect :check_consistency, OpenStruct.new(consistent: true), [name: "projects/my-project/instances/my-instance/tables/my-table", consistency_token: "123"]
       mocked_tables.expect :generate_consistency_token, OpenStruct.new(consistency_token: "123"), [name: "projects/my-project/instances/my-instance/tables/my-table"]
       mocked_tables.expect :check_consistency, OpenStruct.new(consistent: true), [name: "projects/my-project/instances/my-instance/tables/my-table", consistency_token: "123"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Table::ClusterState" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :FULL]
     end
   end
 
@@ -995,7 +1016,14 @@ def clusters_resp
 end
 
 def cluster_state_hash state = nil
-  { replication_state: state }
+  {
+    replication_state: state,
+    encryption_info: [
+      {
+        encryption_type: :GOOGLE_DEFAULT_ENCRYPTION
+      }
+    ]
+  }
 end
 
 def cluster_state_grpc state = nil
@@ -1168,6 +1196,7 @@ def table_resp
   Google::Cloud::Bigtable::Admin::V2::Table.new(
     table_hash(
       name: "projects/my-project/instances/my-instance/tables/my-table",
+      cluster_states: cluster_states_grpc,
       column_families: column_families_grpc,
       granularity: :MILLIS
     )

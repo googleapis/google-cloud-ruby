@@ -153,6 +153,19 @@ module Google
         #
         # @return [Array<Google::Cloud::Bigtable::Table::ClusterState>]
         #
+        # @example Retrieve a table with cluster states.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table", view: :FULL, perform_lookup: true)
+        #
+        #   table.cluster_states.each do |cs|
+        #     puts cs.cluster_name
+        #     puts cs.replication_state
+        #     puts cs.encryption_infos.first.encryption_type
+        #   end
+        #
         def cluster_states
           check_view_and_load :FULL, skip_if: [:ENCRYPTION_VIEW, :REPLICATION_VIEW]
           @grpc.cluster_states.map do |name, state_grpc|
