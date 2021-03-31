@@ -30,7 +30,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "IAM Service Account Credentials",
         "ruby-cloud-description": "The Service Account Credentials API creates short-lived credentials for Identity and Access Management (IAM) service accounts. You can also use this API to sign JSON Web Tokens (JWTs), as well as blobs of binary data that contain other types of tokens.",
         "ruby-cloud-env-prefix": "IAM_CREDENTIALS",
-        "ruby-cloud-wrapper-of": "v1:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.3",
         "ruby-cloud-product-url": "https://cloud.google.com/iam",
         "ruby-cloud-api-id": "iamcredentials.googleapis.com",
         "ruby-cloud-api-shortname": "iamcredentials",
