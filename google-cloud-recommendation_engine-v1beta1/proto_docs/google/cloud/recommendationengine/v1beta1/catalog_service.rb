@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent catalog resource name, such as
-        #     "projects/*/locations/global/catalogs/default_catalog".
+        #     `projects/*/locations/global/catalogs/default_catalog`.
         # @!attribute [rw] catalog_item
         #   @return [::Google::Cloud::RecommendationEngine::V1beta1::CatalogItem]
         #     Required. The catalog item to create.
@@ -38,7 +38,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Full resource name of catalog item, such as
-        #     "projects/*/locations/global/catalogs/default_catalog/catalogitems/some_catalog_item_id".
+        #     `projects/*/locations/global/catalogs/default_catalog/catalogitems/some_catalog_item_id`.
         class GetCatalogItemRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -48,7 +48,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent catalog resource name, such as
-        #     "projects/*/locations/global/catalogs/default_catalog".
+        #     `projects/*/locations/global/catalogs/default_catalog`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of results to return per page. If zero, the
@@ -99,7 +99,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Full resource name of catalog item, such as
-        #     "projects/*/locations/global/catalogs/default_catalog/catalogItems/some_catalog_item_id".
+        #     `projects/*/locations/global/catalogs/default_catalog/catalogItems/some_catalog_item_id`.
         class DeleteCatalogItemRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

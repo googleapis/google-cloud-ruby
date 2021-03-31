@@ -230,7 +230,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent catalog resource name, such as
-            #     "projects/*/locations/global/catalogs/default_catalog".
+            #     `projects/*/locations/global/catalogs/default_catalog`.
             #   @param catalog_item [::Google::Cloud::RecommendationEngine::V1beta1::CatalogItem, ::Hash]
             #     Required. The catalog item to create.
             #
@@ -299,7 +299,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. Full resource name of catalog item, such as
-            #     "projects/*/locations/global/catalogs/default_catalog/catalogitems/some_catalog_item_id".
+            #     `projects/*/locations/global/catalogs/default_catalog/catalogitems/some_catalog_item_id`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::RecommendationEngine::V1beta1::CatalogItem]
@@ -366,7 +366,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent catalog resource name, such as
-            #     "projects/*/locations/global/catalogs/default_catalog".
+            #     `projects/*/locations/global/catalogs/default_catalog`.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of results to return per page. If zero, the
             #     service will choose a reasonable default.
@@ -515,7 +515,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. Full resource name of catalog item, such as
-            #     "projects/*/locations/global/catalogs/default_catalog/catalogItems/some_catalog_item_id".
+            #     `projects/*/locations/global/catalogs/default_catalog/catalogItems/some_catalog_item_id`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -586,7 +586,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. "projects/1234/locations/global/catalogs/default_catalog"
+            #     Required. `projects/1234/locations/global/catalogs/default_catalog`
             #   @param request_id [::String]
             #     Optional. Unique identifier provided by client, within the ancestor
             #     dataset scope. Ensures idempotency and used for request deduplication.
