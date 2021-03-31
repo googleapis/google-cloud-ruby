@@ -29,7 +29,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Web Security Scanner",
         "ruby-cloud-description": "Web Security Scanner scans your Compute and App Engine apps for common web vulnerabilities.",
         "ruby-cloud-env-prefix": "WEB_SECURITY_SCANNER",
-        "ruby-cloud-wrapper-of": "v1:0.0;v1beta:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.3;v1beta:0.3",
         "ruby-cloud-product-url": "https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/",
         "ruby-cloud-api-id": "websecurityscanner.googleapis.com",
         "ruby-cloud-api-shortname": "websecurityscanner",
