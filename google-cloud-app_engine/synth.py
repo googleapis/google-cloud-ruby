@@ -30,7 +30,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "App Engine Admin",
         "ruby-cloud-description": "The App Engine Admin API provisions and manages your App Engine applications.",
         "ruby-cloud-env-prefix": "APP_ENGINE",
-        "ruby-cloud-wrapper-of": "v1:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.3",
         "ruby-cloud-product-url": "https://cloud.google.com/appengine/docs/admin-api/",
         "ruby-cloud-api-id": "appengine.googleapis.com",
         "ruby-cloud-api-shortname": "appengine",
