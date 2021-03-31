@@ -442,6 +442,26 @@ module Google
         #   it will be automatically set to the backup create time. The version
         #   time can be as far in the past as specified by the database earliest
         #   version time. Optional.
+        # @param [Hash] encryption_config An encryption configuration describing
+        #   the encryption type and key resources in Cloud KMS. Optional. The
+        #   following settings can be provided:
+        #
+        #   * `:kms_key_name` (String) The name of KMS key to use which should
+        #     be the full path, e.g., `projects/<project>/locations/<location>\
+        #     /keyRings/<key_ring>/cryptoKeys/<kms_key_name>`
+        #     This field should be set only when encryption type
+        #     `:CUSTOMER_MANAGED_ENCRYPTION`.
+        #   * `:encryption_type` (Symbol) The encryption type of the backup.
+        #     Valid values are:
+        #       1. `:USE_DATABASE_ENCRYPTION` - Use the same encryption configuration as
+        #         the database.
+        #       2. `:GOOGLE_DEFAULT_ENCRYPTION` - Google default encryption.
+        #       3. `:CUSTOMER_MANAGED_ENCRYPTION` - Use customer managed encryption.
+        #         If specified, `:kms_key_name` must contain a valid Cloud KMS key.
+        #
+        # @raise [ArgumentError] if `:CUSTOMER_MANAGED_ENCRYPTION` specified without
+        #   customer managed kms key.
+        #
         # @return [Google::Cloud::Spanner::Backup::Job] The job representing
         #   the long-running, asynchronous processing of a backup create
         #   operation.
@@ -468,14 +488,48 @@ module Google
         #     backup = job.backup
         #   end
         #
-        def create_backup backup_id, expire_time, version_time: nil
+        # @example Create backup with encryption config
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   database = spanner.database "my-instance", "my-database"
+        #
+        #   kms_key_name = "projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>"
+        #   encryption_config = {
+        #     kms_key_name: kms_key_name,
+        #     encryption_type: :CUSTOMER_MANAGED_ENCRYPTION
+        #   }
+        #   job = database.create_backup "my-backup",
+        #                                Time.now + 36000,
+        #                                encryption_config: encryption_config
+        #
+        #   job.done? #=> false
+        #   job.reload! # API call
+        #   job.done? #=> true
+        #
+        #   if job.error?
+        #     status = job.error
+        #   else
+        #     backup = job.backup
+        #   end
+        #
+        def create_backup backup_id, expire_time,
+                          version_time: nil, encryption_config: nil
           ensure_service!
+
+          if encryption_config&.include?(:kms_key_name) &&
+             encryption_config[:encryption_type] != :CUSTOMER_MANAGED_ENCRYPTION
+            raise Google::Cloud::InvalidArgumentError,
+                  "kms_key_name only used with CUSTOMER_MANAGED_ENCRYPTION"
+          end
+
           grpc = service.create_backup \
             instance_id,
             database_id,
             backup_id,
             expire_time,
-            version_time
+            version_time,
+            encryption_config: encryption_config
           Backup::Job.from_grpc grpc, service
         end
 

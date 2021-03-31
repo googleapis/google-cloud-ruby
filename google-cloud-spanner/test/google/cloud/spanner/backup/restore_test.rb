@@ -48,6 +48,9 @@ describe Google::Cloud::Spanner::Backup, :restore_database, :mock_spanner do
     )
   end
   let(:backup) { Google::Cloud::Spanner::Backup.from_grpc backup_grpc, spanner.service }
+  let(:kms_key_name) {
+    "projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>"
+  }
 
   it "restore a database in the same instance as the backup instance" do
     mock = Minitest::Mock.new
@@ -61,15 +64,19 @@ describe Google::Cloud::Spanner::Backup, :restore_database, :mock_spanner do
       result_type: Google::Cloud::Spanner::Admin::Database::V1::Database,
       metadata_type: Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata,
     )
+
     mock.expect :restore_database, restore_res, [{
       parent: instance_path(instance_id),
       database_id: "restored-database",
-      backup: backup_path(instance_id, backup_id)
+      backup: backup_path(instance_id, backup_id),
+      encryption_config: { kms_key_name: kms_key_name, encryption_type: :CUSTOMER_MANAGED_ENCRYPTION }
     }, nil]
     mock.expect :get_operation, operation_done, [{ name: "1234567890" }, Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
-    job = backup.restore "restored-database"
+    job = backup.restore "restored-database", encryption_config: {
+      kms_key_name: kms_key_name, encryption_type: :CUSTOMER_MANAGED_ENCRYPTION
+    }
 
     _(job).must_be_kind_of Google::Cloud::Spanner::Backup::Restore::Job
     _(job).wont_be :done?
@@ -99,7 +106,8 @@ describe Google::Cloud::Spanner::Backup, :restore_database, :mock_spanner do
     mock.expect :restore_database, restore_res, [{
       parent: instance_path("other-instance"),
       database_id: "restored-database",
-      backup: backup_path(instance_id, backup_id)
+      backup: backup_path(instance_id, backup_id),
+      encryption_config: nil
     }, nil]
     mock.expect :get_operation, operation_done, [{ name: "1234567890" } , Gapic::CallOptions]
     spanner.service.mocked_databases = mock
@@ -117,5 +125,19 @@ describe Google::Cloud::Spanner::Backup, :restore_database, :mock_spanner do
     _(database).must_be_kind_of Google::Cloud::Spanner::Database
 
     mock.verify
+  end
+
+  it "raise an error on restore database backup for kms key without customer managed encryption type" do
+    assert_raises Google::Cloud::InvalidArgumentError do
+      backup.restore "restored-database", encryption_config: { kms_key_name: kms_key_name }
+    end
+  end
+
+  it "raise an error on create database backup with invalid encryption config" do
+    assert_raises Google::Cloud::InvalidArgumentError do
+      backup.restore "restored-database", encryption_config: {
+        kms_key_name: kms_key_name, encryption_type: :GOOGLE_DEFAULT_ENCRYPTION
+      }
+    end
   end
 end

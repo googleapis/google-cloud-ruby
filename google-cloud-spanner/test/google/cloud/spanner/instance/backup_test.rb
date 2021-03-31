@@ -24,8 +24,13 @@ describe Google::Cloud::Spanner::Instance, :backup, :mock_spanner do
   it "gets a database backup" do
     backup_id = "found-backup"
 
+    encryption_info = Google::Cloud::Spanner::Admin::Database::V1::EncryptionInfo.new \
+      encryption_type: Google::Cloud::Spanner::Admin::Database::V1::EncryptionInfo::Type::CUSTOMER_MANAGED_ENCRYPTION, 
+      encryption_status: Google::Rpc::Status.new(code: 0),
+      kms_key_version: "kms_key_version"
+
     get_res = Google::Cloud::Spanner::Admin::Database::V1::Backup.new \
-      backup_hash(instance_id: instance_id, database_id: database_id, backup_id: backup_id)
+      backup_hash(instance_id: instance_id, database_id: database_id, backup_id: backup_id, encryption_info: encryption_info)
     mock = Minitest::Mock.new
     mock.expect :get_backup, get_res, [{ name: backup_path(instance_id, backup_id) }, nil]
     instance.service.mocked_databases = mock
@@ -38,6 +43,8 @@ describe Google::Cloud::Spanner::Instance, :backup, :mock_spanner do
     _(backup.instance_id).must_equal instance_id
     _(backup.database_id).must_equal database_id
     _(backup.backup_id).must_equal backup_id
+    _(backup.encryption_info).must_equal encryption_info
+    _(backup.encryption_info.kms_key_version).must_equal "kms_key_version"
 
     _(backup.path).must_equal backup_path(instance_id, backup_id)
 
