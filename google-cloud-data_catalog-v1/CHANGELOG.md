@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2021-03-31
+
+#### Features
+
+* Support PolicyTagManager client
+
 ### 0.6.0 / 2021-03-08
 
 #### Features
