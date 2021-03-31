@@ -30,7 +30,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Service Management API",
         "ruby-cloud-description": "Google Service Management allows service producers to publish their services on Google Cloud Platform so that they can be discovered and used by service consumers.",
         "ruby-cloud-env-prefix": "SERVICE_MANAGEMENT",
-        "ruby-cloud-wrapper-of": "v1:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.3",
         "ruby-cloud-product-url": "https://cloud.google.com/service-infrastructure/docs/overview/",
         "ruby-cloud-api-id": "servicemanagement.googleapis.com",
         "ruby-cloud-api-shortname": "servicemanagement",
