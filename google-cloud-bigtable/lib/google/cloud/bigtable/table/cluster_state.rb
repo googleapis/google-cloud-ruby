@@ -38,7 +38,7 @@ module Google
 
           ##
           # The state of replication for the table in this cluster.
-          #   Valid values are:
+          #   Valid values include:
           #   * `:INITIALIZING` - The cluster was recently created.
           #   * `:PLANNED_MAINTENANCE` - The table is temporarily unable to serve.
           #   * `:UNPLANNED_MAINTENANCE` - The table is temporarily unable to serve.
@@ -47,6 +47,8 @@ module Google
           #     after a restore, and is being optimized for performance. When
           #     optimizations are complete, the table will transition to `READY`
           #     state.
+          #   * `:UNKNOWN` - If it could not be determined whether or not the table
+          #     has data in a particular cluster (for example, if its zone is unavailable.)
           #
           # @return [Symbol] The state of replication.
           #

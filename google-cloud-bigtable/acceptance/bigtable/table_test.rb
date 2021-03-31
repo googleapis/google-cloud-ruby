@@ -135,23 +135,36 @@ describe "Instance Tables", :bigtable do
       _(table.grpc.granularity).must_equal :MILLIS
     end
 
-    it "cluster_states loads REPLICATION_VIEW" do
+    it "cluster_states loads FULL" do
       _(table.cluster_states).wont_be :empty? # RPC
 
-      _(table.loaded_views).must_equal Set[:NAME_ONLY, :REPLICATION_VIEW]
+      _(table.loaded_views).must_equal Set[:NAME_ONLY, :FULL]
 
-      _(table.grpc.name).wont_be :nil?
-      _(table.grpc.cluster_states.count).must_be :>, 0
-      _(table.grpc.column_families.count).must_equal 0
-      _(table.grpc.granularity).must_equal :TIMESTAMP_GRANULARITY_UNSPECIFIED
+      _(table.grpc.column_families.count).must_be :>, 0
+      _(table.grpc.granularity).must_equal :MILLIS
+
+      cluster_states = table.cluster_states
+      _(cluster_states).must_be_instance_of Array
+      _(cluster_states).wont_be :empty?
+      cs = cluster_states.first
+      _(cs).must_be_instance_of Google::Cloud::Bigtable::Table::ClusterState
+      _(cs.replication_state).must_equal :READY
+
+      encryption_infos = cs.encryption_infos
+      _(encryption_infos).must_be_instance_of Array
+      _(encryption_infos).wont_be :empty?
+      encryption_info = encryption_infos.first
+      _(encryption_info).must_be_instance_of Google::Cloud::Bigtable::EncryptionInfo
+
+      _(table.loaded_views).must_equal Set[:NAME_ONLY, :FULL]
     end
 
-    it "column_families, granularity and cluster_states loads SCHEMA_VIEW, REPLICATION_VIEW" do
+    it "column_families, granularity and cluster_states loads SCHEMA_VIEW, FULL" do
       _(table.column_families).wont_be :empty? # RPC
       _(table.granularity).must_equal :MILLIS
       _(table.cluster_states).wont_be :empty? # RPC
 
-      _(table.loaded_views).must_equal Set[:NAME_ONLY, :SCHEMA_VIEW, :REPLICATION_VIEW]
+      _(table.loaded_views).must_equal Set[:NAME_ONLY, :SCHEMA_VIEW, :FULL]
 
       _(table.grpc.name).wont_be :nil?
       _(table.grpc.cluster_states.count).must_be :>, 0
@@ -196,6 +209,25 @@ describe "Instance Tables", :bigtable do
       table.reload! view: :ENCRYPTION_VIEW
 
       _(table.loaded_views).must_equal Set[:ENCRYPTION_VIEW]
+
+      _(table.grpc.name).wont_be :nil?
+      _(table.grpc.column_families.count).must_equal 0
+      _(table.grpc.granularity).must_equal :TIMESTAMP_GRANULARITY_UNSPECIFIED
+
+      cluster_states = table.cluster_states
+      _(cluster_states).must_be_instance_of Array
+      _(cluster_states).wont_be :empty?
+      cs = cluster_states.first
+      _(cs).must_be_instance_of Google::Cloud::Bigtable::Table::ClusterState
+      _(cs.replication_state).must_equal :STATE_NOT_KNOWN
+
+      encryption_infos = cs.encryption_infos
+      _(encryption_infos).must_be_instance_of Array
+      _(encryption_infos).wont_be :empty?
+      encryption_info = encryption_infos.first
+      _(encryption_info).must_be_instance_of Google::Cloud::Bigtable::EncryptionInfo
+
+      _(table.loaded_views).must_equal Set[:ENCRYPTION_VIEW]
     end
 
     it "reloads with view option REPLICATION_VIEW" do
@@ -217,6 +249,8 @@ describe "Instance Tables", :bigtable do
       encryption_infos = cs.encryption_infos
       _(encryption_infos).must_be_instance_of Array
       _(encryption_infos).must_be :empty?
+
+      _(table.loaded_views).must_equal Set[:REPLICATION_VIEW]
     end
 
     it "reloads with view option FULL" do
@@ -240,6 +274,8 @@ describe "Instance Tables", :bigtable do
       _(encryption_infos).wont_be :empty?
       encryption_info = encryption_infos.first
       _(encryption_info).must_be_instance_of Google::Cloud::Bigtable::EncryptionInfo
+
+      _(table.loaded_views).must_equal Set[:FULL]
     end
   end
 

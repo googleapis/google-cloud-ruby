@@ -161,14 +161,16 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
       mock.verify
     end
 
-    it "loads REPLICATION_VIEW on access to cluster_states" do
+    it "loads FULL on access to cluster_states" do
       get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
         name: table_path(instance_id, table_id),
-        cluster_states: table_cluster_states
+        cluster_states: table_cluster_states,
+        column_families: column_families_grpc,
+        granularity: :MILLIS
       )
 
       mock = Minitest::Mock.new
-      mock.expect :get_table, get_res, [name: table_path(instance_id, table_id), view: :REPLICATION_VIEW]
+      mock.expect :get_table, get_res, [name: table_path(instance_id, table_id), view: :FULL]
       table.service.mocked_tables = mock
 
       _(table.cluster_states).wont_be :empty?
@@ -177,20 +179,22 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
       mock.verify
     end
 
-    it "loads SCHEMA_VIEW and REPLICATION_VIEW on access to column_families and cluster_states" do
+    it "loads SCHEMA_VIEW and FULL on access to column_families and cluster_states" do
       get_res_schema = Google::Cloud::Bigtable::Admin::V2::Table.new(
         name: table_path(instance_id, table_id),
         column_families: column_families_grpc,
         granularity: :MILLIS
       )
-      get_res_replication = Google::Cloud::Bigtable::Admin::V2::Table.new(
+      get_res_full = Google::Cloud::Bigtable::Admin::V2::Table.new(
         name: table_path(instance_id, table_id),
-        cluster_states: table_cluster_states
+        cluster_states: table_cluster_states,
+        column_families: column_families_grpc,
+        granularity: :MILLIS
       )
 
       mock = Minitest::Mock.new
       mock.expect :get_table, get_res_schema, [name: table_path(instance_id, table_id), view: :SCHEMA_VIEW]
-      mock.expect :get_table, get_res_replication, [name: table_path(instance_id, table_id), view: :REPLICATION_VIEW]
+      mock.expect :get_table, get_res_full, [name: table_path(instance_id, table_id), view: :FULL]
       table.service.mocked_tables = mock
 
       _(table.column_families).wont_be :empty?

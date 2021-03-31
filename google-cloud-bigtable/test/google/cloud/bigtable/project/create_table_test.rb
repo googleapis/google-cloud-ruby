@@ -53,7 +53,7 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
     )
     mock.expect :get_table, get_res, [
       name: table_path(instance_id, table_id),
-      view: :REPLICATION_VIEW
+      view: :FULL
     ]
     bigtable.service.mocked_tables = mock
 
@@ -120,7 +120,7 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
     )
     mock.expect :get_table, get_res, [
       name: table_path(instance_id, table_id),
-      view: :REPLICATION_VIEW
+      view: :FULL
     ]
     bigtable.service.mocked_tables = mock
 
@@ -185,7 +185,7 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
     )
     mock.expect :get_table, get_res, [
       name: table_path(instance_id, table_id),
-      view: :REPLICATION_VIEW
+      view: :FULL
     ]
     bigtable.service.mocked_tables = mock
 

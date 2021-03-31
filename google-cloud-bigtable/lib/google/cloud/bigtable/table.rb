@@ -140,19 +140,21 @@ module Google
         end
 
         ##
-        # Map from cluster ID to per-cluster table state.
+        # Returns an array of {Table::ClusterState} objects that map cluster ID
+        # to per-cluster table state.
+        #
         # If it could not be determined whether or not the table has data in a
         # particular cluster (for example, if its zone is unavailable), then
-        # there will be an entry for the cluster with UNKNOWN `replication_status`.
+        # the cluster state's `replication_state` will be `UNKNOWN`.
         #
-        # Reloads the table if necessary to retrieve the cluster states data,
-        # since it is only available in a table with view type `REPLICATION_VIEW`
-        # or `FULL`. Previously loaded data is retained.
+        # Reloads the table with the `FULL` view type to retrieve the cluster states
+        # data, unless the table was previously loaded with view type `ENCRYPTION_VIEW`,
+        # `REPLICATION_VIEW` or `FULL`.
         #
         # @return [Array<Google::Cloud::Bigtable::Table::ClusterState>]
         #
         def cluster_states
-          check_view_and_load :REPLICATION_VIEW
+          check_view_and_load :FULL, skip_if: [:ENCRYPTION_VIEW, :REPLICATION_VIEW]
           @grpc.cluster_states.map do |name, state_grpc|
             ClusterState.from_grpc state_grpc, name
           end
@@ -674,19 +676,24 @@ module Google
 
         FIELDS_BY_VIEW = {
           SCHEMA_VIEW:      ["granularity", "column_families"],
+          ENCRYPTION_VIEW:  ["cluster_states"],
           REPLICATION_VIEW: ["cluster_states"],
           FULL:             ["granularity", "column_families", "cluster_states"]
         }.freeze
 
         # @private
         #
-        # Checks and reloads table with expected view and sets fields.
-        # @param view [Symbol] Expected view type.
+        # Checks and reloads table with expected view. Performs additive updates to fields specified by the given view.
+        # @param view [Symbol] The view type to load. If already loaded, no load is performed.
+        # @param skip_if [Symbol] Additional satisfying view types. If already loaded, no load is performed.
         #
-        def check_view_and_load view
+        def check_view_and_load view, skip_if: nil
           ensure_service!
 
-          return if @loaded_views.include?(view) || @loaded_views.include?(:FULL)
+          skip = Set.new skip_if
+          skip << view
+          skip << :FULL
+          return if (@loaded_views & skip).any?
 
           grpc = service.get_table instance_id, table_id, view: view
           @loaded_views << view
@@ -694,6 +701,9 @@ module Google
           FIELDS_BY_VIEW[view].each do |field|
             case grpc[field]
             when Google::Protobuf::Map
+              # Special handling for column_families:
+              # Replace contents of existing Map since setting the new Map won't work.
+              # See https://github.com/protocolbuffers/protobuf/issues/4969
               @grpc[field].clear
               grpc[field].each { |k, v| @grpc[field][k] = v }
             else
