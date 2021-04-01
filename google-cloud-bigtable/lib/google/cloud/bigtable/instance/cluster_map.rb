@@ -102,7 +102,7 @@ module Google
               serve_nodes:          nodes,
               location:             location,
               default_storage_type: storage_type,
-              encryption_config: encryption_config
+              encryption_config:    encryption_config
             }.delete_if { |_, v| v.nil? }
 
             self[name] = Google::Cloud::Bigtable::Admin::V2::Cluster.new attrs

@@ -25,7 +25,7 @@ module Google
       #
       # Encryption information for a given resource.
       #
-      # See #{Backup#encryption_info} and {Table::ClusterState#encryption_infos}.
+      # See {Backup#encryption_info} and {Table::ClusterState#encryption_infos}.
       #
       # @example
       #   require "google/cloud/bigtable"
