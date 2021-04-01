@@ -34,7 +34,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource path.
-        #     "projects/*/locations/global/catalogs/default_catalog/eventStores/default_event_store".
+        #     `projects/*/locations/global/catalogs/default_catalog/eventStores/default_event_store`.
         # @!attribute [rw] prediction_api_key_registration
         #   @return [::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistration]
         #     Required. The prediction API key registration.
@@ -47,7 +47,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent placement resource name such as
-        #     "projects/1234/locations/global/catalogs/default_catalog/eventStores/default_event_store"
+        #     `projects/1234/locations/global/catalogs/default_catalog/eventStores/default_event_store`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of results to return per page. If unset, the
@@ -77,7 +77,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The API key to unregister including full resource path.
-        #     "projects/*/locations/global/catalogs/default_catalog/eventStores/default_event_store/predictionApiKeyRegistrations/<YOUR_API_KEY>"
+        #     `projects/*/locations/global/catalogs/default_catalog/eventStores/default_event_store/predictionApiKeyRegistrations/<YOUR_API_KEY>`
         class DeletePredictionApiKeyRegistrationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

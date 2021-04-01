@@ -26,7 +26,7 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the event_store under which the events are
         #     created. The format is
-        #     "projects/$\\{projectId}/locations/global/catalogs/$\\{catalogId}/eventStores/$\\{eventStoreId}"
+        #     `projects/${projectId}/locations/global/catalogs/${catalogId}/eventStores/${eventStoreId}`
         # @!attribute [rw] filter
         #   @return [::String]
         #     Required. The filter string to specify the events to be deleted. Empty
@@ -89,7 +89,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent eventStore resource name, such as
-        #     "projects/1234/locations/global/catalogs/default_catalog/eventStores/default_event_store".
+        #     `projects/1234/locations/global/catalogs/default_catalog/eventStores/default_event_store`.
         # @!attribute [rw] user_event
         #   @return [::Google::Cloud::RecommendationEngine::V1beta1::UserEvent]
         #     Required. User event to write.
@@ -102,7 +102,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent eventStore name, such as
-        #     "projects/1234/locations/global/catalogs/default_catalog/eventStores/default_event_store".
+        #     `projects/1234/locations/global/catalogs/default_catalog/eventStores/default_event_store`.
         # @!attribute [rw] user_event
         #   @return [::String]
         #     Required. URL encoded UserEvent proto.
@@ -126,7 +126,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent eventStore resource name, such as
-        #     "projects/*/locations/*/catalogs/default_catalog/eventStores/default_event_store".
+        #     `projects/*/locations/*/catalogs/default_catalog/eventStores/default_event_store`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of results to return per page. If zero, the
