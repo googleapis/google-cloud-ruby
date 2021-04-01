@@ -22,7 +22,7 @@ describe Google::Cloud::Bigtable::Project, :bigtable do
   let(:cluster_id_development) { "ruby-clstr-dev" }
   let(:cluster_location) { "us-east1-b" }
   let(:instance_id_development_kms_key) { "google-cloud-ruby-tests-kms" }
-  let(:kms_key_name) { kms_key }
+  let(:kms_key_name) { bigtable_kms_key }
 
   after do
     instance = bigtable.instance(instance_id_development)

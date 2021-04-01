@@ -33,8 +33,8 @@ describe "Instance Clusters", :bigtable do
   end
 
   it "create cluster, update and delete" do
-    cluster_id = "#{$bigtable_cluster_id}2"
-    location = $bigtable_cluster_location_2
+    cluster_id = "#{bigtable_cluster_id}2"
+    location = bigtable_cluster_location_2
 
     job = instance.create_cluster(cluster_id, location, nodes: 3)
     job.wait_until_done!

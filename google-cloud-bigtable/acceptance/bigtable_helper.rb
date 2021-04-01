@@ -49,49 +49,24 @@ module Acceptance
   #
   class BigtableTest < Minitest::Test
     attr_accessor :bigtable
-    attr_accessor :kms_key
 
     # Setup project based on available ENV variables
     def setup
       @bigtable = $bigtable
-      @kms_key = $kms_key
-
       refute_nil @bigtable, "You do not have an active bigtable to run the tests."
-      refute_nil @kms_key, "You do not have a kms key to run the tests."
-
       super
     end
 
     def bigtable_instance
-      @instance ||= @bigtable.instance($bigtable_instance_id)
-    end
-
-    def bigtable_cluster_id
-      $bigtable_cluster_id
-    end
-
-    def bigtable_instance_id
-      $bigtable_instance_id
-    end
-
-    def bigtable_cluster_location
-      $bigtable_cluster_location
-    end
-
-    def bigtable_read_table_id
-      $bigtable_read_table_id
-    end
-
-    def bigtable_mutation_table_id
-      $bigtable_mutation_table_id
+      @instance ||= bigtable.instance(bigtable_instance_id)
     end
 
     def bigtable_read_table
-      @bigtable.table($bigtable_instance_id, $bigtable_read_table_id)
+      bigtable.table(bigtable_instance_id, $bigtable_read_table_id)
     end
 
     def bigtable_mutation_table
-      @bigtable.table($bigtable_instance_id, $bigtable_mutation_table_id)
+      bigtable.table(bigtable_instance_id, $bigtable_mutation_table_id)
     end
 
     def random_str
@@ -189,26 +164,40 @@ end
 require "date"
 require "securerandom"
 
-$bigtable_instance_id = "google-cloud-ruby-tests"
-$bigtable_cluster_location = "us-east1-b"
-$bigtable_cluster_location_2 = "us-east1-c"
-$bigtable_cluster_id = "#{$bigtable_instance_id}-clstr"
+def bigtable_instance_id
+  "google-cloud-ruby-tests"
+end
+
+def bigtable_cluster_location
+  "us-east1-b"
+end
+
+def bigtable_cluster_location_2
+  "us-east1-c"
+end
+
+def bigtable_cluster_id
+  "#{bigtable_instance_id}-clstr"
+end
+
+def bigtable_kms_key
+  # Allow overriding the KMS key used for tests via an environment variable. These keys are public, but access may be
+  # restricted when tests are run from a VPC project.
+  ENV["BIGTABLE_TEST_KMS_KEY"] || "projects/helical-zone-771/locations/us-east1/keyRings/bigtable-test/cryptoKeys/bigtable-test-1"
+end
+
+create_test_instance(
+  bigtable_instance_id,
+  bigtable_cluster_id,
+  bigtable_cluster_location
+)
+
 $bigtable_read_table_id = "r-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(2)}"
 $bigtable_mutation_table_id = "r-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.hex(2)}"
 
-# Allow overriding the KMS key used for tests via an environment variable. These keys are public, but access may be
-# restricted when tests are run from a VPC project.
-$kms_key = ENV["BIGTABLE_TEST_KMS_KEY"] || "projects/helical-zone-771/locations/us-east1/keyRings/bigtable-test/cryptoKeys/bigtable-test-1"
-
-create_test_instance(
-  $bigtable_instance_id,
-  $bigtable_cluster_id,
-  $bigtable_cluster_location
-)
-
-create_test_table($bigtable_instance_id, $bigtable_read_table_id, row_count: 5)
-create_test_table($bigtable_instance_id, $bigtable_mutation_table_id)
+create_test_table(bigtable_instance_id, $bigtable_read_table_id, row_count: 5)
+create_test_table(bigtable_instance_id, $bigtable_mutation_table_id)
 
 Minitest.after_run do
-  clean_up_bigtable_objects($bigtable_instance_id, $table_list_for_cleanup)
+  clean_up_bigtable_objects(bigtable_instance_id, $table_list_for_cleanup)
 end
