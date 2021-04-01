@@ -5,12 +5,12 @@ require "google/cloud/compute/v1/regions"
 
 
 # Tests for pagination in GCE
-class TestUseComputePagination < Minitest::Test
+class PaginationSmokeTest < Minitest::Test
   def setup
     @default_zone = "us-central1-a"
-    @default_project = ENV["PROJECT_ID"]
+    @default_project = ENV["V1_TEST_PROJECT"]
     @client = Google::Cloud::Compute::V1::Zones::Rest::Client.new
-    skip "PROJECT_ID must be set before running this test" if @default_project.nil?
+    skip "V1_TEST_PROJECT must be set before running this test" if @default_project.nil?
   end
 
   def test_basic_list

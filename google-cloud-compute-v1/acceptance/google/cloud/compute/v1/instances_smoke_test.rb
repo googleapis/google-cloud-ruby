@@ -4,10 +4,10 @@ require "google/cloud/compute/v1/instances"
 require "google/cloud/compute/v1/zone_operations"
 
 # Tests for GCE instances
-class TestUseComputeSmoke < Minitest::Test
+class InstancesSmokeTest < Minitest::Test
   def setup
     @default_zone = "us-central1-a"
-    @default_project = ENV["PROJECT_ID"]
+    @default_project = ENV["V1_TEST_PROJECT"]
     @machine_type = "zones/#{@default_zone}/machineTypes/n1-standard-1"
     @image =  "projects/debian-cloud/global/images/family/debian-10"
     @client = ::Google::Cloud::Compute::V1::Instances::Rest::Client.new
