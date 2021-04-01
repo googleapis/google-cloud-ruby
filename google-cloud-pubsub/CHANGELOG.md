@@ -1,5 +1,21 @@
 # Release History
 
+### 2.5.0 / 2021-04-01
+
+#### Features
+
+* Add Schema support
+  * Add Schema
+  * Add Project#create_schema
+  * Add Project#schema
+  * Add Project#schemas (Schema::List)
+  * Add Project#valid_schema?
+  * Add schema options to Project#create_topic
+  * Add Topic#schema_name
+  * Add Topic#message_encoding
+  * Add Topic#message_encoding_binary?
+  * Add Topic#message_encoding_json?
+
 ### 2.4.0 / 2021-03-10
 
 #### Features
