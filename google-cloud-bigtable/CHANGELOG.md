@@ -1,5 +1,11 @@
 # Release History
 
+### 2.4.1 / 2021-04-01
+
+#### Bug Fixes
+
+* Update internal management of view states in Table
+
 ### 2.4.0 / 2021-03-10
 
 #### Features
