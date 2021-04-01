@@ -92,6 +92,8 @@ module Google
             end
           elsif field.type == "NUMERIC"
             BigDecimal value[:v]
+          elsif field.type == "BIGNUMERIC"
+            BigDecimal value[:v]
           elsif field.type == "BOOLEAN"
             (value[:v] == "true" ? true : (value[:v] == "false" ? false : nil))
           elsif field.type == "BYTES"
@@ -116,23 +118,23 @@ module Google
 
           Google::Apis::BigqueryV2::QueryParameter.new(
             parameter_type:  to_query_param_type(type),
-            parameter_value: to_query_param_value(param)
+            parameter_value: to_query_param_value(param, type)
           )
         end
 
         ##
         # @private
-        def self.to_query_param_value value
+        def self.to_query_param_value value, type = nil
           return Google::Apis::BigqueryV2::QueryParameterValue.new value: nil if value.nil?
 
-          json_value = to_json_value value
+          json_value = to_json_value value, type
 
           if Array === json_value
-            array_values = json_value.map { |v| to_query_param_value v }
+            array_values = json_value.map { |v| to_query_param_value v } # TODO: support type
             Google::Apis::BigqueryV2::QueryParameterValue.new array_values: array_values
           elsif Hash === json_value
             struct_pairs = json_value.map do |key, value|
-              [String(key), to_query_param_value(value)]
+              [String(key), to_query_param_value(value)] # TODO: support type
             end
             struct_values = Hash[struct_pairs]
             Google::Apis::BigqueryV2::QueryParameterValue.new struct_values: struct_values
@@ -216,7 +218,7 @@ module Google
 
         ##
         # @private
-        def self.to_json_value value
+        def self.to_json_value value, type = nil
           if DateTime === value
             value.strftime "%Y-%m-%d %H:%M:%S.%6N"
           elsif Date === value
@@ -226,15 +228,20 @@ module Google
           elsif Bigquery::Time === value
             value.value
           elsif BigDecimal === value
-            # Round to precision of 9
-            value.finite? ? value.round(9).to_s("F") : value.to_s
+            if value.finite?
+              # Round to precision of 9 unless explicit BIGNUMERIC
+              v = type == :BIGNUMERIC ? value : value.round(9)
+              v.to_s("F")
+            else
+              value.to_s
+            end
           elsif value.respond_to?(:read) && value.respond_to?(:rewind)
             value.rewind
             Base64.strict_encode64(value.read.force_encoding("ASCII-8BIT"))
           elsif Array === value
-            value.map { |v| to_json_value v }
+            value.map { |v| to_json_value v } # TODO: support type
           elsif Hash === value
-            Hash[value.map { |k, v| [k.to_s, to_json_value(v)] }]
+            Hash[value.map { |k, v| [k.to_s, to_json_value(v)] }] # TODO: support type
           else
             value
           end
@@ -251,7 +258,7 @@ module Google
         ##
         # @private
         def self.to_json_row row
-          Hash[row.map { |k, v| [k.to_s, to_json_value(v)] }]
+          Hash[row.map { |k, v| [k.to_s, to_json_value(v)] }] # TODO: support type
         end
 
         def self.resolve_legacy_sql standard_sql, legacy_sql

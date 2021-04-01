@@ -80,7 +80,7 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
     _(rows.count).must_equal 1
     _(rows.first[:value]).must_be_nil
   end
-
+focus
   it "queries the data with a numeric parameter" do
     rows = bigquery.query "SELECT ? AS value", params: [BigDecimal("123456789.123456789")]
 
@@ -91,7 +91,18 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
     _(rows.count).must_equal 1
     _(rows.first[:value]).must_equal BigDecimal("123456789.123456789")
   end
+focus
+  it "queries the data with a rounded numeric parameter" do
+    rows = bigquery.query "SELECT ? AS value", params: [BigDecimal("123456789.1234567891")]
 
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.fields.count).must_equal 1
+    _(rows.fields.first.name).must_equal "value"
+    _(rows.fields.first).must_be :numeric?
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_equal BigDecimal("123456789.123456789")
+  end
+focus
   it "queries the data with a nil parameter and numeric type" do
     rows = bigquery.query "SELECT ? AS value", params: [nil], types: [:NUMERIC]
 
@@ -99,6 +110,28 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
     _(rows.fields.count).must_equal 1
     _(rows.fields.first.name).must_equal "value"
     _(rows.fields.first).must_be :numeric?
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_be_nil
+  end
+focus
+  it "queries the data with a bignumeric parameter and bignumeric type" do
+    rows = bigquery.query "SELECT ? AS value", params: [BigDecimal("123456789.1234567891")], types: [:BIGNUMERIC]
+
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.fields.count).must_equal 1
+    _(rows.fields.first.name).must_equal "value"
+    _(rows.fields.first).must_be :bignumeric?
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_equal BigDecimal("123456789.1234567891")
+  end
+focus
+  it "queries the data with a nil parameter and bignumeric type" do
+    rows = bigquery.query "SELECT ? AS value", params: [nil], types: [:BIGNUMERIC]
+
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.fields.count).must_equal 1
+    _(rows.fields.first.name).must_equal "value"
+    _(rows.fields.first).must_be :bignumeric?
     _(rows.count).must_equal 1
     _(rows.first[:value]).must_be_nil
   end

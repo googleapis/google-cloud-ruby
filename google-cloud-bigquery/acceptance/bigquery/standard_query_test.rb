@@ -39,13 +39,21 @@ describe Google::Cloud::Bigquery, :standard_query_types, :bigquery do
     _(rows.count).must_equal 1
     _(rows.first[:value]).must_equal 12.0
   end
-
+focus
   it "queries a numeric value" do
     rows = bigquery.query "SELECT NUMERIC '123456789.123456789' AS value", standard_sql: true
 
     _(rows.class).must_equal Google::Cloud::Bigquery::Data
     _(rows.count).must_equal 1
     _(rows.first[:value]).must_equal BigDecimal("123456789.123456789")
+  end
+focus
+  it "queries a bignumeric value" do
+    rows = bigquery.query "SELECT BIGNUMERIC '123456789.1234567891' AS value", standard_sql: true
+
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_equal BigDecimal("123456789.1234567891")
   end
 
   it "queries a boolean value" do
