@@ -130,11 +130,12 @@ module Google
           json_value = to_json_value value, type
 
           if Array === json_value
-            array_values = json_value.map { |v| to_query_param_value v } # TODO: support type
+            type = extract_array_type type
+            array_values = json_value.map { |v| to_query_param_value v, type }
             Google::Apis::BigqueryV2::QueryParameterValue.new array_values: array_values
           elsif Hash === json_value
             struct_pairs = json_value.map do |key, value|
-              [String(key), to_query_param_value(value)] # TODO: support type
+              [String(key), to_query_param_value(value, type)]
             end
             struct_values = Hash[struct_pairs]
             Google::Apis::BigqueryV2::QueryParameterValue.new struct_values: struct_values
@@ -239,12 +240,25 @@ module Google
             value.rewind
             Base64.strict_encode64(value.read.force_encoding("ASCII-8BIT"))
           elsif Array === value
-            value.map { |v| to_json_value v } # TODO: support type
+            type = extract_array_type type
+            value.map { |v| to_json_value v, type }
           elsif Hash === value
-            Hash[value.map { |k, v| [k.to_s, to_json_value(v)] }] # TODO: support type
+            Hash[value.map { |k, v| [k.to_s, to_json_value(v, type)] }]
           else
             value
           end
+        end
+
+        ##
+        # @private
+        # Lists are specified by providing the type code in an array. For example, an array of integers are specified as
+        # `[:INT64]`. Extracts the symbol.
+        def self.extract_array_type type
+          return nil if type.nil?
+          unless type.is_a?(Array) && type.count == 1 && type.first.is_a?(Symbol)
+            raise ArgumentError, "types Array #{type.inspect} should include only a single symbol element."
+          end
+          type.first
         end
 
         # rubocop:enable all

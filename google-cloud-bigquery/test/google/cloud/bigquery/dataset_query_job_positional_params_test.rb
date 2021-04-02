@@ -421,7 +421,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :positional_params, :mock
     _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
-  it "queries the data with an array parameter" do
+  it "queries the data with an array of string values parameter" do
     query_job_gapi.configuration.query.query = "#{query} WHERE name IN ?"
     query_job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
@@ -446,6 +446,39 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :positional_params, :mock
     mock.expect :insert_job, query_job_gapi, [project, query_job_gapi]
 
     job = dataset.query_job "#{query} WHERE name IN ?", params: [%w{name1 name2 name3}]
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+  end
+
+  it "queries the data with an array of bignumeric values parameter" do
+    param_1 = BigDecimal("123456789.1234567891")
+    param_2 = BigDecimal("123456789.1234567892")
+    param_3 = BigDecimal("123456789.1234567893")
+    query_job_gapi.configuration.query.query = "#{query} WHERE my_bignumeric IN ?"
+    query_job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "ARRAY",
+          array_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+            type: "BIGNUMERIC"
+          )
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          array_values: [
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "123456789.1234567891"),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "123456789.1234567892"),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "123456789.1234567893")
+          ]
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :insert_job, query_job_gapi, [project, query_job_gapi]
+
+    job = dataset.query_job "#{query} WHERE my_bignumeric IN ?", params: [[param_1, param_2, param_3]], types: [[:BIGNUMERIC]]
     mock.verify
 
     _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob

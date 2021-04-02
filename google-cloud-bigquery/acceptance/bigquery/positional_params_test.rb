@@ -296,6 +296,17 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
     _(rows.first[:value]).must_equal ["foo", "bar", "baz"]
   end
 
+  it "queries the data with an array of bignumeric parameters" do
+    param_1 = BigDecimal("123456789.1234567891")
+    param_2 = BigDecimal("123456789.1234567892")
+    param_3 = BigDecimal("123456789.1234567893")
+    rows = bigquery.query "SELECT ? AS value", params: [[param_1, param_2, param_3]], types: [[:BIGNUMERIC]]
+
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_equal [param_1, param_2, param_3]
+  end
+
   it "queries the data with an empty array of integers and type" do
     rows = bigquery.query "SELECT ? AS value", params: [[]], types: [[:INT64]]
 
