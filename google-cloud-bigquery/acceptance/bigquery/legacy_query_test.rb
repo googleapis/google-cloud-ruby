@@ -39,7 +39,7 @@ describe Google::Cloud::Bigquery, :legacy_query_types, :bigquery do
     _(rows.count).must_equal 1
     _(rows.first[:value]).must_equal 12.0
   end
-focus
+
   it "queries a numeric value" do
     rows = bigquery.query "SELECT CAST('123456789.123456789' AS NUMERIC) AS value", legacy_sql: true
 
@@ -47,7 +47,7 @@ focus
     _(rows.count).must_equal 1
     _(rows.first[:value]).must_equal BigDecimal("123456789.123456789")
   end
-focus
+
   it "queries a rounded numeric value" do
     rows = bigquery.query "SELECT CAST('123456789.1234567891' AS NUMERIC) AS value", legacy_sql: true
 
@@ -55,7 +55,7 @@ focus
     _(rows.count).must_equal 1
     _(rows.first[:value]).must_equal BigDecimal("123456789.123456789")
   end
-focus
+
   it "queries a bignumeric value" do
     rows = bigquery.query "SELECT CAST('123456789.1234567891' AS BIGNUMERIC) AS value", legacy_sql: true
 

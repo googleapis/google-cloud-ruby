@@ -91,7 +91,7 @@ describe Google::Cloud::Bigquery, :named_params, :bigquery do
     _(rows.count).must_equal 1
     _(rows.first[:value]).must_equal BigDecimal("123456789.123456789")
   end
-focus
+
   it "queries the data with a rounded numeric parameter" do
     rows = bigquery.query "SELECT @value AS value", params: { value: BigDecimal("123456789.1234567891") }
 
@@ -113,7 +113,7 @@ focus
     _(rows.count).must_equal 1
     _(rows.first[:value]).must_be_nil
   end
-focus
+
   it "queries the data with a bignumeric parameter and bignumeric type" do
     rows = bigquery.query "SELECT @value AS value", 
                           params: { value: BigDecimal("123456789.1234567891") },

@@ -121,6 +121,31 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :positional_params, :mock
     _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
+  it "queries the data with a bignumeric parameter and types option" do
+    query_job_gapi.configuration.query.query = "#{query} WHERE my_bignumeric = ?"
+    query_job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "BIGNUMERIC"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: "123456798.98765432100001"
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :insert_job, query_job_gapi, [project, query_job_gapi]
+
+    job = dataset.query_job "#{query} WHERE my_bignumeric = ?",
+                            params: [BigDecimal("123456798.98765432100001")],
+                            types: [:BIGNUMERIC]
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+  end
+
   it "queries the data with a true parameter" do
     query_job_gapi.configuration.query.query = "#{query} WHERE active = ?"
     query_job_gapi.configuration.query.query_parameters = [
