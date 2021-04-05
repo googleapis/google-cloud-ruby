@@ -155,21 +155,21 @@ more complex types such as `ARRAY` and `STRUCT`.
 
 The BigQuery data types are converted to and from Ruby types as follows:
 
-| BigQuery     | Ruby                                 | Notes |
-|------------- |--------------------------------------|-------|
-| `BOOL`       | `true`/`false`                       | |
-| `INT64`      | `Integer`                            | |
-| `FLOAT64`    | `Float`                              | |
-| `NUMERIC`    | `BigDecimal`                         | BigDecimal inputs rounded to scale 9. |
+| BigQuery     | Ruby                                 | Notes                                                        |
+|------------- |--------------------------------------|--------------------------------------------------------------|
+| `BOOL`       | `true`/`false`                       |                                                              |
+| `INT64`      | `Integer`                            |                                                              |
+| `FLOAT64`    | `Float`                              |                                                              |
+| `NUMERIC`    | `BigDecimal`                         | BigDecimal args will be rounded to scale 9.                  |
 | `BIGNUMERIC` | to `BigDecimal`, from `String`       | To avoid rounding BigDecimal args to scale 9, pass `String`. |
-| `STRING`     | `String`                             | |
-| `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone. |
-| `DATE`       | `Date`                               | |
-| `TIMESTAMP`  | `Time`                               | |
-| `TIME`       | `Google::Cloud::BigQuery::Time`      | |
-| `BYTES`      | `File`, `IO`, `StringIO`, or similar | |
-| `ARRAY`      | `Array`                              | Nested arrays, `nil` values are not supported. |
-| `STRUCT`     | `Hash`                               | Hash keys may be strings or symbols. |
+| `STRING`     | `String`                             |                                                              |
+| `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.                       |
+| `DATE`       | `Date`                               |                                                              |
+| `TIMESTAMP`  | `Time`                               |                                                              |
+| `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                              |
+| `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                              |
+| `ARRAY`      | `Array`                              | Nested arrays, `nil` values are not supported.               |
+| `STRUCT`     | `Hash`                               | Hash keys may be strings or symbols.                         |
 
 See [Data
 Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types)
