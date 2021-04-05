@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.1 / 2021-04-05
+
+#### Documentation
+
+* Fixed several broken links in the reference documentation
+
 ### 0.2.0 / 2021-03-08
 
 #### Features
