@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.1 / 2021-04-05
+
+#### Documentation
+
+* Mark Instance#state as read-only
+
 ### 0.3.0 / 2021-03-08
 
 #### Features
