@@ -24,7 +24,7 @@ module Google
     module ServiceManagement
       module V1
         module ServiceManager
-          # [Google Service Management API](/service-management/overview)
+          # [Google Service Management API](https://cloud.google.com/service-management/overview)
           class Service
 
             include GRPC::GenericService

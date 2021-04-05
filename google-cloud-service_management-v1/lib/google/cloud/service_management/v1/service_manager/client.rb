@@ -27,7 +27,7 @@ module Google
           ##
           # Client for the ServiceManager service.
           #
-          # [Google Service Management API](/service-management/overview)
+          # [Google Service Management API](https://cloud.google.com/service-management/overview)
           #
           class Client
             # @private
@@ -397,7 +397,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](/service-management/overview)
+            #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
             #     for naming requirements.  For example: `example.googleapis.com`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -470,7 +470,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service. See the [overview](/service-management/overview)
+            #     Required. The name of the service. See the [overview](https://cloud.google.com/service-management/overview)
             #     for naming requirements. For example: `example.googleapis.com`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -539,7 +539,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](/service-management/overview)
+            #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
             #     for naming requirements.  For example: `example.googleapis.com`.
             #   @param page_token [::String]
             #     The token of the page to retrieve.
@@ -612,7 +612,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](/service-management/overview)
+            #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
             #     for naming requirements.  For example: `example.googleapis.com`.
             #   @param config_id [::String]
             #     Required. The id of the service configuration resource.
@@ -695,7 +695,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](/service-management/overview)
+            #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
             #     for naming requirements.  For example: `example.googleapis.com`.
             #   @param service_config [::Google::Api::Service, ::Hash]
             #     Required. The service configuration resource.
@@ -776,7 +776,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](/service-management/overview)
+            #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
             #     for naming requirements.  For example: `example.googleapis.com`.
             #   @param config_source [::Google::Cloud::ServiceManagement::V1::ConfigSource, ::Hash]
             #     Required. The source configuration for the service.
@@ -851,7 +851,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](/service-management/overview)
+            #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
             #     for naming requirements.  For example: `example.googleapis.com`.
             #   @param page_token [::String]
             #     The token of the page to retrieve.
@@ -933,7 +933,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](/service-management/overview)
+            #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
             #     for naming requirements.  For example: `example.googleapis.com`.
             #   @param rollout_id [::String]
             #     Required. The id of the rollout resource.
@@ -1016,7 +1016,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](/service-management/overview)
+            #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
             #     for naming requirements.  For example: `example.googleapis.com`.
             #   @param rollout [::Google::Cloud::ServiceManagement::V1::Rollout, ::Hash]
             #     Required. The rollout resource. The `service_name` field is output only.
