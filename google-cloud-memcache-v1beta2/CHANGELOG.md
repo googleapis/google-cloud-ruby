@@ -1,5 +1,21 @@
 # Release History
 
+### 0.2.0 / 2021-04-05
+
+#### Features
+
+* Drop support for Ruby 2.4 and add support for Ruby 3.0
+* Support for apply_software_update
+* Use self-signed JWT credentials when possible
+
+#### Bug Fixes
+
+* Allow special symbolic credentials in client configs
+
+#### Documentation
+
+* Timeout config description correctly gives the units as seconds.
+
 ### 0.1.2 / 2020-08-06
 
 #### Bug Fixes
