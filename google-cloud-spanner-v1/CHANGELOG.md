@@ -1,5 +1,12 @@
 # Release History
 
+### 0.6.0 / 2021-04-05
+
+#### Features
+
+* Add tagging to request options
+* Support for priority request options
+
 ### 0.5.0 / 2021-03-08
 
 #### Features
