@@ -265,12 +265,6 @@ module Google
 
         ##
         # @private
-        def self.to_json_rows rows
-          rows.map { |row| to_json_row row }
-        end
-
-        ##
-        # @private
         def self.to_json_row row
           Hash[row.map { |k, v| [k.to_s, to_json_value(v)] }] # TODO: support type
         end
