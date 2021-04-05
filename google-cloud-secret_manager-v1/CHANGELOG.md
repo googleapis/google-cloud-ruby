@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 / 2021-04-05
+
+#### Features
+
+* Support for rotation schedules
+
 ### 0.8.0 / 2021-03-08
 
 #### Features
