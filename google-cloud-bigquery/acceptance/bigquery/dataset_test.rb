@@ -58,7 +58,6 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   let(:table_parquet) { dataset.table table_parquet_id }
   let(:local_parquet_file) { "acceptance/data/us-states.parquet" }
 
-  let(:query) { "SELECT id, breed, name, dob FROM #{table.query_id}" }
   let(:rows) do
     [
       { name: "silvano", breed: "the cat kind",      id: 4, dob: Time.now.utc },
@@ -86,8 +85,8 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
 
   let(:schema_update_options) { ["ALLOW_FIELD_ADDITION", "ALLOW_FIELD_RELAXATION"] }
   let(:clustering_fields) { ["breed", "name"] }
-  let(:bigdecimal_numeric) { BigDecimal("0.123456789") }
-  let(:bigdecimal_bignumeric) { BigDecimal("0.12345678901234567890123456789012345678") }
+  let(:string_numeric) { "0.123456789" }
+  let(:string_bignumeric) { "0.12345678901234567890123456789012345678" }
 
   before do
     table
@@ -478,22 +477,37 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   end
 
   it "inserts row with max scale numeric and bignumeric values" do
-    row = {
-      name: "cat 5",
-      breed: "the cat kind",
-      id: 5,
-      dob: Time.now.utc,
-      my_numeric: bigdecimal_numeric,
-      my_bignumeric: bigdecimal_bignumeric
-    }
-    insert_response = dataset.insert table_with_schema.table_id, row
+    rows = [
+      {
+        name: "cat 7",
+        breed: "the cat kind",
+        id: 7,
+        dob: Time.now.utc,
+        my_numeric: BigDecimal(string_numeric),
+        my_bignumeric: string_bignumeric # BigDecimal would be rounded, use String instead!
+      },
+      {
+        name: "cat 8",
+        breed: "the cat kind",
+        id: 8,
+        dob: Time.now.utc,
+        my_numeric: BigDecimal(string_numeric),
+        my_bignumeric: BigDecimal(string_bignumeric) # BigDecimal will be rounded to scale 9.
+      }
+    ]
+    insert_response = dataset.insert table_with_schema.table_id, rows
     _(insert_response).must_be :success?
-    _(insert_response.insert_count).must_equal 1
+    _(insert_response.insert_count).must_equal 2
     _(insert_response.insert_errors).must_be :empty?
     _(insert_response.error_rows).must_be :empty?
 
-    # TODO: add BIGNUMERIC -> BigDecimal conversion to data
-    # assert_data table_with_schema.data(max: 1)
+    data = dataset.query "SELECT id, my_numeric, my_bignumeric FROM #{table_with_schema_id} WHERE id IN (7,8) ORDER BY id"
+    _(data[0][:id]).must_equal 7
+    _(data[0][:my_numeric]).must_equal BigDecimal(string_numeric)
+    _(data[0][:my_bignumeric]).must_equal BigDecimal(string_bignumeric)
+    _(data[1][:id]).must_equal 8
+    _(data[1][:my_numeric]).must_equal BigDecimal(string_numeric)
+    _(data[1][:my_bignumeric]).must_equal BigDecimal(string_numeric) # Rounded to scale 9.
   end
 
   it "creates missing table while inserts rows with autocreate option" do

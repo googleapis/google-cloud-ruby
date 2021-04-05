@@ -20,8 +20,8 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
   let(:table_id) { "examples_table" }
   let(:table) { @table }
 
-  let(:bigdecimal_numeric) { BigDecimal("0.123456789") }
-  let(:bigdecimal_bignumeric) { BigDecimal("0.12345678901234567890123456789012345678") }
+  let(:string_numeric) { "0.123456789" }
+  let(:string_bignumeric) { "0.12345678901234567890123456789012345678" }
 
   before do
     @table = get_or_create_example_table dataset, table_id
@@ -177,10 +177,10 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
 
     _(rows.count).must_equal 1
     _(rows[0][:my_numeric]).must_be_kind_of BigDecimal
-    _(rows[0][:my_numeric]).must_equal bigdecimal_numeric
-    # TODO: add BIGNUMERIC -> BigDecimal conversion to data
-    # _(rows[0][:my_numeric]).must_be_kind_of BigDecimal
-    # _(rows[0][:my_numeric]).must_equal bigdecimal_bignumeric
+    _(rows[0][:my_numeric]).must_equal BigDecimal(string_numeric)
+
+    _(rows[0][:my_bignumeric]).must_be_kind_of BigDecimal
+    _(rows[0][:my_bignumeric]).must_equal BigDecimal(string_bignumeric)
   end
 
   def assert_rows_equal returned_row, example_row
@@ -240,8 +240,8 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
         name: "Bilbo",
         age: 111,
         weight: 67.2,
-        my_numeric: bigdecimal_numeric,
-        my_bignumeric: bigdecimal_bignumeric,
+        my_numeric: BigDecimal(string_numeric),
+        my_bignumeric: string_bignumeric, # BigDecimal would be rounded, use String instead!
         is_magic: false,
         scores: [],
         spells: [],

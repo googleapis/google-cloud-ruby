@@ -115,7 +115,10 @@ module Google
           #   BigQuery Troubleshooting: Metadata errors for streaming inserts
           #
           # @param [Hash, Array<Hash>] rows A hash object or array of hash
-          #   objects containing the data.
+          #   objects containing the data. BigDecimal values will be rounded to
+          #   scale 9 to conform with the BigQuery NUMERIC data type. To avoid
+          #   rounding BIGNUMERIC type values with scale greater than 9, use String
+          #   instead of BigDecimal.
           # @param [Array<String|Symbol>, Symbol] insert_ids A unique ID for each row. BigQuery uses this property to
           #   detect duplicate insertion requests on a best-effort basis. For more information, see [data
           #   consistency](https://cloud.google.com/bigquery/streaming-data-into-bigquery#dataconsistency). Optional. If

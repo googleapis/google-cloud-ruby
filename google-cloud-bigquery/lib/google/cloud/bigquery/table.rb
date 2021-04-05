@@ -2318,7 +2318,10 @@ module Google
         #   BigQuery Troubleshooting: Metadata errors for streaming inserts
         #
         # @param [Hash, Array<Hash>] rows A hash object or array of hash objects
-        #   containing the data. Required.
+        #   containing the data. Required. BigDecimal values will be rounded to
+        #   scale 9 to conform with the BigQuery NUMERIC data type. To avoid
+        #   rounding BIGNUMERIC type values with scale greater than 9, use String
+        #   instead of BigDecimal.
         # @param [Array<String|Symbol>, Symbol] insert_ids A unique ID for each row. BigQuery uses this property to
         #   detect duplicate insertion requests on a best-effort basis. For more information, see [data
         #   consistency](https://cloud.google.com/bigquery/streaming-data-into-bigquery#dataconsistency). Optional. If
@@ -2360,6 +2363,19 @@ module Google
         #     { "first_name" => "Bob", "age" => 22 }
         #   ]
         #   table.insert rows
+        #
+        # @example Provide BIGNUMERIC values as a String to avoid rounding to scale 9 in the conversion from BigDecimal:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   row = {
+        #     "my_numeric" => BigDecimal("123456798.987654321"),
+        #     "my_bignumeric" => "123456798.98765432100001" # BigDecimal would be rounded, use String instead!
+        #   }
+        #   table.insert row
         #
         # @!group Data
         #

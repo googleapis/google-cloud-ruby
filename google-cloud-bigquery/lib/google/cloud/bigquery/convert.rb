@@ -266,7 +266,7 @@ module Google
         ##
         # @private
         def self.to_json_row row
-          Hash[row.map { |k, v| [k.to_s, to_json_value(v)] }] # TODO: support type
+          Hash[row.map { |k, v| [k.to_s, to_json_value(v)] }]
         end
 
         def self.resolve_legacy_sql standard_sql, legacy_sql
