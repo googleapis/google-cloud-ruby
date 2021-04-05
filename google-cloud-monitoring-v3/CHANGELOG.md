@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2021-04-05
+
+#### Features
+
+* Support for querying time series using the Monitoring Query Language
+
 ### 0.3.0 / 2021-03-08
 
 #### Features
