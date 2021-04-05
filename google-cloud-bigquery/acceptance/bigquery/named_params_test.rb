@@ -288,6 +288,17 @@ describe Google::Cloud::Bigquery, :named_params, :bigquery do
     _(rows.first[:value]).must_equal []
   end
 
+  it "queries the data with a converted string to integer in an array parameter" do
+    rows = bigquery.query "SELECT @value AS value", params: { value: ["1"] }, types: { value: [:INT64] }
+
+    _(rows.fields.count).must_equal 1
+    _(rows.fields.first.name).must_equal "value"
+    _(rows.fields.first).must_be :repeated?
+    _(rows.fields.first).must_be :integer?
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_equal [1]
+  end
+
   it "queries the data with a struct parameter" do
     rows = bigquery.query "SELECT @value AS value", params: { value: { message: "hello", repeat: 1 } }
 
@@ -335,5 +346,37 @@ describe Google::Cloud::Bigquery, :named_params, :bigquery do
     _(rows.fields.first.fields.last).must_be :integer?
     _(rows.count).must_equal 1
     _(rows.first[:value]).must_be_nil
+  end
+
+  it "queries the data with nested nil in a struct parameter" do
+    rows = bigquery.query "SELECT @value AS value", params: { value: { message: nil, repeat: 1 } }, types: { value: { message: :STRING, repeat: :INT64 } }
+
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.fields.count).must_equal 1
+    _(rows.fields.first.name).must_equal "value"
+    _(rows.fields.first).must_be :record?
+    _(rows.fields.first.fields.count).must_equal 2
+    _(rows.fields.first.fields.first.name).must_equal "message"
+    _(rows.fields.first.fields.first).must_be :string?
+    _(rows.fields.first.fields.last.name).must_equal "repeat"
+    _(rows.fields.first.fields.last).must_be :integer?
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_equal({ message: nil, repeat: 1 })
+  end
+
+  it "queries the data with a converted string to integer in a struct parameter" do
+    rows = bigquery.query "SELECT @value AS value", params: { value: { message: "hello", repeat: "1" } }, types: { value: { message: :STRING, repeat: :INT64 } }
+
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.fields.count).must_equal 1
+    _(rows.fields.first.name).must_equal "value"
+    _(rows.fields.first).must_be :record?
+    _(rows.fields.first.fields.count).must_equal 2
+    _(rows.fields.first.fields.first.name).must_equal "message"
+    _(rows.fields.first.fields.first).must_be :string?
+    _(rows.fields.first.fields.last.name).must_equal "repeat"
+    _(rows.fields.first.fields.last).must_be :integer?
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_equal({ message: "hello", repeat: 1 })
   end
 end
