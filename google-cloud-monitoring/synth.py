@@ -32,7 +32,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Cloud Monitoring",
         "ruby-cloud-description": "Cloud Monitoring collects metrics, events, and metadata from Google Cloud, Amazon Web Services (AWS), hosted uptime probes, and application instrumentation.",
         "ruby-cloud-env-prefix": "MONITORING",
-        "ruby-cloud-wrapper-of": "v3:0.0",
+        "ruby-cloud-wrapper-of": "v3:0.4",
         "ruby-cloud-product-url": "https://cloud.google.com/monitoring",
         "ruby-cloud-api-id": "monitoring.googleapis.com",
         "ruby-cloud-api-shortname": "monitoring",
@@ -50,7 +50,7 @@ library2 = gapic.ruby_library(
         "ruby-cloud-title": "Cloud Monitoring Dashboards",
         "ruby-cloud-description": "Cloud Monitoring collects metrics, events, and metadata from Google Cloud, Amazon Web Services (AWS), hosted uptime probes, and application instrumentation.",
         "ruby-cloud-env-prefix": "MONITORING_DASHBOARD",
-        "ruby-cloud-wrapper-of": "v1:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.5",
         "ruby-cloud-product-url": "https://cloud.google.com/monitoring",
         "ruby-cloud-api-id": "monitoring.googleapis.com",
         "ruby-cloud-api-shortname": "monitoring",
@@ -68,8 +68,8 @@ s.replace(
 )
 s.replace(
     "google-cloud-monitoring.gemspec",
-    '\n  gem.add_dependency "google-cloud-monitoring-v3", "~> 0.0"\n\n',
-    '\n  gem.add_dependency "google-cloud-monitoring-v3", "~> 0.0"\n  gem.add_dependency "google-cloud-monitoring-dashboard-v1", "~> 0.0"\n\n',
+    '\n  gem.add_dependency "google-cloud-monitoring-v3", "~> 0.4"\n\n',
+    '\n  gem.add_dependency "google-cloud-monitoring-v3", "~> 0.4"\n  gem.add_dependency "google-cloud-monitoring-dashboard-v1", "~> 0.5"\n\n',
 )
 s.replace(
     "Gemfile",
