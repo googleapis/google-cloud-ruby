@@ -5,7 +5,6 @@
 #### Documentation
 
 * Fixed several broken links in the reference documentation
-* Fixed some broken links in the reference documentation
 
 ### 0.3.0 / 2021-03-08
 
