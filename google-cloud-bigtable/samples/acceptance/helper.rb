@@ -153,7 +153,7 @@ require "date"
 require "securerandom"
 
 def bigtable_instance_id
-  "google-cloud-ruby-tests"
+  "google-cloud-ruby-sample"
 end
 
 def bigtable_cluster_location
