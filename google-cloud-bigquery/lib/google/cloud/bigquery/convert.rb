@@ -223,7 +223,7 @@ module Google
             value.value
           elsif BigDecimal === value
             if value.finite?
-              # Round to precision of 9 unless explicit BIGNUMERIC
+              # Round to precision of 9 unless explicit `BIGNUMERIC`
               bigdecimal = type == :BIGNUMERIC ? value : value.round(9)
               bigdecimal.to_s "F"
             else

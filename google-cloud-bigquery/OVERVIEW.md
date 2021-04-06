@@ -160,8 +160,8 @@ The BigQuery data types are converted to and from Ruby types as follows:
 | `BOOL`       | `true`/`false`                       |                                                              |
 | `INT64`      | `Integer`                            |                                                              |
 | `FLOAT64`    | `Float`                              |                                                              |
-| `NUMERIC`    | `BigDecimal`                         | BigDecimal args will be rounded to scale 9.                  |
-| `BIGNUMERIC` | to `BigDecimal`, from `String`       | To avoid rounding BigDecimal args to scale 9, pass `String`. |
+| `NUMERIC`    | `BigDecimal`                         | `BigDecimal` args will be rounded to scale 9.                |
+| `BIGNUMERIC` | to `BigDecimal`, from `String`       | To avoid rounding `BigDecimal` args to scale 9, pass string. |
 | `STRING`     | `String`                             |                                                              |
 | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.                       |
 | `DATE`       | `Date`                               |                                                              |
