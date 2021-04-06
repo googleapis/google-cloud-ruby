@@ -2305,6 +2305,21 @@ module Google
         # need to complete a load operation before the data can appear in query
         # results.
         #
+        # Simple Ruby types are generally accepted per JSON rules, along with the following support for BigQuery's more
+        # complex types:
+        #
+        # | BigQuery     | Ruby                                 | Notes                                              |
+        # |--------------|--------------------------------------|----------------------------------------------------|
+        # | `NUMERIC`    | `BigDecimal`                         | `BigDecimal` values will be rounded to scale 9.    |
+        # | `BIGNUMERIC` | `String`                             | Pass as `String` to avoid rounding to scale 9.     |
+        # | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
+        # | `DATE`       | `Date`                               |                                                    |
+        # | `TIMESTAMP`  | `Time`                               |                                                    |
+        # | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                    |
+        # | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                    |
+        # | `ARRAY`      | `Array`                              | Nested arrays, `nil` values are not supported.     |
+        # | `STRUCT`     | `Hash`                               | Hash keys may be strings or symbols.               |
+        #
         # Because BigQuery's streaming API is designed for high insertion rates,
         # modifications to the underlying table metadata are eventually
         # consistent when interacting with the streaming system. In most cases
