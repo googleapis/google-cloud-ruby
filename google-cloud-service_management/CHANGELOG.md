@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.1 / 2021-04-06
+
+#### Documentation
+
+* Fixed a broken link in the reference documentation
+
 ### 1.0.0 / 2021-03-30
 
 * Bump client version to 1.0 to reflect GA status
