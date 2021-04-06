@@ -298,8 +298,8 @@ module Google
         #   | `BOOL`       | `true`/`false`                       |                                                    |
         #   | `INT64`      | `Integer`                            |                                                    |
         #   | `FLOAT64`    | `Float`                              |                                                    |
-        #   | `NUMERIC`    | `BigDecimal`                         | `BigDecimal` args will be rounded to scale 9.      |
-        #   | `BIGNUMERIC` | to `BigDecimal`, from `String`       | To avoid rounding `BigDecimal` args, pass `String`.|
+        #   | `NUMERIC`    | `BigDecimal`                         | `BigDecimal` values will be rounded to scale 9.    |
+        #   | `BIGNUMERIC` |                                      | Query param values must be mapped in `types`.      |
         #   | `STRING`     | `String`                             |                                                    |
         #   | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
         #   | `DATE`       | `Date`                               |                                                    |
@@ -645,8 +645,8 @@ module Google
         #   | `BOOL`       | `true`/`false`                       |                                                    |
         #   | `INT64`      | `Integer`                            |                                                    |
         #   | `FLOAT64`    | `Float`                              |                                                    |
-        #   | `NUMERIC`    | `BigDecimal`                         | `BigDecimal` args will be rounded to scale 9.      |
-        #   | `BIGNUMERIC` | to `BigDecimal`, from `String`       | To avoid rounding `BigDecimal` args, pass `String`.|
+        #   | `NUMERIC`    | `BigDecimal`                         | `BigDecimal` values will be rounded to scale 9.    |
+        #   | `BIGNUMERIC` |                                      | Query param values must be mapped in `types`.      |
         #   | `STRING`     | `String`                             |                                                    |
         #   | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
         #   | `DATE`       | `Date`                               |                                                    |

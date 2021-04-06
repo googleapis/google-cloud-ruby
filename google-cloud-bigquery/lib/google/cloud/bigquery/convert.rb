@@ -26,15 +26,15 @@ module Google
       ##
       # @private
       #
-      # Internal conversion of raw data values to/from Bigquery values
+      # Internal conversion of raw data values to/from BigQuery values
       #
       #   | BigQuery     | Ruby                                 | Notes                                              |
       #   |--------------|--------------------------------------|----------------------------------------------------|
       #   | `BOOL`       | `true`/`false`                       |                                                    |
       #   | `INT64`      | `Integer`                            |                                                    |
       #   | `FLOAT64`    | `Float`                              |                                                    |
-      #   | `NUMERIC`    | `BigDecimal`                         | BigDecimal args will be rounded to scale 9.        |
-      #   | `BIGNUMERIC` | to `BigDecimal`, from `String`       | To avoid rounding BigDecimal args, pass `String`.  |
+      #   | `NUMERIC`    | `BigDecimal`                         | `BigDecimal` values will be rounded to scale 9.    |
+      #   | `BIGNUMERIC` | converted to `BigDecimal`            | Pass data as `String`; map query params in `types`.|
       #   | `STRING`     | `String`                             |                                                    |
       #   | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
       #   | `DATE`       | `Date`                               |                                                    |
