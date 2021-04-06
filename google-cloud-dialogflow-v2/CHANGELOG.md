@@ -2,26 +2,18 @@
 
 ### 0.7.0 / 2021-04-06
 
-#### ⚠ BREAKING CHANGES
-
-* **dialogflow-v2:** Remove call matcher and streaming_analyze_content functionality
-
 #### Features
 
 * Added clients for Contact Center AI
-* Drop support for Ruby 2.4 and add support for Ruby 3.0
 * Support for webhook headers
+* Expose MP3_64_KBPS and MULAW for output audio encodings.
 * Use self-signed JWT credentials when possible
+* Drop support for Ruby 2.4 and add support for Ruby 3.0
 
 #### Bug Fixes
 
 * Allow special symbolic credentials in client configs
 * Fix retry logic by checking the correct numeric error codes
-* Remove call matcher and streaming_analyze_content functionality
-  * fix!: remove rpc or fields that are unintended to release fix!: remove StreamingAnalyzeContent, CreateCallMatcher, ListCallMatchers, DeleteCallMatcher rpc from v2/v2beta1 fix!: remove `input_audio` field from AnalyzeContentRequest from v2/v2beta1 fix!: remove proto message CreateCallMatcherRequest, CreateCallMatcherResponse, ListCallMatchersRequest, ListCallMatchersResponse, DeleteCallMatcherRequest, DeleteCallMatcherResponse, CallMatcher, StreamingAnalyzeContentRequest, StreamingAnalyzeContentResponse, AudioInput from v2/v2beta1, TelephonyDtmfEvents, TelephonyDtmf from v2
-  * fix!: Remove resource_reference from UpdateAnswerRecord.
-  * docs: fix link for version and environment in participant doc. fix: Add all missing regional HTTP bindings in DF API.
-  * feat: expose MP3_64_KBPS and MULAW for output audio encodings.
 
 #### Documentation
 
