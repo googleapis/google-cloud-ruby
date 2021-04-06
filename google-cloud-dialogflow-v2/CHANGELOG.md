@@ -1,5 +1,28 @@
 # Release History
 
+### 0.7.0 / 2021-04-06
+
+#### Features
+
+* Added clients for Contact Center AI
+* Support for webhook headers
+* Expose MP3_64_KBPS and MULAW for output audio encodings.
+* Use self-signed JWT credentials when possible
+* Drop support for Ruby 2.4 and add support for Ruby 3.0
+
+#### Bug Fixes
+
+* Allow special symbolic credentials in client configs
+* Fix retry logic by checking the correct numeric error codes
+
+#### Documentation
+
+* Fixed references from SentimentAnalysisResult description
+* Minor updates to some parameter descriptions
+* Timeout config description correctly gives the units as seconds.
+* Update session argument description in detect_intent
+* Update tier names in OriginalDetectIntentRequest field descriptions
+
 ### 0.6.4 / 2020-06-25
 
 #### Bug Fixes
