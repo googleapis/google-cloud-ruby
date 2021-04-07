@@ -23,3 +23,6 @@ __pycache__
 */.bundle/
 */vendor/bundle
 */lib/bundler/man/
+
+node_modules
+package-lock.json
