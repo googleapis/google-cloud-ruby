@@ -1,0 +1,36 @@
+name: PR Labels
+on:
+  pull_request_target:
+    types: [labeled]
+    branches:
+      - master
+
+jobs:
+  ci-run:
+    if: "github.repository == 'googleapis/google-cloud-ruby' && github.event.label.name == 'ci: run'"
+    runs-on: ubuntu-latest
+    steps:
+    - name: execute
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          await github.issues.removeLabel({
+            owner: 'googleapis',
+            repo: 'google-cloud-ruby',
+            issue_number: github.event.pull_request.number,
+            name: 'ci: run'
+          });
+          core.info('Removed "ci: run" label.');
+          await github.actions.createWorkflowDispatch({
+            owner: 'googleapis',
+            repo: 'google-cloud-ruby',
+            workflow_id: 'ci.yml',
+            inputs: {
+              head: github.event.pull_request.head.sha,
+              base: github.event.pull_request.base.sha
+            }
+          });
+          core.info('Triggered CI job for PR ' + github.event.pull_request.number);
+          core.info('HEAD: ' + github.event.pull_request.head.sha);
+          core.info('BASE: ' + github.event.pull_request.base.sha);

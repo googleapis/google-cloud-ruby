@@ -7,6 +7,13 @@ on:
     branches:
       - master
   workflow_dispatch:
+    inputs:
+      head:
+        description: "Commit reference at which to run tests"
+        required: false
+      base:
+        description: "Commit reference from which to evaluate diffs"
+        required: false
 
 jobs:
   CI:

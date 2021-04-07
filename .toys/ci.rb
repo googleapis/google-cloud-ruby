@@ -21,9 +21,10 @@ TASKS = ["test", "rubocop", "build", "yard", "linkinator"]
 
 desc "Run CI tasks, not including integration tests."
 
-flag :github_event_name, "--github-event-name PATH"
-flag :github_event_payload, "--github-event-payload PATH"
-flag :from_commit, "--from COMMIT"
+flag :github_event_name, "--github-event-name PATH", default: ""
+flag :github_event_payload, "--github-event-payload PATH", default: ""
+flag :head_commit, "--head COMMIT"
+flag :base_commit, "--base COMMIT"
 flag :bundle_update, "--bundle-update", desc: "Update rather than install gem bundles"
 flag :only, "--only", desc: "Run only the specified tasks (i.e. tasks are opt-in rather than opt-out)"
 
@@ -65,13 +66,9 @@ def determine_dirs
     end
   end
 
-  base_sha = find_base_sha
-  if base_sha.nil?
-    puts "No base SHA. Using local diff.", :bold
-  else
-    puts "Base SHA: #{base_sha}", :bold
-  end
-
+  puts "Evaluating changes.", :bold
+  base_sha, head_sha = interpret_github_event
+  ensure_head head_sha unless head_sha.nil?
   files = find_changed_files base_sha
   if files.empty?
     puts "No files changed.", :bold
@@ -114,31 +111,56 @@ def run_in_dir dir
   end
 end
 
-def find_base_sha
-  case github_event_name
-  when "pull_request"
-    payload = JSON.load File.read github_event_payload
-    payload["pull_request"]["base"]["sha"]
-  when "push"
-    payload = JSON.load File.read github_event_payload
-    payload["before"]
+def interpret_github_event
+  payload = JSON.load File.read github_event_payload unless github_event_payload.empty?
+  base_sha, head_sha =
+    case github_event_name
+    when "pull_request"
+      puts "Getting commits from pull_request event"
+      [payload["pull_request"]["base"]["sha"], nil]
+    when "push"
+      puts "Getting commits from push event"
+      [payload["before"], nil]
+    when "workflow_dispatch"
+      puts "Getting inputs from workflow_dispatch event"
+      [payload["inputs"]["base"], payload["inputs"]["head"]]
+    else
+      [base_commit, head_commit]
+    end
+  base_sha = nil if base_sha&.empty?
+  head_sha = nil if head_sha&.empty?
+  [base_sha, head_sha]
+end
+
+def ensure_head head_sha
+  current_sha = capture(["git", "rev-parse", "HEAD"], e: true).strip
+  if head_sha == current_sha
+    puts "Already at head SHA: #{head_sha}"
   else
-    from_commit
+    puts "Checking out head SHA: #{head_sha}"
+    head_sha = ensure_sha head_sha
+    exec(["git", "checkout", head_sha], e: true)
   end
 end
 
 def find_changed_files base_sha
   if base_sha.nil?
+    puts "No base SHA. Using local diff."
     capture(["git", "status", "--porcelain"]).split("\n").map { |line| line.split.last }
   else
-    result = exec(["git", "show", "--no-patch", "--format=%H", base_sha], out: :capture, err: :capture)
-    if result.error?
-      exec(["git", "fetch", "--depth=1", "origin", base_sha], e: true)
-      base_sha = capture(["git", "show", "--no-patch", "--format=%H", base_sha], e: true).strip
-    else
-      base_sha = result.captured_out
-    end
+    puts "Checking out base SHA: #{base_sha}"
+    base_sha = ensure_sha base_sha
     capture(["git", "diff", "--name-only", base_sha], e: true).split("\n").map(&:strip)
+  end
+end
+
+def ensure_sha sha
+  result = exec(["git", "show", "--no-patch", "--format=%H", sha], out: :capture, err: :capture)
+  if result.error?
+    exec(["git", "fetch", "--depth=1", "origin", sha], e: true)
+    capture(["git", "show", "--no-patch", "--format=%H", sha], e: true).strip
+  else
+    result.captured_out.strip
   end
 end
 
