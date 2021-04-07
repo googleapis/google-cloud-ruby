@@ -1,0 +1,24 @@
+=== 5.2.0 / 2014-04-16
+
+Only output red/green colors when TTY is supported. (cbougher)
+Add +--rg+ flag.
+
+=== 5.1.0 / 2014-04-16
+
+Activate plugin only when required, and fix circular loading issue. (grosser)
+
+=== 5.0.0 / 2013-11-13
+
+Updated for Minitest 5.0
+
+=== 1.1.1 / 2013-04-23
+
+Set minitest dependency.
+
+=== 1.1.0 / 2012-09-20
+
+Color summary output.
+
+=== 1.0.0 / 2012-07-28
+
+New release! Thanks to previous maintainer Enrico Thierbach for allowing the project to continue without him.

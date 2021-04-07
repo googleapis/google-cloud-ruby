@@ -1,5 +1,6 @@
 require "bundler/setup"
 require "fileutils"
+require 'rake/testtask'
 
 task :bundleupdate do
   each_valid_gem bundleupdate: true, name: "BUNDLE UPDATE"
@@ -17,9 +18,11 @@ task :each, :bundleupdate do |t, args|
   end
 end
 
-desc "Runs tests for all gems."
-task :test => :compile do
-  Rake::Task["test:each"].invoke
+# rake task for link_transformer_test
+desc "Runs tests for link_transformer class methods"
+Rake::TestTask.new do |t|  
+  t.warning = true
+  t.test_files = FileList['test/*_test.rb']
 end
 
 namespace :test do
@@ -43,6 +46,7 @@ namespace :test do
   task :codecov do
     abort "**** Codecov disabled ****"
   end
+
 end
 
 desc "Runs acceptance tests for all gems."
@@ -208,10 +212,15 @@ task :release, :tag do |t, args|
     config.key = api_token
   end if api_token
 
+  require_relative "rakelib/link_transformer.rb"
   Dir.chdir package do
     Bundler.with_clean_env do
       sh "rm -rf pkg"
       sh "bundle update"
+      # transform markdown links to yard links during build
+      yard_link_transformer = LinkTransformer.new
+      files = yard_link_transformer.find_markdown_files
+      yard_link_transformer.transform_links_in_files(files)
       sh "bundle exec rake build"
     end
   end

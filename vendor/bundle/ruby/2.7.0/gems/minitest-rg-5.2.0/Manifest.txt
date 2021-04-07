@@ -1,0 +1,12 @@
+.autotest
+.gemtest
+CHANGELOG.rdoc
+Gemfile
+LICENSE
+Manifest.txt
+README.rdoc
+Rakefile
+lib/minitest/rg.rb
+lib/minitest/rg_plugin.rb
+minitest-rg.gemspec
+test/test_minitest-rg.rb
