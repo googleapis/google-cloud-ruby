@@ -32,27 +32,25 @@ module Google
     module Channel
       module V1
         ##
-        # CloudChannelService enables Google cloud resellers and distributors to manage
-        # their customers, channel partners, entitlements and reports.
+        # CloudChannelService lets Google cloud resellers and distributors manage
+        # their customers, channel partners, entitlements, and reports.
         #
         # Using this service:
-        # 1. Resellers or distributors can manage a customer entity.
-        # 2. Distributors can register an authorized reseller in their channel and then
-        #    enable delegated admin access for the reseller.
-        # 3. Resellers or distributors can manage entitlements for their customers.
+        # 1. Resellers and distributors can manage a customer entity.
+        # 2. Distributors can register an authorized reseller in their channel and
+        #    provide them with delegated admin access.
+        # 3. Resellers and distributors can manage customer entitlements.
         #
-        # The service primarily exposes the following resources:
-        # - {::Google::Cloud::Channel::V1::Customer Customer}s: A Customer represents an entity managed by a reseller or
-        # distributor. A customer typically represents an enterprise. In an n-tier
-        # resale channel hierarchy, customers are generally represented as leaf nodes.
-        # Customers primarily have an Entitlement sub-resource discussed below.
+        # CloudChannelService exposes the following resources:
+        # - {::Google::Cloud::Channel::V1::Customer Customer}s: An entity—usually an enterprise—managed by a reseller or
+        # distributor.
         #
-        # - {::Google::Cloud::Channel::V1::Entitlement Entitlement}s: An Entitlement represents an entity which provides a
-        # customer means to start using a service. Entitlements are created or updated
-        # as a result of a successful fulfillment.
+        # - {::Google::Cloud::Channel::V1::Entitlement Entitlement}s: An entity that provides a customer with the means to use
+        # a service. Entitlements are created or updated as a result of a successful
+        # fulfillment.
         #
-        # - {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink}s: A ChannelPartnerLink is an entity that identifies
-        # links between distributors and their indirect resellers in a channel.
+        # - {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink}s: An entity that identifies links between
+        # distributors and their indirect resellers in a channel.
         #
         # To load this service and instantiate a client:
         #

@@ -49,6 +49,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :string_value, :string, 2
         optional :double_value, :double, 3
         optional :proto_value, :message, 4, "google.protobuf.Any"
+        optional :bool_value, :bool, 5
       end
     end
     add_message "google.cloud.channel.v1.AdminUser" do

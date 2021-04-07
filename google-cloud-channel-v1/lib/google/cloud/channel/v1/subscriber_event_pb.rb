@@ -13,6 +13,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_enum "google.cloud.channel.v1.CustomerEvent.Type" do
       value :TYPE_UNSPECIFIED, 0
+      value :PRIMARY_DOMAIN_CHANGED, 1
+      value :PRIMARY_DOMAIN_VERIFIED, 2
     end
     add_message "google.cloud.channel.v1.EntitlementEvent" do
       optional :entitlement, :string, 1

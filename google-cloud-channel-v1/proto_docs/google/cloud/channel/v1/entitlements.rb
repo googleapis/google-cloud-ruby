@@ -209,6 +209,9 @@ module Google
         # @!attribute [rw] sku
         #   @return [::Google::Cloud::Channel::V1::Sku]
         #     The SKU pertaining to the provisioning resource as specified in the Offer.
+        # @!attribute [rw] legacy_sku
+        #   @return [::Google::Cloud::Channel::V1::Sku]
+        #     Optional. The customer to transfer has an entitlement with the populated legacy SKU.
         class TransferableSku
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

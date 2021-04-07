@@ -37,6 +37,12 @@ module Google
           module Type
             # Default value. This state doesn't show unless an error occurs.
             TYPE_UNSPECIFIED = 0
+
+            # Primary domain for customer was changed.
+            PRIMARY_DOMAIN_CHANGED = 1
+
+            # Primary domain of the customer has been verified.
+            PRIMARY_DOMAIN_VERIFIED = 2
           end
         end
 
