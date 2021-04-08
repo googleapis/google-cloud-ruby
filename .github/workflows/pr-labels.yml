@@ -26,6 +26,7 @@ jobs:
             owner: 'googleapis',
             repo: 'google-cloud-ruby',
             workflow_id: 'ci.yml',
+            ref: context.ref,
             inputs: {
               head: context.payload.pull_request.head.sha,
               base: context.payload.pull_request.base.sha
