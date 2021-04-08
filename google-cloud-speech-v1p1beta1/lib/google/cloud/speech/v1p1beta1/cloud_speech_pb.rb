@@ -11,6 +11,7 @@ require 'google/longrunning/operations_pb'
 require 'google/protobuf/any_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/protobuf/wrappers_pb'
 require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/speech/v1p1beta1/cloud_speech.proto", :syntax => :proto3) do
@@ -53,6 +54,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :enable_word_time_offsets, :bool, 8
       optional :enable_word_confidence, :bool, 15
       optional :enable_automatic_punctuation, :bool, 11
+      optional :enable_spoken_punctuation, :message, 22, "google.protobuf.BoolValue"
+      optional :enable_spoken_emojis, :message, 23, "google.protobuf.BoolValue"
       optional :enable_speaker_diarization, :bool, 16
       optional :diarization_speaker_count, :int32, 17
       optional :diarization_config, :message, 19, "google.cloud.speech.v1p1beta1.SpeakerDiarizationConfig"

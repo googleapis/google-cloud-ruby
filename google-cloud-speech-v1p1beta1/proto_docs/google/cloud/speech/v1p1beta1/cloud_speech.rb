@@ -203,7 +203,7 @@ module Google
         #     Speech adaptation configuration improves the accuracy of speech
         #     recognition. When speech adaptation is set it supersedes the
         #     `speech_contexts` field. For more information, see the [speech
-        #     adaptation](https://cloud.google.com/speech-to-text/docs/context-strength)
+        #     adaptation](https://cloud.google.com/speech-to-text/docs/adaptation)
         #     documentation.
         # @!attribute [rw] speech_contexts
         #   @return [::Array<::Google::Cloud::Speech::V1p1beta1::SpeechContext>]
@@ -211,7 +211,7 @@ module Google
         #     A means to provide context to assist the speech recognition. For more
         #     information, see
         #     [speech
-        #     adaptation](https://cloud.google.com/speech-to-text/docs/context-strength).
+        #     adaptation](https://cloud.google.com/speech-to-text/docs/adaptation).
         # @!attribute [rw] enable_word_time_offsets
         #   @return [::Boolean]
         #     If `true`, the top result includes a list of words and
@@ -229,6 +229,22 @@ module Google
         #     This feature is only available in select languages. Setting this for
         #     requests in other languages has no effect at all.
         #     The default 'false' value does not add punctuation to result hypotheses.
+        # @!attribute [rw] enable_spoken_punctuation
+        #   @return [::Google::Protobuf::BoolValue]
+        #     The spoken punctuation behavior for the call
+        #     If not set, uses default behavior based on model of choice
+        #     e.g. command_and_search will enable spoken punctuation by default
+        #     If 'true', replaces spoken punctuation with the corresponding symbols in
+        #     the request. For example, "how are you question mark" becomes "how are
+        #     you?". See https://cloud.google.com/speech-to-text/docs/spoken-punctuation
+        #     for support. If 'false', spoken punctuation is not replaced.
+        # @!attribute [rw] enable_spoken_emojis
+        #   @return [::Google::Protobuf::BoolValue]
+        #     The spoken emoji behavior for the call
+        #     If not set, uses default behavior based on model of choice
+        #     If 'true', adds spoken emoji formatting for the request. This will replace
+        #     spoken emojis with the corresponding Unicode symbols in the final
+        #     transcript. If 'false', spoken emojis are not replaced.
         # @!attribute [rw] enable_speaker_diarization
         #   @return [::Boolean]
         #     If 'true', enables speaker detection for each recognized word in
@@ -650,8 +666,8 @@ module Google
         # audio, and `single_utterance` is set to false, then no messages are streamed
         # back to the client.
         #
-        # Here's an example of a series of ten `StreamingRecognizeResponse`s that might
-        # be returned while processing audio:
+        # Here's an example of a series of `StreamingRecognizeResponse`s that might be
+        # returned while processing audio:
         #
         # 1. results { alternatives { transcript: "tube" } stability: 0.01 }
         #

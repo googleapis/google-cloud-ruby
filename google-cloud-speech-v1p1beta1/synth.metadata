@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "fb0d1b64e6a4e8708ddab0ec67e2f2f4333d0dc5"
+        "sha": "70112dbb57b7e311f867c5f7125be85a49bb998c"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "72326861be446be27d53af95c87e6e313367c371",
-        "internalRef": "362934100"
+        "sha": "93b078ae0decd51e618041bb337a8d592d0c998b",
+        "internalRef": "367239272"
       }
     }
   ],
@@ -70,6 +70,7 @@
     "proto_docs/google/protobuf/empty.rb",
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/protobuf/wrappers.rb",
     "proto_docs/google/rpc/status.rb",
     "test/google/cloud/speech/v1p1beta1/adaptation_paths_test.rb",
     "test/google/cloud/speech/v1p1beta1/adaptation_test.rb",
