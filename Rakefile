@@ -212,7 +212,7 @@ task :release, :tag do |t, args|
     config.key = api_token
   end if api_token
 
-  require_relative "rakelib/link_transformer.rb"
+  require_relative "rakelib/link_transformer"
   Dir.chdir package do
     Bundler.with_clean_env do
       sh "rm -rf pkg"
@@ -220,7 +220,7 @@ task :release, :tag do |t, args|
       # transform markdown links to yard links during build
       yard_link_transformer = LinkTransformer.new
       files = yard_link_transformer.find_markdown_files
-      yard_link_transformer.transform_links_in_files(files)
+      yard_link_transformer.transform_links_in_files files
       sh "bundle exec rake build"
     end
   end

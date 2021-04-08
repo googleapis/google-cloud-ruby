@@ -1,16 +1,14 @@
 require_relative "test_helper"
 
 describe LinkTransformer do 
-  let (:link_transformer) {LinkTransformer.new}
+  let(:link_transformer) { LinkTransformer.new }
   describe "transform_links_in_text" do 
-
     it "can handle empty text inputs" do
-      transformed_text = link_transformer.transform_links_in_text("")
+      transformed_text = link_transformer.transform_links_in_text ""
       expect(transformed_text).must_be_empty
     end
     
     it "keeps text the same if there's no matching markdown links" do
-  
       text = <<~TEXT
       The 3.0 release of the google-cloud-translate client is a significant upgrade
       based on a [next-gen code generator](https://github.com/googleapis/gapic-generator-ruby),
@@ -18,7 +16,7 @@ describe LinkTransformer do
       versions of this library will likely require updates to use this version.
       TEXT
 
-      transformed_text = link_transformer.transform_links_in_text(text)
+      transformed_text = link_transformer.transform_links_in_text text
 
       expect(transformed_text).must_equal text
     end
@@ -34,7 +32,7 @@ describe LinkTransformer do
       about the Ruby support schedule.
       TEXT
 
-      transformed_text = link_transformer.transform_links_in_text(text)
+      transformed_text = link_transformer.transform_links_in_text text
 
       expect(transformed_text).must_equal text
     end
@@ -47,7 +45,7 @@ describe LinkTransformer do
       [Set up authentication](AUTHENTICATION.md) [MIGRATION.md](MIGRATING.md)
       TEXT
 
-      transformed_text = link_transformer.transform_links_in_text(text)
+      transformed_text = link_transformer.transform_links_in_text text
 
       yard_text = <<~TEXT
       The 3.0 release of the google-cloud-translate client is a significant upgrade
@@ -77,11 +75,10 @@ describe LinkTransformer do
       See the [MIGRATION.md](MIGRATING.md) document for more information.
       TEXT
       
-      transformed_text = link_transformer.transform_links_in_text(text)
+      transformed_text = link_transformer.transform_links_in_text text
 
       expect(transformed_text).must_include "{file:AUTHENTICATION.md Set up authentication}"
       expect(transformed_text).must_include "{file:MIGRATING.md MIGRATION.md} "
     end
-
   end
 end
