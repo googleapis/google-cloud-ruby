@@ -93,6 +93,45 @@ describe Google::Cloud::PubSub, :pubsub do
       _(msgs.count).must_equal 3
       msgs.each { |msg| _(msg).must_be_kind_of Google::Cloud::PubSub::Message }
     end
+
+    it "should publish messages with ordering_key" do
+      topic = pubsub.create_topic "#{$topic_prefix}-omt2-#{SecureRandom.hex(2)}"
+
+      sub = topic.subscribe "#{$topic_prefix}-oms2-#{SecureRandom.hex(2)}", message_ordering: true
+      assert sub.message_ordering?
+
+      topic.publish "ordered message 0", ordering_key: "my_key"
+      topic.publish do |batch|
+        batch.publish "ordered message 1", ordering_key: "my_key"
+        batch.publish "ordered message 2", ordering_key: "my_key"
+        batch.publish "ordered message 3", ordering_key: "my_key"
+      end
+
+      received_messages = []
+      subscriber = sub.listen do |msg|
+        received_messages.push msg.data
+        # Acknowledge the message
+        msg.ack!
+      end
+      subscriber.on_error do |error|
+        fail error.inspect
+      end
+      subscriber.start
+
+      counter = 0
+      deadline = 300 # 5 min
+      while received_messages.count < 4 &&  counter < deadline
+        sleep 1
+        counter += 1
+      end
+
+      subscriber.stop
+      subscriber.wait!
+      # Remove the subscription
+      sub.delete
+
+      _(received_messages).must_equal ["ordered message 0", "ordered message 1", "ordered message 2", "ordered message 3"]
+    end
   end
 
   describe "Subscriptions on Project" do

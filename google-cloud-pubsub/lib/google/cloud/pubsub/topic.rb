@@ -588,6 +588,8 @@ module Google
         # @param [String, File] data The message payload. This will be converted
         #   to bytes encoded as ASCII-8BIT.
         # @param [Hash] attributes Optional attributes for the message.
+        # @param [String] ordering_key Identifies related messages for which
+        #   publish order should be respected.
         # @yield [batch] a block for publishing multiple messages in one
         #   request
         # @yieldparam [BatchPublisher] batch the topic batch publisher
@@ -636,10 +638,24 @@ module Google
         #     t.publish "task 3 completed", foo: :bif
         #   end
         #
-        def publish data = nil, attributes = {}
+        # @example Ordered messages are supported using ordering_key:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   topic = pubsub.topic "my-ordered-topic"
+        #
+        #   # Ensure that message ordering is enabled.
+        #   topic.enable_message_ordering!
+        #
+        #   # Publish an ordered message with an ordering key.
+        #   topic.publish "task completed",
+        #                 ordering_key: "task-key"
+        #
+        def publish data = nil, attributes = nil, ordering_key: nil, **extra_attrs, &block
           ensure_service!
-          batch = BatchPublisher.new data, attributes
-          yield batch if block_given?
+          batch = BatchPublisher.new data, attributes, ordering_key, extra_attrs
+          block&.call batch
           return nil if batch.messages.count.zero?
           publish_batch_messages batch
         end

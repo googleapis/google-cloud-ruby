@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "google/cloud/pubsub/convert"
+
 module Google
   module Cloud
     module PubSub
@@ -26,11 +28,12 @@ module Google
       #   pubsub = Google::Cloud::PubSub.new
       #
       #   topic = pubsub.topic "my-topic"
-      #   msgs = topic.publish do |t|
-      #     t.publish "task 1 completed", foo: :bar
-      #     t.publish "task 2 completed", foo: :baz
-      #     t.publish "task 3 completed", foo: :bif
+      #   msgs = topic.publish do |batch_publisher|
+      #     batch_publisher.publish "task 1 completed", foo: :bar
+      #     batch_publisher.publish "task 2 completed", foo: :baz
+      #     batch_publisher.publish "task 3 completed", foo: :bif
       #   end
+      #
       class BatchPublisher
         ##
         # @private The messages to publish
@@ -38,20 +41,40 @@ module Google
 
         ##
         # @private Create a new instance of the object.
-        def initialize data = nil, attributes = {}
+        def initialize data, attributes, ordering_key, extra_attrs
           @messages = []
           @mode = :batch
           return if data.nil?
           @mode = :single
-          publish data, attributes
+          publish data, attributes, ordering_key: ordering_key, **extra_attrs
         end
 
         ##
         # Add a message to the batch to be published to the topic.
         # All messages added to the batch will be published at once.
         # See {Google::Cloud::PubSub::Topic#publish}
-        def publish data, attributes = {}
-          @messages << create_pubsub_message(data, attributes)
+        #
+        # @param [String, File] data The message payload. This will be converted
+        #   to bytes encoded as ASCII-8BIT.
+        # @param [Hash] attributes Optional attributes for the message.
+        # @param [String] ordering_key Identifies related messages for which
+        #   publish order should be respected.
+        #
+        # @example Multiple messages can be sent at the same time using a block:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #   msgs = topic.publish do |batch_publisher|
+        #     batch_publisher.publish "task 1 completed", foo: :bar
+        #     batch_publisher.publish "task 2 completed", foo: :baz
+        #     batch_publisher.publish "task 3 completed", foo: :bif
+        #   end
+        #
+        def publish data, attributes = nil, ordering_key: nil, **extra_attrs
+          msg = Convert.pubsub_message data, attributes, ordering_key, extra_attrs
+          @messages << msg
         end
 
         ##
@@ -68,28 +91,6 @@ module Google
           else
             msgs
           end
-        end
-
-        protected
-
-        def create_pubsub_message data, attributes
-          attributes ||= {}
-          if data.is_a?(::Hash) && attributes.empty?
-            attributes = data
-            data = nil
-          end
-          # Convert IO-ish objects to strings
-          if data.respond_to?(:read) && data.respond_to?(:rewind)
-            data.rewind
-            data = data.read
-          end
-          # Convert data to encoded byte array to match the protobuf defn
-          data_bytes = String(data).dup.force_encoding(Encoding::ASCII_8BIT).freeze
-
-          # Convert attributes to strings to match the protobuf definition
-          attributes = Hash[attributes.map { |k, v| [String(k), String(v)] }]
-
-          Google::Cloud::PubSub::V1::PubsubMessage.new data: data_bytes, attributes: attributes
         end
       end
     end
