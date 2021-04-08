@@ -211,7 +211,7 @@ def pull_messages subscription_id:
   pubsub = Google::Cloud::Pubsub.new
 
   subscription = pubsub.subscription subscription_id
-  subscription.pull.each do |message|
+  subscription.pull(immediate: false).each do |message|
     puts "Message pulled: #{message.data}"
     message.acknowledge!
   end
@@ -303,7 +303,7 @@ def dead_letter_delivery_attempt subscription_id:
   pubsub = Google::Cloud::Pubsub.new
 
   subscription = pubsub.subscription subscription_id
-  subscription.pull.each do |message|
+  subscription.pull(immediate: false).each do |message|
     puts "Received message: #{message.data}"
     puts "Delivery Attempt: #{message.delivery_attempt}"
     message.acknowledge!
@@ -323,7 +323,7 @@ def subscriber_sync_pull_with_lease subscription_id:
   processed = false
 
   # The subscriber pulls a specified number of messages.
-  received_messages = subscription.pull max: 1
+  received_messages = subscription.pull immediate: false, max: 1
 
   # Obtain the first message.
   message = received_messages.first
