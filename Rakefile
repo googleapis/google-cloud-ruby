@@ -1,6 +1,6 @@
 require "bundler/setup"
 require "fileutils"
-require 'rake/testtask'
+require "rake/testtask"
 
 task :bundleupdate do
   each_valid_gem bundleupdate: true, name: "BUNDLE UPDATE"
@@ -20,9 +20,9 @@ end
 
 # rake task for link_transformer_test
 desc "Runs tests for link_transformer class methods"
-Rake::TestTask.new do |t|  
+Rake::TestTask.new do |t|
   t.warning = true
-  t.test_files = FileList['test/*_test.rb']
+  t.test_files = FileList["test/*_test.rb"]
 end
 
 namespace :test do

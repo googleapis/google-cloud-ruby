@@ -21,8 +21,8 @@ describe LinkTransformer do
       expect(transformed_text).must_equal text
     end
 
-    it "keeps text the same if there's no links " do 
-      text = <<~TEXT 
+    it "keeps text the same if there's no links " do
+      text = <<~TEXT
       This library is supported on Ruby 2.5+.
       Google provides official support for Ruby versions that are actively supported
       by Ruby Core—that is, Ruby versions that are either in normal maintenance or
@@ -37,7 +37,7 @@ describe LinkTransformer do
       expect(transformed_text).must_equal text
     end
 
-    it "transform multiple md links on same line" do 
+    it "transform multiple md links on same line" do
       text = <<~TEXT
       The 3.0 release of the google-cloud-translate client is a significant upgrade
       based on a [next-gen code generator](https://github.com/googleapis/gapic-generator-ruby),
