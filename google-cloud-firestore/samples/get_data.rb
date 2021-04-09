@@ -19,6 +19,7 @@ def retrieve_create_examples project_id:, collection_path: "cities"
   # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
+  # [START firestore_data_get_dataset]
   # [START fs_retrieve_create_examples]
   cities_ref = firestore.col collection_path
   cities_ref.doc("SF").set(
@@ -67,6 +68,7 @@ def retrieve_create_examples project_id:, collection_path: "cities"
     }
   )
   # [END fs_retrieve_create_examples]
+  # [END firestore_data_get_dataset]
   puts "Added example cities data to the cities collection."
 end
 
@@ -76,6 +78,7 @@ def get_document project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
+  # [START firestore_data_get_as_map]
   # [START fs_get_document]
   doc_ref  = firestore.doc "#{collection_path}/SF"
   snapshot = doc_ref.get
@@ -85,6 +88,7 @@ def get_document project_id:, collection_path: "cities"
     puts "Document #{snapshot.document_id} does not exist!"
   end
   # [END fs_get_document]
+  # [END firestore_data_get_as_map]
 end
 
 def get_multiple_docs project_id:, collection_path: "cities"
@@ -92,6 +96,7 @@ def get_multiple_docs project_id:, collection_path: "cities"
   # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
+  # [START firestore_data_query]
   # [START fs_get_multiple_docs]
   cities_ref = firestore.col collection_path
 
@@ -101,6 +106,7 @@ def get_multiple_docs project_id:, collection_path: "cities"
     puts "#{city.document_id} data: #{city.data}."
   end
   # [END fs_get_multiple_docs]
+  # [END firestore_data_query]
 end
 
 def get_all_docs project_id:, collection_path: "cities"
@@ -108,12 +114,14 @@ def get_all_docs project_id:, collection_path: "cities"
   # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
+  # [START firestore_data_get_all_documents]
   # [START fs_get_all_docs]
   cities_ref = firestore.col collection_path
   cities_ref.get do |city|
     puts "#{city.document_id} data: #{city.data}."
   end
   # [END fs_get_all_docs]
+  # [END firestore_data_get_all_documents]
 end
 
 def add_subcollection project_id:, collection_path: "cities"
@@ -136,12 +144,14 @@ def list_subcollections project_id:, collection_path: "cities"
   # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
+  # [START firestore_data_get_sub_collections]
   # [START fs_list_subcollections]
   city_ref = firestore.doc "#{collection_path}/SF"
   city_ref.cols do |col|
     puts col.collection_id
   end
   # [END fs_list_subcollections]
+  # [END firestore_data_get_sub_collections]
 end
 
 if $PROGRAM_NAME == __FILE__

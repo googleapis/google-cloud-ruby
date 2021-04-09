@@ -21,9 +21,11 @@ def start_at_field_query_cursor project_id:, collection_path: "cities"
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
   cities_ref = firestore.col collection_path
+  # [START firestore_query_cursor_start_at_field_value_single]
   # [START fs_start_at_field_query_cursor]
   query = cities_ref.order("population").start_at(1_000_000)
   # [END fs_start_at_field_query_cursor]
+  # [END firestore_query_cursor_start_at_field_value_single]
   query.get do |city|
     puts "Document #{city.document_id} returned by start at population 1000000 field query cursor."
   end
@@ -36,9 +38,11 @@ def end_at_field_query_cursor project_id:, collection_path: "cities"
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
   cities_ref = firestore.col collection_path
+  # [START firestore_query_cursor_end_at_field_value_single]
   # [START fs_end_at_field_query_cursor]
   query = cities_ref.order("population").end_at(1_000_000)
   # [END fs_end_at_field_query_cursor]
+  # [END firestore_query_cursor_end_at_field_value_single]
   query.get do |city|
     puts "Document #{city.document_id} returned by end at population 1000000 field query cursor."
   end
@@ -50,6 +54,7 @@ def paginated_query_cursor project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
+  # [START firestore_query_cursor_pagination]
   # [START fs_paginated_query_cursor]
   cities_ref  = firestore.col collection_path
   first_query = cities_ref.order("population").limit(3)
@@ -67,6 +72,7 @@ def paginated_query_cursor project_id:, collection_path: "cities"
     puts "Document #{city.document_id} returned by paginated query cursor."
   end
   # [END fs_paginated_query_cursor]
+  # [END firestore_query_cursor_pagination]
 end
 
 def multiple_cursor_conditions project_id:, collection_path: "cities"
@@ -76,6 +82,7 @@ def multiple_cursor_conditions project_id:, collection_path: "cities"
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
   cities_ref = firestore.col collection_path
+  # [START firestore_query_cursor_start_at_field_value_multi]
   # [START fs_multiple_cursor_conditions]
   # Will return all Springfields
   query1 = firestore.col(collection_path).order("name").order("state").start_at("Springfield")
@@ -83,6 +90,7 @@ def multiple_cursor_conditions project_id:, collection_path: "cities"
   # Will return "Springfield, Missouri" and "Springfield, Wisconsin"
   query2 = firestore.col(collection_path).order("name").order("state").start_at(["Springfield", "Missouri"])
   # [END fs_multiple_cursor_conditions]
+  # [END firestore_query_cursor_start_at_field_value_multi]
   query1.get do |city|
     puts "Document #{city.document_id} returned by start at Springfield query."
   end
@@ -98,11 +106,13 @@ def start_at_snapshot_query_cursor project_id:, collection_path: "cities"
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
   cities_ref = firestore.col collection_path
+  # [START firestore_query_cursor_start_at_document]
   # [START fs_start_at_snapshot_query_cursor]
   doc_ref = firestore.doc "#{collection_path}/SF"
   snapshot = doc_ref.get
   query = cities_ref.order("population").start_at(snapshot)
   # [END fs_start_at_snapshot_query_cursor]
+  # [END firestore_query_cursor_start_at_document]
   query.get do |city|
     puts "Document #{city.document_id} returned by start at document snapshot query cursor."
   end

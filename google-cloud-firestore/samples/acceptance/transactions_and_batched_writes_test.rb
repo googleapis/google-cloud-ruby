@@ -21,7 +21,9 @@ describe "Google Cloud Firestore API samples - Transactions and Batched Writes" 
     @firestore_project = ENV["FIRESTORE_PROJECT"]
     @collection_path = random_name "cities"
     # setup for each test
-    query_create_examples project_id: @firestore_project, collection_path: @collection_path
+    capture_io do
+      query_create_examples project_id: @firestore_project, collection_path: @collection_path
+    end
   end
 
   after do # teardown after each test
