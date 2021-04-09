@@ -446,7 +446,7 @@ module Google
             #     underscores (_), and hyphens (-). The maximum length is 40 characters.
             #   @param parameters [::Hash{::String => ::String}]
             #     Optional. Map from parameter names to values that should be used for those
-            #     parameters. Values may not exceed 100 characters.
+            #     parameters. Values may not exceed 1000 characters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -498,7 +498,8 @@ module Google
             # Instantiates a template and begins execution.
             #
             # This method is equivalent to executing the sequence
-            # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#create_workflow_template CreateWorkflowTemplate}, {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#instantiate_workflow_template InstantiateWorkflowTemplate},
+            # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#create_workflow_template CreateWorkflowTemplate},
+            # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#instantiate_workflow_template InstantiateWorkflowTemplate},
             # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#delete_workflow_template DeleteWorkflowTemplate}.
             #
             # The returned Operation can be used to track execution of

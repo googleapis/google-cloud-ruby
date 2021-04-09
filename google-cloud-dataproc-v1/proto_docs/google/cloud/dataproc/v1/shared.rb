@@ -22,12 +22,29 @@ module Google
     module Dataproc
       module V1
         # Cluster components that can be activated.
+        # Next ID: 16.
         module Component
           # Unspecified component. Specifying this will cause Cluster creation to fail.
           COMPONENT_UNSPECIFIED = 0
 
-          # The Anaconda python distribution.
+          # The Anaconda python distribution. The Anaconda component is not supported
+          # in the Dataproc
+          # <a
+          # href="/dataproc/docs/concepts/versioning/dataproc-release-2.0">2.0
+          # image</a>. The 2.0 image is pre-installed with Miniconda.
           ANACONDA = 5
+
+          # Docker
+          DOCKER = 13
+
+          # The Druid query engine. (alpha)
+          DRUID = 9
+
+          # Flink
+          FLINK = 14
+
+          # HBase. (beta)
+          HBASE = 11
 
           # The Hive Web HCatalog (the REST service for accessing HCatalog).
           HIVE_WEBHCAT = 3
@@ -37,6 +54,12 @@ module Google
 
           # The Presto query engine.
           PRESTO = 6
+
+          # The Ranger service.
+          RANGER = 12
+
+          # The Solr service.
+          SOLR = 10
 
           # The Zeppelin notebook.
           ZEPPELIN = 4
