@@ -67,9 +67,9 @@ def determine_dirs
   end
 
   puts "Evaluating changes.", :bold
-  base_sha, head_sha = interpret_github_event
-  ensure_head head_sha unless head_sha.nil?
-  files = find_changed_files base_sha
+  base_ref, head_ref = interpret_github_event
+  ensure_checkout head_ref unless head_ref.nil?
+  files = find_changed_files base_ref
   if files.empty?
     puts "No files changed.", :bold
   else
@@ -113,7 +113,7 @@ end
 
 def interpret_github_event
   payload = JSON.load File.read github_event_payload unless github_event_payload.empty?
-  base_sha, head_sha =
+  base_ref, head_ref =
     case github_event_name
     when "pull_request"
       puts "Getting commits from pull_request event"
@@ -127,40 +127,42 @@ def interpret_github_event
     else
       [base_commit, head_commit]
     end
-  base_sha = nil if base_sha&.empty?
-  head_sha = nil if head_sha&.empty?
-  [base_sha, head_sha]
+  base_ref = nil if base_ref&.empty?
+  head_ref = nil if head_ref&.empty?
+  [base_ref, head_ref]
 end
 
-def ensure_head head_sha
+def ensure_checkout head_ref
+  puts "Checking for head ref: #{ref}"
+  head_sha = ensure_fetched head_ref
   current_sha = capture(["git", "rev-parse", "HEAD"], e: true).strip
   if head_sha == current_sha
     puts "Already at head SHA: #{head_sha}"
   else
     puts "Checking out head SHA: #{head_sha}"
-    head_sha = ensure_sha head_sha
     exec(["git", "checkout", head_sha], e: true)
   end
 end
 
-def find_changed_files base_sha
-  if base_sha.nil?
-    puts "No base SHA. Using local diff."
+def find_changed_files base_ref
+  if base_ref.nil?
+    puts "No base ref. Using local diff."
     capture(["git", "status", "--porcelain"]).split("\n").map { |line| line.split.last }
   else
-    puts "Checking out base SHA: #{base_sha}"
-    base_sha = ensure_sha base_sha
+    puts "Diffing from base ref: #{base_ref}"
+    base_sha = ensure_fetched base_ref
     capture(["git", "diff", "--name-only", base_sha], e: true).split("\n").map(&:strip)
   end
 end
 
-def ensure_sha sha
-  result = exec(["git", "show", "--no-patch", "--format=%H", sha], out: :capture, err: :capture)
-  if result.error?
-    exec(["git", "fetch", "--depth=1", "origin", sha], e: true)
-    capture(["git", "show", "--no-patch", "--format=%H", sha], e: true).strip
-  else
+def ensure_fetched ref
+  result = exec(["git", "show", "--no-patch", "--format=%H", ref], out: :capture, err: :capture)
+  if result.success?
     result.captured_out.strip
+  else
+    puts "Fetching ref: #{ref}"
+    exec(["git", "fetch", "--depth=1", "origin", "#{ref}:refs/ci/head"], e: true)
+    capture(["git", "show", "--no-patch", "--format=%H", "refs/ci/head"], e: true).strip
   end
 end
 
