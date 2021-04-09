@@ -22,16 +22,19 @@ jobs:
             name: 'ci: run'
           });
           core.info('Removed "ci: run" label.');
+          let prNum = context.payload.pull_request.number;
+          let headRef = 'refs/pull/' + prNum + '/merge';
+          let baseRef = context.payload.pull_request.base.sha;
+          core.info('HEAD: ' + headRef);
+          core.info('BASE: ' + baseRef);
           await github.actions.createWorkflowDispatch({
             owner: 'googleapis',
             repo: 'google-cloud-ruby',
             workflow_id: 'ci.yml',
             ref: context.ref,
             inputs: {
-              head: context.payload.pull_request.head.sha,
-              base: context.payload.pull_request.base.sha
+              head: headRef,
+              base: baseRef
             }
           });
-          core.info('Triggered CI job for PR ' + context.payload.pull_request.number);
-          core.info('HEAD: ' + context.payload.pull_request.head.sha);
-          core.info('BASE: ' + context.payload.pull_request.base.sha);
+          core.info('Triggered CI job for PR ' + prNum);
