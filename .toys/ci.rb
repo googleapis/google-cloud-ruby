@@ -133,7 +133,7 @@ def interpret_github_event
 end
 
 def ensure_checkout head_ref
-  puts "Checking for head ref: #{ref}"
+  puts "Checking for head ref: #{head_ref}"
   head_sha = ensure_fetched head_ref
   current_sha = capture(["git", "rev-parse", "HEAD"], e: true).strip
   if head_sha == current_sha
