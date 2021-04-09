@@ -161,8 +161,8 @@ def ensure_fetched ref
     result.captured_out.strip
   else
     puts "Fetching ref: #{ref}"
-    exec(["git", "fetch", "--depth=1", "origin", "#{ref}:refs/ci/head"], e: true)
-    capture(["git", "show", "--no-patch", "--format=%H", "refs/ci/head"], e: true).strip
+    exec(["git", "fetch", "--depth=1", "origin", "#{ref}:#{ref}"], e: true)
+    capture(["git", "show", "--no-patch", "--format=%H", ref], e: true).strip
   end
 end
 
