@@ -16,7 +16,7 @@ Platform (GCP), including Google Compute Engine (GCE), Google Kubernetes Engine
 (GKE), Google App Engine (GAE), Google Cloud Functions (GCF) and Cloud Run. In
 other environments you can configure authentication easily, either directly in
 your code or via environment variables. Read more about the options for
-connecting in the {file:AUTHENTICATION.md Authentication Guide}.
+connecting in the [Authentication Guide](AUTHENTICATION.md).
 
 ## Creating instances and clusters
 
@@ -396,5 +396,5 @@ instance.delete
 ## Additional information
 
 Google Bigtable can be configured to use an emulator or to enable gRPC's
-logging. To learn more, see the {file:EMULATOR.md Emulator guide} and
-{file:LOGGING.md Logging guide}.
+logging. To learn more, see the [Emulator guide}](EMULATOR.md) and
+[Logging guide](file:LOGGING.md).

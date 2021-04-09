@@ -157,5 +157,4 @@ trace_client.patch_traces trace
 ## Additional information
 
 Stackdriver Trace can be configured to be used in Rack applications or to use
-gRPC's logging. To learn more, see the {file:INSTRUMENTATION.md Instrumentation
-Guide} and {file:LOGGING.md Logging guide}.
+gRPC's logging. To learn more, see the [Instrumentation Guide](INSTRUMENTATION.md) and [Logging guide](file:LOGGING.md).

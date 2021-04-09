@@ -16,7 +16,7 @@ Firestore service, or if you are running on Google Cloud Platform (GCP),
 including Google Compute Engine (GCE), Google Kubernetes Engine (GKE), Google
 App Engine (GAE), Google Cloud Functions (GCF) and Cloud Run this configuration
 is taken care of for you. You can read more about the options for connecting in
-the {file:AUTHENTICATION.md Authentication Guide}.
+the [Authentication Guide](AUTHENTICATION.md).
 
 ## Adding data
 
@@ -490,4 +490,4 @@ the entire collection or sub-collection.
 ## Additional information
 
 Google Firestore can be configured to use gRPC's logging. To learn more, see the
-{file:LOGGING.md Logging guide}.
+[Logging guide](file:LOGGING.md).

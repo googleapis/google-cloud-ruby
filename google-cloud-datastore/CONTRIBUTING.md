@@ -53,7 +53,7 @@ there is a small amount of setup:
 In order to run code interactively, you can automatically load
 google-cloud-datastore and its dependencies in IRB. This requires that your
 developer environment has already been configured by following the steps
-described in the {file:AUTHENTICATION.md Authentication Guide}. An IRB console
+described in the [Authentication Guide](AUTHENTICATION.md). An IRB console
 can be created with:
 
 ```sh
@@ -119,7 +119,7 @@ If you alter an example's title, you may encounter breaking tests.
 ### Datastore Acceptance Tests
 
 The Datastore acceptance tests interact with the live service API. Follow the
-instructions in the {file:AUTHENTICATION.md Authentication guide} for enabling
+instructions in the [Authentication Guide](AUTHENTICATION.md) for enabling
 the Datastore API. Occasionally, some API features may not yet be generally
 available, making it difficult for some contributors to successfully run the
 entire acceptance test suite. However, please ensure that you do successfully
@@ -206,4 +206,4 @@ $ bundle exec rake rubocop
 
 Please note that this project is released with a Contributor Code of Conduct. By
 participating in this project you agree to abide by its terms. See
-{file:CODE_OF_CONDUCT.md Code of Conduct} for more information.
+[Code of Conduct](CODE_OF_CONDUCT.md) for more information.

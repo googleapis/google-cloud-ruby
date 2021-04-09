@@ -13,7 +13,7 @@ Platform (GCP), including Google Compute Engine (GCE), Google Kubernetes Engine
 (GKE), Google App Engine (GAE), Google Cloud Functions (GCF) and Cloud Run. In
 other environments you can configure authentication easily, either directly in
 your code or via environment variables. Read more about the options for
-connecting in the {file:AUTHENTICATION.md Authentication Guide}.
+connecting in the [Authentication Guide](AUTHENTICATION.md).
 
 ## How to report errors
 
@@ -40,9 +40,8 @@ rescue => exception
 end
 ```
 
-See the {file:INSTRUMENTATION.md Instrumentation Guide} for more examples.
+See the [Instrumentation Guide](INSTRUMENTATION.md) for more examples.
 
 ## Additional information
 
-Stackdriver Error Reporting can be configured to use gRPC's logging. To learn more, see the
-{file:LOGGING.md Logging guide}.
+Stackdriver Error Reporting can be configured to use gRPC's logging. To learn more, see the[Logging guide](file:LOGGING.md).
