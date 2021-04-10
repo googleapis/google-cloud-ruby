@@ -570,4 +570,4 @@ for a list of error conditions.
 ## Additional information
 
 Google Cloud Storage can be configured to use logging. To learn more, see the
-[Logging guide](file:LOGGING.md).
+[Logging guide](LOGGING.md).

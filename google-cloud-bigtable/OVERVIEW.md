@@ -397,4 +397,4 @@ instance.delete
 
 Google Bigtable can be configured to use an emulator or to enable gRPC's
 logging. To learn more, see the [Emulator guide}](EMULATOR.md) and
-[Logging guide](file:LOGGING.md).
+[Logging guide](LOGGING.md).

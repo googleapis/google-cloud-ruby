@@ -317,4 +317,4 @@ logging = Google::Cloud::Logging.new timeout: 120
 ## Additional information
 
 Stackdriver Logging can be configured to be used in Rack applications or to use
-gRPC's logging. To learn more, see the [Instrumentation Guide](INSTRUMENTATION.md) and [Logging guide](file:LOGGING.md).
+gRPC's logging. To learn more, see the [Instrumentation Guide](INSTRUMENTATION.md) and [Logging guide](LOGGING.md).

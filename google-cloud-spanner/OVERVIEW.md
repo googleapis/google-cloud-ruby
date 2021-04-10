@@ -321,4 +321,4 @@ instance.delete
 ## Additional information
 
 Cloud Spanner can be configured to use gRPC's logging. To learn more, see the
-[Logging guide](file:LOGGING.md).
+[Logging guide](LOGGING.md).

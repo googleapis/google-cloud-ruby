@@ -491,4 +491,4 @@ datastore = Google::Cloud::Datastore.new timeout: 120
 
 Google Cloud Datastore can be configured to use an emulator or to enable gRPC's
 logging. To learn more, see the [Emulator guide}](EMULATOR.md) and
-[Logging guide](file:LOGGING.md).
+[Logging guide](LOGGING.md).

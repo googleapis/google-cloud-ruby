@@ -263,4 +263,4 @@ response = debugger_client.list_debuggees(
 ## Additional information
 
 Stackdriver Debugger can be configured to use gRPC's logging. To learn more, see
-the [Logging guide](file:LOGGING.md).
+the [Logging guide](LOGGING.md).

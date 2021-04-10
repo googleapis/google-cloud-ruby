@@ -250,4 +250,4 @@ dns = Google::Cloud::Dns.new retries: 10, timeout: 120
 
 ## Additional information
 
-Google Cloud DNS can be configured to use logging. To learn more, see the [Logging guide](file:LOGGING.md).
+Google Cloud DNS can be configured to use logging. To learn more, see the [Logging guide](LOGGING.md).

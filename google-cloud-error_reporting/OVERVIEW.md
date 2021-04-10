@@ -44,4 +44,4 @@ See the [Instrumentation Guide](INSTRUMENTATION.md) for more examples.
 
 ## Additional information
 
-Stackdriver Error Reporting can be configured to use gRPC's logging. To learn more, see the[Logging guide](file:LOGGING.md).
+Stackdriver Error Reporting can be configured to use gRPC's logging. To learn more, see the[Logging guide](LOGGING.md).

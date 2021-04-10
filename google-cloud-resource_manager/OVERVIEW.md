@@ -185,4 +185,4 @@ Policies](https://cloud.google.com/iam/docs/managing-policies).
 ## Additional information
 
 Resource Manager can be configured to use logging. To learn more, see the
-[Logging guide](file:LOGGING.md).
+[Logging guide](LOGGING.md).
