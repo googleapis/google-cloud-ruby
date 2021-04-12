@@ -175,4 +175,4 @@ Developers service account.
 ## Troubleshooting
 
 If you're having trouble authenticating you can ask for help by following the
-{file:TROUBLESHOOTING.md Troubleshooting Guide}.
+[Troubleshooting Guide](TROUBLESHOOTING.md).

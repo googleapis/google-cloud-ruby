@@ -13,7 +13,7 @@ Platform (GCP), including Google Compute Engine (GCE), Google Kubernetes Engine
 (GKE), Google App Engine (GAE), Google Cloud Functions (GCF) and Cloud Run. In
 other environments you can configure authentication easily, either directly in
 your code or via environment variables. Read more about the options for
-connecting in the {file:AUTHENTICATION.md Authentication Guide}.
+connecting in the [Authentication Guide](AUTHENTICATION.md).
 
 ## Creating Zones
 
@@ -250,5 +250,4 @@ dns = Google::Cloud::Dns.new retries: 10, timeout: 120
 
 ## Additional information
 
-Google Cloud DNS can be configured to use logging. To learn more, see the
-{file:LOGGING.md Logging guide}.
+Google Cloud DNS can be configured to use logging. To learn more, see the [Logging guide](LOGGING.md).
