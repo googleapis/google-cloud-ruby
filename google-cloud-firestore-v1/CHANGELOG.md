@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.1 / 2021-04-12
+
+#### Bug Fixes
+
+* Retry on RESOURCE_EXHAUSTED errors
+
 ### 0.4.0 / 2021-03-08
 
 #### Features
