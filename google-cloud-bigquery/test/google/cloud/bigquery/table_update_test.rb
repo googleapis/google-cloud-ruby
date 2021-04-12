@@ -202,6 +202,26 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     mock.verify
   end
 
+  it "updates time partitioning expiration to nil" do
+    mock = Minitest::Mock.new
+    table_hash = random_table_hash dataset_id, table_id, table_name, description
+    table_hash["timePartitioning"] = {
+        "expirationMs" => nil,
+    }
+    partitioning = Google::Apis::BigqueryV2::TimePartitioning.new expiration_ms: nil
+    request_table_gapi = Google::Apis::BigqueryV2::Table.new time_partitioning: partitioning, etag: etag
+    mock.expect :patch_table, return_table(table_hash),
+      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+    mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
+    table.service.mocked_service = mock
+
+    table.time_partitioning_expiration = nil
+
+    _(table.time_partitioning_expiration).must_be_nil
+
+    mock.verify
+  end
+
   it "updates require_partition_filter" do
     mock = Minitest::Mock.new
     table_hash = random_table_hash dataset_id, table_id, table_name, description

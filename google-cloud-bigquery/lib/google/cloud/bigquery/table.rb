@@ -395,8 +395,8 @@ module Google
         # {#resource_full?}), the full representation will be retrieved before
         # the update to comply with ETag-based optimistic concurrency control.
         #
-        # @param [Integer] expiration An expiration time, in seconds,
-        #   for data in time partitions.
+        # @param [Integer, nil] expiration An expiration time, in seconds,
+        #   for data in time partitions, or `nil`.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -416,8 +416,9 @@ module Google
         #
         def time_partitioning_expiration= expiration
           reload! unless resource_full?
+          expiration_ms = expiration * 1000 if expiration
           @gapi.time_partitioning ||= Google::Apis::BigqueryV2::TimePartitioning.new
-          @gapi.time_partitioning.expiration_ms = expiration * 1000
+          @gapi.time_partitioning.expiration_ms = expiration_ms
           patch_gapi! :time_partitioning
         end
 
