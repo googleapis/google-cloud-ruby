@@ -59,6 +59,7 @@ def listen_changes project_id:, collection_path: "cities"
   # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
+  # [START firestore_listen_query_changes]
   # [START fs_listen_changes]
   query = firestore.col(collection_path).where :state, :==, "CA"
   added = []
@@ -83,6 +84,7 @@ def listen_changes project_id:, collection_path: "cities"
     end
   end
   # [END fs_listen_changes]
+  # [END firestore_listen_query_changes]
 
   mtv_doc = firestore.col(collection_path).doc("MTV")
 
