@@ -14,6 +14,7 @@
 
 require "google/cloud/firestore"
 
+# [START firestore_transaction_document_update]
 # [START fs_run_simple_transaction]
 def run_simple_transaction project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
@@ -31,7 +32,9 @@ def run_simple_transaction project_id:, collection_path: "cities"
   puts "Ran a simple transaction to update the population field in the SF document in the cities collection."
 end
 # [END fs_run_simple_transaction]
+# [END firestore_transaction_document_update]
 
+# [START firestore_transaction_document_update_conditional]
 # [START fs_return_info_transaction]
 def return_info_transaction project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
@@ -58,12 +61,14 @@ def return_info_transaction project_id:, collection_path: "cities"
   end
 end
 # [END fs_return_info_transaction]
+# [END firestore_transaction_document_update_conditional]
 
 def batch_write project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
   # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
+  # [START firestore_data_batch_writes]
   # [START fs_batch_write]
   firestore.batch do |b|
     # Set the data for NYC
@@ -76,6 +81,7 @@ def batch_write project_id:, collection_path: "cities"
     b.delete "#{collection_path}/LA"
   end
   # [END fs_batch_write]
+  # [END firestore_data_batch_writes]
   puts "Batch write successfully completed."
 end
 
