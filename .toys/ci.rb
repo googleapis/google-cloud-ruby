@@ -161,8 +161,8 @@ def ensure_fetched ref
     result.captured_out.strip
   else
     puts "Fetching ref: #{ref}"
-    exec(["git", "fetch", "--depth=1", "origin", "#{ref}:#{ref}"], e: true)
-    capture(["git", "show", "--no-patch", "--format=%H", ref], e: true).strip
+    exec(["git", "fetch", "--depth=1", "origin", "#{ref}:refs/temp/#{ref}"], e: true)
+    capture(["git", "show", "--no-patch", "--format=%H", "refs/temp/#{ref}"], e: true).strip
   end
 end
 
@@ -174,9 +174,21 @@ def find_changed_directories files
     end
   end
   dirs.to_a.find_all do |dir|
-    File.file?(File.join(dir, "Rakefile")) &&
-      File.file?(File.join(dir, "Gemfile")) &&
-      File.file?(File.join(dir, "#{dir}.gemspec"))
+    if ["Rakefile", "Gemfile", "#{dir}.gemspec"].all? { |file| File.file?(File.join(dir, file)) }
+      if ::Toys::Compat.allow_fork?
+        func = proc do
+          Dir.chdir dir do
+            spec = Gem::Specification.load "#{dir}.gemspec"
+            puts spec.required_ruby_version.satisfied_by?(Gem::Version.new(RUBY_VERSION)).to_s
+          end
+        end
+        capture_proc(func).strip == "true"
+      else
+        true
+      end
+    else
+      false
+    end
   end.sort
 end
 
