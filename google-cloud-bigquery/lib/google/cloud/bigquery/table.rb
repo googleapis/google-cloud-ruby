@@ -396,7 +396,7 @@ module Google
         # the update to comply with ETag-based optimistic concurrency control.
         #
         # @param [Integer, nil] expiration An expiration time, in seconds,
-        #   for data in time partitions, or `nil`.
+        #   for data in time partitions, , or `nil` to indicate no expiration time.
         #
         # @example
         #   require "google/cloud/bigquery"
