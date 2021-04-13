@@ -157,7 +157,7 @@ describe "subscriptions" do
     expect_with_retry "pubsub_subscriber_sync_pull_with_lease" do
       out, _err = capture_io do
         subscriber_sync_pull_with_lease subscription_id: @subscription.name
-        sleep 10 # Allow enough time for output from non-blocking worker to be captured.
+        sleep 20 # Allow enough time for output from non-blocking worker to be captured.
       end
       assert_includes out, "Reset ack deadline for \"This is a test message.\" for 30 seconds."
       assert_includes out, "Finished processing \"This is a test message.\"."
