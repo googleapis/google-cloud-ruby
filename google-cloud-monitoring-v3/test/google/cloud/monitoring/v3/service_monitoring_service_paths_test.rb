@@ -47,18 +47,6 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientPathsTest
     end
   end
 
-  def test_project_path
-    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      path = client.project_path project: "value0"
-      assert_equal "projects/value0", path
-    end
-  end
-
   def test_service_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -92,6 +80,21 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientPathsTest
 
       path = client.service_level_objective_path folder: "value0", service: "value1", service_level_objective: "value2"
       assert_equal "folders/value0/services/value1/serviceLevelObjectives/value2", path
+    end
+  end
+
+  def test_workspace_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.workspace_path project: "value0"
+      assert_equal "projects/value0", path
+
+      path = client.workspace_path workspace: "value0"
+      assert_equal "workspaces/value0", path
     end
   end
 end

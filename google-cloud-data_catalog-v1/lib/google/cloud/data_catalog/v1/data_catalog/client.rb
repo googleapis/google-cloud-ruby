@@ -224,7 +224,7 @@ module Google
             # This is a custom method
             # (https://cloud.google.com/apis/design/custom_methods) and does not return
             # the complete resource, only the resource identifier and high level
-            # fields. Clients can subsequentally call `Get` methods.
+            # fields. Clients can subsequently call `Get` methods.
             #
             # Note that Data Catalog search queries do not guarantee full recall. Query
             # results that match your query may not be returned, even in subsequent
@@ -256,8 +256,8 @@ module Google
             #     `include_gcp_public_datasets` is considered invalid. Data Catalog will
             #     return an error in such a case.
             #   @param query [::String]
-            #     Required. The query string in search query syntax. The query must be
-            #     non-empty.
+            #     Optional. The query string in search query syntax. An empty query string will result
+            #     in all data assets (in the specified scope) that the user has access to.
             #
             #     Query strings can be simple as "x" or more qualified as:
             #
@@ -274,8 +274,8 @@ module Google
             #     for page_size is 1000. Throws an invalid argument for page_size > 1000.
             #   @param page_token [::String]
             #     Optional. Pagination token returned in an earlier
-            #     {::Google::Cloud::DataCatalog::V1::SearchCatalogResponse#next_page_token SearchCatalogResponse.next_page_token},
-            #     which indicates that this is a continuation of a prior
+            #     {::Google::Cloud::DataCatalog::V1::SearchCatalogResponse#next_page_token SearchCatalogResponse.next_page_token}, which
+            #     indicates that this is a continuation of a prior
             #     {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#search_catalog SearchCatalogRequest}
             #     call, and that the system should return the next page of data. If empty,
             #     the first page is returned.
@@ -366,16 +366,18 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the project this entry group is in. Example:
+            #     Required. The name of the project this entry group belongs to. Example:
             #
-            #     * projects/\\{project_id}/locations/\\{location}
+            #     `projects/{project_id}/locations/{location}`
             #
-            #     Note that this EntryGroup and its child resources may not actually be
-            #     stored in the location in this name.
+            #     Note: The entry group itself and its child resources might not be
+            #     stored in the location specified in its name.
             #   @param entry_group_id [::String]
-            #     Required. The id of the entry group to create.
-            #     The id must begin with a letter or underscore, contain only English
-            #     letters, numbers and underscores, and be at most 64 characters.
+            #     Required. The ID of the entry group to create.
+            #
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
+            #     underscores (_), and must start with a letter or underscore.
+            #     The maximum size is 64 bytes when encoded in UTF-8.
             #   @param entry_group [::Google::Cloud::DataCatalog::V1::EntryGroup, ::Hash]
             #     The entry group to create. Defaults to an empty entry group.
             #
@@ -518,8 +520,11 @@ module Google
             #   @param entry_group [::Google::Cloud::DataCatalog::V1::EntryGroup, ::Hash]
             #     Required. The updated entry group. "name" field must be set.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The fields to update on the entry group. If absent or empty, all modifiable
-            #     fields are updated.
+            #     Names of fields whose values to overwrite on an entry group.
+            #
+            #     If this parameter is absent or empty, all modifiable fields
+            #     are overwritten. If such fields are non-required and omitted in the
+            #     request body, their values are emptied.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::EntryGroup]
@@ -658,16 +663,16 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the location that contains the entry groups, which
-            #     can be provided in URL format. Example:
+            #     Required. The name of the location that contains the entry groups, which can be
+            #     provided in URL format. Example:
             #
             #     * projects/\\{project_id}/locations/\\{location}
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of items to return. Default is 10. Max limit
-            #     is 1000. Throws an invalid argument for `page_size > 1000`.
+            #     Optional. The maximum number of items to return. Default is 10. Max limit is 1000.
+            #     Throws an invalid argument for `page_size > 1000`.
             #   @param page_token [::String]
-            #     Optional. Token that specifies which page is requested. If empty, the first
-            #     page is returned.
+            #     Optional. Token that specifies which page is requested. If empty, the first page is
+            #     returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DataCatalog::V1::EntryGroup>]
@@ -716,8 +721,8 @@ module Google
             end
 
             ##
-            # Creates an entry. Only entries of 'FILESET' type or user-specified type can
-            # be created.
+            # Creates an entry. Only entries of types 'FILESET', 'CLUSTER', 'DATA_STREAM'
+            # or with a user-specified type can be created.
             #
             # Users should enable the Data Catalog API in the project identified by
             # the `parent` parameter (see [Data Catalog Resource Project]
@@ -742,14 +747,18 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the entry group this entry is in. Example:
+            #     Required. The name of the entry group this entry belongs to. Example:
             #
-            #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}
+            #     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`
             #
-            #     Note that this Entry and its child resources may not actually be stored in
-            #     the location in this name.
+            #     Note: The entry itself and its child resources might not be stored in
+            #     the location specified in its name.
             #   @param entry_id [::String]
-            #     Required. The id of the entry to create.
+            #     Required. The ID of the entry to create.
+            #
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
+            #     and underscores (_).
+            #     The maximum size is 64 bytes when encoded in UTF-8.
             #   @param entry [::Google::Cloud::DataCatalog::V1::Entry, ::Hash]
             #     Required. The entry to create.
             #
@@ -823,26 +832,30 @@ module Google
             #   @param entry [::Google::Cloud::DataCatalog::V1::Entry, ::Hash]
             #     Required. The updated entry. The "name" field must be set.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The fields to update on the entry. If absent or empty, all modifiable
-            #     fields are updated.
+            #     Names of fields whose values to overwrite on an entry.
+            #
+            #     If this parameter is absent or empty, all modifiable fields
+            #     are overwritten. If such fields are non-required and omitted in the
+            #     request body, their values are emptied.
             #
             #     The following fields are modifiable:
+            #
             #     * For entries with type `DATA_STREAM`:
             #        * `schema`
-            #     * For entries with type `FILESET`
+            #     * For entries with type `FILESET`:
             #        * `schema`
             #        * `display_name`
             #        * `description`
             #        * `gcs_fileset_spec`
             #        * `gcs_fileset_spec.file_patterns`
-            #     * For entries with `user_specified_type`
+            #     * For entries with `user_specified_type`:
             #        * `schema`
             #        * `display_name`
             #        * `description`
-            #        * user_specified_type
-            #        * user_specified_system
-            #        * linked_resource
-            #        * source_system_timestamps
+            #        * `user_specified_type`
+            #        * `user_specified_system`
+            #        * `linked_resource`
+            #        * `source_system_timestamps`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::Entry]
@@ -1046,7 +1059,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload lookup_entry(linked_resource: nil, sql_resource: nil)
+            # @overload lookup_entry(linked_resource: nil, sql_resource: nil, fully_qualified_name: nil)
             #   Pass arguments to `lookup_entry` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1072,8 +1085,24 @@ module Google
             #       * `bigquery.dataset.project_id.dataset_id`
             #       * `datacatalog.entry.project_id.location_id.entry_group_id.entry_id`
             #
-            #     `*_id`s shoud satisfy the standard SQL rules for identifiers.
+            #     `*_id`s should satisfy the standard SQL rules for identifiers.
             #     https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
+            #   @param fully_qualified_name [::String]
+            #     Fully qualified name (FQN) of the resource.
+            #
+            #     FQNs take two forms:
+            #
+            #     * For non-regionalized resources:
+            #
+            #       `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+            #
+            #     * For regionalized resources:
+            #
+            #       `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
+            #
+            #     Example for a DPMS table:
+            #
+            #     `dataproc_metastore:project_id.location_id.instance_id.database_id.table_id`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::Entry]
@@ -1225,7 +1254,11 @@ module Google
             #
             #     * projects/\\{project_id}/locations/us-central1
             #   @param tag_template_id [::String]
-            #     Required. The id of the tag template to create.
+            #     Required. The ID of the tag template to create.
+            #
+            #     The ID must contain only lowercase letters (a-z), numbers (0-9),
+            #     or underscores (_), and must start with a letter or underscore.
+            #     The maximum size is 64 bytes when encoded in UTF-8.
             #   @param tag_template [::Google::Cloud::DataCatalog::V1::TagTemplate, ::Hash]
             #     Required. The tag template to create.
             #
@@ -1369,13 +1402,12 @@ module Google
             #   @param tag_template [::Google::Cloud::DataCatalog::V1::TagTemplate, ::Hash]
             #     Required. The template to update. The "name" field must be set.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The field mask specifies the parts of the template to overwrite.
+            #     Names of fields whose values to overwrite on a tag template. Currently,
+            #     only `display_name` can be overwritten.
             #
-            #     Allowed fields:
-            #
-            #       * `display_name`
-            #
-            #     If absent or empty, all of the allowed fields above will be updated.
+            #     In general, if this parameter is absent or empty, all modifiable fields
+            #     are overwritten. If such fields are non-required and omitted in the
+            #     request body, their values are emptied.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::TagTemplate]
@@ -1529,7 +1561,10 @@ module Google
             #     * projects/\\{project_id}/locations/us-central1/tagTemplates/\\{tag_template_id}
             #   @param tag_template_field_id [::String]
             #     Required. The ID of the tag template field to create.
-            #     Field ids can contain letters (both uppercase and lowercase), numbers
+            #
+            #     Note: Adding a required field to an existing template is *not* allowed.
+            #
+            #     Field IDs can contain letters (both uppercase and lowercase), numbers
             #     (0-9), underscores (_) and dashes (-). Field IDs must be at least 1
             #     character long and at most 128 characters long. Field IDs must also be
             #     unique within their template.
@@ -1610,20 +1645,22 @@ module Google
             #   @param tag_template_field [::Google::Cloud::DataCatalog::V1::TagTemplateField, ::Hash]
             #     Required. The template to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Optional. The field mask specifies the parts of the template to be updated.
-            #     Allowed fields:
+            #     Optional. Names of fields whose values to overwrite on an individual field of a tag
+            #     template. The following fields are modifiable:
             #
             #       * `display_name`
             #       * `type.enum_type`
             #       * `is_required`
             #
-            #     If `update_mask` is not set or empty, all of the allowed fields above will
-            #     be updated.
+            #     If this parameter is absent or empty, all modifiable fields
+            #     are overwritten. If such fields are non-required and omitted in the request
+            #     body, their values are emptied with one exception: when updating an enum
+            #     type, the provided values are merged with the existing values. Therefore,
+            #     enum values can only be added, existing enum values cannot be deleted or
+            #     renamed.
             #
-            #     When updating an enum type, the provided values will be merged with the
-            #     existing values. Therefore, enum values can only be added, existing enum
-            #     values cannot be deleted nor renamed. Updating a template field from
-            #     optional to required is NOT allowed.
+            #     Additionally, updating a template field from optional to required is
+            #     *not* allowed.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::TagTemplateField]
@@ -1697,8 +1734,7 @@ module Google
             #
             #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}/fields/\\{tag_template_field_id}
             #   @param new_tag_template_field_id [::String]
-            #     Required. The new ID of this tag template field. For example,
-            #     `my_new_field`.
+            #     Required. The new ID of this tag template field. For example, `my_new_field`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::TagTemplateField]
@@ -1738,6 +1774,77 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :rename_tag_template_field, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Renames an enum value in a tag template. The enum values have to be unique
+            # within one enum field.
+            #
+            # @overload rename_tag_template_field_enum_value(request, options = nil)
+            #   Pass arguments to `rename_tag_template_field_enum_value` via a request object, either of type
+            #   {::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldEnumValueRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldEnumValueRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload rename_tag_template_field_enum_value(name: nil, new_enum_value_display_name: nil)
+            #   Pass arguments to `rename_tag_template_field_enum_value` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the enum field value. Example:
+            #
+            #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}/fields/\\{tag_template_field_id}/enumValues/\\{enum_value_display_name}
+            #   @param new_enum_value_display_name [::String]
+            #     Required. The new display name of the enum value. For example, `my_new_enum_value`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DataCatalog::V1::TagTemplateField]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DataCatalog::V1::TagTemplateField]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def rename_tag_template_field_enum_value request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldEnumValueRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.rename_tag_template_field_enum_value.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.rename_tag_template_field_enum_value.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.rename_tag_template_field_enum_value.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_catalog_stub.call_rpc :rename_tag_template_field_enum_value, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -1846,13 +1953,13 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the resource to attach this tag to. Tags can be
-            #     attached to Entries. Example:
+            #     Required. The name of the resource to attach this tag to. Tags can be attached to
+            #     entries. An entry can have up to 1000 attached tags. Example:
             #
-            #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}/entries/\\{entry_id}
+            #     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}`
             #
-            #     Note that this Tag and its child resources may not actually be stored in
-            #     the location in this name.
+            #     Note: The tag and its child resources might not be stored in
+            #     the location specified in its name.
             #   @param tag [::Google::Cloud::DataCatalog::V1::Tag, ::Hash]
             #     Required. The tag to create.
             #
@@ -1922,8 +2029,12 @@ module Google
             #   @param tag [::Google::Cloud::DataCatalog::V1::Tag, ::Hash]
             #     Required. The updated tag. The "name" field must be set.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The fields to update on the Tag. If absent or empty, all modifiable fields
-            #     are updated. Currently the only modifiable field is the field `fields`.
+            #     Names of fields whose values to overwrite on a tag. Currently, a tag has
+            #     the only modifiable field with the name `fields`.
+            #
+            #     In general, if this parameter is absent or empty, all modifiable fields
+            #     are overwritten. If such fields are non-required and omitted in the
+            #     request body, their values are emptied.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::Tag]
@@ -2057,8 +2168,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the Data Catalog resource to list the tags of. The
-            #     resource could be an {::Google::Cloud::DataCatalog::V1::Entry Entry} or an
+            #     Required. The name of the Data Catalog resource to list the tags of. The resource
+            #     could be an {::Google::Cloud::DataCatalog::V1::Entry Entry} or an
             #     {::Google::Cloud::DataCatalog::V1::EntryGroup EntryGroup}.
             #
             #     Examples:
@@ -2603,6 +2714,11 @@ module Google
                 #
                 attr_reader :rename_tag_template_field
                 ##
+                # RPC-specific configuration for `rename_tag_template_field_enum_value`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :rename_tag_template_field_enum_value
+                ##
                 # RPC-specific configuration for `delete_tag_template_field`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2683,6 +2799,8 @@ module Google
                   @update_tag_template_field = ::Gapic::Config::Method.new update_tag_template_field_config
                   rename_tag_template_field_config = parent_rpcs.rename_tag_template_field if parent_rpcs.respond_to? :rename_tag_template_field
                   @rename_tag_template_field = ::Gapic::Config::Method.new rename_tag_template_field_config
+                  rename_tag_template_field_enum_value_config = parent_rpcs.rename_tag_template_field_enum_value if parent_rpcs.respond_to? :rename_tag_template_field_enum_value
+                  @rename_tag_template_field_enum_value = ::Gapic::Config::Method.new rename_tag_template_field_enum_value_config
                   delete_tag_template_field_config = parent_rpcs.delete_tag_template_field if parent_rpcs.respond_to? :delete_tag_template_field
                   @delete_tag_template_field = ::Gapic::Config::Method.new delete_tag_template_field_config
                   create_tag_config = parent_rpcs.create_tag if parent_rpcs.respond_to? :create_tag

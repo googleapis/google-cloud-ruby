@@ -40,7 +40,7 @@ module Google
             # This is a custom method
             # (https://cloud.google.com/apis/design/custom_methods) and does not return
             # the complete resource, only the resource identifier and high level
-            # fields. Clients can subsequentally call `Get` methods.
+            # fields. Clients can subsequently call `Get` methods.
             #
             # Note that Data Catalog search queries do not guarantee full recall. Query
             # results that match your query may not be returned, even in subsequent
@@ -87,8 +87,8 @@ module Google
             rpc :DeleteEntryGroup, ::Google::Cloud::DataCatalog::V1::DeleteEntryGroupRequest, ::Google::Protobuf::Empty
             # Lists entry groups.
             rpc :ListEntryGroups, ::Google::Cloud::DataCatalog::V1::ListEntryGroupsRequest, ::Google::Cloud::DataCatalog::V1::ListEntryGroupsResponse
-            # Creates an entry. Only entries of 'FILESET' type or user-specified type can
-            # be created.
+            # Creates an entry. Only entries of types 'FILESET', 'CLUSTER', 'DATA_STREAM'
+            # or with a user-specified type can be created.
             #
             # Users should enable the Data Catalog API in the project identified by
             # the `parent` parameter (see [Data Catalog Resource Project]
@@ -159,6 +159,9 @@ module Google
             # Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project)
             # for more information).
             rpc :RenameTagTemplateField, ::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldRequest, ::Google::Cloud::DataCatalog::V1::TagTemplateField
+            # Renames an enum value in a tag template. The enum values have to be unique
+            # within one enum field.
+            rpc :RenameTagTemplateFieldEnumValue, ::Google::Cloud::DataCatalog::V1::RenameTagTemplateFieldEnumValueRequest, ::Google::Cloud::DataCatalog::V1::TagTemplateField
             # Deletes a field in a tag template and all uses of that field.
             # Users should enable the Data Catalog API in the project identified by
             # the `name` parameter (see [Data Catalog Resource Project]

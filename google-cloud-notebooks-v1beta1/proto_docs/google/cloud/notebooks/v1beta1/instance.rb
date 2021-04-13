@@ -39,10 +39,12 @@ module Google
         #     Cloud Storage path (`gs://path-to-file/file-name`).
         # @!attribute [r] proxy_uri
         #   @return [::String]
-        #     Output only. The proxy endpoint that is used to access the Jupyter notebook.
+        #     Output only. The proxy endpoint that is used to access the Jupyter
+        #     notebook.
         # @!attribute [rw] instance_owners
         #   @return [::Array<::String>]
-        #     Input only. The owner of this instance after creation. Format: `alias@example.com`
+        #     Input only. The owner of this instance after creation. Format:
+        #     `alias@example.com`
         #
         #     Currently supports one owner only. If not specified, all of the service
         #     account users of your VM instance's service account can use
@@ -59,7 +61,8 @@ module Google
         #     is used.
         # @!attribute [rw] machine_type
         #   @return [::String]
-        #     Required. The [Compute Engine machine type](https://cloud.google.com/compute/docs/machine-types) of this
+        #     Required. The [Compute Engine machine
+        #     type](https://cloud.google.com/compute/docs/machine-types) of this
         #     instance.
         # @!attribute [rw] accelerator_config
         #   @return [::Google::Cloud::Notebooks::V1beta1::Instance::AcceleratorConfig]
@@ -82,37 +85,39 @@ module Google
         #     If not specified, we'll automatically choose from official GPU drivers.
         # @!attribute [rw] boot_disk_type
         #   @return [::Google::Cloud::Notebooks::V1beta1::Instance::DiskType]
-        #     Input only. The type of the boot disk attached to this instance, defaults to
-        #     standard persistent disk (`PD_STANDARD`).
+        #     Input only. The type of the boot disk attached to this instance, defaults
+        #     to standard persistent disk (`PD_STANDARD`).
         # @!attribute [rw] boot_disk_size_gb
         #   @return [::Integer]
-        #     Input only. The size of the boot disk in GB attached to this instance, up to a maximum
-        #     of 64000&nbsp;GB (64&nbsp;TB). The minimum recommended value is
-        #     100&nbsp;GB. If not specified, this defaults to 100.
+        #     Input only. The size of the boot disk in GB attached to this instance, up
+        #     to a maximum of 64000&nbsp;GB (64&nbsp;TB). The minimum recommended value
+        #     is 100&nbsp;GB. If not specified, this defaults to 100.
         # @!attribute [rw] data_disk_type
         #   @return [::Google::Cloud::Notebooks::V1beta1::Instance::DiskType]
-        #     Input only. The type of the data disk attached to this instance, defaults to
-        #     standard persistent disk (`PD_STANDARD`).
+        #     Input only. The type of the data disk attached to this instance, defaults
+        #     to standard persistent disk (`PD_STANDARD`).
         # @!attribute [rw] data_disk_size_gb
         #   @return [::Integer]
-        #     Input only. The size of the data disk in GB attached to this instance, up to a maximum
-        #     of 64000&nbsp;GB (64&nbsp;TB). You can choose the size of the data disk
-        #     based on how big your notebooks and data are. If not specified, this
-        #     defaults to 100.
+        #     Input only. The size of the data disk in GB attached to this instance, up
+        #     to a maximum of 64000&nbsp;GB (64&nbsp;TB). You can choose the size of the
+        #     data disk based on how big your notebooks and data are. If not specified,
+        #     this defaults to 100.
         # @!attribute [rw] no_remove_data_disk
         #   @return [::Boolean]
-        #     Input only. If true, the data disk will not be auto deleted when deleting the instance.
+        #     Input only. If true, the data disk will not be auto deleted when deleting
+        #     the instance.
         # @!attribute [rw] disk_encryption
         #   @return [::Google::Cloud::Notebooks::V1beta1::Instance::DiskEncryption]
-        #     Input only. Disk encryption method used on the boot and data disks, defaults to GMEK.
+        #     Input only. Disk encryption method used on the boot and data disks,
+        #     defaults to GMEK.
         # @!attribute [rw] kms_key
         #   @return [::String]
-        #     Input only. The KMS key used to encrypt the disks, only applicable if disk_encryption
-        #     is CMEK.
-        #     Format:
+        #     Input only. The KMS key used to encrypt the disks, only applicable if
+        #     disk_encryption is CMEK. Format:
         #     `projects/{project_id}/locations/{location}/keyRings/{key_ring_id}/cryptoKeys/{key_id}`
         #
-        #     Learn more about [using your own encryption keys]( https://cloud.google.com/kms/docs/quickstart).
+        #     Learn more about [using your own encryption keys](
+        #     https://cloud.google.com/kms/docs/quickstart).
         # @!attribute [rw] no_public_ip
         #   @return [::Boolean]
         #     If true, no public IP will be assigned to this instance.

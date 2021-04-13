@@ -29,9 +29,16 @@ describe Google::Cloud::Spanner::Instance, :mock_spanner do
   end
   let(:version_retention_period) { "1d" }
   let(:earliest_version_time) { Time.now }
+  let(:encryption_info){
+    Google::Cloud::Spanner::Admin::Database::V1::EncryptionInfo.new(encryption_type: :GOOGLE_DEFAULT_ENCRYPTION)
+  }
   let(:database_grpc) do
     Google::Cloud::Spanner::Admin::Database::V1::Database.new \
-      database_hash(instance_id: instance_id, database_id: database_id, restore_info: restore_info, version_retention_period: version_retention_period, earliest_version_time: earliest_version_time)
+      database_hash(
+        instance_id: instance_id, database_id: database_id,
+        restore_info: restore_info, version_retention_period: version_retention_period,
+        earliest_version_time: earliest_version_time, encryption_info: [encryption_info]
+      )
   end
   let(:database) { Google::Cloud::Spanner::Database.from_grpc database_grpc, spanner.service }
 
@@ -62,5 +69,11 @@ describe Google::Cloud::Spanner::Instance, :mock_spanner do
     _(backup_info.source_database_instance_id).must_equal instance_id
     _(backup_info.source_database_id).must_equal source_database_id
     _(backup_info.create_time).must_be_kind_of Time
+
+    _(database.encryption_config).must_be_kind_of Google::Cloud::Spanner::Admin::Database::V1::EncryptionConfig
+
+    _(database.encryption_info).wont_be :empty?
+    _(database.encryption_info).must_be_kind_of Array
+    _(database.encryption_info.first).must_be_kind_of Google::Cloud::Spanner::Admin::Database::V1::EncryptionInfo
   end
 end

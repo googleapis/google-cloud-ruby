@@ -9,55 +9,92 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Build::V1::CloudBuild::Client",
-          "methods": {
-            "CreateBuild": [
-              "create_build"
-            ],
-            "GetBuild": [
-              "get_build"
-            ],
-            "ListBuilds": [
-              "list_builds"
-            ],
-            "CancelBuild": [
-              "cancel_build"
-            ],
-            "RetryBuild": [
-              "retry_build"
-            ],
-            "CreateBuildTrigger": [
-              "create_build_trigger"
-            ],
-            "GetBuildTrigger": [
-              "get_build_trigger"
-            ],
-            "ListBuildTriggers": [
-              "list_build_triggers"
-            ],
-            "DeleteBuildTrigger": [
-              "delete_build_trigger"
-            ],
-            "UpdateBuildTrigger": [
-              "update_build_trigger"
-            ],
-            "RunBuildTrigger": [
-              "run_build_trigger"
-            ],
-            "CreateWorkerPool": [
-              "create_worker_pool"
-            ],
-            "GetWorkerPool": [
-              "get_worker_pool"
-            ],
-            "DeleteWorkerPool": [
-              "delete_worker_pool"
-            ],
-            "UpdateWorkerPool": [
-              "update_worker_pool"
-            ],
-            "ListWorkerPools": [
-              "list_worker_pools"
-            ]
+          "rpcs": {
+            "CreateBuild": {
+              "methods": [
+                "create_build"
+              ]
+            },
+            "GetBuild": {
+              "methods": [
+                "get_build"
+              ]
+            },
+            "ListBuilds": {
+              "methods": [
+                "list_builds"
+              ]
+            },
+            "CancelBuild": {
+              "methods": [
+                "cancel_build"
+              ]
+            },
+            "RetryBuild": {
+              "methods": [
+                "retry_build"
+              ]
+            },
+            "CreateBuildTrigger": {
+              "methods": [
+                "create_build_trigger"
+              ]
+            },
+            "GetBuildTrigger": {
+              "methods": [
+                "get_build_trigger"
+              ]
+            },
+            "ListBuildTriggers": {
+              "methods": [
+                "list_build_triggers"
+              ]
+            },
+            "DeleteBuildTrigger": {
+              "methods": [
+                "delete_build_trigger"
+              ]
+            },
+            "UpdateBuildTrigger": {
+              "methods": [
+                "update_build_trigger"
+              ]
+            },
+            "RunBuildTrigger": {
+              "methods": [
+                "run_build_trigger"
+              ]
+            },
+            "ReceiveTriggerWebhook": {
+              "methods": [
+                "receive_trigger_webhook"
+              ]
+            },
+            "CreateWorkerPool": {
+              "methods": [
+                "create_worker_pool"
+              ]
+            },
+            "GetWorkerPool": {
+              "methods": [
+                "get_worker_pool"
+              ]
+            },
+            "DeleteWorkerPool": {
+              "methods": [
+                "delete_worker_pool"
+              ]
+            },
+            "UpdateWorkerPool": {
+              "methods": [
+                "update_worker_pool"
+              ]
+            },
+            "ListWorkerPools": {
+              "methods": [
+                "list_worker_pools"
+              ]
+            }
           }
         }
       }

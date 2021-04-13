@@ -1,0 +1,11 @@
+{
+    "api_id": "gkehub.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-gke_hub/latest",
+    "distribution_name": "google-cloud-gke_hub",
+    "language": "ruby",
+    "name": "gkehub",
+    "name_pretty": "GKE Hub API",
+    "product_documentation": "https://cloud.google.com/anthos/clusters/docs",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true
+}

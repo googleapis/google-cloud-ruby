@@ -9,22 +9,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client",
-          "methods": {
-            "CreateDashboard": [
-              "create_dashboard"
-            ],
-            "ListDashboards": [
-              "list_dashboards"
-            ],
-            "GetDashboard": [
-              "get_dashboard"
-            ],
-            "DeleteDashboard": [
-              "delete_dashboard"
-            ],
-            "UpdateDashboard": [
-              "update_dashboard"
-            ]
+          "rpcs": {
+            "CreateDashboard": {
+              "methods": [
+                "create_dashboard"
+              ]
+            },
+            "ListDashboards": {
+              "methods": [
+                "list_dashboards"
+              ]
+            },
+            "GetDashboard": {
+              "methods": [
+                "get_dashboard"
+              ]
+            },
+            "DeleteDashboard": {
+              "methods": [
+                "delete_dashboard"
+              ]
+            },
+            "UpdateDashboard": {
+              "methods": [
+                "update_dashboard"
+              ]
+            }
           }
         }
       }

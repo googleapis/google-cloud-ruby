@@ -33,7 +33,7 @@ describe Google::Cloud::Bigtable::Table, :replication, :mock_bigtable do
     )
   end
   let(:table) do
-    Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service)
+    Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service, view: :FULL)
   end
 
   let(:token) { "l947XelENinaxJQP0nnrZJjHnAF7YrwW8HCJLotwrF" }

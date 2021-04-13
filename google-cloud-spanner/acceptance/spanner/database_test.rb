@@ -34,6 +34,8 @@ describe "Spanner Databases", :spanner do
     _(database.database_id).must_equal database_id
     _(database.instance_id).must_equal instance_id
     _(database.project_id).must_equal spanner.project
+    _(database.encryption_config).must_be :nil?
+    _(database.encryption_info).must_be_kind_of Array
 
     _(spanner.database(instance_id, database_id)).wont_be :nil?
 
@@ -55,6 +57,7 @@ describe "Spanner Databases", :spanner do
     _(all_databases).wont_be :empty?
     all_databases.each do |database|
       _(database).must_be_kind_of Google::Cloud::Spanner::Database
+      _(database.encryption_info).must_be_kind_of Array
     end
 
     first_database = spanner.database all_databases.first.instance_id, all_databases.first.database_id

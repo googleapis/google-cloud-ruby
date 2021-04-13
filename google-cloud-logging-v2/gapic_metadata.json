@@ -9,76 +9,122 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Logging::V2::ConfigService::Client",
-          "methods": {
-            "ListBuckets": [
-              "list_buckets"
-            ],
-            "GetBucket": [
-              "get_bucket"
-            ],
-            "CreateBucket": [
-              "create_bucket"
-            ],
-            "UpdateBucket": [
-              "update_bucket"
-            ],
-            "DeleteBucket": [
-              "delete_bucket"
-            ],
-            "UndeleteBucket": [
-              "undelete_bucket"
-            ],
-            "ListViews": [
-              "list_views"
-            ],
-            "GetView": [
-              "get_view"
-            ],
-            "CreateView": [
-              "create_view"
-            ],
-            "UpdateView": [
-              "update_view"
-            ],
-            "DeleteView": [
-              "delete_view"
-            ],
-            "ListSinks": [
-              "list_sinks"
-            ],
-            "GetSink": [
-              "get_sink"
-            ],
-            "CreateSink": [
-              "create_sink"
-            ],
-            "UpdateSink": [
-              "update_sink"
-            ],
-            "DeleteSink": [
-              "delete_sink"
-            ],
-            "ListExclusions": [
-              "list_exclusions"
-            ],
-            "GetExclusion": [
-              "get_exclusion"
-            ],
-            "CreateExclusion": [
-              "create_exclusion"
-            ],
-            "UpdateExclusion": [
-              "update_exclusion"
-            ],
-            "DeleteExclusion": [
-              "delete_exclusion"
-            ],
-            "GetCmekSettings": [
-              "get_cmek_settings"
-            ],
-            "UpdateCmekSettings": [
-              "update_cmek_settings"
-            ]
+          "rpcs": {
+            "ListBuckets": {
+              "methods": [
+                "list_buckets"
+              ]
+            },
+            "GetBucket": {
+              "methods": [
+                "get_bucket"
+              ]
+            },
+            "CreateBucket": {
+              "methods": [
+                "create_bucket"
+              ]
+            },
+            "UpdateBucket": {
+              "methods": [
+                "update_bucket"
+              ]
+            },
+            "DeleteBucket": {
+              "methods": [
+                "delete_bucket"
+              ]
+            },
+            "UndeleteBucket": {
+              "methods": [
+                "undelete_bucket"
+              ]
+            },
+            "ListViews": {
+              "methods": [
+                "list_views"
+              ]
+            },
+            "GetView": {
+              "methods": [
+                "get_view"
+              ]
+            },
+            "CreateView": {
+              "methods": [
+                "create_view"
+              ]
+            },
+            "UpdateView": {
+              "methods": [
+                "update_view"
+              ]
+            },
+            "DeleteView": {
+              "methods": [
+                "delete_view"
+              ]
+            },
+            "ListSinks": {
+              "methods": [
+                "list_sinks"
+              ]
+            },
+            "GetSink": {
+              "methods": [
+                "get_sink"
+              ]
+            },
+            "CreateSink": {
+              "methods": [
+                "create_sink"
+              ]
+            },
+            "UpdateSink": {
+              "methods": [
+                "update_sink"
+              ]
+            },
+            "DeleteSink": {
+              "methods": [
+                "delete_sink"
+              ]
+            },
+            "ListExclusions": {
+              "methods": [
+                "list_exclusions"
+              ]
+            },
+            "GetExclusion": {
+              "methods": [
+                "get_exclusion"
+              ]
+            },
+            "CreateExclusion": {
+              "methods": [
+                "create_exclusion"
+              ]
+            },
+            "UpdateExclusion": {
+              "methods": [
+                "update_exclusion"
+              ]
+            },
+            "DeleteExclusion": {
+              "methods": [
+                "delete_exclusion"
+              ]
+            },
+            "GetCmekSettings": {
+              "methods": [
+                "get_cmek_settings"
+              ]
+            },
+            "UpdateCmekSettings": {
+              "methods": [
+                "update_cmek_settings"
+              ]
+            }
           }
         }
       }
@@ -87,25 +133,37 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Logging::V2::LoggingService::Client",
-          "methods": {
-            "DeleteLog": [
-              "delete_log"
-            ],
-            "WriteLogEntries": [
-              "write_log_entries"
-            ],
-            "ListLogEntries": [
-              "list_log_entries"
-            ],
-            "ListMonitoredResourceDescriptors": [
-              "list_monitored_resource_descriptors"
-            ],
-            "ListLogs": [
-              "list_logs"
-            ],
-            "TailLogEntries": [
-              "tail_log_entries"
-            ]
+          "rpcs": {
+            "DeleteLog": {
+              "methods": [
+                "delete_log"
+              ]
+            },
+            "WriteLogEntries": {
+              "methods": [
+                "write_log_entries"
+              ]
+            },
+            "ListLogEntries": {
+              "methods": [
+                "list_log_entries"
+              ]
+            },
+            "ListMonitoredResourceDescriptors": {
+              "methods": [
+                "list_monitored_resource_descriptors"
+              ]
+            },
+            "ListLogs": {
+              "methods": [
+                "list_logs"
+              ]
+            },
+            "TailLogEntries": {
+              "methods": [
+                "tail_log_entries"
+              ]
+            }
           }
         }
       }
@@ -114,22 +172,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Logging::V2::MetricsService::Client",
-          "methods": {
-            "ListLogMetrics": [
-              "list_log_metrics"
-            ],
-            "GetLogMetric": [
-              "get_log_metric"
-            ],
-            "CreateLogMetric": [
-              "create_log_metric"
-            ],
-            "UpdateLogMetric": [
-              "update_log_metric"
-            ],
-            "DeleteLogMetric": [
-              "delete_log_metric"
-            ]
+          "rpcs": {
+            "ListLogMetrics": {
+              "methods": [
+                "list_log_metrics"
+              ]
+            },
+            "GetLogMetric": {
+              "methods": [
+                "get_log_metric"
+              ]
+            },
+            "CreateLogMetric": {
+              "methods": [
+                "create_log_metric"
+              ]
+            },
+            "UpdateLogMetric": {
+              "methods": [
+                "update_log_metric"
+              ]
+            },
+            "DeleteLogMetric": {
+              "methods": [
+                "delete_log_metric"
+              ]
+            }
           }
         }
       }

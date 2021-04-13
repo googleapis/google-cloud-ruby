@@ -9,16 +9,22 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client",
-          "methods": {
-            "ProcessDocument": [
-              "process_document"
-            ],
-            "BatchProcessDocuments": [
-              "batch_process_documents"
-            ],
-            "ReviewDocument": [
-              "review_document"
-            ]
+          "rpcs": {
+            "ProcessDocument": {
+              "methods": [
+                "process_document"
+              ]
+            },
+            "BatchProcessDocuments": {
+              "methods": [
+                "batch_process_documents"
+              ]
+            },
+            "ReviewDocument": {
+              "methods": [
+                "review_document"
+              ]
+            }
           }
         }
       }

@@ -9,67 +9,107 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Tasks::V2beta2::CloudTasks::Client",
-          "methods": {
-            "ListQueues": [
-              "list_queues"
-            ],
-            "GetQueue": [
-              "get_queue"
-            ],
-            "CreateQueue": [
-              "create_queue"
-            ],
-            "UpdateQueue": [
-              "update_queue"
-            ],
-            "DeleteQueue": [
-              "delete_queue"
-            ],
-            "PurgeQueue": [
-              "purge_queue"
-            ],
-            "PauseQueue": [
-              "pause_queue"
-            ],
-            "ResumeQueue": [
-              "resume_queue"
-            ],
-            "GetIamPolicy": [
-              "get_iam_policy"
-            ],
-            "SetIamPolicy": [
-              "set_iam_policy"
-            ],
-            "TestIamPermissions": [
-              "test_iam_permissions"
-            ],
-            "ListTasks": [
-              "list_tasks"
-            ],
-            "GetTask": [
-              "get_task"
-            ],
-            "CreateTask": [
-              "create_task"
-            ],
-            "DeleteTask": [
-              "delete_task"
-            ],
-            "LeaseTasks": [
-              "lease_tasks"
-            ],
-            "AcknowledgeTask": [
-              "acknowledge_task"
-            ],
-            "RenewLease": [
-              "renew_lease"
-            ],
-            "CancelLease": [
-              "cancel_lease"
-            ],
-            "RunTask": [
-              "run_task"
-            ]
+          "rpcs": {
+            "ListQueues": {
+              "methods": [
+                "list_queues"
+              ]
+            },
+            "GetQueue": {
+              "methods": [
+                "get_queue"
+              ]
+            },
+            "CreateQueue": {
+              "methods": [
+                "create_queue"
+              ]
+            },
+            "UpdateQueue": {
+              "methods": [
+                "update_queue"
+              ]
+            },
+            "DeleteQueue": {
+              "methods": [
+                "delete_queue"
+              ]
+            },
+            "PurgeQueue": {
+              "methods": [
+                "purge_queue"
+              ]
+            },
+            "PauseQueue": {
+              "methods": [
+                "pause_queue"
+              ]
+            },
+            "ResumeQueue": {
+              "methods": [
+                "resume_queue"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            },
+            "ListTasks": {
+              "methods": [
+                "list_tasks"
+              ]
+            },
+            "GetTask": {
+              "methods": [
+                "get_task"
+              ]
+            },
+            "CreateTask": {
+              "methods": [
+                "create_task"
+              ]
+            },
+            "DeleteTask": {
+              "methods": [
+                "delete_task"
+              ]
+            },
+            "LeaseTasks": {
+              "methods": [
+                "lease_tasks"
+              ]
+            },
+            "AcknowledgeTask": {
+              "methods": [
+                "acknowledge_task"
+              ]
+            },
+            "RenewLease": {
+              "methods": [
+                "renew_lease"
+              ]
+            },
+            "CancelLease": {
+              "methods": [
+                "cancel_lease"
+              ]
+            },
+            "RunTask": {
+              "methods": [
+                "run_task"
+              ]
+            }
           }
         }
       }

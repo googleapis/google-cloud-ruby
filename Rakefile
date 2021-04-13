@@ -234,7 +234,7 @@ task :release, :tag do |t, args|
   end
 
   if gem_was_published
-    Rake::Task["docs:publish_tag"].invoke tag
+    Rake::Task["kokoro:publish_docs"].invoke
   end
 end
 
@@ -482,7 +482,6 @@ namespace :kokoro do
   task :release do
     kokoro.release
     Rake::Task["release"].invoke kokoro.tag
-    kokoro.cloudrad
   end
 
   task :release_please, :gem, :token do |t, args|
@@ -491,6 +490,12 @@ namespace :kokoro do
     else
       kokoro.release_please args[:gem], args[:token]
     end
+  end
+
+  task :publish_docs do
+    kokoro.devsite
+    kokoro.cloudrad
+    exit kokoro.exit_status
   end
 
   task :republish do

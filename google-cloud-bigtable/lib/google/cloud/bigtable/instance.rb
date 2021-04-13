@@ -520,6 +520,7 @@ module Google
         def table table_id, view: nil, perform_lookup: nil, app_profile_id: nil
           ensure_service!
 
+          view ||= :SCHEMA_VIEW
           table = if perform_lookup
                     grpc = service.get_table instance_id, table_id, view: view
                     Table.from_grpc grpc, service, view: view

@@ -372,19 +372,6 @@ describe Google::Cloud::PubSub, :pubsub do
         end
       end
     end
-
-    def pull_with_retry sub
-      received_messages = []
-      retries = 0
-      while retries <= 5 do
-        received_messages = sub.pull
-        break if received_messages.any?
-        retries += 1
-        puts "the subscription does not have the message yet. sleeping for #{retries*retries} second(s) and retrying."
-        sleep retries*retries
-      end
-      received_messages
-    end
   end
 
   describe "IAM Policies and Permissions" do

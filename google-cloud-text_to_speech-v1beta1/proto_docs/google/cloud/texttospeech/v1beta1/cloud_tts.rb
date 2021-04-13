@@ -25,13 +25,14 @@ module Google
         # @!attribute [rw] language_code
         #   @return [::String]
         #     Optional. Recommended.
-        #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. If
-        #     specified, the ListVoices call will only return voices that can be used to
-        #     synthesize this language_code. E.g. when specifying "en-NZ", you will get
-        #     supported "en-\*" voices; when specifying "no", you will get supported
+        #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
+        #     If not specified, the API will return all supported voices.
+        #     If specified, the ListVoices call will only return voices that can be used
+        #     to synthesize this language_code. E.g. when specifying "en-NZ", you will
+        #     get supported "en-NZ" voices; when specifying "no", you will get supported
         #     "no-\*" (Norwegian) and "nb-\*" (Norwegian Bokmal) voices; specifying "zh"
         #     will also get supported "cmn-\*" voices; specifying "zh-hk" will also get
-        #     supported "yue-\*" voices.
+        #     supported "yue-hk" voices.
         class ListVoicesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -78,7 +79,7 @@ module Google
         #     Required. The configuration of the synthesized audio.
         # @!attribute [rw] enable_time_pointing
         #   @return [::Array<::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest::TimepointType>]
-        #     Whether and what timepoints should be returned in the response.
+        #     Whether and what timepoints are returned in the response.
         class SynthesizeSpeechRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -266,6 +267,10 @@ module Google
           # 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
           # Audio content returned as MULAW also contains a WAV header.
           MULAW = 5
+
+          # 8-bit samples that compand 14-bit audio samples using G.711 PCMU/A-law.
+          # Audio content returned as ALAW also contains a WAV header.
+          ALAW = 6
         end
       end
     end

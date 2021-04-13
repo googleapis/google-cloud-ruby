@@ -9,31 +9,47 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Translate::V3::TranslationService::Client",
-          "methods": {
-            "TranslateText": [
-              "translate_text"
-            ],
-            "DetectLanguage": [
-              "detect_language"
-            ],
-            "GetSupportedLanguages": [
-              "get_supported_languages"
-            ],
-            "BatchTranslateText": [
-              "batch_translate_text"
-            ],
-            "CreateGlossary": [
-              "create_glossary"
-            ],
-            "ListGlossaries": [
-              "list_glossaries"
-            ],
-            "GetGlossary": [
-              "get_glossary"
-            ],
-            "DeleteGlossary": [
-              "delete_glossary"
-            ]
+          "rpcs": {
+            "TranslateText": {
+              "methods": [
+                "translate_text"
+              ]
+            },
+            "DetectLanguage": {
+              "methods": [
+                "detect_language"
+              ]
+            },
+            "GetSupportedLanguages": {
+              "methods": [
+                "get_supported_languages"
+              ]
+            },
+            "BatchTranslateText": {
+              "methods": [
+                "batch_translate_text"
+              ]
+            },
+            "CreateGlossary": {
+              "methods": [
+                "create_glossary"
+              ]
+            },
+            "ListGlossaries": {
+              "methods": [
+                "list_glossaries"
+              ]
+            },
+            "GetGlossary": {
+              "methods": [
+                "get_glossary"
+              ]
+            },
+            "DeleteGlossary": {
+              "methods": [
+                "delete_glossary"
+              ]
+            }
           }
         }
       }

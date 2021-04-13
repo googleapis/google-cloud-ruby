@@ -9,76 +9,122 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client",
-          "methods": {
-            "CreateSource": [
-              "create_source"
-            ],
-            "CreateFinding": [
-              "create_finding"
-            ],
-            "CreateNotificationConfig": [
-              "create_notification_config"
-            ],
-            "DeleteNotificationConfig": [
-              "delete_notification_config"
-            ],
-            "GetIamPolicy": [
-              "get_iam_policy"
-            ],
-            "GetNotificationConfig": [
-              "get_notification_config"
-            ],
-            "GetOrganizationSettings": [
-              "get_organization_settings"
-            ],
-            "GetSource": [
-              "get_source"
-            ],
-            "GroupAssets": [
-              "group_assets"
-            ],
-            "GroupFindings": [
-              "group_findings"
-            ],
-            "ListAssets": [
-              "list_assets"
-            ],
-            "ListFindings": [
-              "list_findings"
-            ],
-            "ListNotificationConfigs": [
-              "list_notification_configs"
-            ],
-            "ListSources": [
-              "list_sources"
-            ],
-            "RunAssetDiscovery": [
-              "run_asset_discovery"
-            ],
-            "SetFindingState": [
-              "set_finding_state"
-            ],
-            "SetIamPolicy": [
-              "set_iam_policy"
-            ],
-            "TestIamPermissions": [
-              "test_iam_permissions"
-            ],
-            "UpdateFinding": [
-              "update_finding"
-            ],
-            "UpdateNotificationConfig": [
-              "update_notification_config"
-            ],
-            "UpdateOrganizationSettings": [
-              "update_organization_settings"
-            ],
-            "UpdateSource": [
-              "update_source"
-            ],
-            "UpdateSecurityMarks": [
-              "update_security_marks"
-            ]
+          "rpcs": {
+            "CreateSource": {
+              "methods": [
+                "create_source"
+              ]
+            },
+            "CreateFinding": {
+              "methods": [
+                "create_finding"
+              ]
+            },
+            "CreateNotificationConfig": {
+              "methods": [
+                "create_notification_config"
+              ]
+            },
+            "DeleteNotificationConfig": {
+              "methods": [
+                "delete_notification_config"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "GetNotificationConfig": {
+              "methods": [
+                "get_notification_config"
+              ]
+            },
+            "GetOrganizationSettings": {
+              "methods": [
+                "get_organization_settings"
+              ]
+            },
+            "GetSource": {
+              "methods": [
+                "get_source"
+              ]
+            },
+            "GroupAssets": {
+              "methods": [
+                "group_assets"
+              ]
+            },
+            "GroupFindings": {
+              "methods": [
+                "group_findings"
+              ]
+            },
+            "ListAssets": {
+              "methods": [
+                "list_assets"
+              ]
+            },
+            "ListFindings": {
+              "methods": [
+                "list_findings"
+              ]
+            },
+            "ListNotificationConfigs": {
+              "methods": [
+                "list_notification_configs"
+              ]
+            },
+            "ListSources": {
+              "methods": [
+                "list_sources"
+              ]
+            },
+            "RunAssetDiscovery": {
+              "methods": [
+                "run_asset_discovery"
+              ]
+            },
+            "SetFindingState": {
+              "methods": [
+                "set_finding_state"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            },
+            "UpdateFinding": {
+              "methods": [
+                "update_finding"
+              ]
+            },
+            "UpdateNotificationConfig": {
+              "methods": [
+                "update_notification_config"
+              ]
+            },
+            "UpdateOrganizationSettings": {
+              "methods": [
+                "update_organization_settings"
+              ]
+            },
+            "UpdateSource": {
+              "methods": [
+                "update_source"
+              ]
+            },
+            "UpdateSecurityMarks": {
+              "methods": [
+                "update_security_marks"
+              ]
+            }
           }
         }
       }

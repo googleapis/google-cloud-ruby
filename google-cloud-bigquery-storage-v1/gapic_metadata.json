@@ -9,16 +9,22 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client",
-          "methods": {
-            "CreateReadSession": [
-              "create_read_session"
-            ],
-            "ReadRows": [
-              "read_rows"
-            ],
-            "SplitReadStream": [
-              "split_read_stream"
-            ]
+          "rpcs": {
+            "CreateReadSession": {
+              "methods": [
+                "create_read_session"
+              ]
+            },
+            "ReadRows": {
+              "methods": [
+                "read_rows"
+              ]
+            },
+            "SplitReadStream": {
+              "methods": [
+                "split_read_stream"
+              ]
+            }
           }
         }
       }

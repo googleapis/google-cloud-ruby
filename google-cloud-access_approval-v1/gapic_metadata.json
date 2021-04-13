@@ -9,28 +9,42 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::AccessApproval::V1::AccessApproval::Client",
-          "methods": {
-            "ListApprovalRequests": [
-              "list_approval_requests"
-            ],
-            "GetApprovalRequest": [
-              "get_approval_request"
-            ],
-            "ApproveApprovalRequest": [
-              "approve_approval_request"
-            ],
-            "DismissApprovalRequest": [
-              "dismiss_approval_request"
-            ],
-            "GetAccessApprovalSettings": [
-              "get_access_approval_settings"
-            ],
-            "UpdateAccessApprovalSettings": [
-              "update_access_approval_settings"
-            ],
-            "DeleteAccessApprovalSettings": [
-              "delete_access_approval_settings"
-            ]
+          "rpcs": {
+            "ListApprovalRequests": {
+              "methods": [
+                "list_approval_requests"
+              ]
+            },
+            "GetApprovalRequest": {
+              "methods": [
+                "get_approval_request"
+              ]
+            },
+            "ApproveApprovalRequest": {
+              "methods": [
+                "approve_approval_request"
+              ]
+            },
+            "DismissApprovalRequest": {
+              "methods": [
+                "dismiss_approval_request"
+              ]
+            },
+            "GetAccessApprovalSettings": {
+              "methods": [
+                "get_access_approval_settings"
+              ]
+            },
+            "UpdateAccessApprovalSettings": {
+              "methods": [
+                "update_access_approval_settings"
+              ]
+            },
+            "DeleteAccessApprovalSettings": {
+              "methods": [
+                "delete_access_approval_settings"
+              ]
+            }
           }
         }
       }

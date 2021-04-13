@@ -144,6 +144,29 @@ module Google
               "projects/#{project}/locations/#{location}/tagTemplates/#{tag_template}/fields/#{field}"
             end
 
+            ##
+            # Create a fully-qualified TagTemplateFieldEnumValue resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{tag_template_field_id}/enumValues/{enum_value_display_name}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param tag_template [String]
+            # @param tag_template_field_id [String]
+            # @param enum_value_display_name [String]
+            #
+            # @return [::String]
+            def tag_template_field_enum_value_path project:, location:, tag_template:, tag_template_field_id:, enum_value_display_name:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "tag_template cannot contain /" if tag_template.to_s.include? "/"
+              raise ::ArgumentError, "tag_template_field_id cannot contain /" if tag_template_field_id.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/tagTemplates/#{tag_template}/fields/#{tag_template_field_id}/enumValues/#{enum_value_display_name}"
+            end
+
             extend self
           end
         end

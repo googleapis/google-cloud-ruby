@@ -9,22 +9,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Workflows::V1beta::Workflows::Client",
-          "methods": {
-            "ListWorkflows": [
-              "list_workflows"
-            ],
-            "GetWorkflow": [
-              "get_workflow"
-            ],
-            "CreateWorkflow": [
-              "create_workflow"
-            ],
-            "DeleteWorkflow": [
-              "delete_workflow"
-            ],
-            "UpdateWorkflow": [
-              "update_workflow"
-            ]
+          "rpcs": {
+            "ListWorkflows": {
+              "methods": [
+                "list_workflows"
+              ]
+            },
+            "GetWorkflow": {
+              "methods": [
+                "get_workflow"
+              ]
+            },
+            "CreateWorkflow": {
+              "methods": [
+                "create_workflow"
+              ]
+            },
+            "DeleteWorkflow": {
+              "methods": [
+                "delete_workflow"
+              ]
+            },
+            "UpdateWorkflow": {
+              "methods": [
+                "update_workflow"
+              ]
+            }
           }
         }
       }

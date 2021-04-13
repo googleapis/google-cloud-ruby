@@ -25,51 +25,6 @@ module Google
           # Path helper methods for the Conversations API.
           module Paths
             ##
-            # Create a fully-qualified CallMatcher resource string.
-            #
-            # @overload call_matcher_path(project:, conversation:, call_matcher:)
-            #   The resource will be in the following format:
-            #
-            #   `projects/{project}/conversations/{conversation}/callMatchers/{call_matcher}`
-            #
-            #   @param project [String]
-            #   @param conversation [String]
-            #   @param call_matcher [String]
-            #
-            # @overload call_matcher_path(project:, location:, conversation:, call_matcher:)
-            #   The resource will be in the following format:
-            #
-            #   `projects/{project}/locations/{location}/conversations/{conversation}/callMatchers/{call_matcher}`
-            #
-            #   @param project [String]
-            #   @param location [String]
-            #   @param conversation [String]
-            #   @param call_matcher [String]
-            #
-            # @return [::String]
-            def call_matcher_path **args
-              resources = {
-                "call_matcher:conversation:project" => (proc do |project:, conversation:, call_matcher:|
-                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ::ArgumentError, "conversation cannot contain /" if conversation.to_s.include? "/"
-
-                  "projects/#{project}/conversations/#{conversation}/callMatchers/#{call_matcher}"
-                end),
-                "call_matcher:conversation:location:project" => (proc do |project:, location:, conversation:, call_matcher:|
-                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-                  raise ::ArgumentError, "conversation cannot contain /" if conversation.to_s.include? "/"
-
-                  "projects/#{project}/locations/#{location}/conversations/#{conversation}/callMatchers/#{call_matcher}"
-                end)
-              }
-
-              resource = resources[args.keys.sort.join(":")]
-              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
-              resource.call(**args)
-            end
-
-            ##
             # Create a fully-qualified Conversation resource string.
             #
             # @overload conversation_path(project:, conversation:)

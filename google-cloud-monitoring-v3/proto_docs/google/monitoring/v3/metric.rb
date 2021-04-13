@@ -56,8 +56,8 @@ module Google
         # @!attribute [rw] metadata
         #   @return [::Google::Api::MonitoredResourceMetadata]
         #     Output only. The associated monitored resource metadata. When reading a
-        #     a timeseries, this field will include metadata labels that are explicitly
-        #     named in the reduction. When creating a timeseries, this field is ignored.
+        #     time series, this field will include metadata labels that are explicitly
+        #     named in the reduction. When creating a time series, this field is ignored.
         # @!attribute [rw] metric_kind
         #   @return [::Google::Api::MetricDescriptor::MetricKind]
         #     The metric kind of the time series. When listing time series, this metric
@@ -87,12 +87,17 @@ module Google
         #     metric. If the associated metric's descriptor must be auto-created, then
         #     the value type of the descriptor is determined by the point's type, which
         #     must be `BOOL`, `INT64`, `DOUBLE`, or `DISTRIBUTION`.
+        # @!attribute [rw] unit
+        #   @return [::String]
+        #     The units in which the metric value is reported. It is only applicable
+        #     if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The `unit`
+        #     defines the representation of the stored metric values.
         class TimeSeries
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A descriptor for the labels and points in a timeseries.
+        # A descriptor for the labels and points in a time series.
         # @!attribute [rw] label_descriptors
         #   @return [::Array<::Google::Api::LabelDescriptor>]
         #     Descriptors for the labels.
@@ -113,6 +118,12 @@ module Google
           # @!attribute [rw] metric_kind
           #   @return [::Google::Api::MetricDescriptor::MetricKind]
           #     The value stream kind.
+          # @!attribute [rw] unit
+          #   @return [::String]
+          #     The unit in which `time_series` point values are reported. `unit`
+          #     follows the UCUM format for units as seen in
+          #     https://unitsofmeasure.org/ucum.html.
+          #     `unit` is only valid if `value_type` is INTEGER, DOUBLE, DISTRIBUTION.
           class ValueDescriptor
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

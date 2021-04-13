@@ -12,6 +12,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :serialized_record_batch, :bytes, 1
       optional :row_count, :int64, 2
     end
+    add_message "google.cloud.bigquery.storage.v1.ArrowSerializationOptions" do
+      optional :buffer_compression, :enum, 2, "google.cloud.bigquery.storage.v1.ArrowSerializationOptions.CompressionCodec"
+    end
+    add_enum "google.cloud.bigquery.storage.v1.ArrowSerializationOptions.CompressionCodec" do
+      value :COMPRESSION_UNSPECIFIED, 0
+      value :LZ4_FRAME, 1
+    end
   end
 end
 
@@ -22,6 +29,8 @@ module Google
         module V1
           ArrowSchema = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.ArrowSchema").msgclass
           ArrowRecordBatch = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.ArrowRecordBatch").msgclass
+          ArrowSerializationOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.ArrowSerializationOptions").msgclass
+          ArrowSerializationOptions::CompressionCodec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.ArrowSerializationOptions.CompressionCodec").enummodule
         end
       end
     end

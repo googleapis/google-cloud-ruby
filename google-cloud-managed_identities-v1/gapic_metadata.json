@@ -9,37 +9,57 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client",
-          "methods": {
-            "CreateMicrosoftAdDomain": [
-              "create_microsoft_ad_domain"
-            ],
-            "ResetAdminPassword": [
-              "reset_admin_password"
-            ],
-            "ListDomains": [
-              "list_domains"
-            ],
-            "GetDomain": [
-              "get_domain"
-            ],
-            "UpdateDomain": [
-              "update_domain"
-            ],
-            "DeleteDomain": [
-              "delete_domain"
-            ],
-            "AttachTrust": [
-              "attach_trust"
-            ],
-            "ReconfigureTrust": [
-              "reconfigure_trust"
-            ],
-            "DetachTrust": [
-              "detach_trust"
-            ],
-            "ValidateTrust": [
-              "validate_trust"
-            ]
+          "rpcs": {
+            "CreateMicrosoftAdDomain": {
+              "methods": [
+                "create_microsoft_ad_domain"
+              ]
+            },
+            "ResetAdminPassword": {
+              "methods": [
+                "reset_admin_password"
+              ]
+            },
+            "ListDomains": {
+              "methods": [
+                "list_domains"
+              ]
+            },
+            "GetDomain": {
+              "methods": [
+                "get_domain"
+              ]
+            },
+            "UpdateDomain": {
+              "methods": [
+                "update_domain"
+              ]
+            },
+            "DeleteDomain": {
+              "methods": [
+                "delete_domain"
+              ]
+            },
+            "AttachTrust": {
+              "methods": [
+                "attach_trust"
+              ]
+            },
+            "ReconfigureTrust": {
+              "methods": [
+                "reconfigure_trust"
+              ]
+            },
+            "DetachTrust": {
+              "methods": [
+                "detach_trust"
+              ]
+            },
+            "ValidateTrust": {
+              "methods": [
+                "validate_trust"
+              ]
+            }
           }
         }
       }

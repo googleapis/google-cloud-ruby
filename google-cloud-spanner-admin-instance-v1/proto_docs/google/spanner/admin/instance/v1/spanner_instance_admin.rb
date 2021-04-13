@@ -118,7 +118,7 @@ module Google
             #     See [the
             #     documentation](https://cloud.google.com/spanner/docs/instances#node_count)
             #     for more information about nodes.
-            # @!attribute [rw] state
+            # @!attribute [r] state
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::Instance::State]
             #     Output only. The current instance state. For
             #     {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#create_instance CreateInstance}, the state must be

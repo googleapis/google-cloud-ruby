@@ -9,22 +9,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client",
-          "methods": {
-            "CreateBudget": [
-              "create_budget"
-            ],
-            "UpdateBudget": [
-              "update_budget"
-            ],
-            "GetBudget": [
-              "get_budget"
-            ],
-            "ListBudgets": [
-              "list_budgets"
-            ],
-            "DeleteBudget": [
-              "delete_budget"
-            ]
+          "rpcs": {
+            "CreateBudget": {
+              "methods": [
+                "create_budget"
+              ]
+            },
+            "UpdateBudget": {
+              "methods": [
+                "update_budget"
+              ]
+            },
+            "GetBudget": {
+              "methods": [
+                "get_budget"
+              ]
+            },
+            "ListBudgets": {
+              "methods": [
+                "list_budgets"
+              ]
+            },
+            "DeleteBudget": {
+              "methods": [
+                "delete_budget"
+              ]
+            }
           }
         }
       }

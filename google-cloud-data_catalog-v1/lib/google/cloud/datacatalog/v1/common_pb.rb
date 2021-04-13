@@ -9,6 +9,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :INTEGRATED_SYSTEM_UNSPECIFIED, 0
       value :BIGQUERY, 1
       value :CLOUD_PUBSUB, 2
+      value :DATAPROC_METASTORE, 3
     end
   end
 end

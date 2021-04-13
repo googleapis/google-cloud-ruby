@@ -108,6 +108,9 @@ module Google
             rpc :UpdateBuildTrigger, ::Google::Cloud::Build::V1::UpdateBuildTriggerRequest, ::Google::Cloud::Build::V1::BuildTrigger
             # Runs a `BuildTrigger` at a particular source revision.
             rpc :RunBuildTrigger, ::Google::Cloud::Build::V1::RunBuildTriggerRequest, ::Google::Longrunning::Operation
+            # ReceiveTriggerWebhook [Experimental] is called when the API receives a
+            # webhook request targeted at a specific trigger.
+            rpc :ReceiveTriggerWebhook, ::Google::Cloud::Build::V1::ReceiveTriggerWebhookRequest, ::Google::Cloud::Build::V1::ReceiveTriggerWebhookResponse
             # Creates a `WorkerPool` to run the builds, and returns the new worker pool.
             #
             # This API is experimental.

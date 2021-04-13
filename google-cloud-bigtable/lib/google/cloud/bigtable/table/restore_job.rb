@@ -108,7 +108,7 @@ module Google
           #   end
           #
           def table
-            Table.from_grpc results, service if results
+            Table.from_grpc results, service, view: :NAME_ONLY if results
           end
         end
       end

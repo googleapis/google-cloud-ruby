@@ -18,6 +18,7 @@ require "google/cloud/pubsub/service"
 require "google/cloud/pubsub/credentials"
 require "google/cloud/pubsub/topic"
 require "google/cloud/pubsub/batch_publisher"
+require "google/cloud/pubsub/schema"
 require "google/cloud/pubsub/snapshot"
 
 module Google
@@ -192,15 +193,31 @@ module Google
         #
         #   Hash keys and values may include the following:
         #
-        #   * `:max_bytes` (Integer) The maximum size of messages to be collected before the batch is published. Default
-        #     is 1,000,000 (1MB).
-        #   * `:max_messages` (Integer) The maximum number of messages to be collected before the batch is published.
-        #     Default is 100.
-        #   * `:interval` (Numeric) The number of seconds to collect messages before the batch is published. Default is
-        #     0.01.
-        #   * `:threads` (Hash) The number of threads to create to handle concurrent calls by the publisher:
-        #     * `:publish` (Integer) The number of threads used to publish messages. Default is 2.
-        #     * `:callback` (Integer) The number of threads to handle the published messages' callbacks. Default is 4.
+        #   * `:max_bytes` (Integer) The maximum size of messages to be collected
+        #     before the batch is published. Default is 1,000,000 (1MB).
+        #   * `:max_messages` (Integer) The maximum number of messages to be
+        #     collected before the batch is published. Default is 100.
+        #   * `:interval` (Numeric) The number of seconds to collect messages before
+        #     the batch is published. Default is 0.01.
+        #   * `:threads` (Hash) The number of threads to create to handle concurrent
+        #     calls by the publisher:
+        #
+        #     * `:publish` (Integer) The number of threads used to publish messages.
+        #       Default is 2.
+        #     * `:callback` (Integer) The number of threads to handle the published
+        #       messages' callbacks. Default is 4.
+        # @param [String] schema_name The name of the schema that messages
+        #   published should be validated against. Optional. The value can be a
+        #   simple schema ID (relative name), in which case the current project
+        #   ID will be supplied, or a fully-qualified schema name in the form
+        #   `projects/{project_id}/schemas/{schema_id}`. If provided,
+        #   `message_encoding` must also be provided.
+        # @param [String, Symbol] message_encoding The encoding of messages validated
+        #   against the schema identified by `schema_name`. Optional. Values include:
+        #
+        #   * `JSON` - JSON encoding.
+        #   * `BINARY` - Binary encoding, as defined by the schema type. For some
+        #     schema types, binary encoding may not be available.
         #
         # @return [Google::Cloud::PubSub::Topic]
         #
@@ -210,12 +227,20 @@ module Google
         #   pubsub = Google::Cloud::PubSub.new
         #   topic = pubsub.create_topic "my-topic"
         #
-        def create_topic topic_name, labels: nil, kms_key: nil, persistence_regions: nil, async: nil
+        def create_topic topic_name,
+                         labels: nil,
+                         kms_key: nil,
+                         persistence_regions: nil,
+                         async: nil,
+                         schema_name: nil,
+                         message_encoding: nil
           ensure_service!
           grpc = service.create_topic topic_name,
                                       labels:              labels,
                                       kms_key_name:        kms_key,
-                                      persistence_regions: persistence_regions
+                                      persistence_regions: persistence_regions,
+                                      schema_name:         schema_name,
+                                      message_encoding:    message_encoding
           Topic.from_grpc grpc, service, async: async
         end
         alias new_topic create_topic
@@ -386,6 +411,198 @@ module Google
         end
         alias find_snapshots snapshots
         alias list_snapshots snapshots
+
+        ##
+        # Retrieves schema by name.
+        #
+        # @param [String] schema_name Name of a schema. The value can
+        #   be a simple schema ID, in which case the current project ID
+        #   will be supplied, or a fully-qualified schema name in the form
+        #   `projects/{project_id}/schemas/{schema_id}`.
+        # @param view [Symbol, String, nil] Possible values:
+        #   * `BASIC` - Include the `name` and `type` of the schema, but not the `definition`.
+        #   * `FULL` - Include all Schema object fields.
+        #
+        #   The default value is `BASIC`.
+        # @param [String] project If the schema belongs to a project other
+        #   than the one currently connected to, the alternate project ID can be
+        #   specified here. Not used if a fully-qualified schema name is
+        #   provided for `schema_name`.
+        # @param [Boolean] skip_lookup Optionally create a {Schema} object
+        #   without verifying the schema resource exists on the Pub/Sub
+        #   service. Calls made on this object will raise errors if the service
+        #   resource does not exist. Default is `false`.
+        #
+        # @return [Google::Cloud::PubSub::Schema, nil] Returns `nil` if
+        #   the schema does not exist.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   schema = pubsub.schema "my-schema"
+        #   schema.name #=> "projects/my-project/schemas/my-schema"
+        #   schema.type #=> :PROTOCOL_BUFFER
+        #   # schema.definition # nil - Use view: :full to load complete resource.
+        #
+        # @example Skip the lookup against the service with `skip_lookup`:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   # No API call is made to retrieve the schema information.
+        #   # The default project is used in the name.
+        #   schema = pubsub.schema "my-schema", skip_lookup: true
+        #   schema.name #=> "projects/my-project/schemas/my-schema"
+        #   schema.type #=> nil
+        #   schema.definition #=> nil
+        #
+        # @example Get the schema definition with `view: :full`:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   schema = pubsub.schema "my-schema", view: :full
+        #   schema.name #=> "projects/my-project/schemas/my-schema"
+        #   schema.type #=> :PROTOCOL_BUFFER
+        #   schema.definition # The schema definition
+        #
+        def schema schema_name, view: nil, project: nil, skip_lookup: nil
+          ensure_service!
+          options = { project: project }
+          return Schema.from_name schema_name, view, service, options if skip_lookup
+          view ||= :BASIC
+          grpc = service.get_schema schema_name, view, options
+          Schema.from_grpc grpc, service
+        rescue Google::Cloud::NotFoundError
+          nil
+        end
+        alias get_schema schema
+        alias find_schema schema
+
+        ##
+        # Creates a new schema.
+        #
+        # @param [String] schema_id The ID to use for the schema, which will
+        #   become the final component of the schema's resource name. Required.
+        #
+        #   The schema ID (relative name) must start with a letter, and
+        #   contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
+        #   underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
+        #   signs (`%`). It must be between 3 and 255 characters in length, and
+        #   it must not start with `goog`.
+        # @param [String, Symbol] type The type of the schema. Required. Possible
+        #   values are case-insensitive and include:
+        #
+        #     * `PROTOCOL_BUFFER` - A Protocol Buffer schema definition.
+        #     * `AVRO` - An Avro schema definition.
+        # @param [String] definition  The definition of the schema. Required. This
+        #   should be a string representing the full definition of the schema that
+        #   is a valid schema definition of the type specified in `type`.
+        # @param [String] project If the schema belongs to a project other
+        #   than the one currently connected to, the alternate project ID can be
+        #   specified here. Optional.
+        #
+        # @return [Google::Cloud::PubSub::Schema]
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   definition = "..."
+        #   schema = pubsub.create_schema "my-schema", :avro, definition
+        #   schema.name #=> "projects/my-project/schemas/my-schema"
+        #
+        def create_schema schema_id, type, definition, project: nil
+          ensure_service!
+          type = type.to_s.upcase
+          grpc = service.create_schema schema_id, type, definition, project: project
+          Schema.from_grpc grpc, service
+        end
+        alias new_schema create_schema
+
+        ##
+        # Retrieves a list of schemas for the given project.
+        #
+        # @param view [String, Symbol, nil] The set of fields to return in the response. Possible values:
+        #
+        #     * `BASIC` - Include the `name` and `type` of the schema, but not the `definition`.
+        #     * `FULL` - Include all Schema object fields.
+        #
+        #   The default value is `BASIC`.
+        # @param [String] token A previously-returned page token representing
+        #   part of the larger set of results to view.
+        # @param [Integer] max Maximum number of schemas to return.
+        #
+        # @return [Array<Google::Cloud::PubSub::Schema>] (See
+        #   {Google::Cloud::PubSub::Schema::List})
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   schemas = pubsub.schemas
+        #   schemas.each do |schema|
+        #     puts schema.name
+        #   end
+        #
+        # @example Retrieve all schemas: (See {Schema::List#all})
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   schemas = pubsub.schemas
+        #   schemas.all do |schema|
+        #     puts schema.name
+        #   end
+        #
+        def schemas view: nil, token: nil, max: nil
+          ensure_service!
+          view ||= :BASIC
+          options = { token: token, max: max }
+          grpc = service.list_schemas view, options
+          Schema::List.from_grpc grpc, service, view, max
+        end
+        alias find_schemas schemas
+        alias list_schemas schemas
+
+        ##
+        # Validates a schema type and definition.
+        #
+        # @param [String, Symbol] type The type of the schema. Required. Possible
+        #   values are case-insensitive and include:
+        #
+        #     * `PROTOCOL_BUFFER` - A Protocol Buffer schema definition.
+        #     * `AVRO` - An Avro schema definition.
+        # @param [String] definition  The definition of the schema. Required. This
+        #   should be a string representing the full definition of the schema that
+        #   is a valid schema definition of the type specified in `type`.
+        # @param [String] project If the schema belongs to a project other
+        #   than the one currently connected to, the alternate project ID can be
+        #   specified here. Optional.
+        #
+        # @return [Boolean] `true` if the schema is valid, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   definition = "..."
+        #   pubsub.validate_schema :avro, definition #=> true
+        #
+        def valid_schema? type, definition, project: nil
+          ensure_service!
+          type = type.to_s.upcase
+          service.validate_schema type, definition, project: project # return type is empty
+          true
+        rescue Google::Cloud::InvalidArgumentError
+          false
+        end
+        alias validate_schema valid_schema?
 
         protected
 

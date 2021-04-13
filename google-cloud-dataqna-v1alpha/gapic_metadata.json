@@ -9,10 +9,12 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::Client",
-          "methods": {
-            "SuggestQueries": [
-              "suggest_queries"
-            ]
+          "rpcs": {
+            "SuggestQueries": {
+              "methods": [
+                "suggest_queries"
+              ]
+            }
           }
         }
       }
@@ -21,22 +23,32 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::DataQnA::V1alpha::QuestionService::Client",
-          "methods": {
-            "GetQuestion": [
-              "get_question"
-            ],
-            "CreateQuestion": [
-              "create_question"
-            ],
-            "ExecuteQuestion": [
-              "execute_question"
-            ],
-            "GetUserFeedback": [
-              "get_user_feedback"
-            ],
-            "UpdateUserFeedback": [
-              "update_user_feedback"
-            ]
+          "rpcs": {
+            "GetQuestion": {
+              "methods": [
+                "get_question"
+              ]
+            },
+            "CreateQuestion": {
+              "methods": [
+                "create_question"
+              ]
+            },
+            "ExecuteQuestion": {
+              "methods": [
+                "execute_question"
+              ]
+            },
+            "GetUserFeedback": {
+              "methods": [
+                "get_user_feedback"
+              ]
+            },
+            "UpdateUserFeedback": {
+              "methods": [
+                "update_user_feedback"
+              ]
+            }
           }
         }
       }

@@ -189,6 +189,11 @@ module Google
         #     Input only. Settings used to create a CMEK crypto key. When set a project with a KMS
         #     CMEK key is provisioned. This field is mandatory for a subset of Compliance
         #     Regimes.
+        # @!attribute [rw] resource_settings
+        #   @return [::Array<::Google::Cloud::AssuredWorkloads::V1beta1::Workload::ResourceSettings>]
+        #     Input only. Resource properties that are used to customize workload resources.
+        #     These properties (such as custom project id) will be used to create
+        #     workload resources if possible. This field is optional.
         class Workload
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -269,6 +274,22 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Represent the custom settings for the resources to be created.
+          # @!attribute [rw] resource_id
+          #   @return [::String]
+          #     Resource identifier.
+          #     For a project this represents project_id. If the project is already
+          #     taken, the workload creation will fail.
+          # @!attribute [rw] resource_type
+          #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::ResourceInfo::ResourceType]
+          #     Indicates the type of resource. This field should be specified to
+          #     correspond the id to the right project type (CONSUMER_PROJECT or
+          #     ENCRYPTION_KEYS_PROJECT)
+          class ResourceSettings
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
@@ -297,6 +318,12 @@ module Google
 
             # Assured Workloads For US Regions data protection controls
             US_REGIONAL_ACCESS = 5
+
+            # Health Insurance Portability and Accountability Act controls
+            HIPAA = 6
+
+            # Health Information Trust Alliance controls
+            HITRUST = 7
           end
         end
 

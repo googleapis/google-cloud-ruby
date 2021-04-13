@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "940404e086b1ea483ee79fd879d67c1c368790df"
+        "sha": "e8907a5b1bc94a01dacf709b83a40cc734704e57"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "874846a1917ee5c3fe271449f3cb9a06e75407be",
-        "internalRef": "326288259"
+        "sha": "a1ab4d44db02d59ff58810c6d4182d84e4b9abaa",
+        "internalRef": "365620142"
       }
     }
   ],
@@ -47,11 +47,24 @@
     "lib/google/cloud/data_catalog/v1/data_catalog/client.rb",
     "lib/google/cloud/data_catalog/v1/data_catalog/credentials.rb",
     "lib/google/cloud/data_catalog/v1/data_catalog/paths.rb",
+    "lib/google/cloud/data_catalog/v1/policy_tag_manager.rb",
+    "lib/google/cloud/data_catalog/v1/policy_tag_manager/client.rb",
+    "lib/google/cloud/data_catalog/v1/policy_tag_manager/credentials.rb",
+    "lib/google/cloud/data_catalog/v1/policy_tag_manager/paths.rb",
+    "lib/google/cloud/data_catalog/v1/policy_tag_manager_serialization.rb",
+    "lib/google/cloud/data_catalog/v1/policy_tag_manager_serialization/client.rb",
+    "lib/google/cloud/data_catalog/v1/policy_tag_manager_serialization/credentials.rb",
+    "lib/google/cloud/data_catalog/v1/policy_tag_manager_serialization/paths.rb",
     "lib/google/cloud/data_catalog/v1/version.rb",
     "lib/google/cloud/datacatalog/v1/common_pb.rb",
+    "lib/google/cloud/datacatalog/v1/data_source_pb.rb",
     "lib/google/cloud/datacatalog/v1/datacatalog_pb.rb",
     "lib/google/cloud/datacatalog/v1/datacatalog_services_pb.rb",
     "lib/google/cloud/datacatalog/v1/gcs_fileset_spec_pb.rb",
+    "lib/google/cloud/datacatalog/v1/policytagmanager_pb.rb",
+    "lib/google/cloud/datacatalog/v1/policytagmanager_services_pb.rb",
+    "lib/google/cloud/datacatalog/v1/policytagmanagerserialization_pb.rb",
+    "lib/google/cloud/datacatalog/v1/policytagmanagerserialization_services_pb.rb",
     "lib/google/cloud/datacatalog/v1/schema_pb.rb",
     "lib/google/cloud/datacatalog/v1/search_pb.rb",
     "lib/google/cloud/datacatalog/v1/table_spec_pb.rb",
@@ -61,8 +74,11 @@
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/cloud/datacatalog/v1/common.rb",
+    "proto_docs/google/cloud/datacatalog/v1/data_source.rb",
     "proto_docs/google/cloud/datacatalog/v1/datacatalog.rb",
     "proto_docs/google/cloud/datacatalog/v1/gcs_fileset_spec.rb",
+    "proto_docs/google/cloud/datacatalog/v1/policytagmanager.rb",
+    "proto_docs/google/cloud/datacatalog/v1/policytagmanagerserialization.rb",
     "proto_docs/google/cloud/datacatalog/v1/schema.rb",
     "proto_docs/google/cloud/datacatalog/v1/search.rb",
     "proto_docs/google/cloud/datacatalog/v1/table_spec.rb",
@@ -77,6 +93,10 @@
     "proto_docs/google/type/expr.rb",
     "test/google/cloud/data_catalog/v1/data_catalog_paths_test.rb",
     "test/google/cloud/data_catalog/v1/data_catalog_test.rb",
+    "test/google/cloud/data_catalog/v1/policy_tag_manager_paths_test.rb",
+    "test/google/cloud/data_catalog/v1/policy_tag_manager_serialization_paths_test.rb",
+    "test/google/cloud/data_catalog/v1/policy_tag_manager_serialization_test.rb",
+    "test/google/cloud/data_catalog/v1/policy_tag_manager_test.rb",
     "test/helper.rb"
   ]
 }

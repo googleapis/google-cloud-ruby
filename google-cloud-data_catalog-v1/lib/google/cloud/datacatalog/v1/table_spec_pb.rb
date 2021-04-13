@@ -29,6 +29,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :TABLE_SOURCE_TYPE_UNSPECIFIED, 0
       value :BIGQUERY_VIEW, 2
       value :BIGQUERY_TABLE, 5
+      value :BIGQUERY_MATERIALIZED_VIEW, 7
     end
   end
 end

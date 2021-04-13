@@ -378,8 +378,8 @@ module Google
           #     and identifies the prevailing subjective opinion, especially to determine
           #     a user's attitude as positive, negative, or neutral:
           #     https://cloud.google.com/natural-language/docs/basics#sentiment_analysis
-          #     For {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content Participants.StreamingAnalyzeContent} method, result will be in
-          #     {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse#message StreamingAnalyzeContentResponse.message.SentimentAnalysisResult}.
+          #     For [Participants.StreamingAnalyzeContent][google.cloud.dialogflow.v2.Participants.StreamingAnalyzeContent] method, result will be in
+          #     [StreamingAnalyzeContentResponse.message.SentimentAnalysisResult][google.cloud.dialogflow.v2.StreamingAnalyzeContentResponse.message].
           #     For {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent} method, result will be in
           #     {::Google::Cloud::Dialogflow::V2::AnalyzeContentResponse#message AnalyzeContentResponse.message.SentimentAnalysisResult}
           #     For {::Google::Cloud::Dialogflow::V2::Conversations::Client#list_messages Conversations.ListMessages} method, result will be in

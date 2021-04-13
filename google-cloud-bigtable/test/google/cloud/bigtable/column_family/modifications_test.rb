@@ -27,7 +27,7 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
     )
   end
   let(:table) do
-    Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service)
+    Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service, view: :SCHEMA_VIEW)
   end
   let(:gc_rule) {
     Google::Cloud::Bigtable::GcRule.max_versions(3)

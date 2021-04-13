@@ -9,34 +9,52 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client",
-          "methods": {
-            "CreateIndex": [
-              "create_index"
-            ],
-            "ListIndexes": [
-              "list_indexes"
-            ],
-            "GetIndex": [
-              "get_index"
-            ],
-            "DeleteIndex": [
-              "delete_index"
-            ],
-            "GetField": [
-              "get_field"
-            ],
-            "UpdateField": [
-              "update_field"
-            ],
-            "ListFields": [
-              "list_fields"
-            ],
-            "ExportDocuments": [
-              "export_documents"
-            ],
-            "ImportDocuments": [
-              "import_documents"
-            ]
+          "rpcs": {
+            "CreateIndex": {
+              "methods": [
+                "create_index"
+              ]
+            },
+            "ListIndexes": {
+              "methods": [
+                "list_indexes"
+              ]
+            },
+            "GetIndex": {
+              "methods": [
+                "get_index"
+              ]
+            },
+            "DeleteIndex": {
+              "methods": [
+                "delete_index"
+              ]
+            },
+            "GetField": {
+              "methods": [
+                "get_field"
+              ]
+            },
+            "UpdateField": {
+              "methods": [
+                "update_field"
+              ]
+            },
+            "ListFields": {
+              "methods": [
+                "list_fields"
+              ]
+            },
+            "ExportDocuments": {
+              "methods": [
+                "export_documents"
+              ]
+            },
+            "ImportDocuments": {
+              "methods": [
+                "import_documents"
+              ]
+            }
           }
         }
       }

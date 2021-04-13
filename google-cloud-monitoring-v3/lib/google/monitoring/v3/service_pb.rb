@@ -3,7 +3,6 @@
 
 require 'google/protobuf'
 
-require 'google/api/monitored_resource_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
@@ -20,6 +19,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :cloud_endpoints, :message, 8, "google.monitoring.v3.Service.CloudEndpoints"
         optional :cluster_istio, :message, 9, "google.monitoring.v3.Service.ClusterIstio"
         optional :mesh_istio, :message, 10, "google.monitoring.v3.Service.MeshIstio"
+        optional :istio_canonical_service, :message, 11, "google.monitoring.v3.Service.IstioCanonicalService"
       end
     end
     add_message "google.monitoring.v3.Service.Custom" do
@@ -40,6 +40,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :mesh_uid, :string, 1
       optional :service_namespace, :string, 3
       optional :service_name, :string, 4
+    end
+    add_message "google.monitoring.v3.Service.IstioCanonicalService" do
+      optional :mesh_uid, :string, 1
+      optional :canonical_service_namespace, :string, 3
+      optional :canonical_service, :string, 4
     end
     add_message "google.monitoring.v3.Service.Telemetry" do
       optional :resource_name, :string, 1
@@ -132,6 +137,7 @@ module Google
         Service::CloudEndpoints = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.CloudEndpoints").msgclass
         Service::ClusterIstio = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.ClusterIstio").msgclass
         Service::MeshIstio = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.MeshIstio").msgclass
+        Service::IstioCanonicalService = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.IstioCanonicalService").msgclass
         Service::Telemetry = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.Telemetry").msgclass
         ServiceLevelObjective = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ServiceLevelObjective").msgclass
         ServiceLevelObjective::View = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ServiceLevelObjective.View").enummodule

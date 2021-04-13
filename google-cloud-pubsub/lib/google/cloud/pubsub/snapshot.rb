@@ -15,6 +15,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/pubsub/snapshot/list"
+require "google/cloud/pubsub/v1"
 
 module Google
   module Cloud

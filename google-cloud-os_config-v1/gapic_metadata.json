@@ -9,34 +9,52 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::OsConfig::V1::OsConfigService::Client",
-          "methods": {
-            "ExecutePatchJob": [
-              "execute_patch_job"
-            ],
-            "GetPatchJob": [
-              "get_patch_job"
-            ],
-            "CancelPatchJob": [
-              "cancel_patch_job"
-            ],
-            "ListPatchJobs": [
-              "list_patch_jobs"
-            ],
-            "ListPatchJobInstanceDetails": [
-              "list_patch_job_instance_details"
-            ],
-            "CreatePatchDeployment": [
-              "create_patch_deployment"
-            ],
-            "GetPatchDeployment": [
-              "get_patch_deployment"
-            ],
-            "ListPatchDeployments": [
-              "list_patch_deployments"
-            ],
-            "DeletePatchDeployment": [
-              "delete_patch_deployment"
-            ]
+          "rpcs": {
+            "ExecutePatchJob": {
+              "methods": [
+                "execute_patch_job"
+              ]
+            },
+            "GetPatchJob": {
+              "methods": [
+                "get_patch_job"
+              ]
+            },
+            "CancelPatchJob": {
+              "methods": [
+                "cancel_patch_job"
+              ]
+            },
+            "ListPatchJobs": {
+              "methods": [
+                "list_patch_jobs"
+              ]
+            },
+            "ListPatchJobInstanceDetails": {
+              "methods": [
+                "list_patch_job_instance_details"
+              ]
+            },
+            "CreatePatchDeployment": {
+              "methods": [
+                "create_patch_deployment"
+              ]
+            },
+            "GetPatchDeployment": {
+              "methods": [
+                "get_patch_deployment"
+              ]
+            },
+            "ListPatchDeployments": {
+              "methods": [
+                "list_patch_deployments"
+              ]
+            },
+            "DeletePatchDeployment": {
+              "methods": [
+                "delete_patch_deployment"
+              ]
+            }
           }
         }
       }

@@ -91,13 +91,16 @@ class MockSpanner < Minitest::Spec
   end
 
   def database_hash instance_id: "my-instance-id", database_id: "database-#{rand(9999)}",
-                    state: "READY", restore_info: {}, version_retention_period: "", earliest_version_time: nil
+                    state: "READY", restore_info: {}, version_retention_period: "", earliest_version_time: nil,
+                    encryption_config: {}, encryption_info: []
     {
       name: "projects/#{project}/instances/#{instance_id}/databases/#{database_id}",
       state: state,
       restore_info: restore_info,
       version_retention_period: version_retention_period,
-      earliest_version_time: earliest_version_time
+      earliest_version_time: earliest_version_time,
+      encryption_config: encryption_config,
+      encryption_info: encryption_info
     }
   end
 
@@ -119,7 +122,7 @@ class MockSpanner < Minitest::Spec
 
   def backup_hash instance_id: "my-instance-id", database_id: "database-#{rand(9999)}",
                   backup_id: "backup-#{rand(9999)}", state: "READY", expire_time: Time.now + 36000,
-                  version_time: Time.now - 3600, create_time: Time.now, size_bytes: 1024, 
+                  version_time: Time.now - 3600, create_time: Time.now, size_bytes: 1024,
                   referencing_databases: ["db1"]
     {
       name: "projects/#{project}/instances/#{instance_id}/backups/#{backup_id}",

@@ -49,6 +49,11 @@ module Google
         # @!attribute [rw] mesh_istio
         #   @return [::Google::Cloud::Monitoring::V3::Service::MeshIstio]
         #     Type used for Istio services scoped to an Istio mesh.
+        # @!attribute [rw] istio_canonical_service
+        #   @return [::Google::Cloud::Monitoring::V3::Service::IstioCanonicalService]
+        #     Type used for canonical services scoped to an Istio mesh.
+        #     Metrics for Istio are
+        #     [documented here](https://istio.io/latest/docs/reference/config/metrics/)
         # @!attribute [rw] telemetry
         #   @return [::Google::Cloud::Monitoring::V3::Service::Telemetry]
         #     Configuration for how to query telemetry on a Service.
@@ -86,7 +91,8 @@ module Google
           end
 
           # Istio service scoped to a single Kubernetes cluster. Learn more at
-          # http://istio.io.
+          # https://istio.io. Clusters running OSS Istio will have their services
+          # ingested as this type.
           # @!attribute [rw] location
           #   @return [::String]
           #     The location of the Kubernetes cluster in which this Istio service is
@@ -110,7 +116,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Istio service scoped to an Istio mesh
+          # Istio service scoped to an Istio mesh. Anthos clusters running ASM < 1.6.8
+          # will have their services ingested as this type.
           # @!attribute [rw] mesh_uid
           #   @return [::String]
           #     Identifier for the mesh in which this Istio service is defined.
@@ -124,6 +131,30 @@ module Google
           #     The name of the Istio service underlying this service. Corresponds to the
           #     `destination_service_name` metric label in Istio metrics.
           class MeshIstio
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Canonical service scoped to an Istio mesh. Anthos clusters running ASM >=
+          # 1.6.8 will have their services ingested as this type.
+          # @!attribute [rw] mesh_uid
+          #   @return [::String]
+          #     Identifier for the Istio mesh in which this canonical service is defined.
+          #     Corresponds to the `mesh_uid` metric label in
+          #     [Istio metrics](https://cloud.google.com/monitoring/api/metrics_istio).
+          # @!attribute [rw] canonical_service_namespace
+          #   @return [::String]
+          #     The namespace of the canonical service underlying this service.
+          #     Corresponds to the `destination_canonical_service_namespace` metric
+          #     label in [Istio
+          #     metrics](https://cloud.google.com/monitoring/api/metrics_istio).
+          # @!attribute [rw] canonical_service
+          #   @return [::String]
+          #     The name of the canonical service underlying this service.
+          #     Corresponds to the `destination_canonical_service_name` metric label in
+          #     label in [Istio
+          #     metrics](https://cloud.google.com/monitoring/api/metrics_istio).
+          class IstioCanonicalService
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

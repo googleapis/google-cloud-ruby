@@ -9,58 +9,92 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client",
-          "methods": {
-            "ListDatabases": [
-              "list_databases"
-            ],
-            "CreateDatabase": [
-              "create_database"
-            ],
-            "GetDatabase": [
-              "get_database"
-            ],
-            "UpdateDatabaseDdl": [
-              "update_database_ddl"
-            ],
-            "DropDatabase": [
-              "drop_database"
-            ],
-            "GetDatabaseDdl": [
-              "get_database_ddl"
-            ],
-            "SetIamPolicy": [
-              "set_iam_policy"
-            ],
-            "GetIamPolicy": [
-              "get_iam_policy"
-            ],
-            "TestIamPermissions": [
-              "test_iam_permissions"
-            ],
-            "CreateBackup": [
-              "create_backup"
-            ],
-            "GetBackup": [
-              "get_backup"
-            ],
-            "UpdateBackup": [
-              "update_backup"
-            ],
-            "DeleteBackup": [
-              "delete_backup"
-            ],
-            "ListBackups": [
-              "list_backups"
-            ],
-            "RestoreDatabase": [
-              "restore_database"
-            ],
-            "ListDatabaseOperations": [
-              "list_database_operations"
-            ],
-            "ListBackupOperations": [
-              "list_backup_operations"
-            ]
+          "rpcs": {
+            "ListDatabases": {
+              "methods": [
+                "list_databases"
+              ]
+            },
+            "CreateDatabase": {
+              "methods": [
+                "create_database"
+              ]
+            },
+            "GetDatabase": {
+              "methods": [
+                "get_database"
+              ]
+            },
+            "UpdateDatabaseDdl": {
+              "methods": [
+                "update_database_ddl"
+              ]
+            },
+            "DropDatabase": {
+              "methods": [
+                "drop_database"
+              ]
+            },
+            "GetDatabaseDdl": {
+              "methods": [
+                "get_database_ddl"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            },
+            "CreateBackup": {
+              "methods": [
+                "create_backup"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "get_backup"
+              ]
+            },
+            "UpdateBackup": {
+              "methods": [
+                "update_backup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "delete_backup"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "list_backups"
+              ]
+            },
+            "RestoreDatabase": {
+              "methods": [
+                "restore_database"
+              ]
+            },
+            "ListDatabaseOperations": {
+              "methods": [
+                "list_database_operations"
+              ]
+            },
+            "ListBackupOperations": {
+              "methods": [
+                "list_backup_operations"
+              ]
+            }
           }
         }
       }

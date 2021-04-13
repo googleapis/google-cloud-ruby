@@ -4,9 +4,12 @@ inherit_gem:
 AllCops:
   Exclude:
     - "acceptance/**/*"
+    - "utilities/**/*"
 
 Lint/RescueException:
   Exclude:
     - "subscriptions.rb"
 Lint/UselessAssignment:
   Enabled: false
+Metrics/MethodLength:
+  Max: 26

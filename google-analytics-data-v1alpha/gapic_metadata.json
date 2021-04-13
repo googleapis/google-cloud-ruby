@@ -9,25 +9,37 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Analytics::Data::V1alpha::AnalyticsData::Client",
-          "methods": {
-            "RunReport": [
-              "run_report"
-            ],
-            "RunPivotReport": [
-              "run_pivot_report"
-            ],
-            "BatchRunReports": [
-              "batch_run_reports"
-            ],
-            "BatchRunPivotReports": [
-              "batch_run_pivot_reports"
-            ],
-            "GetMetadata": [
-              "get_metadata"
-            ],
-            "RunRealtimeReport": [
-              "run_realtime_report"
-            ]
+          "rpcs": {
+            "RunReport": {
+              "methods": [
+                "run_report"
+              ]
+            },
+            "RunPivotReport": {
+              "methods": [
+                "run_pivot_report"
+              ]
+            },
+            "BatchRunReports": {
+              "methods": [
+                "batch_run_reports"
+              ]
+            },
+            "BatchRunPivotReports": {
+              "methods": [
+                "batch_run_pivot_reports"
+              ]
+            },
+            "GetMetadata": {
+              "methods": [
+                "get_metadata"
+              ]
+            },
+            "RunRealtimeReport": {
+              "methods": [
+                "run_realtime_report"
+              ]
+            }
           }
         }
       }

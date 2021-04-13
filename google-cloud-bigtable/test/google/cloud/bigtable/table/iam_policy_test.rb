@@ -29,7 +29,7 @@ describe Google::Cloud::Bigtable::Table, :iam_policy, :mock_bigtable do
     )
   }
   let(:table) do
-    Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service)
+    Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service, view: :SCHEMA_VIEW)
   end
   let(:viewer_policy_json) do
     {

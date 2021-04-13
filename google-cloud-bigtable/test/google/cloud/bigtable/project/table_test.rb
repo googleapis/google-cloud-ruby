@@ -72,34 +72,6 @@ describe Google::Cloud::Bigtable::Project, :table, :mock_bigtable do
     _(table).must_be :nil?
   end
 
-  it "load schema view on access schema fields" do
-    table_id = "test-table"
-    get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
-      name: table_path(instance_id, table_id),
-      cluster_states: clusters_state_grpc,
-      column_families: column_families_grpc,
-      granularity: :MILLIS
-    )
-
-    mock = Minitest::Mock.new
-    mock.expect :get_table, get_res, [name: table_path(instance_id, table_id), view: :SCHEMA_VIEW]
-    mock.expect :get_table, get_res, [name: table_path(instance_id, table_id), view: :REPLICATION_VIEW]
-    bigtable.service.mocked_tables = mock
-
-    table = Google::Cloud::Bigtable::Table.from_grpc(
-      Google::Cloud::Bigtable::Admin::V2::Table.new(name: table_path(instance_id, table_id)),
-      bigtable.service,
-      view: :NAME_ONLY
-    )
-
-    2.times do
-      _(table.column_families).wont_be :empty?
-      _(table.granularity).must_equal :MILLIS
-      _(table.cluster_states).wont_be :empty?
-    end
-    mock.verify
-  end
-
   it "get table object without fetching table" do
     table_id = "my-table"
     app_profile_id = "my-app-profile"

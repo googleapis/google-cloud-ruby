@@ -9,109 +9,177 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client",
-          "methods": {
-            "CreateDataset": [
-              "create_dataset"
-            ],
-            "GetDataset": [
-              "get_dataset"
-            ],
-            "ListDatasets": [
-              "list_datasets"
-            ],
-            "DeleteDataset": [
-              "delete_dataset"
-            ],
-            "ImportData": [
-              "import_data"
-            ],
-            "ExportData": [
-              "export_data"
-            ],
-            "GetDataItem": [
-              "get_data_item"
-            ],
-            "ListDataItems": [
-              "list_data_items"
-            ],
-            "GetAnnotatedDataset": [
-              "get_annotated_dataset"
-            ],
-            "ListAnnotatedDatasets": [
-              "list_annotated_datasets"
-            ],
-            "DeleteAnnotatedDataset": [
-              "delete_annotated_dataset"
-            ],
-            "LabelImage": [
-              "label_image"
-            ],
-            "LabelVideo": [
-              "label_video"
-            ],
-            "LabelText": [
-              "label_text"
-            ],
-            "GetExample": [
-              "get_example"
-            ],
-            "ListExamples": [
-              "list_examples"
-            ],
-            "CreateAnnotationSpecSet": [
-              "create_annotation_spec_set"
-            ],
-            "GetAnnotationSpecSet": [
-              "get_annotation_spec_set"
-            ],
-            "ListAnnotationSpecSets": [
-              "list_annotation_spec_sets"
-            ],
-            "DeleteAnnotationSpecSet": [
-              "delete_annotation_spec_set"
-            ],
-            "CreateInstruction": [
-              "create_instruction"
-            ],
-            "GetInstruction": [
-              "get_instruction"
-            ],
-            "ListInstructions": [
-              "list_instructions"
-            ],
-            "DeleteInstruction": [
-              "delete_instruction"
-            ],
-            "GetEvaluation": [
-              "get_evaluation"
-            ],
-            "SearchEvaluations": [
-              "search_evaluations"
-            ],
-            "SearchExampleComparisons": [
-              "search_example_comparisons"
-            ],
-            "CreateEvaluationJob": [
-              "create_evaluation_job"
-            ],
-            "UpdateEvaluationJob": [
-              "update_evaluation_job"
-            ],
-            "GetEvaluationJob": [
-              "get_evaluation_job"
-            ],
-            "PauseEvaluationJob": [
-              "pause_evaluation_job"
-            ],
-            "ResumeEvaluationJob": [
-              "resume_evaluation_job"
-            ],
-            "DeleteEvaluationJob": [
-              "delete_evaluation_job"
-            ],
-            "ListEvaluationJobs": [
-              "list_evaluation_jobs"
-            ]
+          "rpcs": {
+            "CreateDataset": {
+              "methods": [
+                "create_dataset"
+              ]
+            },
+            "GetDataset": {
+              "methods": [
+                "get_dataset"
+              ]
+            },
+            "ListDatasets": {
+              "methods": [
+                "list_datasets"
+              ]
+            },
+            "DeleteDataset": {
+              "methods": [
+                "delete_dataset"
+              ]
+            },
+            "ImportData": {
+              "methods": [
+                "import_data"
+              ]
+            },
+            "ExportData": {
+              "methods": [
+                "export_data"
+              ]
+            },
+            "GetDataItem": {
+              "methods": [
+                "get_data_item"
+              ]
+            },
+            "ListDataItems": {
+              "methods": [
+                "list_data_items"
+              ]
+            },
+            "GetAnnotatedDataset": {
+              "methods": [
+                "get_annotated_dataset"
+              ]
+            },
+            "ListAnnotatedDatasets": {
+              "methods": [
+                "list_annotated_datasets"
+              ]
+            },
+            "DeleteAnnotatedDataset": {
+              "methods": [
+                "delete_annotated_dataset"
+              ]
+            },
+            "LabelImage": {
+              "methods": [
+                "label_image"
+              ]
+            },
+            "LabelVideo": {
+              "methods": [
+                "label_video"
+              ]
+            },
+            "LabelText": {
+              "methods": [
+                "label_text"
+              ]
+            },
+            "GetExample": {
+              "methods": [
+                "get_example"
+              ]
+            },
+            "ListExamples": {
+              "methods": [
+                "list_examples"
+              ]
+            },
+            "CreateAnnotationSpecSet": {
+              "methods": [
+                "create_annotation_spec_set"
+              ]
+            },
+            "GetAnnotationSpecSet": {
+              "methods": [
+                "get_annotation_spec_set"
+              ]
+            },
+            "ListAnnotationSpecSets": {
+              "methods": [
+                "list_annotation_spec_sets"
+              ]
+            },
+            "DeleteAnnotationSpecSet": {
+              "methods": [
+                "delete_annotation_spec_set"
+              ]
+            },
+            "CreateInstruction": {
+              "methods": [
+                "create_instruction"
+              ]
+            },
+            "GetInstruction": {
+              "methods": [
+                "get_instruction"
+              ]
+            },
+            "ListInstructions": {
+              "methods": [
+                "list_instructions"
+              ]
+            },
+            "DeleteInstruction": {
+              "methods": [
+                "delete_instruction"
+              ]
+            },
+            "GetEvaluation": {
+              "methods": [
+                "get_evaluation"
+              ]
+            },
+            "SearchEvaluations": {
+              "methods": [
+                "search_evaluations"
+              ]
+            },
+            "SearchExampleComparisons": {
+              "methods": [
+                "search_example_comparisons"
+              ]
+            },
+            "CreateEvaluationJob": {
+              "methods": [
+                "create_evaluation_job"
+              ]
+            },
+            "UpdateEvaluationJob": {
+              "methods": [
+                "update_evaluation_job"
+              ]
+            },
+            "GetEvaluationJob": {
+              "methods": [
+                "get_evaluation_job"
+              ]
+            },
+            "PauseEvaluationJob": {
+              "methods": [
+                "pause_evaluation_job"
+              ]
+            },
+            "ResumeEvaluationJob": {
+              "methods": [
+                "resume_evaluation_job"
+              ]
+            },
+            "DeleteEvaluationJob": {
+              "methods": [
+                "delete_evaluation_job"
+              ]
+            },
+            "ListEvaluationJobs": {
+              "methods": [
+                "list_evaluation_jobs"
+              ]
+            }
           }
         }
       }

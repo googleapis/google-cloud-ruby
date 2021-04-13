@@ -9,25 +9,37 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Language::V1::LanguageService::Client",
-          "methods": {
-            "AnalyzeSentiment": [
-              "analyze_sentiment"
-            ],
-            "AnalyzeEntities": [
-              "analyze_entities"
-            ],
-            "AnalyzeEntitySentiment": [
-              "analyze_entity_sentiment"
-            ],
-            "AnalyzeSyntax": [
-              "analyze_syntax"
-            ],
-            "ClassifyText": [
-              "classify_text"
-            ],
-            "AnnotateText": [
-              "annotate_text"
-            ]
+          "rpcs": {
+            "AnalyzeSentiment": {
+              "methods": [
+                "analyze_sentiment"
+              ]
+            },
+            "AnalyzeEntities": {
+              "methods": [
+                "analyze_entities"
+              ]
+            },
+            "AnalyzeEntitySentiment": {
+              "methods": [
+                "analyze_entity_sentiment"
+              ]
+            },
+            "AnalyzeSyntax": {
+              "methods": [
+                "analyze_syntax"
+              ]
+            },
+            "ClassifyText": {
+              "methods": [
+                "classify_text"
+              ]
+            },
+            "AnnotateText": {
+              "methods": [
+                "annotate_text"
+              ]
+            }
           }
         }
       }

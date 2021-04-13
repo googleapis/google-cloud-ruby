@@ -31,7 +31,7 @@ describe Google::Cloud::Bigtable::Table, :delete, :mock_bigtable do
     )
   }
   let(:table) {
-    Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service)
+    Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service, view: :FULL)
   }
 
   it "can delete itself" do

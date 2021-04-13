@@ -12,12 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START pubsub_dependencies]
 source "https://rubygems.org"
 
-gem "google-cloud-pubsub", "~> 2.4"
+# [END pubsub_dependencies]
+
+if ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
+  gem "google-cloud-pubsub", path: "../../google-cloud-pubsub"
+else
+  # [START pubsub_dependencies]
+  gem "google-cloud-pubsub"
+  # [END pubsub_dependencies]
+end
+
 gem "sinatra"
 
 group :test do
+  gem "avro", "~> 1.10"
   gem "google-style", "~> 1.25.1"
   gem "minitest", "~> 5.14"
   gem "minitest-focus", "~> 1.1"

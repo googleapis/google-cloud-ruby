@@ -91,6 +91,9 @@ module Google
 
           # BigQuery native table.
           BIGQUERY_TABLE = 5
+
+          # BigQuery materialized view.
+          BIGQUERY_MATERIALIZED_VIEW = 7
         end
       end
     end

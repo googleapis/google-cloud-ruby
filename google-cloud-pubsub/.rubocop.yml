@@ -6,6 +6,7 @@ AllCops:
     - "**/acceptance/**/*"
     - "support/**/*"
     - "test/**/*"
+    - "samples/utilities/**/*"
 
 Style/Documentation:
   Enabled: false

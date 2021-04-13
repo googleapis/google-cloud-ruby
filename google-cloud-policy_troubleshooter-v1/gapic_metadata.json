@@ -9,10 +9,12 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::Client",
-          "methods": {
-            "TroubleshootIamPolicy": [
-              "troubleshoot_iam_policy"
-            ]
+          "rpcs": {
+            "TroubleshootIamPolicy": {
+              "methods": [
+                "troubleshoot_iam_policy"
+              ]
+            }
           }
         }
       }

@@ -9,16 +9,22 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Speech::V1p1beta1::Speech::Client",
-          "methods": {
-            "Recognize": [
-              "recognize"
-            ],
-            "LongRunningRecognize": [
-              "long_running_recognize"
-            ],
-            "StreamingRecognize": [
-              "streaming_recognize"
-            ]
+          "rpcs": {
+            "Recognize": {
+              "methods": [
+                "recognize"
+              ]
+            },
+            "LongRunningRecognize": {
+              "methods": [
+                "long_running_recognize"
+              ]
+            },
+            "StreamingRecognize": {
+              "methods": [
+                "streaming_recognize"
+              ]
+            }
           }
         }
       }
@@ -27,37 +33,57 @@
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Speech::V1p1beta1::Adaptation::Client",
-          "methods": {
-            "CreatePhraseSet": [
-              "create_phrase_set"
-            ],
-            "GetPhraseSet": [
-              "get_phrase_set"
-            ],
-            "ListPhraseSet": [
-              "list_phrase_set"
-            ],
-            "UpdatePhraseSet": [
-              "update_phrase_set"
-            ],
-            "DeletePhraseSet": [
-              "delete_phrase_set"
-            ],
-            "CreateCustomClass": [
-              "create_custom_class"
-            ],
-            "GetCustomClass": [
-              "get_custom_class"
-            ],
-            "ListCustomClasses": [
-              "list_custom_classes"
-            ],
-            "UpdateCustomClass": [
-              "update_custom_class"
-            ],
-            "DeleteCustomClass": [
-              "delete_custom_class"
-            ]
+          "rpcs": {
+            "CreatePhraseSet": {
+              "methods": [
+                "create_phrase_set"
+              ]
+            },
+            "GetPhraseSet": {
+              "methods": [
+                "get_phrase_set"
+              ]
+            },
+            "ListPhraseSet": {
+              "methods": [
+                "list_phrase_set"
+              ]
+            },
+            "UpdatePhraseSet": {
+              "methods": [
+                "update_phrase_set"
+              ]
+            },
+            "DeletePhraseSet": {
+              "methods": [
+                "delete_phrase_set"
+              ]
+            },
+            "CreateCustomClass": {
+              "methods": [
+                "create_custom_class"
+              ]
+            },
+            "GetCustomClass": {
+              "methods": [
+                "get_custom_class"
+              ]
+            },
+            "ListCustomClasses": {
+              "methods": [
+                "list_custom_classes"
+              ]
+            },
+            "UpdateCustomClass": {
+              "methods": [
+                "update_custom_class"
+              ]
+            },
+            "DeleteCustomClass": {
+              "methods": [
+                "delete_custom_class"
+              ]
+            }
           }
         }
       }
