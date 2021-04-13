@@ -271,9 +271,8 @@ module Google
 
             # We must be stopped, tell the stream to quit.
             @request_queue.push self
-          rescue GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,
-                 GRPC::ResourceExhausted, GRPC::Unauthenticated,
-                 GRPC::Unavailable, GRPC::Core::CallError => e
+          rescue GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal, GRPC::ResourceExhausted,
+                 GRPC::Unauthenticated, GRPC::Unavailable, GRPC::Unknown, GRPC::Core::CallError => e
             # Restart the stream with an incremental back for a retriable error.
             # Also when GRPC raises the internal CallError.
 

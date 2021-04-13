@@ -187,6 +187,27 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :retry, :watch_fi
     verify_doc_snapshots doc_snapshots
   end
 
+  it "restarts when GRPC::Unknown is raised" do
+    # set stub because we can't mock a streaming request/response
+    listen_stub = StreamingListenStub.new restartable_listen_responses(GRPC::Unknown.new)
+    firestore.service.instance_variable_set :@firestore, listen_stub
+
+    doc_snapshots = []
+    listener = document.listen do |doc_snp|
+      doc_snapshots << doc_snp
+    end
+
+    # Start listener because we stopped this from happening in this setup
+    # Pass in mock to verify incremental backoff is happening
+    listener.instance_variable_get(:@listener).start_with_sleep_mock sleep_mock
+
+    wait_until { doc_snapshots.count == 6 }
+
+    listener.stop
+
+    verify_doc_snapshots doc_snapshots
+  end
+
   def restartable_listen_responses error
     [
       [
