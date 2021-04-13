@@ -82,9 +82,13 @@ module Google
         # @!attribute [r] primary_domain
         #   @return [::String]
         #     Output only. The primary domain name.
-        # @!attribute [rw] is_domain_verified
+        # @!attribute [r] is_domain_verified
         #   @return [::Boolean]
-        #     Whether the domain is verified.
+        #     Output only. Whether the domain is verified.
+        #     This field is not returned for a Customer's cloud_identity_info resource.
+        #     Partners can use the domains.get() method of the Workspace SDK's
+        #     Directory API, or listen to the PRIMARY_DOMAIN_VERIFIED Pub/Sub event in
+        #     to track domain verification of their resolve Workspace customers.
         # @!attribute [rw] alternate_email
         #   @return [::String]
         #     The alternate email.
@@ -130,6 +134,9 @@ module Google
         # @!attribute [rw] proto_value
         #   @return [::Google::Protobuf::Any]
         #     Represents an 'Any' proto value.
+        # @!attribute [rw] bool_value
+        #   @return [::Boolean]
+        #     Represents a boolean value.
         class Value
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
