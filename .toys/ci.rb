@@ -27,6 +27,8 @@ flag :head_commit, "--head COMMIT"
 flag :base_commit, "--base COMMIT"
 flag :bundle_update, "--bundle-update", desc: "Update rather than install gem bundles"
 flag :only, "--only", desc: "Run only the specified tasks (i.e. tasks are opt-in rather than opt-out)"
+flag :gems, accept: Array
+flag :all_gems
 
 TASKS.each do |task|
   flag "task_#{task}", "--[no-]#{task}", desc: "Run the #{task} task"
@@ -41,6 +43,8 @@ def run
     val.nil? ? !only : val
   end
   @errors = []
+  @cur_dir = Dir.getwd
+  Dir.chdir context_directory
   determine_dirs.each { |dir| run_in_dir dir }
   puts
   if @errors.empty?
@@ -53,19 +57,31 @@ def run
 end
 
 def determine_dirs
-  cur_dir = Dir.getwd
-  base_dir = context_directory
-  Dir.chdir base_dir
+  return gems if gems
+  return all_gem_dirs if all_gems
+  cur_gem_dir || gem_dirs_from_changes
+end
 
-  if cur_dir != base_dir && cur_dir.start_with?(base_dir)
-    cur_dir = cur_dir.sub "#{base_dir}/", ""
-    dirs = find_changed_directories ["#{cur_dir}/."]
+def all_gem_dirs
+  puts "Running for all gems", :bold
+  dirs = Dir.glob("*/*.gemspec").map { |file| File.dirname file }
+  filter_gem_dirs dirs
+end
+
+def cur_gem_dir
+  root_dir = context_directory
+  if @cur_dir != root_dir && @cur_dir.start_with?(root_dir)
+    dir = @cur_dir.sub "#{root_dir}/", ""
+    dirs = find_changed_directories ["#{dir}/."]
     unless dirs.empty?
       puts "Running in current directory: #{dirs.first}", :bold
       return dirs
     end
   end
+  nil
+end
 
+def gem_dirs_from_changes
   puts "Evaluating changes.", :bold
   base_ref, head_ref = interpret_github_event
   ensure_checkout head_ref unless head_ref.nil?
@@ -83,31 +99,6 @@ def determine_dirs
   else
     puts "Gem directories changed:", :bold
     dirs.each { |dir| puts "  #{dir}" }
-  end
-
-  dirs
-end
-
-def run_in_dir dir
-  Dir.chdir dir do
-    bundle_task = bundle_update ? "update" : "install"
-    puts
-    puts "#{dir}: bundle ...", :bold
-    result = exec ["bundle", bundle_task]
-    unless result.success?
-      @errors << "#{dir}: bundle"
-      next
-    end
-    @run_tasks.each do |task|
-      puts
-      puts "#{dir}: #{task} ...", :bold
-      success = if task == "linkinator"
-        run_linkinator
-      else
-        exec(["bundle", "exec", "rake", task]).success?
-      end
-      @errors << "#{dir}: #{task}" unless success
-    end
   end
 end
 
@@ -173,7 +164,11 @@ def find_changed_directories files
       dirs << Regexp.last_match[1]
     end
   end
-  dirs.to_a.find_all do |dir|
+  filter_gem_dirs dirs.to_a
+end
+
+def filter_gem_dirs dirs
+  dirs.find_all do |dir|
     if ["Rakefile", "Gemfile", "#{dir}.gemspec"].all? { |file| File.file?(File.join(dir, file)) }
       if ::Toys::Compat.allow_fork?
         func = proc do
@@ -192,8 +187,32 @@ def find_changed_directories files
   end.sort
 end
 
+def run_in_dir dir
+  Dir.chdir dir do
+    bundle_task = bundle_update ? "update" : "install"
+    puts
+    puts "#{dir}: bundle ...", :bold
+    result = exec ["bundle", bundle_task]
+    unless result.success?
+      @errors << "#{dir}: bundle"
+      next
+    end
+    @run_tasks.each do |task|
+      puts
+      puts "#{dir}: #{task} ...", :bold
+      success = if task == "linkinator"
+        run_linkinator
+      else
+        exec(["bundle", "exec", "rake", task]).success?
+      end
+      @errors << "#{dir}: #{task}" unless success
+    end
+  end
+end
+
 def run_linkinator
-  result = exec ["npx", "linkinator", "./doc"], out: :capture, err: [:child, :out]
+  linkinator_cmd = ["npx", "linkinator", "./doc", "--skip", "\\w+\\.md$"]
+  result = exec linkinator_cmd, out: :capture, err: [:child, :out]
   puts result.captured_out
   checked_links = result.captured_out.split "\n"
   checked_links.select! { |link| link =~ /^\[(\d+)\]/ && ::Regexp.last_match[1] != "200" }
