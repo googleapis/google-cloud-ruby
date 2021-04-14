@@ -40,6 +40,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
   let(:partitioned_table_id) { "weekly_kittens_reference" }
   let(:partitioned_field_table_id) { "kittens_field_reference" }
   let(:seven_days) { 7 * 24 * 60 * 60 }
+  let(:ten_days) { 10 * 24 * 60 * 60 }
   let(:query) { "SELECT id, breed, name, dob FROM #{table.query_id}" }
   let(:rows) do
     [
@@ -126,13 +127,22 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
     end
 
     partitioned_table = dataset.table partitioned_table_id, skip_lookup: true
-    partitioned_table.time_partitioning_expiration = 1
+    partitioned_table.time_partitioning_expiration = ten_days
 
     partitioned_table.reload!
     _(partitioned_table.table_id).must_equal partitioned_table_id
     _(partitioned_table.time_partitioning_type).must_equal "DAY"
     _(partitioned_table.time_partitioning_field).must_be_nil
-    _(partitioned_table.time_partitioning_expiration).must_equal 1
+    _(partitioned_table.time_partitioning_expiration).must_equal ten_days
+
+    partitioned_table = dataset.table partitioned_table_id, skip_lookup: true
+    partitioned_table.time_partitioning_expiration = nil
+
+    partitioned_table.reload!
+    _(partitioned_table.table_id).must_equal partitioned_table_id
+    _(partitioned_table.time_partitioning_type).must_equal "DAY"
+    _(partitioned_table.time_partitioning_field).must_be_nil
+    _(partitioned_table.time_partitioning_expiration).must_be_nil
   end
 
   it "gets and sets time partitioning by field" do
