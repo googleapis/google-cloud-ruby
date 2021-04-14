@@ -14,14 +14,13 @@
 
 require "google/cloud/firestore"
 
-# [START firestore_transaction_document_update]
-# [START fs_run_simple_transaction]
 def run_simple_transaction project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
   # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
-
+  # [START firestore_transaction_document_update]
+  # [START fs_run_simple_transaction]
   city_ref = firestore.doc "#{collection_path}/SF"
 
   firestore.transaction do |tx|
@@ -29,19 +28,18 @@ def run_simple_transaction project_id:, collection_path: "cities"
     puts "New population is #{new_population}."
     tx.update city_ref, { population: new_population }
   end
+  # [END fs_run_simple_transaction]
+  # [END firestore_transaction_document_update]
   puts "Ran a simple transaction to update the population field in the SF document in the cities collection."
 end
-# [END fs_run_simple_transaction]
-# [END firestore_transaction_document_update]
 
-# [START firestore_transaction_document_update_conditional]
-# [START fs_return_info_transaction]
 def return_info_transaction project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
   # collection_path = "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
-
+  # [START firestore_transaction_document_update_conditional]
+  # [START fs_return_info_transaction]
   city_ref = firestore.doc "#{collection_path}/SF"
 
   updated = firestore.transaction do |tx|
@@ -49,8 +47,6 @@ def return_info_transaction project_id:, collection_path: "cities"
     if new_population < 1_000_000
       tx.update city_ref, { population: new_population }
       true
-    else
-      false
     end
   end
 
@@ -59,9 +55,9 @@ def return_info_transaction project_id:, collection_path: "cities"
   else
     puts "Sorry! Population is too big."
   end
+  # [END fs_return_info_transaction]
+  # [END firestore_transaction_document_update_conditional]
 end
-# [END fs_return_info_transaction]
-# [END firestore_transaction_document_update_conditional]
 
 def batch_write project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
