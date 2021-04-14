@@ -56,7 +56,6 @@ class Kokoro < Command
       end
       local_docs_test if should_link_check?
     end
-    release_please if @should_release && @updated
   end
 
   def cloudrad
@@ -132,7 +131,6 @@ class Kokoro < Command
       run "bundle exec rake ci:acceptance", 3600
       local_docs_test if should_link_check?
     end
-    release_please if @should_release
   end
 
   def post
