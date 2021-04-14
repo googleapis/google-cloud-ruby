@@ -37,19 +37,22 @@ end
 
 def release_please gem_name
   version = gem_version gem_name
-  puts "Running release-please for #{gem_name} from version #{version}", :bold
+  puts "Running release-please for #{gem_name} from version #{version.inspect}", :bold
   cmd = [
     "npx", "release-please", "release-pr",
     "--package-name", gem_name,
-    "--last-package-version", version,
     "--release-type", "ruby-yoshi",
     "--repo-url", "googleapis/google-cloud-ruby",
-    "--bump-minor-pre-major"
+    "--bump-minor-pre-major", "--debug"
   ]
+  cmd += ["--last-package-version", version] if version
   cmd += ["--token", github_token] if github_token
   log_cmd = cmd.inspect
   log_cmd.sub! github_token, "****" if github_token
-  exec cmd, log_cmd: log_cmd
+  result = exec cmd, log_cmd: log_cmd, e: false
+  unless result.success?
+    puts "Error running release-please for #{gem_name} from version #{version.inspect}", :bold, :red
+  end
 end
 
 def gem_version gem_name
@@ -59,5 +62,6 @@ def gem_version gem_name
       puts spec.version.to_s
     end
   end
-  capture_proc(func).strip
+  version = capture_proc(func).strip
+  version == "0.0.1alpha" ? nil : version
 end
