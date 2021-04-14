@@ -211,7 +211,8 @@ def run_in_dir dir
 end
 
 def run_linkinator
-  result = exec ["npx", "linkinator", "./doc"], out: :capture, err: [:child, :out]
+  linkinator_cmd = ["npx", "linkinator", "./doc", "--skip", "\\w+\\.md$"]
+  result = exec linkinator_cmd, out: :capture, err: [:child, :out]
   puts result.captured_out
   checked_links = result.captured_out.split "\n"
   checked_links.select! { |link| link =~ /^\[(\d+)\]/ && ::Regexp.last_match[1] != "200" }
