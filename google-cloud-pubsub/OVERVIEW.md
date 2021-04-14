@@ -205,13 +205,16 @@ sleep
 Messages also can be pulled directly in a one-time operation. (See
 {Google::Cloud::PubSub::Subscription#pull Subscription#pull})
 
+The `immediate: false` option is now recommended to avoid adverse impacts on
+pull operations.
+
 ```ruby
 require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new
 
 sub = pubsub.subscription "my-topic-sub"
-received_messages = sub.pull
+received_messages = sub.pull immediate: false
 ```
 
 A maximum number of messages to pull can be specified:
@@ -222,7 +225,7 @@ require "google/cloud/pubsub"
 pubsub = Google::Cloud::PubSub.new
 
 sub = pubsub.subscription "my-topic-sub"
-received_messages = sub.pull max: 10
+received_messages = sub.pull immediate: false, max: 10
 ```
 
 ## Acknowledging a Message
@@ -263,7 +266,7 @@ require "google/cloud/pubsub"
 pubsub = Google::Cloud::PubSub.new
 
 sub = pubsub.subscription "my-topic-sub"
-received_messages = sub.pull
+received_messages = sub.pull immediate: false
 sub.acknowledge received_messages
 ```
 
@@ -328,7 +331,7 @@ require "google/cloud/pubsub"
 pubsub = Google::Cloud::PubSub.new
 
 sub = pubsub.subscription "my-topic-sub"
-received_messages = sub.pull
+received_messages = sub.pull immediate: false
 sub.modify_ack_deadline 120, received_messages
 ```
 
@@ -474,7 +477,7 @@ sub = pubsub.subscription "my-topic-sub"
 
 snapshot = sub.create_snapshot
 
-received_messages = sub.pull
+received_messages = sub.pull immediate: false
 sub.acknowledge received_messages
 
 sub.seek snapshot
