@@ -734,10 +734,11 @@ module Google
 
         ##
         # Pulls messages from the server, blocking until messages are available
-        # when called with the `immediate: false` option, which is now recommended
-        # to avoid adverse impacts on pull operations. Raises an API error with
-        # status `UNAVAILABLE` if there are too many concurrent pull requests
-        # pending for the given subscription.
+        # when called with the `immediate: false` option, which is recommended
+        # to avoid adverse impacts on the performance of pull operations.
+        #
+        # Raises an API error with status `UNAVAILABLE` if there are too many
+        # concurrent pull requests pending for the given subscription.
         #
         # See also {#listen} for the preferred way to process messages as they
         # become available.
