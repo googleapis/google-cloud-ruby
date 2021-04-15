@@ -100,6 +100,7 @@ def gem_dirs_from_changes
     puts "Gem directories changed:", :bold
     dirs.each { |dir| puts "  #{dir}" }
   end
+  dirs
 end
 
 def interpret_github_event
