@@ -205,8 +205,8 @@ sleep
 Messages also can be pulled directly in a one-time operation. (See
 {Google::Cloud::PubSub::Subscription#pull Subscription#pull})
 
-The `immediate: false` option is now recommended to avoid adverse impacts on
-pull operations.
+The `immediate: false` option is recommended to avoid adverse impacts on the
+performance of pull operations.
 
 ```ruby
 require "google/cloud/pubsub"
