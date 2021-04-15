@@ -205,11 +205,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :tags, :string, 19
       optional :trigger_template, :message, 7, "google.devtools.cloudbuild.v1.RepoSource"
       optional :github, :message, 13, "google.devtools.cloudbuild.v1.GitHubEventsConfig"
+      optional :pubsub_config, :message, 29, "google.devtools.cloudbuild.v1.PubsubConfig"
       optional :create_time, :message, 5, "google.protobuf.Timestamp"
       optional :disabled, :bool, 9
       map :substitutions, :string, :string, 11
       repeated :ignored_files, :string, 15
       repeated :included_files, :string, 16
+      optional :filter, :string, 30
       oneof :build_template do
         optional :build, :message, 4, "google.devtools.cloudbuild.v1.Build"
         optional :filename, :string, 8
@@ -223,6 +225,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :pull_request, :message, 4, "google.devtools.cloudbuild.v1.PullRequestFilter"
         optional :push, :message, 5, "google.devtools.cloudbuild.v1.PushFilter"
       end
+    end
+    add_message "google.devtools.cloudbuild.v1.PubsubConfig" do
+      optional :subscription, :string, 1
+      optional :topic, :string, 2
+      optional :service_account_email, :string, 3
+      optional :state, :enum, 4, "google.devtools.cloudbuild.v1.PubsubConfig.State"
+    end
+    add_enum "google.devtools.cloudbuild.v1.PubsubConfig.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :OK, 1
+      value :SUBSCRIPTION_DELETED, 2
+      value :TOPIC_DELETED, 3
+      value :SUBSCRIPTION_MISCONFIGURED, 4
     end
     add_message "google.devtools.cloudbuild.v1.PullRequestFilter" do
       optional :comment_control, :enum, 5, "google.devtools.cloudbuild.v1.PullRequestFilter.CommentControl"
@@ -414,6 +429,8 @@ module Google
         CancelBuildRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.CancelBuildRequest").msgclass
         BuildTrigger = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildTrigger").msgclass
         GitHubEventsConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.GitHubEventsConfig").msgclass
+        PubsubConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.PubsubConfig").msgclass
+        PubsubConfig::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.PubsubConfig.State").enummodule
         PullRequestFilter = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.PullRequestFilter").msgclass
         PullRequestFilter::CommentControl = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.PullRequestFilter.CommentControl").enummodule
         PushFilter = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.PushFilter").msgclass

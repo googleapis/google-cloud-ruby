@@ -863,6 +863,10 @@ module Google
         #     a build whenever a GitHub event is received.
         #
         #     Mutually exclusive with `trigger_template`.
+        # @!attribute [rw] pubsub_config
+        #   @return [::Google::Cloud::Build::V1::PubsubConfig]
+        #     Optional. PubsubConfig describes the configuration of a trigger that
+        #     creates a build whenever a Pub/Sub message is published.
         # @!attribute [rw] build
         #   @return [::Google::Cloud::Build::V1::Build]
         #     Contents of the build template.
@@ -901,6 +905,9 @@ module Google
         #     filter and included_files is not empty, then we make sure that at
         #     least one of those files matches a included_files glob. If not,
         #     then we do not trigger a build.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. A Common Expression Language string.
         class BuildTrigger
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -940,6 +947,47 @@ module Google
         class GitHubEventsConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # PubsubConfig describes the configuration of a trigger that
+        # creates a build whenever a Pub/Sub message is published.
+        # @!attribute [r] subscription
+        #   @return [::String]
+        #     Output only. Name of the subscription. Format is
+        #     `projects/{project}/subscriptions/{subscription}`.
+        # @!attribute [rw] topic
+        #   @return [::String]
+        #     The name of the topic from which this subscription is receiving messages.
+        #     Format is `projects/{project}/topics/{topic}`.
+        # @!attribute [rw] service_account_email
+        #   @return [::String]
+        #     Service account that will make the push request.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::Build::V1::PubsubConfig::State]
+        #     Potential issues with the underlying Pub/Sub subscription configuration.
+        #     Only populated on get requests.
+        class PubsubConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enumerates potential issues with the underlying Pub/Sub subscription
+          # configuration.
+          module State
+            # The subscription configuration has not been checked.
+            STATE_UNSPECIFIED = 0
+
+            # The Pub/Sub subscription is properly configured.
+            OK = 1
+
+            # The subscription has been deleted.
+            SUBSCRIPTION_DELETED = 2
+
+            # The topic has been deleted.
+            TOPIC_DELETED = 3
+
+            # Some of the subscription's field are misconfigured.
+            SUBSCRIPTION_MISCONFIGURED = 4
+          end
         end
 
         # PullRequestFilter contains filter properties for matching GitHub Pull
