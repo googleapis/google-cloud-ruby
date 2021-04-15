@@ -18,6 +18,7 @@ desc "Runs release-please."
 
 flag :github_token, "--github-token=TOKEN", default: ENV["GITHUB_TOKEN"]
 flag :install
+flag :use_fork, "--fork"
 remaining_args :gems, desc: "Release the specified gems. If no specific gem is provided, all gems are checked."
 
 include :exec, e: true
@@ -45,6 +46,7 @@ def release_please gem_name
     "--repo-url", "googleapis/google-cloud-ruby",
     "--bump-minor-pre-major", "--debug"
   ]
+  cmd += ["--fork"] if use_fork
   cmd += ["--last-package-version", version] if version
   cmd += ["--token", github_token] if github_token
   log_cmd = cmd.inspect

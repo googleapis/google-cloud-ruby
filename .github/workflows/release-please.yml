@@ -28,4 +28,4 @@ jobs:
       - name: Install tools
         run: "gem install --no-document toys && npm install release-please"
       - name: execute
-        run: "toys release-please ${{ github.event.inputs.gem }}"
+        run: "toys release-please --fork ${{ github.event.inputs.gem }}"
