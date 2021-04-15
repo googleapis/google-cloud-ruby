@@ -109,7 +109,7 @@ def interpret_github_event
     case github_event_name
     when "pull_request"
       puts "Getting commits from pull_request event"
-      [payload["pull_request"]["base"]["sha"], nil]
+      [payload["pull_request"]["base"]["ref"], nil]
     when "push"
       puts "Getting commits from push event"
       [payload["before"], nil]
