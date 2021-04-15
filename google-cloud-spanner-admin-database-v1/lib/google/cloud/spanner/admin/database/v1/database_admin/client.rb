@@ -301,9 +301,8 @@ module Google
                 #     defaults to the server's maximum allowed page size.
                 #   @param page_token [::String]
                 #     If non-empty, `page_token` should contain a
-                #     {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesResponse#next_page_token next_page_token}
-                #     from a previous
-                #     {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesResponse ListDatabasesResponse}.
+                #     {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesResponse#next_page_token next_page_token} from a
+                #     previous {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesResponse ListDatabasesResponse}.
                 #
                 # @yield [response, operation] Access the result along with the RPC operation
                 # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Spanner::Admin::Database::V1::Database>]
@@ -357,8 +356,8 @@ module Google
                 # have a name of the format `<database_name>/operations/<operation_id>` and
                 # can be used to track preparation of the database. The
                 # {::Google::Longrunning::Operation#metadata metadata} field type is
-                # {::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata CreateDatabaseMetadata}.
-                # The {::Google::Longrunning::Operation#response response} field type is
+                # {::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata CreateDatabaseMetadata}. The
+                # {::Google::Longrunning::Operation#response response} field type is
                 # {::Google::Cloud::Spanner::Admin::Database::V1::Database Database}, if successful.
                 #
                 # @overload create_database(request, options = nil)
@@ -391,8 +390,8 @@ module Google
                 #     statements execute atomically with the creation of the database:
                 #     if there is an error in any statement, the database is not created.
                 #   @param encryption_config [::Google::Cloud::Spanner::Admin::Database::V1::EncryptionConfig, ::Hash]
-                #     Optional. The encryption configuration for the database. If this field is
-                #     not specified, Cloud Spanner will encrypt/decrypt all data at rest using
+                #     Optional. The encryption configuration for the database. If this field is not
+                #     specified, Cloud Spanner will encrypt/decrypt all data at rest using
                 #     Google default encryption.
                 #
                 # @yield [response, operation] Access the result along with the RPC operation
@@ -515,8 +514,7 @@ module Google
                 # the format `<database_name>/operations/<operation_id>` and can be used to
                 # track execution of the schema change(s). The
                 # {::Google::Longrunning::Operation#metadata metadata} field type is
-                # {::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlMetadata UpdateDatabaseDdlMetadata}.
-                # The operation has no response.
+                # {::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlMetadata UpdateDatabaseDdlMetadata}.  The operation has no response.
                 #
                 # @overload update_database_ddl(request, options = nil)
                 #   Pass arguments to `update_database_ddl` via a request object, either of type
@@ -545,20 +543,18 @@ module Google
                 #
                 #     Specifying an explicit operation ID simplifies determining
                 #     whether the statements were executed in the event that the
-                #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl UpdateDatabaseDdl}
-                #     call is replayed, or the return value is otherwise lost: the
-                #     {::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest#database database}
-                #     and `operation_id` fields can be combined to form the
+                #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl UpdateDatabaseDdl} call is replayed,
+                #     or the return value is otherwise lost: the {::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest#database database} and
+                #     `operation_id` fields can be combined to form the
                 #     {::Google::Longrunning::Operation#name name} of the resulting
-                #     {::Google::Longrunning::Operation longrunning.Operation}:
-                #     `<database>/operations/<operation_id>`.
+                #     {::Google::Longrunning::Operation longrunning.Operation}: `<database>/operations/<operation_id>`.
                 #
                 #     `operation_id` should be unique within the database, and must be
                 #     a valid identifier: `[a-z][a-z0-9_]*`. Note that
                 #     automatically-generated operation IDs always begin with an
                 #     underscore. If the named operation already exists,
-                #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl UpdateDatabaseDdl}
-                #     returns `ALREADY_EXISTS`.
+                #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl UpdateDatabaseDdl} returns
+                #     `ALREADY_EXISTS`.
                 #
                 # @yield [response, operation] Access the result along with the RPC operation
                 # @yieldparam response [::Gapic::Operation]
@@ -987,12 +983,12 @@ module Google
                 # `projects/<project>/instances/<instance>/backups/<backup>/operations/<operation_id>`
                 # and can be used to track creation of the backup. The
                 # {::Google::Longrunning::Operation#metadata metadata} field type is
-                # {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata}.
-                # The {::Google::Longrunning::Operation#response response} field type is
-                # {::Google::Cloud::Spanner::Admin::Database::V1::Backup Backup}, if successful.
-                # Cancelling the returned operation will stop the creation and delete the
-                # backup. There can be only one pending backup creation per database. Backup
-                # creation of different databases can run concurrently.
+                # {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata}. The
+                # {::Google::Longrunning::Operation#response response} field type is
+                # {::Google::Cloud::Spanner::Admin::Database::V1::Backup Backup}, if successful. Cancelling the returned operation will stop the
+                # creation and delete the backup.
+                # There can be only one pending backup creation per database. Backup creation
+                # of different databases can run concurrently.
                 #
                 # @overload create_backup(request, options = nil)
                 #   Pass arguments to `create_backup` via a request object, either of type
@@ -1023,11 +1019,11 @@ module Google
                 #   @param backup [::Google::Cloud::Spanner::Admin::Database::V1::Backup, ::Hash]
                 #     Required. The backup to create.
                 #   @param encryption_config [::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupEncryptionConfig, ::Hash]
-                #     Optional. The encryption configuration used to encrypt the backup. If this
-                #     field is not specified, the backup will use the same encryption
-                #     configuration as the database by default, namely
-                #     {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupEncryptionConfig#encryption_type encryption_type}
-                #     = `USE_DATABASE_ENCRYPTION`.
+                #     Optional. The encryption configuration used to encrypt the backup. If this field is
+                #     not specified, the backup will use the same
+                #     encryption configuration as the database by default, namely
+                #     {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupEncryptionConfig#encryption_type encryption_type} =
+                #     `USE_DATABASE_ENCRYPTION`.
                 #
                 # @yield [response, operation] Access the result along with the RPC operation
                 # @yieldparam response [::Gapic::Operation]
@@ -1076,8 +1072,7 @@ module Google
                 end
 
                 ##
-                # Gets metadata on a pending or completed
-                # {::Google::Cloud::Spanner::Admin::Database::V1::Backup Backup}.
+                # Gets metadata on a pending or completed {::Google::Cloud::Spanner::Admin::Database::V1::Backup Backup}.
                 #
                 # @overload get_backup(request, options = nil)
                 #   Pass arguments to `get_backup` via a request object, either of type
@@ -1145,8 +1140,7 @@ module Google
                 end
 
                 ##
-                # Updates a pending or completed
-                # {::Google::Cloud::Spanner::Admin::Database::V1::Backup Backup}.
+                # Updates a pending or completed {::Google::Cloud::Spanner::Admin::Database::V1::Backup Backup}.
                 #
                 # @overload update_backup(request, options = nil)
                 #   Pass arguments to `update_backup` via a request object, either of type
@@ -1221,8 +1215,7 @@ module Google
                 end
 
                 ##
-                # Deletes a pending or completed
-                # {::Google::Cloud::Spanner::Admin::Database::V1::Backup Backup}.
+                # Deletes a pending or completed {::Google::Cloud::Spanner::Admin::Database::V1::Backup Backup}.
                 #
                 # @overload delete_backup(request, options = nil)
                 #   Pass arguments to `delete_backup` via a request object, either of type
@@ -1321,9 +1314,7 @@ module Google
                 #     must be one of: `<`, `>`, `<=`, `>=`, `!=`, `=`, or `:`.
                 #     Colon `:` is the contains operator. Filter rules are not case sensitive.
                 #
-                #     The following fields in the
-                #     {::Google::Cloud::Spanner::Admin::Database::V1::Backup Backup} are eligible for
-                #     filtering:
+                #     The following fields in the {::Google::Cloud::Spanner::Admin::Database::V1::Backup Backup} are eligible for filtering:
                 #
                 #       * `name`
                 #       * `database`
@@ -1355,10 +1346,9 @@ module Google
                 #     less, defaults to the server's maximum allowed page size.
                 #   @param page_token [::String]
                 #     If non-empty, `page_token` should contain a
-                #     {::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsResponse#next_page_token next_page_token}
-                #     from a previous
-                #     {::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsResponse ListBackupsResponse}
-                #     to the same `parent` and with the same `filter`.
+                #     {::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsResponse#next_page_token next_page_token} from a
+                #     previous {::Google::Cloud::Spanner::Admin::Database::V1::ListBackupsResponse ListBackupsResponse} to the same `parent` and with the same
+                #     `filter`.
                 #
                 # @yield [response, operation] Access the result along with the RPC operation
                 # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Spanner::Admin::Database::V1::Backup>]
@@ -1455,12 +1445,12 @@ module Google
                 #     Name of the backup from which to restore.  Values are of the form
                 #     `projects/<project>/instances/<instance>/backups/<backup>`.
                 #   @param encryption_config [::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseEncryptionConfig, ::Hash]
-                #     Optional. An encryption configuration describing the encryption type and
-                #     key resources in Cloud KMS used to encrypt/decrypt the database to restore
-                #     to. If this field is not specified, the restored database will use the same
-                #     encryption configuration as the backup by default, namely
-                #     {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseEncryptionConfig#encryption_type encryption_type}
-                #     = `USE_CONFIG_DEFAULT_OR_BACKUP_ENCRYPTION`.
+                #     Optional. An encryption configuration describing the encryption type and key
+                #     resources in Cloud KMS used to encrypt/decrypt the database to restore to.
+                #     If this field is not specified, the restored database will use
+                #     the same encryption configuration as the backup by default, namely
+                #     {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseEncryptionConfig#encryption_type encryption_type} =
+                #     `USE_CONFIG_DEFAULT_OR_BACKUP_ENCRYPTION`.
                 #
                 # @yield [response, operation] Access the result along with the RPC operation
                 # @yieldparam response [::Gapic::Operation]
@@ -1551,9 +1541,7 @@ module Google
                 #       * `name` - The name of the long-running operation
                 #       * `done` - False if the operation is in progress, else true.
                 #       * `metadata.@type` - the type of metadata. For example, the type string
-                #          for
-                #          {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata RestoreDatabaseMetadata}
-                #          is
+                #          for {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata RestoreDatabaseMetadata} is
                 #          `type.googleapis.com/google.spanner.admin.database.v1.RestoreDatabaseMetadata`.
                 #       * `metadata.<field_name>` - any field in metadata.value.
                 #       * `error` - Error associated with the long-running operation.
@@ -1573,8 +1561,7 @@ module Google
                 #         `(metadata.name:restored_howl) AND` \
                 #         `(metadata.progress.start_time < \"2018-03-28T14:50:00Z\") AND` \
                 #         `(error:*)` - Return operations where:
-                #         * The operation's metadata type is
-                #         {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata RestoreDatabaseMetadata}.
+                #         * The operation's metadata type is {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata RestoreDatabaseMetadata}.
                 #         * The database is restored from a backup.
                 #         * The backup name contains "backup_howl".
                 #         * The restored database's name contains "restored_howl".
@@ -1586,9 +1573,8 @@ module Google
                 #   @param page_token [::String]
                 #     If non-empty, `page_token` should contain a
                 #     {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse#next_page_token next_page_token}
-                #     from a previous
-                #     {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse ListDatabaseOperationsResponse}
-                #     to the same `parent` and with the same `filter`.
+                #     from a previous {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse ListDatabaseOperationsResponse} to the
+                #     same `parent` and with the same `filter`.
                 #
                 # @yield [response, operation] Access the result along with the RPC operation
                 # @yieldparam response [::Gapic::PagedEnumerable<::Gapic::Operation>]
@@ -1682,9 +1668,7 @@ module Google
                 #       * `name` - The name of the long-running operation
                 #       * `done` - False if the operation is in progress, else true.
                 #       * `metadata.@type` - the type of metadata. For example, the type string
-                #          for
-                #          {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata}
-                #          is
+                #          for {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata} is
                 #          `type.googleapis.com/google.spanner.admin.database.v1.CreateBackupMetadata`.
                 #       * `metadata.<field_name>` - any field in metadata.value.
                 #       * `error` - Error associated with the long-running operation.
@@ -1704,8 +1688,7 @@ module Google
                 #         `(metadata.name:howl) AND` \
                 #         `(metadata.progress.start_time < \"2018-03-28T14:50:00Z\") AND` \
                 #         `(error:*)` - Returns operations where:
-                #         * The operation's metadata type is
-                #         {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata}.
+                #         * The operation's metadata type is {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata}.
                 #         * The backup name contains the string "howl".
                 #         * The operation started before 2018-03-28T14:50:00Z.
                 #         * The operation resulted in an error.
@@ -1715,9 +1698,8 @@ module Google
                 #   @param page_token [::String]
                 #     If non-empty, `page_token` should contain a
                 #     {::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsResponse#next_page_token next_page_token}
-                #     from a previous
-                #     {::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsResponse ListBackupOperationsResponse}
-                #     to the same `parent` and with the same `filter`.
+                #     from a previous {::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsResponse ListBackupOperationsResponse} to the
+                #     same `parent` and with the same `filter`.
                 #
                 # @yield [response, operation] Access the result along with the RPC operation
                 # @yieldparam response [::Gapic::PagedEnumerable<::Gapic::Operation>]
