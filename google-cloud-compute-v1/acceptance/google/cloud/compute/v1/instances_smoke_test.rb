@@ -1,7 +1,10 @@
 require "minitest/autorun"
 
 require "google/cloud/compute/v1/instances"
+require "google/cloud/compute/v1/instance_group_managers"
+require "google/cloud/compute/v1/instance_templates"
 require "google/cloud/compute/v1/zone_operations"
+require "google/cloud/compute/v1/global_operations"
 
 # Tests for GCE instances
 class InstancesSmokeTest < Minitest::Test
@@ -11,6 +14,7 @@ class InstancesSmokeTest < Minitest::Test
     @machine_type = "zones/#{@default_zone}/machineTypes/n1-standard-1"
     @image =  "projects/debian-cloud/global/images/family/debian-10"
     @client = ::Google::Cloud::Compute::V1::Instances::Rest::Client.new
+    @client_ops = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new
     @name = "rbgapic#{rand 10_000_000}"
     @instances = []
     skip "PROJECT_ID must be set before running this test" if @default_project.nil?
@@ -80,6 +84,72 @@ class InstancesSmokeTest < Minitest::Test
     assert exception.message.include?("An error has occurred when making a REST request: Invalid resource field value in the request.")
   end
 
+  def test_query_params
+    skip "Request fails because body is empty"
+    templates_client = ::Google::Cloud::Compute::V1::InstanceTemplates::Rest::Client.new
+    igm_client = ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::Client.new
+    template_name = "rbgapic#{rand 10_000}"
+    igm_name = "rbgapic#{rand 10_000}"
+    template_resource = {
+      name: template_name,
+      properties: {
+        disks: [
+          {
+            initialize_params:
+              {
+                source_image: @image
+              },
+            boot: true,
+            auto_delete: true,
+            type: "PERSISTENT"
+          }
+        ],
+      machine_type: "n1-standard-1",
+      network_interfaces: [{ access_configs: [{ name: "default", type: "ONE_TO_ONE_NAT" }] }]
+      }
+    }
+    client = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::Client.new
+    operation = templates_client.insert project: @default_project, instance_template_resource: template_resource
+    starttime = Time.now
+    while (operation.status != :DONE) && (Time.now < starttime + 100)
+      operation = client.get operation: operation.name, project: @default_project
+      sleep 3
+    end
+    igm_resource = {
+      base_instance_name: "rbgapicinst",
+      target_size: 1,
+      instance_template: operation.target_link,
+      name: igm_name
+    }
+
+    op = igm_client.insert project: @default_project, zone: @default_zone, instance_group_manager_resource: igm_resource
+    wait_for_zonal_op op
+
+    igm = igm_client.get project: @default_project, zone: @default_zone, instance_group_manager: igm_name
+    assert_equal igm.target_size, 1
+
+    resize_op = igm_client.resize project: @default_project, zone: @default_zone, instance_group_manager: igm_name,
+                                  size: 0
+    wait_for_zonal_op resize_op
+
+    igm = igm_client.get project: @default_project, zone: @default_zone, instance_group_manager: igm_name
+    assert_equal igm.target_size, 0
+
+    del_op = igm_client.delete project: @default_project, zone: @default_zone, instance_group_manager: igm_name
+    wait_for_zonal_op del_op
+
+    del_op = templates_client.delete project: @default_project, zone: @default_zone, instance_template: template_name
+    wait_for_zonal_op del_op
+  end
+
+  def wait_for_zonal_op operation
+    starttime = Time.now
+    while (operation.status != :DONE) && (Time.now < starttime + 100)
+      operation = @client_ops.get operation: operation.name, project: @default_project, zone: @default_zone
+      sleep 3
+    end
+  end
+
   def read_instance
     @client.get project: @default_project, zone: @default_zone, instance: @name
   end
@@ -104,11 +174,6 @@ class InstancesSmokeTest < Minitest::Test
     result = @client.insert project: @default_project, zone: @default_zone, instance_resource: instance_resource
     @instances.append @name
     return unless result.status != :DONE
-    client_ops ||= ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new
-    starttime = Time.now
-    while (result.status != :DONE) && (Time.now < starttime + 60)
-      result = client_ops.get operation: result.name, project: @default_project, zone: @default_zone
-      sleep 3
-    end
+    wait_for_zonal_op result
   end
 end
