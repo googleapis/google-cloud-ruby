@@ -31,6 +31,8 @@ module Google
           # of Compute Engine instances.
           #
           class Client
+            include Paths
+
             # @private
             attr_reader :cluster_controller_stub
 
@@ -237,9 +239,9 @@ module Google
             #   @param cluster [::Google::Cloud::Dataproc::V1::Cluster, ::Hash]
             #     Required. The cluster to create.
             #   @param request_id [::String]
-            #     Optional. A unique id used to identify the request. If the server
-            #     receives two {::Google::Cloud::Dataproc::V1::CreateClusterRequest CreateClusterRequest} requests  with the same
-            #     id, then the second request will be ignored and the
+            #     Optional. A unique id used to identify the request. If the server receives two
+            #     [CreateClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateClusterRequest)s
+            #     with the same id, then the second request will be ignored and the
             #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the backend
             #     is returned.
             #
@@ -389,8 +391,9 @@ module Google
             #      </table>
             #   @param request_id [::String]
             #     Optional. A unique id used to identify the request. If the server
-            #     receives two {::Google::Cloud::Dataproc::V1::UpdateClusterRequest UpdateClusterRequest} requests  with the same
-            #     id, then the second request will be ignored and the
+            #     receives two
+            #     [UpdateClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.UpdateClusterRequest)s
+            #     with the same id, then the second request will be ignored and the
             #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
             #     backend is returned.
             #
@@ -449,6 +452,186 @@ module Google
             end
 
             ##
+            # Stops a cluster in a project.
+            #
+            # @overload stop_cluster(request, options = nil)
+            #   Pass arguments to `stop_cluster` via a request object, either of type
+            #   {::Google::Cloud::Dataproc::V1::StopClusterRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataproc::V1::StopClusterRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload stop_cluster(project_id: nil, region: nil, cluster_name: nil, cluster_uuid: nil, request_id: nil)
+            #   Pass arguments to `stop_cluster` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param project_id [::String]
+            #     Required. The ID of the Google Cloud Platform project the
+            #     cluster belongs to.
+            #   @param region [::String]
+            #     Required. The Dataproc region in which to handle the request.
+            #   @param cluster_name [::String]
+            #     Required. The cluster name.
+            #   @param cluster_uuid [::String]
+            #     Optional. Specifying the `cluster_uuid` means the RPC will fail
+            #     (with error NOT_FOUND) if a cluster with the specified UUID does not exist.
+            #   @param request_id [::String]
+            #     Optional. A unique id used to identify the request. If the server
+            #     receives two
+            #     [StopClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StopClusterRequest)s
+            #     with the same id, then the second request will be ignored and the
+            #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
+            #     backend is returned.
+            #
+            #     Recommendation: Set this value to a
+            #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+            #
+            #     The id must contain only letters (a-z, A-Z), numbers (0-9),
+            #     underscores (_), and hyphens (-). The maximum length is 40 characters.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def stop_cluster request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1::StopClusterRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.stop_cluster.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "project_id" => request.project_id,
+                "region" => request.region,
+                "cluster_name" => request.cluster_name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.stop_cluster.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.stop_cluster.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cluster_controller_stub.call_rpc :stop_cluster, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Starts a cluster in a project.
+            #
+            # @overload start_cluster(request, options = nil)
+            #   Pass arguments to `start_cluster` via a request object, either of type
+            #   {::Google::Cloud::Dataproc::V1::StartClusterRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataproc::V1::StartClusterRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload start_cluster(project_id: nil, region: nil, cluster_name: nil, cluster_uuid: nil, request_id: nil)
+            #   Pass arguments to `start_cluster` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param project_id [::String]
+            #     Required. The ID of the Google Cloud Platform project the
+            #     cluster belongs to.
+            #   @param region [::String]
+            #     Required. The Dataproc region in which to handle the request.
+            #   @param cluster_name [::String]
+            #     Required. The cluster name.
+            #   @param cluster_uuid [::String]
+            #     Optional. Specifying the `cluster_uuid` means the RPC will fail
+            #     (with error NOT_FOUND) if a cluster with the specified UUID does not exist.
+            #   @param request_id [::String]
+            #     Optional. A unique id used to identify the request. If the server
+            #     receives two
+            #     [StartClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StartClusterRequest)s
+            #     with the same id, then the second request will be ignored and the
+            #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
+            #     backend is returned.
+            #
+            #     Recommendation: Set this value to a
+            #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+            #
+            #     The id must contain only letters (a-z, A-Z), numbers (0-9),
+            #     underscores (_), and hyphens (-). The maximum length is 40 characters.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def start_cluster request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1::StartClusterRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.start_cluster.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "project_id" => request.project_id,
+                "region" => request.region,
+                "cluster_name" => request.cluster_name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.start_cluster.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.start_cluster.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cluster_controller_stub.call_rpc :start_cluster, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Deletes a cluster in a project. The returned
             # {::Google::Longrunning::Operation#metadata Operation.metadata} will be
             # [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
@@ -480,8 +663,9 @@ module Google
             #     (with error NOT_FOUND) if cluster with specified UUID does not exist.
             #   @param request_id [::String]
             #     Optional. A unique id used to identify the request. If the server
-            #     receives two {::Google::Cloud::Dataproc::V1::DeleteClusterRequest DeleteClusterRequest} requests  with the same
-            #     id, then the second request will be ignored and the
+            #     receives two
+            #     [DeleteClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.DeleteClusterRequest)s
+            #     with the same id, then the second request will be ignored and the
             #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the
             #     backend is returned.
             #
@@ -934,6 +1118,16 @@ module Google
                 #
                 attr_reader :update_cluster
                 ##
+                # RPC-specific configuration for `stop_cluster`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :stop_cluster
+                ##
+                # RPC-specific configuration for `start_cluster`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :start_cluster
+                ##
                 # RPC-specific configuration for `delete_cluster`
                 # @return [::Gapic::Config::Method]
                 #
@@ -960,6 +1154,10 @@ module Google
                   @create_cluster = ::Gapic::Config::Method.new create_cluster_config
                   update_cluster_config = parent_rpcs.update_cluster if parent_rpcs.respond_to? :update_cluster
                   @update_cluster = ::Gapic::Config::Method.new update_cluster_config
+                  stop_cluster_config = parent_rpcs.stop_cluster if parent_rpcs.respond_to? :stop_cluster
+                  @stop_cluster = ::Gapic::Config::Method.new stop_cluster_config
+                  start_cluster_config = parent_rpcs.start_cluster if parent_rpcs.respond_to? :start_cluster
+                  @start_cluster = ::Gapic::Config::Method.new start_cluster_config
                   delete_cluster_config = parent_rpcs.delete_cluster if parent_rpcs.respond_to? :delete_cluster
                   @delete_cluster = ::Gapic::Config::Method.new delete_cluster_config
                   get_cluster_config = parent_rpcs.get_cluster if parent_rpcs.respond_to? :get_cluster

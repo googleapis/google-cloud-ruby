@@ -191,6 +191,148 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::ClientTest < Minitest::T
     end
   end
 
+  def test_stop_cluster
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    project_id = "hello world"
+    region = "hello world"
+    cluster_name = "hello world"
+    cluster_uuid = "hello world"
+    request_id = "hello world"
+
+    stop_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :stop_cluster, name
+      assert_kind_of ::Google::Cloud::Dataproc::V1::StopClusterRequest, request
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["region"]
+      assert_equal "hello world", request["cluster_name"]
+      assert_equal "hello world", request["cluster_uuid"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, stop_cluster_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dataproc::V1::ClusterController::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.stop_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.stop_cluster project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.stop_cluster ::Google::Cloud::Dataproc::V1::StopClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.stop_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.stop_cluster(::Google::Cloud::Dataproc::V1::StopClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, stop_cluster_client_stub.call_rpc_count
+    end
+  end
+
+  def test_start_cluster
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    project_id = "hello world"
+    region = "hello world"
+    cluster_name = "hello world"
+    cluster_uuid = "hello world"
+    request_id = "hello world"
+
+    start_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :start_cluster, name
+      assert_kind_of ::Google::Cloud::Dataproc::V1::StartClusterRequest, request
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["region"]
+      assert_equal "hello world", request["cluster_name"]
+      assert_equal "hello world", request["cluster_uuid"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, start_cluster_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dataproc::V1::ClusterController::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.start_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.start_cluster project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.start_cluster ::Google::Cloud::Dataproc::V1::StartClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.start_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.start_cluster(::Google::Cloud::Dataproc::V1::StartClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, cluster_uuid: cluster_uuid, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, start_cluster_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_cluster
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
