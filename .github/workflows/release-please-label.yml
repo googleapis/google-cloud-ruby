@@ -1,0 +1,24 @@
+name: release-please-label
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - opened
+jobs:
+  release-please-label:
+    if: "${{ github.event.sender == 'yoshi-code-bot' && startsWith(github.event.pull_request.title, 'chore: release ') }}"
+    runs-on: ubuntu-latest
+    steps:
+      - name: ReleaseLabel
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.YOSHI_APPROVER_TOKEN}}
+          script: |
+            core.info('Labeling release');
+            github.issues.addLabels({
+              owner: 'googleapis',
+              repo: 'google-api-ruby-client',
+              issue_number: context.payload.number,
+              labels: ['autorelease: pending']
+            });
