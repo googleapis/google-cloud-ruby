@@ -16,9 +16,10 @@ jobs:
           github-token: ${{secrets.YOSHI_APPROVER_TOKEN}}
           script: |
             core.info('Labeling release');
-            github.issues.addLabels({
-              owner: 'googleapis',
-              repo: 'google-api-ruby-client',
-              issue_number: context.payload.number,
+            await github.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
               labels: ['autorelease: pending']
             });
+            core.info('Labeled');
