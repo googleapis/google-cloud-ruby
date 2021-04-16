@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 / 2021-04-16
+
+#### Features
+
+* Support for stop_cluster and start_cluster, along with additional options for jobs and workflow templates
+
 ### 0.5.0 / 2021-03-08
 
 #### Features
