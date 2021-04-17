@@ -25,8 +25,8 @@ module Google
           # A budget is a plan that describes what you expect to spend on Cloud
           # projects, plus the rules to execute as spend is tracked against that plan,
           # (for example, send an alert when 90% of the target spend is met).
-          # Currently all plans are monthly budgets so the usage period(s) tracked are
-          # implied (calendar months of usage back-to-back).
+          # The budget time period is configurable, with options such as month (default),
+          # quarter, year, or custom time period.
           # @!attribute [r] name
           #   @return [::String]
           #     Output only. Resource name of the budget.
@@ -38,8 +38,9 @@ module Google
           #     Validation: <= 60 chars.
           # @!attribute [rw] budget_filter
           #   @return [::Google::Cloud::Billing::Budgets::V1beta1::Filter]
-          #     Optional. Filters that define which resources are used to compute
-          #     the actual spend against the budget.
+          #     Optional. Filters that define which resources are used to compute the
+          #     actual spend against the budget amount, such as projects, services, and the
+          #     budget's time period, as well as other filters.
           # @!attribute [rw] amount
           #   @return [::Google::Cloud::Billing::Budgets::V1beta1::BudgetAmount]
           #     Required. Budgeted amount.
@@ -67,21 +68,29 @@ module Google
           #     A specified amount to use as the budget.
           #     `currency_code` is optional. If specified when creating a budget, it must
           #     match the currency of the billing account. If specified when updating a
-          #     budget, it must match the existing budget currency_code.
+          #     budget, it must match the currency_code of the existing budget.
           #     The `currency_code` is provided on output.
           # @!attribute [rw] last_period_amount
           #   @return [::Google::Cloud::Billing::Budgets::V1beta1::LastPeriodAmount]
           #     Use the last period's actual spend as the budget for the present period.
+          #     LastPeriodAmount can only be set when the budget's time period is a
+          #     {::Google::Cloud::Billing::Budgets::V1beta1::Filter#calendar_period Filter.calendar_period}.
+          #     It cannot be set in combination with
+          #     {::Google::Cloud::Billing::Budgets::V1beta1::Filter#custom_period Filter.custom_period}.
           class BudgetAmount
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Describes a budget amount targeted to last period's spend.
-          # At this time, the amount is automatically 100% of last period's spend;
-          # that is, there are no other options yet.
-          # Future configuration will be described here (for example, configuring a
-          # percentage of last period's spend).
+          # Describes a budget amount targeted to the last
+          # {::Google::Cloud::Billing::Budgets::V1beta1::Filter#calendar_period Filter.calendar_period}
+          # spend. At this time, the amount is automatically 100% of the last calendar
+          # period's spend; that is, there are no other options yet.
+          # Future configuration options will be described here (for example, configuring
+          # a percentage of last period's spend).
+          # LastPeriodAmount cannot be set for a budget configured with
+          # a
+          # {::Google::Cloud::Billing::Budgets::V1beta1::Filter#custom_period Filter.custom_period}.
           class LastPeriodAmount
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -117,6 +126,10 @@ module Google
 
               # Use forecasted spend for the period as the basis for comparison against
               # the threshold.
+              # FORECASTED_SPEND can only be set when the budget's time period is a
+              # {::Google::Cloud::Billing::Budgets::V1beta1::Filter#calendar_period Filter.calendar_period}.
+              # It cannot be set in combination with
+              # {::Google::Cloud::Billing::Budgets::V1beta1::Filter#custom_period Filter.custom_period}.
               FORECASTED_SPEND = 2
             end
           end
@@ -129,12 +142,12 @@ module Google
           #     be published, in the form `projects/{project_id}/topics/{topic_id}`.
           #     Updates are sent at regular intervals to the topic. The topic needs to be
           #     created before the budget is created; see
-          #     https://cloud.google.com/billing/docs/how-to/budgets#manage-notifications
+          #     https://cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications
           #     for more details.
           #     Caller is expected to have
           #     `pubsub.topics.setIamPolicy` permission on the topic when it's set for a
           #     budget, otherwise, the API call will fail with PERMISSION_DENIED. See
-          #     https://cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications
+          #     https://cloud.google.com/billing/docs/how-to/budgets-programmatic-notifications#permissions_required_for_this_task
           #     for more details on Pub/Sub roles and permissions.
           # @!attribute [rw] schema_version
           #   @return [::String]
@@ -179,13 +192,12 @@ module Google
           #     {::Google::Cloud::Billing::Budgets::V1beta1::Filter#credit_types_treatment Filter.credit_types_treatment}
           #     is INCLUDE_SPECIFIED_CREDITS, this is a list of credit types to be
           #     subtracted from gross cost to determine the spend for threshold
-          #     calculations.
+          #     calculations. See [a list of acceptable credit type
+          #     values](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#credits-type).
           #
           #     If
           #     {::Google::Cloud::Billing::Budgets::V1beta1::Filter#credit_types_treatment Filter.credit_types_treatment}
-          #     is **not** INCLUDE_SPECIFIED_CREDITS, this field must be empty. See [a list
-          #     of acceptable credit type
-          #     values](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#credits-type).
+          #     is **not** INCLUDE_SPECIFIED_CREDITS, this field must be empty.
           # @!attribute [rw] credit_types_treatment
           #   @return [::Google::Cloud::Billing::Budgets::V1beta1::Filter::CreditTypesTreatment]
           #     Optional. If not set, default behavior is `INCLUDE_ALL_CREDITS`.
@@ -211,6 +223,18 @@ module Google
           #     this set of labeled resources should be included in the budget. Currently,
           #     multiple entries or multiple values per entry are not allowed. If omitted,
           #     the report will include all labeled and unlabeled usage.
+          # @!attribute [rw] calendar_period
+          #   @return [::Google::Cloud::Billing::Budgets::V1beta1::CalendarPeriod]
+          #     Optional. Specifies to track usage for recurring calendar period.
+          #     For example, assume that CalendarPeriod.QUARTER is set. The budget will
+          #     track usage from April 1 to June 30, when the current calendar month is
+          #     April, May, June. After that, it will track usage from July 1 to
+          #     September 30 when the current calendar month is July, August, September,
+          #     so on.
+          # @!attribute [rw] custom_period
+          #   @return [::Google::Cloud::Billing::Budgets::V1beta1::CustomPeriod]
+          #     Optional. Specifies to track usage from any start date (required) to any
+          #     end date (optional). This time period is static, it does not recur.
           class Filter
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -224,8 +248,11 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # Specifies how credits should be treated when determining spend for
-            # threshold calculations.
+            # Specifies how credits are applied when determining the spend for
+            # threshold calculations. Budgets track the total cost minus any applicable
+            # selected credits.
+            # [See the documentation for a list of credit
+            # types](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#credits-type).
             module CreditTypesTreatment
               CREDIT_TYPES_TREATMENT_UNSPECIFIED = 0
 
@@ -237,10 +264,45 @@ module Google
               # threshold calculations.
               EXCLUDE_ALL_CREDITS = 2
 
-              # Credit types specified in the credit_types field are subtracted from the
+              # [Credit
+              # types](https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables#credits-type)
+              # specified in the credit_types field are subtracted from the
               # gross cost to determine the spend for threshold calculations.
               INCLUDE_SPECIFIED_CREDITS = 3
             end
+          end
+
+          # All date times begin at 12 AM US and Canadian Pacific Time (UTC-8).
+          # @!attribute [rw] start_date
+          #   @return [::Google::Type::Date]
+          #     Required. The start date must be after January 1, 2017.
+          # @!attribute [rw] end_date
+          #   @return [::Google::Type::Date]
+          #     Optional. The end date of the time period. Budgets with elapsed end date
+          #     won't be processed. If unset, specifies to track all usage incurred since
+          #     the start_date.
+          class CustomPeriod
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A `CalendarPeriod` represents the abstract concept of a time period that
+          # has a canonical start. Grammatically, "the start of the current
+          # `CalendarPeriod`". All calendar times begin at 12 AM US and Canadian
+          # Pacific Time (UTC-8).
+          module CalendarPeriod
+            CALENDAR_PERIOD_UNSPECIFIED = 0
+
+            # A month. Month starts on the first day of each month, such as January 1,
+            # February 1, March 1, and so on.
+            MONTH = 1
+
+            # A quarter. Quarters start on dates January 1, April 1, July 1, and October
+            # 1 of each year.
+            QUARTER = 2
+
+            # A year. Year starts on January 1.
+            YEAR = 3
           end
         end
       end
