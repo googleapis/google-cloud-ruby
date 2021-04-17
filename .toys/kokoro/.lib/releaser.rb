@@ -56,6 +56,7 @@ class Releaser
   def initialize gem_name, gem_dir,
                  rubygems_api_token: nil,
                  docs_staging_bucket: nil,
+                 docs_staging_bucket_v2: nil,
                  docuploader_credentials: nil,
                  dry_run: false,
                  current_versions: nil,
@@ -65,6 +66,7 @@ class Releaser
     @gem_dir = File.expand_path gem_dir
     @rubygems_api_token = rubygems_api_token || ENV["RUBYGEMS_API_TOKEN"]
     @docs_staging_bucket = docs_staging_bucket || ENV["STAGING_BUCKET"] || "docs-staging"
+    @docs_staging_bucket_v2 = docs_staging_bucket_v2 || ENV["V2_STAGING_BUCKET"] || "docs-staging-v2-dev"
     @docuploader_credentials = docuploader_credentials
     if ENV["KOKORO_KEYSTORE_DIR"]
       @docuploader_credentials ||= File.join(ENV["KOKORO_KEYSTORE_DIR"], "73713_docuploader_service_account")
@@ -80,6 +82,7 @@ class Releaser
   attr_reader :gem_dir
   attr_reader :rubygems_api_token
   attr_reader :docs_staging_bucket
+  attr_reader :docs_staging_bucket_v2
   attr_reader :docuploader_credentials
 
   def dry_run?
@@ -174,8 +177,9 @@ class Releaser
         @executor.exec [
           "python3", "-m", "docuploader", "upload", ".",
           "--credentials", docuploader_credentials,
-          "--staging-bucket", docs_staging_bucket,
+          "--staging-bucket", docs_staging_bucket_v2,
           "--metadata-file", "./docs.metadata",
+          "--destination-prefix", "docfx",
         ]
       end
     end
