@@ -129,12 +129,12 @@ end
 
 $table_list_for_cleanup = []
 
-def create_test_table instance_id, table_id, row_count: nil
+def create_test_table instance_id, table_id, row_count: nil, cleanup: true
   table = $bigtable.create_table(instance_id, table_id) do |cfs|
     cfs.add('cf', gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(1))
   end
 
-  $table_list_for_cleanup << table_id
+  $table_list_for_cleanup << table_id if cleanup
 
   return table unless row_count
 
@@ -157,7 +157,7 @@ def clean_up_bigtable_objects instance_id, table_ids = []
       $bigtable.delete_table(instance_id, table_id)
     end
   rescue StandardError => e
-    puts "Error while cleaning up #{instance.instance_id} instance tables.\n\n#{e}"
+    puts "Error while cleaning up #{instance_id} instance tables.\n\n#{e}"
   end
 end
 
