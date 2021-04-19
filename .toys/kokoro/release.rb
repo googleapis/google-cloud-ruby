@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include :exec, e: true
-include :gems
-
 optional_arg :package
 flag :dry_run, default: ::ENV["RELEASE_DRY_RUN"] == "true"
+
+include :exec, e: true
+include :gems
 
 def run
   gem "gems", "~> 1.2"
@@ -24,7 +24,9 @@ def run
   require "releaser"
   Releaser.load_env
   set :package, Releaser.package_from_context unless package
+  raise "Unable to determine package" unless package
 
+  # TODO: Move link transformer into Toys lib directory.
   require File.join(Dir.getwd, "rakelib", "link_transformer")
   Dir.chdir package do
     yard_link_transformer = LinkTransformer.new

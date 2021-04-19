@@ -43,8 +43,10 @@ class Releaser
   def self.package_from_context
     return ::ENV["RELEASE_PACKAGE"] if ::ENV["RELEASE_PACKAGE"]
     tags = Array(::ENV["KOKORO_GIT_COMMIT"])
+    puts "Got #{tags.inspect} from KOKORO_GIT_COMMIT"
     executor = Toys::Utils::Exec.new
     tags += executor.capture(["git", "describe", "--exact-match", "--tags"], err: :null).strip.split
+    puts "All tags: #{tags.inspect}"
     tags.each do |tag|
       if tag =~ %r{^([^/]+)/v\d+\.\d+\.\d+$}
         return Regexp.last_match[1]
