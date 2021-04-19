@@ -31,7 +31,7 @@ describe Google::Cloud::Bigtable::Project, :encryption, :bigtable do
     @instance.delete if @instance
   end
 
-  it "creates a development instance with CMEK cluster" do
+  it "creates an instance, cluster, table and backup with CMEK" do
     job = bigtable.create_instance instance_id_cmek, display_name: "Ruby Test with KMS key", type: :DEVELOPMENT do |clusters|
       # "Need to have at least one cluster map element in CreateInstanceRequest."
       clusters.add cluster_id_cmek, cluster_location, kms_key: kms_key_name # nodes not allowed
@@ -57,12 +57,13 @@ describe Google::Cloud::Bigtable::Project, :encryption, :bigtable do
     encryption_infos = cs.encryption_infos
     _(encryption_infos).must_be_instance_of Array
     _(encryption_infos).wont_be :empty?
-    encryption_info = encryption_infos.first
-    _(encryption_info).must_be_instance_of Google::Cloud::Bigtable::EncryptionInfo
-    _(encryption_info.encryption_type).must_equal :CUSTOMER_MANAGED_ENCRYPTION
-    _(encryption_info.encryption_status).must_be_instance_of Google::Cloud::Bigtable::Status
-    _(encryption_info.encryption_status.description).must_equal "UNKNOWN"
-    _(encryption_info.kms_key_version).must_be :nil?
+    encryption_infos.each do |encryption_info|
+      _(encryption_info).must_be_instance_of Google::Cloud::Bigtable::EncryptionInfo
+      _(encryption_info.encryption_type).must_equal :CUSTOMER_MANAGED_ENCRYPTION
+      _(encryption_info.encryption_status).must_be_instance_of Google::Cloud::Bigtable::Status
+      _(encryption_info.encryption_status.description).must_equal "UNKNOWN"
+      _(encryption_info.kms_key_version).must_be :nil?
+    end
 
     job = cluster.create_backup @table, backup_id, (Time.now.round(0) + 60 * 60 * 7)
     job.wait_until_done!
