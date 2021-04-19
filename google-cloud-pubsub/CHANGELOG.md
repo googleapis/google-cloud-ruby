@@ -1,5 +1,17 @@
 # Release History
 
+### 2.6.0 / 2021-04-19
+
+#### Features
+
+* Add ordering_key to Topic#publish
+  * Add ordering_key to BatchPublisher#publish
+
+#### Documentation
+
+* The immediate: false option is recommended to avoid adverse impacts on the performance of pull operations ([#11153](https://www.github.com/googleapis/google-cloud-ruby/issues/11153))
+* Update Subscription#pull docs and samples to recommend immediate: false
+
 ### 2.5.0 / 2021-04-01
 
 #### Features
