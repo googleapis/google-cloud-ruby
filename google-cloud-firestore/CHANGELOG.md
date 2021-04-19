@@ -1,5 +1,11 @@
 # Release History
 
+### 2.5.1 / 2021-04-19
+
+#### Bug Fixes
+
+* Add GRPC::Unknown to retryable errors in Watch::Listener
+
 ### 2.5.0 / 2021-03-10
 
 #### Features
