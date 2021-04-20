@@ -1,5 +1,12 @@
 # Release History
 
+### 1.29.1 / 2021-04-20
+
+#### Bug Fixes
+
+* Fix Table#time_partitioning_expiration=
+  * Accept nil argument.
+
 ### 1.29.0 / 2021-03-10
 
 #### Features
