@@ -32,6 +32,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type).wont_be :int?
     _(field.type).wont_be :float?
     _(field.type).wont_be :numeric?
+    _(field.type).wont_be :bignumeric?
     _(field.type).wont_be :boolean?
     _(field.type).wont_be :string?
     _(field.type).wont_be :bytes?
@@ -55,6 +56,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[0].type).must_be :int?
     _(field.type.struct_type.fields[0].type).wont_be :float?
     _(field.type.struct_type.fields[0].type).wont_be :numeric?
+    _(field.type.struct_type.fields[0].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[0].type).wont_be :boolean?
     _(field.type.struct_type.fields[0].type).wont_be :string?
     _(field.type.struct_type.fields[0].type).wont_be :bytes?
@@ -84,6 +86,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type).wont_be :int?
     _(field.type).wont_be :float?
     _(field.type).wont_be :numeric?
+    _(field.type).wont_be :bignumeric?
     _(field.type).wont_be :boolean?
     _(field.type).wont_be :string?
     _(field.type).wont_be :bytes?
@@ -107,6 +110,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[0].type).must_be :int?
     _(field.type.struct_type.fields[0].type).wont_be :float?
     _(field.type.struct_type.fields[0].type).wont_be :numeric?
+    _(field.type.struct_type.fields[0].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[0].type).wont_be :boolean?
     _(field.type.struct_type.fields[0].type).wont_be :string?
     _(field.type.struct_type.fields[0].type).wont_be :bytes?
@@ -136,6 +140,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type).wont_be :int?
     _(field.type).wont_be :float?
     _(field.type).wont_be :numeric?
+    _(field.type).wont_be :bignumeric?
     _(field.type).wont_be :boolean?
     _(field.type).wont_be :string?
     _(field.type).wont_be :bytes?
@@ -159,6 +164,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[0].type).must_be :int?
     _(field.type.struct_type.fields[0].type).wont_be :float?
     _(field.type.struct_type.fields[0].type).wont_be :numeric?
+    _(field.type.struct_type.fields[0].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[0].type).wont_be :boolean?
     _(field.type.struct_type.fields[0].type).wont_be :string?
     _(field.type.struct_type.fields[0].type).wont_be :bytes?
@@ -186,6 +192,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type).wont_be :int?
     _(field.type).wont_be :float?
     _(field.type).wont_be :numeric?
+    _(field.type).wont_be :bignumeric?
     _(field.type).wont_be :boolean?
     _(field.type).wont_be :string?
     _(field.type).wont_be :bytes?
@@ -222,6 +229,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type).wont_be :int?
     _(field.type).wont_be :float?
     _(field.type).wont_be :numeric?
+    _(field.type).wont_be :bignumeric?
     _(field.type).wont_be :boolean?
     _(field.type).wont_be :string?
     _(field.type).wont_be :bytes?
@@ -245,6 +253,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[0].type).wont_be :int?
     _(field.type.struct_type.fields[0].type).wont_be :float?
     _(field.type.struct_type.fields[0].type).wont_be :numeric?
+    _(field.type.struct_type.fields[0].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[0].type).wont_be :boolean?
     _(field.type.struct_type.fields[0].type).wont_be :string?
     _(field.type.struct_type.fields[0].type).wont_be :bytes?
@@ -265,6 +274,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[0].type.struct_type.fields[0].type).must_be :int?
     _(field.type.struct_type.fields[0].type.struct_type.fields[0].type).wont_be :float?
     _(field.type.struct_type.fields[0].type.struct_type.fields[0].type).wont_be :numeric?
+    _(field.type.struct_type.fields[0].type.struct_type.fields[0].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[0].type.struct_type.fields[0].type).wont_be :boolean?
     _(field.type.struct_type.fields[0].type.struct_type.fields[0].type).wont_be :string?
     _(field.type.struct_type.fields[0].type.struct_type.fields[0].type).wont_be :bytes?
@@ -289,7 +299,8 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
       value_field("datetime_col", "DATETIME"),
       value_field("geo_col", "GEOGRAPHY"),
       value_field("time_col", "TIME"),
-      value_field("ts_col", "TIMESTAMP")
+      value_field("ts_col", "TIMESTAMP"),
+      value_field("bignumeric_col", "BIGNUMERIC")
     ]
 
     struct_type = Google::Cloud::Bigquery::StandardSql::StructType.new fields: fields
@@ -306,6 +317,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type).wont_be :int?
     _(field.type).wont_be :float?
     _(field.type).wont_be :numeric?
+    _(field.type).wont_be :bignumeric?
     _(field.type).wont_be :boolean?
     _(field.type).wont_be :string?
     _(field.type).wont_be :bytes?
@@ -318,7 +330,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type).must_be :struct?
 
     _(field.type.struct_type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::StructType
-    _(field.type.struct_type.fields.count).must_equal 11
+    _(field.type.struct_type.fields.count).must_equal 12
 
     _(field.type.struct_type.fields[0]).must_be_kind_of Google::Cloud::Bigquery::StandardSql::Field
     _(field.type.struct_type.fields[0].name).must_equal "int_col"
@@ -329,6 +341,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[0].type).must_be :int?
     _(field.type.struct_type.fields[0].type).wont_be :float?
     _(field.type.struct_type.fields[0].type).wont_be :numeric?
+    _(field.type.struct_type.fields[0].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[0].type).wont_be :boolean?
     _(field.type.struct_type.fields[0].type).wont_be :string?
     _(field.type.struct_type.fields[0].type).wont_be :bytes?
@@ -349,6 +362,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[1].type).wont_be :int?
     _(field.type.struct_type.fields[1].type).must_be :float?
     _(field.type.struct_type.fields[1].type).wont_be :numeric?
+    _(field.type.struct_type.fields[1].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[1].type).wont_be :boolean?
     _(field.type.struct_type.fields[1].type).wont_be :string?
     _(field.type.struct_type.fields[1].type).wont_be :bytes?
@@ -369,6 +383,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[2].type).wont_be :int?
     _(field.type.struct_type.fields[2].type).wont_be :float?
     _(field.type.struct_type.fields[2].type).must_be :numeric?
+    _(field.type.struct_type.fields[2].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[2].type).wont_be :boolean?
     _(field.type.struct_type.fields[2].type).wont_be :string?
     _(field.type.struct_type.fields[2].type).wont_be :bytes?
@@ -389,6 +404,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[3].type).wont_be :int?
     _(field.type.struct_type.fields[3].type).wont_be :float?
     _(field.type.struct_type.fields[3].type).wont_be :numeric?
+    _(field.type.struct_type.fields[3].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[3].type).must_be :boolean?
     _(field.type.struct_type.fields[3].type).wont_be :string?
     _(field.type.struct_type.fields[3].type).wont_be :bytes?
@@ -409,6 +425,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[4].type).wont_be :int?
     _(field.type.struct_type.fields[4].type).wont_be :float?
     _(field.type.struct_type.fields[4].type).wont_be :numeric?
+    _(field.type.struct_type.fields[4].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[4].type).wont_be :boolean?
     _(field.type.struct_type.fields[4].type).must_be :string?
     _(field.type.struct_type.fields[4].type).wont_be :bytes?
@@ -429,6 +446,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[5].type).wont_be :int?
     _(field.type.struct_type.fields[5].type).wont_be :float?
     _(field.type.struct_type.fields[5].type).wont_be :numeric?
+    _(field.type.struct_type.fields[5].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[5].type).wont_be :boolean?
     _(field.type.struct_type.fields[5].type).wont_be :string?
     _(field.type.struct_type.fields[5].type).must_be :bytes?
@@ -449,6 +467,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[6].type).wont_be :int?
     _(field.type.struct_type.fields[6].type).wont_be :float?
     _(field.type.struct_type.fields[6].type).wont_be :numeric?
+    _(field.type.struct_type.fields[6].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[6].type).wont_be :boolean?
     _(field.type.struct_type.fields[6].type).wont_be :string?
     _(field.type.struct_type.fields[6].type).wont_be :bytes?
@@ -469,6 +488,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[7].type).wont_be :int?
     _(field.type.struct_type.fields[7].type).wont_be :float?
     _(field.type.struct_type.fields[7].type).wont_be :numeric?
+    _(field.type.struct_type.fields[7].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[7].type).wont_be :boolean?
     _(field.type.struct_type.fields[7].type).wont_be :string?
     _(field.type.struct_type.fields[7].type).wont_be :bytes?
@@ -489,6 +509,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[8].type).wont_be :int?
     _(field.type.struct_type.fields[8].type).wont_be :float?
     _(field.type.struct_type.fields[8].type).wont_be :numeric?
+    _(field.type.struct_type.fields[8].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[8].type).wont_be :boolean?
     _(field.type.struct_type.fields[8].type).wont_be :string?
     _(field.type.struct_type.fields[8].type).wont_be :bytes?
@@ -509,6 +530,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[9].type).wont_be :int?
     _(field.type.struct_type.fields[9].type).wont_be :float?
     _(field.type.struct_type.fields[9].type).wont_be :numeric?
+    _(field.type.struct_type.fields[9].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[9].type).wont_be :boolean?
     _(field.type.struct_type.fields[9].type).wont_be :string?
     _(field.type.struct_type.fields[9].type).wont_be :bytes?
@@ -529,6 +551,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[10].type).wont_be :int?
     _(field.type.struct_type.fields[10].type).wont_be :float?
     _(field.type.struct_type.fields[10].type).wont_be :numeric?
+    _(field.type.struct_type.fields[10].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[10].type).wont_be :boolean?
     _(field.type.struct_type.fields[10].type).wont_be :string?
     _(field.type.struct_type.fields[10].type).wont_be :bytes?
@@ -539,6 +562,27 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[10].type).must_be :timestamp?
     _(field.type.struct_type.fields[10].type).wont_be :array?
     _(field.type.struct_type.fields[10].type).wont_be :struct?
+
+    _(field.type.struct_type.fields[11]).must_be_kind_of Google::Cloud::Bigquery::StandardSql::Field
+    _(field.type.struct_type.fields[11].name).must_equal "bignumeric_col"
+    _(field.type.struct_type.fields[11].type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(field.type.struct_type.fields[11].type.type_kind).must_equal "BIGNUMERIC"
+    _(field.type.struct_type.fields[11].type.array_element_type).must_be_nil
+    _(field.type.struct_type.fields[11].type.struct_type).must_be_nil
+    _(field.type.struct_type.fields[11].type).wont_be :int?
+    _(field.type.struct_type.fields[11].type).wont_be :float?
+    _(field.type.struct_type.fields[11].type).wont_be :numeric?
+    _(field.type.struct_type.fields[11].type).must_be :bignumeric?
+    _(field.type.struct_type.fields[11].type).wont_be :boolean?
+    _(field.type.struct_type.fields[11].type).wont_be :string?
+    _(field.type.struct_type.fields[11].type).wont_be :bytes?
+    _(field.type.struct_type.fields[11].type).wont_be :date?
+    _(field.type.struct_type.fields[11].type).wont_be :datetime?
+    _(field.type.struct_type.fields[11].type).wont_be :geography?
+    _(field.type.struct_type.fields[11].type).wont_be :time?
+    _(field.type.struct_type.fields[11].type).wont_be :timestamp?
+    _(field.type.struct_type.fields[11].type).wont_be :array?
+    _(field.type.struct_type.fields[11].type).wont_be :struct?
   end
 
   it "represents all types of array fields" do
@@ -553,7 +597,8 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
       array_field("datetime_array_col", "DATETIME"),
       array_field("geo_array_col", "GEOGRAPHY"),
       array_field("time_array_col", "TIME"),
-      array_field("ts_array_col", "TIMESTAMP")
+      array_field("ts_array_col", "TIMESTAMP"),
+      array_field("bignumeric_col", "BIGNUMERIC")
     ]
 
     struct_type = Google::Cloud::Bigquery::StandardSql::StructType.new fields: fields
@@ -570,6 +615,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type).wont_be :int?
     _(field.type).wont_be :float?
     _(field.type).wont_be :numeric?
+    _(field.type).wont_be :bignumeric?
     _(field.type).wont_be :boolean?
     _(field.type).wont_be :string?
     _(field.type).wont_be :bytes?
@@ -582,7 +628,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type).must_be :struct?
 
     _(field.type.struct_type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::StructType
-    _(field.type.struct_type.fields.count).must_equal 11
+    _(field.type.struct_type.fields.count).must_equal 12
 
     _(field.type.struct_type.fields[0]).must_be_kind_of Google::Cloud::Bigquery::StandardSql::Field
     _(field.type.struct_type.fields[0].name).must_equal "int_array_col"
@@ -596,6 +642,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[0].type).wont_be :int?
     _(field.type.struct_type.fields[0].type).wont_be :float?
     _(field.type.struct_type.fields[0].type).wont_be :numeric?
+    _(field.type.struct_type.fields[0].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[0].type).wont_be :boolean?
     _(field.type.struct_type.fields[0].type).wont_be :string?
     _(field.type.struct_type.fields[0].type).wont_be :bytes?
@@ -619,6 +666,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[1].type).wont_be :int?
     _(field.type.struct_type.fields[1].type).wont_be :float?
     _(field.type.struct_type.fields[1].type).wont_be :numeric?
+    _(field.type.struct_type.fields[1].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[1].type).wont_be :boolean?
     _(field.type.struct_type.fields[1].type).wont_be :string?
     _(field.type.struct_type.fields[1].type).wont_be :bytes?
@@ -642,6 +690,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[2].type).wont_be :int?
     _(field.type.struct_type.fields[2].type).wont_be :float?
     _(field.type.struct_type.fields[2].type).wont_be :numeric?
+    _(field.type.struct_type.fields[2].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[2].type).wont_be :boolean?
     _(field.type.struct_type.fields[2].type).wont_be :string?
     _(field.type.struct_type.fields[2].type).wont_be :bytes?
@@ -665,6 +714,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[3].type).wont_be :int?
     _(field.type.struct_type.fields[3].type).wont_be :float?
     _(field.type.struct_type.fields[3].type).wont_be :numeric?
+    _(field.type.struct_type.fields[3].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[3].type).wont_be :boolean?
     _(field.type.struct_type.fields[3].type).wont_be :string?
     _(field.type.struct_type.fields[3].type).wont_be :bytes?
@@ -688,6 +738,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[4].type).wont_be :int?
     _(field.type.struct_type.fields[4].type).wont_be :float?
     _(field.type.struct_type.fields[4].type).wont_be :numeric?
+    _(field.type.struct_type.fields[4].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[4].type).wont_be :boolean?
     _(field.type.struct_type.fields[4].type).wont_be :string?
     _(field.type.struct_type.fields[4].type).wont_be :bytes?
@@ -711,6 +762,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[5].type).wont_be :int?
     _(field.type.struct_type.fields[5].type).wont_be :float?
     _(field.type.struct_type.fields[5].type).wont_be :numeric?
+    _(field.type.struct_type.fields[5].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[5].type).wont_be :boolean?
     _(field.type.struct_type.fields[5].type).wont_be :string?
     _(field.type.struct_type.fields[5].type).wont_be :bytes?
@@ -734,6 +786,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[6].type).wont_be :int?
     _(field.type.struct_type.fields[6].type).wont_be :float?
     _(field.type.struct_type.fields[6].type).wont_be :numeric?
+    _(field.type.struct_type.fields[6].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[6].type).wont_be :boolean?
     _(field.type.struct_type.fields[6].type).wont_be :string?
     _(field.type.struct_type.fields[6].type).wont_be :bytes?
@@ -757,6 +810,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[7].type).wont_be :int?
     _(field.type.struct_type.fields[7].type).wont_be :float?
     _(field.type.struct_type.fields[7].type).wont_be :numeric?
+    _(field.type.struct_type.fields[7].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[7].type).wont_be :boolean?
     _(field.type.struct_type.fields[7].type).wont_be :string?
     _(field.type.struct_type.fields[7].type).wont_be :bytes?
@@ -780,6 +834,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[8].type).wont_be :int?
     _(field.type.struct_type.fields[8].type).wont_be :float?
     _(field.type.struct_type.fields[8].type).wont_be :numeric?
+    _(field.type.struct_type.fields[8].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[8].type).wont_be :boolean?
     _(field.type.struct_type.fields[8].type).wont_be :string?
     _(field.type.struct_type.fields[8].type).wont_be :bytes?
@@ -803,6 +858,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[9].type).wont_be :int?
     _(field.type.struct_type.fields[9].type).wont_be :float?
     _(field.type.struct_type.fields[9].type).wont_be :numeric?
+    _(field.type.struct_type.fields[9].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[9].type).wont_be :boolean?
     _(field.type.struct_type.fields[9].type).wont_be :string?
     _(field.type.struct_type.fields[9].type).wont_be :bytes?
@@ -826,6 +882,7 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[10].type).wont_be :int?
     _(field.type.struct_type.fields[10].type).wont_be :float?
     _(field.type.struct_type.fields[10].type).wont_be :numeric?
+    _(field.type.struct_type.fields[10].type).wont_be :bignumeric?
     _(field.type.struct_type.fields[10].type).wont_be :boolean?
     _(field.type.struct_type.fields[10].type).wont_be :string?
     _(field.type.struct_type.fields[10].type).wont_be :bytes?
@@ -836,6 +893,30 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     _(field.type.struct_type.fields[10].type).wont_be :timestamp?
     _(field.type.struct_type.fields[10].type).must_be :array?
     _(field.type.struct_type.fields[10].type).wont_be :struct?
+
+    _(field.type.struct_type.fields[11]).must_be_kind_of Google::Cloud::Bigquery::StandardSql::Field
+    _(field.type.struct_type.fields[11].name).must_equal "bignumeric_col"
+    _(field.type.struct_type.fields[11].type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(field.type.struct_type.fields[11].type.type_kind).must_equal "ARRAY"
+    _(field.type.struct_type.fields[11].type.array_element_type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(field.type.struct_type.fields[11].type.array_element_type.type_kind).must_equal "BIGNUMERIC"
+    _(field.type.struct_type.fields[11].type.array_element_type.array_element_type).must_be_nil
+    _(field.type.struct_type.fields[11].type.array_element_type.struct_type).must_be_nil
+    _(field.type.struct_type.fields[11].type.struct_type).must_be_nil
+    _(field.type.struct_type.fields[11].type).wont_be :int?
+    _(field.type.struct_type.fields[11].type).wont_be :float?
+    _(field.type.struct_type.fields[11].type).wont_be :numeric?
+    _(field.type.struct_type.fields[11].type).wont_be :bignumeric?
+    _(field.type.struct_type.fields[11].type).wont_be :boolean?
+    _(field.type.struct_type.fields[11].type).wont_be :string?
+    _(field.type.struct_type.fields[11].type).wont_be :bytes?
+    _(field.type.struct_type.fields[11].type).wont_be :date?
+    _(field.type.struct_type.fields[11].type).wont_be :datetime?
+    _(field.type.struct_type.fields[11].type).wont_be :geography?
+    _(field.type.struct_type.fields[11].type).wont_be :time?
+    _(field.type.struct_type.fields[11].type).wont_be :timestamp?
+    _(field.type.struct_type.fields[11].type).must_be :array?
+    _(field.type.struct_type.fields[11].type).wont_be :struct?
   end
 
   def value_field name, type_kind

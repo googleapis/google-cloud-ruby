@@ -101,6 +101,21 @@ module Google
           # collected in batches and inserted together.
           # See {Google::Cloud::Bigquery::Table#insert_async}.
           #
+          # Simple Ruby types are generally accepted per JSON rules, along with the following support for BigQuery's
+          # more complex types:
+          #
+          # | BigQuery     | Ruby                                 | Notes                                              |
+          # |--------------|--------------------------------------|----------------------------------------------------|
+          # | `NUMERIC`    | `BigDecimal`                         | `BigDecimal` values will be rounded to scale 9.    |
+          # | `BIGNUMERIC` | `String`                             | Pass as `String` to avoid rounding to scale 9.     |
+          # | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
+          # | `DATE`       | `Date`                               |                                                    |
+          # | `TIMESTAMP`  | `Time`                               |                                                    |
+          # | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                    |
+          # | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                    |
+          # | `ARRAY`      | `Array`                              | Nested arrays, `nil` values are not supported.     |
+          # | `STRUCT`     | `Hash`                               | Hash keys may be strings or symbols.               |
+          #
           # Because BigQuery's streaming API is designed for high insertion
           # rates, modifications to the underlying table metadata are eventually
           # consistent when interacting with the streaming system. In most cases
@@ -114,8 +129,11 @@ module Google
           # @see https://cloud.google.com/bigquery/troubleshooting-errors#metadata-errors-for-streaming-inserts
           #   BigQuery Troubleshooting: Metadata errors for streaming inserts
           #
-          # @param [Hash, Array<Hash>] rows A hash object or array of hash
-          #   objects containing the data.
+          # @param [Hash, Array<Hash>] rows A hash object or array of hash objects
+          #   containing the data. Required. `BigDecimal` values will be rounded to
+          #   scale 9 to conform with the BigQuery `NUMERIC` data type. To avoid
+          #   rounding `BIGNUMERIC` type values with scale greater than 9, use `String`
+          #   instead of `BigDecimal`.
           # @param [Array<String|Symbol>, Symbol] insert_ids A unique ID for each row. BigQuery uses this property to
           #   detect duplicate insertion requests on a best-effort basis. For more information, see [data
           #   consistency](https://cloud.google.com/bigquery/streaming-data-into-bigquery#dataconsistency). Optional. If

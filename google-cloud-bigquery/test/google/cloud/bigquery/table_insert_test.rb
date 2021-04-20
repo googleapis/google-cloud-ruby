@@ -185,20 +185,22 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
   end
 
   it "properly formats values when inserting" do
+    string_numeric = "123456798.987654321"
+    string_bignumeric = "123456798.98765432100001"
     inserting_row = {
       id: 2,
       name: "Gandalf",
       age: 1000,
       weight: 198.6,
       is_magic: true,
-      scores: [100.0, 99.0, 0.001],
+      scores: [100.0, BigDecimal(string_numeric), string_bignumeric], # BigDecimal BIGNUMERIC would be rounded!
       spells: [
         { name: "Skydragon",
           discovered_by: "Firebreather",
           properties: [
             { name: "Flying", power: 1.0 },
-            { name: "Creature", power: 1.0 },
-            { name: "Explodey", power: 11.0 }
+            { name: "Creature", power: BigDecimal(string_numeric) },
+            { name: "Explodey", power: string_bignumeric } # BigDecimal would be rounded, use String instead!
           ],
           icon: File.open("acceptance/data/kitten-test-data.json", "rb"),
           last_used: Time.parse("2015-10-31 23:59:56 UTC")
@@ -206,11 +208,49 @@ describe Google::Cloud::Bigquery::Table, :insert, :mock_bigquery do
       ],
       tea_time: Google::Cloud::Bigquery::Time.new("15:00:00"),
       next_vacation: Date.parse("2666-06-06"),
-      favorite_time: Time.parse("2001-12-19T23:59:59 UTC").utc.to_datetime
+      favorite_time: Time.parse("2001-12-19T23:59:59 UTC").utc.to_datetime,
+      my_numeric: BigDecimal(string_numeric),
+      my_bignumeric: string_bignumeric, # BigDecimal would be rounded, use String instead!
+      my_rounded_bignumeric: BigDecimal(string_bignumeric)
     }
     inserted_row_hash = {
       insertId: insert_id,
-      json: {"id"=>2, "name"=>"Gandalf", "age"=>1000, "weight"=>198.6, "is_magic"=>true, "scores"=>[100.0, 99.0, 0.001], "spells"=>[{"name"=>"Skydragon", "discovered_by"=>"Firebreather", "properties"=>[{"name"=>"Flying", "power"=>1.0}, {"name"=>"Creature", "power"=>1.0}, {"name"=>"Explodey", "power"=>11.0}], "icon"=>Google::Cloud::Bigquery::Convert.to_json_value(File.open("acceptance/data/kitten-test-data.json", "rb")), "last_used"=>"2015-10-31 23:59:56.000000+00:00"}], "tea_time"=>"15:00:00", "next_vacation"=>"2666-06-06", "favorite_time"=>"2001-12-19 23:59:59.000000"}
+      json: {
+        "id"=>2,
+        "name"=>"Gandalf",
+        "age"=>1000,
+        "weight"=>198.6,
+        "is_magic"=>true,
+        "scores"=>[100.0, string_numeric, string_bignumeric],
+        "spells"=>[
+          {
+            "name"=>"Skydragon",
+            "discovered_by"=>"Firebreather",
+            "properties"=>[
+              {
+                "name"=>"Flying",
+                "power"=>1.0
+              },
+              {
+                "name"=>"Creature",
+                "power"=>string_numeric
+              },
+              {
+                "name"=>"Explodey",
+                "power"=>string_bignumeric
+              }
+            ],
+            "icon"=>Google::Cloud::Bigquery::Convert.to_json_value(File.open("acceptance/data/kitten-test-data.json", "rb")),
+            "last_used"=>"2015-10-31 23:59:56.000000+00:00"
+          }
+        ],
+        "tea_time"=>"15:00:00",
+        "next_vacation"=>"2666-06-06",
+        "favorite_time"=>"2001-12-19 23:59:59.000000",
+        "my_numeric"=>string_numeric,
+        "my_bignumeric"=>string_bignumeric,
+        "my_rounded_bignumeric"=>string_numeric
+      }
     }
     mock = Minitest::Mock.new
     insert_req = {

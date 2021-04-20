@@ -48,6 +48,22 @@ describe Google::Cloud::Bigquery, :legacy_query_types, :bigquery do
     _(rows.first[:value]).must_equal BigDecimal("123456789.123456789")
   end
 
+  it "queries a rounded numeric value" do
+    rows = bigquery.query "SELECT CAST('123456789.1234567891' AS NUMERIC) AS value", legacy_sql: true
+
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_equal BigDecimal("123456789.123456789")
+  end
+
+  it "queries a bignumeric value" do
+    rows = bigquery.query "SELECT CAST('123456789.1234567891' AS BIGNUMERIC) AS value", legacy_sql: true
+
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_equal BigDecimal("123456789.1234567891")
+  end
+
   it "queries a boolean value" do
     rows = bigquery.query "SELECT false AS value", legacy_sql: true
 

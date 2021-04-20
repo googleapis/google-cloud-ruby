@@ -92,6 +92,17 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
     _(rows.first[:value]).must_equal BigDecimal("123456789.123456789")
   end
 
+  it "queries the data with a rounded numeric parameter" do
+    rows = bigquery.query "SELECT ? AS value", params: [BigDecimal("123456789.1234567891")]
+
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.fields.count).must_equal 1
+    _(rows.fields.first.name).must_equal "value"
+    _(rows.fields.first).must_be :numeric?
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_equal BigDecimal("123456789.123456789")
+  end
+
   it "queries the data with a nil parameter and numeric type" do
     rows = bigquery.query "SELECT ? AS value", params: [nil], types: [:NUMERIC]
 
@@ -99,6 +110,28 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
     _(rows.fields.count).must_equal 1
     _(rows.fields.first.name).must_equal "value"
     _(rows.fields.first).must_be :numeric?
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_be_nil
+  end
+
+  it "queries the data with a bignumeric parameter and bignumeric type" do
+    rows = bigquery.query "SELECT ? AS value", params: [BigDecimal("123456789.1234567891")], types: [:BIGNUMERIC]
+
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.fields.count).must_equal 1
+    _(rows.fields.first.name).must_equal "value"
+    _(rows.fields.first).must_be :bignumeric?
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_equal BigDecimal("123456789.1234567891")
+  end
+
+  it "queries the data with a nil parameter and bignumeric type" do
+    rows = bigquery.query "SELECT ? AS value", params: [nil], types: [:BIGNUMERIC]
+
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.fields.count).must_equal 1
+    _(rows.fields.first.name).must_equal "value"
+    _(rows.fields.first).must_be :bignumeric?
     _(rows.count).must_equal 1
     _(rows.first[:value]).must_be_nil
   end
@@ -261,6 +294,17 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
     _(rows.class).must_equal Google::Cloud::Bigquery::Data
     _(rows.count).must_equal 1
     _(rows.first[:value]).must_equal ["foo", "bar", "baz"]
+  end
+
+  it "queries the data with an array of bignumeric parameters" do
+    param_1 = BigDecimal("123456789.1234567891")
+    param_2 = BigDecimal("123456789.1234567892")
+    param_3 = BigDecimal("123456789.1234567893")
+    rows = bigquery.query "SELECT ? AS value", params: [[param_1, param_2, param_3]], types: [[:BIGNUMERIC]]
+
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_equal [param_1, param_2, param_3]
   end
 
   it "queries the data with an empty array of integers and type" do

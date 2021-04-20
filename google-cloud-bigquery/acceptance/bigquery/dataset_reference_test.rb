@@ -207,7 +207,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
   end
 
   it "inserts rows directly and gets its data" do
-    insert_response = table.insert rows
+    insert_response = dataset.insert table_id, rows
     _(insert_response).must_be :success?
     _(insert_response.insert_count).must_equal 3
     _(insert_response.insert_errors).must_be :empty?

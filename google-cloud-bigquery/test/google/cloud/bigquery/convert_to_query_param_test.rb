@@ -191,6 +191,50 @@ describe Google::Cloud::Bigquery::Convert, :to_query_param do
     end
   end
 
+  describe :BIGNUMERIC do
+    it "allows BigDecimal when using type" do
+      expected = Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "BIGNUMERIC"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: "123456798.98765432100001"
+        )
+      )
+
+      actual = Google::Cloud::Bigquery::Convert.to_query_param BigDecimal("123456798.98765432100001"), :BIGNUMERIC
+      assert_equal expected.to_h, actual.to_h
+    end
+
+    it "allows string when using type" do
+      expected = Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "BIGNUMERIC"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: "123456798.98765432100001"
+        )
+      )
+
+      actual = Google::Cloud::Bigquery::Convert.to_query_param "123456798.98765432100001", :BIGNUMERIC
+      assert_equal expected.to_h, actual.to_h
+    end
+
+    it "allows nil when using type" do
+      expected = Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "BIGNUMERIC"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: nil
+        )
+      )
+
+      actual = Google::Cloud::Bigquery::Convert.to_query_param nil, :BIGNUMERIC
+      assert_equal expected.to_h, actual.to_h
+    end
+  end
+
   describe :STRING do
     it "identifies by value" do
       expected = Google::Apis::BigqueryV2::QueryParameter.new(

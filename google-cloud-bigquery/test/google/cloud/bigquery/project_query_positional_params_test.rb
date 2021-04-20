@@ -89,6 +89,37 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     assert_valid_data data
   end
 
+  it "queries the data with an integer parameter with types option" do
+    job_gapi = query_job_gapi "#{query} WHERE age > ?", parameter_mode: "POSITIONAL", location: nil
+    job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "INT64"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: "35"
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+
+    data = bigquery.query "#{query} WHERE age > ?", params: ["35"], types: [:INT64]
+    mock.verify
+
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
+    assert_valid_data data
+  end
+
   it "queries the data with a float parameter" do
     job_gapi = query_job_gapi "#{query} WHERE score > ?", parameter_mode: "POSITIONAL", location: nil
     job_gapi.configuration.query.query_parameters = [
@@ -145,6 +176,39 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
                 [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = bigquery.query "#{query} WHERE pi = ?", params: [BigDecimal("3.141592654")]
+    mock.verify
+
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
+    assert_valid_data data
+  end
+
+  it "queries the data with a bignumeric parameter and types option" do
+    job_gapi = query_job_gapi "#{query} WHERE my_bignumeric = ?", parameter_mode: "POSITIONAL", location: nil
+    job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "BIGNUMERIC"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: "123456798.98765432100001"
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+
+    data = bigquery.query "#{query} WHERE my_bignumeric = ?",
+                          params: [BigDecimal("123456798.98765432100001")],
+                          types: [:BIGNUMERIC]
     mock.verify
 
     _(data.class).must_equal Google::Cloud::Bigquery::Data
@@ -498,7 +562,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     assert_valid_data data
   end
 
-  it "queries the data with an array parameter" do
+  it "queries the data with an array of string values parameter" do
     job_gapi = query_job_gapi "#{query} WHERE name IN ?", parameter_mode: "POSITIONAL", location: nil
     job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
@@ -530,6 +594,85 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
                 [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = bigquery.query "#{query} WHERE name IN ?", params: [%w{name1 name2 name3}]
+    mock.verify
+
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
+    assert_valid_data data
+  end
+
+  it "queries the data with an array of bignumeric values parameter" do
+    param_1 = BigDecimal("123456789.1234567891")
+    param_2 = BigDecimal("123456789.1234567892")
+    param_3 = BigDecimal("123456789.1234567893")
+    job_gapi = query_job_gapi "#{query} WHERE my_bignumeric IN ?", parameter_mode: "POSITIONAL", location: nil
+    job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "ARRAY",
+          array_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+            type: "BIGNUMERIC"
+          )
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          array_values: [
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "123456789.1234567891"),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "123456789.1234567892"),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "123456789.1234567893")
+          ]
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+
+    data = bigquery.query "#{query} WHERE my_bignumeric IN ?", params: [[param_1, param_2, param_3]], types: [[:BIGNUMERIC]]
+    mock.verify
+
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
+    assert_valid_data data
+  end
+
+  it "queries the data with an array parameter with types option" do
+    job_gapi = query_job_gapi "#{query} WHERE age IN ?", parameter_mode: "POSITIONAL", location: nil
+    job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "ARRAY",
+          array_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+            type: "INT64"
+          )
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          array_values: [
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "1"),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "2"),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "3")
+          ]
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+
+    data = bigquery.query "#{query} WHERE age IN ?", params: [["1","2","3"]], types: [[:INT64]]
     mock.verify
 
     _(data.class).must_equal Google::Cloud::Bigquery::Data
@@ -580,6 +723,44 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
                 [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = bigquery.query "#{query} WHERE meta = ?", params: [{name: "Testy McTesterson", age: 42, active: false, score: 98.7}]
+    mock.verify
+
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
+    assert_valid_data data
+  end
+
+  it "queries the data with a struct parameter with types option" do
+    job_gapi = query_job_gapi "#{query} WHERE meta = ?", parameter_mode: "POSITIONAL", location: nil
+    job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "STRUCT",
+          struct_types: [
+            Google::Apis::BigqueryV2::QueryParameterType::StructType.new(
+              name: "age",
+              type: Google::Apis::BigqueryV2::QueryParameterType.new(type: "INT64"))
+          ]
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          struct_values: {
+            "age"    => Google::Apis::BigqueryV2::QueryParameterValue.new(value: "42")
+          }
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+
+    data = bigquery.query "#{query} WHERE meta = ?", params: [{ age: "42" }], types: [{ age: :INT64 }]
     mock.verify
 
     _(data.class).must_equal Google::Cloud::Bigquery::Data

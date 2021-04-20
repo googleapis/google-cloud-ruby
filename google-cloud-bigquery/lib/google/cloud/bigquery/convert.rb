@@ -26,25 +26,25 @@ module Google
       ##
       # @private
       #
-      # Internal conversion of raw data values to/from Bigquery values
+      # Internal conversion of raw data values to/from BigQuery values
       #
-      # | BigQuery    | Ruby           | Notes  |
-      # |-------------|----------------|---|
-      # | `BOOL`      | `true`/`false` | |
-      # | `INT64`     | `Integer`      | |
-      # | `FLOAT64`   | `Float`        | |
-      # | `NUMERIC`   | `BigDecimal`   | Will be rounded to 9 decimal places |
-      # | `STRING`    | `String`       | |
-      # | `DATETIME`  | `DateTime`  | `DATETIME` does not support time zone. |
-      # | `DATE`      | `Date`         | |
-      # | `TIMESTAMP` | `Time`         | |
-      # | `TIME`      | `Google::Cloud::BigQuery::Time` | |
-      # | `BYTES`     | `File`, `IO`, `StringIO`, or similar | |
-      # | `ARRAY` | `Array` | Nested arrays, `nil` values are not supported. |
-      # | `STRUCT`    | `Hash`        | Hash keys may be strings or symbols. |
+      #   | BigQuery     | Ruby                                 | Notes                                              |
+      #   |--------------|--------------------------------------|----------------------------------------------------|
+      #   | `BOOL`       | `true`/`false`                       |                                                    |
+      #   | `INT64`      | `Integer`                            |                                                    |
+      #   | `FLOAT64`    | `Float`                              |                                                    |
+      #   | `NUMERIC`    | `BigDecimal`                         | `BigDecimal` values will be rounded to scale 9.    |
+      #   | `BIGNUMERIC` | converted to `BigDecimal`            | Pass data as `String`; map query params in `types`.|
+      #   | `STRING`     | `String`                             |                                                    |
+      #   | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
+      #   | `DATE`       | `Date`                               |                                                    |
+      #   | `TIMESTAMP`  | `Time`                               |                                                    |
+      #   | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                    |
+      #   | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                    |
+      #   | `ARRAY`      | `Array`                              | Nested arrays, `nil` values are not supported.     |
+      #   | `STRUCT`     | `Hash`                               | Hash keys may be strings or symbols.               |
+      #
       module Convert
-        ##
-        # @private
         def self.format_rows rows, fields
           Array(rows).map do |row|
             # convert TableRow to hash to handle nested TableCell values
@@ -52,8 +52,6 @@ module Google
           end
         end
 
-        ##
-        # @private
         def self.format_row row, fields
           row_pairs = fields.zip(row[:f]).map do |f, v|
             [f.name.to_sym, format_value(v, f)]
@@ -90,6 +88,8 @@ module Google
             end
           elsif field.type == "NUMERIC"
             BigDecimal value[:v]
+          elsif field.type == "BIGNUMERIC"
+            BigDecimal value[:v]
           elsif field.type == "BOOLEAN"
             (value[:v] == "true" ? true : (value[:v] == "false" ? false : nil))
           elsif field.type == "BYTES"
@@ -107,30 +107,21 @@ module Google
           end
         end
 
-        ##
-        # @private
-        def self.to_query_param param, type = nil
-          type ||= default_query_param_type_for param
+        # rubocop:enable all
 
-          Google::Apis::BigqueryV2::QueryParameter.new(
-            parameter_type:  to_query_param_type(type),
-            parameter_value: to_query_param_value(param)
-          )
-        end
-
-        ##
-        # @private
-        def self.to_query_param_value value
+        def self.to_query_param_value value, type = nil
           return Google::Apis::BigqueryV2::QueryParameterValue.new value: nil if value.nil?
 
-          json_value = to_json_value value
+          json_value = to_json_value value, type
 
-          if Array === json_value
-            array_values = json_value.map { |v| to_query_param_value v }
+          case json_value
+          when Array
+            type = extract_array_type type
+            array_values = json_value.map { |v| to_query_param_value v, type }
             Google::Apis::BigqueryV2::QueryParameterValue.new array_values: array_values
-          elsif Hash === json_value
-            struct_pairs = json_value.map do |key, value|
-              [String(key), to_query_param_value(value)]
+          when Hash
+            struct_pairs = json_value.map do |k, v|
+              [String(k), to_query_param_value(v, type)]
             end
             struct_values = Hash[struct_pairs]
             Google::Apis::BigqueryV2::QueryParameterValue.new struct_values: struct_values
@@ -141,12 +132,13 @@ module Google
         end
 
         def self.to_query_param_type type
-          if Array === type
+          case type
+          when Array
             Google::Apis::BigqueryV2::QueryParameterType.new(
               type: "ARRAY".freeze,
               array_type: to_query_param_type(type.first)
             )
-          elsif Hash === type
+          when Hash
             Google::Apis::BigqueryV2::QueryParameterType.new(
               type: "STRUCT".freeze,
               struct_types: type.map do |key, val|
@@ -157,9 +149,13 @@ module Google
               end
             )
           else
-            Google::Apis::BigqueryV2::QueryParameterType.new(type: type.to_s.freeze)
+            Google::Apis::BigqueryV2::QueryParameterType.new type: type.to_s.freeze
           end
         end
+
+        # rubocop:disable Lint/DuplicateBranch
+        # rubocop:disable Metrics/CyclomaticComplexity
+        # rubocop:disable Style/GuardClause
 
         def self.default_query_param_type_for param
           raise ArgumentError, "nil params are not supported, must assign optional type" if param.nil?
@@ -200,9 +196,9 @@ module Google
             end
             [non_nil_values.first]
           when Hash
-            Hash[param.map do |key, value|
-              [key, default_query_param_type_for(value)]
-            end]
+            param.transform_values do |value|
+              default_query_param_type_for value
+            end
           else
             if param.respond_to?(:read) && param.respond_to?(:rewind)
               :BYTES
@@ -212,9 +208,11 @@ module Google
           end
         end
 
-        ##
-        # @private
-        def self.to_json_value value
+        # rubocop:enable Lint/DuplicateBranch
+        # rubocop:enable Metrics/CyclomaticComplexity
+        # rubocop:enable Style/GuardClause
+
+        def self.to_json_value value, type = nil
           if DateTime === value
             value.strftime "%Y-%m-%d %H:%M:%S.%6N"
           elsif Date === value
@@ -224,30 +222,46 @@ module Google
           elsif Bigquery::Time === value
             value.value
           elsif BigDecimal === value
-            # Round to precision of 9
-            value.finite? ? value.round(9).to_s("F") : value.to_s
+            if value.finite?
+              # Round to precision of 9 unless explicit `BIGNUMERIC`
+              bigdecimal = type == :BIGNUMERIC ? value : value.round(9)
+              bigdecimal.to_s "F"
+            else
+              value.to_s
+            end
           elsif value.respond_to?(:read) && value.respond_to?(:rewind)
             value.rewind
-            Base64.strict_encode64(value.read.force_encoding("ASCII-8BIT"))
+            Base64.strict_encode64 value.read.force_encoding("ASCII-8BIT")
           elsif Array === value
-            value.map { |v| to_json_value v }
+            type = extract_array_type type
+            value.map { |x| to_json_value x, type }
           elsif Hash === value
-            Hash[value.map { |k, v| [k.to_s, to_json_value(v)] }]
+            Hash[value.map { |k, v| [k.to_s, to_json_value(v, type)] }]
           else
             value
           end
         end
 
-        # rubocop:enable all
+        def self.to_query_param param, type = nil
+          type ||= default_query_param_type_for param
 
-        ##
-        # @private
-        def self.to_json_rows rows
-          rows.map { |row| to_json_row row }
+          Google::Apis::BigqueryV2::QueryParameter.new(
+            parameter_type:  to_query_param_type(type),
+            parameter_value: to_query_param_value(param, type)
+          )
         end
 
         ##
-        # @private
+        # Lists are specified by providing the type code in an array. For example, an array of integers are specified as
+        # `[:INT64]`. Extracts the symbol.
+        def self.extract_array_type type
+          return nil if type.nil?
+          unless type.is_a?(Array) && type.count == 1 && type.first.is_a?(Symbol)
+            raise ArgumentError, "types Array #{type.inspect} should include only a single symbol element."
+          end
+          type.first
+        end
+
         def self.to_json_row row
           Hash[row.map { |k, v| [k.to_s, to_json_value(v)] }]
         end
@@ -259,8 +273,6 @@ module Google
         end
 
         ##
-        # @private
-        #
         # Converts create disposition strings to API values.
         #
         # @return [String] API representation of create disposition.
@@ -279,8 +291,6 @@ module Google
         end
 
         ##
-        # @private
-        #
         # Converts write disposition strings to API values.
         #
         # @return [String] API representation of write disposition.
@@ -301,8 +311,6 @@ module Google
         end
 
         ##
-        # @private
-        #
         # Converts source format strings to API values.
         #
         # @return [String] API representation of source format.
@@ -325,8 +333,6 @@ module Google
         end
 
         ##
-        # @private
-        #
         # Converts file paths into source format by extension.
         #
         # @return [String] API representation of source format.
@@ -337,8 +343,6 @@ module Google
         end
 
         ##
-        # @private
-        #
         # Converts file path into source format by extension.
         #
         # @return [String] API representation of source format.
@@ -353,8 +357,6 @@ module Google
         end
 
         ##
-        # @private
-        #
         # Converts a primitive time value in milliseconds to a Ruby Time object.
         #
         # @return [Time, nil] The Ruby Time object, or nil if the given argument
@@ -365,8 +367,6 @@ module Google
         end
 
         ##
-        # @private
-        #
         # Converts a Ruby Time object to a primitive time value in milliseconds.
         #
         # @return [Integer, nil] The primitive time value in milliseconds, or

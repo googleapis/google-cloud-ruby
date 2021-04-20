@@ -40,8 +40,8 @@ module Google
           MODES = ["NULLABLE", "REQUIRED", "REPEATED"].freeze
 
           # @private
-          TYPES = ["STRING", "INTEGER", "INT64", "FLOAT", "FLOAT64", "NUMERIC", "BOOLEAN", "BOOL", "BYTES", "TIMESTAMP",
-                   "TIME", "DATETIME", "DATE", "RECORD", "STRUCT"].freeze
+          TYPES = ["STRING", "INTEGER", "INT64", "FLOAT", "FLOAT64", "NUMERIC", "BIGNUMERIC", "BOOLEAN", "BOOL",
+                   "BYTES", "TIMESTAMP", "TIME", "DATETIME", "DATE", "RECORD", "STRUCT"].freeze
 
           ##
           # The name of the field.
@@ -72,10 +72,10 @@ module Google
           #
           # @return [String] The field data type. Possible values include
           #   `STRING`, `BYTES`, `INTEGER`, `INT64` (same as `INTEGER`),
-          #   `FLOAT`, `FLOAT64` (same as `FLOAT`), `NUMERIC`, `BOOLEAN`, `BOOL`
-          #   (same as `BOOLEAN`), `TIMESTAMP`, `DATE`, `TIME`, `DATETIME`,
-          #   `RECORD` (where `RECORD` indicates that the field contains a
-          #   nested schema) or `STRUCT` (same as `RECORD`).
+          #   `FLOAT`, `FLOAT64` (same as `FLOAT`), `NUMERIC`, `BIGNUMERIC`,
+          #   `BOOLEAN`, `BOOL` (same as `BOOLEAN`), `TIMESTAMP`, `DATE`,
+          #   `TIME`, `DATETIME`, `RECORD` (where `RECORD` indicates that the
+          #   field contains a nested schema) or `STRUCT` (same as `RECORD`).
           #
           def type
             @gapi.type
@@ -86,10 +86,10 @@ module Google
           #
           # @param [String] new_type The data type. Possible values include
           #   `STRING`, `BYTES`, `INTEGER`, `INT64` (same as `INTEGER`),
-          #   `FLOAT`, `FLOAT64` (same as `FLOAT`), `NUMERIC`, `BOOLEAN`, `BOOL`
-          #   (same as `BOOLEAN`), `TIMESTAMP`, `DATE`, `TIME`, `DATETIME`,
-          #   `RECORD` (where `RECORD` indicates that the field contains a
-          #   nested schema) or `STRUCT` (same as `RECORD`).
+          #   `FLOAT`, `FLOAT64` (same as `FLOAT`), `NUMERIC`, `BIGNUMERIC`,
+          #   `BOOLEAN`, `BOOL` (same as `BOOLEAN`), `TIMESTAMP`, `DATE`,
+          #   `TIME`, `DATETIME`, `RECORD` (where `RECORD` indicates that the
+          #   field contains a nested schema) or `STRUCT` (same as `RECORD`).
           #
           def type= new_type
             @gapi.update! type: verify_type(new_type)
@@ -200,6 +200,15 @@ module Google
           end
 
           ##
+          # Checks if the type of the field is `BIGNUMERIC`.
+          #
+          # @return [Boolean] `true` when `BIGNUMERIC`, `false` otherwise.
+          #
+          def bignumeric?
+            type == "BIGNUMERIC"
+          end
+
+          ##
           # Checks if the type of the field is `BOOLEAN`.
           #
           # @return [Boolean] `true` when `BOOLEAN`, `false` otherwise.
@@ -299,6 +308,7 @@ module Google
           # * `:INT64`
           # * `:FLOAT64`
           # * `:NUMERIC`
+          # * `:BIGNUMERIC`
           # * `:STRING`
           # * `:DATETIME`
           # * `:DATE`
@@ -394,9 +404,18 @@ module Google
           end
 
           ##
-          # Adds a numeric number field to the schema. Numeric is a
-          # fixed-precision numeric type with 38 decimal digits, 9 that follow
-          # the decimal point.
+          # Adds a numeric number field to the schema. `NUMERIC` is a decimal
+          # type with fixed precision and scale. Precision is the number of
+          # digits that the number contains. Scale is how many of these
+          # digits appear after the decimal point. It supports:
+          #
+          # Precision: 38
+          # Scale: 9
+          # Min: -9.9999999999999999999999999999999999999E+28
+          # Max: 9.9999999999999999999999999999999999999E+28
+          #
+          # This type can represent decimal fractions exactly, and is suitable
+          # for financial calculations.
           #
           # This can only be called on fields that are of type `RECORD`.
           #
@@ -413,6 +432,37 @@ module Google
             record_check!
 
             add_field name, :numeric, description: description, mode: mode
+          end
+
+          ##
+          # Adds a bignumeric number field to the schema. `BIGNUMERIC` is a
+          # decimal type with fixed precision and scale. Precision is the
+          # number of digits that the number contains. Scale is how many of
+          # these digits appear after the decimal point. It supports:
+          #
+          # Precision: 76.76 (the 77th digit is partial)
+          # Scale: 38
+          # Min: -5.7896044618658097711785492504343953926634992332820282019728792003956564819968E+38
+          # Max: 5.7896044618658097711785492504343953926634992332820282019728792003956564819967E+38
+          #
+          # This type can represent decimal fractions exactly, and is suitable
+          # for financial calculations.
+          #
+          # This can only be called on fields that are of type `RECORD`.
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          #
+          def bignumeric name, description: nil, mode: :nullable
+            record_check!
+
+            add_field name, :bignumeric, description: description, mode: mode
           end
 
           ##
