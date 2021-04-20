@@ -52,8 +52,11 @@ def release_please gem_name
   log_cmd = cmd.inspect
   log_cmd.sub! github_token, "****" if github_token
   result = exec cmd, log_cmd: log_cmd, e: false
-  unless result.success?
+  if result.success?
+    sleep 1
+  else
     puts "Error running release-please for #{gem_name} from version #{version.inspect}", :bold, :red
+    sleep 2
   end
 end
 
