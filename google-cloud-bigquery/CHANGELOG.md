@@ -1,5 +1,20 @@
 # Release History
 
+### 1.30.0 / 2021-04-20
+
+#### Features
+
+* Add support for BIGNUMERIC data type
+  * Add support for BIGNUMERIC data insert.
+  * Add support for BIGNUMERIC query params.
+  * Add #bignumeric to Schema, Table, LoadJob::Updater and Field.
+  * Update types tables in docs.
+
+#### Bug Fixes
+
+* Fix Table#time_partitioning_expiration=
+  * Accept nil argument.
+
 ### 1.29.0 / 2021-03-10
 
 #### Features
