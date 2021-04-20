@@ -28,7 +28,7 @@ green, you may create a release as follows:
 
 1. Choose a gem to release based on the changes report from the previous step.
    If there are changes to
-   [google-cloud-env](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-env),
+   [google-cloud-errors](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-errors),
    [google-cloud-core](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-core),
    and/or
    [stackdriver-core](https://github.com/googleapis/google-cloud-ruby/tree/master/stackdriver-core),

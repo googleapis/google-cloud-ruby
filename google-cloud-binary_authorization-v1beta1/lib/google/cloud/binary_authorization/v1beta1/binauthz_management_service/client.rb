@@ -207,13 +207,16 @@ module Google
             # Service calls
 
             ##
-            # A {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} specifies the {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors} that must attest to
-            # a container image, before the project is allowed to deploy that
+            # A {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} specifies the
+            # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors} that must
+            # attest to a container image, before the project is allowed to deploy that
             # image. There is at most one policy per project. All image admission
             # requests are permitted if a project has no policy.
             #
-            # Gets the {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} for this project. Returns a default
-            # {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} if the project does not have one.
+            # Gets the {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} for this
+            # project. Returns a default
+            # {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} if the project
+            # does not have one.
             #
             # @overload get_policy(request, options = nil)
             #   Pass arguments to `get_policy` via a request object, either of type
@@ -231,8 +234,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} to retrieve,
-            #     in the format `projects/*/policy`.
+            #     Required. The resource name of the
+            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} to retrieve, in
+            #     the format `projects/*/policy`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::BinaryAuthorization::V1beta1::Policy]
@@ -280,11 +284,13 @@ module Google
             end
 
             ##
-            # Creates or updates a project's {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy}, and returns a copy of the
-            # new {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy}. A policy is always updated as a whole, to avoid race
-            # conditions with concurrent policy enforcement (or management!)
-            # requests. Returns NOT_FOUND if the project does not exist, INVALID_ARGUMENT
-            # if the request is malformed.
+            # Creates or updates a project's
+            # {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy}, and returns a
+            # copy of the new {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy}.
+            # A policy is always updated as a whole, to avoid race conditions with
+            # concurrent policy enforcement (or management!) requests. Returns NOT_FOUND
+            # if the project does not exist, INVALID_ARGUMENT if the request is
+            # malformed.
             #
             # @overload update_policy(request, options = nil)
             #   Pass arguments to `update_policy` via a request object, either of type
@@ -302,9 +308,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param policy [::Google::Cloud::BinaryAuthorization::V1beta1::Policy, ::Hash]
-            #     Required. A new or updated {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} value. The service will
-            #     overwrite the {::Google::Cloud::BinaryAuthorization::V1beta1::Policy#name policy name} field with the resource name in
-            #     the request URL, in the format `projects/*/policy`.
+            #     Required. A new or updated
+            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} value. The
+            #     service will overwrite the [policy
+            #     name][google.cloud.binaryauthorization.v1beta1.Policy.name] field with the
+            #     resource name in the request URL, in the format `projects/*/policy`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::BinaryAuthorization::V1beta1::Policy]
@@ -352,10 +360,13 @@ module Google
             end
 
             ##
-            # Creates an {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor}, and returns a copy of the new
-            # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor}. Returns NOT_FOUND if the project does not exist,
-            # INVALID_ARGUMENT if the request is malformed, ALREADY_EXISTS if the
-            # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} already exists.
+            # Creates an {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor},
+            # and returns a copy of the new
+            # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor}. Returns
+            # NOT_FOUND if the project does not exist, INVALID_ARGUMENT if the request is
+            # malformed, ALREADY_EXISTS if the
+            # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} already
+            # exists.
             #
             # @overload create_attestor(request, options = nil)
             #   Pass arguments to `create_attestor` via a request object, either of type
@@ -373,13 +384,17 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent of this {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor}.
+            #     Required. The parent of this
+            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor}.
             #   @param attestor_id [::String]
-            #     Required. The {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors} ID.
+            #     Required. The
+            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors} ID.
             #   @param attestor [::Google::Cloud::BinaryAuthorization::V1beta1::Attestor, ::Hash]
-            #     Required. The initial {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} value. The service will
-            #     overwrite the {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor#name attestor name} field with the resource name,
-            #     in the format `projects/*/attestors/*`.
+            #     Required. The initial
+            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} value. The
+            #     service will overwrite the [attestor
+            #     name][google.cloud.binaryauthorization.v1beta1.Attestor.name] field with
+            #     the resource name, in the format `projects/*/attestors/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::BinaryAuthorization::V1beta1::Attestor]
@@ -428,7 +443,9 @@ module Google
 
             ##
             # Gets an {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor}.
-            # Returns NOT_FOUND if the {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} does not exist.
+            # Returns NOT_FOUND if the
+            # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} does not
+            # exist.
             #
             # @overload get_attestor(request, options = nil)
             #   Pass arguments to `get_attestor` via a request object, either of type
@@ -446,8 +463,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} to retrieve, in the format
-            #     `projects/*/attestors/*`.
+            #     Required. The name of the
+            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} to retrieve,
+            #     in the format `projects/*/attestors/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::BinaryAuthorization::V1beta1::Attestor]
@@ -496,7 +514,9 @@ module Google
 
             ##
             # Updates an {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor}.
-            # Returns NOT_FOUND if the {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} does not exist.
+            # Returns NOT_FOUND if the
+            # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} does not
+            # exist.
             #
             # @overload update_attestor(request, options = nil)
             #   Pass arguments to `update_attestor` via a request object, either of type
@@ -514,9 +534,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param attestor [::Google::Cloud::BinaryAuthorization::V1beta1::Attestor, ::Hash]
-            #     Required. The updated {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} value. The service will
-            #     overwrite the {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor#name attestor name} field with the resource name
-            #     in the request URL, in the format `projects/*/attestors/*`.
+            #     Required. The updated
+            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} value. The
+            #     service will overwrite the [attestor
+            #     name][google.cloud.binaryauthorization.v1beta1.Attestor.name] field with
+            #     the resource name in the request URL, in the format
+            #     `projects/*/attestors/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::BinaryAuthorization::V1beta1::Attestor]
@@ -584,14 +607,16 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The resource name of the project associated with the
-            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors}, in the format `projects/*`.
+            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors}, in the
+            #     format `projects/*`.
             #   @param page_size [::Integer]
             #     Requested page size. The server may return fewer results than requested. If
             #     unspecified, the server will pick an appropriate default.
             #   @param page_token [::String]
             #     A token identifying a page of results the server should return. Typically,
-            #     this is the value of {::Google::Cloud::BinaryAuthorization::V1beta1::ListAttestorsResponse#next_page_token ListAttestorsResponse.next_page_token} returned
-            #     from the previous call to the `ListAttestors` method.
+            #     this is the value of
+            #     {::Google::Cloud::BinaryAuthorization::V1beta1::ListAttestorsResponse#next_page_token ListAttestorsResponse.next_page_token}
+            #     returned from the previous call to the `ListAttestors` method.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::BinaryAuthorization::V1beta1::Attestor>]
@@ -640,8 +665,10 @@ module Google
             end
 
             ##
-            # Deletes an {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor}. Returns NOT_FOUND if the
-            # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} does not exist.
+            # Deletes an {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor}.
+            # Returns NOT_FOUND if the
+            # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} does not
+            # exist.
             #
             # @overload delete_attestor(request, options = nil)
             #   Pass arguments to `delete_attestor` via a request object, either of type
@@ -659,8 +686,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors} to delete, in the format
-            #     `projects/*/attestors/*`.
+            #     Required. The name of the
+            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors} to delete,
+            #     in the format `projects/*/attestors/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]

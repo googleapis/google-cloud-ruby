@@ -24,6 +24,7 @@ describe Google::Cloud::Bigtable::Instance, :cluster, :mock_bigtable do
   let(:instance) {
     Google::Cloud::Bigtable::Instance.from_grpc(instance_grpc, bigtable.service)
   }
+  let(:kms_key) { "path/to/encryption_key_name" }
 
   it "gets an cluster" do
     cluster_id = "found-cluster"
@@ -34,7 +35,8 @@ describe Google::Cloud::Bigtable::Instance, :cluster, :mock_bigtable do
         nodes: 3,
         location: location_id,
         storage_type: :SSD,
-        state: :READY
+        state: :READY,
+        kms_key: kms_key
       )
     )
 
@@ -53,6 +55,7 @@ describe Google::Cloud::Bigtable::Instance, :cluster, :mock_bigtable do
     _(cluster.ready?).must_equal true
     _(cluster.storage_type).must_equal :SSD
     _(cluster.nodes).must_equal 3
+    _(cluster.kms_key).must_equal kms_key
   end
 
   it "returns nil when getting an non-existent cluster" do

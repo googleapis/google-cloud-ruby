@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2021-04-05
+
+#### Features
+
+* Support for receive_trigger_webhook and for available secrets in builds
+
 ### 0.4.0 / 2021-03-08
 
 #### Features

@@ -25,6 +25,25 @@ module Google
           # Path helper methods for the WorkflowTemplateService API.
           module Paths
             ##
+            # Create a fully-qualified Cluster resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/clusters/{cluster}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param cluster [String]
+            #
+            # @return [::String]
+            def cluster_path project:, location:, cluster:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/clusters/#{cluster}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
@@ -56,6 +75,25 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/regions/#{region}"
+            end
+
+            ##
+            # Create a fully-qualified Service resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/services/{service}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param service [String]
+            #
+            # @return [::String]
+            def service_path project:, location:, service:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/services/#{service}"
             end
 
             ##

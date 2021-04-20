@@ -54,6 +54,16 @@
                 "update_cluster"
               ]
             },
+            "StopCluster": {
+              "methods": [
+                "stop_cluster"
+              ]
+            },
+            "StartCluster": {
+              "methods": [
+                "start_cluster"
+              ]
+            },
             "DeleteCluster": {
               "methods": [
                 "delete_cluster"

@@ -1,0 +1,61 @@
+name: CI
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+    inputs:
+      head:
+        description: "Commit reference at which to run tests"
+        required: false
+      base:
+        description: "Commit reference from which to evaluate diffs"
+        required: false
+
+jobs:
+  CI:
+    if: ${{ github.repository == 'googleapis/google-cloud-ruby' }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            ruby: "2.5"
+            task: "--test"
+          - os: ubuntu-latest
+            ruby: "2.6"
+            task: "--test"
+          - os: ubuntu-latest
+            ruby: "2.7"
+            task: "--test"
+          - os: ubuntu-latest
+            ruby: "3.0"
+            task: "--test"
+          - os: macos-latest
+            ruby: "2.7"
+            task: "--test"
+          - os: windows-latest
+            ruby: "2.7"
+            task: "--test"
+          - os: ubuntu-latest
+            ruby: "2.7"
+            task: "--rubocop --build --yard --linkinator"
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Install Ruby ${{ matrix.ruby }}
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: "${{ matrix.ruby }}"
+    - name: Install NodeJS 12.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: "12.x"
+    - name: Install tools
+      run: "gem install --no-document toys && npm install linkinator"
+    - name: Test ${{ matrix.task }}
+      run: toys ci -v --only ${{ matrix.task }} --github-event-name=${{ github.event_name }} --github-event-payload=${{ github.event_path }}

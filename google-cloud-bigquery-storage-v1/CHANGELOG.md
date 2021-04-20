@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2021-04-05
+
+#### Features
+
+* Add Arrow compression option, and return the schema on the first read_rows response
+
 ### 0.4.0 / 2021-03-08
 
 #### Features

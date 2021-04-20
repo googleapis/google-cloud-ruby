@@ -733,19 +733,28 @@ module Google
         end
 
         ##
-        # Pulls messages from the server. Returns an empty list if there are no
-        # messages available in the backlog. Raises an ApiError with status
-        # `UNAVAILABLE` if there are too many concurrent pull requests pending
-        # for the given subscription.
+        # Pulls messages from the server, blocking until messages are available
+        # when called with the `immediate: false` option, which is recommended
+        # to avoid adverse impacts on the performance of pull operations.
+        #
+        # Raises an API error with status `UNAVAILABLE` if there are too many
+        # concurrent pull requests pending for the given subscription.
         #
         # See also {#listen} for the preferred way to process messages as they
         # become available.
         #
-        # @param [Boolean] immediate When `true` the system will respond
-        #   immediately even if it is not able to return messages. When `false`
-        #   the system is allowed to wait until it can return least one message.
-        #   No messages are returned when a request times out. The default value
-        #   is `true`.
+        # @param [Boolean] immediate Whether to return immediately or block until
+        #   messages are available.
+        #
+        #   **Warning:** The default value of this field is `true`. However, sending
+        #   `true` is discouraged because it adversely impacts the performance of
+        #   pull operations. We recommend that users always explicitly set this field
+        #   to `false`.
+        #
+        #   If this field set to `true`, the system will respond immediately
+        #   even if it there are no messages available to return in the pull
+        #   response. Otherwise, the system may wait (for a bounded amount of time)
+        #   until at least one message is available, rather than returning no messages.
         #
         #   See also {#listen} for the preferred way to process messages as they
         #   become available.
@@ -755,13 +764,16 @@ module Google
         #
         # @return [Array<Google::Cloud::PubSub::ReceivedMessage>]
         #
-        # @example
+        # @example The `immediate: false` option is now recommended to avoid adverse impacts on pull operations:
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   sub.pull.each { |received_message| received_message.acknowledge! }
+        #   received_messages = sub.pull immediate: false
+        #   received_messages.each do |received_message|
+        #     received_message.acknowledge!
+        #   end
         #
         # @example A maximum number of messages returned can also be specified:
         #   require "google/cloud/pubsub"
@@ -769,17 +781,7 @@ module Google
         #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   sub.pull(max: 10).each do |received_message|
-        #     received_message.acknowledge!
-        #   end
-        #
-        # @example The call can block until messages are available:
-        #   require "google/cloud/pubsub"
-        #
-        #   pubsub = Google::Cloud::PubSub.new
-        #
-        #   sub = pubsub.subscription "my-topic-sub"
-        #   received_messages = sub.pull immediate: false
+        #   received_messages = sub.pull immediate: false, max: 10
         #   received_messages.each do |received_message|
         #     received_message.acknowledge!
         #   end
@@ -1010,7 +1012,7 @@ module Google
         #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   received_messages = sub.pull
+        #   received_messages = sub.pull immediate: false
         #   sub.acknowledge received_messages
         #
         def acknowledge *messages
@@ -1045,7 +1047,7 @@ module Google
         #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   received_messages = sub.pull
+        #   received_messages = sub.pull immediate: false
         #   sub.modify_ack_deadline 120, received_messages
         #
         def modify_ack_deadline new_deadline, *messages
@@ -1143,7 +1145,7 @@ module Google
         #
         #   snapshot = sub.create_snapshot
         #
-        #   received_messages = sub.pull
+        #   received_messages = sub.pull immediate: false
         #   sub.acknowledge received_messages
         #
         #   sub.seek snapshot
@@ -1156,7 +1158,7 @@ module Google
         #
         #   time = Time.now
         #
-        #   received_messages = sub.pull
+        #   received_messages = sub.pull immediate: false
         #   sub.acknowledge received_messages
         #
         #   sub.seek time

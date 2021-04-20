@@ -19,7 +19,9 @@ describe "Google Cloud Firestore API samples - Get Data" do
   before :all do
     @firestore_project = ENV["FIRESTORE_PROJECT"]
     @collection_path = random_name "cities"
-    retrieve_create_examples project_id: @firestore_project, collection_path: @collection_path
+    capture_io do
+      retrieve_create_examples project_id: @firestore_project, collection_path: @collection_path
+    end
   end
 
   after :all do
@@ -86,7 +88,11 @@ describe "Google Cloud Firestore API samples - Get Data" do
   end
 
   it "list_subcollections" do
-    add_subcollection project_id: @firestore_project, collection_path: @collection_path
+    # Setup
+    capture_io do
+      add_subcollection project_id: @firestore_project, collection_path: @collection_path
+    end
+
     out, _err = capture_io do
       list_subcollections project_id: @firestore_project, collection_path: @collection_path
     end

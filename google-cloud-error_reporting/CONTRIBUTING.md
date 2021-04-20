@@ -53,7 +53,7 @@ tests, there is a small amount of setup:
 In order to run code interactively, you can automatically load
 google-cloud-error_reporting and its dependencies in IRB. This requires that
 your developer environment has already been configured by following the steps
-described in the {file:AUTHENTICATION.md Authentication Guide}. An IRB console
+described in the [Authentication Guide](AUTHENTICATION.md). An IRB console
 can be created with:
 
 ```sh
@@ -126,9 +126,7 @@ run the entire acceptance test suite. However, please ensure that you do
 successfully run acceptance tests for any code areas covered by your pull
 request.
 
-To run the acceptance tests, first create and configure a project in the Google
-Developers Console, as described in the {file:AUTHENTICATION.md Authentication
-guide}. Be sure to download the JSON KEY file. Make note of the PROJECT_ID and
+To run the acceptance tests, first creat[Authentication Guide](AUTHENTICATION.md). Be sure to download the JSON KEY file. Make note of the PROJECT_ID and
 the KEYFILE location on your system.
 
 Before you can run the Error Reporting acceptance tests, you must first create
@@ -185,5 +183,4 @@ $ bundle exec rake rubocop
 ## Code of Conduct
 
 Please note that this project is released with a Contributor Code of Conduct. By
-participating in this project you agree to abide by its terms. See
-{file:CODE_OF_CONDUCT.md Code of Conduct} for more information.
+participating in this project you agree to abide by its terms. See [Code of Conduct](CODE_OF_CONDUCT.md) for more information.

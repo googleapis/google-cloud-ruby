@@ -77,13 +77,15 @@ class MockBigtable < Minitest::Spec
     { instances: instances }
   end
 
-  def cluster_hash name: nil, nodes: nil, location: nil, storage_type: nil, state: nil
+  def cluster_hash name: nil, nodes: nil, location: nil, storage_type: nil, state: nil, kms_key: nil
+    encryption_config = { kms_key_name: kms_key } if kms_key
     {
       name: name,
       serve_nodes: nodes,
       location: location ? location_path(location) : nil,
       default_storage_type: storage_type,
-      state: state
+      state: state,
+      encryption_config: encryption_config
     }.delete_if { |_, v| v.nil? }
   end
 
@@ -139,7 +141,7 @@ class MockBigtable < Minitest::Spec
      )
   end
 
-  def clusters_state_grpc num: 3, start_id: 1
+  def cluster_states_grpc num: 3, start_id: 1
     num.times.each_with_object({}) do |i, r|
       r["cluster-#{i + start_id }"] = cluster_state_grpc(:READY)
     end
@@ -162,7 +164,7 @@ class MockBigtable < Minitest::Spec
     tables = num.times.map do |i|
       table_hash(
         name: table_path(instance_id, "table-#{start_id + i}"),
-        cluster_states: clusters_state_grpc,
+        cluster_states: cluster_states_grpc,
         column_families: column_families_grpc,
         granularity: :MILLIS
       )
@@ -198,10 +200,17 @@ class MockBigtable < Minitest::Spec
                   start_time: nil,
                   end_time: nil,
                   size_bytes: 123456,
-                  state: :READY
+                  state: :READY,
+                  encryption_type: nil,
+                  encryption_status: nil,
+                  kms_key_version: nil
+
     now = Time.now.round 0
     start_time ||= now + 60
     end_time ||= now + 120
+    encryption_info = encryption_info_grpc type: encryption_type,
+                                           status_code: encryption_status,
+                                           kms_key_version: kms_key_version
 
     Google::Cloud::Bigtable::Admin::V2::Backup.new(
       name: backup_path(instance_id, cluster_id, backup_id),
@@ -210,7 +219,8 @@ class MockBigtable < Minitest::Spec
       start_time: start_time,
       end_time: end_time,
       size_bytes: size_bytes,
-      state: state
+      state: state,
+      encryption_info: encryption_info
     )
   end
 
@@ -220,6 +230,18 @@ class MockBigtable < Minitest::Spec
       backup_grpc "my-instance", "my-cluster", "my-backup-#{i}", "my-source-table", expire_time
     end
     Google::Cloud::Bigtable::Admin::V2::ListBackupsResponse.new backups: arr
+  end
+
+
+  def encryption_info_grpc type: nil, status_code: nil, kms_key_version: nil
+    type ||= :GOOGLE_DEFAULT_ENCRYPTION
+    encryption_type = Google::Cloud::Bigtable::Admin::V2::EncryptionInfo::EncryptionType.const_get type
+    status = Google::Rpc::Status.new code: status_code if status_code
+    Google::Cloud::Bigtable::Admin::V2::EncryptionInfo.new(
+      encryption_type: type,
+      encryption_status: status,
+      kms_key_version: kms_key_version
+    )
   end
 
   def project_path

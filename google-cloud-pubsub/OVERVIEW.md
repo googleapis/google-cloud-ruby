@@ -12,7 +12,7 @@ Platform (GCP), including Google Compute Engine (GCE), Google Kubernetes Engine
 (GKE), Google App Engine (GAE), Google Cloud Functions (GCF) and Cloud Run. In
 other environments you can configure authentication easily, either directly in
 your code or via environment variables. Read more about the options for
-connecting in the {file:AUTHENTICATION.md Authentication Guide}.
+connecting in the [Authentication Guide](AUTHENTICATION.md).
 
 ```ruby
 require "google/cloud/pubsub"
@@ -205,13 +205,16 @@ sleep
 Messages also can be pulled directly in a one-time operation. (See
 {Google::Cloud::PubSub::Subscription#pull Subscription#pull})
 
+The `immediate: false` option is recommended to avoid adverse impacts on the
+performance of pull operations.
+
 ```ruby
 require "google/cloud/pubsub"
 
 pubsub = Google::Cloud::PubSub.new
 
 sub = pubsub.subscription "my-topic-sub"
-received_messages = sub.pull
+received_messages = sub.pull immediate: false
 ```
 
 A maximum number of messages to pull can be specified:
@@ -222,7 +225,7 @@ require "google/cloud/pubsub"
 pubsub = Google::Cloud::PubSub.new
 
 sub = pubsub.subscription "my-topic-sub"
-received_messages = sub.pull max: 10
+received_messages = sub.pull immediate: false, max: 10
 ```
 
 ## Acknowledging a Message
@@ -263,7 +266,7 @@ require "google/cloud/pubsub"
 pubsub = Google::Cloud::PubSub.new
 
 sub = pubsub.subscription "my-topic-sub"
-received_messages = sub.pull
+received_messages = sub.pull immediate: false
 sub.acknowledge received_messages
 ```
 
@@ -328,7 +331,7 @@ require "google/cloud/pubsub"
 pubsub = Google::Cloud::PubSub.new
 
 sub = pubsub.subscription "my-topic-sub"
-received_messages = sub.pull
+received_messages = sub.pull immediate: false
 sub.modify_ack_deadline 120, received_messages
 ```
 
@@ -474,7 +477,7 @@ sub = pubsub.subscription "my-topic-sub"
 
 snapshot = sub.create_snapshot
 
-received_messages = sub.pull
+received_messages = sub.pull immediate: false
 sub.acknowledge received_messages
 
 sub.seek snapshot
@@ -521,5 +524,5 @@ sub.topic.name #=> "projects/other-project-id/topics/other-topic"
 ## Additional information
 
 Google Cloud Pub/Sub can be configured to use an emulator or to enable gRPC's
-logging. To learn more, see the {file:EMULATOR.md Emulator guide} and
-{file:LOGGING.md Logging guide}.
+logging. To learn more, see the [Emulator guide}](EMULATOR.md) and
+[Logging guide](LOGGING.md).

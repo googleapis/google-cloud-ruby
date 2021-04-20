@@ -79,6 +79,14 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
     _(backup.ready?).must_equal true
   end
 
+  it "knows its encryption info" do
+    encryption_info = backup.encryption_info
+    _(encryption_info).must_be_kind_of Google::Cloud::Bigtable::EncryptionInfo
+    _(encryption_info.encryption_type).must_equal :GOOGLE_DEFAULT_ENCRYPTION
+    _(encryption_info.encryption_status).must_be :nil?
+    _(encryption_info.kms_key_version).must_be :nil?
+  end
+
   it "returns its source_table without options as view: :NAME_ONLY" do
     table = backup.source_table
 
@@ -89,7 +97,7 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
   end
 
   it "returns its source_table with perform_lookup and view options" do
-    cluster_states = clusters_state_grpc
+    cluster_states = cluster_states_grpc
     column_families = column_families_grpc
     get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
       table_hash(

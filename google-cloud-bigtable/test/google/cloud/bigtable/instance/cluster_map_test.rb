@@ -18,20 +18,37 @@
 require "helper"
 
 describe Google::Cloud::Bigtable::Instance::ClusterMap, :mock_bigtable do
-  it "add cluster to map" do
-    location = location_path("us-east-1b")
-    cluster_id = "test-cluster"
+  let(:cluster_id) { "test-cluster" }
+  let(:loc) { location_path("us-east-1b") }
+  let(:kms_key) { "path/to/encryption_key_name" }
 
+  it "adds a cluster" do
     cluster_map = Google::Cloud::Bigtable::Instance::ClusterMap.new
     _(cluster_map).must_be :empty?
 
-    cluster_map.add(cluster_id, location, nodes: 3, storage_type: :SSD)
+    cluster_map.add(cluster_id, loc, nodes: 3, storage_type: :SSD)
     _(cluster_map.length).must_equal 1
 
     cluster_grpc = cluster_map[cluster_id]
     _(cluster_grpc).must_be_kind_of Google::Cloud::Bigtable::Admin::V2::Cluster
-    _(cluster_grpc.location).must_equal location_path("us-east-1b")
+    _(cluster_grpc.location).must_equal loc
     _(cluster_grpc.serve_nodes).must_equal 3
     _(cluster_grpc.default_storage_type).must_equal :SSD
+    _(cluster_grpc.encryption_config).must_be :nil?
+  end
+
+  it "adds a cluster with KMS key (CMEK)" do
+    cluster_map = Google::Cloud::Bigtable::Instance::ClusterMap.new
+
+    cluster_map.add(cluster_id, loc, kms_key: kms_key)
+    _(cluster_map.length).must_equal 1
+
+    cluster_grpc = cluster_map[cluster_id]
+    _(cluster_grpc).must_be_kind_of Google::Cloud::Bigtable::Admin::V2::Cluster
+    _(cluster_grpc.location).must_equal loc
+    _(cluster_grpc.serve_nodes).must_equal 0
+    _(cluster_grpc.default_storage_type).must_equal :STORAGE_TYPE_UNSPECIFIED
+    _(cluster_grpc.encryption_config).must_be_kind_of Google::Cloud::Bigtable::Admin::V2::Cluster::EncryptionConfig
+    _(cluster_grpc.encryption_config.kms_key_name).must_equal kms_key
   end
 end

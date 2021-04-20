@@ -1,5 +1,33 @@
 # Release History
 
+### 2.6.0 / 2021-04-19
+
+#### Features
+
+* Add ordering_key to Topic#publish
+  * Add ordering_key to BatchPublisher#publish
+
+#### Documentation
+
+* The immediate: false option is recommended to avoid adverse impacts on the performance of pull operations ([#11153](https://www.github.com/googleapis/google-cloud-ruby/issues/11153))
+* Update Subscription#pull docs and samples to recommend immediate: false
+
+### 2.5.0 / 2021-04-01
+
+#### Features
+
+* Add Schema support
+  * Add Schema
+  * Add Project#create_schema
+  * Add Project#schema
+  * Add Project#schemas (Schema::List)
+  * Add Project#valid_schema?
+  * Add schema options to Project#create_topic
+  * Add Topic#schema_name
+  * Add Topic#message_encoding
+  * Add Topic#message_encoding_binary?
+  * Add Topic#message_encoding_json?
+
 ### 2.4.0 / 2021-03-10
 
 #### Features

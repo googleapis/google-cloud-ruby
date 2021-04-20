@@ -116,6 +116,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.dataproc.v1.JobPlacement" do
       optional :cluster_name, :string, 1
       optional :cluster_uuid, :string, 2
+      map :cluster_labels, :string, :string, 3
     end
     add_message "google.cloud.dataproc.v1.JobStatus" do
       optional :state, :enum, 1, "google.cloud.dataproc.v1.JobStatus.State"
@@ -187,6 +188,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.dataproc.v1.JobScheduling" do
       optional :max_failures_per_hour, :int32, 1
+      optional :max_failures_total, :int32, 2
     end
     add_message "google.cloud.dataproc.v1.SubmitJobRequest" do
       optional :project_id, :string, 1

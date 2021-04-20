@@ -395,8 +395,8 @@ module Google
         # {#resource_full?}), the full representation will be retrieved before
         # the update to comply with ETag-based optimistic concurrency control.
         #
-        # @param [Integer] expiration An expiration time, in seconds,
-        #   for data in time partitions.
+        # @param [Integer, nil] expiration An expiration time, in seconds,
+        #   for data in time partitions, , or `nil` to indicate no expiration time.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -416,8 +416,9 @@ module Google
         #
         def time_partitioning_expiration= expiration
           reload! unless resource_full?
+          expiration_ms = expiration * 1000 if expiration
           @gapi.time_partitioning ||= Google::Apis::BigqueryV2::TimePartitioning.new
-          @gapi.time_partitioning.expiration_ms = expiration * 1000
+          @gapi.time_partitioning.expiration_ms = expiration_ms
           patch_gapi! :time_partitioning
         end
 
@@ -2305,6 +2306,21 @@ module Google
         # need to complete a load operation before the data can appear in query
         # results.
         #
+        # Simple Ruby types are generally accepted per JSON rules, along with the following support for BigQuery's more
+        # complex types:
+        #
+        # | BigQuery     | Ruby                                 | Notes                                              |
+        # |--------------|--------------------------------------|----------------------------------------------------|
+        # | `NUMERIC`    | `BigDecimal`                         | `BigDecimal` values will be rounded to scale 9.    |
+        # | `BIGNUMERIC` | `String`                             | Pass as `String` to avoid rounding to scale 9.     |
+        # | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
+        # | `DATE`       | `Date`                               |                                                    |
+        # | `TIMESTAMP`  | `Time`                               |                                                    |
+        # | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                    |
+        # | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                    |
+        # | `ARRAY`      | `Array`                              | Nested arrays, `nil` values are not supported.     |
+        # | `STRUCT`     | `Hash`                               | Hash keys may be strings or symbols.               |
+        #
         # Because BigQuery's streaming API is designed for high insertion rates,
         # modifications to the underlying table metadata are eventually
         # consistent when interacting with the streaming system. In most cases
@@ -2318,7 +2334,10 @@ module Google
         #   BigQuery Troubleshooting: Metadata errors for streaming inserts
         #
         # @param [Hash, Array<Hash>] rows A hash object or array of hash objects
-        #   containing the data. Required.
+        #   containing the data. Required. `BigDecimal` values will be rounded to
+        #   scale 9 to conform with the BigQuery `NUMERIC` data type. To avoid
+        #   rounding `BIGNUMERIC` type values with scale greater than 9, use `String`
+        #   instead of `BigDecimal`.
         # @param [Array<String|Symbol>, Symbol] insert_ids A unique ID for each row. BigQuery uses this property to
         #   detect duplicate insertion requests on a best-effort basis. For more information, see [data
         #   consistency](https://cloud.google.com/bigquery/streaming-data-into-bigquery#dataconsistency). Optional. If
@@ -2360,6 +2379,19 @@ module Google
         #     { "first_name" => "Bob", "age" => 22 }
         #   ]
         #   table.insert rows
+        #
+        # @example Pass `BIGNUMERIC` value as a string to avoid rounding to scale 9 in the conversion from `BigDecimal`:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   row = {
+        #     "my_numeric" => BigDecimal("123456798.987654321"),
+        #     "my_bignumeric" => "123456798.98765432100001" # BigDecimal would be rounded, use String instead!
+        #   }
+        #   table.insert row
         #
         # @!group Data
         #
@@ -3229,9 +3261,18 @@ module Google
           end
 
           ##
-          # Adds a numeric number field to the schema. Numeric is a
-          # fixed-precision numeric type with 38 decimal digits, 9 that follow
-          # the decimal point.
+          # Adds a numeric number field to the schema. `NUMERIC` is a decimal
+          # type with fixed precision and scale. Precision is the number of
+          # digits that the number contains. Scale is how many of these
+          # digits appear after the decimal point. It supports:
+          #
+          # Precision: 38
+          # Scale: 9
+          # Min: -9.9999999999999999999999999999999999999E+28
+          # Max: 9.9999999999999999999999999999999999999E+28
+          #
+          # This type can represent decimal fractions exactly, and is suitable
+          # for financial calculations.
           #
           # See {Schema#numeric}
           #
@@ -3256,6 +3297,45 @@ module Google
           # @!group Schema
           def numeric name, description: nil, mode: :nullable
             schema.numeric name, description: description, mode: mode
+          end
+
+          ##
+          # Adds a bignumeric number field to the schema. `BIGNUMERIC` is a
+          # decimal type with fixed precision and scale. Precision is the
+          # number of digits that the number contains. Scale is how many of
+          # these digits appear after the decimal point. It supports:
+          #
+          # Precision: 76.76 (the 77th digit is partial)
+          # Scale: 38
+          # Min: -5.7896044618658097711785492504343953926634992332820282019728792003956564819968E+38
+          # Max: 5.7896044618658097711785492504343953926634992332820282019728792003956564819967E+38
+          #
+          # This type can represent decimal fractions exactly, and is suitable
+          # for financial calculations.
+          #
+          # See {Schema#bignumeric}
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.create_table "my_table" do |schema|
+          #     schema.bignumeric "total_cost", mode: :required
+          #   end
+          #
+          # @!group Schema
+          def bignumeric name, description: nil, mode: :nullable
+            schema.bignumeric name, description: description, mode: mode
           end
 
           ##

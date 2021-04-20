@@ -168,8 +168,10 @@ module Google
         ##
         # The type of storage used by this cluster to serve its
         # parent instance's tables, unless explicitly overridden.
-        # Valid values are `:SSD`(Flash (SSD) storage should be used),
-        # `:HDD`(Magnetic drive (HDD) storage should be used)
+        # Valid values are:
+        #
+        #   * `:SSD` - Flash (SSD) storage should be used.
+        #   * `:HDD` - Magnetic drive (HDD) storage should be used.
         #
         # @return [Symbol]
         #
@@ -195,6 +197,24 @@ module Google
         #
         def location_path
           @grpc.location
+        end
+
+        ##
+        # The full name of the Cloud KMS encryption key for the cluster, if it is CMEK-protected, in the format
+        # `projects/{key_project_id}/locations/{location}/keyRings/{ring_name}/cryptoKeys/{key_name}`.
+        #
+        # The requirements for this key are:
+        #
+        # 1. The Cloud Bigtable service account associated with the project that contains this cluster must be granted
+        #    the `cloudkms.cryptoKeyEncrypterDecrypter` role on the CMEK key.
+        # 2. Only regional keys can be used and the region of the CMEK key must match the region of the cluster.
+        # 3. All clusters within an instance must use the same CMEK key.
+        #
+        # @return [String, nil] The full name of the Cloud KMS encryption key, or `nil` if the cluster is not
+        #   CMEK-protected.
+        #
+        def kms_key
+          @grpc.encryption_config&.kms_key_name
         end
 
         ##

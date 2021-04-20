@@ -124,5 +124,4 @@ $ bundle exec rake rubocop
 ## Code of Conduct
 
 Please note that this project is released with a Contributor Code of Conduct. By
-participating in this project you agree to abide by its terms. See
-{file:CODE_OF_CONDUCT.md Code of Conduct} for more information.
+participating in this project you agree to abide by its terms. See [Code of Conduct](CODE_OF_CONDUCT.md) for more information.

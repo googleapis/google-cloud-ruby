@@ -31,4 +31,24 @@ class Google::Cloud::DataCatalog::ClientConstructionMinitest < Minitest::Test
       assert_kind_of Google::Cloud::DataCatalog::V1::DataCatalog::Client, client
     end
   end
+
+  def test_policy_tag_manager
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::DataCatalog.policy_tag_manager do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client, client
+    end
+  end
+
+  def test_policy_tag_manager_serialization
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::DataCatalog.policy_tag_manager_serialization do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client, client
+    end
+  end
 end

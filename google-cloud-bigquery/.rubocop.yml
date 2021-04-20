@@ -29,7 +29,7 @@ Metrics/ModuleLength:
   Exclude:
     - "lib/google/cloud/bigquery/convert.rb"
 Metrics/PerceivedComplexity:
-  Max: 14
+  Max: 16
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-bigquery.rb"

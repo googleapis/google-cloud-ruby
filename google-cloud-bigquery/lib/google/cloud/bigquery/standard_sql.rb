@@ -274,6 +274,17 @@ module Google
           end
 
           ##
+          # Checks if the {#type_kind} of the field is `BIGNUMERIC`.
+          #
+          # @return [Boolean] `true` when `BIGNUMERIC`, `false` otherwise.
+          #
+          # @!group Helpers
+          #
+          def bignumeric?
+            type_kind == "BIGNUMERIC".freeze
+          end
+
+          ##
           # Checks if the {#type_kind} of the field is `BOOL`.
           #
           # @return [Boolean] `true` when `BOOL`, `false` otherwise.

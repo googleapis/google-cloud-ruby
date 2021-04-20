@@ -20,6 +20,9 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
   let(:table_id) { "examples_table" }
   let(:table) { @table }
 
+  let(:string_numeric) { "0.123456789" }
+  let(:string_bignumeric) { "0.12345678901234567890123456789012345678" }
+
   before do
     @table = get_or_create_example_table dataset, table_id
   end
@@ -169,6 +172,17 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
     _(child_jobs[1].script_statistics.stack_frames[0].text.length).must_be :>, 0
   end
 
+  it "queries max scale numeric and bignumeric values" do
+    rows = bigquery.query "SELECT my_numeric, my_bignumeric FROM #{dataset_id}.#{table_id} WHERE id = 1"
+
+    _(rows.count).must_equal 1
+    _(rows[0][:my_numeric]).must_be_kind_of BigDecimal
+    _(rows[0][:my_numeric]).must_equal BigDecimal(string_numeric)
+
+    _(rows[0][:my_bignumeric]).must_be_kind_of BigDecimal
+    _(rows[0][:my_bignumeric]).must_equal BigDecimal(string_bignumeric)
+  end
+
   def assert_rows_equal returned_row, example_row
     _(returned_row[:id]).must_equal example_row[:id]
     _(returned_row[:name]).must_equal example_row[:name]
@@ -197,6 +211,8 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
         schema.string "name", mode: :nullable
         schema.integer "age", mode: :nullable
         schema.float "weight", mode: :nullable
+        schema.numeric "my_numeric", mode: :nullable
+        schema.bignumeric "my_bignumeric", mode: :nullable
         schema.boolean "is_magic", mode: :nullable
         schema.float "scores", mode: :repeated
         schema.record "spells", mode: :repeated do |spells|
@@ -224,6 +240,8 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
         name: "Bilbo",
         age: 111,
         weight: 67.2,
+        my_numeric: BigDecimal(string_numeric),
+        my_bignumeric: string_bignumeric, # BigDecimal would be rounded, use String instead!
         is_magic: false,
         scores: [],
         spells: [],

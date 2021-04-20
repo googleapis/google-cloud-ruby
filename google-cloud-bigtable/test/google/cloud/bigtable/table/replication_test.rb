@@ -20,7 +20,7 @@ require "helper"
 describe Google::Cloud::Bigtable::Table, :replication, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:table_id) { "test-table" }
-  let(:cluster_states) { clusters_state_grpc }
+  let(:cluster_states) { cluster_states_grpc }
   let(:column_families) { column_families_grpc }
   let(:table_grpc) do
     Google::Cloud::Bigtable::Admin::V2::Table.new(

@@ -31,7 +31,7 @@ module Google
     module ServiceManagement
       module V1
         ##
-        # [Google Service Management API](/service-management/overview)
+        # [Google Service Management API](https://cloud.google.com/service-management/overview)
         #
         # To load this service and instantiate a client:
         #

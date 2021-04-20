@@ -853,20 +853,21 @@ module Google
           #
           #   Ruby types are mapped to BigQuery types as follows:
           #
-          #   | BigQuery    | Ruby                                 | Notes                                          |
-          #   |-------------|--------------------------------------|------------------------------------------------|
-          #   | `BOOL`      | `true`/`false`                       |                                                |
-          #   | `INT64`     | `Integer`                            |                                                |
-          #   | `FLOAT64`   | `Float`                              |                                                |
-          #   | `NUMERIC`   | `BigDecimal`                         | Will be rounded to 9 decimal places            |
-          #   | `STRING`    | `String`                             |                                                |
-          #   | `DATETIME`  | `DateTime`                           | `DATETIME` does not support time zone.         |
-          #   | `DATE`      | `Date`                               |                                                |
-          #   | `TIMESTAMP` | `Time`                               |                                                |
-          #   | `TIME`      | `Google::Cloud::BigQuery::Time`      |                                                |
-          #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar |                                                |
-          #   | `ARRAY`     | `Array`                              | Nested arrays, `nil` values are not supported. |
-          #   | `STRUCT`    | `Hash`                               | Hash keys may be strings or symbols.           |
+          #   | BigQuery     | Ruby                                 | Notes                                            |
+          #   |--------------|--------------------------------------|--------------------------------------------------|
+          #   | `BOOL`       | `true`/`false`                       |                                                  |
+          #   | `INT64`      | `Integer`                            |                                                  |
+          #   | `FLOAT64`    | `Float`                              |                                                  |
+          #   | `NUMERIC`    | `BigDecimal`                         | `BigDecimal` values will be rounded to scale 9.  |
+          #   | `BIGNUMERIC` |                                      | Query param values must be mapped in `types`.    |
+          #   | `STRING`     | `String`                             |                                                  |
+          #   | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.           |
+          #   | `DATE`       | `Date`                               |                                                  |
+          #   | `TIMESTAMP`  | `Time`                               |                                                  |
+          #   | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                  |
+          #   | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                  |
+          #   | `ARRAY`      | `Array`                              | Nested arrays, `nil` values are not supported.   |
+          #   | `STRUCT`     | `Hash`                               | Hash keys may be strings or symbols.             |
           #
           #   See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for an overview
           #   of each BigQuery data type, including allowed values.
@@ -887,35 +888,37 @@ module Google
           #
           #   Ruby types are mapped to BigQuery types as follows:
           #
-          #   | BigQuery    | Ruby                                 | Notes                                          |
-          #   |-------------|--------------------------------------|------------------------------------------------|
-          #   | `BOOL`      | `true`/`false`                       |                                                |
-          #   | `INT64`     | `Integer`                            |                                                |
-          #   | `FLOAT64`   | `Float`                              |                                                |
-          #   | `NUMERIC`   | `BigDecimal`                         | Will be rounded to 9 decimal places            |
-          #   | `STRING`    | `String`                             |                                                |
-          #   | `DATETIME`  | `DateTime`                           | `DATETIME` does not support time zone.         |
-          #   | `DATE`      | `Date`                               |                                                |
-          #   | `TIMESTAMP` | `Time`                               |                                                |
-          #   | `TIME`      | `Google::Cloud::BigQuery::Time`      |                                                |
-          #   | `BYTES`     | `File`, `IO`, `StringIO`, or similar |                                                |
-          #   | `ARRAY`     | `Array`                              | Nested arrays, `nil` values are not supported. |
-          #   | `STRUCT`    | `Hash`                               | Hash keys may be strings or symbols.           |
+          #   | BigQuery     | Ruby                                 | Notes                                            |
+          #   |--------------|--------------------------------------|--------------------------------------------------|
+          #   | `BOOL`       | `true`/`false`                       |                                                  |
+          #   | `INT64`      | `Integer`                            |                                                  |
+          #   | `FLOAT64`    | `Float`                              |                                                  |
+          #   | `NUMERIC`    | `BigDecimal`                         | `BigDecimal` values will be rounded to scale 9.  |
+          #   | `BIGNUMERIC` |                                      | Query param values must be mapped in `types`.    |
+          #   | `STRING`     | `String`                             |                                                  |
+          #   | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.           |
+          #   | `DATE`       | `Date`                               |                                                  |
+          #   | `TIMESTAMP`  | `Time`                               |                                                  |
+          #   | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                  |
+          #   | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                  |
+          #   | `ARRAY`      | `Array`                              | Nested arrays, `nil` values are not supported.   |
+          #   | `STRUCT`     | `Hash`                               | Hash keys may be strings or symbols.             |
           #
           #   See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for an overview
           #   of each BigQuery data type, including allowed values.
-          # @param [Array, Hash] types Standard SQL only. Types of the SQL parameters in `params`. It is not always to
-          #   infer the right SQL type from a value in `params`. In these cases, `types` must be used to specify the SQL
-          #   type for these values.
+          # @param [Array, Hash] types Standard SQL only. Types of the SQL parameters in `params`. It is not always
+          #   possible to infer the right SQL type from a value in `params`. In these cases, `types` must be used to
+          #   specify the SQL type for these values.
           #
-          #   Must match the value type passed to `params`. This must be an `Array` when the query uses positional query
-          #   parameters. This must be an `Hash` when the query uses named query parameters. The values should be
-          #   BigQuery type codes from the following list:
+          #   Arguments must match the value type passed to `params`. This must be an `Array` when the query uses
+          #   positional query parameters. This must be an `Hash` when the query uses named query parameters. The values
+          #   should be BigQuery type codes from the following list:
           #
           #   * `:BOOL`
           #   * `:INT64`
           #   * `:FLOAT64`
           #   * `:NUMERIC`
+          #   * `:BIGNUMERIC`
           #   * `:STRING`
           #   * `:DATETIME`
           #   * `:DATE`

@@ -50,6 +50,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
     _(field.type).must_be :int?
     _(field.type).wont_be :float?
     _(field.type).wont_be :numeric?
+    _(field.type).wont_be :bignumeric?
     _(field.type).wont_be :boolean?
     _(field.type).wont_be :string?
     _(field.type).wont_be :bytes?
@@ -75,6 +76,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
     _(field.type).wont_be :int?
     _(field.type).must_be :float?
     _(field.type).wont_be :numeric?
+    _(field.type).wont_be :bignumeric?
     _(field.type).wont_be :boolean?
     _(field.type).wont_be :string?
     _(field.type).wont_be :bytes?
@@ -100,6 +102,33 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
     _(field.type).wont_be :int?
     _(field.type).wont_be :float?
     _(field.type).must_be :numeric?
+    _(field.type).wont_be :bignumeric?
+    _(field.type).wont_be :boolean?
+    _(field.type).wont_be :string?
+    _(field.type).wont_be :bytes?
+    _(field.type).wont_be :date?
+    _(field.type).wont_be :datetime?
+    _(field.type).wont_be :geography?
+    _(field.type).wont_be :time?
+    _(field.type).wont_be :timestamp?
+    _(field.type).wont_be :array?
+    _(field.type).wont_be :struct?
+  end
+
+  it "represents a BIGNUMERIC field" do
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "bignumeric_col", type: "BIGNUMERIC"
+
+    _(field.name).must_equal "bignumeric_col"
+
+    _(field.type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(field.type.type_kind).must_equal "BIGNUMERIC"
+    _(field.type.array_element_type).must_be_nil
+    _(field.type.struct_type).must_be_nil
+
+    _(field.type).wont_be :int?
+    _(field.type).wont_be :float?
+    _(field.type).wont_be :numeric?
+    _(field.type).must_be :bignumeric?
     _(field.type).wont_be :boolean?
     _(field.type).wont_be :string?
     _(field.type).wont_be :bytes?
@@ -125,6 +154,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
     _(field.type).wont_be :int?
     _(field.type).wont_be :float?
     _(field.type).wont_be :numeric?
+    _(field.type).wont_be :bignumeric?
     _(field.type).must_be :boolean?
     _(field.type).wont_be :string?
     _(field.type).wont_be :bytes?
@@ -150,6 +180,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
     _(field.type).wont_be :int?
     _(field.type).wont_be :float?
     _(field.type).wont_be :numeric?
+    _(field.type).wont_be :bignumeric?
     _(field.type).wont_be :boolean?
     _(field.type).must_be :string?
     _(field.type).wont_be :bytes?
@@ -175,6 +206,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
     _(field.type).wont_be :int?
     _(field.type).wont_be :float?
     _(field.type).wont_be :numeric?
+    _(field.type).wont_be :bignumeric?
     _(field.type).wont_be :boolean?
     _(field.type).wont_be :string?
     _(field.type).must_be :bytes?
@@ -200,6 +232,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
     _(field.type).wont_be :int?
     _(field.type).wont_be :float?
     _(field.type).wont_be :numeric?
+    _(field.type).wont_be :bignumeric?
     _(field.type).wont_be :boolean?
     _(field.type).wont_be :string?
     _(field.type).wont_be :bytes?
@@ -225,6 +258,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
     _(field.type).wont_be :int?
     _(field.type).wont_be :float?
     _(field.type).wont_be :numeric?
+    _(field.type).wont_be :bignumeric?
     _(field.type).wont_be :boolean?
     _(field.type).wont_be :string?
     _(field.type).wont_be :bytes?
@@ -250,6 +284,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
     _(field.type).wont_be :int?
     _(field.type).wont_be :float?
     _(field.type).wont_be :numeric?
+    _(field.type).wont_be :bignumeric?
     _(field.type).wont_be :boolean?
     _(field.type).wont_be :string?
     _(field.type).wont_be :bytes?
@@ -275,6 +310,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
     _(field.type).wont_be :int?
     _(field.type).wont_be :float?
     _(field.type).wont_be :numeric?
+    _(field.type).wont_be :bignumeric?
     _(field.type).wont_be :boolean?
     _(field.type).wont_be :string?
     _(field.type).wont_be :bytes?
@@ -300,6 +336,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
     _(field.type).wont_be :int?
     _(field.type).wont_be :float?
     _(field.type).wont_be :numeric?
+    _(field.type).wont_be :bignumeric?
     _(field.type).wont_be :boolean?
     _(field.type).wont_be :string?
     _(field.type).wont_be :bytes?

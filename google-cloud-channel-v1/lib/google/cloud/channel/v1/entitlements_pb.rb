@@ -71,6 +71,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.channel.v1.TransferableSku" do
       optional :transfer_eligibility, :message, 9, "google.cloud.channel.v1.TransferEligibility"
       optional :sku, :message, 11, "google.cloud.channel.v1.Sku"
+      optional :legacy_sku, :message, 12, "google.cloud.channel.v1.Sku"
     end
     add_message "google.cloud.channel.v1.TransferEligibility" do
       optional :is_eligible, :bool, 1

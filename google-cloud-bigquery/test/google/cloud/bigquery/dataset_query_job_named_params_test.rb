@@ -77,6 +77,30 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :named_params, :mock_bigq
     _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
+  it "queries the data with an integer parameter with types option" do
+    query_job_gapi.configuration.query.query = "#{query} WHERE age > @age"
+    query_job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        name: "age",
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "INT64"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: "35"
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :insert_job, query_job_gapi, [project, query_job_gapi]
+
+    job = dataset.query_job "#{query} WHERE age > @age", params: { age: "35" }, types: { age: :INT64 }
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+  end
+
   it "queries the data with a float parameter" do
     query_job_gapi.configuration.query.query = "#{query} WHERE score > @score"
     query_job_gapi.configuration.query.query_parameters = [
@@ -120,6 +144,32 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :named_params, :mock_bigq
     mock.expect :insert_job, query_job_gapi, [project, query_job_gapi]
 
     job = dataset.query_job "#{query} WHERE pi = @pi", params: { pi: BigDecimal("3.141592654") }
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+  end
+
+  it "queries the data with a bignumeric parameter and types option" do
+    query_job_gapi.configuration.query.query = "#{query} WHERE my_bignumeric = @my_bignumeric"
+    query_job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        name: "my_bignumeric",
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "BIGNUMERIC"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: "123456798.98765432100001"
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :insert_job, query_job_gapi, [project, query_job_gapi]
+
+    job = dataset.query_job "#{query} WHERE my_bignumeric = @my_bignumeric",
+                            params: { my_bignumeric: BigDecimal("123456798.98765432100001") },
+                            types: { my_bignumeric: :BIGNUMERIC }
     mock.verify
 
     _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
@@ -420,7 +470,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :named_params, :mock_bigq
     _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
-  it "queries the data with an array parameter" do
+  it "queries the data with an array of string values parameter" do
     query_job_gapi.configuration.query.query = "#{query} WHERE name IN @names"
     query_job_gapi.configuration.query.query_parameters = [
       Google::Apis::BigqueryV2::QueryParameter.new(
@@ -446,6 +496,73 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :named_params, :mock_bigq
     mock.expect :insert_job, query_job_gapi, [project, query_job_gapi]
 
     job = dataset.query_job "#{query} WHERE name IN @names", params: { names: %w{name1 name2 name3} }
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+  end
+
+  it "queries the data with an array of bignumeric values parameter" do
+    param_1 = BigDecimal("123456789.1234567891")
+    param_2 = BigDecimal("123456789.1234567892")
+    param_3 = BigDecimal("123456789.1234567893")
+    query_job_gapi.configuration.query.query = "#{query} WHERE my_bignumeric IN @my_params"
+    query_job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        name: "my_params",
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "ARRAY",
+          array_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+            type: "BIGNUMERIC"
+          )
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          array_values: [
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "123456789.1234567891"),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "123456789.1234567892"),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "123456789.1234567893")
+          ]
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :insert_job, query_job_gapi, [project, query_job_gapi]
+
+    job = dataset.query_job "#{query} WHERE my_bignumeric IN @my_params",
+                            params: { my_params: [param_1, param_2, param_3] },
+                            types: { my_params: [:BIGNUMERIC] }
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+  end
+
+  it "queries the data with an array parameter with types option" do
+    query_job_gapi.configuration.query.query = "#{query} WHERE age IN @ages"
+    query_job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        name: "ages",
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "ARRAY",
+          array_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+            type: "INT64"
+          )
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          array_values: [
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "1"),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "2"),
+            Google::Apis::BigqueryV2::QueryParameterValue.new(value: "3")
+          ]
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :insert_job, query_job_gapi, [project, query_job_gapi]
+
+    job = dataset.query_job "#{query} WHERE age IN @ages", params: { ages: ["1", "2", "3"] }, types: { ages: [:INT64] }
     mock.verify
 
     _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
@@ -489,6 +606,37 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :named_params, :mock_bigq
     mock.expect :insert_job, query_job_gapi, [project, query_job_gapi]
 
     job = dataset.query_job "#{query} WHERE meta = @meta", params: { meta: { name: "Testy McTesterson", age: 42, active: false, score: 98.7 } }
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+  end
+
+  it "queries the data with a struct parameter with types option" do
+    query_job_gapi.configuration.query.query = "#{query} WHERE meta = @meta"
+    query_job_gapi.configuration.query.query_parameters = [
+      Google::Apis::BigqueryV2::QueryParameter.new(
+        name: "meta",
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "STRUCT",
+          struct_types: [
+            Google::Apis::BigqueryV2::QueryParameterType::StructType.new(
+              name: "age",
+              type: Google::Apis::BigqueryV2::QueryParameterType.new(type: "INT64"))
+          ]
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          struct_values: {
+            "age"    => Google::Apis::BigqueryV2::QueryParameterValue.new(value: "42")
+          }
+        )
+      )
+    ]
+
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :insert_job, query_job_gapi, [project, query_job_gapi]
+
+    job = dataset.query_job "#{query} WHERE meta = @meta", params: { meta: { age: "42" } }, types: { meta: { age: :INT64 } }
     mock.verify
 
     _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob

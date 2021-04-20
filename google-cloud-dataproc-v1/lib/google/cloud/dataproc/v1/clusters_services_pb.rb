@@ -42,6 +42,10 @@ module Google
             # [Operation.metadata][google.longrunning.Operation.metadata] will be
             # [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
             rpc :UpdateCluster, ::Google::Cloud::Dataproc::V1::UpdateClusterRequest, ::Google::Longrunning::Operation
+            # Stops a cluster in a project.
+            rpc :StopCluster, ::Google::Cloud::Dataproc::V1::StopClusterRequest, ::Google::Longrunning::Operation
+            # Starts a cluster in a project.
+            rpc :StartCluster, ::Google::Cloud::Dataproc::V1::StartClusterRequest, ::Google::Longrunning::Operation
             # Deletes a cluster in a project. The returned
             # [Operation.metadata][google.longrunning.Operation.metadata] will be
             # [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).

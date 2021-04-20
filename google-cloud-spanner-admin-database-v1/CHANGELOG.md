@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.1 / 2021-04-05
+
+#### Documentation
+
+* Correct the default encryption type documented in restore_database
+
 ### 0.5.0 / 2021-03-08
 
 #### Features

@@ -118,7 +118,7 @@ describe "topics" do
 
     messages = []
     expect_with_retry "pubsub_publish_with_ordering_keys" do
-      @subscription.pull(max: 20).each do |message|
+      @subscription.pull(immediate: false, max: 20).each do |message|
         messages << message
         message.acknowledge!
       end
@@ -141,7 +141,7 @@ describe "topics" do
 
     messages = []
     expect_with_retry "pubsub_resume_publish_with_ordering_keys" do
-      @subscription.pull(max: 20).each do |message|
+      @subscription.pull(immediate: false, max: 20).each do |message|
         messages << message
         message.acknowledge!
       end
@@ -238,7 +238,7 @@ describe "topics" do
 
     messages = []
     expect_with_retry "pubsub_publish" do
-      @subscription.pull(max: 1).each do |message|
+      @subscription.pull(immediate: false, max: 1).each do |message|
         messages << message
         message.acknowledge!
       end
@@ -259,7 +259,7 @@ describe "topics" do
 
     messages = []
     expect_with_retry "pubsub_publish_custom_attributes" do
-      @subscription.pull(max: 1).each do |message|
+      @subscription.pull(immediate: false, max: 1).each do |message|
         messages << message
         message.acknowledge!
       end
@@ -283,7 +283,7 @@ describe "topics" do
 
     messages = []
     expect_with_retry "pubsub_publisher_batch_settings" do
-      @subscription.pull(max: 20).each do |message|
+      @subscription.pull(immediate: false, max: 20).each do |message|
         messages << message
         message.acknowledge!
       end
@@ -308,7 +308,7 @@ describe "topics" do
 
     messages = []
     expect_with_retry "pubsub_publisher_concurrency_control" do
-      @subscription.pull(max: 1).each do |message|
+      @subscription.pull(immediate: false, max: 1).each do |message|
         messages << message
         message.acknowledge!
       end
@@ -329,7 +329,7 @@ describe "topics" do
 
     messages = []
     expect_with_retry "pubsub_publish" do
-      @subscription.pull(max: 1).each do |message|
+      @subscription.pull(immediate: false, max: 1).each do |message|
         messages << message
         message.acknowledge!
       end

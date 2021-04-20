@@ -243,8 +243,9 @@ module Google
             #     Required. The job resource.
             #   @param request_id [::String]
             #     Optional. A unique id used to identify the request. If the server
-            #     receives two {::Google::Cloud::Dataproc::V1::SubmitJobRequest SubmitJobRequest} requests  with the same
-            #     id, then the second request will be ignored and the
+            #     receives two
+            #     [SubmitJobRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.SubmitJobRequest)s
+            #     with the same id, then the second request will be ignored and the
             #     first {::Google::Cloud::Dataproc::V1::Job Job} created and stored in the backend
             #     is returned.
             #
@@ -327,8 +328,9 @@ module Google
             #     Required. The job resource.
             #   @param request_id [::String]
             #     Optional. A unique id used to identify the request. If the server
-            #     receives two {::Google::Cloud::Dataproc::V1::SubmitJobRequest SubmitJobRequest} requests  with the same
-            #     id, then the second request will be ignored and the
+            #     receives two
+            #     [SubmitJobRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.SubmitJobRequest)s
+            #     with the same id, then the second request will be ignored and the
             #     first {::Google::Cloud::Dataproc::V1::Job Job} created and stored in the backend
             #     is returned.
             #

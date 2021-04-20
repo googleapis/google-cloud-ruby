@@ -20,7 +20,9 @@ describe "Google Cloud Firestore API samples - Delete Data" do
   before do
     @firestore_project = ENV["FIRESTORE_PROJECT"]
     @collection_path = random_name "cities"
-    retrieve_create_examples project_id: @firestore_project, collection_path: @collection_path
+    capture_io do
+      retrieve_create_examples project_id: @firestore_project, collection_path: @collection_path
+    end
   end
 
   it "delete_field, delete_doc, delete_collection" do

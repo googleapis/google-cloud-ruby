@@ -18,9 +18,9 @@
 require "google/cloud/bigtable/backup/job"
 require "google/cloud/bigtable/backup/list"
 require "google/cloud/bigtable/convert"
+require "google/cloud/bigtable/encryption_info"
 require "google/cloud/bigtable/policy"
 require "google/cloud/bigtable/table/restore_job"
-
 
 module Google
   module Cloud
@@ -205,6 +205,27 @@ module Google
         #
         def ready?
           state == :READY
+        end
+
+        ##
+        # The encryption information for the backup. See also {Instance::ClusterMap#add}.
+        #
+        # @return [Google::Cloud::Bigtable::EncryptionInfo] The encryption information for the backup.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #   instance = bigtable.instance("my-instance")
+        #   cluster = instance.cluster("my-cluster")
+        #
+        #   backup = cluster.backup("my-backup")
+        #
+        #   encryption_info = backup.encryption_info
+        #   encryption_info.encryption_type #=> :GOOGLE_DEFAULT_ENCRYPTION
+        #
+        def encryption_info
+          EncryptionInfo.from_grpc @grpc.encryption_info
         end
 
         ##

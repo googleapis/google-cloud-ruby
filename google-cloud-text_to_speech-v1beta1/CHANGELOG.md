@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 / 2021-04-05
+
+#### Features
+
+* Support for ALAW audio encoding
+
 ### 0.5.0 / 2021-03-08
 
 #### Features
