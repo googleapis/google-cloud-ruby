@@ -21,14 +21,14 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
   let(:instance_id) { "test-instance" }
   let(:table_id) { "test-table" }
 
-  let(:cluster_states) { clusters_state_grpc }
-  let(:column_families) { column_families_grpc }
+  let(:table_cluster_states) { cluster_states_grpc }
+  let(:table_column_families) { column_families_grpc }
   let(:table_grpc) do
     Google::Cloud::Bigtable::Admin::V2::Table.new(
     table_hash(
       name: table_path(instance_id, table_id),
-      cluster_states: cluster_states,
-      column_families: column_families,
+      cluster_states: table_cluster_states,
+      column_families: table_column_families,
       granularity: :MILLIS
     )
   )
@@ -46,16 +46,20 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
     _(table.granularity).must_equal :MILLIS
     _(table.granularity_millis?).must_equal true
 
-    _(table.cluster_states.map(&:cluster_name).sort).must_equal cluster_states.keys
-    table.cluster_states.each do |cs|
+    cluster_states = table.cluster_states
+    _(cluster_states).must_be_instance_of Array
+    _(cluster_states.map(&:cluster_name).sort).must_equal table_cluster_states.keys
+    cluster_states.each do |cs|
+      _(cs).must_be_instance_of Google::Cloud::Bigtable::Table::ClusterState
       _(cs.replication_state).must_equal :READY
     end
 
-    _(table.column_families).must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
-    _(table.column_families).must_be :frozen?
-    _(table.column_families.names.sort).must_equal column_families.keys
-    table.column_families.each do |name, cf|
-      _(cf.gc_rule.to_grpc).must_equal column_families[cf.name].gc_rule
+    column_families = table.column_families
+    _(column_families).must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
+    _(column_families).must_be :frozen?
+    _(column_families.names.sort).must_equal table_column_families.keys
+    column_families.each do |name, cf|
+      _(cf.gc_rule.to_grpc).must_equal table_column_families[cf.name].gc_rule
     end
   end
 
@@ -157,14 +161,16 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
       mock.verify
     end
 
-    it "loads REPLICATION_VIEW on access to cluster_states" do
+    it "loads FULL on access to cluster_states" do
       get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
         name: table_path(instance_id, table_id),
-        cluster_states: cluster_states
+        cluster_states: table_cluster_states,
+        column_families: column_families_grpc,
+        granularity: :MILLIS
       )
 
       mock = Minitest::Mock.new
-      mock.expect :get_table, get_res, [name: table_path(instance_id, table_id), view: :REPLICATION_VIEW]
+      mock.expect :get_table, get_res, [name: table_path(instance_id, table_id), view: :FULL]
       table.service.mocked_tables = mock
 
       _(table.cluster_states).wont_be :empty?
@@ -173,20 +179,22 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
       mock.verify
     end
 
-    it "loads SCHEMA_VIEW and REPLICATION_VIEW on access to column_families and cluster_states" do
+    it "loads SCHEMA_VIEW and FULL on access to column_families and cluster_states" do
       get_res_schema = Google::Cloud::Bigtable::Admin::V2::Table.new(
         name: table_path(instance_id, table_id),
         column_families: column_families_grpc,
         granularity: :MILLIS
       )
-      get_res_replication = Google::Cloud::Bigtable::Admin::V2::Table.new(
+      get_res_full = Google::Cloud::Bigtable::Admin::V2::Table.new(
         name: table_path(instance_id, table_id),
-        cluster_states: cluster_states
+        cluster_states: table_cluster_states,
+        column_families: column_families_grpc,
+        granularity: :MILLIS
       )
 
       mock = Minitest::Mock.new
       mock.expect :get_table, get_res_schema, [name: table_path(instance_id, table_id), view: :SCHEMA_VIEW]
-      mock.expect :get_table, get_res_replication, [name: table_path(instance_id, table_id), view: :REPLICATION_VIEW]
+      mock.expect :get_table, get_res_full, [name: table_path(instance_id, table_id), view: :FULL]
       table.service.mocked_tables = mock
 
       _(table.column_families).wont_be :empty?
@@ -196,5 +204,15 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
 
       mock.verify
     end
+  end
+
+  it "reloads its state with view option" do
+    mock = Minitest::Mock.new
+    mock.expect :get_table, table_grpc, [name: table_path(instance_id, table_id), view: :ENCRYPTION_VIEW]
+    table.service.mocked_tables = mock
+
+    table.reload! view: :ENCRYPTION_VIEW
+
+    mock.verify
   end
 end

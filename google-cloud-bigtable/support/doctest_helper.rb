@@ -358,6 +358,21 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigtable::EncryptionInfo" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
+      mocked_instances.expect :get_cluster, cluster_resp, [name: "projects/my-project/instances/my-instance/clusters/my-cluster"]
+      mocked_tables.expect :get_backup, backup_resp, [name: "projects/my-project/instances/my-instance/clusters/my-cluster/backups/my-backup"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::EncryptionInfo@Retrieve a table with cluster states containing encryption info." do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :ENCRYPTION_VIEW]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigtable::GcRule" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_tables.expect :create_table, table_resp, [Hash]
@@ -705,6 +720,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigtable::Table#cluster_states" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :FULL]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigtable::Table#column_families" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
@@ -800,6 +822,13 @@ YARD::Doctest.configure do |doctest|
       mocked_tables.expect :check_consistency, OpenStruct.new(consistent: true), [name: "projects/my-project/instances/my-instance/tables/my-table", consistency_token: "123"]
       mocked_tables.expect :generate_consistency_token, OpenStruct.new(consistency_token: "123"), [name: "projects/my-project/instances/my-instance/tables/my-table"]
       mocked_tables.expect :check_consistency, OpenStruct.new(consistent: true), [name: "projects/my-project/instances/my-instance/tables/my-table", consistency_token: "123"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Table::ClusterState" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_instances.expect :get_instance, instance_resp, [name: "projects/my-project/instances/my-instance"]
+      mocked_tables.expect :get_table, table_resp, [name: "projects/my-project/instances/my-instance/tables/my-table", view: :FULL]
     end
   end
 
@@ -921,7 +950,10 @@ def backup_hash name:, source_table:, expire_time: nil
   {
     name: name,
     source_table: source_table,
-    expire_time: expire_time
+    expire_time: expire_time,
+    encryption_info: {
+      encryption_type: :GOOGLE_DEFAULT_ENCRYPTION
+    }
   }.delete_if { |_, v| v.nil? }
 end
 
@@ -984,7 +1016,14 @@ def clusters_resp
 end
 
 def cluster_state_hash state = nil
-  { replication_state: state }
+  {
+    replication_state: state,
+    encryption_info: [
+      {
+        encryption_type: :GOOGLE_DEFAULT_ENCRYPTION
+      }
+    ]
+  }
 end
 
 def cluster_state_grpc state = nil
@@ -993,7 +1032,7 @@ def cluster_state_grpc state = nil
   )
 end
 
-def clusters_state_grpc num: 3, start_id: 1
+def cluster_states_grpc num: 3, start_id: 1
   num.times.each_with_object({}) do |i, r|
     r["cluster-#{i + start_id }"] = cluster_state_grpc(:READY)
   end
@@ -1144,7 +1183,7 @@ def tables_hash instance_id, num: 3, start_id: 1
   tables = num.times.map do |i|
     table_hash(
       name: table_path(instance_id, "my-table-#{start_id + i}"),
-      cluster_states: clusters_state_grpc,
+      cluster_states: cluster_states_grpc,
       column_families: column_families_grpc,
       granularity: :MILLIS
     )
@@ -1157,6 +1196,7 @@ def table_resp
   Google::Cloud::Bigtable::Admin::V2::Table.new(
     table_hash(
       name: "projects/my-project/instances/my-instance/tables/my-table",
+      cluster_states: cluster_states_grpc,
       column_families: column_families_grpc,
       granularity: :MILLIS
     )

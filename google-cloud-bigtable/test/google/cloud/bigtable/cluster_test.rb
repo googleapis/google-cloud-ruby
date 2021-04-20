@@ -20,13 +20,18 @@ describe Google::Cloud::Bigtable::Cluster, :mock_bigtable do
   let(:cluster_id) { "test-cluster" }
   let(:location_id) { "us-east-1b" }
   let(:nodes) { 3 }
+  let(:kms_key) { "path/to/encryption_key_name" }
+  let(:encryption_config) do
+    Google::Cloud::Bigtable::Admin::V2::Cluster::EncryptionConfig.new(kms_key_name: kms_key)
+  end
   let(:cluster_grpc) do
     Google::Cloud::Bigtable::Admin::V2::Cluster.new(
       name: cluster_path(instance_id, cluster_id),
       serve_nodes: nodes,
       location: location_path(location_id),
       default_storage_type: :SSD,
-      state: :READY
+      state: :READY,
+      encryption_config: encryption_config
     )
   end
   let(:cluster) { Google::Cloud::Bigtable::Cluster.from_grpc(cluster_grpc, bigtable.service) }
@@ -45,6 +50,7 @@ describe Google::Cloud::Bigtable::Cluster, :mock_bigtable do
     _(cluster).wont_be :creating?
     _(cluster).wont_be :resizing?
     _(cluster).wont_be :disabled?
+    _(cluster.kms_key).must_equal kms_key
   end
 
   it "reloads its state" do
@@ -64,5 +70,6 @@ describe Google::Cloud::Bigtable::Cluster, :mock_bigtable do
     _(cluster.ready?).must_equal true
     _(cluster.storage_type).must_equal :SSD
     _(cluster.nodes).must_equal 3
+    _(cluster.kms_key).must_equal kms_key
   end
 end

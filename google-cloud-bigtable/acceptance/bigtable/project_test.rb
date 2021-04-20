@@ -46,6 +46,9 @@ describe Google::Cloud::Bigtable::Project, :bigtable do
     _(instance).must_be_kind_of Google::Cloud::Bigtable::Instance
     _(instance.development?).must_equal true
     _(instance.clusters.count).must_equal 1
-    _(instance.clusters.first.nodes).must_equal 1
+    cluster = instance.clusters.first
+
+    _(cluster.nodes).must_equal 1
+    _(cluster.kms_key).must_be :nil?
   end
 end
