@@ -47,8 +47,8 @@ module Google
                 # have a name of the format `<database_name>/operations/<operation_id>` and
                 # can be used to track preparation of the database. The
                 # [metadata][google.longrunning.Operation.metadata] field type is
-                # [CreateDatabaseMetadata][google.spanner.admin.database.v1.CreateDatabaseMetadata].
-                # The [response][google.longrunning.Operation.response] field type is
+                # [CreateDatabaseMetadata][google.spanner.admin.database.v1.CreateDatabaseMetadata]. The
+                # [response][google.longrunning.Operation.response] field type is
                 # [Database][google.spanner.admin.database.v1.Database], if successful.
                 rpc :CreateDatabase, ::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest, ::Google::Longrunning::Operation
                 # Gets the state of a Cloud Spanner database.
@@ -59,8 +59,7 @@ module Google
                 # the format `<database_name>/operations/<operation_id>` and can be used to
                 # track execution of the schema change(s). The
                 # [metadata][google.longrunning.Operation.metadata] field type is
-                # [UpdateDatabaseDdlMetadata][google.spanner.admin.database.v1.UpdateDatabaseDdlMetadata].
-                # The operation has no response.
+                # [UpdateDatabaseDdlMetadata][google.spanner.admin.database.v1.UpdateDatabaseDdlMetadata].  The operation has no response.
                 rpc :UpdateDatabaseDdl, ::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest, ::Google::Longrunning::Operation
                 # Drops (aka deletes) a Cloud Spanner database.
                 # Completed backups for the database will be retained according to their
@@ -104,21 +103,18 @@ module Google
                 # `projects/<project>/instances/<instance>/backups/<backup>/operations/<operation_id>`
                 # and can be used to track creation of the backup. The
                 # [metadata][google.longrunning.Operation.metadata] field type is
-                # [CreateBackupMetadata][google.spanner.admin.database.v1.CreateBackupMetadata].
-                # The [response][google.longrunning.Operation.response] field type is
-                # [Backup][google.spanner.admin.database.v1.Backup], if successful.
-                # Cancelling the returned operation will stop the creation and delete the
-                # backup. There can be only one pending backup creation per database. Backup
-                # creation of different databases can run concurrently.
+                # [CreateBackupMetadata][google.spanner.admin.database.v1.CreateBackupMetadata]. The
+                # [response][google.longrunning.Operation.response] field type is
+                # [Backup][google.spanner.admin.database.v1.Backup], if successful. Cancelling the returned operation will stop the
+                # creation and delete the backup.
+                # There can be only one pending backup creation per database. Backup creation
+                # of different databases can run concurrently.
                 rpc :CreateBackup, ::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupRequest, ::Google::Longrunning::Operation
-                # Gets metadata on a pending or completed
-                # [Backup][google.spanner.admin.database.v1.Backup].
+                # Gets metadata on a pending or completed [Backup][google.spanner.admin.database.v1.Backup].
                 rpc :GetBackup, ::Google::Cloud::Spanner::Admin::Database::V1::GetBackupRequest, ::Google::Cloud::Spanner::Admin::Database::V1::Backup
-                # Updates a pending or completed
-                # [Backup][google.spanner.admin.database.v1.Backup].
+                # Updates a pending or completed [Backup][google.spanner.admin.database.v1.Backup].
                 rpc :UpdateBackup, ::Google::Cloud::Spanner::Admin::Database::V1::UpdateBackupRequest, ::Google::Cloud::Spanner::Admin::Database::V1::Backup
-                # Deletes a pending or completed
-                # [Backup][google.spanner.admin.database.v1.Backup].
+                # Deletes a pending or completed [Backup][google.spanner.admin.database.v1.Backup].
                 rpc :DeleteBackup, ::Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupRequest, ::Google::Protobuf::Empty
                 # Lists completed and pending backups.
                 # Backups returned are ordered by `create_time` in descending order,

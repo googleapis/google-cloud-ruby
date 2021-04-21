@@ -9,6 +9,7 @@ require 'google/longrunning/operations_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/spanner/admin/database/v1/common_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/spanner/admin/database/v1/backup.proto", :syntax => :proto3) do
     add_message "google.spanner.admin.database.v1.Backup" do
