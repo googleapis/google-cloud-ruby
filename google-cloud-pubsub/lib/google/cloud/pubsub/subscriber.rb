@@ -128,11 +128,10 @@ module Google
 
         ##
         # Immediately stops the subscriber. No new messages will be pulled from
-        # the subscription. All actions taken on received messages that have not
-        # yet been sent to the API will be sent to the API. All received but
-        # unprocessed messages will be released back to the API and redelivered.
-        # Use {#wait!} to block until the subscriber is fully stopped and all
-        # received messages have been processed or released.
+        # the subscription. Use {#wait!} to block until all received messages have
+        # been processed or released: All actions taken on received messages that
+        # have not yet been sent to the API will be sent to the API. All received
+        # but unprocessed messages will be released back to the API and redelivered.
         #
         # @return [Subscriber] returns self so calls can be chained.
         #
@@ -146,8 +145,18 @@ module Google
             end
           end
           stop_pool.map(&:join)
-          # Shutdown the buffer TimerTask (and flush the buffer) after the streams are all stopped.
-          synchronize { @buffer.stop }
+
+          wait_pool = synchronize do
+            @stream_pool.map do |stream|
+              Thread.new { stream.wait! }
+            end
+          end
+
+          @final_stopped_thread = Thread.new do
+            wait_pool.map(&:join)
+            # Shutdown the buffer TimerTask (and flush the buffer) after the streams are all stopped.
+            synchronize { @buffer.stop }
+          end
 
           self
         end
@@ -167,15 +176,7 @@ module Google
         # @return [Subscriber] returns self so calls can be chained.
         #
         def wait! timeout = nil
-          wait_pool = synchronize do
-            @stream_pool.map do |stream|
-              Thread.new { stream.wait! timeout }
-            end
-          end
-          wait_pool.map(&:join)
-          # Final flush the buffer after the streams are finished processing.
-          synchronize { @buffer.flush! }
-
+          @final_stopped_thread&.join timeout
           self
         end
 
