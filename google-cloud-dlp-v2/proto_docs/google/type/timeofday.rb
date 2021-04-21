@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,8 @@ module Google
   module Type
     # Represents a time of day. The date and time zone are either not significant
     # or are specified elsewhere. An API may choose to allow leap seconds. Related
-    # types are {::Google::Type::Date google.type.Date} and `google.protobuf.Timestamp`.
+    # types are {::Google::Type::Date google.type.Date} and
+    # `google.protobuf.Timestamp`.
     # @!attribute [rw] hours
     #   @return [::Integer]
     #     Hours of day in 24 hour format. Should be from 0 to 23. An API may choose

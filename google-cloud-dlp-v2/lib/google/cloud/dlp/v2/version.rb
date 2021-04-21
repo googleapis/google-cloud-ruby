@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Dlp
       module V2
-        VERSION = "0.7.0"
+        VERSION = "0.0.1"
       end
     end
   end

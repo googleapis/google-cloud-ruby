@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,30 +19,30 @@
 
 module Google
   module Type
-    # Represents a day of week.
+    # Represents a day of the week.
     module DayOfWeek
-      # The unspecified day-of-week.
+      # The day of the week is unspecified.
       DAY_OF_WEEK_UNSPECIFIED = 0
 
-      # The day-of-week of Monday.
+      # Monday
       MONDAY = 1
 
-      # The day-of-week of Tuesday.
+      # Tuesday
       TUESDAY = 2
 
-      # The day-of-week of Wednesday.
+      # Wednesday
       WEDNESDAY = 3
 
-      # The day-of-week of Thursday.
+      # Thursday
       THURSDAY = 4
 
-      # The day-of-week of Friday.
+      # Friday
       FRIDAY = 5
 
-      # The day-of-week of Saturday.
+      # Saturday
       SATURDAY = 6
 
-      # The day-of-week of Sunday.
+      # Sunday
       SUNDAY = 7
     end
   end
