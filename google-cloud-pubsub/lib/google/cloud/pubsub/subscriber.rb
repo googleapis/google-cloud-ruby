@@ -146,7 +146,7 @@ module Google
             end
           end
           stop_pool.map(&:join)
-          # Stop the buffer after the streams are all stopped
+          # Shutdown the buffer TimerTask (and flush the buffer) after the streams are all stopped.
           synchronize { @buffer.stop }
 
           self
@@ -173,6 +173,8 @@ module Google
             end
           end
           wait_pool.map(&:join)
+          # Final flush the buffer after the streams are finished processing.
+          synchronize { @buffer.flush! }
 
           self
         end
