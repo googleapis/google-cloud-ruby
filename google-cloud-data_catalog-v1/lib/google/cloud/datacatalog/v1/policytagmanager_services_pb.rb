@@ -55,11 +55,12 @@ module Google
             rpc :GetTaxonomy, ::Google::Cloud::DataCatalog::V1::GetTaxonomyRequest, ::Google::Cloud::DataCatalog::V1::Taxonomy
             # Creates a policy tag in a taxonomy.
             rpc :CreatePolicyTag, ::Google::Cloud::DataCatalog::V1::CreatePolicyTagRequest, ::Google::Cloud::DataCatalog::V1::PolicyTag
-            # Deletes a policy tag. This method also deletes
-            #   - all of its descendant policy tags, if any,
-            #   - the policies associated with the policy tag and its descendants, and
-            #   - references from BigQuery table schema of the policy tag and its
-            #     descendants.
+            # Deletes a policy tag. This method also deletes:
+            #
+            # * all of its descendant policy tags, if any
+            # * the policies associated with the policy tag and its descendants
+            # * references from BigQuery table schema of the policy tag and its
+            #   descendants.
             rpc :DeletePolicyTag, ::Google::Cloud::DataCatalog::V1::DeletePolicyTagRequest, ::Google::Protobuf::Empty
             # Updates a policy tag. This method can update the policy tag's display
             # name, description, and parent policy tag.
