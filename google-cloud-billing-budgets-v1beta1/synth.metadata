@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "940404e086b1ea483ee79fd879d67c1c368790df"
+        "sha": "2504a472b6c229022c4be22b3c100583a9df127f"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "dd89b0cc1bffc39d1fb5c91c6c2bb3532f237792",
-        "internalRef": "356991675"
+        "sha": "24f0828e943c3bf73ecc971ea4b7fbfed6d7824d",
+        "internalRef": "368871882"
       }
     }
   ],
@@ -59,6 +59,7 @@
     "proto_docs/google/protobuf/empty.rb",
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/struct.rb",
+    "proto_docs/google/type/date.rb",
     "proto_docs/google/type/money.rb",
     "test/google/cloud/billing/budgets/v1beta1/budget_service_paths_test.rb",
     "test/google/cloud/billing/budgets/v1beta1/budget_service_test.rb",

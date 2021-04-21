@@ -6,6 +6,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/struct_pb'
+require 'google/type/date_pb'
 require 'google/type/money_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/billing/budgets/v1beta1/budget_model.proto", :syntax => :proto3) do
@@ -48,12 +49,26 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :services, :string, 3
       repeated :subaccounts, :string, 5
       map :labels, :string, :message, 6, "google.protobuf.ListValue"
+      oneof :usage_period do
+        optional :calendar_period, :enum, 8, "google.cloud.billing.budgets.v1beta1.CalendarPeriod"
+        optional :custom_period, :message, 9, "google.cloud.billing.budgets.v1beta1.CustomPeriod"
+      end
     end
     add_enum "google.cloud.billing.budgets.v1beta1.Filter.CreditTypesTreatment" do
       value :CREDIT_TYPES_TREATMENT_UNSPECIFIED, 0
       value :INCLUDE_ALL_CREDITS, 1
       value :EXCLUDE_ALL_CREDITS, 2
       value :INCLUDE_SPECIFIED_CREDITS, 3
+    end
+    add_message "google.cloud.billing.budgets.v1beta1.CustomPeriod" do
+      optional :start_date, :message, 1, "google.type.Date"
+      optional :end_date, :message, 2, "google.type.Date"
+    end
+    add_enum "google.cloud.billing.budgets.v1beta1.CalendarPeriod" do
+      value :CALENDAR_PERIOD_UNSPECIFIED, 0
+      value :MONTH, 1
+      value :QUARTER, 2
+      value :YEAR, 3
     end
   end
 end
@@ -71,6 +86,8 @@ module Google
           AllUpdatesRule = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.budgets.v1beta1.AllUpdatesRule").msgclass
           Filter = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.budgets.v1beta1.Filter").msgclass
           Filter::CreditTypesTreatment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.budgets.v1beta1.Filter.CreditTypesTreatment").enummodule
+          CustomPeriod = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.budgets.v1beta1.CustomPeriod").msgclass
+          CalendarPeriod = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.budgets.v1beta1.CalendarPeriod").enummodule
         end
       end
     end
