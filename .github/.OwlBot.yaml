@@ -1,0 +1,12 @@
+
+deep-preserve-regex:
+    - /.*/\.repo-metadata.json$
+    - /.*/\.yardopts-cloudrad$
+    - /.*/\CHANGELOG.md$
+
+deep-remove-regex:
+    - /google-cloud-dlp-v.*
+
+deep-copy-regex:
+    - source: /google/privacy/dlp/(.*)/.*-ruby/(.*)
+      dest: /google-cloud-dlp-$1/$2
