@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "e8907a5b1bc94a01dacf709b83a40cc734704e57"
+        "sha": "d3b6892cb4cb7f8c4954066fb7180e004c0a8487"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "6ce40ff8faf68226782f507ca6b2d497a77044de",
-        "internalRef": "365498709"
+        "sha": "3b236df084cf9222c529a2890f90e3a4ff0f2dfd",
+        "internalRef": "368426665"
       }
     }
   ],
@@ -48,6 +48,7 @@
     "lib/google/cloud/spanner/v1/spanner/credentials.rb",
     "lib/google/cloud/spanner/v1/spanner/paths.rb",
     "lib/google/cloud/spanner/v1/version.rb",
+    "lib/google/spanner/v1/commit_response_pb.rb",
     "lib/google/spanner/v1/keys_pb.rb",
     "lib/google/spanner/v1/mutation_pb.rb",
     "lib/google/spanner/v1/query_plan_pb.rb",
@@ -65,6 +66,7 @@
     "proto_docs/google/protobuf/struct.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
+    "proto_docs/google/spanner/v1/commit_response.rb",
     "proto_docs/google/spanner/v1/keys.rb",
     "proto_docs/google/spanner/v1/mutation.rb",
     "proto_docs/google/spanner/v1/query_plan.rb",
