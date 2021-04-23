@@ -137,6 +137,7 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :ordered_messages, :mock_
   end
 
   it "publishes messages with ordering_key with a low max_messages" do
+    # TODO: topic with interval: 30, max_messages: 100
     topic.service.mocked_publisher = AsyncPublisherStub.new
 
     topic.enable_message_ordering!

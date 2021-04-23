@@ -16,6 +16,7 @@
 require "monitor"
 require "concurrent"
 require "google/cloud/pubsub/errors"
+require "google/cloud/pubsub/flow_controller"
 require "google/cloud/pubsub/async_publisher/batch"
 require "google/cloud/pubsub/publish_result"
 require "google/cloud/pubsub/service"
@@ -91,7 +92,10 @@ module Google
           @ordered = false
           @batches = {}
           @cond = new_cond
-
+          @flow_controller = FlowController.new(
+            byte_limit: 10 * @max_bytes,
+            message_limit: 10 * @max_messages
+          )
           @thread = Thread.new { run_background }
         end
 
@@ -121,6 +125,7 @@ module Google
         #
         def publish data = nil, attributes = nil, ordering_key: nil, **extra_attrs, &callback
           msg = Convert.pubsub_message data, attributes, ordering_key, extra_attrs
+          @flow_controller.acquire msg.to_proto.bytesize
 
           synchronize do
             raise AsyncPublisherStopped if @stopped
@@ -325,7 +330,6 @@ module Google
         end
 
         # rubocop:disable Metrics/AbcSize
-        # rubocop:disable Metrics/MethodLength
 
         def publish_batch_sync topic_name, batch
           # The only batch methods that are safe to call from the loop are
@@ -337,6 +341,7 @@ module Google
             unless items.empty?
               grpc = @service.publish topic_name, items.map(&:msg)
               items.zip Array(grpc.message_ids) do |item, id|
+                @flow_controller.release item.msg.to_proto.bytesize
                 next unless item.callback
 
                 item.msg.message_id = id
@@ -374,7 +379,6 @@ module Google
         end
 
         # rubocop:enable Metrics/AbcSize
-        # rubocop:enable Metrics/MethodLength
 
         PUBLISH_RETRY_ERRORS = [
           GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,

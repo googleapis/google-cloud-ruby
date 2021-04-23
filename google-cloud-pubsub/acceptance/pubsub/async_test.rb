@@ -27,7 +27,7 @@ describe Google::Cloud::PubSub, :async, :pubsub do
   let(:nonce) { rand 100 }
   let(:topic) { retrieve_topic "#{$topic_prefix}-async#{nonce}" }
   let(:sub) { retrieve_subscription topic, "#{$topic_prefix}-async-sub#{nonce}" }
-
+focus
   it "publishes and pulls asyncronously" do
     events = sub.pull
     _(events).must_be :empty?
