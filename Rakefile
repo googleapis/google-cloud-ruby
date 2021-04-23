@@ -1,6 +1,12 @@
 require "bundler/setup"
 require "fileutils"
 require "rake/testtask"
+require "rubocop/rake_task"
+
+desc "Runs rubocop at the root level"
+RuboCop::RakeTask.new(:rubocop) do |task|
+  task.options = ["-c", ".rubocop_root.yml"]
+end
 
 task :bundleupdate do
   each_valid_gem bundleupdate: true, name: "BUNDLE UPDATE"
@@ -114,7 +120,7 @@ namespace :acceptance do
 end
 
 desc "Runs rubocop report for all gems individually."
-task :rubocop, :bundleupdate do |t, args|
+task :rubocop_all, :bundleupdate do |t, args|
   each_valid_gem bundleupdate: args[:bundleupdate] do |gem|
     header "RUBOCOP REPORT FOR #{gem}"
     run_task_if_exists "rubocop"
