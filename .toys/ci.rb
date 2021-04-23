@@ -17,35 +17,86 @@
 require "json"
 require "set"
 
-TASKS = ["test", "rubocop", "build", "yard", "linkinator"]
+TASKS = ["test", "rubocop", "build", "yard", "linkinator", "acceptance", "samples-master", "samples-latest"]
 
-desc "Run CI tasks, not including integration tests."
+desc "Run CI tasks."
 
-flag :github_event_name, "--github-event-name PATH", default: ""
-flag :github_event_payload, "--github-event-payload PATH", default: ""
-flag :head_commit, "--head COMMIT"
-flag :base_commit, "--base COMMIT"
-flag :bundle_update, "--bundle-update", desc: "Update rather than install gem bundles"
-flag :only, "--only", desc: "Run only the specified tasks (i.e. tasks are opt-in rather than opt-out)"
-flag :gems, accept: Array
-flag :all_gems
+flag :github_event_name, "--github-event-name=EVENT" do |f|
+  f.default ""
+  f.desc "Name of the github event triggering this job. Optional."
+end
+flag :github_event_payload, "--github-event-payload=PATH" do |f|
+  f.default ""
+  f.desc "Path to the github event payload JSON file. Optional."
+end
+flag :head_commit, "--head=COMMIT" do |f|
+  f.desc "Ref or SHA of the head commit when analyzing changes. Defaults to the current commit."
+end
+flag :base_commit, "--base=COMMIT" do |f|
+  f.desc "Ref or SHA of the base commit when analyzing changes. If omitted, uses uncommitted diffs."
+end
+flag :bundle_update do |f|
+  f.desc "Update rather than install gem bundles. This can take longer."
+end
+flag :gems, "--gems=NAMES" do |f|
+  f.accept Array
+  f.desc "Test the given gems (comma-delimited) instead of analyzing changes."
+end
+flag :all_gems, "--all-gems[=FILES]" do |f|
+  f.accept Array
+  f.desc "Test all gems, or all that include at least one of the given files (comma-delimited)."
+end
+flag :project, "--project=NAME" do |f|
+  f.accept String
+  f.desc "The project to use for acceptance/sample tests."
+end
+flag :keyfile, "--keyfile=PATH" do |f|
+  f.accept String
+  f.desc "Path to the credentials to use for acceptance/sample tests."
+end
+flag :max_gem_count do |f|
+  f.accept Integer
+  f.default 0
+  f.desc "The max number of gems to test. If more gems are detected, no tests are run."
+end
+flag :load_kokoro_context do |f|
+  f.desc "Load Kokoro credentials and environment info"
+end
 
-TASKS.each do |task|
-  flag "task_#{task}", "--[no-]#{task}", desc: "Run the #{task} task"
+flag_group desc: "Tasks" do
+  TASKS.each do |task|
+    task_underscore = task.tr "-", "_"
+    flag "task_#{task_underscore}", "--[no-]#{task}", desc: "Run the #{task} task"
+  end
 end
 
 include :exec
 include :terminal, styled: true
 
 def run
+  if load_kokoro_context
+    require "repo_context"
+    RepoContext.load_kokoro_env
+  end
+
+  @auth_env = setup_auth_env
   @run_tasks = TASKS.find_all do |task|
-    val = get "task_#{task}"
-    val.nil? ? !only : val
+    task_underscore = task.tr "-", "_"
+    get "task_#{task_underscore}"
   end
   @errors = []
   @cur_dir = Dir.getwd
   Dir.chdir context_directory
-  determine_dirs.each { |dir| run_in_dir dir }
+  dirs = determine_dirs
+
+  if max_gem_count > 0 && dirs.size > max_gem_count
+    puts "CI skipped because the limit of #{max_gem_count} libraries was exceeded.", :bold, :yellow
+    puts "Modified libraries found:"
+    dirs.each { |dir| puts "  #{dir}" }
+    exit
+  end
+
+  dirs.shuffle.each { |dir| run_in_dir dir }
   puts
   if @errors.empty?
     puts "CI passed", :bold, :green
@@ -56,15 +107,35 @@ def run
   end
 end
 
+def setup_auth_env
+  final_project = project || ENV["GCLOUD_TEST_PROJECT"] || ENV["GOOGLE_CLOUD_PROJECT"]
+  final_keyfile = keyfile || ENV["GCLOUD_TEST_KEYFILE"] || ENV["GOOGLE_APPLICATION_CREDENTIALS"]
+  puts "Project for integration tests: #{final_project.inspect}"
+  puts "Set keyfile for integration tests." if final_keyfile
+  {
+    "GCLOUD_TEST_PROJECT" => final_project,
+    "GOOGLE_CLOUD_PROJECT" => final_project,
+    "GCLOUD_TEST_KEYFILE" => final_keyfile,
+    "GOOGLE_APPLICATION_CREDENTIALS" => final_keyfile
+  }
+end
+
 def determine_dirs
   return gems if gems
-  return all_gem_dirs if all_gems
+  return all_gem_dirs if all_gems || github_event_name == "schedule"
   cur_gem_dir || gem_dirs_from_changes
 end
 
 def all_gem_dirs
-  puts "Running for all gems", :bold
   dirs = Dir.glob("*/*.gemspec").map { |file| File.dirname file }
+  if all_gems == true
+    puts "Running for all gems", :bold
+  else
+    puts "Running for all gems with the following files: #{all_gems}", :bold
+    dirs.delete_if do |dir|
+      all_gems.all? { |name| !File.exist? File.join(dir, name) }
+    end
+  end
   filter_gem_dirs dirs
 end
 
@@ -151,6 +222,11 @@ def ensure_fetched ref
   result = exec(["git", "show", "--no-patch", "--format=%H", ref], out: :capture, err: :capture)
   if result.success?
     result.captured_out.strip
+  elsif ref == "HEAD^"
+    # Common special case
+    current_sha = capture(["git", "rev-parse", "HEAD"], e: true).strip
+    exec(["git", "fetch", "--depth=2", "origin", current_sha], e: true)
+    capture(["git", "rev-parse", "HEAD^"], e: true).strip
   else
     puts "Fetching ref: #{ref}"
     exec(["git", "fetch", "--depth=1", "origin", "#{ref}:refs/temp/#{ref}"], e: true)
@@ -204,7 +280,7 @@ def run_in_dir dir
       success = if task == "linkinator"
         run_linkinator
       else
-        exec(["bundle", "exec", "rake", task]).success?
+        exec(["bundle", "exec", "rake", task.tr("-", ":")], env: @auth_env).success?
       end
       @errors << "#{dir}: #{task}" unless success
     end
