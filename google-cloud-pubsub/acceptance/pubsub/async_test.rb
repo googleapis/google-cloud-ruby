@@ -157,10 +157,12 @@ describe Google::Cloud::PubSub, :async, :pubsub do
     topic.publish "ack me please"
 
     received_message = nil
+    acked = false
     subscriber = sub.listen do |msg|
       received_message = msg
       sleep 3 # Provide enough delay to execute subscriber.stop before msg.ack!
       msg.ack!
+      acked = true
     end
     subscriber.start
 
@@ -177,6 +179,8 @@ describe Google::Cloud::PubSub, :async, :pubsub do
 
     subscriber.wait! # Should block until TimedUnaryBuffer finally flushes the msg.ack! in the callback above.
 
+    _(acked).must_equal true
+
     msgs = sub.pull immediate: false
     _(msgs).must_be :empty?
 
@@ -192,10 +196,12 @@ describe Google::Cloud::PubSub, :async, :pubsub do
     topic.publish "ack me please"
 
     received_message = nil
+    acked = false
     subscriber = sub.listen do |msg|
       received_message = msg
       sleep 3 # Provide enough delay to execute subscriber.stop before msg.ack!
       msg.ack!
+      acked = true
     end
     subscriber.start
 
@@ -210,7 +216,51 @@ describe Google::Cloud::PubSub, :async, :pubsub do
 
     subscriber.stop # Should return before msg.ack! is called in the callback above.
 
-    sleep 6 # Do not call subscriber.wait!
+    sleep 4 # Do not call subscriber.wait!
+
+    _(acked).must_equal true
+
+    msgs = sub.pull immediate: false
+    _(msgs).must_be :empty?
+
+    # Remove the subscription
+    sub.delete
+  end
+
+  it "will acknowledge asyncronously after subscriber wait! followed by stop in a different thread" do
+    msgs = sub.pull
+    _(msgs).must_be :empty?
+
+    # Publish a new message
+    topic.publish "ack me please"
+
+    received_message = nil
+    acked = false
+    subscriber = sub.listen do |msg|
+      received_message = msg
+      sleep 3 # Provide enough delay to execute subscriber.stop before msg.ack!
+      msg.ack!
+      acked = true
+    end
+    subscriber.start
+
+    subscription_retries = 0
+    while received_message.nil?
+      fail "published message was never received has failed" if subscription_retries >= 100
+      subscription_retries += 1
+      sleep 0.1
+    end
+    _(received_message).wont_be :nil?
+    _(received_message.data).must_equal "ack me please"
+
+    Thread.new do
+      sleep 4
+      subscriber.stop # Follows wait!, below.
+    end
+
+    subscriber.wait! # Should block until TimedUnaryBuffer finally flushes the msg.ack! in the callback above.
+
+    _(acked).must_equal true
 
     msgs = sub.pull immediate: false
     _(msgs).must_be :empty?

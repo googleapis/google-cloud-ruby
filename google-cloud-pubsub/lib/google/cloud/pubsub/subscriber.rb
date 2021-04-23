@@ -142,7 +142,7 @@ module Google
             @stream_pool.map(&:stop)
           end
 
-          @final_stopped_thread = synchronize do
+          @final_stopped_thread ||= synchronize do
             Thread.new do
               @stream_pool.map(&:wait!)
               # Shutdown the buffer TimerTask (and flush the buffer) after the streams are all stopped.
@@ -168,7 +168,14 @@ module Google
         # @return [Subscriber] returns self so calls can be chained.
         #
         def wait! timeout = nil
-          @final_stopped_thread&.join timeout
+          @final_stopped_thread ||= synchronize do
+            Thread.new do
+              @stream_pool.map(&:wait!)
+              # Shutdown the buffer TimerTask (and flush the buffer) after the streams are all stopped.
+              @buffer.stop
+            end
+          end
+          @final_stopped_thread.join timeout
           self
         end
 
