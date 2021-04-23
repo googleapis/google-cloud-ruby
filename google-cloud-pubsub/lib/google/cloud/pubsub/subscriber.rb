@@ -136,26 +136,18 @@ module Google
         # @return [Subscriber] returns self so calls can be chained.
         #
         def stop
-          stop_pool = synchronize do
+          synchronize do
             @started = false
             @stopped = true
-
-            @stream_pool.map do |stream|
-              Thread.new { stream.stop }
-            end
-          end
-          stop_pool.map(&:join)
-
-          wait_pool = synchronize do
-            @stream_pool.map do |stream|
-              Thread.new { stream.wait! }
-            end
+            @stream_pool.map(&:stop)
           end
 
-          @final_stopped_thread = Thread.new do
-            wait_pool.map(&:join)
-            # Shutdown the buffer TimerTask (and flush the buffer) after the streams are all stopped.
-            synchronize { @buffer.stop }
+          @final_stopped_thread = synchronize do
+            Thread.new do
+              @stream_pool.map(&:wait!)
+              # Shutdown the buffer TimerTask (and flush the buffer) after the streams are all stopped.
+              @buffer.stop
+            end
           end
 
           self
