@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 / 2021-04-23
+
+#### Features
+
+* Added progress field to UpdateDatabaseDdlMetadata
+
 ### 0.5.1 / 2021-04-05
 
 #### Documentation
