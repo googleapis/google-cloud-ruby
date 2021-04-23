@@ -1,0 +1,25 @@
+rebaseMergeAllowed: true
+squashMergeAllowed: true
+mergeCommitAllowed: false
+branchProtectionRules:
+- pattern: master
+  isAdminEnforced: false
+  requiredStatusCheckContexts:
+    - 'cla/google'
+    - 'CI (macos-latest, 2.7, test , spec)'
+    - 'CI (ubuntu-latest, 2.5, test , spec)'
+    - 'CI (ubuntu-latest, 2.6, test , spec)'
+    - 'CI (ubuntu-latest, 2.7, rubocop , integration , build , yardoc , linkinator)'
+    - 'CI (ubuntu-latest, 2.7, test , spec)'
+    - 'CI (ubuntu-latest, 3.0, test , spec)'
+    - 'CI (windows-latest, 2.7, test , spec)'
+  requiredApprovingReviewCount: 1
+  requiresCodeOwnerReviews: true
+  requiresStrictStatusChecks: true
+permissionRules:
+  - team: yoshi-admins
+    permission: admin
+  - team: yoshi-ruby-admins
+    permission: admin
+  - team: yoshi-ruby
+    permission: push
