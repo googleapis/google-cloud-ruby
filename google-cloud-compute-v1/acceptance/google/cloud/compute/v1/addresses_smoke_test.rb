@@ -21,20 +21,6 @@ class AddressesSmokeTest < Minitest::Test
     end
   end
 
-  def insert_address
-    address_resource = {
-      name: @name
-    }
-    result = @client.insert project: @default_project, region: @default_region, address_resource: address_resource
-    @addresses.append @name
-    return unless result.status != :DONE
-    starttime = Time.now
-    while (result.status != :DONE) && (Time.now < starttime + 60)
-      result = @client_ops.get operation: result.name, project: @default_project, region: @default_region
-      sleep 3
-    end
-  end
-
   def test_create
     insert_address
     address = @client.get project: @default_project, region: @default_region, address: @name
@@ -51,11 +37,38 @@ class AddressesSmokeTest < Minitest::Test
   def test_delete
     insert_address
     @addresses.delete @name
-    result = @client.delete project: @default_project, region: @default_region, address: @name
-    return unless result.status != :DONE
+    op = @client.delete project: @default_project, region: @default_region, address: @name
+    wait_for_regional_op op
+  end
+
+  def test_non_ascii
+    address_resource = {
+      name: @name,
+      description: "тест"
+    }
+    op = @client.insert project: @default_project, region: @default_region, address_resource: address_resource
+    @addresses.append @name
+    wait_for_regional_op op
+    address = @client.get project: @default_project, region: @default_region, address: @name
+    assert_equal @name, address.name
+    assert_equal "тест", address.description
+  end
+
+  private
+
+  def insert_address
+    address_resource = {
+      name: @name
+    }
+    op = @client.insert project: @default_project, region: @default_region, address_resource: address_resource
+    @addresses.append @name
+    wait_for_regional_op op
+  end
+
+  def wait_for_regional_op operation
     starttime = Time.now
-    while (result.status != :DONE) && (Time.now < starttime + 60)
-      result = @client_ops.get operation: result.name, project: @default_project, region: @default_region
+    while (operation.status != :DONE) && (Time.now < starttime + 60)
+      @client_ops.get operation: operation.name, project: @default_project, region: @default_region
       sleep 3
     end
   end

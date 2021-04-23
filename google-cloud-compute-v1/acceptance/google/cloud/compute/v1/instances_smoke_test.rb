@@ -50,7 +50,6 @@ class InstancesSmokeTest < Minitest::Test
   end
 
   def test_patch
-    skip "Post methods fail when body is empty"
     resource = {
       enable_secure_boot: true
     }
@@ -63,8 +62,9 @@ class InstancesSmokeTest < Minitest::Test
       sleep 10
     end
     assert_equal false, instance.shielded_instance_config.enable_secure_boot
-    @client.update_shielded_instance_config(instance: @name, zone: @default_zone, project: @default_project,
-                                            shielded_instance_config_resource: resource)
+    op = @client.update_shielded_instance_config(instance: @name, zone: @default_zone, project: @default_project,
+                                                 shielded_instance_config_resource: resource)
+    wait_for_zonal_op op
     instance = read_instance
     assert_equal true, instance.shielded_instance_config.enable_secure_boot
   end
@@ -85,7 +85,6 @@ class InstancesSmokeTest < Minitest::Test
   end
 
   def test_query_params
-    skip "Request fails because body is empty"
     templates_client = ::Google::Cloud::Compute::V1::InstanceTemplates::Rest::Client.new
     igm_client = ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::Client.new
     template_name = "rbgapic#{rand 10_000}"
@@ -108,39 +107,42 @@ class InstancesSmokeTest < Minitest::Test
       network_interfaces: [{ access_configs: [{ name: "default", type: "ONE_TO_ONE_NAT" }] }]
       }
     }
-    client = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::Client.new
-    operation = templates_client.insert project: @default_project, instance_template_resource: template_resource
-    starttime = Time.now
-    while (operation.status != :DONE) && (Time.now < starttime + 100)
-      operation = client.get operation: operation.name, project: @default_project
-      sleep 3
+    global_ops_client = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::Client.new
+    begin
+      operation = templates_client.insert project: @default_project, instance_template_resource: template_resource
+      starttime = Time.now
+      while (operation.status != :DONE) && (Time.now < starttime + 100)
+        operation = global_ops_client.get operation: operation.name, project: @default_project
+        sleep 3
+      end
+      igm_resource = {
+        base_instance_name: "rbgapicinst",
+        target_size: 1,
+        instance_template: operation.target_link,
+        name: igm_name
+      }
+
+      op = igm_client.insert project: @default_project, zone: @default_zone, instance_group_manager_resource: igm_resource
+      wait_for_zonal_op op
+
+      igm = igm_client.get project: @default_project, zone: @default_zone, instance_group_manager: igm_name
+      assert_equal igm.target_size, 1
+
+      resize_op = igm_client.resize project: @default_project, zone: @default_zone, instance_group_manager: igm_name,
+                                    size: 0
+      wait_for_zonal_op resize_op
+
+      igm = igm_client.get project: @default_project, zone: @default_zone, instance_group_manager: igm_name
+      assert_equal igm.target_size, 0
+    ensure
+      del_op = igm_client.delete project: @default_project, zone: @default_zone, instance_group_manager: igm_name
+      wait_for_zonal_op del_op
+
+      templates_client.delete project: @default_project, instance_template: template_name
     end
-    igm_resource = {
-      base_instance_name: "rbgapicinst",
-      target_size: 1,
-      instance_template: operation.target_link,
-      name: igm_name
-    }
-
-    op = igm_client.insert project: @default_project, zone: @default_zone, instance_group_manager_resource: igm_resource
-    wait_for_zonal_op op
-
-    igm = igm_client.get project: @default_project, zone: @default_zone, instance_group_manager: igm_name
-    assert_equal igm.target_size, 1
-
-    resize_op = igm_client.resize project: @default_project, zone: @default_zone, instance_group_manager: igm_name,
-                                  size: 0
-    wait_for_zonal_op resize_op
-
-    igm = igm_client.get project: @default_project, zone: @default_zone, instance_group_manager: igm_name
-    assert_equal igm.target_size, 0
-
-    del_op = igm_client.delete project: @default_project, zone: @default_zone, instance_group_manager: igm_name
-    wait_for_zonal_op del_op
-
-    del_op = templates_client.delete project: @default_project, zone: @default_zone, instance_template: template_name
-    wait_for_zonal_op del_op
   end
+
+  private
 
   def wait_for_zonal_op operation
     starttime = Time.now
@@ -158,7 +160,13 @@ class InstancesSmokeTest < Minitest::Test
     instance_resource = {
       name: @name,
       machine_type: @machine_type,
-      network_interfaces: [{ access_configs: [{ name: "default" }] }],
+      network_interfaces: [
+        {
+          access_configs: [
+            { name: "default" }
+          ]
+        }
+      ],
       disks: [
         {
           initialize_params:
