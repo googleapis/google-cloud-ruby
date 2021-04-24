@@ -14,7 +14,7 @@ branchProtectionRules:
     - 'CI (ubuntu-latest, 3.0, --test)'
   requiredApprovingReviewCount: 1
   requiresCodeOwnerReviews: true
-  requiresStrictStatusChecks: true
+  requiresStrictStatusChecks: false
 permissionRules:
   - team: yoshi-admins
     permission: admin
