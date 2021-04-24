@@ -122,18 +122,18 @@ end
 
 def determine_dirs
   return gems if gems
-  return all_gem_dirs if all_gems || github_event_name == "schedule"
+  return all_gem_dirs(all_gems || true) if all_gems || github_event_name == "schedule"
   cur_gem_dir || gem_dirs_from_changes
 end
 
-def all_gem_dirs
+def all_gem_dirs which_files
   dirs = Dir.glob("*/*.gemspec").map { |file| File.dirname file }
-  if all_gems == true
+  if which_files == true
     puts "Running for all gems", :bold
   else
-    puts "Running for all gems with the following files: #{all_gems}", :bold
+    puts "Running for all gems with the following files: #{which_files}", :bold
     dirs.delete_if do |dir|
-      all_gems.all? { |name| !File.exist? File.join(dir, name) }
+      which_files.all? { |name| !File.exist? File.join(dir, name) }
     end
   end
   filter_gem_dirs dirs
