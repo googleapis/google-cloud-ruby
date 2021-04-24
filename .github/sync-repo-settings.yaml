@@ -9,7 +9,7 @@ branchProtectionRules:
     - 'CI (macos-latest, 2.7, --test)'
     - 'CI (ubuntu-latest, 2.5, --test)'
     - 'CI (ubuntu-latest, 2.6, --test)'
-    - 'CI (ubuntu-latest, 2.7, --rubocop --build --yard --linkinator)'
+    # - 'CI (ubuntu-latest, 2.7, --rubocop --build --yard --linkinator)'
     - 'CI (ubuntu-latest, 2.7, --test)'
     - 'CI (ubuntu-latest, 3.0, --test)'
   requiredApprovingReviewCount: 1
