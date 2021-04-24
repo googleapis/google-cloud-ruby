@@ -373,7 +373,8 @@ module Google
         #   end
         #
         def execute_query sql, params: nil, types: nil, single_use: nil,
-                          query_options: nil, call_options: nil
+                          query_options: nil, request_options: nil,
+                          call_options: nil
           validate_single_use_args! single_use
           ensure_service!
 
@@ -384,7 +385,8 @@ module Google
           @pool.with_session do |session|
             results = session.execute_query \
               sql, params: params, types: types, transaction: single_use_tx,
-              query_options: query_options, call_options: call_options
+              query_options: query_options, request_options: request_options,
+              call_options: call_options
           end
           results
         end
@@ -599,7 +601,8 @@ module Google
         #    call_options: call_options
         #
         def execute_partition_update sql, params: nil, types: nil,
-                                     query_options: nil, call_options: nil
+                                     query_options: nil, request_options: nil,
+                                     call_options: nil
           ensure_service!
 
           params, types = Convert.to_input_params_and_types params, types
@@ -608,7 +611,8 @@ module Google
             results = session.execute_query \
               sql, params: params, types: types,
               transaction: pdml_transaction(session),
-              query_options: query_options, call_options: call_options
+              query_options: query_options, request_options: request_options,
+              call_options: call_options
           end
           # Stream all PartialResultSet to get ResultSetStats
           results.rows.to_a
@@ -754,7 +758,7 @@ module Google
         #   end
         #
         def read table, columns, keys: nil, index: nil, limit: nil,
-                 single_use: nil, call_options: nil
+                 single_use: nil, request_options: nil, call_options: nil
           validate_single_use_args! single_use
           ensure_service!
 
@@ -767,6 +771,7 @@ module Google
             results = session.read \
               table, columns, keys: keys, index: index, limit: limit,
                               transaction: single_use_tx,
+                              request_options: request_options,
                               call_options: call_options
           end
           results
@@ -846,9 +851,10 @@ module Google
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
         #
-        def upsert table, rows, commit_options: nil
+        def upsert table, rows, commit_options: nil, request_options: nil
           @pool.with_session do |session|
-            session.upsert table, rows, commit_options: commit_options
+            session.upsert table, rows, commit_options: commit_options,
+                           request_options: request_options
           end
         end
         alias save upsert
@@ -926,9 +932,10 @@ module Google
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
         #
-        def insert table, rows, commit_options: nil
+        def insert table, rows, commit_options: nil, request_options: nil
           @pool.with_session do |session|
-            session.insert table, rows, commit_options: commit_options
+            session.insert table, rows, commit_options: commit_options,
+                           request_options: request_options
           end
         end
 
@@ -1005,9 +1012,10 @@ module Google
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
         #
-        def update table, rows, commit_options: nil
+        def update table, rows, commit_options: nil, request_options: nil
           @pool.with_session do |session|
-            session.update table, rows, commit_options: commit_options
+            session.update table, rows, commit_options: commit_options,
+                           request_options: request_options
           end
         end
 
@@ -1086,9 +1094,10 @@ module Google
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
         #
-        def replace table, rows, commit_options: nil
+        def replace table, rows, commit_options: nil, request_options: nil
           @pool.with_session do |session|
-            session.replace table, rows, commit_options: commit_options
+            session.replace table, rows, commit_options: commit_options,
+                            request_options: request_options
           end
         end
 
@@ -1159,9 +1168,11 @@ module Google
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
         #
-        def delete table, keys = [], commit_options: nil, call_options: nil
+        def delete table, keys = [], commit_options: nil, request_options: nil,
+                   call_options: nil
           @pool.with_session do |session|
             session.delete table, keys, commit_options: commit_options,
+                           request_options: request_options,
                            call_options: call_options
           end
         end
@@ -1237,18 +1248,21 @@ module Google
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
         #
-        def commit commit_options: nil, call_options: nil, &block
+        def commit commit_options: nil, request_options: nil,
+                   call_options: nil, &block
           raise ArgumentError, "Must provide a block" unless block_given?
 
           @pool.with_session do |session|
             session.commit(
-              commit_options: commit_options, call_options: call_options, &block
+              commit_options: commit_options, request_options: request_options,
+              call_options: call_options, &block
             )
           end
         end
 
         # rubocop:disable Metrics/AbcSize
         # rubocop:disable Metrics/MethodLength
+        # rubocop:disable Metrics/BlockLength
 
         ##
         # Creates a transaction for reads and writes that execute atomically at
@@ -1350,7 +1364,8 @@ module Google
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
         #
-        def transaction deadline: 120, commit_options: nil, call_options: nil
+        def transaction deadline: 120, commit_options: nil,
+                        request_options: nil, call_options: nil
           ensure_service!
           unless Thread.current[:transaction_id].nil?
             raise "Nested transactions are not allowed"
@@ -1367,6 +1382,7 @@ module Google
               tx.session.path, tx.mutations,
               transaction_id: tx.transaction_id,
               commit_options: commit_options,
+              request_options: request_options,
               call_options: call_options
             resp = CommitResponse.from_grpc commit_resp
             commit_options ? resp : resp.timestamp
@@ -1397,6 +1413,7 @@ module Google
 
         # rubocop:enable Metrics/AbcSize
         # rubocop:enable Metrics/MethodLength
+        # rubocop:enable Metrics/BlockLength
 
         ##
         # Creates a snapshot read-only transaction for reads that execute

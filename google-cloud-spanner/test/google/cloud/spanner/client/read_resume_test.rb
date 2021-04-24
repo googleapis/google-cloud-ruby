@@ -112,14 +112,16 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :mock_spanner do
       session: session_grpc.name, table: "my-table",
       columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
       key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true),
-      transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil
+      transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil,
+      request_options: nil
     }, default_options]
     mock.expect :streaming_read, RaiseableEnumerator.new(results_enum2), [{
       session: session_grpc.name, table: "my-table",
       columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
       key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true),
-      transaction: nil, index: nil, limit: nil, resume_token: "abc123", partition_token: nil
-      }, default_options]
+      transaction: nil, index: nil, limit: nil, resume_token: "abc123", partition_token: nil,
+      request_options: nil
+    }, default_options]
     spanner.service.mocked_service = mock
 
     results = client.read "my-table", columns

@@ -31,7 +31,11 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
 
   it "can execute a single DML query" do
     mock = Minitest::Mock.new
-    mock.expect :execute_batch_dml, batch_response_grpc, [{ session: session_grpc.name, transaction: tx_selector, statements: [statement_grpc("UPDATE users SET active = true")], seqno: 1 }, default_options]
+    mock.expect :execute_batch_dml, batch_response_grpc, [{
+      session: session_grpc.name, transaction: tx_selector,
+      statements: [statement_grpc("UPDATE users SET active = true")],
+      seqno: 1, request_options: nil
+    }, default_options]
     session.service.mocked_service = mock
 
     row_counts = transaction.batch_update do |b|
@@ -56,7 +60,10 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
     statements << statement_grpc("UPDATE users SET avatar = @avatar", params: Google::Protobuf::Struct.new(fields: { "avatar" => Google::Protobuf::Value.new(string_value: Base64.strict_encode64("contents")) }), param_types: { "avatar" => Google::Cloud::Spanner::V1::Type.new(code: :BYTES) })
     statements << statement_grpc("UPDATE users SET project_ids = @list", params: Google::Protobuf::Struct.new(fields: { "list" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "1"), Google::Protobuf::Value.new(string_value: "2"), Google::Protobuf::Value.new(string_value: "3")])) }), param_types: { "list" => Google::Cloud::Spanner::V1::Type.new(code: :ARRAY, array_element_type: Google::Cloud::Spanner::V1::Type.new(code: :INT64)) })
     statements << statement_grpc("UPDATE users SET settings = @dict", params: Google::Protobuf::Struct.new(fields: { "dict" => Google::Protobuf::Value.new(list_value: Google::Protobuf::ListValue.new(values: [Google::Protobuf::Value.new(string_value: "production")])) }), param_types: { "dict" => Google::Cloud::Spanner::V1::Type.new(code: :STRUCT, struct_type: Google::Cloud::Spanner::V1::StructType.new(fields: [Google::Cloud::Spanner::V1::StructType::Field.new(name: "env", type: Google::Cloud::Spanner::V1::Type.new(code: :STRING))])) })
-    mock.expect :execute_batch_dml, batch_response_grpc(9), [{ session: session_grpc.name, transaction: tx_selector, statements: statements, seqno: 1 }, default_options]
+    mock.expect :execute_batch_dml, batch_response_grpc(9), [{
+      session: session_grpc.name, transaction: tx_selector, statements: statements,
+      seqno: 1, request_options: nil
+    }, default_options]
     session.service.mocked_service = mock
 
     row_counts = transaction.batch_update do |b|
@@ -109,7 +116,7 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
       session.service.mocked_service = mock
       expect_execute_streaming_sql results_enum, session_grpc.name, "UPDATE users SET active = true", transaction: tx_selector, seqno: 1, options: default_options
       statement = statement_grpc("UPDATE users SET age = @age", params: Google::Protobuf::Struct.new(fields: { "age" => Google::Protobuf::Value.new(string_value: "29") }), param_types: { "age" => Google::Cloud::Spanner::V1::Type.new(code: :INT64) })
-      mock.expect :execute_batch_dml, batch_response_grpc, [{ session: session_grpc.name, transaction: tx_selector, statements: [statement], seqno: 2 }, default_options]
+      mock.expect :execute_batch_dml, batch_response_grpc, [{ session: session_grpc.name, transaction: tx_selector, statements: [statement], seqno: 2, request_options: nil }, default_options]
       expect_execute_streaming_sql results_enum, session_grpc.name, "UPDATE users SET active = false", transaction: tx_selector, seqno: 3, options: default_options
 
       transaction.execute_update "UPDATE users SET active = true"
@@ -134,7 +141,7 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
     call_options = { timeout: timeout, retry_policy: retry_policy }
 
     mock = Minitest::Mock.new
-    mock.expect :execute_batch_dml, batch_response_grpc, [{ session: session_grpc.name, transaction: tx_selector, statements: [statement_grpc("UPDATE users SET active = true")], seqno: 1 }, expect_options]
+    mock.expect :execute_batch_dml, batch_response_grpc, [{ session: session_grpc.name, transaction: tx_selector, statements: [statement_grpc("UPDATE users SET active = true")], seqno: 1, request_options: nil }, expect_options]
     session.service.mocked_service = mock
 
     row_counts = transaction.batch_update call_options: call_options do |b|

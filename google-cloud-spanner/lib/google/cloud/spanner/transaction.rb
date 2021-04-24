@@ -554,10 +554,11 @@ module Google
         #     end
         #   end
         #
-        def batch_update call_options: nil, &block
+        def batch_update request_options: nil, call_options: nil, &block
           ensure_session!
           @seqno += 1
           session.batch_update tx_selector, @seqno,
+                               request_options: request_options,
                                call_options: call_options, &block
         end
 

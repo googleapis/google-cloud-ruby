@@ -83,7 +83,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       session: session_grpc.name, table: "my-table",
       columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
       key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true),
-      transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil
+      transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil,
+      request_options: nil
      }, default_options]
     spanner.service.mocked_service = mock
 
@@ -105,7 +106,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       session: session_grpc.name, table: "my-table",
       columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
       key_set: Google::Cloud::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([2]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([3]).list_value]),
-      transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil
+      transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil,
+      request_options: nil
      }, default_options]
     spanner.service.mocked_service = mock
 
@@ -131,7 +133,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       session: session_grpc.name, table: "my-table",
       columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
       key_set: Google::Cloud::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.object_to_grpc_value([time1]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([time2]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([time3]).list_value]),
-      transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil
+      transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil,
+      request_options: nil
      }, default_options]
     spanner.service.mocked_service = mock
 
@@ -153,7 +156,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       session: session_grpc.name, table: "my-table",
       columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
       key_set: Google::Cloud::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1,1]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([2,2]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([3,3]).list_value]),
-      transaction: nil, index: "MyTableCompositeKey", limit: nil, resume_token: nil, partition_token: nil
+      transaction: nil, index: "MyTableCompositeKey", limit: nil, resume_token: nil, partition_token: nil,
+      request_options: nil
      }, default_options]
     spanner.service.mocked_service = mock
 
@@ -175,7 +179,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       session: session_grpc.name, table: "my-table",
       columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
       key_set: Google::Cloud::Spanner::V1::KeySet.new(ranges: [Google::Cloud::Spanner::Convert.to_key_range([1,1]..[3,3])]),
-      transaction: nil, index: "MyTableCompositeKey", limit: nil, resume_token: nil, partition_token: nil
+      transaction: nil, index: "MyTableCompositeKey", limit: nil, resume_token: nil, partition_token: nil,
+      request_options: nil
      }, default_options]
     spanner.service.mocked_service = mock
 
@@ -198,7 +203,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       session: session_grpc.name, table: "my-table",
       columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
       key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true),
-      transaction: nil, index: nil, limit: 5, resume_token: nil, partition_token: nil
+      transaction: nil, index: nil, limit: 5, resume_token: nil, partition_token: nil,
+      request_options: nil
      }, default_options]
     spanner.service.mocked_service = mock
 
@@ -220,7 +226,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       session: session_grpc.name, table: "my-table",
       columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
       key_set: Google::Cloud::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1]).list_value]),
-      transaction: nil, index: nil, limit: 1, resume_token: nil, partition_token: nil
+      transaction: nil, index: nil, limit: 1, resume_token: nil, partition_token: nil,
+      request_options: nil
      }, default_options]
     spanner.service.mocked_service = mock
 
@@ -244,7 +251,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       session: session_grpc.name, table: "my-table",
       columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
       key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true),
-      transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil
+      transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil,
+      request_options: nil
      }, default_options]
     spanner.service.mocked_service = mock
 
@@ -267,7 +275,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     }
     expect_options = default_options.merge timeout: timeout, retry_policy: retry_policy
     call_options = { timeout: timeout, retry_policy: retry_policy }
-    
+
     columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
@@ -275,7 +283,8 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       session: session_grpc.name, table: "my-table",
       columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
       key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true),
-      transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil
+      transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil,
+      request_options: nil
      }, expect_options]
     spanner.service.mocked_service = mock
 
