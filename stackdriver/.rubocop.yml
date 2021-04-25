@@ -10,3 +10,4 @@ Documentation:
 Metrics/BlockLength:
   Exclude:
     - "Rakefile"
+    - "*.gemspec"

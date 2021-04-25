@@ -10,6 +10,7 @@ Documentation:
 Metrics/BlockLength:
   Exclude:
     - "Rakefile"
+    - "*.gemspec"
 Naming/FileName:
   Exclude:
     - "lib/google-cloud.rb"
