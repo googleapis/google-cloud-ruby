@@ -7,3 +7,6 @@ AllCops:
 
 Documentation:
   Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - "Rakefile"
