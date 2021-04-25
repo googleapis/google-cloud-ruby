@@ -268,7 +268,7 @@ def run_in_dir dir
   Dir.chdir dir do
     bundle_task = bundle_update ? "update" : "install"
     puts
-    puts "#{dir}: bundle ...", :bold
+    puts "#{dir}: bundle ...", :bold, :cyan
     result = exec ["bundle", bundle_task]
     unless result.success?
       @errors << "#{dir}: bundle"
@@ -276,7 +276,7 @@ def run_in_dir dir
     end
     @run_tasks.each do |task|
       puts
-      puts "#{dir}: #{task} ...", :bold
+      puts "#{dir}: #{task} ...", :bold, :cyan
       success = if task == "linkinator"
         run_linkinator
       else

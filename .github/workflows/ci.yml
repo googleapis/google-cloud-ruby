@@ -31,7 +31,10 @@ jobs:
             task: "--test"
           - os: ubuntu-latest
             ruby: "2.7"
-            task: "--test"
+            task: "--rubocop --build --test"
+          - os: ubuntu-latest
+            ruby: "2.7"
+            task: "--yard --linkinator"
           - os: ubuntu-latest
             ruby: "3.0"
             task: "--test"
@@ -41,9 +44,6 @@ jobs:
           - os: windows-latest
             ruby: "2.7"
             task: "--test"
-          - os: ubuntu-latest
-            ruby: "2.7"
-            task: "--rubocop --build --yard --linkinator"
       fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
