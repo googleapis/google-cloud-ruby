@@ -140,17 +140,9 @@ module Google
             @started = false
             @stopped = true
             @stream_pool.map(&:stop)
+            wait_stop_buffer_thread!
+            self
           end
-
-          @final_stopped_thread ||= synchronize do
-            Thread.new do
-              @stream_pool.map(&:wait!)
-              # Shutdown the buffer TimerTask (and flush the buffer) after the streams are all stopped.
-              @buffer.stop
-            end
-          end
-
-          self
         end
 
         ##
@@ -168,14 +160,8 @@ module Google
         # @return [Subscriber] returns self so calls can be chained.
         #
         def wait! timeout = nil
-          @final_stopped_thread ||= synchronize do
-            Thread.new do
-              @stream_pool.map(&:wait!)
-              # Shutdown the buffer TimerTask (and flush the buffer) after the streams are all stopped.
-              @buffer.stop
-            end
-          end
-          @final_stopped_thread.join timeout
+          wait_stop_buffer_thread!
+          @wait_stop_buffer_thread.join timeout
           self
         end
 
@@ -380,6 +366,18 @@ module Google
         end
 
         protected
+
+        ##
+        # Starts a new thread to call wait! (blocking) on each Stream and then stop the TimedUnaryBuffer.
+        def wait_stop_buffer_thread!
+          synchronize do
+            @wait_stop_buffer_thread ||= Thread.new do
+              @stream_pool.map(&:wait!)
+              # Shutdown the buffer TimerTask (and flush the buffer) after the streams are all stopped.
+              @buffer.stop
+            end
+          end
+        end
 
         def coerce_inventory inventory
           @inventory = inventory
