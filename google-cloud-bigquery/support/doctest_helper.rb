@@ -879,6 +879,15 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Table#clustering_fields=" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
+      mock.expect :patch_table, table_full_gapi, ["my-project", "my_dataset", "my_table", Google::Apis::BigqueryV2::Table, Hash]
+      mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
+    end
+  end
+
   # Google::Cloud::Bigquery::Table#data@Paginate rows of data: (See {Data#next})
   # Google::Cloud::Bigquery::Table#data@Retrieve all rows of data: (See {Data#all})
   doctest.before "Google::Cloud::Bigquery::Table#data" do
