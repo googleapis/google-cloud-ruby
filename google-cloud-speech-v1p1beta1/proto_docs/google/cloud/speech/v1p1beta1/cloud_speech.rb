@@ -291,7 +291,7 @@ module Google
         #       </tr>
         #       <tr>
         #         <td><code>video</code></td>
-        #         <td>Best for audio that originated from from video or includes multiple
+        #         <td>Best for audio that originated from video or includes multiple
         #             speakers. Ideally the audio is recorded at a 16khz or greater
         #             sampling rate. This is a premium model that costs more than the
         #             standard rate.</td>
@@ -388,6 +388,12 @@ module Google
             # kbps). When using this encoding, `sample_rate_hertz` has to match the
             # sample rate of the file being used.
             MP3 = 8
+
+            # Opus encoded audio frames in WebM container
+            # ([OggOpus](https://wiki.xiph.org/OggOpus)). This is a Beta features and
+            # only available in v1p1beta1. `sample_rate_hertz` must be one of 8000,
+            # 12000, 16000, 24000, or 48000.
+            WEBM_OPUS = 9
           end
         end
 
