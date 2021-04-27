@@ -199,6 +199,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :layout_type, :enum, 2, "google.cloud.documentai.v1beta3.Document.PageAnchor.PageRef.LayoutType"
       optional :layout_id, :string, 3
       optional :bounding_poly, :message, 4, "google.cloud.documentai.v1beta3.BoundingPoly"
+      optional :confidence, :float, 5
     end
     add_enum "google.cloud.documentai.v1beta3.Document.PageAnchor.PageRef.LayoutType" do
       value :LAYOUT_TYPE_UNSPECIFIED, 0
