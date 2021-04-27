@@ -1546,7 +1546,7 @@ module Google
         #     iam_client.authorization = Google::Auth.get_application_default scopes
         #
         #     request = {
-        #       "payload": string_to_sign,
+        #       "payload" => string_to_sign
         #     }
         #     resource = "projects/-/serviceAccounts/#{issuer}"
         #     response = iam_client.sign_service_account_blob resource, request, {}
@@ -1779,7 +1779,7 @@ module Google
         #     iam_client.authorization = Google::Auth.get_application_default scopes
         #
         #     request = {
-        #       "payload": string_to_sign,
+        #       "payload" => string_to_sign
         #     }
         #     resource = "projects/-/serviceAccounts/#{issuer}"
         #     response = iam_client.sign_service_account_blob resource, request, {}
@@ -1929,7 +1929,7 @@ module Google
         #     iam_client.authorization = Google::Auth.get_application_default scopes
         #
         #     request = {
-        #       "payload": string_to_sign,
+        #       "payload" => string_to_sign
         #     }
         #     resource = "projects/-/serviceAccounts/#{issuer}"
         #     response = iam_client.sign_service_account_blob resource, request, {}
