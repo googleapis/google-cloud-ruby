@@ -514,7 +514,7 @@ module Google
         # Checks if the destination table will be time-partitioned. See
         # [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         #
-        # @return [Boolean, nil] `true` when the table will be time-partitioned,
+        # @return [Boolean] `true` when the table will be time-partitioned,
         #   or `false` otherwise.
         #
         # @!group Attributes
@@ -597,7 +597,7 @@ module Google
         # @see https://cloud.google.com/bigquery/docs/creating-clustered-tables
         #   Creating and using clustered tables
         #
-        # @return [Boolean, nil] `true` when the table will be clustered,
+        # @return [Boolean] `true` when the table will be clustered,
         #   or `false` otherwise.
         #
         # @!group Attributes
