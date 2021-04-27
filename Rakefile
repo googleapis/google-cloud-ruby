@@ -455,7 +455,7 @@ namespace :kokoro do
 
   desc "Generate configs for kokoro"
   task :build do
-    kokoro.build
+    puts "kokoro:build no longer needed"
   end
 
   task :presubmit do

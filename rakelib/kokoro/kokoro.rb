@@ -5,7 +5,6 @@ require "net/http"
 require "open3"
 
 require_relative "command"
-require_relative "kokoro_builder"
 require_relative "../devsite/repo_metadata"
 
 class Kokoro < Command
@@ -19,7 +18,6 @@ class Kokoro < Command
     @updated_gems  = updated_gems
     @gem           = gem
 
-    @builder        = KokoroBuilder.new ruby_versions, gems
     @failed         = false
     @tag            = nil
     @updated        = @updated_gems.include? @gem
@@ -27,14 +25,6 @@ class Kokoro < Command
                       ENV.fetch("OS", "") == "linux" &&
                       RUBY_VERSION == ruby_versions.sort.last
     @pr_number      = ENV["KOKORO_GITHUB_PULL_REQUEST_NUMBER"]
-  end
-
-  def build
-    @builder.build
-  end
-
-  def publish
-    @builder.publish
   end
 
   def presubmit
