@@ -514,7 +514,7 @@ module Google
         # Checks if the destination table will be time-partitioned. See
         # [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         #
-        # @return [Boolean, nil] `true` when the table will be time-partitioned,
+        # @return [Boolean] `true` when the table will be time-partitioned,
         #   or `false` otherwise.
         #
         # @!group Attributes
@@ -589,10 +589,15 @@ module Google
         ###
         # Checks if the destination table will be clustered.
         #
-        # @see https://cloud.google.com/bigquery/docs/clustered-tables
-        #   Introduction to Clustered Tables
+        # See {QueryJob::Updater#clustering_fields=}, {Table#clustering_fields} and
+        # {Table#clustering_fields=}.
         #
-        # @return [Boolean, nil] `true` when the table will be clustered,
+        # @see https://cloud.google.com/bigquery/docs/clustered-tables
+        #   Introduction to clustered tables
+        # @see https://cloud.google.com/bigquery/docs/creating-clustered-tables
+        #   Creating and using clustered tables
+        #
+        # @return [Boolean] `true` when the table will be clustered,
         #   or `false` otherwise.
         #
         # @!group Attributes
@@ -607,14 +612,16 @@ module Google
         # be first partitioned and subsequently clustered. The order of the
         # returned fields determines the sort order of the data.
         #
-        # See {QueryJob::Updater#clustering_fields=}.
+        # BigQuery supports clustering for both partitioned and non-partitioned
+        # tables.
         #
-        # @see https://cloud.google.com/bigquery/docs/partitioned-tables
-        #   Partitioned Tables
+        # See {QueryJob::Updater#clustering_fields=}, {Table#clustering_fields} and
+        # {Table#clustering_fields=}.
+        #
         # @see https://cloud.google.com/bigquery/docs/clustered-tables
-        #   Introduction to Clustered Tables
+        #   Introduction to clustered tables
         # @see https://cloud.google.com/bigquery/docs/creating-clustered-tables
-        #   Creating and Using Clustered Tables
+        #   Creating and using clustered tables
         #
         # @return [Array<String>, nil] The clustering fields, or `nil` if the
         #   destination table will not be clustered.
@@ -1445,23 +1452,23 @@ module Google
           end
 
           ##
-          # Sets one or more fields on which the destination table should be
-          # clustered. Must be specified with time-based partitioning, data in
-          # the table will be first partitioned and subsequently clustered.
+          # Sets the list of fields on which data should be clustered.
           #
           # Only top-level, non-repeated, simple-type fields are supported. When
           # you cluster a table using multiple columns, the order of columns you
           # specify is important. The order of the specified columns determines
           # the sort order of the data.
           #
-          # See {QueryJob#clustering_fields}.
+          # BigQuery supports clustering for both partitioned and non-partitioned
+          # tables.
           #
-          # @see https://cloud.google.com/bigquery/docs/partitioned-tables
-          #   Partitioned Tables
+          # See {QueryJob#clustering_fields}, {Table#clustering_fields} and
+          # {Table#clustering_fields=}.
+          #
           # @see https://cloud.google.com/bigquery/docs/clustered-tables
-          #   Introduction to Clustered Tables
+          #   Introduction to clustered tables
           # @see https://cloud.google.com/bigquery/docs/creating-clustered-tables
-          #   Creating and Using Clustered Tables
+          #   Creating and using clustered tables
           #
           # @param [Array<String>] fields The clustering fields. Only top-level,
           #   non-repeated, simple-type fields are supported.
