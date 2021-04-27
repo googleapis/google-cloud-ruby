@@ -169,10 +169,10 @@ module Google
               ##
               # Creates a new custom dashboard. For examples on how you can use this API to
               # create dashboards, see [Managing dashboards by
-              # API](/monitoring/dashboards/api-dashboard). This method requires the
+              # API](https://cloud.google.com/monitoring/dashboards/api-dashboard). This method requires the
               # `monitoring.dashboards.create` permission on the specified project. For
               # more information about permissions, see [Cloud Identity and Access
-              # Management](/iam).
+              # Management](https://cloud.google.com/iam).
               #
               # @overload create_dashboard(request, options = nil)
               #   Pass arguments to `create_dashboard` via a request object, either of type
