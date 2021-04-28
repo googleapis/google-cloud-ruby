@@ -1,5 +1,12 @@
 # Release History
 
+### 1.31.0 / 2021-04-28
+
+#### Features
+
+* Add support for mutable clustering configuration
+  * Add Table#clustering_fields=
+
 ### 1.30.0 / 2021-04-20
 
 #### Features
