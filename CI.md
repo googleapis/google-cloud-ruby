@@ -149,6 +149,26 @@ Nightly tests run overnight on a cron, and are intended to run only once per day
 
 Thus, the difference between nightly and continuous is that: continuous runs samples-master whereas nightly runs samples-latest, and continuous analyzes the changes in the given commit whereas nightly tests all libraries.
 
+#### Examples
+
+To run unit tests for libraries with uncommitted changes:
+
+    toys ci --test
+
+To run unit and rubocop tests for _all_ libraries:
+
+    toys ci --test --rubocop --all-gems
+
+To run acceptance tests for libraries that changed since a given commit SHA, and provide needed credentials:
+
+    toys ci --acceptance --project=my-project --keyfile=/path/to/my/keyfile.json --base=9fbcc35
+
+To update the bundle and run all tests except acceptance and samples, for a specific library:
+
+    toys ci --bundle-update --test --rubocop --build --yard --linkinator --gems=google-cloud-pubsub
+    # or...
+    cd google-cloud-pubsub && toys ci --bundle-update --test --rubocop --build --yard --linkinator
+
 ### Kokoro configuration
 
 All acceptance tests and samples tests run in Kokoro, an internal Google system that is used because these tests must handle credentials that we currently do not want exposed to GitHub Actions. We try to limit Kokoro usage only to those tests, because configuring Kokoro is a bit of a pain. It is necessary to edit corresponding config files in two places: in the [`.kokoro/` directory](.kokoro/) in the git repo, _and_ in a corresponding directory in Google's internal source control.
