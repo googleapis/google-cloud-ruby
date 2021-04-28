@@ -1,5 +1,12 @@
 # Release History
 
+### 2.6.1 / 2021-04-28
+
+#### Bug Fixes
+
+* Add final flush of pending requests to Subscriber#wait!
+  * fix(pubsub): Add final flush of pending requests to Subscriber#wait!
+
 ### 2.6.0 / 2021-04-19
 
 #### Features
