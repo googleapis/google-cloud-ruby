@@ -37,11 +37,11 @@ The full test suite can be conceptualized as a matrix across four dimensions: te
 
     We test against several operating systems: Linux (Ubuntu), MacOS Big Sur, and Windows 10. These currently run on the 64-bit Intel architecture, but we may extend this to include ARM in the future.
 
-4.  **Ruby version**
+3.  **Ruby version**
 
     We generally support four minor Ruby versions at any given time. (These are Ruby 2.5, 2.6, 2.7, and 3.0 at the time of this writing.)
 
-5.  **Target library**
+4.  **Target library**
 
     Google-cloud-ruby is a "monorepo", meaning it includes the source for multiple (and indeed, a large number of) individual libraries, each with its own test suite.
 
