@@ -35,9 +35,6 @@ end
 flag :base_commit, "--base=COMMIT" do |f|
   f.desc "Ref or SHA of the base commit when analyzing changes. If omitted, uses uncommitted diffs."
 end
-flag :bundle_update do |f|
-  f.desc "Update rather than install gem bundles. This can take longer."
-end
 flag :gems, "--gems=NAMES" do |f|
   f.accept Array
   f.desc "Test the given gems (comma-delimited) instead of analyzing changes."
@@ -63,10 +60,20 @@ flag :load_kokoro_context do |f|
   f.desc "Load Kokoro credentials and environment info"
 end
 
-flag_group desc: "Tasks" do
+at_least_one_required desc: "Tasks" do
+  flag :do_bundle, "--[no-]bundle" do |f|
+    f.desc "Normally bundle install is performed prior to any other task. Use --no-bundle to disable this, or" \
+           " use --bundle to force a bundle install even if no other tasks are run."
+  end
+  flag :bundle_update do |f|
+    f.desc "Update rather than install gem bundles."
+  end
   TASKS.each do |task|
     task_underscore = task.tr "-", "_"
     flag "task_#{task_underscore}", "--[no-]#{task}", desc: "Run the #{task} task"
+  end
+  flag :all_tasks do |f|
+    f.desc "Run all tasks."
   end
 end
 
@@ -80,10 +87,8 @@ def run
   end
 
   @auth_env = setup_auth_env
-  @run_tasks = TASKS.find_all do |task|
-    task_underscore = task.tr "-", "_"
-    get "task_#{task_underscore}"
-  end
+  @run_tasks, @bundle_task = determine_tasks
+
   @errors = []
   @cur_dir = Dir.getwd
   Dir.chdir context_directory
@@ -110,14 +115,34 @@ end
 def setup_auth_env
   final_project = project || ENV["GCLOUD_TEST_PROJECT"] || ENV["GOOGLE_CLOUD_PROJECT"]
   final_keyfile = keyfile || ENV["GCLOUD_TEST_KEYFILE"] || ENV["GOOGLE_APPLICATION_CREDENTIALS"]
-  puts "Project for integration tests: #{final_project.inspect}"
-  puts "Set keyfile for integration tests." if final_keyfile
+  logger.info "Project for integration tests: #{final_project.inspect}"
+  logger.info "Set keyfile for integration tests." if final_keyfile
   {
     "GCLOUD_TEST_PROJECT" => final_project,
     "GOOGLE_CLOUD_PROJECT" => final_project,
     "GCLOUD_TEST_KEYFILE" => final_keyfile,
     "GOOGLE_APPLICATION_CREDENTIALS" => final_keyfile
   }
+end
+
+def determine_tasks
+  run_tasks = TASKS.find_all do |task|
+    task_underscore = task.tr "-", "_"
+    do_task = get "task_#{task_underscore}"
+    do_task.nil? ? all_tasks : do_task
+  end
+  bundle_task = if bundle_update
+    logger.info "Will update bundles for tested libraries"
+    "update"
+  elsif do_bundle == false
+    logger.info "Will not install bundles for tested libraries"
+    nil
+  else
+    logger.info "Will install bundles for tested libraries"
+    "install"
+  end
+  logger.info "Running the following tasks: #{run_tasks.inspect}"
+  [run_tasks, bundle_task]
 end
 
 def determine_dirs
@@ -179,15 +204,16 @@ def interpret_github_event
   base_ref, head_ref =
     case github_event_name
     when "pull_request"
-      puts "Getting commits from pull_request event"
+      logger.info "Getting commits from pull_request event"
       [payload["pull_request"]["base"]["ref"], nil]
     when "push"
-      puts "Getting commits from push event"
+      logger.info "Getting commits from push event"
       [payload["before"], nil]
     when "workflow_dispatch"
-      puts "Getting inputs from workflow_dispatch event"
+      logger.info "Getting inputs from workflow_dispatch event"
       [payload["inputs"]["base"], payload["inputs"]["head"]]
     else
+      logger.info "Using local commits"
       [base_commit, head_commit]
     end
   base_ref = nil if base_ref&.empty?
@@ -196,23 +222,23 @@ def interpret_github_event
 end
 
 def ensure_checkout head_ref
-  puts "Checking for head ref: #{head_ref}"
+  logger.info "Checking for head ref: #{head_ref}"
   head_sha = ensure_fetched head_ref
   current_sha = capture(["git", "rev-parse", "HEAD"], e: true).strip
   if head_sha == current_sha
-    puts "Already at head SHA: #{head_sha}"
+    logger.info "Already at head SHA: #{head_sha}"
   else
-    puts "Checking out head SHA: #{head_sha}"
+    logger.info "Checking out head SHA: #{head_sha}"
     exec(["git", "checkout", head_sha], e: true)
   end
 end
 
 def find_changed_files base_ref
   if base_ref.nil?
-    puts "No base ref. Using local diff."
+    logger.info "No base ref. Using local diff."
     capture(["git", "status", "--porcelain"]).split("\n").map { |line| line.split.last }
   else
-    puts "Diffing from base ref: #{base_ref}"
+    logger.info "Diffing from base ref: #{base_ref}"
     base_sha = ensure_fetched base_ref
     capture(["git", "diff", "--name-only", base_sha], e: true).split("\n").map(&:strip)
   end
@@ -228,7 +254,7 @@ def ensure_fetched ref
     exec(["git", "fetch", "--depth=2", "origin", current_sha], e: true)
     capture(["git", "rev-parse", "HEAD^"], e: true).strip
   else
-    puts "Fetching ref: #{ref}"
+    logger.info "Fetching ref: #{ref}"
     exec(["git", "fetch", "--depth=1", "origin", "#{ref}:refs/temp/#{ref}"], e: true)
     capture(["git", "show", "--no-patch", "--format=%H", "refs/temp/#{ref}"], e: true).strip
   end
@@ -266,13 +292,14 @@ end
 
 def run_in_dir dir
   Dir.chdir dir do
-    bundle_task = bundle_update ? "update" : "install"
-    puts
-    puts "#{dir}: bundle ...", :bold, :cyan
-    result = exec ["bundle", bundle_task]
-    unless result.success?
-      @errors << "#{dir}: bundle"
-      next
+    if @bundle_task
+      puts
+      puts "#{dir}: bundle ...", :bold, :cyan
+      result = exec ["bundle", @bundle_task]
+      unless result.success?
+        @errors << "#{dir}: bundle"
+        next
+      end
     end
     @run_tasks.each do |task|
       puts
