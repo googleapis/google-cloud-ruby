@@ -78,7 +78,7 @@ module Google
         #     Example: AUTOMOTIVE, FOOD_AND_DRINK
         # @!attribute [rw] time_zone
         #   @return [::String]
-        #     Reporting Time Zone, used as the day boundary for reports, regardless of
+        #     Required. Reporting Time Zone, used as the day boundary for reports, regardless of
         #     where the data originates. If the time zone honors DST, Analytics will
         #     automatically adjust for the changes.
         #
@@ -94,10 +94,15 @@ module Google
         #
         #     Format: https://en.wikipedia.org/wiki/ISO_4217
         #     Examples: "USD", "EUR", "JPY"
-        # @!attribute [r] deleted
-        #   @return [::Boolean]
-        #     Output only. Indicates whether this Property is soft-deleted or not. Deleted properties
-        #     are excluded from List results unless specifically requested.
+        # @!attribute [r] delete_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. If set, the time at which this property was trashed. If not set, then this
+        #     property is not currently in the trash can.
+        # @!attribute [r] expire_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. If set, the time at which this trashed property will be permanently
+        #     deleted. If not set, then this property is not currently in the trash can
+        #     and is not slated to be deleted.
         class Property
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -451,6 +456,85 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A set of changes within a Google Analytics account or its child properties
+        # that resulted from the same cause. Common causes would be updates made in the
+        # Google Analytics UI, changes from customer support, or automatic Google
+        # Analytics system changes.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     ID of this change history event. This ID is unique across Google Analytics.
+        # @!attribute [rw] change_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Time when change was made.
+        # @!attribute [rw] actor_type
+        #   @return [::Google::Analytics::Admin::V1alpha::ActorType]
+        #     The type of actor that made this change.
+        # @!attribute [rw] user_actor_email
+        #   @return [::String]
+        #     Email address of the Google account that made the change. This will be a
+        #     valid email address if the actor field is set to USER, and empty otherwise.
+        #     Google accounts that have been deleted will cause an error.
+        # @!attribute [rw] changes_filtered
+        #   @return [::Boolean]
+        #     If true, then the list of changes returned was filtered, and does not
+        #     represent all changes that occurred in this event.
+        # @!attribute [rw] changes
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::ChangeHistoryChange>]
+        #     A list of changes made in this change history event that fit the filters
+        #     specified in SearchChangeHistoryEventsRequest.
+        class ChangeHistoryEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A description of a change to a single Google Analytics resource.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Resource name of the resource whose changes are described by this entry.
+        # @!attribute [rw] action
+        #   @return [::Google::Analytics::Admin::V1alpha::ActionType]
+        #     The type of action that changed this resource.
+        # @!attribute [rw] resource_before_change
+        #   @return [::Google::Analytics::Admin::V1alpha::ChangeHistoryChange::ChangeHistoryResource]
+        #     Resource contents from before the change was made. If this resource was
+        #     created in this change, this field will be missing.
+        # @!attribute [rw] resource_after_change
+        #   @return [::Google::Analytics::Admin::V1alpha::ChangeHistoryChange::ChangeHistoryResource]
+        #     Resource contents from after the change was made. If this resource was
+        #     deleted in this change, this field will be missing.
+        class ChangeHistoryChange
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A snapshot of a resource as before or after the result of a change in
+          # change history.
+          # @!attribute [rw] account
+          #   @return [::Google::Analytics::Admin::V1alpha::Account]
+          #     A snapshot of an Account resource in change history.
+          # @!attribute [rw] property
+          #   @return [::Google::Analytics::Admin::V1alpha::Property]
+          #     A snapshot of a Property resource in change history.
+          # @!attribute [rw] web_data_stream
+          #   @return [::Google::Analytics::Admin::V1alpha::WebDataStream]
+          #     A snapshot of a WebDataStream resource in change history.
+          # @!attribute [rw] android_app_data_stream
+          #   @return [::Google::Analytics::Admin::V1alpha::AndroidAppDataStream]
+          #     A snapshot of an AndroidAppDataStream resource in change history.
+          # @!attribute [rw] ios_app_data_stream
+          #   @return [::Google::Analytics::Admin::V1alpha::IosAppDataStream]
+          #     A snapshot of an IosAppDataStream resource in change history.
+          # @!attribute [rw] firebase_link
+          #   @return [::Google::Analytics::Admin::V1alpha::FirebaseLink]
+          #     A snapshot of a FirebaseLink resource in change history.
+          # @!attribute [rw] google_ads_link
+          #   @return [::Google::Analytics::Admin::V1alpha::GoogleAdsLink]
+          #     A snapshot of a GoogleAdsLink resource in change history.
+          class ChangeHistoryResource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Maximum access settings that Firebase user receive on the linked Analytics
         # property.
         module MaximumUserAccess
@@ -554,6 +638,64 @@ module Google
 
           # Shopping
           SHOPPING = 26
+        end
+
+        # Different kinds of actors that can make changes to Google Analytics
+        # resources.
+        module ActorType
+          # Unknown or unspecified actor type.
+          ACTOR_TYPE_UNSPECIFIED = 0
+
+          # Changes made by the user specified in actor_email.
+          USER = 1
+
+          # Changes made by the Google Analytics system.
+          SYSTEM = 2
+
+          # Changes made by Google Analytics support team staff.
+          SUPPORT = 3
+        end
+
+        # Types of actions that may change a resource.
+        module ActionType
+          # Action type unknown or not specified.
+          ACTION_TYPE_UNSPECIFIED = 0
+
+          # Resource was created in this change.
+          CREATED = 1
+
+          # Resource was updated in this change.
+          UPDATED = 2
+
+          # Resource was deleted in this change.
+          DELETED = 3
+        end
+
+        # Types of resources whose changes may be returned from change history.
+        module ChangeHistoryResourceType
+          # Resource type unknown or not specified.
+          CHANGE_HISTORY_RESOURCE_TYPE_UNSPECIFIED = 0
+
+          # Account resource
+          ACCOUNT = 1
+
+          # Property resource
+          PROPERTY = 2
+
+          # WebDataStream resource
+          WEB_DATA_STREAM = 3
+
+          # AndroidAppDataStream resource
+          ANDROID_APP_DATA_STREAM = 4
+
+          # IosAppDataStream resource
+          IOS_APP_DATA_STREAM = 5
+
+          # FirebaseLink resource
+          FIREBASE_LINK = 6
+
+          # GoogleAdsLink resource
+          GOOGLE_ADS_LINK = 7
         end
       end
     end

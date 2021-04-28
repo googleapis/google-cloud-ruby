@@ -127,8 +127,6 @@ module Google
 
                 default_config.rpcs.update_ios_app_data_stream.timeout = 60.0
 
-                default_config.rpcs.create_ios_app_data_stream.timeout = 60.0
-
                 default_config.rpcs.list_ios_app_data_streams.timeout = 60.0
 
                 default_config.rpcs.get_android_app_data_stream.timeout = 60.0
@@ -136,8 +134,6 @@ module Google
                 default_config.rpcs.delete_android_app_data_stream.timeout = 60.0
 
                 default_config.rpcs.update_android_app_data_stream.timeout = 60.0
-
-                default_config.rpcs.create_android_app_data_stream.timeout = 60.0
 
                 default_config.rpcs.list_android_app_data_streams.timeout = 60.0
 
@@ -929,10 +925,10 @@ module Google
             #     Example: "properties/1000"
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::Property]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [::Google::Protobuf::Empty]
+            # @return [::Google::Analytics::Admin::V1alpha::Property]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
@@ -2341,83 +2337,6 @@ module Google
             end
 
             ##
-            # Creates an iOS app stream with the specified location and attributes.
-            #
-            # Note that an iOS app stream must be linked to a Firebase app to receive
-            # traffic.
-            #
-            # To create a working app stream, make sure your property is linked to a
-            # Firebase project. Then, use the Firebase API to create a Firebase app,
-            # which will also create an appropriate data stream in Analytics (may take up
-            # to 24 hours).
-            #
-            # @overload create_ios_app_data_stream(request, options = nil)
-            #   Pass arguments to `create_ios_app_data_stream` via a request object, either of type
-            #   {::Google::Analytics::Admin::V1alpha::CreateIosAppDataStreamRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Analytics::Admin::V1alpha::CreateIosAppDataStreamRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload create_ios_app_data_stream(ios_app_data_stream: nil, parent: nil)
-            #   Pass arguments to `create_ios_app_data_stream` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param ios_app_data_stream [::Google::Analytics::Admin::V1alpha::IosAppDataStream, ::Hash]
-            #     Required. The iOS app data stream to create.
-            #   @param parent [::String]
-            #     Required. The parent resource where this ios app data stream will be created.
-            #     Format: properties/123
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Analytics::Admin::V1alpha::IosAppDataStream]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Google::Analytics::Admin::V1alpha::IosAppDataStream]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            def create_ios_app_data_stream request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateIosAppDataStreamRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.create_ios_app_data_stream.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {
-                "parent" => request.parent
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.create_ios_app_data_stream.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.create_ios_app_data_stream.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @analytics_admin_service_stub.call_rpc :create_ios_app_data_stream, request, options: options do |response, operation|
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
             # Returns child iOS app data streams under the specified parent property.
             #
             # iOS app data streams will be excluded if the caller does not have access.
@@ -2698,83 +2617,6 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :update_android_app_data_stream, request, options: options do |response, operation|
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
-            # Creates an Android app stream with the specified location and attributes.
-            #
-            # Note that an Android app stream must be linked to a Firebase app to receive
-            # traffic.
-            #
-            # To create a working app stream, make sure your property is linked to a
-            # Firebase project. Then, use the Firebase API to create a Firebase app,
-            # which will also create an appropriate data stream in Analytics (may take up
-            # to 24 hours).
-            #
-            # @overload create_android_app_data_stream(request, options = nil)
-            #   Pass arguments to `create_android_app_data_stream` via a request object, either of type
-            #   {::Google::Analytics::Admin::V1alpha::CreateAndroidAppDataStreamRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Analytics::Admin::V1alpha::CreateAndroidAppDataStreamRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload create_android_app_data_stream(android_app_data_stream: nil, parent: nil)
-            #   Pass arguments to `create_android_app_data_stream` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param android_app_data_stream [::Google::Analytics::Admin::V1alpha::AndroidAppDataStream, ::Hash]
-            #     Required. The android app stream to create.
-            #   @param parent [::String]
-            #     Required. The parent resource where this android app data stream will be created.
-            #     Format: properties/123
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Analytics::Admin::V1alpha::AndroidAppDataStream]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Google::Analytics::Admin::V1alpha::AndroidAppDataStream]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            def create_android_app_data_stream request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateAndroidAppDataStreamRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.create_android_app_data_stream.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {
-                "parent" => request.parent
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.create_android_app_data_stream.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.create_android_app_data_stream.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @analytics_admin_service_stub.call_rpc :create_android_app_data_stream, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -3717,6 +3559,99 @@ module Google
             end
 
             ##
+            # Searches through all changes to an account or its children given the
+            # specified set of filters.
+            #
+            # @overload search_change_history_events(request, options = nil)
+            #   Pass arguments to `search_change_history_events` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload search_change_history_events(account: nil, property: nil, resource_type: nil, action: nil, actor_email: nil, earliest_change_time: nil, latest_change_time: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `search_change_history_events` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param account [::String]
+            #     Required. The account resource for which to return change history resources.
+            #   @param property [::String]
+            #     Optional. Resource name for a child property. If set, only return changes
+            #     made to this property or its child resources.
+            #   @param resource_type [::Array<::Google::Analytics::Admin::V1alpha::ChangeHistoryResourceType>]
+            #     Optional. If set, only return changes if they are for a resource that matches at
+            #     least one of these types.
+            #   @param action [::Array<::Google::Analytics::Admin::V1alpha::ActionType>]
+            #     Optional. If set, only return changes that match one or more of these types of
+            #     actions.
+            #   @param actor_email [::Array<::String>]
+            #     Optional. If set, only return changes if they are made by a user in this list.
+            #   @param earliest_change_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Optional. If set, only return changes made after this time (inclusive).
+            #   @param latest_change_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Optional. If set, only return changes made before this time (inclusive).
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of ChangeHistoryEvent items to return.
+            #     The service may return fewer than this value, even if there are additional
+            #     pages. If unspecified, at most 50 items will be returned.
+            #     The maximum value is 200 (higher values will be coerced to the maximum).
+            #   @param page_token [::String]
+            #     Optional. A page token, received from a previous `SearchChangeHistoryEvents` call.
+            #     Provide this to retrieve the subsequent page. When paginating, all other
+            #     parameters provided to `SearchChangeHistoryEvents` must match the call that
+            #     provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::ChangeHistoryEvent>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::ChangeHistoryEvent>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def search_change_history_events request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.search_change_history_events.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "account" => request.account
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.search_change_history_events.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.search_change_history_events.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :search_change_history_events, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :search_change_history_events, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the AnalyticsAdminService API.
             #
             # This class represents the configuration for AnalyticsAdminService,
@@ -3998,11 +3933,6 @@ module Google
                 #
                 attr_reader :update_ios_app_data_stream
                 ##
-                # RPC-specific configuration for `create_ios_app_data_stream`
-                # @return [::Gapic::Config::Method]
-                #
-                attr_reader :create_ios_app_data_stream
-                ##
                 # RPC-specific configuration for `list_ios_app_data_streams`
                 # @return [::Gapic::Config::Method]
                 #
@@ -4022,11 +3952,6 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_android_app_data_stream
-                ##
-                # RPC-specific configuration for `create_android_app_data_stream`
-                # @return [::Gapic::Config::Method]
-                #
-                attr_reader :create_android_app_data_stream
                 ##
                 # RPC-specific configuration for `list_android_app_data_streams`
                 # @return [::Gapic::Config::Method]
@@ -4092,6 +4017,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_data_sharing_settings
+                ##
+                # RPC-specific configuration for `search_change_history_events`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :search_change_history_events
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -4153,8 +4083,6 @@ module Google
                   @delete_ios_app_data_stream = ::Gapic::Config::Method.new delete_ios_app_data_stream_config
                   update_ios_app_data_stream_config = parent_rpcs.update_ios_app_data_stream if parent_rpcs.respond_to? :update_ios_app_data_stream
                   @update_ios_app_data_stream = ::Gapic::Config::Method.new update_ios_app_data_stream_config
-                  create_ios_app_data_stream_config = parent_rpcs.create_ios_app_data_stream if parent_rpcs.respond_to? :create_ios_app_data_stream
-                  @create_ios_app_data_stream = ::Gapic::Config::Method.new create_ios_app_data_stream_config
                   list_ios_app_data_streams_config = parent_rpcs.list_ios_app_data_streams if parent_rpcs.respond_to? :list_ios_app_data_streams
                   @list_ios_app_data_streams = ::Gapic::Config::Method.new list_ios_app_data_streams_config
                   get_android_app_data_stream_config = parent_rpcs.get_android_app_data_stream if parent_rpcs.respond_to? :get_android_app_data_stream
@@ -4163,8 +4091,6 @@ module Google
                   @delete_android_app_data_stream = ::Gapic::Config::Method.new delete_android_app_data_stream_config
                   update_android_app_data_stream_config = parent_rpcs.update_android_app_data_stream if parent_rpcs.respond_to? :update_android_app_data_stream
                   @update_android_app_data_stream = ::Gapic::Config::Method.new update_android_app_data_stream_config
-                  create_android_app_data_stream_config = parent_rpcs.create_android_app_data_stream if parent_rpcs.respond_to? :create_android_app_data_stream
-                  @create_android_app_data_stream = ::Gapic::Config::Method.new create_android_app_data_stream_config
                   list_android_app_data_streams_config = parent_rpcs.list_android_app_data_streams if parent_rpcs.respond_to? :list_android_app_data_streams
                   @list_android_app_data_streams = ::Gapic::Config::Method.new list_android_app_data_streams_config
                   get_enhanced_measurement_settings_config = parent_rpcs.get_enhanced_measurement_settings if parent_rpcs.respond_to? :get_enhanced_measurement_settings
@@ -4191,6 +4117,8 @@ module Google
                   @list_google_ads_links = ::Gapic::Config::Method.new list_google_ads_links_config
                   get_data_sharing_settings_config = parent_rpcs.get_data_sharing_settings if parent_rpcs.respond_to? :get_data_sharing_settings
                   @get_data_sharing_settings = ::Gapic::Config::Method.new get_data_sharing_settings_config
+                  search_change_history_events_config = parent_rpcs.search_change_history_events if parent_rpcs.respond_to? :search_change_history_events
+                  @search_change_history_events = ::Gapic::Config::Method.new search_change_history_events_config
 
                   yield self if block_given?
                 end
