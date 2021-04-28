@@ -4,40 +4,50 @@ This document describes how continuous integration is configured for this reposi
 
 ## Overview
 
-Continuous integration refers to the various tests run automatically against the source in this repository under different conditions. These tests can be enumerated in a matrix with the following five dimensions:
+Continuous integration refers to tests that run _automatically_ against the source in this repository under different conditions.
 
-1.  **Test trigger**
+### Test trigger
 
-    Continuous integration runs in response to four types of events:
+Tests can run in response to four types of triggering events:
 
-    * **Presubmit**: Tests may run to validate code in a pull request before it is accepted into the main code base.
-    * **Continuous**: Tests may run when new code is merged into the main branch.
-    * **Nightly**: Tests may run each night on a schedule.
-    * **Manual**: Some tests may be triggered manually.
+* **Presubmit**: Tests may run to validate code in a pull request before it is accepted into the main code base.
+* **Continuous**: Tests may run when new code is merged into the main branch.
+* **Nightly**: Tests may run each night on a schedule.
+* **Manual**: Some tests may be triggered manually.
 
-2.  **Test type**
+### Test matrix
 
-    Several types of tests are defined, to cover different things:
+The full test suite can be conceptualized as a matrix across four dimensions: test type, test platform, Ruby version, and target gem.
+
+1.  **Test type**
+
+    Several types of tests are defined, to validate different concerns:
 
     * **Unit tests**: Small, fast tests that check the code itself.
     * **Rubocop test**: The [Rubocop](https://rubocop.org/) style checker and linter.
     * **Build test**: Runs a build of the gem.
     * **Yardoc test**: Runs the [YARD](https://yardoc.org/) documentation generation.
     * **Linkinator test**: Runs the [Linkinator](https://github.com/JustinBeckwith/linkinator) tool to find broken documentation links.
-    * **Acceptance tests**: A small number of slower tests for a client that runs against the actual backend service.
+    * **Acceptance tests**: A small number of slower tests for a client that runs against the actual backend service. (i.e. similar to integration tests)
     * **Sample tests**: Tests of code samples, usually run against the actual backend service.
 
-3.  **OS and architecture platform**
+    Note: the repo also has a directory of integration tests, but they are not currently run by the CI system.
 
-    We support several operating systems: Linux, MacOS, and Windows, mostly on the 64-bit Intel architecture, but this is being extended to include ARM. Some tests are run against a limited subset of this matrix, while others cover a broader set.
+2.  **OS and architecture platform**
+
+    We test against several operating systems: Linux (Ubuntu), MacOS Big Sur, and Windows 10. These currently run on the 64-bit Intel architecture, but we may extend this to include ARM in the future.
 
 4.  **Ruby version**
 
-    Tests may run against one or multiple Ruby versions. We generally support four Ruby versions at any given time, but we may run some tests against only a subset of those.
+    We generally support four minor Ruby versions at any given time. (These are Ruby 2.5, 2.6, 2.7, and 3.0 at the time of this writing.)
 
-5.  **Test target**
+5.  **Target library**
 
-    Google-cloud-ruby is a "monorepo", meaning it includes the source for multiple (and indeed, a large number of) individual libraries, each with its own test suite. In some cases, we'll run tests for all libraries, but in other cases we'll choose a subset of libraries based on considerations such as what code has "changed" in a pull request or commit.
+    Google-cloud-ruby is a "monorepo", meaning it includes the source for multiple (and indeed, a large number of) individual libraries, each with its own test suite.
+
+It is generally not feasible to run the entire matrix of tests at any one time. In most cases, we'll select a strategic subset of the matrix. For example, for presubmit and continuous tests, we normally do not test every target library, but select only those whose code as "changed" in a given pull request or commit. Similarly, we often limit the Ruby version coverage, sometimes testing only the oldest and newest supported versions, or even testing only the single newest version, if we believe that other tests will give adequate coverage to other versions. The CI configuration specifies exactly which tests will run under which circumstances, and this document will describe the setup below.
+
+### Test runner
 
 We use two different CI systems to run tests: **GitHub Actions**, a GitHub-provided CI system closely integrated into GitHub's development tooling and ecosystem, and **Kokoro**, an internal Google system. In general, the latter is used for tests that require or access security-sensitive data, notably acceptance tests that use real credentials to hit Google Cloud backends, while the former is used for all other tests.
 
@@ -45,12 +55,12 @@ Finally, tests may be run locally using Ruby tools. We'll discuss the Ruby tools
 
 ## Local invocation and scripts
 
-The "command line front-end" for the CI system is a [Toys](https://github.com/dazuma/toys) script that knows how to kick off the different kinds of tests provided by each library. (The actual implementation of each test may be a combination of rake tasks and other tools.) The tool:
+The "command line front-end" for the CI system is a [Toys](https://github.com/dazuma/toys) script that knows how to kick off the different kinds of tests provided by each library. (The actual implementation of each test may be a combination of rake tasks and other tools.) The command line script:
 
 * Selects _target libraries_ to test, based on either command line arguments, the current directory, or an analysis of changes.
 * Selects _test types_ to run based on command line arguments.
 
-The tool is written in Ruby and runs on the current Ruby version and OS architecture. It performs the selected tests in the specified two-dimensional test matrix, logs the output, and prints a summary of failed tests at the end. The implementation is in [.toys/ci.rb](.toys/ci.rb).
+The tool is written in Ruby and runs on the current Ruby version and OS architecture. It performs the selected tests in the specified two-dimensional test matrix of target libraries and test types, logs the output, and prints a summary of failed tests at the end. The implementation is in [.toys/ci.rb](.toys/ci.rb).
 
 ### Running the tool locally
 
@@ -78,11 +88,11 @@ If you pass `--all-tasks`, you can selectively _disable_ individual tests by usi
 
 #### Selecting libraries
 
-By default, if you run `toys ci` in the repo root directory, it will analyze local changes since the last commit (i.e. git status) and run tests for the list of libraries associated with those changed files. This might be the empty list if there are no local changes, or the local changes are not associated with any particular gem.
+By default, if you run `toys ci` in the repo root directory, it will analyze local changes since the last commit (i.e. git status) and run tests for the list of libraries associated with those changed files. This might be the empty list if there are no local changes, or if the local changes are not associated with any particular gem.
 
 You can also provide command line arguments to control the set of libraries to test. For example:
 
-* If you set `--base=<REF>`, the changes between the given commit and `HEAD` will be analyzed. In general, you need to provide a SHA or a branch or tag name. Additionally, `--base=HEAD^` is supported, as it's a common case to test changes since the previous commit, but no other "navigation" refs are supported. (You may also set `--head=<REF>`, but this will check out a new `HEAD` and may put your local clone in a weird state, so use with caution.)
+* If you set `--base=<REF>`, the changes between the given commit and `HEAD` will be analyzed. In general, you need to provide a SHA or a branch or tag name. Additionally, `--base=HEAD^` is supported, as it's a common case to test changes since the previous commit, but no other "navigation" refs are supported. (You may also set `--head=<REF>`, but this will check out a new `HEAD` and may put your local clone in a grafted state, so use with caution.)
 * You can set `--gems=<NAMES>` to a comma-delimited list of gem names, to ignore changes and just test specific gems.
 * You can set the `--all-gems` flag to test all gems. Use this with caution as it can take a long time to iterate over all gems.
 * If you set `--max-gem-count=<NUM>`, it will place a limit on the number of gems the tool will test. If more than the given number of gems are selected (perhaps because changes have been made across many gem directories, or because you provided `--all-gems`), then the tool will bail, print a warning, and run _no tests_. The test _will not fail_ in this case.
@@ -94,9 +104,9 @@ Alternatively, if you run `toys ci` from within a particular library's directory
 A few additional flags of note:
 
 * Normally, a `bundle install` is run implicitly before the tests in each gem directory. You can disable this by passing `--no-bundle`. You can run a `bundle update` instead by passing `--bundle-update`.
-* It's possible to install or update the bundle without actually performing any tests by passing `--bundle` or `--bundle-update`. For example, you can update all bundles for all gems using `toys ci --all-gems --bundle-update`.
+* It's possible to install or update the bundle without actually performing any tests by passing `--bundle` or `--bundle-update`, and not providing any other test selection flag. For example, you can update the bundles for all gems using `toys ci --all-gems --bundle-update`.
 * If you run acceptance or sample tests, you will need to provide a project ID and credentials. You can do this by setting the `GOOGLE_CLOUD_PROJECT` and `GOOGLE_APPLICATION_CREDENTIALS` environment variables, or you can set the `--project=` and `--keyfile=` flags.
-* Get online help by passing `--help`.
+* Get online help by passing `--help` (i.e. `toys ci --help`).
 * You can pass `--verbose` (or `-v`) to turn on verbose logging.
 
 There are also a few other flags that are used by GitHub Actions and Kokoro to configure their jobs, and generally shouldn't be set locally. These include `--github-event-name=`, `--github-event-payload=`, and `--load-kokoro-context`.
@@ -107,7 +117,7 @@ This section describes the automated CI runs. First we'll provide an overview of
 
 ### Choosing tests
 
-Not all tests run in every circumstance. Which tests actually run depends on how the tests were triggered, among other concerns. For example, we've seen how the tool can analyze changes and run tests only for modified libraries. Here we'll cover which tests actually run under what circumstance. (The following sections on configuration will document where these decisions are implemented so they can be changed.)
+Not all tests run in every circumstance. Which tests actually run depends on how the tests were triggered, among other concerns. For example, we've seen how the tool can analyze changes and run tests only for modified libraries. Here we'll cover which tests actually run under what circumstance. (Later, we'll provide more details on configuration, documenting where these decisions are implemented so they can be changed.)
 
 #### Presubmit tests
 
@@ -133,7 +143,7 @@ The only real difference between the matrix covered by presubmit and continuous 
 
 Nightly tests run overnight on a cron, and are intended to run only once per day. Thus, we allow for a larger matrix of tests, and longer run times.
 
-* All test types are run, except samples-master. (For nightly tests, we run sample tests against the latest released libraries, not the current code.)
+* All test types are run, except samples-master. (Nightly tests run sample tests against the latest released libraries, not the current code.)
 * Nightly tests do not analyze changes, but run tests for _all_ libraries. This is how we get regular coverage of all libraries, not just those seeing active development. (`--max-gem-count` is not set.)
 * Ruby and OS versions are identical to continuous tests. All tests are run against Linux and the latest version of Ruby. Additionally, unit tests (and only unit tests) are run against Linux and _all_ four supported minor releases of Ruby, _and_ are run against Windows and MacOS against the latest version of Ruby. Finally, acceptance and sample tests are run on both the oldest and newest versions of Ruby (on Linux).
 
@@ -173,7 +183,7 @@ An earlier version of this test infrastructure also ran Kokoro tests in Windows 
 
 Previously, we also created separate Kokoro jobs _per library_ in some cases. This would allow us to massively parallelize those runs, but it also meant maintaining large (and growing) numbers of Kokoro configs, not to mention hammering Kokoro's infrastructure every time we ran those jobs. At this time, we are trying to avoid per-library Kokoro configs, but that does imply a limit on the size of our Kokoro jobs to prevent them from taking too long to run.
 
-Currently, we have configured a 200-minute time limit on Kokoro runs. As of May 2021, most runs (even nightly runs) are well under an hour, so this should not be a significant issue for the time being, but if it does become an issue, the time limit is configured is in the _internal_ Kokoro configs (in the root `common.cfg` for this repo.)
+Currently, we have configured a 200-minute time limit on Kokoro runs. As of May 2021, most runs (even nightly runs) are well under an hour, so this should not be a significant issue for the time being, but if it does become an issue, the time limit is configured is in the _internal_ Kokoro configs in Google's internal source control (specifically in the root `common.cfg` for this repo.)
 
 ### GitHub Actions configuration
 
