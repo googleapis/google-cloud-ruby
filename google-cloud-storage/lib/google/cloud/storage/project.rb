@@ -611,11 +611,11 @@ module Google
         #     scopes = ["https://www.googleapis.com/auth/iam"]
         #     iam_client.authorization = Google::Auth.get_application_default scopes
         #
-        #     request = {
-        #       "payload": string_to_sign,
-        #     }
+        #     request = Google::Apis::IamcredentialsV1::SignBlobRequest.new(
+        #       payload: string_to_sign
+        #     )
         #     resource = "projects/-/serviceAccounts/#{issuer}"
-        #     response = iam_client.sign_service_account_blob resource, request, {}
+        #     response = iam_client.sign_service_account_blob resource, request
         #     response.signed_blob
         #   end
         #
