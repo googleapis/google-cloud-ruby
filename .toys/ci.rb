@@ -40,7 +40,6 @@ flag :gems, "--gems=NAMES" do |f|
   f.desc "Test the given gems (comma-delimited) instead of analyzing changes."
 end
 flag :all_gems, "--all-gems[=FILES]" do |f|
-  f.accept Array
   f.desc "Test all gems, or all that include at least one of the given files (comma-delimited)."
 end
 flag :project, "--project=NAME" do |f|
@@ -153,12 +152,14 @@ end
 
 def all_gem_dirs which_files
   dirs = Dir.glob("*/*.gemspec").map { |file| File.dirname file }
-  if which_files == true
+  if which_files == true || which_files == ""
     puts "Running for all gems", :bold
   else
     puts "Running for all gems with the following files: #{which_files}", :bold
     dirs.delete_if do |dir|
-      which_files.all? { |name| !File.exist? File.join(dir, name) }
+      which_files.split(",").all? do |name|
+        !File.exist? File.join(dir, name)
+      end
     end
   end
   filter_gem_dirs dirs

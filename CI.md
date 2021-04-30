@@ -111,6 +111,26 @@ A few additional flags of note:
 
 There are also a few other flags that are used by GitHub Actions and Kokoro to configure their jobs, and generally shouldn't be set locally. These include `--github-event-name=`, `--github-event-payload=`, and `--load-kokoro-context`.
 
+#### Examples
+
+To run unit tests for libraries with uncommitted changes:
+
+    toys ci --test
+
+To run unit and rubocop tests for _all_ libraries:
+
+    toys ci --test --rubocop --all-gems
+
+To run acceptance tests for libraries that changed since a given commit SHA, and provide needed credentials:
+
+    toys ci --acceptance --project=my-project --keyfile=/path/to/my/keyfile.json --base=9fbcc35
+
+To update the bundle and run all tests except acceptance and samples, for a specific library:
+
+    toys ci --bundle-update --test --rubocop --build --yard --linkinator --gems=google-cloud-pubsub
+    # or...
+    cd google-cloud-pubsub && toys ci --bundle-update --test --rubocop --build --yard --linkinator
+
 ## CI configuration
 
 This section describes the automated CI runs. First we'll provide an overview of which tests will run in which circumstances. We'll then cover the Kokoro configuration that runs the acceptance and sample tests, and the GitHub Actions configuration that runs everything else.
@@ -148,26 +168,6 @@ Nightly tests run overnight on a cron, and are intended to run only once per day
 * Ruby and OS versions are identical to continuous tests. All tests are run against Linux and the latest version of Ruby. Additionally, unit tests (and only unit tests) are run against Linux and _all_ four supported minor releases of Ruby, _and_ are run against Windows and MacOS against the latest version of Ruby. Finally, acceptance and sample tests are run on both the oldest and newest versions of Ruby (on Linux).
 
 Thus, the difference between nightly and continuous is that: continuous runs samples-master whereas nightly runs samples-latest, and continuous analyzes the changes in the given commit whereas nightly tests all libraries.
-
-#### Examples
-
-To run unit tests for libraries with uncommitted changes:
-
-    toys ci --test
-
-To run unit and rubocop tests for _all_ libraries:
-
-    toys ci --test --rubocop --all-gems
-
-To run acceptance tests for libraries that changed since a given commit SHA, and provide needed credentials:
-
-    toys ci --acceptance --project=my-project --keyfile=/path/to/my/keyfile.json --base=9fbcc35
-
-To update the bundle and run all tests except acceptance and samples, for a specific library:
-
-    toys ci --bundle-update --test --rubocop --build --yard --linkinator --gems=google-cloud-pubsub
-    # or...
-    cd google-cloud-pubsub && toys ci --bundle-update --test --rubocop --build --yard --linkinator
 
 ### Kokoro configuration
 
