@@ -602,7 +602,7 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
 
   def test_delete_property
     # Create GRPC objects.
-    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_response = ::Google::Analytics::Admin::V1alpha::Property.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1809,66 +1809,6 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     end
   end
 
-  def test_create_ios_app_data_stream
-    # Create GRPC objects.
-    grpc_response = ::Google::Analytics::Admin::V1alpha::IosAppDataStream.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    ios_app_data_stream = {}
-    parent = "hello world"
-
-    create_ios_app_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :create_ios_app_data_stream, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateIosAppDataStreamRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::IosAppDataStream), request["ios_app_data_stream"]
-      assert_equal "hello world", request["parent"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, create_ios_app_data_stream_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.create_ios_app_data_stream({ ios_app_data_stream: ios_app_data_stream, parent: parent }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.create_ios_app_data_stream ios_app_data_stream: ios_app_data_stream, parent: parent do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.create_ios_app_data_stream ::Google::Analytics::Admin::V1alpha::CreateIosAppDataStreamRequest.new(ios_app_data_stream: ios_app_data_stream, parent: parent) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.create_ios_app_data_stream({ ios_app_data_stream: ios_app_data_stream, parent: parent }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.create_ios_app_data_stream(::Google::Analytics::Admin::V1alpha::CreateIosAppDataStreamRequest.new(ios_app_data_stream: ios_app_data_stream, parent: parent), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, create_ios_app_data_stream_client_stub.call_rpc_count
-    end
-  end
-
   def test_list_ios_app_data_streams
     # Create GRPC objects.
     grpc_response = ::Google::Analytics::Admin::V1alpha::ListIosAppDataStreamsResponse.new
@@ -2109,66 +2049,6 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
 
       # Verify method calls
       assert_equal 5, update_android_app_data_stream_client_stub.call_rpc_count
-    end
-  end
-
-  def test_create_android_app_data_stream
-    # Create GRPC objects.
-    grpc_response = ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    android_app_data_stream = {}
-    parent = "hello world"
-
-    create_android_app_data_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :create_android_app_data_stream, name
-      assert_kind_of ::Google::Analytics::Admin::V1alpha::CreateAndroidAppDataStreamRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream), request["android_app_data_stream"]
-      assert_equal "hello world", request["parent"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, create_android_app_data_stream_client_stub do
-      # Create client
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.create_android_app_data_stream({ android_app_data_stream: android_app_data_stream, parent: parent }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.create_android_app_data_stream android_app_data_stream: android_app_data_stream, parent: parent do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.create_android_app_data_stream ::Google::Analytics::Admin::V1alpha::CreateAndroidAppDataStreamRequest.new(android_app_data_stream: android_app_data_stream, parent: parent) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.create_android_app_data_stream({ android_app_data_stream: android_app_data_stream, parent: parent }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.create_android_app_data_stream(::Google::Analytics::Admin::V1alpha::CreateAndroidAppDataStreamRequest.new(android_app_data_stream: android_app_data_stream, parent: parent), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, create_android_app_data_stream_client_stub.call_rpc_count
     end
   end
 
@@ -2960,6 +2840,85 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
 
       # Verify method calls
       assert_equal 5, get_data_sharing_settings_client_stub.call_rpc_count
+    end
+  end
+
+  def test_search_change_history_events
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    account = "hello world"
+    property = "hello world"
+    resource_type = [:CHANGE_HISTORY_RESOURCE_TYPE_UNSPECIFIED]
+    action = [:ACTION_TYPE_UNSPECIFIED]
+    actor_email = ["hello world"]
+    earliest_change_time = {}
+    latest_change_time = {}
+    page_size = 42
+    page_token = "hello world"
+
+    search_change_history_events_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :search_change_history_events, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsRequest, request
+      assert_equal "hello world", request["account"]
+      assert_equal "hello world", request["property"]
+      assert_equal [:CHANGE_HISTORY_RESOURCE_TYPE_UNSPECIFIED], request["resource_type"]
+      assert_equal [:ACTION_TYPE_UNSPECIFIED], request["action"]
+      assert_equal ["hello world"], request["actor_email"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["earliest_change_time"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["latest_change_time"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, search_change_history_events_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.search_change_history_events({ account: account, property: property, resource_type: resource_type, action: action, actor_email: actor_email, earliest_change_time: earliest_change_time, latest_change_time: latest_change_time, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.search_change_history_events account: account, property: property, resource_type: resource_type, action: action, actor_email: actor_email, earliest_change_time: earliest_change_time, latest_change_time: latest_change_time, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.search_change_history_events ::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsRequest.new(account: account, property: property, resource_type: resource_type, action: action, actor_email: actor_email, earliest_change_time: earliest_change_time, latest_change_time: latest_change_time, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.search_change_history_events({ account: account, property: property, resource_type: resource_type, action: action, actor_email: actor_email, earliest_change_time: earliest_change_time, latest_change_time: latest_change_time, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.search_change_history_events(::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsRequest.new(account: account, property: property, resource_type: resource_type, action: action, actor_email: actor_email, earliest_change_time: earliest_change_time, latest_change_time: latest_change_time, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, search_change_history_events_client_stub.call_rpc_count
     end
   end
 

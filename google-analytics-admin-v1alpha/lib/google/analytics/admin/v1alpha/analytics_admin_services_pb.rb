@@ -81,7 +81,7 @@ module Google
             # https://support.google.com/analytics/answer/6154772
             #
             # Returns an error if the target is not found, or is not an GA4 Property.
-            rpc :DeleteProperty, ::Google::Analytics::Admin::V1alpha::DeletePropertyRequest, ::Google::Protobuf::Empty
+            rpc :DeleteProperty, ::Google::Analytics::Admin::V1alpha::DeletePropertyRequest, ::Google::Analytics::Admin::V1alpha::Property
             # Updates a property.
             rpc :UpdateProperty, ::Google::Analytics::Admin::V1alpha::UpdatePropertyRequest, ::Google::Analytics::Admin::V1alpha::Property
             # Gets information about a user's link to an account or property.
@@ -138,16 +138,6 @@ module Google
             rpc :DeleteIosAppDataStream, ::Google::Analytics::Admin::V1alpha::DeleteIosAppDataStreamRequest, ::Google::Protobuf::Empty
             # Updates an iOS app stream on a property.
             rpc :UpdateIosAppDataStream, ::Google::Analytics::Admin::V1alpha::UpdateIosAppDataStreamRequest, ::Google::Analytics::Admin::V1alpha::IosAppDataStream
-            # Creates an iOS app stream with the specified location and attributes.
-            #
-            # Note that an iOS app stream must be linked to a Firebase app to receive
-            # traffic.
-            #
-            # To create a working app stream, make sure your property is linked to a
-            # Firebase project. Then, use the Firebase API to create a Firebase app,
-            # which will also create an appropriate data stream in Analytics (may take up
-            # to 24 hours).
-            rpc :CreateIosAppDataStream, ::Google::Analytics::Admin::V1alpha::CreateIosAppDataStreamRequest, ::Google::Analytics::Admin::V1alpha::IosAppDataStream
             # Returns child iOS app data streams under the specified parent property.
             #
             # iOS app data streams will be excluded if the caller does not have access.
@@ -159,16 +149,6 @@ module Google
             rpc :DeleteAndroidAppDataStream, ::Google::Analytics::Admin::V1alpha::DeleteAndroidAppDataStreamRequest, ::Google::Protobuf::Empty
             # Updates an android app stream on a property.
             rpc :UpdateAndroidAppDataStream, ::Google::Analytics::Admin::V1alpha::UpdateAndroidAppDataStreamRequest, ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream
-            # Creates an Android app stream with the specified location and attributes.
-            #
-            # Note that an Android app stream must be linked to a Firebase app to receive
-            # traffic.
-            #
-            # To create a working app stream, make sure your property is linked to a
-            # Firebase project. Then, use the Firebase API to create a Firebase app,
-            # which will also create an appropriate data stream in Analytics (may take up
-            # to 24 hours).
-            rpc :CreateAndroidAppDataStream, ::Google::Analytics::Admin::V1alpha::CreateAndroidAppDataStreamRequest, ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream
             # Returns child android app streams under the specified parent property.
             #
             # Android app streams will be excluded if the caller does not have access.
@@ -207,6 +187,9 @@ module Google
             # Get data sharing settings on an account.
             # Data sharing settings are singletons.
             rpc :GetDataSharingSettings, ::Google::Analytics::Admin::V1alpha::GetDataSharingSettingsRequest, ::Google::Analytics::Admin::V1alpha::DataSharingSettings
+            # Searches through all changes to an account or its children given the
+            # specified set of filters.
+            rpc :SearchChangeHistoryEvents, ::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsRequest, ::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsResponse
           end
 
           Stub = Service.rpc_stub_class
