@@ -1,5 +1,12 @@
 # Release History
 
+### 2.6.0 / 2021-05-03
+
+#### Features
+
+* Add support for Backup restore to different Instance
+  * Add instance to Backup#restore
+
 ### 2.5.0 / 2021-04-20
 
 #### Features
