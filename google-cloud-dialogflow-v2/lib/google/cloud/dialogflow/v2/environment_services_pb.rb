@@ -35,6 +35,27 @@ module Google
 
             # Returns the list of all non-draft environments of the specified agent.
             rpc :ListEnvironments, ::Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest, ::Google::Cloud::Dialogflow::V2::ListEnvironmentsResponse
+            # Retrieves the specified agent environment.
+            rpc :GetEnvironment, ::Google::Cloud::Dialogflow::V2::GetEnvironmentRequest, ::Google::Cloud::Dialogflow::V2::Environment
+            # Creates an agent environment.
+            rpc :CreateEnvironment, ::Google::Cloud::Dialogflow::V2::CreateEnvironmentRequest, ::Google::Cloud::Dialogflow::V2::Environment
+            # Updates the specified agent environment.
+            #
+            # This method allows you to deploy new agent versions into the environment.
+            # When an environment is pointed to a new agent version by setting
+            # `environment.agent_version`, the environment is temporarily set to the
+            # `LOADING` state. During that time, the environment keeps on serving the
+            # previous version of the agent. After the new agent version is done loading,
+            # the environment is set back to the `RUNNING` state.
+            # You can use "-" as Environment ID in environment name to update version
+            # in "draft" environment. WARNING: this will negate all recent changes to
+            # draft and can't be undone. You may want to save the draft to a version
+            # before calling this function.
+            rpc :UpdateEnvironment, ::Google::Cloud::Dialogflow::V2::UpdateEnvironmentRequest, ::Google::Cloud::Dialogflow::V2::Environment
+            # Deletes the specified agent environment.
+            rpc :DeleteEnvironment, ::Google::Cloud::Dialogflow::V2::DeleteEnvironmentRequest, ::Google::Protobuf::Empty
+            # Gets the history of the specified environment.
+            rpc :GetEnvironmentHistory, ::Google::Cloud::Dialogflow::V2::GetEnvironmentHistoryRequest, ::Google::Cloud::Dialogflow::V2::EnvironmentHistory
           end
 
           Stub = Service.rpc_stub_class

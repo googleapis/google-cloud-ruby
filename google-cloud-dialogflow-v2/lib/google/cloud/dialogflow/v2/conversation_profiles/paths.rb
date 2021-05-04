@@ -27,15 +27,56 @@ module Google
             ##
             # Create a fully-qualified Agent resource string.
             #
-            # The resource will be in the following format:
+            # @overload agent_path(project:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/agent`
+            #   `projects/{project}/agent`
             #
-            # @param project [String]
+            #   @param project [String]
+            #
+            # @overload agent_path(project:, location:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/agent`
+            #
+            #   @param project [String]
+            #   @param location [String]
             #
             # @return [::String]
-            def agent_path project:
-              "projects/#{project}/agent"
+            def agent_path **args
+              resources = {
+                "project" => (proc do |project:|
+                  "projects/#{project}/agent"
+                end),
+                "location:project" => (proc do |project:, location:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/agent"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified ConversationModel resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/conversationModels/{conversation_model}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param conversation_model [String]
+            #
+            # @return [::String]
+            def conversation_model_path project:, location:, conversation_model:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/conversationModels/#{conversation_model}"
             end
 
             ##

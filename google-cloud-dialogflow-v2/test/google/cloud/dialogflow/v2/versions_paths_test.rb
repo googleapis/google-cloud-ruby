@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,13 +20,13 @@ require "helper"
 
 require "gapic/grpc/service_stub"
 
-require "google/cloud/dialogflow/v2/entity_types"
+require "google/cloud/dialogflow/v2/versions"
 
-class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientPathsTest < Minitest::Test
+class ::Google::Cloud::Dialogflow::V2::Versions::ClientPathsTest < Minitest::Test
   def test_agent_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::Versions::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -38,18 +38,18 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientPathsTest < Minitest::
     end
   end
 
-  def test_entity_type_path
+  def test_version_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::Versions::Client.new do |config|
         config.credentials = grpc_channel
       end
 
-      path = client.entity_type_path project: "value0", entity_type: "value1"
-      assert_equal "projects/value0/agent/entityTypes/value1", path
+      path = client.version_path project: "value0", version: "value1"
+      assert_equal "projects/value0/agent/versions/value1", path
 
-      path = client.entity_type_path project: "value0", location: "value1", entity_type: "value2"
-      assert_equal "projects/value0/locations/value1/agent/entityTypes/value2", path
+      path = client.version_path project: "value0", location: "value1", version: "value2"
+      assert_equal "projects/value0/locations/value1/agent/versions/value2", path
     end
   end
 end

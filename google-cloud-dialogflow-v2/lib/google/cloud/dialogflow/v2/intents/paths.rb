@@ -27,15 +27,37 @@ module Google
             ##
             # Create a fully-qualified Agent resource string.
             #
-            # The resource will be in the following format:
+            # @overload agent_path(project:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/agent`
+            #   `projects/{project}/agent`
             #
-            # @param project [String]
+            #   @param project [String]
+            #
+            # @overload agent_path(project:, location:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/agent`
+            #
+            #   @param project [String]
+            #   @param location [String]
             #
             # @return [::String]
-            def agent_path project:
-              "projects/#{project}/agent"
+            def agent_path **args
+              resources = {
+                "project" => (proc do |project:|
+                  "projects/#{project}/agent"
+                end),
+                "location:project" => (proc do |project:, location:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/agent"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##
@@ -61,6 +83,28 @@ module Google
             #   @param session [String]
             #   @param context [String]
             #
+            # @overload context_path(project:, location:, session:, context:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/agent/sessions/{session}/contexts/{context}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param session [String]
+            #   @param context [String]
+            #
+            # @overload context_path(project:, location:, environment:, user:, session:, context:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param environment [String]
+            #   @param user [String]
+            #   @param session [String]
+            #   @param context [String]
+            #
             # @return [::String]
             def context_path **args
               resources = {
@@ -77,6 +121,22 @@ module Google
                   raise ::ArgumentError, "session cannot contain /" if session.to_s.include? "/"
 
                   "projects/#{project}/agent/environments/#{environment}/users/#{user}/sessions/#{session}/contexts/#{context}"
+                end),
+                "context:location:project:session" => (proc do |project:, location:, session:, context:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/agent/sessions/#{session}/contexts/#{context}"
+                end),
+                "context:environment:location:project:session:user" => (proc do |project:, location:, environment:, user:, session:, context:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "environment cannot contain /" if environment.to_s.include? "/"
+                  raise ::ArgumentError, "user cannot contain /" if user.to_s.include? "/"
+                  raise ::ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/agent/environments/#{environment}/users/#{user}/sessions/#{session}/contexts/#{context}"
                 end)
               }
 
@@ -88,18 +148,42 @@ module Google
             ##
             # Create a fully-qualified Intent resource string.
             #
-            # The resource will be in the following format:
+            # @overload intent_path(project:, intent:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/agent/intents/{intent}`
+            #   `projects/{project}/agent/intents/{intent}`
             #
-            # @param project [String]
-            # @param intent [String]
+            #   @param project [String]
+            #   @param intent [String]
+            #
+            # @overload intent_path(project:, location:, intent:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/agent/intents/{intent}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param intent [String]
             #
             # @return [::String]
-            def intent_path project:, intent:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+            def intent_path **args
+              resources = {
+                "intent:project" => (proc do |project:, intent:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
-              "projects/#{project}/agent/intents/#{intent}"
+                  "projects/#{project}/agent/intents/#{intent}"
+                end),
+                "intent:location:project" => (proc do |project:, location:, intent:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/agent/intents/#{intent}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             extend self

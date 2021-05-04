@@ -24,7 +24,7 @@ module Google
         # Defines the services to connect to incoming Dialogflow conversations.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Optional. The unique identifier of this conversation profile.
+        #     The unique identifier of this conversation profile.
         #     Format: `projects/<Project ID>/locations/<Location
         #     ID>/conversationProfiles/<Conversation Profile ID>`.
         # @!attribute [rw] display_name
@@ -45,6 +45,9 @@ module Google
         # @!attribute [rw] human_agent_handoff_config
         #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentHandoffConfig]
         #     Configuration for connecting to a live agent.
+        #
+        #     Currently, this feature is not general available, please contact Google
+        #     to get access.
         # @!attribute [rw] notification_config
         #   @return [::Google::Cloud::Dialogflow::V2::NotificationConfig]
         #     Configuration for publishing conversation lifecycle events.
@@ -179,6 +182,9 @@ module Google
         # @!attribute [rw] end_user_suggestion_config
         #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionConfig]
         #     Configuration for agent assistance of end user participant.
+        #
+        #     Currently, this feature is not general available, please contact Google
+        #     to get access.
         # @!attribute [rw] message_analysis_config
         #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::MessageAnalysisConfig]
         #     Configuration for message analysis.
@@ -357,7 +363,7 @@ module Google
           # Supported feature: ARTICLE_SUGGESTION, SMART_COMPOSE, SMART_REPLY.
           # @!attribute [rw] model
           #   @return [::String]
-          #     Required. Conversation model resource name. Format: `projects/<Project
+          #     Conversation model resource name. Format: `projects/<Project
           #     ID>/conversationModels/<Model ID>`.
           class ConversationModelConfig
             include ::Google::Protobuf::MessageExts
@@ -370,6 +376,9 @@ module Google
           #     Enable entity extraction in conversation messages on [agent assist
           #     stage](https://cloud.google.com/dialogflow/priv/docs/contact-center/basics#stages).
           #     If unspecified, defaults to false.
+          #
+          #     Currently, this feature is not general available, please contact Google
+          #     to get access.
           # @!attribute [rw] enable_sentiment_analysis
           #   @return [::Boolean]
           #     Enable sentiment analysis in conversation messages on [agent assist
@@ -394,6 +403,9 @@ module Google
 
         # Defines the hand off to a live agent, typically on which external agent
         # service provider to connect to a conversation.
+        #
+        # Currently, this feature is not general available, please contact Google
+        # to get access.
         # @!attribute [rw] live_person_config
         #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentHandoffConfig::LivePersonConfig]
         #     Uses LivePerson (https://www.liveperson.com).

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,8 @@ module Google
   module Cloud
     module Dialogflow
       module V2
-        module Agents
-          # Path helper methods for the Agents API.
+        module Versions
+          # Path helper methods for the Versions API.
           module Paths
             ##
             # Create a fully-qualified Agent resource string.
@@ -61,34 +61,44 @@ module Google
             end
 
             ##
-            # Create a fully-qualified Location resource string.
+            # Create a fully-qualified Version resource string.
             #
-            # The resource will be in the following format:
+            # @overload version_path(project:, version:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}`
+            #   `projects/{project}/agent/versions/{version}`
             #
-            # @param project [String]
-            # @param location [String]
+            #   @param project [String]
+            #   @param version [String]
             #
-            # @return [::String]
-            def location_path project:, location:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-
-              "projects/#{project}/locations/#{location}"
-            end
-
-            ##
-            # Create a fully-qualified Project resource string.
+            # @overload version_path(project:, location:, version:)
+            #   The resource will be in the following format:
             #
-            # The resource will be in the following format:
+            #   `projects/{project}/locations/{location}/agent/versions/{version}`
             #
-            # `projects/{project}`
-            #
-            # @param project [String]
+            #   @param project [String]
+            #   @param location [String]
+            #   @param version [String]
             #
             # @return [::String]
-            def project_path project:
-              "projects/#{project}"
+            def version_path **args
+              resources = {
+                "project:version" => (proc do |project:, version:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/agent/versions/#{version}"
+                end),
+                "location:project:version" => (proc do |project:, location:, version:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/agent/versions/#{version}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             extend self

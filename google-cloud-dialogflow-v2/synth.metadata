@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "3c8bd26b7ed6243772b1ce4f8e206114cbeee42a"
+        "sha": "a1a534a7f40ba71a181ab4ef065cf408e3391dcc"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "c2bdbfa6f7423369da902a5faaa86bfd213b5169",
-        "internalRef": "364696134"
+        "sha": "5efeb79eed444f14cf2cf89516dbf9ece86a4a0c",
+        "internalRef": "371848474"
       }
     }
   ],
@@ -96,6 +96,12 @@
     "lib/google/cloud/dialogflow/v2/environments/client.rb",
     "lib/google/cloud/dialogflow/v2/environments/credentials.rb",
     "lib/google/cloud/dialogflow/v2/environments/paths.rb",
+    "lib/google/cloud/dialogflow/v2/fulfillment_pb.rb",
+    "lib/google/cloud/dialogflow/v2/fulfillment_services_pb.rb",
+    "lib/google/cloud/dialogflow/v2/fulfillments.rb",
+    "lib/google/cloud/dialogflow/v2/fulfillments/client.rb",
+    "lib/google/cloud/dialogflow/v2/fulfillments/credentials.rb",
+    "lib/google/cloud/dialogflow/v2/fulfillments/paths.rb",
     "lib/google/cloud/dialogflow/v2/gcs_pb.rb",
     "lib/google/cloud/dialogflow/v2/human_agent_assistant_event_pb.rb",
     "lib/google/cloud/dialogflow/v2/intent_pb.rb",
@@ -131,6 +137,12 @@
     "lib/google/cloud/dialogflow/v2/sessions/paths.rb",
     "lib/google/cloud/dialogflow/v2/validation_result_pb.rb",
     "lib/google/cloud/dialogflow/v2/version.rb",
+    "lib/google/cloud/dialogflow/v2/version_pb.rb",
+    "lib/google/cloud/dialogflow/v2/version_services_pb.rb",
+    "lib/google/cloud/dialogflow/v2/versions.rb",
+    "lib/google/cloud/dialogflow/v2/versions/client.rb",
+    "lib/google/cloud/dialogflow/v2/versions/credentials.rb",
+    "lib/google/cloud/dialogflow/v2/versions/paths.rb",
     "lib/google/cloud/dialogflow/v2/webhook_pb.rb",
     "proto_docs/README.md",
     "proto_docs/google/api/field_behavior.rb",
@@ -145,6 +157,7 @@
     "proto_docs/google/cloud/dialogflow/v2/document.rb",
     "proto_docs/google/cloud/dialogflow/v2/entity_type.rb",
     "proto_docs/google/cloud/dialogflow/v2/environment.rb",
+    "proto_docs/google/cloud/dialogflow/v2/fulfillment.rb",
     "proto_docs/google/cloud/dialogflow/v2/human_agent_assistant_event.rb",
     "proto_docs/google/cloud/dialogflow/v2/intent.rb",
     "proto_docs/google/cloud/dialogflow/v2/knowledge_base.rb",
@@ -152,6 +165,7 @@
     "proto_docs/google/cloud/dialogflow/v2/session.rb",
     "proto_docs/google/cloud/dialogflow/v2/session_entity_type.rb",
     "proto_docs/google/cloud/dialogflow/v2/validation_result.rb",
+    "proto_docs/google/cloud/dialogflow/v2/version.rb",
     "proto_docs/google/cloud/dialogflow/v2/webhook.rb",
     "proto_docs/google/longrunning/operations.rb",
     "proto_docs/google/protobuf/any.rb",
@@ -181,6 +195,8 @@
     "test/google/cloud/dialogflow/v2/entity_types_test.rb",
     "test/google/cloud/dialogflow/v2/environments_paths_test.rb",
     "test/google/cloud/dialogflow/v2/environments_test.rb",
+    "test/google/cloud/dialogflow/v2/fulfillments_paths_test.rb",
+    "test/google/cloud/dialogflow/v2/fulfillments_test.rb",
     "test/google/cloud/dialogflow/v2/intents_operations_test.rb",
     "test/google/cloud/dialogflow/v2/intents_paths_test.rb",
     "test/google/cloud/dialogflow/v2/intents_test.rb",
@@ -192,6 +208,8 @@
     "test/google/cloud/dialogflow/v2/session_entity_types_test.rb",
     "test/google/cloud/dialogflow/v2/sessions_paths_test.rb",
     "test/google/cloud/dialogflow/v2/sessions_test.rb",
+    "test/google/cloud/dialogflow/v2/versions_paths_test.rb",
+    "test/google/cloud/dialogflow/v2/versions_test.rb",
     "test/helper.rb"
   ]
 }
