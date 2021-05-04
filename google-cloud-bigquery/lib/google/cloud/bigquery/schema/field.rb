@@ -164,6 +164,16 @@ module Google
           end
 
           ##
+          # The policy tag list for the field. Policy tag identifiers are of the form
+          # `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #
+          # @return [Array<String>, nil] The policy tag list for the field, or `nil`.
+          #
+          def policy_tags
+            @gapi.policy_tags&.names&.to_a
+          end
+
+          ##
           # Checks if the type of the field is `STRING`.
           #
           # @return [Boolean] `true` when `STRING`, `false` otherwise.
