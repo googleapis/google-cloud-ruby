@@ -136,6 +136,7 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
     _(schema.field(:name).mode).must_equal "REQUIRED"
     _(schema.field(:name)).must_be :string?
     _(schema.field(:name)).must_be :required?
+    _(schema.field(:name).policy_tags).must_be :nil?
 
     _(schema.field(:age)).must_be_kind_of Google::Cloud::Bigquery::Schema::Field
     _(schema.field(:age).name).must_equal "age"
