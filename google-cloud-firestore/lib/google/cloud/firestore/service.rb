@@ -96,6 +96,15 @@ module Google
           )
         end
 
+        def partition_query parent, structured_query, partition_count, token: nil, max: nil
+          paged_enum = firestore.partition_query parent: parent,
+                                                 structured_query: structured_query,
+                                                 partition_count: partition_count,
+                                                 page_token: token,
+                                                 page_size: max
+          paged_enum.response
+        end
+
         def run_query path, query_grpc, transaction: nil
           run_query_req = {
             parent:           path,
