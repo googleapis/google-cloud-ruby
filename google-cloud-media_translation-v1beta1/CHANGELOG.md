@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2021-05-06
+
+#### ⚠ BREAKING CHANGES
+
+* Remove unsupported alternative_source_language_codes, recognition_result, and detected_source_language_code fields
+
 ### 0.3.0 / 2021-03-08
 
 #### Features
