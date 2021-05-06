@@ -32,6 +32,39 @@ class ::Google::Cloud::Dialogflow::V2::Environments::ClientPathsTest < Minitest:
 
       path = client.agent_path project: "value0"
       assert_equal "projects/value0/agent", path
+
+      path = client.agent_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1/agent", path
+    end
+  end
+
+  def test_environment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.environment_path project: "value0", environment: "value1"
+      assert_equal "projects/value0/agent/environments/value1", path
+
+      path = client.environment_path project: "value0", location: "value1", environment: "value2"
+      assert_equal "projects/value0/locations/value1/agent/environments/value2", path
+    end
+  end
+
+  def test_fulfillment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.fulfillment_path project: "value0"
+      assert_equal "projects/value0/agent/fulfillment", path
+
+      path = client.fulfillment_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1/agent/fulfillment", path
     end
   end
 end

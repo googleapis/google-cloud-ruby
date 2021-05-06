@@ -42,11 +42,9 @@ module Google
         # A typical workflow for customers provide feedback to an answer is:
         #
         # 1. For human agent assistant, customers get suggestion via ListSuggestions
-        #    API. Together with the answers,
-        #    {::Google::Cloud::Dialogflow::V2::AnswerRecord#name AnswerRecord.name} are
-        #    returned to the customers.
-        # 2. The customer uses the
-        # {::Google::Cloud::Dialogflow::V2::AnswerRecord#name AnswerRecord.name} to call the
+        #    API. Together with the answers, {::Google::Cloud::Dialogflow::V2::AnswerRecord#name AnswerRecord.name} are returned to the
+        #    customers.
+        # 2. The customer uses the {::Google::Cloud::Dialogflow::V2::AnswerRecord#name AnswerRecord.name} to call the
         #    [UpdateAnswerRecord][] method to send feedback about a specific answer
         #    that they believe is wrong.
         # @!attribute [rw] name
@@ -57,8 +55,8 @@ module Google
         # @!attribute [rw] answer_feedback
         #   @return [::Google::Cloud::Dialogflow::V2::AnswerFeedback]
         #     Required. The AnswerFeedback for this record. You can set this with
-        #     {::Google::Cloud::Dialogflow::V2::AnswerRecords::Client#update_answer_record AnswerRecords.UpdateAnswerRecord}
-        #     in order to give us feedback about this answer.
+        #     {::Google::Cloud::Dialogflow::V2::AnswerRecords::Client#update_answer_record AnswerRecords.UpdateAnswerRecord} in order to give us feedback about
+        #     this answer.
         # @!attribute [r] agent_assistant_record
         #   @return [::Google::Cloud::Dialogflow::V2::AgentAssistantRecord]
         #     Output only. The record for human agent assistant.
@@ -67,8 +65,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for
-        # {::Google::Cloud::Dialogflow::V2::AnswerRecords::Client#list_answer_records AnswerRecords.ListAnswerRecords}.
+        # Request message for {::Google::Cloud::Dialogflow::V2::AnswerRecords::Client#list_answer_records AnswerRecords.ListAnswerRecords}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project to list all answer records for in reverse
@@ -98,8 +95,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for
-        # {::Google::Cloud::Dialogflow::V2::AnswerRecords::Client#list_answer_records AnswerRecords.ListAnswerRecords}.
+        # Response message for {::Google::Cloud::Dialogflow::V2::AnswerRecords::Client#list_answer_records AnswerRecords.ListAnswerRecords}.
         # @!attribute [rw] answer_records
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::AnswerRecord>]
         #     The list of answer records.
@@ -116,8 +112,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for
-        # {::Google::Cloud::Dialogflow::V2::AnswerRecords::Client#update_answer_record AnswerRecords.UpdateAnswerRecord}.
+        # Request message for {::Google::Cloud::Dialogflow::V2::AnswerRecords::Client#update_answer_record AnswerRecords.UpdateAnswerRecord}.
         # @!attribute [rw] answer_record
         #   @return [::Google::Cloud::Dialogflow::V2::AnswerRecord]
         #     Required. Answer record to update.
@@ -197,9 +192,7 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::AgentAssistantFeedback::DocumentEfficiency]
         #     Optional. Whether or not the suggested document is efficient. For example,
         #     if the document is poorly written, hard to understand, hard to use or
-        #     too long to find useful information,
-        #     {::Google::Cloud::Dialogflow::V2::AgentAssistantFeedback#document_efficiency document_efficiency}
-        #     is
+        #     too long to find useful information, {::Google::Cloud::Dialogflow::V2::AgentAssistantFeedback#document_efficiency document_efficiency} is
         #     {::Google::Cloud::Dialogflow::V2::AgentAssistantFeedback::DocumentEfficiency::INEFFICIENT DocumentEfficiency.INEFFICIENT}.
         class AgentAssistantFeedback
           include ::Google::Protobuf::MessageExts

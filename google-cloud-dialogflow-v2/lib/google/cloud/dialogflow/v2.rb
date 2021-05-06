@@ -27,8 +27,10 @@ require "google/cloud/dialogflow/v2/answer_records"
 require "google/cloud/dialogflow/v2/conversations"
 require "google/cloud/dialogflow/v2/conversation_profiles"
 require "google/cloud/dialogflow/v2/documents"
+require "google/cloud/dialogflow/v2/fulfillments"
 require "google/cloud/dialogflow/v2/environments"
 require "google/cloud/dialogflow/v2/knowledge_bases"
+require "google/cloud/dialogflow/v2/versions"
 require "google/cloud/dialogflow/v2/version"
 
 module Google

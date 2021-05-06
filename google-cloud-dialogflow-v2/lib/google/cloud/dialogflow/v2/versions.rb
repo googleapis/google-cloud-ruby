@@ -22,28 +22,28 @@ require "gapic/config/method"
 
 require "google/cloud/dialogflow/v2/version"
 
-require "google/cloud/dialogflow/v2/answer_records/credentials"
-require "google/cloud/dialogflow/v2/answer_records/paths"
-require "google/cloud/dialogflow/v2/answer_records/client"
+require "google/cloud/dialogflow/v2/versions/credentials"
+require "google/cloud/dialogflow/v2/versions/paths"
+require "google/cloud/dialogflow/v2/versions/client"
 
 module Google
   module Cloud
     module Dialogflow
       module V2
         ##
-        # Service for managing {::Google::Cloud::Dialogflow::V2::AnswerRecord AnswerRecords}.
+        # Service for managing {::Google::Cloud::Dialogflow::V2::Version Versions}.
         #
         # To load this service and instantiate a client:
         #
-        #     require "google/cloud/dialogflow/v2/answer_records"
-        #     client = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new
+        #     require "google/cloud/dialogflow/v2/versions"
+        #     client = ::Google::Cloud::Dialogflow::V2::Versions::Client.new
         #
-        module AnswerRecords
+        module Versions
         end
       end
     end
   end
 end
 
-helper_path = ::File.join __dir__, "answer_records", "helpers.rb"
-require "google/cloud/dialogflow/v2/answer_records/helpers" if ::File.file? helper_path
+helper_path = ::File.join __dir__, "versions", "helpers.rb"
+require "google/cloud/dialogflow/v2/versions/helpers" if ::File.file? helper_path
