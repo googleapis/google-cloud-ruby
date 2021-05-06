@@ -154,6 +154,32 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
     _(row_counts.first).must_equal 1
   end
 
+  describe "priority request options" do
+    it "can execute a DML query" do
+      mock = Minitest::Mock.new
+      statements = [
+        statement_grpc(
+          "UPDATE users SET active = @active",
+          params: Google::Protobuf::Struct.new(fields: { "active" => Google::Protobuf::Value.new(bool_value: true) }),
+          param_types: { "active" => Google::Cloud::Spanner::V1::Type.new(code: :BOOL) }
+        )
+      ]
+      mock.expect :execute_batch_dml, batch_response_grpc(1), [{
+        session: session_grpc.name, transaction: tx_selector, statements: statements,
+        seqno: 1, request_options: { priority: :PRIORITY_MEDIUM}
+      }, default_options]
+      session.service.mocked_service = mock
+
+      row_counts = transaction.batch_update request_options: { priority: :PRIORITY_MEDIUM} do |b|
+        b.batch_update "UPDATE users SET active = @active", params: { active: true }
+      end
+
+      mock.verify
+
+      _(row_counts.count).must_equal 1
+    end
+  end
+
   def statement_grpc sql, params: nil, param_types: {}
     Google::Cloud::Spanner::V1::ExecuteBatchDmlRequest::Statement.new \
       sql: sql, params: params, param_types: param_types

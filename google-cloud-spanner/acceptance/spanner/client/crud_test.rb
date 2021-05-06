@@ -158,4 +158,24 @@ describe "Spanner Client", :crud, :spanner do
     _(results.rows.count).must_equal 0
     _(results.timestamp).wont_be :nil?
   end
+
+   describe "request options" do
+    it "execute CRUD statement with priority options" do
+      request_options = { priority: :PRIORITY_MEDIUM }
+      results = db.read "accounts", ["account_id"], request_options: request_options
+      _(results.rows.count).must_equal 0
+
+      db.insert "accounts", default_account_rows[0], request_options: request_options
+      db.upsert "accounts", default_account_rows[1], request_options: request_options
+
+      results = db.read "accounts", ["account_id"]
+      _(results.rows.count).must_equal 2
+
+      db.replace "accounts", default_account_rows[0], request_options: request_options
+      db.delete "accounts", [1, 2, 3], request_options: request_options
+
+      results = db.read "accounts", ["account_id"]
+      _(results.rows.count).must_equal 0
+    end
+  end
 end

@@ -223,6 +223,14 @@ module Google
         #   * `:optimizer_version` (String) The version of optimizer to use.
         #     Empty to use database default. "latest" to use the latest
         #     available optimizer version.
+        # @param [Hash] request_options Common request options.
+        #
+        #   * `:priority` (Symbol) The relative priority for requests.
+        #     The priority acts as a hint to the Cloud Spanner scheduler
+        #     and does not guarantee priority or order of execution.
+        #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
+        #     `:PRIORITY_HIGH`. If priority not set then default is
+        #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -367,6 +375,21 @@ module Google
         #
         #   results = db.execute_query \
         #     "SELECT * FROM users", call_options: call_options
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
+        #   end
+        #
+        # @example Using request options.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   request_options = { priority: :PRIORITY_MEDIUM }
+        #   results = db.execute_query "SELECT * FROM users",
+        #                              request_options: request_options
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -537,6 +560,14 @@ module Google
         #   * `:optimizer_version` (String) The version of optimizer to use.
         #     Empty to use database default. "latest" to use the latest
         #     available optimizer version.
+        # @param [Hash] request_options Common request options.
+        #
+        #   * `:priority` (String) The relative priority for requests.
+        #     The priority acts as a hint to the Cloud Spanner scheduler
+        #     and does not guarantee priority or order of execution.
+        #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
+        #     `:PRIORITY_HIGH`. If priority not set then default is
+        #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -599,6 +630,17 @@ module Google
         #   row_count = db.execute_partition_update \
         #    "UPDATE users SET friends = NULL WHERE active = false",
         #    call_options: call_options
+        #
+        # @example Using request options.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   request_options = { priority: :PRIORITY_MEDIUM }
+        #   row_count = db.execute_partition_update \
+        #    "UPDATE users SET friends = NULL WHERE active = @active",
+        #    params: { active: false }, request_options: request_options
         #
         def execute_partition_update sql, params: nil, types: nil,
                                      query_options: nil, request_options: nil,
@@ -693,6 +735,14 @@ module Google
         #       Useful for reading the freshest data available at a nearby
         #       replica, while bounding the possible staleness if the local
         #       replica has fallen behind.
+        # @param [Hash] request_options Common request options.
+        #
+        #   * `:priority` (String) The relative priority for requests.
+        #     The priority acts as a hint to the Cloud Spanner scheduler
+        #     and does not guarantee priority or order of execution.
+        #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
+        #     `:PRIORITY_HIGH`. If priority not set then default is
+        #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -752,6 +802,21 @@ module Google
         #   call_options = { timeout: timeout, retry_policy: retry_policy }
         #
         #   results = db.read "users", [:id, :name], call_options: call_options
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
+        #   end
+        #
+        # @example Using request options.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   request_options = { priority: :PRIORITY_MEDIUM }
+        #   results = db.read "users", [:id, :name],
+        #                     request_options: request_options
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
@@ -822,6 +887,14 @@ module Google
         #   * `:return_commit_stats` (Boolean) A boolean value. If `true`,
         #     then statistics related to the transaction will be included in
         #     {CommitResponse}. Default value is `false`
+        # @param [Hash] request_options Common request options.
+        #
+        #   * `:priority` (String) The relative priority for requests.
+        #     The priority acts as a hint to the Cloud Spanner scheduler
+        #     and does not guarantee priority or order of execution.
+        #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
+        #     `:PRIORITY_HIGH`. If priority not set then default is
+        #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
         #
         # @return [Time, CommitResponse] The timestamp at which the operation
         #   committed. If commit options are set it returns {CommitResponse}.
@@ -850,6 +923,17 @@ module Google
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
+        #
+        # @example Using request options.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   request_options = { priority: :PRIORITY_MEDIUM }
+        #   db.upsert "users", [{ id: 1, name: "Charlie", active: false }],
+        #                      request_options: request_options
         #
         def upsert table, rows, commit_options: nil, request_options: nil
           @pool.with_session do |session|
@@ -903,6 +987,14 @@ module Google
         #   * `:return_commit_stats` (Boolean) A boolean value. If `true`,
         #     then statistics related to the transaction will be included in
         #     {CommitResponse}. Default value is `false`
+        # @param [Hash] request_options Common request options.
+        #
+        #   * `:priority` (String) The relative priority for requests.
+        #     The priority acts as a hint to the Cloud Spanner scheduler
+        #     and does not guarantee priority or order of execution.
+        #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
+        #     `:PRIORITY_HIGH`. If priority not set then default is
+        #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
         #
         # @return [Time, CommitResponse] The timestamp at which the operation
         #   committed. If commit options are set it returns {CommitResponse}.
@@ -931,6 +1023,17 @@ module Google
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
+        #
+        # @example Using request options.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   request_options = { priority: :PRIORITY_MEDIUM }
+        #   db.insert "users", [{ id: 1, name: "Charlie", active: false }],
+        #                      request_options: request_options
         #
         def insert table, rows, commit_options: nil, request_options: nil
           @pool.with_session do |session|
@@ -983,6 +1086,14 @@ module Google
         #   * `:return_commit_stats` (Boolean) A boolean value. If `true`,
         #     then statistics related to the transaction will be included in
         #     {CommitResponse}. Default value is `false`
+        # @param [Hash] request_options Common request options.
+        #
+        #   * `:priority` (String) The relative priority for requests.
+        #     The priority acts as a hint to the Cloud Spanner scheduler
+        #     and does not guarantee priority or order of execution.
+        #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
+        #     `:PRIORITY_HIGH`. If priority not set then default is
+        #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
         #
         # @return [Time, CommitResponse] The timestamp at which the operation
         #   committed. If commit options are set it returns {CommitResponse}.
@@ -1011,6 +1122,17 @@ module Google
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
+        #
+        # @example Using request options.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   request_options = { priority: :PRIORITY_MEDIUM }
+        #   db.update "users", [{ id: 1, name: "Charlie", active: false }],
+        #                      request_options: request_options
         #
         def update table, rows, commit_options: nil, request_options: nil
           @pool.with_session do |session|
@@ -1065,6 +1187,14 @@ module Google
         #   * `:return_commit_stats` (Boolean) A boolean value. If `true`,
         #     then statistics related to the transaction will be included in
         #     {CommitResponse}. Default value is `false`
+        # @param [Hash] request_options Common request options.
+        #
+        #   * `:priority` (String) The relative priority for requests.
+        #     The priority acts as a hint to the Cloud Spanner scheduler
+        #     and does not guarantee priority or order of execution.
+        #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
+        #     `:PRIORITY_HIGH`. If priority not set then default is
+        #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
         #
         # @return [Time, CommitResponse] The timestamp at which the operation
         #   committed. If commit options are set it returns {CommitResponse}.
@@ -1093,6 +1223,17 @@ module Google
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
+        #
+        # @example Using request options.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   request_options = { priority: :PRIORITY_MEDIUM }
+        #   db.replace "users", [{ id: 1, name: "Charlie", active: false }],
+        #                       request_options: request_options
         #
         def replace table, rows, commit_options: nil, request_options: nil
           @pool.with_session do |session|
@@ -1128,7 +1269,14 @@ module Google
         #   * `:return_commit_stats` (Boolean) A boolean value. If `true`,
         #     then statistics related to the transaction will be included in
         #     {CommitResponse}. Default value is `false`
+        # @param [Hash] request_options Common request options.
         #
+        #   * `:priority` (String) The relative priority for requests.
+        #     The priority acts as a hint to the Cloud Spanner scheduler
+        #     and does not guarantee priority or order of execution.
+        #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
+        #     `:PRIORITY_HIGH`. If priority not set then default is
+        #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -1168,6 +1316,16 @@ module Google
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
         #
+        # @example With request optinos
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   request_options = { priority: :PRIORITY_MEDIUM }
+        #   db.delete "users", [1, 2, 3], request_options: request_options
+        #
         def delete table, keys = [], commit_options: nil, request_options: nil,
                    call_options: nil
           @pool.with_session do |session|
@@ -1199,7 +1357,14 @@ module Google
         #   * `:return_commit_stats` (Boolean) A boolean value. If `true`,
         #     then statistics related to the transaction will be included in
         #     {CommitResponse}. Default value is `false`
+        # @param [Hash] request_options Common request options.
         #
+        #   * `:priority` (String) The relative priority for requests.
+        #     The priority acts as a hint to the Cloud Spanner scheduler
+        #     and does not guarantee priority or order of execution.
+        #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
+        #     `:PRIORITY_HIGH`. If priority not set then default is
+        #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -1248,6 +1413,18 @@ module Google
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
         #
+        # @example With request options
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   db.commit request_options: { priority: :PRIORITY_MEDIUM } do |c|
+        #     c.update "users", [{ id: 1, name: "Charlie", active: false }]
+        #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+        #   end
+        #
         def commit commit_options: nil, request_options: nil,
                    call_options: nil, &block
           raise ArgumentError, "Must provide a block" unless block_given?
@@ -1287,7 +1464,14 @@ module Google
         #   * `:return_commit_stats` (Boolean) A boolean value. If `true`,
         #     then statistics related to the transaction will be included in
         #     {CommitResponse}. Default value is `false`
+        # @param [Hash] request_options Common request options.
         #
+        #   * `:priority` (String) The relative priority for requests.
+        #     The priority acts as a hint to the Cloud Spanner scheduler
+        #     and does not guarantee priority or order of execution.
+        #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
+        #     `:PRIORITY_HIGH`. If priority not set then default is
+        #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -1363,6 +1547,21 @@ module Google
         #
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
+        #
+        # @example Using request options.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   db.transaction request_options: { priority: :PRIORITY_MEDIUM } do |tx|
+        #     tx.update "users", [{ id: 1, name: "Charlie", active: false }]
+        #     tx.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+        #
+        #     request_options = { priority: :PRIORITY_LOW }
+        #     results = tx.execute_query "SELECT * FROM users",
+        #                               request_options: request_options
+        #   end
         #
         def transaction deadline: 120, commit_options: nil,
                         request_options: nil, call_options: nil

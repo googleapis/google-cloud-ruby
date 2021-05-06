@@ -297,6 +297,31 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     assert_results results
   end
 
+  describe "priority request options" do
+    it "read rows" do
+      columns = [:id, :name]
+
+      mock = Minitest::Mock.new
+      mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+      mock.expect :streaming_read, results_enum, [{
+        session: session_grpc.name, table: "my-table",
+        columns: ["id", "name"],
+        key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true),
+        transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil,
+        request_options: { priority: :PRIORITY_MEDIUM }
+      }, default_options]
+      spanner.service.mocked_service = mock
+
+      results = client.read "my-table", columns, request_options: { priority: :PRIORITY_MEDIUM }
+
+      shutdown_client! client
+
+      mock.verify
+
+      assert_results results
+    end
+  end
+
   def assert_results results
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
