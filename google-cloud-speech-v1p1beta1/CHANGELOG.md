@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 / 2021-05-06
+
+#### Features
+
+* Add webm opus support
+
 ### 0.8.0 / 2021-04-26
 
 #### Features
