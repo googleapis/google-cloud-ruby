@@ -1,5 +1,15 @@
 # Release History
 
+### 0.7.0 / 2021-05-06
+
+#### ⚠ BREAKING CHANGES
+
+* **analytics-admin-v1alpha:** Support search_change_history_events, call and remove create_ios_app_data_stream and create_android_app_data_stream
+
+#### Features
+
+* Support search_change_history_events, call and remove create_ios_app_data_stream and create_android_app_data_stream
+
 ### 0.6.0 / 2021-03-08
 
 #### Features
