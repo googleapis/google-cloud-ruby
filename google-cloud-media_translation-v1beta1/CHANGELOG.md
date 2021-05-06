@@ -4,10 +4,6 @@
 
 #### ⚠ BREAKING CHANGES
 
-* **media_translation-v1beta1:** Remove unsupported alternative_source_language_codes, recognition_result, and detected_source_language_code fields
-
-#### Bug Fixes
-
 * Remove unsupported alternative_source_language_codes, recognition_result, and detected_source_language_code fields
 
 ### 0.3.0 / 2021-03-08
