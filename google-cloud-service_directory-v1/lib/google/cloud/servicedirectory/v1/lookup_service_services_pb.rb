@@ -27,7 +27,7 @@ module Google
           # Service Directory API for looking up service data at runtime.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode
