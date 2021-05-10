@@ -60,11 +60,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
-            ACTIVE = 46297862
+            ACTIVE = 314733318
 
             DELETED = 120962041
 
-            DEPRECATED = 194924979
+            DEPRECATED = 463360435
 
             OBSOLETE = 66532761
           end
@@ -149,33 +149,33 @@ module Google
 
             CLEANUP_FAILED = 150308440
 
-            DEPRECATED_RESOURCE_USED = 123400130
+            DEPRECATED_RESOURCE_USED = 391835586
 
-            DEPRECATED_TYPE_USED = 78090774
+            DEPRECATED_TYPE_USED = 346526230
 
-            DISK_SIZE_LARGER_THAN_IMAGE_SIZE = 101007511
+            DISK_SIZE_LARGER_THAN_IMAGE_SIZE = 369442967
 
-            EXPERIMENTAL_TYPE_USED = 183518987
+            EXPERIMENTAL_TYPE_USED = 451954443
 
             EXTERNAL_API_WARNING = 175546307
 
-            FIELD_VALUE_OVERRIDEN = 61233967
+            FIELD_VALUE_OVERRIDEN = 329669423
 
-            INJECTED_KERNELS_DEPRECATED = 148941963
+            INJECTED_KERNELS_DEPRECATED = 417377419
 
-            LARGE_DEPLOYMENT_WARNING = 213005222
+            LARGE_DEPLOYMENT_WARNING = 481440678
 
-            MISSING_TYPE_DEPENDENCY = 76070007
+            MISSING_TYPE_DEPENDENCY = 344505463
 
-            NEXT_HOP_ADDRESS_NOT_ASSIGNED = 56529543
+            NEXT_HOP_ADDRESS_NOT_ASSIGNED = 324964999
 
-            NEXT_HOP_CANNOT_IP_FORWARD = 114947431
+            NEXT_HOP_CANNOT_IP_FORWARD = 383382887
 
-            NEXT_HOP_INSTANCE_NOT_FOUND = 195814990
+            NEXT_HOP_INSTANCE_NOT_FOUND = 464250446
 
             NEXT_HOP_INSTANCE_NOT_ON_NETWORK = 243758146
 
-            NEXT_HOP_NOT_RUNNING = 148645809
+            NEXT_HOP_NOT_RUNNING = 417081265
 
             NOT_CRITICAL_ERROR = 105763924
 
@@ -185,15 +185,15 @@ module Google
 
             REQUIRED_TOS_AGREEMENT = 3745539
 
-            RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING = 228293185
+            RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING = 496728641
 
             RESOURCE_NOT_DELETED = 168598460
 
-            SCHEMA_VALIDATION_IGNORED = 6810186
+            SCHEMA_VALIDATION_IGNORED = 275245642
 
             SINGLE_INSTANCE_PROPERTY_TEMPLATE = 268305617
 
-            UNDECLARED_PROPERTIES = 122077983
+            UNDECLARED_PROPERTIES = 390513439
 
             UNREACHABLE = 13328052
           end
@@ -297,9 +297,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_NETWORK_TIER = 0
 
-            PREMIUM = 131095095
+            PREMIUM = 399530551
 
-            STANDARD = 216207037
+            STANDARD = 484642493
           end
 
           # The type of configuration. The default and only option is ONE_TO_ONE_NAT.
@@ -395,7 +395,7 @@ module Google
 
             EXTERNAL = 35607499
 
-            INTERNAL = 10860221
+            INTERNAL = 279295677
 
             UNSPECIFIED_TYPE = 53933922
           end
@@ -419,9 +419,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_NETWORK_TIER = 0
 
-            PREMIUM = 131095095
+            PREMIUM = 399530551
 
-            STANDARD = 216207037
+            STANDARD = 484642493
           end
 
           # The purpose of this resource, which can be one of the following values:
@@ -434,15 +434,15 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_PURPOSE = 0
 
-            DNS_RESOLVER = 207679100
+            DNS_RESOLVER = 476114556
 
             GCE_ENDPOINT = 230515243
 
             NAT_AUTO = 163666477
 
-            SHARED_LOADBALANCER_VIP = 26012116
+            SHARED_LOADBALANCER_VIP = 294447572
 
-            VPC_PEERING = 132364714
+            VPC_PEERING = 400800170
           end
 
           # [Output Only] The status of the address, which can be one of RESERVING, RESERVED, or IN_USE. An address that is RESERVING is currently in the process of being reserved. A RESERVED address is currently reserved and available to use. An IN_USE address is currently being used by another resource and is not available.
@@ -452,9 +452,9 @@ module Google
 
             IN_USE = 17393485
 
-            RESERVED = 163805992
+            RESERVED = 432241448
 
-            RESERVING = 246151769
+            RESERVING = 514587225
           end
         end
 
@@ -624,13 +624,13 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            FEATURE_TYPE_UNSPECIFIED = 263331803
+            FEATURE_TYPE_UNSPECIFIED = 531767259
 
             GVNIC = 68209305
 
             MULTI_IP_SUBNET = 151776719
 
-            SECURE_BOOT = 108375738
+            SECURE_BOOT = 376811194
 
             SEV_CAPABLE = 87083793
 
@@ -638,7 +638,7 @@ module Google
 
             VIRTIO_SCSI_MULTIQUEUE = 201597069
 
-            WINDOWS = 188427875
+            WINDOWS = 456863331
           end
         end
 
@@ -729,9 +729,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_ON_UPDATE_ACTION = 0
 
-            RECREATE_DISK = 226332397
+            RECREATE_DISK = 494767853
 
-            RECREATE_DISK_IF_SOURCE_CHANGED = 129664256
+            RECREATE_DISK_IF_SOURCE_CHANGED = 398099712
 
             USE_EXISTING_DISK = 232682233
           end
@@ -846,9 +846,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            PERSISTENT = 192248471
+            PERSISTENT = 460683927
 
-            SCRATCH = 228343514
+            SCRATCH = 496778970
           end
         end
 
@@ -876,9 +876,9 @@ module Google
 
             ADMIN_READ = 128951462
 
-            DATA_READ = 36789515
+            DATA_READ = 305224971
 
-            DATA_WRITE = 71746282
+            DATA_WRITE = 340181738
 
             LOG_TYPE_UNSPECIFIED = 154527053
           end
@@ -923,11 +923,11 @@ module Google
 
             ADMIN_WRITE = 244412079
 
-            DATA_READ = 36789515
+            DATA_READ = 305224971
 
-            DATA_WRITE = 71746282
+            DATA_WRITE = 340181738
 
-            PERMISSION_TYPE_UNSPECIFIED = 171877890
+            PERMISSION_TYPE_UNSPECIFIED = 440313346
           end
         end
 
@@ -972,7 +972,7 @@ module Google
 
             ONLY_SCALE_OUT = 152713670
 
-            ONLY_UP = 209659918
+            ONLY_UP = 478095374
           end
         end
 
@@ -1023,13 +1023,13 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            ALL_INSTANCES_UNHEALTHY = 136530021
+            ALL_INSTANCES_UNHEALTHY = 404965477
 
             BACKEND_SERVICE_DOES_NOT_EXIST = 191417626
 
             CAPPED_AT_MAX_NUM_REPLICAS = 518617
 
-            CUSTOM_METRIC_DATA_POINTS_TOO_SPARSE = 60529203
+            CUSTOM_METRIC_DATA_POINTS_TOO_SPARSE = 328964659
 
             CUSTOM_METRIC_INVALID = 204430550
 
@@ -1037,7 +1037,7 @@ module Google
 
             MISSING_CUSTOM_METRIC_DATA_POINTS = 94885086
 
-            MISSING_LOAD_BALANCING_DATA_POINTS = 241423442
+            MISSING_LOAD_BALANCING_DATA_POINTS = 509858898
 
             MODE_OFF = 164169907
 
@@ -1047,15 +1047,15 @@ module Google
 
             MORE_THAN_ONE_BACKEND_SERVICE = 151922141
 
-            NOT_ENOUGH_QUOTA_AVAILABLE = 134666175
+            NOT_ENOUGH_QUOTA_AVAILABLE = 403101631
 
-            REGION_RESOURCE_STOCKOUT = 260187390
+            REGION_RESOURCE_STOCKOUT = 528622846
 
             SCALING_TARGET_DOES_NOT_EXIST = 122636699
 
-            UNKNOWN = 164706346
+            UNKNOWN = 433141802
 
-            UNSUPPORTED_MAX_RATE_LOAD_BALANCING_CONFIGURATION = 62409553
+            UNSUPPORTED_MAX_RATE_LOAD_BALANCING_CONFIGURATION = 330845009
 
             ZONE_RESOURCE_STOCKOUT = 210200502
           end
@@ -1130,9 +1130,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            ACTIVE = 46297862
+            ACTIVE = 314733318
 
-            DELETING = 260166568
+            DELETING = 528602024
 
             ERROR = 66247144
 
@@ -1473,11 +1473,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_CACHE_MODE = 0
 
-            CACHE_ALL_STATIC = 86592489
+            CACHE_ALL_STATIC = 355027945
 
-            FORCE_CACHE_ALL = 217591472
+            FORCE_CACHE_ALL = 486026928
 
-            INVALID_CACHE_MODE = 112860104
+            INVALID_CACHE_MODE = 381295560
 
             USE_ORIGIN_HEADERS = 55380261
           end
@@ -1588,11 +1588,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_CACHE_MODE = 0
 
-            CACHE_ALL_STATIC = 86592489
+            CACHE_ALL_STATIC = 355027945
 
-            FORCE_CACHE_ALL = 217591472
+            FORCE_CACHE_ALL = 486026928
 
-            INVALID_CACHE_MODE = 112860104
+            INVALID_CACHE_MODE = 381295560
 
             USE_ORIGIN_HEADERS = 55380261
           end
@@ -1922,13 +1922,13 @@ module Google
 
             EXTERNAL = 35607499
 
-            INTERNAL = 10860221
+            INTERNAL = 279295677
 
             INTERNAL_MANAGED = 37350397
 
             INTERNAL_SELF_MANAGED = 236211150
 
-            INVALID_LOAD_BALANCING_SCHEME = 6916604
+            INVALID_LOAD_BALANCING_SCHEME = 275352060
           end
 
           # The load balancing algorithm used within the scope of the locality. The possible values are:
@@ -1950,7 +1950,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_LOCALITY_LB_POLICY = 0
 
-            INVALID_LB_POLICY = 54883251
+            INVALID_LB_POLICY = 323318707
 
             LEAST_REQUEST = 46604921
 
@@ -1960,7 +1960,7 @@ module Google
 
             RANDOM = 262527171
 
-            RING_HASH = 164359613
+            RING_HASH = 432795069
 
             ROUND_ROBIN = 153895801
           end
@@ -2002,17 +2002,17 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_SESSION_AFFINITY = 0
 
-            CLIENT_IP = 77229595
+            CLIENT_IP = 345665051
 
             CLIENT_IP_PORT_PROTO = 221722926
 
             CLIENT_IP_PROTO = 25322148
 
-            GENERATED_COOKIE = 101885748
+            GENERATED_COOKIE = 370321204
 
             HEADER_FIELD = 200737960
 
-            HTTP_COOKIE = 226546171
+            HTTP_COOKIE = 494981627
 
             NONE = 2402104
           end
@@ -2123,22 +2123,22 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_HEALTH_STATE = 0
 
-            HEALTHY = 171365757
+            HEALTHY = 439801213
 
-            UNHEALTHY = 193682628
+            UNHEALTHY = 462118084
           end
 
           module WeightError
             # A value indicating that the enum field is not set.
             UNDEFINED_WEIGHT_ERROR = 0
 
-            INVALID_WEIGHT = 115262944
+            INVALID_WEIGHT = 383698400
 
-            MISSING_WEIGHT = 115592081
+            MISSING_WEIGHT = 384027537
 
-            UNAVAILABLE_WEIGHT = 171028839
+            UNAVAILABLE_WEIGHT = 439464295
 
-            WEIGHT_NONE = 233993375
+            WEIGHT_NONE = 502428831
           end
         end
 
@@ -2345,15 +2345,15 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            CREATING = 187129529
+            CREATING = 455564985
 
-            DELETING = 260166568
+            DELETING = 528602024
 
-            INVALID = 261848535
+            INVALID = 530283991
 
             READY = 77848963
 
-            UPDATING = 226178886
+            UPDATING = 494614342
           end
         end
 
@@ -2376,13 +2376,13 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            ACCELERATOR = 161379915
+            ACCELERATOR = 429815371
 
-            LOCAL_SSD = 240499440
+            LOCAL_SSD = 508934896
 
             MEMORY = 123056385
 
-            UNSPECIFIED = 258350871
+            UNSPECIFIED = 526786327
 
             VCPU = 2628978
           end
@@ -2448,11 +2448,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_CATEGORY = 0
 
-            CATEGORY_UNSPECIFIED = 240754006
+            CATEGORY_UNSPECIFIED = 509189462
 
-            LICENSE = 79433761
+            LICENSE = 347869217
 
-            MACHINE = 201117735
+            MACHINE = 469553191
           end
 
           # The plan for this commitment, which determines duration and discount rate. The currently supported plans are TWELVE_MONTH (1 year), and THIRTY_SIX_MONTH (3 years).
@@ -2460,7 +2460,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_PLAN = 0
 
-            INVALID = 261848535
+            INVALID = 530283991
 
             THIRTY_SIX_MONTH = 266295942
 
@@ -2472,11 +2472,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            ACTIVE = 46297862
+            ACTIVE = 314733318
 
-            CREATING = 187129529
+            CREATING = 455564985
 
-            EXPIRED = 214053637
+            EXPIRED = 482489093
 
             NOT_YET_ACTIVE = 20607337
           end
@@ -2809,15 +2809,15 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            CREATING = 187129529
+            CREATING = 455564985
 
-            DELETING = 260166568
+            DELETING = 528602024
 
-            FAILED = 187271229
+            FAILED = 455706685
 
             READY = 77848963
 
-            RESTORING = 135828395
+            RESTORING = 404263851
           end
         end
 
@@ -2899,7 +2899,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_INSTANTIATE_FROM = 0
 
-            ATTACH_READ_ONLY = 245339963
+            ATTACH_READ_ONLY = 513775419
 
             BLANK = 63281460
 
@@ -3148,11 +3148,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            DYNAMIC_PEERING_ROUTE = 201359402
+            DYNAMIC_PEERING_ROUTE = 469794858
 
-            STATIC_PEERING_ROUTE = 204972089
+            STATIC_PEERING_ROUTE = 473407545
 
-            SUBNET_PEERING_ROUTE = 197347048
+            SUBNET_PEERING_ROUTE = 465782504
           end
         end
 
@@ -3248,11 +3248,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_REDUNDANCY_TYPE = 0
 
-            FOUR_IPS_REDUNDANCY = 251652457
+            FOUR_IPS_REDUNDANCY = 520087913
 
             SINGLE_IP_INTERNALLY_REDUNDANT = 133914873
 
-            TWO_IPS_REDUNDANCY = 98614179
+            TWO_IPS_REDUNDANCY = 367049635
           end
         end
 
@@ -3347,7 +3347,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_METADATA = 0
 
-            EXCLUDE_ALL_METADATA = 66084498
+            EXCLUDE_ALL_METADATA = 334519954
 
             INCLUDE_ALL_METADATA = 164619908
           end
@@ -3427,9 +3427,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_DIRECTION = 0
 
-            EGRESS = 164445045
+            EGRESS = 432880501
 
-            INGRESS = 248495765
+            INGRESS = 516931221
           end
         end
 
@@ -3728,13 +3728,13 @@ module Google
 
             EXTERNAL = 35607499
 
-            INTERNAL = 10860221
+            INTERNAL = 279295677
 
             INTERNAL_MANAGED = 37350397
 
             INTERNAL_SELF_MANAGED = 236211150
 
-            INVALID = 261848535
+            INVALID = 530283991
           end
 
           # This signifies the networking tier used for configuring this load balancer and can only take the following values: PREMIUM, STANDARD.
@@ -3746,9 +3746,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_NETWORK_TIER = 0
 
-            PREMIUM = 131095095
+            PREMIUM = 399530551
 
-            STANDARD = 216207037
+            STANDARD = 484642493
           end
         end
 
@@ -3867,9 +3867,9 @@ module Google
 
             USE_FIXED_PORT = 190235748
 
-            USE_NAMED_PORT = 80865215
+            USE_NAMED_PORT = 349300671
 
-            USE_SERVING_PORT = 94202060
+            USE_SERVING_PORT = 362637516
           end
         end
 
@@ -4099,9 +4099,9 @@ module Google
 
             USE_FIXED_PORT = 190235748
 
-            USE_NAMED_PORT = 80865215
+            USE_NAMED_PORT = 349300671
 
-            USE_SERVING_PORT = 94202060
+            USE_SERVING_PORT = 362637516
           end
 
           # Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
@@ -4111,7 +4111,7 @@ module Google
 
             NONE = 2402104
 
-            PROXY_V1 = 65917484
+            PROXY_V1 = 334352940
           end
         end
 
@@ -4159,9 +4159,9 @@ module Google
 
             USE_FIXED_PORT = 190235748
 
-            USE_NAMED_PORT = 80865215
+            USE_NAMED_PORT = 349300671
 
-            USE_SERVING_PORT = 94202060
+            USE_SERVING_PORT = 362637516
           end
 
           # Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
@@ -4171,7 +4171,7 @@ module Google
 
             NONE = 2402104
 
-            PROXY_V1 = 65917484
+            PROXY_V1 = 334352940
           end
         end
 
@@ -4219,9 +4219,9 @@ module Google
 
             USE_FIXED_PORT = 190235748
 
-            USE_NAMED_PORT = 80865215
+            USE_NAMED_PORT = 349300671
 
-            USE_SERVING_PORT = 94202060
+            USE_SERVING_PORT = 362637516
           end
 
           # Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
@@ -4231,7 +4231,7 @@ module Google
 
             NONE = 2402104
 
-            PROXY_V1 = 65917484
+            PROXY_V1 = 334352940
           end
         end
 
@@ -4285,9 +4285,9 @@ module Google
 
             USE_FIXED_PORT = 190235748
 
-            USE_NAMED_PORT = 80865215
+            USE_NAMED_PORT = 349300671
 
-            USE_SERVING_PORT = 94202060
+            USE_SERVING_PORT = 362637516
           end
 
           # Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
@@ -4297,7 +4297,7 @@ module Google
 
             NONE = 2402104
 
-            PROXY_V1 = 65917484
+            PROXY_V1 = 334352940
           end
         end
 
@@ -4342,9 +4342,9 @@ module Google
 
             USE_FIXED_PORT = 190235748
 
-            USE_NAMED_PORT = 80865215
+            USE_NAMED_PORT = 349300671
 
-            USE_SERVING_PORT = 94202060
+            USE_SERVING_PORT = 362637516
           end
 
           # Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
@@ -4354,7 +4354,7 @@ module Google
 
             NONE = 2402104
 
-            PROXY_V1 = 65917484
+            PROXY_V1 = 334352940
           end
         end
 
@@ -4443,7 +4443,7 @@ module Google
 
             HTTPS = 69079243
 
-            INVALID = 261848535
+            INVALID = 530283991
 
             SSL = 82412
 
@@ -4540,7 +4540,7 @@ module Google
 
             AND = 64951
 
-            NO_AGGREGATION = 158009668
+            NO_AGGREGATION = 426445124
           end
         end
 
@@ -4648,13 +4648,13 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_HEALTH_STATE = 0
 
-            DRAINING = 212019946
+            DRAINING = 480455402
 
-            HEALTHY = 171365757
+            HEALTHY = 439801213
 
-            UNHEALTHY = 193682628
+            UNHEALTHY = 462118084
 
-            UNKNOWN = 164706346
+            UNKNOWN = 433141802
           end
         end
 
@@ -4879,13 +4879,13 @@ module Google
 
             FOUND = 67084130
 
-            MOVED_PERMANENTLY_DEFAULT = 118262993
+            MOVED_PERMANENTLY_DEFAULT = 386698449
 
-            PERMANENT_REDIRECT = 113570925
+            PERMANENT_REDIRECT = 382006381
 
-            SEE_OTHER = 176945124
+            SEE_OTHER = 445380580
 
-            TEMPORARY_REDIRECT = 221114922
+            TEMPORARY_REDIRECT = 489550378
           end
         end
 
@@ -5239,9 +5239,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            DELETING = 260166568
+            DELETING = 528602024
 
-            FAILED = 187271229
+            FAILED = 455706685
 
             PENDING = 35394935
 
@@ -5341,7 +5341,7 @@ module Google
 
             UNSPECIFIED_NIC_TYPE = 67411801
 
-            VIRTIO_NET = 183688025
+            VIRTIO_NET = 452123481
           end
         end
 
@@ -5370,7 +5370,7 @@ module Google
 
             SPECIFIC_RESERVATION = 229889055
 
-            UNSPECIFIED = 258350871
+            UNSPECIFIED = 526786327
           end
         end
 
@@ -5406,7 +5406,7 @@ module Google
 
             MIGRATE = 165699979
 
-            TERMINATE = 259182145
+            TERMINATE = 527617601
           end
         end
 
@@ -5602,11 +5602,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_PRIVATE_IPV6_GOOGLE_ACCESS = 0
 
-            ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE = 159540538
+            ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE = 427975994
 
-            ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE = 19774807
+            ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE = 288210263
 
-            INHERIT_FROM_SUBNETWORK = 261821503
+            INHERIT_FROM_SUBNETWORK = 530256959
           end
 
           # [Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED, REPAIRING, and TERMINATED. For more information about the status of the instance, see  Instance life cycle.
@@ -5614,23 +5614,23 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            DEPROVISIONING = 160500206
+            DEPROVISIONING = 428935662
 
-            PROVISIONING = 22461165
+            PROVISIONING = 290896621
 
-            REPAIRING = 145047829
+            REPAIRING = 413483285
 
             RUNNING = 121282975
 
-            STAGING = 162636827
+            STAGING = 431072283
 
-            STOPPED = 175840685
+            STOPPED = 444276141
 
-            STOPPING = 82356340
+            STOPPING = 350791796
 
             SUSPENDED = 51223995
 
-            SUSPENDING = 245770790
+            SUSPENDING = 514206246
 
             TERMINATED = 250018339
           end
@@ -6177,17 +6177,17 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            APPLYING = 83568052
+            APPLYING = 352003508
 
-            DELETING = 260166568
+            DELETING = 528602024
 
             EFFECTIVE = 244201863
 
             NONE = 2402104
 
-            UNAPPLIED = 215499684
+            UNAPPLIED = 483935140
 
-            UNAPPLIED_DELETION = 45521417
+            UNAPPLIED_DELETION = 313956873
           end
         end
 
@@ -6297,21 +6297,21 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_CURRENT_ACTION = 0
 
-            ABANDONING = 119809357
+            ABANDONING = 388244813
 
-            CREATING = 187129529
+            CREATING = 455564985
 
-            CREATING_WITHOUT_RETRIES = 160408329
+            CREATING_WITHOUT_RETRIES = 428843785
 
-            DELETING = 260166568
+            DELETING = 528602024
 
             NONE = 2402104
 
-            RECREATING = 18843116
+            RECREATING = 287278572
 
             REFRESHING = 163266343
 
-            RESTARTING = 52098931
+            RESTARTING = 320534387
 
             VERIFYING = 16982185
           end
@@ -6321,23 +6321,23 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_INSTANCE_STATUS = 0
 
-            DEPROVISIONING = 160500206
+            DEPROVISIONING = 428935662
 
-            PROVISIONING = 22461165
+            PROVISIONING = 290896621
 
-            REPAIRING = 145047829
+            REPAIRING = 413483285
 
             RUNNING = 121282975
 
-            STAGING = 162636827
+            STAGING = 431072283
 
-            STOPPED = 175840685
+            STOPPED = 444276141
 
-            STOPPING = 82356340
+            STOPPING = 350791796
 
             SUSPENDED = 51223995
 
-            SUSPENDING = 245770790
+            SUSPENDING = 514206246
 
             TERMINATED = 250018339
           end
@@ -6447,23 +6447,23 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            DEPROVISIONING = 160500206
+            DEPROVISIONING = 428935662
 
-            PROVISIONING = 22461165
+            PROVISIONING = 290896621
 
-            REPAIRING = 145047829
+            REPAIRING = 413483285
 
             RUNNING = 121282975
 
-            STAGING = 162636827
+            STAGING = 431072283
 
-            STOPPED = 175840685
+            STOPPED = 444276141
 
-            STOPPING = 82356340
+            STOPPING = 350791796
 
             SUSPENDED = 51223995
 
-            SUSPENDING = 245770790
+            SUSPENDING = 514206246
 
             TERMINATED = 250018339
           end
@@ -6625,21 +6625,21 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_ACTION = 0
 
-            ABANDONING = 119809357
+            ABANDONING = 388244813
 
-            CREATING = 187129529
+            CREATING = 455564985
 
-            CREATING_WITHOUT_RETRIES = 160408329
+            CREATING_WITHOUT_RETRIES = 428843785
 
-            DELETING = 260166568
+            DELETING = 528602024
 
             NONE = 2402104
 
-            RECREATING = 18843116
+            RECREATING = 287278572
 
             REFRESHING = 163266343
 
-            RESTARTING = 52098931
+            RESTARTING = 320534387
 
             VERIFYING = 16982185
           end
@@ -6741,11 +6741,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_PRIVATE_IPV6_GOOGLE_ACCESS = 0
 
-            ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE = 159540538
+            ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE = 427975994
 
-            ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE = 19774807
+            ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE = 288210263
 
-            INHERIT_FROM_SUBNETWORK = 261821503
+            INHERIT_FROM_SUBNETWORK = 530256959
           end
         end
 
@@ -6972,9 +6972,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_SOURCE = 0
 
-            GOOGLE = 229003833
+            GOOGLE = 497439289
 
-            NSRC_GOOGLE = 242139106
+            NSRC_GOOGLE = 510574562
           end
 
           # State of this notification, which can take one of the following values:
@@ -6984,15 +6984,15 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
-            ACTIVE = 46297862
+            ACTIVE = 314733318
 
             CANCELLED = 41957681
 
-            COMPLETED = 41485867
+            COMPLETED = 309921323
 
             NS_ACTIVE = 252563136
 
-            NS_CANCELED = 238143955
+            NS_CANCELED = 506579411
           end
         end
 
@@ -7088,9 +7088,9 @@ module Google
 
             DEDICATED = 258411983
 
-            IT_PRIVATE = 67241551
+            IT_PRIVATE = 335677007
 
-            PARTNER = 193489064
+            PARTNER = 461924520
           end
 
           # Type of link requested, which can take one of the following values:
@@ -7100,7 +7100,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_LINK_TYPE = 0
 
-            LINK_TYPE_ETHERNET_100G_LR = 69237095
+            LINK_TYPE_ETHERNET_100G_LR = 337672551
 
             LINK_TYPE_ETHERNET_10G_LR = 236739749
           end
@@ -7126,9 +7126,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
-            ACTIVE = 46297862
+            ACTIVE = 314733318
 
-            UNPROVISIONED = 248898523
+            UNPROVISIONED = 517333979
           end
         end
 
@@ -7286,15 +7286,15 @@ module Google
 
             BPS_100M = 49547958
 
-            BPS_10G = 10257550
+            BPS_10G = 278693006
 
-            BPS_1G = 86922992
+            BPS_1G = 355358448
 
             BPS_200M = 49577749
 
-            BPS_20G = 10258511
+            BPS_20G = 278693967
 
-            BPS_2G = 86923023
+            BPS_2G = 355358479
 
             BPS_300M = 49607540
 
@@ -7302,11 +7302,11 @@ module Google
 
             BPS_500M = 49667122
 
-            BPS_50G = 10261394
+            BPS_50G = 278696850
 
-            BPS_50M = 10261400
+            BPS_50M = 278696856
 
-            BPS_5G = 86923116
+            BPS_5G = 355358572
           end
 
           # Desired availability domain for the attachment. Only available for type PARTNER, at creation time, and can take one of the following values:
@@ -7317,11 +7317,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_EDGE_AVAILABILITY_DOMAIN = 0
 
-            AVAILABILITY_DOMAIN_1 = 81116634
+            AVAILABILITY_DOMAIN_1 = 349552090
 
-            AVAILABILITY_DOMAIN_2 = 81116635
+            AVAILABILITY_DOMAIN_2 = 349552091
 
-            AVAILABILITY_DOMAIN_ANY = 106820917
+            AVAILABILITY_DOMAIN_ANY = 375256373
           end
 
           # [Output Only] The current status of whether or not this interconnect attachment is functional, which can take one of the following values:
@@ -7347,19 +7347,19 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
-            ACTIVE = 46297862
+            ACTIVE = 314733318
 
             DEFUNCT = 115891759
 
-            PARTNER_REQUEST_RECEIVED = 245151848
+            PARTNER_REQUEST_RECEIVED = 513587304
 
             PENDING_CUSTOMER = 167494054
 
-            PENDING_PARTNER = 119455200
+            PENDING_PARTNER = 387890656
 
-            STATE_UNSPECIFIED = 202319945
+            STATE_UNSPECIFIED = 470755401
 
-            UNPROVISIONED = 248898523
+            UNPROVISIONED = 517333979
           end
 
           # The type of interconnect attachment this is, which can take one of the following values:
@@ -7372,9 +7372,9 @@ module Google
 
             DEDICATED = 258411983
 
-            PARTNER = 193489064
+            PARTNER = 461924520
 
-            PARTNER_PROVIDER = 214825896
+            PARTNER_PROVIDER = 483261352
           end
         end
 
@@ -7519,7 +7519,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
-            ACTIVE = 46297862
+            ACTIVE = 314733318
 
             DETACHED = 216562546
           end
@@ -7550,13 +7550,13 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
-            HIGH_ALARM = 36927828
+            HIGH_ALARM = 305363284
 
             HIGH_WARNING = 220984799
 
-            LOW_ALARM = 48223590
+            LOW_ALARM = 316659046
 
-            LOW_WARNING = 70358385
+            LOW_WARNING = 338793841
 
             OK = 2524
           end
@@ -7605,13 +7605,13 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_LOCATION_PRESENCE = 0
 
-            GLOBAL = 226228131
+            GLOBAL = 494663587
 
-            LOCAL_REGION = 135100008
+            LOCAL_REGION = 403535464
 
-            LP_GLOBAL = 161148606
+            LP_GLOBAL = 429584062
 
-            LP_LOCAL_REGION = 220163395
+            LP_LOCAL_REGION = 488598851
           end
         end
 
@@ -7684,23 +7684,23 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_CONTINENT = 0
 
-            AFRICA = 49008250
+            AFRICA = 317443706
 
             ASIA_PAC = 119782269
 
             C_AFRICA = 71993846
 
-            C_ASIA_PAC = 197232633
+            C_ASIA_PAC = 465668089
 
             C_EUROPE = 200369438
 
-            C_NORTH_AMERICA = 7261592
+            C_NORTH_AMERICA = 275697048
 
-            C_SOUTH_AMERICA = 128714336
+            C_SOUTH_AMERICA = 397149792
 
-            EUROPE = 177383842
+            EUROPE = 445819298
 
-            NORTH_AMERICA = 179580052
+            NORTH_AMERICA = 448015508
 
             SOUTH_AMERICA = 32597340
           end
@@ -7712,9 +7712,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            AVAILABLE = 173644457
+            AVAILABLE = 442079913
 
-            CLOSED = 111727980
+            CLOSED = 380163436
           end
         end
 
@@ -7848,13 +7848,13 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
-            DISABLED = 248261244
+            DISABLED = 516696700
 
             ENABLED = 182130465
 
             RESTRICTED = 261551195
 
-            STATE_UNSPECIFIED = 202319945
+            STATE_UNSPECIFIED = 470755401
 
             TERMINATED = 250018339
           end
@@ -7910,11 +7910,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_LOG_NAME = 0
 
-            ADMIN_ACTIVITY = 159067679
+            ADMIN_ACTIVITY = 427503135
 
             DATA_ACCESS = 238070681
 
-            UNSPECIFIED_LOG_NAME = 142079726
+            UNSPECIFIED_LOG_NAME = 410515182
           end
         end
 
@@ -7953,7 +7953,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_LOG_MODE = 0
 
-            LOG_FAIL_CLOSED = 92034322
+            LOG_FAIL_CLOSED = 360469778
 
             LOG_MODE_UNSPECIFIED = 88160822
           end
@@ -8146,15 +8146,15 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_DETAILED_HEALTH_STATE = 0
 
-            DRAINING = 212019946
+            DRAINING = 480455402
 
-            HEALTHY = 171365757
+            HEALTHY = 439801213
 
-            TIMEOUT = 209377601
+            TIMEOUT = 477813057
 
-            UNHEALTHY = 193682628
+            UNHEALTHY = 462118084
 
-            UNKNOWN = 164706346
+            UNKNOWN = 433141802
           end
         end
 
@@ -8278,9 +8278,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
-            ACTIVE = 46297862
+            ACTIVE = 314733318
 
-            INACTIVE = 1985643
+            INACTIVE = 270421099
           end
         end
 
@@ -8297,7 +8297,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_ROUTING_MODE = 0
 
-            GLOBAL = 226228131
+            GLOBAL = 494663587
 
             REGIONAL = 92288543
           end
@@ -8502,15 +8502,15 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_NETWORK_ENDPOINT_TYPE = 0
 
-            GCE_VM_IP_PORT = 233402919
+            GCE_VM_IP_PORT = 501838375
 
-            INTERNET_FQDN_PORT = 135719021
+            INTERNET_FQDN_PORT = 404154477
 
-            INTERNET_IP_PORT = 209284507
+            INTERNET_IP_PORT = 477719963
 
-            NON_GCP_PRIVATE_IP_PORT = 68012512
+            NON_GCP_PRIVATE_IP_PORT = 336447968
 
-            SERVERLESS = 2057052
+            SERVERLESS = 270492508
           end
         end
 
@@ -8722,7 +8722,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_MODE = 0
 
-            MODE_UNSPECIFIED = 102912635
+            MODE_UNSPECIFIED = 371348091
 
             OFF = 78159
 
@@ -8808,11 +8808,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            CREATING = 187129529
+            CREATING = 455564985
 
-            DELETING = 260166568
+            DELETING = 528602024
 
-            INVALID = 261848535
+            INVALID = 530283991
 
             READY = 77848963
           end
@@ -8899,7 +8899,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            RESTART_NODE_ON_ANY_SERVER = 234515529
+            RESTART_NODE_ON_ANY_SERVER = 502950985
 
             RESTART_NODE_ON_MINIMAL_SERVERS = 204166495
 
@@ -8942,7 +8942,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_CPU_OVERCOMMIT_TYPE = 0
 
-            CPU_OVERCOMMIT_TYPE_UNSPECIFIED = 252230159
+            CPU_OVERCOMMIT_TYPE_UNSPECIFIED = 520665615
 
             ENABLED = 182130465
 
@@ -8953,15 +8953,15 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            CREATING = 187129529
+            CREATING = 455564985
 
-            DELETING = 260166568
+            DELETING = 528602024
 
-            INVALID = 261848535
+            INVALID = 530283991
 
             READY = 77848963
 
-            REPAIRING = 145047829
+            REPAIRING = 413483285
           end
         end
 
@@ -9096,7 +9096,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_CPU_OVERCOMMIT_TYPE = 0
 
-            CPU_OVERCOMMIT_TYPE_UNSPECIFIED = 252230159
+            CPU_OVERCOMMIT_TYPE_UNSPECIFIED = 520665615
 
             ENABLED = 182130465
 
@@ -9108,11 +9108,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            CREATING = 187129529
+            CREATING = 455564985
 
-            DELETING = 260166568
+            DELETING = 528602024
 
-            INVALID = 261848535
+            INVALID = 530283991
 
             READY = 77848963
           end
@@ -9410,33 +9410,33 @@ module Google
 
             CLEANUP_FAILED = 150308440
 
-            DEPRECATED_RESOURCE_USED = 123400130
+            DEPRECATED_RESOURCE_USED = 391835586
 
-            DEPRECATED_TYPE_USED = 78090774
+            DEPRECATED_TYPE_USED = 346526230
 
-            DISK_SIZE_LARGER_THAN_IMAGE_SIZE = 101007511
+            DISK_SIZE_LARGER_THAN_IMAGE_SIZE = 369442967
 
-            EXPERIMENTAL_TYPE_USED = 183518987
+            EXPERIMENTAL_TYPE_USED = 451954443
 
             EXTERNAL_API_WARNING = 175546307
 
-            FIELD_VALUE_OVERRIDEN = 61233967
+            FIELD_VALUE_OVERRIDEN = 329669423
 
-            INJECTED_KERNELS_DEPRECATED = 148941963
+            INJECTED_KERNELS_DEPRECATED = 417377419
 
-            LARGE_DEPLOYMENT_WARNING = 213005222
+            LARGE_DEPLOYMENT_WARNING = 481440678
 
-            MISSING_TYPE_DEPENDENCY = 76070007
+            MISSING_TYPE_DEPENDENCY = 344505463
 
-            NEXT_HOP_ADDRESS_NOT_ASSIGNED = 56529543
+            NEXT_HOP_ADDRESS_NOT_ASSIGNED = 324964999
 
-            NEXT_HOP_CANNOT_IP_FORWARD = 114947431
+            NEXT_HOP_CANNOT_IP_FORWARD = 383382887
 
-            NEXT_HOP_INSTANCE_NOT_FOUND = 195814990
+            NEXT_HOP_INSTANCE_NOT_FOUND = 464250446
 
             NEXT_HOP_INSTANCE_NOT_ON_NETWORK = 243758146
 
-            NEXT_HOP_NOT_RUNNING = 148645809
+            NEXT_HOP_NOT_RUNNING = 417081265
 
             NOT_CRITICAL_ERROR = 105763924
 
@@ -9446,15 +9446,15 @@ module Google
 
             REQUIRED_TOS_AGREEMENT = 3745539
 
-            RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING = 228293185
+            RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING = 496728641
 
             RESOURCE_NOT_DELETED = 168598460
 
-            SCHEMA_VALIDATION_IGNORED = 6810186
+            SCHEMA_VALIDATION_IGNORED = 275245642
 
             SINGLE_INSTANCE_PROPERTY_TEMPLATE = 268305617
 
-            UNDECLARED_PROPERTIES = 122077983
+            UNDECLARED_PROPERTIES = 390513439
 
             UNREACHABLE = 13328052
           end
@@ -9661,9 +9661,9 @@ module Google
 
             BOTH = 2044801
 
-            EGRESS = 164445045
+            EGRESS = 432880501
 
-            INGRESS = 248495765
+            INGRESS = 516931221
           end
         end
 
@@ -9961,7 +9961,7 @@ module Google
 
             DENY = 2094604
 
-            DENY_WITH_LOG = 82998526
+            DENY_WITH_LOG = 351433982
 
             LOG = 75556
 
@@ -10051,39 +10051,39 @@ module Google
 
             AFFINITY_GROUPS = 108303563
 
-            AUTOSCALERS = 202813532
+            AUTOSCALERS = 471248988
 
             BACKEND_BUCKETS = 137626846
 
-            BACKEND_SERVICES = 1188297
+            BACKEND_SERVICES = 269623753
 
-            C2_CPUS = 49165755
+            C2_CPUS = 317601211
 
-            COMMITMENTS = 187706334
+            COMMITMENTS = 456141790
 
             COMMITTED_A2_CPUS = 59330902
 
             COMMITTED_C2_CPUS = 223725528
 
-            COMMITTED_CPUS = 23959246
+            COMMITTED_CPUS = 292394702
 
-            COMMITTED_LICENSES = 89171413
+            COMMITTED_LICENSES = 357606869
 
-            COMMITTED_LOCAL_SSD_TOTAL_GB = 39958024
+            COMMITTED_LOCAL_SSD_TOTAL_GB = 308393480
 
-            COMMITTED_MEMORY_OPTIMIZED_CPUS = 220622430
+            COMMITTED_MEMORY_OPTIMIZED_CPUS = 489057886
 
             COMMITTED_N2D_CPUS = 125951757
 
-            COMMITTED_N2_CPUS = 54154147
+            COMMITTED_N2_CPUS = 322589603
 
-            COMMITTED_NVIDIA_A100_GPUS = 107363989
+            COMMITTED_NVIDIA_A100_GPUS = 375799445
 
             COMMITTED_NVIDIA_K80_GPUS = 3857188
 
             COMMITTED_NVIDIA_P100_GPUS = 107528100
 
-            COMMITTED_NVIDIA_P4_GPUS = 79517441
+            COMMITTED_NVIDIA_P4_GPUS = 347952897
 
             COMMITTED_NVIDIA_T4_GPUS = 139871237
 
@@ -10091,43 +10091,43 @@ module Google
 
             CPUS = 2075595
 
-            CPUS_ALL_REGIONS = 202475693
+            CPUS_ALL_REGIONS = 470911149
 
-            DISKS_TOTAL_GB = 85085087
+            DISKS_TOTAL_GB = 353520543
 
-            EXTERNAL_NETWORK_LB_FORWARDING_RULES = 105862809
+            EXTERNAL_NETWORK_LB_FORWARDING_RULES = 374298265
 
             EXTERNAL_PROTOCOL_FORWARDING_RULES = 63478888
 
-            EXTERNAL_VPN_GATEWAYS = 4021678
+            EXTERNAL_VPN_GATEWAYS = 272457134
 
-            FIREWALLS = 106050387
+            FIREWALLS = 374485843
 
-            FORWARDING_RULES = 164233493
+            FORWARDING_RULES = 432668949
 
             GLOBAL_INTERNAL_ADDRESSES = 42738332
 
             GPUS_ALL_REGIONS = 39387177
 
-            HEALTH_CHECKS = 20912046
+            HEALTH_CHECKS = 289347502
 
             IMAGES = 15562360
 
             INSTANCES = 131337822
 
-            INSTANCE_GROUPS = 87483582
+            INSTANCE_GROUPS = 355919038
 
             INSTANCE_GROUP_MANAGERS = 101798192
 
             INSTANCE_TEMPLATES = 226188271
 
-            INTERCONNECTS = 146769285
+            INTERCONNECTS = 415204741
 
             INTERCONNECT_ATTACHMENTS_PER_REGION = 159968086
 
-            INTERCONNECT_ATTACHMENTS_TOTAL_MBPS = 156654963
+            INTERCONNECT_ATTACHMENTS_TOTAL_MBPS = 425090419
 
-            INTERCONNECT_TOTAL_GBPS = 16906410
+            INTERCONNECT_TOTAL_GBPS = 285341866
 
             INTERNAL_ADDRESSES = 197899392
 
@@ -10135,25 +10135,25 @@ module Google
 
             IN_PLACE_SNAPSHOTS = 151359133
 
-            IN_USE_ADDRESSES = 133689616
+            IN_USE_ADDRESSES = 402125072
 
             IN_USE_BACKUP_SCHEDULES = 32786705
 
-            IN_USE_SNAPSHOT_SCHEDULES = 193668627
+            IN_USE_SNAPSHOT_SCHEDULES = 462104083
 
-            LOCAL_SSD_TOTAL_GB = 62442565
+            LOCAL_SSD_TOTAL_GB = 330878021
 
             M1_CPUS = 37203366
 
             M2_CPUS = 65832517
 
-            MACHINE_IMAGES = 178551184
+            MACHINE_IMAGES = 446986640
 
-            N2D_CPUS = 83307914
+            N2D_CPUS = 351743370
 
-            N2_CPUS = 148029830
+            N2_CPUS = 416465286
 
-            NETWORKS = 217046021
+            NETWORKS = 485481477
 
             NETWORK_ENDPOINT_GROUPS = 102144909
 
@@ -10161,9 +10161,9 @@ module Google
 
             NODE_GROUPS = 24624817
 
-            NODE_TEMPLATES = 206461212
+            NODE_TEMPLATES = 474896668
 
-            NVIDIA_A100_GPUS = 236437522
+            NVIDIA_A100_GPUS = 504872978
 
             NVIDIA_K80_GPUS = 163886599
 
@@ -10171,13 +10171,13 @@ module Google
 
             NVIDIA_P100_VWS_GPUS = 213970574
 
-            NVIDIA_P4_GPUS = 15406014
+            NVIDIA_P4_GPUS = 283841470
 
-            NVIDIA_P4_VWS_GPUS = 259861163
+            NVIDIA_P4_VWS_GPUS = 528296619
 
             NVIDIA_T4_GPUS = 75759810
 
-            NVIDIA_T4_VWS_GPUS = 51377583
+            NVIDIA_T4_VWS_GPUS = 319813039
 
             NVIDIA_V100_GPUS = 129293095
 
@@ -10189,13 +10189,13 @@ module Google
 
             PREEMPTIBLE_NVIDIA_A100_GPUS = 68832784
 
-            PREEMPTIBLE_NVIDIA_K80_GPUS = 106524745
+            PREEMPTIBLE_NVIDIA_K80_GPUS = 374960201
 
-            PREEMPTIBLE_NVIDIA_P100_GPUS = 68996895
+            PREEMPTIBLE_NVIDIA_P100_GPUS = 337432351
 
-            PREEMPTIBLE_NVIDIA_P100_VWS_GPUS = 45108620
+            PREEMPTIBLE_NVIDIA_P100_VWS_GPUS = 313544076
 
-            PREEMPTIBLE_NVIDIA_P4_GPUS = 160762172
+            PREEMPTIBLE_NVIDIA_P4_GPUS = 429197628
 
             PREEMPTIBLE_NVIDIA_P4_VWS_GPUS = 252981545
 
@@ -10207,9 +10207,9 @@ module Google
 
             PSC_ILB_CONSUMER_FORWARDING_RULES_PER_PRODUCER_NETWORK = 231164291
 
-            PUBLIC_ADVERTISED_PREFIXES = 202936524
+            PUBLIC_ADVERTISED_PREFIXES = 471371980
 
-            PUBLIC_DELEGATED_PREFIXES = 264030518
+            PUBLIC_DELEGATED_PREFIXES = 532465974
 
             REGIONAL_AUTOSCALERS = 29363772
 
@@ -10219,35 +10219,35 @@ module Google
 
             RESOURCE_POLICIES = 83955297
 
-            ROUTERS = 224583210
+            ROUTERS = 493018666
 
-            ROUTES = 7244618
+            ROUTES = 275680074
 
             SECURITY_POLICIES = 189518703
 
-            SECURITY_POLICY_CEVAL_RULES = 202380233
+            SECURITY_POLICY_CEVAL_RULES = 470815689
 
             SECURITY_POLICY_RULES = 203549225
 
-            SNAPSHOTS = 74969871
+            SNAPSHOTS = 343405327
 
             SSD_TOTAL_GB = 161732561
 
-            SSL_CERTIFICATES = 109936943
+            SSL_CERTIFICATES = 378372399
 
             STATIC_ADDRESSES = 93624049
 
-            STATIC_BYOIP_ADDRESSES = 7374193
+            STATIC_BYOIP_ADDRESSES = 275809649
 
-            SUBNETWORKS = 152895013
+            SUBNETWORKS = 421330469
 
             TARGET_HTTPS_PROXIES = 219522506
 
             TARGET_HTTP_PROXIES = 164117155
 
-            TARGET_INSTANCES = 16084272
+            TARGET_INSTANCES = 284519728
 
-            TARGET_POOLS = 79825801
+            TARGET_POOLS = 348261257
 
             TARGET_SSL_PROXIES = 159216235
 
@@ -10255,7 +10255,7 @@ module Google
 
             TARGET_VPN_GATEWAYS = 75029928
 
-            URL_MAPS = 110225287
+            URL_MAPS = 378660743
 
             VPN_GATEWAYS = 35620282
 
@@ -10328,9 +10328,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_DEFAULT_NETWORK_TIER = 0
 
-            PREMIUM = 131095095
+            PREMIUM = 399530551
 
-            STANDARD = 216207037
+            STANDARD = 484642493
           end
 
           # [Output Only] The role this project has in a shared VPC configuration. Currently, only projects with the host role, which is specified by the value HOST, are differentiated.
@@ -10340,7 +10340,7 @@ module Google
 
             HOST = 2223528
 
-            UNSPECIFIED_XPN_PROJECT_STATUS = 71957801
+            UNSPECIFIED_XPN_PROJECT_STATUS = 340393257
           end
         end
 
@@ -10360,7 +10360,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            PROJECT = 140236537
+            PROJECT = 408671993
 
             XPN_RESOURCE_TYPE_UNSPECIFIED = 151607034
           end
@@ -10416,9 +10416,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_NETWORK_TIER = 0
 
-            PREMIUM = 131095095
+            PREMIUM = 399530551
 
-            STANDARD = 216207037
+            STANDARD = 484642493
           end
         end
 
@@ -11065,11 +11065,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            CREATING = 187129529
+            CREATING = 455564985
 
-            DELETING = 260166568
+            DELETING = 528602024
 
-            INVALID = 261848535
+            INVALID = 530283991
 
             READY = 77848963
           end
@@ -11107,7 +11107,7 @@ module Google
 
             COLLOCATED = 103257554
 
-            UNSPECIFIED_COLLOCATION = 195872749
+            UNSPECIFIED_COLLOCATION = 464308205
           end
         end
 
@@ -11235,7 +11235,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_ON_SOURCE_DISK_DELETE = 0
 
-            APPLY_RETENTION_POLICY = 266635876
+            APPLY_RETENTION_POLICY = 535071332
 
             KEEP_AUTO_SNAPSHOTS = 258925689
 
@@ -11309,21 +11309,21 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_DAY = 0
 
-            FRIDAY = 202963295
+            FRIDAY = 471398751
 
-            INVALID = 261848535
+            INVALID = 530283991
 
             MONDAY = 132310288
 
-            SATURDAY = 10602425
+            SATURDAY = 279037881
 
-            SUNDAY = 41190864
+            SUNDAY = 309626320
 
             THURSDAY = 207198682
 
-            TUESDAY = 9074221
+            TUESDAY = 277509677
 
-            WEDNESDAY = 153593654
+            WEDNESDAY = 422029110
           end
         end
 
@@ -11438,7 +11438,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_ADVERTISE_MODE = 0
 
-            CUSTOM = 120160113
+            CUSTOM = 388595569
 
             DEFAULT = 115302945
           end
@@ -11495,7 +11495,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_ADVERTISE_MODE = 0
 
-            CUSTOM = 120160113
+            CUSTOM = 388595569
 
             DEFAULT = 115302945
           end
@@ -11514,9 +11514,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_MANAGEMENT_TYPE = 0
 
-            MANAGED_BY_ATTACHMENT = 190490955
+            MANAGED_BY_ATTACHMENT = 458926411
 
-            MANAGED_BY_USER = 48858611
+            MANAGED_BY_USER = 317294067
           end
         end
 
@@ -11548,9 +11548,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_MANAGEMENT_TYPE = 0
 
-            MANAGED_BY_ATTACHMENT = 190490955
+            MANAGED_BY_ATTACHMENT = 458926411
 
-            MANAGED_BY_USER = 48858611
+            MANAGED_BY_USER = 317294067
           end
         end
 
@@ -11626,7 +11626,7 @@ module Google
 
             ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES = 185573819
 
-            LIST_OF_SUBNETWORKS = 249106814
+            LIST_OF_SUBNETWORKS = 517542270
           end
         end
 
@@ -11781,9 +11781,9 @@ module Google
 
             ALL = 64897
 
-            ERRORS_ONLY = 39049216
+            ERRORS_ONLY = 307484672
 
-            TRANSLATIONS_ONLY = 88777193
+            TRANSLATIONS_ONLY = 357212649
           end
         end
 
@@ -11810,7 +11810,7 @@ module Google
 
             LIST_OF_SECONDARY_IP_RANGES = 192289308
 
-            PRIMARY_IP_RANGE = 28674498
+            PRIMARY_IP_RANGE = 297109954
           end
         end
 
@@ -11855,7 +11855,7 @@ module Google
 
             DOWN = 2104482
 
-            UNKNOWN = 164706346
+            UNKNOWN = 433141802
 
             UP = 2715
           end
@@ -12251,11 +12251,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            CREATING = 187129529
+            CREATING = 455564985
 
-            DELETING = 260166568
+            DELETING = 528602024
 
-            FAILED = 187271229
+            FAILED = 455706685
 
             READY = 77848963
 
@@ -12267,7 +12267,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STORAGE_BYTES_STATUS = 0
 
-            UPDATING = 226178886
+            UPDATING = 494614342
 
             UP_TO_DATE = 101306702
           end
@@ -12325,17 +12325,17 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            ACTIVE = 46297862
+            ACTIVE = 314733318
 
-            MANAGED_CERTIFICATE_STATUS_UNSPECIFIED = 206365394
+            MANAGED_CERTIFICATE_STATUS_UNSPECIFIED = 474800850
 
-            PROVISIONING = 22461165
+            PROVISIONING = 290896621
 
             PROVISIONING_FAILED = 76813775
 
-            PROVISIONING_FAILED_PERMANENTLY = 6600747
+            PROVISIONING_FAILED_PERMANENTLY = 275036203
 
-            RENEWAL_FAILED = 166223620
+            RENEWAL_FAILED = 434659076
           end
         end
 
@@ -12417,11 +12417,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            MANAGED = 211065727
+            MANAGED = 479501183
 
-            SELF_MANAGED = 166002060
+            SELF_MANAGED = 434437516
 
-            TYPE_UNSPECIFIED = 169278866
+            TYPE_UNSPECIFIED = 437714322
           end
         end
 
@@ -12560,7 +12560,7 @@ module Google
 
             COMPATIBLE = 179357396
 
-            CUSTOM = 120160113
+            CUSTOM = 388595569
 
             MODERN = 132013855
 
@@ -12670,9 +12670,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_AGGREGATION_INTERVAL = 0
 
-            INTERVAL_10_MIN = 218720460
+            INTERVAL_10_MIN = 487155916
 
-            INTERVAL_15_MIN = 223338065
+            INTERVAL_15_MIN = 491773521
 
             INTERVAL_1_MIN = 69052714
 
@@ -12690,7 +12690,7 @@ module Google
 
             CUSTOM_METADATA = 62450749
 
-            EXCLUDE_ALL_METADATA = 66084498
+            EXCLUDE_ALL_METADATA = 334519954
 
             INCLUDE_ALL_METADATA = 164619908
           end
@@ -12786,11 +12786,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_PRIVATE_IPV6_GOOGLE_ACCESS = 0
 
-            DISABLE_GOOGLE_ACCESS = 182523123
+            DISABLE_GOOGLE_ACCESS = 450958579
 
-            ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE = 159540538
+            ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE = 427975994
 
-            ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE = 19774807
+            ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE = 288210263
           end
 
           # The purpose of the resource. This field can be either PRIVATE_RFC_1918 or INTERNAL_HTTPS_LOAD_BALANCER. A subnetwork with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a user-created subnetwork that is reserved for Internal HTTP(S) Load Balancing. If unspecified, the purpose defaults to PRIVATE_RFC_1918. The enableFlowLogs field isn't supported with the purpose field set to INTERNAL_HTTPS_LOAD_BALANCER.
@@ -12800,7 +12800,7 @@ module Google
 
             INTERNAL_HTTPS_LOAD_BALANCER = 248748889
 
-            PRIVATE = 135049571
+            PRIVATE = 403485027
 
             PRIVATE_RFC_1918 = 254902107
           end
@@ -12810,9 +12810,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_ROLE = 0
 
-            ACTIVE = 46297862
+            ACTIVE = 314733318
 
-            BACKUP = 72575426
+            BACKUP = 341010882
           end
 
           # [Output Only] The state of the subnetwork, which can be one of the following values: READY: Subnetwork is created and ready to use DRAINING: only applicable to subnetworks that have the purpose set to INTERNAL_HTTPS_LOAD_BALANCER and indicates that connections to the load balancer are being drained. A subnetwork that is draining cannot be used or modified until it reaches a status of READY CREATING: Subnetwork is provisioning DELETING: Subnetwork is being deleted UPDATING: Subnetwork is being updated
@@ -12820,7 +12820,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
-            DRAINING = 212019946
+            DRAINING = 480455402
 
             READY = 77848963
           end
@@ -13176,7 +13176,7 @@ module Google
 
             DISABLE = 241807048
 
-            ENABLE = 170400131
+            ENABLE = 438835587
 
             NONE = 2402104
           end
@@ -13207,7 +13207,7 @@ module Google
 
             DISABLE = 241807048
 
-            ENABLE = 170400131
+            ENABLE = 438835587
 
             NONE = 2402104
           end
@@ -13458,17 +13458,17 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_SESSION_AFFINITY = 0
 
-            CLIENT_IP = 77229595
+            CLIENT_IP = 345665051
 
             CLIENT_IP_PORT_PROTO = 221722926
 
             CLIENT_IP_PROTO = 25322148
 
-            GENERATED_COOKIE = 101885748
+            GENERATED_COOKIE = 370321204
 
             HEADER_FIELD = 200737960
 
-            HTTP_COOKIE = 226546171
+            HTTP_COOKIE = 494981627
 
             NONE = 2402104
           end
@@ -13621,7 +13621,7 @@ module Google
 
             NONE = 2402104
 
-            PROXY_V1 = 65917484
+            PROXY_V1 = 334352940
           end
         end
 
@@ -13677,7 +13677,7 @@ module Google
 
             NONE = 2402104
 
-            PROXY_V1 = 65917484
+            PROXY_V1 = 334352940
           end
         end
 
@@ -13727,7 +13727,7 @@ module Google
 
             NONE = 2402104
 
-            PROXY_V1 = 65917484
+            PROXY_V1 = 334352940
           end
         end
 
@@ -13769,7 +13769,7 @@ module Google
 
             NONE = 2402104
 
-            PROXY_V1 = 65917484
+            PROXY_V1 = 334352940
           end
         end
 
@@ -13842,11 +13842,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            CREATING = 187129529
+            CREATING = 455564985
 
-            DELETING = 260166568
+            DELETING = 528602024
 
-            FAILED = 187271229
+            FAILED = 455706685
 
             READY = 77848963
           end
@@ -14370,9 +14370,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
-            CONNECTION_REDUNDANCY_MET = 236807451
+            CONNECTION_REDUNDANCY_MET = 505242907
 
-            CONNECTION_REDUNDANCY_NOT_MET = 243427855
+            CONNECTION_REDUNDANCY_NOT_MET = 511863311
           end
 
           # Indicates the reason why the VPN connection does not meet the high availability redundancy criteria/requirement. Valid values is INCOMPLETE_TUNNELS_COVERAGE.
@@ -14514,29 +14514,29 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            ALLOCATING_RESOURCES = 52487360
+            ALLOCATING_RESOURCES = 320922816
 
             AUTHORIZATION_ERROR = 23580290
 
-            DEPROVISIONING = 160500206
+            DEPROVISIONING = 428935662
 
             ESTABLISHED = 88852344
 
-            FAILED = 187271229
+            FAILED = 455706685
 
             FIRST_HANDSHAKE = 191393000
 
-            NEGOTIATION_FAILURE = 91890412
+            NEGOTIATION_FAILURE = 360325868
 
             NETWORK_ERROR = 193912951
 
             NO_INCOMING_PACKETS = 119983216
 
-            PROVISIONING = 22461165
+            PROVISIONING = 290896621
 
             REJECTED = 174130302
 
-            STOPPED = 175840685
+            STOPPED = 444276141
 
             WAITING_FOR_FULL_CONFIG = 41640522
           end
@@ -20205,9 +20205,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_DIRECTION = 0
 
-            INCOMING = 70117414
+            INCOMING = 338552870
 
-            OUTGOING = 39002988
+            OUTGOING = 307438444
           end
         end
 
