@@ -75,12 +75,14 @@ class MockSpanner < Minitest::Spec
     { instances: 3.times.map { instance_hash } }
   end
 
-  def instance_hash name: "instance-#{rand(9999)}", nodes: 1, state: "READY", labels: {}
+  def instance_hash name: "instance-#{rand(9999)}", nodes: 1, processing_units: nil,
+                    state: "READY", labels: {}
     {
       name: "projects/#{project}/instances/#{name}",
       config: "projects/#{project}/instanceConfigs/regional-us-central1",
       display_name: name.split("-").map(&:capitalize).join(" "),
       node_count: nodes,
+      processing_units: processing_units,
       state: state,
       labels: labels
     }

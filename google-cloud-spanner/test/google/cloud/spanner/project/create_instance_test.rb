@@ -19,7 +19,7 @@ describe Google::Cloud::Spanner::Project, :create_instance, :mock_spanner do
     Google::Longrunning::Operation.new(
       name: "1234567890",
       metadata: {
-        type_url: "google.spanner.admin.database.v1.UpdateDatabaseDdlRequest",
+        type_url: "google.spanner.admin.database.v1.CreateInstanceMetadata",
         value: ""
       }
     )
@@ -48,10 +48,9 @@ describe Google::Cloud::Spanner::Project, :create_instance, :mock_spanner do
       )
     )
   end
+  let(:instance_id) { "new-instance" }
 
   it "creates an empty instance" do
-    instance_id = "new-instance"
-
     mock = Minitest::Mock.new
     create_req = Google::Cloud::Spanner::Admin::Instance::V1::Instance.new config: instance_config_path(config)
     create_res = \
@@ -88,8 +87,6 @@ describe Google::Cloud::Spanner::Project, :create_instance, :mock_spanner do
   end
 
   it "creates a full instance and labels with symbols" do
-    instance_id = "new-instance"
-
     create_req = Google::Cloud::Spanner::Admin::Instance::V1::Instance.new(
       config: instance_config_path(config), display_name: "My New Instance",
       node_count: 99, labels: { "env" => "production" }
@@ -110,5 +107,38 @@ describe Google::Cloud::Spanner::Project, :create_instance, :mock_spanner do
 
     _(job).must_be_kind_of Google::Cloud::Spanner::Instance::Job
     _(job).wont_be :done?
+  end
+
+  it "creates a instance with processing units" do
+    create_req = Google::Cloud::Spanner::Admin::Instance::V1::Instance.new(
+      config: instance_config_path(config), display_name: "My New Instance",
+      processing_units: 1000, labels: { "env" => "production" }
+    )
+    create_res = \
+      Gapic::Operation.new(
+        job_grpc, Object.new,
+        result_type: Google::Cloud::Spanner::Admin::Instance::V1::Instance,
+        metadata_type: Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceMetadata
+      )
+    mock = Minitest::Mock.new
+
+    mock.expect :create_instance, create_res, [{ parent: project_path, instance_id: instance_id, instance: create_req }, nil]
+    spanner.service.mocked_instances = mock
+
+    job = spanner.create_instance instance_id, config: config, name: "My New Instance", processing_units: 1000, labels: { env: :production }
+
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Spanner::Instance::Job
+    _(job).wont_be :done?
+  end
+
+  it "raise an error if create instance with both options processing units and nodes count" do
+    error = assert_raises ArgumentError do
+      job = spanner.create_instance instance_id, config: config, name: "My New Instance",
+                                    nodes: 1, processing_units: 1000
+    end
+
+    _(error.message).must_equal "only one of processing_units or nodes should be specified"
   end
 end

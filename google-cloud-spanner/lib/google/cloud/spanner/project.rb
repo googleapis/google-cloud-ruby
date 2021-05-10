@@ -177,7 +177,10 @@ module Google
         #   configuration. Values can be the `instance_config_id`, the full
         #   path, or an {Instance::Config} object. Required.
         # @param [Integer] nodes The number of nodes allocated to this instance.
-        #   Required.
+        #   Optional. Specifiy either `nodes` or `processing_units`
+        # @param [Integer] processing_units The number of processing units
+        #   allocated to this instance. Optional. Specifiy either `nodes`
+        #   or `processing_units`
         # @param [Hash] labels Cloud Labels are a flexible and lightweight
         #   mechanism for organizing cloud resources into groups that reflect a
         #   customer's organizational needs and deployment strategies. Cloud
@@ -195,6 +198,7 @@ module Google
         #
         # @return [Instance::Job] The job representing the long-running,
         #   asynchronous processing of an instance create operation.
+        # @raise [ArgumentError] if both processing_units or nodes are specified.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -217,14 +221,41 @@ module Google
         #     instance = job.instance
         #   end
         #
+        # @example Create instance using processsing units
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   job = spanner.create_instance "my-new-instance",
+        #                                 name: "My New Instance",
+        #                                 config: "regional-us-central1",
+        #                                 processing_units: 500,
+        #                                 labels: { production: :env }
+        #
+        #   job.done? #=> false
+        #   job.reload! # API call
+        #   job.done? #=> true
+        #
+        #   if job.error?
+        #     status = job.error
+        #   else
+        #     instance = job.instance
+        #   end
+        #
         def create_instance instance_id, name: nil, config: nil, nodes: nil,
-                            labels: nil
+                            processing_units: nil, labels: nil
           config = config.path if config.respond_to? :path
+
+          if nodes && processing_units
+            raise ArgumentError,
+                  "only one of processing_units or nodes should be specified"
+          end
+
           # Convert from possible Google::Protobuf::Map
           labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
           grpc = service.create_instance \
             instance_id, name: name, config: config, nodes: nodes,
-                         labels: labels
+                         processing_units: processing_units, labels: labels
           Instance::Job.from_grpc grpc, service
         end
 
