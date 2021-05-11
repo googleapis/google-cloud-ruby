@@ -853,7 +853,8 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Name of the organization to groupBy. Its format is
-            #     "organizations/[organization_id]".
+            #     "organizations/[organization_id], folders/[folder_id], or
+            #     projects/[project_id]".
             #   @param filter [::String]
             #     Expression that defines the filter to apply across assets.
             #     The expression is a list of zero or more restrictions combined via logical
@@ -1028,7 +1029,9 @@ module Google
             # specified properties.
             #
             # To group across all sources provide a `-` as the source id.
-            # Example: /v1/organizations/\\{organization_id}/sources/-/findings
+            # Example: /v1/organizations/\\{organization_id}/sources/-/findings,
+            # /v1/folders/\\{folder_id}/sources/-/findings,
+            # /v1/projects/\\{project_id}/sources/-/findings
             #
             # @overload group_findings(request, options = nil)
             #   Pass arguments to `group_findings` via a request object, either of type
@@ -1047,9 +1050,12 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Name of the source to groupBy. Its format is
-            #     "organizations/[organization_id]/sources/[source_id]". To groupBy across
-            #     all sources provide a source_id of `-`. For example:
-            #     organizations/\\{organization_id}/sources/-
+            #     "organizations/[organization_id]/sources/[source_id]",
+            #     folders/[folder_id]/sources/[source_id], or
+            #     projects/[project_id]/sources/[source_id]. To groupBy across all sources
+            #     provide a source_id of `-`. For example:
+            #     organizations/\\{organization_id}/sources/-, folders/\\{folder_id}/sources/-,
+            #     or projects/\\{project_id}/sources/-
             #   @param filter [::String]
             #     Expression that defines the filter to apply across findings.
             #     The expression is a list of one or more restrictions combined via logical
@@ -1229,7 +1235,8 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Name of the organization assets should belong to. Its format is
-            #     "organizations/[organization_id]".
+            #     "organizations/[organization_id], folders/[folder_id], or
+            #     projects/[project_id]".
             #   @param filter [::String]
             #     Expression that defines the filter to apply across assets.
             #     The expression is a list of zero or more restrictions combined via logical
@@ -1426,9 +1433,12 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Name of the source the findings belong to. Its format is
-            #     "organizations/[organization_id]/sources/[source_id]". To list across all
-            #     sources provide a source_id of `-`. For example:
-            #     organizations/\\{organization_id}/sources/-
+            #     "organizations/[organization_id]/sources/[source_id],
+            #     folders/[folder_id]/sources/[source_id], or
+            #     projects/[project_id]/sources/[source_id]". To list across all sources
+            #     provide a source_id of `-`. For example:
+            #     organizations/\\{organization_id}/sources/-, folders/\\{folder_id}/sources/- or
+            #     projects/\\{projects_id}/sources/-
             #   @param filter [::String]
             #     Expression that defines the filter to apply across findings.
             #     The expression is a list of one or more restrictions combined via logical
@@ -1686,8 +1696,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of the parent of sources to list. Its format should
-            #     be "organizations/[organization_id]".
+            #     Required. Resource name of the parent of sources to list. Its format should be
+            #     "organizations/[organization_id], folders/[folder_id], or
+            #     projects/[project_id]".
             #   @param page_token [::String]
             #     The value returned by the last `ListSourcesResponse`; indicates
             #     that this is a continuation of a prior `ListSources` call, and
