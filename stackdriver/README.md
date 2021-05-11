@@ -8,8 +8,6 @@ application.
 Specifically, this gem is a convenience package that loads and automatically
 activates the instrumentation features of the following gems:
 
-*   [google-cloud-debugger](https://googleapis.dev/ruby/google-cloud-debugger/latest) which enables remote
-    debugging using [Stackdriver Debugger](https://cloud.google.com/debugger/)
 *   [google-cloud-error_reporting](https://googleapis.dev/ruby/google-cloud-error_reporting/latest) which
     reports unhandled exceptions and other errors to
     [Stackdriver Error Reporting](https://cloud.google.com/error-reporting/)
@@ -57,7 +55,6 @@ require "stackdriver"
 use Google::Cloud::Logging::Middleware
 use Google::Cloud::ErrorReporting::Middleware
 use Google::Cloud::Trace::Middleware
-use Google::Cloud::Debugger::Middleware
 ```
 
 #### Advanced instrumentation
