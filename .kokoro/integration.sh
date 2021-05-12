@@ -2,13 +2,6 @@
 
 set -eo pipefail
 
-# TODO: Remove these when the docker image sets them.
-export OLDEST_RUBY_VERSION=2.5.8
-export NEWEST_RUBY_VERSION=3.0.0
-export RBENV_ROOT=/root/.rbenv
-export PYENV_ROOT=/root/.pyenv
-export NODENV_ROOT=/root/.nodenv
-
 # Get requested ruby versions. Use the default if not given.
 ruby_versions=($RUBY_VERSIONS)
 if [ "${#ruby_versions[@]}" = "0" ]; then
