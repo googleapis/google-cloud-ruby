@@ -1711,7 +1711,7 @@ module Google
 
               ##
               # Create a new table by restoring from a completed backup. The new table
-              # must be in the same instance as the instance containing the backup.  The
+              # must be in the same project as the instance containing the backup.  The
               # returned table {::Google::Longrunning::Operation long-running operation} can
               # be used to track the progress of the operation, and to cancel it.  The
               # {::Google::Longrunning::Operation#metadata metadata} field type is
@@ -1736,8 +1736,8 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The name of the instance in which to create the restored
-              #     table. This instance must be the parent of the source backup. Values are
-              #     of the form `projects/<project>/instances/<instance>`.
+              #     table. This instance must be in the same project as the source backup.
+              #     Values are of the form `projects/<project>/instances/<instance>`.
               #   @param table_id [::String]
               #     Required. The id of the table to create and restore to. This
               #     table must not already exist. The `table_id` appended to

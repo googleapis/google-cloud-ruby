@@ -27,8 +27,8 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The name of the instance in which to create the restored
-          #     table. This instance must be the parent of the source backup. Values are
-          #     of the form `projects/<project>/instances/<instance>`.
+          #     table. This instance must be in the same project as the source backup.
+          #     Values are of the form `projects/<project>/instances/<instance>`.
           # @!attribute [rw] table_id
           #   @return [::String]
           #     Required. The id of the table to create and restore to. This
