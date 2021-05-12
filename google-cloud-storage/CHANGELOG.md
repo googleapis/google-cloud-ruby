@@ -1,5 +1,11 @@
 # Release History
 
+### 1.31.1 / 2021-05-12
+
+#### Documentation
+
+* Update IAMCredentialsService#sign_service_account_blob examples
+
 ### 1.31.0 / 2021-03-10
 
 #### Features
