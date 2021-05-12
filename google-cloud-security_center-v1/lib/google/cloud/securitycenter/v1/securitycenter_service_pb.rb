@@ -10,6 +10,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/securitycenter/v1/asset_pb'
 require 'google/cloud/securitycenter/v1/finding_pb'
+require 'google/cloud/securitycenter/v1/folder_pb'
 require 'google/cloud/securitycenter/v1/notification_config_pb'
 require 'google/cloud/securitycenter/v1/organization_settings_pb'
 require 'google/cloud/securitycenter/v1/security_marks_pb'
@@ -155,6 +156,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :project_display_name, :string, 3
       optional :parent_name, :string, 4
       optional :parent_display_name, :string, 5
+      repeated :folders, :message, 7, "google.cloud.securitycenter.v1.Folder"
     end
     add_enum "google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult.StateChange" do
       value :UNUSED, 0
