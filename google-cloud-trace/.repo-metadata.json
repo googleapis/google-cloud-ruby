@@ -3,5 +3,5 @@
     "language": "ruby",
     "distribution_name": "google-cloud-trace",
     "client_documentation": "https://googleapis.dev/ruby/google-cloud-trace/latest",
-    "library_type": "GAPIC_MANUAL"
+    "library_type": "INTEGRATION"
 }

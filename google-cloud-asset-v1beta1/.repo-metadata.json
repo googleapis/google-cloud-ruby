@@ -7,6 +7,5 @@
     "name_pretty": "Cloud Asset V1beta1 API",
     "product_documentation": "https://cloud.google.com/asset-inventory/",
     "repo": "googleapis/google-cloud-ruby",
-    "requires_billing": true,
-    "library_type": "GAPIC_MANUAL"
+    "requires_billing": true
 }

@@ -3,5 +3,5 @@
     "language": "ruby",
     "distribution_name": "google-cloud-core",
     "client_documentation": "https://googleapis.dev/ruby/google-cloud-core/latest",
-    "library_type": "GAPIC_MANUAL"
+    "library_type": "CORE"
 }
