@@ -51,14 +51,20 @@ module Google
         #     The time at which the asset was created in Security Command Center.
         # @!attribute [rw] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The time at which the asset was last updated, added, or deleted in Cloud
-        #     SCC.
+        #     The time at which the asset was last updated or added in Cloud SCC.
         # @!attribute [rw] iam_policy
         #   @return [::Google::Cloud::SecurityCenter::V1p1beta1::Asset::IamPolicy]
         #     Cloud IAM Policy information associated with the Google Cloud resource
         #     described by the Security Command Center asset. This information is managed
         #     and defined by the Google Cloud resource and cannot be modified by the
         #     user.
+        # @!attribute [rw] canonical_name
+        #   @return [::String]
+        #     The canonical name of the resource. It's either
+        #     "organizations/\\{organization_id}/assets/\\{asset_id}",
+        #     "folders/\\{folder_id}/assets/\\{asset_id}" or
+        #     "projects/\\{project_number}/assets/\\{asset_id}", depending on the closest CRM
+        #     ancestor of the resource.
         class Asset
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -96,6 +102,11 @@ module Google
           # @!attribute [rw] resource_project_display_name
           #   @return [::String]
           #     The user defined display name for the project of this resource.
+          # @!attribute [rw] folders
+          #   @return [::Array<::Google::Cloud::SecurityCenter::V1p1Beta1::Folder>]
+          #     Contains a Folder message for each folder in the assets ancestry.
+          #     The first folder is the deepest nested folder, and the last folder is the
+          #     folder directly under the Organization.
           class SecurityCenterProperties
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

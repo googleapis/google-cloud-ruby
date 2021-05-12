@@ -3,8 +3,8 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/resource_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/securitycenter/v1p1beta1/organization_settings.proto", :syntax => :proto3) do
     add_message "google.cloud.securitycenter.v1p1beta1.OrganizationSettings" do
@@ -15,6 +15,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.securitycenter.v1p1beta1.OrganizationSettings.AssetDiscoveryConfig" do
       repeated :project_ids, :string, 1
       optional :inclusion_mode, :enum, 2, "google.cloud.securitycenter.v1p1beta1.OrganizationSettings.AssetDiscoveryConfig.InclusionMode"
+      repeated :folder_ids, :string, 3
     end
     add_enum "google.cloud.securitycenter.v1p1beta1.OrganizationSettings.AssetDiscoveryConfig.InclusionMode" do
       value :INCLUSION_MODE_UNSPECIFIED, 0
