@@ -66,14 +66,21 @@ module Google
         attr_reader :interval
         attr_reader :publish_threads
         attr_reader :callback_threads
+        attr_reader :flow_control
         ##
         # @private Implementation accessors
         attr_reader :service, :batch, :publish_thread_pool,
-                    :callback_thread_pool
+                    :callback_thread_pool, :flow_controller
 
         ##
         # @private Create a new instance of the object.
-        def initialize topic_name, service, max_bytes: 1_000_000, max_messages: 100, interval: 0.01, threads: {}
+        def initialize topic_name,
+                       service,
+                       max_bytes: 1_000_000,
+                       max_messages: 100,
+                       interval: 0.01,
+                       threads: {},
+                       flow_control: {}
           # init MonitorMixin
           super()
           @topic_name = service.topic_path topic_name
@@ -84,6 +91,10 @@ module Google
           @interval         = interval
           @publish_threads  = (threads[:publish] || 2).to_i
           @callback_threads = (threads[:callback] || 4).to_i
+          @flow_control = {
+            byte_limit: 10 * @max_bytes,
+            message_limit: 10 * @max_messages
+          }.merge flow_control
 
           @published_at = nil
           @publish_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @publish_threads
@@ -92,10 +103,7 @@ module Google
           @ordered = false
           @batches = {}
           @cond = new_cond
-          @flow_controller = FlowController.new(
-            byte_limit: 10 * @max_bytes,
-            message_limit: 10 * @max_messages
-          )
+          @flow_controller = FlowController.new(**@flow_control)
           @thread = Thread.new { run_background }
         end
 
@@ -125,14 +133,22 @@ module Google
         #
         def publish data = nil, attributes = nil, ordering_key: nil, **extra_attrs, &callback
           msg = Convert.pubsub_message data, attributes, ordering_key, extra_attrs
-          @flow_controller.acquire msg.to_proto.bytesize
+          begin
+            @flow_controller.acquire msg.to_proto.bytesize
+          rescue FlowControlLimitError
+            stop_publish ordering_key if ordering_key
+            raise
+          end
 
           synchronize do
             raise AsyncPublisherStopped if @stopped
             raise OrderedMessagesDisabled if !@ordered && !msg.ordering_key.empty? # default is empty string
 
             batch = resolve_batch_for_message msg
-            raise OrderingKeyError, batch.ordering_key if batch.canceled?
+            if batch.canceled?
+              @flow_controller.release msg.to_proto.bytesize
+              raise OrderingKeyError, batch.ordering_key
+            end
             batch_action = batch.add msg, callback
             if batch_action == :full
               publish_batches!
@@ -310,6 +326,17 @@ module Google
           @batches[ordering_key]
         end
 
+        def stop_publish ordering_key
+          synchronize do
+            batch = resolve_batch_for_ordering_key ordering_key
+            return if batch.nil?
+            cancelled_items = batch.cancel!
+            cancelled_items.each do |item|
+              @flow_controller.release item.bytesize
+            end
+          end
+        end
+
         def publish_batches! stop: nil
           @batches.reject! { |_ordering_key, batch| batch.empty? }
           @batches.each_value do |batch|
@@ -341,7 +368,7 @@ module Google
             unless items.empty?
               grpc = @service.publish topic_name, items.map(&:msg)
               items.zip Array(grpc.message_ids) do |item, id|
-                @flow_controller.release item.msg.to_proto.bytesize
+                @flow_controller.release item.bytesize
                 next unless item.callback
 
                 item.msg.message_id = id

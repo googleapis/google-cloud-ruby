@@ -174,4 +174,52 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
       publisher.publish "ordered message", ordering_key: "123"
     end
   end
+
+  it "publishes messages with ordering_key and flow_controller" do
+    pubsub.service.mocked_publisher = AsyncPublisherStub.new
+
+    flow_control = {
+      byte_limit: 7 * 3,
+      limit_exceeded_behavior: :error
+    }
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, interval: 30, flow_control: flow_control
+    publisher.enable_message_ordering!
+
+    _(publisher.flow_controller.outstanding_bytes).must_equal 0
+
+    # Create batch for ordering key.
+    publisher.publish "a", ordering_key: "k1" # Acquires flow controller permit for 7 bytes.
+    _(publisher.flow_controller.outstanding_bytes).must_equal 7
+
+    # 25 is too many bytes, cancels batch for ordering key, releases the flow controller permit for "a".
+    expect do
+      publisher.publish "bbbbbbbbbbbbbbbbbbb", ordering_key: "k1"
+    end.must_raise Google::Cloud::PubSub::FlowControlLimitError
+    _(publisher.flow_controller.outstanding_bytes).must_equal 0
+
+    # Acquires flow controller permit for 7 bytes, but batch for ordering key is still cancelled.
+    # The raise also releases the flow controller permit for "c".
+    err = expect do
+      publisher.publish "c", ordering_key: "k1"
+    end.must_raise Google::Cloud::PubSub::OrderingKeyError
+    _(err.message).must_equal "Can't publish message using k1."
+    _(publisher.flow_controller.outstanding_bytes).must_equal 0
+
+    # Reset the batch and try again.
+    publisher.resume_publish "k1"
+
+    publisher.publish "a", ordering_key: "k1" # Acquires flow controller permit for 7 bytes.
+    publisher.publish "b", ordering_key: "k1" # Acquires flow controller permit for 7 bytes.
+    publisher.publish "c", ordering_key: "k1" # Acquires flow controller permit for 7 bytes.
+
+    _(publisher.flow_controller.outstanding_bytes).must_equal 7 * 3
+
+    # force the queued messages to be published
+    publisher.stop!
+
+    _(publisher.flow_controller.outstanding_bytes).must_equal 0
+
+    published_messages_hash = pubsub.service.mocked_publisher.message_hash
+    assert_equal ["a","b","c"], published_messages_hash["k1"].map(&:data)
+  end
 end

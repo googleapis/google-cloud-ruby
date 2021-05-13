@@ -31,6 +31,9 @@ module Google
         attr_reader :message_limit
         attr_reader :byte_limit
         attr_reader :limit_exceeded_behavior
+        ##
+        # @private Implementation accessors
+        attr_reader :outstanding_messages, :outstanding_bytes, :awaiting_message_acquires, :awaiting_bytes_acquires
 
         def initialize message_limit: 1000, byte_limit: 10_000_000, limit_exceeded_behavior: :ignore
           # init MonitorMixin
@@ -56,7 +59,8 @@ module Google
             raise FlowControlLimitError, "Flow control message limit (#{message_limit}) would be exceeded"
           end
           if limit_exceeded_behavior == :error && @outstanding_bytes + message_size > byte_limit
-            raise FlowControlLimitError, "Flow control byte limit (#{byte_limit}) would be exceeded"
+            raise FlowControlLimitError,
+                  "Flow control byte limit (#{byte_limit}) would be exceeded, message_size: #{message_size}"
           end
           if limit_exceeded_behavior == :block && message_limit < 1
             raise FlowControlLimitError,
