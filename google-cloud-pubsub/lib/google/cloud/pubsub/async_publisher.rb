@@ -92,9 +92,9 @@ module Google
           @publish_threads  = (threads[:publish] || 2).to_i
           @callback_threads = (threads[:callback] || 4).to_i
           @flow_control = {
-            byte_limit: 10 * @max_bytes,
-            message_limit: 10 * @max_messages
-          }.merge flow_control
+            message_limit: 10 * @max_messages,
+            byte_limit: 10 * @max_bytes
+          }.merge(flow_control).freeze
 
           @published_at = nil
           @publish_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @publish_threads
