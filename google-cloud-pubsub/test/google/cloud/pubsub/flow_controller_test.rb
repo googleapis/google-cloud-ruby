@@ -287,7 +287,7 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
       adding_initial_done = Concurrent::Event.new
       adding_large_done = Concurrent::Event.new
       adding_busy_done = Concurrent::Event.new
-      releasing_initial_done = Concurrent::Event.new
+      releasing_busy_done = Concurrent::Event.new
       releasing_large_done = Concurrent::Event.new
 
       # Occupy some of the flow capacity, then try to add a large message. Releasing
@@ -306,13 +306,13 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
       # At the same time, gradually keep releasing the messages - the released
       # capacity should be consumed by the large message, not the other small messages
       # being added after it.
-      run_in_thread flow_controller, :release, initial_messages, releasing_initial_done, action_pause: 0.1
+      run_in_thread flow_controller, :release, messages, releasing_busy_done, action_pause: 0.1
 
       # Sanity check - releasing should have completed by now.
-      assert releasing_initial_done.wait(1.1), "Releasing messages blocked or errored."
+      assert releasing_busy_done.wait(2), "Releasing messages blocked or errored."
 
       # Enough messages released, the large message should have come through in the meantime.
-      assert adding_large_done.wait(0.1), "A thread adding a large message starved."
+      assert adding_large_done.wait(1), "A thread adding a large message starved."
 
       refute adding_busy_done.wait(0.1), "Adding multiple small messages did not block."
 
