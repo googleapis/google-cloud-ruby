@@ -130,6 +130,7 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
 
     # delete
     schema.delete
+    sleep 2
 
     schema = pubsub.schema schema_name
     _(schema).must_be :nil?
