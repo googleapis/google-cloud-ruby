@@ -190,7 +190,15 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The agent to list all intents from.
-            #     Format: `projects/<Project ID>/agent`.
+            #     Format: `projects/<Project ID>/agent` or `projects/<Project
+            #     ID>/locations/<Location ID>/agent`.
+            #
+            #     Alternatively, you can specify the environment to list intents for.
+            #     Format: `projects/<Project ID>/agent/environments/<Environment ID>`
+            #     or `projects/<Project ID>/locations/<Location
+            #     ID>/agent/environments/<Environment ID>`.
+            #     Note: training phrases of the intents will not be returned for non-draft
+            #     environment.
             #   @param language_code [::String]
             #     Optional. The language used to access language-specific data.
             #     If not specified, the agent's default language is used.
