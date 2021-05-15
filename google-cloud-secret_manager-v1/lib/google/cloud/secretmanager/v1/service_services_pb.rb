@@ -57,13 +57,13 @@ module Google
             rpc :ListSecretVersions, ::Google::Cloud::SecretManager::V1::ListSecretVersionsRequest, ::Google::Cloud::SecretManager::V1::ListSecretVersionsResponse
             # Gets metadata for a [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
             #
-            # `projects/*/secrets/*/versions/latest` is an alias to the `latest`
-            # [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
+            # `projects/*/secrets/*/versions/latest` is an alias to the most recently
+            # created [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
             rpc :GetSecretVersion, ::Google::Cloud::SecretManager::V1::GetSecretVersionRequest, ::Google::Cloud::SecretManager::V1::SecretVersion
             # Accesses a [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]. This call returns the secret data.
             #
-            # `projects/*/secrets/*/versions/latest` is an alias to the `latest`
-            # [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
+            # `projects/*/secrets/*/versions/latest` is an alias to the most recently
+            # created [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
             rpc :AccessSecretVersion, ::Google::Cloud::SecretManager::V1::AccessSecretVersionRequest, ::Google::Cloud::SecretManager::V1::AccessSecretVersionResponse
             # Disables a [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
             #
