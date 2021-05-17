@@ -179,6 +179,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
     pubsub.service.mocked_publisher = AsyncPublisherStub.new
 
     flow_control = {
+      message_limit: 1000,
       byte_limit: 7 * 3,
       limit_exceeded_behavior: :error
     }

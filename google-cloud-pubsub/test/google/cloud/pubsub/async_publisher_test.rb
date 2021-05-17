@@ -333,6 +333,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
   it "publishes multiple messages with flow control message_limit" do
     flow_control = {
       message_limit: 2,
+      byte_limit: 10000000,
       limit_exceeded_behavior: :error
     }
     publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name,
@@ -370,6 +371,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
 
   it "publishes multiple messages with flow control byte_limit" do
     flow_control = {
+      message_limit: 1000,
       byte_limit: 3 * 2,
       limit_exceeded_behavior: :error
     }

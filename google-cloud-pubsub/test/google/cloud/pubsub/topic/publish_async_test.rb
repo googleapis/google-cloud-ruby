@@ -80,6 +80,7 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
   end
 
   it "publishes multiple messages with callbacks" do
+    mutex = Mutex.new
     messages = [
       Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message 0".encode(Encoding::ASCII_8BIT), message_id: "msg0"),
       Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message 1".encode(Encoding::ASCII_8BIT), message_id: "msg1")
@@ -92,12 +93,12 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
 
     topic.publish_async "async-message 0" do |result|
       assert_equal "msg0", result.msg_id
-      callbacks_called += 1
+      mutex.synchronize { callbacks_called += 1 }
     end
 
     topic.publish_async "async-message 1" do |result|
       assert_equal "msg1", result.msg_id
-      callbacks_called += 1
+      mutex.synchronize { callbacks_called += 1 }
     end
 
     _(topic.async_publisher).wont_be :nil?
