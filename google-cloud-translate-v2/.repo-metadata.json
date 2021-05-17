@@ -1,5 +1,6 @@
 {
     "language": "ruby",
     "distribution_name": "google-cloud-translate-v2",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-translate-v2/latest"
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-translate-v2/latest",
+    "library_type": "GAPIC_MANUAL"
 }

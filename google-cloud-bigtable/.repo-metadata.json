@@ -2,5 +2,6 @@
     "name": "bigtable",
     "language": "ruby",
     "distribution_name": "google-cloud-bigtable",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-bigtable/latest"
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-bigtable/latest",
+    "library_type": "GAPIC_MANUAL"
 }
