@@ -14,7 +14,6 @@
 
 
 require "google/cloud/pubsub/errors"
-# require "monitor"
 require "concurrent/atomics"
 
 module Google
@@ -26,8 +25,6 @@ module Google
       # Used to control the flow of messages passing through it.
       #
       class FlowController
-        include MonitorMixin
-
         attr_reader :message_limit
         attr_reader :byte_limit
         attr_reader :limit_exceeded_behavior
