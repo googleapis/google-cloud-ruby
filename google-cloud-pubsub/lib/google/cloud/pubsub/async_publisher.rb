@@ -135,8 +135,8 @@ module Google
           msg = Convert.pubsub_message data, attributes, ordering_key, extra_attrs
           begin
             @flow_controller.acquire msg.to_proto.bytesize
-          rescue FlowControlLimitError
-            stop_publish ordering_key if ordering_key
+          rescue FlowControlLimitError => e
+            stop_publish ordering_key, e if ordering_key
             raise
           end
 
@@ -326,13 +326,17 @@ module Google
           @batches[ordering_key]
         end
 
-        def stop_publish ordering_key
+        def stop_publish ordering_key, err
           synchronize do
             batch = resolve_batch_for_ordering_key ordering_key
             return if batch.nil?
-            cancelled_items = batch.cancel!
-            cancelled_items.each do |item|
+            items = batch.cancel!
+            items.each do |item|
               @flow_controller.release item.bytesize
+              next unless item.callback
+
+              publish_result = PublishResult.from_error item.msg, err
+              execute_callback_async item.callback, publish_result
             end
           end
         end
@@ -395,6 +399,7 @@ module Google
           end
 
           items.each do |item|
+            @flow_controller.release item.bytesize
             next unless item.callback
 
             publish_result = PublishResult.from_error item.msg, e

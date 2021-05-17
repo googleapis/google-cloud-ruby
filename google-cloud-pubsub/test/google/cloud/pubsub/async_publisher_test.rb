@@ -33,6 +33,10 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     _(publisher.interval).must_equal 0.01
     _(publisher.publish_threads).must_equal 2
     _(publisher.callback_threads).must_equal 4
+    _(publisher.flow_control).must_be_kind_of Hash
+    _(publisher.flow_control[:message_limit]).must_equal 1000
+    _(publisher.flow_control[:byte_limit]).must_equal 10000000
+    _(publisher.flow_control[:limit_exceeded_behavior]).must_be :nil?
   end
 
   it "knows its given attributes" do
@@ -53,6 +57,9 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     _(publisher.interval).must_equal 0.02
     _(publisher.publish_threads).must_equal 3
     _(publisher.callback_threads).must_equal 5
+    _(publisher.flow_control[:message_limit]).must_equal 2000
+    _(publisher.flow_control[:byte_limit]).must_equal 20000000
+    _(publisher.flow_control[:limit_exceeded_behavior]).must_be :nil?
   end
 
   it "knows given attributes and retains its defaults" do
@@ -70,6 +77,9 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     _(publisher.interval).must_equal 0.01
     _(publisher.publish_threads).must_equal 3
     _(publisher.callback_threads).must_equal 4
+    _(publisher.flow_control[:message_limit]).must_equal 1000
+    _(publisher.flow_control[:byte_limit]).must_equal 20000000
+    _(publisher.flow_control[:limit_exceeded_behavior]).must_be :nil?
   end
 
   it "publishes a message" do
@@ -340,9 +350,14 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     publisher.publish "b"
     _(publisher.flow_controller.outstanding_messages).must_equal 2 # Limit
 
+    callback_called = true
     expect do
-      publisher.publish "c"
+      publisher.publish "c" do |result|
+        assert_kind_of Google::Cloud::PubSub::FlowControlLimitError, result.error
+        callback_called = true
+      end
     end.must_raise Google::Cloud::PubSub::FlowControlLimitError
+    _(callback_called).must_equal true
 
     # force the queued messages to be published
     publisher.stop!
@@ -373,8 +388,12 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     publisher.publish "b"
     _(publisher.flow_controller.outstanding_bytes).must_equal 3 * 2 # Limit
 
+    callback_called = true
     expect do
-      publisher.publish "c"
+      publisher.publish "c" do |result|
+        assert_kind_of Google::Cloud::PubSub::FlowControlLimitError, result.error
+        callback_called = true
+      end
     end.must_raise Google::Cloud::PubSub::FlowControlLimitError
 
     # force the queued messages to be published
@@ -384,6 +403,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
 
     published_messages_hash = publisher.service.mocked_publisher.message_hash
     assert_equal ["a","b"], published_messages_hash[""].map(&:data)
+    _(callback_called).must_equal true
   end
 
   def wait_until delay: 0.01, max: 10, output: nil, msg: "criteria not met", &block

@@ -192,18 +192,28 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
     _(publisher.flow_controller.outstanding_bytes).must_equal 7
 
     # 25 is too many bytes, cancels batch for ordering key, releases the flow controller permit for "a".
+    flow_callback_called = true
     expect do
-      publisher.publish "bbbbbbbbbbbbbbbbbbb", ordering_key: "k1"
+      publisher.publish "bbbbbbbbbbbbbbbbbbb", ordering_key: "k1" do |result|
+        assert_kind_of Google::Cloud::PubSub::FlowControlLimitError, result.error
+        flow_callback_called = true
+      end
     end.must_raise Google::Cloud::PubSub::FlowControlLimitError
     _(publisher.flow_controller.outstanding_bytes).must_equal 0
+    _(flow_callback_called).must_equal true
 
     # Acquires flow controller permit for 7 bytes, but batch for ordering key is still cancelled.
     # The raise also releases the flow controller permit for "c".
+    ordering_callback_called = true
     err = expect do
-      publisher.publish "c", ordering_key: "k1"
+      publisher.publish "c", ordering_key: "k1" do |result|
+        assert_kind_of Google::Cloud::PubSub::OrderingKeyError, result.error
+        ordering_callback_called = true
+      end
     end.must_raise Google::Cloud::PubSub::OrderingKeyError
     _(err.message).must_equal "Can't publish message using k1."
     _(publisher.flow_controller.outstanding_bytes).must_equal 0
+    _(ordering_callback_called).must_equal true
 
     # Reset the batch and try again.
     publisher.resume_publish "k1"
