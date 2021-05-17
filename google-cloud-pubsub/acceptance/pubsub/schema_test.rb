@@ -109,7 +109,10 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
       _(msg).wont_be :nil?
 
       # Check it received the published message
-      received_messages = pull_with_retry subscription
+      wait_for_condition description: "subscription pull" do
+        received_messages = subscription.pull immediate: false
+        received_messages.any?
+      end
       _(received_messages.count).must_equal 1
       received_message = received_messages.first
       _(received_message.data).must_equal msg.data
@@ -130,12 +133,17 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
 
     # delete
     schema.delete
-    sleep 2
 
-    schema = pubsub.schema schema_name
+    wait_for_condition description: "schema delete" do
+      schema = pubsub.schema schema_name
+      schema.nil?
+    end
     _(schema).must_be :nil?
 
-    topic = pubsub.topic topic.name
+    wait_for_condition description: "topic deleted schema_name" do
+      topic = pubsub.topic topic.name
+      topic.schema_name == "_deleted-schema_"
+    end
     _(topic.schema_name).must_equal "_deleted-schema_"
     _(topic.message_encoding).must_equal :BINARY
 
