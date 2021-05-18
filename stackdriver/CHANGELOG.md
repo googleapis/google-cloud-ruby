@@ -4,7 +4,7 @@
 
 #### Documentation
 
-* Remove Debugger description from the readmes ([#11251](https://www.github.com/googleapis/google-cloud-ruby/issues/11251))
+* Remove Debugger description from the readmes
 
 ### 0.21.0 / 2021-03-10
 
