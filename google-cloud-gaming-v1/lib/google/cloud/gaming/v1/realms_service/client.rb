@@ -69,17 +69,17 @@ module Google
                 default_config.rpcs.list_realms.timeout = 60.0
                 default_config.rpcs.list_realms.retry_policy = {
                   initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 10.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.get_realm.timeout = 60.0
                 default_config.rpcs.get_realm.retry_policy = {
                   initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 10.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.create_realm.timeout = 60.0
@@ -91,9 +91,9 @@ module Google
                 default_config.rpcs.preview_realm_update.timeout = 60.0
                 default_config.rpcs.preview_realm_update.retry_policy = {
                   initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 10.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config
