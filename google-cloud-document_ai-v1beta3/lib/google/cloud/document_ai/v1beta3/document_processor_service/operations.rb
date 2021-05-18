@@ -500,7 +500,7 @@ module Google
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
-            #   Defaults to `"us-documentai.googleapis.com"`.
+            #   Defaults to `"documentai.googleapis.com"`.
             #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
@@ -551,7 +551,7 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "us-documentai.googleapis.com", ::String
+              config_attr :endpoint,      "documentai.googleapis.com", ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
