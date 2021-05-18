@@ -129,6 +129,7 @@ module Google
         #   | `BOOL`      | `true`/`false` | |
         #   | `INT64`     | `Integer`      | |
         #   | `FLOAT64`   | `Float`        | |
+        #   | `NUMERIC`   | `BigDecimal`   | |
         #   | `STRING`    | `String`       | |
         #   | `DATE`      | `Date`         | |
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
@@ -154,6 +155,7 @@ module Google
         #   * `:BYTES`
         #   * `:DATE`
         #   * `:FLOAT64`
+        #   * `:NUMERIC`
         #   * `:INT64`
         #   * `:STRING`
         #   * `:TIMESTAMP`
@@ -494,6 +496,7 @@ module Google
         #   | `BOOL`      | `true`/`false` | |
         #   | `INT64`     | `Integer`      | |
         #   | `FLOAT64`   | `Float`        | |
+        #   | `NUMERIC`   | `BigDecimal`   | |
         #   | `STRING`    | `String`       | |
         #   | `DATE`      | `Date`         | |
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
@@ -520,6 +523,7 @@ module Google
         #   * `:BYTES`
         #   * `:DATE`
         #   * `:FLOAT64`
+        #   * `:NUMERIC`
         #   * `:INT64`
         #   * `:STRING`
         #   * `:TIMESTAMP`
@@ -801,6 +805,7 @@ module Google
         #   | `BOOL`      | `true`/`false` | |
         #   | `INT64`     | `Integer`      | |
         #   | `FLOAT64`   | `Float`        | |
+        #   | `NUMERIC`   | `BigDecimal`   | |
         #   | `STRING`    | `String`       | |
         #   | `DATE`      | `Date`         | |
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
@@ -881,6 +886,7 @@ module Google
         #   | `BOOL`      | `true`/`false` | |
         #   | `INT64`     | `Integer`      | |
         #   | `FLOAT64`   | `Float`        | |
+        #   | `NUMERIC`   | `BigDecimal`   | |
         #   | `STRING`    | `String`       | |
         #   | `DATE`      | `Date`         | |
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
@@ -960,6 +966,7 @@ module Google
         #   | `BOOL`      | `true`/`false` | |
         #   | `INT64`     | `Integer`      | |
         #   | `FLOAT64`   | `Float`        | |
+        #   | `NUMERIC`   | `BigDecimal`   | |
         #   | `STRING`    | `String`       | |
         #   | `DATE`      | `Date`         | |
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
@@ -1041,6 +1048,7 @@ module Google
         #   | `BOOL`      | `true`/`false` | |
         #   | `INT64`     | `Integer`      | |
         #   | `FLOAT64`   | `Float`        | |
+        #   | `NUMERIC`   | `BigDecimal`   | |
         #   | `STRING`    | `String`       | |
         #   | `DATE`      | `Date`         | |
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
@@ -1508,12 +1516,13 @@ module Google
         #   Hash values must contain the type value. If a Hash is used the
         #   fields will be created using the same order as the Hash keys.
         #
-        #   Supported type values incude:
+        #   Supported type values include:
         #
         #   * `:BOOL`
         #   * `:BYTES`
         #   * `:DATE`
         #   * `:FLOAT64`
+        #   * `:NUMERIC`
         #   * `:INT64`
         #   * `:STRING`
         #   * `:TIMESTAMP`
