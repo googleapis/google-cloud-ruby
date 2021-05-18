@@ -182,6 +182,34 @@ class MockFirestore < Minitest::Spec
     [req, default_options]
   end
 
+  def partition_query_args query,
+                           parent: "projects/#{project}/databases/(default)/documents",
+                           partition_count: 3
+    {
+      parent: parent,
+      structured_query: query,
+      partition_count: partition_count,
+      page_token: nil,
+      page_size: nil
+    }
+  end
+
+  def partition_query_resp count = 3, token = nil
+    Google::Cloud::Firestore::V1::PartitionQueryResponse.new(
+      partitions: count.times.map { cursor_gapi },
+      next_page_token: token
+    )
+  end
+
+  def cursor_gapi
+    Google::Cloud::Firestore::V1::Cursor.new(
+      values: [
+        Google::Cloud::Firestore::V1::Value.new(string_value: "a")
+      ],
+      before: false
+    )
+  end
+
   def paged_enum_struct response
     OpenStruct.new response: response
   end

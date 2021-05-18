@@ -44,10 +44,6 @@ module Google
       #
       class CollectionGroup < Query
         ##
-        # @private The gRPC service object.
-        attr_accessor :service
-
-        ##
         # Retrieves a list of document references for the documents in this
         # collection.
         #
@@ -72,21 +68,14 @@ module Google
         #   col_group = firestore.col_group "cities"
         #
         #   col_group.partitions(3).each do |query_partition|
-        #     puts query_partition.create_query
+        #     # puts query_partition.create_query
         #   end
         #
         def partitions partition_count, token: nil, max: nil
           ensure_service!
 
-          unless block_given?
-            return enum_for :partitions, partition_count
-          end
-
-          results = service.partition_query parent_path, query, partition_count
-          results.each do |result|
-            next if result.result.nil?
-            yield result # TODO: QueryPartition.from_result result, self
-          end
+          resp_gapi = service.partition_query parent_path, query, partition_count, token: token, max: max
+          resp_gapi.partitions
         end
 
         ##
@@ -100,12 +89,7 @@ module Google
               )
             ]
           )
-
-          new.tap do |q|
-            q.instance_variable_set :@query, query
-            q.instance_variable_set :@parent_path, parent_path
-            q.instance_variable_set :@client, client
-          end
+          CollectionGroup.new query, parent_path, client
         end
       end
     end

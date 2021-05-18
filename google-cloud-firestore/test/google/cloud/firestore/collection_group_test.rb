@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,38 +14,38 @@
 
 require "helper"
 
-describe Google::Cloud::Firestore::Client, :col_group, :mock_firestore do
+describe Google::Cloud::Firestore::CollectionGroup, :mock_firestore do
   let(:collection_id) { "my-collection-id" }
-  let(:collection_id_bad) { "a/b/my-collection-id" }
+  let(:collection_group) do
+    Google::Cloud::Firestore::CollectionGroup.from_collection_id documents_path, collection_id, firestore
+  end
 
-  it "creates a collection group query" do
-    collection_group = firestore.col_group(collection_id)
-
+  it "creates a query" do
     _(collection_group).must_be_kind_of Google::Cloud::Firestore::Query
     query_gapi = collection_group.query
+
     _(query_gapi).must_be_kind_of Google::Cloud::Firestore::V1::StructuredQuery
     _(query_gapi.from.size).must_equal 1
     _(query_gapi.from.first).must_be_kind_of Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector
     _(query_gapi.from.first.all_descendants).must_equal true
     _(query_gapi.from.first.collection_id).must_equal collection_id
   end
+focus
+  it "creates partitions" do
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      from: [
+        Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "my-collection-id", all_descendants: true)
+      ]
+    )
+    num_partitions = 3
 
-  it "creates a collection group query using collection_group alias" do
-    collection_group = firestore.collection_group(collection_id)
+    list_res = paged_enum_struct partition_query_resp(num_partitions)
+    firestore_mock.expect :partition_query, list_res, [partition_query_args(expected_query, partition_count: num_partitions)]
 
     _(collection_group).must_be_kind_of Google::Cloud::Firestore::Query
-    query_gapi = collection_group.query
-    _(query_gapi).must_be_kind_of Google::Cloud::Firestore::V1::StructuredQuery
-    _(query_gapi.from.size).must_equal 1
-    _(query_gapi.from.first).must_be_kind_of Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector
-    _(query_gapi.from.first.all_descendants).must_equal true
-    _(query_gapi.from.first.collection_id).must_equal collection_id
-  end
+    partitions = collection_group.partitions 3
 
-  it "raises when collection_id contains a forward slash" do
-    error = expect do
-      firestore.col_group collection_id_bad
-    end.must_raise ArgumentError
-    _(error.message).must_equal "Invalid collection_id: 'a/b/my-collection-id', must not contain '/'."
+    _(partitions).must_be_kind_of Google::Cloud::Firestore::QueryPartition::List
+    _(partitions.count).must_equal 3
   end
 end

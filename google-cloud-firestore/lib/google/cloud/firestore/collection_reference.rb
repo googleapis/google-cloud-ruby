@@ -48,6 +48,13 @@ module Google
         attr_accessor :client
 
         ##
+        # @private Creates a new CollectionReference.
+        def initialize path, client, query
+          super query, nil, client
+          @path = path
+        end
+
+        ##
         # The collection identifier for the collection resource.
         #
         # @return [String] collection identifier.
@@ -257,11 +264,7 @@ module Google
             ]
           )
 
-          new.tap do |c|
-            c.client = client
-            c.instance_variable_set :@path, path
-            c.instance_variable_set :@query, query
-          end
+          CollectionReference.new path, client, query
         end
 
         protected
