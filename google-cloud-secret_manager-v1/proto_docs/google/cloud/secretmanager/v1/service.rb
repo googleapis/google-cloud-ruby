@@ -141,8 +141,9 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
         #     `projects/*/secrets/*/versions/*`.
-        #     `projects/*/secrets/*/versions/latest` is an alias to the `latest`
-        #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+        #
+        #     `projects/*/secrets/*/versions/latest` is an alias to the most recently
+        #     created {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
         class GetSecretVersionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -165,6 +166,9 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
         #     `projects/*/secrets/*/versions/*`.
+        #
+        #     `projects/*/secrets/*/versions/latest` is an alias to the most recently
+        #     created {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
         class AccessSecretVersionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -188,6 +192,11 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::Secret Secret} to delete in the format
         #     `projects/*/secrets/*`.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. Etag of the {::Google::Cloud::SecretManager::V1::Secret Secret}. The request succeeds if it matches
+        #     the etag of the currently stored secret object. If the etag is omitted,
+        #     the request succeeds.
         class DeleteSecretRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -198,6 +207,11 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to disable in the format
         #     `projects/*/secrets/*/versions/*`.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. Etag of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}. The request succeeds if it matches
+        #     the etag of the currently stored secret version object. If the etag is
+        #     omitted, the request succeeds.
         class DisableSecretVersionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -208,6 +222,11 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to enable in the format
         #     `projects/*/secrets/*/versions/*`.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. Etag of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}. The request succeeds if it matches
+        #     the etag of the currently stored secret version object. If the etag is
+        #     omitted, the request succeeds.
         class EnableSecretVersionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -218,6 +237,11 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to destroy in the format
         #     `projects/*/secrets/*/versions/*`.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. Etag of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}. The request succeeds if it matches
+        #     the etag of the currently stored secret version object. If the etag is
+        #     omitted, the request succeeds.
         class DestroySecretVersionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

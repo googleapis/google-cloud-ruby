@@ -363,11 +363,13 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::ClientTest < Min
 
     # Create request parameters for a unary method.
     name = "hello world"
+    etag = "hello world"
 
     delete_secret_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_secret, name
       assert_kind_of ::Google::Cloud::SecretManager::V1::DeleteSecretRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["etag"]
       refute_nil options
     end
 
@@ -378,31 +380,31 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::ClientTest < Min
       end
 
       # Use hash object
-      client.delete_secret({ name: name }) do |response, operation|
+      client.delete_secret({ name: name, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_secret name: name do |response, operation|
+      client.delete_secret name: name, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_secret ::Google::Cloud::SecretManager::V1::DeleteSecretRequest.new(name: name) do |response, operation|
+      client.delete_secret ::Google::Cloud::SecretManager::V1::DeleteSecretRequest.new(name: name, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_secret({ name: name }, grpc_options) do |response, operation|
+      client.delete_secret({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_secret(::Google::Cloud::SecretManager::V1::DeleteSecretRequest.new(name: name), grpc_options) do |response, operation|
+      client.delete_secret(::Google::Cloud::SecretManager::V1::DeleteSecretRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -604,11 +606,13 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::ClientTest < Min
 
     # Create request parameters for a unary method.
     name = "hello world"
+    etag = "hello world"
 
     disable_secret_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :disable_secret_version, name
       assert_kind_of ::Google::Cloud::SecretManager::V1::DisableSecretVersionRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["etag"]
       refute_nil options
     end
 
@@ -619,31 +623,31 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::ClientTest < Min
       end
 
       # Use hash object
-      client.disable_secret_version({ name: name }) do |response, operation|
+      client.disable_secret_version({ name: name, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.disable_secret_version name: name do |response, operation|
+      client.disable_secret_version name: name, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.disable_secret_version ::Google::Cloud::SecretManager::V1::DisableSecretVersionRequest.new(name: name) do |response, operation|
+      client.disable_secret_version ::Google::Cloud::SecretManager::V1::DisableSecretVersionRequest.new(name: name, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.disable_secret_version({ name: name }, grpc_options) do |response, operation|
+      client.disable_secret_version({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.disable_secret_version(::Google::Cloud::SecretManager::V1::DisableSecretVersionRequest.new(name: name), grpc_options) do |response, operation|
+      client.disable_secret_version(::Google::Cloud::SecretManager::V1::DisableSecretVersionRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -662,11 +666,13 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::ClientTest < Min
 
     # Create request parameters for a unary method.
     name = "hello world"
+    etag = "hello world"
 
     enable_secret_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :enable_secret_version, name
       assert_kind_of ::Google::Cloud::SecretManager::V1::EnableSecretVersionRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["etag"]
       refute_nil options
     end
 
@@ -677,31 +683,31 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::ClientTest < Min
       end
 
       # Use hash object
-      client.enable_secret_version({ name: name }) do |response, operation|
+      client.enable_secret_version({ name: name, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.enable_secret_version name: name do |response, operation|
+      client.enable_secret_version name: name, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.enable_secret_version ::Google::Cloud::SecretManager::V1::EnableSecretVersionRequest.new(name: name) do |response, operation|
+      client.enable_secret_version ::Google::Cloud::SecretManager::V1::EnableSecretVersionRequest.new(name: name, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.enable_secret_version({ name: name }, grpc_options) do |response, operation|
+      client.enable_secret_version({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.enable_secret_version(::Google::Cloud::SecretManager::V1::EnableSecretVersionRequest.new(name: name), grpc_options) do |response, operation|
+      client.enable_secret_version(::Google::Cloud::SecretManager::V1::EnableSecretVersionRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -720,11 +726,13 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::ClientTest < Min
 
     # Create request parameters for a unary method.
     name = "hello world"
+    etag = "hello world"
 
     destroy_secret_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :destroy_secret_version, name
       assert_kind_of ::Google::Cloud::SecretManager::V1::DestroySecretVersionRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["etag"]
       refute_nil options
     end
 
@@ -735,31 +743,31 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::ClientTest < Min
       end
 
       # Use hash object
-      client.destroy_secret_version({ name: name }) do |response, operation|
+      client.destroy_secret_version({ name: name, etag: etag }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.destroy_secret_version name: name do |response, operation|
+      client.destroy_secret_version name: name, etag: etag do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.destroy_secret_version ::Google::Cloud::SecretManager::V1::DestroySecretVersionRequest.new(name: name) do |response, operation|
+      client.destroy_secret_version ::Google::Cloud::SecretManager::V1::DestroySecretVersionRequest.new(name: name, etag: etag) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.destroy_secret_version({ name: name }, grpc_options) do |response, operation|
+      client.destroy_secret_version({ name: name, etag: etag }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.destroy_secret_version(::Google::Cloud::SecretManager::V1::DestroySecretVersionRequest.new(name: name), grpc_options) do |response, operation|
+      client.destroy_secret_version(::Google::Cloud::SecretManager::V1::DestroySecretVersionRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

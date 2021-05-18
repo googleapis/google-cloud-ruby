@@ -16,6 +16,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       map :labels, :string, :string, 4
       repeated :topics, :message, 5, "google.cloud.secretmanager.v1.Topic"
+      optional :etag, :string, 8
       optional :rotation, :message, 9, "google.cloud.secretmanager.v1.Rotation"
       oneof :expiration do
         optional :expire_time, :message, 6, "google.protobuf.Timestamp"
@@ -28,6 +29,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :destroy_time, :message, 3, "google.protobuf.Timestamp"
       optional :state, :enum, 4, "google.cloud.secretmanager.v1.SecretVersion.State"
       optional :replication_status, :message, 5, "google.cloud.secretmanager.v1.ReplicationStatus"
+      optional :etag, :string, 6
     end
     add_enum "google.cloud.secretmanager.v1.SecretVersion.State" do
       value :STATE_UNSPECIFIED, 0

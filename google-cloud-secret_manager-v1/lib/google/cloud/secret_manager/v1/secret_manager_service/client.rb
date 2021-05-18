@@ -559,7 +559,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_secret(name: nil)
+            # @overload delete_secret(name: nil, etag: nil)
             #   Pass arguments to `delete_secret` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -567,6 +567,10 @@ module Google
             #   @param name [::String]
             #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::Secret Secret} to delete in the format
             #     `projects/*/secrets/*`.
+            #   @param etag [::String]
+            #     Optional. Etag of the {::Google::Cloud::SecretManager::V1::Secret Secret}. The request succeeds if it matches
+            #     the etag of the currently stored secret object. If the etag is omitted,
+            #     the request succeeds.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -693,8 +697,8 @@ module Google
             ##
             # Gets metadata for a {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
             #
-            # `projects/*/secrets/*/versions/latest` is an alias to the `latest`
-            # {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+            # `projects/*/secrets/*/versions/latest` is an alias to the most recently
+            # created {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
             #
             # @overload get_secret_version(request, options = nil)
             #   Pass arguments to `get_secret_version` via a request object, either of type
@@ -714,8 +718,9 @@ module Google
             #   @param name [::String]
             #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
             #     `projects/*/secrets/*/versions/*`.
-            #     `projects/*/secrets/*/versions/latest` is an alias to the `latest`
-            #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+            #
+            #     `projects/*/secrets/*/versions/latest` is an alias to the most recently
+            #     created {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecretManager::V1::SecretVersion]
@@ -765,8 +770,8 @@ module Google
             ##
             # Accesses a {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}. This call returns the secret data.
             #
-            # `projects/*/secrets/*/versions/latest` is an alias to the `latest`
-            # {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+            # `projects/*/secrets/*/versions/latest` is an alias to the most recently
+            # created {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
             #
             # @overload access_secret_version(request, options = nil)
             #   Pass arguments to `access_secret_version` via a request object, either of type
@@ -786,6 +791,9 @@ module Google
             #   @param name [::String]
             #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
             #     `projects/*/secrets/*/versions/*`.
+            #
+            #     `projects/*/secrets/*/versions/latest` is an alias to the most recently
+            #     created {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecretManager::V1::AccessSecretVersionResponse]
@@ -848,7 +856,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload disable_secret_version(name: nil)
+            # @overload disable_secret_version(name: nil, etag: nil)
             #   Pass arguments to `disable_secret_version` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -856,6 +864,10 @@ module Google
             #   @param name [::String]
             #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to disable in the format
             #     `projects/*/secrets/*/versions/*`.
+            #   @param etag [::String]
+            #     Optional. Etag of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}. The request succeeds if it matches
+            #     the etag of the currently stored secret version object. If the etag is
+            #     omitted, the request succeeds.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecretManager::V1::SecretVersion]
@@ -918,7 +930,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload enable_secret_version(name: nil)
+            # @overload enable_secret_version(name: nil, etag: nil)
             #   Pass arguments to `enable_secret_version` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -926,6 +938,10 @@ module Google
             #   @param name [::String]
             #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to enable in the format
             #     `projects/*/secrets/*/versions/*`.
+            #   @param etag [::String]
+            #     Optional. Etag of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}. The request succeeds if it matches
+            #     the etag of the currently stored secret version object. If the etag is
+            #     omitted, the request succeeds.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecretManager::V1::SecretVersion]
@@ -989,7 +1005,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload destroy_secret_version(name: nil)
+            # @overload destroy_secret_version(name: nil, etag: nil)
             #   Pass arguments to `destroy_secret_version` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -997,6 +1013,10 @@ module Google
             #   @param name [::String]
             #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to destroy in the format
             #     `projects/*/secrets/*/versions/*`.
+            #   @param etag [::String]
+            #     Optional. Etag of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}. The request succeeds if it matches
+            #     the etag of the currently stored secret version object. If the etag is
+            #     omitted, the request succeeds.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecretManager::V1::SecretVersion]
