@@ -75,6 +75,16 @@ module Google
         attr_accessor :client
 
         ##
+        # @private Creates a new Query.
+        def initialize query, parent_path, client, limit_type: nil
+          query ||= StructuredQuery.new
+          @query = query
+          @parent_path = parent_path
+          @limit_type = limit_type
+          @client = client
+        end
+
+        ##
         # Restricts documents matching the query to return only data for the
         # provided fields.
         #
@@ -965,13 +975,7 @@ module Google
         ##
         # @private Start a new Query.
         def self.start query, parent_path, client, limit_type: nil
-          query ||= StructuredQuery.new
-          Query.new.tap do |q|
-            q.instance_variable_set :@query, query
-            q.instance_variable_set :@parent_path, parent_path
-            q.instance_variable_set :@limit_type, limit_type
-            q.instance_variable_set :@client, client
-          end
+          new query, parent_path, client, limit_type: limit_type
         end
 
         protected
@@ -1216,7 +1220,7 @@ module Google
         ##
         # @private Raise an error unless an database available.
         def ensure_client!
-          raise "Must have active connection to service" unless client
+          raise "Must have active connection to client" unless client
         end
 
         ##
