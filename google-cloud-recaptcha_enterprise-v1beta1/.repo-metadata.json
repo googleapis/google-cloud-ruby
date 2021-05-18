@@ -7,5 +7,6 @@
     "name_pretty": "reCAPTCHA Enterprise V1beta1 API",
     "product_documentation": "https://cloud.google.com/recaptcha-enterprise",
     "repo": "googleapis/google-cloud-ruby",
-    "requires_billing": true
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO"
 }
