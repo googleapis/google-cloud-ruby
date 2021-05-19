@@ -72,9 +72,9 @@ module Google
                 default_config.rpcs.get_job.timeout = 30.0
                 default_config.rpcs.get_job.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_job.timeout = 30.0
@@ -84,9 +84,9 @@ module Google
                 default_config.rpcs.delete_job.timeout = 30.0
                 default_config.rpcs.delete_job.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.batch_delete_jobs.timeout = 30.0
@@ -94,9 +94,9 @@ module Google
                 default_config.rpcs.list_jobs.timeout = 30.0
                 default_config.rpcs.list_jobs.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_jobs.timeout = 30.0
