@@ -298,6 +298,12 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Firestore::QueryPartition" do
+    mock_firestore do |mock|
+      mock.expect :partition_query, partition_query_resp, [Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Firestore::CollectionReference" do
     mock_firestore do |mock|
       mock.expect :run_query, run_query_resp, run_query_args
@@ -528,19 +534,20 @@ def documents_resp token: nil
   paged_enum_struct response
 end
 
-def cursor_gapi
-  Google::Cloud::Firestore::V1::Cursor.new(
-    values: [
-      Google::Cloud::Firestore::V1::Value.new(string_value: "a")
-    ],
-    before: false
-  )
-end
-
 def partition_query_resp count: 3, token: nil
   response = Google::Cloud::Firestore::V1::PartitionQueryResponse.new(
-    partitions: count.times.map { cursor_gapi },
-    next_page_token: token
+    partitions: count.times.map { |i| cursor_grpc values: [i*10, i*10+1] }
   )
+  response.next_page_token = token if token
   paged_enum_struct response
+end
+
+def cursor_grpc values: [1,2], before: false
+  converted_values = values.map do |val|
+    Google::Cloud::Firestore::Convert.raw_to_value val
+  end
+  Google::Cloud::Firestore::V1::Cursor.new(
+    values: converted_values,
+    before: before
+  )
 end

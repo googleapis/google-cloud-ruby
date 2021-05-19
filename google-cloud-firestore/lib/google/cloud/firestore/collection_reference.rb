@@ -14,9 +14,9 @@
 
 
 require "google/cloud/firestore/v1"
+require "google/cloud/firestore/query"
 require "google/cloud/firestore/document_reference"
 require "google/cloud/firestore/document_snapshot"
-require "google/cloud/firestore/query"
 require "google/cloud/firestore/generate"
 require "google/cloud/firestore/collection_reference_list"
 
