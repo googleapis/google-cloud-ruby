@@ -363,6 +363,8 @@ def cleanup_all_databases(instance)
   puts "Cleaning up all databases."
 
   instance.databases.all do |database|
+    next unless database.database_id.start_with?('gcruby')
+
     puts "Deleting database #{database.database_id}"
     database.drop
   end
