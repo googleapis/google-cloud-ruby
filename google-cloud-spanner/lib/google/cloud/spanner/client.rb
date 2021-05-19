@@ -42,12 +42,10 @@ module Google
       #
       #   db = spanner.client "my-instance", "my-database"
       #
-      #   db.transaction do |tx|
-      #     results = tx.execute_query "SELECT * FROM users"
+      #   results = db.execute_query "SELECT * FROM users"
       #
-      #     results.rows.each do |row|
-      #       puts "User #{row[:id]} is #{row[:name]}"
-      #     end
+      #   results.rows.each do |row|
+      #     puts "User #{row[:id]} is #{row[:name]}"
       #   end
       #
       class Client
@@ -167,6 +165,9 @@ module Google
         # @param [Hash] single_use Perform the read with a single-use snapshot
         #   (read-only transaction). (See
         #   [TransactionOptions](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#transactionoptions).)
+        #   If no value is specified for this parameter, Cloud Spanner will use
+        #   a single use read-only transaction with strong timestamp bound as
+        #   default.
         #   The snapshot can be created by providing exactly one of the
         #   following options in the hash:
         #
@@ -408,7 +409,7 @@ module Google
         # once" semantics.
         #
         # Where DML statements must be executed using Transaction (see
-        # {Transaction#execute_update}), Paritioned DML statements are executed
+        # {Transaction#execute_update}), Partitioned DML statements are executed
         # outside of a read/write transaction.
         #
         # Not all DML statements can be executed in the Partitioned DML mode and
@@ -640,6 +641,9 @@ module Google
         # @param [Hash] single_use Perform the read with a single-use snapshot
         #   (read-only transaction). (See
         #   [TransactionOptions](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#transactionoptions).)
+        #   If no value is specified for this parameter, Cloud Spanner will use
+        #   a single use read-only transaction with strong timestamp bound as
+        #   default.
         #   The snapshot can be created by providing exactly one of the
         #   following options in the hash:
         #
