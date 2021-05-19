@@ -71,17 +71,17 @@ module Google
                 default_config.rpcs.list_insights.timeout = 60.0
                 default_config.rpcs.list_insights.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_insight.timeout = 60.0
                 default_config.rpcs.get_insight.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.mark_insight_accepted.timeout = 60.0
@@ -89,17 +89,17 @@ module Google
                 default_config.rpcs.list_recommendations.timeout = 60.0
                 default_config.rpcs.list_recommendations.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_recommendation.timeout = 60.0
                 default_config.rpcs.get_recommendation.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.mark_recommendation_claimed.timeout = 60.0
