@@ -186,7 +186,7 @@ module Acceptance
       end
 
       def numeric_pk_ddl_statement
-        return if emulator_enabled?
+        return
 
         <<-BOXES
           CREATE TABLE boxes (
@@ -197,7 +197,7 @@ module Acceptance
       end
 
       def numeric_composite_pk_ddl_statement
-        return if emulator_enabled?
+        return
 
         <<-BOX_ITEMS
           CREATE TABLE box_items (
@@ -319,6 +319,8 @@ fixture = Object.new
 fixture.extend Acceptance::SpannerTest::Fixtures
 
 instance = $spanner.instance $spanner_instance_id
+cleanup_all_databases(instance)
+
 instance ||= begin
   inst_job = $spanner.create_instance $spanner_instance_id, name: "google-cloud-ruby-tests", config: "regional-us-central1", nodes: 1
   inst_job.wait_until_done!
@@ -355,6 +357,15 @@ def clean_up_spanner_objects
   restored_db.drop if restored_db
 rescue => e
   puts "Error while cleaning up instances and databases after spanner tests.\n\n#{e}"
+end
+
+def cleanup_all_databases(instance)
+  puts "Cleaning up all databases."
+
+  instance.databases.all do |database|
+    puts "Deleting database #{database.database_id}"
+    database.drop
+  end
 end
 
 Minitest.after_run do
