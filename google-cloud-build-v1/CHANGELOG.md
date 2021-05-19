@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2021-05-19
+
+#### Features
+
+* Support source manifests
+
 ### 0.6.0 / 2021-04-26
 
 #### Features
