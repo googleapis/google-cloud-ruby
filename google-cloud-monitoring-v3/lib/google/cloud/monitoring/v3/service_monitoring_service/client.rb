@@ -73,17 +73,17 @@ module Google
                 default_config.rpcs.get_service.timeout = 30.0
                 default_config.rpcs.get_service.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_services.timeout = 30.0
                 default_config.rpcs.list_services.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_service.timeout = 30.0
@@ -91,9 +91,9 @@ module Google
                 default_config.rpcs.delete_service.timeout = 30.0
                 default_config.rpcs.delete_service.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_service_level_objective.timeout = 30.0
@@ -101,17 +101,17 @@ module Google
                 default_config.rpcs.get_service_level_objective.timeout = 30.0
                 default_config.rpcs.get_service_level_objective.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_service_level_objectives.timeout = 30.0
                 default_config.rpcs.list_service_level_objectives.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_service_level_objective.timeout = 30.0
@@ -119,9 +119,9 @@ module Google
                 default_config.rpcs.delete_service_level_objective.timeout = 30.0
                 default_config.rpcs.delete_service_level_objective.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config

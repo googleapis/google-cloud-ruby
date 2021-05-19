@@ -69,33 +69,33 @@ module Google
                 default_config.rpcs.list_monitored_resource_descriptors.timeout = 30.0
                 default_config.rpcs.list_monitored_resource_descriptors.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_monitored_resource_descriptor.timeout = 30.0
                 default_config.rpcs.get_monitored_resource_descriptor.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_metric_descriptors.timeout = 30.0
                 default_config.rpcs.list_metric_descriptors.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_metric_descriptor.timeout = 30.0
                 default_config.rpcs.get_metric_descriptor.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_metric_descriptor.timeout = 12.0
@@ -103,17 +103,17 @@ module Google
                 default_config.rpcs.delete_metric_descriptor.timeout = 30.0
                 default_config.rpcs.delete_metric_descriptor.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_time_series.timeout = 30.0
                 default_config.rpcs.list_time_series.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_time_series.timeout = 12.0
