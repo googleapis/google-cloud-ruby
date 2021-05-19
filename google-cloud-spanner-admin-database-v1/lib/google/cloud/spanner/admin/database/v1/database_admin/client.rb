@@ -75,9 +75,9 @@ module Google
                     default_config.rpcs.list_databases.timeout = 3600.0
                     default_config.rpcs.list_databases.retry_policy = {
                       initial_delay: 1.0,
-                  max_delay: 32.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                      max_delay: 32.0,
+                      multiplier: 1.3,
+                      retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.create_database.timeout = 3600.0
@@ -85,33 +85,33 @@ module Google
                     default_config.rpcs.get_database.timeout = 3600.0
                     default_config.rpcs.get_database.retry_policy = {
                       initial_delay: 1.0,
-                  max_delay: 32.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                      max_delay: 32.0,
+                      multiplier: 1.3,
+                      retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.update_database_ddl.timeout = 3600.0
                     default_config.rpcs.update_database_ddl.retry_policy = {
                       initial_delay: 1.0,
-                  max_delay: 32.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                      max_delay: 32.0,
+                      multiplier: 1.3,
+                      retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.drop_database.timeout = 3600.0
                     default_config.rpcs.drop_database.retry_policy = {
                       initial_delay: 1.0,
-                  max_delay: 32.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                      max_delay: 32.0,
+                      multiplier: 1.3,
+                      retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.get_database_ddl.timeout = 3600.0
                     default_config.rpcs.get_database_ddl.retry_policy = {
                       initial_delay: 1.0,
-                  max_delay: 32.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                      max_delay: 32.0,
+                      multiplier: 1.3,
+                      retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.set_iam_policy.timeout = 30.0
@@ -119,9 +119,9 @@ module Google
                     default_config.rpcs.get_iam_policy.timeout = 30.0
                     default_config.rpcs.get_iam_policy.retry_policy = {
                       initial_delay: 1.0,
-                  max_delay: 32.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                      max_delay: 32.0,
+                      multiplier: 1.3,
+                      retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.test_iam_permissions.timeout = 30.0
@@ -131,33 +131,33 @@ module Google
                     default_config.rpcs.get_backup.timeout = 3600.0
                     default_config.rpcs.get_backup.retry_policy = {
                       initial_delay: 1.0,
-                  max_delay: 32.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                      max_delay: 32.0,
+                      multiplier: 1.3,
+                      retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.update_backup.timeout = 3600.0
                     default_config.rpcs.update_backup.retry_policy = {
                       initial_delay: 1.0,
-                  max_delay: 32.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                      max_delay: 32.0,
+                      multiplier: 1.3,
+                      retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.delete_backup.timeout = 3600.0
                     default_config.rpcs.delete_backup.retry_policy = {
                       initial_delay: 1.0,
-                  max_delay: 32.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                      max_delay: 32.0,
+                      multiplier: 1.3,
+                      retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.list_backups.timeout = 3600.0
                     default_config.rpcs.list_backups.retry_policy = {
                       initial_delay: 1.0,
-                  max_delay: 32.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                      max_delay: 32.0,
+                      multiplier: 1.3,
+                      retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.restore_database.timeout = 3600.0
@@ -165,17 +165,17 @@ module Google
                     default_config.rpcs.list_database_operations.timeout = 3600.0
                     default_config.rpcs.list_database_operations.retry_policy = {
                       initial_delay: 1.0,
-                  max_delay: 32.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                      max_delay: 32.0,
+                      multiplier: 1.3,
+                      retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.list_backup_operations.timeout = 3600.0
                     default_config.rpcs.list_backup_operations.retry_policy = {
                       initial_delay: 1.0,
-                  max_delay: 32.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                      max_delay: 32.0,
+                      multiplier: 1.3,
+                      retry_codes: [14, 4]
                     }
 
                     default_config
