@@ -71,25 +71,25 @@ module Google
                   default_config.rpcs.create_read_session.timeout = 600.0
                   default_config.rpcs.create_read_session.retry_policy = {
                     initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [4, 14]
+                    max_delay: 60.0,
+                    multiplier: 1.3,
+                    retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.read_rows.timeout = 86_400.0
                   default_config.rpcs.read_rows.retry_policy = {
                     initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14]
+                    max_delay: 60.0,
+                    multiplier: 1.3,
+                    retry_codes: [14]
                   }
 
                   default_config.rpcs.split_read_stream.timeout = 600.0
                   default_config.rpcs.split_read_stream.retry_policy = {
                     initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [4, 14]
+                    max_delay: 60.0,
+                    multiplier: 1.3,
+                    retry_codes: [4, 14]
                   }
 
                   default_config
