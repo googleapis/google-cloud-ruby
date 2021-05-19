@@ -4,5 +4,6 @@
     "language": "ruby",
     "name_pretty": "Grafeas V1 API",
     "repo": "googleapis/google-cloud-ruby",
-    "requires_billing": true
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO"
 }
