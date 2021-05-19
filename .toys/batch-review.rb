@@ -95,8 +95,11 @@ def init_config
   @edit_enabled = true
   @editor = editor || ENV["EDITOR"] || "/bin/nano"
   @max_line_count = max_line_count
-  @omit_paths = omit_paths.map do |path|
-    path.is_a?(Regexp) ? path : Regexp.new(path.to_s)
+  @omits = omit_paths.map do |path|
+    regexp = path.is_a?(Regexp) ? path : Regexp.new(path.to_s)
+    Omit.new "Any file path matching #{regexp}" do |file|
+      regexp =~ file.path
+    end
   end
 end
 
@@ -131,29 +134,94 @@ def handle_input pr_data
     when "q"
       puts "... quitting."
       exit 0
-    when /^e\s*\+$/
-      @edit_enabled = true
-      puts "... enabling editing"
-    when /^e\s*-$/
-      @edit_enabled = false
-      puts "... disabling editing"
-    when /^d\s*a$/
-      display_all_diffs pr_data
-    when /^d\s*f$/
-      display_filenames pr_data
-    when /^d\s*(\d+)$/
-      display_file Regexp.last_match[1].to_i
-    when /^o\s*-$/
-      puts "... cleared omit paths"
-      @omit_paths = []
-    when /^o\s*(\S+)$/
-      regexp = Regexp.new Regexp.last_match[1]
-      @omit_paths << regexp
-      puts "... added omit path: #{regexp}"
+    when /^e\s*([+-])$/
+      handle_edit Regexp.last_match[1]
+    when /^d\s*(\S+)$/
+      handle_display Regexp.last_match[1], pr_data
+    when /^o\s*(\S(?:.*\S)?)$/
+      handle_omit(*Regexp.last_match[1].split)
     else
       puts "Unknown command.", :red, :bold
       show_help
     end
+  end
+end
+
+def handle_edit arg
+  case arg
+  when "+"
+    @edit_enabled = true
+    puts "... enabling editing"
+  when "-"
+    @edit_enabled = false
+    puts "... disabling editing"
+  end
+end
+
+def handle_display arg, pr_data
+  case arg
+  when "a"
+    display_all_diffs pr_data
+  when "A"
+    display_all_diffs pr_data, force_all: true
+  when "f"
+    display_filenames pr_data
+  when /^\d+$/
+    display_file arg.to_i
+  else
+    puts "Don't know how to display: #{arg.inspect}", :red, :bold
+  end
+end
+
+def handle_omit arg, *extra_args
+  case arg
+  when "-"
+    @omits = []
+    puts "... cleared omits"
+  when /^p/
+    extra_args.each do |exp|
+      regexp = Regexp.new exp
+      omit = Omit.new "Any file path matching #{regexp}" do |file|
+        regexp =~ file.path
+      end
+      @omits << omit
+      puts "... added omit for all file paths: #{regexp}"
+    end
+  when /^c/
+    extra_args.each do |exp|
+      regexp = Regexp.new exp
+      omit = Omit.new "Any changed file path matching #{regexp}" do |file|
+        file.type == "C" && regexp =~ file.path
+      end
+      @omits << omit
+      puts "... added omit for changed file paths: #{regexp}"
+    end
+  when /^a/
+    extra_args.each do |exp|
+      regexp = Regexp.new exp
+      omit = Omit.new "Any added file path matching #{regexp}" do |file|
+        file.type == "A" && regexp =~ file.path
+      end
+      @omits << omit
+      puts "... added omit for added file paths: #{regexp}"
+    end
+  when /^d/
+    extra_args.each do |exp|
+      regexp = Regexp.new exp
+      omit = Omit.new "Any deleted file path matching #{regexp}" do |file|
+        file.type == "D" && regexp =~ file.path
+      end
+      @omits << omit
+      puts "... added omit for deleted file paths: #{regexp}"
+    end
+  when /^i/
+    omit = Omit.new "All changes affect indentation only" do |file|
+      file.only_indentation
+    end
+    @omits << omit
+    puts "... added omit for indentation-only diffs"
+  else
+    puts "Unknown omit arg: #{arg.inspect}", :red, :bold
   end
 end
 
@@ -186,11 +254,15 @@ def display_filenames pr_data
   end
 end
 
-def display_all_diffs pr_data
-  diff_text = pr_data.diff_files
-    .find_all { |file| !@omit_paths.any? { |omit| omit =~ file.path } }
-    .map(&:text)
-    .join
+def display_all_diffs pr_data, force_all: false
+  files = pr_data.diff_files
+  unless force_all
+    disp_files, omit_files = files.partition { |file| !@omits.any? { |omit| omit.call file } }
+  end
+  omit_files.each do |file|
+    puts "Omitting display of #{file.path}"
+  end
+  diff_text = disp_files.map(&:text).join
   exec ["ydiff", "--width=0", "-s", "--wrap"],
        in: [:string, diff_text],
        e: true
@@ -289,15 +361,15 @@ end
 class DiffFile
   def initialize text
     @text = text
+    lines = text.split "\n"
     @path =
-      if @text =~ %r{^diff --git a/(\S+) b/\S+$}
+      if lines.first =~ %r{^diff --git a/(\S+) b/\S+$}
         $1
       else
         ""
       end
-    second_line = @text.split("\n", 3)[1].to_s
     @type =
-      case second_line
+      case lines[1].to_s
       when /^new file/
         "N"
       when /^deleted file/
@@ -305,11 +377,76 @@ class DiffFile
       else
         "C"
       end
+    analyze_changes lines
   end
 
   attr_reader :text
   attr_reader :path
   attr_reader :type
+  attr_reader :only_indentation
+
+  private
+
+  def analyze_changes lines
+    @only_indentation = true
+    hunk = nil
+    lines << "@@"
+    lines.each do |line|
+      if line.start_with? "@@"
+        analyze_hunk hunk if hunk && !hunk.empty?
+        hunk = []
+      else
+        hunk << line if hunk
+      end
+    end
+  end
+
+  def analyze_hunk hunk
+    analyze_only_indentation hunk
+  end
+
+  def analyze_only_indentation hunk
+    return unless @only_indentation
+    minuses = [""]
+    pos = 1
+    @only_indentation = false
+    catch :fail do
+      hunk.each do |line|
+        if line.start_with? "-"
+          if pos == minuses.length
+            minuses = [line]
+            pos = 0
+          elsif pos == 0
+            minuses << line
+          else
+            throw :fail
+          end
+        elsif line.start_with? "+"
+          throw :fail unless pos < minuses.length && minuses[pos].sub(/^-\s*/, "") == line.sub(/^\+\s*/, "")
+          pos += 1
+        elsif line.start_with? " "
+          throw :fail unless pos == minuses.length
+        else
+          throw :fail
+        end
+      end
+      @only_indentation = true
+    end
+  end
+end
+
+class Omit
+  def initialize desc, &block
+    raise "Block required" unless block
+    @desc = desc
+    @block = block
+  end
+
+  attr_reader :desc
+
+  def call pr_file
+    @block.call pr_file
+  end
 end
 
 class PrData
