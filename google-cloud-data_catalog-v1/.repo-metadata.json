@@ -7,5 +7,6 @@
     "name_pretty": "Data Catalog V1 API",
     "product_documentation": "https://cloud.google.com/data-catalog",
     "repo": "googleapis/google-cloud-ruby",
-    "requires_billing": true
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO"
 }
