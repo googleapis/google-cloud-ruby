@@ -90,33 +90,33 @@ module Google
                     default_config.rpcs.list_instance_configs.timeout = 3600.0
                     default_config.rpcs.list_instance_configs.retry_policy = {
                       initial_delay: 1.0,
-                  max_delay: 32.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                      max_delay: 32.0,
+                      multiplier: 1.3,
+                      retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.get_instance_config.timeout = 3600.0
                     default_config.rpcs.get_instance_config.retry_policy = {
                       initial_delay: 1.0,
-                  max_delay: 32.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                      max_delay: 32.0,
+                      multiplier: 1.3,
+                      retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.list_instances.timeout = 3600.0
                     default_config.rpcs.list_instances.retry_policy = {
                       initial_delay: 1.0,
-                  max_delay: 32.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                      max_delay: 32.0,
+                      multiplier: 1.3,
+                      retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.get_instance.timeout = 3600.0
                     default_config.rpcs.get_instance.retry_policy = {
                       initial_delay: 1.0,
-                  max_delay: 32.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                      max_delay: 32.0,
+                      multiplier: 1.3,
+                      retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.create_instance.timeout = 3600.0
@@ -126,9 +126,9 @@ module Google
                     default_config.rpcs.delete_instance.timeout = 3600.0
                     default_config.rpcs.delete_instance.retry_policy = {
                       initial_delay: 1.0,
-                  max_delay: 32.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                      max_delay: 32.0,
+                      multiplier: 1.3,
+                      retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.set_iam_policy.timeout = 30.0
@@ -136,9 +136,9 @@ module Google
                     default_config.rpcs.get_iam_policy.timeout = 30.0
                     default_config.rpcs.get_iam_policy.retry_policy = {
                       initial_delay: 1.0,
-                  max_delay: 32.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                      max_delay: 32.0,
+                      multiplier: 1.3,
+                      retry_codes: [14, 4]
                     }
 
                     default_config.rpcs.test_iam_permissions.timeout = 30.0
