@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.0 / 2021-05-19
+
+#### Features
+
+* Support for management of fulfillments, environments, and versions
+
 ### 1.2.0 / 2021-03-08
 
 #### Features
