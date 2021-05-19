@@ -44,7 +44,11 @@ def cleanup_all_databases(instance)
     next unless database.database_id.start_with?('gcruby')
 
     puts "Deleting database #{database.database_id}"
-    database.drop
+    begin
+      database.drop
+    rescue => e
+      puts "Error while deleting database #{database.database_id} #{e.message}"
+    end
   end
 end
 
