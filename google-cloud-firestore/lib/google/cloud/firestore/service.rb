@@ -96,6 +96,8 @@ module Google
           )
         end
 
+        ##
+        # Returns Google::Cloud::Firestore::V1::PartitionQueryResponse
         def partition_query parent, structured_query, partition_count, token: nil, max: nil
           paged_enum = firestore.partition_query parent: parent,
                                                  structured_query: structured_query,

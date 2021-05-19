@@ -30,7 +30,7 @@ describe Google::Cloud::Firestore::CollectionGroup, :mock_firestore do
     _(query_gapi.from.first.all_descendants).must_equal true
     _(query_gapi.from.first.collection_id).must_equal collection_id
   end
-focus
+
   it "creates partitions" do
     expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
       from: [
@@ -39,7 +39,7 @@ focus
     )
     num_partitions = 3
 
-    list_res = paged_enum_struct partition_query_resp(num_partitions)
+    list_res = paged_enum_struct partition_query_resp(count: num_partitions)
     firestore_mock.expect :partition_query, list_res, [partition_query_args(expected_query, partition_count: num_partitions)]
 
     _(collection_group).must_be_kind_of Google::Cloud::Firestore::Query

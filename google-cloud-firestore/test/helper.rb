@@ -194,19 +194,20 @@ class MockFirestore < Minitest::Spec
     }
   end
 
-  def partition_query_resp count = 3, token = nil
+  def partition_query_resp count: 3, token: nil
     Google::Cloud::Firestore::V1::PartitionQueryResponse.new(
-      partitions: count.times.map { cursor_gapi },
+      partitions: count.times.map { |i| cursor_grpc values: [i*10, i*10+1] },
       next_page_token: token
     )
   end
 
-  def cursor_gapi
+  def cursor_grpc values: [1,2], before: false
+    converted_values = values.map do |val|
+      Google::Cloud::Firestore::Convert.raw_to_value val
+    end
     Google::Cloud::Firestore::V1::Cursor.new(
-      values: [
-        Google::Cloud::Firestore::V1::Value.new(string_value: "a")
-      ],
-      before: false
+      values: converted_values,
+      before: before
     )
   end
 

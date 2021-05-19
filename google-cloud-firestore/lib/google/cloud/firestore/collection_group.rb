@@ -14,11 +14,8 @@
 
 
 require "google/cloud/firestore/v1"
-require "google/cloud/firestore/document_reference"
-require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/query"
-require "google/cloud/firestore/generate"
-require "google/cloud/firestore/collection_reference_list"
+require "google/cloud/firestore/query_partition"
 
 module Google
   module Cloud
@@ -64,18 +61,19 @@ module Google
         #
         #   firestore = Google::Cloud::Firestore.new
         #
-        #   # Get the cities collection group query
         #   col_group = firestore.col_group "cities"
         #
-        #   col_group.partitions(3).each do |query_partition|
-        #     # puts query_partition.create_query
+        #   partitions = col_group.partitions 3
+        #   partitions.each do |partition|
+        #     puts partition.create_query
         #   end
         #
         def partitions partition_count, token: nil, max: nil
           ensure_service!
 
-          resp_gapi = service.partition_query parent_path, query, partition_count, token: token, max: max
-          resp_gapi.partitions
+          grpc = service.partition_query parent_path, query, partition_count, token: token, max: max
+
+          QueryPartition::List.from_grpc grpc, client, parent_path, query, partition_count, max: max
         end
 
         ##
