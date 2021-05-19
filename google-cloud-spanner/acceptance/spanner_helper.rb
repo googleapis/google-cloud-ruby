@@ -36,6 +36,8 @@ def emulator_enabled?
 end
 
 def cleanup_all_databases(instance)
+  return if emulator_enabled? || instance.nil?
+
   puts "Cleaning up all databases."
 
   instance.databases.all do |database|
@@ -369,7 +371,6 @@ def clean_up_spanner_objects
 rescue => e
   puts "Error while cleaning up instances and databases after spanner tests.\n\n#{e}"
 end
-
 
 Minitest.after_run do
   clean_up_spanner_objects
