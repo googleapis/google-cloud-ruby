@@ -77,17 +77,17 @@ module Google
                 default_config.rpcs.get_build.timeout = 600.0
                 default_config.rpcs.get_build.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_builds.timeout = 600.0
                 default_config.rpcs.list_builds.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.cancel_build.timeout = 600.0
@@ -99,25 +99,25 @@ module Google
                 default_config.rpcs.get_build_trigger.timeout = 600.0
                 default_config.rpcs.get_build_trigger.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_build_triggers.timeout = 600.0
                 default_config.rpcs.list_build_triggers.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_build_trigger.timeout = 600.0
                 default_config.rpcs.delete_build_trigger.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_build_trigger.timeout = 600.0
@@ -129,9 +129,9 @@ module Google
                 default_config.rpcs.get_worker_pool.timeout = 600.0
                 default_config.rpcs.get_worker_pool.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_worker_pool.timeout = 600.0
@@ -141,9 +141,9 @@ module Google
                 default_config.rpcs.list_worker_pools.timeout = 600.0
                 default_config.rpcs.list_worker_pools.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config
