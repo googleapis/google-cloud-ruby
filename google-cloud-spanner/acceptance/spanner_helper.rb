@@ -35,6 +35,17 @@ def emulator_enabled?
   ENV["SPANNER_EMULATOR_HOST"]
 end
 
+def cleanup_all_databases(instance)
+  puts "Cleaning up all databases."
+
+  instance.databases.all do |database|
+    next unless database.database_id.start_with?('gcruby')
+
+    puts "Deleting database #{database.database_id}"
+    database.drop
+  end
+end
+
 # Create shared spanner object so we don't create new for each test
 $spanner = Google::Cloud::Spanner.new
 
@@ -359,16 +370,6 @@ rescue => e
   puts "Error while cleaning up instances and databases after spanner tests.\n\n#{e}"
 end
 
-def cleanup_all_databases(instance)
-  puts "Cleaning up all databases."
-
-  instance.databases.all do |database|
-    next unless database.database_id.start_with?('gcruby')
-
-    puts "Deleting database #{database.database_id}"
-    database.drop
-  end
-end
 
 Minitest.after_run do
   clean_up_spanner_objects
