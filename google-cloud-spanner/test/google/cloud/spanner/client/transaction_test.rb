@@ -496,7 +496,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     spanner.service.mocked_service = mock
 
     timestamp = client.transaction do |tx|
-      tx.update "users", [{ id: 1, name: "Charlie", active: false }]
+      tx.update "users", [{ id: 1, name: "Charlie", active: false, address: { "pincode" => 1234 } }]
       tx.insert "users", [{ id: 2, name: "Harvey",  active: true }]
       tx.upsert "users", [{ id: 3, name: "Marley",  active: false }]
       tx.replace "users", [{ id: 4, name: "Henry",  active: true }]

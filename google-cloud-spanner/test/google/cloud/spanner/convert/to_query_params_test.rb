@@ -254,6 +254,17 @@ describe Google::Cloud::Spanner::Convert, :to_query_params, :mock_spanner do
                                              Google::Spanner::V1::Type.new(code: :NUMERIC)] })
   end
 
+  it "converts a Hash to json value " do
+    value = { name: "ABC", open: true, rating: 10 }
+    combined_params = Google::Cloud::Spanner::Convert.to_query_params(
+      { venue_detail: value }, { venue_detail: :JSON }
+    )
+    _(combined_params).must_equal({
+      "venue_detail" => [ Google::Protobuf::Value.new(string_value: value.to_json),
+                          Google::Spanner::V1::Type.new(code: :JSON)]
+    })
+  end
+
   describe "Struct Parameters Query Examples" do
     # Simple field access.
     # [parameters=STRUCT<threadf INT64, userf STRING>(1,"bob") AS struct_param, 10 as p4]
