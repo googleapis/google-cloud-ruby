@@ -26,3 +26,6 @@ __pycache__
 
 node_modules
 package-lock.json
+
+# Ignore RubyMine project files
+.idea
