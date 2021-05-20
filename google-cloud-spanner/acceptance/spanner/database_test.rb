@@ -36,6 +36,7 @@ describe "Spanner Databases", :spanner do
     _(database.project_id).must_equal spanner.project
     _(database.encryption_config).must_be :nil?
     _(database.encryption_info).must_be_kind_of Array
+    _(database.create_time).must_be_kind_of Time
 
     _(spanner.database(instance_id, database_id)).wont_be :nil?
 
