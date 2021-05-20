@@ -139,16 +139,5 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
       schema.nil?
     end
     _(schema).must_be :nil?
-
-    wait_for_condition description: "topic deleted schema_name" do
-      topic = pubsub.topic topic.name
-      topic.schema_name == "_deleted-schema_"
-    end
-    _(topic.schema_name).must_equal "_deleted-schema_"
-    _(topic.message_encoding).must_equal :BINARY
-
-    expect do 
-      pubsub.create_topic topic_name_2, schema_name: schema_name, message_encoding: :binary
-    end.must_raise Google::Cloud::NotFoundError
   end
 end
