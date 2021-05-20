@@ -33,8 +33,6 @@ module Google
         attr_reader :outstanding_messages, :outstanding_bytes, :awaiting_message_acquires, :awaiting_bytes_acquires
 
         def initialize message_limit: 1000, byte_limit: 10_000_000, limit_exceeded_behavior: :ignore
-          # init MonitorMixin
-          # super()
           unless [:ignore, :error, :block].include? limit_exceeded_behavior
             raise ArgumentError, "limit_exceeded_behavior must be one of :ignore, :error, :block"
           end
