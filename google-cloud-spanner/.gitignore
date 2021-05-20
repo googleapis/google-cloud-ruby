@@ -8,6 +8,3 @@ jsondoc/*
 
 # Ignore YARD stuffs
 .yardoc
-
-# Ignore RubyMine project files
-.idea
