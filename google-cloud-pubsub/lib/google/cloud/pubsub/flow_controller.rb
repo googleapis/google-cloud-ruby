@@ -69,7 +69,7 @@ module Google
           acquire_message
           acquire_bytes message_size
         ensure
-          @mutex.unlock if @mutex.locked?
+          @mutex.unlock if @mutex.owned?
         end
 
         # rubocop:disable Style/IdenticalConditionalBranches
