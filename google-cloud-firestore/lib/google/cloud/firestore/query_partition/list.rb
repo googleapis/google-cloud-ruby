@@ -89,7 +89,7 @@ module Google
             return nil unless next?
             ensure_client!
             grpc = @client.service.partition_query @parent, @structured_query, @partition_count, token: token, max: @max
-            self.class.from_grpc grpc, @client, @parent, @structured_query, @partition_count, @max
+            self.class.from_grpc grpc, @client, @parent, @structured_query, @partition_count, max: @max
           end
 
           ##
