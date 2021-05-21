@@ -71,9 +71,15 @@ module Google
         def partitions partition_count, token: nil, max: nil
           ensure_service!
 
-          grpc = service.partition_query parent_path, query, partition_count, token: token, max: max
+          # Partition queries require explicit ordering by __name__.
+          query_with_default_order = order("__name__").query
+          # Since we are always returning an extra partition (with en empty endBefore cursor), we reduce the desired
+          # partition count by one.
+          partition_count -= 1
 
-          QueryPartition::List.from_grpc grpc, client, parent_path, query, partition_count, max: max
+          grpc = service.partition_query parent_path, query_with_default_order, partition_count, token: token, max: max
+
+          QueryPartition::List.from_grpc grpc, client, parent_path, query_with_default_order, partition_count, max: max
         end
 
         ##

@@ -127,7 +127,7 @@ class MockFirestore < Minitest::Spec
   def wait_until &block
     wait_count = 0
     until block.call
-      fail "wait_until criterial was not met" if wait_count > 100
+      fail "wait_until criteria was not met" if wait_count > 100
       wait_count += 1
       sleep 0.01
     end
@@ -184,14 +184,18 @@ class MockFirestore < Minitest::Spec
 
   def partition_query_args query,
                            parent: "projects/#{project}/databases/(default)/documents",
-                           partition_count: 3
-    {
-      parent: parent,
-      structured_query: query,
-      partition_count: partition_count,
-      page_token: nil,
-      page_size: nil
-    }
+                           partition_count: 2,
+                           page_token: nil,
+                           page_size: nil
+    [
+      {
+        parent: parent,
+        structured_query: query,
+        partition_count: partition_count,
+        page_token: page_token,
+        page_size: page_size
+      }
+    ]
   end
 
   def partition_query_resp count: 3, token: nil
