@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2021-05-21
+
+#### Features
+
+* Use non-regionalized default host name
+
 ### 0.2.0 / 2021-03-08
 
 #### Features
