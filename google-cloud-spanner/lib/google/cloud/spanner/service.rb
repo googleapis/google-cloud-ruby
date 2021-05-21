@@ -148,6 +148,11 @@ module Google
 
         def update_instance instance, field_mask: nil, call_options: nil
           opts = default_options call_options: call_options
+
+          if field_mask.nil? || field_mask.empty?
+            field_mask = %w[display_name node_count labels]
+          end
+
           request = {
             instance: instance,
             field_mask: Google::Protobuf::FieldMask.new(paths: field_mask)

@@ -248,12 +248,6 @@ module Google
             field_mask << field unless @grpc[field.to_s] == value
           end
 
-          if field_mask.include?(:node_count) &&
-             field_mask.include?(:processing_units)
-            raise ArgumentError,
-                  "only one of processing_units or nodes should be specified"
-          end
-
           job_grpc = service.update_instance @grpc, field_mask: field_mask
           Instance::Job.from_grpc job_grpc, service
         end

@@ -177,9 +177,9 @@ module Google
         #   configuration. Values can be the `instance_config_id`, the full
         #   path, or an {Instance::Config} object. Required.
         # @param [Integer] nodes The number of nodes allocated to this instance.
-        #   Optional. Specifiy either `nodes` or `processing_units`
+        #   Optional. Specify either `nodes` or `processing_units`
         # @param [Integer] processing_units The number of processing units
-        #   allocated to this instance. Optional. Specifiy either `nodes`
+        #   allocated to this instance. Optional. Specify either `nodes`
         #   or `processing_units`
         # @param [Hash] labels Cloud Labels are a flexible and lightweight
         #   mechanism for organizing cloud resources into groups that reflect a
@@ -245,11 +245,6 @@ module Google
         def create_instance instance_id, name: nil, config: nil, nodes: nil,
                             processing_units: nil, labels: nil
           config = config.path if config.respond_to? :path
-
-          if nodes && processing_units
-            raise ArgumentError,
-                  "only one of processing_units or nodes should be specified"
-          end
 
           # Convert from possible Google::Protobuf::Map
           labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels

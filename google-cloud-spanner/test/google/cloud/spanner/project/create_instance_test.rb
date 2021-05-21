@@ -132,13 +132,4 @@ describe Google::Cloud::Spanner::Project, :create_instance, :mock_spanner do
     _(job).must_be_kind_of Google::Cloud::Spanner::Instance::Job
     _(job).wont_be :done?
   end
-
-  it "raise an error if create instance with both options processing units and nodes count" do
-    error = assert_raises ArgumentError do
-      job = spanner.create_instance instance_id, config: config, name: "My New Instance",
-                                    nodes: 1, processing_units: 1000
-    end
-
-    _(error.message).must_equal "only one of processing_units or nodes should be specified"
-  end
 end

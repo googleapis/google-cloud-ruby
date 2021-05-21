@@ -76,14 +76,25 @@ describe Google::Cloud::Spanner::Instance, :save, :mock_spanner do
     _(job).wont_be :done?
   end
 
-  it "raise an error if specified processing units and node count" do
-    instance.nodes = 10
-    instance.processing_units = 2000
+  it "updates processing units" do
+    instance.processing_units = 1000
 
-    error = assert_raises ArgumentError do
-      instance.save
-    end
+    update_res = \
+      Gapic::Operation.new(
+        job_grpc, Object.new,
+        result_type: Google::Cloud::Spanner::Admin::Instance::V1::Instance,
+        metadata_type: Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceMetadata
+      )
+    mask = Google::Protobuf::FieldMask.new paths: ["processing_units"]
+    mock = Minitest::Mock.new
+    mock.expect :update_instance, update_res, [{ instance: instance_grpc, field_mask: mask }, nil]
+    spanner.service.mocked_instances = mock
 
-    _(error.message).must_equal "only one of processing_units or nodes should be specified"
+    job = instance.save
+
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Spanner::Instance::Job
+    _(job).wont_be :done?
   end
 end
