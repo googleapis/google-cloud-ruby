@@ -249,6 +249,7 @@ module Google
           end
 
           job_grpc = service.update_instance @grpc, field_mask: field_mask
+          @orignal_values = @grpc.to_h
           Instance::Job.from_grpc job_grpc, service
         end
         alias update save

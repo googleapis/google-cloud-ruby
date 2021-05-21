@@ -27,18 +27,19 @@ describe Google::Cloud::Spanner::Instance, :save, :mock_spanner do
       }
     )
   end
+  let(:update_res) do
+    Gapic::Operation.new(
+      job_grpc, Object.new,
+      result_type: Google::Cloud::Spanner::Admin::Instance::V1::Instance,
+      metadata_type: Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceMetadata
+    )
+  end
 
   it "updates and saves itself" do
     instance.display_name = "Updated display name"
     instance.nodes = 99
     instance.labels = { "env" => "production" }
 
-    update_res = \
-      Gapic::Operation.new(
-        job_grpc, Object.new,
-        result_type: Google::Cloud::Spanner::Admin::Instance::V1::Instance,
-        metadata_type: Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceMetadata
-      )
     mask = Google::Protobuf::FieldMask.new paths: ["display_name", "node_count", "labels"]
     mock = Minitest::Mock.new
     mock.expect :update_instance, update_res, [{ instance: instance_grpc, field_mask: mask }, nil]
@@ -57,12 +58,6 @@ describe Google::Cloud::Spanner::Instance, :save, :mock_spanner do
     instance.nodes = 99
     instance.labels["env"] = "production"
 
-    update_res = \
-      Gapic::Operation.new(
-        job_grpc, Object.new,
-        result_type: Google::Cloud::Spanner::Admin::Instance::V1::Instance,
-        metadata_type: Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceMetadata
-      )
     mask = Google::Protobuf::FieldMask.new paths: ["display_name", "node_count", "labels"]
     mock = Minitest::Mock.new
     mock.expect :update_instance, update_res, [{ instance: instance_grpc, field_mask: mask }, nil]
@@ -79,12 +74,6 @@ describe Google::Cloud::Spanner::Instance, :save, :mock_spanner do
   it "updates processing units" do
     instance.processing_units = 1000
 
-    update_res = \
-      Gapic::Operation.new(
-        job_grpc, Object.new,
-        result_type: Google::Cloud::Spanner::Admin::Instance::V1::Instance,
-        metadata_type: Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceMetadata
-      )
     mask = Google::Protobuf::FieldMask.new paths: ["processing_units"]
     mock = Minitest::Mock.new
     mock.expect :update_instance, update_res, [{ instance: instance_grpc, field_mask: mask }, nil]
@@ -96,5 +85,25 @@ describe Google::Cloud::Spanner::Instance, :save, :mock_spanner do
 
     _(job).must_be_kind_of Google::Cloud::Spanner::Instance::Job
     _(job).wont_be :done?
+  end
+
+  it "update orignal value after instance update request" do
+    _(instance.processing_units).must_equal 0
+
+    instance.processing_units = 1000
+
+    mask = Google::Protobuf::FieldMask.new paths: ["processing_units"]
+    mock = Minitest::Mock.new
+    mock.expect :update_instance, update_res, [{ instance: instance_grpc, field_mask: mask }, nil]
+    spanner.service.mocked_instances = mock
+
+    job = instance.save
+
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Spanner::Instance::Job
+    _(job).wont_be :done?
+
+    _(instance.instance_variable_get("@orignal_values")[:processing_units]).must_equal 1000
   end
 end
