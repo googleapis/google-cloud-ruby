@@ -208,7 +208,7 @@ module Google
 
         ##
         # Update changes.
-        #  `display_name`, `lables`, `nodes`, `processing_units` can be
+        #  `display_name`, `labels`, `nodes`, `processing_units` can be
         #  updated. `processing_units` and `nodes` can be used interchangeably
         #  to update.
         #
