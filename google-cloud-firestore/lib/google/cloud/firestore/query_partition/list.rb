@@ -88,8 +88,8 @@ module Google
           def next
             return nil unless next?
             ensure_client!
-            grpc = @client.service.partition_query @parent, @structured_query, @partition_count, token: token, max: @max
-            self.class.from_grpc grpc, @client, @parent, @structured_query, @partition_count, max: @max
+            grpc = @client.service.partition_query @parent, @query.query, @partition_count, token: token, max: @max
+            self.class.from_grpc grpc, @client, @parent, @query, @partition_count, max: @max
           end
 
           ##
@@ -167,18 +167,21 @@ module Google
           ##
           # @private New QueryPartition::List from a
           # Google::Cloud::Firestore::V1::PartitionQueryResponse object.
-          def self.from_grpc grpc, client, parent, structured_query, partition_count, max: nil
+          def self.from_grpc grpc, client, parent, query, partition_count, max: nil
+            # TODO: Should the logic adding the last partition be applied to the entire result set, not the page?
             start_at = nil
             partitions = List.new(Array(grpc.partitions).map do |cursor|
               end_before = cursor.values.map do |value|
                 Convert.value_to_raw value, client
               end
-              partition = QueryPartition.new structured_query, start_at, end_before
+              partition = QueryPartition.new query, start_at, end_before
               start_at = end_before
               partition
             end)
+            # We are always returning an extra partition (with en empty endBefore cursor).
+            partitions << QueryPartition.new(query, start_at, nil)
             partitions.instance_variable_set :@parent, parent
-            partitions.instance_variable_set :@structured_query, structured_query
+            partitions.instance_variable_set :@query, query
             partitions.instance_variable_set :@partition_count, partition_count
             token = grpc.next_page_token
             token = nil if token == ""

@@ -186,7 +186,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Firestore::CollectionGroup#partitions" do
     mock_firestore do |mock|
-      mock.expect :partition_query, partition_query_resp, [Hash]
+      mock.expect :partition_query, partition_query_resp, [Google::Cloud::Firestore::V1::PartitionQueryRequest]
     end
   end
 
@@ -300,7 +300,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Firestore::QueryPartition" do
     mock_firestore do |mock|
-      mock.expect :partition_query, partition_query_resp, [Hash]
+      mock.expect :partition_query, partition_query_resp, [Google::Cloud::Firestore::V1::PartitionQueryRequest]
     end
   end
 

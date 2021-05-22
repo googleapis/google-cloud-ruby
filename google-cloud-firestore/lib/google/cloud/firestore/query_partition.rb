@@ -58,7 +58,10 @@ module Google
         # @return [Query] query.
         #
         def create_query
-          @query
+          base_query = @query
+          base_query = base_query.start_at start_at if start_at
+          base_query = base_query.end_before end_before if end_before
+          base_query
         end
       end
     end
