@@ -37,7 +37,10 @@ describe Google::Cloud::Firestore::CollectionGroup, :mock_firestore do
   end
 
   it "lists partitions" do
-    list_res = paged_enum_struct partition_query_resp(count: 3)
+    # grpc.partitions: 
+    # [<Google::Cloud::Firestore::V1::Cursor: values: [<Google::Cloud::Firestore::V1::Value: reference_value: "projects/buoyant-ability-182823/databases/(default)/documents/gcloud-2021-05-21t23-38-03z-a581db45/query/dabf1479/32">], before: false>,
+    #  <Google::Cloud::Firestore::V1::Cursor: values: [<Google::Cloud::Firestore::V1::Value: reference_value: "projects/buoyant-ability-182823/databases/(default)/documents/gcloud-2021-05-21t23-38-03z-a581db45/query/dabf1479/89">], before: false>]
+    list_res = paged_enum_struct partition_query_resp
     firestore_mock.expect :partition_query, list_res, partition_query_args(expected_query)
 
     partitions = collection_group.partitions 3
@@ -46,12 +49,17 @@ describe Google::Cloud::Firestore::CollectionGroup, :mock_firestore do
 
     _(partitions).must_be_kind_of Google::Cloud::Firestore::QueryPartition::List
     _(partitions.count).must_equal 3
-    partitions.each { |m| _(m).must_be_kind_of Google::Cloud::Firestore::QueryPartition }
+
+    _(partitions[0]).must_be_kind_of Google::Cloud::Firestore::QueryPartition
+    _(partitions[0].start_at).must_be :nil?
+    _(partitions[0].end_before).must_equal [0,1]
+    query_1 = partitions[0].create_query
+    # TODO: query assertions
   end
 
   it "paginates partitions" do
-    first_list_res = paged_enum_struct partition_query_resp(count: 3, token: "next_page_token")
-    second_list_res = paged_enum_struct partition_query_resp(count: 2)
+    first_list_res = paged_enum_struct partition_query_resp(token: "next_page_token")
+    second_list_res = paged_enum_struct partition_query_resp(count: 1)
 
     firestore_mock.expect :partition_query, first_list_res, partition_query_args(expected_query, partition_count: 5)
     firestore_mock.expect :partition_query, second_list_res, partition_query_args(expected_query, partition_count: 5, page_token: "next_page_token")
@@ -70,17 +78,15 @@ describe Google::Cloud::Firestore::CollectionGroup, :mock_firestore do
     _(second_partitions.token).must_be :nil?
   end
 
-  it "paginates partitions using and next" do
-    first_list_res = paged_enum_struct partition_query_resp(count: 3, token: "next_page_token")
-    second_list_res = paged_enum_struct partition_query_resp(count: 2)
+  it "paginates partitions using next" do
+    first_list_res = paged_enum_struct partition_query_resp(count: 2, token: "next_page_token")
+    second_list_res = paged_enum_struct partition_query_resp(count: 1)
 
     firestore_mock.expect :partition_query, first_list_res, partition_query_args(expected_query, partition_count: 5)
     firestore_mock.expect :partition_query, second_list_res, partition_query_args(expected_query, partition_count: 5, page_token: "next_page_token")
 
     first_partitions = collection_group.partitions 6
     second_partitions = first_partitions.next
-
-    firestore_mock.verify
 
     first_partitions.each { |m| _(m).must_be_kind_of Google::Cloud::Firestore::QueryPartition }
     _(first_partitions.count).must_equal 3
@@ -92,8 +98,8 @@ describe Google::Cloud::Firestore::CollectionGroup, :mock_firestore do
   end
 
   it "paginates partitions using all" do
-    first_list_res = paged_enum_struct partition_query_resp(count: 3, token: "next_page_token")
-    second_list_res = paged_enum_struct partition_query_resp(count: 2)
+    first_list_res = paged_enum_struct partition_query_resp(count: 2, token: "next_page_token")
+    second_list_res = paged_enum_struct partition_query_resp(count: 1)
 
     firestore_mock.expect :partition_query, first_list_res, partition_query_args(expected_query, partition_count: 5)
     firestore_mock.expect :partition_query, second_list_res, partition_query_args(expected_query, partition_count: 5, page_token: "next_page_token")
@@ -122,22 +128,20 @@ describe Google::Cloud::Firestore::CollectionGroup, :mock_firestore do
   end
 
   it "paginates partitions using all with request_limit set" do
-    first_list_res = paged_enum_struct partition_query_resp(count: 3, token: "next_page_token")
-    second_list_res = paged_enum_struct partition_query_resp(count: 3, token: "second_page_token")
+    first_list_res = paged_enum_struct partition_query_resp(count: 2, token: "next_page_token")
+    second_list_res = paged_enum_struct partition_query_resp(count: 2, token: "second_page_token")
 
     firestore_mock.expect :partition_query, first_list_res, partition_query_args(expected_query, partition_count: 5)
     firestore_mock.expect :partition_query, second_list_res, partition_query_args(expected_query, partition_count: 5, page_token: "next_page_token")
 
     all_partitions = collection_group.partitions(6).all(request_limit: 1).to_a
 
-    firestore_mock.verify
-
     all_partitions.each { |m| _(m).must_be_kind_of Google::Cloud::Firestore::QueryPartition }
     _(all_partitions.count).must_equal 6
   end
 
   it "paginates partitions with max set" do
-    list_res = paged_enum_struct partition_query_resp(count: 3, token: "next_page_token")
+    list_res = paged_enum_struct partition_query_resp(token: "next_page_token")
     firestore_mock.expect :partition_query, list_res, partition_query_args(expected_query, partition_count: 5, page_size: 3)
 
     partitions = collection_group.partitions 6, max: 3
