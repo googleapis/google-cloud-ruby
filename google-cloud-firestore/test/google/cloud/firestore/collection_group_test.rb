@@ -52,7 +52,7 @@ describe Google::Cloud::Firestore::CollectionGroup, :mock_firestore do
 
     _(partitions[0]).must_be_kind_of Google::Cloud::Firestore::QueryPartition
     _(partitions[0].start_at).must_be :nil?
-    _(partitions[0].end_before).must_equal [0,1]
+    _(partitions[0].end_before).must_equal ["128"]
     query_1 = partitions[0].create_query
     # TODO: query assertions
   end

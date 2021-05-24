@@ -1098,11 +1098,14 @@ module Google
             return snapshot_to_cursor values.first, query
           end
 
+          # The *values param in start_at, start_after, etc. will wrap an array argument in an array, so unwrap it here.
+          values = values.first if values.count == 1 && values.first.is_a?(Array)
+
           # pair values with their field_paths to ensure correct formatting
           order_field_paths = order_by_field_paths query
           if values.count > order_field_paths.count
             # raise if too many values provided for the cursor
-            raise ArgumentError, "too many values"
+            raise ArgumentError, "There cannot be more values than Order By fields"
           end
 
           values = values.zip(order_field_paths).map do |value, field_path|
@@ -1134,7 +1137,6 @@ module Google
               snapshot[field_path]
             end
           end
-
           values_to_cursor values, query
         end
 
