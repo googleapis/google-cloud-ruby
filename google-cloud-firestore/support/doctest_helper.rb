@@ -536,13 +536,15 @@ end
 
 def partition_query_resp count: 3, token: nil
   response = Google::Cloud::Firestore::V1::PartitionQueryResponse.new(
-    partitions: count.times.map { |i| cursor_grpc values: [i*10, i*10+1] }
+    # Minimum partition size is 128.
+    partitions: count.times.map { |i| cursor_grpc values: [(i+1*128).to_s] }
   )
   response.next_page_token = token if token
   paged_enum_struct response
 end
 
-def cursor_grpc values: [1,2], before: false
+# Minimum partition size is 128.
+def cursor_grpc values: ["128"], before: false
   converted_values = values.map do |val|
     Google::Cloud::Firestore::Convert.raw_to_value val
   end

@@ -305,7 +305,40 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
     _(generated_query).must_equal expected_query
   end
 
-  it "Start/End with two values" do
+  it "StartAt/EndBefore with two values" do
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
+      order_by: [
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
+          direction: :ASCENDING
+        ),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "b"),
+          direction: :DESCENDING
+        )
+      ],
+      start_at: Google::Cloud::Firestore::V1::Cursor.new(
+        values: [
+          Google::Cloud::Firestore::Convert.raw_to_value(7),
+          Google::Cloud::Firestore::Convert.raw_to_value(8)
+        ],
+        before: true
+      ),
+      end_at: Google::Cloud::Firestore::V1::Cursor.new(
+        values: [
+          Google::Cloud::Firestore::Convert.raw_to_value(9),
+          Google::Cloud::Firestore::Convert.raw_to_value(10)
+        ],
+        before: true
+      )
+    )
+
+    generated_query = collection.order(:a).order(:b, :desc).start_at(7, 8).end_before(9, 10).query
+    _(generated_query).must_equal expected_query
+  end
+
+  it "StartAfter/EndAt with two values" do
     expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
       from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
       order_by: [
@@ -335,6 +368,72 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
     )
 
     generated_query = collection.order(:a).order(:b, :desc).start_after(7, 8).end_at(9, 10).query
+    _(generated_query).must_equal expected_query
+  end
+
+  it "StartAt/EndBefore with array values" do
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
+      order_by: [
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
+          direction: :ASCENDING
+        ),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "b"),
+          direction: :DESCENDING
+        )
+      ],
+      start_at: Google::Cloud::Firestore::V1::Cursor.new(
+        values: [
+          Google::Cloud::Firestore::Convert.raw_to_value(7),
+          Google::Cloud::Firestore::Convert.raw_to_value(8)
+        ],
+        before: true
+      ),
+      end_at: Google::Cloud::Firestore::V1::Cursor.new(
+        values: [
+          Google::Cloud::Firestore::Convert.raw_to_value(9),
+          Google::Cloud::Firestore::Convert.raw_to_value(10)
+        ],
+        before: true
+      )
+    )
+
+    generated_query = collection.order(:a).order(:b, :desc).start_at([7, 8]).end_before([9, 10]).query
+    _(generated_query).must_equal expected_query
+  end
+
+  it "StartAfter/EndAt with array values" do
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "C")],
+      order_by: [
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
+          direction: :ASCENDING
+        ),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "b"),
+          direction: :DESCENDING
+        )
+      ],
+      start_at: Google::Cloud::Firestore::V1::Cursor.new(
+        values: [
+          Google::Cloud::Firestore::Convert.raw_to_value(7),
+          Google::Cloud::Firestore::Convert.raw_to_value(8)
+        ],
+        before: false
+      ),
+      end_at: Google::Cloud::Firestore::V1::Cursor.new(
+        values: [
+          Google::Cloud::Firestore::Convert.raw_to_value(9),
+          Google::Cloud::Firestore::Convert.raw_to_value(10)
+        ],
+        before: false
+      )
+    )
+
+    generated_query = collection.order(:a).order(:b, :desc).start_after([7, 8]).end_at([9, 10]).query
     _(generated_query).must_equal expected_query
   end
 
