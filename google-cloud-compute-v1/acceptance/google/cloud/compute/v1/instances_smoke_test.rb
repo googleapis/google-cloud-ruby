@@ -55,6 +55,7 @@ class InstancesSmokeTest < Minitest::Test
     }
     insert_resource
     @client.stop instance: @name, zone: @default_zone, project: @default_project
+    $stdout.puts "Waiting for instance #{@name} to stop."
     instance = read_instance
     starttime = Time.now
     while (instance.status != :Terminated) && (Time.now < starttime + 200)
@@ -64,7 +65,7 @@ class InstancesSmokeTest < Minitest::Test
     assert_equal false, instance.shielded_instance_config.enable_secure_boot
     op = @client.update_shielded_instance_config(instance: @name, zone: @default_zone, project: @default_project,
                                                  shielded_instance_config_resource: resource)
-    wait_for_zonal_op op
+    wait_for_zonal_op op, "update"
     instance = read_instance
     assert_equal true, instance.shielded_instance_config.enable_secure_boot
   end
@@ -110,6 +111,7 @@ class InstancesSmokeTest < Minitest::Test
     global_ops_client = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::Client.new
     begin
       operation = templates_client.insert project: @default_project, instance_template_resource: template_resource
+      $stdout.puts "Waiting until instance template #{template_name} is inserted."
       starttime = Time.now
       while (operation.status != :DONE) && (Time.now < starttime + 100)
         operation = global_ops_client.get operation: operation.name, project: @default_project
@@ -123,20 +125,20 @@ class InstancesSmokeTest < Minitest::Test
       }
 
       op = igm_client.insert project: @default_project, zone: @default_zone, instance_group_manager_resource: igm_resource
-      wait_for_zonal_op op
+      wait_for_zonal_op op, "insert"
 
       igm = igm_client.get project: @default_project, zone: @default_zone, instance_group_manager: igm_name
       assert_equal igm.target_size, 1
 
       resize_op = igm_client.resize project: @default_project, zone: @default_zone, instance_group_manager: igm_name,
                                     size: 0
-      wait_for_zonal_op resize_op
+      wait_for_zonal_op resize_op, "resize"
 
       igm = igm_client.get project: @default_project, zone: @default_zone, instance_group_manager: igm_name
       assert_equal igm.target_size, 0
     ensure
       del_op = igm_client.delete project: @default_project, zone: @default_zone, instance_group_manager: igm_name
-      wait_for_zonal_op del_op
+      wait_for_zonal_op del_op, "delete"
 
       templates_client.delete project: @default_project, instance_template: template_name
     end
@@ -144,9 +146,10 @@ class InstancesSmokeTest < Minitest::Test
 
   private
 
-  def wait_for_zonal_op operation
+  def wait_for_zonal_op operation, op_type
+    $stdout.puts "Waiting for zonal #{op_type} operation #{operation.name}."
     starttime = Time.now
-    while (operation.status != :DONE) && (Time.now < starttime + 100)
+    while (operation.status != :DONE) && (Time.now < starttime + 200)
       operation = @client_ops.get operation: operation.name, project: @default_project, zone: @default_zone
       sleep 3
     end
@@ -180,8 +183,10 @@ class InstancesSmokeTest < Minitest::Test
       ]
     }
     result = @client.insert project: @default_project, zone: @default_zone, instance_resource: instance_resource
+    $stdout.puts "Inserting instance #{@name}."
     @instances.append @name
     return unless result.status != :DONE
-    wait_for_zonal_op result
+    wait_for_zonal_op result, "insert"
+    $stdout.puts "Operation to insert instance #{@name} completed."
   end
 end

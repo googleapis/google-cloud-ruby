@@ -38,7 +38,7 @@ class AddressesSmokeTest < Minitest::Test
     insert_address
     @addresses.delete @name
     op = @client.delete project: @default_project, region: @default_region, address: @name
-    wait_for_regional_op op
+    wait_for_regional_op op, "delete"
   end
 
   def test_non_ascii
@@ -48,7 +48,7 @@ class AddressesSmokeTest < Minitest::Test
     }
     op = @client.insert project: @default_project, region: @default_region, address_resource: address_resource
     @addresses.append @name
-    wait_for_regional_op op
+    wait_for_regional_op op, "insert"
     address = @client.get project: @default_project, region: @default_region, address: @name
     assert_equal @name, address.name
     assert_equal "тест", address.description
@@ -62,10 +62,11 @@ class AddressesSmokeTest < Minitest::Test
     }
     op = @client.insert project: @default_project, region: @default_region, address_resource: address_resource
     @addresses.append @name
-    wait_for_regional_op op
+    wait_for_regional_op op, "insert"
   end
 
-  def wait_for_regional_op operation
+  def wait_for_regional_op operation, op_type
+    $stdout.puts "Waiting for regional #{op_type} operation #{operation.name}."
     starttime = Time.now
     while (operation.status != :DONE) && (Time.now < starttime + 60)
       @client_ops.get operation: operation.name, project: @default_project, region: @default_region
