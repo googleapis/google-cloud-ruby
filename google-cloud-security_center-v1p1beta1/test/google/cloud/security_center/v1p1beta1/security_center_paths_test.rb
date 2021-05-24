@@ -32,6 +32,24 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientPathsTes
 
       path = client.finding_path organization: "value0", source: "value1", finding: "value2"
       assert_equal "organizations/value0/sources/value1/findings/value2", path
+
+      path = client.finding_path folder: "value0", source: "value1", finding: "value2"
+      assert_equal "folders/value0/sources/value1/findings/value2", path
+
+      path = client.finding_path project: "value0", source: "value1", finding: "value2"
+      assert_equal "projects/value0/sources/value1/findings/value2", path
+    end
+  end
+
+  def test_folder_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.folder_path folder: "value0"
+      assert_equal "folders/value0", path
     end
   end
 
@@ -71,6 +89,18 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientPathsTes
     end
   end
 
+  def test_project_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.project_path project: "value0"
+      assert_equal "projects/value0", path
+    end
+  end
+
   def test_security_marks_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -83,6 +113,18 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientPathsTes
 
       path = client.security_marks_path organization: "value0", source: "value1", finding: "value2"
       assert_equal "organizations/value0/sources/value1/findings/value2/securityMarks", path
+
+      path = client.security_marks_path folder: "value0", asset: "value1"
+      assert_equal "folders/value0/assets/value1/securityMarks", path
+
+      path = client.security_marks_path project: "value0", asset: "value1"
+      assert_equal "projects/value0/assets/value1/securityMarks", path
+
+      path = client.security_marks_path folder: "value0", source: "value1", finding: "value2"
+      assert_equal "folders/value0/sources/value1/findings/value2/securityMarks", path
+
+      path = client.security_marks_path project: "value0", source: "value1", finding: "value2"
+      assert_equal "projects/value0/sources/value1/findings/value2/securityMarks", path
     end
   end
 
@@ -95,6 +137,12 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientPathsTes
 
       path = client.source_path organization: "value0", source: "value1"
       assert_equal "organizations/value0/sources/value1", path
+
+      path = client.source_path folder: "value0", source: "value1"
+      assert_equal "folders/value0/sources/value1", path
+
+      path = client.source_path project: "value0", source: "value1"
+      assert_equal "projects/value0/sources/value1", path
     end
   end
 

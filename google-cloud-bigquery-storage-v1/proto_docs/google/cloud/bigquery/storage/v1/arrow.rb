@@ -64,6 +64,9 @@ module Google
 
               # LZ4 Frame (https://github.com/lz4/lz4/blob/dev/doc/lz4_Frame_format.md)
               LZ4_FRAME = 1
+
+              # Zstandard compression.
+              ZSTD = 2
             end
           end
         end

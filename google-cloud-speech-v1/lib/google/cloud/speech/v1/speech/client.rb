@@ -66,9 +66,9 @@ module Google
                 default_config.rpcs.recognize.timeout = 5000.0
                 default_config.rpcs.recognize.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.long_running_recognize.timeout = 5000.0
@@ -76,9 +76,9 @@ module Google
                 default_config.rpcs.streaming_recognize.timeout = 5000.0
                 default_config.rpcs.streaming_recognize.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config

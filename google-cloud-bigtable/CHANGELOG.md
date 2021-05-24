@@ -1,5 +1,25 @@
 # Release History
 
+### 2.6.0 / 2021-05-03
+
+#### Features
+
+* Add support for Backup restore to different Instance
+  * Add instance to Backup#restore
+
+### 2.5.0 / 2021-04-20
+
+#### Features
+
+* Add CMEK support
+  * Add kms_key to ClusterMap#add
+  * Add Cluster#kms_key
+  * Add EncryptionInfo
+  * Add ClusterState#encryption_infos
+  * Add ENCRYPTION_VIEW support to Table
+  * Update docs in Table::ClusterState
+  * Add Backup#encryption_info
+
 ### 2.4.1 / 2021-04-01
 
 #### Bug Fixes

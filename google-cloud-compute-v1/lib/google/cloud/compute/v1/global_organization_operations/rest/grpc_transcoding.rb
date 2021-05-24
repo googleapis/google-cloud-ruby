@@ -33,7 +33,7 @@ module Google
                 uri = "/compute/v1/locations/global/operations/#{request_pb.operation}"
                 body = nil
                 query_string_params = {}
-                query_string_params["parentId"] = request_pb.parent_id.to_s if request_pb.parent_id && request_pb.parent_id != ""
+                query_string_params["parentId"] = request_pb.parent_id.to_s if request_pb.has_parent_id?
 
                 [uri, body, query_string_params]
               end
@@ -46,7 +46,7 @@ module Google
                 uri = "/compute/v1/locations/global/operations/#{request_pb.operation}"
                 body = nil
                 query_string_params = {}
-                query_string_params["parentId"] = request_pb.parent_id.to_s if request_pb.parent_id && request_pb.parent_id != ""
+                query_string_params["parentId"] = request_pb.parent_id.to_s if request_pb.has_parent_id?
 
                 [uri, body, query_string_params]
               end
@@ -59,12 +59,12 @@ module Google
                 uri = "/compute/v1/locations/global/operations"
                 body = nil
                 query_string_params = {}
-                query_string_params["filter"] = request_pb.filter.to_s if request_pb.filter && request_pb.filter != ""
-                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.max_results && request_pb.max_results != 0
-                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.order_by && request_pb.order_by != ""
-                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.page_token && request_pb.page_token != ""
-                query_string_params["parentId"] = request_pb.parent_id.to_s if request_pb.parent_id && request_pb.parent_id != ""
-                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.return_partial_success && request_pb.return_partial_success != false
+                query_string_params["filter"] = request_pb.filter.to_s if request_pb.has_filter?
+                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.has_max_results?
+                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.has_order_by?
+                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.has_page_token?
+                query_string_params["parentId"] = request_pb.parent_id.to_s if request_pb.has_parent_id?
+                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.has_return_partial_success?
 
                 [uri, body, query_string_params]
               end

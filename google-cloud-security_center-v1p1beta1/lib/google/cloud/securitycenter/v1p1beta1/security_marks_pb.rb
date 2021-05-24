@@ -3,13 +3,14 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/resource_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/securitycenter/v1p1beta1/security_marks.proto", :syntax => :proto3) do
     add_message "google.cloud.securitycenter.v1p1beta1.SecurityMarks" do
       optional :name, :string, 1
       map :marks, :string, :string, 2
+      optional :canonical_name, :string, 3
     end
   end
 end

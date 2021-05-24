@@ -129,6 +129,7 @@ module Google
           end
 
           # methods below are public visibility only for unit testing
+          # rubocop:disable Style/StringLiterals
           def escape_characters str
             str.split("").map do |s|
               if s.ascii_only?
@@ -155,6 +156,7 @@ module Google
               end
             end.join
           end
+          # rubocop:enable Style/StringLiterals
 
           def escape_special_unicode str
             str.unpack("U*").map { |i| "\\u#{i.to_s(16).rjust(4, '0')}" }.join

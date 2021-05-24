@@ -26,7 +26,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :industry_category, :enum, 6, "google.analytics.admin.v1alpha.IndustryCategory"
       optional :time_zone, :string, 7
       optional :currency_code, :string, 8
-      optional :deleted, :bool, 9
+      optional :delete_time, :message, 11, "google.protobuf.Timestamp"
+      optional :expire_time, :message, 12, "google.protobuf.Timestamp"
     end
     add_message "google.analytics.admin.v1alpha.AndroidAppDataStream" do
       optional :name, :string, 1
@@ -115,6 +116,31 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :property, :string, 1
       optional :display_name, :string, 2
     end
+    add_message "google.analytics.admin.v1alpha.ChangeHistoryEvent" do
+      optional :id, :string, 1
+      optional :change_time, :message, 2, "google.protobuf.Timestamp"
+      optional :actor_type, :enum, 3, "google.analytics.admin.v1alpha.ActorType"
+      optional :user_actor_email, :string, 4
+      optional :changes_filtered, :bool, 5
+      repeated :changes, :message, 6, "google.analytics.admin.v1alpha.ChangeHistoryChange"
+    end
+    add_message "google.analytics.admin.v1alpha.ChangeHistoryChange" do
+      optional :resource, :string, 1
+      optional :action, :enum, 2, "google.analytics.admin.v1alpha.ActionType"
+      optional :resource_before_change, :message, 3, "google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource"
+      optional :resource_after_change, :message, 4, "google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource"
+    end
+    add_message "google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource" do
+      oneof :resource do
+        optional :account, :message, 1, "google.analytics.admin.v1alpha.Account"
+        optional :property, :message, 2, "google.analytics.admin.v1alpha.Property"
+        optional :web_data_stream, :message, 3, "google.analytics.admin.v1alpha.WebDataStream"
+        optional :android_app_data_stream, :message, 4, "google.analytics.admin.v1alpha.AndroidAppDataStream"
+        optional :ios_app_data_stream, :message, 5, "google.analytics.admin.v1alpha.IosAppDataStream"
+        optional :firebase_link, :message, 6, "google.analytics.admin.v1alpha.FirebaseLink"
+        optional :google_ads_link, :message, 7, "google.analytics.admin.v1alpha.GoogleAdsLink"
+      end
+    end
     add_enum "google.analytics.admin.v1alpha.MaximumUserAccess" do
       value :MAXIMUM_USER_ACCESS_UNSPECIFIED, 0
       value :NO_ACCESS, 1
@@ -151,6 +177,28 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :JOBS_AND_EDUCATION, 25
       value :SHOPPING, 26
     end
+    add_enum "google.analytics.admin.v1alpha.ActorType" do
+      value :ACTOR_TYPE_UNSPECIFIED, 0
+      value :USER, 1
+      value :SYSTEM, 2
+      value :SUPPORT, 3
+    end
+    add_enum "google.analytics.admin.v1alpha.ActionType" do
+      value :ACTION_TYPE_UNSPECIFIED, 0
+      value :CREATED, 1
+      value :UPDATED, 2
+      value :DELETED, 3
+    end
+    add_enum "google.analytics.admin.v1alpha.ChangeHistoryResourceType" do
+      value :CHANGE_HISTORY_RESOURCE_TYPE_UNSPECIFIED, 0
+      value :ACCOUNT, 1
+      value :PROPERTY, 2
+      value :WEB_DATA_STREAM, 3
+      value :ANDROID_APP_DATA_STREAM, 4
+      value :IOS_APP_DATA_STREAM, 5
+      value :FIREBASE_LINK, 6
+      value :GOOGLE_ADS_LINK, 7
+    end
   end
 end
 
@@ -172,8 +220,14 @@ module Google
         DataSharingSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DataSharingSettings").msgclass
         AccountSummary = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AccountSummary").msgclass
         PropertySummary = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.PropertySummary").msgclass
+        ChangeHistoryEvent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ChangeHistoryEvent").msgclass
+        ChangeHistoryChange = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ChangeHistoryChange").msgclass
+        ChangeHistoryChange::ChangeHistoryResource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource").msgclass
         MaximumUserAccess = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.MaximumUserAccess").enummodule
         IndustryCategory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.IndustryCategory").enummodule
+        ActorType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ActorType").enummodule
+        ActionType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ActionType").enummodule
+        ChangeHistoryResourceType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ChangeHistoryResourceType").enummodule
       end
     end
   end

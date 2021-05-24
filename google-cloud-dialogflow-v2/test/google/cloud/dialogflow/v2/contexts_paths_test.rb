@@ -35,6 +35,12 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientPathsTest < Minitest::Tes
 
       path = client.context_path project: "value0", environment: "value1", user: "value2", session: "value3", context: "value4"
       assert_equal "projects/value0/agent/environments/value1/users/value2/sessions/value3/contexts/value4", path
+
+      path = client.context_path project: "value0", location: "value1", session: "value2", context: "value3"
+      assert_equal "projects/value0/locations/value1/agent/sessions/value2/contexts/value3", path
+
+      path = client.context_path project: "value0", location: "value1", environment: "value2", user: "value3", session: "value4", context: "value5"
+      assert_equal "projects/value0/locations/value1/agent/environments/value2/users/value3/sessions/value4/contexts/value5", path
     end
   end
 
@@ -50,6 +56,12 @@ class ::Google::Cloud::Dialogflow::V2::Contexts::ClientPathsTest < Minitest::Tes
 
       path = client.session_path project: "value0", environment: "value1", user: "value2", session: "value3"
       assert_equal "projects/value0/agent/environments/value1/users/value2/sessions/value3", path
+
+      path = client.session_path project: "value0", location: "value1", session: "value2"
+      assert_equal "projects/value0/locations/value1/agent/sessions/value2", path
+
+      path = client.session_path project: "value0", location: "value1", environment: "value2", user: "value3", session: "value4"
+      assert_equal "projects/value0/locations/value1/agent/environments/value2/users/value3/sessions/value4", path
     end
   end
 end

@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 / 2021-05-21
+
+#### Features
+
+* Support for optimistic concurrency control using Etags
+
 ### 0.9.0 / 2021-04-05
 
 #### Features

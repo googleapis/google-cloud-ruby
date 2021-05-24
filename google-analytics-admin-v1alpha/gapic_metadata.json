@@ -155,11 +155,6 @@
                 "update_ios_app_data_stream"
               ]
             },
-            "CreateIosAppDataStream": {
-              "methods": [
-                "create_ios_app_data_stream"
-              ]
-            },
             "ListIosAppDataStreams": {
               "methods": [
                 "list_ios_app_data_streams"
@@ -178,11 +173,6 @@
             "UpdateAndroidAppDataStream": {
               "methods": [
                 "update_android_app_data_stream"
-              ]
-            },
-            "CreateAndroidAppDataStream": {
-              "methods": [
-                "create_android_app_data_stream"
               ]
             },
             "ListAndroidAppDataStreams": {
@@ -248,6 +238,11 @@
             "GetDataSharingSettings": {
               "methods": [
                 "get_data_sharing_settings"
+              ]
+            },
+            "SearchChangeHistoryEvents": {
+              "methods": [
+                "search_change_history_events"
               ]
             }
           }

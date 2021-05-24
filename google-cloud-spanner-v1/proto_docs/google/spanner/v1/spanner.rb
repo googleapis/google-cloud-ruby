@@ -171,8 +171,9 @@ module Google
         #     that belongs to a transaction.
         #     This field is ignored for requests where it's not applicable (e.g.
         #     CommitRequest).
-        #     `request_tag` must be a valid identifier of the form:
-        #     `[a-zA-Z][a-zA-Z0-9_\-]` between 2 and 64 characters in length
+        #     Legal characters for `request_tag` values are all printable characters
+        #     (ASCII 32 - 126) and the length of a request_tag is limited to 50
+        #     characters. Values that exceed this limit are truncated.
         # @!attribute [rw] transaction_tag
         #   @return [::String]
         #     A tag used for statistics collection about this transaction.
@@ -182,8 +183,9 @@ module Google
         #     to the same transaction.
         #     If this request doesn’t belong to any transaction, transaction_tag will be
         #     ignored.
-        #     `transaction_tag` must be a valid identifier of the format:
-        #     `[a-zA-Z][a-zA-Z0-9_\-]{0,49}`
+        #     Legal characters for `transaction_tag` values are all printable characters
+        #     (ASCII 32 - 126) and the length of a transaction_tag is limited to 50
+        #     characters. Values that exceed this limit are truncated.
         class RequestOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -769,35 +771,6 @@ module Google
         class CommitRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The response for {::Google::Cloud::Spanner::V1::Spanner::Client#commit Commit}.
-        # @!attribute [rw] commit_timestamp
-        #   @return [::Google::Protobuf::Timestamp]
-        #     The Cloud Spanner timestamp at which the transaction committed.
-        # @!attribute [rw] commit_stats
-        #   @return [::Google::Cloud::Spanner::V1::CommitResponse::CommitStats]
-        #     The statistics about this Commit. Not returned by default.
-        #     For more information, see
-        #     {::Google::Cloud::Spanner::V1::CommitRequest#return_commit_stats CommitRequest.return_commit_stats}.
-        class CommitResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # Additional statistics about a commit.
-          # @!attribute [rw] mutation_count
-          #   @return [::Integer]
-          #     The total number of mutations for the transaction. Knowing the
-          #     `mutation_count` value can help you maximize the number of mutations
-          #     in a transaction and minimize the number of API round trips. You can
-          #     also monitor this value to prevent transactions from exceeding the system
-          #     [limit](http://cloud.google.com/spanner/quotas#limits_for_creating_reading_updating_and_deleting_data).
-          #     If the number of mutations exceeds the limit, the server returns
-          #     [INVALID_ARGUMENT](http://cloud.google.com/spanner/docs/reference/rest/v1/Code#ENUM_VALUES.INVALID_ARGUMENT).
-          class CommitStats
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
         end
 
         # The request for {::Google::Cloud::Spanner::V1::Spanner::Client#rollback Rollback}.

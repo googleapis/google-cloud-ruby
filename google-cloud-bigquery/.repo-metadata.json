@@ -2,5 +2,6 @@
     "name": "bigquery",
     "language": "ruby",
     "distribution_name": "google-cloud-bigquery",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-bigquery/latest"
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-bigquery/latest",
+    "library_type": "GAPIC_MANUAL"
 }

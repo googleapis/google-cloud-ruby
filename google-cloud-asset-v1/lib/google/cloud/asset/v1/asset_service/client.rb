@@ -70,9 +70,9 @@ module Google
                 default_config.rpcs.batch_get_assets_history.timeout = 60.0
                 default_config.rpcs.batch_get_assets_history.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_feed.timeout = 60.0
@@ -80,17 +80,17 @@ module Google
                 default_config.rpcs.get_feed.timeout = 60.0
                 default_config.rpcs.get_feed.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_feeds.timeout = 60.0
                 default_config.rpcs.list_feeds.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_feed.timeout = 60.0
@@ -98,33 +98,33 @@ module Google
                 default_config.rpcs.delete_feed.timeout = 60.0
                 default_config.rpcs.delete_feed.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_all_resources.timeout = 15.0
                 default_config.rpcs.search_all_resources.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_all_iam_policies.timeout = 15.0
                 default_config.rpcs.search_all_iam_policies.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.analyze_iam_policy.timeout = 300.0
                 default_config.rpcs.analyze_iam_policy.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.analyze_iam_policy_longrunning.timeout = 60.0

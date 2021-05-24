@@ -27,32 +27,78 @@ module Google
             ##
             # Create a fully-qualified Agent resource string.
             #
-            # The resource will be in the following format:
+            # @overload agent_path(project:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/agent`
+            #   `projects/{project}/agent`
             #
-            # @param project [String]
+            #   @param project [String]
+            #
+            # @overload agent_path(project:, location:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/agent`
+            #
+            #   @param project [String]
+            #   @param location [String]
             #
             # @return [::String]
-            def agent_path project:
-              "projects/#{project}/agent"
+            def agent_path **args
+              resources = {
+                "project" => (proc do |project:|
+                  "projects/#{project}/agent"
+                end),
+                "location:project" => (proc do |project:, location:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/agent"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##
             # Create a fully-qualified EntityType resource string.
             #
-            # The resource will be in the following format:
+            # @overload entity_type_path(project:, entity_type:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/agent/entityTypes/{entity_type}`
+            #   `projects/{project}/agent/entityTypes/{entity_type}`
             #
-            # @param project [String]
-            # @param entity_type [String]
+            #   @param project [String]
+            #   @param entity_type [String]
+            #
+            # @overload entity_type_path(project:, location:, entity_type:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/agent/entityTypes/{entity_type}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param entity_type [String]
             #
             # @return [::String]
-            def entity_type_path project:, entity_type:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+            def entity_type_path **args
+              resources = {
+                "entity_type:project" => (proc do |project:, entity_type:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
-              "projects/#{project}/agent/entityTypes/#{entity_type}"
+                  "projects/#{project}/agent/entityTypes/#{entity_type}"
+                end),
+                "entity_type:location:project" => (proc do |project:, location:, entity_type:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/agent/entityTypes/#{entity_type}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             extend self

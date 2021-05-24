@@ -24,6 +24,8 @@ module Google
         # A taxonomy is a collection of hierarchical policy tags that classify data
         # along a common axis. For instance a "data sensitivity" taxonomy could contain
         # the following policy tags:
+        #
+        # ```
         # + PII
         #   + Account number
         #   + Age
@@ -31,11 +33,16 @@ module Google
         #   + Zipcode
         # + Financials
         #   + Revenue
+        # ```
+        #
         # A "data origin" taxonomy could contain the following policy tags:
+        #
+        # ```
         # + User data
         # + Employee data
         # + Partner data
         # + Public data
+        # ```
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Resource name of this taxonomy in format:
@@ -78,10 +85,14 @@ module Google
 
         # Denotes one policy tag in a taxonomy (e.g. ssn). Policy tags can be defined
         # in a hierarchy. For example, consider the following hierarchy:
+        #
+        # ```
         # + Geolocation
         #   + LatLong
         #   + City
         #   + ZipCode
+        # ```
+        #
         # Policy tag "Geolocation" contains 3 child policy tags: "LatLong", "City", and
         # "ZipCode".
         # @!attribute [r] name

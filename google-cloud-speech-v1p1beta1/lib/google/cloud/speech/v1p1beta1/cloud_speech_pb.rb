@@ -73,6 +73,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :OGG_OPUS, 6
       value :SPEEX_WITH_HEADER_BYTE, 7
       value :MP3, 8
+      value :WEBM_OPUS, 9
     end
     add_message "google.cloud.speech.v1p1beta1.SpeakerDiarizationConfig" do
       optional :enable_speaker_diarization, :bool, 1

@@ -2,5 +2,6 @@
     "name": "logging",
     "language": "ruby",
     "distribution_name": "google-cloud-logging",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-logging/latest"
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-logging/latest",
+    "library_type": "GAPIC_MANUAL"
 }

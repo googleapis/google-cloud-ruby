@@ -153,10 +153,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :ios_app_data_stream, :message, 1, "google.analytics.admin.v1alpha.IosAppDataStream"
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
     end
-    add_message "google.analytics.admin.v1alpha.CreateIosAppDataStreamRequest" do
-      optional :ios_app_data_stream, :message, 1, "google.analytics.admin.v1alpha.IosAppDataStream"
-      optional :parent, :string, 2
-    end
     add_message "google.analytics.admin.v1alpha.ListIosAppDataStreamsRequest" do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
@@ -175,10 +171,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.analytics.admin.v1alpha.UpdateAndroidAppDataStreamRequest" do
       optional :android_app_data_stream, :message, 1, "google.analytics.admin.v1alpha.AndroidAppDataStream"
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
-    end
-    add_message "google.analytics.admin.v1alpha.CreateAndroidAppDataStreamRequest" do
-      optional :android_app_data_stream, :message, 1, "google.analytics.admin.v1alpha.AndroidAppDataStream"
-      optional :parent, :string, 2
     end
     add_message "google.analytics.admin.v1alpha.ListAndroidAppDataStreamsRequest" do
       optional :parent, :string, 1
@@ -250,6 +242,21 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :account_summaries, :message, 1, "google.analytics.admin.v1alpha.AccountSummary"
       optional :next_page_token, :string, 2
     end
+    add_message "google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest" do
+      optional :account, :string, 1
+      optional :property, :string, 2
+      repeated :resource_type, :enum, 3, "google.analytics.admin.v1alpha.ChangeHistoryResourceType"
+      repeated :action, :enum, 4, "google.analytics.admin.v1alpha.ActionType"
+      repeated :actor_email, :string, 5
+      optional :earliest_change_time, :message, 6, "google.protobuf.Timestamp"
+      optional :latest_change_time, :message, 7, "google.protobuf.Timestamp"
+      optional :page_size, :int32, 8
+      optional :page_token, :string, 9
+    end
+    add_message "google.analytics.admin.v1alpha.SearchChangeHistoryEventsResponse" do
+      repeated :change_history_events, :message, 1, "google.analytics.admin.v1alpha.ChangeHistoryEvent"
+      optional :next_page_token, :string, 2
+    end
   end
 end
 
@@ -294,13 +301,11 @@ module Google
         GetIosAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetIosAppDataStreamRequest").msgclass
         DeleteIosAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteIosAppDataStreamRequest").msgclass
         UpdateIosAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateIosAppDataStreamRequest").msgclass
-        CreateIosAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateIosAppDataStreamRequest").msgclass
         ListIosAppDataStreamsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListIosAppDataStreamsRequest").msgclass
         ListIosAppDataStreamsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListIosAppDataStreamsResponse").msgclass
         GetAndroidAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetAndroidAppDataStreamRequest").msgclass
         DeleteAndroidAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteAndroidAppDataStreamRequest").msgclass
         UpdateAndroidAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateAndroidAppDataStreamRequest").msgclass
-        CreateAndroidAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateAndroidAppDataStreamRequest").msgclass
         ListAndroidAppDataStreamsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAndroidAppDataStreamsRequest").msgclass
         ListAndroidAppDataStreamsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAndroidAppDataStreamsResponse").msgclass
         GetEnhancedMeasurementSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest").msgclass
@@ -319,6 +324,8 @@ module Google
         GetDataSharingSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetDataSharingSettingsRequest").msgclass
         ListAccountSummariesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAccountSummariesRequest").msgclass
         ListAccountSummariesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAccountSummariesResponse").msgclass
+        SearchChangeHistoryEventsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest").msgclass
+        SearchChangeHistoryEventsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.SearchChangeHistoryEventsResponse").msgclass
       end
     end
   end

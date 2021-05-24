@@ -49,6 +49,10 @@ module Google
           # @!attribute [rw] inclusion_mode
           #   @return [::Google::Cloud::SecurityCenter::V1::OrganizationSettings::AssetDiscoveryConfig::InclusionMode]
           #     The mode to use for filtering asset discovery.
+          # @!attribute [rw] folder_ids
+          #   @return [::Array<::String>]
+          #     The folder ids to use for filtering asset discovery.
+          #     It consists of only digits, e.g., 756619654966.
           class AssetDiscoveryConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -68,9 +68,9 @@ module Google
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
                   initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config
@@ -178,7 +178,9 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The agent to list all environments from.
-            #     Format: `projects/<Project ID>/agent`.
+            #     Format:
+            #     - `projects/<Project ID>/agent`
+            #     - `projects/<Project ID>/locations/<Location ID>/agent`
             #   @param page_size [::Integer]
             #     Optional. The maximum number of items to return in a single page. By default 100 and
             #     at most 1000.
@@ -224,6 +226,379 @@ module Google
 
               @environments_stub.call_rpc :list_environments, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @environments_stub, :list_environments, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Retrieves the specified agent environment.
+            #
+            # @overload get_environment(request, options = nil)
+            #   Pass arguments to `get_environment` via a request object, either of type
+            #   {::Google::Cloud::Dialogflow::V2::GetEnvironmentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dialogflow::V2::GetEnvironmentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_environment(name: nil)
+            #   Pass arguments to `get_environment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the environment.
+            #     Supported formats:
+            #     - `projects/<Project ID>/agent/environments/<Environment ID>`
+            #     - `projects/<Project ID>/locations/<Location
+            #       ID>/agent/environments/<Environment ID>`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dialogflow::V2::Environment]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dialogflow::V2::Environment]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def get_environment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::GetEnvironmentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_environment.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_environment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_environment.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @environments_stub.call_rpc :get_environment, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates an agent environment.
+            #
+            # @overload create_environment(request, options = nil)
+            #   Pass arguments to `create_environment` via a request object, either of type
+            #   {::Google::Cloud::Dialogflow::V2::CreateEnvironmentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dialogflow::V2::CreateEnvironmentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_environment(parent: nil, environment: nil, environment_id: nil)
+            #   Pass arguments to `create_environment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The agent to create an environment for.
+            #     Supported formats:
+            #     - `projects/<Project ID>/agent`
+            #     - `projects/<Project ID>/locations/<Location ID>/agent`
+            #   @param environment [::Google::Cloud::Dialogflow::V2::Environment, ::Hash]
+            #     Required. The environment to create.
+            #   @param environment_id [::String]
+            #     Required. The unique id of the new environment.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dialogflow::V2::Environment]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dialogflow::V2::Environment]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def create_environment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::CreateEnvironmentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_environment.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_environment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_environment.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @environments_stub.call_rpc :create_environment, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the specified agent environment.
+            #
+            # This method allows you to deploy new agent versions into the environment.
+            # When an environment is pointed to a new agent version by setting
+            # `environment.agent_version`, the environment is temporarily set to the
+            # `LOADING` state. During that time, the environment keeps on serving the
+            # previous version of the agent. After the new agent version is done loading,
+            # the environment is set back to the `RUNNING` state.
+            # You can use "-" as Environment ID in environment name to update version
+            # in "draft" environment. WARNING: this will negate all recent changes to
+            # draft and can't be undone. You may want to save the draft to a version
+            # before calling this function.
+            #
+            # @overload update_environment(request, options = nil)
+            #   Pass arguments to `update_environment` via a request object, either of type
+            #   {::Google::Cloud::Dialogflow::V2::UpdateEnvironmentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dialogflow::V2::UpdateEnvironmentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_environment(environment: nil, update_mask: nil, allow_load_to_draft_and_discard_changes: nil)
+            #   Pass arguments to `update_environment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param environment [::Google::Cloud::Dialogflow::V2::Environment, ::Hash]
+            #     Required. The environment to update.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. The mask to control which fields get updated.
+            #   @param allow_load_to_draft_and_discard_changes [::Boolean]
+            #     Optional. This field is used to prevent accidental overwrite of the draft
+            #     environment, which is an operation that cannot be undone. To confirm that
+            #     the caller desires this overwrite, this field must be explicitly set to
+            #     true when updating the draft environment (environment ID = `-`).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dialogflow::V2::Environment]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dialogflow::V2::Environment]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def update_environment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::UpdateEnvironmentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_environment.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "environment.name" => request.environment.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_environment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_environment.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @environments_stub.call_rpc :update_environment, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes the specified agent environment.
+            #
+            # @overload delete_environment(request, options = nil)
+            #   Pass arguments to `delete_environment` via a request object, either of type
+            #   {::Google::Cloud::Dialogflow::V2::DeleteEnvironmentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dialogflow::V2::DeleteEnvironmentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_environment(name: nil)
+            #   Pass arguments to `delete_environment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the environment to delete.
+            #     / Format:
+            #     - `projects/<Project ID>/agent/environments/<Environment ID>`
+            #     - `projects/<Project ID>/locations/<Location
+            #     ID>/agent/environments/<Environment ID>`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def delete_environment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::DeleteEnvironmentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_environment.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_environment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_environment.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @environments_stub.call_rpc :delete_environment, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets the history of the specified environment.
+            #
+            # @overload get_environment_history(request, options = nil)
+            #   Pass arguments to `get_environment_history` via a request object, either of type
+            #   {::Google::Cloud::Dialogflow::V2::GetEnvironmentHistoryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dialogflow::V2::GetEnvironmentHistoryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_environment_history(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `get_environment_history` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The name of the environment to retrieve history for.
+            #     Supported formats:
+            #     - `projects/<Project ID>/agent/environments/<Environment ID>`
+            #     - `projects/<Project ID>/locations/<Location
+            #       ID>/agent/environments/<Environment ID>`
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of items to return in a single page. By default 100 and
+            #     at most 1000.
+            #   @param page_token [::String]
+            #     Optional. The next_page_token value returned from a previous list request.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dialogflow::V2::EnvironmentHistory::Entry>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dialogflow::V2::EnvironmentHistory::Entry>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def get_environment_history request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::GetEnvironmentHistoryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_environment_history.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_environment_history.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_environment_history.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @environments_stub.call_rpc :get_environment_history, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @environments_stub, :get_environment_history, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
@@ -372,11 +747,46 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_environments
+                ##
+                # RPC-specific configuration for `get_environment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_environment
+                ##
+                # RPC-specific configuration for `create_environment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_environment
+                ##
+                # RPC-specific configuration for `update_environment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_environment
+                ##
+                # RPC-specific configuration for `delete_environment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_environment
+                ##
+                # RPC-specific configuration for `get_environment_history`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_environment_history
 
                 # @private
                 def initialize parent_rpcs = nil
                   list_environments_config = parent_rpcs.list_environments if parent_rpcs.respond_to? :list_environments
                   @list_environments = ::Gapic::Config::Method.new list_environments_config
+                  get_environment_config = parent_rpcs.get_environment if parent_rpcs.respond_to? :get_environment
+                  @get_environment = ::Gapic::Config::Method.new get_environment_config
+                  create_environment_config = parent_rpcs.create_environment if parent_rpcs.respond_to? :create_environment
+                  @create_environment = ::Gapic::Config::Method.new create_environment_config
+                  update_environment_config = parent_rpcs.update_environment if parent_rpcs.respond_to? :update_environment
+                  @update_environment = ::Gapic::Config::Method.new update_environment_config
+                  delete_environment_config = parent_rpcs.delete_environment if parent_rpcs.respond_to? :delete_environment
+                  @delete_environment = ::Gapic::Config::Method.new delete_environment_config
+                  get_environment_history_config = parent_rpcs.get_environment_history if parent_rpcs.respond_to? :get_environment_history
+                  @get_environment_history = ::Gapic::Config::Method.new get_environment_history_config
 
                   yield self if block_given?
                 end

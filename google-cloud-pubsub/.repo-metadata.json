@@ -2,5 +2,6 @@
     "name": "pubsub",
     "language": "ruby",
     "distribution_name": "google-cloud-pubsub",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-pubsub/latest"
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-pubsub/latest",
+    "library_type": "GAPIC_MANUAL"
 }

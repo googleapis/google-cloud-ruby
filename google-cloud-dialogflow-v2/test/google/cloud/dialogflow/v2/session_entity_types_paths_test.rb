@@ -35,6 +35,12 @@ class ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientPathsTest < Min
 
       path = client.session_path project: "value0", environment: "value1", user: "value2", session: "value3"
       assert_equal "projects/value0/agent/environments/value1/users/value2/sessions/value3", path
+
+      path = client.session_path project: "value0", location: "value1", session: "value2"
+      assert_equal "projects/value0/locations/value1/agent/sessions/value2", path
+
+      path = client.session_path project: "value0", location: "value1", environment: "value2", user: "value3", session: "value4"
+      assert_equal "projects/value0/locations/value1/agent/environments/value2/users/value3/sessions/value4", path
     end
   end
 
@@ -50,6 +56,12 @@ class ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientPathsTest < Min
 
       path = client.session_entity_type_path project: "value0", environment: "value1", user: "value2", session: "value3", entity_type: "value4"
       assert_equal "projects/value0/agent/environments/value1/users/value2/sessions/value3/entityTypes/value4", path
+
+      path = client.session_entity_type_path project: "value0", location: "value1", session: "value2", entity_type: "value3"
+      assert_equal "projects/value0/locations/value1/agent/sessions/value2/entityTypes/value3", path
+
+      path = client.session_entity_type_path project: "value0", location: "value1", environment: "value2", user: "value3", session: "value4", entity_type: "value5"
+      assert_equal "projects/value0/locations/value1/agent/environments/value2/users/value3/sessions/value4/entityTypes/value5", path
     end
   end
 end

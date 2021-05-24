@@ -1,0 +1,13 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Include:
+    - "test/**/*.rb"
+    - "rakelib/link_transformer.rb"
+  Exclude:
+    - "integration/**/**"
+
+Metrics/BlockLength:
+  Exclude:
+    - "test/**/*.rb"

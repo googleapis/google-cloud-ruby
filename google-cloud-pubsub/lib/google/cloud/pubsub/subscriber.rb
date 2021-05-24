@@ -128,28 +128,21 @@ module Google
 
         ##
         # Immediately stops the subscriber. No new messages will be pulled from
-        # the subscription. All actions taken on received messages that have not
-        # yet been sent to the API will be sent to the API. All received but
-        # unprocessed messages will be released back to the API and redelivered.
-        # Use {#wait!} to block until the subscriber is fully stopped and all
-        # received messages have been processed or released.
+        # the subscription. Use {#wait!} to block until all received messages have
+        # been processed or released: All actions taken on received messages that
+        # have not yet been sent to the API will be sent to the API. All received
+        # but unprocessed messages will be released back to the API and redelivered.
         #
         # @return [Subscriber] returns self so calls can be chained.
         #
         def stop
-          stop_pool = synchronize do
+          synchronize do
             @started = false
             @stopped = true
-
-            @stream_pool.map do |stream|
-              Thread.new { stream.stop }
-            end
+            @stream_pool.map(&:stop)
+            wait_stop_buffer_thread!
+            self
           end
-          stop_pool.map(&:join)
-          # Stop the buffer after the streams are all stopped
-          synchronize { @buffer.stop }
-
-          self
         end
 
         ##
@@ -167,13 +160,8 @@ module Google
         # @return [Subscriber] returns self so calls can be chained.
         #
         def wait! timeout = nil
-          wait_pool = synchronize do
-            @stream_pool.map do |stream|
-              Thread.new { stream.wait! timeout }
-            end
-          end
-          wait_pool.map(&:join)
-
+          wait_stop_buffer_thread!
+          @wait_stop_buffer_thread.join timeout
           self
         end
 
@@ -378,6 +366,18 @@ module Google
         end
 
         protected
+
+        ##
+        # Starts a new thread to call wait! (blocking) on each Stream and then stop the TimedUnaryBuffer.
+        def wait_stop_buffer_thread!
+          synchronize do
+            @wait_stop_buffer_thread ||= Thread.new do
+              @stream_pool.map(&:wait!)
+              # Shutdown the buffer TimerTask (and flush the buffer) after the streams are all stopped.
+              @buffer.stop
+            end
+          end
+        end
 
         def coerce_inventory inventory
           @inventory = inventory

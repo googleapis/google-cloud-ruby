@@ -79,7 +79,8 @@ module Google
         #     occurred. For example, if the finding represents an open firewall it would
         #     capture the time the detector believes the firewall became open. The
         #     accuracy is determined by the detector. If the finding were to be resolved
-        #     afterward, this time would reflect when the finding was resolved.
+        #     afterward, this time would reflect when the finding was resolved. Must not
+        #     be set to a value greater than the current timestamp.
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time at which the finding was created in Security Command Center.
@@ -87,6 +88,14 @@ module Google
         #   @return [::Google::Cloud::SecurityCenter::V1::Finding::Severity]
         #     The severity of the finding. This field is managed by the source that
         #     writes the finding.
+        # @!attribute [rw] canonical_name
+        #   @return [::String]
+        #     The canonical name of the finding. It's either
+        #     "organizations/\\{organization_id}/sources/\\{source_id}/findings/\\{finding_id}",
+        #     "folders/\\{folder_id}/sources/\\{source_id}/findings/\\{finding_id}" or
+        #     "projects/\\{project_number}/sources/\\{source_id}/findings/\\{finding_id}",
+        #     depending on the closest CRM ancestor of the resource associated with the
+        #     finding.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

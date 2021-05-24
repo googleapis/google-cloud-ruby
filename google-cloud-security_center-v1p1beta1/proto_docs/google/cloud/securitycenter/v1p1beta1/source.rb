@@ -46,6 +46,14 @@ module Google
         #     scan and detect four common vulnerabilities, including cross-site-scripting
         #     (XSS), Flash injection, mixed content (HTTP in HTTPS), and
         #     outdated/insecure libraries."
+        # @!attribute [rw] canonical_name
+        #   @return [::String]
+        #     The canonical name of the finding. It's either
+        #     "organizations/\\{organization_id}/sources/\\{source_id}",
+        #     "folders/\\{folder_id}/sources/\\{source_id}" or
+        #     "projects/\\{project_number}/sources/\\{source_id}",
+        #     depending on the closest CRM ancestor of the resource associated with the
+        #     finding.
         class Source
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

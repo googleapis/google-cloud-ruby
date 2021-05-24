@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.1 / 2021-04-27
+
+#### Documentation
+
+* Fix formatting in PolicyTagManager documentation
+
 ### 0.7.0 / 2021-03-31
 
 #### Features

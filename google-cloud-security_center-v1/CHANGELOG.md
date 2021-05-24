@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2021-05-18
+
+#### Features
+
+* Support for folder information and asset canonical names
+
 ### 0.6.0 / 2021-03-08
 
 #### Features

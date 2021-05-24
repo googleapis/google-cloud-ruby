@@ -24,11 +24,10 @@ module Google
     module Dialogflow
       module V2
         module AnswerRecords
-          # Service for managing
-          # [AnswerRecords][google.cloud.dialogflow.v2.AnswerRecord].
+          # Service for managing [AnswerRecords][google.cloud.dialogflow.v2.AnswerRecord].
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode

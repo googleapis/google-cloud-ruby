@@ -30,7 +30,7 @@ module Google
           # snake_case or kebab-case, either of those cases is accepted.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode

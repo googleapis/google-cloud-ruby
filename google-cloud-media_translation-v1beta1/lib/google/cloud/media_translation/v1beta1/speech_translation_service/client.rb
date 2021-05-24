@@ -66,9 +66,9 @@ module Google
                 default_config.timeout = 400.0
                 default_config.retry_policy = {
                   initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14, 2, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 2, 4]
                 }
 
                 default_config.rpcs.streaming_translate_speech.timeout = 400.0

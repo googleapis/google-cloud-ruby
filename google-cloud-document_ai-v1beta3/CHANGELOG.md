@@ -1,5 +1,17 @@
 # Release History
 
+### 0.9.0 / 2021-05-21
+
+#### Features
+
+* Use non-regionalized default host name
+
+### 0.8.0 / 2021-05-06
+
+#### Features
+
+* Report confidence of detected page elements
+
 ### 0.7.0 / 2021-03-30
 
 #### Features

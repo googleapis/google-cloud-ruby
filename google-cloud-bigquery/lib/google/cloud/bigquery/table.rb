@@ -471,8 +471,13 @@ module Google
         ###
         # Checks if the table is clustered.
         #
+        # See {Table::Updater#clustering_fields=}, {Table#clustering_fields} and
+        # {Table#clustering_fields=}.
+        #
         # @see https://cloud.google.com/bigquery/docs/clustered-tables
-        #   Introduction to Clustered Tables
+        #   Introduction to clustered tables
+        # @see https://cloud.google.com/bigquery/docs/creating-clustered-tables
+        #   Creating and using clustered tables
         #
         # @return [Boolean, nil] `true` when the table is clustered, or
         #   `false` otherwise, if the object is a resource (see {#resource?});
@@ -491,14 +496,16 @@ module Google
         # first partitioned and subsequently clustered. The order of the
         # returned fields determines the sort order of the data.
         #
-        # See {Table::Updater#clustering_fields=}.
+        # BigQuery supports clustering for both partitioned and non-partitioned
+        # tables.
         #
-        # @see https://cloud.google.com/bigquery/docs/partitioned-tables
-        #   Partitioned Tables
+        # See {Table::Updater#clustering_fields=}, {Table#clustering_fields=} and
+        # {Table#clustering?}.
+        #
         # @see https://cloud.google.com/bigquery/docs/clustered-tables
-        #   Introduction to Clustered Tables
+        #   Introduction to clustered tables
         # @see https://cloud.google.com/bigquery/docs/creating-clustered-tables
-        #   Creating and Using Clustered Tables
+        #   Creating and using clustered tables
         #
         # @return [Array<String>, nil] The clustering fields, or `nil` if the
         #   table is not clustered or if the table is a reference (see
@@ -510,6 +517,53 @@ module Google
           return nil if reference?
           ensure_full_data!
           @gapi.clustering.fields if clustering?
+        end
+
+        ##
+        # Updates the list of fields on which data should be clustered.
+        #
+        # Only top-level, non-repeated, simple-type fields are supported. When
+        # you cluster a table using multiple columns, the order of columns you
+        # specify is important. The order of the specified columns determines
+        # the sort order of the data.
+        #
+        # BigQuery supports clustering for both partitioned and non-partitioned
+        # tables.
+        #
+        # See {Table::Updater#clustering_fields=}, {Table#clustering_fields} and
+        # {Table#clustering?}.
+        #
+        # @see https://cloud.google.com/bigquery/docs/clustered-tables
+        #   Introduction to clustered tables
+        # @see https://cloud.google.com/bigquery/docs/creating-clustered-tables
+        #   Creating and using clustered tables
+        # @see https://cloud.google.com/bigquery/docs/creating-clustered-tables#modifying-cluster-spec
+        #   Modifying clustering specification
+        #
+        # @param [Array<String>, nil] fields The clustering fields, or `nil` to
+        #   remove the clustering configuration. Only top-level, non-repeated,
+        #   simple-type fields are supported.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   table = dataset.table "my_table"
+        #
+        #   table.clustering_fields = ["last_name", "first_name"]
+        #
+        # @!group Attributes
+        #
+        def clustering_fields= fields
+          reload! unless resource_full?
+          if fields
+            @gapi.clustering ||= Google::Apis::BigqueryV2::Clustering.new
+            @gapi.clustering.fields = fields
+          else
+            @gapi.clustering = nil
+          end
+          patch_gapi! :clustering
         end
 
         ##
@@ -3062,27 +3116,22 @@ module Google
           end
 
           ##
-          # Sets one or more fields on which data should be clustered. Must be
-          # specified with time-based partitioning, data in the table will be
-          # first partitioned and subsequently clustered.
+          # Sets the list of fields on which data should be clustered.
           #
           # Only top-level, non-repeated, simple-type fields are supported. When
           # you cluster a table using multiple columns, the order of columns you
           # specify is important. The order of the specified columns determines
           # the sort order of the data.
           #
-          # You can only set the clustering fields while creating a table as in
-          # the example below. BigQuery does not allow you to change clustering
-          # on an existing table.
+          # BigQuery supports clustering for both partitioned and non-partitioned
+          # tables.
           #
-          # See {Table#clustering_fields}.
+          # See {Table#clustering_fields} and {Table#clustering_fields=}.
           #
-          # @see https://cloud.google.com/bigquery/docs/partitioned-tables
-          #   Partitioned Tables
           # @see https://cloud.google.com/bigquery/docs/clustered-tables
-          #   Introduction to Clustered Tables
+          #   Introduction to clustered tables
           # @see https://cloud.google.com/bigquery/docs/creating-clustered-tables
-          #   Creating and Using Clustered Tables
+          #   Creating and using clustered tables
           #
           # @param [Array<String>] fields The clustering fields. Only top-level,
           #   non-repeated, simple-type fields are supported.

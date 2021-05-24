@@ -553,19 +553,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for CreateIosAppDataStream RPC.
-        # @!attribute [rw] ios_app_data_stream
-        #   @return [::Google::Analytics::Admin::V1alpha::IosAppDataStream]
-        #     Required. The iOS app data stream to create.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The parent resource where this ios app data stream will be created.
-        #     Format: properties/123
-        class CreateIosAppDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # Request message for ListIosAppDataStreams RPC.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -634,19 +621,6 @@ module Google
         #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
         #     the entire entity, use one path with the string "*" to match all fields.
         class UpdateAndroidAppDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for CreateAndroidAppDataStream RPC.
-        # @!attribute [rw] android_app_data_stream
-        #   @return [::Google::Analytics::Admin::V1alpha::AndroidAppDataStream]
-        #     Required. The android app stream to create.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The parent resource where this android app data stream will be created.
-        #     Format: properties/123
-        class CreateAndroidAppDataStreamRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -908,6 +882,61 @@ module Google
         #     A token, which can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
         class ListAccountSummariesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for SearchChangeHistoryEvents RPC.
+        # @!attribute [rw] account
+        #   @return [::String]
+        #     Required. The account resource for which to return change history resources.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     Optional. Resource name for a child property. If set, only return changes
+        #     made to this property or its child resources.
+        # @!attribute [rw] resource_type
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::ChangeHistoryResourceType>]
+        #     Optional. If set, only return changes if they are for a resource that matches at
+        #     least one of these types.
+        # @!attribute [rw] action
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::ActionType>]
+        #     Optional. If set, only return changes that match one or more of these types of
+        #     actions.
+        # @!attribute [rw] actor_email
+        #   @return [::Array<::String>]
+        #     Optional. If set, only return changes if they are made by a user in this list.
+        # @!attribute [rw] earliest_change_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. If set, only return changes made after this time (inclusive).
+        # @!attribute [rw] latest_change_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. If set, only return changes made before this time (inclusive).
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of ChangeHistoryEvent items to return.
+        #     The service may return fewer than this value, even if there are additional
+        #     pages. If unspecified, at most 50 items will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `SearchChangeHistoryEvents` call.
+        #     Provide this to retrieve the subsequent page. When paginating, all other
+        #     parameters provided to `SearchChangeHistoryEvents` must match the call that
+        #     provided the page token.
+        class SearchChangeHistoryEventsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for SearchAccounts RPC.
+        # @!attribute [rw] change_history_events
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::ChangeHistoryEvent>]
+        #     Results that were accessible to the caller.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class SearchChangeHistoryEventsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

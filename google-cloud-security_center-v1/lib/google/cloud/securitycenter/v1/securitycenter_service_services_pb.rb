@@ -27,7 +27,7 @@ module Google
           # V1 APIs for Security Center service.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode
@@ -57,7 +57,9 @@ module Google
             # specified properties.
             #
             # To group across all sources provide a `-` as the source id.
-            # Example: /v1/organizations/{organization_id}/sources/-/findings
+            # Example: /v1/organizations/{organization_id}/sources/-/findings,
+            # /v1/folders/{folder_id}/sources/-/findings,
+            # /v1/projects/{project_id}/sources/-/findings
             rpc :GroupFindings, ::Google::Cloud::SecurityCenter::V1::GroupFindingsRequest, ::Google::Cloud::SecurityCenter::V1::GroupFindingsResponse
             # Lists an organization's assets.
             rpc :ListAssets, ::Google::Cloud::SecurityCenter::V1::ListAssetsRequest, ::Google::Cloud::SecurityCenter::V1::ListAssetsResponse
@@ -86,6 +88,7 @@ module Google
             # Creates or updates a finding. The corresponding source must exist for a
             # finding creation to succeed.
             rpc :UpdateFinding, ::Google::Cloud::SecurityCenter::V1::UpdateFindingRequest, ::Google::Cloud::SecurityCenter::V1::Finding
+            #
             # Updates a notification config. The following update
             # fields are allowed: description, pubsub_topic, streaming_config.filter
             rpc :UpdateNotificationConfig, ::Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest, ::Google::Cloud::SecurityCenter::V1::NotificationConfig
