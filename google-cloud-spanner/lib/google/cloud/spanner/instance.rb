@@ -68,7 +68,7 @@ module Google
         def initialize grpc, service
           @grpc = grpc
           @service = service
-          @orignal_values = grpc.to_h
+          @current_values = grpc.to_h
         end
 
         # The unique identifier for the project.
@@ -244,12 +244,12 @@ module Google
           ensure_service!
 
           field_mask = []
-          @orignal_values.each do |field, value|
+          @current_values.each do |field, value|
             field_mask << field unless @grpc[field.to_s] == value
           end
 
           job_grpc = service.update_instance @grpc, field_mask: field_mask
-          @orignal_values = @grpc.to_h
+          @current_values = @grpc.to_h
           Instance::Job.from_grpc job_grpc, service
         end
         alias update save

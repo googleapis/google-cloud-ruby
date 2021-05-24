@@ -104,6 +104,6 @@ describe Google::Cloud::Spanner::Instance, :save, :mock_spanner do
     _(job).must_be_kind_of Google::Cloud::Spanner::Instance::Job
     _(job).wont_be :done?
 
-    _(instance.instance_variable_get("@orignal_values")[:processing_units]).must_equal 1000
+    _(instance.instance_variable_get("@current_values")[:processing_units]).must_equal 1000
   end
 end
