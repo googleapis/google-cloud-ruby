@@ -1,5 +1,11 @@
 # Release History
 
+### 0.21.1 / 2021-05-18
+
+#### Documentation
+
+* Remove Debugger description from the readmes
+
 ### 0.21.0 / 2021-03-10
 
 #### Features

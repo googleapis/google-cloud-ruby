@@ -72,25 +72,25 @@ module Google
                 default_config.rpcs.delete_workload.timeout = 60.0
                 default_config.rpcs.delete_workload.retry_policy = {
                   initial_delay: 0.2,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.get_workload.timeout = 60.0
                 default_config.rpcs.get_workload.retry_policy = {
                   initial_delay: 0.2,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.list_workloads.timeout = 60.0
                 default_config.rpcs.list_workloads.retry_policy = {
                   initial_delay: 0.2,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config

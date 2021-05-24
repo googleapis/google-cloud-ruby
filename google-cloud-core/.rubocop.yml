@@ -11,6 +11,9 @@ Documentation:
 Lint/UnreachableLoop:
   Exclude:
     - "lib/google/cloud/credentials.rb"
+Metrics/BlockLength:
+  Exclude:
+    - "Rakefile"
 Metrics/ClassLength:
   Exclude:
     - "lib/google/cloud/config.rb"

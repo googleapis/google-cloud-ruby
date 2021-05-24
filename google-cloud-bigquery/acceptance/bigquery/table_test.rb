@@ -482,13 +482,24 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
   end
 
-  it "allows tables to be created with time_partitioning and clustering" do
-    table = time_partitioned_table
-    _(table.time_partitioning?).must_equal true
-    _(table.time_partitioning_type).must_equal "DAY"
-    _(table.time_partitioning_field).must_equal "dob"
-    _(table.time_partitioning_expiration).must_equal seven_days
-    _(table.clustering_fields).must_equal clustering_fields
+  it "allows tables to be created and updated with time_partitioning and clustering" do
+    begin
+      table = time_partitioned_table
+      _(table.time_partitioning?).must_equal true
+      _(table.time_partitioning_type).must_equal "DAY"
+      _(table.time_partitioning_field).must_equal "dob"
+      _(table.time_partitioning_expiration).must_equal seven_days
+      _(table.clustering_fields).must_equal clustering_fields
+
+      new_clustering_fields = ["last_name"]
+      table.clustering_fields = new_clustering_fields
+      _(table.clustering_fields).must_equal new_clustering_fields
+
+      table.clustering_fields = nil
+      _(table.clustering_fields).must_be :nil?
+    ensure
+      time_partitioned_table.delete
+    end
   end
 
   it "allows tables to be created with range_partitioning" do

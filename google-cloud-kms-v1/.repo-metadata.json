@@ -7,5 +7,6 @@
     "name_pretty": "Cloud Key Management Service (KMS) V1 API",
     "product_documentation": "https://cloud.google.com/kms",
     "repo": "googleapis/google-cloud-ruby",
-    "requires_billing": true
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO"
 }

@@ -3,12 +3,12 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/securitycenter/v1/security_marks_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/securitycenter/v1/finding.proto", :syntax => :proto3) do
     add_message "google.cloud.securitycenter.v1.Finding" do
@@ -23,6 +23,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :event_time, :message, 9, "google.protobuf.Timestamp"
       optional :create_time, :message, 10, "google.protobuf.Timestamp"
       optional :severity, :enum, 12, "google.cloud.securitycenter.v1.Finding.Severity"
+      optional :canonical_name, :string, 14
     end
     add_enum "google.cloud.securitycenter.v1.Finding.State" do
       value :STATE_UNSPECIFIED, 0

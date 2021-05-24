@@ -71,25 +71,25 @@ module Google
                 default_config.rpcs.process_document.timeout = 120.0
                 default_config.rpcs.process_document.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.batch_process_documents.timeout = 120.0
                 default_config.rpcs.batch_process_documents.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.review_document.timeout = 120.0
                 default_config.rpcs.review_document.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config
@@ -448,7 +448,7 @@ module Google
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
-            #   Defaults to `"us-documentai.googleapis.com"`.
+            #   Defaults to `"documentai.googleapis.com"`.
             #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
@@ -499,7 +499,7 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "us-documentai.googleapis.com", ::String
+              config_attr :endpoint,      "documentai.googleapis.com", ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

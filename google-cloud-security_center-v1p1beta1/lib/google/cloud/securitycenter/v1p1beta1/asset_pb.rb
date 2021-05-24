@@ -3,11 +3,12 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/securitycenter/v1p1beta1/folder_pb'
 require 'google/cloud/securitycenter/v1p1beta1/security_marks_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/securitycenter/v1p1beta1/asset.proto", :syntax => :proto3) do
     add_message "google.cloud.securitycenter.v1p1beta1.Asset" do
@@ -18,6 +19,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 9, "google.protobuf.Timestamp"
       optional :update_time, :message, 10, "google.protobuf.Timestamp"
       optional :iam_policy, :message, 11, "google.cloud.securitycenter.v1p1beta1.Asset.IamPolicy"
+      optional :canonical_name, :string, 13
     end
     add_message "google.cloud.securitycenter.v1p1beta1.Asset.SecurityCenterProperties" do
       optional :resource_name, :string, 1
@@ -28,6 +30,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :resource_display_name, :string, 6
       optional :resource_parent_display_name, :string, 7
       optional :resource_project_display_name, :string, 8
+      repeated :folders, :message, 10, "google.cloud.securitycenter.v1p1beta1.Folder"
     end
     add_message "google.cloud.securitycenter.v1p1beta1.Asset.IamPolicy" do
       optional :policy_blob, :string, 1

@@ -58,13 +58,13 @@ module Google
             #     Output only. The type of encryption.
             # @!attribute [r] encryption_status
             #   @return [::Google::Rpc::Status]
-            #     Output only. If present, the status of a recent encrypt/decrypt call on
-            #     underlying data for this database or backup. Regardless of status, data is
-            #     always encrypted at rest.
+            #     Output only. If present, the status of a recent encrypt/decrypt call on underlying data
+            #     for this database or backup. Regardless of status, data is always encrypted
+            #     at rest.
             # @!attribute [r] kms_key_version
             #   @return [::String]
-            #     Output only. A Cloud KMS key version that is being used to protect the
-            #     database or backup.
+            #     Output only. A Cloud KMS key version that is being used to protect the database or
+            #     backup.
             class EncryptionInfo
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

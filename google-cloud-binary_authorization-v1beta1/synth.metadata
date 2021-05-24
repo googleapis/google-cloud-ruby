@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "70112dbb57b7e311f867c5f7125be85a49bb998c"
+        "sha": "0b121e312b5d421e591de64beebe4fb04c170549"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "7e91915c247a5c84ab5fcdf11ce2bdf7404f2fcc",
-        "internalRef": "367156876"
+        "sha": "bceaea9f824a0d3600cd6a868ea457ac18980049",
+        "internalRef": "373173593"
       }
     }
   ],
@@ -48,12 +48,14 @@
     "lib/google/cloud/binary_authorization/v1beta1/binauthz_management_service/credentials.rb",
     "lib/google/cloud/binary_authorization/v1beta1/binauthz_management_service/paths.rb",
     "lib/google/cloud/binary_authorization/v1beta1/version.rb",
+    "lib/google/cloud/binaryauthorization/v1beta1/continuous_validation_logging_pb.rb",
     "lib/google/cloud/binaryauthorization/v1beta1/resources_pb.rb",
     "lib/google/cloud/binaryauthorization/v1beta1/service_pb.rb",
     "lib/google/cloud/binaryauthorization/v1beta1/service_services_pb.rb",
     "proto_docs/README.md",
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/binaryauthorization/v1beta1/continuous_validation_logging.rb",
     "proto_docs/google/cloud/binaryauthorization/v1beta1/resources.rb",
     "proto_docs/google/cloud/binaryauthorization/v1beta1/service.rb",
     "proto_docs/google/protobuf/empty.rb",

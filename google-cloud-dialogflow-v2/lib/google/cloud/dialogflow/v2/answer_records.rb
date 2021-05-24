@@ -31,8 +31,7 @@ module Google
     module Dialogflow
       module V2
         ##
-        # Service for managing
-        # {::Google::Cloud::Dialogflow::V2::AnswerRecord AnswerRecords}.
+        # Service for managing {::Google::Cloud::Dialogflow::V2::AnswerRecord AnswerRecords}.
         #
         # To load this service and instantiate a client:
         #

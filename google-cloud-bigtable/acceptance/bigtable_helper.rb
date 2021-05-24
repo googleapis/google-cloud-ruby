@@ -61,6 +61,10 @@ module Acceptance
       @instance ||= bigtable.instance(bigtable_instance_id)
     end
 
+    def bigtable_instance_2
+      @instance_2 ||= @bigtable.instance(bigtable_instance_id_2)
+    end
+
     def bigtable_read_table
       bigtable.table(bigtable_instance_id, $bigtable_read_table_id)
     end
@@ -168,6 +172,10 @@ def bigtable_instance_id
   "google-cloud-ruby-tests"
 end
 
+def bigtable_instance_id_2
+  "google-cloud-ruby-tests-2"
+end
+
 def bigtable_cluster_location
   "us-east1-b"
 end
@@ -180,6 +188,10 @@ def bigtable_cluster_id
   "#{bigtable_instance_id}-clstr"
 end
 
+def bigtable_cluster_id_2
+  "#{$bigtable_instance_id}-clstr2"
+end
+
 def bigtable_kms_key
   # Allow overriding the KMS key used for tests via an environment variable. These keys are public, but access may be
   # restricted when tests are run from a VPC project.
@@ -189,6 +201,12 @@ end
 create_test_instance(
   bigtable_instance_id,
   bigtable_cluster_id,
+  bigtable_cluster_location
+)
+
+create_test_instance(
+  bigtable_instance_id_2,
+  bigtable_cluster_id_2,
   bigtable_cluster_location
 )
 

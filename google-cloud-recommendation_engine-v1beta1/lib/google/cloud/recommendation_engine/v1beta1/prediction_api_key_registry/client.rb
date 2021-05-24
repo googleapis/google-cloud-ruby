@@ -72,25 +72,25 @@ module Google
                 default_config.rpcs.create_prediction_api_key_registration.timeout = 600.0
                 default_config.rpcs.create_prediction_api_key_registration.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_prediction_api_key_registrations.timeout = 600.0
                 default_config.rpcs.list_prediction_api_key_registrations.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_prediction_api_key_registration.timeout = 600.0
                 default_config.rpcs.delete_prediction_api_key_registration.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config

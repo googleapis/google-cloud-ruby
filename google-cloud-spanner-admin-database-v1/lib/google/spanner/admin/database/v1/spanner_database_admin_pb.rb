@@ -69,6 +69,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :statements, :string, 2
       repeated :commit_timestamps, :message, 3, "google.protobuf.Timestamp"
       optional :throttled, :bool, 4
+      repeated :progress, :message, 5, "google.spanner.admin.database.v1.OperationProgress"
     end
     add_message "google.spanner.admin.database.v1.DropDatabaseRequest" do
       optional :database, :string, 1

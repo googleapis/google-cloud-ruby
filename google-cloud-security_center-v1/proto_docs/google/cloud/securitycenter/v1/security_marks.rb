@@ -42,6 +42,16 @@ module Google
         #       * Keys must be letters, numbers, underscores, or dashes
         #       * Values have leading and trailing whitespace trimmed, remaining
         #         characters must be between 1 - 4096 characters (inclusive)
+        # @!attribute [rw] canonical_name
+        #   @return [::String]
+        #     The canonical name of the marks.
+        #     Examples:
+        #     "organizations/\\{organization_id}/assets/\\{asset_id}/securityMarks"
+        #     "folders/\\{folder_id}/assets/\\{asset_id}/securityMarks"
+        #     "projects/\\{project_number}/assets/\\{asset_id}/securityMarks"
+        #     "organizations/\\{organization_id}/sources/\\{source_id}/findings/\\{finding_id}/securityMarks"
+        #     "folders/\\{folder_id}/sources/\\{source_id}/findings/\\{finding_id}/securityMarks"
+        #     "projects/\\{project_number}/sources/\\{source_id}/findings/\\{finding_id}/securityMarks"
         class SecurityMarks
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

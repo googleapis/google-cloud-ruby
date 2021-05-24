@@ -17,35 +17,90 @@
 require "json"
 require "set"
 
-TASKS = ["test", "rubocop", "build", "yard", "linkinator"]
+TASKS = ["test", "rubocop", "build", "yard", "linkinator", "acceptance", "samples-master", "samples-latest"]
 
-desc "Run CI tasks, not including integration tests."
+desc "Run CI tasks."
 
-flag :github_event_name, "--github-event-name PATH", default: ""
-flag :github_event_payload, "--github-event-payload PATH", default: ""
-flag :head_commit, "--head COMMIT"
-flag :base_commit, "--base COMMIT"
-flag :bundle_update, "--bundle-update", desc: "Update rather than install gem bundles"
-flag :only, "--only", desc: "Run only the specified tasks (i.e. tasks are opt-in rather than opt-out)"
-flag :gems, accept: Array
-flag :all_gems
+flag :github_event_name, "--github-event-name=EVENT" do |f|
+  f.default ""
+  f.desc "Name of the github event triggering this job. Optional."
+end
+flag :github_event_payload, "--github-event-payload=PATH" do |f|
+  f.default ""
+  f.desc "Path to the github event payload JSON file. Optional."
+end
+flag :head_commit, "--head=COMMIT" do |f|
+  f.desc "Ref or SHA of the head commit when analyzing changes. Defaults to the current commit."
+end
+flag :base_commit, "--base=COMMIT" do |f|
+  f.desc "Ref or SHA of the base commit when analyzing changes. If omitted, uses uncommitted diffs."
+end
+flag :gems, "--gems=NAMES" do |f|
+  f.accept Array
+  f.desc "Test the given gems (comma-delimited) instead of analyzing changes."
+end
+flag :all_gems, "--all-gems[=FILES]" do |f|
+  f.desc "Test all gems, or all that include at least one of the given files (comma-delimited)."
+end
+flag :project, "--project=NAME" do |f|
+  f.accept String
+  f.desc "The project to use for acceptance/sample tests."
+end
+flag :keyfile, "--keyfile=PATH" do |f|
+  f.accept String
+  f.desc "Path to the credentials to use for acceptance/sample tests."
+end
+flag :max_gem_count do |f|
+  f.accept Integer
+  f.default 0
+  f.desc "The max number of gems to test. If more gems are detected, no tests are run."
+end
+flag :load_kokoro_context do |f|
+  f.desc "Load Kokoro credentials and environment info"
+end
 
-TASKS.each do |task|
-  flag "task_#{task}", "--[no-]#{task}", desc: "Run the #{task} task"
+at_least_one_required desc: "Tasks" do
+  flag :do_bundle, "--[no-]bundle" do |f|
+    f.desc "Normally bundle install is performed prior to any other task. Use --no-bundle to disable this, or" \
+           " use --bundle to force a bundle install even if no other tasks are run."
+  end
+  flag :bundle_update do |f|
+    f.desc "Update rather than install gem bundles."
+  end
+  TASKS.each do |task|
+    task_underscore = task.tr "-", "_"
+    flag "task_#{task_underscore}", "--[no-]#{task}", desc: "Run the #{task} task"
+  end
+  flag :all_tasks do |f|
+    f.desc "Run all tasks."
+  end
 end
 
 include :exec
 include :terminal, styled: true
 
 def run
-  @run_tasks = TASKS.find_all do |task|
-    val = get "task_#{task}"
-    val.nil? ? !only : val
+  if load_kokoro_context
+    require "repo_context"
+    RepoContext.load_kokoro_env
   end
+
+  @auth_env = setup_auth_env
+  @run_tasks, @bundle_task = determine_tasks
+
   @errors = []
   @cur_dir = Dir.getwd
   Dir.chdir context_directory
-  determine_dirs.each { |dir| run_in_dir dir }
+  dirs = determine_dirs
+
+  if max_gem_count > 0 && dirs.size > max_gem_count
+    puts "CI skipped because the limit of #{max_gem_count} libraries was exceeded.", :bold, :yellow
+    puts "Modified libraries found:"
+    dirs.each { |dir| puts "  #{dir}" }
+    exit
+  end
+
+  dirs.shuffle.each { |dir| run_in_dir dir }
   puts
   if @errors.empty?
     puts "CI passed", :bold, :green
@@ -56,15 +111,57 @@ def run
   end
 end
 
+def setup_auth_env
+  final_project = project || ENV["GCLOUD_TEST_PROJECT"] || ENV["GOOGLE_CLOUD_PROJECT"]
+  final_keyfile = keyfile || ENV["GCLOUD_TEST_KEYFILE"] || ENV["GOOGLE_APPLICATION_CREDENTIALS"]
+  logger.info "Project for integration tests: #{final_project.inspect}"
+  logger.info "Set keyfile for integration tests." if final_keyfile
+  {
+    "GCLOUD_TEST_PROJECT" => final_project,
+    "GOOGLE_CLOUD_PROJECT" => final_project,
+    "GCLOUD_TEST_KEYFILE" => final_keyfile,
+    "GOOGLE_APPLICATION_CREDENTIALS" => final_keyfile
+  }
+end
+
+def determine_tasks
+  run_tasks = TASKS.find_all do |task|
+    task_underscore = task.tr "-", "_"
+    do_task = get "task_#{task_underscore}"
+    do_task.nil? ? all_tasks : do_task
+  end
+  bundle_task = if bundle_update
+    logger.info "Will update bundles for tested libraries"
+    "update"
+  elsif do_bundle == false
+    logger.info "Will not install bundles for tested libraries"
+    nil
+  else
+    logger.info "Will install bundles for tested libraries"
+    "install"
+  end
+  logger.info "Running the following tasks: #{run_tasks.inspect}"
+  [run_tasks, bundle_task]
+end
+
 def determine_dirs
   return gems if gems
-  return all_gem_dirs if all_gems
+  return all_gem_dirs(all_gems || true) if all_gems || github_event_name == "schedule"
   cur_gem_dir || gem_dirs_from_changes
 end
 
-def all_gem_dirs
-  puts "Running for all gems", :bold
+def all_gem_dirs which_files
   dirs = Dir.glob("*/*.gemspec").map { |file| File.dirname file }
+  if which_files == true || which_files == ""
+    puts "Running for all gems", :bold
+  else
+    puts "Running for all gems with the following files: #{which_files}", :bold
+    dirs.delete_if do |dir|
+      which_files.split(",").all? do |name|
+        !File.exist? File.join(dir, name)
+      end
+    end
+  end
   filter_gem_dirs dirs
 end
 
@@ -108,15 +205,16 @@ def interpret_github_event
   base_ref, head_ref =
     case github_event_name
     when "pull_request"
-      puts "Getting commits from pull_request event"
+      logger.info "Getting commits from pull_request event"
       [payload["pull_request"]["base"]["ref"], nil]
     when "push"
-      puts "Getting commits from push event"
+      logger.info "Getting commits from push event"
       [payload["before"], nil]
     when "workflow_dispatch"
-      puts "Getting inputs from workflow_dispatch event"
+      logger.info "Getting inputs from workflow_dispatch event"
       [payload["inputs"]["base"], payload["inputs"]["head"]]
     else
+      logger.info "Using local commits"
       [base_commit, head_commit]
     end
   base_ref = nil if base_ref&.empty?
@@ -125,23 +223,23 @@ def interpret_github_event
 end
 
 def ensure_checkout head_ref
-  puts "Checking for head ref: #{head_ref}"
+  logger.info "Checking for head ref: #{head_ref}"
   head_sha = ensure_fetched head_ref
   current_sha = capture(["git", "rev-parse", "HEAD"], e: true).strip
   if head_sha == current_sha
-    puts "Already at head SHA: #{head_sha}"
+    logger.info "Already at head SHA: #{head_sha}"
   else
-    puts "Checking out head SHA: #{head_sha}"
+    logger.info "Checking out head SHA: #{head_sha}"
     exec(["git", "checkout", head_sha], e: true)
   end
 end
 
 def find_changed_files base_ref
   if base_ref.nil?
-    puts "No base ref. Using local diff."
+    logger.info "No base ref. Using local diff."
     capture(["git", "status", "--porcelain"]).split("\n").map { |line| line.split.last }
   else
-    puts "Diffing from base ref: #{base_ref}"
+    logger.info "Diffing from base ref: #{base_ref}"
     base_sha = ensure_fetched base_ref
     capture(["git", "diff", "--name-only", base_sha], e: true).split("\n").map(&:strip)
   end
@@ -151,8 +249,13 @@ def ensure_fetched ref
   result = exec(["git", "show", "--no-patch", "--format=%H", ref], out: :capture, err: :capture)
   if result.success?
     result.captured_out.strip
+  elsif ref == "HEAD^"
+    # Common special case
+    current_sha = capture(["git", "rev-parse", "HEAD"], e: true).strip
+    exec(["git", "fetch", "--depth=2", "origin", current_sha], e: true)
+    capture(["git", "rev-parse", "HEAD^"], e: true).strip
   else
-    puts "Fetching ref: #{ref}"
+    logger.info "Fetching ref: #{ref}"
     exec(["git", "fetch", "--depth=1", "origin", "#{ref}:refs/temp/#{ref}"], e: true)
     capture(["git", "show", "--no-patch", "--format=%H", "refs/temp/#{ref}"], e: true).strip
   end
@@ -190,21 +293,22 @@ end
 
 def run_in_dir dir
   Dir.chdir dir do
-    bundle_task = bundle_update ? "update" : "install"
-    puts
-    puts "#{dir}: bundle ...", :bold
-    result = exec ["bundle", bundle_task]
-    unless result.success?
-      @errors << "#{dir}: bundle"
-      next
+    if @bundle_task
+      puts
+      puts "#{dir}: bundle ...", :bold, :cyan
+      result = exec ["bundle", @bundle_task]
+      unless result.success?
+        @errors << "#{dir}: bundle"
+        next
+      end
     end
     @run_tasks.each do |task|
       puts
-      puts "#{dir}: #{task} ...", :bold
+      puts "#{dir}: #{task} ...", :bold, :cyan
       success = if task == "linkinator"
         run_linkinator
       else
-        exec(["bundle", "exec", "rake", task]).success?
+        exec(["bundle", "exec", "rake", task.tr("-", ":")], env: @auth_env).success?
       end
       @errors << "#{dir}: #{task}" unless success
     end

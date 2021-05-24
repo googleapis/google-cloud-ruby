@@ -69,17 +69,17 @@ module Google
                 default_config.rpcs.list_game_server_deployments.timeout = 60.0
                 default_config.rpcs.list_game_server_deployments.retry_policy = {
                   initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 10.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.get_game_server_deployment.timeout = 60.0
                 default_config.rpcs.get_game_server_deployment.retry_policy = {
                   initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 10.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.create_game_server_deployment.timeout = 60.0
@@ -91,9 +91,9 @@ module Google
                 default_config.rpcs.get_game_server_deployment_rollout.timeout = 60.0
                 default_config.rpcs.get_game_server_deployment_rollout.retry_policy = {
                   initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 10.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.update_game_server_deployment_rollout.timeout = 60.0
@@ -101,17 +101,17 @@ module Google
                 default_config.rpcs.preview_game_server_deployment_rollout.timeout = 60.0
                 default_config.rpcs.preview_game_server_deployment_rollout.retry_policy = {
                   initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 10.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.fetch_deployment_state.timeout = 120.0
                 default_config.rpcs.fetch_deployment_state.retry_policy = {
                   initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 10.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config

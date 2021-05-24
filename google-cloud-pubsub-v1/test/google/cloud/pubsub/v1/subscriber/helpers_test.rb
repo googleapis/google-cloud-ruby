@@ -25,13 +25,15 @@ require "google/cloud/pubsub/v1/subscriber"
 class ::Google::Cloud::PubSub::V1::Subscriber::HelpersTest < Minitest::Test
   def test_config_channel_args
     ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::PubSub::V1::Subscriber::Client.new do |config|
-        channel_args = config.channel_args
-        assert channel_args
-        assert_equal -1, channel_args["grpc.max_send_message_length"]
-        assert_equal -1, channel_args["grpc.max_receive_message_length"]
-        assert_equal 300_000, channel_args["grpc.keepalive_time_ms"]
-        assert_equal 1, channel_args["grpc.service_config_disable_resolution"]
+      ::Google::Auth::Credentials.stub :default, :my_creds do
+        ::Google::Cloud::PubSub::V1::Subscriber::Client.new do |config|
+          channel_args = config.channel_args
+          assert channel_args
+          assert_equal -1, channel_args["grpc.max_send_message_length"]
+          assert_equal -1, channel_args["grpc.max_receive_message_length"]
+          assert_equal 300_000, channel_args["grpc.keepalive_time_ms"]
+          assert_equal 1, channel_args["grpc.service_config_disable_resolution"]
+        end
       end
     end
   end

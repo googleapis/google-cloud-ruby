@@ -114,6 +114,313 @@ class ::Google::Cloud::Dialogflow::V2::Environments::ClientTest < Minitest::Test
     end
   end
 
+  def test_get_environment
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dialogflow::V2::Environment.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_environment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_environment, name
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::GetEnvironmentRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_environment_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_environment({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_environment name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_environment ::Google::Cloud::Dialogflow::V2::GetEnvironmentRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_environment({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_environment(::Google::Cloud::Dialogflow::V2::GetEnvironmentRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_environment_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_environment
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dialogflow::V2::Environment.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    environment = {}
+    environment_id = "hello world"
+
+    create_environment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_environment, name
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::CreateEnvironmentRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::Environment), request["environment"]
+      assert_equal "hello world", request["environment_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_environment_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_environment({ parent: parent, environment: environment, environment_id: environment_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_environment parent: parent, environment: environment, environment_id: environment_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_environment ::Google::Cloud::Dialogflow::V2::CreateEnvironmentRequest.new(parent: parent, environment: environment, environment_id: environment_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_environment({ parent: parent, environment: environment, environment_id: environment_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_environment(::Google::Cloud::Dialogflow::V2::CreateEnvironmentRequest.new(parent: parent, environment: environment, environment_id: environment_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_environment_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_environment
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dialogflow::V2::Environment.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    environment = {}
+    update_mask = {}
+    allow_load_to_draft_and_discard_changes = true
+
+    update_environment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_environment, name
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::UpdateEnvironmentRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::Environment), request["environment"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal true, request["allow_load_to_draft_and_discard_changes"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_environment_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_environment({ environment: environment, update_mask: update_mask, allow_load_to_draft_and_discard_changes: allow_load_to_draft_and_discard_changes }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_environment environment: environment, update_mask: update_mask, allow_load_to_draft_and_discard_changes: allow_load_to_draft_and_discard_changes do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_environment ::Google::Cloud::Dialogflow::V2::UpdateEnvironmentRequest.new(environment: environment, update_mask: update_mask, allow_load_to_draft_and_discard_changes: allow_load_to_draft_and_discard_changes) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_environment({ environment: environment, update_mask: update_mask, allow_load_to_draft_and_discard_changes: allow_load_to_draft_and_discard_changes }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_environment(::Google::Cloud::Dialogflow::V2::UpdateEnvironmentRequest.new(environment: environment, update_mask: update_mask, allow_load_to_draft_and_discard_changes: allow_load_to_draft_and_discard_changes), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_environment_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_environment
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_environment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_environment, name
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::DeleteEnvironmentRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_environment_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_environment({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_environment name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_environment ::Google::Cloud::Dialogflow::V2::DeleteEnvironmentRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_environment({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_environment(::Google::Cloud::Dialogflow::V2::DeleteEnvironmentRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_environment_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_environment_history
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dialogflow::V2::EnvironmentHistory.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    get_environment_history_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_environment_history, name
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::GetEnvironmentHistoryRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_environment_history_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_environment_history({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_environment_history parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_environment_history ::Google::Cloud::Dialogflow::V2::GetEnvironmentHistoryRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_environment_history({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_environment_history(::Google::Cloud::Dialogflow::V2::GetEnvironmentHistoryRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_environment_history_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

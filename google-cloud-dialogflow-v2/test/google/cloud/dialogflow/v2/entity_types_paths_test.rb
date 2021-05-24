@@ -32,6 +32,9 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientPathsTest < Minitest::
 
       path = client.agent_path project: "value0"
       assert_equal "projects/value0/agent", path
+
+      path = client.agent_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1/agent", path
     end
   end
 
@@ -44,6 +47,9 @@ class ::Google::Cloud::Dialogflow::V2::EntityTypes::ClientPathsTest < Minitest::
 
       path = client.entity_type_path project: "value0", entity_type: "value1"
       assert_equal "projects/value0/agent/entityTypes/value1", path
+
+      path = client.entity_type_path project: "value0", location: "value1", entity_type: "value2"
+      assert_equal "projects/value0/locations/value1/agent/entityTypes/value2", path
     end
   end
 end

@@ -42,10 +42,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :commit_sha, :string, 5
       end
     end
+    add_message "google.devtools.cloudbuild.v1.StorageSourceManifest" do
+      optional :bucket, :string, 1
+      optional :object, :string, 2
+      optional :generation, :int64, 3
+    end
     add_message "google.devtools.cloudbuild.v1.Source" do
       oneof :source do
         optional :storage_source, :message, 2, "google.devtools.cloudbuild.v1.StorageSource"
         optional :repo_source, :message, 3, "google.devtools.cloudbuild.v1.RepoSource"
+        optional :storage_source_manifest, :message, 8, "google.devtools.cloudbuild.v1.StorageSourceManifest"
       end
     end
     add_message "google.devtools.cloudbuild.v1.BuiltImage" do
@@ -142,6 +148,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.devtools.cloudbuild.v1.SourceProvenance" do
       optional :resolved_storage_source, :message, 3, "google.devtools.cloudbuild.v1.StorageSource"
       optional :resolved_repo_source, :message, 6, "google.devtools.cloudbuild.v1.RepoSource"
+      optional :resolved_storage_source_manifest, :message, 9, "google.devtools.cloudbuild.v1.StorageSourceManifest"
       map :file_hashes, :string, :message, 4, "google.devtools.cloudbuild.v1.FileHashes"
     end
     add_message "google.devtools.cloudbuild.v1.FileHashes" do
@@ -402,6 +409,7 @@ module Google
         RunBuildTriggerRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.RunBuildTriggerRequest").msgclass
         StorageSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.StorageSource").msgclass
         RepoSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.RepoSource").msgclass
+        StorageSourceManifest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.StorageSourceManifest").msgclass
         Source = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Source").msgclass
         BuiltImage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuiltImage").msgclass
         BuildStep = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildStep").msgclass

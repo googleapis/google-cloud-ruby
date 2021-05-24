@@ -11,7 +11,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.mediatranslation.v1beta1.TranslateSpeechConfig" do
       optional :audio_encoding, :string, 1
       optional :source_language_code, :string, 2
-      repeated :alternative_source_language_codes, :string, 6
       optional :target_language_code, :string, 3
       optional :sample_rate_hertz, :int32, 4
       optional :model, :string, 5
@@ -27,7 +26,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       end
     end
     add_message "google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult" do
-      optional :recognition_result, :string, 3
       oneof :result do
         optional :text_translation_result, :message, 1, "google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.TextTranslationResult"
       end
@@ -35,7 +33,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResult.TextTranslationResult" do
       optional :translation, :string, 1
       optional :is_final, :bool, 2
-      optional :detected_source_language_code, :string, 3
     end
     add_message "google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResponse" do
       optional :error, :message, 1, "google.rpc.Status"

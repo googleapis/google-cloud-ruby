@@ -27,7 +27,7 @@ module Google
           # Service for doing schema-related operations.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode

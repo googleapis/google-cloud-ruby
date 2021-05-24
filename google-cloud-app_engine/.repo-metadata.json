@@ -7,5 +7,6 @@
     "name_pretty": "App Engine Admin API",
     "product_documentation": "https://cloud.google.com/appengine/docs/admin-api/",
     "repo": "googleapis/google-cloud-ruby",
-    "requires_billing": true
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO"
 }

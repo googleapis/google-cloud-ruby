@@ -1,5 +1,17 @@
 # Release History
 
+### 0.9.0 / 2021-05-06
+
+#### Features
+
+* Add webm opus support
+
+### 0.8.0 / 2021-04-26
+
+#### Features
+
+* Support for spoken punctuation and spoken emojis
+
 ### 0.7.0 / 2021-03-25
 
 #### Features
