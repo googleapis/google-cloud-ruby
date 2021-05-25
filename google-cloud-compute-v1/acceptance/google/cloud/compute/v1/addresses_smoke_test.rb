@@ -7,12 +7,12 @@ require "google/cloud/compute/v1/region_operations"
 class AddressesSmokeTest < Minitest::Test
   def setup
     @default_region = "us-central1"
-    @default_project = ENV["V1_TEST_PROJECT"]
+    @default_project = ENV["COMPUTE_TEST_PROJECT"]
     @client = ::Google::Cloud::Compute::V1::Addresses::Rest::Client.new
     @client_ops ||= ::Google::Cloud::Compute::V1::RegionOperations::Rest::Client.new
     @name = "rbgapic#{rand 10_000_000}"
     @addresses = []
-    skip "PROJECT_ID must be set before running this test" if @default_project.nil?
+    skip "COMPUTE_TEST_PROJECT must be set before running this test" if @default_project.nil?
   end
 
   def teardown
@@ -60,16 +60,18 @@ class AddressesSmokeTest < Minitest::Test
     address_resource = {
       name: @name
     }
+    $stdout.puts "Inserting address #{@name}."
     op = @client.insert project: @default_project, region: @default_region, address_resource: address_resource
     @addresses.append @name
     wait_for_regional_op op, "insert"
+    $stdout.puts "Operation to insert address #{@name} completed."
   end
 
   def wait_for_regional_op operation, op_type
     $stdout.puts "Waiting for regional #{op_type} operation #{operation.name}."
     starttime = Time.now
     while (operation.status != :DONE) && (Time.now < starttime + 60)
-      @client_ops.get operation: operation.name, project: @default_project, region: @default_region
+      operation = @client_ops.get operation: operation.name, project: @default_project, region: @default_region
       sleep 3
     end
   end

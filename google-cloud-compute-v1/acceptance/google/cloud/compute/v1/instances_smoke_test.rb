@@ -10,14 +10,14 @@ require "google/cloud/compute/v1/global_operations"
 class InstancesSmokeTest < Minitest::Test
   def setup
     @default_zone = "us-central1-a"
-    @default_project = ENV["V1_TEST_PROJECT"]
+    @default_project = ENV["COMPUTE_TEST_PROJECT"]
     @machine_type = "zones/#{@default_zone}/machineTypes/n1-standard-1"
     @image =  "projects/debian-cloud/global/images/family/debian-10"
     @client = ::Google::Cloud::Compute::V1::Instances::Rest::Client.new
     @client_ops = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new
     @name = "rbgapic#{rand 10_000_000}"
     @instances = []
-    skip "PROJECT_ID must be set before running this test" if @default_project.nil?
+    skip "COMPUTE_TEST_PROJECT must be set before running this test" if @default_project.nil?
   end
 
   def teardown

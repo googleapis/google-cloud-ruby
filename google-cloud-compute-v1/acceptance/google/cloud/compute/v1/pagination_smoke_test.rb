@@ -8,9 +8,9 @@ require "google/cloud/compute/v1/regions"
 class PaginationSmokeTest < Minitest::Test
   def setup
     @default_zone = "us-central1-a"
-    @default_project = ENV["V1_TEST_PROJECT"]
+    @default_project = ENV["COMPUTE_TEST_PROJECT"]
     @client = Google::Cloud::Compute::V1::Zones::Rest::Client.new
-    skip "V1_TEST_PROJECT must be set before running this test" if @default_project.nil?
+    skip "COMPUTE_TEST_PROJECT must be set before running this test" if @default_project.nil?
   end
 
   def test_basic_list
