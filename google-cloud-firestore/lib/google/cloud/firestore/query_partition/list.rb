@@ -30,9 +30,8 @@ module Google
         #   col_group = firestore.col_group "cities"
         #
         #   partitions = col_group.partitions 3
-        #   partitions.each do |partition|
-        #     puts partition.create_query
-        #   end
+        #
+        #   queries = partitions.map(&:create_query)
         #
         class List < DelegateClass(::Array)
           ##
@@ -119,9 +118,8 @@ module Google
           #   col_group = firestore.col_group "cities"
           #
           #   partitions = col_group.partitions 3
-          #   partitions.all do |partition|
-          #     puts partition.create_query
-          #   end
+          #
+          #   queries = partitions.map(&:create_query)
           #
           # @example Using the enumerator by not passing a block:
           #   require "google/cloud/firestore"
@@ -131,9 +129,8 @@ module Google
           #   col_group = firestore.col_group "cities"
           #
           #   partitions = col_group.partitions 3
-          #   all_queries = partitions.all.map do |partition|
-          #     puts partition.create_query
-          #   end
+          #
+          #   queries = partitions.map(&:create_query)
           #
           # @example Limit the number of API calls made:
           #   require "google/cloud/firestore"
@@ -143,9 +140,8 @@ module Google
           #   col_group = firestore.col_group "cities"
           #
           #   partitions = col_group.partitions 3
-          #   partitions.all(request_limit: 10) do |partition|
-          #     puts partition.create_query
-          #   end
+          #
+          #   queries = partitions.map(&:create_query)
           #
           def all request_limit: nil, &block
             request_limit = request_limit.to_i if request_limit

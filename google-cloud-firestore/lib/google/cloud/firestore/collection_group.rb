@@ -64,9 +64,8 @@ module Google
         #   col_group = firestore.col_group "cities"
         #
         #   partitions = col_group.partitions 3
-        #   partitions.each do |partition|
-        #     puts partition.create_query
-        #   end
+        #
+        #   queries = partitions.map(&:create_query)
         #
         def partitions partition_count, token: nil, max: nil
           ensure_service!
