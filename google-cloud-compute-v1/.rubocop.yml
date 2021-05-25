@@ -7,7 +7,6 @@ AllCops:
     - "lib/**/*_pb.rb"
     - "proto_docs/**/*"
     - "test/**/*"
-#    - "acceptance/**/*"
     - "Rakefile"
 
 Layout/LineLength:
