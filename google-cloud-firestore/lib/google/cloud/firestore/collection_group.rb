@@ -41,20 +41,15 @@ module Google
       #
       class CollectionGroup < Query
         ##
-        # Retrieves a list of document references for the documents in this
-        # collection.
+        # Partitions a query by returning partition cursors that can be used to run the query in parallel. The returned
+        # partition cursors are split points that can be used as starting/end points for the query results.
         #
-        # The document references returned may include references to "missing
-        # documents", i.e. document locations that have no document present but
-        # which contain subcollections with documents. Attempting to read such a
-        # document reference (e.g. via {DocumentReference#get}) will return
-        # a {DocumentSnapshot} whose `exists?` method returns false.
-        #
-        # @param [String] token A previously-returned page token representing
-        #   part of the larger set of results to view.
+        # @param [Integer] partition_count The desired maximum number of partition points. The number must be strictly
+        #   positive. The actual number of partitions returned may be fewer.
+        # @param [String] token A previously-returned page token representing part of the larger set of results to view.
         # @param [Integer] max Maximum number of results to return.
         #
-        # @return [Array<DocumentReference>] An array of document references.
+        # @return [Array<QueryPartition>] An array of query partitions.
         #
         # @example
         #   require "google/cloud/firestore"

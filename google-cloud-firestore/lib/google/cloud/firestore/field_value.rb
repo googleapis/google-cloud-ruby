@@ -27,9 +27,14 @@ module Google
       #
       #   firestore = Google::Cloud::Firestore.new
       #
-      #   user_snap = firestore.doc("users/frank").get
+      #   # Get a document reference
+      #   nyc_ref = firestore.doc "cities/NYC"
       #
-      #   # TODO
+      #   # Set the population to increment by 1.
+      #   increment_value = Google::Cloud::Firestore::FieldValue.increment 1
+      #
+      #   nyc_ref.update({ name: "New York City",
+      #                    population: increment_value })
       #
       class FieldValue
         ##

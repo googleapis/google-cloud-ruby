@@ -28,6 +28,14 @@ module Google
       #
       # See {CollectionGroup#partitions}.
       #
+      # @!attribute [r] start_at
+      #   The cursor that defines the first result for this partition, or `nil` if this is the first partition.
+      #   @return [Array] a cursor value that can be used with {Query#start_at} or `nil` if this is the first partition.
+      # @!attribute [r] end_before
+      #   The cursor that defines the first result after this partition, or `nil` if this is the last partition.
+      #   @return [Array] a cursor value that can be used with {Query#end_before} or `nil` if this is the last
+      #     partition.
+      #
       # @example
       #   require "google/cloud/firestore"
       #
