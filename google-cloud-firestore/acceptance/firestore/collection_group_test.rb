@@ -113,13 +113,19 @@ describe Google::Cloud::Firestore::CollectionGroup, :firestore_acceptance do
   end
 
   describe "#partitions" do
-    it "queries a collection group with partitions" do
-      document_count = 2 * 128 + 127 # Minimum partition size is 128.
+    it "queries a collection group using partitions" do
+      document_ids = ["a", "b", "c"].map do |prefix|
+        # Minimum partition size is 128.
+        128.times.map do |i|
+          "#{prefix}#{(i+1).to_s.rjust(3, '0')}"
+        end
+      end.flatten # "a001", "a002", ... "c128"
+
       rand_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
       firestore.batch do |b|
-        document_count.times do |i|
-          doc_ref = rand_col.document i
-          b.set doc_ref, {foo: i}
+        document_ids.each do |id|
+          doc_ref = rand_col.document id
+          b.set doc_ref, {}
         end
       end
 
@@ -128,6 +134,36 @@ describe Google::Cloud::Firestore::CollectionGroup, :firestore_acceptance do
       partitions = collection_group.partitions 3
       _(partitions).must_be_kind_of Google::Cloud::Firestore::QueryPartition::List
       _(partitions.count).must_equal 3
+
+      _(partitions[0]).must_be_kind_of Google::Cloud::Firestore::QueryPartition
+      _(partitions[0].start_at).must_be :nil?
+      _(partitions[0].end_before).must_be_kind_of Array
+      _(partitions[0].end_before[0]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      _(document_ids).must_include partitions[0].end_before[0].document_id
+
+      _(partitions[1]).must_be_kind_of Google::Cloud::Firestore::QueryPartition
+      _(partitions[1].start_at).must_be_kind_of Array
+      _(partitions[1].start_at[0]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      _(document_ids).must_include partitions[1].start_at[0].document_id
+      _(partitions[1].end_before).must_be_kind_of Array
+      _(partitions[1].end_before[0]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      _(document_ids).must_include partitions[1].end_before[0].document_id
+
+      _(partitions[2]).must_be_kind_of Google::Cloud::Firestore::QueryPartition
+      _(partitions[2].start_at).must_be_kind_of Array
+      _(partitions[2].start_at[0]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      _(document_ids).must_include partitions[2].start_at[0].document_id
+      _(partitions[2].end_before).must_be :nil?
+
+      queries = partitions.map(&:create_query)
+      _(queries.count).must_equal 3
+      results = queries.map do |query|
+        _(query).must_be_kind_of Google::Cloud::Firestore::Query
+        query.get.map(&:document_id)
+      end
+      results.each { |result| _(result).wont_be :empty? }
+      # Verify all document IDs have been returned, in original order.
+      _(results.flatten).must_equal document_ids
     end
   end
 end
