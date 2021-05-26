@@ -204,12 +204,12 @@ module Google
 
         # A resource message representing a user's permissions on an Account or
         # Property resource.
-        # @!attribute [rw] name
+        # @!attribute [r] name
         #   @return [::String]
-        #     Example format: properties/1234/userLinks/5678
+        #     Output only. Example format: properties/1234/userLinks/5678
         # @!attribute [rw] email_address
         #   @return [::String]
-        #     Email address of the user to link
+        #     Immutable. Email address of the user to link
         # @!attribute [rw] direct_roles
         #   @return [::Array<::String>]
         #     Roles directly assigned to this user for this account or property.
@@ -372,7 +372,7 @@ module Google
         #     Enable personalized advertising features with this integration.
         #     Automatically publish my Google Analytics audience lists and Google
         #     Analytics remarketing events/parameters to the linked Google Ads account.
-        #     If this field is not set on create/update it will be defaulted to true.
+        #     If this field is not set on create/update, it will be defaulted to true.
         # @!attribute [r] email_address
         #   @return [::String]
         #     Output only. Email address of the user that created the link.
@@ -456,6 +456,26 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A secret value used for sending hits to Measurement Protocol.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name of this secret. This secret may be a child of any type of
+        #     stream.
+        #     Format:
+        #     properties/\\{property}/webDataStreams/\\{webDataStream}/measurementProtocolSecrets/\\{measurementProtocolSecret}
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Required. Human-readable display name for this secret.
+        # @!attribute [r] secret_value
+        #   @return [::String]
+        #     Output only. The measurement protocol secret value. Pass this value to the api_secret
+        #     field of the Measurement Protocol API when sending hits to this
+        #     secret's parent property.
+        class MeasurementProtocolSecret
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A set of changes within a Google Analytics account or its child properties
         # that resulted from the same cause. Common causes would be updates made in the
         # Google Analytics UI, changes from customer support, or automatic Google
@@ -529,9 +549,197 @@ module Google
           # @!attribute [rw] google_ads_link
           #   @return [::Google::Analytics::Admin::V1alpha::GoogleAdsLink]
           #     A snapshot of a GoogleAdsLink resource in change history.
+          # @!attribute [rw] google_signals_settings
+          #   @return [::Google::Analytics::Admin::V1alpha::GoogleSignalsSettings]
+          #     A snapshot of a GoogleSignalsSettings resource in change history.
+          # @!attribute [rw] conversion_event
+          #   @return [::Google::Analytics::Admin::V1alpha::ConversionEvent]
+          #     A snapshot of a ConversionEvent resource in change history.
+          # @!attribute [rw] measurement_protocol_secret
+          #   @return [::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret]
+          #     A snapshot of a MeasurementProtocolSecret resource in change history.
+          # @!attribute [rw] custom_dimension
+          #   @return [::Google::Analytics::Admin::V1alpha::CustomDimension]
+          #     A snapshot of a CustomDimension resource in change history.
+          # @!attribute [rw] custom_metric
+          #   @return [::Google::Analytics::Admin::V1alpha::CustomMetric]
+          #     A snapshot of a CustomMetric resource in change history.
           class ChangeHistoryResource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # A conversion event in a Google Analytics property.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name of this conversion event.
+        #     Format: properties/\\{property}/conversionEvents/\\{conversion_event}
+        # @!attribute [rw] event_name
+        #   @return [::String]
+        #     Immutable. The event name for this conversion event.
+        #     Examples: 'click', 'purchase'
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time when this conversion event was created in the property.
+        # @!attribute [r] is_deletable
+        #   @return [::Boolean]
+        #     Output only. If set, this event can currently be deleted via DeleteConversionEvent.
+        class ConversionEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Settings values for Google Signals.  This is a singleton resource.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name of this setting.
+        #     Format: properties/\\{property_id}/googleSignalsSettings
+        #     Example: "properties/1000/googleSignalsSettings"
+        # @!attribute [rw] state
+        #   @return [::Google::Analytics::Admin::V1alpha::GoogleSignalsState]
+        #     Status of this setting.
+        # @!attribute [r] consent
+        #   @return [::Google::Analytics::Admin::V1alpha::GoogleSignalsConsent]
+        #     Output only. Terms of Service acceptance.
+        class GoogleSignalsSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A definition for a CustomDimension.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name for this CustomDimension resource.
+        #     Format: properties/\\{property}/customDimensions/\\{customDimension}
+        # @!attribute [rw] parameter_name
+        #   @return [::String]
+        #     Required. Immutable. Tagging parameter name for this custom dimension.
+        #
+        #     If this is a user-scoped dimension, then this is the user property name.
+        #     If this is an event-scoped dimension, then this is the event parameter
+        #     name.
+        #
+        #     May only contain alphanumeric and underscore characters, starting with a
+        #     letter. Max length of 24 characters for user-scoped dimensions, 40
+        #     characters for event-scoped dimensions.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Required. Display name for this custom dimension as shown in the Analytics UI.
+        #     Max length of 82 characters, alphanumeric plus space and underscore
+        #     starting with a letter. Legacy system-generated display names may contain
+        #     square brackets, but updates to this field will never permit square
+        #     brackets.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. Description for this custom dimension. Max length of 150 characters.
+        # @!attribute [rw] scope
+        #   @return [::Google::Analytics::Admin::V1alpha::CustomDimension::DimensionScope]
+        #     Required. Immutable. The scope of this dimension.
+        # @!attribute [rw] disallow_ads_personalization
+        #   @return [::Boolean]
+        #     Optional. If set to true, sets this dimension as NPA and excludes it from ads
+        #     personalization.
+        #
+        #     This is currently only supported by user-scoped custom dimensions.
+        class CustomDimension
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Valid values for the scope of this dimension.
+          module DimensionScope
+            # Scope unknown or not specified.
+            DIMENSION_SCOPE_UNSPECIFIED = 0
+
+            # Dimension scoped to an event.
+            EVENT = 1
+
+            # Dimension scoped to a user.
+            USER = 2
+          end
+        end
+
+        # A definition for a custom metric.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name for this CustomMetric resource.
+        #     Format: properties/\\{property}/customMetrics/\\{customMetric}
+        # @!attribute [rw] parameter_name
+        #   @return [::String]
+        #     Required. Immutable. Tagging name for this custom metric.
+        #
+        #     If this is an event-scoped metric, then this is the event parameter
+        #     name.
+        #
+        #     May only contain alphanumeric and underscore charactes, starting with a
+        #     letter. Max length of 40 characters for event-scoped metrics.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Required. Display name for this custom metric as shown in the Analytics UI.
+        #     Max length of 82 characters, alphanumeric plus space and underscore
+        #     starting with a letter. Legacy system-generated display names may contain
+        #     square brackets, but updates to this field will never permit square
+        #     brackets.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. Description for this custom dimension.
+        #     Max length of 150 characters.
+        # @!attribute [rw] measurement_unit
+        #   @return [::Google::Analytics::Admin::V1alpha::CustomMetric::MeasurementUnit]
+        #     Required. Immutable. The type for the custom metric's value.
+        # @!attribute [rw] scope
+        #   @return [::Google::Analytics::Admin::V1alpha::CustomMetric::MetricScope]
+        #     Required. Immutable. The scope of this custom metric.
+        class CustomMetric
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible types of representing the custom metric's value.
+          #
+          # Currency representation may change in the future, requiring a breaking API
+          # change.
+          module MeasurementUnit
+            # MeasurementUnit unspecified or missing.
+            MEASUREMENT_UNIT_UNSPECIFIED = 0
+
+            # This metric uses default units.
+            STANDARD = 1
+
+            # This metric measures a currency.
+            CURRENCY = 2
+
+            # This metric measures feet.
+            FEET = 3
+
+            # This metric measures meters.
+            METERS = 4
+
+            # This metric measures kilometers.
+            KILOMETERS = 5
+
+            # This metric measures miles.
+            MILES = 6
+
+            # This metric measures milliseconds.
+            MILLISECONDS = 7
+
+            # This metric measures seconds.
+            SECONDS = 8
+
+            # This metric measures minutes.
+            MINUTES = 9
+
+            # This metric measures hours.
+            HOURS = 10
+          end
+
+          # The scope of this metric.
+          module MetricScope
+            # Scope unknown or not specified.
+            METRIC_SCOPE_UNSPECIFIED = 0
+
+            # Metric scoped to an event.
+            EVENT = 1
           end
         end
 
@@ -696,6 +904,50 @@ module Google
 
           # GoogleAdsLink resource
           GOOGLE_ADS_LINK = 7
+
+          # GoogleSignalsSettings resource
+          GOOGLE_SIGNALS_SETTINGS = 8
+
+          # ConversionEvent resource
+          CONVERSION_EVENT = 9
+
+          # MeasurementProtocolSecret resource
+          MEASUREMENT_PROTOCOL_SECRET = 10
+
+          # CustomDimension resource
+          CUSTOM_DIMENSION = 11
+
+          # CustomMetric resource
+          CUSTOM_METRIC = 12
+        end
+
+        # Status of the Google Signals settings (i.e., whether this feature has been
+        # enabled for the property).
+        module GoogleSignalsState
+          # Google Signals status defaults to GOOGLE_SIGNALS_STATE_UNSPECIFIED to
+          # represent that the user has not made an explicit choice.
+          GOOGLE_SIGNALS_STATE_UNSPECIFIED = 0
+
+          # Google Signals is enabled.
+          GOOGLE_SIGNALS_ENABLED = 1
+
+          # Google Signals is disabled.
+          GOOGLE_SIGNALS_DISABLED = 2
+        end
+
+        # Consent field of the Google Signals settings (i.e., whether the user has
+        # consented to the Google Signals terms of service.)
+        module GoogleSignalsConsent
+          # Google Signals consent value defaults to
+          # GOOGLE_SIGNALS_CONSENT_UNSPECIFIED.  This will be treated as
+          # GOOGLE_SIGNALS_CONSENT_NOT_CONSENTED.
+          GOOGLE_SIGNALS_CONSENT_UNSPECIFIED = 0
+
+          # Terms of service have been accepted
+          GOOGLE_SIGNALS_CONSENT_CONSENTED = 2
+
+          # Terms of service have not been accepted
+          GOOGLE_SIGNALS_CONSENT_NOT_CONSENTED = 1
         end
       end
     end
