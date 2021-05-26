@@ -44,6 +44,9 @@ module Google
             # result. For regular-size resource parent, the export operation usually
             # finishes within 5 minutes.
             rpc :ExportAssets, ::Google::Cloud::Asset::V1::ExportAssetsRequest, ::Google::Longrunning::Operation
+            # Lists assets with time and resource types and returns paged results in
+            # response.
+            rpc :ListAssets, ::Google::Cloud::Asset::V1::ListAssetsRequest, ::Google::Cloud::Asset::V1::ListAssetsResponse
             # Batch gets the update history of assets that overlap a time window.
             # For IAM_POLICY content, this API outputs history when the asset and its
             # attached IAM POLICY both exist. This can create gaps in the output history.
