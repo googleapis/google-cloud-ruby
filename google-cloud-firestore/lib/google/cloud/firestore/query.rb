@@ -1105,7 +1105,7 @@ module Google
           order_field_paths = order_by_field_paths query
           if values.count > order_field_paths.count
             # raise if too many values provided for the cursor
-            raise ArgumentError, "There cannot be more values than Order By fields"
+            raise ArgumentError, "There cannot be more cursor values than order by fields"
           end
 
           values = values.zip(order_field_paths).map do |value, field_path|

@@ -24,7 +24,9 @@ module Google
       # # CollectionGroup
       #
       # A collection group object is used for adding documents, getting
-      # document references, and querying for documents (See {Query}).
+      # document references, and querying for documents, including with partitions.
+      #
+      # See {Client#col_group} and {Query}.
       #
       # @example
       #   require "google/cloud/firestore"

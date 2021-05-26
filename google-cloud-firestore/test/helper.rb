@@ -204,16 +204,16 @@ class MockFirestore < Minitest::Spec
 
   def partition_query_resp count: 2, token: nil
     Google::Cloud::Firestore::V1::PartitionQueryResponse.new(
-      # Minimum partition size is 128.
-      partitions: count.times.map { |i| cursor_grpc values: [(i+1*128).to_s] },
+      partitions: count.times.map { |i| cursor_grpc doc_ids: [((i+1) * 10).to_s] },
       next_page_token: token
     )
   end
 
-  # Minimum partition size is 128.
-  def cursor_grpc values: ["128"], before: false
-    converted_values = values.map do |val|
-      Google::Cloud::Firestore::Convert.raw_to_value val
+  def cursor_grpc doc_ids: ["10"], before: true
+    converted_values = doc_ids.map do |doc_id|
+      Google::Cloud::Firestore::V1::Value.new(
+        reference_value: document_path(doc_id)
+      )
     end
     Google::Cloud::Firestore::V1::Cursor.new(
       values: converted_values,
@@ -223,6 +223,10 @@ class MockFirestore < Minitest::Spec
 
   def paged_enum_struct response
     OpenStruct.new response: response
+  end
+
+  def document_path doc_id
+    "projects/#{project}/databases/(default)/documents/my-collection-id/#{doc_id}"
   end
 end
 

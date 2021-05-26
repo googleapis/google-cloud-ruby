@@ -109,7 +109,7 @@ module Google
           #
           # @return [Enumerator]
           #
-          # @example Iterating each document reference by passing a block:
+          # @example Iterating each document reference by passing a block or proc:
           #   require "google/cloud/firestore"
           #
           #   firestore = Google::Cloud::Firestore.new

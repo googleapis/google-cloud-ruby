@@ -47,7 +47,7 @@ module Google
           end
 
           ##
-          # Whether there is a next page of document references.
+          # Whether there is a next page of query partitions.
           #
           # @return [Boolean]
           #
@@ -60,7 +60,7 @@ module Google
           #
           #   partitions = col_group.partitions 3
           #   if partitions.next?
-          #     next_documents = partitions.next
+          #     next_partitions = partitions.next
           #   end
           #
           def next?
@@ -68,7 +68,7 @@ module Google
           end
 
           ##
-          # Retrieve the next page of document references.
+          # Retrieve the next page of query partitions.
           #
           # @return [QueryPartition::List]
           #
@@ -81,14 +81,14 @@ module Google
           #
           #   partitions = col_group.partitions 3
           #   if partitions.next?
-          #     next_documents = partitions.next
+          #     next_partitions = partitions.next
           #   end
           #
           def next
             return nil unless next?
             ensure_client!
             grpc = @client.service.partition_query @parent, @query.query, @partition_count, token: token, max: @max
-            self.class.from_grpc grpc, @client, @parent, @query, @partition_count, max: @max
+            self.class.from_grpc grpc, @client, @parent, @query, @partition_count, max: @max, start_at: @start_at
           end
 
           ##
@@ -103,14 +103,13 @@ module Google
           # over the results returned by a single API call.) Use with caution.
           #
           # @param [Integer] request_limit The upper limit of API requests to
-          #   make to load all document references. Default is no limit.
-          # @yield [document] The block for accessing each document.
-          # @yieldparam [QueryPartition] document The document reference
-          #   object.
+          #   make to load all query partitions. Default is no limit.
+          # @yield [partition] The block for accessing each partition.
+          # @yieldparam [QueryPartition] partition The query partition object.
           #
           # @return [Enumerator]
           #
-          # @example Iterating each document reference by passing a block:
+          # @example Iterating each query partition by passing a block or proc:
           #   require "google/cloud/firestore"
           #
           #   firestore = Google::Cloud::Firestore.new
@@ -119,7 +118,7 @@ module Google
           #
           #   partitions = col_group.partitions 3
           #
-          #   queries = partitions.map(&:create_query)
+          #   queries = partitions.all(&:create_query)
           #
           # @example Using the enumerator by not passing a block:
           #   require "google/cloud/firestore"
@@ -130,9 +129,9 @@ module Google
           #
           #   partitions = col_group.partitions 3
           #
-          #   queries = partitions.map(&:create_query)
+          #   queries = partitions.all.map(&:create_query)
           #
-          # @example Limit the number of API calls made:
+          # @example Limit the number of API calls made by `#all`:
           #   require "google/cloud/firestore"
           #
           #   firestore = Google::Cloud::Firestore.new
@@ -141,7 +140,7 @@ module Google
           #
           #   partitions = col_group.partitions 3
           #
-          #   queries = partitions.map(&:create_query)
+          #   queries = partitions.all(request_limit: 10, &:create_query)
           #
           def all request_limit: nil, &block
             request_limit = request_limit.to_i if request_limit
@@ -163,9 +162,10 @@ module Google
           ##
           # @private New QueryPartition::List from a
           # Google::Cloud::Firestore::V1::PartitionQueryResponse object.
-          def self.from_grpc grpc, client, parent, query, partition_count, max: nil
-            # TODO: Should the logic adding the last partition be applied to the entire result set, not the page?
-            start_at = nil
+          def self.from_grpc grpc, client, parent, query, partition_count, max: nil, start_at: nil
+            token = grpc.next_page_token
+            token = nil if token == ""
+
             partitions = List.new(Array(grpc.partitions).map do |cursor|
               end_before = cursor.values.map do |value|
                 Convert.value_to_raw value, client
@@ -174,16 +174,15 @@ module Google
               start_at = end_before
               partition
             end)
-            # We are always returning an extra partition (with en empty endBefore cursor).
-            partitions << QueryPartition.new(query, start_at, nil)
+            # Return an extra partition (with en empty endBefore cursor) at the end of the results.
+            partitions << QueryPartition.new(query, start_at, nil) unless token
             partitions.instance_variable_set :@parent, parent
             partitions.instance_variable_set :@query, query
             partitions.instance_variable_set :@partition_count, partition_count
-            token = grpc.next_page_token
-            token = nil if token == ""
             partitions.instance_variable_set :@token, token
             partitions.instance_variable_set :@client, client
             partitions.instance_variable_set :@max, max
+            partitions.instance_variable_set :@start_at, start_at
             partitions
           end
 

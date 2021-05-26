@@ -26,15 +26,20 @@ module Google
       # The cursors returned by {#start_at} and {#end_before} can only be used in a query that matches the constraint of
       # the query that produced this partition.
       #
-      # See {CollectionGroup#partitions}.
+      # See {CollectionGroup#partitions} and {Query}.
       #
       # @!attribute [r] start_at
-      #   The cursor that defines the first result for this partition, or `nil` if this is the first partition.
-      #   @return [Array] a cursor value that can be used with {Query#start_at} or `nil` if this is the first partition.
+      #   The cursor values that define the first result for this partition, or `nil` if this is the first partition.
+      #   Returns an array of values that represent a position, in the order they appear in the order by clause of the
+      #   query. Can contain fewer values than specified in the order by clause. Will be used in the query returned by
+      #   {#create_query}.
+      #   @return [Array<Object>, nil] Typically, the values are {DocumentSnapshot} objects.
       # @!attribute [r] end_before
-      #   The cursor that defines the first result after this partition, or `nil` if this is the last partition.
-      #   @return [Array] a cursor value that can be used with {Query#end_before} or `nil` if this is the last
-      #     partition.
+      #   The cursor values that define the first result after this partition, or `nil` if this is the last partition.
+      #   Returns an array of values that represent a position, in the order they appear in the order by clause of the
+      #   query.  Can contain fewer values than specified in the order by clause. Will be used in the query returned by
+      #   {#create_query}.
+      #   @return [Array<Object>, nil] Typically, the values are {DocumentSnapshot} objects.
       #
       # @example
       #   require "google/cloud/firestore"
@@ -60,9 +65,10 @@ module Google
         end
 
         ##
-        # Creates a query that only returns the documents for this partition.
+        # Creates a new query that only returns the documents for this partition, using the cursor valuess from
+        # {#start_at} and {#end_before}.
         #
-        # @return [Query] query.
+        # @return [Query] The query for the partition.
         #
         def create_query
           base_query = @query

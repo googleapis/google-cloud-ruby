@@ -114,32 +114,36 @@ describe Google::Cloud::Firestore::CollectionGroup, :firestore_acceptance do
 
   describe "#partitions" do
     it "queries a collection group using partitions" do
+      rand_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+
       document_ids = ["a", "b", "c"].map do |prefix|
         # Minimum partition size is 128.
         128.times.map do |i|
           "#{prefix}#{(i+1).to_s.rjust(3, '0')}"
         end
       end.flatten # "a001", "a002", ... "c128"
-
-      rand_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
       firestore.batch do |b|
         document_ids.each do |id|
           doc_ref = rand_col.document id
-          b.set doc_ref, {}
+          b.set doc_ref, { foo: id }
         end
       end
 
       collection_group = firestore.collection_group(rand_col.collection_id)
 
-      partitions = collection_group.partitions 3
+      partitions = collection_group.partitions 6, max: 1
       _(partitions).must_be_kind_of Google::Cloud::Firestore::QueryPartition::List
-      _(partitions.count).must_equal 3
+      _(partitions.count).must_equal 1
 
       _(partitions[0]).must_be_kind_of Google::Cloud::Firestore::QueryPartition
       _(partitions[0].start_at).must_be :nil?
       _(partitions[0].end_before).must_be_kind_of Array
       _(partitions[0].end_before[0]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
       _(document_ids).must_include partitions[0].end_before[0].document_id
+
+      partitions += partitions.next
+      _(partitions).must_be_kind_of Array
+      _(partitions.count).must_equal 3
 
       _(partitions[1]).must_be_kind_of Google::Cloud::Firestore::QueryPartition
       _(partitions[1].start_at).must_be_kind_of Array
@@ -159,7 +163,10 @@ describe Google::Cloud::Firestore::CollectionGroup, :firestore_acceptance do
       _(queries.count).must_equal 3
       results = queries.map do |query|
         _(query).must_be_kind_of Google::Cloud::Firestore::Query
-        query.get.map(&:document_id)
+        query.get.map do |snp|
+          _(snp).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+          snp.document_id
+        end
       end
       results.each { |result| _(result).wont_be :empty? }
       # Verify all document IDs have been returned, in original order.
