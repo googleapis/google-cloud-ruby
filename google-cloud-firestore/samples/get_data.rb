@@ -128,7 +128,7 @@ def add_subcollection project_id:, collection_path: "cities"
 
   added_doc_ref = subcollection_ref.add name: "Marina"
   puts "Added document with ID: #{added_doc_ref.document_id}."
-   # [END fs_add_subcollection]
+  # [END fs_add_subcollection]
 end
 
 def list_subcollections project_id:, collection_path: "cities"
