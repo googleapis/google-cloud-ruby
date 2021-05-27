@@ -415,7 +415,7 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
       run_in_thread flow_controller, :release, messages, releasing_busy_done, action_pause: 0.1
 
       # Sanity check - releasing should have completed by now.
-      assert releasing_busy_done.wait(1.1), "Releasing messages blocked or errored."
+      assert releasing_busy_done.wait(2), "Releasing messages blocked or errored."
 
       # Enough messages released, the large message should have come through in the meantime.
       assert adding_large_done.wait(0.1), "A thread adding a large message starved."
