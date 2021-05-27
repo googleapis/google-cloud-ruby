@@ -53,10 +53,10 @@ module Google
         def acquire message_size
           return if limit_exceeded_behavior == :ignore
           @mutex.lock
-          if limit_exceeded_behavior == :error && would_exceed_message_limit
+          if limit_exceeded_behavior == :error && would_exceed_message_limit?
             raise FlowControlLimitError, "Flow control message limit (#{message_limit}) would be exceeded"
           end
-          if limit_exceeded_behavior == :error && would_exceed_byte_limit(message_size)
+          if limit_exceeded_behavior == :error && would_exceed_byte_limit?(message_size)
             raise FlowControlLimitError,
                   "Flow control byte limit (#{byte_limit}) would be exceeded, message_size: #{message_size}"
           end
@@ -92,13 +92,10 @@ module Google
 
         def acquire_or_wait bytes_remaining
           waiter = nil
-          while would_exceed_byte_limit(bytes_remaining) || would_exceed_message_limit
-            if would_exceed_byte_limit bytes_remaining
-              # Take what is available, even if still blocked by message limit as well as byte limit.
-              available = byte_limit - @outstanding_bytes
-              bytes_remaining -= available
-              @outstanding_bytes = byte_limit
-            end
+          while is_new_and_others_wait?(waiter) ||
+                would_exceed_byte_limit?(bytes_remaining) ||
+                would_exceed_message_limit?
+
             if waiter.nil?
               waiter = Concurrent::Event.new
               # This waiter gets added to the back of the line.
@@ -126,11 +123,15 @@ module Google
         # rubocop:enable Style/IdenticalConditionalBranches
         # rubocop:enable Style/GuardClause
 
-        def would_exceed_message_limit
+        def is_new_and_others_wait? waiter
+          waiter.nil? && !@awaiting.empty?
+        end
+
+        def would_exceed_message_limit?
           @outstanding_messages + 1 > message_limit
         end
 
-        def would_exceed_byte_limit bytes_requested
+        def would_exceed_byte_limit? bytes_requested
           @outstanding_bytes + bytes_requested > byte_limit
         end
       end
