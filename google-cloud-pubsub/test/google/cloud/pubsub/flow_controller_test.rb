@@ -16,8 +16,6 @@ require "helper"
 require "concurrent/atomics"
 
 describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
-  let(:message_size_bytes) { 3 }
-
   it "knows its default settings" do
     flow_controller = Google::Cloud::PubSub::FlowController.new
 
@@ -56,8 +54,8 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
         limit_exceeded_behavior: :ignore
       )
 
-      flow_controller.acquire message_size_bytes
-      flow_controller.acquire message_size_bytes
+      flow_controller.acquire 3
+      flow_controller.acquire 3
     end
 
     it "does not raise or block when > byte_limit" do
@@ -67,8 +65,8 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
         limit_exceeded_behavior: :ignore
       )
 
-      flow_controller.acquire message_size_bytes
-      flow_controller.acquire message_size_bytes
+      flow_controller.acquire 3
+      flow_controller.acquire 3
     end
   end
 
@@ -80,19 +78,19 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
         limit_exceeded_behavior: :error
       )
 
-      flow_controller.acquire message_size_bytes
-      flow_controller.acquire message_size_bytes
+      flow_controller.acquire 3
+      flow_controller.acquire 3
     end
 
     it "does not raise when <= byte_limit" do
       flow_controller = Google::Cloud::PubSub::FlowController.new(
         message_limit: 1000,
-        byte_limit: message_size_bytes * 2,
+        byte_limit: 3 * 2,
         limit_exceeded_behavior: :error
       )
 
-      flow_controller.acquire message_size_bytes
-      flow_controller.acquire message_size_bytes
+      flow_controller.acquire 3
+      flow_controller.acquire 3
     end
 
     it "raises when > message_limit" do
@@ -102,42 +100,42 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
         limit_exceeded_behavior: :error
       )
 
-      flow_controller.acquire message_size_bytes
-      flow_controller.release message_size_bytes
-      flow_controller.acquire message_size_bytes
+      flow_controller.acquire 3
+      flow_controller.release 3
+      flow_controller.acquire 3
       expect do
-        flow_controller.acquire message_size_bytes
+        flow_controller.acquire 3
       end.must_raise Google::Cloud::PubSub::FlowControlLimitError
     end
 
     it "raises when > byte_limit" do
       flow_controller = Google::Cloud::PubSub::FlowController.new(
         message_limit: 1000,
-        byte_limit: message_size_bytes,
+        byte_limit: 3,
         limit_exceeded_behavior: :error
       )
 
-      flow_controller.acquire message_size_bytes
-      flow_controller.release message_size_bytes
-      flow_controller.acquire message_size_bytes
+      flow_controller.acquire 3
+      flow_controller.release 3
+      flow_controller.acquire 3
       expect do
-        flow_controller.acquire message_size_bytes
+        flow_controller.acquire 3
       end.must_raise Google::Cloud::PubSub::FlowControlLimitError
     end
 
     it "does not raise when sufficient capacity is released before new acquires" do
       flow_controller = Google::Cloud::PubSub::FlowController.new(
         message_limit: 2,
-        byte_limit: message_size_bytes * 2,
+        byte_limit: 3 * 2,
         limit_exceeded_behavior: :error
       )
 
-      flow_controller.acquire message_size_bytes
-      flow_controller.acquire message_size_bytes
-      flow_controller.release message_size_bytes
-      flow_controller.acquire message_size_bytes
-      flow_controller.release message_size_bytes
-      flow_controller.acquire message_size_bytes
+      flow_controller.acquire 3
+      flow_controller.acquire 3
+      flow_controller.release 3
+      flow_controller.acquire 3
+      flow_controller.release 3
+      flow_controller.acquire 3
     end
 
     it "works correctly even after too many message limit releases" do
@@ -147,37 +145,37 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
         limit_exceeded_behavior: :error
       )
 
-      flow_controller.acquire message_size_bytes
+      flow_controller.acquire 3
 
-      flow_controller.release message_size_bytes
-      flow_controller.release message_size_bytes # Bad release!
+      flow_controller.release 3
+      flow_controller.release 3 # Bad release!
 
-      flow_controller.acquire message_size_bytes
+      flow_controller.acquire 3
       expect do
-        flow_controller.acquire message_size_bytes
+        flow_controller.acquire 3
       end.must_raise Google::Cloud::PubSub::FlowControlLimitError
-      flow_controller.release message_size_bytes
-      flow_controller.acquire message_size_bytes
+      flow_controller.release 3
+      flow_controller.acquire 3
     end
 
     it "works correctly even after too many byte limit releases" do
       flow_controller = Google::Cloud::PubSub::FlowController.new(
         message_limit: 1000,
-        byte_limit: message_size_bytes,
+        byte_limit: 3,
         limit_exceeded_behavior: :error
       )
 
-      flow_controller.acquire message_size_bytes
+      flow_controller.acquire 3
 
-      flow_controller.release message_size_bytes
-      flow_controller.release message_size_bytes # Bad release!
+      flow_controller.release 3
+      flow_controller.release 3 # Bad release!
 
-      flow_controller.acquire message_size_bytes
+      flow_controller.acquire 3
       expect do
-        flow_controller.acquire message_size_bytes
+        flow_controller.acquire 3
       end.must_raise Google::Cloud::PubSub::FlowControlLimitError
-      flow_controller.release message_size_bytes
-      flow_controller.acquire message_size_bytes
+      flow_controller.release 3
+      flow_controller.acquire 3
     end
   end
 
@@ -196,24 +194,24 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
       releasing_2_done = Concurrent::Event.new
       releasing_3_done = Concurrent::Event.new
 
-      run_in_thread flow_controller, :acquire, message_size_bytes, adding_1_done
+      run_in_thread flow_controller, :acquire, 3, adding_1_done
       assert adding_1_done.wait(0.1), "Adding message 1 never unblocked."
-      run_in_thread flow_controller, :acquire, message_size_bytes, adding_2_done
+      run_in_thread flow_controller, :acquire, 3, adding_2_done
       assert adding_2_done.wait(0.1), "Adding message 2 never unblocked."
-      run_in_thread flow_controller, :acquire, message_size_bytes, adding_3_done
+      run_in_thread flow_controller, :acquire, 3, adding_3_done
       assert adding_3_done.wait(0.1), "Adding message 3 never unblocked."
-      run_in_thread flow_controller, :release, message_size_bytes, releasing_1_done
+      run_in_thread flow_controller, :release, 3, releasing_1_done
       assert releasing_1_done.wait(0.1), "Releasing message 1 never unblocked."
-      run_in_thread flow_controller, :release, message_size_bytes, releasing_2_done
+      run_in_thread flow_controller, :release, 3, releasing_2_done
       assert releasing_2_done.wait(0.1), "Releasing message 2 never unblocked."
-      run_in_thread flow_controller, :release, message_size_bytes, releasing_3_done
+      run_in_thread flow_controller, :release, 3, releasing_3_done
       assert releasing_3_done.wait(0.1), "Releasing message 3 never unblocked."
     end
 
     it "does not block when <= byte_limit" do
       flow_controller = Google::Cloud::PubSub::FlowController.new(
         message_limit: 1000,
-        byte_limit: message_size_bytes * 3,
+        byte_limit: 3 * 3,
         limit_exceeded_behavior: :block
       )
 
@@ -224,17 +222,17 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
       releasing_2_done = Concurrent::Event.new
       releasing_3_done = Concurrent::Event.new
 
-      run_in_thread flow_controller, :acquire, message_size_bytes, adding_1_done
+      run_in_thread flow_controller, :acquire, 3, adding_1_done
       assert adding_1_done.wait(0.1), "Adding message 1 never unblocked."
-      run_in_thread flow_controller, :acquire, message_size_bytes, adding_2_done
+      run_in_thread flow_controller, :acquire, 3, adding_2_done
       assert adding_2_done.wait(0.1), "Adding message 2 never unblocked."
-      run_in_thread flow_controller, :acquire, message_size_bytes, adding_3_done
+      run_in_thread flow_controller, :acquire, 3, adding_3_done
       assert adding_3_done.wait(0.1), "Adding message 3 never unblocked."
-      run_in_thread flow_controller, :release, message_size_bytes, releasing_1_done
+      run_in_thread flow_controller, :release, 3, releasing_1_done
       assert releasing_1_done.wait(0.1), "Releasing message 1 never unblocked."
-      run_in_thread flow_controller, :release, message_size_bytes, releasing_2_done
+      run_in_thread flow_controller, :release, 3, releasing_2_done
       assert releasing_2_done.wait(0.1), "Releasing message 2 never unblocked."
-      run_in_thread flow_controller, :release, message_size_bytes, releasing_3_done
+      run_in_thread flow_controller, :release, 3, releasing_3_done
       assert releasing_3_done.wait(0.1), "Releasing message 3 never unblocked."
     end
 
@@ -251,12 +249,12 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
     it "raises when a single message is > byte_limit" do
       flow_controller = Google::Cloud::PubSub::FlowController.new(
         message_limit: 1000,
-        byte_limit: message_size_bytes,
+        byte_limit: 3,
         limit_exceeded_behavior: :block
       )
 
       expect do
-        flow_controller.acquire message_size_bytes * 2
+        flow_controller.acquire 3 * 2
       end.must_raise Google::Cloud::PubSub::FlowControlLimitError
     end
 
@@ -276,39 +274,39 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
 
       _(flow_controller.outstanding_bytes).must_equal 0
 
-      run_in_thread flow_controller, :acquire, message_size_bytes, adding_1_done
+      run_in_thread flow_controller, :acquire, 3, adding_1_done
       assert adding_1_done.wait(0.1), "Adding message 1 never unblocked."
-      _(flow_controller.outstanding_bytes).must_equal message_size_bytes
+      _(flow_controller.outstanding_bytes).must_equal 3 # Implementation detail
 
-      run_in_thread flow_controller, :acquire, message_size_bytes, adding_2_done
+      run_in_thread flow_controller, :acquire, 3, adding_2_done
       refute adding_2_done.wait(0.1), "Adding message 2 did not block."
-      _(flow_controller.outstanding_bytes).must_equal message_size_bytes
+      _(flow_controller.outstanding_bytes).must_equal 3 # Implementation detail
 
-      run_in_thread flow_controller, :acquire, message_size_bytes, adding_3_done
+      run_in_thread flow_controller, :acquire, 3, adding_3_done
       refute adding_3_done.wait(0.1), "Adding message 3 did not block."
-      _(flow_controller.outstanding_bytes).must_equal message_size_bytes
+      _(flow_controller.outstanding_bytes).must_equal 3 # Implementation detail
 
-      run_in_thread flow_controller, :release, message_size_bytes, releasing_1_done
+      run_in_thread flow_controller, :release, 3, releasing_1_done
       assert releasing_1_done.wait(0.1), "Releasing message 1 errored."
 
       assert adding_2_done.wait(0.1), "Adding message 2 never unblocked."
-      _(flow_controller.outstanding_bytes).must_equal message_size_bytes
+      _(flow_controller.outstanding_bytes).must_equal 3 # Implementation detail
 
-      run_in_thread flow_controller, :release, message_size_bytes, releasing_2_done
+      run_in_thread flow_controller, :release, 3, releasing_2_done
       assert releasing_2_done.wait(0.1), "Releasing message 2 errored."
 
       assert adding_3_done.wait(0.1), "Adding message 3 never unblocked."
-      _(flow_controller.outstanding_bytes).must_equal message_size_bytes
+      _(flow_controller.outstanding_bytes).must_equal 3 # Implementation detail
 
-      run_in_thread flow_controller, :release, message_size_bytes, releasing_3_done
+      run_in_thread flow_controller, :release, 3, releasing_3_done
       assert releasing_3_done.wait(0.1), "Releasing message 3 errored."
-      _(flow_controller.outstanding_bytes).must_equal 0
+      _(flow_controller.outstanding_bytes).must_equal 0 # Implementation detail
     end
 
     it "blocks when > byte_limit" do
       flow_controller = Google::Cloud::PubSub::FlowController.new(
         message_limit: 1000,
-        byte_limit: message_size_bytes,
+        byte_limit: 3,
         limit_exceeded_behavior: :block
       )
 
@@ -319,32 +317,66 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
       releasing_2_done = Concurrent::Event.new
       releasing_3_done = Concurrent::Event.new
 
-      _(flow_controller.outstanding_bytes).must_equal 0
+      _(flow_controller.outstanding_bytes).must_equal 0 # Implementation detail
 
-      run_in_thread flow_controller, :acquire, message_size_bytes, adding_1_done
+      run_in_thread flow_controller, :acquire, 3, adding_1_done
       assert adding_1_done.wait(0.1), "Adding message 1 never unblocked."
-      _(flow_controller.outstanding_bytes).must_equal message_size_bytes
+      _(flow_controller.outstanding_bytes).must_equal 3 # Implementation detail
 
-      run_in_thread flow_controller, :acquire, message_size_bytes, adding_2_done
+      run_in_thread flow_controller, :acquire, 3, adding_2_done
       refute adding_2_done.wait(0.1), "Adding message 2 did not block."
 
-      run_in_thread flow_controller, :acquire, message_size_bytes, adding_3_done
+      run_in_thread flow_controller, :acquire, 3, adding_3_done
       refute adding_3_done.wait(0.1), "Adding message 3 did not block."
 
-      run_in_thread flow_controller, :release, message_size_bytes, releasing_1_done
+      run_in_thread flow_controller, :release, 3, releasing_1_done
       assert releasing_1_done.wait(0.1), "Releasing message 1 errored."
 
       assert adding_2_done.wait(0.1), "Adding message 2 never unblocked."
 
-      run_in_thread flow_controller, :release, message_size_bytes, releasing_2_done
+      run_in_thread flow_controller, :release, 3, releasing_2_done
       assert releasing_2_done.wait(0.1), "Releasing message 2 errored."
 
       assert adding_3_done.wait(0.1), "Adding message 3 never unblocked."
-      _(flow_controller.outstanding_bytes).must_equal message_size_bytes
+      _(flow_controller.outstanding_bytes).must_equal 3 # Implementation detail
 
-      run_in_thread flow_controller, :release, message_size_bytes, releasing_3_done
+      run_in_thread flow_controller, :release, 3, releasing_3_done
       assert releasing_3_done.wait(0.1), "Releasing message 3 errored."
-      _(flow_controller.outstanding_bytes).must_equal 0
+      _(flow_controller.outstanding_bytes).must_equal 0 # Implementation detail
+    end
+
+    it "unblocks all waiting acquires to byte_limit after a single release of sufficient bytes" do
+      flow_controller = Google::Cloud::PubSub::FlowController.new(
+        message_limit: 1000,
+        byte_limit: 3,
+        limit_exceeded_behavior: :block
+      )
+
+      adding_1_done = Concurrent::Event.new
+      adding_2_done = Concurrent::Event.new
+      adding_3_done = Concurrent::Event.new
+      adding_4_done = Concurrent::Event.new
+      releasing_1_done = Concurrent::Event.new
+
+      run_in_thread flow_controller, :acquire, 3, adding_1_done
+      assert adding_1_done.wait(0.1), "Adding message 1 never unblocked."
+      _(flow_controller.outstanding_bytes).must_equal 3 # Implementation detail
+
+      run_in_thread flow_controller, :acquire, 1, adding_2_done
+      refute adding_2_done.wait(0.1), "Adding message 2 did not block."
+
+      run_in_thread flow_controller, :acquire, 1, adding_3_done
+      refute adding_3_done.wait(0.1), "Adding message 3 did not block."
+
+      run_in_thread flow_controller, :acquire, 1, adding_4_done
+      refute adding_4_done.wait(0.1), "Adding message 4 did not block."
+
+      flow_controller.release 40
+
+      assert adding_2_done.wait(0.1), "Adding message 2 never unblocked."
+      assert adding_3_done.wait(0.1), "Adding message 2 never unblocked."
+      assert adding_4_done.wait(0.1), "Adding message 2 never unblocked."
+      _(flow_controller.outstanding_bytes).must_equal 3 # Implementation detail
     end
 
     it "blocks but does not starve large messages when > byte_limit" do
@@ -369,7 +401,7 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
       initial_messages = Array.new(5) { 10 }
       run_in_thread flow_controller, :acquire, initial_messages, adding_initial_done
       assert adding_initial_done.wait(0.1), "Adding initial messages blocked or errored."
-      _(flow_controller.outstanding_bytes).must_equal 50
+      _(flow_controller.outstanding_bytes).must_equal 50 # Implementation detail
 
       run_in_thread flow_controller, :acquire, large_msg, adding_large_done
 
@@ -396,11 +428,11 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
       assert releasing_large_done.wait(0.1), "Releasing a message blocked or errored."
 
       assert adding_busy_done.wait(1.0), "Adding messages blocked or errored."
-      _(flow_controller.outstanding_bytes).must_equal 50
+      _(flow_controller.outstanding_bytes).must_equal 50 # Implementation detail
 
       run_in_thread flow_controller, :release, initial_messages, releasing_initial_done
       assert releasing_initial_done.wait(0.1), "Releasing initial messages blocked or errored."
-      _(flow_controller.outstanding_bytes).must_equal 0
+      _(flow_controller.outstanding_bytes).must_equal 0 # Implementation detail
     end
 
     it "blocks in a queue of waiting threads that avoids deadlocks" do
