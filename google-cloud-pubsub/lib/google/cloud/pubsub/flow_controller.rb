@@ -73,14 +73,11 @@ module Google
         def release message_size
           return if limit_exceeded_behavior == :ignore
           @mutex.synchronize do
-            # Releasing a message decreases the load.
+            raise "Flow control messages count would be negative" if (@outstanding_messages - 1).negative?
+            raise "Flow control bytes count would be negative" if (@outstanding_bytes - message_size).negative?
+
             @outstanding_messages -= 1
             @outstanding_bytes -= message_size
-            if @outstanding_messages.negative? || @outstanding_bytes.negative?
-              # Releasing a message that was never added or already released.
-              @outstanding_messages = [0, @outstanding_messages].max
-              @outstanding_bytes = [0, @outstanding_bytes].max
-            end
             @awaiting.first.set unless @awaiting.empty?
           end
         end
@@ -90,10 +87,10 @@ module Google
         # rubocop:disable Style/IdenticalConditionalBranches
         # rubocop:disable Style/GuardClause
 
-        def acquire_or_wait bytes_remaining
+        def acquire_or_wait message_size
           waiter = nil
           while is_new_and_others_wait?(waiter) ||
-                would_exceed_byte_limit?(bytes_remaining) ||
+                would_exceed_byte_limit?(message_size) ||
                 would_exceed_message_limit?
 
             if waiter.nil?
@@ -110,7 +107,7 @@ module Google
             @mutex.lock
           end
           @outstanding_messages += 1
-          @outstanding_bytes += bytes_remaining
+          @outstanding_bytes += message_size
 
           @awaiting.shift if waiter # Remove the newly released waiter from the head of the queue.
 

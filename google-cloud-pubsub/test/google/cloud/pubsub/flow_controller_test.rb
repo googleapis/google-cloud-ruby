@@ -138,7 +138,7 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
       flow_controller.acquire 3
     end
 
-    it "works correctly even after too many message limit releases" do
+    it "raises if too many message limit releases" do
       flow_controller = Google::Cloud::PubSub::FlowController.new(
         message_limit: 1,
         byte_limit: 10_000_000,
@@ -146,19 +146,13 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
       )
 
       flow_controller.acquire 3
-
       flow_controller.release 3
-      flow_controller.release 3 # Bad release!
-
-      flow_controller.acquire 3
       expect do
-        flow_controller.acquire 3
-      end.must_raise Google::Cloud::PubSub::FlowControlLimitError
-      flow_controller.release 3
-      flow_controller.acquire 3
+        flow_controller.release 3
+      end.must_raise RuntimeError
     end
 
-    it "works correctly even after too many byte limit releases" do
+    it "raises if too many byte limit releases" do
       flow_controller = Google::Cloud::PubSub::FlowController.new(
         message_limit: 1000,
         byte_limit: 3,
@@ -166,16 +160,10 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
       )
 
       flow_controller.acquire 3
-
       flow_controller.release 3
-      flow_controller.release 3 # Bad release!
-
-      flow_controller.acquire 3
       expect do
-        flow_controller.acquire 3
-      end.must_raise Google::Cloud::PubSub::FlowControlLimitError
-      flow_controller.release 3
-      flow_controller.acquire 3
+        flow_controller.release 3
+      end.must_raise RuntimeError
     end
   end
 
@@ -345,6 +333,48 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
       _(flow_controller.outstanding_bytes).must_equal 0 # Implementation detail
     end
 
+    it "blocks when insufficient bytes available" do
+      flow_controller = Google::Cloud::PubSub::FlowController.new(
+        message_limit: 1000,
+        byte_limit: 4,
+        limit_exceeded_behavior: :block
+      )
+
+      adding_1_done = Concurrent::Event.new
+      adding_2_done = Concurrent::Event.new
+      adding_3_done = Concurrent::Event.new
+      releasing_1_done = Concurrent::Event.new
+      releasing_2_done = Concurrent::Event.new
+      releasing_3_done = Concurrent::Event.new
+
+      _(flow_controller.outstanding_bytes).must_equal 0 # Implementation detail
+
+      run_in_thread flow_controller, :acquire, 3, adding_1_done
+      assert adding_1_done.wait(0.1), "Adding message 1 never unblocked."
+      _(flow_controller.outstanding_bytes).must_equal 3 # Implementation detail
+
+      run_in_thread flow_controller, :acquire, 3, adding_2_done
+      refute adding_2_done.wait(0.1), "Adding message 2 did not block."
+
+      run_in_thread flow_controller, :acquire, 3, adding_3_done
+      refute adding_3_done.wait(0.1), "Adding message 3 did not block."
+
+      run_in_thread flow_controller, :release, 3, releasing_1_done
+      assert releasing_1_done.wait(0.1), "Releasing message 1 errored."
+
+      assert adding_2_done.wait(0.1), "Adding message 2 never unblocked."
+
+      run_in_thread flow_controller, :release, 3, releasing_2_done
+      assert releasing_2_done.wait(0.1), "Releasing message 2 errored."
+
+      assert adding_3_done.wait(0.1), "Adding message 3 never unblocked."
+      _(flow_controller.outstanding_bytes).must_equal 3 # Implementation detail
+
+      run_in_thread flow_controller, :release, 3, releasing_3_done
+      assert releasing_3_done.wait(0.1), "Releasing message 3 errored."
+      _(flow_controller.outstanding_bytes).must_equal 0 # Implementation detail
+    end
+
     it "unblocks all waiting acquires to byte_limit after a single release of sufficient bytes" do
       flow_controller = Google::Cloud::PubSub::FlowController.new(
         message_limit: 1000,
@@ -371,7 +401,7 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
       run_in_thread flow_controller, :acquire, 1, adding_4_done
       refute adding_4_done.wait(0.1), "Adding message 4 did not block."
 
-      flow_controller.release 40
+      flow_controller.release 3
 
       assert adding_2_done.wait(0.1), "Adding message 2 never unblocked."
       assert adding_3_done.wait(0.1), "Adding message 2 never unblocked."
