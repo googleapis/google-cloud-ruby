@@ -48,10 +48,8 @@ module Google
         #
         # @param [Integer] partition_count The desired maximum number of partition points. The number must be strictly
         #   positive. The actual number of partitions returned may be fewer.
-        # @param [String] token A previously-returned page token representing part of the larger set of results to view.
-        # @param [Integer] max Maximum number of results to return.
         #
-        # @return [Array<QueryPartition>] An array of query partitions.
+        # @return [Array<QueryPartition>] An ordered array of query partitions.
         #
         # @example
         #   require "google/cloud/firestore"
@@ -64,7 +62,7 @@ module Google
         #
         #   queries = partitions.map(&:create_query)
         #
-        def partitions partition_count, token: nil, max: nil
+        def partitions partition_count
           ensure_service!
 
           # Partition queries require explicit ordering by __name__.
@@ -73,18 +71,28 @@ module Google
           # partition count by one.
           partition_count -= 1
 
-          grpc = service.partition_query parent_path,
-                                         query_with_default_order.query,
-                                         partition_count,
-                                         token: token,
-                                         max: max
+          # Retrieve all pages of the results, because order is not guaranteed and they must be sorted.
+          grpc_partitions = list_all partition_count, query_with_default_order
+          cursor_values = grpc_partitions.map do |cursor|
+            # Convert each cursor to a (single-element) array of Google::Cloud::Firestore::DocumentReference.
+            cursor.values.map do |value|
+              Convert.value_to_raw value, client
+            end
+          end
+          # Sort the values of the returned cursor, which right now should only contain a single reference value (which
+          # needs to be sorted one component at a time).
+          cursor_values.sort! do |a, b|
+            a.first.path <=> b.first.path
+          end
 
-          QueryPartition::List.from_grpc grpc,
-                                         client,
-                                         parent_path,
-                                         query_with_default_order,
-                                         partition_count,
-                                         max: max
+          start_at = nil
+          results = cursor_values.map do |end_before|
+            partition = QueryPartition.new query_with_default_order, start_at, end_before
+            start_at = end_before
+            partition
+          end
+          results << QueryPartition.new(query_with_default_order, start_at, nil)
+          results
         end
 
         ##
@@ -99,6 +107,21 @@ module Google
             ]
           )
           CollectionGroup.new query, parent_path, client
+        end
+
+        protected
+
+        def list_all partition_count, query_with_default_order
+          grpc_partitions = []
+          token = nil
+          loop do
+            grpc = service.partition_query parent_path, query_with_default_order.query, partition_count, token: token
+            grpc_partitions += Array(grpc.partitions)
+            token = grpc.next_page_token
+            token = nil if token == ""
+            break unless token
+          end
+          grpc_partitions
         end
       end
     end

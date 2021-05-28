@@ -517,6 +517,10 @@ def list_documents_args
   ]
 end
 
+def document_path doc_id
+  "projects/my-project-id/databases/(default)/documents/#{doc_id}"
+end
+
 def document_gapi doc: "my-document", fields: {}
   Google::Cloud::Firestore::V1::Document.new(
     name: "projects/my-project-id/databases/(default)/documents/#{doc}",
@@ -537,16 +541,18 @@ end
 def partition_query_resp count: 3, token: nil
   response = Google::Cloud::Firestore::V1::PartitionQueryResponse.new(
     # Minimum partition size is 128.
-    partitions: count.times.map { |i| cursor_grpc values: [(i+1*128).to_s] }
+    partitions: count.times.map { |i| cursor_grpc doc_ids: [((i+1) * 10).to_s] }
   )
   response.next_page_token = token if token
   paged_enum_struct response
 end
 
 # Minimum partition size is 128.
-def cursor_grpc values: ["128"], before: false
-  converted_values = values.map do |val|
-    Google::Cloud::Firestore::Convert.raw_to_value val
+def cursor_grpc doc_ids: ["10"], before: true
+  converted_values = doc_ids.map do |doc_id|
+    Google::Cloud::Firestore::V1::Value.new(
+      reference_value: document_path(doc_id)
+    )
   end
   Google::Cloud::Firestore::V1::Cursor.new(
     values: converted_values,

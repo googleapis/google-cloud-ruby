@@ -131,19 +131,15 @@ describe Google::Cloud::Firestore::CollectionGroup, :firestore_acceptance do
 
       collection_group = firestore.collection_group(rand_col.collection_id)
 
-      partitions = collection_group.partitions 6, max: 1
-      _(partitions).must_be_kind_of Google::Cloud::Firestore::QueryPartition::List
-      _(partitions.count).must_equal 1
+      partitions = collection_group.partitions 6
+      _(partitions).must_be_kind_of Array
+      _(partitions.count).must_equal 3
 
       _(partitions[0]).must_be_kind_of Google::Cloud::Firestore::QueryPartition
       _(partitions[0].start_at).must_be :nil?
       _(partitions[0].end_before).must_be_kind_of Array
       _(partitions[0].end_before[0]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
       _(document_ids).must_include partitions[0].end_before[0].document_id
-
-      partitions += partitions.next
-      _(partitions).must_be_kind_of Array
-      _(partitions.count).must_equal 3
 
       _(partitions[1]).must_be_kind_of Google::Cloud::Firestore::QueryPartition
       _(partitions[1].start_at).must_be_kind_of Array
@@ -152,6 +148,9 @@ describe Google::Cloud::Firestore::CollectionGroup, :firestore_acceptance do
       _(partitions[1].end_before).must_be_kind_of Array
       _(partitions[1].end_before[0]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
       _(document_ids).must_include partitions[1].end_before[0].document_id
+
+      # Verify that partitions are sorted ascending order
+      _(partitions[0].end_before[0].document_id).must_be :<, partitions[1].end_before[0].document_id
 
       _(partitions[2]).must_be_kind_of Google::Cloud::Firestore::QueryPartition
       _(partitions[2].start_at).must_be_kind_of Array

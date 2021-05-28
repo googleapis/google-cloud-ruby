@@ -13,8 +13,6 @@
 # limitations under the License.
 
 
-require "google/cloud/firestore/query_partition/list"
-
 module Google
   module Cloud
     module Firestore
