@@ -182,10 +182,6 @@ class MockFirestore < Minitest::Spec
     [req, default_options]
   end
 
-  # expected partition_query({:parent=>"projects/projectID/databases/(default)/documents", :structured_query=><Google::Cloud::Firestore::V1::StructuredQuery: from: [<Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector: collection_id: "my-collection-id", all_descendants: true>], order_by: [<Google::Cloud::Firestore::V1::StructuredQuery::Order: field: <Google::Cloud::Firestore::V1::StructuredQuery::FieldReference: field_path: "__name__">, direction: :ASCENDING>], offset: 0>, :partition_count=>5, :page_token=>"next_page_token", :page_size=>nil}) => #<OpenStruct response=<Google::Cloud::Firestore::V1::PartitionQueryResponse: partitions: [<Google::Cloud::Firestore::V1::Cursor: values: [<Google::Cloud::Firestore::V1::Value: integer_value: 0>, <Google::Cloud::Firestore::V1::Value: integer_value: 1>], before: false>, <Google::Cloud::Firestore::V1::Cursor: values: [<Google::Cloud::Firestore::V1::Value: integer_value: 10>, <Google::Cloud::Firestore::V1::Value: integer_value: 11>], before: false>, <Google::Cloud::Firestore::V1::Cursor: values: [<Google::Cloud::Firestore::V1::Value: integer_value: 20>, <Google::Cloud::Firestore::V1::Value: integer_value: 21>], before: false>], next_page_token: "second_page_token">>
-  # got     [partition_query({:parent=>"projects/projectID/databases/(default)/documents", :structured_query=><Google::Cloud::Firestore::V1::StructuredQuery: from: [<Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector: collection_id: "my-collection-id", all_descendants: true>], order_by: [<Google::Cloud::Firestore::V1::StructuredQuery::Order: field: <Google::Cloud::Firestore::V1::StructuredQuery::FieldReference: field_path: "__name__">, direction: :ASCENDING>], offset: 0>, :partition_count=>5, :page_token=>nil, :page_size=>nil}) => #<OpenStruct response=<Google::Cloud::Firestore::V1::PartitionQueryResponse: partitions: [<Google::Cloud::Firestore::V1::Cursor: values: [<Google::Cloud::Firestore::V1::Value: integer_value: 0>, <Google::Cloud::Firestore::V1::Value: integer_value: 1>], before: false>, <Google::Cloud::Firestore::V1::Cursor: values: [<Google::Cloud::Firestore::V1::Value: integer_value: 10>, <Google::Cloud::Firestore::V1::Value: integer_value: 11>], before: false>, <Google::Cloud::Firestore::V1::Cursor: values: [<Google::Cloud::Firestore::V1::Value: integer_value: 20>, <Google::Cloud::Firestore::V1::Value: integer_value: 21>], before: false>], next_page_token: "next_page_token">>]
-
-
   def partition_query_args query_grpc,
                            parent: "projects/#{project}/databases/(default)/documents",
                            partition_count: 2,
@@ -202,9 +198,9 @@ class MockFirestore < Minitest::Spec
     ]
   end
 
-  def partition_query_resp count: 2, token: nil
+  def partition_query_resp doc_ids: ["10", "20"], token: nil
     Google::Cloud::Firestore::V1::PartitionQueryResponse.new(
-      partitions: count.times.map { |i| cursor_grpc doc_ids: [((i+1) * 10).to_s] },
+      partitions: doc_ids.map { |id| cursor_grpc doc_ids: [id] },
       next_page_token: token
     )
   end

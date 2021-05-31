@@ -23,11 +23,11 @@ describe Google::Cloud::Firestore::CollectionGroup, :mock_firestore do
     collection_group_query
   end
 
-  it "lists partitions" do
-    # grpc.partitions: 
-    # [<Google::Cloud::Firestore::V1::Cursor: values: [<Google::Cloud::Firestore::V1::Value: reference_value: "projects/buoyant-ability-182823/databases/(default)/documents/gcloud-2021-05-21t23-38-03z-a581db45/query/dabf1479/32">], before: false>,
-    #  <Google::Cloud::Firestore::V1::Cursor: values: [<Google::Cloud::Firestore::V1::Value: reference_value: "projects/buoyant-ability-182823/databases/(default)/documents/gcloud-2021-05-21t23-38-03z-a581db45/query/dabf1479/89">], before: false>]
-    list_res = paged_enum_struct partition_query_resp
+  it "sorts and lists partitions" do
+    # Results should be sorted so that "alice" comes before "alice-"
+    # Use an ID ending in "-" to ensure correct sorting, since full path strings are sorted dash before slash
+    # See Google::Cloud::Firestore::ResourcePath
+    list_res = paged_enum_struct partition_query_resp(doc_ids: ["alice-", "alice"])
     firestore_mock.expect :partition_query, list_res, partition_query_args(expected_query)
 
     partitions = collection_group.partitions 3
@@ -42,36 +42,36 @@ describe Google::Cloud::Firestore::CollectionGroup, :mock_firestore do
     _(partitions[0].end_before).must_be_kind_of Array
     _(partitions[0].end_before.count).must_equal 1 # The array should have an element for each field in Order By.
     _(partitions[0].end_before[0]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    _(partitions[0].end_before[0].path).must_equal document_path("10")
+    _(partitions[0].end_before[0].path).must_equal document_path("alice")
 
     _(partitions[1]).must_be_kind_of Google::Cloud::Firestore::QueryPartition
     _(partitions[1].start_at).must_be_kind_of Array
     _(partitions[1].start_at.count).must_equal 1 # The array should have an element for each field in Order By.
     _(partitions[1].start_at[0]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    _(partitions[1].start_at[0].path).must_equal document_path("10")
+    _(partitions[1].start_at[0].path).must_equal document_path("alice")
     _(partitions[1].end_before).must_be_kind_of Array
     _(partitions[1].end_before.count).must_equal 1 # The array should have an element for each field in Order By.
     _(partitions[1].end_before[0]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    _(partitions[1].end_before[0].path).must_equal document_path("20")
+    _(partitions[1].end_before[0].path).must_equal document_path("alice-")
 
     _(partitions[2]).must_be_kind_of Google::Cloud::Firestore::QueryPartition
     _(partitions[2].start_at).must_be_kind_of Array
     _(partitions[2].start_at.count).must_equal 1 # The array should have an element for each field in Order By.
     _(partitions[2].start_at[0]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    _(partitions[2].start_at[0].path).must_equal document_path("20")
+    _(partitions[2].start_at[0].path).must_equal document_path("alice-")
     _(partitions[2].end_before).must_be :nil?
 
     query_1 = partitions[0].create_query
     _(query_1).must_be_kind_of Google::Cloud::Firestore::Query
-    _(query_1.query).must_equal collection_group_query(end_before: ["10"])
+    _(query_1.query).must_equal collection_group_query(end_before: ["alice"])
 
     query_2 = partitions[1].create_query
     _(query_2).must_be_kind_of Google::Cloud::Firestore::Query
-    _(query_2.query).must_equal collection_group_query(start_at: ["10"], end_before: ["20"])
+    _(query_2.query).must_equal collection_group_query(start_at: ["alice"], end_before: ["alice-"])
 
     query_3 = partitions[2].create_query
     _(query_3).must_be_kind_of Google::Cloud::Firestore::Query
-    _(query_3.query).must_equal collection_group_query(start_at: ["20"])
+    _(query_3.query).must_equal collection_group_query(start_at: ["alice-"])
   end
 
   def collection_group_query start_at: nil, end_before: nil

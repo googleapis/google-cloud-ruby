@@ -82,7 +82,7 @@ module Google
           # Sort the values of the returned cursor, which right now should only contain a single reference value (which
           # needs to be sorted one component at a time).
           cursor_values.sort! do |a, b|
-            a.first.path <=> b.first.path
+            a.first <=> b.first
           end
 
           start_at = nil
