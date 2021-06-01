@@ -125,7 +125,7 @@ describe "Spanner Client", :dml, :spanner do
     it "execute DML statement with priority options" do
       request_options = { priority: :PRIORITY_MEDIUM }
 
-      db.transaction do |tx|
+      db.transaction request_options: request_options do |tx|
         insert_row_count = tx.execute_update \
             "INSERT INTO accounts (account_id, username, active, reputation) VALUES (@account_id, @username, @active, @reputation)",
             params: { account_id: 4, username: "inserted", active: true, reputation: 88.8 },
