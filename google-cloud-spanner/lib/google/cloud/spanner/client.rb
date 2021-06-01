@@ -737,7 +737,7 @@ module Google
         #       replica has fallen behind.
         # @param [Hash] request_options Common request options.
         #
-        #   * `:priority` (String) The relative priority for requests.
+        #   * `:priority` (Symbol) The relative priority for requests.
         #     The priority acts as a hint to the Cloud Spanner scheduler
         #     and does not guarantee priority or order of execution.
         #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
