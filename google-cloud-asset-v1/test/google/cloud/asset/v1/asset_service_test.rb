@@ -118,6 +118,79 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     end
   end
 
+  def test_list_assets
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Asset::V1::ListAssetsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    read_time = {}
+    asset_types = ["hello world"]
+    content_type = :CONTENT_TYPE_UNSPECIFIED
+    page_size = 42
+    page_token = "hello world"
+
+    list_assets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_assets, name
+      assert_kind_of ::Google::Cloud::Asset::V1::ListAssetsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["read_time"]
+      assert_equal ["hello world"], request["asset_types"]
+      assert_equal :CONTENT_TYPE_UNSPECIFIED, request["content_type"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_assets_client_stub do
+      # Create client
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_assets parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_assets ::Google::Cloud::Asset::V1::ListAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_assets(::Google::Cloud::Asset::V1::ListAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_assets_client_stub.call_rpc_count
+    end
+  end
+
   def test_batch_get_assets_history
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Asset::V1::BatchGetAssetsHistoryResponse.new

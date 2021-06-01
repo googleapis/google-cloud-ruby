@@ -63,12 +63,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :asset_type, :string, 2
       optional :project, :string, 3
+      repeated :folders, :string, 17
+      optional :organization, :string, 18
       optional :display_name, :string, 4
       optional :description, :string, 5
       optional :location, :string, 6
       map :labels, :string, :string, 7
       repeated :network_tags, :string, 8
+      optional :kms_key, :string, 10
+      optional :create_time, :message, 11, "google.protobuf.Timestamp"
+      optional :update_time, :message, 12, "google.protobuf.Timestamp"
+      optional :state, :string, 13
       optional :additional_attributes, :message, 9, "google.protobuf.Struct"
+      optional :parent_full_resource_name, :string, 19
+      optional :parent_asset_type, :string, 103
     end
     add_message "google.cloud.asset.v1.IamPolicySearchResult" do
       optional :resource, :string, 1
@@ -85,6 +93,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.asset.v1.IamPolicyAnalysisState" do
       optional :code, :enum, 1, "google.rpc.Code"
       optional :cause, :string, 2
+    end
+    add_message "google.cloud.asset.v1.ConditionEvaluation" do
+      optional :evaluation_value, :enum, 1, "google.cloud.asset.v1.ConditionEvaluation.EvaluationValue"
+    end
+    add_enum "google.cloud.asset.v1.ConditionEvaluation.EvaluationValue" do
+      value :EVALUATION_VALUE_UNSPECIFIED, 0
+      value :TRUE, 1
+      value :FALSE, 2
+      value :CONDITIONAL, 3
     end
     add_message "google.cloud.asset.v1.IamPolicyAnalysisResult" do
       optional :attached_resource_full_name, :string, 1
@@ -116,6 +133,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :resources, :message, 1, "google.cloud.asset.v1.IamPolicyAnalysisResult.Resource"
       repeated :accesses, :message, 2, "google.cloud.asset.v1.IamPolicyAnalysisResult.Access"
       repeated :resource_edges, :message, 3, "google.cloud.asset.v1.IamPolicyAnalysisResult.Edge"
+      optional :condition_evaluation, :message, 4, "google.cloud.asset.v1.ConditionEvaluation"
     end
     add_message "google.cloud.asset.v1.IamPolicyAnalysisResult.IdentityList" do
       repeated :identities, :message, 1, "google.cloud.asset.v1.IamPolicyAnalysisResult.Identity"
@@ -138,6 +156,8 @@ module Google
         IamPolicySearchResult::Explanation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicySearchResult.Explanation").msgclass
         IamPolicySearchResult::Explanation::Permissions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions").msgclass
         IamPolicyAnalysisState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisState").msgclass
+        ConditionEvaluation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ConditionEvaluation").msgclass
+        ConditionEvaluation::EvaluationValue = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ConditionEvaluation.EvaluationValue").enummodule
         IamPolicyAnalysisResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisResult").msgclass
         IamPolicyAnalysisResult::Resource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisResult.Resource").msgclass
         IamPolicyAnalysisResult::Access = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisResult.Access").msgclass
