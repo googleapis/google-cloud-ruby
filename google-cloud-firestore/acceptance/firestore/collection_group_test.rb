@@ -170,6 +170,14 @@ describe Google::Cloud::Firestore::CollectionGroup, :firestore_acceptance do
       results.each { |result| _(result).wont_be :empty? }
       # Verify all document IDs have been returned, in original order.
       _(results.flatten).must_equal document_ids
+
+      # Verify QueryPartition#start_at and #end_before can be used with a new Query.
+      query = collection_group.order("__name__").start_at(partitions[1].start_at).end_before(partitions[1].end_before)
+      result = query.get.map do |snp|
+        _(snp).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+        snp.document_id
+      end
+      _(result).must_equal results[1]
     end
   end
 end
