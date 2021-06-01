@@ -1222,7 +1222,7 @@ module Google
         ##
         # @private Raise an error unless an database available.
         def ensure_client!
-          raise "Must have active connection to client" unless client
+          raise "Must have active connection to service" unless client
         end
 
         ##

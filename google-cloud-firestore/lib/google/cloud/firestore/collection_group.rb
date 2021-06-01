@@ -34,10 +34,10 @@ module Google
       #   firestore = Google::Cloud::Firestore.new
       #
       #   # Get a collection group
-      #   cities_col = firestore.col "cities"
+      #   col_group = firestore.col_group "cities"
       #
       #   # Get and print all city documents
-      #   cities_col.get do |city|
+      #   col_group.get do |city|
       #     puts "#{city.document_id} has #{city[:population]} residents."
       #   end
       #

@@ -49,8 +49,8 @@ module Google
 
         ##
         # @private Creates a new CollectionReference.
-        def initialize path, client, query
-          super query, nil, client
+        def initialize query, path, client
+          super query, nil, client # Pass nil parent_path arg since this class implements #parent_path
           @path = path
         end
 
@@ -264,7 +264,7 @@ module Google
             ]
           )
 
-          CollectionReference.new path, client, query
+          CollectionReference.new query, path, client
         end
 
         protected
