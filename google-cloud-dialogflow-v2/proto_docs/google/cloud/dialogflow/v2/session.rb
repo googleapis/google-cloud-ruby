@@ -248,6 +248,10 @@ module Google
         #        the required parameter values have been collected.
         #     - `true` if all required parameter values have been collected, or if the
         #        matched intent doesn't contain any required parameters.
+        # @!attribute [rw] cancels_slot_filling
+        #   @return [::Boolean]
+        #     Indicates whether the conversational query triggers a cancellation for slot
+        #     filling.
         # @!attribute [rw] fulfillment_text
         #   @return [::String]
         #     The text to be pronounced to the user or shown on the screen.
