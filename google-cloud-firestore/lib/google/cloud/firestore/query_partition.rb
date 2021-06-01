@@ -30,14 +30,14 @@ module Google
       #   The cursor values that define the first result for this partition, or `nil` if this is the first partition.
       #   Returns an array of values that represent a position, in the order they appear in the order by clause of the
       #   query. Can contain fewer values than specified in the order by clause. Will be used in the query returned by
-      #   {#create_query}.
-      #   @return [Array<Object>, nil] Typically, the values are {DocumentSnapshot} objects.
+      #   {#to_query}.
+      #   @return [Array<Object>, nil] Typically, the values are {DocumentReference} objects.
       # @!attribute [r] end_before
       #   The cursor values that define the first result after this partition, or `nil` if this is the last partition.
       #   Returns an array of values that represent a position, in the order they appear in the order by clause of the
       #   query.  Can contain fewer values than specified in the order by clause. Will be used in the query returned by
-      #   {#create_query}.
-      #   @return [Array<Object>, nil] Typically, the values are {DocumentSnapshot} objects.
+      #   {#to_query}.
+      #   @return [Array<Object>, nil] Typically, the values are {DocumentReference} objects.
       #
       # @example
       #   require "google/cloud/firestore"
@@ -48,7 +48,7 @@ module Google
       #
       #   partitions = col_group.partitions 3
       #
-      #   queries = partitions.map(&:create_query)
+      #   queries = partitions.map(&:to_query)
       #
       class QueryPartition
         attr_reader :start_at
@@ -68,7 +68,7 @@ module Google
         #
         # @return [Query] The query for the partition.
         #
-        def create_query
+        def to_query
           base_query = @query
           base_query = base_query.start_at start_at if start_at
           base_query = base_query.end_before end_before if end_before

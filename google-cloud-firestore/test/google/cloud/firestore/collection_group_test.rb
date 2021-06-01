@@ -61,15 +61,15 @@ describe Google::Cloud::Firestore::CollectionGroup, :mock_firestore do
     _(partitions[2].start_at[0].path).must_equal document_path("alice-")
     _(partitions[2].end_before).must_be :nil?
 
-    query_1 = partitions[0].create_query
+    query_1 = partitions[0].to_query
     _(query_1).must_be_kind_of Google::Cloud::Firestore::Query
     _(query_1.query).must_equal collection_group_query(end_before: ["alice"])
 
-    query_2 = partitions[1].create_query
+    query_2 = partitions[1].to_query
     _(query_2).must_be_kind_of Google::Cloud::Firestore::Query
     _(query_2.query).must_equal collection_group_query(start_at: ["alice"], end_before: ["alice-"])
 
-    query_3 = partitions[2].create_query
+    query_3 = partitions[2].to_query
     _(query_3).must_be_kind_of Google::Cloud::Firestore::Query
     _(query_3.query).must_equal collection_group_query(start_at: ["alice-"])
   end

@@ -158,7 +158,7 @@ describe Google::Cloud::Firestore::CollectionGroup, :firestore_acceptance do
       _(document_ids).must_include partitions[2].start_at[0].document_id
       _(partitions[2].end_before).must_be :nil?
 
-      queries = partitions.map(&:create_query)
+      queries = partitions.map(&:to_query)
       _(queries.count).must_equal 3
       results = queries.map do |query|
         _(query).must_be_kind_of Google::Cloud::Firestore::Query

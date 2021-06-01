@@ -60,7 +60,7 @@ module Google
         #
         #   partitions = col_group.partitions 3
         #
-        #   queries = partitions.map(&:create_query)
+        #   queries = partitions.map(&:to_query)
         #
         def partitions partition_count
           ensure_service!
