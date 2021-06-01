@@ -186,7 +186,7 @@ module Acceptance
       end
 
       def numeric_pk_ddl_statement
-        return # if emulator_enabled?
+        return if emulator_enabled?
 
         <<-BOXES
           CREATE TABLE boxes (
@@ -197,7 +197,7 @@ module Acceptance
       end
 
       def numeric_composite_pk_ddl_statement
-        return # if emulator_enabled?
+        return if emulator_enabled?
 
         <<-BOX_ITEMS
           CREATE TABLE box_items (
