@@ -19,8 +19,39 @@ describe Google::Cloud::Firestore::CollectionGroup, :mock_firestore do
   let(:collection_group) do
     Google::Cloud::Firestore::CollectionGroup.from_collection_id documents_path, collection_id, firestore
   end
-  let(:expected_query) do
-    collection_group_query
+  let(:expected_query) { collection_group_query }
+
+  it "raises if partition_count is < 1" do
+    expect do
+      partitions = collection_group.partitions 0
+    end.must_raise ArgumentError
+  end
+
+  it "returns 1 empty partition if partition_count is 1, without RPC" do
+    partitions = collection_group.partitions 1
+
+    _(partitions).must_be_kind_of Array
+    _(partitions.count).must_equal 1
+
+    _(partitions[0]).must_be_kind_of Google::Cloud::Firestore::QueryPartition
+    _(partitions[0].start_at).must_be :nil?
+    _(partitions[0].end_before).must_be :nil?
+  end
+
+  it "returns 1 empty partition if RPC returns no partitions" do
+    list_res = paged_enum_struct partition_query_resp(doc_ids: [])
+    firestore_mock.expect :partition_query, list_res, partition_query_args(expected_query)
+
+    partitions = collection_group.partitions 3
+
+    firestore_mock.verify
+
+    _(partitions).must_be_kind_of Array
+    _(partitions.count).must_equal 1
+
+    _(partitions[0]).must_be_kind_of Google::Cloud::Firestore::QueryPartition
+    _(partitions[0].start_at).must_be :nil?
+    _(partitions[0].end_before).must_be :nil?
   end
 
   it "sorts and lists partitions" do

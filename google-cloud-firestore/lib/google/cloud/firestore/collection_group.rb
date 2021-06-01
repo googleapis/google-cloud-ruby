@@ -65,14 +65,20 @@ module Google
         def partitions partition_count
           ensure_service!
 
+          raise ArgumentError, "partition_count must be > 0" unless partition_count.positive?
+
           # Partition queries require explicit ordering by __name__.
           query_with_default_order = order "__name__"
           # Since we are always returning an extra partition (with en empty endBefore cursor), we reduce the desired
           # partition count by one.
           partition_count -= 1
 
-          # Retrieve all pages of the results, because order is not guaranteed and they must be sorted.
-          grpc_partitions = list_all partition_count, query_with_default_order
+          grpc_partitions = if partition_count.positive?
+                              # Retrieve all pages, since cursor order is not guaranteed and they must be sorted.
+                              list_all partition_count, query_with_default_order
+                            else
+                              [] # Ensure that a single, empty QueryPartition is returned.
+                            end
           cursor_values = grpc_partitions.map do |cursor|
             # Convert each cursor to a (single-element) array of Google::Cloud::Firestore::DocumentReference.
             cursor.values.map do |value|
@@ -91,6 +97,7 @@ module Google
             start_at = end_before
             partition
           end
+          # Always add a final QueryPartition with an empty end_before value.
           results << QueryPartition.new(query_with_default_order, start_at, nil)
           results
         end
