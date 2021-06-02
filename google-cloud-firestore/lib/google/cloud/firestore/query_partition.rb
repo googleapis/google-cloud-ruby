@@ -63,7 +63,7 @@ module Google
         end
 
         ##
-        # Creates a new query that only returns the documents for this partition, using the cursor valuess from
+        # Creates a new query that only returns the documents for this partition, using the cursor values from
         # {#start_at} and {#end_before}.
         #
         # @return [Query] The query for the partition.

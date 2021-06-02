@@ -17,6 +17,7 @@ require "google/cloud/firestore/v1"
 require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/query_listener"
 require "google/cloud/firestore/convert"
+require "json"
 
 module Google
   module Cloud
@@ -971,6 +972,67 @@ module Google
           QueryListener.new(self, &callback).start
         end
         alias on_snapshot listen
+
+        ##
+        # Serializes the instance to a JSON text string. See also {Query.from_json}.
+        #
+        # @return [String] A JSON text string.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #   query = firestore.col(:cities).select(:population)
+        #
+        #   json = query.to_json
+        #
+        #   new_query = Google::Cloud::Firestore::Query.from_json json, firestore
+        #
+        #   new_query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        def to_json options = nil
+          query_json = Google::Cloud::Firestore::V1::StructuredQuery.encode_json query
+          {
+            "query" => JSON.parse(query_json),
+            "parent_path" => parent_path,
+            "limit_type" => limit_type
+          }.to_json options
+        end
+
+        ##
+        # Deserializes a JSON text string serialized from this class and returns it as a new instance. See also
+        # {#to_json}.
+        #
+        # @param [String] json A JSON text string serialized using {#to_json}.
+        # @param [Google::Cloud::Firestore::Client] client A connected client instance.
+        #
+        # @return [Query] A new query equal to the original query used to create the JSON text string.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #   query = firestore.col(:cities).select(:population)
+        #
+        #   json = query.to_json
+        #
+        #   new_query = Google::Cloud::Firestore::Query.from_json json, firestore
+        #
+        #   new_query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        def self.from_json json, client
+          raise ArgumentError, "client is required" unless client
+
+          json = JSON.parse json
+          query_json = json["query"]
+          raise ArgumentError, "Field 'query' is required" unless query_json
+          query = Google::Cloud::Firestore::V1::StructuredQuery.decode_json query_json.to_json
+          start query, json["parent_path"], client, limit_type: json["limit_type"]&.to_sym
+        end
 
         ##
         # @private Start a new Query.

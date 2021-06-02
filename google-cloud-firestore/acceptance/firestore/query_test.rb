@@ -284,4 +284,37 @@ describe "Query", :firestore_acceptance do
     _(results.map(&:document_id)).must_equal ["doc1", "doc2"]
     _(results.map { |doc| doc[:foo] }).must_equal ["a", "b"]
   end
+
+  it "has to_json method and from_json class method" do
+    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    rand_query_col.doc("doc1").create({foo: "a"})
+    rand_query_col.doc("doc2").create({foo: "b"})
+    rand_query_col.doc("doc3").create({foo: "c"})
+
+    original_query = rand_query_col.order(:foo).limit_to_last 2
+
+    json = original_query.to_json
+    _(json).must_be_instance_of String
+
+    query = Google::Cloud::Firestore::Query.from_json json, firestore
+    _(query).must_be_instance_of Google::Cloud::Firestore::Query
+
+    results_1 = []
+    query.get { |result| results_1 << result } # block directly to get, rpc
+    _(results_1.map(&:document_id)).must_equal ["doc2","doc3"]
+    _(results_1.map { |doc| doc[:foo] }).must_equal ["b","c"]
+
+    results_2 = []
+    query.get { |result| results_2 << result } # block directly to get, rpc
+    _(results_2.map(&:document_id)).must_equal ["doc2","doc3"]
+    _(results_2.map { |doc| doc[:foo] }).must_equal ["b","c"]
+
+    results_3 = query.get # enum_for :get
+    _(results_3.map(&:document_id)).must_equal ["doc2","doc3"] # rpc
+    _(results_3.map { |doc| doc[:foo] }).must_equal ["b","c"] # rpc
+
+    results_4 = query.get # enum_for :get
+    _(results_4.map(&:document_id)).must_equal ["doc2","doc3"] # rpc
+    _(results_4.map { |doc| doc[:foo] }).must_equal ["b","c"] # rpc
+  end
 end
