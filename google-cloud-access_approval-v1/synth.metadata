@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "cd594fecdf82e65e9e4751e6050c8ff6b5b339af"
+        "sha": "71548e51dce3bffab7471bebab0c24c238bec925"
       }
     },
     {
@@ -29,10 +29,8 @@
   ],
   "generatedFiles": [
     ".gitignore",
-    ".repo-metadata.json",
     ".rubocop.yml",
     ".yardopts",
-    ".yardopts-cloudrad",
     "AUTHENTICATION.md",
     "CHANGELOG.md",
     "Gemfile",
