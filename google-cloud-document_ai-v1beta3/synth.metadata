@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "0b121e312b5d421e591de64beebe4fb04c170549"
+        "sha": "71548e51dce3bffab7471bebab0c24c238bec925"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b29fb6b9fcdf3bc67487fa22ab7783915023041e",
-        "internalRef": "373516134"
+        "sha": "204809ddb580527550e61a7ca524e837b5a8409d",
+        "internalRef": "377114643"
       }
     }
   ],
@@ -54,6 +54,7 @@
     "lib/google/cloud/documentai/v1beta3/document_processor_service_pb.rb",
     "lib/google/cloud/documentai/v1beta3/document_processor_service_services_pb.rb",
     "lib/google/cloud/documentai/v1beta3/geometry_pb.rb",
+    "lib/google/cloud/documentai/v1beta3/operation_metadata_pb.rb",
     "proto_docs/README.md",
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
@@ -61,6 +62,7 @@
     "proto_docs/google/cloud/documentai/v1beta3/document_io.rb",
     "proto_docs/google/cloud/documentai/v1beta3/document_processor_service.rb",
     "proto_docs/google/cloud/documentai/v1beta3/geometry.rb",
+    "proto_docs/google/cloud/documentai/v1beta3/operation_metadata.rb",
     "proto_docs/google/longrunning/operations.rb",
     "proto_docs/google/protobuf/any.rb",
     "proto_docs/google/protobuf/duration.rb",
