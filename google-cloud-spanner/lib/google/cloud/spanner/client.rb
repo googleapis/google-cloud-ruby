@@ -11,6 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
+# frozen_string_literal: true
 
 
 require "google/cloud/spanner/errors"
@@ -1804,11 +1806,10 @@ module Google
         # GRPC::Aborted
         def delay_from_aborted err
           return nil if err.nil?
-          if err.respond_to?(:metadata) && err.metadata["retryDelay"]
-            # a correct metadata will look like this:
-            # "{\"retryDelay\":{\"seconds\":60}}"
-            seconds = err.metadata["retryDelay"]["seconds"].to_i
-            nanos = err.metadata["retryDelay"]["nanos"].to_i
+          if err.respond_to?(:metadata) && err.metadata["google.rpc.retryinfo-bin"]
+            retry_info = Google::Rpc::RetryInfo.decode(err.metadata["google.rpc.retryinfo-bin"])
+            seconds = retry_info["retry_delay"].seconds
+            nanos = retry_info["retry_delay"].nanos
             return seconds if nanos.zero?
             return seconds + (nanos / 1_000_000_000.0)
           end
