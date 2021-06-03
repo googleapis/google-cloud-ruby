@@ -25,6 +25,12 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   let(:file_name) { "file.ext" }
   let(:file) { Google::Cloud::Storage::File.new_lazy bucket_name, file_name, storage.service }
   let(:file_user_project) { Google::Cloud::Storage::File.new_lazy bucket_name, file_name, storage.service, user_project: true }
+  let(:generation) { 1234567890 }
+  let(:generations) { [1234567894, 1234567893, 1234567892, 1234567891] }
+  let(:file_gapis) do
+    generations.map { |g| Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket.name, file.name, g).to_json) }
+  end
+  let(:metageneration) { 6 }
 
   let(:rewrite_response) do
     rewrite_resource = Google::Apis::StorageV1::Object.from_json random_file_hash(bucket_name, file_name).to_json
@@ -88,7 +94,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket_name, file_name, { generation: nil, user_project: nil }]
+    mock.expect :delete_object, nil, delete_object_args(bucket.name, file.name)
 
     file.service.mocked_service = mock
 
@@ -99,7 +105,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
   it "can delete itself with generation set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket_name, file_name, { generation: nil, user_project: nil }]
+    mock.expect :delete_object, nil, delete_object_args(bucket.name, file.name)
 
     file.service.mocked_service = mock
 
@@ -111,12 +117,12 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
   it "can delete itself when having a generation and with generation set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket_name, file_name, { generation: 1234567892, user_project: nil }]
+    mock.expect :delete_object, nil, delete_object_args(bucket.name, file.name, generation: generation)
 
     file.service.mocked_service = mock
 
-    file.gapi.generation = 1234567892
-    _(file.generation).must_equal 1234567892
+    file.gapi.generation = generation
+    _(file.generation).must_equal generation
     file.delete generation: true
 
     mock.verify
@@ -124,18 +130,18 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
   it "can delete itself with generation set to a generation" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket_name, file_name, { generation: 1234567894, user_project: nil }]
+    mock.expect :delete_object, nil, delete_object_args(bucket.name, file.name, generation: generation)
 
     file.service.mocked_service = mock
 
-    file.delete generation: 1234567894
+    file.delete generation: generation
 
     mock.verify
   end
 
   it "can delete itself with user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket.name, file_user_project.name, { generation: nil, user_project: "test" }]
+    mock.expect :delete_object, nil, delete_object_args(bucket.name, file_user_project.name, user_project: "test")
 
     file_user_project.service.mocked_service = mock
 
@@ -146,7 +152,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
   it "can delete itself with generation set to true and user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket_name, file_name, { generation: nil, user_project: "test" }]
+    mock.expect :delete_object, nil, delete_object_args(bucket.name, file_user_project.name, user_project: "test")
 
     file_user_project.service.mocked_service = mock
 
@@ -158,12 +164,12 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
   it "can delete itself when having a generation and with generation set to true and user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket_name, file_name, { generation: 1234567893, user_project: "test" }]
+    mock.expect :delete_object, nil, delete_object_args(bucket.name, file_user_project.name, generation: generation, user_project: "test")
 
     file_user_project.service.mocked_service = mock
 
-    file_user_project.gapi.generation = 1234567893
-    _(file_user_project.generation).must_equal 1234567893
+    file_user_project.gapi.generation = generation
+    _(file_user_project.generation).must_equal generation
     file_user_project.delete generation: true
 
     mock.verify
@@ -171,11 +177,11 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
   it "can delete itself with generation set to a generation and user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket_name, file_name, { generation: 1234567894, user_project: "test" }]
+    mock.expect :delete_object, nil, delete_object_args(bucket.name, file_user_project.name, generation: generation, user_project: "test")
 
     file_user_project.service.mocked_service = mock
 
-    file_user_project.delete generation: 1234567894
+    file_user_project.delete generation: generation
 
     mock.verify
   end

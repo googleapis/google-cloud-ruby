@@ -1375,6 +1375,20 @@ module Google
         #   {#generation}. The default behavior is to delete the latest version
         #   of the file (regardless of the version to which the file is set,
         #   which is the version returned by {#generation}.)
+        # @param [Integer] if_generation_match Makes the operation conditional
+        #   on whether the file's current generation matches the given value.
+        #   Setting to 0 makes the operation succeed only if there are no live
+        #   versions of the file.
+        # @param [Integer] if_generation_not_match Makes the operation conditional
+        #   on whether the file's current generation does not match the given
+        #   value. If no live file exists, the precondition fails. Setting to 0
+        #   makes the operation succeed only if there is a live version of the file.
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the file's current metageneration matches the given value.
+        # @param [Integer] if_metageneration_not_match Makes the operation
+        #   conditional on whether the file's current metageneration does not
+        #   match the given value.
+        #
         # @return [Boolean] Returns `true` if the file was deleted.
         #
         # @example
@@ -1407,11 +1421,21 @@ module Google
         #   file = bucket.file "path/to/my-file.ext"
         #   file.delete generation: 123456
         #
-        def delete generation: nil
+        def delete generation: nil,
+                   if_generation_match: nil,
+                   if_generation_not_match: nil,
+                   if_metageneration_match: nil,
+                   if_metageneration_not_match: nil
           generation = self.generation if generation == true
           ensure_service!
-          service.delete_file bucket, name, generation: generation,
-                                            user_project: user_project
+          service.delete_file bucket,
+                              name,
+                              generation: generation,
+                              if_generation_match: if_generation_match,
+                              if_generation_not_match: if_generation_not_match,
+                              if_metageneration_match: if_metageneration_match,
+                              if_metageneration_not_match: if_metageneration_not_match,
+                              user_project: user_project
           true
         end
 

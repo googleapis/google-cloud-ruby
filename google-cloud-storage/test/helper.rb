@@ -208,4 +208,23 @@ class MockStorage < Minitest::Spec
   def policy_gapi etag: "CAE=", version: 1, bindings: []
     Google::Apis::StorageV1::Policy.new etag: etag, version: version, bindings: bindings
   end
+
+  def delete_object_args bucket_name,
+                         file_name,
+                         generation: nil,
+                         if_generation_match: nil,
+                         if_generation_not_match: nil,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil,
+                         user_project: nil
+    opts = {
+      generation: generation,
+      if_generation_match: if_generation_match,
+      if_generation_not_match: if_generation_not_match,
+      if_metageneration_match: if_metageneration_match,
+      if_metageneration_not_match: if_metageneration_not_match,
+      user_project: user_project
+    }
+    [bucket_name, file_name, opts]
+  end
 end
