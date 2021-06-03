@@ -833,8 +833,7 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
     file_name = "file.ext"
 
     mock = Minitest::Mock.new
-    mock.expect :get_object, find_file_gapi(bucket.name, file_name),
-      [bucket.name, file_name, generation: nil, user_project: nil, options: {}]
+    mock.expect :get_object, find_file_gapi(bucket.name, file_name), get_object_args(bucket.name, file_name)
 
     bucket.service.mocked_service = mock
 
@@ -851,8 +850,7 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
     file_name = "file.ext"
 
     mock = Minitest::Mock.new
-    mock.expect :get_object, find_file_gapi(bucket.name, file_name),
-      [bucket.name, file_name, generation: nil, user_project: nil, options: {}]
+    mock.expect :get_object, find_file_gapi(bucket.name, file_name), get_object_args(bucket.name, file_name)
 
     bucket.service.mocked_service = mock
 
@@ -871,7 +869,7 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_object, find_file_gapi(bucket.name, file_name),
-      [bucket.name, file_name, generation: generation, user_project: nil, options: {}]
+    get_object_args(bucket.name, file_name, generation: generation)
 
     bucket.service.mocked_service = mock
 
@@ -889,7 +887,7 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_object, find_file_gapi(bucket.name, file_name),
-      [bucket.name, file_name, generation: nil, user_project: nil, options: key_options]
+      get_object_args(bucket.name, file_name, options: key_options)
 
     bucket.service.mocked_service = mock
 
@@ -907,7 +905,7 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_object, find_file_gapi(bucket_user_project.name, file_name),
-      [bucket_user_project.name, file_name, generation: nil, user_project: "test", options: {}]
+      get_object_args(bucket_user_project.name, file_name, generation: nil, user_project: "test")
 
     bucket_user_project.service.mocked_service = mock
 

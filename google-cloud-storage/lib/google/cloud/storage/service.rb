@@ -319,12 +319,23 @@ module Google
 
         ##
         # Retrieves an object or its metadata.
-        def get_file bucket_name, file_path, generation: nil, key: nil,
+        def get_file bucket_name,
+                     file_path,
+                     generation: nil,
+                     if_generation_match: nil,
+                     if_generation_not_match: nil,
+                     if_metageneration_match: nil,
+                     if_metageneration_not_match: nil,
+                     key: nil,
                      user_project: nil
           execute do
             service.get_object \
               bucket_name, file_path,
               generation: generation,
+              if_generation_match: if_generation_match,
+              if_generation_not_match: if_generation_not_match,
+              if_metageneration_match: if_metageneration_match,
+              if_metageneration_not_match: if_metageneration_not_match,
               user_project: user_project(user_project),
               options: key_options(key)
           end

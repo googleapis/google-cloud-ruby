@@ -897,8 +897,8 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     file_name = "file.ext"
 
     mock = Minitest::Mock.new
-    mock.expect :get_object, find_file_gapi(bucket.name, file_name),
-      [bucket.name, file_name, generation: nil, user_project: nil, options: {}]
+    mock.expect :get_object, find_file_gapi(bucket.name, file_name), get_object_args(bucket.name, file_name)
+      
 
     bucket.service.mocked_service = mock
 
@@ -915,8 +915,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     file_name = "file.ext"
 
     mock = Minitest::Mock.new
-    mock.expect :get_object, find_file_gapi(bucket.name, file_name),
-      [bucket.name, file_name, generation: nil, user_project: nil, options: {}]
+    mock.expect :get_object, find_file_gapi(bucket.name, file_name), get_object_args(bucket.name, file_name)
 
     bucket.service.mocked_service = mock
 
@@ -935,11 +934,30 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_object, find_file_gapi(bucket.name, file_name),
-      [bucket.name, file_name, generation: generation, user_project: nil, options: {}]
+      get_object_args(bucket.name, file_name, generation: generation)
 
     bucket.service.mocked_service = mock
 
     file = bucket.file file_name, generation: generation
+
+    mock.verify
+
+    _(file.name).must_equal file_name
+    _(file.user_project).must_be :nil?
+    _(file).wont_be :lazy?
+  end
+
+  it "finds a file with if_generation_match" do
+    file_name = "file.ext"
+    generation = 123
+
+    mock = Minitest::Mock.new
+    mock.expect :get_object, find_file_gapi(bucket.name, file_name),
+      get_object_args(bucket.name, file_name, if_generation_match: generation)
+
+    bucket.service.mocked_service = mock
+
+    file = bucket.file file_name, if_generation_match: generation
 
     mock.verify
 
@@ -953,7 +971,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_object, find_file_gapi(bucket_user_project.name, file_name),
-      [bucket_user_project.name, file_name, generation: nil, user_project: "test", options: {}]
+      get_object_args(bucket_user_project.name, file_name, generation: nil, user_project: "test")
 
     bucket_user_project.service.mocked_service = mock
 

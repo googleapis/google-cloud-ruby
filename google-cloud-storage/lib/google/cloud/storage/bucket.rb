@@ -1040,6 +1040,19 @@ module Google
         # @param [String] path Name (path) of the file.
         # @param [Integer] generation When present, selects a specific revision
         #   of this object. Default is the latest version.
+        # @param [Integer] if_generation_match Makes the operation conditional
+        #   on whether the file's current generation matches the given value.
+        #   Setting to 0 makes the operation succeed only if there are no live
+        #   versions of the file.
+        # @param [Integer] if_generation_not_match Makes the operation conditional
+        #   on whether the file's current generation does not match the given
+        #   value. If no live file exists, the precondition fails. Setting to 0
+        #   makes the operation succeed only if there is a live version of the file.
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the file's current metageneration matches the given value.
+        # @param [Integer] if_metageneration_not_match Makes the operation
+        #   conditional on whether the file's current metageneration does not
+        #   match the given value.
         # @param [Boolean] skip_lookup Optionally create a Bucket object
         #   without verifying the bucket resource exists on the Storage service.
         #   Calls made on this object will raise errors if the bucket resource
@@ -1061,7 +1074,14 @@ module Google
         #   file = bucket.file "path/to/my-file.ext"
         #   puts file.name
         #
-        def file path, generation: nil, skip_lookup: nil, encryption_key: nil
+        def file path,
+                 generation: nil,
+                 if_generation_match: nil,
+                 if_generation_not_match: nil,
+                 if_metageneration_match: nil,
+                 if_metageneration_not_match: nil,
+                 skip_lookup: nil,
+                 encryption_key: nil
           ensure_service!
           if skip_lookup
             return File.new_lazy name, path, service,
@@ -1069,6 +1089,10 @@ module Google
                                  user_project: user_project
           end
           gapi = service.get_file name, path, generation: generation,
+                                              if_generation_match: if_generation_match,
+                                              if_generation_not_match: if_generation_not_match,
+                                              if_metageneration_match: if_metageneration_match,
+                                              if_metageneration_not_match: if_metageneration_not_match,
                                               key: encryption_key,
                                               user_project: user_project
           File.from_gapi gapi, service, user_project: user_project

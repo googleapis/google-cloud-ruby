@@ -872,9 +872,9 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name, 1234567891).to_json),
-      [bucket_name, file_name, generation: nil, user_project: nil, options: {}]
+      get_object_args(bucket.name, file_name)
     mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name, 1234567892).to_json),
-      [bucket_name, file_name, generation: nil, user_project: nil, options: {}]
+      get_object_args(bucket.name, file_name)
 
     bucket.service.mocked_service = mock
     file.service.mocked_service = mock
@@ -892,9 +892,9 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_user_project.name, file_name, 1234567891).to_json),
-      [bucket_user_project.name, file_name, generation: nil, user_project: "test", options: {}]
+      get_object_args(bucket_name, file_name, user_project: "test")
     mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_user_project.name, file_name, 1234567892).to_json),
-      [bucket_user_project.name, file_name, generation: nil, user_project: "test", options: {}]
+      get_object_args(bucket_name, file_name, user_project: "test")
 
     bucket_user_project.service.mocked_service = mock
     file.service.mocked_service = mock

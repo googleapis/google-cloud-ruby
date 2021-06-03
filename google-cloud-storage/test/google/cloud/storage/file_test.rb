@@ -1369,9 +1369,9 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket.name, file_name, generations[3]).to_json),
-      [bucket.name, file_name, generation: nil, user_project: nil, options: {}]
+      get_object_args(bucket.name, file_name)
     mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket.name, file_name, generations[2]).to_json),
-      [bucket.name, file_name, generation: nil, user_project: nil, options: {}]
+      get_object_args(bucket.name, file_name)
 
     bucket.service.mocked_service = mock
     file.service.mocked_service = mock
@@ -1389,9 +1389,9 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_user_project.name, file_name, generations[3]).to_json),
-      [bucket_user_project.name, file_name, generation: nil, user_project: "test", options: {}]
+      get_object_args(bucket_user_project.name, file_name, user_project: "test")
     mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_user_project.name, file_name, generations[2]).to_json),
-      [bucket_user_project.name, file_name, generation: nil, user_project: "test", options: {}]
+      get_object_args(bucket_user_project.name, file_name, user_project: "test")
 
     bucket_user_project.service.mocked_service = mock
     file.service.mocked_service = mock
@@ -1409,7 +1409,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket.name, file_name, generations[0]).to_json),
-      [bucket.name, file_name, generation: nil, user_project: nil, options: {}]
+      get_object_args(bucket.name, file_name)
     mock.expect :list_objects, Google::Apis::StorageV1::Objects.new(kind: "storage#objects", items: file_gapis),
       [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: file_name, versions: true, user_project: nil]
 
@@ -1435,7 +1435,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_user_project.name, file_name, generations[0]).to_json),
-      [bucket_user_project.name, file_name, generation: nil, user_project: "test", options: {}]
+      get_object_args(bucket_user_project.name, file_name, user_project: "test")
     mock.expect :list_objects, Google::Apis::StorageV1::Objects.new(kind: "storage#objects", items: file_gapis),
       [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: file_name, versions: true, user_project: "test"]
 

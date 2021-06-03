@@ -55,7 +55,7 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :get_object, find_file_gapi(bucket.name, file_name),
-                  [bucket.name, file_name, generation: nil, user_project: nil, options: key_options]
+        get_object_args(bucket.name, file_name, options: key_options)
 
       bucket.service.mocked_service = mock
 
