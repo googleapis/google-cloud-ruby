@@ -319,11 +319,13 @@ module Google
         def self.execute_query service, session_path, sql, params: nil,
                                types: nil, transaction: nil,
                                partition_token: nil, seqno: nil,
-                               query_options: nil, call_options: nil
+                               query_options: nil, request_options: nil,
+                               call_options: nil
           execute_query_options = {
             transaction: transaction, params: params, types: types,
             partition_token: partition_token, seqno: seqno,
-            query_options: query_options, call_options: call_options
+            query_options: query_options, request_options: request_options,
+            call_options: call_options
           }
           enum = service.execute_streaming_sql session_path, sql,
                                                **execute_query_options
@@ -338,11 +340,13 @@ module Google
         # @private
         def self.read service, session_path, table, columns, keys: nil,
                       index: nil, limit: nil, transaction: nil,
-                      partition_token: nil, call_options: nil
+                      partition_token: nil, request_options: nil,
+                      call_options: nil
           read_options = {
             keys: keys, index: index, limit: limit,
             transaction: transaction,
             partition_token: partition_token,
+            request_options: request_options,
             call_options: call_options
           }
           enum = service.streaming_read_table \
