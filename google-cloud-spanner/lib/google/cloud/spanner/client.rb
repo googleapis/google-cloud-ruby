@@ -1805,7 +1805,7 @@ module Google
         def delay_from_aborted err
           return nil if err.nil?
           if err.respond_to?(:metadata) && err.metadata["google.rpc.retryinfo-bin"]
-            retry_info = Google::Rpc::RetryInfo.decode(err.metadata["google.rpc.retryinfo-bin"])
+            retry_info = Google::Rpc::RetryInfo.decode err.metadata["google.rpc.retryinfo-bin"]
             seconds = retry_info["retry_delay"].seconds
             nanos = retry_info["retry_delay"].nanos
             return seconds if nanos.zero?
