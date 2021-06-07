@@ -209,6 +209,37 @@ class MockStorage < Minitest::Spec
     Google::Apis::StorageV1::Policy.new etag: etag, version: version, bindings: bindings
   end
 
+  def insert_object_args bucket_name,
+                      file_gapi,
+                      name: nil,
+                      predefined_acl: nil,
+                      upload_source: nil,
+                      content_encoding: nil,
+                      content_type: "text/plain",
+                      kms_key_name: nil,
+                      if_generation_match: nil,
+                      if_generation_not_match: nil,
+                      if_metageneration_match: nil,
+                      if_metageneration_not_match: nil,
+                      user_project: nil,
+                      options: {}
+    opts = {
+      name: name,
+      predefined_acl: predefined_acl,
+      upload_source: upload_source,
+      content_encoding: content_encoding,
+      content_type: content_type,
+      kms_key_name: kms_key_name,
+      if_generation_match: if_generation_match,
+      if_generation_not_match: if_generation_not_match,
+      if_metageneration_match: if_metageneration_match,
+      if_metageneration_not_match: if_metageneration_not_match,
+      user_project: user_project,
+      options: options
+    }
+    [bucket_name, file_gapi, opts]
+  end
+
   def get_object_args bucket_name,
                       file_name,
                       generation: nil,

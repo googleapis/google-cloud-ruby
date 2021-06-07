@@ -290,30 +290,61 @@ module Google
 
         ##
         # Inserts a new file for the given bucket
-        def insert_file bucket_name, source, path = nil, acl: nil,
-                        cache_control: nil, content_disposition: nil,
-                        content_encoding: nil, content_language: nil,
-                        content_type: nil, custom_time: nil, crc32c: nil, md5: nil, metadata: nil,
-                        storage_class: nil, key: nil, kms_key: nil,
-                        temporary_hold: nil, event_based_hold: nil,
+        def insert_file bucket_name,
+                        source,
+                        path = nil,
+                        acl: nil,
+                        cache_control: nil,
+                        content_disposition: nil,
+                        content_encoding: nil,
+                        content_language: nil,
+                        content_type: nil,
+                        custom_time: nil,
+                        crc32c: nil,
+                        md5: nil,
+                        metadata: nil,
+                        storage_class: nil,
+                        key: nil,
+                        kms_key: nil,
+                        temporary_hold: nil,
+                        event_based_hold: nil,
+                        if_generation_match: nil,
+                        if_generation_not_match: nil,
+                        if_metageneration_match: nil,
+                        if_metageneration_not_match: nil,
                         user_project: nil
-          params =
-            { cache_control: cache_control, content_type: content_type, custom_time: custom_time,
-              content_disposition: content_disposition, md5_hash: md5,
-              content_encoding: content_encoding, crc32c: crc32c,
-              content_language: content_language, metadata: metadata,
-              storage_class: storage_class, temporary_hold: temporary_hold,
-              event_based_hold: event_based_hold }.delete_if { |_k, v| v.nil? }
+          params = {
+            cache_control: cache_control,
+            content_type: content_type,
+            custom_time: custom_time,
+            content_disposition: content_disposition,
+            md5_hash: md5,
+            content_encoding: content_encoding,
+            crc32c: crc32c,
+            content_language: content_language,
+            metadata: metadata,
+            storage_class: storage_class,
+            temporary_hold: temporary_hold,
+            event_based_hold: event_based_hold
+          }.delete_if { |_k, v| v.nil? }
           file_obj = Google::Apis::StorageV1::Object.new(**params)
           content_type ||= mime_type_for(path || Pathname(source).to_path)
 
           execute do
-            service.insert_object \
-              bucket_name, file_obj,
-              name: path, predefined_acl: acl, upload_source: source,
-              content_encoding: content_encoding, content_type: content_type,
-              kms_key_name: kms_key, user_project: user_project(user_project),
-              options: key_options(key)
+            service.insert_object bucket_name,
+                                  file_obj,
+                                  name: path,
+                                  predefined_acl: acl,
+                                  upload_source: source,
+                                  content_encoding: content_encoding,
+                                  content_type: content_type,
+                                  if_generation_match: if_generation_match,
+                                  if_generation_not_match: if_generation_not_match,
+                                  if_metageneration_match: if_metageneration_match,
+                                  if_metageneration_not_match: if_metageneration_not_match,
+                                  kms_key_name: kms_key,
+                                  user_project: user_project(user_project),
+                                  options: key_options(key)
           end
         end
 
