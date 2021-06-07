@@ -210,6 +210,26 @@ describe "Spanner Client", :transaction, :spanner do
     assert_commit_response commit_resp, commit_options
   end
 
+  describe "request options" do
+    it "execute transaction with priority options" do
+      timestamp = db.transaction request_options: { priority: :PRIORITY_MEDIUM } do |tx|
+        tx_results = tx.read "accounts", columns
+        _(tx_results.rows.count).must_equal default_account_rows.length
+        tx.insert "accounts", additional_account
+      end
+      _(timestamp).must_be_kind_of Time
+    end
+
+    it "execute query with priority options" do
+      timestamp = db.transaction do |tx|
+        tx_results = tx.execute_sql query_reputation,
+                                    request_options: { priority: :PRIORITY_MEDIUM }
+        _(tx_results.rows.count).must_be :>, 0
+      end
+      _(timestamp).must_be_kind_of Time
+    end
+  end
+
   def read_and_update db
     db.transaction do |tx|
       tx_results = tx.read "accounts", [:reputation], keys: 1, limit: 1

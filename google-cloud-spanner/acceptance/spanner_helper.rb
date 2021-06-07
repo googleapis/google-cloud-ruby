@@ -186,7 +186,7 @@ module Acceptance
       end
 
       def numeric_pk_ddl_statement
-        return if emulator_enabled?
+        return
 
         <<-BOXES
           CREATE TABLE boxes (
@@ -197,7 +197,7 @@ module Acceptance
       end
 
       def numeric_composite_pk_ddl_statement
-        return if emulator_enabled?
+        return
 
         <<-BOX_ITEMS
           CREATE TABLE box_items (
@@ -319,6 +319,7 @@ fixture = Object.new
 fixture.extend Acceptance::SpannerTest::Fixtures
 
 instance = $spanner.instance $spanner_instance_id
+
 instance ||= begin
   inst_job = $spanner.create_instance $spanner_instance_id, name: "google-cloud-ruby-tests", config: "regional-us-central1", nodes: 1
   inst_job.wait_until_done!

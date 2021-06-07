@@ -7,5 +7,6 @@
     "name_pretty": "Cloud Talent Solution API",
     "product_documentation": "https://cloud.google.com/solutions/talent-solution",
     "repo": "googleapis/google-cloud-ruby",
-    "requires_billing": true
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO"
 }

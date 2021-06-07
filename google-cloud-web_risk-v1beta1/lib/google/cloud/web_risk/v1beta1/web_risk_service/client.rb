@@ -67,25 +67,25 @@ module Google
                 default_config.rpcs.compute_threat_list_diff.timeout = 600.0
                 default_config.rpcs.compute_threat_list_diff.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_uris.timeout = 600.0
                 default_config.rpcs.search_uris.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_hashes.timeout = 600.0
                 default_config.rpcs.search_hashes.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config

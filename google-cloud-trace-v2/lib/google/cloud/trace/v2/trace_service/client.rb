@@ -74,9 +74,9 @@ module Google
                 default_config.rpcs.create_span.timeout = 120.0
                 default_config.rpcs.create_span.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 1.0,
-              multiplier: 1.2,
-              retry_codes: [14, 4]
+                  max_delay: 1.0,
+                  multiplier: 1.2,
+                  retry_codes: [14, 4]
                 }
 
                 default_config

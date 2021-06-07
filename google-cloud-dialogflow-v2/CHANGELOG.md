@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.1 / 2021-05-21
+
+#### Documentation
+
+* Document location-aware intent parent paths
+
 ### 0.8.0 / 2021-05-06
 
 #### Features

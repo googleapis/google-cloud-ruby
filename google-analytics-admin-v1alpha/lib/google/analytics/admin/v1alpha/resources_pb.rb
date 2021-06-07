@@ -116,6 +116,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :property, :string, 1
       optional :display_name, :string, 2
     end
+    add_message "google.analytics.admin.v1alpha.MeasurementProtocolSecret" do
+      optional :name, :string, 1
+      optional :display_name, :string, 2
+      optional :secret_value, :string, 3
+    end
     add_message "google.analytics.admin.v1alpha.ChangeHistoryEvent" do
       optional :id, :string, 1
       optional :change_time, :message, 2, "google.protobuf.Timestamp"
@@ -139,7 +144,61 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :ios_app_data_stream, :message, 5, "google.analytics.admin.v1alpha.IosAppDataStream"
         optional :firebase_link, :message, 6, "google.analytics.admin.v1alpha.FirebaseLink"
         optional :google_ads_link, :message, 7, "google.analytics.admin.v1alpha.GoogleAdsLink"
+        optional :google_signals_settings, :message, 8, "google.analytics.admin.v1alpha.GoogleSignalsSettings"
+        optional :conversion_event, :message, 11, "google.analytics.admin.v1alpha.ConversionEvent"
+        optional :measurement_protocol_secret, :message, 12, "google.analytics.admin.v1alpha.MeasurementProtocolSecret"
+        optional :custom_dimension, :message, 13, "google.analytics.admin.v1alpha.CustomDimension"
+        optional :custom_metric, :message, 14, "google.analytics.admin.v1alpha.CustomMetric"
       end
+    end
+    add_message "google.analytics.admin.v1alpha.ConversionEvent" do
+      optional :name, :string, 1
+      optional :event_name, :string, 2
+      optional :create_time, :message, 3, "google.protobuf.Timestamp"
+      optional :is_deletable, :bool, 4
+    end
+    add_message "google.analytics.admin.v1alpha.GoogleSignalsSettings" do
+      optional :name, :string, 1
+      optional :state, :enum, 3, "google.analytics.admin.v1alpha.GoogleSignalsState"
+      optional :consent, :enum, 4, "google.analytics.admin.v1alpha.GoogleSignalsConsent"
+    end
+    add_message "google.analytics.admin.v1alpha.CustomDimension" do
+      optional :name, :string, 1
+      optional :parameter_name, :string, 2
+      optional :display_name, :string, 3
+      optional :description, :string, 4
+      optional :scope, :enum, 5, "google.analytics.admin.v1alpha.CustomDimension.DimensionScope"
+      optional :disallow_ads_personalization, :bool, 6
+    end
+    add_enum "google.analytics.admin.v1alpha.CustomDimension.DimensionScope" do
+      value :DIMENSION_SCOPE_UNSPECIFIED, 0
+      value :EVENT, 1
+      value :USER, 2
+    end
+    add_message "google.analytics.admin.v1alpha.CustomMetric" do
+      optional :name, :string, 1
+      optional :parameter_name, :string, 2
+      optional :display_name, :string, 3
+      optional :description, :string, 4
+      optional :measurement_unit, :enum, 5, "google.analytics.admin.v1alpha.CustomMetric.MeasurementUnit"
+      optional :scope, :enum, 6, "google.analytics.admin.v1alpha.CustomMetric.MetricScope"
+    end
+    add_enum "google.analytics.admin.v1alpha.CustomMetric.MeasurementUnit" do
+      value :MEASUREMENT_UNIT_UNSPECIFIED, 0
+      value :STANDARD, 1
+      value :CURRENCY, 2
+      value :FEET, 3
+      value :METERS, 4
+      value :KILOMETERS, 5
+      value :MILES, 6
+      value :MILLISECONDS, 7
+      value :SECONDS, 8
+      value :MINUTES, 9
+      value :HOURS, 10
+    end
+    add_enum "google.analytics.admin.v1alpha.CustomMetric.MetricScope" do
+      value :METRIC_SCOPE_UNSPECIFIED, 0
+      value :EVENT, 1
     end
     add_enum "google.analytics.admin.v1alpha.MaximumUserAccess" do
       value :MAXIMUM_USER_ACCESS_UNSPECIFIED, 0
@@ -198,6 +257,21 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :IOS_APP_DATA_STREAM, 5
       value :FIREBASE_LINK, 6
       value :GOOGLE_ADS_LINK, 7
+      value :GOOGLE_SIGNALS_SETTINGS, 8
+      value :CONVERSION_EVENT, 9
+      value :MEASUREMENT_PROTOCOL_SECRET, 10
+      value :CUSTOM_DIMENSION, 11
+      value :CUSTOM_METRIC, 12
+    end
+    add_enum "google.analytics.admin.v1alpha.GoogleSignalsState" do
+      value :GOOGLE_SIGNALS_STATE_UNSPECIFIED, 0
+      value :GOOGLE_SIGNALS_ENABLED, 1
+      value :GOOGLE_SIGNALS_DISABLED, 2
+    end
+    add_enum "google.analytics.admin.v1alpha.GoogleSignalsConsent" do
+      value :GOOGLE_SIGNALS_CONSENT_UNSPECIFIED, 0
+      value :GOOGLE_SIGNALS_CONSENT_CONSENTED, 2
+      value :GOOGLE_SIGNALS_CONSENT_NOT_CONSENTED, 1
     end
   end
 end
@@ -220,14 +294,24 @@ module Google
         DataSharingSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DataSharingSettings").msgclass
         AccountSummary = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AccountSummary").msgclass
         PropertySummary = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.PropertySummary").msgclass
+        MeasurementProtocolSecret = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.MeasurementProtocolSecret").msgclass
         ChangeHistoryEvent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ChangeHistoryEvent").msgclass
         ChangeHistoryChange = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ChangeHistoryChange").msgclass
         ChangeHistoryChange::ChangeHistoryResource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource").msgclass
+        ConversionEvent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ConversionEvent").msgclass
+        GoogleSignalsSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GoogleSignalsSettings").msgclass
+        CustomDimension = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CustomDimension").msgclass
+        CustomDimension::DimensionScope = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CustomDimension.DimensionScope").enummodule
+        CustomMetric = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CustomMetric").msgclass
+        CustomMetric::MeasurementUnit = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CustomMetric.MeasurementUnit").enummodule
+        CustomMetric::MetricScope = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CustomMetric.MetricScope").enummodule
         MaximumUserAccess = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.MaximumUserAccess").enummodule
         IndustryCategory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.IndustryCategory").enummodule
         ActorType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ActorType").enummodule
         ActionType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ActionType").enummodule
         ChangeHistoryResourceType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ChangeHistoryResourceType").enummodule
+        GoogleSignalsState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GoogleSignalsState").enummodule
+        GoogleSignalsConsent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GoogleSignalsConsent").enummodule
       end
     end
   end

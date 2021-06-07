@@ -240,9 +240,114 @@
                 "get_data_sharing_settings"
               ]
             },
+            "GetMeasurementProtocolSecret": {
+              "methods": [
+                "get_measurement_protocol_secret"
+              ]
+            },
+            "ListMeasurementProtocolSecrets": {
+              "methods": [
+                "list_measurement_protocol_secrets"
+              ]
+            },
+            "CreateMeasurementProtocolSecret": {
+              "methods": [
+                "create_measurement_protocol_secret"
+              ]
+            },
+            "DeleteMeasurementProtocolSecret": {
+              "methods": [
+                "delete_measurement_protocol_secret"
+              ]
+            },
+            "UpdateMeasurementProtocolSecret": {
+              "methods": [
+                "update_measurement_protocol_secret"
+              ]
+            },
             "SearchChangeHistoryEvents": {
               "methods": [
                 "search_change_history_events"
+              ]
+            },
+            "GetGoogleSignalsSettings": {
+              "methods": [
+                "get_google_signals_settings"
+              ]
+            },
+            "UpdateGoogleSignalsSettings": {
+              "methods": [
+                "update_google_signals_settings"
+              ]
+            },
+            "CreateConversionEvent": {
+              "methods": [
+                "create_conversion_event"
+              ]
+            },
+            "GetConversionEvent": {
+              "methods": [
+                "get_conversion_event"
+              ]
+            },
+            "DeleteConversionEvent": {
+              "methods": [
+                "delete_conversion_event"
+              ]
+            },
+            "ListConversionEvents": {
+              "methods": [
+                "list_conversion_events"
+              ]
+            },
+            "CreateCustomDimension": {
+              "methods": [
+                "create_custom_dimension"
+              ]
+            },
+            "UpdateCustomDimension": {
+              "methods": [
+                "update_custom_dimension"
+              ]
+            },
+            "ListCustomDimensions": {
+              "methods": [
+                "list_custom_dimensions"
+              ]
+            },
+            "ArchiveCustomDimension": {
+              "methods": [
+                "archive_custom_dimension"
+              ]
+            },
+            "GetCustomDimension": {
+              "methods": [
+                "get_custom_dimension"
+              ]
+            },
+            "CreateCustomMetric": {
+              "methods": [
+                "create_custom_metric"
+              ]
+            },
+            "UpdateCustomMetric": {
+              "methods": [
+                "update_custom_metric"
+              ]
+            },
+            "ListCustomMetrics": {
+              "methods": [
+                "list_custom_metrics"
+              ]
+            },
+            "ArchiveCustomMetric": {
+              "methods": [
+                "archive_custom_metric"
+              ]
+            },
+            "GetCustomMetric": {
+              "methods": [
+                "get_custom_metric"
               ]
             }
           }

@@ -7,5 +7,6 @@
     "name_pretty": "Cloud Video Intelligence V1p2beta1 API",
     "product_documentation": "https://cloud.google.com/video-intelligence",
     "repo": "googleapis/google-cloud-ruby",
-    "requires_billing": true
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO"
 }

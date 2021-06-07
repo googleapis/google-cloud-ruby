@@ -57,6 +57,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :action, :string, 3
       optional :parameters, :message, 4, "google.protobuf.Struct"
       optional :all_required_params_present, :bool, 5
+      optional :cancels_slot_filling, :bool, 21
       optional :fulfillment_text, :string, 6
       repeated :fulfillment_messages, :message, 7, "google.cloud.dialogflow.v2.Intent.Message"
       optional :webhook_source, :string, 8

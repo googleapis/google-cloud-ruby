@@ -67,97 +67,97 @@ module Google
               default_config.rpcs.list_workload_identity_pools.timeout = 60.0
               default_config.rpcs.list_workload_identity_pools.retry_policy = {
                 initial_delay: 1.0,
-            max_delay: 10.0,
-            multiplier: 1.3,
-            retry_codes: [14, 4]
+                max_delay: 10.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
               }
 
               default_config.rpcs.get_workload_identity_pool.timeout = 60.0
               default_config.rpcs.get_workload_identity_pool.retry_policy = {
                 initial_delay: 1.0,
-            max_delay: 10.0,
-            multiplier: 1.3,
-            retry_codes: [14, 4]
+                max_delay: 10.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
               }
 
               default_config.rpcs.create_workload_identity_pool.timeout = 60.0
               default_config.rpcs.create_workload_identity_pool.retry_policy = {
                 initial_delay: 1.0,
-            max_delay: 10.0,
-            multiplier: 1.3,
-            retry_codes: [14, 4]
+                max_delay: 10.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
               }
 
               default_config.rpcs.update_workload_identity_pool.timeout = 60.0
               default_config.rpcs.update_workload_identity_pool.retry_policy = {
                 initial_delay: 1.0,
-            max_delay: 10.0,
-            multiplier: 1.3,
-            retry_codes: [14, 4]
+                max_delay: 10.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
               }
 
               default_config.rpcs.delete_workload_identity_pool.timeout = 60.0
               default_config.rpcs.delete_workload_identity_pool.retry_policy = {
                 initial_delay: 1.0,
-            max_delay: 10.0,
-            multiplier: 1.3,
-            retry_codes: [14, 4]
+                max_delay: 10.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
               }
 
               default_config.rpcs.undelete_workload_identity_pool.timeout = 60.0
               default_config.rpcs.undelete_workload_identity_pool.retry_policy = {
                 initial_delay: 1.0,
-            max_delay: 10.0,
-            multiplier: 1.3,
-            retry_codes: [14, 4]
+                max_delay: 10.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
               }
 
               default_config.rpcs.list_workload_identity_pool_providers.timeout = 60.0
               default_config.rpcs.list_workload_identity_pool_providers.retry_policy = {
                 initial_delay: 1.0,
-            max_delay: 10.0,
-            multiplier: 1.3,
-            retry_codes: [14, 4]
+                max_delay: 10.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
               }
 
               default_config.rpcs.get_workload_identity_pool_provider.timeout = 60.0
               default_config.rpcs.get_workload_identity_pool_provider.retry_policy = {
                 initial_delay: 1.0,
-            max_delay: 10.0,
-            multiplier: 1.3,
-            retry_codes: [14, 4]
+                max_delay: 10.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
               }
 
               default_config.rpcs.create_workload_identity_pool_provider.timeout = 60.0
               default_config.rpcs.create_workload_identity_pool_provider.retry_policy = {
                 initial_delay: 1.0,
-            max_delay: 10.0,
-            multiplier: 1.3,
-            retry_codes: [14, 4]
+                max_delay: 10.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
               }
 
               default_config.rpcs.update_workload_identity_pool_provider.timeout = 60.0
               default_config.rpcs.update_workload_identity_pool_provider.retry_policy = {
                 initial_delay: 1.0,
-            max_delay: 10.0,
-            multiplier: 1.3,
-            retry_codes: [14, 4]
+                max_delay: 10.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
               }
 
               default_config.rpcs.delete_workload_identity_pool_provider.timeout = 60.0
               default_config.rpcs.delete_workload_identity_pool_provider.retry_policy = {
                 initial_delay: 1.0,
-            max_delay: 10.0,
-            multiplier: 1.3,
-            retry_codes: [14, 4]
+                max_delay: 10.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
               }
 
               default_config.rpcs.undelete_workload_identity_pool_provider.timeout = 60.0
               default_config.rpcs.undelete_workload_identity_pool_provider.retry_policy = {
                 initial_delay: 1.0,
-            max_delay: 10.0,
-            multiplier: 1.3,
-            retry_codes: [14, 4]
+                max_delay: 10.0,
+                multiplier: 1.3,
+                retry_codes: [14, 4]
               }
 
               default_config

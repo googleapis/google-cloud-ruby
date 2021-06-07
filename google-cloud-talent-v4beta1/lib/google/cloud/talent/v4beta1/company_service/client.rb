@@ -70,9 +70,9 @@ module Google
                 default_config.rpcs.get_company.timeout = 30.0
                 default_config.rpcs.get_company.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_company.timeout = 30.0
@@ -80,17 +80,17 @@ module Google
                 default_config.rpcs.delete_company.timeout = 30.0
                 default_config.rpcs.delete_company.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_companies.timeout = 30.0
                 default_config.rpcs.list_companies.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config

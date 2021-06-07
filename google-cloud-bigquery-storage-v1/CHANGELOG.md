@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 / 2021-05-21
+
+#### Features
+
+* Add ZSTD compression as an option for Arrow
+
 ### 0.5.0 / 2021-04-05
 
 #### Features

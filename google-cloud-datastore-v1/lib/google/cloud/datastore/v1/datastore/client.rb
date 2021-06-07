@@ -71,17 +71,17 @@ module Google
                 default_config.rpcs.lookup.timeout = 60.0
                 default_config.rpcs.lookup.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.run_query.timeout = 60.0
                 default_config.rpcs.run_query.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.begin_transaction.timeout = 60.0
@@ -95,9 +95,9 @@ module Google
                 default_config.rpcs.reserve_ids.timeout = 60.0
                 default_config.rpcs.reserve_ids.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config

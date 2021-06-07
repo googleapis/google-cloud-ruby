@@ -79,25 +79,25 @@ module Grafeas
             default_config.rpcs.get_occurrence.timeout = 30.0
             default_config.rpcs.get_occurrence.retry_policy = {
               initial_delay: 0.1,
-          max_delay: 60.0,
-          multiplier: 1.3,
-          retry_codes: [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
             }
 
             default_config.rpcs.list_occurrences.timeout = 30.0
             default_config.rpcs.list_occurrences.retry_policy = {
               initial_delay: 0.1,
-          max_delay: 60.0,
-          multiplier: 1.3,
-          retry_codes: [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
             }
 
             default_config.rpcs.delete_occurrence.timeout = 30.0
             default_config.rpcs.delete_occurrence.retry_policy = {
               initial_delay: 0.1,
-          max_delay: 60.0,
-          multiplier: 1.3,
-          retry_codes: [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
             }
 
             default_config.rpcs.create_occurrence.timeout = 30.0
@@ -109,33 +109,33 @@ module Grafeas
             default_config.rpcs.get_occurrence_note.timeout = 30.0
             default_config.rpcs.get_occurrence_note.retry_policy = {
               initial_delay: 0.1,
-          max_delay: 60.0,
-          multiplier: 1.3,
-          retry_codes: [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
             }
 
             default_config.rpcs.get_note.timeout = 30.0
             default_config.rpcs.get_note.retry_policy = {
               initial_delay: 0.1,
-          max_delay: 60.0,
-          multiplier: 1.3,
-          retry_codes: [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
             }
 
             default_config.rpcs.list_notes.timeout = 30.0
             default_config.rpcs.list_notes.retry_policy = {
               initial_delay: 0.1,
-          max_delay: 60.0,
-          multiplier: 1.3,
-          retry_codes: [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
             }
 
             default_config.rpcs.delete_note.timeout = 30.0
             default_config.rpcs.delete_note.retry_policy = {
               initial_delay: 0.1,
-          max_delay: 60.0,
-          multiplier: 1.3,
-          retry_codes: [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
             }
 
             default_config.rpcs.create_note.timeout = 30.0
@@ -147,9 +147,9 @@ module Grafeas
             default_config.rpcs.list_note_occurrences.timeout = 30.0
             default_config.rpcs.list_note_occurrences.retry_policy = {
               initial_delay: 0.1,
-          max_delay: 60.0,
-          multiplier: 1.3,
-          retry_codes: [14, 4]
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [14, 4]
             }
 
             default_config

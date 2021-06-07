@@ -120,4 +120,18 @@ describe "Spanner Client", :dml, :spanner do
     post_results = db.execute_sql "SELECT * FROM accounts", single_use: { timestamp: timestamp }
     _(post_results.rows.count).must_equal 5
   end
+
+  describe "request options" do
+    it "execute DML statement with priority options" do
+      request_options = { priority: :PRIORITY_MEDIUM }
+
+      db.transaction request_options: request_options do |tx|
+        insert_row_count = tx.execute_update \
+            "INSERT INTO accounts (account_id, username, active, reputation) VALUES (@account_id, @username, @active, @reputation)",
+            params: { account_id: 4, username: "inserted", active: true, reputation: 88.8 },
+            request_options: request_options
+        _(insert_row_count).must_equal 1
+      end
+    end
+  end
 end

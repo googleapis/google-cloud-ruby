@@ -29,10 +29,9 @@ module Google
           #     `projects/{project_id}/locations/{location}/sessions/{session_id}`.
           # @!attribute [r] expire_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Output only. Time at which the session becomes invalid. After this time,
-          #     subsequent requests to read this Session will return errors. The
-          #     expire_time is automatically assigned and currently cannot be specified or
-          #     updated.
+          #     Output only. Time at which the session becomes invalid. After this time, subsequent
+          #     requests to read this Session will return errors. The expire_time is
+          #     automatically assigned and currently cannot be specified or updated.
           # @!attribute [rw] data_format
           #   @return [::Google::Cloud::Bigquery::Storage::V1::DataFormat]
           #     Immutable. Data format of the output data.
@@ -48,8 +47,7 @@ module Google
           #     `projects/{project_id}/datasets/{dataset_id}/tables/{table_id}`
           # @!attribute [rw] table_modifiers
           #   @return [::Google::Cloud::Bigquery::Storage::V1::ReadSession::TableModifiers]
-          #     Optional. Any modifiers which are applied when reading from the specified
-          #     table.
+          #     Optional. Any modifiers which are applied when reading from the specified table.
           # @!attribute [rw] read_options
           #   @return [::Google::Cloud::Bigquery::Storage::V1::ReadSession::TableReadOptions]
           #     Optional. Read options for this session (e.g. column selection, filters).
@@ -95,6 +93,7 @@ module Google
             #     Restricted to a maximum length for 1 MB.
             # @!attribute [rw] arrow_serialization_options
             #   @return [::Google::Cloud::Bigquery::Storage::V1::ArrowSerializationOptions]
+            #     Optional. Options specific to the Apache Arrow output format.
             class TableReadOptions
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

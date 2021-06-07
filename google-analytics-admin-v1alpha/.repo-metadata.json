@@ -6,5 +6,6 @@
     "name": "analyticsadmin",
     "name_pretty": "Google Analytics Admin V1alpha API",
     "repo": "googleapis/google-cloud-ruby",
-    "requires_billing": true
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO"
 }

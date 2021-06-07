@@ -88,7 +88,7 @@ module Google
         #   @return [::Google::Cloud::Tasks::V2beta2::Queue::State]
         #     Output only. The state of the queue.
         #
-        #     `state` can only be changed by called
+        #     `state` can only be changed by calling
         #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#pause_queue PauseQueue},
         #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#resume_queue ResumeQueue}, or uploading
         #     [queue.yaml/xml](https://cloud.google.com/appengine/docs/python/config/queueref).
