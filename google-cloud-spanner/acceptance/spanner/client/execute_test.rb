@@ -199,4 +199,13 @@ describe "Spanner Client", :execute_sql, :spanner do
       _(row[:num]).must_equal 42
     end
   end
+
+  describe "request options" do
+    it "run sample query with priority" do
+      results = db.execute_sql "SELECT 1", request_options: { priority: :PRIORITY_MEDIUM }
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+
+      _(results.rows.count).must_equal 1
+    end
+  end
 end

@@ -51,4 +51,13 @@ describe "Spanner Client", :pdml, :spanner do
     post_results = db.execute_sql "SELECT * FROM accounts WHERE active = TRUE", single_use: { strong: true }
     _(post_results.rows.count).must_equal 3
   end
+
+  describe "request options" do
+    it "execute Partitioned DML statement with priority options" do
+      pdml_row_count = db.execute_partition_update "UPDATE accounts a SET a.active = TRUE WHERE a.active = FALSE",
+                                                   request_options: { priority: :PRIORITY_MEDIUM }
+
+      _(pdml_row_count).must_equal 1
+    end
+  end
 end

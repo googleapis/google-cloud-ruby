@@ -172,7 +172,7 @@ describe "Spanner Client", :types, :numeric, :spanner do
   end
 
   it "writes and queries primary key as a numeric" do
-    skip if emulator_enabled?
+    skip
 
     id = BigDecimal(SecureRandom.int64)
     db.upsert "boxes", { id: id, name: "box-1" }
@@ -185,7 +185,7 @@ describe "Spanner Client", :types, :numeric, :spanner do
   end
 
   it "writes and queries composite numeric primary key" do
-    skip if emulator_enabled?
+    skip
 
     id = SecureRandom.int64
     box_id = BigDecimal(SecureRandom.int64)
