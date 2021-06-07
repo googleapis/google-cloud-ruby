@@ -35,4 +35,4 @@ Naming/FileName:
     - "lib/google-cloud-bigquery.rb"
 Naming/MethodParameterName:
   Exclude:
-    - "lib/google/cloud/bigquery/external.rb"
+    - "lib/google/cloud/bigquery/external/**/*.rb"

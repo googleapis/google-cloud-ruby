@@ -113,6 +113,13 @@ module Google
           @grpc.state
         end
 
+        ##
+        # Time at which the database creation started.
+        # @return [Time]
+        def create_time
+          Convert.timestamp_to_time @grpc.create_time
+        end
+
         # An encryption configuration describing the encryption type and key
         # resources in Cloud KMS.
         #

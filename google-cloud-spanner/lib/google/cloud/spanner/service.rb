@@ -313,7 +313,8 @@ module Google
         def execute_streaming_sql session_name, sql, transaction: nil,
                                   params: nil, types: nil, resume_token: nil,
                                   partition_token: nil, seqno: nil,
-                                  query_options: nil, call_options: nil
+                                  query_options: nil, request_options: nil,
+                                  call_options: nil
           opts = default_options session_name: session_name,
                                  call_options: call_options
           request =  {
@@ -325,13 +326,14 @@ module Google
             resume_token: resume_token,
             partition_token: partition_token,
             seqno: seqno,
-            query_options: query_options
+            query_options: query_options,
+            request_options: request_options
           }
           service.execute_streaming_sql request, opts
         end
 
         def execute_batch_dml session_name, transaction, statements, seqno,
-                              call_options: nil
+                              request_options: nil, call_options: nil
           opts = default_options session_name: session_name,
                                  call_options: call_options
           statements = statements.map(&:to_grpc)
@@ -339,7 +341,8 @@ module Google
             session: session_name,
             transaction: transaction,
             statements: statements,
-            seqno: seqno
+            seqno: seqno,
+            request_options: request_options
           }
           results = service.execute_batch_dml request, opts
 
@@ -357,14 +360,14 @@ module Google
         def streaming_read_table session_name, table_name, columns, keys: nil,
                                  index: nil, transaction: nil, limit: nil,
                                  resume_token: nil, partition_token: nil,
-                                 call_options: nil
+                                 request_options: nil, call_options: nil
           opts = default_options session_name: session_name,
                                  call_options: call_options
           request = {
             session: session_name, table: table_name, columns: columns,
             key_set: keys, transaction: transaction, index: index,
             limit: limit, resume_token: resume_token,
-            partition_token: partition_token
+            partition_token: partition_token, request_options: request_options
           }
           service.streaming_read request, opts
         end
@@ -402,7 +405,7 @@ module Google
         end
 
         def commit session_name, mutations = [], transaction_id: nil,
-                   commit_options: nil, call_options: nil
+                   commit_options: nil, request_options: nil, call_options: nil
           tx_opts = nil
           if transaction_id.nil?
             tx_opts = V1::TransactionOptions.new(
@@ -413,7 +416,8 @@ module Google
                                  call_options: call_options
           request = {
             session: session_name, transaction_id: transaction_id,
-            single_use_transaction: tx_opts, mutations: mutations
+            single_use_transaction: tx_opts, mutations: mutations,
+            request_options: request_options
           }
 
           if commit_options

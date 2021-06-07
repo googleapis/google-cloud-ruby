@@ -116,6 +116,7 @@ module Google
         #   | `BOOL`      | `true`/`false` | |
         #   | `INT64`     | `Integer`      | |
         #   | `FLOAT64`   | `Float`        | |
+        #   | `NUMERIC`   | `BigDecimal`   | |
         #   | `STRING`    | `String`       | |
         #   | `DATE`      | `Date`         | |
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
@@ -141,6 +142,7 @@ module Google
         #   * `:BYTES`
         #   * `:DATE`
         #   * `:FLOAT64`
+        #   * `:NUMERIC`
         #   * `:INT64`
         #   * `:STRING`
         #   * `:TIMESTAMP`
@@ -314,7 +316,7 @@ module Google
         #
         def execute_query sql, params: nil, types: nil, transaction: nil,
                           partition_token: nil, seqno: nil, query_options: nil,
-                          call_options: nil
+                          request_options: nil, call_options: nil
           ensure_service!
           if query_options.nil?
             query_options = @query_options
@@ -328,6 +330,7 @@ module Google
                                           partition_token: partition_token,
                                           seqno: seqno,
                                           query_options: query_options,
+                                          request_options: request_options,
                                           call_options: call_options
           @last_updated_at = Time.now
           results
@@ -369,7 +372,8 @@ module Google
         # @return [Array<Integer>] A list with the exact number of rows that
         #   were modified for each DML statement.
         #
-        def batch_update transaction, seqno, call_options: nil
+        def batch_update transaction, seqno, request_options: nil,
+                         call_options: nil
           ensure_service!
 
           raise ArgumentError, "block is required" unless block_given?
@@ -379,6 +383,7 @@ module Google
 
           results = service.execute_batch_dml path, transaction,
                                               batch.statements, seqno,
+                                              request_options: request_options,
                                               call_options: call_options
           @last_updated_at = Time.now
           results
@@ -434,13 +439,15 @@ module Google
         #   end
         #
         def read table, columns, keys: nil, index: nil, limit: nil,
-                 transaction: nil, partition_token: nil, call_options: nil
+                 transaction: nil, partition_token: nil, request_options: nil,
+                 call_options: nil
           ensure_service!
 
           results = Results.read service, path, table, columns,
                                  keys: keys, index: index, limit: limit,
                                  transaction: transaction,
                                  partition_token: partition_token,
+                                 request_options: request_options,
                                  call_options: call_options
           @last_updated_at = Time.now
           results
@@ -542,13 +549,15 @@ module Google
         #   puts commit_resp.timestamp
         #   puts commit_resp.stats.mutation_count
         #
-        def commit transaction_id: nil, commit_options: nil, call_options: nil
+        def commit transaction_id: nil, commit_options: nil,
+                   request_options: nil, call_options: nil
           ensure_service!
           commit = Commit.new
           yield commit
           commit_resp = service.commit path, commit.mutations,
                                        transaction_id: transaction_id,
                                        commit_options: commit_options,
+                                       request_options: request_options,
                                        call_options: call_options
           @last_updated_at = Time.now
           resp = CommitResponse.from_grpc commit_resp
@@ -573,6 +582,7 @@ module Google
         #   | `BOOL`      | `true`/`false` | |
         #   | `INT64`     | `Integer`      | |
         #   | `FLOAT64`   | `Float`        | |
+        #   | `NUMERIC`   | `BigDecimal`   | |
         #   | `STRING`    | `String`       | |
         #   | `DATE`      | `Date`         | |
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
@@ -633,10 +643,11 @@ module Google
         #   puts commit_resp.stats.mutation_count
         #
         def upsert table, *rows, transaction_id: nil, commit_options: nil,
-                   call_options: nil
+                   request_options: nil, call_options: nil
           opts = {
             transaction_id: transaction_id,
             commit_options: commit_options,
+            request_options: request_options,
             call_options: call_options
           }
           commit(**opts) do |c|
@@ -662,6 +673,7 @@ module Google
         #   | `BOOL`      | `true`/`false` | |
         #   | `INT64`     | `Integer`      | |
         #   | `FLOAT64`   | `Float`        | |
+        #   | `NUMERIC`   | `BigDecimal`   | |
         #   | `STRING`    | `String`       | |
         #   | `DATE`      | `Date`         | |
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
@@ -722,10 +734,11 @@ module Google
         #   puts commit_resp.stats.mutation_count
         #
         def insert table, *rows, transaction_id: nil, commit_options: nil,
-                   call_options: nil
+                   request_options: nil, call_options: nil
           opts = {
             transaction_id: transaction_id,
             commit_options: commit_options,
+            request_options: request_options,
             call_options: call_options
           }
           commit(**opts) do |c|
@@ -750,6 +763,7 @@ module Google
         #   | `BOOL`      | `true`/`false` | |
         #   | `INT64`     | `Integer`      | |
         #   | `FLOAT64`   | `Float`        | |
+        #   | `NUMERIC`   | `BigDecimal`   | |
         #   | `STRING`    | `String`       | |
         #   | `DATE`      | `Date`         | |
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
@@ -810,10 +824,11 @@ module Google
         #   puts commit_resp.stats.mutation_count
         #
         def update table, *rows, transaction_id: nil, commit_options: nil,
-                   call_options: nil
+                   request_options: nil, call_options: nil
           opts = {
             transaction_id: transaction_id,
             commit_options: commit_options,
+            request_options: request_options,
             call_options: call_options
           }
           commit(**opts) do |c|
@@ -840,6 +855,7 @@ module Google
         #   | `BOOL`      | `true`/`false` | |
         #   | `INT64`     | `Integer`      | |
         #   | `FLOAT64`   | `Float`        | |
+        #   | `NUMERIC`   | `BigDecimal`   | |
         #   | `STRING`    | `String`       | |
         #   | `DATE`      | `Date`         | |
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
@@ -900,10 +916,11 @@ module Google
         #   puts commit_resp.stats.mutation_count
         #
         def replace table, *rows, transaction_id: nil, commit_options: nil,
-                    call_options: nil
+                    request_options: nil, call_options: nil
           opts = {
             transaction_id: transaction_id,
             commit_options: commit_options,
+            request_options: request_options,
             call_options: call_options
           }
           commit(**opts) do |c|
@@ -968,10 +985,11 @@ module Google
         #   puts commit_resp.stats.mutation_count
         #
         def delete table, keys = [], transaction_id: nil, commit_options: nil,
-                   call_options: nil
+                   request_options: nil, call_options: nil
           opts = {
             transaction_id: transaction_id,
             commit_options: commit_options,
+            request_options: request_options,
             call_options: call_options
           }
           commit(**opts) do |c|

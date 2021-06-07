@@ -113,6 +113,7 @@ module Google
         #   | `BOOL`      | `true`/`false` | |
         #   | `INT64`     | `Integer`      | |
         #   | `FLOAT64`   | `Float`        | |
+        #   | `NUMERIC`   | `BigDecimal`   | |
         #   | `STRING`    | `String`       | |
         #   | `DATE`      | `Date`         | |
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
@@ -138,6 +139,7 @@ module Google
         #   * `:BYTES`
         #   * `:DATE`
         #   * `:FLOAT64`
+        #   * `:NUMERIC`
         #   * `:INT64`
         #   * `:STRING`
         #   * `:TIMESTAMP`
@@ -155,6 +157,14 @@ module Google
         #   * `:optimizer_version` (String) The version of optimizer to use.
         #     Empty to use database default. "latest" to use the latest
         #     available optimizer version.
+        # @param [Hash] request_options Common request options.
+        #
+        #   * `:priority` (String) The relative priority for requests.
+        #     The priority acts as a hint to the Cloud Spanner scheduler
+        #     and does not guarantee priority or order of execution.
+        #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
+        #     `:PRIORITY_HIGH`. If priority not set then default is
+        #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -312,7 +322,7 @@ module Google
         #   end
         #
         def execute_query sql, params: nil, types: nil, query_options: nil,
-                          call_options: nil
+                          request_options: nil, call_options: nil
           ensure_session!
 
           @seqno += 1
@@ -321,6 +331,7 @@ module Google
           session.execute_query sql, params: params, types: types,
                                      transaction: tx_selector, seqno: @seqno,
                                      query_options: query_options,
+                                     request_options: request_options,
                                      call_options: call_options
         end
         alias execute execute_query
@@ -350,6 +361,7 @@ module Google
         #   | `BOOL`      | `true`/`false` | |
         #   | `INT64`     | `Integer`      | |
         #   | `FLOAT64`   | `Float`        | |
+        #   | `NUMERIC`   | `BigDecimal`   | |
         #   | `STRING`    | `String`       | |
         #   | `DATE`      | `Date`         | |
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
@@ -376,6 +388,7 @@ module Google
         #   * `:BYTES`
         #   * `:DATE`
         #   * `:FLOAT64`
+        #   * `:NUMERIC`
         #   * `:INT64`
         #   * `:STRING`
         #   * `:TIMESTAMP`
@@ -391,6 +404,14 @@ module Google
         #   * `:optimizer_version` (String) The version of optimizer to use.
         #     Empty to use database default. "latest" to use the latest
         #     available optimizer version.
+        # @param [Hash] request_options Common request options.
+        #
+        #   * `:priority` (String) The relative priority for requests.
+        #     The priority acts as a hint to the Cloud Spanner scheduler
+        #     and does not guarantee priority or order of execution.
+        #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
+        #     `:PRIORITY_HIGH`. If priority not set then default is
+        #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -468,9 +489,10 @@ module Google
         #   end
         #
         def execute_update sql, params: nil, types: nil, query_options: nil,
-                           call_options: nil
+                           request_options: nil, call_options: nil
           results = execute_query sql, params: params, types: types,
                                   query_options: query_options,
+                                  request_options: request_options,
                                   call_options: call_options
           # Stream all PartialResultSet to get ResultSetStats
           results.rows.to_a
@@ -485,6 +507,14 @@ module Google
         ##
         # Executes DML statements in a batch.
         #
+        # @param [Hash] request_options Common request options.
+        #
+        #   * `:priority` (String) The relative priority for requests.
+        #     The priority acts as a hint to the Cloud Spanner scheduler
+        #     and does not guarantee priority or order of execution.
+        #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
+        #     `:PRIORITY_HIGH`. If priority not set then default is
+        #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -554,10 +584,11 @@ module Google
         #     end
         #   end
         #
-        def batch_update call_options: nil, &block
+        def batch_update request_options: nil, call_options: nil, &block
           ensure_session!
           @seqno += 1
           session.batch_update tx_selector, @seqno,
+                               request_options: request_options,
                                call_options: call_options, &block
         end
 
@@ -577,6 +608,14 @@ module Google
         #   Optional.
         # @param [Integer] limit If greater than zero, no more than this number
         #   of rows will be returned. The default is no limit.
+        # @param [Hash] request_options Common request options.
+        #
+        #   * `:priority` (String) The relative priority for requests.
+        #     The priority acts as a hint to the Cloud Spanner scheduler
+        #     and does not guarantee priority or order of execution.
+        #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
+        #     `:PRIORITY_HIGH`. If priority not set then default is
+        #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -609,7 +648,7 @@ module Google
         #   end
         #
         def read table, columns, keys: nil, index: nil, limit: nil,
-                 call_options: nil
+                 request_options: nil, call_options: nil
           ensure_session!
 
           columns = Array(columns).map(&:to_s)
@@ -617,6 +656,7 @@ module Google
 
           session.read table, columns, keys: keys, index: index, limit: limit,
                                        transaction: tx_selector,
+                                       request_options: request_options,
                                        call_options: call_options
         end
 
@@ -641,6 +681,7 @@ module Google
         #   | `BOOL`      | `true`/`false` | |
         #   | `INT64`     | `Integer`      | |
         #   | `FLOAT64`   | `Float`        | |
+        #   | `NUMERIC`   | `BigDecimal`   | |
         #   | `STRING`    | `String`       | |
         #   | `DATE`      | `Date`         | |
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
@@ -687,6 +728,7 @@ module Google
         #   | `BOOL`      | `true`/`false` | |
         #   | `INT64`     | `Integer`      | |
         #   | `FLOAT64`   | `Float`        | |
+        #   | `NUMERIC`   | `BigDecimal`   | |
         #   | `STRING`    | `String`       | |
         #   | `DATE`      | `Date`         | |
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
@@ -732,6 +774,7 @@ module Google
         #   | `BOOL`      | `true`/`false` | |
         #   | `INT64`     | `Integer`      | |
         #   | `FLOAT64`   | `Float`        | |
+        #   | `NUMERIC`   | `BigDecimal`   | |
         #   | `STRING`    | `String`       | |
         #   | `DATE`      | `Date`         | |
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
@@ -779,6 +822,7 @@ module Google
         #   | `BOOL`      | `true`/`false` | |
         #   | `INT64`     | `Integer`      | |
         #   | `FLOAT64`   | `Float`        | |
+        #   | `NUMERIC`   | `BigDecimal`   | |
         #   | `STRING`    | `String`       | |
         #   | `DATE`      | `Date`         | |
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
@@ -880,6 +924,7 @@ module Google
         #   * `:BYTES`
         #   * `:DATE`
         #   * `:FLOAT64`
+        #   * `:NUMERIC`
         #   * `:INT64`
         #   * `:STRING`
         #   * `:TIMESTAMP`

@@ -940,6 +940,350 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request message for GetMeasurementProtocolSecret RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the measurement protocol secret to lookup.
+        #     Format:
+        #     properties/\\{property}/webDataStreams/\\{webDataStream}/measurementProtocolSecrets/\\{measurementProtocolSecret}
+        #     Note: Any type of stream (WebDataStream, IosAppDataStream,
+        #     AndroidAppDataStream) may be a parent.
+        class GetMeasurementProtocolSecretRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateMeasurementProtocolSecret RPC
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where this secret will be created.
+        #     Any type of stream (WebDataStream, IosAppDataStream, AndroidAppDataStream)
+        #     may be a parent.
+        #     Format: properties/\\{property}/webDataStreams/\\{webDataStream}
+        # @!attribute [rw] measurement_protocol_secret
+        #   @return [::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret]
+        #     Required. The measurement protocol secret to create.
+        class CreateMeasurementProtocolSecretRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteMeasurementProtocolSecret RPC
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the MeasurementProtocolSecret to delete.
+        #     Format:
+        #     properties/\\{property}/webDataStreams/\\{webDataStream}/measurementProtocolSecrets/\\{measurementProtocolSecret}
+        #     Note: Any type of stream (WebDataStream, IosAppDataStream,
+        #     AndroidAppDataStream) may be a parent.
+        class DeleteMeasurementProtocolSecretRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateMeasurementProtocolSecret RPC
+        # @!attribute [rw] measurement_protocol_secret
+        #   @return [::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret]
+        #     Required. The measurement protocol secret to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     The list of fields to be updated. Omitted fields will not be updated.
+        class UpdateMeasurementProtocolSecretRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListMeasurementProtocolSecret RPC
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the parent stream.
+        #     Any type of stream (WebDataStream, IosAppDataStream, AndroidAppDataStream)
+        #     may be a parent.
+        #     Format:
+        #     properties/\\{property}/webDataStreams/\\{webDataStream}/measurementProtocolSecrets
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 10 resources will be returned.
+        #     The maximum value is 10. Higher values will be coerced to the maximum.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListMeasurementProtocolSecrets`
+        #     call. Provide this to retrieve the subsequent page. When paginating, all
+        #     other parameters provided to `ListMeasurementProtocolSecrets` must match
+        #     the call that provided the page token.
+        class ListMeasurementProtocolSecretsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListMeasurementProtocolSecret RPC
+        # @!attribute [rw] measurement_protocol_secrets
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret>]
+        #     A list of secrets for the parent stream specified in the request.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListMeasurementProtocolSecretsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetGoogleSignalsSettings RPC
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the google signals settings to retrieve.
+        #     Format: properties/\\{property}/googleSignalsSettings
+        class GetGoogleSignalsSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateGoogleSignalsSettings RPC
+        # @!attribute [rw] google_signals_settings
+        #   @return [::Google::Analytics::Admin::V1alpha::GoogleSignalsSettings]
+        #     Required. The settings to update.
+        #     The `name` field is used to identify the settings to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake case
+        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+        #     the entire entity, use one path with the string "*" to match all fields.
+        class UpdateGoogleSignalsSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateConversionEvent RPC
+        # @!attribute [rw] conversion_event
+        #   @return [::Google::Analytics::Admin::V1alpha::ConversionEvent]
+        #     Required. The conversion event to create.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the parent property where this conversion event will
+        #     be created. Format: properties/123
+        class CreateConversionEventRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetConversionEvent RPC
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the conversion event to retrieve.
+        #     Format: properties/\\{property}/conversionEvents/\\{conversion_event}
+        #     Example: "properties/123/conversionEvents/456"
+        class GetConversionEventRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteConversionEvent RPC
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the conversion event to delete.
+        #     Format: properties/\\{property}/conversionEvents/\\{conversion_event}
+        #     Example: "properties/123/conversionEvents/456"
+        class DeleteConversionEventRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListConversionEvents RPC
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the parent property.
+        #     Example: 'properties/123'
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200; (higher values will be coerced to the maximum)
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListConversionEvents` call.
+        #     Provide this to retrieve the subsequent page.
+        #     When paginating, all other parameters provided to `ListConversionEvents`
+        #     must match the call that provided the page token.
+        class ListConversionEventsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListConversionEvents RPC.
+        # @!attribute [rw] conversion_events
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::ConversionEvent>]
+        #     The requested conversion events
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListConversionEventsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateCustomDimension RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] custom_dimension
+        #   @return [::Google::Analytics::Admin::V1alpha::CustomDimension]
+        #     Required. The CustomDimension to create.
+        class CreateCustomDimensionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateCustomDimension RPC.
+        # @!attribute [rw] custom_dimension
+        #   @return [::Google::Analytics::Admin::V1alpha::CustomDimension]
+        #     The CustomDimension to update
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Omitted fields will not be updated.
+        #     To replace the entire entity, use one path with the string "*" to match
+        #     all fields.
+        class UpdateCustomDimensionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListCustomDimensions RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListCustomDimensions` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListCustomDimensions`
+        #     must match the call that provided the page token.
+        class ListCustomDimensionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListCustomDimensions RPC.
+        # @!attribute [rw] custom_dimensions
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::CustomDimension>]
+        #     List of CustomDimensions.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListCustomDimensionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ArchiveCustomDimension RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the CustomDimension to archive.
+        #     Example format: properties/1234/customDimensions/5678
+        class ArchiveCustomDimensionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetCustomDimension RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the CustomDimension to get.
+        #     Example format: properties/1234/customDimensions/5678
+        class GetCustomDimensionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateCustomMetric RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] custom_metric
+        #   @return [::Google::Analytics::Admin::V1alpha::CustomMetric]
+        #     Required. The CustomMetric to create.
+        class CreateCustomMetricRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateCustomMetric RPC.
+        # @!attribute [rw] custom_metric
+        #   @return [::Google::Analytics::Admin::V1alpha::CustomMetric]
+        #     The CustomMetric to update
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Omitted fields will not be updated.
+        #     To replace the entire entity, use one path with the string "*" to match
+        #     all fields.
+        class UpdateCustomMetricRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListCustomMetrics RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListCustomMetrics` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListCustomMetrics` must
+        #     match the call that provided the page token.
+        class ListCustomMetricsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListCustomMetrics RPC.
+        # @!attribute [rw] custom_metrics
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::CustomMetric>]
+        #     List of CustomMetrics.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListCustomMetricsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ArchiveCustomMetric RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the CustomMetric to archive.
+        #     Example format: properties/1234/customMetrics/5678
+        class ArchiveCustomMetricRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetCustomMetric RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the CustomMetric to get.
+        #     Example format: properties/1234/customMetrics/5678
+        class GetCustomMetricRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

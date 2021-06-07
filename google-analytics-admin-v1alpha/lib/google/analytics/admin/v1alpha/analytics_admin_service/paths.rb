@@ -56,6 +56,51 @@ module Google
             end
 
             ##
+            # Create a fully-qualified ConversionEvent resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/conversionEvents/{conversion_event}`
+            #
+            # @param property [String]
+            # @param conversion_event [String]
+            #
+            # @return [::String]
+            def conversion_event_path property:, conversion_event:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/conversionEvents/#{conversion_event}"
+            end
+
+            ##
+            # Create a fully-qualified CustomDimension resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/customDimensions`
+            #
+            # @param property [String]
+            #
+            # @return [::String]
+            def custom_dimension_path property:
+              "properties/#{property}/customDimensions"
+            end
+
+            ##
+            # Create a fully-qualified CustomMetric resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/customMetrics`
+            #
+            # @param property [String]
+            #
+            # @return [::String]
+            def custom_metric_path property:
+              "properties/#{property}/customMetrics"
+            end
+
+            ##
             # Create a fully-qualified DataSharingSettings resource string.
             #
             # The resource will be in the following format:
@@ -135,6 +180,20 @@ module Google
             end
 
             ##
+            # Create a fully-qualified GoogleSignalsSettings resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/googleSignalsSettings`
+            #
+            # @param property [String]
+            #
+            # @return [::String]
+            def google_signals_settings_path property:
+              "properties/#{property}/googleSignalsSettings"
+            end
+
+            ##
             # Create a fully-qualified IosAppDataStream resource string.
             #
             # The resource will be in the following format:
@@ -149,6 +208,25 @@ module Google
               raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
 
               "properties/#{property}/iosAppDataStreams/#{ios_app_data_stream}"
+            end
+
+            ##
+            # Create a fully-qualified MeasurementProtocolSecret resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/webDataStreams/{web_data_stream}/measurementProtocolSecrets/{measurement_protocol_secret}`
+            #
+            # @param property [String]
+            # @param web_data_stream [String]
+            # @param measurement_protocol_secret [String]
+            #
+            # @return [::String]
+            def measurement_protocol_secret_path property:, web_data_stream:, measurement_protocol_secret:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+              raise ::ArgumentError, "web_data_stream cannot contain /" if web_data_stream.to_s.include? "/"
+
+              "properties/#{property}/webDataStreams/#{web_data_stream}/measurementProtocolSecrets/#{measurement_protocol_secret}"
             end
 
             ##

@@ -187,9 +187,54 @@ module Google
             # Get data sharing settings on an account.
             # Data sharing settings are singletons.
             rpc :GetDataSharingSettings, ::Google::Analytics::Admin::V1alpha::GetDataSharingSettingsRequest, ::Google::Analytics::Admin::V1alpha::DataSharingSettings
+            # Lookup for a single "GA4" MeasurementProtocolSecret.
+            rpc :GetMeasurementProtocolSecret, ::Google::Analytics::Admin::V1alpha::GetMeasurementProtocolSecretRequest, ::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret
+            # Returns child MeasurementProtocolSecrets under the specified parent
+            # Property.
+            rpc :ListMeasurementProtocolSecrets, ::Google::Analytics::Admin::V1alpha::ListMeasurementProtocolSecretsRequest, ::Google::Analytics::Admin::V1alpha::ListMeasurementProtocolSecretsResponse
+            # Creates a measurement protocol secret.
+            rpc :CreateMeasurementProtocolSecret, ::Google::Analytics::Admin::V1alpha::CreateMeasurementProtocolSecretRequest, ::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret
+            # Deletes target MeasurementProtocolSecret.
+            rpc :DeleteMeasurementProtocolSecret, ::Google::Analytics::Admin::V1alpha::DeleteMeasurementProtocolSecretRequest, ::Google::Protobuf::Empty
+            # Updates a measurement protocol secret.
+            rpc :UpdateMeasurementProtocolSecret, ::Google::Analytics::Admin::V1alpha::UpdateMeasurementProtocolSecretRequest, ::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret
             # Searches through all changes to an account or its children given the
             # specified set of filters.
             rpc :SearchChangeHistoryEvents, ::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsRequest, ::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsResponse
+            # Lookup for Google Signals settings for a property.
+            rpc :GetGoogleSignalsSettings, ::Google::Analytics::Admin::V1alpha::GetGoogleSignalsSettingsRequest, ::Google::Analytics::Admin::V1alpha::GoogleSignalsSettings
+            # Updates Google Signals settings for a property.
+            rpc :UpdateGoogleSignalsSettings, ::Google::Analytics::Admin::V1alpha::UpdateGoogleSignalsSettingsRequest, ::Google::Analytics::Admin::V1alpha::GoogleSignalsSettings
+            # Creates a conversion event with the specified attributes.
+            rpc :CreateConversionEvent, ::Google::Analytics::Admin::V1alpha::CreateConversionEventRequest, ::Google::Analytics::Admin::V1alpha::ConversionEvent
+            # Retrieve a single conversion event.
+            rpc :GetConversionEvent, ::Google::Analytics::Admin::V1alpha::GetConversionEventRequest, ::Google::Analytics::Admin::V1alpha::ConversionEvent
+            # Deletes a conversion event in a property.
+            rpc :DeleteConversionEvent, ::Google::Analytics::Admin::V1alpha::DeleteConversionEventRequest, ::Google::Protobuf::Empty
+            # Returns a list of conversion events in the specified parent property.
+            #
+            # Returns an empty list if no conversion events are found.
+            rpc :ListConversionEvents, ::Google::Analytics::Admin::V1alpha::ListConversionEventsRequest, ::Google::Analytics::Admin::V1alpha::ListConversionEventsResponse
+            # Creates a CustomDimension.
+            rpc :CreateCustomDimension, ::Google::Analytics::Admin::V1alpha::CreateCustomDimensionRequest, ::Google::Analytics::Admin::V1alpha::CustomDimension
+            # Updates a CustomDimension on a property.
+            rpc :UpdateCustomDimension, ::Google::Analytics::Admin::V1alpha::UpdateCustomDimensionRequest, ::Google::Analytics::Admin::V1alpha::CustomDimension
+            # Lists CustomDimensions on a property.
+            rpc :ListCustomDimensions, ::Google::Analytics::Admin::V1alpha::ListCustomDimensionsRequest, ::Google::Analytics::Admin::V1alpha::ListCustomDimensionsResponse
+            # Archives a CustomDimension on a property.
+            rpc :ArchiveCustomDimension, ::Google::Analytics::Admin::V1alpha::ArchiveCustomDimensionRequest, ::Google::Protobuf::Empty
+            # Lookup for a single CustomDimension.
+            rpc :GetCustomDimension, ::Google::Analytics::Admin::V1alpha::GetCustomDimensionRequest, ::Google::Analytics::Admin::V1alpha::CustomDimension
+            # Creates a CustomMetric.
+            rpc :CreateCustomMetric, ::Google::Analytics::Admin::V1alpha::CreateCustomMetricRequest, ::Google::Analytics::Admin::V1alpha::CustomMetric
+            # Updates a CustomMetric on a property.
+            rpc :UpdateCustomMetric, ::Google::Analytics::Admin::V1alpha::UpdateCustomMetricRequest, ::Google::Analytics::Admin::V1alpha::CustomMetric
+            # Lists CustomMetrics on a property.
+            rpc :ListCustomMetrics, ::Google::Analytics::Admin::V1alpha::ListCustomMetricsRequest, ::Google::Analytics::Admin::V1alpha::ListCustomMetricsResponse
+            # Archives a CustomMetric on a property.
+            rpc :ArchiveCustomMetric, ::Google::Analytics::Admin::V1alpha::ArchiveCustomMetricRequest, ::Google::Protobuf::Empty
+            # Lookup for a single CustomMetric.
+            rpc :GetCustomMetric, ::Google::Analytics::Admin::V1alpha::GetCustomMetricRequest, ::Google::Analytics::Admin::V1alpha::CustomMetric
           end
 
           Stub = Service.rpc_stub_class
