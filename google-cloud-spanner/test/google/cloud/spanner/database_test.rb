@@ -35,7 +35,7 @@ describe Google::Cloud::Spanner::Instance, :mock_spanner do
   let(:database_grpc) do
     Google::Cloud::Spanner::Admin::Database::V1::Database.new \
       database_hash(
-        instance_id: instance_id, database_id: database_id,
+        instance_id: instance_id, database_id: database_id, create_time: Time.now,
         restore_info: restore_info, version_retention_period: version_retention_period,
         earliest_version_time: earliest_version_time, encryption_info: [encryption_info]
       )
@@ -51,6 +51,8 @@ describe Google::Cloud::Spanner::Instance, :mock_spanner do
     _(database.state).must_equal :READY
     _(database).must_be :ready?
     _(database).wont_be :creating?
+
+    _(database.create_time).must_be_kind_of Time
 
     _(database.version_retention_period).must_equal version_retention_period
     _(database.earliest_version_time).must_equal earliest_version_time
