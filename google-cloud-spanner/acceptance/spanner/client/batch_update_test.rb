@@ -135,4 +135,18 @@ describe "Spanner Client", :batch_update, :spanner do
     end
     _(timestamp).must_be_kind_of Time
   end
+
+   describe "request options" do
+    it "execute batch update with priority options" do
+      timestamp = db.transaction do |tx|
+        row_counts = tx.batch_update request_options: { priority: :PRIORITY_HIGH } do |b|
+          b.batch_update insert_dml, params: insert_params
+          b.batch_update update_dml, params: update_params
+        end
+
+        _(row_counts).must_be_kind_of Array
+        _(row_counts.count).must_equal 2
+      end
+    end
+  end
 end

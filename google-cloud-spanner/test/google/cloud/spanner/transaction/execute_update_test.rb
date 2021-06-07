@@ -252,4 +252,23 @@ describe Google::Cloud::Spanner::Transaction, :execute_update, :mock_spanner do
 
     _(row_count).must_equal 1
   end
+
+  describe "priority request options" do
+    it "can execute a DML query" do
+      mock = Minitest::Mock.new
+      session.service.mocked_service = mock
+      expect_execute_streaming_sql results_enum, session_grpc.name,
+                                   "UPDATE users SET active = true",
+                                   transaction: tx_selector, seqno: 1,
+                                   request_options: { priority: :PRIORITY_MEDIUM },
+                                   options: default_options
+
+      row_count = transaction.execute_update "UPDATE users SET active = true",
+                                             request_options: { priority: :PRIORITY_MEDIUM }
+
+      mock.verify
+
+      _(row_count).must_equal 1
+    end
+  end
 end

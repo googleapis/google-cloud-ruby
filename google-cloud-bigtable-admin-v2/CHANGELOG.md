@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.1 / 2021-05-19
+
+#### Documentation
+
+* Clarify that backup restores must be in the same project
+
 ### 0.5.0 / 2021-03-08
 
 #### Features

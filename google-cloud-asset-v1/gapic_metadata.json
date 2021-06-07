@@ -15,6 +15,11 @@
                 "export_assets"
               ]
             },
+            "ListAssets": {
+              "methods": [
+                "list_assets"
+              ]
+            },
             "BatchGetAssetsHistory": {
               "methods": [
                 "batch_get_assets_history"

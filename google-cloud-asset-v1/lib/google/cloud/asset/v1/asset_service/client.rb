@@ -67,6 +67,14 @@ module Google
 
                 default_config.rpcs.export_assets.timeout = 60.0
 
+                default_config.rpcs.list_assets.timeout = 60.0
+                default_config.rpcs.list_assets.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
+                }
+
                 default_config.rpcs.batch_get_assets_history.timeout = 60.0
                 default_config.rpcs.batch_get_assets_history.retry_policy = {
                   initial_delay: 0.1,
@@ -328,6 +336,112 @@ module Google
 
               @asset_service_stub.call_rpc :export_assets, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists assets with time and resource types and returns paged results in
+            # response.
+            #
+            # @overload list_assets(request, options = nil)
+            #   Pass arguments to `list_assets` via a request object, either of type
+            #   {::Google::Cloud::Asset::V1::ListAssetsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Asset::V1::ListAssetsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_assets(parent: nil, read_time: nil, asset_types: nil, content_type: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_assets` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Name of the organization or project the assets belong to. Format:
+            #     "organizations/[organization-number]" (such as "organizations/123"),
+            #     "projects/[project-id]" (such as "projects/my-project-id"), or
+            #     "projects/[project-number]" (such as "projects/12345").
+            #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Timestamp to take an asset snapshot. This can only be set to a timestamp
+            #     between the current time and the current time minus 35 days (inclusive).
+            #     If not specified, the current time will be used. Due to delays in resource
+            #     data collection and indexing, there is a volatile window during which
+            #     running the same query may get different results.
+            #   @param asset_types [::Array<::String>]
+            #     A list of asset types to take a snapshot for. For example:
+            #     "compute.googleapis.com/Disk".
+            #
+            #     Regular expression is also supported. For example:
+            #
+            #     * "compute.googleapis.com.*" snapshots resources whose asset type starts
+            #     with "compute.googleapis.com".
+            #     * ".*Instance" snapshots resources whose asset type ends with "Instance".
+            #     * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+            #
+            #     See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+            #     regular expression syntax. If the regular expression does not match any
+            #     supported asset type, an INVALID_ARGUMENT error will be returned.
+            #
+            #     If specified, only matching assets will be returned, otherwise, it will
+            #     snapshot all asset types. See [Introduction to Cloud Asset
+            #     Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+            #     for all supported asset types.
+            #   @param content_type [::Google::Cloud::Asset::V1::ContentType]
+            #     Asset content type. If not specified, no content but the asset name will
+            #     be returned.
+            #   @param page_size [::Integer]
+            #     The maximum number of assets to be returned in a single response. Default
+            #     is 100, minimum is 1, and maximum is 1000.
+            #   @param page_token [::String]
+            #     The `next_page_token` returned from the previous `ListAssetsResponse`, or
+            #     unspecified for the first `ListAssetsRequest`. It is a continuation of a
+            #     prior `ListAssets` call, and the API should return the next page of assets.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::Asset>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::Asset>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def list_assets request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::ListAssetsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_assets.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Asset::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_assets.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_assets.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @asset_service_stub.call_rpc :list_assets, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @asset_service_stub, :list_assets, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
@@ -811,7 +925,7 @@ module Google
             #   @param scope [::String]
             #     Required. A scope can be a project, a folder, or an organization. The search is
             #     limited to the resources within the `scope`. The caller must be granted the
-            #     [`cloudasset.assets.searchAllResources`](http://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+            #     [`cloudasset.assets.searchAllResources`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
             #     permission on the desired scope.
             #
             #     The allowed values are:
@@ -822,36 +936,41 @@ module Google
             #     * organizations/\\{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
             #   @param query [::String]
             #     Optional. The query statement. See [how to construct a
-            #     query](http://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
+            #     query](https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
             #     for more information. If not specified or empty, it will search all the
-            #     resources within the specified `scope`. Note that the query string is
-            #     compared against each Cloud IAM policy binding, including its members,
-            #     roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
-            #     contain the bindings that match your query. To learn more about the IAM
-            #     policy structure, see [IAM policy
-            #     doc](https://cloud.google.com/iam/docs/policies#structure).
+            #     resources within the specified `scope`.
             #
             #     Examples:
             #
             #     * `name:Important` to find Cloud resources whose name contains
             #       "Important" as a word.
+            #     * `name=Important` to find the Cloud resource whose name is exactly
+            #       "Important".
             #     * `displayName:Impor*` to find Cloud resources whose display name
-            #       contains "Impor" as a prefix.
-            #     * `description:*por*` to find Cloud resources whose description
-            #       contains "por" as a substring.
-            #     * `location:us-west*` to find Cloud resources whose location is
-            #       prefixed with "us-west".
+            #       contains "Impor" as a prefix of any word in the field.
+            #     * `location:us-west*` to find Cloud resources whose location contains both
+            #       "us" and "west" as prefixes.
             #     * `labels:prod` to find Cloud resources whose labels contain "prod" as
             #       a key or value.
             #     * `labels.env:prod` to find Cloud resources that have a label "env"
             #       and its value is "prod".
             #     * `labels.env:*` to find Cloud resources that have a label "env".
+            #     * `kmsKey:key` to find Cloud resources encrypted with a customer-managed
+            #       encryption key whose name contains the word "key".
+            #     * `state:ACTIVE` to find Cloud resources whose state contains "ACTIVE" as a
+            #       word.
+            #     * `NOT state:ACTIVE` to find \\{\\{gcp_name}} resources whose state
+            #       doesn't contain "ACTIVE" as a word.
+            #     * `createTime<1609459200` to find Cloud resources that were created before
+            #       "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
+            #       "2021-01-01 00:00:00 UTC" in seconds.
+            #     * `updateTime>1609459200` to find Cloud resources that were updated after
+            #       "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
+            #       "2021-01-01 00:00:00 UTC" in seconds.
             #     * `Important` to find Cloud resources that contain "Important" as a word
             #       in any of the searchable fields.
-            #     * `Impor*` to find Cloud resources that contain "Impor" as a prefix
-            #       in any of the searchable fields.
-            #     * `*por*` to find Cloud resources that contain "por" as a substring in
-            #       any of the searchable fields.
+            #     * `Impor*` to find Cloud resources that contain "Impor" as a prefix of any
+            #       word in any of the searchable fields.
             #     * `Important location:(us-west1 OR global)` to find Cloud
             #       resources that contain "Important" as a word in any of the searchable
             #       fields and are also located in the "us-west1" region or the "global"
@@ -860,6 +979,17 @@ module Google
             #     Optional. A list of asset types that this request searches for. If empty, it will
             #     search all the [searchable asset
             #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+            #
+            #     Regular expressions are also supported. For example:
+            #
+            #     * "compute.googleapis.com.*" snapshots resources whose asset type starts
+            #     with "compute.googleapis.com".
+            #     * ".*Instance" snapshots resources whose asset type ends with "Instance".
+            #     * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+            #
+            #     See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+            #     regular expression syntax. If the regular expression does not match any
+            #     supported asset type, an INVALID_ARGUMENT error will be returned.
             #   @param page_size [::Integer]
             #     Optional. The page size for search result pagination. Page size is capped at 500 even
             #     if a larger value is given. If set to zero, server will pick an appropriate
@@ -871,12 +1001,24 @@ module Google
             #     the previous response. The values of all other method parameters, must be
             #     identical to those in the previous call.
             #   @param order_by [::String]
-            #     Optional. A comma separated list of fields specifying the sorting order of the
+            #     Optional. A comma-separated list of fields specifying the sorting order of the
             #     results. The default order is ascending. Add " DESC" after the field name
             #     to indicate descending order. Redundant space characters are ignored.
-            #     Example: "location DESC, name". Only string fields in the response are
-            #     sortable, including `name`, `displayName`, `description`, `location`. All
-            #     the other fields such as repeated fields (e.g., `networkTags`), map
+            #     Example: "location DESC, name".
+            #     Only singular primitive fields in the response are sortable:
+            #       * name
+            #       * assetType
+            #       * project
+            #       * displayName
+            #       * description
+            #       * location
+            #       * kmsKey
+            #       * createTime
+            #       * updateTime
+            #       * state
+            #       * parentFullResourceName
+            #       * parentAssetType
+            #     All the other fields such as repeated fields (e.g., `networkTags`), map
             #     fields (e.g., `labels`) and struct fields (e.g., `additionalAttributes`)
             #     are not supported.
             #
@@ -951,7 +1093,7 @@ module Google
             #     Required. A scope can be a project, a folder, or an organization. The search is
             #     limited to the IAM policies within the `scope`. The caller must be granted
             #     the
-            #     [`cloudasset.assets.searchAllIamPolicies`](http://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+            #     [`cloudasset.assets.searchAllIamPolicies`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
             #     permission on the desired scope.
             #
             #     The allowed values are:
@@ -964,7 +1106,12 @@ module Google
             #     Optional. The query statement. See [how to construct a
             #     query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
             #     for more information. If not specified or empty, it will search all the
-            #     IAM policies within the specified `scope`.
+            #     IAM policies within the specified `scope`. Note that the query string is
+            #     compared against each Cloud IAM policy binding, including its members,
+            #     roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
+            #     contain the bindings that match your query. To learn more about the IAM
+            #     policy structure, see [IAM policy
+            #     doc](https://cloud.google.com/iam/docs/policies#structure).
             #
             #     Examples:
             #
@@ -972,18 +1119,25 @@ module Google
             #       "amy@gmail.com".
             #     * `policy:roles/compute.admin` to find IAM policy bindings that specify
             #       the Compute Admin role.
+            #     * `policy:comp*` to find IAM policy bindings that contain "comp" as a
+            #       prefix of any word in the binding.
             #     * `policy.role.permissions:storage.buckets.update` to find IAM policy
             #       bindings that specify a role containing "storage.buckets.update"
             #       permission. Note that if callers don't have `iam.roles.get` access to a
             #       role's included permissions, policy bindings that specify this role will
             #       be dropped from the search results.
+            #     * `policy.role.permissions:upd*` to find IAM policy bindings that specify a
+            #       role containing "upd" as a prefix of any word in the role permission.
+            #       Note that if callers don't have `iam.roles.get` access to a role's
+            #       included permissions, policy bindings that specify this role will be
+            #       dropped from the search results.
             #     * `resource:organizations/123456` to find IAM policy bindings
             #       that are set on "organizations/123456".
+            #     * `resource=//cloudresourcemanager.googleapis.com/projects/myproject` to
+            #       find IAM policy bindings that are set on the project named "myproject".
             #     * `Important` to find IAM policy bindings that contain "Important" as a
             #       word in any of the searchable fields (except for the included
             #       permissions).
-            #     * `*por*` to find IAM policy bindings that contain "por" as a substring
-            #       in any of the searchable fields (except for the included permissions).
             #     * `resource:(instance1 OR instance2) policy:amy` to find
             #       IAM policy bindings that are set on resources "instance1" or
             #       "instance2" and also specify user "amy".
@@ -1341,6 +1495,11 @@ module Google
                 #
                 attr_reader :export_assets
                 ##
+                # RPC-specific configuration for `list_assets`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_assets
+                ##
                 # RPC-specific configuration for `batch_get_assets_history`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1395,6 +1554,8 @@ module Google
                 def initialize parent_rpcs = nil
                   export_assets_config = parent_rpcs.export_assets if parent_rpcs.respond_to? :export_assets
                   @export_assets = ::Gapic::Config::Method.new export_assets_config
+                  list_assets_config = parent_rpcs.list_assets if parent_rpcs.respond_to? :list_assets
+                  @list_assets = ::Gapic::Config::Method.new list_assets_config
                   batch_get_assets_history_config = parent_rpcs.batch_get_assets_history if parent_rpcs.respond_to? :batch_get_assets_history
                   @batch_get_assets_history = ::Gapic::Config::Method.new batch_get_assets_history_config
                   create_feed_config = parent_rpcs.create_feed if parent_rpcs.respond_to? :create_feed

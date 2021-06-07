@@ -79,7 +79,8 @@ module Google
         # [resource
         # hierarchy](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy),
         # a resource outside the Google Cloud resource hierarchy (such as Google
-        # Kubernetes Engine clusters and objects), or a policy (e.g. Cloud IAM policy).
+        # Kubernetes Engine clusters and objects), or a policy (e.g. Cloud IAM policy),
+        # or a relationship (e.g. an INSTANCE_TO_INSTANCEGROUP relationship).
         # See [Supported asset
         # types](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
         # for more information.
@@ -230,14 +231,40 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     The project that this resource belongs to, in the form of
-        #     projects/\\{PROJECT_NUMBER}.
+        #     projects/\\{PROJECT_NUMBER}. This field is available when the resource
+        #     belongs to a project.
         #
-        #     To search against the `project`:
+        #     To search against `project`:
         #
+        #     * use a field query. Example: `project:12345`
+        #     * use a free text query. Example: `12345`
         #     * specify the `scope` field as this project in your search request.
+        # @!attribute [rw] folders
+        #   @return [::Array<::String>]
+        #     The folder(s) that this resource belongs to, in the form of
+        #     folders/\\{FOLDER_NUMBER}. This field is available when the resource
+        #     belongs to one or more folders.
+        #
+        #     To search against `folders`:
+        #
+        #     * use a field query. Example: `folders:(123 OR 456)`
+        #     * use a free text query. Example: `123`
+        #     * specify the `scope` field as this folder in your search request.
+        # @!attribute [rw] organization
+        #   @return [::String]
+        #     The organization that this resource belongs to, in the form of
+        #     organizations/\\{ORGANIZATION_NUMBER}. This field is available when the
+        #     resource belongs to an organization.
+        #
+        #     To search against `organization`:
+        #
+        #     * use a field query. Example: `organization:123`
+        #     * use a free text query. Example: `123`
+        #     * specify the `scope` field as this organization in your search request.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     The display name of this resource.
+        #     The display name of this resource. This field is available only when the
+        #     resource's proto contains it.
         #
         #     To search against the `display_name`:
         #
@@ -246,16 +273,18 @@ module Google
         # @!attribute [rw] description
         #   @return [::String]
         #     One or more paragraphs of text description of this resource. Maximum length
-        #     could be up to 1M bytes.
+        #     could be up to 1M bytes. This field is available only when the resource's
+        #     proto contains it.
         #
         #     To search against the `description`:
         #
-        #     * use a field query. Example: `description:"*important instance*"`
-        #     * use a free text query. Example: `"*important instance*"`
+        #     * use a field query. Example: `description:"important instance"`
+        #     * use a free text query. Example: `"important instance"`
         # @!attribute [rw] location
         #   @return [::String]
         #     Location can be `global`, regional like `us-east1`, or zonal like
-        #     `us-west1-b`.
+        #     `us-west1-b`. This field is available only when the resource's proto
+        #     contains it.
         #
         #     To search against the `location`:
         #
@@ -265,7 +294,8 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels associated with this resource. See [Labelling and grouping GCP
         #     resources](https://cloud.google.com/blog/products/gcp/labelling-and-grouping-your-google-cloud-platform-resources)
-        #     for more information.
+        #     for more information. This field is available only when the resource's
+        #     proto contains it.
         #
         #     To search against the `labels`:
         #
@@ -279,12 +309,73 @@ module Google
         #     Network tags associated with this resource. Like labels, network tags are a
         #     type of annotations used to group GCP resources. See [Labelling GCP
         #     resources](https://cloud.google.com/blog/products/gcp/labelling-and-grouping-your-google-cloud-platform-resources)
-        #     for more information.
+        #     for more information. This field is available only when the resource's
+        #     proto contains it.
         #
         #     To search against the `network_tags`:
         #
         #     * use a field query. Example: `networkTags:internal`
         #     * use a free text query. Example: `internal`
+        # @!attribute [rw] kms_key
+        #   @return [::String]
+        #     The Cloud KMS
+        #     [CryptoKey](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys?hl=en)
+        #     name or
+        #     [CryptoKeyVersion](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys.cryptoKeyVersions?hl=en)
+        #     name. This field is available only when the resource's proto contains it.
+        #
+        #     To search against the `kms_key`:
+        #
+        #     * use a field query. Example: `kmsKey:key`
+        #     * use a free text query. Example: `key`
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The create timestamp of this resource, at which the resource was created.
+        #     The granularity is in seconds. Timestamp.nanos will always be 0. This field
+        #     is available only when the resource's proto contains it.
+        #
+        #     To search against `create_time`:
+        #
+        #     * use a field query.
+        #         - value in seconds since unix epoch. Example: `createTime > 1609459200`
+        #         - value in date string. Example: `createTime > 2021-01-01`
+        #         - value in date-time string (must be quoted). Example: `createTime >
+        #         "2021-01-01T00:00:00"`
+        # @!attribute [rw] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The last update timestamp of this resource, at which the resource was last
+        #     modified or deleted. The granularity is in seconds. Timestamp.nanos will
+        #     always be 0. This field is available only when the resource's proto
+        #     contains it.
+        #
+        #     To search against `update_time`:
+        #
+        #     * use a field query.
+        #         - value in seconds since unix epoch. Example: `updateTime < 1609459200`
+        #         - value in date string. Example: `updateTime < 2021-01-01`
+        #         - value in date-time string (must be quoted). Example: `updateTime <
+        #         "2021-01-01T00:00:00"`
+        # @!attribute [rw] state
+        #   @return [::String]
+        #     The state of this resource. Different resources types have different state
+        #     definitions that are mapped from various fields of different resource
+        #     types. This field is available only when the resource's proto contains it.
+        #
+        #     Example:
+        #     If the resource is an instance provided by Compute Engine,
+        #     its state will include PROVISIONING, STAGING, RUNNING, STOPPING,
+        #     SUSPENDING, SUSPENDED, REPAIRING, and TERMINATED. See `status` definition
+        #     in [API
+        #     Reference](https://cloud.google.com/compute/docs/reference/rest/v1/instances).
+        #     If the resource is a project provided by Cloud Resource Manager, its state
+        #     will include LIFECYCLE_STATE_UNSPECIFIED, ACTIVE, DELETE_REQUESTED and
+        #     DELETE_IN_PROGRESS. See `lifecycleState` definition in [API
+        #     Reference](https://cloud.google.com/resource-manager/reference/rest/v1/projects).
+        #
+        #     To search against the `state`:
+        #
+        #     * use a field query. Example: `state:RUNNING`
+        #     * use a free text query. Example: `RUNNING`
         # @!attribute [rw] additional_attributes
         #   @return [::Google::Protobuf::Struct]
         #     The additional searchable attributes of this resource. The attributes may
@@ -294,7 +385,7 @@ module Google
         #     corresponding GCP service (e.g., Compute Engine). see [API references and
         #     supported searchable
         #     attributes](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types)
-        #     for more information.
+        #     to see which fields are included.
         #
         #     You can search values of these fields through free text search. However,
         #     you should not consume the field programically as the field names and
@@ -306,6 +397,25 @@ module Google
         #     * use a free text query to match the attributes values. Example: to search
         #       `additional_attributes = { dnsName: "foobar" }`, you can issue a query
         #       `foobar`.
+        # @!attribute [rw] parent_full_resource_name
+        #   @return [::String]
+        #     The full resource name of this resource's parent, if it has one.
+        #     To search against the `parent_full_resource_name`:
+        #
+        #     * use a field query. Example:
+        #     `parentFullResourceName:"project-name"`
+        #     * use a free text query. Example:
+        #     `project-name`
+        # @!attribute [rw] parent_asset_type
+        #   @return [::String]
+        #     The type of this resource's immediate parent, if there is one.
+        #
+        #     To search against the `parent_asset_type`:
+        #
+        #     * use a field query. Example:
+        #     `parentAssetType:"cloudresourcemanager.googleapis.com/Project"`
+        #     * use a free text query. Example:
+        #     `cloudresourcemanager.googleapis.com/Project`
         class ResourceSearchResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -339,7 +449,7 @@ module Google
         #     projects/\\{PROJECT_NUMBER}. If an IAM policy is set on a resource (like VM
         #     instance, Cloud Storage bucket), the project field will indicate the
         #     project that contains the resource. If an IAM policy is set on a folder or
-        #     orgnization, the project field will be empty.
+        #     orgnization, this field will be empty.
         #
         #     To search against the `project`:
         #
@@ -418,6 +528,32 @@ module Google
         class IamPolicyAnalysisState
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The Condition evaluation.
+        # @!attribute [rw] evaluation_value
+        #   @return [::Google::Cloud::Asset::V1::ConditionEvaluation::EvaluationValue]
+        #     The evaluation result.
+        class ConditionEvaluation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Value of this expression.
+          module EvaluationValue
+            # Reserved for future use.
+            EVALUATION_VALUE_UNSPECIFIED = 0
+
+            # The evaluation result is `true`.
+            TRUE = 1
+
+            # The evaluation result is `false`.
+            FALSE = 2
+
+            # The evaluation result is `conditional` when the condition expression
+            # contains variables that are either missing input values or have not been
+            # supported by Analyzer yet.
+            CONDITIONAL = 3
+          end
         end
 
         # IAM Policy analysis result, consisting of one IAM policy binding and derived
@@ -542,6 +678,10 @@ module Google
           #     the full resource name of a parent resource and {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#target_node Edge.target_node}
           #     contains the full resource name of a child resource. This field is
           #     present only if the output_resource_edges option is enabled in request.
+          # @!attribute [rw] condition_evaluation
+          #   @return [::Google::Cloud::Asset::V1::ConditionEvaluation]
+          #     Condition evaluation for this AccessControlList, if there is a condition
+          #     defined in the above IAM policy binding.
           class AccessControlList
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
