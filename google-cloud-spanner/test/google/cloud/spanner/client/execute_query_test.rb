@@ -331,7 +331,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :mock_spanner do
   end
 
   it "can execute a simple query with query options" do
-    expect_query_options = { optimizer_version: "4" }
+    expect_query_options = { optimizer_version: "4", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
     spanner.service.mocked_service = mock
@@ -347,7 +347,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :mock_spanner do
   end
 
   it "can execute a simple query with query options (client-level)" do
-    expect_query_options = { optimizer_version: "4" }
+    expect_query_options = { optimizer_version: "4", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
     new_client = spanner.client instance_id, database_id, pool: { min: 0 }, query_options: expect_query_options
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]

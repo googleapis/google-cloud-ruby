@@ -333,7 +333,7 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
   end
 
   it "can execute a simple query with query options" do
-    expect_query_options = { optimizer_version: "1", optimizer_statistics_package: "" }
+    expect_query_options = { optimizer_version: "1", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
     mock = Minitest::Mock.new
     batch_snapshot.session.service.mocked_service = mock
     expect_execute_streaming_sql results_enum, session.path, sql, transaction: tx_selector, param_types: {}, partition_token: partition_token, options: default_options, query_options: expect_query_options

@@ -249,7 +249,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
   end
 
   it "can execute a PDML statement with query options" do
-    expect_query_options = { optimizer_version: "1" }
+    expect_query_options = { optimizer_version: "1", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
     mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: pdml_tx_opts }, default_options]
@@ -264,7 +264,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
   end
 
   it "can execute a PDML statement with query options (environment variable or client-level)" do
-    expect_query_options = { optimizer_version: "1" }
+    expect_query_options = { optimizer_version: "1", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
     new_client = spanner.client instance_id, database_id, pool: { min: 0 }, query_options: expect_query_options
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
@@ -280,8 +280,8 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
   end
 
   it "can execute a PDML statement with query options that query-level configs merge over environment variable or client-level configs" do
-    expect_query_options = { optimizer_version: "2", another_field: "test" }
-    new_client = spanner.client instance_id, database_id, pool: { min: 0 }, query_options: { optimizer_version: "1", another_field: "test" }
+    expect_query_options = { optimizer_version: "2", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
+    new_client = spanner.client instance_id, database_id, pool: { min: 0 }, query_options: { optimizer_version: "1", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
     mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: pdml_tx_opts }, default_options]
