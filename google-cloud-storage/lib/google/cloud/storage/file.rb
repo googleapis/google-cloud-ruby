@@ -774,6 +774,22 @@ module Google
         # accessible in the block is completely mutable and will be included in the
         # request.
         #
+        # @param [Integer] generation Select a specific revision of the file to
+        #   update. The default is the latest version.
+        # @param [Integer] if_generation_match Makes the operation conditional
+        #   on whether the file's current generation matches the given value.
+        #   Setting to 0 makes the operation succeed only if there are no live
+        #   versions of the file.
+        # @param [Integer] if_generation_not_match Makes the operation conditional
+        #   on whether the file's current generation does not match the given
+        #   value. If no live file exists, the precondition fails. Setting to 0
+        #   makes the operation succeed only if there is a live version of the file.
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the file's current metageneration matches the given value.
+        # @param [Integer] if_metageneration_not_match Makes the operation
+        #   conditional on whether the file's current metageneration does not
+        #   match the given value.
+        #
         # @yield [file] a block yielding a delegate object for updating the file
         #
         # @example
@@ -796,11 +812,21 @@ module Google
         #     f.metadata["score"] = "10"
         #   end
         #
-        def update
+        def update generation: nil,
+                   if_generation_match: nil,
+                   if_generation_not_match: nil,
+                   if_metageneration_match: nil,
+                   if_metageneration_not_match: nil
           updater = Updater.new gapi
           yield updater
           updater.check_for_changed_metadata!
-          update_gapi! updater.updates unless updater.updates.empty?
+          return if updater.updates.empty?
+          update_gapi! updater.updates,
+                       generation: generation,
+                       if_generation_match: if_generation_match,
+                       if_generation_not_match: if_generation_not_match,
+                       if_metageneration_match: if_metageneration_match,
+                       if_metageneration_not_match: if_metageneration_not_match
         end
 
         ##
@@ -1935,7 +1961,13 @@ module Google
           reload! generation: true
         end
 
-        def update_gapi! *attributes
+        def update_gapi! attributes,
+                         generation: nil,
+                         if_generation_match: nil,
+                         if_generation_not_match: nil,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil
+          attributes = Array(attributes)
           attributes.flatten!
           return if attributes.empty?
           update_gapi = self.class.gapi_from_attrs @gapi, attributes
@@ -1945,11 +1977,25 @@ module Google
 
           rewrite_attrs = [:storage_class, :kms_key_name]
           @gapi = if attributes.any? { |a| rewrite_attrs.include? a }
-                    rewrite_gapi \
-                      bucket, name, update_gapi, user_project: user_project
+                    rewrite_gapi bucket,
+                                 name,
+                                 update_gapi,
+                                 generation: generation,
+                                 if_generation_match: if_generation_match,
+                                 if_generation_not_match: if_generation_not_match,
+                                 if_metageneration_match: if_metageneration_match,
+                                 if_metageneration_not_match: if_metageneration_not_match,
+                                 user_project: user_project
                   else
-                    service.patch_file \
-                      bucket, name, update_gapi, user_project: user_project
+                    service.patch_file bucket,
+                                       name,
+                                       update_gapi,
+                                       generation: generation,
+                                       if_generation_match: if_generation_match,
+                                       if_generation_not_match: if_generation_not_match,
+                                       if_metageneration_match: if_metageneration_match,
+                                       if_metageneration_not_match: if_metageneration_not_match,
+                                       user_project: user_project
                   end
         end
 

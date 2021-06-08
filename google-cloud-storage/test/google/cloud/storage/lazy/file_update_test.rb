@@ -25,7 +25,7 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
     mock = Minitest::Mock.new
     patch_file_gapi = Google::Apis::StorageV1::Object.new cache_control: "private, max-age=0, no-cache"
     mock.expect :patch_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_name, patch_file_gapi, predefined_acl: nil, user_project: nil]
+      patch_object_args(bucket_name, file_name, patch_file_gapi)
 
     file.service.mocked_service = mock
 
@@ -39,7 +39,7 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
     mock = Minitest::Mock.new
     patch_file_gapi = Google::Apis::StorageV1::Object.new content_disposition: "inline; filename=filename.ext"
     mock.expect :patch_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_name, patch_file_gapi, predefined_acl: nil, user_project: nil]
+      patch_object_args(bucket_name, file_name, patch_file_gapi)
 
     file.service.mocked_service = mock
 
@@ -53,7 +53,7 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
     mock = Minitest::Mock.new
     patch_file_gapi = Google::Apis::StorageV1::Object.new content_encoding: "deflate"
     mock.expect :patch_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_name, patch_file_gapi, predefined_acl: nil, user_project: nil]
+      patch_object_args(bucket_name, file_name, patch_file_gapi)
 
     file.service.mocked_service = mock
 
@@ -67,7 +67,7 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
     mock = Minitest::Mock.new
     patch_file_gapi = Google::Apis::StorageV1::Object.new content_language: "de"
     mock.expect :patch_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_name, patch_file_gapi, predefined_acl: nil, user_project: nil]
+      patch_object_args(bucket_name, file_name, patch_file_gapi)
 
     file.service.mocked_service = mock
 
@@ -81,7 +81,7 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
     mock = Minitest::Mock.new
     patch_file_gapi = Google::Apis::StorageV1::Object.new content_type: "application/json"
     mock.expect :patch_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_name, patch_file_gapi, predefined_acl: nil, user_project: nil]
+      patch_object_args(bucket_name, file_name, patch_file_gapi)
 
     file.service.mocked_service = mock
 
@@ -95,7 +95,7 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
     mock = Minitest::Mock.new
     patch_file_gapi = Google::Apis::StorageV1::Object.new custom_time: custom_time
     mock.expect :patch_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_name, patch_file_gapi, predefined_acl: nil, user_project: nil]
+      patch_object_args(bucket_name, file_name, patch_file_gapi)
 
     file.service.mocked_service = mock
 
@@ -109,7 +109,7 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
     mock = Minitest::Mock.new
     patch_file_gapi = Google::Apis::StorageV1::Object.new metadata: { "player" => "Bob", score: 10 }
     mock.expect :patch_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_name, patch_file_gapi, predefined_acl: nil, user_project: nil]
+      patch_object_args(bucket_name, file_name, patch_file_gapi)
 
     file.service.mocked_service = mock
 
@@ -219,7 +219,7 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
       metadata: { "player" => "Bob", "score" => "10" }
     )
     mock.expect :patch_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_name, patch_file_gapi, predefined_acl: nil, user_project: nil]
+      patch_object_args(bucket_name, file_name, patch_file_gapi)
 
     file.service.mocked_service = mock
 
@@ -249,7 +249,7 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
       metadata: { "player" => "Bob", "score" => "10" }
     )
     mock.expect :patch_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_user_project.name, patch_file_gapi, predefined_acl: nil, user_project: "test"]
+      patch_object_args(bucket_name, file_user_project.name, patch_file_gapi, user_project: "test")
 
     file_user_project.service.mocked_service = mock
 
@@ -273,7 +273,7 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
       content_language: "de"
     )
     mock.expect :patch_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_name, patch_file_gapi, predefined_acl: nil, user_project: nil]
+      patch_object_args(bucket_name, file_name, patch_file_gapi)
 
     file.service.mocked_service = mock
 

@@ -470,14 +470,28 @@ module Google
 
         ##
         # Updates a file's metadata.
-        def patch_file bucket_name, file_path, file_gapi = nil,
-                       predefined_acl: nil, user_project: nil
+        def patch_file bucket_name,
+                       file_path,
+                       file_gapi = nil,
+                       generation: nil,
+                       if_generation_match: nil,
+                       if_generation_not_match: nil,
+                       if_metageneration_match: nil,
+                       if_metageneration_not_match: nil,
+                       predefined_acl: nil,
+                       user_project: nil
           file_gapi ||= Google::Apis::StorageV1::Object.new
           execute do
-            service.patch_object \
-              bucket_name, file_path, file_gapi,
-              predefined_acl: predefined_acl,
-              user_project: user_project(user_project)
+            service.patch_object bucket_name,
+                                 file_path,
+                                 file_gapi,
+                                 generation: generation,
+                                 if_generation_match: if_generation_match,
+                                 if_generation_not_match: if_generation_not_match,
+                                 if_metageneration_match: if_metageneration_match,
+                                 if_metageneration_not_match: if_metageneration_not_match,
+                                 predefined_acl: predefined_acl,
+                                 user_project: user_project(user_project)
           end
         end
 

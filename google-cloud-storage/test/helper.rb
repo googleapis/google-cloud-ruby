@@ -261,6 +261,29 @@ class MockStorage < Minitest::Spec
     [bucket_name, file_name, opts]
   end
 
+  def patch_object_args bucket_name,
+                        file_name,
+                        file_gapi = nil,
+                        generation: nil,
+                        if_generation_match: nil,
+                        if_generation_not_match: nil,
+                        if_metageneration_match: nil,
+                        if_metageneration_not_match: nil,
+                        predefined_acl: nil,
+                        user_project: nil
+    file_gapi ||= Google::Apis::StorageV1::Object.new(acl: [])
+    opts = {
+      generation: generation,
+      if_generation_match: if_generation_match,
+      if_generation_not_match: if_generation_not_match,
+      if_metageneration_match: if_metageneration_match,
+      if_metageneration_not_match: if_metageneration_not_match,
+      predefined_acl: predefined_acl,
+      user_project: user_project
+    }
+    [bucket_name, file_name, file_gapi, opts]
+  end
+
   def delete_object_args bucket_name,
                          file_name,
                          generation: nil,
