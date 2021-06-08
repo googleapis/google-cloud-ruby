@@ -1393,6 +1393,12 @@ module Google
         #   used. All source files must have been encrypted with the same key,
         #   and the resulting destination file will also be encrypted with the
         #   key.
+        # @param [Integer] if_generation_match Makes the operation conditional
+        #   on whether the file's current generation matches the given value.
+        #   Setting to 0 makes the operation succeed only if there are no live
+        #   versions of the file.
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the file's current metageneration matches the given value.
         #
         # @yield [file] A block yielding a delegate file object for setting the
         #   properties of the destination file.
@@ -1441,7 +1447,12 @@ module Google
         #
         #   new_file = bucket.compose [file_1, file_2], "path/to/new-file.ext"
         #
-        def compose sources, destination, acl: nil, encryption_key: nil
+        def compose sources,
+                    destination,
+                    acl: nil,
+                    encryption_key: nil,
+                    if_generation_match: nil,
+                    if_metageneration_match: nil
           ensure_service!
           sources = Array sources
           if sources.size < 2
@@ -1457,9 +1468,15 @@ module Google
           end
 
           acl_rule = File::Acl.predefined_rule_for acl
-          gapi = service.compose_file name, sources, destination, destination_gapi, acl: acl_rule,
-                                                                                    key: encryption_key,
-                                                                                    user_project: user_project
+          gapi = service.compose_file name,
+                                      sources,
+                                      destination,
+                                      destination_gapi,
+                                      acl: acl_rule,
+                                      key: encryption_key,
+                                      if_generation_match: if_generation_match,
+                                      if_metageneration_match: if_metageneration_match,
+                                      user_project: user_project
           File.from_gapi gapi, service, user_project: user_project
         end
         alias compose_file compose

@@ -317,4 +317,41 @@ class MockStorage < Minitest::Spec
     }
     [source_bucket, source_object, destination_bucket, destination_object, object_object, opts]
   end
+
+  def compose_object_args bucket_name,
+                          file_name,
+                          source_files,
+                          destination_gapi = nil,
+                          destination_predefined_acl: nil,
+                          if_generation_match: nil,
+                          if_metageneration_match: nil,
+                          user_project: nil,
+                          options: {}
+    req = compose_request source_files, destination_gapi
+    opts = {
+      destination_predefined_acl: destination_predefined_acl,
+      if_generation_match: if_generation_match,
+      if_metageneration_match: if_metageneration_match,
+      user_project: user_project,
+      options: options
+    }
+    [bucket_name, file_name, req, opts]
+  end
+
+  def compose_request source_files, destination_gapi
+    source_objects = source_files.map do |file|
+      if file.is_a? String
+        Google::Apis::StorageV1::ComposeRequest::SourceObject.new \
+          name: file
+      else
+        Google::Apis::StorageV1::ComposeRequest::SourceObject.new \
+          name: file.name,
+          generation: file.generation
+      end
+    end
+    Google::Apis::StorageV1::ComposeRequest.new(
+      destination: destination_gapi,
+      source_objects: source_objects
+    )
+  end
 end

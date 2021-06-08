@@ -420,20 +420,28 @@ module Google
 
         ## Copy a file from source bucket/object to a
         # destination bucket/object.
-        def compose_file bucket_name, source_files, destination_path,
-                         destination_gapi, acl: nil, key: nil, user_project: nil
+        def compose_file bucket_name,
+                         source_files,
+                         destination_path,
+                         destination_gapi,
+                         acl: nil,
+                         key: nil,
+                         if_generation_match: nil,
+                         if_metageneration_match: nil,
+                         user_project: nil
 
           compose_req = Google::Apis::StorageV1::ComposeRequest.new \
-            source_objects: compose_file_source_objects(source_files),
-            destination: destination_gapi
+            source_objects: compose_file_source_objects(source_files), destination: destination_gapi
 
           execute do
-            service.compose_object \
-              bucket_name, destination_path,
-              compose_req,
-              destination_predefined_acl: acl,
-              user_project: user_project(user_project),
-              options: key_options(key)
+            service.compose_object bucket_name,
+                                   destination_path,
+                                   compose_req,
+                                   destination_predefined_acl: acl,
+                                   if_generation_match: if_generation_match,
+                                   if_metageneration_match: if_metageneration_match,
+                                   user_project: user_project(user_project),
+                                   options: key_options(key)
           end
         end
 
