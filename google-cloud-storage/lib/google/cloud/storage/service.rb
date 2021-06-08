@@ -374,23 +374,47 @@ module Google
 
         ## Rewrite a file from source bucket/object to a
         # destination bucket/object.
-        def rewrite_file source_bucket_name, source_file_path,
-                         destination_bucket_name, destination_file_path,
-                         file_gapi = nil, source_key: nil, destination_key: nil,
-                         destination_kms_key: nil, acl: nil, generation: nil,
-                         token: nil, user_project: nil
+        def rewrite_file source_bucket_name,
+                         source_file_path,
+                         destination_bucket_name,
+                         destination_file_path,
+                         file_gapi = nil,
+                         source_key: nil,
+                         destination_key: nil,
+                         destination_kms_key: nil,
+                         acl: nil,
+                         generation: nil,
+                         if_generation_match: nil,
+                         if_generation_not_match: nil,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil,
+                         if_source_generation_match: nil,
+                         if_source_generation_not_match: nil,
+                         if_source_metageneration_match: nil,
+                         if_source_metageneration_not_match: nil,
+                         token: nil,
+                         user_project: nil
           key_options = rewrite_key_options source_key, destination_key
           execute do
-            service.rewrite_object \
-              source_bucket_name, source_file_path,
-              destination_bucket_name, destination_file_path,
-              file_gapi,
-              destination_kms_key_name: destination_kms_key,
-              destination_predefined_acl: acl,
-              source_generation: generation,
-              rewrite_token: token,
-              user_project: user_project(user_project),
-              options: key_options
+            service.rewrite_object source_bucket_name,
+                                   source_file_path,
+                                   destination_bucket_name,
+                                   destination_file_path,
+                                   file_gapi,
+                                   destination_kms_key_name: destination_kms_key,
+                                   destination_predefined_acl: acl,
+                                   source_generation: generation,
+                                   if_generation_match: if_generation_match,
+                                   if_generation_not_match: if_generation_not_match,
+                                   if_metageneration_match: if_metageneration_match,
+                                   if_metageneration_not_match: if_metageneration_not_match,
+                                   if_source_generation_match: if_source_generation_match,
+                                   if_source_generation_not_match: if_source_generation_not_match,
+                                   if_source_metageneration_match: if_source_metageneration_match,
+                                   if_source_metageneration_not_match: if_source_metageneration_not_match,
+                                   rewrite_token: token,
+                                   user_project: user_project(user_project),
+                                   options: key_options
           end
         end
 

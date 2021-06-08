@@ -1138,6 +1138,27 @@ module Google
         #     access, and allUsers get READER access.
         # @param [Integer] generation Select a specific revision of the file to
         #   rewrite. The default is the latest version.
+        # @param [Integer] if_generation_match Makes the operation conditional
+        #   on whether the destination file's current generation matches the given value.
+        #   Setting to 0 makes the operation succeed only if there are no live
+        #   versions of the file.
+        # @param [Integer] if_generation_not_match Makes the operation conditional
+        #   on whether the destination file's current generation does not match the given
+        #   value. If no live file exists, the precondition fails. Setting to 0
+        #   makes the operation succeed only if there is a live version of the file.
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the destination file's current metageneration matches the given value.
+        # @param [Integer] if_metageneration_not_match Makes the operation
+        #   conditional on whether the destination file's current metageneration does not
+        #   match the given value.
+        # @param [Integer] if_source_generation_match Makes the operation conditional on
+        #   whether the source object's current generation matches the given value.
+        # @param [Integer] if_source_generation_not_match Makes the operation conditional
+        #   on whether the source object's current generation does not match the given value.
+        # @param [Integer] if_source_metageneration_match Makes the operation conditional
+        #   on whether the source object's current metageneration matches the given value.
+        # @param [Integer] if_source_metageneration_not_match Makes the operation conditional
+        #   on whether the source object's current metageneration does not match the given value.
         # @param [String] encryption_key Optional. The customer-supplied,
         #   AES-256 encryption key used to decrypt the file, if the existing
         #   file is encrypted.
@@ -1259,11 +1280,24 @@ module Google
         #     f.metadata["rewritten_from"] = "#{file.bucket}/#{file.name}"
         #   end
         #
-        def rewrite dest_bucket_or_path, dest_path = nil, acl: nil, generation: nil, encryption_key: nil,
-                    new_encryption_key: nil, new_kms_key: nil, force_copy_metadata: nil
+        def rewrite dest_bucket_or_path,
+                    dest_path = nil,
+                    acl: nil,
+                    generation: nil,
+                    if_generation_match: nil,
+                    if_generation_not_match: nil,
+                    if_metageneration_match: nil,
+                    if_metageneration_not_match: nil,
+                    if_source_generation_match: nil,
+                    if_source_generation_not_match: nil,
+                    if_source_metageneration_match: nil,
+                    if_source_metageneration_not_match: nil,
+                    encryption_key: nil,
+                    new_encryption_key: nil,
+                    new_kms_key: nil,
+                    force_copy_metadata: nil
           ensure_service!
-          dest_bucket, dest_path = fix_rewrite_args dest_bucket_or_path,
-                                                    dest_path
+          dest_bucket, dest_path = fix_rewrite_args dest_bucket_or_path, dest_path
 
           update_gapi = nil
           if block_given?
@@ -1276,9 +1310,21 @@ module Google
             end
           end
 
-          new_gapi = rewrite_gapi bucket, name, update_gapi,
-                                  new_bucket: dest_bucket, new_name: dest_path,
-                                  acl: acl, generation: generation,
+          new_gapi = rewrite_gapi bucket,
+                                  name,
+                                  update_gapi,
+                                  new_bucket: dest_bucket,
+                                  new_name: dest_path,
+                                  acl: acl,
+                                  generation: generation,
+                                  if_generation_match: if_generation_match,
+                                  if_generation_not_match: if_generation_not_match,
+                                  if_metageneration_match: if_metageneration_match,
+                                  if_metageneration_not_match: if_metageneration_not_match,
+                                  if_source_generation_match: if_source_generation_match,
+                                  if_source_generation_not_match: if_source_generation_not_match,
+                                  if_source_metageneration_match: if_source_metageneration_match,
+                                  if_source_metageneration_not_match: if_source_metageneration_not_match,
                                   encryption_key: encryption_key,
                                   new_encryption_key: new_encryption_key,
                                   new_kms_key: new_kms_key,
@@ -1907,18 +1953,43 @@ module Google
                   end
         end
 
-        def rewrite_gapi bucket, name, updated_gapi,
-                         new_bucket: nil, new_name: nil, acl: nil,
-                         generation: nil, encryption_key: nil,
-                         new_encryption_key: nil, new_kms_key: nil,
+        def rewrite_gapi bucket,
+                         name,
+                         updated_gapi,
+                         new_bucket: nil,
+                         new_name: nil,
+                         acl: nil,
+                         generation: nil,
+                         if_generation_match: nil,
+                         if_generation_not_match: nil,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil,
+                         if_source_generation_match: nil,
+                         if_source_generation_not_match: nil,
+                         if_source_metageneration_match: nil,
+                         if_source_metageneration_not_match: nil,
+                         encryption_key: nil,
+                         new_encryption_key: nil,
+                         new_kms_key: nil,
                          user_project: nil
           new_bucket ||= bucket
           new_name ||= name
-          options = { acl: File::Acl.predefined_rule_for(acl),
-                      generation: generation, source_key: encryption_key,
-                      destination_key: new_encryption_key,
-                      destination_kms_key: new_kms_key,
-                      user_project: user_project }.delete_if { |_k, v| v.nil? }
+          options = {
+            acl: File::Acl.predefined_rule_for(acl),
+            generation: generation,
+            if_generation_match: if_generation_match,
+            if_generation_not_match: if_generation_not_match,
+            if_metageneration_match: if_metageneration_match,
+            if_metageneration_not_match: if_metageneration_not_match,
+            if_source_generation_match: if_source_generation_match,
+            if_source_generation_not_match: if_source_generation_not_match,
+            if_source_metageneration_match: if_source_metageneration_match,
+            if_source_metageneration_not_match: if_source_metageneration_not_match,
+            source_key: encryption_key,
+            destination_key: new_encryption_key,
+            destination_kms_key: new_kms_key,
+            user_project: user_project
+          }.delete_if { |_k, v| v.nil? }
 
           resp = service.rewrite_file \
             bucket, name, new_bucket, new_name, updated_gapi, **options

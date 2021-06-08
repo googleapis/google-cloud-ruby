@@ -279,4 +279,42 @@ class MockStorage < Minitest::Spec
     }
     [bucket_name, file_name, opts]
   end
+
+  def rewrite_object_args source_bucket,
+                          source_object,
+                          destination_bucket,
+                          destination_object,
+                          object_object = nil,
+                          destination_kms_key_name: nil,
+                          destination_predefined_acl: nil,
+                          if_generation_match: nil,
+                          if_generation_not_match: nil,
+                          if_metageneration_match: nil,
+                          if_metageneration_not_match: nil,
+                          if_source_generation_match: nil,
+                          if_source_generation_not_match: nil,
+                          if_source_metageneration_match: nil,
+                          if_source_metageneration_not_match: nil,
+                          source_generation: nil,
+                          rewrite_token: nil,
+                          user_project: nil,
+                          options: {}
+    opts = {
+      destination_kms_key_name: destination_kms_key_name,
+      destination_predefined_acl: destination_predefined_acl,
+      if_generation_match: if_generation_match,
+      if_generation_not_match: if_generation_not_match,
+      if_metageneration_match: if_metageneration_match,
+      if_metageneration_not_match: if_metageneration_not_match,
+      if_source_generation_match: if_source_generation_match,
+      if_source_generation_not_match: if_source_generation_not_match,
+      if_source_metageneration_match: if_source_metageneration_match,
+      if_source_metageneration_not_match: if_source_metageneration_not_match,
+      source_generation: source_generation,
+      rewrite_token: rewrite_token,
+      user_project: user_project,
+      options: options
+    }
+    [source_bucket, source_object, destination_bucket, destination_object, object_object, opts]
+  end
 end
