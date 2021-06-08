@@ -168,7 +168,8 @@ describe "Spanner Client", :execute_sql, :spanner do
   end
 
   describe "when the environment variable of query options is set" do
-    let(:origin_env) { nil }
+    let(:origin_opt_version) { nil }
+    let(:origin_opt_stats_pkg) { nil }
 
     before do
       origin_opt_version = ENV["SPANNER_OPTIMIZER_VERSION"]
