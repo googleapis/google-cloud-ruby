@@ -1,5 +1,25 @@
 # Release History
 
+### 2.7.0 / 2021-06-09
+
+#### Features
+
+* add the support of optimizer statistics package ([#7591](https://www.github.com/googleapis/google-cloud-ruby/issues/7591))
+  * feat(spanner): add the support of optimizer statistics package
+  * Fix rubocop issues.
+  * Fix the env issue.
+* database create time access method ([#11617](https://www.github.com/googleapis/google-cloud-ruby/issues/11617))
+  * added database create time method
+  * remove assert for databse create time
+* RPC priority request option. ([#11258](https://www.github.com/googleapis/google-cloud-ruby/issues/11258))
+
+#### Bug Fixes
+
+* extract binary retry info from error ([#11656](https://www.github.com/googleapis/google-cloud-ruby/issues/11656))
+  * fix: extract binary retry info from error
+  * fix: remove unrelated frozen_string_literal change
+  * fix: remove unnecessary parentheses
+
 ### 2.6.0 / 2021-03-31
 
 #### Features
