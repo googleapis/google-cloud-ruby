@@ -297,7 +297,7 @@ module Google
             end
 
             ##
-            # Returns a requested {::Google::Cloud::Channel::V1::Customer Customer} resource.
+            # Returns the requested {::Google::Cloud::Channel::V1::Customer Customer} resource.
             #
             # Possible error codes:
             #
@@ -620,7 +620,7 @@ module Google
             end
 
             ##
-            # Deletes the given {::Google::Cloud::Channel::V1::Customer Customer} permanently and irreversibly.
+            # Deletes the given {::Google::Cloud::Channel::V1::Customer Customer} permanently.
             #
             # Possible error codes:
             #
@@ -1091,7 +1091,7 @@ module Google
             end
 
             ##
-            # Returns a requested {::Google::Cloud::Channel::V1::Entitlement Entitlement} resource.
+            # Returns the requested {::Google::Cloud::Channel::V1::Entitlement Entitlement} resource.
             #
             # Possible error codes:
             #
@@ -2341,7 +2341,7 @@ module Google
             end
 
             ##
-            # Returns a requested {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink} resource.
+            # Returns the requested {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink} resource.
             # You must be a distributor to call this method.
             #
             # Possible error codes:
@@ -2603,6 +2603,83 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :update_channel_partner_link, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Returns the requested {::Google::Cloud::Channel::V1::Offer Offer} resource.
+            #
+            # Possible error codes:
+            #
+            # * PERMISSION_DENIED: The entitlement doesn't belong to the reseller.
+            # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+            # * NOT_FOUND: Entitlement or offer was not found.
+            #
+            # Return value:
+            # The {::Google::Cloud::Channel::V1::Offer Offer} resource.
+            #
+            # @overload lookup_offer(request, options = nil)
+            #   Pass arguments to `lookup_offer` via a request object, either of type
+            #   {::Google::Cloud::Channel::V1::LookupOfferRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Channel::V1::LookupOfferRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload lookup_offer(entitlement: nil)
+            #   Pass arguments to `lookup_offer` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param entitlement [::String]
+            #     Required. The resource name of the entitlement to retrieve the Offer.
+            #     Entitlement uses the format:
+            #     accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Channel::V1::Offer]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Channel::V1::Offer]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def lookup_offer request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Channel::V1::LookupOfferRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.lookup_offer.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Channel::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "entitlement" => request.entitlement
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.lookup_offer.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.lookup_offer.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_channel_service_stub.call_rpc :lookup_offer, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -3568,6 +3645,11 @@ module Google
                 #
                 attr_reader :update_channel_partner_link
                 ##
+                # RPC-specific configuration for `lookup_offer`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :lookup_offer
+                ##
                 # RPC-specific configuration for `list_products`
                 # @return [::Gapic::Config::Method]
                 #
@@ -3660,6 +3742,8 @@ module Google
                   @create_channel_partner_link = ::Gapic::Config::Method.new create_channel_partner_link_config
                   update_channel_partner_link_config = parent_rpcs.update_channel_partner_link if parent_rpcs.respond_to? :update_channel_partner_link
                   @update_channel_partner_link = ::Gapic::Config::Method.new update_channel_partner_link_config
+                  lookup_offer_config = parent_rpcs.lookup_offer if parent_rpcs.respond_to? :lookup_offer
+                  @lookup_offer = ::Gapic::Config::Method.new lookup_offer_config
                   list_products_config = parent_rpcs.list_products if parent_rpcs.respond_to? :list_products
                   @list_products = ::Gapic::Config::Method.new list_products_config
                   list_skus_config = parent_rpcs.list_skus if parent_rpcs.respond_to? :list_skus

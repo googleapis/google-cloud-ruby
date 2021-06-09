@@ -62,7 +62,7 @@ module Google
             # Return value:
             # List of [Customer][google.cloud.channel.v1.Customer]s, or an empty list if there are no customers.
             rpc :ListCustomers, ::Google::Cloud::Channel::V1::ListCustomersRequest, ::Google::Cloud::Channel::V1::ListCustomersResponse
-            # Returns a requested [Customer][google.cloud.channel.v1.Customer] resource.
+            # Returns the requested [Customer][google.cloud.channel.v1.Customer] resource.
             #
             # Possible error codes:
             #
@@ -119,7 +119,7 @@ module Google
             # Return value:
             # The updated [Customer][google.cloud.channel.v1.Customer] resource.
             rpc :UpdateCustomer, ::Google::Cloud::Channel::V1::UpdateCustomerRequest, ::Google::Cloud::Channel::V1::Customer
-            # Deletes the given [Customer][google.cloud.channel.v1.Customer] permanently and irreversibly.
+            # Deletes the given [Customer][google.cloud.channel.v1.Customer] permanently.
             #
             # Possible error codes:
             #
@@ -199,7 +199,7 @@ module Google
             # Return value:
             # List of [TransferableOffer][google.cloud.channel.v1.TransferableOffer] for the given customer and SKU.
             rpc :ListTransferableOffers, ::Google::Cloud::Channel::V1::ListTransferableOffersRequest, ::Google::Cloud::Channel::V1::ListTransferableOffersResponse
-            # Returns a requested [Entitlement][google.cloud.channel.v1.Entitlement] resource.
+            # Returns the requested [Entitlement][google.cloud.channel.v1.Entitlement] resource.
             #
             # Possible error codes:
             #
@@ -491,7 +491,7 @@ module Google
             # Return value:
             # The list of the distributor account's [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resources.
             rpc :ListChannelPartnerLinks, ::Google::Cloud::Channel::V1::ListChannelPartnerLinksRequest, ::Google::Cloud::Channel::V1::ListChannelPartnerLinksResponse
-            # Returns a requested [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.
+            # Returns the requested [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.
             # You must be a distributor to call this method.
             #
             # Possible error codes:
@@ -550,6 +550,17 @@ module Google
             # Return value:
             # The updated [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.
             rpc :UpdateChannelPartnerLink, ::Google::Cloud::Channel::V1::UpdateChannelPartnerLinkRequest, ::Google::Cloud::Channel::V1::ChannelPartnerLink
+            # Returns the requested [Offer][google.cloud.channel.v1.Offer] resource.
+            #
+            # Possible error codes:
+            #
+            # * PERMISSION_DENIED: The entitlement doesn't belong to the reseller.
+            # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+            # * NOT_FOUND: Entitlement or offer was not found.
+            #
+            # Return value:
+            # The [Offer][google.cloud.channel.v1.Offer] resource.
+            rpc :LookupOffer, ::Google::Cloud::Channel::V1::LookupOfferRequest, ::Google::Cloud::Channel::V1::Offer
             # Lists the Products the reseller is authorized to sell.
             #
             # Possible error codes:

@@ -98,6 +98,9 @@ module Google
 
             # License was assigned to or revoked from a user.
             LICENSE_ASSIGNMENT_CHANGED = 12
+
+            # License cap was changed for the entitlement.
+            LICENSE_CAP_CHANGED = 13
           end
         end
 

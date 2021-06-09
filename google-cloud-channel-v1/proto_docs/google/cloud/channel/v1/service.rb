@@ -701,6 +701,17 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for LookupOffer.
+        # @!attribute [rw] entitlement
+        #   @return [::String]
+        #     Required. The resource name of the entitlement to retrieve the Offer.
+        #     Entitlement uses the format:
+        #     accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
+        class LookupOfferRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for ListProducts.
         # @!attribute [rw] account
         #   @return [::String]
