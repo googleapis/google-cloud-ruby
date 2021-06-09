@@ -297,6 +297,22 @@ module Google
           # Convenience method to apply the `authenticatedRead` predefined ACL
           # rule to the file.
           #
+          # @param [Integer] generation Select a specific revision of the file to
+          #   update. The default is the latest version.
+          # @param [Integer] if_generation_match Makes the operation conditional
+          #   on whether the file's current generation matches the given value.
+          #   Setting to 0 makes the operation succeed only if there are no live
+          #   versions of the file.
+          # @param [Integer] if_generation_not_match Makes the operation conditional
+          #   on whether the file's current generation does not match the given
+          #   value. If no live file exists, the precondition fails. Setting to 0
+          #   makes the operation succeed only if there is a live version of the file.
+          # @param [Integer] if_metageneration_match Makes the operation conditional
+          #   on whether the file's current metageneration matches the given value.
+          # @param [Integer] if_metageneration_not_match Makes the operation
+          #   conditional on whether the file's current metageneration does not
+          #   match the given value.
+          #
           # @example
           #   require "google/cloud/storage"
           #
@@ -307,8 +323,17 @@ module Google
           #   file = bucket.file "path/to/my-file.ext"
           #   file.acl.auth!
           #
-          def auth!
-            update_predefined_acl! "authenticatedRead"
+          def auth! generation: nil,
+                    if_generation_match: nil,
+                    if_generation_not_match: nil,
+                    if_metageneration_match: nil,
+                    if_metageneration_not_match: nil
+            update_predefined_acl! "authenticatedRead",
+                                   generation: generation,
+                                   if_generation_match: if_generation_match,
+                                   if_generation_not_match: if_generation_not_match,
+                                   if_metageneration_match: if_metageneration_match,
+                                   if_metageneration_not_match: if_metageneration_not_match
           end
           alias authenticatedRead! auth!
           alias auth_read! auth!
@@ -318,6 +343,22 @@ module Google
           ##
           # Convenience method to apply the `bucketOwnerFullControl` predefined
           # ACL rule to the file.
+          #
+          # @param [Integer] generation Select a specific revision of the file to
+          #   update. The default is the latest version.
+          # @param [Integer] if_generation_match Makes the operation conditional
+          #   on whether the file's current generation matches the given value.
+          #   Setting to 0 makes the operation succeed only if there are no live
+          #   versions of the file.
+          # @param [Integer] if_generation_not_match Makes the operation conditional
+          #   on whether the file's current generation does not match the given
+          #   value. If no live file exists, the precondition fails. Setting to 0
+          #   makes the operation succeed only if there is a live version of the file.
+          # @param [Integer] if_metageneration_match Makes the operation conditional
+          #   on whether the file's current metageneration matches the given value.
+          # @param [Integer] if_metageneration_not_match Makes the operation
+          #   conditional on whether the file's current metageneration does not
+          #   match the given value.
           #
           # @example
           #   require "google/cloud/storage"
@@ -329,14 +370,39 @@ module Google
           #   file = bucket.file "path/to/my-file.ext"
           #   file.acl.owner_full!
           #
-          def owner_full!
-            update_predefined_acl! "bucketOwnerFullControl"
+          def owner_full! generation: nil,
+                          if_generation_match: nil,
+                          if_generation_not_match: nil,
+                          if_metageneration_match: nil,
+                          if_metageneration_not_match: nil
+            update_predefined_acl! "bucketOwnerFullControl",
+                                   generation: generation,
+                                   if_generation_match: if_generation_match,
+                                   if_generation_not_match: if_generation_not_match,
+                                   if_metageneration_match: if_metageneration_match,
+                                   if_metageneration_not_match: if_metageneration_not_match
           end
           alias bucketOwnerFullControl! owner_full!
 
           ##
           # Convenience method to apply the `bucketOwnerRead` predefined ACL
           # rule to the file.
+          #
+          # @param [Integer] generation Select a specific revision of the file to
+          #   update. The default is the latest version.
+          # @param [Integer] if_generation_match Makes the operation conditional
+          #   on whether the file's current generation matches the given value.
+          #   Setting to 0 makes the operation succeed only if there are no live
+          #   versions of the file.
+          # @param [Integer] if_generation_not_match Makes the operation conditional
+          #   on whether the file's current generation does not match the given
+          #   value. If no live file exists, the precondition fails. Setting to 0
+          #   makes the operation succeed only if there is a live version of the file.
+          # @param [Integer] if_metageneration_match Makes the operation conditional
+          #   on whether the file's current metageneration matches the given value.
+          # @param [Integer] if_metageneration_not_match Makes the operation
+          #   conditional on whether the file's current metageneration does not
+          #   match the given value.
           #
           # @example
           #   require "google/cloud/storage"
@@ -348,14 +414,39 @@ module Google
           #   file = bucket.file "path/to/my-file.ext"
           #   file.acl.owner_read!
           #
-          def owner_read!
-            update_predefined_acl! "bucketOwnerRead"
+          def owner_read! generation: nil,
+                          if_generation_match: nil,
+                          if_generation_not_match: nil,
+                          if_metageneration_match: nil,
+                          if_metageneration_not_match: nil
+            update_predefined_acl! "bucketOwnerRead",
+                                   generation: generation,
+                                   if_generation_match: if_generation_match,
+                                   if_generation_not_match: if_generation_not_match,
+                                   if_metageneration_match: if_metageneration_match,
+                                   if_metageneration_not_match: if_metageneration_not_match
           end
           alias bucketOwnerRead! owner_read!
 
           ##
           # Convenience method to apply the `private` predefined ACL
           # rule to the file.
+          #
+          # @param [Integer] generation Select a specific revision of the file to
+          #   update. The default is the latest version.
+          # @param [Integer] if_generation_match Makes the operation conditional
+          #   on whether the file's current generation matches the given value.
+          #   Setting to 0 makes the operation succeed only if there are no live
+          #   versions of the file.
+          # @param [Integer] if_generation_not_match Makes the operation conditional
+          #   on whether the file's current generation does not match the given
+          #   value. If no live file exists, the precondition fails. Setting to 0
+          #   makes the operation succeed only if there is a live version of the file.
+          # @param [Integer] if_metageneration_match Makes the operation conditional
+          #   on whether the file's current metageneration matches the given value.
+          # @param [Integer] if_metageneration_not_match Makes the operation
+          #   conditional on whether the file's current metageneration does not
+          #   match the given value.
           #
           # @example
           #   require "google/cloud/storage"
@@ -367,13 +458,38 @@ module Google
           #   file = bucket.file "path/to/my-file.ext"
           #   file.acl.private!
           #
-          def private!
-            update_predefined_acl! "private"
+          def private! generation: nil,
+                       if_generation_match: nil,
+                       if_generation_not_match: nil,
+                       if_metageneration_match: nil,
+                       if_metageneration_not_match: nil
+            update_predefined_acl! "private",
+                                   generation: generation,
+                                   if_generation_match: if_generation_match,
+                                   if_generation_not_match: if_generation_not_match,
+                                   if_metageneration_match: if_metageneration_match,
+                                   if_metageneration_not_match: if_metageneration_not_match
           end
 
           ##
           # Convenience method to apply the `projectPrivate` predefined ACL
           # rule to the file.
+          #
+          # @param [Integer] generation Select a specific revision of the file to
+          #   update. The default is the latest version.
+          # @param [Integer] if_generation_match Makes the operation conditional
+          #   on whether the file's current generation matches the given value.
+          #   Setting to 0 makes the operation succeed only if there are no live
+          #   versions of the file.
+          # @param [Integer] if_generation_not_match Makes the operation conditional
+          #   on whether the file's current generation does not match the given
+          #   value. If no live file exists, the precondition fails. Setting to 0
+          #   makes the operation succeed only if there is a live version of the file.
+          # @param [Integer] if_metageneration_match Makes the operation conditional
+          #   on whether the file's current metageneration matches the given value.
+          # @param [Integer] if_metageneration_not_match Makes the operation
+          #   conditional on whether the file's current metageneration does not
+          #   match the given value.
           #
           # @example
           #   require "google/cloud/storage"
@@ -385,14 +501,39 @@ module Google
           #   file = bucket.file "path/to/my-file.ext"
           #   file.acl.project_private!
           #
-          def project_private!
-            update_predefined_acl! "projectPrivate"
+          def project_private! generation: nil,
+                               if_generation_match: nil,
+                               if_generation_not_match: nil,
+                               if_metageneration_match: nil,
+                               if_metageneration_not_match: nil
+            update_predefined_acl! "projectPrivate",
+                                   generation: generation,
+                                   if_generation_match: if_generation_match,
+                                   if_generation_not_match: if_generation_not_match,
+                                   if_metageneration_match: if_metageneration_match,
+                                   if_metageneration_not_match: if_metageneration_not_match
           end
           alias projectPrivate! project_private!
 
           ##
           # Convenience method to apply the `publicRead` predefined ACL
           # rule to the file.
+          #
+          # @param [Integer] generation Select a specific revision of the file to
+          #   update. The default is the latest version.
+          # @param [Integer] if_generation_match Makes the operation conditional
+          #   on whether the file's current generation matches the given value.
+          #   Setting to 0 makes the operation succeed only if there are no live
+          #   versions of the file.
+          # @param [Integer] if_generation_not_match Makes the operation conditional
+          #   on whether the file's current generation does not match the given
+          #   value. If no live file exists, the precondition fails. Setting to 0
+          #   makes the operation succeed only if there is a live version of the file.
+          # @param [Integer] if_metageneration_match Makes the operation conditional
+          #   on whether the file's current metageneration matches the given value.
+          # @param [Integer] if_metageneration_not_match Makes the operation
+          #   conditional on whether the file's current metageneration does not
+          #   match the given value.
           #
           # @example
           #   require "google/cloud/storage"
@@ -404,8 +545,17 @@ module Google
           #   file = bucket.file "path/to/my-file.ext"
           #   file.acl.public!
           #
-          def public!
-            update_predefined_acl! "publicRead"
+          def public! generation: nil,
+                      if_generation_match: nil,
+                      if_generation_not_match: nil,
+                      if_metageneration_match: nil,
+                      if_metageneration_not_match: nil
+            update_predefined_acl! "publicRead",
+                                   generation: generation,
+                                   if_generation_match: if_generation_match,
+                                   if_generation_not_match: if_generation_not_match,
+                                   if_metageneration_match: if_metageneration_match,
+                                   if_metageneration_not_match: if_metageneration_not_match
           end
           alias publicRead! public!
           alias public_read! public!
@@ -418,9 +568,21 @@ module Google
             self
           end
 
-          def update_predefined_acl! acl_role
+          def update_predefined_acl! acl_role,
+                                     generation: nil,
+                                     if_generation_match: nil,
+                                     if_generation_not_match: nil,
+                                     if_metageneration_match: nil,
+                                     if_metageneration_not_match: nil
             patched_file = Google::Apis::StorageV1::Object.new acl: []
-            @service.patch_file @bucket, @file, patched_file,
+            @service.patch_file @bucket,
+                                @file,
+                                patched_file,
+                                generation: generation,
+                                if_generation_match: if_generation_match,
+                                if_generation_not_match: if_generation_not_match,
+                                if_metageneration_match: if_metageneration_match,
+                                if_metageneration_not_match: if_metageneration_not_match,
                                 predefined_acl: acl_role,
                                 user_project: user_project
             clear!
