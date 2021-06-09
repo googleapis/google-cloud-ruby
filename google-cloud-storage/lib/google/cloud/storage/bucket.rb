@@ -970,7 +970,7 @@ module Google
         #   bucket.public_access_prevention_enforced? # true
         #
         def public_access_prevention_enforced?
-          return false unless @gapi.iam_configuration && @gapi.iam_configuration.public_access_prevention
+          return false unless @gapi.iam_configuration&.public_access_prevention
           @gapi.iam_configuration.public_access_prevention.to_s == "enforced"
         end
 
@@ -993,7 +993,7 @@ module Google
         #   bucket.public_access_prevention_unspecified? # true
         #
         def public_access_prevention_unspecified?
-          return false unless @gapi.iam_configuration && @gapi.iam_configuration.public_access_prevention
+          return false unless @gapi.iam_configuration&.public_access_prevention
           @gapi.iam_configuration.public_access_prevention.to_s == "unspecified"
         end
 

@@ -399,6 +399,22 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Storage::Bucket#public_access_prevention" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, bucket_gapi("my-bucket"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+      mock.expect :patch_bucket, bucket_gapi("my-bucket"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+    end
+  end
+
+
+  doctest.before "Google::Cloud::Storage::Bucket#public_access_prevention=@Set Public Access Prevention to enforced:" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, bucket_gapi("my-bucket", public_access_prevention: "enforced"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Storage::Bucket#public_access_prevention=@Set Public Access Prevention to unspecified:" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
@@ -413,15 +429,6 @@ YARD::Doctest.configure do |doctest|
       mock.expect :patch_bucket, bucket_gapi("my-bucket"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
-
-  doctest.before "Google::Cloud::Storage::Bucket#public_access_prevention" do
-    mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
-      mock.expect :patch_bucket, bucket_gapi("my-bucket"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
-      mock.expect :patch_bucket, bucket_gapi("my-bucket"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
-    end
-  end
-
   doctest.before "Google::Cloud::Storage::Bucket#update_policy" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi("my-bucket"), ["my-bucket", Hash]

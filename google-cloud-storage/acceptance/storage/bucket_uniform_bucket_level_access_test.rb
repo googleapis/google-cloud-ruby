@@ -235,7 +235,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   it "sets public_access_prevention to enforced" do
     # Insert a new bucket with Public Access Prevention Unspecified.
     refute bucket.public_access_prevention_enforced?
-    _(bucket.public_access_prevention).must_be :nil?
+    _(bucket.public_access_prevention).must_equal "unspecified"
     # Insert and Patch requests using unexpected PAP enum values return 400 error.
     expect do
       bucket.public_access_prevention = "BAD VALUE"
