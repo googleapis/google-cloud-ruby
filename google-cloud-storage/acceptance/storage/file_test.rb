@@ -94,9 +94,13 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded_1.reload!
     _(uploaded_1.generation).must_equal generation_1
 
-    uploaded_2 = bucket.create_file StringIO.new("generation 2"), filename
+    uploaded_2 = bucket.create_file StringIO.new("generation 2"), filename, if_generation_match: generation_1
     generation_2 = uploaded_2.generation
     _(generation_2).wont_equal generation_1
+
+    expect do
+      bucket.create_file StringIO.new("generation 2"), filename, if_generation_match: generation_1
+    end.must_raise Google::Cloud::FailedPreconditionError
 
     uploaded_1.reload! generation: true
     _(uploaded_1.generation).must_equal generation_1
@@ -106,7 +110,7 @@ describe Google::Cloud::Storage::File, :storage do
     _(uploaded_1.generation).must_equal generation_2
 
     Tempfile.open ["generation_file", ".txt"] do |tmpfile|
-      downloaded = bucket.file(filename).download tmpfile
+      downloaded = bucket.file(filename, if_generation_match: generation_2).download tmpfile
       _(File.read(downloaded.path)).must_equal "generation 2"
     end
 
@@ -116,7 +120,7 @@ describe Google::Cloud::Storage::File, :storage do
     end
 
     uploaded_2.delete generation: generation_1
-    uploaded_2.delete generation: generation_2
+    uploaded_2.delete if_generation_match: generation_2
     bucket.versioning = false
   end
 
@@ -179,7 +183,10 @@ describe Google::Cloud::Storage::File, :storage do
     _(uploaded.metadata).must_be :empty?
     _(uploaded.metageneration).must_equal 1
 
-    uploaded.update do |f|
+    uploaded.update if_generation_match: generation,
+                    if_generation_not_match: (generation - 1),
+                    if_metageneration_match: 1,
+                    if_metageneration_not_match: 0 do |f|
       f.cache_control = "private, max-age=0, no-cache"
       f.content_disposition = "attachment; filename=filename.ext"
       f.content_language = "en"
@@ -212,6 +219,12 @@ describe Google::Cloud::Storage::File, :storage do
     _(uploaded.metadata["player"]).must_equal "Alice"
     _(uploaded.metadata["score"]).must_equal "101"
     _(uploaded.metageneration).must_equal 2
+
+    expect do
+      uploaded.update if_generation_match: (generation - 1) do |f|
+        f.content_language = "de"
+      end
+    end.must_raise Google::Cloud::FailedPreconditionError
 
     uploaded.reload!
 
