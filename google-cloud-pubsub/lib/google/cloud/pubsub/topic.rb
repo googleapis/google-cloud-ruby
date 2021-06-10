@@ -684,6 +684,11 @@ module Google
         # @note At the time of this release, ordering keys are not yet publicly
         #   enabled and requires special project enablements.
         #
+        # Publisher flow control limits the number of outstanding messages that
+        # are allowed to wait to be published. See the `flow_control` key in the
+        # `async` parameter in {Project#topic} for more information about publisher
+        # flow control settings.
+        #
         # @param [String, File] data The message payload. This will be converted
         #   to bytes encoded as ASCII-8BIT.
         # @param [Hash] attributes Optional attributes for the message.
@@ -703,6 +708,13 @@ module Google
         #   message with an `ordering_key` that has already failed when
         #   publishing. Use {#resume_publish} to allow this `ordering_key` to be
         #   published again.
+        # @raise [Google::Cloud::PubSub::FlowControlLimitError] when publish flow
+        #   control limits are exceeded, and the `async` parameter key
+        #   `flow_control.limit_exceeded_behavior` is set to `:error` or `:block`.
+        #   If `flow_control.limit_exceeded_behavior` is set to `:block`, this error
+        #   will be raised only when a limit would be exceeded by a single message.
+        #   See the `async` parameter in {Project#topic} for more information about
+        #   `flow_control` settings.
         #
         # @example
         #   require "google/cloud/pubsub"

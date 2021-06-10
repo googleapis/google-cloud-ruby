@@ -129,8 +129,8 @@ module Google
           end
 
           ##
-          # Rebalances the batch by moving any queued items that will fit into
-          # the active item list.
+          # Fills the batch by sequentially moving the queued items that will
+          # fit into the active item list.
           #
           # This method is only intended to be used by the active publishing
           # job.
@@ -151,8 +151,6 @@ module Google
               @items
             end
           end
-
-          # rubocop:disable Metrics/MethodLength
 
           ##
           # Resets the batch after a successful publish. This clears the active
@@ -201,8 +199,6 @@ module Google
             end
             true
           end
-
-          # rubocop:enable Metrics/MethodLength
 
           ##
           # Cancel the batch and hault futher batches until resumed. See

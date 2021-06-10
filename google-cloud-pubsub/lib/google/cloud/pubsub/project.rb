@@ -103,6 +103,16 @@ module Google
         #   * `:threads` (Hash) The number of threads to create to handle concurrent calls by the publisher:
         #     * `:publish` (Integer) The number of threads used to publish messages. Default is 2.
         #     * `:callback` (Integer) The number of threads to handle the published messages' callbacks. Default is 4.
+        #   * `:flow_control` (Hash) The client flow control settings for message publishing:
+        #     * `:message_limit` (Integer) The maximum number of messages allowed to wait to be published. Default is
+        #       `10 * max_messages`.
+        #     * `:byte_limit` (Integer) The maximum total size of messages allowed to wait to be published. Default is
+        #       `10 * max_bytes`.
+        #     * `:limit_exceeded_behavior` (Symbol) The action to take when publish flow control limits are exceeded.
+        #       Possible values include: `:ignore` - Flow control is disabled. `:error` - Calls to {Topic#publish_async}
+        #       will raise {FlowControlLimitError} when publish flow control limits are exceeded. `:block` - Calls to
+        #       {Topic#publish_async} will block until capacity is available when publish flow control limits are
+        #       exceeded. The default value is `:ignore`.
         #
         # @return [Google::Cloud::PubSub::Topic, nil] Returns `nil` if topic
         #   does not exist.
@@ -206,6 +216,16 @@ module Google
         #       Default is 2.
         #     * `:callback` (Integer) The number of threads to handle the published
         #       messages' callbacks. Default is 4.
+        #   * `:flow_control` (Hash) The client flow control settings for message publishing:
+        #     * `:message_limit` (Integer) The maximum number of messages allowed to wait to be published. Default is
+        #       `10 * max_messages`.
+        #     * `:byte_limit` (Integer) The maximum total size of messages allowed to wait to be published. Default is
+        #       `10 * max_bytes`.
+        #     * `:limit_exceeded_behavior` (Symbol) The action to take when publish flow control limits are exceeded.
+        #       Possible values include: `:ignore` - Flow control is disabled. `:error` - Calls to {Topic#publish_async}
+        #       will raise {FlowControlLimitError} when publish flow control limits are exceeded. `:block` - Calls to
+        #       {Topic#publish_async} will block until capacity is available when publish flow control limits are
+        #       exceeded. The default value is `:ignore`.
         # @param [String] schema_name The name of the schema that messages
         #   published should be validated against. Optional. The value can be a
         #   simple schema ID (relative name), in which case the current project

@@ -33,8 +33,6 @@ module Google
     # See {file:OVERVIEW.md Google Cloud Pub/Sub Overview}.
     #
     module PubSub
-      # rubocop:disable Metrics/AbcSize
-
       ##
       # Creates a new object for connecting to the Pub/Sub service.
       # Each call creates a new connection.
@@ -109,8 +107,6 @@ module Google
         service = PubSub::Service.new project_id, credentials, host: endpoint, timeout: timeout
         PubSub::Project.new service
       end
-
-      # rubocop:enable Metrics/AbcSize
 
       ##
       # Configure the Google Cloud PubSub library.
