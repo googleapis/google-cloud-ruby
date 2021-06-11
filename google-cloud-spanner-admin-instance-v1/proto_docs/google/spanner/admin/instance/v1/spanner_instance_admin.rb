@@ -118,6 +118,11 @@ module Google
             #     See [the
             #     documentation](https://cloud.google.com/spanner/docs/instances#node_count)
             #     for more information about nodes.
+            # @!attribute [rw] processing_units
+            #   @return [::Integer]
+            #     The number of processing units allocated to this instance. At most one of
+            #     processing_units or node_count should be present in the message. This may
+            #     be zero in API responses for instances that are not yet in state `READY`.
             # @!attribute [r] state
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::Instance::State]
             #     Output only. The current instance state. For
