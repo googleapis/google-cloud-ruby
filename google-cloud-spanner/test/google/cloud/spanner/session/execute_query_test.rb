@@ -232,7 +232,7 @@ describe Google::Cloud::Spanner::Session, :execute_query, :mock_spanner do
   end
 
   it "can execute a simple query with query options" do
-    expect_query_options = { optimizer_version: "4" }
+    expect_query_options = { optimizer_version: "4", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
     mock = Minitest::Mock.new
     session.service.mocked_service = mock
     expect_execute_streaming_sql results_enum, session.path, "SELECT * FROM users", options: default_options, query_options: expect_query_options
@@ -245,7 +245,7 @@ describe Google::Cloud::Spanner::Session, :execute_query, :mock_spanner do
   end
 
   it "can execute a simple query with query options (session-level)" do
-    expect_query_options = { optimizer_version: "4" }
+    expect_query_options = { optimizer_version: "4", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
     session = Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service, query_options: expect_query_options
     mock = Minitest::Mock.new
     session.service.mocked_service = mock
@@ -259,8 +259,8 @@ describe Google::Cloud::Spanner::Session, :execute_query, :mock_spanner do
   end
 
   it "can execute a simple query with query options that query-level configs merge over session-level configs" do
-    expect_query_options = { optimizer_version: "2", another_field: "test" }
-    session = Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service, query_options: { optimizer_version: "1", another_field: "test" }
+    expect_query_options = { optimizer_version: "2", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
+    session = Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service, query_options: { optimizer_version: "1", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
     mock = Minitest::Mock.new
     session.service.mocked_service = mock
     expect_execute_streaming_sql results_enum, session.path, "SELECT * FROM users", options: default_options, query_options: expect_query_options

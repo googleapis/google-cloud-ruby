@@ -11,6 +11,8 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
+Metrics/AbcSize:
+  Max: 35
 Metrics/BlockLength:
   Exclude:
     - "google-cloud-pubsub.gemspec"
@@ -20,8 +22,7 @@ Metrics/ClassLength:
 Metrics/CyclomaticComplexity:
   Max: 15
 Metrics/MethodLength:
-  Exclude:
-    - "lib/google/cloud/pubsub.rb"
+  Max: 35
 Metrics/PerceivedComplexity:
   Max: 15
 Naming/FileName:

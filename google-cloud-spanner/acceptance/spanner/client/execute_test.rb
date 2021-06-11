@@ -130,7 +130,7 @@ describe "Spanner Client", :execute_sql, :spanner do
   end
 
   it "runs a simple query with query options" do
-    query_options = { optimizer_version: "1" }
+    query_options = { optimizer_version: "3", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
     results = db.execute_sql "SELECT 42 AS num", query_options: query_options
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
@@ -147,10 +147,10 @@ describe "Spanner Client", :execute_sql, :spanner do
   end
 
   it "runs a simple query when the client-level config of query options is set" do
-    query_options = { optimizer_version: "1" }
+    query_options = { optimizer_version: "3", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
     new_spanner = Google::Cloud::Spanner.new
     new_db = new_spanner.client db.instance_id, db.database_id, query_options: query_options
-    _(new_db.query_options).must_equal({ optimizer_version: "1" })
+    _(new_db.query_options).must_equal({ optimizer_version: "3", optimizer_statistics_package: "auto_20191128_14_47_22UTC" })
 
     results = new_db.execute_sql "SELECT 42 AS num"
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -168,21 +168,25 @@ describe "Spanner Client", :execute_sql, :spanner do
   end
 
   describe "when the environment variable of query options is set" do
-    let(:origin_env) { nil }
+    let(:origin_opt_version) { nil }
+    let(:origin_opt_stats_pkg) { nil }
 
     before do
-      origin_env = ENV["SPANNER_OPTIMIZER_VERSION"]
-      ENV["SPANNER_OPTIMIZER_VERSION"] = "1"
+      origin_opt_version = ENV["SPANNER_OPTIMIZER_VERSION"]
+      ENV["SPANNER_OPTIMIZER_VERSION"] = "3"
+      origin_opt_stats_pkg = ENV["SPANNER_OPTIMIZER_STATISTICS_PACKAGE"]
+      ENV["SPANNER_OPTIMIZER_STATISTICS_PACKAGE"] = "auto_20191128_14_47_22UTC"
     end
 
     after do
-      ENV["SPANNER_OPTIMIZER_VERSION"] = origin_env
+      ENV["SPANNER_OPTIMIZER_VERSION"] = origin_opt_version
+      ENV["SPANNER_OPTIMIZER_STATISTICS_PACKAGE"] = origin_opt_stats_pkg
     end
 
     it "runs a simple query " do
       new_spanner = Google::Cloud::Spanner.new
       new_db = new_spanner.client db.instance_id, db.database_id
-      _(new_db.project.query_options).must_equal({ optimizer_version: "1" })
+      _(new_db.project.query_options).must_equal({ optimizer_version: "3", optimizer_statistics_package: "auto_20191128_14_47_22UTC" })
 
       results = new_db.execute_sql "SELECT 42 AS num"
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
