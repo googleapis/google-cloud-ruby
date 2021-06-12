@@ -26,7 +26,7 @@ describe Google::Cloud::PubSub::Schema, :partial, :mock_pubsub do
   it "knows its attributes" do
     _(schema.name).must_equal schema_path(schema_id)
     _(schema.type).must_equal type
-    _(schema.definition).must_equal ""
+    _(schema.definition).must_be :nil?
   end
 
   it "knows its view state" do
