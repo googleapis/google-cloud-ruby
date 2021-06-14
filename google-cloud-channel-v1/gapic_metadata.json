@@ -135,6 +135,11 @@
                 "update_channel_partner_link"
               ]
             },
+            "LookupOffer": {
+              "methods": [
+                "lookup_offer"
+              ]
+            },
             "ListProducts": {
               "methods": [
                 "list_products"

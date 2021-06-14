@@ -181,6 +181,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :request_id, :string, 3
     end
+    add_message "google.cloud.channel.v1.LookupOfferRequest" do
+      optional :entitlement, :string, 1
+    end
     add_message "google.cloud.channel.v1.ListProductsRequest" do
       optional :account, :string, 1
       optional :page_size, :int32, 2
@@ -331,6 +334,7 @@ module Google
         CancelEntitlementRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.CancelEntitlementRequest").msgclass
         SuspendEntitlementRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.SuspendEntitlementRequest").msgclass
         ActivateEntitlementRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ActivateEntitlementRequest").msgclass
+        LookupOfferRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.LookupOfferRequest").msgclass
         ListProductsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListProductsRequest").msgclass
         ListProductsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListProductsResponse").msgclass
         ListSkusRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListSkusRequest").msgclass

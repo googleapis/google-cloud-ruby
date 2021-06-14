@@ -33,6 +33,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :RENEWAL_SETTING_CHANGED, 10
       value :PAID_SERVICE_STARTED, 11
       value :LICENSE_ASSIGNMENT_CHANGED, 12
+      value :LICENSE_CAP_CHANGED, 13
     end
     add_message "google.cloud.channel.v1.SubscriberEvent" do
       oneof :event do
