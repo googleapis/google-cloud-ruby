@@ -27,19 +27,25 @@ class MockActiveCall
     @request_response_count = 0
   end
 
-  def request_response *args
+  def request_response request, metadata: {}
     @request_response_count += 1
     "test-response"
   end
 end
 
 describe GRPC::ActiveCallWithTrace do
-  let (:active_call_with_trace) { MockActiveCall.new }
+  let(:active_call_with_trace) { MockActiveCall.new }
 
   describe "#request_response" do
     it "calls super even if a span is not set" do
       Google::Cloud::Trace.stub :get, nil do
         active_call_with_trace.request_response("test").must_equal "test-response"
+      end
+    end
+
+    it "handles keyword arguments properly" do
+      Google::Cloud::Trace.stub :get, nil do
+        active_call_with_trace.request_response("test", metadata: {foo: "bar"}).must_equal "test-response"
       end
     end
 
