@@ -296,45 +296,6 @@ module Google
             CANCELLED = 5
           end
         end
-
-        # The common metadata for long running operations.
-        # @!attribute [rw] state
-        #   @return [::Google::Cloud::DocumentAI::V1beta3::CommonOperationMetadata::State]
-        #     The state of the operation.
-        # @!attribute [rw] state_message
-        #   @return [::String]
-        #     A message providing more details about the current state of processing.
-        # @!attribute [rw] create_time
-        #   @return [::Google::Protobuf::Timestamp]
-        #     The creation time of the operation.
-        # @!attribute [rw] update_time
-        #   @return [::Google::Protobuf::Timestamp]
-        #     The last update time of the operation.
-        class CommonOperationMetadata
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # State of the longrunning operation.
-          module State
-            # Unspecified state.
-            STATE_UNSPECIFIED = 0
-
-            # Operation is still running.
-            RUNNING = 1
-
-            # Operation is being cancelled.
-            CANCELLING = 2
-
-            # Operation succeeded.
-            SUCCEEDED = 3
-
-            # Operation failed.
-            FAILED = 4
-
-            # Operation is cancelled.
-            CANCELLED = 5
-          end
-        end
       end
     end
   end

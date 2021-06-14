@@ -28,7 +28,7 @@ module Google
         #     X coordinate.
         # @!attribute [rw] y
         #   @return [::Integer]
-        #     Y coordinate.
+        #     Y coordinate (starts from the top of the image).
         class Vertex
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -42,7 +42,7 @@ module Google
         #     X coordinate.
         # @!attribute [rw] y
         #   @return [::Float]
-        #     Y coordinate.
+        #     Y coordinate (starts from the top of the image).
         class NormalizedVertex
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
