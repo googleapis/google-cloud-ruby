@@ -48,7 +48,7 @@ module Google
           @grpc = grpc
           @service = service
           @exists = nil
-          @view = view || :BASIC
+          @view = view || :FULL
         end
 
         ##
@@ -81,7 +81,7 @@ module Google
         #
         def definition
           return nil if reference?
-          @grpc.definition
+          @grpc.definition if @grpc.definition && !@grpc.definition.empty?
         end
 
         ##
@@ -141,7 +141,7 @@ module Google
         #   * `FULL` - Include all Schema object fields.
         #
         #   Optional. If not provided or `nil`, the last non-nil `view` argument to this method will be used if one has
-        #   been given, othewise `BASIC` will be used.
+        #   been given, othewise `FULL` will be used.
         #
         # @return [Google::Cloud::PubSub::Schema] Returns the reloaded schema.
         #
@@ -153,7 +153,7 @@ module Google
         #
         #   schema.reload!
         #
-        # @example Use the `view` option to load the full resource:
+        # @example Use the `view` option to load the basic or full resource:
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
@@ -267,7 +267,7 @@ module Google
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
-        #   schema = pubsub.schema "my-schema", view: :full
+        #   schema = pubsub.schema "my-schema"
         #
         #   schema.resource_full? #=> true
         #

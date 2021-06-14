@@ -60,7 +60,7 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
     _(schema.definition).must_equal definition
 
     # list
-    schemas = pubsub.schemas view: :full
+    schemas = pubsub.schemas
     _(schemas).wont_be :empty?
     schema = schemas.first
     _(schema).must_be_kind_of Google::Cloud::PubSub::Schema
@@ -69,7 +69,7 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
     _(schema.definition).wont_be :nil?
 
     # get
-    schema = pubsub.schema schema_name, view: :full
+    schema = pubsub.schema schema_name
     _(schema).must_be_kind_of Google::Cloud::PubSub::Schema
     _(schema.name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
     _(schema.type).must_equal :AVRO
@@ -135,7 +135,7 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
     schema.delete
 
     wait_for_condition description: "schema delete" do
-      schema = pubsub.schema schema_name
+      schema = pubsub.schema schema_name, view: :basic
       schema.nil?
     end
     _(schema).must_be :nil?

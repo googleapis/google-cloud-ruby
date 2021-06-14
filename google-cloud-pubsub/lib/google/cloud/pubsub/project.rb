@@ -443,7 +443,7 @@ module Google
         #   * `BASIC` - Include the `name` and `type` of the schema, but not the `definition`.
         #   * `FULL` - Include all Schema object fields.
         #
-        #   The default value is `BASIC`.
+        #   The default value is `FULL`.
         # @param [String] project If the schema belongs to a project other
         #   than the one currently connected to, the alternate project ID can be
         #   specified here. Not used if a fully-qualified schema name is
@@ -464,7 +464,7 @@ module Google
         #   schema = pubsub.schema "my-schema"
         #   schema.name #=> "projects/my-project/schemas/my-schema"
         #   schema.type #=> :PROTOCOL_BUFFER
-        #   # schema.definition # nil - Use view: :full to load complete resource.
+        #   schema.definition # The schema definition
         #
         # @example Skip the lookup against the service with `skip_lookup`:
         #   require "google/cloud/pubsub"
@@ -478,21 +478,21 @@ module Google
         #   schema.type #=> nil
         #   schema.definition #=> nil
         #
-        # @example Get the schema definition with `view: :full`:
+        # @example Omit the schema definition with `view: :basic`:
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   schema = pubsub.schema "my-schema", view: :full
+        #   schema = pubsub.schema "my-schema", view: :basic
         #   schema.name #=> "projects/my-project/schemas/my-schema"
         #   schema.type #=> :PROTOCOL_BUFFER
-        #   schema.definition # The schema definition
+        #   schema.definition #=> nil
         #
         def schema schema_name, view: nil, project: nil, skip_lookup: nil
           ensure_service!
           options = { project: project }
           return Schema.from_name schema_name, view, service, options if skip_lookup
-          view ||= :BASIC
+          view ||= :FULL
           grpc = service.get_schema schema_name, view, options
           Schema.from_grpc grpc, service
         rescue Google::Cloud::NotFoundError
@@ -551,7 +551,7 @@ module Google
         #     * `BASIC` - Include the `name` and `type` of the schema, but not the `definition`.
         #     * `FULL` - Include all Schema object fields.
         #
-        #   The default value is `BASIC`.
+        #   The default value is `FULL`.
         # @param [String] token A previously-returned page token representing
         #   part of the larger set of results to view.
         # @param [Integer] max Maximum number of schemas to return.
@@ -581,7 +581,7 @@ module Google
         #
         def schemas view: nil, token: nil, max: nil
           ensure_service!
-          view ||= :BASIC
+          view ||= :FULL
           options = { token: token, max: max }
           grpc = service.list_schemas view, options
           Schema::List.from_grpc grpc, service, view, max
