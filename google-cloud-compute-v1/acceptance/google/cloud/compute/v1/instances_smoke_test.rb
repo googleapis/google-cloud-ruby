@@ -85,7 +85,24 @@ class InstancesSmokeTest < Minitest::Test
     assert exception.message.include?("An error has occurred when making a REST request: Invalid resource field value in the request.")
   end
 
+  def test_update_desc_to_empty
+    # We test here: 1)set body field to empty string
+    #               2)optional body field not set
+    insert_resource
+    instance = read_instance
+    assert_equal "test", instance.description
+    assert_equal 0, instance.scheduling.min_node_cpus
+    instance.description = ""
+    op = @client.update instance: @name, instance_resource: instance, project: @default_project, zone: @default_zone
+    wait_for_zonal_op op, "update"
+    fetched = read_instance
+    assert_equal "", fetched.description
+    assert_equal 0, fetched.scheduling.min_node_cpus
+  end
+
   def test_query_params
+    # We test here: 1)set body field to zero
+    #               2)set query param to zero
     templates_client = ::Google::Cloud::Compute::V1::InstanceTemplates::Rest::Client.new
     igm_client = ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::Client.new
     template_name = "rbgapic#{rand 10_000}"
@@ -119,13 +136,20 @@ class InstancesSmokeTest < Minitest::Test
       end
       igm_resource = {
         base_instance_name: "rbgapicinst",
-        target_size: 1,
+        target_size: 0,
         instance_template: operation.target_link,
         name: igm_name
       }
 
       op = igm_client.insert project: @default_project, zone: @default_zone, instance_group_manager_resource: igm_resource
       wait_for_zonal_op op, "insert"
+
+      igm = igm_client.get project: @default_project, zone: @default_zone, instance_group_manager: igm_name
+      assert_equal igm.target_size, 0
+
+      resize_op = igm_client.resize project: @default_project, zone: @default_zone, instance_group_manager: igm_name,
+                                    size: 1
+      wait_for_zonal_op resize_op, "resize"
 
       igm = igm_client.get project: @default_project, zone: @default_zone, instance_group_manager: igm_name
       assert_equal igm.target_size, 1
@@ -162,6 +186,7 @@ class InstancesSmokeTest < Minitest::Test
   def insert_resource
     instance_resource = {
       name: @name,
+      description: "test",
       machine_type: @machine_type,
       network_interfaces: [
         {
