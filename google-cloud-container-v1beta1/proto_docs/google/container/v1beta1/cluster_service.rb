@@ -2848,6 +2848,9 @@ module Google
         #     For more information about protecting resources with Cloud KMS Keys please
         #     see:
         #     https://cloud.google.com/compute/docs/disks/customer-managed-encryption
+        # @!attribute [rw] image_type
+        #   @return [::String]
+        #     The image type to use for node created by NodeAutoprovisioning.
         class AutoprovisioningNodePoolDefaults
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
