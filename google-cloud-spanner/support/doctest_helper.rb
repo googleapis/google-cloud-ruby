@@ -84,6 +84,7 @@ YARD::Doctest.configure do |doctest|
   doctest.skip "Google::Cloud::Spanner::Database::Job#refresh!"
   doctest.skip "Google::Cloud::Spanner::Backup::Job#refresh!"
   doctest.skip "Google::Cloud::Spanner::Backup::Restore::Job#refresh!"
+  doctest.skip "Google::Cloud::Spanner::Instance#update"
 
   doctest.before "Google::Cloud#spanner" do
     mock_spanner do |mock, mock_instances, mock_databases|
@@ -119,6 +120,18 @@ YARD::Doctest.configure do |doctest|
       operation = job_grpc("google.spanner.admin.instance.v1.CreateInstanceMetadata", done: true)
       mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
       mock_instances.expect :get_instance, OpenStruct.new(instance_hash), [{ name: "projects/my-project/instances/my-new-instance" }, nil]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Instance#save" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_client = Minitest::Mock.new
+      mock_instances.expect :get_instance, Google::Cloud::Spanner::Admin::Instance::V1::Instance.new(instance_hash), [{ name: "projects/my-project/instances/my-instance" }, nil]
+      mock_instances.expect :update_instance, update_instance_resp(client: mock_client) do |req|
+        verify_mock_params(req, instance: Google::Cloud::Spanner::Admin::Instance::V1::Instance, field_mask: Google::Protobuf::FieldMask)
+      end
+      operation = job_grpc("google.spanner.admin.instance.v1.UpdateInstanceMetadata", done: true)
+      mock_client.expect :get_operation, OpenStruct.new(grpc_op: operation), [{ name: "1234567890" }, Gapic::CallOptions]
     end
   end
 
@@ -1419,6 +1432,15 @@ def create_instance_resp client: nil
     client,
     result_type: Google::Cloud::Spanner::Admin::Instance::V1::Instance,
     metadata_type: Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceMetadata
+  )
+end
+
+def update_instance_resp client: nil
+  Gapic::Operation.new(
+    job_grpc("google.spanner.admin.instance.v1.UpdateInstanceMetadata"),
+    client,
+    result_type: Google::Cloud::Spanner::Admin::Instance::V1::Instance,
+    metadata_type: Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceMetadata
   )
 end
 

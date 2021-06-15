@@ -127,13 +127,15 @@ module Google
         end
 
         def create_instance instance_id, name: nil, config: nil, nodes: nil,
-                            labels: nil, call_options: nil
+                            processing_units: nil, labels: nil,
+                            call_options: nil
           opts = default_options call_options: call_options
           labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
 
           create_obj = Admin::Instance::V1::Instance.new({
             display_name: name, config: instance_config_path(config),
-            node_count: nodes, labels: labels
+            node_count: nodes, processing_units: processing_units,
+            labels: labels
           }.delete_if { |_, v| v.nil? })
 
           request = {
@@ -144,12 +146,17 @@ module Google
           instances.create_instance request, opts
         end
 
-        def update_instance instance, call_options: nil
+        def update_instance instance, field_mask: nil, call_options: nil
           opts = default_options call_options: call_options
-          mask = Google::Protobuf::FieldMask.new(
-            paths: %w[display_name node_count labels]
-          )
-          request = { instance: instance, field_mask: mask }
+
+          if field_mask.nil? || field_mask.empty?
+            field_mask = %w[display_name node_count labels]
+          end
+
+          request = {
+            instance: instance,
+            field_mask: Google::Protobuf::FieldMask.new(paths: field_mask)
+          }
           instances.update_instance request, opts
         end
 

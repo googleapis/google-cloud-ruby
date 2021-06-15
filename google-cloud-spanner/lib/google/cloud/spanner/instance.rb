@@ -68,6 +68,7 @@ module Google
         def initialize grpc, service
           @grpc = grpc
           @service = service
+          @current_values = grpc.to_h
         end
 
         # The unique identifier for the project.
@@ -135,6 +136,23 @@ module Google
         alias node_count= nodes=
 
         ##
+        # The number of processing units allocated to this instance.
+        #
+        # @return [Integer]
+        def processing_units
+          @grpc.processing_units
+        end
+
+        ##
+        # Updates number of processing units allocated to this instance.
+        #
+        # @param units [Integer] The number of processing units allocated
+        #   to this instance.
+        def processing_units= units
+          @grpc.processing_units = units
+        end
+
+        ##
         # The current instance state. Possible values are `:CREATING` and
         # `:READY`.
         # @return [Symbol]
@@ -188,8 +206,50 @@ module Google
           )
         end
 
+        ##
+        # Update changes.
+        #  `display_name`, `labels`, `nodes`, `processing_units` can be
+        #  updated. `processing_units` and `nodes` can be used interchangeably
+        #  to update.
+        #
+        # @return [Instance::Job] The job representing the long-running,
+        #   asynchronous processing of an instance update operation.
+        # @raise [ArgumentError] if both processing_units or nodes are specified.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   instance = spanner.instance "my-instance"
+        #   instance.display_name = "prod-instance"
+        #   instance.labels = { env: "prod", app: "api" }
+        #   instance.nodes = 2
+        #   # OR
+        #   # instance.processing_units = 500
+        #
+        #   job = instance.save
+        #
+        #   job.done? #=> false
+        #   job.reload! # API call
+        #   job.done? #=> true
+        #
+        #   if job.error?
+        #     status = job.error
+        #   else
+        #     instance = job.instance
+        #   end
+        #
         def save
-          job_grpc = service.update_instance @grpc
+          ensure_service!
+
+          field_mask = []
+          @current_values.each do |field, value|
+            field_mask << field unless @grpc[field.to_s] == value
+          end
+
+          job_grpc = service.update_instance @grpc, field_mask: field_mask
+          @current_values = @grpc.to_h
           Instance::Job.from_grpc job_grpc, service
         end
         alias update save
