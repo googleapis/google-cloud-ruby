@@ -1,5 +1,19 @@
 # Release History
 
+### 2.7.0 / 2021-06-15
+
+#### Features
+
+* Add Publisher Flow Control
+  * Add flow_control to async options in Project#create_topic and Project#topic
+  * Add FlowControlLimitError
+
+#### Bug Fixes
+
+* Fix Project#schema and #schemas to return full resource
+  * Include schema definition in default return values.
+  * Fix Schema#definition to return nil instead of empty string when not present.
+
 ### 2.6.1 / 2021-04-28
 
 #### Bug Fixes
