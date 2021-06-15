@@ -970,12 +970,18 @@ class MockBigquery < Minitest::Spec
     )
   end
 
-  def load_job_url_gapi table_reference, urls, job_id: "job_9876543210", location: "US", hive_partitioning_options: nil
+  def load_job_url_gapi table_reference,
+                        urls,
+                        job_id: "job_9876543210",
+                        location: "US",
+                        hive_partitioning_options: nil,
+                        parquet_options: nil
     load = Google::Apis::BigqueryV2::JobConfigurationLoad.new(
       destination_table: table_reference,
       source_uris: [urls].flatten
     )
     load.hive_partitioning_options = hive_partitioning_options if hive_partitioning_options
+    load.parquet_options = parquet_options if parquet_options
     Google::Apis::BigqueryV2::Job.new(
       job_reference: job_reference_gapi(project, job_id, location: location),
       configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
@@ -991,7 +997,8 @@ class MockBigquery < Minitest::Spec
                          location: "US",
                          labels: nil,
                          source_format: nil,
-                         hive_partitioning_options: nil
+                         hive_partitioning_options: nil,
+                         parquet_options: nil
     hash = random_job_hash job_id, location: location
     hash["configuration"]["load"] = {
       "sourceFormat" => source_format,
@@ -1006,6 +1013,7 @@ class MockBigquery < Minitest::Spec
     resp.status = status "done"
     resp.configuration.labels = labels if labels
     resp.configuration.load.hive_partitioning_options = hive_partitioning_options if hive_partitioning_options
+    resp.configuration.load.parquet_options = parquet_options if parquet_options
     resp
   end
 

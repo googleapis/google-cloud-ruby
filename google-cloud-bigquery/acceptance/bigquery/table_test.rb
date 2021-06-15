@@ -749,6 +749,10 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     _(job.hive_partitioning_mode).must_be_nil
     _(job.hive_partitioning_source_uri_prefix).must_be_nil
 
+    _(job.parquet_options?).must_equal false
+    _(job.parquet_enable_list_inference?).must_be_nil
+    _(job.parquet_enum_as_string?).must_be_nil
+
     _(job.range_partitioning?).must_equal false
     _(job.range_partitioning_field).must_be_nil
     _(job.range_partitioning_start).must_be_nil
