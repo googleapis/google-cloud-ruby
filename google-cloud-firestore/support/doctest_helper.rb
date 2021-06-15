@@ -178,6 +178,18 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Firestore::CollectionGroup" do
+    mock_firestore do |mock|
+      mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::CollectionGroup#partitions" do
+    mock_firestore do |mock|
+      mock.expect :partition_query, partition_query_resp, [Google::Cloud::Firestore::V1::PartitionQueryRequest]
+    end
+  end
+
   doctest.skip "Google::Cloud::Firestore::FieldPath" do
     mock_firestore do |mock|
       mock.expect :batch_get_documents, batch_get_resp_users, batch_get_args
@@ -283,6 +295,12 @@ YARD::Doctest.configure do |doctest|
     mock_firestore do |mock|
       mock.expect :batch_get_documents, batch_get_resp, batch_get_args
       mock.expect :run_query, run_query_resp, run_query_args
+    end
+  end
+
+  doctest.before "Google::Cloud::Firestore::QueryPartition" do
+    mock_firestore do |mock|
+      mock.expect :partition_query, partition_query_resp, [Google::Cloud::Firestore::V1::PartitionQueryRequest]
     end
   end
 
@@ -499,6 +517,10 @@ def list_documents_args
   ]
 end
 
+def document_path doc_id
+  "projects/my-project-id/databases/(default)/documents/#{doc_id}"
+end
+
 def document_gapi doc: "my-document", fields: {}
   Google::Cloud::Firestore::V1::Document.new(
     name: "projects/my-project-id/databases/(default)/documents/#{doc}",
@@ -514,4 +536,26 @@ def documents_resp token: nil
   )
   response.next_page_token = token if token
   paged_enum_struct response
+end
+
+def partition_query_resp count: 3, token: nil
+  response = Google::Cloud::Firestore::V1::PartitionQueryResponse.new(
+    # Minimum partition size is 128.
+    partitions: count.times.map { |i| cursor_grpc doc_ids: [((i+1) * 10).to_s] }
+  )
+  response.next_page_token = token if token
+  paged_enum_struct response
+end
+
+# Minimum partition size is 128.
+def cursor_grpc doc_ids: ["10"], before: true
+  converted_values = doc_ids.map do |doc_id|
+    Google::Cloud::Firestore::V1::Value.new(
+      reference_value: document_path(doc_id)
+    )
+  end
+  Google::Cloud::Firestore::V1::Cursor.new(
+    values: converted_values,
+    before: before
+  )
 end

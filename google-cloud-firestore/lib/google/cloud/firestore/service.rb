@@ -96,6 +96,20 @@ module Google
           )
         end
 
+        ##
+        # Returns Google::Cloud::Firestore::V1::PartitionQueryResponse
+        def partition_query parent, query_grpc, partition_count, token: nil, max: nil
+          request = Google::Cloud::Firestore::V1::PartitionQueryRequest.new(
+            parent: parent,
+            structured_query: query_grpc,
+            partition_count: partition_count,
+            page_token: token,
+            page_size: max
+          )
+          paged_enum = firestore.partition_query request
+          paged_enum.response
+        end
+
         def run_query path, query_grpc, transaction: nil
           run_query_req = {
             parent:           path,

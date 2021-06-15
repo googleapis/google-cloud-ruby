@@ -127,7 +127,7 @@ class MockFirestore < Minitest::Spec
   def wait_until &block
     wait_count = 0
     until block.call
-      fail "wait_until criterial was not met" if wait_count > 100
+      fail "wait_until criteria was not met" if wait_count > 100
       wait_count += 1
       sleep 0.01
     end
@@ -182,8 +182,47 @@ class MockFirestore < Minitest::Spec
     [req, default_options]
   end
 
+  def partition_query_args query_grpc,
+                           parent: "projects/#{project}/databases/(default)/documents",
+                           partition_count: 2,
+                           page_token: nil,
+                           page_size: nil
+    [
+      Google::Cloud::Firestore::V1::PartitionQueryRequest.new(
+        parent: parent,
+        structured_query: query_grpc,
+        partition_count: partition_count,
+        page_token: page_token,
+        page_size: page_size
+      )
+    ]
+  end
+
+  def partition_query_resp doc_ids: ["10", "20"], token: nil
+    Google::Cloud::Firestore::V1::PartitionQueryResponse.new(
+      partitions: doc_ids.map { |id| cursor_grpc doc_ids: [id] },
+      next_page_token: token
+    )
+  end
+
+  def cursor_grpc doc_ids: ["10"], before: true
+    converted_values = doc_ids.map do |doc_id|
+      Google::Cloud::Firestore::V1::Value.new(
+        reference_value: document_path(doc_id)
+      )
+    end
+    Google::Cloud::Firestore::V1::Cursor.new(
+      values: converted_values,
+      before: before
+    )
+  end
+
   def paged_enum_struct response
     OpenStruct.new response: response
+  end
+
+  def document_path doc_id
+    "projects/#{project}/databases/(default)/documents/my-collection-id/#{doc_id}"
   end
 end
 

@@ -18,6 +18,7 @@ require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/collection_reference"
 require "google/cloud/firestore/document_listener"
 require "google/cloud/firestore/document_reference/list"
+require "google/cloud/firestore/resource_path"
 
 module Google
   module Cloud
@@ -458,6 +459,12 @@ module Google
         end
 
         # @!endgroup
+
+        # @private
+        def <=> other
+          return nil unless other.is_a? self.class
+          ResourcePath.from_path(path) <=> ResourcePath.from_path(other.path)
+        end
 
         ##
         # @private New DocumentReference object from a path.

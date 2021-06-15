@@ -17,6 +17,7 @@ require "google/cloud/firestore/v1"
 require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/query_listener"
 require "google/cloud/firestore/convert"
+require "json"
 
 module Google
   module Cloud
@@ -73,6 +74,16 @@ module Google
         ##
         # @private The firestore client object.
         attr_accessor :client
+
+        ##
+        # @private Creates a new Query.
+        def initialize query, parent_path, client, limit_type: nil
+          query ||= StructuredQuery.new
+          @query = query
+          @parent_path = parent_path
+          @limit_type = limit_type
+          @client = client
+        end
 
         ##
         # Restricts documents matching the query to return only data for the
@@ -963,15 +974,70 @@ module Google
         alias on_snapshot listen
 
         ##
+        # Serializes the instance to a JSON text string. See also {Query.from_json}.
+        #
+        # @return [String] A JSON text string.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #   query = firestore.col(:cities).select(:population)
+        #
+        #   json = query.to_json
+        #
+        #   new_query = Google::Cloud::Firestore::Query.from_json json, firestore
+        #
+        #   new_query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        def to_json options = nil
+          query_json = Google::Cloud::Firestore::V1::StructuredQuery.encode_json query
+          {
+            "query" => JSON.parse(query_json),
+            "parent_path" => parent_path,
+            "limit_type" => limit_type
+          }.to_json options
+        end
+
+        ##
+        # Deserializes a JSON text string serialized from this class and returns it as a new instance. See also
+        # {#to_json}.
+        #
+        # @param [String] json A JSON text string serialized using {#to_json}.
+        # @param [Google::Cloud::Firestore::Client] client A connected client instance.
+        #
+        # @return [Query] A new query equal to the original query used to create the JSON text string.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #   query = firestore.col(:cities).select(:population)
+        #
+        #   json = query.to_json
+        #
+        #   new_query = Google::Cloud::Firestore::Query.from_json json, firestore
+        #
+        #   new_query.get do |city|
+        #     puts "#{city.document_id} has #{city[:population]} residents."
+        #   end
+        #
+        def self.from_json json, client
+          raise ArgumentError, "client is required" unless client
+
+          json = JSON.parse json
+          query_json = json["query"]
+          raise ArgumentError, "Field 'query' is required" unless query_json
+          query = Google::Cloud::Firestore::V1::StructuredQuery.decode_json query_json.to_json
+          start query, json["parent_path"], client, limit_type: json["limit_type"]&.to_sym
+        end
+
+        ##
         # @private Start a new Query.
         def self.start query, parent_path, client, limit_type: nil
-          query ||= StructuredQuery.new
-          Query.new.tap do |q|
-            q.instance_variable_set :@query, query
-            q.instance_variable_set :@parent_path, parent_path
-            q.instance_variable_set :@limit_type, limit_type
-            q.instance_variable_set :@client, client
-          end
+          new query, parent_path, client, limit_type: limit_type
         end
 
         protected
@@ -1094,11 +1160,14 @@ module Google
             return snapshot_to_cursor values.first, query
           end
 
+          # The *values param in start_at, start_after, etc. will wrap an array argument in an array, so unwrap it here.
+          values = values.first if values.count == 1 && values.first.is_a?(Array)
+
           # pair values with their field_paths to ensure correct formatting
           order_field_paths = order_by_field_paths query
           if values.count > order_field_paths.count
             # raise if too many values provided for the cursor
-            raise ArgumentError, "too many values"
+            raise ArgumentError, "There cannot be more cursor values than order by fields"
           end
 
           values = values.zip(order_field_paths).map do |value, field_path|
@@ -1130,7 +1199,6 @@ module Google
               snapshot[field_path]
             end
           end
-
           values_to_cursor values, query
         end
 

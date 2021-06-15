@@ -14,9 +14,9 @@
 
 
 require "google/cloud/firestore/v1"
+require "google/cloud/firestore/query"
 require "google/cloud/firestore/document_reference"
 require "google/cloud/firestore/document_snapshot"
-require "google/cloud/firestore/query"
 require "google/cloud/firestore/generate"
 require "google/cloud/firestore/collection_reference_list"
 
@@ -46,6 +46,13 @@ module Google
         ##
         # @private The firestore client object.
         attr_accessor :client
+
+        ##
+        # @private Creates a new CollectionReference.
+        def initialize query, path, client
+          super query, nil, client # Pass nil parent_path arg since this class implements #parent_path
+          @path = path
+        end
 
         ##
         # The collection identifier for the collection resource.
@@ -257,11 +264,7 @@ module Google
             ]
           )
 
-          new.tap do |c|
-            c.client = client
-            c.instance_variable_set :@path, path
-            c.instance_variable_set :@query, query
-          end
+          CollectionReference.new query, path, client
         end
 
         protected

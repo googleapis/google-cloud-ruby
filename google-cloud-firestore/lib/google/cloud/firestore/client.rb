@@ -20,6 +20,7 @@ require "google/cloud/firestore/field_value"
 require "google/cloud/firestore/collection_reference"
 require "google/cloud/firestore/document_reference"
 require "google/cloud/firestore/document_snapshot"
+require "google/cloud/firestore/collection_group"
 require "google/cloud/firestore/batch"
 require "google/cloud/firestore/transaction"
 
@@ -139,7 +140,7 @@ module Google
         alias collection col
 
         ##
-        # Creates and returns a new Query that includes all documents in the
+        # Creates and returns a new collection group that includes all documents in the
         # database that are contained in a collection or subcollection with the
         # given collection_id.
         #
@@ -147,7 +148,7 @@ module Google
         #   over. Every collection or subcollection with this ID as the last
         #   segment of its path will be included. Cannot contain a slash (`/`).
         #
-        # @return [Query] The created Query.
+        # @return [CollectionGroup] The created collection group.
         #
         # @example
         #   require "google/cloud/firestore"
@@ -155,9 +156,9 @@ module Google
         #   firestore = Google::Cloud::Firestore.new
         #
         #   # Get the cities collection group query
-        #   query = firestore.col_group "cities"
+        #   col_group = firestore.col_group "cities"
         #
-        #   query.get do |city|
+        #   col_group.get do |city|
         #     puts "#{city.document_id} has #{city[:population]} residents."
         #   end
         #
@@ -166,15 +167,8 @@ module Google
             raise ArgumentError, "Invalid collection_id: '#{collection_id}', " \
               "must not contain '/'."
           end
-          query = Google::Cloud::Firestore::V1::StructuredQuery.new(
-            from: [
-              Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(
-                collection_id: collection_id, all_descendants: true
-              )
-            ]
-          )
 
-          Query.start query, service.documents_path, self
+          CollectionGroup.from_collection_id service.documents_path, collection_id, self
         end
         alias collection_group col_group
 

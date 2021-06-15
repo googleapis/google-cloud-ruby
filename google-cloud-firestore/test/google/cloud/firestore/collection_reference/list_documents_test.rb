@@ -137,21 +137,6 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
     _(documents.token).must_equal "next_page_token"
   end
 
-  it "paginates documents without max set" do
-    list_res = paged_enum_struct list_documents_gapi(3, "next_page_token")
-
-    firestore_mock.expect :list_documents, list_res, list_documents_args
-
-    documents = collection.list_documents
-
-    firestore_mock.verify
-
-    documents.each { |m| _(m).must_be_kind_of Google::Cloud::Firestore::DocumentReference }
-    _(documents.count).must_equal 3
-    _(documents.token).wont_be :nil?
-    _(documents.token).must_equal "next_page_token"
-  end
-
   def document_gapi
     Google::Cloud::Firestore::V1::Document.new(
       name: "projects/#{project}/databases/(default)/documents/my-document",
