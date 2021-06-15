@@ -7,5 +7,6 @@
     "name_pretty": "IAM Service Account Credentials API",
     "product_documentation": "https://cloud.google.com/iam",
     "repo": "googleapis/google-cloud-ruby",
-    "requires_billing": true
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO"
 }

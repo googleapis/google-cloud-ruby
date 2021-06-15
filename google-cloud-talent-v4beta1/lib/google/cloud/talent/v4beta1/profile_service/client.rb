@@ -69,9 +69,9 @@ module Google
                 default_config.rpcs.list_profiles.timeout = 30.0
                 default_config.rpcs.list_profiles.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_profile.timeout = 30.0
@@ -79,9 +79,9 @@ module Google
                 default_config.rpcs.get_profile.timeout = 30.0
                 default_config.rpcs.get_profile.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_profile.timeout = 30.0
@@ -89,9 +89,9 @@ module Google
                 default_config.rpcs.delete_profile.timeout = 30.0
                 default_config.rpcs.delete_profile.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_profiles.timeout = 30.0

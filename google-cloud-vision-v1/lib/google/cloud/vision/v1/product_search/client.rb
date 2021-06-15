@@ -81,153 +81,153 @@ module Google
                 default_config.rpcs.create_product_set.timeout = 600.0
                 default_config.rpcs.create_product_set.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: []
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: []
                 }
 
                 default_config.rpcs.list_product_sets.timeout = 600.0
                 default_config.rpcs.list_product_sets.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_product_set.timeout = 600.0
                 default_config.rpcs.get_product_set.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_product_set.timeout = 600.0
                 default_config.rpcs.update_product_set.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.delete_product_set.timeout = 600.0
                 default_config.rpcs.delete_product_set.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_product.timeout = 600.0
                 default_config.rpcs.create_product.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: []
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: []
                 }
 
                 default_config.rpcs.list_products.timeout = 600.0
                 default_config.rpcs.list_products.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_product.timeout = 600.0
                 default_config.rpcs.get_product.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_product.timeout = 600.0
                 default_config.rpcs.update_product.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.delete_product.timeout = 600.0
                 default_config.rpcs.delete_product.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_reference_image.timeout = 600.0
                 default_config.rpcs.create_reference_image.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: []
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: []
                 }
 
                 default_config.rpcs.delete_reference_image.timeout = 600.0
                 default_config.rpcs.delete_reference_image.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_reference_images.timeout = 600.0
                 default_config.rpcs.list_reference_images.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_reference_image.timeout = 600.0
                 default_config.rpcs.get_reference_image.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.add_product_to_product_set.timeout = 600.0
                 default_config.rpcs.add_product_to_product_set.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.remove_product_from_product_set.timeout = 600.0
                 default_config.rpcs.remove_product_from_product_set.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_products_in_product_set.timeout = 600.0
                 default_config.rpcs.list_products_in_product_set.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.import_product_sets.timeout = 600.0
                 default_config.rpcs.import_product_sets.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: []
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: []
                 }
 
                 default_config.rpcs.purge_products.timeout = 600.0
                 default_config.rpcs.purge_products.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: []
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: []
                 }
 
                 default_config

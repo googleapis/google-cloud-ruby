@@ -75,17 +75,17 @@ module Google
                 default_config.rpcs.list_uptime_check_configs.timeout = 30.0
                 default_config.rpcs.list_uptime_check_configs.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_uptime_check_config.timeout = 30.0
                 default_config.rpcs.get_uptime_check_config.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_uptime_check_config.timeout = 30.0
@@ -95,17 +95,17 @@ module Google
                 default_config.rpcs.delete_uptime_check_config.timeout = 30.0
                 default_config.rpcs.delete_uptime_check_config.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_uptime_check_ips.timeout = 30.0
                 default_config.rpcs.list_uptime_check_ips.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config

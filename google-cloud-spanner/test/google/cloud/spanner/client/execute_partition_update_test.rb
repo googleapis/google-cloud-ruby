@@ -249,7 +249,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
   end
 
   it "can execute a PDML statement with query options" do
-    expect_query_options = { optimizer_version: "1" }
+    expect_query_options = { optimizer_version: "1", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
     mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: pdml_tx_opts }, default_options]
@@ -264,7 +264,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
   end
 
   it "can execute a PDML statement with query options (environment variable or client-level)" do
-    expect_query_options = { optimizer_version: "1" }
+    expect_query_options = { optimizer_version: "1", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
     new_client = spanner.client instance_id, database_id, pool: { min: 0 }, query_options: expect_query_options
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
@@ -280,8 +280,8 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
   end
 
   it "can execute a PDML statement with query options that query-level configs merge over environment variable or client-level configs" do
-    expect_query_options = { optimizer_version: "2", another_field: "test" }
-    new_client = spanner.client instance_id, database_id, pool: { min: 0 }, query_options: { optimizer_version: "1", another_field: "test" }
+    expect_query_options = { optimizer_version: "2", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
+    new_client = spanner.client instance_id, database_id, pool: { min: 0 }, query_options: { optimizer_version: "1", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
     mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: pdml_tx_opts }, default_options]
@@ -317,5 +317,26 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
     mock.verify
 
     _(row_count).must_equal 1
+  end
+
+  describe "priority request options" do
+    it "execute a PDML statement" do
+      mock = Minitest::Mock.new
+      mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+      mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: pdml_tx_opts }, default_options]
+      spanner.service.mocked_service = mock
+      expect_execute_streaming_sql results_enum, session_grpc.name,
+                                   "UPDATE users SET active = true",
+                                   transaction: tx_selector,
+                                   request_options: { priority: :PRIORITY_MEDIUM },
+                                   options: default_options
+
+      row_count = client.execute_partition_update "UPDATE users SET active = true",
+                                                  request_options: { priority: :PRIORITY_MEDIUM }
+
+      mock.verify
+
+      _(row_count).must_equal 1
+    end
   end
 end

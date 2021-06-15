@@ -190,7 +190,7 @@ describe "Spanner Client", :transaction, :spanner do
   end
 
   it "can execute sql with query options" do
-    query_options = { optimizer_version: "latest" }
+    query_options = { optimizer_version: "3", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
     db.transaction do |tx|
       tx_results = tx.execute_sql query_reputation, query_options: query_options
       _(tx_results.rows.first[:reputation]).must_equal 63.5
@@ -208,6 +208,26 @@ describe "Spanner Client", :transaction, :spanner do
     end
 
     assert_commit_response commit_resp, commit_options
+  end
+
+  describe "request options" do
+    it "execute transaction with priority options" do
+      timestamp = db.transaction request_options: { priority: :PRIORITY_MEDIUM } do |tx|
+        tx_results = tx.read "accounts", columns
+        _(tx_results.rows.count).must_equal default_account_rows.length
+        tx.insert "accounts", additional_account
+      end
+      _(timestamp).must_be_kind_of Time
+    end
+
+    it "execute query with priority options" do
+      timestamp = db.transaction do |tx|
+        tx_results = tx.execute_sql query_reputation,
+                                    request_options: { priority: :PRIORITY_MEDIUM }
+        _(tx_results.rows.count).must_be :>, 0
+      end
+      _(timestamp).must_be_kind_of Time
+    end
   end
 
   def read_and_update db

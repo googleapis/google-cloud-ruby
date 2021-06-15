@@ -73,81 +73,81 @@ module Google
                 default_config.rpcs.get_document.timeout = 60.0
                 default_config.rpcs.get_document.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [8, 14, 13, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.list_documents.timeout = 60.0
                 default_config.rpcs.list_documents.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [8, 14, 13, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.update_document.timeout = 60.0
                 default_config.rpcs.update_document.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [8, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [8, 14]
                 }
 
                 default_config.rpcs.delete_document.timeout = 60.0
                 default_config.rpcs.delete_document.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [8, 14, 13, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.batch_get_documents.timeout = 300.0
                 default_config.rpcs.batch_get_documents.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [8, 14, 13, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.begin_transaction.timeout = 60.0
                 default_config.rpcs.begin_transaction.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [8, 14, 13, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.commit.timeout = 60.0
                 default_config.rpcs.commit.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [8, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [8, 14]
                 }
 
                 default_config.rpcs.rollback.timeout = 60.0
                 default_config.rpcs.rollback.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [8, 14, 13, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.run_query.timeout = 300.0
                 default_config.rpcs.run_query.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [8, 14, 13, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.partition_query.timeout = 300.0
                 default_config.rpcs.partition_query.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [8, 14, 13, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.write.timeout = 86_400.0
@@ -155,33 +155,33 @@ module Google
                 default_config.rpcs.listen.timeout = 86_400.0
                 default_config.rpcs.listen.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [8, 14, 13, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.list_collection_ids.timeout = 60.0
                 default_config.rpcs.list_collection_ids.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [8, 14, 13, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.batch_write.timeout = 60.0
                 default_config.rpcs.batch_write.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [8, 14, 10]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [8, 14, 10]
                 }
 
                 default_config.rpcs.create_document.timeout = 60.0
                 default_config.rpcs.create_document.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [8, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [8, 14]
                 }
 
                 default_config

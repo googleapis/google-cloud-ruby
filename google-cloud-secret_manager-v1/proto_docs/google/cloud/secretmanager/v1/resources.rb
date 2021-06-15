@@ -61,6 +61,9 @@ module Google
         # @!attribute [rw] ttl
         #   @return [::Google::Protobuf::Duration]
         #     Input only. The TTL for the {::Google::Cloud::SecretManager::V1::Secret Secret}.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. Etag of the currently stored {::Google::Cloud::SecretManager::V1::Secret Secret}.
         # @!attribute [rw] rotation
         #   @return [::Google::Cloud::SecretManager::V1::Rotation]
         #     Optional. Rotation policy attached to the {::Google::Cloud::SecretManager::V1::Secret Secret}. May be excluded if there is no
@@ -101,6 +104,9 @@ module Google
         # @!attribute [rw] replication_status
         #   @return [::Google::Cloud::SecretManager::V1::ReplicationStatus]
         #     The replication status of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+        # @!attribute [r] etag
+        #   @return [::String]
+        #     Output only. Etag of the currently stored {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
         class SecretVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -290,7 +296,9 @@ module Google
         # Secret. {::Google::Cloud::SecretManager::V1::Secret#topics Secret.topics} must be set to configure rotation.
         # @!attribute [rw] next_rotation_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Optional. Timestamp in UTC at which the {::Google::Cloud::SecretManager::V1::Secret Secret} is scheduled to rotate.
+        #     Optional. Timestamp in UTC at which the {::Google::Cloud::SecretManager::V1::Secret Secret} is scheduled to rotate. Cannot be
+        #     set to less than 300s (5 min) in the future and at most 3153600000s (100
+        #     years).
         #
         #     {::Google::Cloud::SecretManager::V1::Rotation#next_rotation_time next_rotation_time} MUST  be set if {::Google::Cloud::SecretManager::V1::Rotation#rotation_period rotation_period} is set.
         # @!attribute [rw] rotation_period

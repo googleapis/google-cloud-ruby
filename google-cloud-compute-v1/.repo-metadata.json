@@ -2,6 +2,7 @@
     "client_documentation": "https://googleapis.dev/ruby/google-cloud-compute-v1/latest",
     "distribution_name": "google-cloud-compute-v1",
     "language": "ruby",
+    "library_type": "GAPIC_AUTO",
     "name_pretty": "Google Cloud Compute V1 API",
     "release_level": "alpha",
     "repo": "googleapis/google-cloud-ruby",

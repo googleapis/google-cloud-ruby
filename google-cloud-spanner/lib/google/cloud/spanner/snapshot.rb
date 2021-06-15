@@ -83,6 +83,7 @@ module Google
         #   | `BOOL`      | `true`/`false` | |
         #   | `INT64`     | `Integer`      | |
         #   | `FLOAT64`   | `Float`        | |
+        #   | `NUMERIC`   | `BigDecimal`   | |
         #   | `STRING`    | `String`       | |
         #   | `DATE`      | `Date`         | |
         #   | `TIMESTAMP` | `Time`, `DateTime` | |
@@ -108,6 +109,7 @@ module Google
         #   * `:BYTES`
         #   * `:DATE`
         #   * `:FLOAT64`
+        #   * `:NUMERIC`
         #   * `:INT64`
         #   * `:STRING`
         #   * `:TIMESTAMP`
@@ -125,6 +127,8 @@ module Google
         #   * `:optimizer_version` (String) The version of optimizer to use.
         #     Empty to use database default. "latest" to use the latest
         #     available optimizer version.
+        #   * `:optimizer_statistics_package` (String) Statistics package to
+        #     use. Empty to use the database default.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -249,7 +253,10 @@ module Google
         #
         #   db.snapshot do |snp|
         #     results = snp.execute_query \
-        #       "SELECT * FROM users", query_options: { optimizer_version: "1" }
+        #       "SELECT * FROM users", query_options: {
+        #         optimizer_version: "1",
+        #         optimizer_statistics_package: "auto_20191128_14_47_22UTC"
+        #       }
         #
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}"
@@ -373,12 +380,13 @@ module Google
         #   Hash values must contain the type value. If a Hash is used the
         #   fields will be created using the same order as the Hash keys.
         #
-        #   Supported type values incude:
+        #   Supported type values include:
         #
         #   * `:BOOL`
         #   * `:BYTES`
         #   * `:DATE`
         #   * `:FLOAT64`
+        #   * `:NUMERIC`
         #   * `:INT64`
         #   * `:STRING`
         #   * `:TIMESTAMP`

@@ -36,6 +36,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :config, :string, 2
       optional :display_name, :string, 3
       optional :node_count, :int32, 5
+      optional :processing_units, :int32, 9
       optional :state, :enum, 6, "google.spanner.admin.instance.v1.Instance.State"
       map :labels, :string, :string, 7
       repeated :endpoint_uris, :string, 8

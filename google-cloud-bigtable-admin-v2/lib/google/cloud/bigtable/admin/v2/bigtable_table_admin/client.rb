@@ -75,17 +75,17 @@ module Google
                   default_config.rpcs.list_tables.timeout = 60.0
                   default_config.rpcs.list_tables.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.get_table.timeout = 60.0
                   default_config.rpcs.get_table.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.delete_table.timeout = 60.0
@@ -97,33 +97,33 @@ module Google
                   default_config.rpcs.generate_consistency_token.timeout = 60.0
                   default_config.rpcs.generate_consistency_token.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.check_consistency.timeout = 60.0
                   default_config.rpcs.check_consistency.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.get_snapshot.timeout = 60.0
                   default_config.rpcs.get_snapshot.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_snapshots.timeout = 60.0
                   default_config.rpcs.list_snapshots.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.delete_snapshot.timeout = 60.0
@@ -133,9 +133,9 @@ module Google
                   default_config.rpcs.get_backup.timeout = 60.0
                   default_config.rpcs.get_backup.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.update_backup.timeout = 60.0
@@ -145,9 +145,9 @@ module Google
                   default_config.rpcs.list_backups.timeout = 60.0
                   default_config.rpcs.list_backups.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.restore_table.timeout = 60.0
@@ -155,9 +155,9 @@ module Google
                   default_config.rpcs.get_iam_policy.timeout = 60.0
                   default_config.rpcs.get_iam_policy.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.set_iam_policy.timeout = 60.0
@@ -165,9 +165,9 @@ module Google
                   default_config.rpcs.test_iam_permissions.timeout = 60.0
                   default_config.rpcs.test_iam_permissions.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config
@@ -1711,7 +1711,7 @@ module Google
 
               ##
               # Create a new table by restoring from a completed backup. The new table
-              # must be in the same instance as the instance containing the backup.  The
+              # must be in the same project as the instance containing the backup.  The
               # returned table {::Google::Longrunning::Operation long-running operation} can
               # be used to track the progress of the operation, and to cancel it.  The
               # {::Google::Longrunning::Operation#metadata metadata} field type is
@@ -1736,8 +1736,8 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The name of the instance in which to create the restored
-              #     table. This instance must be the parent of the source backup. Values are
-              #     of the form `projects/<project>/instances/<instance>`.
+              #     table. This instance must be in the same project as the source backup.
+              #     Values are of the form `projects/<project>/instances/<instance>`.
               #   @param table_id [::String]
               #     Required. The id of the table to create and restore to. This
               #     table must not already exist. The `table_id` appended to

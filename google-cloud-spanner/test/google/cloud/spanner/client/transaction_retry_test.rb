@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "google/rpc/error_details_pb"
 require "helper"
 
 describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
@@ -143,7 +144,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
       # first time called this will raise
       if @called == nil
         @called = true
-        raise GRPC::Aborted.new "aborted", {"retryDelay"=>{"seconds"=>60}}
+        raise GRPC::Aborted.new "aborted", create_retry_info_metadata(60, 0)
       end
       # second call will return correct response
       Google::Cloud::Spanner::V1::CommitResponse.new commit_timestamp: Google::Protobuf::Timestamp.new()
@@ -195,7 +196,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
       # first time called this will raise
       if @called == nil
         @called = true
-        raise GRPC::Aborted.new "aborted", {"retryDelay"=>{"seconds"=>123, "nanos"=>456000000}}
+        raise GRPC::Aborted.new "aborted", create_retry_info_metadata(123, 456000000)
       end
       # second call will return correct response
       Google::Cloud::Spanner::V1::CommitResponse.new commit_timestamp: Google::Protobuf::Timestamp.new()
@@ -254,7 +255,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
       end
       if @called == false
         @called = true
-        raise GRPC::Aborted.new "aborted", {"retryDelay"=>{"seconds"=>30}}
+        raise GRPC::Aborted.new "aborted", create_retry_info_metadata(30, 0)
       end
       # third call will return correct response
       Google::Cloud::Spanner::V1::CommitResponse.new commit_timestamp: Google::Protobuf::Timestamp.new()
@@ -381,4 +382,11 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     _(row[:avatar].read).must_equal "image"
     _(row[:project_ids]).must_equal [1, 2, 3]
   end
+end
+
+def create_retry_info_metadata seconds, nanos
+  metadata = {}
+  retry_info = Google::Rpc::RetryInfo.new(retry_delay: Google::Protobuf::Duration.new(seconds: seconds, nanos: nanos))
+  metadata["google.rpc.retryinfo-bin"] = Google::Rpc::RetryInfo.encode(retry_info)
+  metadata
 end

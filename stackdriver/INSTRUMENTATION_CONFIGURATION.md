@@ -42,13 +42,6 @@ Google::Cloud::ErrorReporting.configure do |config|
   config.service_name = "my-service"
 end
 
-# Debugger specific configurations
-Google::Cloud::Debugger.configure do |config|
-  config.project_id = "debugger-project"
-  config.service_name = "my-service"
-  config.allow_mutating_methods = true
-end
-
 # Logging specific configurations
 Google::Cloud::Logging.configure do |config|
   config.project_id = "error-reporting-project"
@@ -73,7 +66,6 @@ end
 * `project_id`: [`String`] Shared Google Cloud Platform Project identifier. Self discovered on GCP.
 * `credentials`: [`String`] Path to shared service account JSON keyfile. Self discovered on GCP.
 * `use_error_reporting`: [`Boolean`] Explicitly enable or disable Error Reporting features. Default: `Rails.env.production?`
-* `use_debugger`: [`Boolean`] Explicitly enable or disable Debugger features. Default: `Rails.env.production?`
 * `use_logging`: [`Boolean`] Explicitly enable or disable Logging middleware. Default: `Rails.env.production?`
 * `use_trace`: [`Boolean`] Explicitly enable or disable Trace features. Default: `Rails.env.production?`
 
@@ -84,16 +76,6 @@ end
 * `error_reporting.service_name`: [`String`] Identifier to running service. Self discovered on GCP. Default: `"ruby"`
 * `error_reporting.service_version`: [`String`] Version identifier to running service. Self discovered on GCP.
 * `error_reporting.ignore_classes`: [`Array`] An Array of Exception classes to ignore. Default: `[]`
-
-#### Debugger
-
-* `debugger.project_id`: [`String`] Google Cloud Platform Project identifier just for Debugger. Self discovered on GCP.
-* `debugger.credentials`: [`String`] Path to service account JSON keyfile. Self discovered on GCP.
-* `debugger.service_name`: [`String`] Identifier to running service. Self discovered on GCP. Default: `"ruby-app"`
-* `debugger.service_version`: [`String`] Version identifier to running service. Self discovered on GCP.
-* `debugger.root`: [`String`] The root directory of the debuggee application in absolute file path form. Default: `Rack::Directory#root` if the application framework is rack-based,i.e. Ruby on Rails, Sinatra. Otherwise use current working directory.
-* `debugger.allow_mutating_methods`: [`boolean`] Whether to allow expressions to call methods that could mutate program state. Default is `false`.
-* `debugger.evaluation_time_limit`: [`Numeric`] The time limit in seconds for evaluating expressions. Default is `0.05`.
 
 #### Logging
 

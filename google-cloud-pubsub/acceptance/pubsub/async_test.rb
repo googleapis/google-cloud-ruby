@@ -13,10 +13,11 @@
 # limitations under the License.
 
 require "pubsub_helper"
+require "concurrent/atomics"
 
 describe Google::Cloud::PubSub, :async, :pubsub do
-  def retrieve_topic topic_name
-    pubsub.get_topic(topic_name) || pubsub.create_topic(topic_name)
+  def retrieve_topic topic_name, async: nil
+    pubsub.get_topic(topic_name, async: async) || pubsub.create_topic(topic_name, async: async)
   end
 
   def retrieve_subscription topic, subscription_name
@@ -27,6 +28,16 @@ describe Google::Cloud::PubSub, :async, :pubsub do
   let(:nonce) { rand 100 }
   let(:topic) { retrieve_topic "#{$topic_prefix}-async#{nonce}" }
   let(:sub) { retrieve_subscription topic, "#{$topic_prefix}-async-sub#{nonce}" }
+  let(:async_flow_control) do
+    {
+      interval: 30,
+      flow_control: {
+        message_limit: 2,
+        limit_exceeded_behavior: :error
+      }
+    }
+  end
+  let(:topic_flow_control) { retrieve_topic "#{$topic_prefix}-async#{nonce}", async: async_flow_control }
 
   it "publishes and pulls asyncronously" do
     events = sub.pull
@@ -267,5 +278,40 @@ describe Google::Cloud::PubSub, :async, :pubsub do
 
     # Remove the subscription
     sub.delete
+  end
+
+  it "publishes asyncronously with publisher flow control" do
+    publish_1_done = Concurrent::Event.new
+    publish_2_done = Concurrent::Event.new
+    publish_3_done = Concurrent::Event.new
+
+    topic_flow_control.publish_async("a") { publish_1_done.set }
+
+    flow_controller = topic_flow_control.async_publisher.flow_controller
+    _(flow_controller.outstanding_messages).must_equal 1
+
+    topic_flow_control.publish_async("b") { publish_2_done.set }
+    _(flow_controller.outstanding_messages).must_equal 2 # Limit
+
+    expect do
+      topic_flow_control.publish_async "c"
+    end.must_raise Google::Cloud::PubSub::FlowControlLimitError
+
+    # Force the queued messages to be published and wait for events.
+    topic_flow_control.async_publisher.flush
+    assert publish_1_done.wait(1), "Publishing message 1 errored."
+    assert publish_2_done.wait(1), "Publishing message 2 errored."
+
+    _(flow_controller.outstanding_messages).must_equal 0
+
+    topic_flow_control.publish_async("c") { publish_3_done.set }
+
+    _(flow_controller.outstanding_messages).must_equal 1
+
+    # Force the queued message to be published and wait for event.
+    topic_flow_control.async_publisher.stop!
+    assert publish_3_done.wait(1), "Publishing message 3 errored."
+
+    _(flow_controller.outstanding_messages).must_equal 0
   end
 end

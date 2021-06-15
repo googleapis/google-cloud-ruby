@@ -7,5 +7,6 @@
     "name_pretty": "BigQuery Storage API",
     "product_documentation": "https://cloud.google.com/bigquery/docs/reference/storage",
     "repo": "googleapis/google-cloud-ruby",
-    "requires_billing": true
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO"
 }

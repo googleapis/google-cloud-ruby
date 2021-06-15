@@ -76,81 +76,81 @@ module Google
                 default_config.rpcs.get_iam_policy.timeout = 60.0
                 default_config.rpcs.get_iam_policy.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_notification_config.timeout = 60.0
                 default_config.rpcs.get_notification_config.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_organization_settings.timeout = 60.0
                 default_config.rpcs.get_organization_settings.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_source.timeout = 60.0
                 default_config.rpcs.get_source.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.group_assets.timeout = 480.0
                 default_config.rpcs.group_assets.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.group_findings.timeout = 480.0
                 default_config.rpcs.group_findings.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_assets.timeout = 480.0
                 default_config.rpcs.list_assets.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_findings.timeout = 480.0
                 default_config.rpcs.list_findings.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_notification_configs.timeout = 60.0
                 default_config.rpcs.list_notification_configs.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_sources.timeout = 60.0
                 default_config.rpcs.list_sources.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.run_asset_discovery.timeout = 60.0
@@ -162,9 +162,9 @@ module Google
                 default_config.rpcs.test_iam_permissions.timeout = 60.0
                 default_config.rpcs.test_iam_permissions.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_finding.timeout = 60.0
@@ -296,8 +296,8 @@ module Google
             #     Required. Resource name of the new source's parent. Its format should be
             #     "organizations/[organization_id]".
             #   @param source [::Google::Cloud::SecurityCenter::V1::Source, ::Hash]
-            #     Required. The Source being created, only the display_name and description will be
-            #     used. All other fields will be ignored.
+            #     Required. The Source being created, only the display_name and description
+            #     will be used. All other fields will be ignored.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1::Source]
@@ -371,8 +371,8 @@ module Google
             #     It must be alphanumeric and less than or equal to 32 characters and
             #     greater than 0 characters in length.
             #   @param finding [::Google::Cloud::SecurityCenter::V1::Finding, ::Hash]
-            #     Required. The Finding being created. The name and security_marks will be ignored as
-            #     they are both output only fields on this resource.
+            #     Required. The Finding being created. The name and security_marks will be
+            #     ignored as they are both output only fields on this resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1::Finding]
@@ -438,16 +438,17 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of the new notification config's parent. Its format is
-            #     "organizations/[organization_id]".
+            #     Required. Resource name of the new notification config's parent. Its format
+            #     is "organizations/[organization_id]".
             #   @param config_id [::String]
             #     Required.
             #     Unique identifier provided by the client within the parent scope.
             #     It must be between 1 and 128 characters, and contains alphanumeric
             #     characters, underscores or hyphens only.
             #   @param notification_config [::Google::Cloud::SecurityCenter::V1::NotificationConfig, ::Hash]
-            #     Required. The notification config being created. The name and the service account
-            #     will be ignored as they are both output only fields on this resource.
+            #     Required. The notification config being created. The name and the service
+            #     account will be ignored as they are both output only fields on this
+            #     resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1::NotificationConfig]
@@ -717,8 +718,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Name of the organization to get organization settings for. Its format is
-            #     "organizations/[organization_id]/organizationSettings".
+            #     Required. Name of the organization to get organization settings for. Its
+            #     format is "organizations/[organization_id]/organizationSettings".
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1::OrganizationSettings]
@@ -853,7 +854,8 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Name of the organization to groupBy. Its format is
-            #     "organizations/[organization_id]".
+            #     "organizations/[organization_id], folders/[folder_id], or
+            #     projects/[project_id]".
             #   @param filter [::String]
             #     Expression that defines the filter to apply across assets.
             #     The expression is a list of zero or more restrictions combined via logical
@@ -918,9 +920,9 @@ module Google
             #     Use a negated partial match on the empty string to filter based on a
             #     property not existing: `-resource_properties.my_property : ""`
             #   @param group_by [::String]
-            #     Required. Expression that defines what assets fields to use for grouping. The string
-            #     value should follow SQL syntax: comma separated list of fields. For
-            #     example:
+            #     Required. Expression that defines what assets fields to use for grouping.
+            #     The string value should follow SQL syntax: comma separated list of fields.
+            #     For example:
             #     "security_center_properties.resource_project,security_center_properties.project".
             #
             #     The following fields are supported when compare_duration is not set:
@@ -1028,7 +1030,9 @@ module Google
             # specified properties.
             #
             # To group across all sources provide a `-` as the source id.
-            # Example: /v1/organizations/\\{organization_id}/sources/-/findings
+            # Example: /v1/organizations/\\{organization_id}/sources/-/findings,
+            # /v1/folders/\\{folder_id}/sources/-/findings,
+            # /v1/projects/\\{project_id}/sources/-/findings
             #
             # @overload group_findings(request, options = nil)
             #   Pass arguments to `group_findings` via a request object, either of type
@@ -1047,9 +1051,12 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Name of the source to groupBy. Its format is
-            #     "organizations/[organization_id]/sources/[source_id]". To groupBy across
-            #     all sources provide a source_id of `-`. For example:
-            #     organizations/\\{organization_id}/sources/-
+            #     "organizations/[organization_id]/sources/[source_id]",
+            #     folders/[folder_id]/sources/[source_id], or
+            #     projects/[project_id]/sources/[source_id]. To groupBy across all sources
+            #     provide a source_id of `-`. For example:
+            #     organizations/\\{organization_id}/sources/-, folders/\\{folder_id}/sources/-,
+            #     or projects/\\{project_id}/sources/-
             #   @param filter [::String]
             #     Expression that defines the filter to apply across findings.
             #     The expression is a list of one or more restrictions combined via logical
@@ -1084,27 +1091,36 @@ module Google
             #     * category: `=`, `:`
             #     * external_uri: `=`, `:`
             #     * event_time: `=`, `>`, `<`, `>=`, `<=`
-            #     * severity: `=`, `:`
             #
             #       Usage: This should be milliseconds since epoch or an RFC3339 string.
             #       Examples:
             #         `event_time = "2019-06-10T16:07:18-07:00"`
             #         `event_time = 1560208038000`
             #
+            #     * severity: `=`, `:`
+            #     * workflow_state: `=`, `:`
             #     * security_marks.marks: `=`, `:`
             #     * source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
             #
-            #     For example, `source_properties.size = 100` is a valid filter string.
+            #       For example, `source_properties.size = 100` is a valid filter string.
             #
-            #     Use a partial match on the empty string to filter based on a property
-            #     existing: `source_properties.my_property : ""`
+            #       Use a partial match on the empty string to filter based on a property
+            #       existing: `source_properties.my_property : ""`
             #
-            #     Use a negated partial match on the empty string to filter based on a
-            #     property not existing: `-source_properties.my_property : ""`
+            #       Use a negated partial match on the empty string to filter based on a
+            #       property not existing: `-source_properties.my_property : ""`
+            #
+            #     * resource:
+            #       * resource.name: `=`, `:`
+            #       * resource.parent_name: `=`, `:`
+            #       * resource.parent_display_name: `=`, `:`
+            #       * resource.project_name: `=`, `:`
+            #       * resource.project_display_name: `=`, `:`
+            #       * resource.type: `=`, `:`
             #   @param group_by [::String]
-            #     Required. Expression that defines what assets fields to use for grouping (including
-            #     `state_change`). The string value should follow SQL syntax: comma separated
-            #     list of fields. For example: "parent,resource_name".
+            #     Required. Expression that defines what assets fields to use for grouping
+            #     (including `state_change`). The string value should follow SQL syntax:
+            #     comma separated list of fields. For example: "parent,resource_name".
             #
             #     The following fields are supported:
             #
@@ -1229,7 +1245,8 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Name of the organization assets should belong to. Its format is
-            #     "organizations/[organization_id]".
+            #     "organizations/[organization_id], folders/[folder_id], or
+            #     projects/[project_id]".
             #   @param filter [::String]
             #     Expression that defines the filter to apply across assets.
             #     The expression is a list of zero or more restrictions combined via logical
@@ -1426,9 +1443,12 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Name of the source the findings belong to. Its format is
-            #     "organizations/[organization_id]/sources/[source_id]". To list across all
-            #     sources provide a source_id of `-`. For example:
-            #     organizations/\\{organization_id}/sources/-
+            #     "organizations/[organization_id]/sources/[source_id],
+            #     folders/[folder_id]/sources/[source_id], or
+            #     projects/[project_id]/sources/[source_id]". To list across all sources
+            #     provide a source_id of `-`. For example:
+            #     organizations/\\{organization_id}/sources/-, folders/\\{folder_id}/sources/- or
+            #     projects/\\{projects_id}/sources/-
             #   @param filter [::String]
             #     Expression that defines the filter to apply across findings.
             #     The expression is a list of one or more restrictions combined via logical
@@ -1463,23 +1483,33 @@ module Google
             #     * category: `=`, `:`
             #     * external_uri: `=`, `:`
             #     * event_time: `=`, `>`, `<`, `>=`, `<=`
-            #     * severity: `=`, `:`
             #
             #       Usage: This should be milliseconds since epoch or an RFC3339 string.
             #       Examples:
             #         `event_time = "2019-06-10T16:07:18-07:00"`
             #         `event_time = 1560208038000`
             #
-            #     security_marks.marks: `=`, `:`
-            #     source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
+            #     * severity: `=`, `:`
+            #     * workflow_state: `=`, `:`
+            #     * security_marks.marks: `=`, `:`
+            #     * source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
             #
-            #     For example, `source_properties.size = 100` is a valid filter string.
+            #       For example, `source_properties.size = 100` is a valid filter string.
             #
-            #     Use a partial match on the empty string to filter based on a property
-            #     existing: `source_properties.my_property : ""`
+            #       Use a partial match on the empty string to filter based on a property
+            #       existing: `source_properties.my_property : ""`
             #
-            #     Use a negated partial match on the empty string to filter based on a
-            #     property not existing: `-source_properties.my_property : ""`
+            #       Use a negated partial match on the empty string to filter based on a
+            #       property not existing: `-source_properties.my_property : ""`
+            #
+            #     * resource:
+            #       * resource.name: `=`, `:`
+            #       * resource.parent_name: `=`, `:`
+            #       * resource.parent_display_name: `=`, `:`
+            #       * resource.project_name: `=`, `:`
+            #       * resource.project_display_name: `=`, `:`
+            #       * resource.type: `=`, `:`
+            #       * resource.folders.resource_folder: `=`, `:`
             #   @param order_by [::String]
             #     Expression that defines what fields and order to use for sorting. The
             #     string value should follow SQL syntax: comma separated list of fields. For
@@ -1687,7 +1717,8 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Resource name of the parent of sources to list. Its format should
-            #     be "organizations/[organization_id]".
+            #     be "organizations/[organization_id], folders/[folder_id], or
+            #     projects/[project_id]".
             #   @param page_token [::String]
             #     The value returned by the last `ListSourcesResponse`; indicates
             #     that this is a continuation of a prior `ListSources` call, and
@@ -1766,8 +1797,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Name of the organization to run asset discovery for. Its format is
-            #     "organizations/[organization_id]".
+            #     Required. Name of the organization to run asset discovery for. Its format
+            #     is "organizations/[organization_id]".
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -2052,8 +2083,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param finding [::Google::Cloud::SecurityCenter::V1::Finding, ::Hash]
-            #     Required. The finding resource to update or create if it does not already exist.
-            #     parent, security_marks, and update_time will be ignored.
+            #     Required. The finding resource to update or create if it does not already
+            #     exist. parent, security_marks, and update_time will be ignored.
             #
             #     In the case of creation, the finding id portion of the name must be
             #     alphanumeric and less than or equal to 32 characters and greater than 0

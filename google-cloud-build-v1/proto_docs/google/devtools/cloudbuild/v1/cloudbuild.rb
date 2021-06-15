@@ -124,6 +124,27 @@ module Google
           end
         end
 
+        # Location of the source manifest in Google Cloud Storage.
+        # This feature is in Preview.
+        # @!attribute [rw] bucket
+        #   @return [::String]
+        #     Google Cloud Storage bucket containing the source manifest (see [Bucket
+        #     Name
+        #     Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
+        # @!attribute [rw] object
+        #   @return [::String]
+        #     Google Cloud Storage object containing the source manifest.
+        #
+        #     This object must be a JSON file.
+        # @!attribute [rw] generation
+        #   @return [::Integer]
+        #     Google Cloud Storage generation for the object. If the generation is
+        #     omitted, the latest generation will be used.
+        class StorageSourceManifest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Location of the source in a supported storage service.
         # @!attribute [rw] storage_source
         #   @return [::Google::Cloud::Build::V1::StorageSource]
@@ -132,6 +153,10 @@ module Google
         #   @return [::Google::Cloud::Build::V1::RepoSource]
         #     If provided, get the source from this location in a Cloud Source
         #     Repository.
+        # @!attribute [rw] storage_source_manifest
+        #   @return [::Google::Cloud::Build::V1::StorageSourceManifest]
+        #     If provided, get the source from this manifest in Google Cloud Storage.
+        #     This feature is in Preview.
         class Source
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -592,6 +617,11 @@ module Google
         #   @return [::Google::Cloud::Build::V1::RepoSource]
         #     A copy of the build's `source.repo_source`, if exists, with any
         #     revisions resolved.
+        # @!attribute [rw] resolved_storage_source_manifest
+        #   @return [::Google::Cloud::Build::V1::StorageSourceManifest]
+        #     A copy of the build's `source.storage_source_manifest`, if exists, with any
+        #     revisions resolved.
+        #     This feature is in Preview.
         # @!attribute [r] file_hashes
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Build::V1::FileHashes}]
         #     Output only. Hash(es) of the build source, which can be used to verify that

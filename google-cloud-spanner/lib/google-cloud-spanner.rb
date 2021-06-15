@@ -156,7 +156,9 @@ Google::Cloud.configure.add_config! :spanner do |config|
   default_query_options = Google::Cloud::Config.deferred do
     query_options = {}
     optimizer_version = ENV["SPANNER_OPTIMIZER_VERSION"]
+    optimizer_stats_pkg = ENV["SPANNER_OPTIMIZER_STATISTICS_PACKAGE"]
     query_options[:optimizer_version] = optimizer_version if optimizer_version
+    query_options[:optimizer_statistics_package] = optimizer_stats_pkg if optimizer_stats_pkg
     query_options = nil if query_options.empty?
     query_options
   end

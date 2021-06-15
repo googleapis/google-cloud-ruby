@@ -70,129 +70,129 @@ module Google
                 default_config.rpcs.create_subscription.timeout = 60.0
                 default_config.rpcs.create_subscription.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [2, 10, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.get_subscription.timeout = 60.0
                 default_config.rpcs.get_subscription.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [2, 10, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.update_subscription.timeout = 60.0
                 default_config.rpcs.update_subscription.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.list_subscriptions.timeout = 60.0
                 default_config.rpcs.list_subscriptions.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [2, 10, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.delete_subscription.timeout = 60.0
                 default_config.rpcs.delete_subscription.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.modify_ack_deadline.timeout = 60.0
                 default_config.rpcs.modify_ack_deadline.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.acknowledge.timeout = 60.0
                 default_config.rpcs.acknowledge.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.pull.timeout = 60.0
                 default_config.rpcs.pull.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [2, 10, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.streaming_pull.timeout = 900.0
                 default_config.rpcs.streaming_pull.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 8, 10, 13, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 8, 10, 13, 14]
                 }
 
                 default_config.rpcs.modify_push_config.timeout = 60.0
                 default_config.rpcs.modify_push_config.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.get_snapshot.timeout = 60.0
                 default_config.rpcs.get_snapshot.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [2, 10, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.list_snapshots.timeout = 60.0
                 default_config.rpcs.list_snapshots.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [2, 10, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.create_snapshot.timeout = 60.0
                 default_config.rpcs.create_snapshot.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.update_snapshot.timeout = 60.0
                 default_config.rpcs.update_snapshot.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.delete_snapshot.timeout = 60.0
                 default_config.rpcs.delete_snapshot.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.seek.timeout = 60.0
                 default_config.rpcs.seek.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [2, 10, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [2, 10, 14]
                 }
 
                 default_config

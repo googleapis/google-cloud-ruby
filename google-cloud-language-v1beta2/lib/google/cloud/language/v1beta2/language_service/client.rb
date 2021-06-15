@@ -67,49 +67,49 @@ module Google
                 default_config.rpcs.analyze_sentiment.timeout = 600.0
                 default_config.rpcs.analyze_sentiment.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.analyze_entities.timeout = 600.0
                 default_config.rpcs.analyze_entities.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.analyze_entity_sentiment.timeout = 600.0
                 default_config.rpcs.analyze_entity_sentiment.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.analyze_syntax.timeout = 600.0
                 default_config.rpcs.analyze_syntax.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.classify_text.timeout = 600.0
                 default_config.rpcs.classify_text.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.annotate_text.timeout = 600.0
                 default_config.rpcs.annotate_text.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config

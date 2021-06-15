@@ -132,6 +132,16 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_fulfillments
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Dialogflow.fulfillments do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Dialogflow::V2::Fulfillments::Client, client
+    end
+  end
+
   def test_environments
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
@@ -149,6 +159,16 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Dialogflow::V2::KnowledgeBases::Client, client
+    end
+  end
+
+  def test_versions
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Dialogflow.versions do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Dialogflow::V2::Versions::Client, client
     end
   end
 end

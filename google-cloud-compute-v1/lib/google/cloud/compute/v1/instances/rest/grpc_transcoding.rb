@@ -57,12 +57,12 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/aggregated/instances"
                 body = nil
                 query_string_params = {}
-                query_string_params["filter"] = request_pb.filter.to_s if request_pb.filter && request_pb.filter != ""
-                query_string_params["includeAllScopes"] = request_pb.include_all_scopes.to_s if request_pb.include_all_scopes && request_pb.include_all_scopes != false
-                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.max_results && request_pb.max_results != 0
-                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.order_by && request_pb.order_by != ""
-                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.page_token && request_pb.page_token != ""
-                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.return_partial_success && request_pb.return_partial_success != false
+                query_string_params["filter"] = request_pb.filter.to_s if request_pb.has_filter?
+                query_string_params["includeAllScopes"] = request_pb.include_all_scopes.to_s if request_pb.has_include_all_scopes?
+                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.has_max_results?
+                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.has_order_by?
+                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.has_page_token?
+                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.has_return_partial_success?
 
                 [uri, body, query_string_params]
               end
@@ -87,7 +87,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}"
                 body = nil
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.request_id && request_pb.request_id != ""
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -102,7 +102,7 @@ module Google
                 query_string_params = {}
                 query_string_params["accessConfig"] = request_pb.access_config.to_s
                 query_string_params["networkInterface"] = request_pb.network_interface.to_s
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.request_id && request_pb.request_id != ""
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -116,7 +116,7 @@ module Google
                 body = nil
                 query_string_params = {}
                 query_string_params["deviceName"] = request_pb.device_name.to_s
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.request_id && request_pb.request_id != ""
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -141,8 +141,8 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/getGuestAttributes"
                 body = nil
                 query_string_params = {}
-                query_string_params["queryPath"] = request_pb.query_path.to_s if request_pb.query_path && request_pb.query_path != ""
-                query_string_params["variableKey"] = request_pb.variable_key.to_s if request_pb.variable_key && request_pb.variable_key != ""
+                query_string_params["queryPath"] = request_pb.query_path.to_s if request_pb.has_query_path?
+                query_string_params["variableKey"] = request_pb.variable_key.to_s if request_pb.has_variable_key?
 
                 [uri, body, query_string_params]
               end
@@ -155,7 +155,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.resource}/getIamPolicy"
                 body = nil
                 query_string_params = {}
-                query_string_params["optionsRequestedPolicyVersion"] = request_pb.options_requested_policy_version.to_s if request_pb.options_requested_policy_version && request_pb.options_requested_policy_version != 0
+                query_string_params["optionsRequestedPolicyVersion"] = request_pb.options_requested_policy_version.to_s if request_pb.has_options_requested_policy_version?
 
                 [uri, body, query_string_params]
               end
@@ -180,8 +180,8 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/serialPort"
                 body = nil
                 query_string_params = {}
-                query_string_params["port"] = request_pb.port.to_s if request_pb.port && request_pb.port != 0
-                query_string_params["start"] = request_pb.start.to_s if request_pb.start && request_pb.start != ""
+                query_string_params["port"] = request_pb.port.to_s if request_pb.has_port?
+                query_string_params["start"] = request_pb.start.to_s if request_pb.has_start?
 
                 [uri, body, query_string_params]
               end
@@ -218,11 +218,11 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances"
                 body = nil
                 query_string_params = {}
-                query_string_params["filter"] = request_pb.filter.to_s if request_pb.filter && request_pb.filter != ""
-                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.max_results && request_pb.max_results != 0
-                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.order_by && request_pb.order_by != ""
-                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.page_token && request_pb.page_token != ""
-                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.return_partial_success && request_pb.return_partial_success != false
+                query_string_params["filter"] = request_pb.filter.to_s if request_pb.has_filter?
+                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.has_max_results?
+                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.has_order_by?
+                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.has_page_token?
+                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.has_return_partial_success?
 
                 [uri, body, query_string_params]
               end
@@ -235,11 +235,11 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/referrers"
                 body = nil
                 query_string_params = {}
-                query_string_params["filter"] = request_pb.filter.to_s if request_pb.filter && request_pb.filter != ""
-                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.max_results && request_pb.max_results != 0
-                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.order_by && request_pb.order_by != ""
-                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.page_token && request_pb.page_token != ""
-                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.return_partial_success && request_pb.return_partial_success != false
+                query_string_params["filter"] = request_pb.filter.to_s if request_pb.has_filter?
+                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.has_max_results?
+                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.has_order_by?
+                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.has_page_token?
+                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.has_return_partial_success?
 
                 [uri, body, query_string_params]
               end
@@ -264,7 +264,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/reset"
                 body = nil
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.request_id && request_pb.request_id != ""
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -277,8 +277,8 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.resource}/setDeletionProtection"
                 body = nil
                 query_string_params = {}
-                query_string_params["deletionProtection"] = request_pb.deletion_protection.to_s if request_pb.deletion_protection && request_pb.deletion_protection != false
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.request_id && request_pb.request_id != ""
+                query_string_params["deletionProtection"] = request_pb.deletion_protection.to_s if request_pb.has_deletion_protection?
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -293,7 +293,7 @@ module Google
                 query_string_params = {}
                 query_string_params["autoDelete"] = request_pb.auto_delete.to_s
                 query_string_params["deviceName"] = request_pb.device_name.to_s
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.request_id && request_pb.request_id != ""
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -438,7 +438,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/start"
                 body = nil
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.request_id && request_pb.request_id != ""
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -463,7 +463,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/stop"
                 body = nil
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.request_id && request_pb.request_id != ""
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

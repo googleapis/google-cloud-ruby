@@ -12,6 +12,7 @@ require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
+require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/type/expr_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -27,6 +28,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :read_time, :message, 1, "google.protobuf.Timestamp"
       optional :output_config, :message, 2, "google.cloud.asset.v1.OutputConfig"
       optional :output_result, :message, 3, "google.cloud.asset.v1.OutputResult"
+    end
+    add_message "google.cloud.asset.v1.ListAssetsRequest" do
+      optional :parent, :string, 1
+      optional :read_time, :message, 2, "google.protobuf.Timestamp"
+      repeated :asset_types, :string, 3
+      optional :content_type, :enum, 4, "google.cloud.asset.v1.ContentType"
+      optional :page_size, :int32, 5
+      optional :page_token, :string, 6
+    end
+    add_message "google.cloud.asset.v1.ListAssetsResponse" do
+      optional :read_time, :message, 1, "google.protobuf.Timestamp"
+      repeated :assets, :message, 2, "google.cloud.asset.v1.Asset"
+      optional :next_page_token, :string, 3
     end
     add_message "google.cloud.asset.v1.BatchGetAssetsHistoryRequest" do
       optional :parent, :string, 1
@@ -137,6 +151,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :identity_selector, :message, 3, "google.cloud.asset.v1.IamPolicyAnalysisQuery.IdentitySelector"
       optional :access_selector, :message, 4, "google.cloud.asset.v1.IamPolicyAnalysisQuery.AccessSelector"
       optional :options, :message, 5, "google.cloud.asset.v1.IamPolicyAnalysisQuery.Options"
+      optional :condition_context, :message, 6, "google.cloud.asset.v1.IamPolicyAnalysisQuery.ConditionContext"
     end
     add_message "google.cloud.asset.v1.IamPolicyAnalysisQuery.ResourceSelector" do
       optional :full_resource_name, :string, 1
@@ -155,6 +170,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :output_resource_edges, :bool, 4
       optional :output_group_edges, :bool, 5
       optional :analyze_service_account_impersonation, :bool, 6
+    end
+    add_message "google.cloud.asset.v1.IamPolicyAnalysisQuery.ConditionContext" do
+      oneof :TimeContext do
+        optional :access_time, :message, 1, "google.protobuf.Timestamp"
+      end
     end
     add_message "google.cloud.asset.v1.AnalyzeIamPolicyRequest" do
       optional :analysis_query, :message, 1, "google.cloud.asset.v1.IamPolicyAnalysisQuery"
@@ -213,6 +233,8 @@ module Google
       module V1
         ExportAssetsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ExportAssetsRequest").msgclass
         ExportAssetsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ExportAssetsResponse").msgclass
+        ListAssetsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ListAssetsRequest").msgclass
+        ListAssetsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ListAssetsResponse").msgclass
         BatchGetAssetsHistoryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.BatchGetAssetsHistoryRequest").msgclass
         BatchGetAssetsHistoryResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.BatchGetAssetsHistoryResponse").msgclass
         CreateFeedRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.CreateFeedRequest").msgclass
@@ -240,6 +262,7 @@ module Google
         IamPolicyAnalysisQuery::IdentitySelector = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisQuery.IdentitySelector").msgclass
         IamPolicyAnalysisQuery::AccessSelector = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisQuery.AccessSelector").msgclass
         IamPolicyAnalysisQuery::Options = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisQuery.Options").msgclass
+        IamPolicyAnalysisQuery::ConditionContext = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisQuery.ConditionContext").msgclass
         AnalyzeIamPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeIamPolicyRequest").msgclass
         AnalyzeIamPolicyResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeIamPolicyResponse").msgclass
         AnalyzeIamPolicyResponse::IamPolicyAnalysis = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeIamPolicyResponse.IamPolicyAnalysis").msgclass

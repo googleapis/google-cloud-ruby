@@ -115,7 +115,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of the organization to groupBy. Its format is
-        #     "organizations/[organization_id]".
+        #     "organizations/[organization_id], folders/[folder_id], or
+        #     projects/[project_id]".
         # @!attribute [rw] filter
         #   @return [::String]
         #     Expression that defines the filter to apply across assets.
@@ -274,9 +275,12 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of the source to groupBy. Its format is
-        #     "organizations/[organization_id]/sources/[source_id]". To groupBy across
-        #     all sources provide a source_id of `-`. For example:
-        #     organizations/\\{organization_id}/sources/-
+        #     "organizations/[organization_id]/sources/[source_id]",
+        #     folders/[folder_id]/sources/[source_id], or
+        #     projects/[project_id]/sources/[source_id]. To groupBy across all sources
+        #     provide a source_id of `-`. For example:
+        #     organizations/\\{organization_id}/sources/-, folders/\\{folder_id}/sources/-,
+        #     or projects/\\{project_id}/sources/-
         # @!attribute [rw] filter
         #   @return [::String]
         #     Expression that defines the filter to apply across findings.
@@ -478,7 +482,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Resource name of the parent of sources to list. Its format should be
-        #     "organizations/[organization_id]".
+        #     "organizations/[organization_id], folders/[folder_id], or
+        #     projects/[project_id]".
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The value returned by the last `ListSourcesResponse`; indicates
@@ -510,7 +515,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of the organization assets should belong to. Its format is
-        #     "organizations/[organization_id]".
+        #     "organizations/[organization_id], folders/[folder_id], or
+        #     projects/[project_id]".
         # @!attribute [rw] filter
         #   @return [::String]
         #     Expression that defines the filter to apply across assets.
@@ -704,9 +710,12 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of the source the findings belong to. Its format is
-        #     "organizations/[organization_id]/sources/[source_id]". To list across all
-        #     sources provide a source_id of `-`. For example:
-        #     organizations/\\{organization_id}/sources/-
+        #     "organizations/[organization_id]/sources/[source_id],
+        #     folders/[folder_id]/sources/[source_id], or
+        #     projects/[project_id]/sources/[source_id]". To list across all sources
+        #     provide a source_id of `-`. For example:
+        #     organizations/\\{organization_id}/sources/-, folders/\\{folder_id}/sources/- or
+        #     projects/\\{projects_id}/sources/-
         # @!attribute [rw] filter
         #   @return [::String]
         #     Expression that defines the filter to apply across findings.
@@ -885,6 +894,11 @@ module Google
             # @!attribute [rw] parent_display_name
             #   @return [::String]
             #     The human readable name of resource's parent.
+            # @!attribute [rw] folders
+            #   @return [::Array<::Google::Cloud::SecurityCenter::V1p1Beta1::Folder>]
+            #     Contains a Folder message for each folder in the assets ancestry.
+            #     The first folder is the deepest nested folder, and the last folder is
+            #     the folder directly under the Organization.
             class Resource
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

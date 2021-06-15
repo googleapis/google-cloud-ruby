@@ -1673,6 +1673,64 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
     end
   end
 
+  def test_lookup_offer
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Channel::V1::Offer.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    entitlement = "hello world"
+
+    lookup_offer_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :lookup_offer, name
+      assert_kind_of ::Google::Cloud::Channel::V1::LookupOfferRequest, request
+      assert_equal "hello world", request["entitlement"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, lookup_offer_client_stub do
+      # Create client
+      client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.lookup_offer({ entitlement: entitlement }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.lookup_offer entitlement: entitlement do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.lookup_offer ::Google::Cloud::Channel::V1::LookupOfferRequest.new(entitlement: entitlement) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.lookup_offer({ entitlement: entitlement }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.lookup_offer(::Google::Cloud::Channel::V1::LookupOfferRequest.new(entitlement: entitlement), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, lookup_offer_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_products
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Channel::V1::ListProductsResponse.new

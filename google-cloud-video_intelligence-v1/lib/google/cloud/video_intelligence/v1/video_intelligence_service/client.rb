@@ -66,9 +66,9 @@ module Google
                 default_config.rpcs.annotate_video.timeout = 600.0
                 default_config.rpcs.annotate_video.retry_policy = {
                   initial_delay: 1.0,
-              max_delay: 120.0,
-              multiplier: 2.5,
-              retry_codes: [14, 4]
+                  max_delay: 120.0,
+                  multiplier: 2.5,
+                  retry_codes: [14, 4]
                 }
 
                 default_config

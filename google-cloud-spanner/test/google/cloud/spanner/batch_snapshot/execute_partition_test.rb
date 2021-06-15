@@ -259,7 +259,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
       session: session.path, table: "my-table",
       columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
       key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true),
-      transaction: tx_selector, index: "", limit: nil, resume_token: nil, partition_token: partition_token
+      transaction: tx_selector, index: "", limit: nil, resume_token: nil, partition_token: partition_token,
+      request_options: nil
     }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
@@ -278,7 +279,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
       session: session.path, table: "my-table",
       columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
       key_set: Google::Cloud::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([2]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([3]).list_value]),
-      transaction: tx_selector, index: "", limit: nil, resume_token: nil, partition_token: partition_token
+      transaction: tx_selector, index: "", limit: nil, resume_token: nil, partition_token: partition_token,
+      request_options: nil
     }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
@@ -297,7 +299,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
       session: session.path, table: "my-table",
       columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
       key_set: Google::Cloud::Spanner::V1::KeySet.new(keys: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1,1]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([2,2]).list_value, Google::Cloud::Spanner::Convert.object_to_grpc_value([3,3]).list_value]),
-      transaction: tx_selector, index: "MyTableCompositeKey", limit: nil, resume_token: nil, partition_token: partition_token
+      transaction: tx_selector, index: "MyTableCompositeKey", limit: nil, resume_token: nil, partition_token: partition_token,
+      request_options: nil
     }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
@@ -316,7 +319,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
       session: session.path, table: "my-table",
       columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
       key_set: Google::Cloud::Spanner::V1::KeySet.new(ranges: [Google::Cloud::Spanner::Convert.to_key_range([1,1]..[3,3])]),
-      transaction: tx_selector, index: "MyTableCompositeKey", limit: nil, resume_token: nil, partition_token: partition_token
+      transaction: tx_selector, index: "MyTableCompositeKey", limit: nil, resume_token: nil, partition_token: partition_token,
+      request_options: nil
     }, default_options]
     batch_snapshot.session.service.mocked_service = mock
 
@@ -329,7 +333,7 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
   end
 
   it "can execute a simple query with query options" do
-    expect_query_options = { optimizer_version: "1", optimizer_statistics_package: "" }
+    expect_query_options = { optimizer_version: "1", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
     mock = Minitest::Mock.new
     batch_snapshot.session.service.mocked_service = mock
     expect_execute_streaming_sql results_enum, session.path, sql, transaction: tx_selector, param_types: {}, partition_token: partition_token, options: default_options, query_options: expect_query_options
@@ -381,7 +385,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
       session: session.path, table: "my-table",
       columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
       key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true),
-      transaction: tx_selector, index: "", limit: nil, resume_token: nil, partition_token: partition_token
+      transaction: tx_selector, index: "", limit: nil, resume_token: nil, partition_token: partition_token,
+      request_options: nil
     }, expect_options]
     batch_snapshot.session.service.mocked_service = mock
 

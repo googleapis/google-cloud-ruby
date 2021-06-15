@@ -76,41 +76,41 @@ module Google
                 default_config.rpcs.inspect_content.timeout = 300.0
                 default_config.rpcs.inspect_content.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.redact_image.timeout = 300.0
                 default_config.rpcs.redact_image.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.deidentify_content.timeout = 300.0
                 default_config.rpcs.deidentify_content.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.reidentify_content.timeout = 300.0
                 default_config.rpcs.reidentify_content.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_info_types.timeout = 300.0
                 default_config.rpcs.list_info_types.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_inspect_template.timeout = 300.0
@@ -120,25 +120,25 @@ module Google
                 default_config.rpcs.get_inspect_template.timeout = 300.0
                 default_config.rpcs.get_inspect_template.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_inspect_templates.timeout = 300.0
                 default_config.rpcs.list_inspect_templates.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_inspect_template.timeout = 300.0
                 default_config.rpcs.delete_inspect_template.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_deidentify_template.timeout = 300.0
@@ -148,25 +148,25 @@ module Google
                 default_config.rpcs.get_deidentify_template.timeout = 300.0
                 default_config.rpcs.get_deidentify_template.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_deidentify_templates.timeout = 300.0
                 default_config.rpcs.list_deidentify_templates.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_deidentify_template.timeout = 300.0
                 default_config.rpcs.delete_deidentify_template.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_job_trigger.timeout = 300.0
@@ -178,25 +178,25 @@ module Google
                 default_config.rpcs.get_job_trigger.timeout = 300.0
                 default_config.rpcs.get_job_trigger.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_job_triggers.timeout = 300.0
                 default_config.rpcs.list_job_triggers.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_job_trigger.timeout = 300.0
                 default_config.rpcs.delete_job_trigger.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.activate_job_trigger.timeout = 300.0
@@ -206,25 +206,25 @@ module Google
                 default_config.rpcs.list_dlp_jobs.timeout = 300.0
                 default_config.rpcs.list_dlp_jobs.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_dlp_job.timeout = 300.0
                 default_config.rpcs.get_dlp_job.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_dlp_job.timeout = 300.0
                 default_config.rpcs.delete_dlp_job.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.cancel_dlp_job.timeout = 300.0
@@ -236,25 +236,25 @@ module Google
                 default_config.rpcs.get_stored_info_type.timeout = 300.0
                 default_config.rpcs.get_stored_info_type.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_stored_info_types.timeout = 300.0
                 default_config.rpcs.list_stored_info_types.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_stored_info_type.timeout = 300.0
                 default_config.rpcs.delete_stored_info_type.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.hybrid_inspect_dlp_job.timeout = 300.0

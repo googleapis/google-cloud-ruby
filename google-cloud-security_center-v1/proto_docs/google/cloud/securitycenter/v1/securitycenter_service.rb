@@ -33,8 +33,8 @@ module Google
         #     greater than 0 characters in length.
         # @!attribute [rw] finding
         #   @return [::Google::Cloud::SecurityCenter::V1::Finding]
-        #     Required. The Finding being created. The name and security_marks will be ignored as
-        #     they are both output only fields on this resource.
+        #     Required. The Finding being created. The name and security_marks will be
+        #     ignored as they are both output only fields on this resource.
         class CreateFindingRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -43,8 +43,8 @@ module Google
         # Request message for creating a notification config.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Resource name of the new notification config's parent. Its format is
-        #     "organizations/[organization_id]".
+        #     Required. Resource name of the new notification config's parent. Its format
+        #     is "organizations/[organization_id]".
         # @!attribute [rw] config_id
         #   @return [::String]
         #     Required.
@@ -53,8 +53,9 @@ module Google
         #     characters, underscores or hyphens only.
         # @!attribute [rw] notification_config
         #   @return [::Google::Cloud::SecurityCenter::V1::NotificationConfig]
-        #     Required. The notification config being created. The name and the service account
-        #     will be ignored as they are both output only fields on this resource.
+        #     Required. The notification config being created. The name and the service
+        #     account will be ignored as they are both output only fields on this
+        #     resource.
         class CreateNotificationConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -67,8 +68,8 @@ module Google
         #     "organizations/[organization_id]".
         # @!attribute [rw] source
         #   @return [::Google::Cloud::SecurityCenter::V1::Source]
-        #     Required. The Source being created, only the display_name and description will be
-        #     used. All other fields will be ignored.
+        #     Required. The Source being created, only the display_name and description
+        #     will be used. All other fields will be ignored.
         class CreateSourceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -97,8 +98,8 @@ module Google
         # Request message for getting organization settings.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the organization to get organization settings for. Its format is
-        #     "organizations/[organization_id]/organizationSettings".
+        #     Required. Name of the organization to get organization settings for. Its
+        #     format is "organizations/[organization_id]/organizationSettings".
         class GetOrganizationSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -118,7 +119,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of the organization to groupBy. Its format is
-        #     "organizations/[organization_id]".
+        #     "organizations/[organization_id], folders/[folder_id], or
+        #     projects/[project_id]".
         # @!attribute [rw] filter
         #   @return [::String]
         #     Expression that defines the filter to apply across assets.
@@ -185,9 +187,9 @@ module Google
         #     property not existing: `-resource_properties.my_property : ""`
         # @!attribute [rw] group_by
         #   @return [::String]
-        #     Required. Expression that defines what assets fields to use for grouping. The string
-        #     value should follow SQL syntax: comma separated list of fields. For
-        #     example:
+        #     Required. Expression that defines what assets fields to use for grouping.
+        #     The string value should follow SQL syntax: comma separated list of fields.
+        #     For example:
         #     "security_center_properties.resource_project,security_center_properties.project".
         #
         #     The following fields are supported when compare_duration is not set:
@@ -277,9 +279,12 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of the source to groupBy. Its format is
-        #     "organizations/[organization_id]/sources/[source_id]". To groupBy across
-        #     all sources provide a source_id of `-`. For example:
-        #     organizations/\\{organization_id}/sources/-
+        #     "organizations/[organization_id]/sources/[source_id]",
+        #     folders/[folder_id]/sources/[source_id], or
+        #     projects/[project_id]/sources/[source_id]. To groupBy across all sources
+        #     provide a source_id of `-`. For example:
+        #     organizations/\\{organization_id}/sources/-, folders/\\{folder_id}/sources/-,
+        #     or projects/\\{project_id}/sources/-
         # @!attribute [rw] filter
         #   @return [::String]
         #     Expression that defines the filter to apply across findings.
@@ -315,28 +320,37 @@ module Google
         #     * category: `=`, `:`
         #     * external_uri: `=`, `:`
         #     * event_time: `=`, `>`, `<`, `>=`, `<=`
-        #     * severity: `=`, `:`
         #
         #       Usage: This should be milliseconds since epoch or an RFC3339 string.
         #       Examples:
         #         `event_time = "2019-06-10T16:07:18-07:00"`
         #         `event_time = 1560208038000`
         #
+        #     * severity: `=`, `:`
+        #     * workflow_state: `=`, `:`
         #     * security_marks.marks: `=`, `:`
         #     * source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
         #
-        #     For example, `source_properties.size = 100` is a valid filter string.
+        #       For example, `source_properties.size = 100` is a valid filter string.
         #
-        #     Use a partial match on the empty string to filter based on a property
-        #     existing: `source_properties.my_property : ""`
+        #       Use a partial match on the empty string to filter based on a property
+        #       existing: `source_properties.my_property : ""`
         #
-        #     Use a negated partial match on the empty string to filter based on a
-        #     property not existing: `-source_properties.my_property : ""`
+        #       Use a negated partial match on the empty string to filter based on a
+        #       property not existing: `-source_properties.my_property : ""`
+        #
+        #     * resource:
+        #       * resource.name: `=`, `:`
+        #       * resource.parent_name: `=`, `:`
+        #       * resource.parent_display_name: `=`, `:`
+        #       * resource.project_name: `=`, `:`
+        #       * resource.project_display_name: `=`, `:`
+        #       * resource.type: `=`, `:`
         # @!attribute [rw] group_by
         #   @return [::String]
-        #     Required. Expression that defines what assets fields to use for grouping (including
-        #     `state_change`). The string value should follow SQL syntax: comma separated
-        #     list of fields. For example: "parent,resource_name".
+        #     Required. Expression that defines what assets fields to use for grouping
+        #     (including `state_change`). The string value should follow SQL syntax:
+        #     comma separated list of fields. For example: "parent,resource_name".
         #
         #     The following fields are supported:
         #
@@ -481,7 +495,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Resource name of the parent of sources to list. Its format should
-        #     be "organizations/[organization_id]".
+        #     be "organizations/[organization_id], folders/[folder_id], or
+        #     projects/[project_id]".
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The value returned by the last `ListSourcesResponse`; indicates
@@ -513,7 +528,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of the organization assets should belong to. Its format is
-        #     "organizations/[organization_id]".
+        #     "organizations/[organization_id], folders/[folder_id], or
+        #     projects/[project_id]".
         # @!attribute [rw] filter
         #   @return [::String]
         #     Expression that defines the filter to apply across assets.
@@ -707,9 +723,12 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of the source the findings belong to. Its format is
-        #     "organizations/[organization_id]/sources/[source_id]". To list across all
-        #     sources provide a source_id of `-`. For example:
-        #     organizations/\\{organization_id}/sources/-
+        #     "organizations/[organization_id]/sources/[source_id],
+        #     folders/[folder_id]/sources/[source_id], or
+        #     projects/[project_id]/sources/[source_id]". To list across all sources
+        #     provide a source_id of `-`. For example:
+        #     organizations/\\{organization_id}/sources/-, folders/\\{folder_id}/sources/- or
+        #     projects/\\{projects_id}/sources/-
         # @!attribute [rw] filter
         #   @return [::String]
         #     Expression that defines the filter to apply across findings.
@@ -745,23 +764,33 @@ module Google
         #     * category: `=`, `:`
         #     * external_uri: `=`, `:`
         #     * event_time: `=`, `>`, `<`, `>=`, `<=`
-        #     * severity: `=`, `:`
         #
         #       Usage: This should be milliseconds since epoch or an RFC3339 string.
         #       Examples:
         #         `event_time = "2019-06-10T16:07:18-07:00"`
         #         `event_time = 1560208038000`
         #
-        #     security_marks.marks: `=`, `:`
-        #     source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
+        #     * severity: `=`, `:`
+        #     * workflow_state: `=`, `:`
+        #     * security_marks.marks: `=`, `:`
+        #     * source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
         #
-        #     For example, `source_properties.size = 100` is a valid filter string.
+        #       For example, `source_properties.size = 100` is a valid filter string.
         #
-        #     Use a partial match on the empty string to filter based on a property
-        #     existing: `source_properties.my_property : ""`
+        #       Use a partial match on the empty string to filter based on a property
+        #       existing: `source_properties.my_property : ""`
         #
-        #     Use a negated partial match on the empty string to filter based on a
-        #     property not existing: `-source_properties.my_property : ""`
+        #       Use a negated partial match on the empty string to filter based on a
+        #       property not existing: `-source_properties.my_property : ""`
+        #
+        #     * resource:
+        #       * resource.name: `=`, `:`
+        #       * resource.parent_name: `=`, `:`
+        #       * resource.parent_display_name: `=`, `:`
+        #       * resource.project_name: `=`, `:`
+        #       * resource.project_display_name: `=`, `:`
+        #       * resource.type: `=`, `:`
+        #       * resource.folders.resource_folder: `=`, `:`
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Expression that defines what fields and order to use for sorting. The
@@ -888,6 +917,11 @@ module Google
             # @!attribute [rw] parent_display_name
             #   @return [::String]
             #     The human readable name of resource's parent.
+            # @!attribute [rw] folders
+            #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Folder>]
+            #     Contains a Folder message for each folder in the assets ancestry.
+            #     The first folder is the deepest nested folder, and the last folder is
+            #     the folder directly under the Organization.
             class Resource
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -944,8 +978,8 @@ module Google
         # Request message for running asset discovery for an organization.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Name of the organization to run asset discovery for. Its format is
-        #     "organizations/[organization_id]".
+        #     Required. Name of the organization to run asset discovery for. Its format
+        #     is "organizations/[organization_id]".
         class RunAssetDiscoveryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -954,8 +988,8 @@ module Google
         # Request message for updating or creating a finding.
         # @!attribute [rw] finding
         #   @return [::Google::Cloud::SecurityCenter::V1::Finding]
-        #     Required. The finding resource to update or create if it does not already exist.
-        #     parent, security_marks, and update_time will be ignored.
+        #     Required. The finding resource to update or create if it does not already
+        #     exist. parent, security_marks, and update_time will be ignored.
         #
         #     In the case of creation, the finding id portion of the name must be
         #     alphanumeric and less than or equal to 32 characters and greater than 0

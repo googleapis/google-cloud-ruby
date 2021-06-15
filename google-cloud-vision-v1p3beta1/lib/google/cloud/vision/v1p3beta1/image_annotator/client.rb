@@ -70,17 +70,17 @@ module Google
                 default_config.rpcs.batch_annotate_images.timeout = 600.0
                 default_config.rpcs.batch_annotate_images.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.async_batch_annotate_files.timeout = 600.0
                 default_config.rpcs.async_batch_annotate_files.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: []
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: []
                 }
 
                 default_config

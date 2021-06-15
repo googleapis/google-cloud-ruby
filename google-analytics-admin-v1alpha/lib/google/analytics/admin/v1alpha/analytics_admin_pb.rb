@@ -257,6 +257,101 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :change_history_events, :message, 1, "google.analytics.admin.v1alpha.ChangeHistoryEvent"
       optional :next_page_token, :string, 2
     end
+    add_message "google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest" do
+      optional :parent, :string, 1
+      optional :measurement_protocol_secret, :message, 2, "google.analytics.admin.v1alpha.MeasurementProtocolSecret"
+    end
+    add_message "google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest" do
+      optional :measurement_protocol_secret, :message, 1, "google.analytics.admin.v1alpha.MeasurementProtocolSecret"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse" do
+      repeated :measurement_protocol_secrets, :message, 1, "google.analytics.admin.v1alpha.MeasurementProtocolSecret"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest" do
+      optional :google_signals_settings, :message, 1, "google.analytics.admin.v1alpha.GoogleSignalsSettings"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.analytics.admin.v1alpha.CreateConversionEventRequest" do
+      optional :conversion_event, :message, 1, "google.analytics.admin.v1alpha.ConversionEvent"
+      optional :parent, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.GetConversionEventRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.DeleteConversionEventRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ListConversionEventsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListConversionEventsResponse" do
+      repeated :conversion_events, :message, 1, "google.analytics.admin.v1alpha.ConversionEvent"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.CreateCustomDimensionRequest" do
+      optional :parent, :string, 1
+      optional :custom_dimension, :message, 2, "google.analytics.admin.v1alpha.CustomDimension"
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateCustomDimensionRequest" do
+      optional :custom_dimension, :message, 1, "google.analytics.admin.v1alpha.CustomDimension"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.analytics.admin.v1alpha.ListCustomDimensionsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListCustomDimensionsResponse" do
+      repeated :custom_dimensions, :message, 1, "google.analytics.admin.v1alpha.CustomDimension"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.GetCustomDimensionRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.CreateCustomMetricRequest" do
+      optional :parent, :string, 1
+      optional :custom_metric, :message, 2, "google.analytics.admin.v1alpha.CustomMetric"
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateCustomMetricRequest" do
+      optional :custom_metric, :message, 1, "google.analytics.admin.v1alpha.CustomMetric"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.analytics.admin.v1alpha.ListCustomMetricsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListCustomMetricsResponse" do
+      repeated :custom_metrics, :message, 1, "google.analytics.admin.v1alpha.CustomMetric"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.ArchiveCustomMetricRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.GetCustomMetricRequest" do
+      optional :name, :string, 1
+    end
   end
 end
 
@@ -326,6 +421,31 @@ module Google
         ListAccountSummariesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAccountSummariesResponse").msgclass
         SearchChangeHistoryEventsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest").msgclass
         SearchChangeHistoryEventsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.SearchChangeHistoryEventsResponse").msgclass
+        GetMeasurementProtocolSecretRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest").msgclass
+        CreateMeasurementProtocolSecretRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest").msgclass
+        DeleteMeasurementProtocolSecretRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest").msgclass
+        UpdateMeasurementProtocolSecretRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest").msgclass
+        ListMeasurementProtocolSecretsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest").msgclass
+        ListMeasurementProtocolSecretsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse").msgclass
+        GetGoogleSignalsSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest").msgclass
+        UpdateGoogleSignalsSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest").msgclass
+        CreateConversionEventRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateConversionEventRequest").msgclass
+        GetConversionEventRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetConversionEventRequest").msgclass
+        DeleteConversionEventRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteConversionEventRequest").msgclass
+        ListConversionEventsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListConversionEventsRequest").msgclass
+        ListConversionEventsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListConversionEventsResponse").msgclass
+        CreateCustomDimensionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateCustomDimensionRequest").msgclass
+        UpdateCustomDimensionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateCustomDimensionRequest").msgclass
+        ListCustomDimensionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListCustomDimensionsRequest").msgclass
+        ListCustomDimensionsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListCustomDimensionsResponse").msgclass
+        ArchiveCustomDimensionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest").msgclass
+        GetCustomDimensionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetCustomDimensionRequest").msgclass
+        CreateCustomMetricRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateCustomMetricRequest").msgclass
+        UpdateCustomMetricRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateCustomMetricRequest").msgclass
+        ListCustomMetricsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListCustomMetricsRequest").msgclass
+        ListCustomMetricsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListCustomMetricsResponse").msgclass
+        ArchiveCustomMetricRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ArchiveCustomMetricRequest").msgclass
+        GetCustomMetricRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetCustomMetricRequest").msgclass
       end
     end
   end

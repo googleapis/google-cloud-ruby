@@ -516,6 +516,8 @@ module Google
         #   * `:optimizer_version` (String) The version of optimizer to use.
         #     Empty to use database default. "latest" to use the latest
         #     available optimizer version.
+        #   * `:optimizer_statistics_package` (String) Statistics package to
+        #     use. Empty to use the database default.
         #
         # @return [Client] The newly created client.
         #
@@ -580,6 +582,8 @@ module Google
         #   * `:optimizer_version` (String) The version of optimizer to use.
         #     Empty to use database default. "latest" to use the latest
         #     available optimizer version.
+        #   * `:optimizer_statistics_package` (String) Statistics package to
+        #     use. Empty to use the database default.
         #
         # @return [Client] The newly created client.
         #

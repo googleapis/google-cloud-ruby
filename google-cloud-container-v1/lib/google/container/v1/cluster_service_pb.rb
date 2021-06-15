@@ -579,6 +579,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :disk_type, :string, 7
       optional :shielded_instance_config, :message, 8, "google.container.v1.ShieldedInstanceConfig"
       optional :boot_disk_kms_key, :string, 9
+      optional :image_type, :string, 10
     end
     add_message "google.container.v1.ResourceLimit" do
       optional :resource_type, :string, 1

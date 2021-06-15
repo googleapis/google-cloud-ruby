@@ -57,7 +57,7 @@ module Google
 
       # Denotes that a (repeated) field is an unordered list.
       # This indicates that the service may provide the elements of the list
-      # in any arbitrary order, rather than the order the user originally
+      # in any arbitrary  order, rather than the order the user originally
       # provided. Additionally, the list's order may or may not be stable.
       UNORDERED_LIST = 6
     end

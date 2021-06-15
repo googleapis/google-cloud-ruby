@@ -88,6 +88,75 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # ListAssets request.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Name of the organization or project the assets belong to. Format:
+        #     "organizations/[organization-number]" (such as "organizations/123"),
+        #     "projects/[project-id]" (such as "projects/my-project-id"), or
+        #     "projects/[project-number]" (such as "projects/12345").
+        # @!attribute [rw] read_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Timestamp to take an asset snapshot. This can only be set to a timestamp
+        #     between the current time and the current time minus 35 days (inclusive).
+        #     If not specified, the current time will be used. Due to delays in resource
+        #     data collection and indexing, there is a volatile window during which
+        #     running the same query may get different results.
+        # @!attribute [rw] asset_types
+        #   @return [::Array<::String>]
+        #     A list of asset types to take a snapshot for. For example:
+        #     "compute.googleapis.com/Disk".
+        #
+        #     Regular expression is also supported. For example:
+        #
+        #     * "compute.googleapis.com.*" snapshots resources whose asset type starts
+        #     with "compute.googleapis.com".
+        #     * ".*Instance" snapshots resources whose asset type ends with "Instance".
+        #     * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+        #
+        #     See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+        #     regular expression syntax. If the regular expression does not match any
+        #     supported asset type, an INVALID_ARGUMENT error will be returned.
+        #
+        #     If specified, only matching assets will be returned, otherwise, it will
+        #     snapshot all asset types. See [Introduction to Cloud Asset
+        #     Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+        #     for all supported asset types.
+        # @!attribute [rw] content_type
+        #   @return [::Google::Cloud::Asset::V1::ContentType]
+        #     Asset content type. If not specified, no content but the asset name will
+        #     be returned.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of assets to be returned in a single response. Default
+        #     is 100, minimum is 1, and maximum is 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The `next_page_token` returned from the previous `ListAssetsResponse`, or
+        #     unspecified for the first `ListAssetsRequest`. It is a continuation of a
+        #     prior `ListAssets` call, and the API should return the next page of assets.
+        class ListAssetsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ListAssets response.
+        # @!attribute [rw] read_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Time the snapshot was taken.
+        # @!attribute [rw] assets
+        #   @return [::Array<::Google::Cloud::Asset::V1::Asset>]
+        #     Assets.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results. It expires 72 hours after the
+        #     page token for the first page is generated. Set to empty if there are no
+        #     remaining results.
+        class ListAssetsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Batch get assets history request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -253,6 +322,10 @@ module Google
         #     Editing Object
         #     Metadata](https://cloud.google.com/storage/docs/viewing-editing-metadata)
         #     for more information.
+        #
+        #     If the specified Cloud Storage object already exists and there is no
+        #     [hold](https://cloud.google.com/storage/docs/object-holds), it will be
+        #     overwritten with the exported result.
         # @!attribute [rw] uri_prefix
         #   @return [::String]
         #     The uri prefix of all generated Cloud Storage objects. Example:
@@ -457,7 +530,7 @@ module Google
         #   @return [::String]
         #     Required. A scope can be a project, a folder, or an organization. The search is
         #     limited to the resources within the `scope`. The caller must be granted the
-        #     [`cloudasset.assets.searchAllResources`](http://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+        #     [`cloudasset.assets.searchAllResources`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
         #     permission on the desired scope.
         #
         #     The allowed values are:
@@ -469,36 +542,41 @@ module Google
         # @!attribute [rw] query
         #   @return [::String]
         #     Optional. The query statement. See [how to construct a
-        #     query](http://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
+        #     query](https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
         #     for more information. If not specified or empty, it will search all the
-        #     resources within the specified `scope`. Note that the query string is
-        #     compared against each Cloud IAM policy binding, including its members,
-        #     roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
-        #     contain the bindings that match your query. To learn more about the IAM
-        #     policy structure, see [IAM policy
-        #     doc](https://cloud.google.com/iam/docs/policies#structure).
+        #     resources within the specified `scope`.
         #
         #     Examples:
         #
         #     * `name:Important` to find Cloud resources whose name contains
         #       "Important" as a word.
+        #     * `name=Important` to find the Cloud resource whose name is exactly
+        #       "Important".
         #     * `displayName:Impor*` to find Cloud resources whose display name
-        #       contains "Impor" as a prefix.
-        #     * `description:*por*` to find Cloud resources whose description
-        #       contains "por" as a substring.
-        #     * `location:us-west*` to find Cloud resources whose location is
-        #       prefixed with "us-west".
+        #       contains "Impor" as a prefix of any word in the field.
+        #     * `location:us-west*` to find Cloud resources whose location contains both
+        #       "us" and "west" as prefixes.
         #     * `labels:prod` to find Cloud resources whose labels contain "prod" as
         #       a key or value.
         #     * `labels.env:prod` to find Cloud resources that have a label "env"
         #       and its value is "prod".
         #     * `labels.env:*` to find Cloud resources that have a label "env".
+        #     * `kmsKey:key` to find Cloud resources encrypted with a customer-managed
+        #       encryption key whose name contains the word "key".
+        #     * `state:ACTIVE` to find Cloud resources whose state contains "ACTIVE" as a
+        #       word.
+        #     * `NOT state:ACTIVE` to find \\{\\{gcp_name}} resources whose state
+        #       doesn't contain "ACTIVE" as a word.
+        #     * `createTime<1609459200` to find Cloud resources that were created before
+        #       "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
+        #       "2021-01-01 00:00:00 UTC" in seconds.
+        #     * `updateTime>1609459200` to find Cloud resources that were updated after
+        #       "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
+        #       "2021-01-01 00:00:00 UTC" in seconds.
         #     * `Important` to find Cloud resources that contain "Important" as a word
         #       in any of the searchable fields.
-        #     * `Impor*` to find Cloud resources that contain "Impor" as a prefix
-        #       in any of the searchable fields.
-        #     * `*por*` to find Cloud resources that contain "por" as a substring in
-        #       any of the searchable fields.
+        #     * `Impor*` to find Cloud resources that contain "Impor" as a prefix of any
+        #       word in any of the searchable fields.
         #     * `Important location:(us-west1 OR global)` to find Cloud
         #       resources that contain "Important" as a word in any of the searchable
         #       fields and are also located in the "us-west1" region or the "global"
@@ -508,6 +586,17 @@ module Google
         #     Optional. A list of asset types that this request searches for. If empty, it will
         #     search all the [searchable asset
         #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+        #
+        #     Regular expressions are also supported. For example:
+        #
+        #     * "compute.googleapis.com.*" snapshots resources whose asset type starts
+        #     with "compute.googleapis.com".
+        #     * ".*Instance" snapshots resources whose asset type ends with "Instance".
+        #     * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+        #
+        #     See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+        #     regular expression syntax. If the regular expression does not match any
+        #     supported asset type, an INVALID_ARGUMENT error will be returned.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The page size for search result pagination. Page size is capped at 500 even
@@ -522,12 +611,24 @@ module Google
         #     identical to those in the previous call.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Optional. A comma separated list of fields specifying the sorting order of the
+        #     Optional. A comma-separated list of fields specifying the sorting order of the
         #     results. The default order is ascending. Add " DESC" after the field name
         #     to indicate descending order. Redundant space characters are ignored.
-        #     Example: "location DESC, name". Only string fields in the response are
-        #     sortable, including `name`, `displayName`, `description`, `location`. All
-        #     the other fields such as repeated fields (e.g., `networkTags`), map
+        #     Example: "location DESC, name".
+        #     Only singular primitive fields in the response are sortable:
+        #       * name
+        #       * assetType
+        #       * project
+        #       * displayName
+        #       * description
+        #       * location
+        #       * kmsKey
+        #       * createTime
+        #       * updateTime
+        #       * state
+        #       * parentFullResourceName
+        #       * parentAssetType
+        #     All the other fields such as repeated fields (e.g., `networkTags`), map
         #     fields (e.g., `labels`) and struct fields (e.g., `additionalAttributes`)
         #     are not supported.
         class SearchAllResourcesRequest
@@ -556,7 +657,7 @@ module Google
         #     Required. A scope can be a project, a folder, or an organization. The search is
         #     limited to the IAM policies within the `scope`. The caller must be granted
         #     the
-        #     [`cloudasset.assets.searchAllIamPolicies`](http://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+        #     [`cloudasset.assets.searchAllIamPolicies`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
         #     permission on the desired scope.
         #
         #     The allowed values are:
@@ -570,7 +671,12 @@ module Google
         #     Optional. The query statement. See [how to construct a
         #     query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
         #     for more information. If not specified or empty, it will search all the
-        #     IAM policies within the specified `scope`.
+        #     IAM policies within the specified `scope`. Note that the query string is
+        #     compared against each Cloud IAM policy binding, including its members,
+        #     roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
+        #     contain the bindings that match your query. To learn more about the IAM
+        #     policy structure, see [IAM policy
+        #     doc](https://cloud.google.com/iam/docs/policies#structure).
         #
         #     Examples:
         #
@@ -578,18 +684,25 @@ module Google
         #       "amy@gmail.com".
         #     * `policy:roles/compute.admin` to find IAM policy bindings that specify
         #       the Compute Admin role.
+        #     * `policy:comp*` to find IAM policy bindings that contain "comp" as a
+        #       prefix of any word in the binding.
         #     * `policy.role.permissions:storage.buckets.update` to find IAM policy
         #       bindings that specify a role containing "storage.buckets.update"
         #       permission. Note that if callers don't have `iam.roles.get` access to a
         #       role's included permissions, policy bindings that specify this role will
         #       be dropped from the search results.
+        #     * `policy.role.permissions:upd*` to find IAM policy bindings that specify a
+        #       role containing "upd" as a prefix of any word in the role permission.
+        #       Note that if callers don't have `iam.roles.get` access to a role's
+        #       included permissions, policy bindings that specify this role will be
+        #       dropped from the search results.
         #     * `resource:organizations/123456` to find IAM policy bindings
         #       that are set on "organizations/123456".
+        #     * `resource=//cloudresourcemanager.googleapis.com/projects/myproject` to
+        #       find IAM policy bindings that are set on the project named "myproject".
         #     * `Important` to find IAM policy bindings that contain "Important" as a
         #       word in any of the searchable fields (except for the included
         #       permissions).
-        #     * `*por*` to find IAM policy bindings that contain "por" as a substring
-        #       in any of the searchable fields (except for the included permissions).
         #     * `resource:(instance1 OR instance2) policy:amy` to find
         #       IAM policy bindings that are set on resources "instance1" or
         #       "instance2" and also specify user "amy".
@@ -625,7 +738,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # IAM policy analysis query message.
+        # ## IAM policy analysis query message.
         # @!attribute [rw] scope
         #   @return [::String]
         #     Required. The relative name of the root asset. Only resources and IAM policies within
@@ -652,6 +765,9 @@ module Google
         # @!attribute [rw] options
         #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery::Options]
         #     Optional. The query options.
+        # @!attribute [rw] condition_context
+        #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery::ConditionContext]
+        #     Optional. The hypothetical context for IAM conditions evaluation.
         class IamPolicyAnalysisQuery
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -791,6 +907,17 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # The IAM conditions context.
+          # @!attribute [rw] access_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The hypothetical access timestamp to evaluate IAM conditions. Note that
+          #     this value must not be earlier than the current time; otherwise, an
+          #     INVALID_ARGUMENT error will be returned.
+          class ConditionContext
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # A request message for {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy AssetService.AnalyzeIamPolicy}.
@@ -868,9 +995,14 @@ module Google
           # @!attribute [rw] uri
           #   @return [::String]
           #     Required. The uri of the Cloud Storage object. It's the same uri that is used by
-          #     gsutil. For example: "gs://bucket_name/object_name". See
-          #     [Quickstart: Using the gsutil tool]
-          #     (https://cloud.google.com/storage/docs/quickstart-gsutil) for examples.
+          #     gsutil. Example: "gs://bucket_name/object_name". See [Viewing and
+          #     Editing Object
+          #     Metadata](https://cloud.google.com/storage/docs/viewing-editing-metadata)
+          #     for more information.
+          #
+          #     If the specified Cloud Storage object already exists and there is no
+          #     [hold](https://cloud.google.com/storage/docs/object-holds), it will be
+          #     overwritten with the analysis result.
           class GcsDestination
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

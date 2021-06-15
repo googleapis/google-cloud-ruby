@@ -62,15 +62,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.secretmanager.v1.DeleteSecretRequest" do
       optional :name, :string, 1
+      optional :etag, :string, 2
     end
     add_message "google.cloud.secretmanager.v1.DisableSecretVersionRequest" do
       optional :name, :string, 1
+      optional :etag, :string, 2
     end
     add_message "google.cloud.secretmanager.v1.EnableSecretVersionRequest" do
       optional :name, :string, 1
+      optional :etag, :string, 2
     end
     add_message "google.cloud.secretmanager.v1.DestroySecretVersionRequest" do
       optional :name, :string, 1
+      optional :etag, :string, 2
     end
   end
 end

@@ -18,6 +18,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.cloud.bigquery.storage.v1.ArrowSerializationOptions.CompressionCodec" do
       value :COMPRESSION_UNSPECIFIED, 0
       value :LZ4_FRAME, 1
+      value :ZSTD, 2
     end
   end
 end

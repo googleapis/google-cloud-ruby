@@ -32,6 +32,22 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
   let(:persistence_regions) { ["us-west1", "us-west2"] }
   let(:schema_name) { "my-schema" }
   let(:message_encoding) { :JSON }
+  let(:async) do
+    {
+      max_bytes: 2_000_000,
+      max_messages: 200,
+      interval: 0.02,
+      threads: {
+        publish: 3,
+        callback: 5
+      },
+      flow_control: {
+        message_limit: 4_000,
+        byte_limit: 40_000_000,
+        limit_exceeded_behavior: :block
+      }
+    }
+  end
 
   it "creates a topic" do
     new_topic_name = "new-topic-#{Time.now.to_i}"
@@ -186,6 +202,28 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.message_encoding).must_equal message_encoding
   end
 
+  it "creates a topic with async option" do
+    new_topic_name = "new-topic-#{Time.now.to_i}"
+
+    create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name)
+    mock = Minitest::Mock.new
+    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil]
+    pubsub.service.mocked_publisher = mock
+
+    topic = pubsub.create_topic new_topic_name, async: async
+    topic.enable_message_ordering! # Create the AsyncPublisher
+
+    mock.verify
+
+    _(topic.async_publisher.topic_name).must_equal topic_path(new_topic_name)
+    _(topic.async_publisher.max_bytes).must_equal async[:max_bytes]
+    _(topic.async_publisher.max_messages).must_equal async[:max_messages]
+    _(topic.async_publisher.interval).must_equal async[:interval]
+    _(topic.async_publisher.publish_threads).must_equal async[:threads][:publish]
+    _(topic.async_publisher.callback_threads).must_equal async[:threads][:callback]
+    _(topic.async_publisher.flow_control).must_equal async[:flow_control]
+  end
+
   it "raises when creating a topic with schema_name but without message_encoding" do
     err = expect do
       topic = pubsub.create_topic "new-topic", schema_name: schema_name
@@ -312,6 +350,28 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.name).must_equal "projects/custom/topics/found-topic"
     _(topic).must_be :reference?
     _(topic).wont_be :resource?
+  end
+
+  it "gets a topic with async option" do
+    topic_name = "found-topic"
+
+    get_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name)
+    mock = Minitest::Mock.new
+    mock.expect :get_topic, get_res, [topic: topic_path(topic_name)]
+    pubsub.service.mocked_publisher = mock
+
+    topic = pubsub.topic topic_name, async: async
+    topic.enable_message_ordering! # Create the AsyncPublisher
+
+    mock.verify
+
+    _(topic.async_publisher.topic_name).must_equal topic_path(topic_name)
+    _(topic.async_publisher.max_bytes).must_equal async[:max_bytes]
+    _(topic.async_publisher.max_messages).must_equal async[:max_messages]
+    _(topic.async_publisher.interval).must_equal async[:interval]
+    _(topic.async_publisher.publish_threads).must_equal async[:threads][:publish]
+    _(topic.async_publisher.callback_threads).must_equal async[:threads][:callback]
+    _(topic.async_publisher.flow_control).must_equal async[:flow_control]
   end
 
   it "lists topics" do

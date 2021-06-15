@@ -45,7 +45,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/networks/#{request_pb.network}"
                 body = nil
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.request_id && request_pb.request_id != ""
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -82,11 +82,11 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/networks"
                 body = nil
                 query_string_params = {}
-                query_string_params["filter"] = request_pb.filter.to_s if request_pb.filter && request_pb.filter != ""
-                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.max_results && request_pb.max_results != 0
-                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.order_by && request_pb.order_by != ""
-                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.page_token && request_pb.page_token != ""
-                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.return_partial_success && request_pb.return_partial_success != false
+                query_string_params["filter"] = request_pb.filter.to_s if request_pb.has_filter?
+                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.has_max_results?
+                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.has_order_by?
+                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.has_page_token?
+                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.has_return_partial_success?
 
                 [uri, body, query_string_params]
               end
@@ -99,14 +99,14 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/networks/#{request_pb.network}/listPeeringRoutes"
                 body = nil
                 query_string_params = {}
-                query_string_params["direction"] = request_pb.direction.to_s if request_pb.direction && request_pb.direction != :UNDEFINED_DIRECTION
-                query_string_params["filter"] = request_pb.filter.to_s if request_pb.filter && request_pb.filter != ""
-                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.max_results && request_pb.max_results != 0
-                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.order_by && request_pb.order_by != ""
-                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.page_token && request_pb.page_token != ""
-                query_string_params["peeringName"] = request_pb.peering_name.to_s if request_pb.peering_name && request_pb.peering_name != ""
-                query_string_params["region"] = request_pb.region.to_s if request_pb.region && request_pb.region != ""
-                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.return_partial_success && request_pb.return_partial_success != false
+                query_string_params["direction"] = request_pb.direction.to_s if request_pb.has_direction?
+                query_string_params["filter"] = request_pb.filter.to_s if request_pb.has_filter?
+                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.has_max_results?
+                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.has_order_by?
+                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.has_page_token?
+                query_string_params["peeringName"] = request_pb.peering_name.to_s if request_pb.has_peering_name?
+                query_string_params["region"] = request_pb.region.to_s if request_pb.has_region?
+                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.has_return_partial_success?
 
                 [uri, body, query_string_params]
               end
@@ -143,7 +143,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/networks/#{request_pb.network}/switchToCustomMode"
                 body = nil
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.request_id && request_pb.request_id != ""
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

@@ -69,17 +69,17 @@ module Google
                 default_config.rpcs.list_queues.timeout = 20.0
                 default_config.rpcs.list_queues.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 10.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_queue.timeout = 20.0
                 default_config.rpcs.get_queue.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 10.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_queue.timeout = 20.0
@@ -89,9 +89,9 @@ module Google
                 default_config.rpcs.delete_queue.timeout = 20.0
                 default_config.rpcs.delete_queue.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 10.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.purge_queue.timeout = 20.0
@@ -103,9 +103,9 @@ module Google
                 default_config.rpcs.get_iam_policy.timeout = 20.0
                 default_config.rpcs.get_iam_policy.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 10.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.set_iam_policy.timeout = 20.0
@@ -113,25 +113,25 @@ module Google
                 default_config.rpcs.test_iam_permissions.timeout = 20.0
                 default_config.rpcs.test_iam_permissions.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 10.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_tasks.timeout = 20.0
                 default_config.rpcs.list_tasks.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 10.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_task.timeout = 20.0
                 default_config.rpcs.get_task.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 10.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_task.timeout = 20.0
@@ -139,9 +139,9 @@ module Google
                 default_config.rpcs.delete_task.timeout = 20.0
                 default_config.rpcs.delete_task.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  max_delay: 10.0,
+                  multiplier: 1.3,
+                  retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.lease_tasks.timeout = 20.0

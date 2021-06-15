@@ -69,33 +69,33 @@ module Google
                 default_config.rpcs.list_notification_channel_descriptors.timeout = 30.0
                 default_config.rpcs.list_notification_channel_descriptors.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_notification_channel_descriptor.timeout = 30.0
                 default_config.rpcs.get_notification_channel_descriptor.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_notification_channels.timeout = 30.0
                 default_config.rpcs.list_notification_channels.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_notification_channel.timeout = 30.0
                 default_config.rpcs.get_notification_channel.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_notification_channel.timeout = 30.0
@@ -105,9 +105,9 @@ module Google
                 default_config.rpcs.delete_notification_channel.timeout = 30.0
                 default_config.rpcs.delete_notification_channel.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.send_notification_channel_verification_code.timeout = 30.0
@@ -115,17 +115,17 @@ module Google
                 default_config.rpcs.get_notification_channel_verification_code.timeout = 30.0
                 default_config.rpcs.get_notification_channel_verification_code.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.verify_notification_channel.timeout = 30.0
                 default_config.rpcs.verify_notification_channel.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config
