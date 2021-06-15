@@ -1,5 +1,16 @@
 # Release History
 
+### 2.6.0 / 2021-06-15
+
+#### Features
+
+* Add support for Query Partitions
+  * Add CollectionGroup
+  * Update Client#col_group to return CollectionGroup (subclass of Query)
+  * Add QueryPartition
+  * Add QueryPartition::List
+  * Add Query#to_json and Query.from_json
+
 ### 2.5.1 / 2021-04-19
 
 #### Bug Fixes
