@@ -9,6 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/dialogflow/v2/audio_config_pb'
 require 'google/cloud/dialogflow/v2/session_pb'
+require 'google/protobuf/any_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/struct_pb'
@@ -104,6 +105,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.dialogflow.v2.AutomatedAgentReply" do
       optional :detect_intent_response, :message, 1, "google.cloud.dialogflow.v2.DetectIntentResponse"
+      optional :automated_agent_reply_type, :enum, 7, "google.cloud.dialogflow.v2.AutomatedAgentReply.AutomatedAgentReplyType"
+      optional :allow_cancellation, :bool, 8
+    end
+    add_enum "google.cloud.dialogflow.v2.AutomatedAgentReply.AutomatedAgentReplyType" do
+      value :AUTOMATED_AGENT_REPLY_TYPE_UNSPECIFIED, 0
+      value :PARTIAL, 1
+      value :FINAL, 2
     end
     add_message "google.cloud.dialogflow.v2.ArticleAnswer" do
       optional :title, :string, 1
@@ -161,6 +169,7 @@ module Google
         SuggestFaqAnswersResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SuggestFaqAnswersResponse").msgclass
         OutputAudio = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.OutputAudio").msgclass
         AutomatedAgentReply = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.AutomatedAgentReply").msgclass
+        AutomatedAgentReply::AutomatedAgentReplyType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.AutomatedAgentReply.AutomatedAgentReplyType").enummodule
         ArticleAnswer = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ArticleAnswer").msgclass
         FaqAnswer = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.FaqAnswer").msgclass
         SuggestionResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SuggestionResult").msgclass

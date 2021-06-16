@@ -353,9 +353,31 @@ module Google
         # @!attribute [rw] detect_intent_response
         #   @return [::Google::Cloud::Dialogflow::V2::DetectIntentResponse]
         #     Response of the Dialogflow {::Google::Cloud::Dialogflow::V2::Sessions::Client#detect_intent Sessions.DetectIntent} call.
+        # @!attribute [rw] automated_agent_reply_type
+        #   @return [::Google::Cloud::Dialogflow::V2::AutomatedAgentReply::AutomatedAgentReplyType]
+        #     AutomatedAgentReply type.
+        # @!attribute [rw] allow_cancellation
+        #   @return [::Boolean]
+        #     Indicates whether the partial automated agent reply is interruptible when a
+        #     later reply message arrives. e.g. if the agent specified some music as
+        #     partial response, it can be cancelled.
         class AutomatedAgentReply
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents different automated agent reply types.
+          module AutomatedAgentReplyType
+            # Not specified. This should never happen.
+            AUTOMATED_AGENT_REPLY_TYPE_UNSPECIFIED = 0
+
+            # Partial reply. e.g. Aggregated responses in a `Fulfillment` that enables
+            # `return_partial_response` can be returned as partial reply.
+            # WARNING: partial reply is not eligible for barge-in.
+            PARTIAL = 1
+
+            # Final reply.
+            FINAL = 2
+          end
         end
 
         # Represents article answer.
