@@ -1973,7 +1973,8 @@ module Google
             ##
             # Update the version of a {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} that will be used in {::Google::Cloud::Kms::V1::KeyManagementService::Client#encrypt Encrypt}.
             #
-            # Returns an error if called on an asymmetric key.
+            # Returns an error if called on a key whose purpose is not
+            # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
             #
             # @overload update_crypto_key_primary_version(request, options = nil)
             #   Pass arguments to `update_crypto_key_primary_version` via a request object, either of type

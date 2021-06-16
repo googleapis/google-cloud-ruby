@@ -78,6 +78,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :RSA_DECRYPT_OAEP_4096_SHA512, 17
       value :EC_SIGN_P256_SHA256, 12
       value :EC_SIGN_P384_SHA384, 13
+      value :EC_SIGN_SECP256K1_SHA256, 31
       value :EXTERNAL_SYMMETRIC_ENCRYPTION, 18
     end
     add_enum "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState" do

@@ -339,6 +339,10 @@ module Google
             # ECDSA on the NIST P-384 curve with a SHA384 digest.
             EC_SIGN_P384_SHA384 = 13
 
+            # ECDSA on the non-NIST secp256k1 curve. This curve is only supported for
+            # HSM protection level.
+            EC_SIGN_SECP256K1_SHA256 = 31
+
             # Algorithm representing symmetric encryption by an external key manager.
             EXTERNAL_SYMMETRIC_ENCRYPTION = 18
           end

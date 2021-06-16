@@ -117,7 +117,8 @@ module Google
             rpc :AsymmetricDecrypt, ::Google::Cloud::Kms::V1::AsymmetricDecryptRequest, ::Google::Cloud::Kms::V1::AsymmetricDecryptResponse
             # Update the version of a [CryptoKey][google.cloud.kms.v1.CryptoKey] that will be used in [Encrypt][google.cloud.kms.v1.KeyManagementService.Encrypt].
             #
-            # Returns an error if called on an asymmetric key.
+            # Returns an error if called on a key whose purpose is not
+            # [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].
             rpc :UpdateCryptoKeyPrimaryVersion, ::Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest, ::Google::Cloud::Kms::V1::CryptoKey
             # Schedule a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] for destruction.
             #
