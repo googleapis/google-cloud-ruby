@@ -8,5 +8,8 @@
     "product_documentation": "https://cloud.google.com/resource-manager/docs/organization-policy/overview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
+    "ruby-cloud-description": "The Cloud Org Policy service provides a simple mechanism for organizations to restrict the allowed configurations across their entire Cloud Resource hierarchy. Note that google-cloud-org_policy-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-org_policy instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "ORG_POLICY",
+    "ruby-cloud-product-url": "https://cloud.google.com/resource-manager/docs/organization-policy/overview",
     "library_type": "GAPIC_AUTO"
 }
