@@ -8,5 +8,8 @@
     "product_documentation": "https://cloud.google.com/assured-workloads/",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
+    "ruby-cloud-description": "Assured Workloads for Government secures government workloads and accelerates the path to running compliant workloads on Google Cloud.",
+    "ruby-cloud-env-prefix": "ASSURED_WORKLOADS",
+    "ruby-cloud-product-url": "https://cloud.google.com/assured-workloads/",
     "library_type": "GAPIC_AUTO"
 }
