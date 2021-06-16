@@ -8,5 +8,8 @@
     "product_documentation": "https://cloud.google.com/service-infrastructure/docs/overview/",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
+    "ruby-cloud-description": "The Service Control API provides control plane functionality to managed services, such as logging, monitoring, and status checks. Note that google-cloud-service_control-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-service_control instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "SERVICE_CONTROL",
+    "ruby-cloud-product-url": "https://cloud.google.com/service-infrastructure/docs/overview/",
     "library_type": "GAPIC_AUTO"
 }
