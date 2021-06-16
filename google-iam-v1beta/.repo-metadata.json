@@ -8,5 +8,8 @@
     "product_documentation": "https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
+    "ruby-cloud-description": "Pre-release client for the WorkloadIdentityPools service. Note that google-iam-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-iam instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "IAM",
+    "ruby-cloud-product-url": "https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers",
     "library_type": "GAPIC_AUTO"
 }
