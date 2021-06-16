@@ -8,5 +8,8 @@
     "product_documentation": "https://cloud.google.com/monitoring",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
+    "ruby-cloud-description": "Cloud Monitoring collects metrics, events, and metadata from Google Cloud, Amazon Web Services (AWS), hosted uptime probes, and application instrumentation.",
+    "ruby-cloud-env-prefix": "MONITORING",
+    "ruby-cloud-product-url": "https://cloud.google.com/monitoring",
     "library_type": "GAPIC_AUTO"
 }
