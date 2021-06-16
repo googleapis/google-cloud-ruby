@@ -35,6 +35,18 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientPath
     end
   end
 
+  def test_location_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.location_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1", path
+    end
+  end
+
   def test_processor_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

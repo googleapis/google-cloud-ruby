@@ -20,6 +20,36 @@
                 "batch_process_documents"
               ]
             },
+            "FetchProcessorTypes": {
+              "methods": [
+                "fetch_processor_types"
+              ]
+            },
+            "ListProcessors": {
+              "methods": [
+                "list_processors"
+              ]
+            },
+            "CreateProcessor": {
+              "methods": [
+                "create_processor"
+              ]
+            },
+            "DeleteProcessor": {
+              "methods": [
+                "delete_processor"
+              ]
+            },
+            "EnableProcessor": {
+              "methods": [
+                "enable_processor"
+              ]
+            },
+            "DisableProcessor": {
+              "methods": [
+                "disable_processor"
+              ]
+            },
             "ReviewDocument": {
               "methods": [
                 "review_document"

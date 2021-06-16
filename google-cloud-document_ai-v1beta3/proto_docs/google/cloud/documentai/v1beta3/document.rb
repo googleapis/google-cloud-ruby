@@ -190,6 +190,9 @@ module Google
           # @!attribute [rw] form_fields
           #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::Page::FormField>]
           #     A list of visually detected form fields on the page.
+          # @!attribute [rw] provenance
+          #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Provenance]
+          #     The history of this page.
           class Page
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -461,6 +464,9 @@ module Google
             #     - blank (this indicates the field_value is normal text)
             #     - "unfilled_checkbox"
             #     - "filled_checkbox"
+            # @!attribute [rw] provenance
+            #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Provenance]
+            #     The history of this annotation.
             class FormField
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -621,6 +627,8 @@ module Google
             #   @return [::Integer]
             #     Required. Index into the {::Google::Cloud::DocumentAI::V1beta3::Document#pages Document.pages} element, for example using
             #     [Document.pages][page_refs.page] to locate the related page element.
+            #     This field is skipped when its value is the default 0. See
+            #     https://developers.google.com/protocol-buffers/docs/proto3#json.
             # @!attribute [rw] layout_type
             #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::PageAnchor::PageRef::LayoutType]
             #     Optional. The type of the layout element that is being referenced if any.
@@ -691,6 +699,10 @@ module Google
             # @!attribute [rw] revision
             #   @return [::Integer]
             #     The index of the [Document.revisions] identifying the parent revision.
+            # @!attribute [rw] index
+            #   @return [::Integer]
+            #     The index of the parent revisions corresponding collection of items
+            #     (eg. list of entities, properties within entities, etc.)
             # @!attribute [rw] id
             #   @return [::Integer]
             #     The id of the parent provenance.

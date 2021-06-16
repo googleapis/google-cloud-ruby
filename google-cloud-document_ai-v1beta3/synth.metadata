@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "71548e51dce3bffab7471bebab0c24c238bec925"
+        "sha": "60ac7f772609f2450aa2897652ead4739f206058"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "204809ddb580527550e61a7ca524e837b5a8409d",
-        "internalRef": "377114643"
+        "sha": "19906f9fc5f20c5b98984cf9facf54de90c43d66",
+        "internalRef": "379607978"
       }
     }
   ],
@@ -55,6 +55,8 @@
     "lib/google/cloud/documentai/v1beta3/document_processor_service_services_pb.rb",
     "lib/google/cloud/documentai/v1beta3/geometry_pb.rb",
     "lib/google/cloud/documentai/v1beta3/operation_metadata_pb.rb",
+    "lib/google/cloud/documentai/v1beta3/processor_pb.rb",
+    "lib/google/cloud/documentai/v1beta3/processor_type_pb.rb",
     "proto_docs/README.md",
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
@@ -63,6 +65,8 @@
     "proto_docs/google/cloud/documentai/v1beta3/document_processor_service.rb",
     "proto_docs/google/cloud/documentai/v1beta3/geometry.rb",
     "proto_docs/google/cloud/documentai/v1beta3/operation_metadata.rb",
+    "proto_docs/google/cloud/documentai/v1beta3/processor.rb",
+    "proto_docs/google/cloud/documentai/v1beta3/processor_type.rb",
     "proto_docs/google/longrunning/operations.rb",
     "proto_docs/google/protobuf/any.rb",
     "proto_docs/google/protobuf/duration.rb",
