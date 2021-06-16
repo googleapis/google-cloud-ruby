@@ -8,5 +8,8 @@
     "product_documentation": "https://tables.area120.google.com/u/0/about#/",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
+    "ruby-cloud-description": "Using the Area 120 Tables API, you can query for tables, and update/create/delete rows within tables programmatically. Note that google-area120-tables-v1alpha1 is a version-specific client library. For most uses, we recommend installing the main client library google-area120-tables instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "AREA120_TABLES",
+    "ruby-cloud-product-url": "https://tables.area120.google.com/u/0/about#/",
     "library_type": "GAPIC_AUTO"
 }
