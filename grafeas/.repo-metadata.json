@@ -6,5 +6,8 @@
     "product_documentation": "https://grafeas.io",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
+    "ruby-cloud-description": "The Grafeas API stores, and enables querying and retrieval of, critical metadata about all of your software artifacts.",
+    "ruby-cloud-env-prefix": "GRAFEAS",
+    "ruby-cloud-product-url": "https://grafeas.io",
     "library_type": "GAPIC_AUTO"
 }
