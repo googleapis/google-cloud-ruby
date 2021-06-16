@@ -60,6 +60,7 @@ include :terminal
 def run
   require "erb"
   require "fileutils"
+  require "json"
   @gem_name = gem_name
   @branch_name = branch_name || "gen/#{@gem_name}"
   @year = Time.now.year
@@ -86,8 +87,6 @@ def generate
   generate_lib
   puts "\nTesting library...", :bold
   test_lib
-  puts "\nGenerating configs...", :bold
-  update_configs
   finish_branch if git_remote
   puts "\nSuccessful", :bold, :green
 end
@@ -164,6 +163,8 @@ end
 def determine_defaults
   gem_shortname = @base_gem_name.sub(/^google-cloud-/, "")
   @api_name = gem_shortname.gsub(/[-_]/, "")
+  @proto_path_base = "google/cloud/#{@api_name}"
+  @bazel_target_base = "google-cloud-#{@api_name}"
   @api_shortname = @api_name.dup
   @api_id = "#{@api_name}.googleapis.com"
   @service_display_name = gem_shortname.split("_").map(&:capitalize).join " "
@@ -171,9 +172,9 @@ def determine_defaults
   @service_config_name = "#{@api_name}_grpc_service_config.json"
   @description = replace_me_text
   @product_url = replace_me_text
-  @proto_path_base = nil
   @service_override = nil
-  @extra_proto_files = ['"google/cloud/common_resources.proto"']
+  @path_override = nil
+  @namespace_override = nil
 end
 
 def determine_existing_versions
@@ -191,44 +192,81 @@ end
 
 def lookup_precedents
   @existing_versions.reverse_each do |version|
-    synth_file_path = "#{@base_gem_name}-#{version}/synth.py"
-    logger.info "Looking for existing settings in #{synth_file_path}..."
-    script = File.read synth_file_path
-    if script =~ /gapic\.ruby_library\(\n\s+"([^"]*)",/
-      @api_name = Regexp.last_match 1
-    end
-    if script =~ %r{proto_path="([^"]*)/#{version}",}
-      @proto_path_base = Regexp.last_match 1
-    end
-    if script =~ /extra_proto_files=\[([^\]]*)\],/
-      @extra_proto_files = Regexp.last_match(1).strip.split(/,\s*|\s+/)
-    end
-    if script =~ /"ruby-cloud-title":\s*"(.+)",\n/
-      name = Regexp.last_match 1
-      @service_display_name = name.end_with?(" #{version.capitalize}") ? name[0..-(version.length + 2)] : name
-    end
-    if script =~ /"ruby-cloud-description":\s*"(.+)",\n/
-      @description = Regexp.last_match 1
-    end
-    if script =~ /"ruby-cloud-env-prefix":\s*"([A-Z0-9_]+)",\n/
-      @env_prefix = Regexp.last_match 1
-    end
-    if script =~ /"ruby-cloud-grpc-service-config":\s*"(.+)",\n/
-      path = Regexp.last_match 1
-      @service_config_name = File.basename path
-    end
-    if script =~ /"ruby-cloud-product-url":\s*"(.+)",\n/
-      @product_url = Regexp.last_match 1
-    end
-    if script =~ /"ruby-cloud-api-id":\s*"([a-z0-9._-]+)",\n/
-      @api_id = Regexp.last_match 1
-    end
-    if script =~ /"ruby-cloud-api-shortname":\s*"([a-z0-9_-]+)",\n/
-      @api_shortname = Regexp.last_match 1
-    end
-    if script =~ /"ruby-cloud-service-override":\s*"(.+)",\n/
-      @service_override = Regexp.last_match 1
-    end
+    lookup_precedents_in_synth "#{@base_gem_name}-#{version}/synth.py", version
+    lookup_precedents_in_repo_metadata "#{@base_gem_name}-#{version}/.repo-metadata.json"
+  end
+end
+
+def lookup_precedents_in_synth file_path, version
+  logger.info "Looking for existing settings in #{file_path}..."
+  script = File.read file_path
+
+  if script =~ /gapic\.ruby_library\(\n\s+"([^"]*)",/
+    @api_name = Regexp.last_match 1
+  end
+  if script =~ %r{proto_path="([^"]*)/#{version}",}
+    @proto_path_base = Regexp.last_match 1
+  end
+  if script =~ %r{bazel_target="//[^":]+:([^"]*)-#{version}-ruby",}
+    @bazel_target_base = Regexp.last_match 1
+  end
+  if script =~ /"ruby-cloud-title":\s*"(.+)",\n/
+    name = Regexp.last_match 1
+    @service_display_name = name.end_with?(" #{version.capitalize}") ? name[0..-(version.length + 2)] : name
+  end
+  if script =~ /"ruby-cloud-description":\s*"(.+)",\n/
+    @description = Regexp.last_match 1
+  end
+  if script =~ /"ruby-cloud-env-prefix":\s*"([A-Z0-9_]+)",\n/
+    @env_prefix = Regexp.last_match 1
+  end
+  if script =~ /"ruby-cloud-grpc-service-config":\s*"(.+)",\n/
+    path = Regexp.last_match 1
+    @service_config_name = File.basename path
+  end
+  if script =~ /"ruby-cloud-product-url":\s*"(.+)",\n/
+    @product_url = Regexp.last_match 1
+  end
+  if script =~ /"ruby-cloud-api-id":\s*"([a-z0-9._-]+)",\n/
+    @api_id = Regexp.last_match 1
+  end
+  if script =~ /"ruby-cloud-api-shortname":\s*"([a-z0-9_-]+)",\n/
+    @api_shortname = Regexp.last_match 1
+  end
+  if script =~ /"ruby-cloud-service-override":\s*"(.+)",\n/
+    @service_override = Regexp.last_match 1
+  end
+end
+
+def lookup_precedents_in_repo_metadata file_path
+  repo_metadata = JSON.parse File.read file_path
+
+  if repo_metadata.include? "name_pretty"
+    @service_display_name = repo_metadata["name_pretty"].sub(/\s+API$/, "").sub(/\s+V\d[a-z0-9]*$/, "")
+  end
+  if repo_metadata.include? "ruby-cloud-description"
+    @description = repo_metadata["ruby-cloud-description"]
+  end
+  if repo_metadata.include? "ruby-cloud-env-prefix"
+    @env_prefix = repo_metadata["ruby-cloud-env-prefix"]
+  end
+  if repo_metadata.include? "ruby-cloud-product-url"
+    @product_url = repo_metadata["ruby-cloud-product-url"]
+  end
+  if repo_metadata.include? "ruby-cloud-service-override"
+    @service_override = repo_metadata["ruby-cloud-service-override"]
+  end
+  if repo_metadata.include? "ruby-cloud-path-override"
+    @path_override = repo_metadata["ruby-cloud-path-override"]
+  end
+  if repo_metadata.include? "ruby-cloud-namespace-override"
+    @namespace_override = repo_metadata["ruby-cloud-namespace-override"]
+  end
+  if repo_metadata.include? "name"
+    @api_shortname = repo_metadata["name"]
+  end
+  if repo_metadata.include? "api_id"
+    @api_id = repo_metadata["api_id"]
   end
 end
 
@@ -236,33 +274,28 @@ def fill_type_specific_fields
   case @gen_type
   when "gapic"
     @title_version = @api_version.capitalize
-    @service_config_path = @proto_path_base || "google/cloud/#{@api_name}"
-    @service_config_path += "/#{@api_version}/#{@service_config_name}"
+    @service_config_path = "/#{@proto_path_base}/#{@api_version}/#{@service_config_name}"
   when "wrapper"
     @api_version = @existing_versions.first
     @wrapper_expr = @existing_versions.map{ |ver| "#{ver}:0.0" }.join ";"
-    @extra_proto_files.delete '"google/cloud/common_resources.proto"'
   else
     error "Unknown generation type"
   end
 end
 
 def create_optional_sections
-  @extra_proto_files_section = @proto_path_section = @service_override_section = ""
-  unless @extra_proto_files.empty?
-    lines = ["\n    extra_proto_files=["]
-    @extra_proto_files.each { |entry| lines << "\n        #{entry}," }
-    lines << "\n    ],"
-    @extra_proto_files_section = lines.join
-    logger.info "Creating optional section for extra_proto_files"
-  end
-  if @proto_path_base
-    @proto_path_section = "\n    proto_path=\"#{@proto_path_base}/#{@api_version}\","
-    logger.info "Creating optional section for proto_path"
-  end
+  @service_override_section = @path_override_section = @namespace_override_section = ""
   if @service_override
     @service_override_section = "\n        \"ruby-cloud-service-override\": \"#{@service_override}\","
     logger.info "Creating optional section for ruby-cloud-service-override"
+  end
+  if @path_override
+    @path_override_section = "\n        \"ruby-cloud-path-override\": \"#{@path_override}\","
+    logger.info "Creating optional section for ruby-cloud-path-override"
+  end
+  if @namespace_override
+    @namespace_override_section = "\n        \"ruby-cloud-namespace-override\": \"#{@namespace_override}\","
+    logger.info "Creating optional section for ruby-cloud-namespace-override"
   end
 end
 
@@ -306,11 +339,6 @@ def test_lib
     exec ["bundle", "install"]
     exec ["bundle", "exec", "rake", "ci"]
   end
-end
-
-def update_configs
-  exec ["bundle", "update"]
-  exec ["bundle", "exec", "rake", "kokoro:build"]
 end
 
 def finish_branch
