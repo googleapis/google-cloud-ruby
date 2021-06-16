@@ -8,5 +8,8 @@
     "product_documentation": "https://cloud.google.com/container-registry/docs/container-analysis",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
+    "ruby-cloud-description": "The Container Analysis API is an implementation of Grafeas. It stores, and enables querying and retrieval of, critical metadata about all of your software artifacts. Note that google-cloud-container_analysis-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-container_analysis instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "CONTAINER_ANALYSIS",
+    "ruby-cloud-product-url": "https://cloud.google.com/container-registry/docs/container-analysis",
     "library_type": "GAPIC_AUTO"
 }
