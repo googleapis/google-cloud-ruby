@@ -229,7 +229,140 @@ module Google
           end
         end
 
+        # Request message for fetch processor types.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The project of processor type to list.
+        #     Format: projects/\\{project}/locations/\\{location}
+        class FetchProcessorTypesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for fetch processor types.
+        # @!attribute [rw] processor_types
+        #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::ProcessorType>]
+        #     The list of processor types.
+        class FetchProcessorTypesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for list all processors belongs to a project.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent (project and location) which owns this collection of Processors.
+        #     Format: projects/\\{project}/locations/\\{location}
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of processors to return.
+        #     If unspecified, at most 50 processors will be returned.
+        #     The maximum value is 100; values above 100 will be coerced to 100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     We will return the processors sorted by creation time. The page token
+        #     will point to the next processor.
+        class ListProcessorsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for list processors.
+        # @!attribute [rw] processors
+        #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Processor>]
+        #     The list of processors.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Points to the next processor, otherwise empty.
+        class ListProcessorsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for create a processor. Notice this request is sent to
+        # a regionalized backend service, and if the processor type is not available
+        # on that region, the creation will fail.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent (project and location) under which to create the processor.
+        #     Format: projects/\\{project}/locations/\\{location}
+        # @!attribute [rw] processor
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::Processor]
+        #     Required. The processor to be created, requires [processor_type] and [display_name]
+        #     to be set. Also, the processor is under CMEK if CMEK fields are set.
+        class CreateProcessorRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for the delete processor method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The processor resource name to be deleted.
+        class DeleteProcessorRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The long running operation metadata for delete processor method.
+        # @!attribute [rw] common_metadata
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::CommonOperationMetadata]
+        #     The basic metadata of the long running operation.
+        class DeleteProcessorMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for the enable processor method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The processor resource name to be enabled.
+        class EnableProcessorRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for the enable processor method.
+        class EnableProcessorResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The long running operation metadata for enable processor method.
+        # @!attribute [rw] common_metadata
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::CommonOperationMetadata]
+        #     The basic metadata of the long running operation.
+        class EnableProcessorMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for the disable processor method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The processor resource name to be disabled.
+        class DisableProcessorRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for the disable processor method.
+        class DisableProcessorResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The long running operation metadata for disable processor method.
+        # @!attribute [rw] common_metadata
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::CommonOperationMetadata]
+        #     The basic metadata of the long running operation.
+        class DisableProcessorMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for review document method.
+        # Next Id: 6.
         # @!attribute [rw] inline_document
         #   @return [::Google::Cloud::DocumentAI::V1beta3::Document]
         #     An inline document proto.
@@ -240,9 +373,25 @@ module Google
         # @!attribute [rw] document
         #   @return [::Google::Cloud::DocumentAI::V1beta3::Document]
         #     The document that needs human review.
+        # @!attribute [rw] enable_schema_validation
+        #   @return [::Boolean]
+        #     Whether the validation should be performed on the ad-hoc review request.
+        # @!attribute [rw] priority
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::ReviewDocumentRequest::Priority]
+        #     The priority of the human review task.
         class ReviewDocumentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The priority level of the human review task.
+          module Priority
+            # The default priority level.
+            DEFAULT = 0
+
+            # The urgent priority level. The labeling manager should allocate labeler
+            # resource to the urgent task queue to respect this priority level.
+            URGENT = 1
+          end
         end
 
         # Response message for review document method.

@@ -344,6 +344,421 @@ module Google
             end
 
             ##
+            # Fetches processor types.
+            #
+            # @overload fetch_processor_types(request, options = nil)
+            #   Pass arguments to `fetch_processor_types` via a request object, either of type
+            #   {::Google::Cloud::DocumentAI::V1beta3::FetchProcessorTypesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DocumentAI::V1beta3::FetchProcessorTypesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload fetch_processor_types(parent: nil)
+            #   Pass arguments to `fetch_processor_types` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The project of processor type to list.
+            #     Format: projects/\\{project}/locations/\\{location}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DocumentAI::V1beta3::FetchProcessorTypesResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DocumentAI::V1beta3::FetchProcessorTypesResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def fetch_processor_types request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DocumentAI::V1beta3::FetchProcessorTypesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.fetch_processor_types.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.fetch_processor_types.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.fetch_processor_types.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @document_processor_service_stub.call_rpc :fetch_processor_types, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists all processors which belong to this project.
+            #
+            # @overload list_processors(request, options = nil)
+            #   Pass arguments to `list_processors` via a request object, either of type
+            #   {::Google::Cloud::DocumentAI::V1beta3::ListProcessorsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DocumentAI::V1beta3::ListProcessorsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_processors(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_processors` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent (project and location) which owns this collection of Processors.
+            #     Format: projects/\\{project}/locations/\\{location}
+            #   @param page_size [::Integer]
+            #     The maximum number of processors to return.
+            #     If unspecified, at most 50 processors will be returned.
+            #     The maximum value is 100; values above 100 will be coerced to 100.
+            #   @param page_token [::String]
+            #     We will return the processors sorted by creation time. The page token
+            #     will point to the next processor.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DocumentAI::V1beta3::Processor>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::DocumentAI::V1beta3::Processor>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def list_processors request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DocumentAI::V1beta3::ListProcessorsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_processors.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_processors.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_processors.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @document_processor_service_stub.call_rpc :list_processors, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @document_processor_service_stub, :list_processors, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a processor from the type processor that the user chose.
+            # The processor will be at "ENABLED" state by default after its creation.
+            #
+            # @overload create_processor(request, options = nil)
+            #   Pass arguments to `create_processor` via a request object, either of type
+            #   {::Google::Cloud::DocumentAI::V1beta3::CreateProcessorRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DocumentAI::V1beta3::CreateProcessorRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_processor(parent: nil, processor: nil)
+            #   Pass arguments to `create_processor` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent (project and location) under which to create the processor.
+            #     Format: projects/\\{project}/locations/\\{location}
+            #   @param processor [::Google::Cloud::DocumentAI::V1beta3::Processor, ::Hash]
+            #     Required. The processor to be created, requires [processor_type] and [display_name]
+            #     to be set. Also, the processor is under CMEK if CMEK fields are set.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DocumentAI::V1beta3::Processor]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DocumentAI::V1beta3::Processor]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def create_processor request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DocumentAI::V1beta3::CreateProcessorRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_processor.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_processor.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_processor.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @document_processor_service_stub.call_rpc :create_processor, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes the processor, unloads all deployed model artifacts if it was
+            # enabled and then deletes all artifacts associated with this processor.
+            #
+            # @overload delete_processor(request, options = nil)
+            #   Pass arguments to `delete_processor` via a request object, either of type
+            #   {::Google::Cloud::DocumentAI::V1beta3::DeleteProcessorRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DocumentAI::V1beta3::DeleteProcessorRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_processor(name: nil)
+            #   Pass arguments to `delete_processor` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The processor resource name to be deleted.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def delete_processor request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DocumentAI::V1beta3::DeleteProcessorRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_processor.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_processor.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_processor.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @document_processor_service_stub.call_rpc :delete_processor, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Enables a processor
+            #
+            # @overload enable_processor(request, options = nil)
+            #   Pass arguments to `enable_processor` via a request object, either of type
+            #   {::Google::Cloud::DocumentAI::V1beta3::EnableProcessorRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DocumentAI::V1beta3::EnableProcessorRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload enable_processor(name: nil)
+            #   Pass arguments to `enable_processor` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The processor resource name to be enabled.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def enable_processor request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DocumentAI::V1beta3::EnableProcessorRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.enable_processor.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.enable_processor.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.enable_processor.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @document_processor_service_stub.call_rpc :enable_processor, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Disables a processor
+            #
+            # @overload disable_processor(request, options = nil)
+            #   Pass arguments to `disable_processor` via a request object, either of type
+            #   {::Google::Cloud::DocumentAI::V1beta3::DisableProcessorRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DocumentAI::V1beta3::DisableProcessorRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload disable_processor(name: nil)
+            #   Pass arguments to `disable_processor` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The processor resource name to be disabled.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def disable_processor request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DocumentAI::V1beta3::DisableProcessorRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.disable_processor.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.disable_processor.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.disable_processor.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @document_processor_service_stub.call_rpc :disable_processor, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Send a document for Human Review. The input document should be processed by
             # the specified processor.
             #
@@ -357,7 +772,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload review_document(inline_document: nil, human_review_config: nil, document: nil)
+            # @overload review_document(inline_document: nil, human_review_config: nil, document: nil, enable_schema_validation: nil, priority: nil)
             #   Pass arguments to `review_document` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -369,6 +784,10 @@ module Google
             #     reviewed with.
             #   @param document [::Google::Cloud::DocumentAI::V1beta3::Document, ::Hash]
             #     The document that needs human review.
+            #   @param enable_schema_validation [::Boolean]
+            #     Whether the validation should be performed on the ad-hoc review request.
+            #   @param priority [::Google::Cloud::DocumentAI::V1beta3::ReviewDocumentRequest::Priority]
+            #     The priority of the human review task.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -563,6 +982,36 @@ module Google
                 #
                 attr_reader :batch_process_documents
                 ##
+                # RPC-specific configuration for `fetch_processor_types`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :fetch_processor_types
+                ##
+                # RPC-specific configuration for `list_processors`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_processors
+                ##
+                # RPC-specific configuration for `create_processor`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_processor
+                ##
+                # RPC-specific configuration for `delete_processor`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_processor
+                ##
+                # RPC-specific configuration for `enable_processor`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :enable_processor
+                ##
+                # RPC-specific configuration for `disable_processor`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :disable_processor
+                ##
                 # RPC-specific configuration for `review_document`
                 # @return [::Gapic::Config::Method]
                 #
@@ -574,6 +1023,18 @@ module Google
                   @process_document = ::Gapic::Config::Method.new process_document_config
                   batch_process_documents_config = parent_rpcs.batch_process_documents if parent_rpcs.respond_to? :batch_process_documents
                   @batch_process_documents = ::Gapic::Config::Method.new batch_process_documents_config
+                  fetch_processor_types_config = parent_rpcs.fetch_processor_types if parent_rpcs.respond_to? :fetch_processor_types
+                  @fetch_processor_types = ::Gapic::Config::Method.new fetch_processor_types_config
+                  list_processors_config = parent_rpcs.list_processors if parent_rpcs.respond_to? :list_processors
+                  @list_processors = ::Gapic::Config::Method.new list_processors_config
+                  create_processor_config = parent_rpcs.create_processor if parent_rpcs.respond_to? :create_processor
+                  @create_processor = ::Gapic::Config::Method.new create_processor_config
+                  delete_processor_config = parent_rpcs.delete_processor if parent_rpcs.respond_to? :delete_processor
+                  @delete_processor = ::Gapic::Config::Method.new delete_processor_config
+                  enable_processor_config = parent_rpcs.enable_processor if parent_rpcs.respond_to? :enable_processor
+                  @enable_processor = ::Gapic::Config::Method.new enable_processor_config
+                  disable_processor_config = parent_rpcs.disable_processor if parent_rpcs.respond_to? :disable_processor
+                  @disable_processor = ::Gapic::Config::Method.new disable_processor_config
                   review_document_config = parent_rpcs.review_document if parent_rpcs.respond_to? :review_document
                   @review_document = ::Gapic::Config::Method.new review_document_config
 

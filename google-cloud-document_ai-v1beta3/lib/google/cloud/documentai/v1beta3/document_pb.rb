@@ -63,6 +63,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :visual_elements, :message, 9, "google.cloud.documentai.v1beta3.Document.Page.VisualElement"
       repeated :tables, :message, 10, "google.cloud.documentai.v1beta3.Document.Page.Table"
       repeated :form_fields, :message, 11, "google.cloud.documentai.v1beta3.Document.Page.FormField"
+      optional :provenance, :message, 16, "google.cloud.documentai.v1beta3.Document.Provenance"
     end
     add_message "google.cloud.documentai.v1beta3.Document.Page.Dimension" do
       optional :width, :float, 1
@@ -150,6 +151,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :name_detected_languages, :message, 3, "google.cloud.documentai.v1beta3.Document.Page.DetectedLanguage"
       repeated :value_detected_languages, :message, 4, "google.cloud.documentai.v1beta3.Document.Page.DetectedLanguage"
       optional :value_type, :string, 5
+      optional :provenance, :message, 8, "google.cloud.documentai.v1beta3.Document.Provenance"
     end
     add_message "google.cloud.documentai.v1beta3.Document.Page.DetectedLanguage" do
       optional :language_code, :string, 1
@@ -219,6 +221,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.documentai.v1beta3.Document.Provenance.Parent" do
       optional :revision, :int32, 1
+      optional :index, :int32, 3
       optional :id, :int32, 2
     end
     add_enum "google.cloud.documentai.v1beta3.Document.Provenance.OperationType" do

@@ -10,6 +10,8 @@ require 'google/api/resource_pb'
 require 'google/cloud/documentai/v1beta3/document_pb'
 require 'google/cloud/documentai/v1beta3/document_io_pb'
 require 'google/cloud/documentai/v1beta3/operation_metadata_pb'
+require 'google/cloud/documentai/v1beta3/processor_pb'
+require 'google/cloud/documentai/v1beta3/processor_type_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
@@ -82,12 +84,59 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CANCELLED, 5
       value :FAILED, 6
     end
+    add_message "google.cloud.documentai.v1beta3.FetchProcessorTypesRequest" do
+      optional :parent, :string, 1
+    end
+    add_message "google.cloud.documentai.v1beta3.FetchProcessorTypesResponse" do
+      repeated :processor_types, :message, 1, "google.cloud.documentai.v1beta3.ProcessorType"
+    end
+    add_message "google.cloud.documentai.v1beta3.ListProcessorsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.cloud.documentai.v1beta3.ListProcessorsResponse" do
+      repeated :processors, :message, 1, "google.cloud.documentai.v1beta3.Processor"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.cloud.documentai.v1beta3.CreateProcessorRequest" do
+      optional :parent, :string, 1
+      optional :processor, :message, 2, "google.cloud.documentai.v1beta3.Processor"
+    end
+    add_message "google.cloud.documentai.v1beta3.DeleteProcessorRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.documentai.v1beta3.DeleteProcessorMetadata" do
+      optional :common_metadata, :message, 5, "google.cloud.documentai.v1beta3.CommonOperationMetadata"
+    end
+    add_message "google.cloud.documentai.v1beta3.EnableProcessorRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.documentai.v1beta3.EnableProcessorResponse" do
+    end
+    add_message "google.cloud.documentai.v1beta3.EnableProcessorMetadata" do
+      optional :common_metadata, :message, 5, "google.cloud.documentai.v1beta3.CommonOperationMetadata"
+    end
+    add_message "google.cloud.documentai.v1beta3.DisableProcessorRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.documentai.v1beta3.DisableProcessorResponse" do
+    end
+    add_message "google.cloud.documentai.v1beta3.DisableProcessorMetadata" do
+      optional :common_metadata, :message, 5, "google.cloud.documentai.v1beta3.CommonOperationMetadata"
+    end
     add_message "google.cloud.documentai.v1beta3.ReviewDocumentRequest" do
       optional :human_review_config, :string, 1
       optional :document, :message, 2, "google.cloud.documentai.v1beta3.Document"
+      optional :enable_schema_validation, :bool, 3
+      optional :priority, :enum, 5, "google.cloud.documentai.v1beta3.ReviewDocumentRequest.Priority"
       oneof :source do
         optional :inline_document, :message, 4, "google.cloud.documentai.v1beta3.Document"
       end
+    end
+    add_enum "google.cloud.documentai.v1beta3.ReviewDocumentRequest.Priority" do
+      value :DEFAULT, 0
+      value :URGENT, 1
     end
     add_message "google.cloud.documentai.v1beta3.ReviewDocumentResponse" do
       optional :gcs_destination, :string, 1
@@ -125,7 +174,21 @@ module Google
         BatchProcessMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.BatchProcessMetadata").msgclass
         BatchProcessMetadata::IndividualProcessStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.BatchProcessMetadata.IndividualProcessStatus").msgclass
         BatchProcessMetadata::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.BatchProcessMetadata.State").enummodule
+        FetchProcessorTypesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.FetchProcessorTypesRequest").msgclass
+        FetchProcessorTypesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.FetchProcessorTypesResponse").msgclass
+        ListProcessorsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ListProcessorsRequest").msgclass
+        ListProcessorsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ListProcessorsResponse").msgclass
+        CreateProcessorRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.CreateProcessorRequest").msgclass
+        DeleteProcessorRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.DeleteProcessorRequest").msgclass
+        DeleteProcessorMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.DeleteProcessorMetadata").msgclass
+        EnableProcessorRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.EnableProcessorRequest").msgclass
+        EnableProcessorResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.EnableProcessorResponse").msgclass
+        EnableProcessorMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.EnableProcessorMetadata").msgclass
+        DisableProcessorRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.DisableProcessorRequest").msgclass
+        DisableProcessorResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.DisableProcessorResponse").msgclass
+        DisableProcessorMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.DisableProcessorMetadata").msgclass
         ReviewDocumentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ReviewDocumentRequest").msgclass
+        ReviewDocumentRequest::Priority = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ReviewDocumentRequest.Priority").enummodule
         ReviewDocumentResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ReviewDocumentResponse").msgclass
         ReviewDocumentOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ReviewDocumentOperationMetadata").msgclass
         ReviewDocumentOperationMetadata::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ReviewDocumentOperationMetadata.State").enummodule
