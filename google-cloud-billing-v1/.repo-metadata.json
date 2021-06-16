@@ -8,5 +8,8 @@
     "product_documentation": "https://cloud.google.com/billing",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
+    "ruby-cloud-description": "Allows developers to manage billing for their Google Cloud Platform projects programmatically. Note that google-cloud-billing-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-billing instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "BILLING",
+    "ruby-cloud-product-url": "https://cloud.google.com/billing",
     "library_type": "GAPIC_AUTO"
 }
