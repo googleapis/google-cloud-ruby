@@ -8,5 +8,8 @@
     "product_documentation": "https://cloud.google.com/bigquery/docs/reference/storage",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
+    "ruby-cloud-description": "The BigQuery Storage API provides fast access to BigQuery managed storage.",
+    "ruby-cloud-env-prefix": "BIGQUERY_STORAGE",
+    "ruby-cloud-product-url": "https://cloud.google.com/bigquery/docs/reference/storage",
     "library_type": "GAPIC_AUTO"
 }
