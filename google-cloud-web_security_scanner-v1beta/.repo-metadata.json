@@ -8,5 +8,8 @@
     "product_documentation": "https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
+    "ruby-cloud-description": "Web Security Scanner scans your Compute and App Engine apps for common web vulnerabilities. Note that google-cloud-web_security_scanner-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-web_security_scanner instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "WEB_SECURITY_SCANNER",
+    "ruby-cloud-product-url": "https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/",
     "library_type": "GAPIC_AUTO"
 }
