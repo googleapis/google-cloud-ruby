@@ -18,30 +18,39 @@ require "json"
 require "tempfile"
 
 CONFIGS = {
-  gapics: {
-    title_regexp: /^\[CHANGE ME\] Re-generated [\w-]+-v\d+\w* to pick up changes in the API or client/,
+  "gapics" => {
+    title_regexp: /^\[CHANGE ME\] Re-generated [\w-]+-v\d\w* to pick up changes in the API or client/,
     message_type: :shared,
     detail_type: :none,
     omit_paths: ["/synth\\.metadata$"]
   },
-  wrappers: {
+  "wrappers" => {
     title_regexp: /^\[CHANGE ME\] Re-generated (\w+-)*(v[a-z_]|[a-uw-z])\w* to pick up changes in the API or client/,
     message_type: :shared,
     detail_type: :none,
     omit_paths: ["/synth\\.metadata$"]
   },
-  releases: {
-    title_regexp: /^chore: release [\w-]+ \d+\.\d+\.\d+/,
-    message_type: :pr_title_number,
-    detail_type: :none,
-    omit_paths: ["/synth\\.metadata$"]
-  },
-  all: {
+  "all" => {
     title_regexp: //,
     message_type: :pr_title,
     detail_type: :none,
     omit_paths: ["/synth\\.metadata$"]
-  }
+  },
+  "releases-gapics" => {
+    title_regexp: /^chore: release [\w-]+-v\d\w* \d+\.\d+\.\d+/,
+    message_type: :pr_title_number,
+    detail_type: :none,
+  },
+  "releases-wrappers" => {
+    title_regexp: /^chore: release (\w+-)*(v[a-z_]|[a-uw-z])\w* \d+\.\d+\.\d+/,
+    message_type: :pr_title_number,
+    detail_type: :none,
+  },
+  "releases-all" => {
+    title_regexp: /^chore: release [\w-]+ \d+\.\d+\.\d+/,
+    message_type: :pr_title_number,
+    detail_type: :none,
+  },
 }
 
 REPO = "googleapis/google-cloud-ruby"
@@ -49,14 +58,14 @@ REPO = "googleapis/google-cloud-ruby"
 desc "Interactive mass code review"
 
 required_arg :config_name do
-  accept [:gapics, :wrappers, :releases, :all]
+  accept CONFIGS.keys
   desc "The config that determines which PRs to review. Values: gapics, wrappers, releases"
 end
 
 flag :title_regexp, accept: Regexp
 flag :message_type, accept: [:shared, :pr_title, :pr_title_number]
 flag :detail_type, accept: [:shared, :none]
-flag :omit_paths, accept: Array
+flag :omit_paths, accept: Array, default: []
 flag :max_line_count, accept: Integer
 flag :editor, accept: String
 flag :dry_run
@@ -88,8 +97,7 @@ def ensure_prerequisites
 end
 
 def init_config
-  config = CONFIGS[config_name]
-  config.each { |k, v| set k, v if get(k).nil? }
+  CONFIGS[config_name]&.each { |k, v| set k, v if get(k).nil? }
   @commit_message = ""
   @commit_detail = ""
   @edit_enabled = true
