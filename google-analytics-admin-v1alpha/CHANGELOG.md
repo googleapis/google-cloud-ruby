@@ -1,5 +1,15 @@
 # Release History
 
+### 0.8.0 / 2021-06-17
+
+#### Features
+
+* Management of MeasurementProtocolSecrets, GoogleSignalsSettings, ConversionEvents, CustomDimensions, and CustomMetrics
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.7.0 / 2021-05-06
 
 #### ⚠ BREAKING CHANGES
