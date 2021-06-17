@@ -330,7 +330,7 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               # @yield [result, env] Access the result along with the Faraday environment object
               # @yieldparam result [::Google::Cloud::Compute::V1::InstanceAggregatedList]
               # @yieldparam response [::Faraday::Response]
@@ -450,7 +450,80 @@ module Google
               end
 
               ##
-              # Deletes the specified Instance resource. For more information, see Stopping or Deleting an Instance.
+              # Creates multiple instances. Count specifies the number of instances to create.
+              #
+              # @overload bulk_insert(request, options = nil)
+              #   Pass arguments to `bulk_insert` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::BulkInsertInstanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::BulkInsertInstanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #     Note: currently retry functionality is not implemented. While it is possible
+              #     to set it using ::Gapic::CallOptions, it will not be applied
+              #
+              # @overload bulk_insert(bulk_insert_instance_resource_resource: nil, project: nil, request_id: nil, zone: nil)
+              #   Pass arguments to `bulk_insert` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param bulk_insert_instance_resource_resource [::Google::Cloud::Compute::V1::BulkInsertInstanceResource, ::Hash]
+              #     The body resource for this request
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+              #
+              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+              #   @param zone [::String]
+              #     The name of the zone for this request.
+              # @yield [result, env] Access the result along with the Faraday environment object
+              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam response [::Faraday::Response]
+              #
+              # @return [::Google::Cloud::Compute::V1::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def bulk_insert request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::BulkInsertInstanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = {}
+
+                # Set x-goog-api-client header
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     call_metadata
+
+                uri, body, _query_string_params = transcode_bulk_insert request
+                response = @client_stub.make_post_request(
+                  uri:     uri,
+                  body:    body,
+                  options: options
+                )
+                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, response if block_given?
+                result
+              rescue ::Faraday::Error => e
+                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
+                raise ::Google::Cloud::Error.from_error(gapic_error)
+              end
+
+              ##
+              # Deletes the specified Instance resource. For more information, see Deleting an instance.
               #
               # @overload delete(request, options = nil)
               #   Pass arguments to `delete` via a request object, either of type
@@ -732,6 +805,75 @@ module Google
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Instance.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, response if block_given?
+                result
+              rescue ::Faraday::Error => e
+                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
+                raise ::Google::Cloud::Error.from_error(gapic_error)
+              end
+
+              ##
+              # Returns effective firewalls applied to an interface of the instance.
+              #
+              # @overload get_effective_firewalls(request, options = nil)
+              #   Pass arguments to `get_effective_firewalls` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::GetEffectiveFirewallsInstanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::GetEffectiveFirewallsInstanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #     Note: currently retry functionality is not implemented. While it is possible
+              #     to set it using ::Gapic::CallOptions, it will not be applied
+              #
+              # @overload get_effective_firewalls(instance: nil, network_interface: nil, project: nil, zone: nil)
+              #   Pass arguments to `get_effective_firewalls` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     Name of the instance scoping this request.
+              #   @param network_interface [::String]
+              #     The name of the network interface to get the effective firewalls.
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param zone [::String]
+              #     The name of the zone for this request.
+              # @yield [result, env] Access the result along with the Faraday environment object
+              # @yieldparam result [::Google::Cloud::Compute::V1::InstancesGetEffectiveFirewallsResponse]
+              # @yieldparam response [::Faraday::Response]
+              #
+              # @return [::Google::Cloud::Compute::V1::InstancesGetEffectiveFirewallsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def get_effective_firewalls request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetEffectiveFirewallsInstanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = {}
+
+                # Set x-goog-api-client header
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     call_metadata
+
+                uri, _body, query_string_params = transcode_get_effective_firewalls request
+                response = @client_stub.make_get_request(
+                  uri:     uri,
+                  params:  query_string_params,
+                  options: options
+                )
+                result = ::Google::Cloud::Compute::V1::InstancesGetEffectiveFirewallsResponse.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, response if block_given?
                 result
@@ -1208,7 +1350,7 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, env] Access the result along with the Faraday environment object
@@ -1295,7 +1437,7 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, env] Access the result along with the Faraday environment object
@@ -2971,7 +3113,7 @@ module Google
               end
 
               ##
-              # Updates an instance's network interface. This method follows PATCH semantics.
+              # Updates an instance's network interface. This method can only update an interface's alias IP range and attached network. See Modifying alias IP ranges for an existing instance for instructions on changing alias IP ranges. See Migrating a VM between networks for instructions on migrating an interface. This method follows PATCH semantics.
               #
               # @overload update_network_interface(request, options = nil)
               #   Pass arguments to `update_network_interface` via a request object, either of type

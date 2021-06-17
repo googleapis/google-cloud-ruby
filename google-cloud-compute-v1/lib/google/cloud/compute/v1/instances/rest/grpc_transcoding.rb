@@ -79,6 +79,18 @@ module Google
                 [uri, body, query_string_params]
               end
 
+              # @param request_pb [::Google::Cloud::Compute::V1::BulkInsertInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_bulk_insert request_pb
+                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/bulkInsert"
+                body = request_pb.bulk_insert_instance_resource_resource.to_json
+                query_string_params = {}
+
+                [uri, body, query_string_params]
+              end
+
               # @param request_pb [::Google::Cloud::Compute::V1::DeleteInstanceRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
@@ -129,6 +141,19 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}"
                 body = nil
                 query_string_params = {}
+
+                [uri, body, query_string_params]
+              end
+
+              # @param request_pb [::Google::Cloud::Compute::V1::GetEffectiveFirewallsInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_get_effective_firewalls request_pb
+                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/getEffectiveFirewalls"
+                body = nil
+                query_string_params = {}
+                query_string_params["networkInterface"] = request_pb.network_interface.to_s
 
                 [uri, body, query_string_params]
               end

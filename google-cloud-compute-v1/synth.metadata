@@ -1,0 +1,29 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "https://github.com/viacheslav-rostovtsev/google-cloud-ruby",
+        "sha": "edef0221f1bef6a28c008071748602c99b7f42d2"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis-discovery",
+        "remote": "https://github.com/googleapis/googleapis-discovery.git",
+        "sha": "4f5d0604132e93e63330e65e2e6648c75012780c"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis-discovery",
+        "apiName": "compute",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "bazel"
+      }
+    }
+  ]
+}

@@ -244,7 +244,7 @@ module Google
               #   @param region [::String]
               #     Name of the region scoping this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               # @yield [result, env] Access the result along with the Faraday environment object
               # @yieldparam result [::Google::Cloud::Compute::V1::RegionInstanceGroupList]
               # @yieldparam response [::Faraday::Response]
@@ -333,7 +333,7 @@ module Google
               #   @param region_instance_groups_list_instances_request_resource [::Google::Cloud::Compute::V1::RegionInstanceGroupsListInstancesRequest, ::Hash]
               #     The body resource for this request
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               # @yield [result, env] Access the result along with the Faraday environment object
               # @yieldparam result [::Google::Cloud::Compute::V1::RegionInstanceGroupsListInstances]
               # @yieldparam response [::Faraday::Response]

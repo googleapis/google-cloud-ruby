@@ -27,7 +27,7 @@ export COMPUTE_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/compute/v1"
 
-client = ::Google::Cloud::Compute::V1::AcceleratorTypes::Client.new
+client = ::Google::Cloud::Compute::V1::AcceleratorTypes::Rest::Client.new
 ```
 
 ## Credential Lookup

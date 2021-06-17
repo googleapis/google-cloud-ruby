@@ -97,6 +97,18 @@ module Google
                 [uri, body, query_string_params]
               end
 
+              # @param request_pb [::Google::Cloud::Compute::V1::PatchTargetHttpsProxyRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_patch request_pb
+                uri = "/compute/v1/projects/#{request_pb.project}/global/targetHttpsProxies/#{request_pb.target_https_proxy}"
+                body = request_pb.target_https_proxy_resource.to_json
+                query_string_params = {}
+
+                [uri, body, query_string_params]
+              end
+
               # @param request_pb [::Google::Cloud::Compute::V1::SetQuicOverrideTargetHttpsProxyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]

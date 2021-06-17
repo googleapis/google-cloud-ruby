@@ -251,7 +251,7 @@ module Google
               #   @param project [::String]
               #     Name of the project scoping this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               # @yield [result, env] Access the result along with the Faraday environment object
               # @yieldparam result [::Google::Cloud::Compute::V1::BackendServiceAggregatedList]
               # @yieldparam response [::Faraday::Response]
@@ -683,7 +683,7 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               # @yield [result, env] Access the result along with the Faraday environment object
               # @yieldparam result [::Google::Cloud::Compute::V1::BackendServiceList]
               # @yieldparam response [::Faraday::Response]
@@ -799,7 +799,7 @@ module Google
               end
 
               ##
-              # Sets the security policy for the specified backend service.
+              # Sets the Google Cloud Armor security policy for the specified backend service. For more information, see Google Cloud Armor Overview
               #
               # @overload set_security_policy(request, options = nil)
               #   Pass arguments to `set_security_policy` via a request object, either of type
