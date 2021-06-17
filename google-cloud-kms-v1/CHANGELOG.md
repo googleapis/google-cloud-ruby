@@ -1,5 +1,15 @@
 # Release History
 
+### 0.6.0 / 2021-06-17
+
+#### Features
+
+* Add ECDSA secp256k1 to the list of supported algorithms
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.5.0 / 2021-03-08
 
 #### Features
