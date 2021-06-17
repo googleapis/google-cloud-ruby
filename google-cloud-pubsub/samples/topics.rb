@@ -301,7 +301,7 @@ def publish_messages_async_with_flow_control topic_id:
     # Configure how many messages the publisher client can hold in memory
     # before publishing succeeds, and what to do when messages exceed the limit.
     flow_control: {
-      message_limit:  100,
+      message_limit: 100,
       byte_limit: 10 * 1024 * 1024, # 10 MiB
       # Block more messages from being published when the limit is reached. The
       # other options are :ignore and :error.
