@@ -4,6 +4,12 @@
 
 * Clarify Finding#event_time description
 
+### 0.7.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.7.0 / 2021-05-18
 
 #### Features
