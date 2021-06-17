@@ -1,5 +1,15 @@
 # Release History
 
+### 0.6.0 / 2021-06-17
+
+#### Features
+
+* Support image_type for node autoprovisioning
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.5.1 / 2021-03-10
 
 #### Documentation
