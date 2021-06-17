@@ -1,5 +1,16 @@
 # Release History
 
+### 0.9.0 / 2021-06-17
+
+#### Features
+
+* Added automated agent reply type, and allow cancellation flag for partial response feature
+* Report whether a query cancels slot filling
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.8.1 / 2021-05-21
 
 #### Documentation
