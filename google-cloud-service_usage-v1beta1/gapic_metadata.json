@@ -1,0 +1,113 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.api.serviceusage.v1beta1",
+  "libraryPackage": "::Google::Api::ServiceUsage::V1beta1",
+  "services": {
+    "ServiceUsage": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Api::ServiceUsage::V1beta1::ServiceUsage::Client",
+          "rpcs": {
+            "EnableService": {
+              "methods": [
+                "enable_service"
+              ]
+            },
+            "DisableService": {
+              "methods": [
+                "disable_service"
+              ]
+            },
+            "GetService": {
+              "methods": [
+                "get_service"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "list_services"
+              ]
+            },
+            "BatchEnableServices": {
+              "methods": [
+                "batch_enable_services"
+              ]
+            },
+            "ListConsumerQuotaMetrics": {
+              "methods": [
+                "list_consumer_quota_metrics"
+              ]
+            },
+            "GetConsumerQuotaMetric": {
+              "methods": [
+                "get_consumer_quota_metric"
+              ]
+            },
+            "GetConsumerQuotaLimit": {
+              "methods": [
+                "get_consumer_quota_limit"
+              ]
+            },
+            "CreateAdminOverride": {
+              "methods": [
+                "create_admin_override"
+              ]
+            },
+            "UpdateAdminOverride": {
+              "methods": [
+                "update_admin_override"
+              ]
+            },
+            "DeleteAdminOverride": {
+              "methods": [
+                "delete_admin_override"
+              ]
+            },
+            "ListAdminOverrides": {
+              "methods": [
+                "list_admin_overrides"
+              ]
+            },
+            "ImportAdminOverrides": {
+              "methods": [
+                "import_admin_overrides"
+              ]
+            },
+            "CreateConsumerOverride": {
+              "methods": [
+                "create_consumer_override"
+              ]
+            },
+            "UpdateConsumerOverride": {
+              "methods": [
+                "update_consumer_override"
+              ]
+            },
+            "DeleteConsumerOverride": {
+              "methods": [
+                "delete_consumer_override"
+              ]
+            },
+            "ListConsumerOverrides": {
+              "methods": [
+                "list_consumer_overrides"
+              ]
+            },
+            "ImportConsumerOverrides": {
+              "methods": [
+                "import_consumer_overrides"
+              ]
+            },
+            "GenerateServiceIdentity": {
+              "methods": [
+                "generate_service_identity"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
