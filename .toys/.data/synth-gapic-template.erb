@@ -21,19 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
-    "<%= @api_name %>", "<%= @api_version %>",<%= @proto_path_section %><%= @extra_proto_files_section %>
-    generator_args={
-        "ruby-cloud-gem-name": "<%= @gem_name %>",
-        "ruby-cloud-title": "<%= @service_display_name %> <%= @title_version %>",
-        "ruby-cloud-description": "<%= @description %>",
-        "ruby-cloud-env-prefix": "<%= @env_prefix %>",
-        "ruby-cloud-grpc-service-config": "<%= @service_config_path %>",
-        "ruby-cloud-product-url": "<%= @product_url %>",
-        "ruby-cloud-api-id": "<%= @api_id %>",
-        "ruby-cloud-api-shortname": "<%= @api_shortname %>",<%= @service_override_section %>
-    }
+    "<%= @api_name %>", "<%= @api_version %>",
+    proto_path="<%= @proto_path_base %>/<%= @api_version %>",
+    bazel_target="//<%= @proto_path_base %>/<%= @api_version %>:<%= @bazel_target_base %>-<%= @api_version %>-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)
