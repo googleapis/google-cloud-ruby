@@ -953,6 +953,12 @@ module Google
         # The API call to delete the bucket may be retried under certain
         # conditions. See {Google::Cloud#storage} to control this behavior.
         #
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the bucket's current metageneration matches the given value.
+        # @param [Integer] if_metageneration_not_match Makes the operation
+        #   conditional on whether the bucket's current metageneration does not
+        #   match the given value.
+        #
         # @return [Boolean] Returns `true` if the bucket was deleted.
         #
         # @example
@@ -963,10 +969,12 @@ module Google
         #   bucket = storage.bucket "my-bucket"
         #   bucket.delete
         #
-        def delete
+        def delete if_metageneration_match: nil, if_metageneration_not_match: nil
           ensure_service!
-          service.delete_bucket name, user_project: user_project
-          true
+          service.delete_bucket name,
+                                if_metageneration_match: if_metageneration_match,
+                                if_metageneration_not_match: if_metageneration_not_match,
+                                user_project: user_project
         end
 
         ##

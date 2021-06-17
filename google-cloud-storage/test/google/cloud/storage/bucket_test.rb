@@ -94,7 +94,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_bucket, nil, [bucket.name, user_project: nil]
+    mock.expect :delete_bucket, nil, delete_bucket_args(bucket.name)
 
     bucket.service.mocked_service = mock
 
@@ -103,9 +103,31 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
   end
 
+  it "can delete itself with if_metageneration_match set to a metageneration" do
+    mock = Minitest::Mock.new
+    mock.expect :delete_bucket, nil, delete_bucket_args(bucket.name, if_metageneration_match: metageneration)
+
+    bucket.service.mocked_service = mock
+
+    bucket.delete if_metageneration_match: metageneration
+
+    mock.verify
+  end
+
+  it "can delete itself with if_metageneration_not_match set to a metageneration" do
+    mock = Minitest::Mock.new
+    mock.expect :delete_bucket, nil, delete_bucket_args(bucket.name, if_metageneration_not_match: metageneration)
+
+    bucket.service.mocked_service = mock
+
+    bucket.delete if_metageneration_not_match: metageneration
+
+    mock.verify
+  end
+
   it "can delete itself with user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_bucket, nil, [bucket_user_project.name, user_project: "test"]
+    mock.expect :delete_bucket, nil, delete_bucket_args(bucket_user_project.name, user_project: "test")
 
     bucket_user_project.service.mocked_service = mock
 

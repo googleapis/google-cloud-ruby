@@ -209,6 +209,18 @@ class MockStorage < Minitest::Spec
     Google::Apis::StorageV1::Policy.new etag: etag, version: version, bindings: bindings
   end
 
+  def delete_bucket_args bucket_name,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil,
+                         user_project: nil
+    opts = {
+      if_metageneration_match: if_metageneration_match,
+      if_metageneration_not_match: if_metageneration_not_match,
+      user_project: user_project
+    }
+    [bucket_name, opts]
+  end
+
   def insert_object_args bucket_name,
                       file_gapi,
                       name: nil,

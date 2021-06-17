@@ -123,9 +123,14 @@ module Google
 
         ##
         # Permanently deletes an empty bucket.
-        def delete_bucket bucket_name, user_project: nil
+        def delete_bucket bucket_name,
+                          if_metageneration_match: nil,
+                          if_metageneration_not_match: nil,
+                          user_project: nil
           execute do
             service.delete_bucket bucket_name,
+                                  if_metageneration_match: if_metageneration_match,
+                                  if_metageneration_not_match: if_metageneration_not_match,
                                   user_project: user_project(user_project)
           end
         end
