@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.9.0 / 2021-05-06
 
 #### Features
