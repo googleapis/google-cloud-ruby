@@ -8,5 +8,8 @@
     "product_documentation": "https://cloud.google.com/access-approval/",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
+    "ruby-cloud-description": "An API for controlling access to data by Google personnel. Note that google-cloud-access_approval-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-access_approval instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "ACCESS_APPROVAL",
+    "ruby-cloud-product-url": "https://cloud.google.com/access-approval/",
     "library_type": "GAPIC_AUTO"
 }
