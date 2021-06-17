@@ -162,14 +162,13 @@ end
 
 def determine_defaults
   gem_shortname = @base_gem_name.sub(/^google-cloud-/, "")
-  @api_name = gem_shortname.gsub(/[-_]/, "")
+  @api_name = gem_shortname.tr("-", "/").tr "_", ""
   @proto_path_base = "google/cloud/#{@api_name}"
-  @bazel_target_base = "google-cloud-#{@api_name}"
-  @api_shortname = @api_name.dup
-  @api_id = "#{@api_name}.googleapis.com"
+  @bazel_target_base = "google-cloud-#{@api_name.tr '/', '-'}"
+  @api_shortname = @api_name.tr "/", ""
+  @api_id = "#{@api_shortname}.googleapis.com"
   @service_display_name = gem_shortname.split("_").map(&:capitalize).join " "
   @env_prefix = gem_shortname.gsub("-", "_").upcase
-  @service_config_name = "#{@api_name}_grpc_service_config.json"
   @description = replace_me_text
   @product_url = replace_me_text
   @service_override = nil
@@ -220,10 +219,6 @@ def lookup_precedents_in_synth file_path, version
   if script =~ /"ruby-cloud-env-prefix":\s*"([A-Z0-9_]+)",\n/
     @env_prefix = Regexp.last_match 1
   end
-  if script =~ /"ruby-cloud-grpc-service-config":\s*"(.+)",\n/
-    path = Regexp.last_match 1
-    @service_config_name = File.basename path
-  end
   if script =~ /"ruby-cloud-product-url":\s*"(.+)",\n/
     @product_url = Regexp.last_match 1
   end
@@ -271,15 +266,9 @@ def lookup_precedents_in_repo_metadata file_path
 end
 
 def fill_type_specific_fields
-  case @gen_type
-  when "gapic"
-    @title_version = @api_version.capitalize
-    @service_config_path = "/#{@proto_path_base}/#{@api_version}/#{@service_config_name}"
-  when "wrapper"
+  if @gen_type == "wrapper"
     @api_version = @existing_versions.first
     @wrapper_expr = @existing_versions.map{ |ver| "#{ver}:0.0" }.join ";"
-  else
-    error "Unknown generation type"
   end
 end
 
