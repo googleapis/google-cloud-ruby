@@ -1,5 +1,19 @@
 # Release History
 
+### 0.7.0 / 2021-06-17
+
+#### Features
+
+* Support lookup_offer call
+  * Update descriptions of APIs.
+  * Add additional_bindings to HTTP annotations of Customer related APIs (list/create/get/update/delete).
+  * Add a new LookupOffer RPC and LookupOfferRequest proto.
+  * Add a new enum value LICENSE_CAP_CHANGED to enum EntitlementEvent.Type.
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.6.0 / 2021-04-26
 
 #### Features
