@@ -88,6 +88,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/vpnGateways"
                 body = request_pb.vpn_gateway_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -117,6 +118,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/vpnGateways/#{request_pb.resource}/setLabels"
                 body = request_pb.region_set_labels_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

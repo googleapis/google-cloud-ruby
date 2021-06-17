@@ -62,6 +62,11 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/instanceGroups/#{request_pb.instance_group}/listInstances"
                 body = request_pb.region_instance_groups_list_instances_request_resource.to_json
                 query_string_params = {}
+                query_string_params["filter"] = request_pb.filter.to_s if request_pb.has_filter?
+                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.has_max_results?
+                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.has_order_by?
+                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.has_page_token?
+                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.has_return_partial_success?
 
                 [uri, body, query_string_params]
               end
@@ -74,6 +79,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/instanceGroups/#{request_pb.instance_group}/setNamedPorts"
                 body = request_pb.region_instance_groups_set_named_ports_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

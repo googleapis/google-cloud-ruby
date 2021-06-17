@@ -33,6 +33,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/backendBuckets/#{request_pb.backend_bucket}/addSignedUrlKey"
                 body = request_pb.signed_url_key_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -84,6 +85,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/backendBuckets"
                 body = request_pb.backend_bucket_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -113,6 +115,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/backendBuckets/#{request_pb.backend_bucket}"
                 body = request_pb.backend_bucket_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -125,6 +128,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/backendBuckets/#{request_pb.backend_bucket}"
                 body = request_pb.backend_bucket_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

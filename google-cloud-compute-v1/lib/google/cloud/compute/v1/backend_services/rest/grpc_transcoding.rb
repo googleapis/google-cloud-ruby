@@ -33,6 +33,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/backendServices/#{request_pb.backend_service}/addSignedUrlKey"
                 body = request_pb.signed_url_key_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -114,6 +115,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/backendServices"
                 body = request_pb.backend_service_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -143,6 +145,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/backendServices/#{request_pb.backend_service}"
                 body = request_pb.backend_service_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -155,6 +158,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/backendServices/#{request_pb.backend_service}/setSecurityPolicy"
                 body = request_pb.security_policy_reference_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -167,6 +171,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/backendServices/#{request_pb.backend_service}"
                 body = request_pb.backend_service_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

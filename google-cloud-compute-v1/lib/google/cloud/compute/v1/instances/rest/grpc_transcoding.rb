@@ -33,6 +33,8 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/addAccessConfig"
                 body = request_pb.access_config_resource.to_json
                 query_string_params = {}
+                query_string_params["networkInterface"] = request_pb.network_interface.to_s
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -45,6 +47,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/addResourcePolicies"
                 body = request_pb.instances_add_resource_policies_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -75,18 +78,8 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/attachDisk"
                 body = request_pb.attached_disk_resource.to_json
                 query_string_params = {}
-
-                [uri, body, query_string_params]
-              end
-
-              # @param request_pb [::Google::Cloud::Compute::V1::BulkInsertInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_bulk_insert request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/bulkInsert"
-                body = request_pb.bulk_insert_instance_resource_resource.to_json
-                query_string_params = {}
+                query_string_params["forceAttach"] = request_pb.force_attach.to_s if request_pb.has_force_attach?
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -141,19 +134,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}"
                 body = nil
                 query_string_params = {}
-
-                [uri, body, query_string_params]
-              end
-
-              # @param request_pb [::Google::Cloud::Compute::V1::GetEffectiveFirewallsInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_get_effective_firewalls request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/getEffectiveFirewalls"
-                body = nil
-                query_string_params = {}
-                query_string_params["networkInterface"] = request_pb.network_interface.to_s
 
                 [uri, body, query_string_params]
               end
@@ -231,6 +211,8 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances"
                 body = request_pb.instance_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
+                query_string_params["sourceInstanceTemplate"] = request_pb.source_instance_template.to_s if request_pb.has_source_instance_template?
 
                 [uri, body, query_string_params]
               end
@@ -277,6 +259,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/removeResourcePolicies"
                 body = request_pb.instances_remove_resource_policies_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -343,6 +326,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setLabels"
                 body = request_pb.instances_set_labels_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -355,6 +339,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setMachineResources"
                 body = request_pb.instances_set_machine_resources_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -367,6 +352,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setMachineType"
                 body = request_pb.instances_set_machine_type_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -379,6 +365,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setMetadata"
                 body = request_pb.metadata_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -391,6 +378,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setMinCpuPlatform"
                 body = request_pb.instances_set_min_cpu_platform_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -403,6 +391,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setScheduling"
                 body = request_pb.scheduling_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -415,6 +404,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setServiceAccount"
                 body = request_pb.instances_set_service_account_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -427,6 +417,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setShieldedInstanceIntegrityPolicy"
                 body = request_pb.shielded_instance_integrity_policy_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -439,6 +430,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setTags"
                 body = request_pb.tags_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -476,6 +468,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/startWithEncryptionKey"
                 body = request_pb.instances_start_with_encryption_key_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -513,6 +506,9 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}"
                 body = request_pb.instance_resource.to_json
                 query_string_params = {}
+                query_string_params["minimalAction"] = request_pb.minimal_action.to_s if request_pb.has_minimal_action?
+                query_string_params["mostDisruptiveAllowedAction"] = request_pb.most_disruptive_allowed_action.to_s if request_pb.has_most_disruptive_allowed_action?
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -525,6 +521,8 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/updateAccessConfig"
                 body = request_pb.access_config_resource.to_json
                 query_string_params = {}
+                query_string_params["networkInterface"] = request_pb.network_interface.to_s
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -537,6 +535,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/updateDisplayDevice"
                 body = request_pb.display_device_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -549,6 +548,8 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/updateNetworkInterface"
                 body = request_pb.network_interface_resource.to_json
                 query_string_params = {}
+                query_string_params["networkInterface"] = request_pb.network_interface.to_s
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -561,6 +562,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/updateShieldedInstanceConfig"
                 body = request_pb.shielded_instance_config_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

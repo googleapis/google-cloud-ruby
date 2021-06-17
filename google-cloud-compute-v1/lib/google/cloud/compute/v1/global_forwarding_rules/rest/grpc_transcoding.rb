@@ -58,6 +58,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/forwardingRules"
                 body = request_pb.forwarding_rule_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -87,18 +88,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/forwardingRules/#{request_pb.forwarding_rule}"
                 body = request_pb.forwarding_rule_resource.to_json
                 query_string_params = {}
-
-                [uri, body, query_string_params]
-              end
-
-              # @param request_pb [::Google::Cloud::Compute::V1::SetLabelsGlobalForwardingRuleRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_labels request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/global/forwardingRules/#{request_pb.resource}/setLabels"
-                body = request_pb.global_set_labels_request_resource.to_json
-                query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -111,6 +101,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/forwardingRules/#{request_pb.forwarding_rule}/setTarget"
                 body = request_pb.target_reference_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

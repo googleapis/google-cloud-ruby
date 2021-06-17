@@ -178,7 +178,7 @@ module Google
               #   @param project [::String]
               #     Name of the project scoping this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
               # @yield [result, env] Access the result along with the Faraday environment object
               # @yieldparam result [::Google::Cloud::Compute::V1::TargetHttpsProxyAggregatedList]
               # @yieldparam response [::Faraday::Response]
@@ -200,7 +200,8 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
@@ -271,7 +272,8 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
@@ -336,7 +338,8 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
@@ -406,15 +409,17 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_insert request
+                uri, body, query_string_params = transcode_insert request
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
@@ -467,7 +472,7 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
               # @yield [result, env] Access the result along with the Faraday environment object
               # @yieldparam result [::Google::Cloud::Compute::V1::TargetHttpsProxyList]
               # @yieldparam response [::Faraday::Response]
@@ -489,7 +494,8 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
@@ -501,79 +507,6 @@ module Google
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::TargetHttpsProxyList.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
-              end
-
-              ##
-              # Patches the specified TargetHttpsProxy resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules. (== suppress_warning http-rest-shadowed ==)
-              #
-              # @overload patch(request, options = nil)
-              #   Pass arguments to `patch` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::PatchTargetHttpsProxyRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::PatchTargetHttpsProxyRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
-              #
-              # @overload patch(project: nil, request_id: nil, target_https_proxy: nil, target_https_proxy_resource: nil)
-              #   Pass arguments to `patch` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-              #   @param target_https_proxy [::String]
-              #     Name of the TargetHttpsProxy resource to patch.
-              #   @param target_https_proxy_resource [::Google::Cloud::Compute::V1::TargetHttpsProxy, ::Hash]
-              #     The body resource for this request
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              def patch request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::PatchTargetHttpsProxyRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = {}
-
-                # Set x-goog-api-client header
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     call_metadata
-
-                uri, body, _query_string_params = transcode_patch request
-                response = @client_stub.make_patch_request(
-                  uri:     uri,
-                  body:    body,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, response if block_given?
                 result
@@ -635,15 +568,17 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_set_quic_override request
+                uri, body, query_string_params = transcode_set_quic_override request
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
@@ -708,15 +643,17 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_set_ssl_certificates request
+                uri, body, query_string_params = transcode_set_ssl_certificates request
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
@@ -781,15 +718,17 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_set_ssl_policy request
+                uri, body, query_string_params = transcode_set_ssl_policy request
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
@@ -854,15 +793,17 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_set_url_map request
+                uri, body, query_string_params = transcode_set_url_map request
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true

@@ -194,15 +194,17 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_abandon_instances request
+                uri, body, query_string_params = transcode_abandon_instances request
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
@@ -263,7 +265,8 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
@@ -338,15 +341,17 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_create_instances request
+                uri, body, query_string_params = transcode_create_instances request
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
@@ -411,7 +416,8 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
@@ -490,15 +496,17 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_delete_instances request
+                uri, body, query_string_params = transcode_delete_instances request
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
@@ -559,7 +567,8 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
@@ -626,7 +635,8 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
@@ -700,15 +710,17 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_insert request
+                uri, body, query_string_params = transcode_insert request
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
@@ -763,7 +775,7 @@ module Google
               #   @param region [::String]
               #     Name of the region scoping this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
               # @yield [result, env] Access the result along with the Faraday environment object
               # @yieldparam result [::Google::Cloud::Compute::V1::RegionInstanceGroupManagerList]
               # @yieldparam response [::Faraday::Response]
@@ -785,7 +797,8 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
@@ -850,7 +863,7 @@ module Google
               #   @param region [::String]
               #     Name of the region scoping this request. This should conform to RFC1035.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
               # @yield [result, env] Access the result along with the Faraday environment object
               # @yieldparam result [::Google::Cloud::Compute::V1::RegionInstanceGroupManagersListErrorsResponse]
               # @yieldparam response [::Faraday::Response]
@@ -872,7 +885,8 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
@@ -937,7 +951,7 @@ module Google
               #   @param region [::String]
               #     Name of the region scoping this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
               # @yield [result, env] Access the result along with the Faraday environment object
               # @yieldparam result [::Google::Cloud::Compute::V1::RegionInstanceGroupManagersListInstancesResponse]
               # @yieldparam response [::Faraday::Response]
@@ -959,7 +973,8 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
@@ -1024,7 +1039,7 @@ module Google
               #   @param region [::String]
               #     Name of the region scoping this request, should conform to RFC1035.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
               # @yield [result, env] Access the result along with the Faraday environment object
               # @yieldparam result [::Google::Cloud::Compute::V1::RegionInstanceGroupManagersListInstanceConfigsResp]
               # @yieldparam response [::Faraday::Response]
@@ -1046,7 +1061,8 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
@@ -1121,15 +1137,17 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_patch request
+                uri, body, query_string_params = transcode_patch request
                 response = @client_stub.make_patch_request(
                   uri:     uri,
                   body:    body,
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
@@ -1196,15 +1214,17 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_patch_per_instance_configs request
+                uri, body, query_string_params = transcode_patch_per_instance_configs request
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
@@ -1217,7 +1237,7 @@ module Google
               end
 
               ##
-              # Flags the specified VM instances in the managed instance group to be immediately recreated. Each instance is recreated using the group's current configuration. This operation is marked as DONE when the flag is set even if the instances have not yet been recreated. You must separately verify the status of each instance by checking its currentAction field; for more information, see Checking the status of managed instances.
+              # Flags the specified instances in the managed instance group to be immediately recreated. The instances are deleted and recreated using the current instance template for the managed instance group. This operation is marked as DONE when the flag is set even if the instances have not yet been recreated. You must separately verify the status of the recreating action with the listmanagedinstances method.
               #
               # If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
               #
@@ -1275,15 +1295,17 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_recreate_instances request
+                uri, body, query_string_params = transcode_recreate_instances request
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
@@ -1354,7 +1376,8 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
@@ -1429,15 +1452,17 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_set_instance_template request
+                uri, body, query_string_params = transcode_set_instance_template request
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
@@ -1504,15 +1529,17 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_set_target_pools request
+                uri, body, query_string_params = transcode_set_target_pools request
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
@@ -1579,15 +1606,17 @@ module Google
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
 
-                uri, body, _query_string_params = transcode_update_per_instance_configs request
+                uri, body, query_string_params = transcode_update_per_instance_configs request
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true

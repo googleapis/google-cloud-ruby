@@ -33,6 +33,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/disks/#{request_pb.disk}/addResourcePolicies"
                 body = request_pb.disks_add_resource_policies_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -63,6 +64,8 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/disks/#{request_pb.disk}/createSnapshot"
                 body = request_pb.snapshot_resource.to_json
                 query_string_params = {}
+                query_string_params["guestFlush"] = request_pb.guest_flush.to_s if request_pb.has_guest_flush?
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -113,6 +116,8 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/disks"
                 body = request_pb.disk_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
+                query_string_params["sourceImage"] = request_pb.source_image.to_s if request_pb.has_source_image?
 
                 [uri, body, query_string_params]
               end
@@ -142,6 +147,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/disks/#{request_pb.disk}/removeResourcePolicies"
                 body = request_pb.disks_remove_resource_policies_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -154,6 +160,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/disks/#{request_pb.disk}/resize"
                 body = request_pb.disks_resize_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -178,6 +185,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/disks/#{request_pb.resource}/setLabels"
                 body = request_pb.zone_set_labels_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
