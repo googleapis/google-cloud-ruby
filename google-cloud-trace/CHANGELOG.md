@@ -1,5 +1,11 @@
 # Release History
 
+### 0.41.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Fixed Ruby 3 keyword argument error in GRPC::ActiveCallWithTrace patch
+
 ### 0.41.0 / 2021-03-11
 
 #### Features
