@@ -33,6 +33,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/networks/#{request_pb.network}/addPeering"
                 body = request_pb.networks_add_peering_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -70,6 +71,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/networks"
                 body = request_pb.network_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -119,6 +121,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/networks/#{request_pb.network}"
                 body = request_pb.network_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -131,6 +134,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/networks/#{request_pb.network}/removePeering"
                 body = request_pb.networks_remove_peering_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -156,6 +160,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/networks/#{request_pb.network}/updatePeering"
                 body = request_pb.networks_update_peering_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

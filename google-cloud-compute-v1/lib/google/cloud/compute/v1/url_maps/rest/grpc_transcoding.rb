@@ -76,6 +76,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/urlMaps"
                 body = request_pb.url_map_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -88,6 +89,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/urlMaps/#{request_pb.url_map}/invalidateCache"
                 body = request_pb.cache_invalidation_rule_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -117,6 +119,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/urlMaps/#{request_pb.url_map}"
                 body = request_pb.url_map_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -129,6 +132,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/urlMaps/#{request_pb.url_map}"
                 body = request_pb.url_map_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

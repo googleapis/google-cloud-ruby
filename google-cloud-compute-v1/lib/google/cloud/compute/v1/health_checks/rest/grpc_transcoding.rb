@@ -76,6 +76,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/healthChecks"
                 body = request_pb.health_check_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -105,6 +106,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/healthChecks/#{request_pb.health_check}"
                 body = request_pb.health_check_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -117,6 +119,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/healthChecks/#{request_pb.health_check}"
                 body = request_pb.health_check_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
