@@ -1,5 +1,15 @@
 # Release History
 
+### 0.5.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
+#### Documentation
+
+* Fix a typo in the Queue#state documentation
+
 ### 0.5.0 / 2021-03-08
 
 #### Features
