@@ -1,0 +1,43 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.eventarc.v1",
+  "libraryPackage": "::Google::Cloud::Eventarc::V1",
+  "services": {
+    "Eventarc": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Eventarc::V1::Eventarc::Client",
+          "rpcs": {
+            "GetTrigger": {
+              "methods": [
+                "get_trigger"
+              ]
+            },
+            "ListTriggers": {
+              "methods": [
+                "list_triggers"
+              ]
+            },
+            "CreateTrigger": {
+              "methods": [
+                "create_trigger"
+              ]
+            },
+            "UpdateTrigger": {
+              "methods": [
+                "update_trigger"
+              ]
+            },
+            "DeleteTrigger": {
+              "methods": [
+                "delete_trigger"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
