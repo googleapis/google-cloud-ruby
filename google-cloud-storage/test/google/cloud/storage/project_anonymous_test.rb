@@ -83,8 +83,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name, {user_project: nil}]
-    mock.expect :get_object, find_file_gapi(bucket_name, file_name),
-      [bucket_name, file_name, generation: nil, user_project: nil, options: {}]
+    mock.expect :get_object, find_file_gapi(bucket_name, file_name), get_object_args(bucket_name, file_name)
 
     anonymous_storage.service.mocked_service = mock
 
@@ -106,8 +105,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name, {user_project: nil}]
-      mock.expect :get_object, find_file_gapi(bucket_name, file_name),
-        [bucket_name, file_name, generation: nil, user_project: nil, options: {}]
+      mock.expect :get_object, find_file_gapi(bucket_name, file_name), get_object_args(bucket_name, file_name)
       mock.expect :get_object_with_response, [tmpfile, download_http_resp],
         [bucket_name, file_name, download_dest: tmpfile, generation: 1234567890, user_project: nil, options: {}]
 

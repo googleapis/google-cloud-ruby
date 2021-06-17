@@ -208,4 +208,173 @@ class MockStorage < Minitest::Spec
   def policy_gapi etag: "CAE=", version: 1, bindings: []
     Google::Apis::StorageV1::Policy.new etag: etag, version: version, bindings: bindings
   end
+
+  def insert_object_args bucket_name,
+                      file_gapi,
+                      name: nil,
+                      predefined_acl: nil,
+                      upload_source: nil,
+                      content_encoding: nil,
+                      content_type: "text/plain",
+                      kms_key_name: nil,
+                      if_generation_match: nil,
+                      if_generation_not_match: nil,
+                      if_metageneration_match: nil,
+                      if_metageneration_not_match: nil,
+                      user_project: nil,
+                      options: {}
+    opts = {
+      name: name,
+      predefined_acl: predefined_acl,
+      upload_source: upload_source,
+      content_encoding: content_encoding,
+      content_type: content_type,
+      kms_key_name: kms_key_name,
+      if_generation_match: if_generation_match,
+      if_generation_not_match: if_generation_not_match,
+      if_metageneration_match: if_metageneration_match,
+      if_metageneration_not_match: if_metageneration_not_match,
+      user_project: user_project,
+      options: options
+    }
+    [bucket_name, file_gapi, opts]
+  end
+
+  def get_object_args bucket_name,
+                      file_name,
+                      generation: nil,
+                      if_generation_match: nil,
+                      if_generation_not_match: nil,
+                      if_metageneration_match: nil,
+                      if_metageneration_not_match: nil,
+                      user_project: nil,
+                      options: {}
+    opts = {
+      generation: generation,
+      if_generation_match: if_generation_match,
+      if_generation_not_match: if_generation_not_match,
+      if_metageneration_match: if_metageneration_match,
+      if_metageneration_not_match: if_metageneration_not_match,
+      user_project: user_project,
+      options: options
+    }
+    [bucket_name, file_name, opts]
+  end
+
+  def patch_object_args bucket_name,
+                        file_name,
+                        file_gapi = nil,
+                        generation: nil,
+                        if_generation_match: nil,
+                        if_generation_not_match: nil,
+                        if_metageneration_match: nil,
+                        if_metageneration_not_match: nil,
+                        predefined_acl: nil,
+                        user_project: nil
+    file_gapi ||= Google::Apis::StorageV1::Object.new(acl: [])
+    opts = {
+      generation: generation,
+      if_generation_match: if_generation_match,
+      if_generation_not_match: if_generation_not_match,
+      if_metageneration_match: if_metageneration_match,
+      if_metageneration_not_match: if_metageneration_not_match,
+      predefined_acl: predefined_acl,
+      user_project: user_project
+    }
+    [bucket_name, file_name, file_gapi, opts]
+  end
+
+  def delete_object_args bucket_name,
+                         file_name,
+                         generation: nil,
+                         if_generation_match: nil,
+                         if_generation_not_match: nil,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil,
+                         user_project: nil
+    opts = {
+      generation: generation,
+      if_generation_match: if_generation_match,
+      if_generation_not_match: if_generation_not_match,
+      if_metageneration_match: if_metageneration_match,
+      if_metageneration_not_match: if_metageneration_not_match,
+      user_project: user_project
+    }
+    [bucket_name, file_name, opts]
+  end
+
+  def rewrite_object_args source_bucket,
+                          source_object,
+                          destination_bucket,
+                          destination_object,
+                          object_object = nil,
+                          destination_kms_key_name: nil,
+                          destination_predefined_acl: nil,
+                          if_generation_match: nil,
+                          if_generation_not_match: nil,
+                          if_metageneration_match: nil,
+                          if_metageneration_not_match: nil,
+                          if_source_generation_match: nil,
+                          if_source_generation_not_match: nil,
+                          if_source_metageneration_match: nil,
+                          if_source_metageneration_not_match: nil,
+                          source_generation: nil,
+                          rewrite_token: nil,
+                          user_project: nil,
+                          options: {}
+    opts = {
+      destination_kms_key_name: destination_kms_key_name,
+      destination_predefined_acl: destination_predefined_acl,
+      if_generation_match: if_generation_match,
+      if_generation_not_match: if_generation_not_match,
+      if_metageneration_match: if_metageneration_match,
+      if_metageneration_not_match: if_metageneration_not_match,
+      if_source_generation_match: if_source_generation_match,
+      if_source_generation_not_match: if_source_generation_not_match,
+      if_source_metageneration_match: if_source_metageneration_match,
+      if_source_metageneration_not_match: if_source_metageneration_not_match,
+      source_generation: source_generation,
+      rewrite_token: rewrite_token,
+      user_project: user_project,
+      options: options
+    }
+    [source_bucket, source_object, destination_bucket, destination_object, object_object, opts]
+  end
+
+  def compose_object_args bucket_name,
+                          file_name,
+                          source_files,
+                          destination_gapi = nil,
+                          destination_predefined_acl: nil,
+                          if_generation_match: nil,
+                          if_metageneration_match: nil,
+                          user_project: nil,
+                          options: {}
+    req = compose_request source_files, destination_gapi
+    opts = {
+      destination_predefined_acl: destination_predefined_acl,
+      if_generation_match: if_generation_match,
+      if_metageneration_match: if_metageneration_match,
+      user_project: user_project,
+      options: options
+    }
+    [bucket_name, file_name, req, opts]
+  end
+
+  def compose_request source_files, destination_gapi
+    source_objects = source_files.map do |file|
+      if file.is_a? String
+        Google::Apis::StorageV1::ComposeRequest::SourceObject.new \
+          name: file
+      else
+        Google::Apis::StorageV1::ComposeRequest::SourceObject.new \
+          name: file.name,
+          generation: file.generation
+      end
+    end
+    Google::Apis::StorageV1::ComposeRequest.new(
+      destination: destination_gapi,
+      source_objects: source_objects
+    )
+  end
 end

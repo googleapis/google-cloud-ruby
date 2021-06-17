@@ -1040,6 +1040,19 @@ module Google
         # @param [String] path Name (path) of the file.
         # @param [Integer] generation When present, selects a specific revision
         #   of this object. Default is the latest version.
+        # @param [Integer] if_generation_match Makes the operation conditional
+        #   on whether the file's current generation matches the given value.
+        #   Setting to 0 makes the operation succeed only if there are no live
+        #   versions of the file.
+        # @param [Integer] if_generation_not_match Makes the operation conditional
+        #   on whether the file's current generation does not match the given
+        #   value. If no live file exists, the precondition fails. Setting to 0
+        #   makes the operation succeed only if there is a live version of the file.
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the file's current metageneration matches the given value.
+        # @param [Integer] if_metageneration_not_match Makes the operation
+        #   conditional on whether the file's current metageneration does not
+        #   match the given value.
         # @param [Boolean] skip_lookup Optionally create a Bucket object
         #   without verifying the bucket resource exists on the Storage service.
         #   Calls made on this object will raise errors if the bucket resource
@@ -1061,7 +1074,14 @@ module Google
         #   file = bucket.file "path/to/my-file.ext"
         #   puts file.name
         #
-        def file path, generation: nil, skip_lookup: nil, encryption_key: nil
+        def file path,
+                 generation: nil,
+                 if_generation_match: nil,
+                 if_generation_not_match: nil,
+                 if_metageneration_match: nil,
+                 if_metageneration_not_match: nil,
+                 skip_lookup: nil,
+                 encryption_key: nil
           ensure_service!
           if skip_lookup
             return File.new_lazy name, path, service,
@@ -1069,6 +1089,10 @@ module Google
                                  user_project: user_project
           end
           gapi = service.get_file name, path, generation: generation,
+                                              if_generation_match: if_generation_match,
+                                              if_generation_not_match: if_generation_not_match,
+                                              if_metageneration_match: if_metageneration_match,
+                                              if_metageneration_not_match: if_metageneration_not_match,
                                               key: encryption_key,
                                               user_project: user_project
           File.from_gapi gapi, service, user_project: user_project
@@ -1179,6 +1203,19 @@ module Google
         #   the same location as the bucket.The Service Account associated with
         #   your project requires access to this encryption key. Do not provide
         #   if `encryption_key` is used.
+        # @param [Integer] if_generation_match Makes the operation conditional
+        #   on whether the file's current generation matches the given value.
+        #   Setting to 0 makes the operation succeed only if there are no live
+        #   versions of the file.
+        # @param [Integer] if_generation_not_match Makes the operation conditional
+        #   on whether the file's current generation does not match the given
+        #   value. If no live file exists, the precondition fails. Setting to 0
+        #   makes the operation succeed only if there is a live version of the file.
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the file's current metageneration matches the given value.
+        # @param [Integer] if_metageneration_not_match Makes the operation
+        #   conditional on whether the file's current metageneration does not
+        #   match the given value.
         #
         # @return [Google::Cloud::Storage::File]
         #
@@ -1262,12 +1299,27 @@ module Google
         #   file.download "path/to/downloaded/gzipped.txt",
         #                 skip_decompress: true
         #
-        def create_file file, path = nil, acl: nil, cache_control: nil,
-                        content_disposition: nil, content_encoding: nil,
-                        content_language: nil, content_type: nil, custom_time: nil,
-                        crc32c: nil, md5: nil, metadata: nil,
-                        storage_class: nil, encryption_key: nil, kms_key: nil,
-                        temporary_hold: nil, event_based_hold: nil
+        def create_file file,
+                        path = nil,
+                        acl: nil,
+                        cache_control: nil,
+                        content_disposition: nil,
+                        content_encoding: nil,
+                        content_language: nil,
+                        content_type: nil,
+                        custom_time: nil,
+                        crc32c: nil,
+                        md5: nil,
+                        metadata: nil,
+                        storage_class: nil,
+                        encryption_key: nil,
+                        kms_key: nil,
+                        temporary_hold: nil,
+                        event_based_hold: nil,
+                        if_generation_match: nil,
+                        if_generation_not_match: nil,
+                        if_metageneration_match: nil,
+                        if_metageneration_not_match: nil
           ensure_service!
           ensure_io_or_file_exists! file
           path ||= file.path if file.respond_to? :path
@@ -1275,22 +1327,29 @@ module Google
           raise ArgumentError, "must provide path" if path.nil?
 
 
-          gapi = service.insert_file name, file, path, acl: File::Acl.predefined_rule_for(acl),
-                                                       md5: md5,
-                                                       cache_control: cache_control,
-                                                       content_type: content_type,
-                                                       custom_time: custom_time,
-                                                       content_disposition: content_disposition,
-                                                       crc32c: crc32c,
-                                                       content_encoding: content_encoding,
-                                                       metadata: metadata,
-                                                       content_language: content_language,
-                                                       key: encryption_key,
-                                                       kms_key: kms_key,
-                                                       storage_class: storage_class_for(storage_class),
-                                                       temporary_hold: temporary_hold,
-                                                       event_based_hold: event_based_hold,
-                                                       user_project: user_project
+          gapi = service.insert_file name,
+                                     file,
+                                     path,
+                                     acl: File::Acl.predefined_rule_for(acl),
+                                     md5: md5,
+                                     cache_control: cache_control,
+                                     content_type: content_type,
+                                     custom_time: custom_time,
+                                     content_disposition: content_disposition,
+                                     crc32c: crc32c,
+                                     content_encoding: content_encoding,
+                                     metadata: metadata,
+                                     content_language: content_language,
+                                     key: encryption_key,
+                                     kms_key: kms_key,
+                                     storage_class: storage_class_for(storage_class),
+                                     temporary_hold: temporary_hold,
+                                     event_based_hold: event_based_hold,
+                                     if_generation_match: if_generation_match,
+                                     if_generation_not_match: if_generation_not_match,
+                                     if_metageneration_match: if_metageneration_match,
+                                     if_metageneration_not_match: if_metageneration_not_match,
+                                     user_project: user_project
           File.from_gapi gapi, service, user_project: user_project
         end
         alias upload_file create_file
@@ -1334,6 +1393,12 @@ module Google
         #   used. All source files must have been encrypted with the same key,
         #   and the resulting destination file will also be encrypted with the
         #   key.
+        # @param [Integer] if_generation_match Makes the operation conditional
+        #   on whether the file's current generation matches the given value.
+        #   Setting to 0 makes the operation succeed only if there are no live
+        #   versions of the file.
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the file's current metageneration matches the given value.
         #
         # @yield [file] A block yielding a delegate file object for setting the
         #   properties of the destination file.
@@ -1382,7 +1447,12 @@ module Google
         #
         #   new_file = bucket.compose [file_1, file_2], "path/to/new-file.ext"
         #
-        def compose sources, destination, acl: nil, encryption_key: nil
+        def compose sources,
+                    destination,
+                    acl: nil,
+                    encryption_key: nil,
+                    if_generation_match: nil,
+                    if_metageneration_match: nil
           ensure_service!
           sources = Array sources
           if sources.size < 2
@@ -1398,9 +1468,15 @@ module Google
           end
 
           acl_rule = File::Acl.predefined_rule_for acl
-          gapi = service.compose_file name, sources, destination, destination_gapi, acl: acl_rule,
-                                                                                    key: encryption_key,
-                                                                                    user_project: user_project
+          gapi = service.compose_file name,
+                                      sources,
+                                      destination,
+                                      destination_gapi,
+                                      acl: acl_rule,
+                                      key: encryption_key,
+                                      if_generation_match: if_generation_match,
+                                      if_metageneration_match: if_metageneration_match,
+                                      user_project: user_project
           File.from_gapi gapi, service, user_project: user_project
         end
         alias compose_file compose

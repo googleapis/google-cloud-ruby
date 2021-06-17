@@ -25,6 +25,12 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   let(:file_name) { "file.ext" }
   let(:file) { Google::Cloud::Storage::File.new_lazy bucket_name, file_name, storage.service }
   let(:file_user_project) { Google::Cloud::Storage::File.new_lazy bucket_name, file_name, storage.service, user_project: true }
+  let(:generation) { 1234567890 }
+  let(:generations) { [1234567894, 1234567893, 1234567892, 1234567891] }
+  let(:file_gapis) do
+    generations.map { |g| Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket.name, file.name, g).to_json) }
+  end
+  let(:metageneration) { 6 }
 
   let(:rewrite_response) do
     rewrite_resource = Google::Apis::StorageV1::Object.from_json random_file_hash(bucket_name, file_name).to_json
@@ -88,7 +94,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket_name, file_name, { generation: nil, user_project: nil }]
+    mock.expect :delete_object, nil, delete_object_args(bucket.name, file.name)
 
     file.service.mocked_service = mock
 
@@ -99,7 +105,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
   it "can delete itself with generation set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket_name, file_name, { generation: nil, user_project: nil }]
+    mock.expect :delete_object, nil, delete_object_args(bucket.name, file.name)
 
     file.service.mocked_service = mock
 
@@ -111,12 +117,12 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
   it "can delete itself when having a generation and with generation set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket_name, file_name, { generation: 1234567892, user_project: nil }]
+    mock.expect :delete_object, nil, delete_object_args(bucket.name, file.name, generation: generation)
 
     file.service.mocked_service = mock
 
-    file.gapi.generation = 1234567892
-    _(file.generation).must_equal 1234567892
+    file.gapi.generation = generation
+    _(file.generation).must_equal generation
     file.delete generation: true
 
     mock.verify
@@ -124,18 +130,18 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
   it "can delete itself with generation set to a generation" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket_name, file_name, { generation: 1234567894, user_project: nil }]
+    mock.expect :delete_object, nil, delete_object_args(bucket.name, file.name, generation: generation)
 
     file.service.mocked_service = mock
 
-    file.delete generation: 1234567894
+    file.delete generation: generation
 
     mock.verify
   end
 
   it "can delete itself with user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket.name, file_user_project.name, { generation: nil, user_project: "test" }]
+    mock.expect :delete_object, nil, delete_object_args(bucket.name, file_user_project.name, user_project: "test")
 
     file_user_project.service.mocked_service = mock
 
@@ -146,7 +152,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
   it "can delete itself with generation set to true and user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket_name, file_name, { generation: nil, user_project: "test" }]
+    mock.expect :delete_object, nil, delete_object_args(bucket.name, file_user_project.name, user_project: "test")
 
     file_user_project.service.mocked_service = mock
 
@@ -158,12 +164,12 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
   it "can delete itself when having a generation and with generation set to true and user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket_name, file_name, { generation: 1234567893, user_project: "test" }]
+    mock.expect :delete_object, nil, delete_object_args(bucket.name, file_user_project.name, generation: generation, user_project: "test")
 
     file_user_project.service.mocked_service = mock
 
-    file_user_project.gapi.generation = 1234567893
-    _(file_user_project.generation).must_equal 1234567893
+    file_user_project.gapi.generation = generation
+    _(file_user_project.generation).must_equal generation
     file_user_project.delete generation: true
 
     mock.verify
@@ -171,11 +177,11 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
   it "can delete itself with generation set to a generation and user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket_name, file_name, { generation: 1234567894, user_project: "test" }]
+    mock.expect :delete_object, nil, delete_object_args(bucket.name, file_user_project.name, generation: generation, user_project: "test")
 
     file_user_project.service.mocked_service = mock
 
-    file_user_project.delete generation: 1234567894
+    file_user_project.delete generation: generation
 
     mock.verify
   end
@@ -481,7 +487,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   it "can copy itself in the same bucket" do
     mock = Minitest::Mock.new
     mock.expect :rewrite_object, rewrite_response,
-      [bucket_name, file_name, bucket_name, "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+      rewrite_object_args(bucket.name, file.name, bucket.name, "new-file.ext")
 
     file.service.mocked_service = mock
 
@@ -493,7 +499,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   it "can copy itself in the same bucket with generation" do
     mock = Minitest::Mock.new
     mock.expect :rewrite_object, rewrite_response,
-      [bucket_name, file_name, bucket_name, "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: 123, rewrite_token: nil, user_project: nil, options: {}]
+      rewrite_object_args(bucket.name, file.name, bucket.name, "new-file.ext", source_generation: 123)
 
     file.service.mocked_service = mock
 
@@ -505,7 +511,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   it "can copy itself in the same bucket with predefined ACL" do
     mock = Minitest::Mock.new
     mock.expect :rewrite_object, rewrite_response,
-      [bucket_name, file_name, bucket_name, "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: "private", source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+      rewrite_object_args(bucket.name, file.name, bucket.name, "new-file.ext", destination_predefined_acl: "private")
 
     file.service.mocked_service = mock
 
@@ -517,7 +523,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   it "can copy itself in the same bucket with ACL alias" do
     mock = Minitest::Mock.new
     mock.expect :rewrite_object, rewrite_response,
-      [bucket_name, file_name, bucket_name, "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: "publicRead", source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+      rewrite_object_args(bucket.name, file.name, bucket.name, "new-file.ext", destination_predefined_acl: "publicRead")
 
     file.service.mocked_service = mock
 
@@ -529,7 +535,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   it "can copy itself with customer-supplied encryption key" do
     mock = Minitest::Mock.new
     mock.expect :rewrite_object, rewrite_response,
-      [bucket_name, file_name, bucket_name, "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: copy_key_options]
+      rewrite_object_args(bucket.name, file.name, bucket.name, "new-file.ext", rewrite_token: nil, user_project: nil, options: copy_key_options)
 
     file.service.mocked_service = mock
 
@@ -541,7 +547,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   it "can copy itself with user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :rewrite_object, rewrite_response,
-      [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
+      rewrite_object_args(bucket.name, file_user_project.name, bucket.name, "new-file.ext", rewrite_token: nil, user_project: "test")
 
     file_user_project.service.mocked_service = mock
 
@@ -554,7 +560,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   it "can copy itself to a different bucket" do
     mock = Minitest::Mock.new
     mock.expect :rewrite_object, rewrite_response,
-      [bucket_name, file_name, "new-bucket", "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+      rewrite_object_args(bucket.name, file.name, "new-bucket", "new-file.ext")
 
     file.service.mocked_service = mock
 
@@ -566,7 +572,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   it "can copy itself to a different bucket with generation" do
     mock = Minitest::Mock.new
     mock.expect :rewrite_object, rewrite_response,
-      [bucket_name, file_name, "new-bucket", "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: 123, rewrite_token: nil, user_project: nil, options: {}]
+      rewrite_object_args(bucket.name, file.name, "new-bucket", "new-file.ext", source_generation: 123)
 
     file.service.mocked_service = mock
 
@@ -578,7 +584,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   it "can copy itself to a different bucket with predefined ACL" do
     mock = Minitest::Mock.new
     mock.expect :rewrite_object, rewrite_response,
-      [bucket_name, file_name, "new-bucket", "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: "private", source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+      rewrite_object_args(bucket.name, file.name, "new-bucket", "new-file.ext", destination_predefined_acl: "private")
 
     file.service.mocked_service = mock
 
@@ -590,7 +596,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   it "can copy itself to a different bucket with ACL alias" do
     mock = Minitest::Mock.new
     mock.expect :rewrite_object, rewrite_response,
-      [bucket_name, file_name, "new-bucket", "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: "publicRead", source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+      rewrite_object_args(bucket.name, file.name, "new-bucket", "new-file.ext", destination_predefined_acl: "publicRead")
 
     file.service.mocked_service = mock
 
@@ -602,7 +608,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   it "can copy itself to a different bucket with customer-supplied encryption key" do
     mock = Minitest::Mock.new
     mock.expect :rewrite_object, rewrite_response,
-      [bucket_name, file_name, "new-bucket", "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: copy_key_options]
+      rewrite_object_args(bucket.name, file.name, "new-bucket", "new-file.ext", rewrite_token: nil, user_project: nil, options: copy_key_options)
 
     file.service.mocked_service = mock
 
@@ -614,13 +620,13 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   it "can copy itself calling rewrite multiple times" do
     mock = Minitest::Mock.new
     mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
-      [bucket_name, file_name, bucket_name, "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+      rewrite_object_args(bucket.name, file.name, bucket.name, "new-file.ext")
     mock.expect :rewrite_object, undone_rewrite("keeptrying"),
-      [bucket_name, file_name, bucket_name, "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "notyetcomplete", user_project: nil, options: {}]
+      rewrite_object_args(bucket.name, file.name, bucket.name, "new-file.ext", rewrite_token: "notyetcomplete")
     mock.expect :rewrite_object, undone_rewrite("almostthere"),
-      [bucket_name, file_name, bucket_name, "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "keeptrying", user_project: nil, options: {}]
+      rewrite_object_args(bucket.name, file.name, bucket.name, "new-file.ext", rewrite_token: "keeptrying")
     mock.expect :rewrite_object, rewrite_response,
-      [bucket_name, file_name, bucket_name, "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "almostthere", user_project: nil, options: {}]
+      rewrite_object_args(bucket.name, file.name, bucket.name, "new-file.ext", rewrite_token: "almostthere")
 
     file.service.mocked_service = mock
 
@@ -636,13 +642,13 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   it "can copy itself calling rewrite multiple times with user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
-      [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
+      rewrite_object_args(bucket.name, file_user_project.name, bucket.name, "new-file.ext", rewrite_token: nil, user_project: "test")
     mock.expect :rewrite_object, undone_rewrite("keeptrying"),
-      [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "notyetcomplete", user_project: "test", options: {}]
+      rewrite_object_args(bucket.name, file_user_project.name, bucket.name, "new-file.ext", rewrite_token: "notyetcomplete", user_project: "test")
     mock.expect :rewrite_object, undone_rewrite("almostthere"),
-      [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "keeptrying", user_project: "test", options: {}]
+      rewrite_object_args(bucket.name, file_user_project.name, bucket.name, "new-file.ext", rewrite_token: "keeptrying", user_project: "test")
     mock.expect :rewrite_object, rewrite_response,
-      [bucket.name, file_user_project.name, bucket.name, "new-file.ext", nil, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: "almostthere", user_project: "test", options: {}]
+      rewrite_object_args(bucket.name, file_user_project.name, bucket.name, "new-file.ext", rewrite_token: "almostthere", user_project: "test")
 
     file_user_project.service.mocked_service = mock
 
@@ -668,7 +674,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     update_file_gapi.storage_class = "NEARLINE"
 
     mock.expect :rewrite_object, rewrite_response,
-                [bucket_name, file_name, bucket_name, "new-file.ext", update_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+      rewrite_object_args(bucket.name, file.name, bucket.name, "new-file.ext", update_file_gapi)
 
     file.service.mocked_service = mock
 
@@ -698,7 +704,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     update_file_gapi.storage_class = "NEARLINE"
 
     mock.expect :rewrite_object, rewrite_response,
-                [bucket_name, file_name, bucket_name, "new-file.ext", update_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
+      rewrite_object_args(bucket.name, file.name, bucket.name, "new-file.ext", update_file_gapi)
 
     file.service.mocked_service = mock
 
@@ -728,7 +734,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     update_file_gapi.storage_class = "NEARLINE"
 
     mock.expect :rewrite_object, rewrite_response,
-      [bucket.name, file_user_project.name, bucket.name, "new-file.ext", update_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
+      rewrite_object_args(bucket.name, file_user_project.name, bucket.name, "new-file.ext", update_file_gapi, rewrite_token: nil, user_project: "test")
 
     file_user_project.service.mocked_service = mock
 
@@ -751,9 +757,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     mock = Minitest::Mock.new
     options = { header: source_key_headers.merge(key_headers) }
     mock.expect :rewrite_object, rewrite_response,
-                [bucket_name, file_name, bucket_name, file_name, nil,
-                 destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil,
-                 rewrite_token: nil, user_project: nil, options: options ]
+      rewrite_object_args(bucket_name, file_name, bucket_name, file_name, options: options)
 
     file.service.mocked_service = mock
 
@@ -766,10 +770,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   it "can rotate its customer-supplied encryption keys with user_project set to true" do
     mock = Minitest::Mock.new
     options = { header: source_key_headers.merge(key_headers) }
-    mock.expect :rewrite_object, rewrite_response,
-                [bucket.name, file_user_project.name, bucket.name, file_user_project.name, nil,
-                 destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil,
-                 rewrite_token: nil, user_project: "test", options: options ]
+    mock.expect :rewrite_object, rewrite_response, rewrite_object_args(bucket.name, file_user_project.name, bucket.name, file_user_project.name, user_project: "test", options: options)
 
     file_user_project.service.mocked_service = mock
 
@@ -783,10 +784,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   it "can rotate to a customer-supplied encryption key if previously unencrypted with customer key" do
     mock = Minitest::Mock.new
     options = { header: key_headers }
-    mock.expect :rewrite_object, rewrite_response,
-                [bucket_name, file_name, bucket_name, file_name, nil,
-                 destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil,
-                 rewrite_token: nil, user_project: nil, options: options ]
+    mock.expect :rewrite_object, rewrite_response, rewrite_object_args(bucket_name, file_name, bucket_name, file_name, options: options)
 
     file.service.mocked_service = mock
 
@@ -799,10 +797,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   it "can rotate from a customer-supplied encryption key to default service encryption" do
     mock = Minitest::Mock.new
     options = { header: source_key_headers }
-    mock.expect :rewrite_object, rewrite_response,
-                [bucket_name, file_name, bucket_name, file_name, nil,
-                 destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil,
-                 rewrite_token: nil, user_project: nil, options: options ]
+    mock.expect :rewrite_object, rewrite_response, rewrite_object_args(bucket_name, file_name, bucket_name, file_name, options: options)
 
     file.service.mocked_service = mock
 
@@ -815,14 +810,8 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   it "can rotate its customer-supplied encryption keys with multiple requests for large objects" do
     mock = Minitest::Mock.new
     options = { header: source_key_headers.merge(key_headers) }
-    mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
-                [bucket_name, file_name, bucket_name, file_name, nil,
-                 destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil,
-                 rewrite_token: nil, user_project: nil, options: options ]
-    mock.expect :rewrite_object, rewrite_response,
-                [bucket_name, file_name, bucket_name, file_name, nil,
-                 destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil,
-                 rewrite_token: "notyetcomplete", user_project: nil, options: options ]
+    mock.expect :rewrite_object, undone_rewrite("notyetcomplete"), rewrite_object_args(bucket_name, file_name, bucket_name, file_name, options: options)
+    mock.expect :rewrite_object, rewrite_response, rewrite_object_args(bucket_name, file_name, bucket_name, file_name, rewrite_token: "notyetcomplete", options: options)
 
     file.service.mocked_service = mock
 
@@ -839,14 +828,8 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
   it "can rotate its customer-supplied encryption keys with multiple requests for large objects with user_project set to true" do
     mock = Minitest::Mock.new
     options = { header: source_key_headers.merge(key_headers) }
-    mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
-                [bucket.name, file_user_project.name, bucket.name, file_user_project.name, nil,
-                 destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil,
-                 rewrite_token: nil, user_project: "test", options: options ]
-    mock.expect :rewrite_object, rewrite_response,
-                [bucket.name, file_user_project.name, bucket.name, file_user_project.name, nil,
-                 destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil,
-                 rewrite_token: "notyetcomplete", user_project: "test", options: options ]
+    mock.expect :rewrite_object, undone_rewrite("notyetcomplete"), rewrite_object_args(bucket.name, file_user_project.name, bucket.name, file_user_project.name, user_project: "test", options: options)
+    mock.expect :rewrite_object, rewrite_response, rewrite_object_args(bucket.name, file_user_project.name, bucket.name, file_user_project.name, rewrite_token: "notyetcomplete", user_project: "test", options: options)
 
     file_user_project.service.mocked_service = mock
 
@@ -866,9 +849,9 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name, 1234567891).to_json),
-      [bucket_name, file_name, generation: nil, user_project: nil, options: {}]
+      get_object_args(bucket.name, file_name)
     mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name, 1234567892).to_json),
-      [bucket_name, file_name, generation: nil, user_project: nil, options: {}]
+      get_object_args(bucket.name, file_name)
 
     bucket.service.mocked_service = mock
     file.service.mocked_service = mock
@@ -886,9 +869,9 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_user_project.name, file_name, 1234567891).to_json),
-      [bucket_user_project.name, file_name, generation: nil, user_project: "test", options: {}]
+      get_object_args(bucket_name, file_name, user_project: "test")
     mock.expect :get_object, Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_user_project.name, file_name, 1234567892).to_json),
-      [bucket_user_project.name, file_name, generation: nil, user_project: "test", options: {}]
+      get_object_args(bucket_name, file_name, user_project: "test")
 
     bucket_user_project.service.mocked_service = mock
     file.service.mocked_service = mock

@@ -290,41 +290,83 @@ module Google
 
         ##
         # Inserts a new file for the given bucket
-        def insert_file bucket_name, source, path = nil, acl: nil,
-                        cache_control: nil, content_disposition: nil,
-                        content_encoding: nil, content_language: nil,
-                        content_type: nil, custom_time: nil, crc32c: nil, md5: nil, metadata: nil,
-                        storage_class: nil, key: nil, kms_key: nil,
-                        temporary_hold: nil, event_based_hold: nil,
+        def insert_file bucket_name,
+                        source,
+                        path = nil,
+                        acl: nil,
+                        cache_control: nil,
+                        content_disposition: nil,
+                        content_encoding: nil,
+                        content_language: nil,
+                        content_type: nil,
+                        custom_time: nil,
+                        crc32c: nil,
+                        md5: nil,
+                        metadata: nil,
+                        storage_class: nil,
+                        key: nil,
+                        kms_key: nil,
+                        temporary_hold: nil,
+                        event_based_hold: nil,
+                        if_generation_match: nil,
+                        if_generation_not_match: nil,
+                        if_metageneration_match: nil,
+                        if_metageneration_not_match: nil,
                         user_project: nil
-          params =
-            { cache_control: cache_control, content_type: content_type, custom_time: custom_time,
-              content_disposition: content_disposition, md5_hash: md5,
-              content_encoding: content_encoding, crc32c: crc32c,
-              content_language: content_language, metadata: metadata,
-              storage_class: storage_class, temporary_hold: temporary_hold,
-              event_based_hold: event_based_hold }.delete_if { |_k, v| v.nil? }
+          params = {
+            cache_control: cache_control,
+            content_type: content_type,
+            custom_time: custom_time,
+            content_disposition: content_disposition,
+            md5_hash: md5,
+            content_encoding: content_encoding,
+            crc32c: crc32c,
+            content_language: content_language,
+            metadata: metadata,
+            storage_class: storage_class,
+            temporary_hold: temporary_hold,
+            event_based_hold: event_based_hold
+          }.delete_if { |_k, v| v.nil? }
           file_obj = Google::Apis::StorageV1::Object.new(**params)
           content_type ||= mime_type_for(path || Pathname(source).to_path)
 
           execute do
-            service.insert_object \
-              bucket_name, file_obj,
-              name: path, predefined_acl: acl, upload_source: source,
-              content_encoding: content_encoding, content_type: content_type,
-              kms_key_name: kms_key, user_project: user_project(user_project),
-              options: key_options(key)
+            service.insert_object bucket_name,
+                                  file_obj,
+                                  name: path,
+                                  predefined_acl: acl,
+                                  upload_source: source,
+                                  content_encoding: content_encoding,
+                                  content_type: content_type,
+                                  if_generation_match: if_generation_match,
+                                  if_generation_not_match: if_generation_not_match,
+                                  if_metageneration_match: if_metageneration_match,
+                                  if_metageneration_not_match: if_metageneration_not_match,
+                                  kms_key_name: kms_key,
+                                  user_project: user_project(user_project),
+                                  options: key_options(key)
           end
         end
 
         ##
         # Retrieves an object or its metadata.
-        def get_file bucket_name, file_path, generation: nil, key: nil,
+        def get_file bucket_name,
+                     file_path,
+                     generation: nil,
+                     if_generation_match: nil,
+                     if_generation_not_match: nil,
+                     if_metageneration_match: nil,
+                     if_metageneration_not_match: nil,
+                     key: nil,
                      user_project: nil
           execute do
             service.get_object \
               bucket_name, file_path,
               generation: generation,
+              if_generation_match: if_generation_match,
+              if_generation_not_match: if_generation_not_match,
+              if_metageneration_match: if_metageneration_match,
+              if_metageneration_not_match: if_metageneration_not_match,
               user_project: user_project(user_project),
               options: key_options(key)
           end
@@ -332,42 +374,74 @@ module Google
 
         ## Rewrite a file from source bucket/object to a
         # destination bucket/object.
-        def rewrite_file source_bucket_name, source_file_path,
-                         destination_bucket_name, destination_file_path,
-                         file_gapi = nil, source_key: nil, destination_key: nil,
-                         destination_kms_key: nil, acl: nil, generation: nil,
-                         token: nil, user_project: nil
+        def rewrite_file source_bucket_name,
+                         source_file_path,
+                         destination_bucket_name,
+                         destination_file_path,
+                         file_gapi = nil,
+                         source_key: nil,
+                         destination_key: nil,
+                         destination_kms_key: nil,
+                         acl: nil,
+                         generation: nil,
+                         if_generation_match: nil,
+                         if_generation_not_match: nil,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil,
+                         if_source_generation_match: nil,
+                         if_source_generation_not_match: nil,
+                         if_source_metageneration_match: nil,
+                         if_source_metageneration_not_match: nil,
+                         token: nil,
+                         user_project: nil
           key_options = rewrite_key_options source_key, destination_key
           execute do
-            service.rewrite_object \
-              source_bucket_name, source_file_path,
-              destination_bucket_name, destination_file_path,
-              file_gapi,
-              destination_kms_key_name: destination_kms_key,
-              destination_predefined_acl: acl,
-              source_generation: generation,
-              rewrite_token: token,
-              user_project: user_project(user_project),
-              options: key_options
+            service.rewrite_object source_bucket_name,
+                                   source_file_path,
+                                   destination_bucket_name,
+                                   destination_file_path,
+                                   file_gapi,
+                                   destination_kms_key_name: destination_kms_key,
+                                   destination_predefined_acl: acl,
+                                   source_generation: generation,
+                                   if_generation_match: if_generation_match,
+                                   if_generation_not_match: if_generation_not_match,
+                                   if_metageneration_match: if_metageneration_match,
+                                   if_metageneration_not_match: if_metageneration_not_match,
+                                   if_source_generation_match: if_source_generation_match,
+                                   if_source_generation_not_match: if_source_generation_not_match,
+                                   if_source_metageneration_match: if_source_metageneration_match,
+                                   if_source_metageneration_not_match: if_source_metageneration_not_match,
+                                   rewrite_token: token,
+                                   user_project: user_project(user_project),
+                                   options: key_options
           end
         end
 
         ## Copy a file from source bucket/object to a
         # destination bucket/object.
-        def compose_file bucket_name, source_files, destination_path,
-                         destination_gapi, acl: nil, key: nil, user_project: nil
+        def compose_file bucket_name,
+                         source_files,
+                         destination_path,
+                         destination_gapi,
+                         acl: nil,
+                         key: nil,
+                         if_generation_match: nil,
+                         if_metageneration_match: nil,
+                         user_project: nil
 
           compose_req = Google::Apis::StorageV1::ComposeRequest.new \
-            source_objects: compose_file_source_objects(source_files),
-            destination: destination_gapi
+            source_objects: compose_file_source_objects(source_files), destination: destination_gapi
 
           execute do
-            service.compose_object \
-              bucket_name, destination_path,
-              compose_req,
-              destination_predefined_acl: acl,
-              user_project: user_project(user_project),
-              options: key_options(key)
+            service.compose_object bucket_name,
+                                   destination_path,
+                                   compose_req,
+                                   destination_predefined_acl: acl,
+                                   if_generation_match: if_generation_match,
+                                   if_metageneration_match: if_metageneration_match,
+                                   user_project: user_project(user_project),
+                                   options: key_options(key)
           end
         end
 
@@ -396,24 +470,48 @@ module Google
 
         ##
         # Updates a file's metadata.
-        def patch_file bucket_name, file_path, file_gapi = nil,
-                       predefined_acl: nil, user_project: nil
+        def patch_file bucket_name,
+                       file_path,
+                       file_gapi = nil,
+                       generation: nil,
+                       if_generation_match: nil,
+                       if_generation_not_match: nil,
+                       if_metageneration_match: nil,
+                       if_metageneration_not_match: nil,
+                       predefined_acl: nil,
+                       user_project: nil
           file_gapi ||= Google::Apis::StorageV1::Object.new
           execute do
-            service.patch_object \
-              bucket_name, file_path, file_gapi,
-              predefined_acl: predefined_acl,
-              user_project: user_project(user_project)
+            service.patch_object bucket_name,
+                                 file_path,
+                                 file_gapi,
+                                 generation: generation,
+                                 if_generation_match: if_generation_match,
+                                 if_generation_not_match: if_generation_not_match,
+                                 if_metageneration_match: if_metageneration_match,
+                                 if_metageneration_not_match: if_metageneration_not_match,
+                                 predefined_acl: predefined_acl,
+                                 user_project: user_project(user_project)
           end
         end
 
         ##
         # Permanently deletes a file.
-        def delete_file bucket_name, file_path, generation: nil,
+        def delete_file bucket_name,
+                        file_path,
+                        generation: nil,
+                        if_generation_match: nil,
+                        if_generation_not_match: nil,
+                        if_metageneration_match: nil,
+                        if_metageneration_not_match: nil,
                         user_project: nil
           execute do
             service.delete_object bucket_name, file_path,
                                   generation: generation,
+                                  if_generation_match: if_generation_match,
+                                  if_generation_not_match: if_generation_not_match,
+                                  if_metageneration_match: if_metageneration_match,
+                                  if_metageneration_not_match: if_metageneration_not_match,
                                   user_project: user_project(user_project)
           end
         end
