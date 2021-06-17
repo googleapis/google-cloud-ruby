@@ -1,5 +1,16 @@
 # Release History
 
+### 2.8.0 / 2021-06-17
+
+#### Features
+
+* create instance using processing units/node count ([#11379](https://www.github.com/googleapis/google-cloud-ruby/issues/11379))
+  * create instance using processing units/node count
+  * fix typo
+  * removed node count and processing unit validations
+  * update orignal value on instance save
+  * remove orignal_values to current_valuess
+
 ### 2.7.0 / 2021-06-09
 
 #### Features
