@@ -1,5 +1,15 @@
 # Release History
 
+### 0.12.0 / 2021-06-17
+
+#### Features
+
+* Support list_assets call, and add a number of additional fields to ResourceSearchResult
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.11.0 / 2021-03-08
 
 #### Features
