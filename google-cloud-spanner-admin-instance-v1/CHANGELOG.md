@@ -1,5 +1,15 @@
 # Release History
 
+### 0.4.0 / 2021-06-17
+
+#### Features
+
+* Add processing_units to the Instance resource
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.3.1 / 2021-04-05
 
 #### Documentation
