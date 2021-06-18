@@ -1159,9 +1159,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket_name).to_json),
-      [bucket_name, {user_project: nil}]
+      get_bucket_args(bucket_name)
     mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket_name, new_url_root).to_json),
-      [bucket_name, {user_project: nil}]
+      get_bucket_args(bucket_name)
 
     bucket.service.mocked_service = mock
 
@@ -1180,9 +1180,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket_name).to_json),
-      [bucket_name, {user_project: "test"}]
+      get_bucket_args(bucket_name, user_project: "test")
     mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket_name, new_url_root).to_json),
-      [bucket_name, {user_project: "test"}]
+      get_bucket_args(bucket_name, user_project: "test")
 
     bucket_user_project.service.mocked_service = mock
 

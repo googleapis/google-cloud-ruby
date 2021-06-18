@@ -36,6 +36,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
   let(:bucket_cors_gapi) { bucket_cors.map { |c| Google::Apis::StorageV1::Bucket::CorsConfiguration.new **c } }
   let(:kms_key) { "path/to/encryption_key_name" }
   let(:bucket_retention_period) { 86400 }
+  let(:metageneration) { 6 }
 
   it "gets and memoizes its service_account_email" do
     mock = Minitest::Mock.new
@@ -631,7 +632,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     bucket_name = "found-bucket"
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name, {user_project: nil}]
+    mock.expect :get_bucket, find_bucket_gapi(bucket_name), get_bucket_args(bucket_name)
 
     storage.service.mocked_service = mock
 
@@ -647,7 +648,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     bucket_name = "found-bucket"
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name, {user_project: nil}]
+    mock.expect :get_bucket, find_bucket_gapi(bucket_name), get_bucket_args(bucket_name)
 
     storage.service.mocked_service = mock
 
@@ -659,11 +660,43 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     _(bucket).wont_be :lazy?
   end
 
+  it "finds a bucket with if_metageneration_match set to a metageneration" do
+    bucket_name = "found-bucket"
+
+    mock = Minitest::Mock.new
+    mock.expect :get_bucket, find_bucket_gapi(bucket_name), get_bucket_args(bucket_name, if_metageneration_match: metageneration)
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.bucket bucket_name, if_metageneration_match: metageneration
+
+    mock.verify
+
+    _(bucket.name).must_equal bucket_name
+    _(bucket).wont_be :lazy?
+  end
+
+  it "finds a bucket with if_metageneration_not_match set to a metageneration" do
+    bucket_name = "found-bucket"
+
+    mock = Minitest::Mock.new
+    mock.expect :get_bucket, find_bucket_gapi(bucket_name), get_bucket_args(bucket_name, if_metageneration_not_match: metageneration)
+
+    storage.service.mocked_service = mock
+
+    bucket = storage.bucket bucket_name, if_metageneration_not_match: metageneration
+
+    mock.verify
+
+    _(bucket.name).must_equal bucket_name
+    _(bucket).wont_be :lazy?
+  end
+
   it "finds a bucket with user_project set to true" do
     bucket_name = "found-bucket"
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name, { user_project: "test" }]
+    mock.expect :get_bucket, find_bucket_gapi(bucket_name), get_bucket_args(bucket_name, user_project: "test")
 
     storage.service.mocked_service = mock
 
@@ -679,7 +712,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     bucket_name = "found-bucket"
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name, { user_project: "my-other-project" }]
+    mock.expect :get_bucket, find_bucket_gapi(bucket_name), get_bucket_args(bucket_name, user_project: "my-other-project")
 
     storage.service.mocked_service = mock
 
