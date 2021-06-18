@@ -51,6 +51,12 @@ CONFIGS = {
     message_type: :pr_title_number,
     detail_type: :none,
   },
+  "obsolete-tracker" => {
+    title_regexp: /^chore: start tracking obsolete files/,
+    message_type: :pr_title_number,
+    detail_type: :none,
+    omit_paths: ["/synth\\.metadata$"]
+  },
 }
 
 REPO = "googleapis/google-cloud-ruby"
@@ -65,7 +71,7 @@ end
 flag :title_regexp, accept: Regexp
 flag :message_type, accept: [:shared, :pr_title, :pr_title_number]
 flag :detail_type, accept: [:shared, :none]
-flag :omit_paths, accept: Array, default: []
+flag :omit_paths, accept: Array
 flag :max_line_count, accept: Integer
 flag :editor, accept: String
 flag :dry_run
@@ -103,7 +109,7 @@ def init_config
   @edit_enabled = true
   @editor = editor || ENV["EDITOR"] || "/bin/nano"
   @max_line_count = max_line_count
-  @omits = omit_paths.map do |path|
+  @omits = Array(omit_paths).map do |path|
     regexp = path.is_a?(Regexp) ? path : Regexp.new(path.to_s)
     Omit.new "Any file path matching #{regexp}" do |file|
       regexp =~ file.path
@@ -271,15 +277,17 @@ def display_all_diffs pr_data, force_all: false
     puts "Omitting display of #{file.path}"
   end
   diff_text = disp_files.map(&:text).join
+  return if diff_text.empty?
   exec ["ydiff", "--width=0", "-s", "--wrap"],
        in: [:string, diff_text],
        e: true
 end
 
 def display_file pr_data, index
-  file = pr_data.diff_files[index]
+  diff_text = pr_data.diff_files[index].text
+  return if diff_text.empty?
   exec ["ydiff", "--width=0", "-s", "--wrap"],
-       in: [:string, file.text],
+       in: [:string, diff_text],
        e: true
 end
 
