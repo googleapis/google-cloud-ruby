@@ -46,7 +46,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/images/#{request_pb.image}/deprecate"
                 body = request_pb.deprecation_status_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -96,8 +95,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/images"
                 body = request_pb.image_resource.to_json
                 query_string_params = {}
-                query_string_params["forceCreate"] = request_pb.force_create.to_s if request_pb.has_force_create?
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -127,7 +124,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/images/#{request_pb.image}"
                 body = request_pb.image_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

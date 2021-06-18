@@ -33,7 +33,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instanceGroupManagers/#{request_pb.instance_group_manager}/abandonInstances"
                 body = request_pb.instance_group_managers_abandon_instances_request_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -76,7 +75,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instanceGroupManagers/#{request_pb.instance_group_manager}/createInstances"
                 body = request_pb.instance_group_managers_create_instances_request_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -102,7 +100,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instanceGroupManagers/#{request_pb.instance_group_manager}/deleteInstances"
                 body = request_pb.instance_group_managers_delete_instances_request_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -139,7 +136,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instanceGroupManagers"
                 body = request_pb.instance_group_manager_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -220,7 +216,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instanceGroupManagers/#{request_pb.instance_group_manager}"
                 body = request_pb.instance_group_manager_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -233,7 +228,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instanceGroupManagers/#{request_pb.instance_group_manager}/patchPerInstanceConfigs"
                 body = request_pb.instance_group_managers_patch_per_instance_configs_req_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -246,7 +240,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instanceGroupManagers/#{request_pb.instance_group_manager}/recreateInstances"
                 body = request_pb.instance_group_managers_recreate_instances_request_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -273,7 +266,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instanceGroupManagers/#{request_pb.instance_group_manager}/setInstanceTemplate"
                 body = request_pb.instance_group_managers_set_instance_template_request_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -286,7 +278,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instanceGroupManagers/#{request_pb.instance_group_manager}/setTargetPools"
                 body = request_pb.instance_group_managers_set_target_pools_request_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -299,7 +290,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instanceGroupManagers/#{request_pb.instance_group_manager}/updatePerInstanceConfigs"
                 body = request_pb.instance_group_managers_update_per_instance_configs_req_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

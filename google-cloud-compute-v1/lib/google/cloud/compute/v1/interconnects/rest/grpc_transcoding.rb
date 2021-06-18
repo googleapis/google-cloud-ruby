@@ -70,7 +70,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/interconnects"
                 body = request_pb.interconnect_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -100,7 +99,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/interconnects/#{request_pb.interconnect}"
                 body = request_pb.interconnect_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

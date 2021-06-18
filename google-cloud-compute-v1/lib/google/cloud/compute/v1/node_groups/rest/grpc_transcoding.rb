@@ -33,7 +33,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/nodeGroups/#{request_pb.node_group}/addNodes"
                 body = request_pb.node_groups_add_nodes_request_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -77,7 +76,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/nodeGroups/#{request_pb.node_group}/deleteNodes"
                 body = request_pb.node_groups_delete_nodes_request_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -115,8 +113,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/nodeGroups"
                 body = request_pb.node_group_resource.to_json
                 query_string_params = {}
-                query_string_params["initialNodeCount"] = request_pb.initial_node_count.to_s
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -163,7 +159,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/nodeGroups/#{request_pb.node_group}"
                 body = request_pb.node_group_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -188,7 +183,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/nodeGroups/#{request_pb.node_group}/setNodeTemplate"
                 body = request_pb.node_groups_set_node_template_request_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

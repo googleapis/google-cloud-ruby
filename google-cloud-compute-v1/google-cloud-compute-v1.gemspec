@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-compute-v1 is the official client library for the Google Cloud Compute V1 API. This library is considered to be in alpha. This means it is still a work-in-progress and under active development. Any release is subject to backwards-incompatible changes at any time."
+  gem.description   = "google-cloud-compute-v1 is the official client library for the Google Cloud Compute V1 API. This library is considered to be in alpha. This means it is still a work-in-progress and under active development. Any release is subject to backwards-incompatible changes at any time. Note that google-cloud-compute-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-compute instead. See the readme for more details."
   gem.summary       = "API Client library for the Google Cloud Compute V1 (ALPHA) API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.5"
 
-  gem.add_dependency "gapic-common", ">= 0.5", "< 2.a"
+  gem.add_dependency "gapic-common", "~> 0.4"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
 
   gem.add_development_dependency "google-style", "~> 1.25.1"

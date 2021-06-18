@@ -58,7 +58,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/targetGrpcProxies"
                 body = request_pb.target_grpc_proxy_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -88,7 +87,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/targetGrpcProxies/#{request_pb.target_grpc_proxy}"
                 body = request_pb.target_grpc_proxy_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

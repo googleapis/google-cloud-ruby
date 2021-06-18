@@ -64,7 +64,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/subnetworks/#{request_pb.subnetwork}/expandIpCidrRange"
                 body = request_pb.subnetworks_expand_ip_cidr_range_request_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -102,7 +101,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/subnetworks"
                 body = request_pb.subnetwork_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -149,8 +147,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/subnetworks/#{request_pb.subnetwork}"
                 body = request_pb.subnetwork_resource.to_json
                 query_string_params = {}
-                query_string_params["drainTimeoutSeconds"] = request_pb.drain_timeout_seconds.to_s if request_pb.has_drain_timeout_seconds?
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -175,7 +171,6 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/subnetworks/#{request_pb.subnetwork}/setPrivateIpGoogleAccess"
                 body = request_pb.subnetworks_set_private_ip_google_access_request_resource.to_json
                 query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
