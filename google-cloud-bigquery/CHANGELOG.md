@@ -1,5 +1,11 @@
 # Release History
 
+### 1.31.1 / 2021-06-18
+
+#### Bug Fixes
+
+* Expand googleauth dependency to support future 1.x versions
+
 ### 1.31.0 / 2021-04-28
 
 #### Features
