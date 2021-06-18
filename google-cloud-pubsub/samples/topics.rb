@@ -299,7 +299,7 @@ def publish_messages_async_with_flow_control topic_id:
 
   topic = pubsub.topic topic_id, async: {
     # Configure how many messages the publisher client can hold in memory
-    # before publishing succeeds, and what to do when messages exceed the limit.
+    # and what to do when messages exceed the limit.
     flow_control: {
       message_limit: 100,
       byte_limit: 10 * 1024 * 1024, # 10 MiB
@@ -308,7 +308,7 @@ def publish_messages_async_with_flow_control topic_id:
       limit_exceeded_behavior: :block
     }
   }
-  # Publish 1000 messages in quick succession to trigger publisher flow control.
+  # Rapidly publishing 1000 messages in a loop may be constrained by flow control.
   1000.times do |i|
     topic.publish_async "message #{i}" do |result|
       raise "Failed to publish the message." unless result.succeeded?
