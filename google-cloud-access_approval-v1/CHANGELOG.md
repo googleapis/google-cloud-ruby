@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.1 / 2021-06-18
+
+#### Bug Fixes
+
+* Support future 1.x releases of gapic-common
+
 ### 0.4.0 / 2021-03-08
 
 #### Features
