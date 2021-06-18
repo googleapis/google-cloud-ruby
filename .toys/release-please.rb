@@ -47,7 +47,7 @@ def release_please gem_name
     "--bump-minor-pre-major", "--debug"
   ]
   cmd += ["--fork"] if use_fork
-  cmd += ["--last-package-version", version] if version
+  cmd += ["--last-package-version", version] if version && version >= "0.1"
   cmd += ["--token", github_token] if github_token
   log_cmd = cmd.inspect
   log_cmd.sub! github_token, "****" if github_token
