@@ -417,6 +417,49 @@ module Google
         end
 
         ###
+        # Checks if Parquet options are set.
+        #
+        # @see https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet Loading Parquet data from Cloud
+        #   Storage
+        #
+        # @return [Boolean] `true` when Parquet options are set, or `false` otherwise.
+        #
+        # @!group Attributes
+        #
+        def parquet_options?
+          !@gapi.configuration.load.parquet_options.nil?
+        end
+
+        ###
+        # Indicates whether to use schema inference specifically for Parquet `LIST` logical type.
+        #
+        # @see https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet Loading Parquet data from Cloud
+        #   Storage
+        #
+        # @return [Boolean, nil] The `enable_list_inference` value in Parquet options, or `nil` if Parquet options are
+        #   not set.
+        #
+        # @!group Attributes
+        #
+        def parquet_enable_list_inference?
+          @gapi.configuration.load.parquet_options.enable_list_inference if parquet_options?
+        end
+
+        ###
+        # Indicates whether to infer Parquet `ENUM` logical type as `STRING` instead of `BYTES` by default.
+        #
+        # @see https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet Loading Parquet data from Cloud
+        #   Storage
+        #
+        # @return [Boolean, nil] The `enum_as_string` value in Parquet options, or `nil` if Parquet options are not set.
+        #
+        # @!group Attributes
+        #
+        def parquet_enum_as_string?
+          @gapi.configuration.load.parquet_options.enum_as_string if parquet_options?
+        end
+
+        ###
         # Checks if the destination table will be range partitioned. See [Creating and using integer range partitioned
         # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
         #
@@ -1532,6 +1575,66 @@ module Google
           def hive_partitioning_source_uri_prefix= source_uri_prefix
             @gapi.configuration.load.hive_partitioning_options ||= Google::Apis::BigqueryV2::HivePartitioningOptions.new
             @gapi.configuration.load.hive_partitioning_options.source_uri_prefix = source_uri_prefix
+          end
+
+          ##
+          # Sets whether to use schema inference specifically for Parquet `LIST` logical type.
+          #
+          # @see https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet Loading Parquet data from
+          #   Cloud Storage
+          #
+          # @param [Boolean] enable_list_inference The `enable_list_inference` value to use in Parquet options.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   gcs_uris = ["gs://mybucket/00/*.parquet", "gs://mybucket/01/*.parquet"]
+          #   load_job = dataset.load_job "my_new_table", gcs_uris do |job|
+          #     job.format = :parquet
+          #     job.parquet_enable_list_inference = true
+          #   end
+          #
+          #   load_job.wait_until_done!
+          #   load_job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def parquet_enable_list_inference= enable_list_inference
+            @gapi.configuration.load.parquet_options ||= Google::Apis::BigqueryV2::ParquetOptions.new
+            @gapi.configuration.load.parquet_options.enable_list_inference = enable_list_inference
+          end
+
+          ##
+          # Sets whether to infer Parquet `ENUM` logical type as `STRING` instead of `BYTES` by default.
+          #
+          # @see https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet Loading Parquet data from
+          #   Cloud Storage
+          #
+          # @param [Boolean] enum_as_string The `enum_as_string` value to use in Parquet options.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   gcs_uris = ["gs://mybucket/00/*.parquet", "gs://mybucket/01/*.parquet"]
+          #   load_job = dataset.load_job "my_new_table", gcs_uris do |job|
+          #     job.format = :parquet
+          #     job.parquet_enum_as_string = true
+          #   end
+          #
+          #   load_job.wait_until_done!
+          #   load_job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def parquet_enum_as_string= enum_as_string
+            @gapi.configuration.load.parquet_options ||= Google::Apis::BigqueryV2::ParquetOptions.new
+            @gapi.configuration.load.parquet_options.enum_as_string = enum_as_string
           end
 
           ##
