@@ -317,6 +317,17 @@ describe "topics" do
     end
   end
 
+  it "supports pubsub_publisher_flow_control" do
+    #setup
+    @topic = pubsub.create_topic topic_id
+    @subscription = @topic.subscribe random_subscription_id
+
+    # pubsub_publisher_flow_control
+    assert_output "Published messages with flow control settings to #{topic_id}.\n" do
+      publish_messages_async_with_flow_control topic_id: topic_id
+    end
+  end
+
   it "supports publish_with_error_handler" do
     #setup
     @topic = pubsub.create_topic topic_id
