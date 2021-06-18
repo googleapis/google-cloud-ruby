@@ -905,6 +905,12 @@ module Google
         # completely mutable and will be included in the request. (See
         # {Bucket::Cors})
         #
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the bucket's current metageneration matches the given value.
+        # @param [Integer] if_metageneration_not_match Makes the operation
+        #   conditional on whether the bucket's current metageneration does not
+        #   match the given value.
+        #
         # @yield [bucket] a block yielding a delegate object for updating the
         #   file
         #
@@ -936,14 +942,17 @@ module Google
         #     end
         #   end
         #
-        def update
+        def update if_metageneration_match: nil, if_metageneration_not_match: nil
           updater = Updater.new @gapi
           yield updater
           # Add check for mutable cors
           updater.check_for_changed_labels!
           updater.check_for_mutable_cors!
           updater.check_for_mutable_lifecycle!
-          patch_gapi! updater.updates unless updater.updates.empty?
+          return if updater.updates.empty?
+          patch_gapi! updater.updates,
+                      if_metageneration_match: if_metageneration_match,
+                      if_metageneration_not_match: if_metageneration_not_match
         end
 
         ##
@@ -2630,7 +2639,10 @@ module Google
           reload!
         end
 
-        def patch_gapi! *attributes
+        def patch_gapi! attributes,
+                        if_metageneration_match: nil,
+                        if_metageneration_not_match: nil
+          attributes = Array(attributes)
           attributes.flatten!
           return if attributes.empty?
           ensure_service!
@@ -2638,7 +2650,10 @@ module Google
             [attr, @gapi.send(attr)]
           end]
           patch_gapi = API::Bucket.new(**patch_args)
-          @gapi = service.patch_bucket name, patch_gapi,
+          @gapi = service.patch_bucket name,
+                                       patch_gapi,
+                                       if_metageneration_match: if_metageneration_match,
+                                       if_metageneration_not_match: if_metageneration_not_match,
                                        user_project: user_project
           @lazy = nil
           self

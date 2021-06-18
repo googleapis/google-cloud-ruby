@@ -259,8 +259,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
     mock.expect :get_bucket, bucket_gapi, get_bucket_args(bucket_name, user_project: "test")
     mock.expect :patch_bucket,
       Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket_name).to_json),
-      [bucket_name, Google::Apis::StorageV1::Bucket.new(acl: []),
-       predefined_acl: "authenticatedRead", predefined_default_object_acl: nil, user_project: "test"]
+      patch_bucket_args(bucket_name, predefined_acl: "authenticatedRead", user_project: "test")
 
     storage.service.mocked_service = mock
 
@@ -424,8 +423,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
     mock = Minitest::Mock.new
     mock.expect :patch_bucket,
       Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket.name).to_json),
-      [bucket_name, Google::Apis::StorageV1::Bucket.new(acl: []),
-       predefined_acl: acl_role, predefined_default_object_acl: nil, user_project: nil]
+      patch_bucket_args(bucket_name, predefined_acl: acl_role)
 
     storage.service.mocked_service = mock
 
