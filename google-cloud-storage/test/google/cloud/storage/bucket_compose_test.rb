@@ -96,19 +96,19 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
     mock = Minitest::Mock.new
     mock.expect :compose_object,
                 file_3_gapi,
-                compose_object_args(bucket.name, file_3_name, [file_gapi, file_2_gapi], sources_if_generation_match: [generation, generation_2])
+                compose_object_args(bucket.name, file_3_name, [file_gapi, file_2_gapi], if_source_generation_match: [generation, generation_2])
     bucket.service.mocked_service = mock
 
-    new_file = bucket.compose [file, file_2], file_3_name, sources_if_generation_match: [generation, generation_2]
+    new_file = bucket.compose [file, file_2], file_3_name, if_source_generation_match: [generation, generation_2]
     _(new_file).must_be_kind_of Google::Cloud::Storage::File
     _(new_file.name).must_equal file_3_name
 
     mock.verify
   end
 
-  it "raises if compose is called with a sources_if_generation_match array that does not match sources array" do
+  it "raises if compose is called with an if_source_generation_match array that does not match sources array" do
     expect do
-      new_file = bucket.compose [file, file_2], file_3_name, sources_if_generation_match: [generation]
+      new_file = bucket.compose [file, file_2], file_3_name, if_source_generation_match: [generation]
     end.must_raise ArgumentError
   end
 
