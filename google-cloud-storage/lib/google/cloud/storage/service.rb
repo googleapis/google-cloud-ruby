@@ -443,12 +443,14 @@ module Google
                          destination_gapi,
                          acl: nil,
                          key: nil,
+                         sources_if_generation_match: nil,
                          if_generation_match: nil,
                          if_metageneration_match: nil,
                          user_project: nil
 
-          compose_req = Google::Apis::StorageV1::ComposeRequest.new \
-            source_objects: compose_file_source_objects(source_files), destination: destination_gapi
+          source_objects = compose_file_source_objects source_files, sources_if_generation_match
+          compose_req = Google::Apis::StorageV1::ComposeRequest.new source_objects: source_objects,
+                                                                    destination: destination_gapi
 
           execute do
             service.compose_object bucket_name,
@@ -730,8 +732,8 @@ module Google
             "false" => "NONE" }[str_or_bool.to_s.downcase]
         end
 
-        def compose_file_source_objects source_files
-          source_files.map do |file|
+        def compose_file_source_objects source_files, sources_if_generation_match
+          source_objects = source_files.map do |file|
             if file.is_a? Google::Cloud::Storage::File
               Google::Apis::StorageV1::ComposeRequest::SourceObject.new \
                 name: file.name,
@@ -741,6 +743,18 @@ module Google
                 name: file
             end
           end
+          return source_objects unless sources_if_generation_match
+          if source_files.count != sources_if_generation_match.count
+            raise ArgumentError, "if provided, sources_if_generation_match length must match sources length"
+          end
+          sources_if_generation_match.each_with_index do |generation, i|
+            next unless generation
+            object_preconditions = Google::Apis::StorageV1::ComposeRequest::SourceObject::ObjectPreconditions.new(
+              if_generation_match: generation
+            )
+            source_objects[i].object_preconditions = object_preconditions
+          end
+          source_objects
         end
 
         def execute

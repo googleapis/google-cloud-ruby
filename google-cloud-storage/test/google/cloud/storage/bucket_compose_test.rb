@@ -46,7 +46,8 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
     }
   end
   let(:key_options) { { header: key_headers } }
-  let(:generation) { 1234567890 }
+  let(:generation) { 1234567891 }
+  let(:generation_2) { 1234567892 }
   let(:metageneration) { 6 }
 
   it "can compose a new file with string sources" do
@@ -76,8 +77,8 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
   end
 
   it "can compose a new file with File sources that have generations" do
-    file_gapi.generation = "123"
-    file_2_gapi.generation = "456"
+    file_gapi.generation = generation
+    file_2_gapi.generation = generation_2
 
     mock = Minitest::Mock.new
     mock.expect :compose_object, file_3_gapi, compose_object_args(bucket.name, file_3_name, [file_gapi, file_2_gapi])
@@ -89,6 +90,26 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
     _(new_file.name).must_equal file_3_name
 
     mock.verify
+  end
+
+  it "can compose a new file with sources that have if_generation_match preconditions" do
+    mock = Minitest::Mock.new
+    mock.expect :compose_object,
+                file_3_gapi,
+                compose_object_args(bucket.name, file_3_name, [file_gapi, file_2_gapi], sources_if_generation_match: [generation, generation_2])
+    bucket.service.mocked_service = mock
+
+    new_file = bucket.compose [file, file_2], file_3_name, sources_if_generation_match: [generation, generation_2]
+    _(new_file).must_be_kind_of Google::Cloud::Storage::File
+    _(new_file.name).must_equal file_3_name
+
+    mock.verify
+  end
+
+  it "raises if compose is called with a sources_if_generation_match array that does not match sources array" do
+    expect do
+      new_file = bucket.compose [file, file_2], file_3_name, sources_if_generation_match: [generation]
+    end.must_raise ArgumentError
   end
 
   it "can compose a new file with predefined ACL" do

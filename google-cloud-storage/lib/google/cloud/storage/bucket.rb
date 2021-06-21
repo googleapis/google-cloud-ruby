@@ -1456,12 +1456,16 @@ module Google
         #   used. All source files must have been encrypted with the same key,
         #   and the resulting destination file will also be encrypted with the
         #   key.
+        # @param [Array<Integer>] sources_if_generation_match Makes the operation
+        #   conditional on whether the source files' current generations match the
+        #   given values. The list must match `sources` item-to-item.
         # @param [Integer] if_generation_match Makes the operation conditional
-        #   on whether the file's current generation matches the given value.
-        #   Setting to 0 makes the operation succeed only if there are no live
-        #   versions of the file.
+        #   on whether the destination file's current generation matches the
+        #   given value. Setting to 0 makes the operation succeed only if there
+        #   are no live versions of the file.
         # @param [Integer] if_metageneration_match Makes the operation conditional
-        #   on whether the file's current metageneration matches the given value.
+        #   on whether the destination file's current metageneration matches the
+        #   given value.
         #
         # @yield [file] A block yielding a delegate file object for setting the
         #   properties of the destination file.
@@ -1514,6 +1518,7 @@ module Google
                     destination,
                     acl: nil,
                     encryption_key: nil,
+                    sources_if_generation_match: nil,
                     if_generation_match: nil,
                     if_metageneration_match: nil
           ensure_service!
@@ -1537,6 +1542,7 @@ module Google
                                       destination_gapi,
                                       acl: acl_rule,
                                       key: encryption_key,
+                                      sources_if_generation_match: sources_if_generation_match,
                                       if_generation_match: if_generation_match,
                                       if_metageneration_match: if_metageneration_match,
                                       user_project: user_project
