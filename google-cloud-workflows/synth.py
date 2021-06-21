@@ -30,7 +30,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Workflows",
         "ruby-cloud-description": "Workflows link series of serverless tasks together in an order you define. Combine the power of Google Cloud's APIs, serverless products like Cloud Functions and Cloud Run, and calls to external APIs to create flexible serverless applications. Workflows requires no infrastructure management and scales seamlessly with demand, including scaling down to zero..",
         "ruby-cloud-env-prefix": "WORKFLOWS",
-        "ruby-cloud-wrapper-of": "v1beta:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.0;v1beta:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/workflows",
         "ruby-cloud-api-id": "workflows.googleapis.com",
         "ruby-cloud-api-shortname": "workflows",

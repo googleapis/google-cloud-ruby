@@ -30,7 +30,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Certificate Authority Service",
         "ruby-cloud-description": "Certificate Authority Service is a highly available, scalable Google Cloud service that enables you to simplify, automate, and customize the deployment, management, and security of private certificate authorities (CA).",
         "ruby-cloud-env-prefix": "PRIVATE_CA",
-        "ruby-cloud-wrapper-of": "v1beta1:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.0;v1beta1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/certificate-authority-service/",
         "ruby-cloud-api-id": "privateca.googleapis.com",
         "ruby-cloud-api-shortname": "privateca",
