@@ -28,7 +28,7 @@ class Google::Cloud::Workflows::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::Workflows.workflows do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Workflows::V1beta::Workflows::Client, client
+      assert_kind_of Google::Cloud::Workflows::V1::Workflows::Client, client
     end
   end
 end

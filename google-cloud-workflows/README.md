@@ -16,6 +16,7 @@ for this library, google-cloud-workflows, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
+[google-cloud-workflows-v1](https://googleapis.dev/ruby/google-cloud-workflows-v1/latest),
 [google-cloud-workflows-v1beta](https://googleapis.dev/ruby/google-cloud-workflows-v1beta/latest).
 
 See also the [Product Documentation](https://cloud.google.com/workflows)
@@ -76,7 +77,7 @@ about the Ruby support schedule.
 Most modern Ruby client libraries for Google APIs come in two flavors: the main
 client library with a name such as `google-cloud-workflows`,
 and lower-level _versioned_ client libraries with names such as
-`google-cloud-workflows-v1beta`.
+`google-cloud-workflows-v1`.
 _In most cases, you should install the main client._
 
 ### What's the difference between the main client and a versioned client?
@@ -114,7 +115,7 @@ You can use a versioned client if you are content with a possibly lower-level
 class interface, you explicitly want to avoid features provided by the main
 client, or you want to access a specific service version not be covered by the
 main client. You can identify versioned client gems because the service version
-is part of the name, e.g. `google-cloud-workflows-v1beta`.
+is part of the name, e.g. `google-cloud-workflows-v1`.
 
 ### What about the google-apis-<name> clients?
 
