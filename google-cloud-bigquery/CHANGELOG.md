@@ -1,5 +1,22 @@
 # Release History
 
+### 1.32.0 / 2021-06-21
+
+#### Features
+
+* Add support for Parquet options
+  * feat(bigquery): Add Bigquery::External::ParquetSource
+  * Add Parquet options to LoadJob
+    * Add LoadJob#parquet_options?
+    * Add LoadJob#parquet_enable_list_inference?
+    * Add LoadJob#parquet_enum_as_string?
+    * Add LoadJob::Updater#parquet_enable_list_inference=
+    * Add LoadJob::Updater#parquet_enum_as_string=
+
+#### Bug Fixes
+
+* Expand googleauth dependency to support future 1.x versions
+
 ### 1.31.0 / 2021-04-28
 
 #### Features
