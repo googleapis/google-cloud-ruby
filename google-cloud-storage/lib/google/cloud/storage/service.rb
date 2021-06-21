@@ -83,9 +83,14 @@ module Google
         ##
         # Retrieves bucket by name.
         # Returns Google::Apis::StorageV1::Bucket.
-        def get_bucket bucket_name, user_project: nil
+        def get_bucket bucket_name,
+                       if_metageneration_match: nil,
+                       if_metageneration_not_match: nil,
+                       user_project: nil
           execute do
             service.get_bucket bucket_name,
+                               if_metageneration_match: if_metageneration_match,
+                               if_metageneration_not_match: if_metageneration_not_match,
                                user_project: user_project(user_project)
           end
         end
@@ -106,26 +111,38 @@ module Google
 
         ##
         # Updates a bucket, including its ACL metadata.
-        def patch_bucket bucket_name, bucket_gapi = nil, predefined_acl: nil,
-                         predefined_default_acl: nil, user_project: nil
+        def patch_bucket bucket_name,
+                         bucket_gapi = nil,
+                         predefined_acl: nil,
+                         predefined_default_acl: nil,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil,
+                         user_project: nil
           bucket_gapi ||= Google::Apis::StorageV1::Bucket.new
           bucket_gapi.acl = [] if predefined_acl
           bucket_gapi.default_object_acl = [] if predefined_default_acl
 
           execute do
-            service.patch_bucket \
-              bucket_name, bucket_gapi,
-              predefined_acl: predefined_acl,
-              predefined_default_object_acl: predefined_default_acl,
-              user_project: user_project(user_project)
+            service.patch_bucket bucket_name,
+                                 bucket_gapi,
+                                 predefined_acl: predefined_acl,
+                                 predefined_default_object_acl: predefined_default_acl,
+                                 if_metageneration_match: if_metageneration_match,
+                                 if_metageneration_not_match: if_metageneration_not_match,
+                                 user_project: user_project(user_project)
           end
         end
 
         ##
         # Permanently deletes an empty bucket.
-        def delete_bucket bucket_name, user_project: nil
+        def delete_bucket bucket_name,
+                          if_metageneration_match: nil,
+                          if_metageneration_not_match: nil,
+                          user_project: nil
           execute do
             service.delete_bucket bucket_name,
+                                  if_metageneration_match: if_metageneration_match,
+                                  if_metageneration_not_match: if_metageneration_not_match,
                                   user_project: user_project(user_project)
           end
         end

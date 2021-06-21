@@ -315,6 +315,9 @@ module Google
         ##
         # Updates the destination bucket for the bucket's logs.
         #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
+        #
         # @see https://cloud.google.com/storage/docs/access-logs Access Logs
         #
         # @param [String] logging_bucket The bucket to hold the logging output
@@ -343,6 +346,9 @@ module Google
         # name](https://cloud.google.com/storage/docs/bucket-naming#objectnames).
         # By default, the object prefix is the name of the bucket for which the
         # logs are enabled.
+        #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
         #
         # @see https://cloud.google.com/storage/docs/access-logs Access Logs
         #
@@ -377,6 +383,9 @@ module Google
         # For more information, see [Storage
         # Classes](https://cloud.google.com/storage/docs/storage-classes).
         #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
+        #
         # @param [Symbol, String] new_storage_class Storage class of the bucket.
         #
         def storage_class= new_storage_class
@@ -399,6 +408,9 @@ module Google
         # Updates whether [Object
         # Versioning](https://cloud.google.com/storage/docs/object-versioning)
         # is enabled for the bucket.
+        #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
         #
         # @param [Boolean] new_versioning true if versioning is to be enabled
         #   for the bucket.
@@ -427,6 +439,9 @@ module Google
 
         ##
         # Updates the main page suffix for a static website.
+        #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
         #
         # @see https://cloud.google.com/storage/docs/website-configuration#step4
         #   How to Host a Static Website
@@ -467,6 +482,9 @@ module Google
         ##
         # Updates the hash of user-provided labels.
         #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
+        #
         # @param [Hash(String => String)] labels The user-provided labels.
         #
         def labels= labels
@@ -477,6 +495,9 @@ module Google
         ##
         # Updates the page returned from a static website served from the bucket
         # when a site visitor requests a resource that does not exist.
+        #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
         #
         # @see https://cloud.google.com/storage/docs/website-configuration#step4
         #   How to Host a Static Website
@@ -508,6 +529,9 @@ module Google
         # to the access. The requester must pass the `user_project` option to
         # {Project#bucket} and {Project#buckets} to indicate the project to
         # which the access costs should be billed.
+        #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
         #
         # @param [Boolean] new_requester_pays When set to `true`, requester pays
         #   is enabled for the bucket.
@@ -556,6 +580,9 @@ module Google
         ##
         # Set the Cloud KMS encryption key that will be used to protect files.
         # For example: `projects/a/locations/b/keyRings/c/cryptoKeys/d`
+        #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
         #
         # @param [String, nil] new_default_kms_key New Cloud KMS key name, or
         #   `nil` to delete the Cloud KMS encryption key.
@@ -616,6 +643,9 @@ module Google
         #
         # See also: {#lock_retention_policy!}, {#retention_period},
         # {#retention_effective_at}, and {#retention_policy_locked?}.
+        #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
         #
         # @param [Integer, nil] new_retention_period The retention period
         #   defined in seconds. The value must be between 0 and 100 years (in
@@ -714,6 +744,9 @@ module Google
         # newly-created files in the bucket.
         #
         # See {File#event_based_hold?} and {File#set_event_based_hold!}.
+        #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
         #
         # @param [Boolean] new_default_event_based_hold The default event-based
         #   hold field for the bucket.
@@ -823,6 +856,9 @@ module Google
         # Before enabling uniform bucket-level access please review [uniform bucket-level
         # access](https://cloud.google.com/storage/docs/uniform-bucket-level-access).
         #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
+        #
         # @param [Boolean] new_uniform_bucket_level_access When set to `true`, uniform bucket-level access is enabled in
         #   the bucket's IAM configuration.
         #
@@ -905,6 +941,12 @@ module Google
         # completely mutable and will be included in the request. (See
         # {Bucket::Cors})
         #
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the bucket's current metageneration matches the given value.
+        # @param [Integer] if_metageneration_not_match Makes the operation
+        #   conditional on whether the bucket's current metageneration does not
+        #   match the given value.
+        #
         # @yield [bucket] a block yielding a delegate object for updating the
         #   file
         #
@@ -936,14 +978,27 @@ module Google
         #     end
         #   end
         #
-        def update
+        # @example With a `if_metageneration_match` precondition:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #   bucket.update if_metageneration_match: 6 do |b|
+        #     b.website_main = "index.html"
+        #   end
+        #
+        def update if_metageneration_match: nil, if_metageneration_not_match: nil
           updater = Updater.new @gapi
           yield updater
           # Add check for mutable cors
           updater.check_for_changed_labels!
           updater.check_for_mutable_cors!
           updater.check_for_mutable_lifecycle!
-          patch_gapi! updater.updates unless updater.updates.empty?
+          return if updater.updates.empty?
+          patch_gapi! updater.updates,
+                      if_metageneration_match: if_metageneration_match,
+                      if_metageneration_not_match: if_metageneration_not_match
         end
 
         ##
@@ -952,6 +1007,12 @@ module Google
         #
         # The API call to delete the bucket may be retried under certain
         # conditions. See {Google::Cloud#storage} to control this behavior.
+        #
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the bucket's current metageneration matches the given value.
+        # @param [Integer] if_metageneration_not_match Makes the operation
+        #   conditional on whether the bucket's current metageneration does not
+        #   match the given value.
         #
         # @return [Boolean] Returns `true` if the bucket was deleted.
         #
@@ -963,10 +1024,12 @@ module Google
         #   bucket = storage.bucket "my-bucket"
         #   bucket.delete
         #
-        def delete
+        def delete if_metageneration_match: nil, if_metageneration_not_match: nil
           ensure_service!
-          service.delete_bucket name, user_project: user_project
-          true
+          service.delete_bucket name,
+                                if_metageneration_match: if_metageneration_match,
+                                if_metageneration_not_match: if_metageneration_not_match,
+                                user_project: user_project
         end
 
         ##
@@ -2622,7 +2685,10 @@ module Google
           reload!
         end
 
-        def patch_gapi! *attributes
+        def patch_gapi! attributes,
+                        if_metageneration_match: nil,
+                        if_metageneration_not_match: nil
+          attributes = Array(attributes)
           attributes.flatten!
           return if attributes.empty?
           ensure_service!
@@ -2630,7 +2696,10 @@ module Google
             [attr, @gapi.send(attr)]
           end]
           patch_gapi = API::Bucket.new(**patch_args)
-          @gapi = service.patch_bucket name, patch_gapi,
+          @gapi = service.patch_bucket name,
+                                       patch_gapi,
+                                       if_metageneration_match: if_metageneration_match,
+                                       if_metageneration_not_match: if_metageneration_not_match,
                                        user_project: user_project
           @lazy = nil
           self
