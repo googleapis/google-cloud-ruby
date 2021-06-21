@@ -51,13 +51,13 @@ describe Google::Cloud::Trace::Railtie do
         Google::Cloud::Trace::Railtie.send :consolidate_rails_config, rails_config
 
         Google::Cloud::Trace.configure do |config|
-          config.project_id.must_equal "test-project"
-          config.credentials.must_equal "test/keyfile"
-          config.capture_stack.must_equal true
-          config.notifications.must_equal ["foo", "boo"]
-          config.max_data_length.must_equal 123
-          config.sampler.must_equal "test-sampler"
-          config.span_id_generator.must_equal a_test_generator
+          _(config.project_id).must_equal "test-project"
+          _(config.credentials).must_equal "test/keyfile"
+          _(config.capture_stack).must_equal true
+          _(config.notifications).must_equal ["foo", "boo"]
+          _(config.max_data_length).must_equal 123
+          _(config.sampler).must_equal "test-sampler"
+          _(config.span_id_generator).must_equal a_test_generator
         end
       end
     end
@@ -77,13 +77,13 @@ describe Google::Cloud::Trace::Railtie do
         Google::Cloud::Trace::Railtie.send :consolidate_rails_config, rails_config
 
         Google::Cloud::Trace.configure do |config|
-          config.project_id.must_equal "another-test-project"
-          config.credentials.must_equal "/another/test/keyfile"
-          config.capture_stack.must_equal false
-          config.notifications.must_equal ["blah"]
-          config.max_data_length.must_equal 345
-          config.sampler.must_equal "another-test-sampler"
-          config.span_id_generator.must_equal another_generator
+          _(config.project_id).must_equal "another-test-project"
+          _(config.credentials).must_equal "/another/test/keyfile"
+          _(config.capture_stack).must_equal false
+          _(config.notifications).must_equal ["blah"]
+          _(config.max_data_length).must_equal 345
+          _(config.sampler).must_equal "another-test-sampler"
+          _(config.span_id_generator).must_equal another_generator
         end
       end
     end
@@ -93,16 +93,16 @@ describe Google::Cloud::Trace::Railtie do
 
       Google::Cloud::Trace::Railtie.stub :valid_credentials?, false do
         Google::Cloud::Trace::Railtie.send :consolidate_rails_config, rails_config
-        Google::Cloud.configure.use_trace.must_equal false
+        _(Google::Cloud.configure.use_trace).must_equal false
       end
     end
 
     it "Set use_trace to true if Rails is in production" do
       Google::Cloud::Trace::Railtie.stub :valid_credentials?, true do
         Rails.env.stub :production?, true do
-          Google::Cloud.configure.use_trace.must_be_nil
+          _(Google::Cloud.configure.use_trace).must_be_nil
           Google::Cloud::Trace::Railtie.send :consolidate_rails_config, rails_config
-          Google::Cloud.configure.use_trace.must_equal true
+          _(Google::Cloud.configure.use_trace).must_equal true
         end
       end
     end
@@ -113,7 +113,7 @@ describe Google::Cloud::Trace::Railtie do
       Google::Cloud::Trace::Railtie.stub :valid_credentials?, true do
         Rails.env.stub :production?, false do
           Google::Cloud::Trace::Railtie.send :consolidate_rails_config, rails_config
-          Google::Cloud.configure.use_trace.must_equal true
+          _(Google::Cloud.configure.use_trace).must_equal true
         end
       end
     end
@@ -139,13 +139,13 @@ describe Google::Cloud::Trace::Railtie do
         Google::Cloud::Trace::Railtie.send :consolidate_rails_config, rails_config
 
         Google::Cloud::Trace.configure do |config|
-          config.project_id.must_equal "test-project"
-          config.credentials.must_equal "test/keyfile"
-          config.capture_stack.must_equal true
-          config.notifications.must_equal ["foo", "boo"]
-          config.max_data_length.must_equal 123
-          config.sampler.must_equal "test-sampler"
-          config.span_id_generator.must_equal a_test_generator
+          _(config.project_id).must_equal "test-project"
+          _(config.credentials).must_equal "test/keyfile"
+          _(config.capture_stack).must_equal true
+          _(config.notifications).must_equal ["foo", "boo"]
+          _(config.max_data_length).must_equal 123
+          _(config.sampler).must_equal "test-sampler"
+          _(config.span_id_generator).must_equal a_test_generator
         end
       end
     end
@@ -165,13 +165,13 @@ describe Google::Cloud::Trace::Railtie do
         Google::Cloud::Trace::Railtie.send :consolidate_rails_config, rails_config
 
         Google::Cloud::Trace.configure do |config|
-          config.project_id.must_equal "another-test-project"
-          config.credentials.must_equal "/another/test/keyfile"
-          config.capture_stack.must_equal false
-          config.notifications.must_equal ["blah"]
-          config.max_data_length.must_equal 345
-          config.sampler.must_equal "another-test-sampler"
-          config.span_id_generator.must_equal another_generator
+          _(config.project_id).must_equal "another-test-project"
+          _(config.credentials).must_equal "/another/test/keyfile"
+          _(config.capture_stack).must_equal false
+          _(config.notifications).must_equal ["blah"]
+          _(config.max_data_length).must_equal 345
+          _(config.sampler).must_equal "another-test-sampler"
+          _(config.span_id_generator).must_equal another_generator
         end
       end
     end
@@ -181,16 +181,16 @@ describe Google::Cloud::Trace::Railtie do
 
       Google::Cloud::Trace::Railtie.stub :valid_credentials?, false do
         Google::Cloud::Trace::Railtie.send :consolidate_rails_config, rails_config
-        Google::Cloud.configure.use_trace.must_equal false
+        _(Google::Cloud.configure.use_trace).must_equal false
       end
     end
 
     it "Set use_trace to true if Rails is in production" do
       Google::Cloud::Trace::Railtie.stub :valid_credentials?, true do
         Rails.env.stub :production?, true do
-          Google::Cloud.configure.use_trace.must_be_nil
+          _(Google::Cloud.configure.use_trace).must_be_nil
           Google::Cloud::Trace::Railtie.send :consolidate_rails_config, rails_config
-          Google::Cloud.configure.use_trace.must_equal true
+          _(Google::Cloud.configure.use_trace).must_equal true
         end
       end
     end
@@ -200,7 +200,7 @@ describe Google::Cloud::Trace::Railtie do
         Rails.env.stub :production?, true do
           Google::Cloud.configure.use_trace = false
           Google::Cloud::Trace::Railtie.send :consolidate_rails_config, rails_config
-          Google::Cloud.configure.use_trace.must_equal false
+          _(Google::Cloud.configure.use_trace).must_equal false
         end
       end
     end
@@ -211,7 +211,7 @@ describe Google::Cloud::Trace::Railtie do
       Google::Cloud::Trace::Railtie.stub :valid_credentials?, true do
         Rails.env.stub :production?, false do
           Google::Cloud::Trace::Railtie.send :consolidate_rails_config, rails_config
-          Google::Cloud.configure.use_trace.must_equal true
+          _(Google::Cloud.configure.use_trace).must_equal true
         end
       end
     end
