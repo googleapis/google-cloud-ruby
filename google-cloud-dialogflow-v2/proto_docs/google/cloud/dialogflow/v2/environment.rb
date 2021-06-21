@@ -52,7 +52,7 @@ module Google
         #     The maximum length is 500 characters. If exceeded, the request is rejected.
         # @!attribute [rw] agent_version
         #   @return [::String]
-        #     Optional. The agent version loaded into this environment.
+        #     Required. The agent version loaded into this environment.
         #     Supported formats:
         #     - `projects/<Project ID>/agent/versions/<Version ID>`
         #     - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
