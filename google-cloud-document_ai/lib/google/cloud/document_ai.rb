@@ -48,8 +48,8 @@ module Google
       # Create a new client object for DocumentProcessorService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client](https://googleapis.dev/ruby/google-cloud-document_ai-v1beta3/latest/Google/Cloud/DocumentAI/V1beta3/DocumentProcessorService/Client.html)
-      # for version V1beta3 of the API.
+      # [Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client](https://googleapis.dev/ruby/google-cloud-document_ai-v1/latest/Google/Cloud/DocumentAI/V1/DocumentProcessorService/Client.html)
+      # for version V1 of the API.
       # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the DocumentProcessorService service is
       # supported by that API version, and the corresponding gem is available, the
@@ -63,10 +63,10 @@ module Google
       # structured information from unstructured or semi-structured documents.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1beta3`.
+      #   Defaults to `:v1`.
       # @return [DocumentProcessorService::Client] A client object for the specified version.
       #
-      def self.document_processor_service version: :v1beta3, &block
+      def self.document_processor_service version: :v1, &block
         require "google/cloud/document_ai/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::DocumentAI

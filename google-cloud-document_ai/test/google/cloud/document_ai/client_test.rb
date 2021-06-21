@@ -28,7 +28,7 @@ class Google::Cloud::DocumentAI::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::DocumentAI.document_processor_service do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client, client
+      assert_kind_of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client, client
     end
   end
 end
