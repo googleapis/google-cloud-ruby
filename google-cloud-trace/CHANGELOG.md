@@ -1,5 +1,12 @@
 # Release History
 
+### 0.41.2 / 2021-06-22
+
+#### Bug Fixes
+
+* Error reporting no longer fails due to loading the wrong constant
+* Fixed a crash in the gRPC patch when no span is present in the current trace
+
 ### 0.41.1 / 2021-06-17
 
 #### Bug Fixes
