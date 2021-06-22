@@ -2,7 +2,7 @@
 
 API Client library for the Private Catalog API
 
-With Private Catalog, developers and cloud admins can make their solutions discoverable to their internal enterprise users. Cloud admins can manage their solutions and ensure their users are always launching the latest versions. Note that google-cloud-private_catalog-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-private_catalog instead. See the readme for more details.
+With Private Catalog, developers and cloud admins can make their solutions discoverable to their internal enterprise users. Cloud admins can manage their solutions and ensure their users are always launching the latest versions.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-private_catalog-v*`.
