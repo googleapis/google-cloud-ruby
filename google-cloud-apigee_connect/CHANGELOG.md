@@ -4,4 +4,4 @@
 
 #### Features
 
-* Initial generation of google-cloud-apigee_connect ([#12051](https://www.github.com/googleapis/google-cloud-ruby/issues/12051))
+* Initial generation of google-cloud-apigee_connect
