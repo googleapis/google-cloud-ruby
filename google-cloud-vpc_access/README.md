@@ -2,7 +2,7 @@
 
 API Client library for the Serverless VPC Access API
 
-Serverless VPC Access enables you to connect from a serverless environment on Google Cloud (Cloud Run, Cloud Functions, or the App Engine standard environment) directly to your VPC network. This connection makes it possible for your serverless environment to access Compute Engine VM instances, Memorystore instances, and any other resources with an internal IP address. Note that google-cloud-vpc_access-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-vpc_access instead. See the readme for more details.
+Serverless VPC Access enables you to connect from a serverless environment on Google Cloud (Cloud Run, Cloud Functions, or the App Engine standard environment) directly to your VPC network. This connection makes it possible for your serverless environment to access Compute Engine VM instances, Memorystore instances, and any other resources with an internal IP address.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-vpc_access-v*`.
