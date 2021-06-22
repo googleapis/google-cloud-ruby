@@ -388,11 +388,12 @@ class MockStorage < Minitest::Spec
                           source_files,
                           destination_gapi = nil,
                           destination_predefined_acl: nil,
+                          if_source_generation_match: nil,
                           if_generation_match: nil,
                           if_metageneration_match: nil,
                           user_project: nil,
                           options: {}
-    req = compose_request source_files, destination_gapi
+    req = compose_request source_files, destination_gapi, if_source_generation_match
     opts = {
       destination_predefined_acl: destination_predefined_acl,
       if_generation_match: if_generation_match,
@@ -403,7 +404,7 @@ class MockStorage < Minitest::Spec
     [bucket_name, file_name, req, opts]
   end
 
-  def compose_request source_files, destination_gapi
+  def compose_request source_files, destination_gapi, if_source_generation_match
     source_objects = source_files.map do |file|
       if file.is_a? String
         Google::Apis::StorageV1::ComposeRequest::SourceObject.new \
@@ -412,6 +413,18 @@ class MockStorage < Minitest::Spec
         Google::Apis::StorageV1::ComposeRequest::SourceObject.new \
           name: file.name,
           generation: file.generation
+      end
+    end
+    if if_source_generation_match
+      if source_files.count != if_source_generation_match.count
+        raise ArgumentError, "if provided, if_source_generation_match length must match sources length"
+      end
+      if_source_generation_match.each_with_index do |generation, i|
+        next unless generation
+        object_preconditions = Google::Apis::StorageV1::ComposeRequest::SourceObject::ObjectPreconditions.new(
+          if_generation_match: generation
+        )
+        source_objects[i].object_preconditions = object_preconditions
       end
     end
     Google::Apis::StorageV1::ComposeRequest.new(

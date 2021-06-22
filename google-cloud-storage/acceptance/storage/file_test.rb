@@ -687,6 +687,18 @@ describe Google::Cloud::Storage::File, :storage do
     composed.delete
   end
 
+  it "should raise when attempting to compose existing files with failing precondition" do
+    uploaded_a = bucket.create_file StringIO.new("a"), "a.txt"
+    uploaded_b = bucket.create_file StringIO.new("b"), "b.txt"
+    if_source_generation_match = [nil, (uploaded_b.generation - 1)] # Bad generation value.
+
+    expect do
+      bucket.compose [uploaded_a.name, uploaded_b.name], "ab.txt", if_source_generation_match: if_source_generation_match
+    end.must_raise Google::Cloud::FailedPreconditionError
+    uploaded_a.delete
+    uploaded_b.delete
+  end
+
   describe "anonymous project" do
     let(:anonymous_storage) { Google::Cloud::Storage.anonymous }
 
