@@ -2,13 +2,9 @@
 
 ### 2.0.0 / 2021-06-22
 
-#### ⚠ BREAKING CHANGES
-
-* **workflows:** Now defaults to version V1 of the service
-
 #### Features
 
-* Now defaults to version V1 of the service
+* Now defaults to version V1 of the service (BREAKING CHANGE)
 
 ### 1.1.0 / 2021-03-08
 
