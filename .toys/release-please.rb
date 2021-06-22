@@ -37,8 +37,10 @@ def run
 end
 
 def release_please gem_name
+  gem_name, release_as = gem_name.split ":"
   version = gem_version gem_name
-  puts "Running release-please for #{gem_name} from version #{version.inspect}", :bold
+  as_clause = release_as ? " as version #{release_as}" : ""
+  puts "Running release-please for #{gem_name} from version #{version}#{as_clause}", :bold
   cmd = [
     "npx", "release-please", "release-pr",
     "--package-name", gem_name,
@@ -48,6 +50,7 @@ def release_please gem_name
   ]
   cmd += ["--fork"] if use_fork
   cmd += ["--last-package-version", version] if version && version >= "0.1"
+  cmd += ["--release-as", release_as] if release_as
   cmd += ["--token", github_token] if github_token
   log_cmd = cmd.inspect
   log_cmd.sub! github_token, "****" if github_token
