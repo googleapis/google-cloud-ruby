@@ -193,9 +193,25 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the HumanReviewConfig that the document will be
         #     reviewed with.
+        # @!attribute [rw] enable_schema_validation
+        #   @return [::Boolean]
+        #     Whether the validation should be performed on the ad-hoc review request.
+        # @!attribute [rw] priority
+        #   @return [::Google::Cloud::DocumentAI::V1::ReviewDocumentRequest::Priority]
+        #     The priority of the human review task.
         class ReviewDocumentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The priority level of the human review task.
+          module Priority
+            # The default priority level.
+            DEFAULT = 0
+
+            # The urgent priority level. The labeling manager should allocate labeler
+            # resource to the urgent task queue to respect this priority level.
+            URGENT = 1
+          end
         end
 
         # Response message for review document method.

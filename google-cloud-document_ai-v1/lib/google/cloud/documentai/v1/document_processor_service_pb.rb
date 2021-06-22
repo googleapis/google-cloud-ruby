@@ -72,9 +72,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.documentai.v1.ReviewDocumentRequest" do
       optional :human_review_config, :string, 1
+      optional :enable_schema_validation, :bool, 3
+      optional :priority, :enum, 5, "google.cloud.documentai.v1.ReviewDocumentRequest.Priority"
       oneof :source do
         optional :inline_document, :message, 4, "google.cloud.documentai.v1.Document"
       end
+    end
+    add_enum "google.cloud.documentai.v1.ReviewDocumentRequest.Priority" do
+      value :DEFAULT, 0
+      value :URGENT, 1
     end
     add_message "google.cloud.documentai.v1.ReviewDocumentResponse" do
       optional :gcs_destination, :string, 1
@@ -99,6 +105,7 @@ module Google
         BatchProcessMetadata::IndividualProcessStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.BatchProcessMetadata.IndividualProcessStatus").msgclass
         BatchProcessMetadata::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.BatchProcessMetadata.State").enummodule
         ReviewDocumentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.ReviewDocumentRequest").msgclass
+        ReviewDocumentRequest::Priority = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.ReviewDocumentRequest.Priority").enummodule
         ReviewDocumentResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.ReviewDocumentResponse").msgclass
         ReviewDocumentOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.ReviewDocumentOperationMetadata").msgclass
       end
