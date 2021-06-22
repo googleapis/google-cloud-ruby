@@ -28,7 +28,7 @@ library = gapic.ruby_library(
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-service_usage",
         "ruby-cloud-title": "Service Usage",
-        "ruby-cloud-description": "Service Usage is an infrastructure service of Google Cloud that lets you list and manage other APIs and services in your Cloud projects. You can list and manage Google Cloud services and their APIs, as well as services created using Cloud Endpoints. Note that google-cloud-service_usage-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-service_usage instead. See the readme for more details.",
+        "ruby-cloud-description": "Service Usage is an infrastructure service of Google Cloud that lets you list and manage other APIs and services in your Cloud projects. You can list and manage Google Cloud services and their APIs, as well as services created using Cloud Endpoints.",
         "ruby-cloud-env-prefix": "SERVICE_USAGE",
         "ruby-cloud-wrapper-of": "v1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/service-usage/",

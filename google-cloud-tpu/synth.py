@@ -28,7 +28,7 @@ library = gapic.ruby_library(
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-tpu",
         "ruby-cloud-title": "Cloud TPU",
-        "ruby-cloud-description": "Tensor Processing Units (TPUs) are Google's custom-developed application-specific integrated circuits (ASICs) used to accelerate machine learning workloads. Cloud TPUs allow you to access TPUs from Compute Engine, Google Kubernetes Engine and AI Platform. Note that google-cloud-tpu-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-tpu instead. See the readme for more details.",
+        "ruby-cloud-description": "Tensor Processing Units (TPUs) are Google's custom-developed application-specific integrated circuits (ASICs) used to accelerate machine learning workloads. Cloud TPUs allow you to access TPUs from Compute Engine, Google Kubernetes Engine and AI Platform.",
         "ruby-cloud-env-prefix": "CLOUD_TPU",
         "ruby-cloud-wrapper-of": "v1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/tpu/",
