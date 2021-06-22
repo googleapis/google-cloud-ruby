@@ -2,7 +2,7 @@
 
 API Client library for the Service Usage API
 
-Service Usage is an infrastructure service of Google Cloud that lets you list and manage other APIs and services in your Cloud projects. You can list and manage Google Cloud services and their APIs, as well as services created using Cloud Endpoints. Note that google-cloud-service_usage-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-service_usage instead. See the readme for more details.
+Service Usage is an infrastructure service of Google Cloud that lets you list and manage other APIs and services in your Cloud projects. You can list and manage Google Cloud services and their APIs, as well as services created using Cloud Endpoints.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-service_usage-v*`.
