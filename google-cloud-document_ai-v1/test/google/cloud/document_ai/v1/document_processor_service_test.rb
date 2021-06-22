@@ -189,6 +189,8 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::ClientTest < Mi
     # Create request parameters for a unary method.
     inline_document = {}
     human_review_config = "hello world"
+    enable_schema_validation = true
+    priority = :DEFAULT
 
     review_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :review_document, name
@@ -196,6 +198,8 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::ClientTest < Mi
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1::Document), request["inline_document"]
       assert_equal :inline_document, request.source
       assert_equal "hello world", request["human_review_config"]
+      assert_equal true, request["enable_schema_validation"]
+      assert_equal :DEFAULT, request["priority"]
       refute_nil options
     end
 
@@ -206,35 +210,35 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::ClientTest < Mi
       end
 
       # Use hash object
-      client.review_document({ inline_document: inline_document, human_review_config: human_review_config }) do |response, operation|
+      client.review_document({ inline_document: inline_document, human_review_config: human_review_config, enable_schema_validation: enable_schema_validation, priority: priority }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.review_document inline_document: inline_document, human_review_config: human_review_config do |response, operation|
+      client.review_document inline_document: inline_document, human_review_config: human_review_config, enable_schema_validation: enable_schema_validation, priority: priority do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.review_document ::Google::Cloud::DocumentAI::V1::ReviewDocumentRequest.new(inline_document: inline_document, human_review_config: human_review_config) do |response, operation|
+      client.review_document ::Google::Cloud::DocumentAI::V1::ReviewDocumentRequest.new(inline_document: inline_document, human_review_config: human_review_config, enable_schema_validation: enable_schema_validation, priority: priority) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.review_document({ inline_document: inline_document, human_review_config: human_review_config }, grpc_options) do |response, operation|
+      client.review_document({ inline_document: inline_document, human_review_config: human_review_config, enable_schema_validation: enable_schema_validation, priority: priority }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.review_document(::Google::Cloud::DocumentAI::V1::ReviewDocumentRequest.new(inline_document: inline_document, human_review_config: human_review_config), grpc_options) do |response, operation|
+      client.review_document(::Google::Cloud::DocumentAI::V1::ReviewDocumentRequest.new(inline_document: inline_document, human_review_config: human_review_config, enable_schema_validation: enable_schema_validation, priority: priority), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

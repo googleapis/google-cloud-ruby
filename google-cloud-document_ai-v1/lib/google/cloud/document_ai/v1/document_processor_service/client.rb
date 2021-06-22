@@ -351,7 +351,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload review_document(inline_document: nil, human_review_config: nil)
+            # @overload review_document(inline_document: nil, human_review_config: nil, enable_schema_validation: nil, priority: nil)
             #   Pass arguments to `review_document` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -361,6 +361,10 @@ module Google
             #   @param human_review_config [::String]
             #     Required. The resource name of the HumanReviewConfig that the document will be
             #     reviewed with.
+            #   @param enable_schema_validation [::Boolean]
+            #     Whether the validation should be performed on the ad-hoc review request.
+            #   @param priority [::Google::Cloud::DocumentAI::V1::ReviewDocumentRequest::Priority]
+            #     The priority of the human review task.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
