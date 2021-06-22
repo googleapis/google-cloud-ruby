@@ -2,13 +2,9 @@
 
 ### 1.0.0 / 2021-06-22
 
-#### ⚠ BREAKING CHANGES
-
-* **document_ai:** Now defaults to version V1 of the service
-
 #### Features
 
-* Now defaults to version V1 of the service
+* Now defaults to version V1 of the service (BREAKING CHANGE)
 
 ### 0.3.0 / 2021-05-21
 
