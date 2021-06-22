@@ -39,13 +39,13 @@ describe GRPC::ActiveCallWithTrace do
   describe "#request_response" do
     it "calls super even if a span is not set" do
       Google::Cloud::Trace.stub :get, nil do
-        active_call_with_trace.request_response("test").must_equal "test-response"
+        _(active_call_with_trace.request_response("test")).must_equal "test-response"
       end
     end
 
     it "handles keyword arguments properly" do
       Google::Cloud::Trace.stub :get, nil do
-        active_call_with_trace.request_response("test", metadata: {foo: "bar"}).must_equal "test-response"
+        _(active_call_with_trace.request_response("test", metadata: {foo: "bar"})).must_equal "test-response"
       end
     end
 
@@ -56,10 +56,10 @@ describe GRPC::ActiveCallWithTrace do
       end
 
       Google::Cloud::Trace.stub :get, stubbed_span do
-        active_call_with_trace.request_response("test").must_equal "test-response"
+        _(active_call_with_trace.request_response("test")).must_equal "test-response"
       end
 
-      stubbed_span.labels[Google::Cloud::Trace::LabelKey::RPC_REQUEST_TYPE].must_equal "String"
+      _(stubbed_span.labels[Google::Cloud::Trace::LabelKey::RPC_REQUEST_TYPE]).must_equal "String"
     end
   end
 end

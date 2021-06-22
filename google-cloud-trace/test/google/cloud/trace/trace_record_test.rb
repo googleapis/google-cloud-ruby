@@ -30,15 +30,15 @@ describe Google::Cloud::Trace::TraceRecord do
                                              sampled: true,
                                              capture_stack: false
     trace = Google::Cloud::Trace::TraceRecord.new project_id, tc
-    trace.trace_context.must_equal tc
-    trace.trace_id.must_equal my_trace_id
+    _(trace.trace_context).must_equal tc
+    _(trace.trace_id).must_equal my_trace_id
   end
 
   it "initializes with no spans" do
     trace = empty_trace
 
-    trace.all_spans.must_be_empty
-    trace.root_spans.must_be_empty
+    _(trace.all_spans).must_be_empty
+    _(trace.root_spans).must_be_empty
   end
 
   it "can create a new populated span" do
@@ -52,35 +52,35 @@ describe Google::Cloud::Trace::TraceRecord do
                              start_time: start_time, end_time: end_time,
                              labels: labels
 
-    span.trace.must_equal trace
-    span.parent.must_be_nil
-    span.kind.must_equal Google::Cloud::Trace::SpanKind::RPC_SERVER
-    span.name.must_equal "aname"
-    span.start_time.must_equal start_time
-    span.end_time.must_equal end_time
-    span.labels.must_equal labels
-    span.children.must_be_empty
-    trace.all_spans.size.must_equal 1
-    trace.all_spans.must_include span
-    trace.root_spans.size.must_equal 1
-    trace.root_spans.must_include span
+    _(span.trace).must_equal trace
+    _(span.parent).must_be_nil
+    _(span.kind).must_equal Google::Cloud::Trace::SpanKind::RPC_SERVER
+    _(span.name).must_equal "aname"
+    _(span.start_time).must_equal start_time
+    _(span.end_time).must_equal end_time
+    _(span.labels).must_equal labels
+    _(span.children).must_be_empty
+    _(trace.all_spans.size).must_equal 1
+    _(trace.all_spans).must_include span
+    _(trace.root_spans.size).must_equal 1
+    _(trace.root_spans).must_include span
   end
 
   it "can create a new empty span" do
     trace = empty_trace
     span = trace.create_span ""
 
-    span.trace.must_equal trace
-    span.parent.must_be_nil
-    span.kind.must_equal Google::Cloud::Trace::SpanKind::UNSPECIFIED
-    span.name.must_be_empty
-    span.start_time.must_be_nil
-    span.end_time.must_be_nil
-    span.labels.must_be_empty
-    trace.all_spans.size.must_equal 1
-    trace.all_spans.must_include span
-    trace.root_spans.size.must_equal 1
-    trace.root_spans.must_include span
+    _(span.trace).must_equal trace
+    _(span.parent).must_be_nil
+    _(span.kind).must_equal Google::Cloud::Trace::SpanKind::UNSPECIFIED
+    _(span.name).must_be_empty
+    _(span.start_time).must_be_nil
+    _(span.end_time).must_be_nil
+    _(span.labels).must_be_empty
+    _(trace.all_spans.size).must_equal 1
+    _(trace.all_spans).must_include span
+    _(trace.root_spans.size).must_equal 1
+    _(trace.root_spans).must_include span
   end
 
   it "can create subspans" do
@@ -90,42 +90,42 @@ describe Google::Cloud::Trace::TraceRecord do
     subspan = span.create_span "bname",
                                kind: Google::Cloud::Trace::SpanKind::RPC_CLIENT
 
-    subspan.trace.must_equal trace
-    subspan.parent.must_equal span
-    subspan.name.must_equal "bname"
-    subspan.kind.must_equal Google::Cloud::Trace::SpanKind::RPC_CLIENT
-    subspan.start_time.must_be_nil
-    subspan.end_time.must_be_nil
-    subspan.labels.must_be_empty
-    trace.all_spans.size.must_equal 2
-    trace.all_spans.must_include span
-    trace.all_spans.must_include subspan
-    trace.root_spans.size.must_equal 1
-    trace.root_spans.must_include span
-    span.children.size.must_equal 1
-    span.children.must_include subspan
+    _(subspan.trace).must_equal trace
+    _(subspan.parent).must_equal span
+    _(subspan.name).must_equal "bname"
+    _(subspan.kind).must_equal Google::Cloud::Trace::SpanKind::RPC_CLIENT
+    _(subspan.start_time).must_be_nil
+    _(subspan.end_time).must_be_nil
+    _(subspan.labels).must_be_empty
+    _(trace.all_spans.size).must_equal 2
+    _(trace.all_spans).must_include span
+    _(trace.all_spans).must_include subspan
+    _(trace.root_spans.size).must_equal 1
+    _(trace.root_spans).must_include span
+    _(span.children.size).must_equal 1
+    _(span.children).must_include subspan
   end
 
   it "can start and finish spans" do
     trace = empty_trace
     span = trace.create_span "aname"
 
-    span.start_time.must_be_nil
-    span.end_time.must_be_nil
+    _(span.start_time).must_be_nil
+    _(span.end_time).must_be_nil
 
     pre_start_time = Time.now.utc
     span.start!
 
-    span.start_time.must_be :>=, pre_start_time
-    span.end_time.must_be_nil
+    _(span.start_time).must_be :>=, pre_start_time
+    _(span.end_time).must_be_nil
 
     between_time = Time.now.utc
     span.finish!
     post_end_time = Time.now.utc
 
-    span.start_time.must_be :<=, between_time
-    span.end_time.must_be :>=, between_time
-    span.end_time.must_be :<=, post_end_time
+    _(span.start_time).must_be :<=, between_time
+    _(span.end_time).must_be :>=, between_time
+    _(span.end_time).must_be :<=, post_end_time
   end
 
   it "can delete spans recursively" do
@@ -135,13 +135,13 @@ describe Google::Cloud::Trace::TraceRecord do
     subsubspan = subspan.create_span "cname"
     subspan.delete
 
-    subspan.exists?.must_equal false
-    subsubspan.exists?.must_equal false
-    span.children.must_be_empty
-    trace.all_spans.size.must_equal 1
-    trace.all_spans.must_include span
-    trace.root_spans.size.must_equal 1
-    trace.root_spans.must_include span
+    _(subspan.exists?).must_equal false
+    _(subsubspan.exists?).must_equal false
+    _(span.children).must_be_empty
+    _(trace.all_spans.size).must_equal 1
+    _(trace.all_spans).must_include span
+    _(trace.root_spans.size).must_equal 1
+    _(trace.root_spans).must_include span
   end
 
   it "can move spans to a new parent" do
@@ -150,15 +150,15 @@ describe Google::Cloud::Trace::TraceRecord do
     span2 = trace.create_span "bname"
     subspan = span1.create_span "cname"
 
-    span1.children.must_include subspan
-    span2.children.must_be_empty
-    subspan.parent.must_equal span1
+    _(span1.children).must_include subspan
+    _(span2.children).must_be_empty
+    _(subspan.parent).must_equal span1
 
     subspan.move_under span2
 
-    span1.children.must_be_empty
-    span2.children.must_include subspan
-    subspan.parent.must_equal span2
+    _(span1.children).must_be_empty
+    _(span2.children).must_include subspan
+    _(subspan.parent).must_equal span2
   end
 
   it "can create span trees using in_span" do
@@ -173,23 +173,23 @@ describe Google::Cloud::Trace::TraceRecord do
     root2 = trace.in_span("dname") { |span| span }
     after_time = Time.now.utc
 
-    trace.all_spans.size.must_equal 4
-    trace.root_spans.size.must_equal 2
+    _(trace.all_spans.size).must_equal 4
+    _(trace.root_spans.size).must_equal 2
 
-    root1.children.size.must_equal 2
-    root1.children.must_include sub1
-    root1.children.must_include sub2
-    root2.children.must_be_empty
+    _(root1.children.size).must_equal 2
+    _(root1.children).must_include sub1
+    _(root1.children).must_include sub2
+    _(root2.children).must_be_empty
 
-    root1.start_time.must_be :>=, before_time
-    sub1.start_time.must_be :>=, root1.start_time
-    sub1.end_time.must_be :>=, sub1.start_time
-    sub2.start_time.must_be :>=, sub1.end_time
-    sub2.end_time.must_be :>=, sub2.start_time
-    root1.end_time.must_be :>=, sub2.end_time
-    root2.start_time.must_be :>=, root1.end_time
-    root2.end_time.must_be :>=, root2.start_time
-    after_time.must_be :>=, root2.end_time
+    _(root1.start_time).must_be :>=, before_time
+    _(sub1.start_time).must_be :>=, root1.start_time
+    _(sub1.end_time).must_be :>=, sub1.start_time
+    _(sub2.start_time).must_be :>=, sub1.end_time
+    _(sub2.end_time).must_be :>=, sub2.start_time
+    _(root1.end_time).must_be :>=, sub2.end_time
+    _(root2.start_time).must_be :>=, root1.end_time
+    _(root2.end_time).must_be :>=, root2.start_time
+    _(after_time).must_be :>=, root2.end_time
   end
 
   it "converts to and from a protobuf" do
@@ -242,8 +242,8 @@ describe Google::Cloud::Trace::TraceRecord do
           labels: sub_labels)
       ]
 
-    trace.to_grpc.must_equal proto
-    Google::Cloud::Trace::TraceRecord.from_grpc(proto).must_equal trace
+    _(trace.to_grpc).must_equal proto
+    _(Google::Cloud::Trace::TraceRecord.from_grpc(proto)).must_equal trace
   end
 
   it "converts to and from a protobuf with an orphaned span" do
@@ -298,7 +298,7 @@ describe Google::Cloud::Trace::TraceRecord do
           labels: sub_labels)
       ]
 
-    trace.to_grpc.must_equal proto
-    Google::Cloud::Trace::TraceRecord.from_grpc(proto).must_equal trace
+    _(trace.to_grpc).must_equal proto
+    _(Google::Cloud::Trace::TraceRecord.from_grpc(proto)).must_equal trace
   end
 end

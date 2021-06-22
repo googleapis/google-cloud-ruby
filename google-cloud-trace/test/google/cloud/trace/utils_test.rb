@@ -28,29 +28,31 @@ describe Google::Cloud::Trace::Utils do
   }
 
     it "accepts nil" do
-    Google::Cloud::Trace::Utils.time_to_grpc(nil).must_be_nil
+    _(Google::Cloud::Trace::Utils.time_to_grpc(nil)).must_be_nil
   end
 
   it "converts time objects to proto objects" do
-    Google::Cloud::Trace::Utils.time_to_grpc(time_obj).must_equal time_proto
+    _(Google::Cloud::Trace::Utils.time_to_grpc(time_obj)).must_equal time_proto
   end
 
   it "converts float objects to proto objects" do
     # Float math is imprecise, so we're faking a sorta-equal
     result = Google::Cloud::Trace::Utils.time_to_grpc(time_float)
-    result.seconds.must_equal secs
-    result.nanos.must_be_close_to nsecs, 1000
+    _(result.seconds).must_equal secs
+    _(result.nanos).must_be_close_to nsecs, 1000
   end
 
   it "converts int objects to proto objects" do
-    Google::Cloud::Trace::Utils.time_to_grpc(secs).must_equal Google::Protobuf::Timestamp.new seconds: secs
+    _(Google::Cloud::Trace::Utils.time_to_grpc(secs)).must_equal Google::Protobuf::Timestamp.new seconds: secs
   end
 
   it "raises when called with a string" do
-    proc { Google::Cloud::Trace::Utils.time_to_grpc("test")}.must_raise ArgumentError
+    assert_raises ArgumentError do
+      Google::Cloud::Trace::Utils.time_to_grpc("test")
+    end
   end
 
   it "converts proto objects to time objects" do
-    Google::Cloud::Trace::Utils.grpc_to_time(time_proto).must_equal time_obj
+    _(Google::Cloud::Trace::Utils.grpc_to_time(time_proto)).must_equal time_obj
   end
 end
