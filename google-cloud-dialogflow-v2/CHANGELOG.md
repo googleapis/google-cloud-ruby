@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 / 2021-06-22
+
+#### Features
+
+* Provide a helper for agent version paths
+
 ### 0.9.0 / 2021-06-17
 
 #### Features
