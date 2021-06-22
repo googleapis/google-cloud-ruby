@@ -2,7 +2,7 @@
 
 API Client library for the Cloud Database Migration Service API
 
-Database Migration Service makes it easier for you to migrate your data to Google Cloud. Database Migration Service helps you lift and shift your MySQL and PostgreSQL workloads into Cloud SQL. Database Migration Service streamlines networking workflow, manages the initial snapshot and ongoing replication, and provides a status of the migration operation. Note that google-cloud-cloud_dms-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-cloud_dms instead. See the readme for more details.
+Database Migration Service makes it easier for you to migrate your data to Google Cloud. Database Migration Service helps you lift and shift your MySQL and PostgreSQL workloads into Cloud SQL. Database Migration Service streamlines networking workflow, manages the initial snapshot and ongoing replication, and provides a status of the migration operation.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-cloud_dms-v*`.
