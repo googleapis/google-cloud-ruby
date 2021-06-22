@@ -240,7 +240,8 @@ def lookup_precedents_in_repo_metadata file_path
     @service_display_name = repo_metadata["name_pretty"].sub(/\s+API$/, "").sub(/\s+V\d[a-z0-9]*$/, "")
   end
   if repo_metadata.include? "ruby-cloud-description"
-    @description = repo_metadata["ruby-cloud-description"]
+    versioned_suffix = /\sNote that [a-z0-9_-]+ is a version-specific client library\. For most uses, we recommend installing the main client library [a-z0-9_-]+ instead\. See the readme for more details\./
+    @description = repo_metadata["ruby-cloud-description"].sub(versioned_suffix, "")
   end
   if repo_metadata.include? "ruby-cloud-env-prefix"
     @env_prefix = repo_metadata["ruby-cloud-env-prefix"]

@@ -28,7 +28,7 @@ library = gapic.ruby_library(
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-life_sciences",
         "ruby-cloud-title": "Cloud Life Sciences",
-        "ruby-cloud-description": "Cloud Life Sciences is a suite of services and tools for managing, processing, and transforming life sciences data. It also enables advanced insights and operational workflows using highly scalable and compliant infrastructure. Note that google-cloud-life_sciences-v2beta is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-life_sciences instead. See the readme for more details.",
+        "ruby-cloud-description": "Cloud Life Sciences is a suite of services and tools for managing, processing, and transforming life sciences data. It also enables advanced insights and operational workflows using highly scalable and compliant infrastructure.",
         "ruby-cloud-env-prefix": "LIFE_SCIENCES",
         "ruby-cloud-wrapper-of": "v2beta:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/life-sciences/",

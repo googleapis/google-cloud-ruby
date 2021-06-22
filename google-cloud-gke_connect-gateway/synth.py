@@ -28,7 +28,7 @@ library = gapic.ruby_library(
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-gke_connect-gateway",
         "ruby-cloud-title": "Connect Gateway",
-        "ruby-cloud-description": "The Connect gateway builds on the power of fleets to let Anthos users connect to and run commands against registered Anthos clusters in a simple, consistent, and secured way, whether the clusters are on Google Cloud, other public clouds, or on premises, and makes it easier to automate DevOps processes across all your clusters. Note that google-cloud-gke_connect-gateway-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-gke_connect-gateway instead. See the readme for more details.",
+        "ruby-cloud-description": "The Connect gateway builds on the power of fleets to let Anthos users connect to and run commands against registered Anthos clusters in a simple, consistent, and secured way, whether the clusters are on Google Cloud, other public clouds, or on premises, and makes it easier to automate DevOps processes across all your clusters.",
         "ruby-cloud-env-prefix": "GKE_CONNECT_GATEWAY",
         "ruby-cloud-wrapper-of": "v1beta1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/anthos/multicluster-management/gateway/",

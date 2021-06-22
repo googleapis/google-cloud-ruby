@@ -28,7 +28,7 @@ library = gapic.ruby_library(
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-essential_contacts",
         "ruby-cloud-title": "Essential Contacts",
-        "ruby-cloud-description": "Many Google Cloud services, such as Cloud Billing, send out notifications to share important information with Google Cloud users. By default, these notifications are sent to members with certain Identity and Access Management (IAM) roles. With Essential Contacts, you can customize who receives notifications by providing your own list of contacts. Note that google-cloud-essential_contacts-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-essential_contacts instead. See the readme for more details.",
+        "ruby-cloud-description": "Many Google Cloud services, such as Cloud Billing, send out notifications to share important information with Google Cloud users. By default, these notifications are sent to members with certain Identity and Access Management (IAM) roles. With Essential Contacts, you can customize who receives notifications by providing your own list of contacts.",
         "ruby-cloud-env-prefix": "ESSENTIAL_CONTACTS",
         "ruby-cloud-wrapper-of": "v1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/resource-manager/docs/managing-notification-contacts/",

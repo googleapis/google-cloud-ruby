@@ -28,7 +28,7 @@ library = gapic.ruby_library(
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-cloud_dms",
         "ruby-cloud-title": "Cloud Database Migration Service",
-        "ruby-cloud-description": "Database Migration Service makes it easier for you to migrate your data to Google Cloud. Database Migration Service helps you lift and shift your MySQL and PostgreSQL workloads into Cloud SQL. Database Migration Service streamlines networking workflow, manages the initial snapshot and ongoing replication, and provides a status of the migration operation. Note that google-cloud-cloud_dms-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-cloud_dms instead. See the readme for more details.",
+        "ruby-cloud-description": "Database Migration Service makes it easier for you to migrate your data to Google Cloud. Database Migration Service helps you lift and shift your MySQL and PostgreSQL workloads into Cloud SQL. Database Migration Service streamlines networking workflow, manages the initial snapshot and ongoing replication, and provides a status of the migration operation.",
         "ruby-cloud-env-prefix": "DATABASE_MIGRATION",
         "ruby-cloud-wrapper-of": "v1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/database-migration/",

@@ -28,7 +28,7 @@ library = gapic.ruby_library(
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-vpc_access",
         "ruby-cloud-title": "Serverless VPC Access",
-        "ruby-cloud-description": "Serverless VPC Access enables you to connect from a serverless environment on Google Cloud (Cloud Run, Cloud Functions, or the App Engine standard environment) directly to your VPC network. This connection makes it possible for your serverless environment to access Compute Engine VM instances, Memorystore instances, and any other resources with an internal IP address. Note that google-cloud-vpc_access-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-vpc_access instead. See the readme for more details.",
+        "ruby-cloud-description": "Serverless VPC Access enables you to connect from a serverless environment on Google Cloud (Cloud Run, Cloud Functions, or the App Engine standard environment) directly to your VPC network. This connection makes it possible for your serverless environment to access Compute Engine VM instances, Memorystore instances, and any other resources with an internal IP address.",
         "ruby-cloud-env-prefix": "VPC_ACCESS",
         "ruby-cloud-wrapper-of": "v1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/vpc/docs/serverless-vpc-access",

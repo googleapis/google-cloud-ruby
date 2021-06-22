@@ -28,7 +28,7 @@ library = gapic.ruby_library(
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-shell",
         "ruby-cloud-title": "Cloud Shell",
-        "ruby-cloud-description": "Cloud Shell is an interactive shell environment for Google Cloud that makes it easy for you to learn and experiment with Google Cloud and manage your projects and resources from your web browser. Note that google-cloud-shell-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-shell instead. See the readme for more details.",
+        "ruby-cloud-description": "Cloud Shell is an interactive shell environment for Google Cloud that makes it easy for you to learn and experiment with Google Cloud and manage your projects and resources from your web browser.",
         "ruby-cloud-env-prefix": "CLOUD_SHELL",
         "ruby-cloud-wrapper-of": "v1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/shell/",

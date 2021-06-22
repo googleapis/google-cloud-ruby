@@ -28,7 +28,7 @@ library = gapic.ruby_library(
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-private_catalog",
         "ruby-cloud-title": "Private Catalog",
-        "ruby-cloud-description": "With Private Catalog, developers and cloud admins can make their solutions discoverable to their internal enterprise users. Cloud admins can manage their solutions and ensure their users are always launching the latest versions. Note that google-cloud-private_catalog-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-private_catalog instead. See the readme for more details.",
+        "ruby-cloud-description": "With Private Catalog, developers and cloud admins can make their solutions discoverable to their internal enterprise users. Cloud admins can manage their solutions and ensure their users are always launching the latest versions.",
         "ruby-cloud-env-prefix": "PRIVATE_CATALOG",
         "ruby-cloud-wrapper-of": "v1beta1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/private-catalog/",
