@@ -1,5 +1,24 @@
 # Release History
 
+### 1.32.0 / 2021-06-22
+
+#### Features
+
+* Add sources_if_generation_match to Bucket#compose
+* Add support for (meta)generation preconditions to File operations
+  * Add if_(meta)generation_match options to Bucket#compose
+  * Add if_(meta)generation_(not_)match options to Bucket#create_file
+  * Add if_(meta)generation_(not_)match options to Bucket#file
+  * Add if_(meta)generation_(not_)match options to File#delete.
+  * Add if_(meta)generation_(not_)match options to File#rewrite
+  * Add generation and if_(meta)generation_(not_)match options to File#update
+  * Add generation and if_(meta)generation_(not_)match options to File::Acl predefined_acl methods
+
+#### Bug Fixes
+
+* Expand googleauth dependency to support future 1.x versions
+* Update File::Verifier to test for File#to_path
+
 ### 1.31.1 / 2021-05-19
 
 #### Documentation
