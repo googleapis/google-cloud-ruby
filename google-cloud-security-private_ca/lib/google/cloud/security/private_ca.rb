@@ -49,8 +49,8 @@ module Google
         # Create a new client object for CertificateAuthorityService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client](https://googleapis.dev/ruby/google-cloud-security-private_ca-v1beta1/latest/Google/Cloud/Security/PrivateCA/V1beta1/CertificateAuthorityService/Client.html)
-        # for version V1beta1 of the API.
+        # [Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client](https://googleapis.dev/ruby/google-cloud-security-private_ca-v1/latest/Google/Cloud/Security/PrivateCA/V1/CertificateAuthorityService/Client.html)
+        # for version V1 of the API.
         # However, you can specify specify a different API version by passing it in the
         # `version` parameter. If the CertificateAuthorityService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -62,10 +62,10 @@ module Google
         # certificate authorities and issued certificates.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta1`.
+        #   Defaults to `:v1`.
         # @return [CertificateAuthorityService::Client] A client object for the specified version.
         #
-        def self.certificate_authority_service version: :v1beta1, &block
+        def self.certificate_authority_service version: :v1, &block
           require "google/cloud/security/private_ca/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Security::PrivateCA

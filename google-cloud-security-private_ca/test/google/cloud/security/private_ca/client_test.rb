@@ -28,7 +28,7 @@ class Google::Cloud::Security::PrivateCA::ClientConstructionMinitest < Minitest:
       client = Google::Cloud::Security::PrivateCA.certificate_authority_service do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client, client
+      assert_kind_of Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client, client
     end
   end
 end
