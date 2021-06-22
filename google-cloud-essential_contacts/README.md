@@ -2,7 +2,7 @@
 
 API Client library for the Essential Contacts API
 
-Many Google Cloud services, such as Cloud Billing, send out notifications to share important information with Google Cloud users. By default, these notifications are sent to members with certain Identity and Access Management (IAM) roles. With Essential Contacts, you can customize who receives notifications by providing your own list of contacts. Note that google-cloud-essential_contacts-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-essential_contacts instead. See the readme for more details.
+Many Google Cloud services, such as Cloud Billing, send out notifications to share important information with Google Cloud users. By default, these notifications are sent to members with certain Identity and Access Management (IAM) roles. With Essential Contacts, you can customize who receives notifications by providing your own list of contacts.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-essential_contacts-v*`.
