@@ -2,7 +2,7 @@
 
 API Client library for the Cloud Shell API
 
-Cloud Shell is an interactive shell environment for Google Cloud that makes it easy for you to learn and experiment with Google Cloud and manage your projects and resources from your web browser. Note that google-cloud-shell-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-shell instead. See the readme for more details.
+Cloud Shell is an interactive shell environment for Google Cloud that makes it easy for you to learn and experiment with Google Cloud and manage your projects and resources from your web browser.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-shell-v*`.
