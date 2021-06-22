@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.0 / 2021-06-22
+
+#### Features
+
+* Bump version to 1.0 to reflect GA status
+
 ### 0.2.1 / 2021-04-05
 
 #### Documentation
