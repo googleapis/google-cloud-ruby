@@ -42,7 +42,15 @@ describe GRPC::Core::CallWithTrace do
   let (:call_with_trace) { MockGRPCCall.new }
 
   describe "#run_batch" do
-    it "doesn't interfere orignal #run_patch if there are no parent span" do
+    it "doesn't interfere orignal #run_patch if there is no parent span" do
+      Google::Cloud::Trace.stub :get, Google::Cloud::Trace::TraceRecord.new("hello") do
+        call_with_trace.run_batch
+      end
+
+      _(call_with_trace.run_batch_count).must_equal 1
+    end
+
+    it "doesn't interfere orignal #run_patch if there is no current trace record at all" do
       Google::Cloud::Trace.stub :get, nil do
         call_with_trace.run_batch
       end
