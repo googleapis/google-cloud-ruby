@@ -1,5 +1,15 @@
 # Release History
 
+### 1.0.0 / 2021-06-22
+
+#### ⚠ BREAKING CHANGES
+
+* **security-private_ca:** Now defaults to version V1 of the service
+
+#### Features
+
+* Now defaults to version V1 of the service
+
 ### 0.2.0 / 2021-03-08
 
 #### Features
