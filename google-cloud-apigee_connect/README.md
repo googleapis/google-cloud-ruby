@@ -2,7 +2,7 @@
 
 API Client library for the Apigee Connect API
 
-Apigee Connect allows the Apigee hybrid management plane to connect securely to the MART service in the runtime plane without requiring you to expose the MART endpoint on the internet. If you use Apigee Connect, you do not need to configure the MART ingress gateway with a host alias and an authorized DNS certificate. Note that google-cloud-apigee_connect-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-apigee_connect instead. See the readme for more details.
+Apigee Connect allows the Apigee hybrid management plane to connect securely to the MART service in the runtime plane without requiring you to expose the MART endpoint on the internet. If you use Apigee Connect, you do not need to configure the MART ingress gateway with a host alias and an authorized DNS certificate.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-apigee_connect-v*`.
