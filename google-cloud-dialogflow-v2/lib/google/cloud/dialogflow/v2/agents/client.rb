@@ -240,6 +240,10 @@ module Google
             ##
             # Creates/updates the specified agent.
             #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
+            #
             # @overload set_agent(request, options = nil)
             #   Pass arguments to `set_agent` via a request object, either of type
             #   {::Google::Cloud::Dialogflow::V2::SetAgentRequest} or an equivalent Hash.
@@ -454,7 +458,10 @@ module Google
             ##
             # Trains the specified agent.
             #
-            # Operation <response: {::Google::Protobuf::Empty google.protobuf.Empty}>
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             #
             # @overload train_agent(request, options = nil)
             #   Pass arguments to `train_agent` via a request object, either of type
@@ -523,8 +530,6 @@ module Google
 
             ##
             # Exports the specified agent to a ZIP file.
-            #
-            # Operation <response: {::Google::Cloud::Dialogflow::V2::ExportAgentResponse ExportAgentResponse}>
             #
             # @overload export_agent(request, options = nil)
             #   Pass arguments to `export_agent` via a request object, either of type
@@ -607,9 +612,12 @@ module Google
             # call {::Google::Cloud::Dialogflow::V2::Agents::Client#train_agent TrainAgent} and wait for the operation it returns in order to train
             # explicitly.
             #
-            # Operation <response: {::Google::Protobuf::Empty google.protobuf.Empty}>
             # An operation which tracks when importing is complete. It only tracks
             # when the draft agent is updated not when it is done training.
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             #
             # @overload import_agent(request, options = nil)
             #   Pass arguments to `import_agent` via a request object, either of type
@@ -691,9 +699,12 @@ module Google
             # completed yet. Please call {::Google::Cloud::Dialogflow::V2::Agents::Client#train_agent TrainAgent} and wait for the operation it
             # returns in order to train explicitly.
             #
-            # Operation <response: {::Google::Protobuf::Empty google.protobuf.Empty}>
             # An operation which tracks when restoring is complete. It only tracks
             # when the draft agent is updated not when it is done training.
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             #
             # @overload restore_agent(request, options = nil)
             #   Pass arguments to `restore_agent` via a request object, either of type

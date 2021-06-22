@@ -337,6 +337,10 @@ module Google
             ##
             # Creates an intent in the specified agent.
             #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
+            #
             # @overload create_intent(request, options = nil)
             #   Pass arguments to `create_intent` via a request object, either of type
             #   {::Google::Cloud::Dialogflow::V2::CreateIntentRequest} or an equivalent Hash.
@@ -414,6 +418,10 @@ module Google
             ##
             # Updates the specified intent.
             #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
+            #
             # @overload update_intent(request, options = nil)
             #   Pass arguments to `update_intent` via a request object, either of type
             #   {::Google::Cloud::Dialogflow::V2::UpdateIntentRequest} or an equivalent Hash.
@@ -490,6 +498,10 @@ module Google
             ##
             # Deletes the specified intent and its direct or indirect followup intents.
             #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
+            #
             # @overload delete_intent(request, options = nil)
             #   Pass arguments to `delete_intent` via a request object, either of type
             #   {::Google::Cloud::Dialogflow::V2::DeleteIntentRequest} or an equivalent Hash.
@@ -558,7 +570,10 @@ module Google
             ##
             # Updates/Creates multiple intents in the specified agent.
             #
-            # Operation <response: {::Google::Cloud::Dialogflow::V2::BatchUpdateIntentsResponse BatchUpdateIntentsResponse}>
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             #
             # @overload batch_update_intents(request, options = nil)
             #   Pass arguments to `batch_update_intents` via a request object, either of type
@@ -644,7 +659,10 @@ module Google
             ##
             # Deletes intents in the specified agent.
             #
-            # Operation <response: {::Google::Protobuf::Empty google.protobuf.Empty}>
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             #
             # @overload batch_delete_intents(request, options = nil)
             #   Pass arguments to `batch_delete_intents` via a request object, either of type
