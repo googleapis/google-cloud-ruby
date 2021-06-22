@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.0 / 2021-06-22
+
+#### Features
+
+* Now defaults to version V1 of the service (BREAKING CHANGE)
+
 ### 0.2.0 / 2021-03-08
 
 #### Features
