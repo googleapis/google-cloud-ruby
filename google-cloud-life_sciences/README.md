@@ -2,7 +2,7 @@
 
 API Client library for the Cloud Life Sciences API
 
-Cloud Life Sciences is a suite of services and tools for managing, processing, and transforming life sciences data. It also enables advanced insights and operational workflows using highly scalable and compliant infrastructure. Note that google-cloud-life_sciences-v2beta is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-life_sciences instead. See the readme for more details.
+Cloud Life Sciences is a suite of services and tools for managing, processing, and transforming life sciences data. It also enables advanced insights and operational workflows using highly scalable and compliant infrastructure.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-cloud-life_sciences-v*`.
