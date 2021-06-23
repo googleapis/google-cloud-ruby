@@ -208,6 +208,52 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     mock.verify
   end
 
+  it "creates a file with a StringIO and checksum: :md5" do
+    new_file_name = random_file_path
+    new_file_contents = StringIO.new "Hello world"
+
+    mock = Minitest::Mock.new
+    mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+      insert_object_args(bucket.name, empty_file_gapi(md5: "PiWWCnnbxptnTNTsZ6csYg=="), name: new_file_name, upload_source: new_file_contents)
+
+    bucket.service.mocked_service = mock
+
+    bucket.create_file new_file_contents, new_file_name, checksum: :md5
+
+    mock.verify
+  end
+
+  it "creates a file with a StringIO and checksum: :crc32c" do
+    new_file_name = random_file_path
+    new_file_contents = StringIO.new "Hello world"
+
+    mock = Minitest::Mock.new
+    mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+      insert_object_args(bucket.name, empty_file_gapi(crc32c: "crUfeA=="), name: new_file_name, upload_source: new_file_contents)
+
+    bucket.service.mocked_service = mock
+
+    bucket.create_file new_file_contents, new_file_name, checksum: :crc32c
+
+    mock.verify
+  end
+
+  it "raises when create_file is called with both 'checksum: :md5' and 'md5'" do
+    new_file_name = random_file_path
+    new_file_contents = StringIO.new "Hello world"
+    expect do
+      bucket.create_file new_file_contents, new_file_name, checksum: :md5, md5: "PiWWCnnbxptnTNTsZ6csYg=="
+    end.must_raise ArgumentError
+  end
+
+  it "raises when create_file is called with both 'checksum: :crc32c' and 'crc32c'" do
+    new_file_name = random_file_path
+    new_file_contents = StringIO.new "Hello world"
+    expect do
+      bucket.create_file new_file_contents, new_file_name, checksum: :crc32c, crc32c: "crUfeA=="
+    end.must_raise ArgumentError
+  end
+
   it "raises when creating a file with a StringIO and missing path" do
     new_file_contents = StringIO.new "Hello world"
 
@@ -253,20 +299,62 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     end
   end
 
+  it "creates a file with checksum: :md5" do
+    new_file_name = random_file_path
+
+    Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world!"
+      tmpfile.rewind
+
+      md5 = Google::Cloud::Storage::File::Verifier.md5_for tmpfile
+
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+        insert_object_args(bucket.name, empty_file_gapi(md5: md5), name: new_file_name, upload_source: tmpfile)
+
+      bucket.service.mocked_service = mock
+
+      bucket.create_file tmpfile, new_file_name, checksum: :md5
+
+      mock.verify
+    end
+  end
+
+  it "creates a file with checksum: :crc32c" do
+    new_file_name = random_file_path
+
+    Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
+      tmpfile.write "Hello world!"
+      tmpfile.rewind
+
+      crc32c = Google::Cloud::Storage::File::Verifier.crc32c_for tmpfile
+
+      mock = Minitest::Mock.new
+      mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
+        insert_object_args(bucket.name, empty_file_gapi(crc32c: crc32c), name: new_file_name, upload_source: tmpfile)
+
+      bucket.service.mocked_service = mock
+
+      bucket.create_file tmpfile, new_file_name, checksum: :crc32c
+
+      mock.verify
+    end
+  end
+
   it "creates a file with md5" do
     new_file_name = random_file_path
 
     Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
-      tmpfile.write "Hello world"
+      tmpfile.write "Hello world!"
       tmpfile.rewind
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi(md5: "HXB937GQDFxDFqUGi//weQ=="), name: new_file_name, upload_source: tmpfile)
+        insert_object_args(bucket.name, empty_file_gapi(md5: "hvsmnRkNLIX24EaM7KQqIA=="), name: new_file_name, upload_source: tmpfile)
 
       bucket.service.mocked_service = mock
 
-      bucket.create_file tmpfile, new_file_name, md5: "HXB937GQDFxDFqUGi//weQ=="
+      bucket.create_file tmpfile, new_file_name, md5: "hvsmnRkNLIX24EaM7KQqIA=="
 
       mock.verify
     end
@@ -276,16 +364,16 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     new_file_name = random_file_path
 
     Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
-      tmpfile.write "Hello world"
+      tmpfile.write "Hello world!"
       tmpfile.rewind
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi(crc32c: "Lm1F3g=="), name: new_file_name, upload_source: tmpfile)
+        insert_object_args(bucket.name, empty_file_gapi(crc32c: "e5jnUQ=="), name: new_file_name, upload_source: tmpfile)
 
       bucket.service.mocked_service = mock
 
-      bucket.create_file tmpfile, new_file_name, crc32c: "Lm1F3g=="
+      bucket.create_file tmpfile, new_file_name, crc32c: "e5jnUQ=="
 
       mock.verify
     end

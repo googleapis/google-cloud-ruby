@@ -1230,16 +1230,25 @@ module Google
         #   changed to a time in the future. If custom_time must be unset, you
         #   must either perform a rewrite operation, or upload the data again
         #   and create a new file.
+        # @param [Symbol, nil] checksum The type of checksum for the client to
+        #   automatically calculate and send with the create request to verify
+        #   the integrity of the object. Supported values are `:crc32c`, `:md5`
+        #   and `nil`. The default is `nil`. Do not provide if also providing a
+        #   corresponding `crc32c` or `md5` argument. See
+        #   [Validation](https://cloud.google.com/storage/docs/hashes-etags)
+        #   for more information.
         # @param [String] crc32c The CRC32c checksum of the file data, as
         #   described in [RFC 4960, Appendix
         #   B](http://tools.ietf.org/html/rfc4960#appendix-B).
         #   If provided, Cloud Storage will only create the file if the value
-        #   matches the value calculated by the service. See
+        #   matches the value calculated by the service. Do not provide if also
+        #   providing a `checksum: :crc32c` argument. See
         #   [Validation](https://cloud.google.com/storage/docs/hashes-etags)
         #   for more information.
         # @param [String] md5 The MD5 hash of the file data. If provided, Cloud
         #   Storage will only create the file if the value matches the value
-        #   calculated by the service. See
+        #   calculated by the service. Do not provide if also providing a
+        #   `checksum: :md5` argument. See
         #   [Validation](https://cloud.google.com/storage/docs/hashes-etags) for
         #   more information.
         # @param [Hash] metadata A hash of custom, user-provided web-safe keys
@@ -1371,6 +1380,7 @@ module Google
                         content_language: nil,
                         content_type: nil,
                         custom_time: nil,
+                        checksum: nil,
                         crc32c: nil,
                         md5: nil,
                         metadata: nil,
@@ -1390,6 +1400,14 @@ module Google
           raise ArgumentError, "must provide path" if path.nil?
 
 
+          case checksum
+          when :crc32c
+            raise ArgumentError, "'checksum: :crc32c' should not be provided when a 'crc32c' arg is provided" if crc32c
+            crc32c = File::Verifier.crc32c_for file
+          when :md5
+            raise ArgumentError, "'checksum: :md5' should not be provided when an 'md5' arg is provided" if md5
+            md5 = File::Verifier.md5_for file
+          end
           gapi = service.insert_file name,
                                      file,
                                      path,
