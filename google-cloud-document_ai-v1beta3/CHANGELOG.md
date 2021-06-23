@@ -1,5 +1,16 @@
 # Release History
 
+### 0.9.0 / 2021-06-23
+
+#### Features
+
+* Support processor management methods
+* Use non-regionalized default host name
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.8.0 / 2021-05-06
 
 #### Features
