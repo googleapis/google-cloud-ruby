@@ -1,5 +1,12 @@
 # Release History
 
+### 0.6.1 / 2021-06-23
+
+#### Bug Fixes
+
+* Moved CommitResponse into a separate proto file
+* Support future 1.x versions of gapic-common
+
 ### 0.6.0 / 2021-04-05
 
 #### Features
