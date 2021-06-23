@@ -19,6 +19,9 @@ desc "Runs release-please."
 flag :github_token, "--github-token=TOKEN", default: ENV["GITHUB_TOKEN"]
 flag :install
 flag :use_fork, "--fork"
+flag :delay, "--delay=SECS", default: "2"
+flag :retries, "--retry=TIMES", default: ""
+flag :retry_delay, "--retry-delay=SECS", default: "4"
 remaining_args :gems, desc: "Release the specified gems. If no specific gem is provided, all gems are checked."
 
 include :exec, e: true
@@ -31,16 +34,31 @@ def run
     exit
   end
   if gems.empty?
-    set :gems, Dir.glob("*/*.gemspec").map { |path| File.dirname path }
+    set :gems, Dir.glob("*/*.gemspec").map { |path| File.dirname path }.shuffle
   end
-  gems.each { |gem_name| release_please gem_name }
+  if retries.empty?
+    set :retries, 1
+  end
+  @errors = []
+  gems.each do |gem_name|
+    release_please gem_name,
+                   cur_delay: delay.to_f,
+                   cur_retries: retries.to_i,
+                   cur_retry_delay: retry_delay.to_f
+  end
+  unless @errors.empty?
+    puts "**** FINAL ERRORS: ****"
+    @errors.each { |msg| puts msg, :bold, :red }
+    exit 1
+  end
 end
 
-def release_please gem_name
-  gem_name, release_as = gem_name.split ":"
+def release_please orig_gem_name, cur_delay:, cur_retries:, cur_retry_delay:
+  gem_name, release_as = orig_gem_name.split ":"
   version = gem_version gem_name
-  as_clause = release_as ? " as version #{release_as}" : ""
-  puts "Running release-please for #{gem_name} from version #{version}#{as_clause}", :bold
+  job_name = "release-please for #{gem_name} from version #{version}"
+  job_name = "#{job_name} as version #{release_as}" if release_as
+  puts "Running #{job_name}", :bold
   cmd = [
     "npx", "release-please", "release-pr",
     "--package-name", gem_name,
@@ -56,10 +74,21 @@ def release_please gem_name
   log_cmd.sub! github_token, "****" if github_token
   result = exec cmd, log_cmd: log_cmd, e: false
   if result.success?
-    sleep 1
+    sleep cur_delay
   else
-    puts "Error running release-please for #{gem_name} from version #{version.inspect}", :bold, :red
-    sleep 2
+    msg = "Error running #{job_name}"
+    puts msg, :bold, :red
+    if cur_retries <= 0
+      @errors << msg
+      sleep cur_delay
+    else
+      sleep cur_retry_delay
+      puts "Retrying..."
+      release_please orig_gem_name,
+                     cur_delay: cur_delay,
+                     cur_retries: cur_retries - 1,
+                     cur_retry_delay: cur_retry_delay * 2
+    end
   end
 end
 
