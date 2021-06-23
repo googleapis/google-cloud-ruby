@@ -3,16 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "f61572eb38e6952eac8d6e532b0a0f6a63af95ab"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "a4d99492d9cd5945464dad29888241943a536f84"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "7c7d22f6ea687c785ac58d955373808adb406b52",
-        "internalRef": "380916790"
+        "sha": "aeb62a6c03c825f3d6defab8a82fd6dbbe70d9af"
       }
     }
   ],
@@ -26,5 +25,25 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-resource_settings.gemspec",
+    "lib/google-cloud-resource_settings.rb",
+    "lib/google/cloud/resource_settings.rb",
+    "lib/google/cloud/resource_settings/version.rb",
+    "test/google/cloud/resource_settings/client_test.rb",
+    "test/google/cloud/resource_settings/version_test.rb",
+    "test/helper.rb"
   ]
 }
