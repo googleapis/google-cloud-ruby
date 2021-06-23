@@ -1,11 +1,5 @@
 # Release History
 
-### 0.6.0 / 2021-04-26
-
-#### Features
-
-* Added support for configurable budget time period
-
 ### 0.5.0 / 2021-03-08
 
 #### Features

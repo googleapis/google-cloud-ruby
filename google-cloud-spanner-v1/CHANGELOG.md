@@ -1,11 +1,5 @@
 # Release History
 
-### 0.6.1 / 2021-04-23
-
-#### Bug Fixes
-
-* Moved CommitResponse into a separate proto file
-
 ### 0.6.0 / 2021-04-05
 
 #### Features
