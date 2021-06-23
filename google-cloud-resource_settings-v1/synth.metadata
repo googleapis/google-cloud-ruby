@@ -3,16 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "d29a95ec1daaa77b85f261eab380a02ef3bf5d71"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "a4d99492d9cd5945464dad29888241943a536f84"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "dba65e3c28aa8e26c4d5b8ec9c80fbd0d0f29864",
-        "internalRef": "380835888"
+        "sha": "aeb62a6c03c825f3d6defab8a82fd6dbbe70d9af"
       }
     }
   ],
@@ -26,5 +25,36 @@
         "generator": "bazel"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "gapic_metadata.json",
+    "google-cloud-resource_settings-v1.gemspec",
+    "lib/google-cloud-resource_settings-v1.rb",
+    "lib/google/cloud/resource_settings/v1.rb",
+    "lib/google/cloud/resource_settings/v1/resource_settings_service.rb",
+    "lib/google/cloud/resource_settings/v1/resource_settings_service/client.rb",
+    "lib/google/cloud/resource_settings/v1/resource_settings_service/credentials.rb",
+    "lib/google/cloud/resource_settings/v1/resource_settings_service/paths.rb",
+    "lib/google/cloud/resource_settings/v1/version.rb",
+    "lib/google/cloud/resourcesettings/v1/resource_settings_pb.rb",
+    "lib/google/cloud/resourcesettings/v1/resource_settings_services_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/resourcesettings/v1/resource_settings.rb",
+    "test/google/cloud/resource_settings/v1/resource_settings_service_paths_test.rb",
+    "test/google/cloud/resource_settings/v1/resource_settings_service_test.rb",
+    "test/helper.rb"
   ]
 }
