@@ -12,6 +12,9 @@ jsondoc/*
 # Ignore YARD stuffs
 .yardoc
 
+# Ignore devsite/cloudrad stuffs
+*/docs.metadata
+
 # directories left by gh-pages
 _site/*
 .DS_STORE
