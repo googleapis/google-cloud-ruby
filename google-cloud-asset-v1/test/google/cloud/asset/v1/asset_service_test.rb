@@ -636,6 +636,8 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     query = "hello world"
     page_size = 42
     page_token = "hello world"
+    asset_types = ["hello world"]
+    order_by = "hello world"
 
     search_all_iam_policies_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_all_iam_policies, name
@@ -644,6 +646,8 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       assert_equal "hello world", request["query"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal ["hello world"], request["asset_types"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -654,35 +658,35 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.search_all_iam_policies({ scope: scope, query: query, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.search_all_iam_policies({ scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_all_iam_policies scope: scope, query: query, page_size: page_size, page_token: page_token do |response, operation|
+      client.search_all_iam_policies scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_all_iam_policies ::Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token) do |response, operation|
+      client.search_all_iam_policies ::Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_all_iam_policies({ scope: scope, query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.search_all_iam_policies({ scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_all_iam_policies(::Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.search_all_iam_policies(::Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
