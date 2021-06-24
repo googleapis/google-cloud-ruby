@@ -11,6 +11,7 @@ def init
     end
   end
   serialize_index options
+  toc
 end
 
 def serialize(object)
@@ -25,5 +26,17 @@ def serialize_index(options)
   return
   Templates::Engine.with_serializer('index.yml', options.serializer) do
     T('layout').run(options.merge(:index => true))
+  end
+end
+
+def toc
+  roots = []
+  options.objects.each do |object|
+    next if object.root?
+    roots << object if object.parent.root?
+  end
+
+  Templates::Engine.with_serializer("toc.yml", options.serializer) do
+    T('toc').run(options.merge(:item => roots))
   end
 end
