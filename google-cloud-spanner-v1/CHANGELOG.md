@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2021-06-24
+
+#### Features
+
+* Add support for the JSON type
+
 ### 0.6.1 / 2021-06-23
 
 #### Bug Fixes
