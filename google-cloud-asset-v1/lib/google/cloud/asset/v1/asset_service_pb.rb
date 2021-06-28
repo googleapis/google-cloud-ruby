@@ -140,6 +140,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :query, :string, 2
       optional :page_size, :int32, 3
       optional :page_token, :string, 4
+      repeated :asset_types, :string, 5
+      optional :order_by, :string, 7
     end
     add_message "google.cloud.asset.v1.SearchAllIamPoliciesResponse" do
       repeated :results, :message, 1, "google.cloud.asset.v1.IamPolicySearchResult"

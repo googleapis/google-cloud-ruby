@@ -80,7 +80,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.asset.v1.IamPolicySearchResult" do
       optional :resource, :string, 1
+      optional :asset_type, :string, 5
       optional :project, :string, 2
+      repeated :folders, :string, 6
+      optional :organization, :string, 7
       optional :policy, :message, 3, "google.iam.v1.Policy"
       optional :explanation, :message, 4, "google.cloud.asset.v1.IamPolicySearchResult.Explanation"
     end

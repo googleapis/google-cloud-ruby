@@ -443,6 +443,14 @@ module Google
         #     To search against the `resource`:
         #
         #     * use a field query. Example: `resource:organizations/123`
+        # @!attribute [rw] asset_type
+        #   @return [::String]
+        #     The type of the resource associated with this IAM policy. Example:
+        #     `compute.googleapis.com/Disk`.
+        #
+        #     To search against the `asset_type`:
+        #
+        #     * specify the `asset_types` field in your search request.
         # @!attribute [rw] project
         #   @return [::String]
         #     The project that the associated GCP resource belongs to, in the form of
@@ -454,6 +462,28 @@ module Google
         #     To search against the `project`:
         #
         #     * specify the `scope` field as this project in your search request.
+        # @!attribute [rw] folders
+        #   @return [::Array<::String>]
+        #     The folder(s) that the IAM policy belongs to, in the form of
+        #     folders/\\{FOLDER_NUMBER}. This field is available when the IAM policy
+        #     belongs to one or more folders.
+        #
+        #     To search against `folders`:
+        #
+        #     * use a field query. Example: `folders:(123 OR 456)`
+        #     * use a free text query. Example: `123`
+        #     * specify the `scope` field as this folder in your search request.
+        # @!attribute [rw] organization
+        #   @return [::String]
+        #     The organization that the IAM policy belongs to, in the form
+        #     of organizations/\\{ORGANIZATION_NUMBER}. This field is available when the
+        #     IAM policy belongs to an organization.
+        #
+        #     To search against `organization`:
+        #
+        #     * use a field query. Example: `organization:123`
+        #     * use a free text query. Example: `123`
+        #     * specify the `scope` field as this organization in your search request.
         # @!attribute [rw] policy
         #   @return [::Google::Iam::V1::Policy]
         #     The IAM policy directly set on the given resource. Note that the original

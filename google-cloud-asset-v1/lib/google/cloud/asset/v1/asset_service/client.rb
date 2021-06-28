@@ -111,20 +111,20 @@ module Google
               retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.search_all_resources.timeout = 15.0
+                default_config.rpcs.search_all_resources.timeout = 30.0
                 default_config.rpcs.search_all_resources.retry_policy = {
                   initial_delay: 0.1,
               max_delay: 60.0,
               multiplier: 1.3,
-              retry_codes: [4, 14]
+              retry_codes: [14]
                 }
 
-                default_config.rpcs.search_all_iam_policies.timeout = 15.0
+                default_config.rpcs.search_all_iam_policies.timeout = 30.0
                 default_config.rpcs.search_all_iam_policies.retry_policy = {
                   initial_delay: 0.1,
               max_delay: 60.0,
               multiplier: 1.3,
-              retry_codes: [4, 14]
+              retry_codes: [14]
                 }
 
                 default_config.rpcs.analyze_iam_policy.timeout = 300.0
@@ -1084,7 +1084,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_all_iam_policies(scope: nil, query: nil, page_size: nil, page_token: nil)
+            # @overload search_all_iam_policies(scope: nil, query: nil, page_size: nil, page_token: nil, asset_types: nil, order_by: nil)
             #   Pass arguments to `search_all_iam_policies` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1141,6 +1141,10 @@ module Google
             #     * `resource:(instance1 OR instance2) policy:amy` to find
             #       IAM policy bindings that are set on resources "instance1" or
             #       "instance2" and also specify user "amy".
+            #     * `roles:roles/compute.admin` to find IAM policy bindings that specify the
+            #       Compute Admin role.
+            #     * `memberTypes:user` to find IAM policy bindings that contain the "user"
+            #       member type.
             #   @param page_size [::Integer]
             #     Optional. The page size for search result pagination. Page size is capped at 500 even
             #     if a larger value is given. If set to zero, server will pick an appropriate
@@ -1151,6 +1155,34 @@ module Google
             #     this method. `page_token` must be the value of `next_page_token` from the
             #     previous response. The values of all other method parameters must be
             #     identical to those in the previous call.
+            #   @param asset_types [::Array<::String>]
+            #     Optional. A list of asset types that the IAM policies are attached to. If empty, it
+            #     will search the IAM policies that are attached to all the [searchable asset
+            #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+            #
+            #     Regular expressions are also supported. For example:
+            #
+            #     * "compute.googleapis.com.*" snapshots IAM policies attached to asset type
+            #     starts with "compute.googleapis.com".
+            #     * ".*Instance" snapshots IAM policies attached to asset type ends with
+            #     "Instance".
+            #     * ".*Instance.*" snapshots IAM policies attached to asset type contains
+            #     "Instance".
+            #
+            #     See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+            #     regular expression syntax. If the regular expression does not match any
+            #     supported asset type, an INVALID_ARGUMENT error will be returned.
+            #   @param order_by [::String]
+            #     Optional. A comma-separated list of fields specifying the sorting order of the
+            #     results. The default order is ascending. Add " DESC" after the field name
+            #     to indicate descending order. Redundant space characters are ignored.
+            #     Example: "assetType DESC, resource".
+            #     Only singular primitive fields in the response are sortable:
+            #       * resource
+            #       * assetType
+            #       * project
+            #     All the other fields such as repeated fields (e.g., `folders`) and
+            #     non-primitive fields (e.g., `policy`) are not supported.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::IamPolicySearchResult>]
