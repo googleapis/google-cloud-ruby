@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "693ae20a741ede8ab36fbd7411e0b045976b7335"
+        "sha": "036635041351da9fdedc60c760c8a781342a904f"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "336d6f419fe9466e4540083bbfa46a57f67dc92e",
-        "internalRef": "364666178"
+        "sha": "da5f84269f0dcdd50554c974cfa968d5137c2300",
+        "internalRef": "381355331"
       }
     }
   ],
@@ -61,6 +61,7 @@
     "lib/google/cloud/service_control/v1/service_controller/credentials.rb",
     "lib/google/cloud/service_control/v1/version.rb",
     "proto_docs/README.md",
+    "proto_docs/google/api/distribution.rb",
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/api/servicecontrol/v1/check_error.rb",
     "proto_docs/google/api/servicecontrol/v1/distribution.rb",
