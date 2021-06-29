@@ -21,6 +21,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :id, :string, 2
     end
     add_message "google.devtools.cloudbuild.v1.RunBuildTriggerRequest" do
+      optional :name, :string, 4
       optional :project_id, :string, 1
       optional :trigger_id, :string, 2
       optional :source, :message, 3, "google.devtools.cloudbuild.v1.RepoSource"
@@ -117,6 +118,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :timing, :string, :message, 33, "google.devtools.cloudbuild.v1.TimeSpan"
       optional :service_account, :string, 42
       optional :available_secrets, :message, 47, "google.devtools.cloudbuild.v1.Secrets"
+      repeated :warnings, :message, 49, "google.devtools.cloudbuild.v1.Build.Warning"
+    end
+    add_message "google.devtools.cloudbuild.v1.Build.Warning" do
+      optional :text, :string, 1
+      optional :priority, :enum, 2, "google.devtools.cloudbuild.v1.Build.Warning.Priority"
+    end
+    add_enum "google.devtools.cloudbuild.v1.Build.Warning.Priority" do
+      value :PRIORITY_UNSPECIFIED, 0
+      value :INFO, 1
+      value :WARNING, 2
+      value :ALERT, 3
     end
     add_enum "google.devtools.cloudbuild.v1.Build.Status" do
       value :STATUS_UNKNOWN, 0
@@ -206,6 +218,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :id, :string, 2
     end
     add_message "google.devtools.cloudbuild.v1.BuildTrigger" do
+      optional :resource_name, :string, 34
       optional :id, :string, 1
       optional :description, :string, 10
       optional :name, :string, 21
@@ -213,6 +226,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :trigger_template, :message, 7, "google.devtools.cloudbuild.v1.RepoSource"
       optional :github, :message, 13, "google.devtools.cloudbuild.v1.GitHubEventsConfig"
       optional :pubsub_config, :message, 29, "google.devtools.cloudbuild.v1.PubsubConfig"
+      optional :webhook_config, :message, 31, "google.devtools.cloudbuild.v1.WebhookConfig"
       optional :create_time, :message, 5, "google.protobuf.Timestamp"
       optional :disabled, :bool, 9
       map :substitutions, :string, :string, 11
@@ -220,6 +234,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :included_files, :string, 16
       optional :filter, :string, 30
       oneof :build_template do
+        optional :autodetect, :bool, 18
         optional :build, :message, 4, "google.devtools.cloudbuild.v1.Build"
         optional :filename, :string, 8
       end
@@ -246,6 +261,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :TOPIC_DELETED, 3
       value :SUBSCRIPTION_MISCONFIGURED, 4
     end
+    add_message "google.devtools.cloudbuild.v1.WebhookConfig" do
+      optional :state, :enum, 4, "google.devtools.cloudbuild.v1.WebhookConfig.State"
+      oneof :auth_method do
+        optional :secret, :string, 3
+      end
+    end
+    add_enum "google.devtools.cloudbuild.v1.WebhookConfig.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :OK, 1
+      value :SECRET_DELETED, 2
+    end
     add_message "google.devtools.cloudbuild.v1.PullRequestFilter" do
       optional :comment_control, :enum, 5, "google.devtools.cloudbuild.v1.PullRequestFilter.CommentControl"
       optional :invert_regex, :bool, 6
@@ -266,14 +292,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       end
     end
     add_message "google.devtools.cloudbuild.v1.CreateBuildTriggerRequest" do
+      optional :parent, :string, 3
       optional :project_id, :string, 1
       optional :trigger, :message, 2, "google.devtools.cloudbuild.v1.BuildTrigger"
     end
     add_message "google.devtools.cloudbuild.v1.GetBuildTriggerRequest" do
+      optional :name, :string, 3
       optional :project_id, :string, 1
       optional :trigger_id, :string, 2
     end
     add_message "google.devtools.cloudbuild.v1.ListBuildTriggersRequest" do
+      optional :parent, :string, 4
       optional :project_id, :string, 1
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
@@ -283,6 +312,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :next_page_token, :string, 2
     end
     add_message "google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest" do
+      optional :name, :string, 3
       optional :project_id, :string, 1
       optional :trigger_id, :string, 2
     end
@@ -334,6 +364,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :NONE, 4
     end
     add_message "google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest" do
+      optional :name, :string, 5
       optional :body, :message, 1, "google.api.HttpBody"
       optional :project_id, :string, 2
       optional :trigger, :string, 3
@@ -417,6 +448,8 @@ module Google
         Results = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Results").msgclass
         ArtifactResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.ArtifactResult").msgclass
         Build = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Build").msgclass
+        Build::Warning = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Build.Warning").msgclass
+        Build::Warning::Priority = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Build.Warning.Priority").enummodule
         Build::Status = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Build.Status").enummodule
         Artifacts = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Artifacts").msgclass
         Artifacts::ArtifactObjects = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Artifacts.ArtifactObjects").msgclass
@@ -439,6 +472,8 @@ module Google
         GitHubEventsConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.GitHubEventsConfig").msgclass
         PubsubConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.PubsubConfig").msgclass
         PubsubConfig::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.PubsubConfig.State").enummodule
+        WebhookConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.WebhookConfig").msgclass
+        WebhookConfig::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.WebhookConfig.State").enummodule
         PullRequestFilter = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.PullRequestFilter").msgclass
         PullRequestFilter::CommentControl = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.PullRequestFilter.CommentControl").enummodule
         PushFilter = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.PushFilter").msgclass
