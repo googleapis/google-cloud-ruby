@@ -1,0 +1,30 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
+        "sha": "e3332c504d695d68aa53a75faf790578cd8320cd"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "eb2c73b15704ce56eb93345fd14fb564c970a0a9",
+        "internalRef": "382086622"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "dataflow",
+        "apiVersion": "v1beta3",
+        "language": "ruby",
+        "generator": "bazel"
+      }
+    }
+  ]
+}
