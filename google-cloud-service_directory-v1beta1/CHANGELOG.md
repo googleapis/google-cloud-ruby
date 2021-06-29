@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2021-06-29
+
+#### Features
+
+* Support for timestamp and VPC network fields
+
 ### 0.6.1 / 2021-06-17
 
 #### Bug Fixes
