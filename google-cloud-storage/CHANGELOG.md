@@ -1,5 +1,16 @@
 # Release History
 
+### 1.33.0 / 2021-06-29
+
+#### Features
+
+* Add support for PublicAccessPrevention
+  * Add Bucket#public_access_prevention
+  * Add Bucket#public_access_prevention=
+  * Add Bucket#public_access_prevention_enforced?
+  * Add Bucket#public_access_prevention_unspecified?
+  * Add samples for PublicAccessPrevention
+
 ### 1.32.0 / 2021-06-22
 
 #### Features
