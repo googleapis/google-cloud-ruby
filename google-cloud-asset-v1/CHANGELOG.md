@@ -1,5 +1,11 @@
 # Release History
 
+### 0.13.0 / 2021-06-29
+
+#### Features
+
+* Support ordering and asset type filtering in search_all_iam_policies
+
 ### 0.12.0 / 2021-06-17
 
 #### Features
