@@ -36,9 +36,9 @@ describe Google::Cloud::Storage::Bucket, :public_access_prevention, :mock_storag
   it "updates its public_access_prevention" do
     mock = Minitest::Mock.new
     mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "unspecified"),
-                [bucket_name, patch_bucket_gapi(public_access_prevention: "unspecified"), predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+                patch_bucket_args(bucket_name, patch_bucket_gapi(public_access_prevention: "unspecified"))
     mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "enforced"),
-                [bucket_name, patch_bucket_gapi(public_access_prevention: "enforced"), predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+                patch_bucket_args(bucket_name, patch_bucket_gapi(public_access_prevention: "enforced"))
     bucket.service.mocked_service = mock
 
     _(bucket.public_access_prevention).must_be :nil?
@@ -63,9 +63,9 @@ describe Google::Cloud::Storage::Bucket, :public_access_prevention, :mock_storag
   it "updates its public_access_prevention with user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "unspecified"),
-                [bucket_name, patch_bucket_gapi(public_access_prevention: "unspecified"), predefined_acl: nil, predefined_default_object_acl: nil, user_project: "test"]
+                patch_bucket_args(bucket_name, patch_bucket_gapi(public_access_prevention: "unspecified"), user_project: "test")
     mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "enforced"),
-                [bucket_name, patch_bucket_gapi(public_access_prevention: "enforced"), predefined_acl: nil, predefined_default_object_acl: nil, user_project: "test"]
+                patch_bucket_args(bucket_name, patch_bucket_gapi(public_access_prevention: "enforced"), user_project: "test")
 
     bucket_user_project.service.mocked_service = mock
 
