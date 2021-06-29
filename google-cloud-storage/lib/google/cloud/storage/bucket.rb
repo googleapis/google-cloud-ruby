@@ -932,6 +932,108 @@ module Google
         end
 
         ##
+        # The value for Public Access Prevention in the bucket's IAM configuration. Currently, `unspecified` and
+        # `enforced` are supported. When set to `enforced`, Public Access Prevention is enforced in the bucket's IAM
+        # configuration. This value can be modified by calling {#public_access_prevention=}.
+        #
+        # @return [String, nil] Currently, `unspecified` and `enforced` are supported. Returns `nil` if the bucket has
+        #    no IAM configuration.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.public_access_prevention = :enforced
+        #   bucket.public_access_prevention #=> "enforced"
+        #
+        def public_access_prevention
+          @gapi.iam_configuration&.public_access_prevention
+        end
+
+        ##
+        # Sets the value for Public Access Prevention in the bucket's IAM configuration. This value can be queried by
+        # calling {#public_access_prevention}.
+        #
+        # @param [Symbol, String] new_public_access_prevention The bucket's new Public Access Prevention configuration.
+        #   Currently, `unspecified` and `enforced` are supported. When set to `enforced`, Public Access
+        #   Prevention is enforced in the bucket's IAM configuration.
+        #
+        # @example Set Public Access Prevention to enforced:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.public_access_prevention = :enforced
+        #   bucket.public_access_prevention #=> "enforced"
+        #
+        # @example Set Public Access Prevention to unspecified:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.public_access_prevention = :unspecified
+        #   bucket.public_access_prevention #=> "unspecified"
+        #
+        def public_access_prevention= new_public_access_prevention
+          @gapi.iam_configuration ||= API::Bucket::IamConfiguration.new
+          @gapi.iam_configuration.public_access_prevention = new_public_access_prevention.to_s
+          patch_gapi! :iam_configuration
+        end
+
+        ##
+        # Whether the bucket's file IAM configuration enforces Public Access Prevention. The default is `false`. This
+        # value can be modified by calling {Bucket#public_access_prevention=}.
+        #
+        # @return [Boolean] Returns `false` if the bucket has no IAM configuration or if Public Access Prevention is
+        #   not `enforced` in the IAM configuration. Returns `true` if Public Access Prevention is `enforced` in the IAM
+        #   configuration.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.public_access_prevention = :enforced
+        #   bucket.public_access_prevention_enforced? # true
+        #
+        def public_access_prevention_enforced?
+          return false unless @gapi.iam_configuration&.public_access_prevention
+          @gapi.iam_configuration.public_access_prevention.to_s == "enforced"
+        end
+
+        ##
+        # Whether the value for Public Access Prevention in the bucket's IAM configuration is `unspecified`. The default
+        # is `false`. This value can be modified by calling {Bucket#public_access_prevention=}.
+        #
+        # @return [Boolean] Returns `false` if the bucket has no IAM configuration or if Public Access Prevention is
+        #   not `unspecified` in the IAM configuration. Returns `true` if Public Access Prevention is `unspecified` in
+        #   the IAM configuration.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.public_access_prevention = :unspecified
+        #   bucket.public_access_prevention_unspecified? # true
+        #
+        def public_access_prevention_unspecified?
+          return false unless @gapi.iam_configuration&.public_access_prevention
+          @gapi.iam_configuration.public_access_prevention.to_s == "unspecified"
+        end
+
+        ##
         # Updates the bucket with changes made in the given block in a single
         # PATCH request. The following attributes may be set: {#cors},
         # {#logging_bucket=}, {#logging_prefix=}, {#versioning=},

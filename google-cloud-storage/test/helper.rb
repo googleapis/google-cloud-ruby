@@ -195,14 +195,18 @@ class MockStorage < Minitest::Spec
     )
   end
 
-  def iam_configuration_gapi uniform_bucket_level_access: false, locked_time: false
-    ubla = Google::Apis::StorageV1::Bucket::IamConfiguration::UniformBucketLevelAccess.new(
-      enabled: uniform_bucket_level_access
-    )
-    ubla.locked_time = (Date.today + 1).to_datetime if locked_time
-    Google::Apis::StorageV1::Bucket::IamConfiguration.new(
-      uniform_bucket_level_access: ubla
-    )
+  def iam_configuration_gapi uniform_bucket_level_access: nil, locked_time: nil, public_access_prevention: nil
+    raise "uniform_bucket_level_access must be provided with locked_time" if !locked_time.nil? && uniform_bucket_level_access.nil?
+    gapi = Google::Apis::StorageV1::Bucket::IamConfiguration.new
+    if uniform_bucket_level_access
+      ubla = Google::Apis::StorageV1::Bucket::IamConfiguration::UniformBucketLevelAccess.new(
+        enabled: uniform_bucket_level_access
+      )
+      ubla.locked_time = (Date.today + 1).to_datetime if locked_time
+      gapi.uniform_bucket_level_access = ubla
+    end
+    gapi.public_access_prevention = public_access_prevention if public_access_prevention
+    gapi
   end
 
   def policy_gapi etag: "CAE=", version: 1, bindings: []

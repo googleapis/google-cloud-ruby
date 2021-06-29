@@ -99,7 +99,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :mock_sto
 
   def patch_bucket_gapi uniform_bucket_level_access: true
     Google::Apis::StorageV1::Bucket.new(
-      iam_configuration: iam_configuration_gapi(uniform_bucket_level_access: uniform_bucket_level_access)
+      iam_configuration: iam_configuration_gapi(uniform_bucket_level_access: uniform_bucket_level_access, locked_time: false)
     )
   end
 

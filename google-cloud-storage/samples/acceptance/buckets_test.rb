@@ -33,6 +33,7 @@ require_relative "../storage_enable_uniform_bucket_level_access"
 require_relative "../storage_enable_versioning"
 require_relative "../storage_get_bucket_metadata"
 require_relative "../storage_get_default_event_based_hold"
+require_relative "../storage_get_public_access_prevention"
 require_relative "../storage_get_retention_policy"
 require_relative "../storage_get_uniform_bucket_level_access"
 require_relative "../storage_list_buckets"
@@ -41,6 +42,8 @@ require_relative "../storage_remove_bucket_label"
 require_relative "../storage_remove_cors_configuration"
 require_relative "../storage_remove_retention_policy"
 require_relative "../storage_set_bucket_default_kms_key"
+require_relative "../storage_set_public_access_prevention_enforced"
+require_relative "../storage_set_public_access_prevention_unspecified"
 require_relative "../storage_set_retention_policy"
 
 describe "Buckets Snippets" do
@@ -395,6 +398,38 @@ describe "Buckets Snippets" do
       bucket.refresh!
       assert_equal main_page_suffix, bucket.website_main
       assert_equal not_found_page, bucket.website_404
+    end
+  end
+
+  describe "public_access_prevention" do
+    it "set_public_access_prevention_enforced, get_public_access_prevention, " \
+       "set_public_access_prevention_unspecified" do
+      bucket.public_access_prevention = :unspecified
+      bucket.refresh!
+      _(bucket.public_access_prevention).must_equal "unspecified"
+
+      # set_public_access_prevention_enforced
+      assert_output "Public access prevention is set to enforced for #{bucket.name}.\n" do
+        set_public_access_prevention_enforced bucket_name: bucket.name
+      end
+
+      bucket.refresh!
+      _(bucket.public_access_prevention).must_equal "enforced"
+
+      # get_public_access_prevention
+      assert_output "Public access prevention is 'enforced' for #{bucket.name}.\n" do
+        get_public_access_prevention bucket_name: bucket.name
+      end
+      _(bucket.public_access_prevention).must_equal "enforced"
+
+      # set_public_access_prevention_unspecified
+      assert_output "Public access prevention is 'unspecified' for #{bucket.name}.\n" do
+        set_public_access_prevention_unspecified bucket_name: bucket.name
+      end
+
+      bucket.refresh!
+      _(bucket.public_access_prevention).must_equal "unspecified"
+      bucket.public_access_prevention = :unspecified
     end
   end
 end

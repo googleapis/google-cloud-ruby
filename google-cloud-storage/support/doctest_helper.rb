@@ -396,7 +396,29 @@ YARD::Doctest.configure do |doctest|
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :patch_bucket, bucket_gapi("my-bucket"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::Bucket#public_access_prevention" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
       mock.expect :patch_bucket, bucket_gapi("my-bucket"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+      mock.expect :patch_bucket, bucket_gapi("my-bucket"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+    end
+  end
+
+
+  doctest.before "Google::Cloud::Storage::Bucket#public_access_prevention=@Set Public Access Prevention to enforced:" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, bucket_gapi("my-bucket", public_access_prevention: "enforced"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::Bucket#public_access_prevention=@Set Public Access Prevention to unspecified:" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, bucket_gapi("my-bucket", public_access_prevention: "unspecified"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 
@@ -407,7 +429,6 @@ YARD::Doctest.configure do |doctest|
       mock.expect :patch_bucket, bucket_gapi("my-bucket"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
-
   doctest.before "Google::Cloud::Storage::Bucket#update_policy" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi("my-bucket"), ["my-bucket", Hash]
@@ -1223,8 +1244,8 @@ end
 
 # Fixture helpers
 
-def bucket_gapi name = "my-bucket"
-  Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name).to_json
+def bucket_gapi name = "my-bucket", public_access_prevention: "enforced"
+  Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name: name, public_access_prevention: public_access_prevention).to_json
 end
 
 def list_buckets_gapi count = 2, token = nil
@@ -1252,11 +1273,18 @@ def done_rewrite gapi
   Google::Apis::StorageV1::RewriteResponse.new done: true, resource: gapi
 end
 
-def random_bucket_hash(name = "my-bucket",
-  url_root="https://www.googleapis.com/storage/v1", location="US",
-  storage_class="STANDARD", versioning=nil, logging_bucket=nil,
-  logging_prefix=nil, website_main=nil, website_404=nil)
+def random_bucket_hash name: "my-bucket",
+                       url_root: "https://www.googleapis.com/storage/v1",
+                       location: "US",
+                       storage_class: "STANDARD",
+                       versioning: nil,
+                       logging_bucket: nil,
+                       logging_prefix: nil,
+                       website_main: nil,
+                       website_404: nil,
+                       public_access_prevention: nil
   versioning_config = { "enabled" => versioning } if versioning
+  iam_configuration = { "publicAccessPrevention" => public_access_prevention } if public_access_prevention
   { "kind" => "storage#bucket",
     "id" => name,
     "selfLink" => "#{url_root}/b/#{name}",
@@ -1273,6 +1301,7 @@ def random_bucket_hash(name = "my-bucket",
     "versioning" => versioning_config,
     "website" => website_hash(website_main, website_404),
     "encryption" => { "defaultKmsKeyName" => kms_key_name },
+    "iamConfiguration" => iam_configuration,
     "etag" => "CAE=" }.delete_if { |_, v| v.nil? }
 end
 
