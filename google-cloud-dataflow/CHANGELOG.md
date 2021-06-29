@@ -4,4 +4,4 @@
 
 #### Features
 
-* Initial generation of google-cloud-dataflow ([#12178](https://www.github.com/googleapis/google-cloud-ruby/issues/12178))
+* Initial generation of google-cloud-dataflow
