@@ -13,8 +13,14 @@
 # limitations under the License.
 
 require "bigquery_helper"
+require "google/cloud/data_catalog"
+require "google/cloud/data_catalog/v1"
 
 describe Google::Cloud::Bigquery::Schema, :policy_tags, :bigquery do
+
+  let(:policy_tag_manager) { Google::Cloud::DataCatalog.policy_tag_manager }
+  let(:policy_tag_location) { "us" }
+  let(:taxonomy_parent) { "projects/#{bigquery.project_id}/locations/#{policy_tag_location}" }
   let(:dataset_id) { "#{prefix}_dataset" }
   let(:dataset) do
     d = bigquery.dataset dataset_id
@@ -23,23 +29,55 @@ describe Google::Cloud::Bigquery::Schema, :policy_tags, :bigquery do
     end
     d
   end
-  let(:table_id) { "kittens" }
+  let(:table_id) { "table_policy_tag_#{SecureRandom.hex(16)}" }
+  let(:table_id_2) { "table_policy_tag_2_#{SecureRandom.hex(16)}" }
   let(:table) do
     t = dataset.table table_id
     if t.nil?
       t = dataset.create_table table_id do |schema|
         schema.integer   "id",    description: "id description",    mode: :required
+        schema.string    "name",  description: "name description",  mode: :required
+        schema.timestamp "dob",   description: "dob description",   mode: :required
       end
     end
     t
   end
 focus
   it "knows its policy tags for a field" do
-    schema = table.schema # get
-    _(schema).must_be_kind_of Google::Cloud::Bigquery::Schema
-    _(schema).must_be :frozen?
-    fields = schema.fields
-    _(fields).wont_be :empty?
-    _(fields).must_be :frozen?
+    taxonomy_id = nil
+    table = nil
+    begin
+      taxonomy = Google::Cloud::DataCatalog::V1::Taxonomy.new(
+        display_name: "google-cloud-ruby bigquery testing taxonomy",
+			  description: "Taxonomy created for google-cloud-ruby acceptance tests",
+			  activated_policy_types: [:FINE_GRAINED_ACCESS_CONTROL]
+      )
+      taxonomy = policy_tag_manager.create_taxonomy parent: taxonomy_parent, taxonomy: taxonomy
+      taxonomy_id = taxonomy.name
+      _(taxonomy_id).must_be_kind_of String
+
+      policy_tag = Google::Cloud::DataCatalog::V1::PolicyTag.new(
+        display_name: "ExamplePolicyTag"
+      )
+      policy_tag = policy_tag_manager.create_policy_tag parent: taxonomy_id, policy_tag: policy_tag
+      policy_tag_id = policy_tag.name
+      _(policy_tag_id).must_be_kind_of String
+
+
+
+      # schema = table.schema # get
+      # _(schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+      # _(schema).must_be :frozen?
+      # fields = schema.fields
+      # _(fields).wont_be :empty?
+      # _(fields).must_be :frozen?
+
+      # field = fields.first
+      # _(field.policy_tags).must_be :nil?
+      
+    ensure
+      policy_tag_manager.delete_taxonomy name: taxonomy_id if taxonomy_id
+      table.delete if table
+    end
   end
 end
