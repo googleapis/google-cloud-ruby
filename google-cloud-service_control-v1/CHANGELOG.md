@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2021-06-29
+
+#### Features
+
+* Support example points in aggregated distributions
+
 ### 0.3.2 / 2021-06-17
 
 #### Bug Fixes
