@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/debugger/v2"
 
 client = ::Google::Cloud::Debugger::V2::Controller::Client.new
-request = my_create_request
+request = ::Google::Cloud::Debugger::V2::RegisterDebuggeeRequest.new # (request fields as keyword arguments...)
 response = client.register_debuggee request
 ```
 
