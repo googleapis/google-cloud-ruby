@@ -66,11 +66,11 @@ The environment variables that google-cloud-text_to_speech-v1beta1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Credentials}):
 
-1. `TEXTTOSPEECH_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `TEXTTOSPEECH_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `TEXTTOSPEECH_CREDENTIALS` - Path to JSON file, or JSON contents
+* `TEXTTOSPEECH_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/text_to_speech/v1beta1"
