@@ -66,11 +66,11 @@ The environment variables that google-cloud-document_ai-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Credentials}):
 
-1. `DOCUMENT_AI_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `DOCUMENT_AI_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `DOCUMENT_AI_CREDENTIALS` - Path to JSON file, or JSON contents
+* `DOCUMENT_AI_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/document_ai/v1"
