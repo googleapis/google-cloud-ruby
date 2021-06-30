@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/gke_connect/gateway/v1beta1"
 
 client = ::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
-request = my_create_request
+request = ::Google::Api::HttpBody.new # (request fields as keyword arguments...)
 response = client.get_resource request
 ```
 
