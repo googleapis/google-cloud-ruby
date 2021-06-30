@@ -167,10 +167,56 @@ module Google
           # The policy tag list for the field. Policy tag identifiers are of the form
           # `projects/*/locations/*/taxonomies/*/policyTags/*`.
           #
+          # @see https://cloud.google.com/bigquery/docs/column-level-security-intro
+          #   Introduction to BigQuery column-level security
+          #
           # @return [Array<String>, nil] The policy tag list for the field, or `nil`.
           #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.table "my_table"
+          #
+          #   table.schema.field("age").policy_tags
+          #
           def policy_tags
-            @gapi.policy_tags&.names&.to_a
+            names = @gapi.policy_tags&.names
+            names.to_a if names && !names.empty?
+          end
+
+          ##
+          # Updates the policy tag list for the field.
+          #
+          # @see https://cloud.google.com/bigquery/docs/column-level-security-intro
+          #   Introduction to BigQuery column-level security
+          #
+          # @param [Array<String>, String, nil] new_policy_tags The policy tag list or
+          #   single policy tag for the field, or `nil` to remove the existing policy tags.
+          #   Policy tag identifiers are of the form
+          #   `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.table "my_table"
+          #
+          #   policy_tag = "projects/my-project/locations/us/taxonomies/my-taxonomy/policyTags/my-policy-tag"
+          #   table.schema do |schema|
+          #     schema.field("age").policy_tags = policy_tag
+          #   end
+          #
+          #   table.schema.field("age").policy_tags
+          #
+          def policy_tags= new_policy_tags
+            # If new_policy_tags is nil, send an empty array.
+            # Sending a nil value for policy_tags results in no change.
+            new_policy_tags = Array(new_policy_tags)
+            policy_tag_list = Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags.new names: new_policy_tags
+            @gapi.update! policy_tags: policy_tag_list
           end
 
           ##
