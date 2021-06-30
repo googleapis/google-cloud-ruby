@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/app_engine/v1"
 
 client = ::Google::Cloud::AppEngine::V1::Applications::Client.new
-request = my_create_request
+request = ::Google::Cloud::AppEngine::V1::GetApplicationRequest.new # (request fields as keyword arguments...)
 response = client.get_application request
 ```
 
