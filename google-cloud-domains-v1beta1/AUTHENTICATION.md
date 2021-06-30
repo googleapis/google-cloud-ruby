@@ -66,11 +66,11 @@ The environment variables that google-cloud-domains-v1beta1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::Domains::V1beta1::Domains::Credentials}):
 
-1. `DOMAINS_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `DOMAINS_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `DOMAINS_CREDENTIALS` - Path to JSON file, or JSON contents
+* `DOMAINS_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/domains/v1beta1"
