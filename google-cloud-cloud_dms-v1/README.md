@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/cloud_dms/v1"
 
 client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
-request = my_create_request
+request = ::Google::Cloud::CloudDMS::V1::ListMigrationJobsRequest.new # (request fields as keyword arguments...)
 response = client.list_migration_jobs request
 ```
 
