@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/domains/v1beta1"
 
 client = ::Google::Cloud::Domains::V1beta1::Domains::Client.new
-request = my_create_request
+request = ::Google::Cloud::Domains::V1beta1::SearchDomainsRequest.new # (request fields as keyword arguments...)
 response = client.search_domains request
 ```
 
