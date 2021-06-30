@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/profiler/v2"
 
 client = ::Google::Cloud::Profiler::V2::ProfilerService::Client.new
-request = my_create_request
+request = ::Google::Cloud::Profiler::V2::CreateProfileRequest.new # (request fields as keyword arguments...)
 response = client.create_profile request
 ```
 
