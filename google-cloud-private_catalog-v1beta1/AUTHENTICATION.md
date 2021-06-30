@@ -66,11 +66,11 @@ The environment variables that google-cloud-private_catalog-v1beta1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Credentials}):
 
-1. `PRIVATE_CATALOG_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `PRIVATE_CATALOG_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `PRIVATE_CATALOG_CREDENTIALS` - Path to JSON file, or JSON contents
+* `PRIVATE_CATALOG_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/private_catalog/v1beta1"
