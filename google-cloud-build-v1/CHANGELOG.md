@@ -1,5 +1,15 @@
 # Release History
 
+### 0.8.0 / 2021-06-30
+
+#### Features
+
+* Standardize resource paths, and support warnings, webhook config, and build config autodetect
+
+#### Bug Fixes
+
+* Fixed an exception when setting credentials using a Hash
+
 ### 0.7.1 / 2021-06-17
 
 #### Bug Fixes
