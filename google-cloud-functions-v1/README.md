@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/functions/v1"
 
 client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
-request = my_create_request
+request = ::Google::Cloud::Functions::V1::ListFunctionsRequest.new # (request fields as keyword arguments...)
 response = client.list_functions request
 ```
 
