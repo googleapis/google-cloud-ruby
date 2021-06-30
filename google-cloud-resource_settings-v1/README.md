@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/resource_settings/v1"
 
 client = ::Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client.new
-request = my_create_request
+request = ::Google::Cloud::ResourceSettings::V1::ListSettingsRequest.new # (request fields as keyword arguments...)
 response = client.list_settings request
 ```
 
