@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/bigtable/admin/v2"
 
 client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
-request = my_create_request
+request = ::Google::Cloud::Bigtable::Admin::V2::CreateInstanceRequest.new # (request fields as keyword arguments...)
 response = client.create_instance request
 ```
 
