@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/language/v1beta2"
 
 client = ::Google::Cloud::Language::V1beta2::LanguageService::Client.new
-request = my_create_request
+request = ::Google::Cloud::Language::V1beta2::AnalyzeSentimentRequest.new # (request fields as keyword arguments...)
 response = client.analyze_sentiment request
 ```
 
