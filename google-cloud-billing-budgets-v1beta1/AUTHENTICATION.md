@@ -66,11 +66,11 @@ The environment variables that google-cloud-billing-budgets-v1beta1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Credentials}):
 
-1. `BILLING_BUDGETS_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `BILLING_BUDGETS_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `BILLING_BUDGETS_CREDENTIALS` - Path to JSON file, or JSON contents
+* `BILLING_BUDGETS_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/billing/budgets/v1beta1"

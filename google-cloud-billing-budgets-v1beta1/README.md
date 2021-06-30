@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/billing/budgets/v1beta1"
 
 client = ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client.new
-request = my_create_request
+request = ::Google::Cloud::Billing::Budgets::V1beta1::CreateBudgetRequest.new # (request fields as keyword arguments...)
 response = client.create_budget request
 ```
 
