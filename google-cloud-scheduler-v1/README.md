@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/scheduler/v1"
 
 client = ::Google::Cloud::Scheduler::V1::CloudScheduler::Client.new
-request = my_create_request
+request = ::Google::Cloud::Scheduler::V1::ListJobsRequest.new # (request fields as keyword arguments...)
 response = client.list_jobs request
 ```
 
