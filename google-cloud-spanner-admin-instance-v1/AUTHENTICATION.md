@@ -66,11 +66,11 @@ The environment variables that google-cloud-spanner-admin-instance-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Credentials}):
 
-1. `SPANNER_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `SPANNER_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `SPANNER_CREDENTIALS` - Path to JSON file, or JSON contents
+* `SPANNER_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/spanner/admin/instance/v1"

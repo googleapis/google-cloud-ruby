@@ -84,7 +84,7 @@ module Google
                   # Create credentials
                   credentials = @config.credentials
                   credentials ||= Credentials.default scope: @config.scope
-                  if credentials.is_a?(String) || credentials.is_a?(Hash)
+                  if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                     credentials = Credentials.new credentials, scope: @config.scope
                   end
                   @quota_project_id = @config.quota_project
