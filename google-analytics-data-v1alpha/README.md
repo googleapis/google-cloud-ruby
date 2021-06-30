@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/analytics/data/v1alpha"
 
 client = ::Google::Analytics::Data::V1alpha::AnalyticsData::Client.new
-request = my_create_request
+request = ::Google::Analytics::Data::V1alpha::RunReportRequest.new # (request fields as keyword arguments...)
 response = client.run_report request
 ```
 
