@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/dataflow/v1beta3"
 
 client = ::Google::Cloud::Dataflow::V1beta3::Snapshots::Client.new
-request = my_create_request
+request = ::Google::Cloud::Dataflow::V1beta3::GetSnapshotRequest.new # (request fields as keyword arguments...)
 response = client.get_snapshot request
 ```
 
