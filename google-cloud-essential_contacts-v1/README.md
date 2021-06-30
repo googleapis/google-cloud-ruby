@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/essential_contacts/v1"
 
 client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new
-request = my_create_request
+request = ::Google::Cloud::EssentialContacts::V1::CreateContactRequest.new # (request fields as keyword arguments...)
 response = client.create_contact request
 ```
 
