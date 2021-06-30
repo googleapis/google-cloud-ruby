@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/talent/v4"
 
 client = ::Google::Cloud::Talent::V4::CompanyService::Client.new
-request = my_create_request
+request = ::Google::Cloud::Talent::V4::CreateCompanyRequest.new # (request fields as keyword arguments...)
 response = client.create_company request
 ```
 
