@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/security/private_ca/v1"
 
 client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client.new
-request = my_create_request
+request = ::Google::Cloud::Security::PrivateCA::V1::CreateCertificateRequest.new # (request fields as keyword arguments...)
 response = client.create_certificate request
 ```
 
