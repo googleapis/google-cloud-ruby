@@ -66,11 +66,11 @@ The environment variables that google-cloud-service_directory-v1beta1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Credentials}):
 
-1. `SERVICE_DIRECTORY_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `SERVICE_DIRECTORY_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `SERVICE_DIRECTORY_CREDENTIALS` - Path to JSON file, or JSON contents
+* `SERVICE_DIRECTORY_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/service_directory/v1beta1"
