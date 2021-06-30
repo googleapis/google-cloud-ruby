@@ -66,11 +66,11 @@ The environment variables that google-cloud-data_labeling-v1beta1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Credentials}):
 
-1. `DATA_LABELING_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `DATA_LABELING_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `DATA_LABELING_CREDENTIALS` - Path to JSON file, or JSON contents
+* `DATA_LABELING_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/data_labeling/v1beta1"
