@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/firestore/admin/v1"
 
 client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
-request = my_create_request
+request = ::Google::Cloud::Firestore::Admin::V1::CreateIndexRequest.new # (request fields as keyword arguments...)
 response = client.create_index request
 ```
 
