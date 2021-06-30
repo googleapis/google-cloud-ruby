@@ -66,11 +66,11 @@ The environment variables that google-cloud-talent-v4beta1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::Talent::V4beta1::ApplicationService::Credentials}):
 
-1. `TALENT_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `TALENT_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `TALENT_CREDENTIALS` - Path to JSON file, or JSON contents
+* `TALENT_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/talent/v4beta1"
