@@ -66,11 +66,11 @@ The environment variables that google-cloud-managed_identities-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Credentials}):
 
-1. `MANAGED_IDENTITIES_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `MANAGED_IDENTITIES_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `MANAGED_IDENTITIES_CREDENTIALS` - Path to JSON file, or JSON contents
+* `MANAGED_IDENTITIES_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/managed_identities/v1"
