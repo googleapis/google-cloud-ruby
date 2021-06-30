@@ -66,11 +66,11 @@ The environment variables that google-cloud-os_login-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::OsLogin::V1::OsLoginService::Credentials}):
 
-1. `OS_LOGIN_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `OS_LOGIN_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `OS_LOGIN_CREDENTIALS` - Path to JSON file, or JSON contents
+* `OS_LOGIN_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/os_login/v1"
