@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/phishing_protection/v1beta1"
 
 client = ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.new
-request = my_create_request
+request = ::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest.new # (request fields as keyword arguments...)
 response = client.report_phishing request
 ```
 
