@@ -667,11 +667,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_build_trigger(project_id: nil, trigger: nil)
+            # @overload create_build_trigger(parent: nil, project_id: nil, trigger: nil)
             #   Pass arguments to `create_build_trigger` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param parent [::String]
+            #     The parent resource where this trigger will be created.
+            #     Format: `projects/{project}/locations/{location}`
             #   @param project_id [::String]
             #     Required. ID of the project for which to configure automatic builds.
             #   @param trigger [::Google::Cloud::Build::V1::BuildTrigger, ::Hash]
@@ -737,11 +740,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload get_build_trigger(project_id: nil, trigger_id: nil)
+            # @overload get_build_trigger(name: nil, project_id: nil, trigger_id: nil)
             #   Pass arguments to `get_build_trigger` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param name [::String]
+            #     The name of the `Trigger` to retrieve.
+            #     Format: `projects/{project}/locations/{location}/triggers/{trigger}`
             #   @param project_id [::String]
             #     Required. ID of the project that owns the trigger.
             #   @param trigger_id [::String]
@@ -808,11 +814,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_build_triggers(project_id: nil, page_size: nil, page_token: nil)
+            # @overload list_build_triggers(parent: nil, project_id: nil, page_size: nil, page_token: nil)
             #   Pass arguments to `list_build_triggers` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param parent [::String]
+            #     The parent of the collection of `Triggers`.
+            #     Format: `projects/{project}/locations/{location}`
             #   @param project_id [::String]
             #     Required. ID of the project for which to list BuildTriggers.
             #   @param page_size [::Integer]
@@ -881,11 +890,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_build_trigger(project_id: nil, trigger_id: nil)
+            # @overload delete_build_trigger(name: nil, project_id: nil, trigger_id: nil)
             #   Pass arguments to `delete_build_trigger` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param name [::String]
+            #     The name of the `Trigger` to delete.
+            #     Format: `projects/{project}/locations/{location}/triggers/{trigger}`
             #   @param project_id [::String]
             #     Required. ID of the project that owns the trigger.
             #   @param trigger_id [::String]
@@ -1023,11 +1035,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload run_build_trigger(project_id: nil, trigger_id: nil, source: nil)
+            # @overload run_build_trigger(name: nil, project_id: nil, trigger_id: nil, source: nil)
             #   Pass arguments to `run_build_trigger` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param name [::String]
+            #     The name of the `Trigger` to run.
+            #     Format: `projects/{project}/locations/{location}/triggers/{trigger}`
             #   @param project_id [::String]
             #     Required. ID of the project.
             #   @param trigger_id [::String]
@@ -1096,11 +1111,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload receive_trigger_webhook(body: nil, project_id: nil, trigger: nil, secret: nil)
+            # @overload receive_trigger_webhook(name: nil, body: nil, project_id: nil, trigger: nil, secret: nil)
             #   Pass arguments to `receive_trigger_webhook` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param name [::String]
+            #     The name of the `ReceiveTriggerWebhook` to retrieve.
+            #     Format: `projects/{project}/locations/{location}/triggers/{trigger}`
             #   @param body [::Google::Api::HttpBody, ::Hash]
             #     HTTP request body.
             #   @param project_id [::String]

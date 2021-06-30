@@ -68,18 +68,42 @@ module Google
             ##
             # Create a fully-qualified BuildTrigger resource string.
             #
-            # The resource will be in the following format:
+            # @overload build_trigger_path(project:, trigger:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/triggers/{trigger}`
+            #   `projects/{project}/triggers/{trigger}`
             #
-            # @param project [String]
-            # @param trigger [String]
+            #   @param project [String]
+            #   @param trigger [String]
+            #
+            # @overload build_trigger_path(project:, location:, trigger:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/triggers/{trigger}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param trigger [String]
             #
             # @return [::String]
-            def build_trigger_path project:, trigger:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+            def build_trigger_path **args
+              resources = {
+                "project:trigger" => (proc do |project:, trigger:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
-              "projects/#{project}/triggers/#{trigger}"
+                  "projects/#{project}/triggers/#{trigger}"
+                end),
+                "location:project:trigger" => (proc do |project:, location:, trigger:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/triggers/#{trigger}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##

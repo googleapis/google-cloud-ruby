@@ -384,12 +384,14 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     grpc_options = {}
 
     # Create request parameters for a unary method.
+    parent = "hello world"
     project_id = "hello world"
     trigger = {}
 
     create_build_trigger_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_build_trigger, name
       assert_kind_of ::Google::Cloud::Build::V1::CreateBuildTriggerRequest, request
+      assert_equal "hello world", request["parent"]
       assert_equal "hello world", request["project_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Build::V1::BuildTrigger), request["trigger"]
       refute_nil options
@@ -402,31 +404,31 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.create_build_trigger({ project_id: project_id, trigger: trigger }) do |response, operation|
+      client.create_build_trigger({ parent: parent, project_id: project_id, trigger: trigger }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_build_trigger project_id: project_id, trigger: trigger do |response, operation|
+      client.create_build_trigger parent: parent, project_id: project_id, trigger: trigger do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_build_trigger ::Google::Cloud::Build::V1::CreateBuildTriggerRequest.new(project_id: project_id, trigger: trigger) do |response, operation|
+      client.create_build_trigger ::Google::Cloud::Build::V1::CreateBuildTriggerRequest.new(parent: parent, project_id: project_id, trigger: trigger) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_build_trigger({ project_id: project_id, trigger: trigger }, grpc_options) do |response, operation|
+      client.create_build_trigger({ parent: parent, project_id: project_id, trigger: trigger }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_build_trigger(::Google::Cloud::Build::V1::CreateBuildTriggerRequest.new(project_id: project_id, trigger: trigger), grpc_options) do |response, operation|
+      client.create_build_trigger(::Google::Cloud::Build::V1::CreateBuildTriggerRequest.new(parent: parent, project_id: project_id, trigger: trigger), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -444,12 +446,14 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     grpc_options = {}
 
     # Create request parameters for a unary method.
+    name = "hello world"
     project_id = "hello world"
     trigger_id = "hello world"
 
     get_build_trigger_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_build_trigger, name
       assert_kind_of ::Google::Cloud::Build::V1::GetBuildTriggerRequest, request
+      assert_equal "hello world", request["name"]
       assert_equal "hello world", request["project_id"]
       assert_equal "hello world", request["trigger_id"]
       refute_nil options
@@ -462,31 +466,31 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get_build_trigger({ project_id: project_id, trigger_id: trigger_id }) do |response, operation|
+      client.get_build_trigger({ name: name, project_id: project_id, trigger_id: trigger_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_build_trigger project_id: project_id, trigger_id: trigger_id do |response, operation|
+      client.get_build_trigger name: name, project_id: project_id, trigger_id: trigger_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_build_trigger ::Google::Cloud::Build::V1::GetBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id) do |response, operation|
+      client.get_build_trigger ::Google::Cloud::Build::V1::GetBuildTriggerRequest.new(name: name, project_id: project_id, trigger_id: trigger_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_build_trigger({ project_id: project_id, trigger_id: trigger_id }, grpc_options) do |response, operation|
+      client.get_build_trigger({ name: name, project_id: project_id, trigger_id: trigger_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_build_trigger(::Google::Cloud::Build::V1::GetBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id), grpc_options) do |response, operation|
+      client.get_build_trigger(::Google::Cloud::Build::V1::GetBuildTriggerRequest.new(name: name, project_id: project_id, trigger_id: trigger_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -504,6 +508,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     grpc_options = {}
 
     # Create request parameters for a unary method.
+    parent = "hello world"
     project_id = "hello world"
     page_size = 42
     page_token = "hello world"
@@ -511,6 +516,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     list_build_triggers_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_build_triggers, name
       assert_kind_of ::Google::Cloud::Build::V1::ListBuildTriggersRequest, request
+      assert_equal "hello world", request["parent"]
       assert_equal "hello world", request["project_id"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
@@ -524,35 +530,35 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_build_triggers({ project_id: project_id, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_build_triggers({ parent: parent, project_id: project_id, page_size: page_size, page_token: page_token }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_build_triggers project_id: project_id, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_build_triggers parent: parent, project_id: project_id, page_size: page_size, page_token: page_token do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_build_triggers ::Google::Cloud::Build::V1::ListBuildTriggersRequest.new(project_id: project_id, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_build_triggers ::Google::Cloud::Build::V1::ListBuildTriggersRequest.new(parent: parent, project_id: project_id, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_build_triggers({ project_id: project_id, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_build_triggers({ parent: parent, project_id: project_id, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_build_triggers(::Google::Cloud::Build::V1::ListBuildTriggersRequest.new(project_id: project_id, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_build_triggers(::Google::Cloud::Build::V1::ListBuildTriggersRequest.new(parent: parent, project_id: project_id, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -571,12 +577,14 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     grpc_options = {}
 
     # Create request parameters for a unary method.
+    name = "hello world"
     project_id = "hello world"
     trigger_id = "hello world"
 
     delete_build_trigger_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_build_trigger, name
       assert_kind_of ::Google::Cloud::Build::V1::DeleteBuildTriggerRequest, request
+      assert_equal "hello world", request["name"]
       assert_equal "hello world", request["project_id"]
       assert_equal "hello world", request["trigger_id"]
       refute_nil options
@@ -589,31 +597,31 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.delete_build_trigger({ project_id: project_id, trigger_id: trigger_id }) do |response, operation|
+      client.delete_build_trigger({ name: name, project_id: project_id, trigger_id: trigger_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_build_trigger project_id: project_id, trigger_id: trigger_id do |response, operation|
+      client.delete_build_trigger name: name, project_id: project_id, trigger_id: trigger_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_build_trigger ::Google::Cloud::Build::V1::DeleteBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id) do |response, operation|
+      client.delete_build_trigger ::Google::Cloud::Build::V1::DeleteBuildTriggerRequest.new(name: name, project_id: project_id, trigger_id: trigger_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_build_trigger({ project_id: project_id, trigger_id: trigger_id }, grpc_options) do |response, operation|
+      client.delete_build_trigger({ name: name, project_id: project_id, trigger_id: trigger_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_build_trigger(::Google::Cloud::Build::V1::DeleteBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id), grpc_options) do |response, operation|
+      client.delete_build_trigger(::Google::Cloud::Build::V1::DeleteBuildTriggerRequest.new(name: name, project_id: project_id, trigger_id: trigger_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -693,6 +701,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     grpc_options = {}
 
     # Create request parameters for a unary method.
+    name = "hello world"
     project_id = "hello world"
     trigger_id = "hello world"
     source = {}
@@ -700,6 +709,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     run_build_trigger_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_build_trigger, name
       assert_kind_of ::Google::Cloud::Build::V1::RunBuildTriggerRequest, request
+      assert_equal "hello world", request["name"]
       assert_equal "hello world", request["project_id"]
       assert_equal "hello world", request["trigger_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Build::V1::RepoSource), request["source"]
@@ -713,35 +723,35 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.run_build_trigger({ project_id: project_id, trigger_id: trigger_id, source: source }) do |response, operation|
+      client.run_build_trigger({ name: name, project_id: project_id, trigger_id: trigger_id, source: source }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.run_build_trigger project_id: project_id, trigger_id: trigger_id, source: source do |response, operation|
+      client.run_build_trigger name: name, project_id: project_id, trigger_id: trigger_id, source: source do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.run_build_trigger ::Google::Cloud::Build::V1::RunBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id, source: source) do |response, operation|
+      client.run_build_trigger ::Google::Cloud::Build::V1::RunBuildTriggerRequest.new(name: name, project_id: project_id, trigger_id: trigger_id, source: source) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.run_build_trigger({ project_id: project_id, trigger_id: trigger_id, source: source }, grpc_options) do |response, operation|
+      client.run_build_trigger({ name: name, project_id: project_id, trigger_id: trigger_id, source: source }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.run_build_trigger(::Google::Cloud::Build::V1::RunBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id, source: source), grpc_options) do |response, operation|
+      client.run_build_trigger(::Google::Cloud::Build::V1::RunBuildTriggerRequest.new(name: name, project_id: project_id, trigger_id: trigger_id, source: source), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -760,6 +770,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     grpc_options = {}
 
     # Create request parameters for a unary method.
+    name = "hello world"
     body = {}
     project_id = "hello world"
     trigger = "hello world"
@@ -768,6 +779,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     receive_trigger_webhook_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :receive_trigger_webhook, name
       assert_kind_of ::Google::Cloud::Build::V1::ReceiveTriggerWebhookRequest, request
+      assert_equal "hello world", request["name"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Api::HttpBody), request["body"]
       assert_equal "hello world", request["project_id"]
       assert_equal "hello world", request["trigger"]
@@ -782,31 +794,31 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.receive_trigger_webhook({ body: body, project_id: project_id, trigger: trigger, secret: secret }) do |response, operation|
+      client.receive_trigger_webhook({ name: name, body: body, project_id: project_id, trigger: trigger, secret: secret }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.receive_trigger_webhook body: body, project_id: project_id, trigger: trigger, secret: secret do |response, operation|
+      client.receive_trigger_webhook name: name, body: body, project_id: project_id, trigger: trigger, secret: secret do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.receive_trigger_webhook ::Google::Cloud::Build::V1::ReceiveTriggerWebhookRequest.new(body: body, project_id: project_id, trigger: trigger, secret: secret) do |response, operation|
+      client.receive_trigger_webhook ::Google::Cloud::Build::V1::ReceiveTriggerWebhookRequest.new(name: name, body: body, project_id: project_id, trigger: trigger, secret: secret) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.receive_trigger_webhook({ body: body, project_id: project_id, trigger: trigger, secret: secret }, grpc_options) do |response, operation|
+      client.receive_trigger_webhook({ name: name, body: body, project_id: project_id, trigger: trigger, secret: secret }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.receive_trigger_webhook(::Google::Cloud::Build::V1::ReceiveTriggerWebhookRequest.new(body: body, project_id: project_id, trigger: trigger, secret: secret), grpc_options) do |response, operation|
+      client.receive_trigger_webhook(::Google::Cloud::Build::V1::ReceiveTriggerWebhookRequest.new(name: name, body: body, project_id: project_id, trigger: trigger, secret: secret), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
