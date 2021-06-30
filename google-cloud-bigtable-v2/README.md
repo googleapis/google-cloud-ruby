@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/bigtable/v2"
 
 client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new
-request = my_create_request
+request = ::Google::Cloud::Bigtable::V2::ReadRowsRequest.new # (request fields as keyword arguments...)
 response = client.read_rows request
 ```
 
