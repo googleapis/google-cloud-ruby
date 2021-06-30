@@ -17,6 +17,7 @@ require "helper"
 describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
   let(:policy_tag) { "projects/#{project}/locations/us/taxonomies/1/policyTags/1" }
   let(:policy_tag_2) { "projects/#{project}/locations/us/taxonomies/1/policyTags/2" }
+  let(:policy_tag_3) { "projects/#{project}/locations/us/taxonomies/1/policyTags/3" }
   let(:policy_tags) { [ policy_tag, policy_tag_2 ] }
   let :schema_gapi do
     Google::Apis::BigqueryV2::TableSchema.new(
@@ -36,7 +37,6 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
 
   it "knows its policy tags" do
     field = schema.field :my_secret_integer
-    _(field.name).must_equal "my_secret_integer"
     _(field.policy_tags).must_equal policy_tags
   end
 
@@ -44,5 +44,32 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
     gapi = schema.to_gapi
     _(gapi.fields[0].policy_tags).must_be_instance_of Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags
     _(gapi.fields[0].policy_tags.names).must_equal policy_tags
+  end
+
+  it "sets its policy tags to a new array" do
+    field = schema.field :my_secret_integer
+    _(field.policy_tags).must_equal policy_tags
+
+    field.policy_tags = [policy_tag_3]
+    _(field.policy_tags).must_equal [policy_tag_3]
+  end
+
+  it "sets its policy tags to a single string" do
+    field = schema.field :my_secret_integer
+    _(field.policy_tags).must_equal policy_tags
+
+    field.policy_tags = policy_tag_3
+    _(field.policy_tags).must_equal [policy_tag_3]
+  end
+
+  it "removes its policy tags" do
+    field = schema.field :my_secret_integer
+    _(field.policy_tags).must_equal policy_tags
+
+    field.policy_tags = nil
+    _(field.policy_tags).must_be :nil?
+    gapi = schema.to_gapi
+    _(gapi.fields[0].policy_tags).must_be_instance_of Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags
+    _(gapi.fields[0].policy_tags.names).must_equal []
   end
 end

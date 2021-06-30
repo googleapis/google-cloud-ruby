@@ -42,10 +42,9 @@ describe Google::Cloud::Bigquery::Schema, :policy_tags, :bigquery do
     end
     t
   end
-focus
+
   it "knows its policy tags for a field" do
     taxonomy_id = nil
-    table = nil
     begin
       taxonomy = Google::Cloud::DataCatalog::V1::Taxonomy.new(
         display_name: "google-cloud-ruby bigquery testing taxonomy",
@@ -63,21 +62,38 @@ focus
       policy_tag_id = policy_tag.name
       _(policy_tag_id).must_be_kind_of String
 
+      _(table.schema.field("dob").policy_tags).must_be :nil?
 
+      table.schema do |schema|
+        schema.field("dob").policy_tags = policy_tag_id
+      end
 
-      # schema = table.schema # get
-      # _(schema).must_be_kind_of Google::Cloud::Bigquery::Schema
-      # _(schema).must_be :frozen?
-      # fields = schema.fields
-      # _(fields).wont_be :empty?
-      # _(fields).must_be :frozen?
+      _(table.schema.field("dob").policy_tags).must_equal [policy_tag_id]
+      table.reload!
+      _(table.schema.field("dob").policy_tags).must_equal [policy_tag_id]
 
-      # field = fields.first
-      # _(field.policy_tags).must_be :nil?
+      table.schema do |schema|
+        schema.field("dob").policy_tags = nil
+      end
+
+      _(table.schema.field("dob").policy_tags).must_be :nil?
+      table.reload!
+      _(table.schema.field("dob").policy_tags).must_be :nil?
+
+      table_2 = dataset.create_table table_id_2 do |t|
+        t.schema do |schema|
+          schema.integer   "id",    description: "id description",    mode: :required
+          schema.string    "name",  description: "name description",  mode: :required
+          schema.timestamp "dob",   description: "dob description",   mode: :required, policy_tags: [policy_tag_id]
+        end
+      end
+
+      _(table_2.schema.field("dob").policy_tags).must_equal [policy_tag_id]
+      table_2.reload!
+      _(table_2.schema.field("dob").policy_tags).must_equal [policy_tag_id]
       
     ensure
       policy_tag_manager.delete_taxonomy name: taxonomy_id if taxonomy_id
-      table.delete if table
     end
   end
 end
