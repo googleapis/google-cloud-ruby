@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/spanner/admin/database/v1"
 
 client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
-request = my_create_request
+request = ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabasesRequest.new # (request fields as keyword arguments...)
 response = client.list_databases request
 ```
 
