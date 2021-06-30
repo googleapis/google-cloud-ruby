@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/monitoring/dashboard/v1"
 
 client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new
-request = my_create_request
+request = ::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest.new # (request fields as keyword arguments...)
 response = client.create_dashboard request
 ```
 
