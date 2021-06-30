@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/os_login/v1beta"
 
 client = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new
-request = my_create_request
+request = ::Google::Cloud::OsLogin::V1beta::DeletePosixAccountRequest.new # (request fields as keyword arguments...)
 response = client.delete_posix_account request
 ```
 
