@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.2 / 2021-06-30
+
+#### Bug Fixes
+
+* Fixed an exception when providing credentials as a Hash
+
 ### 0.3.1 / 2021-06-17
 
 #### Bug Fixes
