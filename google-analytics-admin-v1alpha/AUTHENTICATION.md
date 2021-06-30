@@ -66,11 +66,11 @@ The environment variables that google-analytics-admin-v1alpha
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Credentials}):
 
-1. `ANALYTICS_ADMIN_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `ANALYTICS_ADMIN_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `ANALYTICS_ADMIN_CREDENTIALS` - Path to JSON file, or JSON contents
+* `ANALYTICS_ADMIN_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/analytics/admin/v1alpha"
