@@ -66,11 +66,11 @@ The environment variables that google-cloud-workflows-executions-v1beta
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::Workflows::Executions::V1beta::Executions::Credentials}):
 
-1. `WORKFLOWS_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `WORKFLOWS_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `WORKFLOWS_CREDENTIALS` - Path to JSON file, or JSON contents
+* `WORKFLOWS_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/workflows/executions/v1beta"
