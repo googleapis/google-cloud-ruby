@@ -66,11 +66,11 @@ The environment variables that google-cloud-web_security_scanner-v1beta
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Credentials}):
 
-1. `WEB_SECURITY_SCANNER_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `WEB_SECURITY_SCANNER_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `WEB_SECURITY_SCANNER_CREDENTIALS` - Path to JSON file, or JSON contents
+* `WEB_SECURITY_SCANNER_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/web_security_scanner/v1beta"
