@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/iam/credentials/v1"
 
 client = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new
-request = my_create_request
+request = ::Google::Iam::Credentials::V1::GenerateAccessTokenRequest.new # (request fields as keyword arguments...)
 response = client.generate_access_token request
 ```
 

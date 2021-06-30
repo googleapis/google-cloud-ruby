@@ -66,11 +66,11 @@ The environment variables that google-iam-credentials-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Iam::Credentials::V1::IAMCredentials::Credentials}):
 
-1. `IAM_CREDENTIALS_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `IAM_CREDENTIALS_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `IAM_CREDENTIALS_CREDENTIALS` - Path to JSON file, or JSON contents
+* `IAM_CREDENTIALS_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/iam/credentials/v1"
