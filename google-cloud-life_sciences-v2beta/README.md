@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/life_sciences/v2beta"
 
 client = ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.new
-request = my_create_request
+request = ::Google::Cloud::LifeSciences::V2beta::RunPipelineRequest.new # (request fields as keyword arguments...)
 response = client.run_pipeline request
 ```
 

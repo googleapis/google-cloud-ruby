@@ -66,11 +66,11 @@ The environment variables that google-cloud-life_sciences-v2beta
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Credentials}):
 
-1. `LIFE_SCIENCES_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `LIFE_SCIENCES_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `LIFE_SCIENCES_CREDENTIALS` - Path to JSON file, or JSON contents
+* `LIFE_SCIENCES_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/life_sciences/v2beta"
