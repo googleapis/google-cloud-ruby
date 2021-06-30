@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/artifact_registry/v1beta2"
 
 client = ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.new
-request = my_create_request
+request = ::Google::Cloud::ArtifactRegistry::V1beta2::ListRepositoriesRequest.new # (request fields as keyword arguments...)
 response = client.list_repositories request
 ```
 
