@@ -1,5 +1,12 @@
 # Release History
 
+### 1.34.0 / 2021-06-30
+
+#### Features
+
+* Add support for automatic crc32c and md5 upload verification
+  * Add checksum to Bucket#create_file
+
 ### 1.33.0 / 2021-06-29
 
 #### Features
