@@ -66,11 +66,11 @@ The environment variables that google-cloud-video-transcoder-v1beta1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::Credentials}):
 
-1. `TRANSCODER_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `TRANSCODER_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `TRANSCODER_CREDENTIALS` - Path to JSON file, or JSON contents
+* `TRANSCODER_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/video/transcoder/v1beta1"
