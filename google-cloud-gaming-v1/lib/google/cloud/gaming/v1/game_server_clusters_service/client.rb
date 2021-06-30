@@ -68,48 +68,33 @@ module Google
 
                 default_config.rpcs.list_game_server_clusters.timeout = 60.0
                 default_config.rpcs.list_game_server_clusters.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_game_server_cluster.timeout = 60.0
                 default_config.rpcs.get_game_server_cluster.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.create_game_server_cluster.timeout = 120.0
 
                 default_config.rpcs.preview_create_game_server_cluster.timeout = 60.0
                 default_config.rpcs.preview_create_game_server_cluster.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.delete_game_server_cluster.timeout = 60.0
 
                 default_config.rpcs.preview_delete_game_server_cluster.timeout = 60.0
                 default_config.rpcs.preview_delete_game_server_cluster.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.update_game_server_cluster.timeout = 60.0
 
                 default_config.rpcs.preview_update_game_server_cluster.timeout = 60.0
                 default_config.rpcs.preview_update_game_server_cluster.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -180,7 +165,7 @@ module Google
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
