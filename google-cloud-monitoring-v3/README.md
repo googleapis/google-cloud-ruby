@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/monitoring/v3"
 
 client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
-request = my_create_request
+request = ::Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest.new # (request fields as keyword arguments...)
 response = client.list_alert_policies request
 ```
 
