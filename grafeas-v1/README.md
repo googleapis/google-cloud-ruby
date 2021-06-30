@@ -24,7 +24,7 @@ $ gem install grafeas-v1
 require "grafeas/v1"
 
 client = ::Grafeas::V1::Grafeas::Client.new
-request = my_create_request
+request = ::Grafeas::V1::GetOccurrenceRequest.new # (request fields as keyword arguments...)
 response = client.get_occurrence request
 ```
 
