@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/bigquery/connection/v1"
 
 client = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new
-request = my_create_request
+request = ::Google::Cloud::Bigquery::Connection::V1::CreateConnectionRequest.new # (request fields as keyword arguments...)
 response = client.create_connection request
 ```
 
