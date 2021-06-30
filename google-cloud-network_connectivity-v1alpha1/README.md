@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/network_connectivity/v1alpha1"
 
 client = ::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client.new
-request = my_create_request
+request = ::Google::Cloud::NetworkConnectivity::V1alpha1::ListHubsRequest.new # (request fields as keyword arguments...)
 response = client.list_hubs request
 ```
 
