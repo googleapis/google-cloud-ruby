@@ -66,11 +66,11 @@ The environment variables that google-cloud-vpc_access-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::VpcAccess::V1::VpcAccessService::Credentials}):
 
-1. `VPC_ACCESS_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `VPC_ACCESS_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `VPC_ACCESS_CREDENTIALS` - Path to JSON file, or JSON contents
+* `VPC_ACCESS_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/vpc_access/v1"
