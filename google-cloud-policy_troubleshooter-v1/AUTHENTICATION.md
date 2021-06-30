@@ -66,11 +66,11 @@ The environment variables that google-cloud-policy_troubleshooter-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::Credentials}):
 
-1. `POLICY_TROUBLESHOOTER_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `POLICY_TROUBLESHOOTER_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `POLICY_TROUBLESHOOTER_CREDENTIALS` - Path to JSON file, or JSON contents
+* `POLICY_TROUBLESHOOTER_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/policy_troubleshooter/v1"
