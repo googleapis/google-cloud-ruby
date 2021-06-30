@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/service_directory/v1"
 
 client = ::Google::Cloud::ServiceDirectory::V1::LookupService::Client.new
-request = my_create_request
+request = ::Google::Cloud::ServiceDirectory::V1::ResolveServiceRequest.new # (request fields as keyword arguments...)
 response = client.resolve_service request
 ```
 
