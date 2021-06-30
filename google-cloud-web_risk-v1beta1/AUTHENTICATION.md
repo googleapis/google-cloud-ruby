@@ -66,11 +66,11 @@ The environment variables that google-cloud-web_risk-v1beta1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::WebRisk::V1beta1::WebRiskService::Credentials}):
 
-1. `WEBRISK_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `WEBRISK_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `WEBRISK_CREDENTIALS` - Path to JSON file, or JSON contents
+* `WEBRISK_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/web_risk/v1beta1"
