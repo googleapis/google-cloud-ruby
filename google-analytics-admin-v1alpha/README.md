@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/analytics/admin/v1alpha"
 
 client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
-request = my_create_request
+request = ::Google::Analytics::Admin::V1alpha::GetAccountRequest.new # (request fields as keyword arguments...)
 response = client.get_account request
 ```
 
