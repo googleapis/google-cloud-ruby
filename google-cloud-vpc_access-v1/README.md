@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/vpc_access/v1"
 
 client = ::Google::Cloud::VpcAccess::V1::VpcAccessService::Client.new
-request = my_create_request
+request = ::Google::Cloud::VpcAccess::V1::CreateConnectorRequest.new # (request fields as keyword arguments...)
 response = client.create_connector request
 ```
 
