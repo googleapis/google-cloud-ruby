@@ -66,11 +66,11 @@ The environment variables that google-cloud-security_center-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::SecurityCenter::V1::SecurityCenter::Credentials}):
 
-1. `SECURITY_CENTER_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `SECURITY_CENTER_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `SECURITY_CENTER_CREDENTIALS` - Path to JSON file, or JSON contents
+* `SECURITY_CENTER_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/security_center/v1"
