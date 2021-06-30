@@ -64,8 +64,8 @@ s.replace(
 )
 s.replace(
     "google-cloud-workflows.gemspec",
-    '\n  gem.add_dependency "google-cloud-workflows-v1beta", "~> 0.0"\n\n',
-    '\n  gem.add_dependency "google-cloud-workflows-v1beta", "~> 0.0"\n  gem.add_dependency "google-cloud-workflows-executions-v1beta", "~> 0.0"\n\n',
+    '\n  gem.add_dependency "google-cloud-workflows-v1beta", ">= 0.0", "< 2.a"\n\n',
+    '\n  gem.add_dependency "google-cloud-workflows-v1beta", ">= 0.0", "< 2.a"\n  gem.add_dependency "google-cloud-workflows-executions-v1beta", ">= 0.0", "< 2.a"\n\n',
 )
 s.replace(
     "Gemfile",
