@@ -66,11 +66,11 @@ The environment variables that google-cloud-pubsub-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::PubSub::V1::SchemaService::Credentials}):
 
-1. `PUBSUB_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `PUBSUB_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `PUBSUB_CREDENTIALS` - Path to JSON file, or JSON contents
+* `PUBSUB_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/pubsub/v1"
