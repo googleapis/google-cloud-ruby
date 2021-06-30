@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/speech/v1"
 
 client = ::Google::Cloud::Speech::V1::Speech::Client.new
-request = my_create_request
+request = ::Google::Cloud::Speech::V1::RecognizeRequest.new # (request fields as keyword arguments...)
 response = client.recognize request
 ```
 
