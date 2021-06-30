@@ -66,11 +66,11 @@ The environment variables that google-cloud-memcache-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::Memcache::V1::CloudMemcache::Credentials}):
 
-1. `MEMCACHE_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `MEMCACHE_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `MEMCACHE_CREDENTIALS` - Path to JSON file, or JSON contents
+* `MEMCACHE_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/memcache/v1"
