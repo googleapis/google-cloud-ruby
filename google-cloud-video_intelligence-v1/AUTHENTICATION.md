@@ -66,11 +66,11 @@ The environment variables that google-cloud-video_intelligence-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Credentials}):
 
-1. `VIDEO_INTELLIGENCE_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `VIDEO_INTELLIGENCE_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `VIDEO_INTELLIGENCE_CREDENTIALS` - Path to JSON file, or JSON contents
+* `VIDEO_INTELLIGENCE_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/video_intelligence/v1"
