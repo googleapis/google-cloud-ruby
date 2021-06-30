@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/security_center/v1"
 
 client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
-request = my_create_request
+request = ::Google::Cloud::SecurityCenter::V1::CreateSourceRequest.new # (request fields as keyword arguments...)
 response = client.create_source request
 ```
 
