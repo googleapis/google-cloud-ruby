@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/dataproc/v1"
 
 client = ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client.new
-request = my_create_request
+request = ::Google::Cloud::Dataproc::V1::CreateAutoscalingPolicyRequest.new # (request fields as keyword arguments...)
 response = client.create_autoscaling_policy request
 ```
 
