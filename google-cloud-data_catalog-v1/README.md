@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/data_catalog/v1"
 
 client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
-request = my_create_request
+request = ::Google::Cloud::DataCatalog::V1::SearchCatalogRequest.new # (request fields as keyword arguments...)
 response = client.search_catalog request
 ```
 
