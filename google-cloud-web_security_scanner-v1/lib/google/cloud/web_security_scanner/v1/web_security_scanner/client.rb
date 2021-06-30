@@ -69,26 +69,17 @@ module Google
 
                 default_config.rpcs.delete_scan_config.timeout = 600.0
                 default_config.rpcs.delete_scan_config.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_scan_config.timeout = 600.0
                 default_config.rpcs.get_scan_config.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_scan_configs.timeout = 600.0
                 default_config.rpcs.list_scan_configs.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_scan_config.timeout = 600.0
@@ -97,52 +88,34 @@ module Google
 
                 default_config.rpcs.get_scan_run.timeout = 600.0
                 default_config.rpcs.get_scan_run.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_scan_runs.timeout = 600.0
                 default_config.rpcs.list_scan_runs.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.stop_scan_run.timeout = 600.0
 
                 default_config.rpcs.list_crawled_urls.timeout = 600.0
                 default_config.rpcs.list_crawled_urls.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_finding.timeout = 600.0
                 default_config.rpcs.get_finding.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_findings.timeout = 600.0
                 default_config.rpcs.list_findings.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_finding_type_stats.timeout = 600.0
                 default_config.rpcs.list_finding_type_stats.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config
@@ -213,7 +186,7 @@ module Google
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
