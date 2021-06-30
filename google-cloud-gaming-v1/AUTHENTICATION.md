@@ -66,11 +66,11 @@ The environment variables that google-cloud-gaming-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::Gaming::V1::GameServerClustersService::Credentials}):
 
-1. `GAMING_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `GAMING_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `GAMING_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GAMING_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/gaming/v1"
