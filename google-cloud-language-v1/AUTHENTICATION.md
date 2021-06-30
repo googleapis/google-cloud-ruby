@@ -66,11 +66,11 @@ The environment variables that google-cloud-language-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::Language::V1::LanguageService::Credentials}):
 
-1. `LANGUAGE_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `LANGUAGE_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `LANGUAGE_CREDENTIALS` - Path to JSON file, or JSON contents
+* `LANGUAGE_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/language/v1"
