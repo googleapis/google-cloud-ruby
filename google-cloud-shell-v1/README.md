@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/shell/v1"
 
 client = ::Google::Cloud::Shell::V1::CloudShellService::Client.new
-request = my_create_request
+request = ::Google::Cloud::Shell::V1::GetEnvironmentRequest.new # (request fields as keyword arguments...)
 response = client.get_environment request
 ```
 
