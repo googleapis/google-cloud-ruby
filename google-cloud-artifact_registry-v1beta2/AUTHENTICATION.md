@@ -66,11 +66,11 @@ The environment variables that google-cloud-artifact_registry-v1beta2
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Credentials}):
 
-1. `ARTIFACT_REGISTRY_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `ARTIFACT_REGISTRY_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `ARTIFACT_REGISTRY_CREDENTIALS` - Path to JSON file, or JSON contents
+* `ARTIFACT_REGISTRY_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/artifact_registry/v1beta2"
