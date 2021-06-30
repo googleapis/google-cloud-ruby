@@ -66,11 +66,11 @@ The environment variables that google-cloud-datastore-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::Datastore::V1::Datastore::Credentials}):
 
-1. `DATASTORE_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `DATASTORE_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `DATASTORE_CREDENTIALS` - Path to JSON file, or JSON contents
+* `DATASTORE_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/datastore/v1"
