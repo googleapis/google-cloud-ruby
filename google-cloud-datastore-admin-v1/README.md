@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/datastore/admin/v1"
 
 client = ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new
-request = my_create_request
+request = ::Google::Cloud::Datastore::Admin::V1::ExportEntitiesRequest.new # (request fields as keyword arguments...)
 response = client.export_entities request
 ```
 
