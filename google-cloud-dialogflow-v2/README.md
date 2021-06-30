@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/dialogflow/v2"
 
 client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new
-request = my_create_request
+request = ::Google::Cloud::Dialogflow::V2::GetAgentRequest.new # (request fields as keyword arguments...)
 response = client.get_agent request
 ```
 
