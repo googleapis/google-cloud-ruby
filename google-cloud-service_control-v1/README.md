@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/service_control/v1"
 
 client = ::Google::Cloud::ServiceControl::V1::QuotaController::Client.new
-request = my_create_request
+request = ::Google::Cloud::ServiceControl::V1::AllocateQuotaRequest.new # (request fields as keyword arguments...)
 response = client.allocate_quota request
 ```
 
