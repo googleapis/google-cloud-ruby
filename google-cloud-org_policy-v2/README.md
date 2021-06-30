@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/org_policy/v2"
 
 client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
-request = my_create_request
+request = ::Google::Cloud::OrgPolicy::V2::ListConstraintsRequest.new # (request fields as keyword arguments...)
 response = client.list_constraints request
 ```
 
