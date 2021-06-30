@@ -66,11 +66,11 @@ The environment variables that google-cloud-automl-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::AutoML::V1::PredictionService::Credentials}):
 
-1. `AUTOML_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `AUTOML_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `AUTOML_CREDENTIALS` - Path to JSON file, or JSON contents
+* `AUTOML_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/automl/v1"
