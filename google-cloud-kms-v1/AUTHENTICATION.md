@@ -66,11 +66,11 @@ The environment variables that google-cloud-kms-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::Kms::V1::KeyManagementService::Credentials}):
 
-1. `KMS_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `KMS_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `KMS_CREDENTIALS` - Path to JSON file, or JSON contents
+* `KMS_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/kms/v1"
