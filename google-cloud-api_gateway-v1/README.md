@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/api_gateway/v1"
 
 client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
-request = my_create_request
+request = ::Google::Cloud::ApiGateway::V1::ListGatewaysRequest.new # (request fields as keyword arguments...)
 response = client.list_gateways request
 ```
 
