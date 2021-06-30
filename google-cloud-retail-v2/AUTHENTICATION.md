@@ -66,11 +66,11 @@ The environment variables that google-cloud-retail-v2
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::Retail::V2::CatalogService::Credentials}):
 
-1. `RETAIL_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `RETAIL_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `RETAIL_CREDENTIALS` - Path to JSON file, or JSON contents
+* `RETAIL_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/retail/v2"
