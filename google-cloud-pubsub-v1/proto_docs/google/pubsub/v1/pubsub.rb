@@ -850,9 +850,21 @@ module Google
         # @!attribute [rw] received_messages
         #   @return [::Array<::Google::Cloud::PubSub::V1::ReceivedMessage>]
         #     Received Pub/Sub messages. This will not be empty.
+        # @!attribute [rw] subscription_properties
+        #   @return [::Google::Cloud::PubSub::V1::StreamingPullResponse::SubscriptionProperties]
+        #     Properties associated with this subscription.
         class StreamingPullResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Subscription properties sent as part of the response.
+          # @!attribute [rw] message_ordering_enabled
+          #   @return [::Boolean]
+          #     True iff message ordering is enabled for this subscription.
+          class SubscriptionProperties
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Request for the `CreateSnapshot` method.
