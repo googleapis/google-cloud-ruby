@@ -88,6 +88,10 @@ module Google
             #   @return [::Array<::Google::Cloud::Spanner::Admin::Instance::V1::ReplicaInfo>]
             #     The geographic placement of nodes in this instance configuration and their
             #     replication properties.
+            # @!attribute [rw] leader_options
+            #   @return [::Array<::String>]
+            #     Allowed values of the “default_leader” schema option for databases in
+            #     instances that use this instance configuration.
             class InstanceConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
