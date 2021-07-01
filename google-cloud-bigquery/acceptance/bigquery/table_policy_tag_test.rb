@@ -43,7 +43,7 @@ describe Google::Cloud::Bigquery::Schema, :policy_tags, :bigquery do
     t
   end
 
-  it "knows its policy tags for a field" do
+  it "sets, updates and removes policy tags for a field" do
     taxonomy_id = nil
     begin
       taxonomy = Google::Cloud::DataCatalog::V1::Taxonomy.new(
@@ -85,12 +85,23 @@ describe Google::Cloud::Bigquery::Schema, :policy_tags, :bigquery do
           schema.integer   "id",    description: "id description",    mode: :required
           schema.string    "name",  description: "name description",  mode: :required
           schema.timestamp "dob",   description: "dob description",   mode: :required, policy_tags: [policy_tag_id]
+
+          schema.record "spells", mode: :repeated do |spells|
+            spells.string "name", mode: :nullable, policy_tags: [policy_tag_id]
+            spells.record "properties", mode: :repeated do |properties|
+              properties.float "power", mode: :nullable, policy_tags: [policy_tag_id]
+            end
+          end
         end
       end
 
       _(table_2.schema.field("dob").policy_tags).must_equal [policy_tag_id]
+      _(table_2.schema.field("spells").field("name").policy_tags).must_equal [policy_tag_id]
+      _(table_2.schema.field("spells").field("properties").field("power").policy_tags).must_equal [policy_tag_id]
       table_2.reload!
       _(table_2.schema.field("dob").policy_tags).must_equal [policy_tag_id]
+      _(table_2.schema.field("spells").field("name").policy_tags).must_equal [policy_tag_id]
+      _(table_2.schema.field("spells").field("properties").field("power").policy_tags).must_equal [policy_tag_id]
       
     ensure
       policy_tag_manager.delete_taxonomy name: taxonomy_id if taxonomy_id
