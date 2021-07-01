@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "scheduler", "v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-scheduler-v1",
-        "ruby-cloud-title": "Cloud Scheduler V1",
-        "ruby-cloud-description": "Cloud Scheduler is a fully managed enterprise-grade cron job scheduler. It allows you to schedule virtually any job, including batch, big data jobs, cloud infrastructure operations, and more. You can automate everything, including retries in case of failure to reduce manual toil and intervention. Cloud Scheduler even acts as a single pane of glass, allowing you to manage all your automation tasks from one place.",
-        "ruby-cloud-env-prefix": "SCHEDULER",
-        "ruby-cloud-grpc-service-config": "google/cloud/scheduler/v1/cloudscheduler_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/scheduler",
-        "ruby-cloud-api-id": "cloudscheduler.googleapis.com",
-        "ruby-cloud-api-shortname": "cloudscheduler",
-    }
+    proto_path="google/cloud/scheduler/v1",
+    bazel_target="//google/cloud/scheduler/v1:google-cloud-scheduler-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

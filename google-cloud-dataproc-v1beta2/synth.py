@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "dataproc", "v1beta2",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-dataproc-v1beta2",
-        "ruby-cloud-title": "Cloud Dataproc V1beta2",
-        "ruby-cloud-description": "Manages Hadoop-based clusters and jobs on Google Cloud Platform.",
-        "ruby-cloud-env-prefix": "DATAPROC",
-        "ruby-cloud-grpc-service-config": "google/cloud/dataproc/v1beta2/dataproc_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/dataproc",
-        "ruby-cloud-api-id": "dataproc.googleapis.com",
-        "ruby-cloud-api-shortname": "dataproc",
-    }
+    proto_path="google/cloud/dataproc/v1beta2",
+    bazel_target="//google/cloud/dataproc/v1beta2:google-cloud-dataproc-v1beta2-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

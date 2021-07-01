@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "recommendationengine", "v1beta1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-recommendation_engine-v1beta1",
-        "ruby-cloud-title": "Recommendations AI V1beta1",
-        "ruby-cloud-description": "Recommendations AI enables you to build an end-to-end personalized recommendation system based on state-of-the-art deep learning ML models, without a need for expertise in ML or recommendation systems.",
-        "ruby-cloud-env-prefix": "RECOMMENDATION_ENGINE",
-        "ruby-cloud-grpc-service-config": "google/cloud/recommendationengine/v1beta1/recommendationengine_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/recommendations-ai/",
-        "ruby-cloud-api-id": "recommendationengine.googleapis.com",
-        "ruby-cloud-api-shortname": "recommendationengine",
-    }
+    proto_path="google/cloud/recommendationengine/v1beta1",
+    bazel_target="//google/cloud/recommendationengine/v1beta1:google-cloud-recommendationengine-v1beta1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

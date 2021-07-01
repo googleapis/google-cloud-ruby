@@ -21,22 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "channel", "v1",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-channel-v1",
-        "ruby-cloud-title": "Cloud Channel V1",
-        "ruby-cloud-description": "You can use Channel Services to manage your relationships with your partners and your customers. Channel Services include a console and APIs to view and provision links between distributors and resellers, customers and entitlements.",
-        "ruby-cloud-env-prefix": "CHANNEL",
-        "ruby-cloud-grpc-service-config": "google/cloud/channel/v1/cloudchannel_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/channel",
-        "ruby-cloud-api-id": "cloudchannel.googleapis.com",
-        "ruby-cloud-api-shortname": "cloudchannel",
-    }
+    proto_path="google/cloud/channel/v1",
+    bazel_target="//google/cloud/channel/v1:google-cloud-channel-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

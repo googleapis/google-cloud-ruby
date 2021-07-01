@@ -19,25 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "notebooks", "v1beta1",
-    extra_proto_files=[
-      "google/cloud/common_resources.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-notebooks-v1beta1",
-        "ruby-cloud-title": "AI Platform Notebooks V1beta1",
-        "ruby-cloud-description": "AI Platform Notebooks makes it easy to manage JupyterLab instances through a protected, publicly available notebook instance URL. A JupyterLab instance is a Deep Learning virtual machine instance with the latest machine learning and data science libraries pre-installed.",
-        "ruby-cloud-env-prefix": "NOTEBOOKS",
-        "ruby-cloud-grpc-service-config": "google/cloud/notebooks/v1beta1/notebooks_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/ai-platform-notebooks",
-        "ruby-cloud-api-id": "notebooks.googleapis.com",
-        "ruby-cloud-api-shortname": "notebooks",
-    }
+    proto_path="google/cloud/notebooks/v1beta1",
+    bazel_target="//google/cloud/notebooks/v1beta1:google-cloud-notebooks-v1beta1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

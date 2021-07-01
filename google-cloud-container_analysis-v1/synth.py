@@ -18,35 +18,14 @@ import synthtool as s
 import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
-import shutil
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "containeranalysis", "v1",
     proto_path="google/devtools/containeranalysis/v1",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-        "grafeas/v1/common.proto",
-        "grafeas/v1/cvss.proto",
-        "grafeas/v1/package.proto",
-        "grafeas/v1/vulnerability.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-container_analysis-v1",
-        "ruby-cloud-title": "Container Analysis V1",
-        "ruby-cloud-description": "The Container Analysis API is an implementation of Grafeas. It stores, and enables querying and retrieval of, critical metadata about all of your software artifacts.",
-        "ruby-cloud-env-prefix": "CONTAINER_ANALYSIS",
-        "ruby-cloud-grpc-service-config": "google/devtools/containeranalysis/v1/containeranalysis_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/container-registry/docs/container-analysis",
-        "ruby-cloud-api-id": "containeranalysis.googleapis.com",
-        "ruby-cloud-api-shortname": "containeranalysis",
-        "ruby-cloud-extra-dependencies": "grafeas-v1=~> 0.0",
-    }
+    bazel_target="//google/devtools/containeranalysis/v1:google-cloud-devtools-containeranalysis-v1-ruby",
 )
-
-# Remove grafeas protos since they will be brought in via the grafeas-v1 gem
-shutil.rmtree(library / "lib/grafeas")
 
 s.copy(library, merge=ruby.global_merge)

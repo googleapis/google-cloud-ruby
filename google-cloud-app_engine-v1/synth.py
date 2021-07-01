@@ -21,22 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "appengine", "v1",
     proto_path="google/appengine/v1",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-app_engine-v1",
-        "ruby-cloud-title": "App Engine Admin V1",
-        "ruby-cloud-description": "The App Engine Admin API provisions and manages your App Engine applications.",
-        "ruby-cloud-env-prefix": "APP_ENGINE",
-        "ruby-cloud-product-url": "https://cloud.google.com/appengine/docs/admin-api/",
-        "ruby-cloud-api-id": "appengine.googleapis.com",
-        "ruby-cloud-api-shortname": "appengine",
-    }
+    bazel_target="//google/appengine/v1:google-cloud-appengine-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "servicemanagement", "v1",
     proto_path="google/api/servicemanagement/v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-service_management-v1",
-        "ruby-cloud-title": "Service Management API V1",
-        "ruby-cloud-description": "Google Service Management allows service producers to publish their services on Google Cloud Platform so that they can be discovered and used by service consumers.",
-        "ruby-cloud-env-prefix": "SERVICE_MANAGEMENT",
-        "ruby-cloud-product-url": "https://cloud.google.com/service-infrastructure/docs/overview/",
-        "ruby-cloud-api-id": "servicemanagement.googleapis.com",
-        "ruby-cloud-api-shortname": "servicemanagement",
-    }
+    bazel_target="//google/api/servicemanagement/v1:google-cloud-api-servicemanagement-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

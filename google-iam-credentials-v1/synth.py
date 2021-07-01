@@ -21,23 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "iamcredentials", "v1",
     proto_path="google/iam/credentials/v1",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-iam-credentials-v1",
-        "ruby-cloud-title": "IAM Service Account Credentials V1",
-        "ruby-cloud-description": "The Service Account Credentials API creates short-lived credentials for Identity and Access Management (IAM) service accounts. You can also use this API to sign JSON Web Tokens (JWTs), as well as blobs of binary data that contain other types of tokens.",
-        "ruby-cloud-env-prefix": "IAM_CREDENTIALS",
-        "ruby-cloud-grpc-service-config": "google/iam/credentials/v1/iamcredentials_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/iam",
-        "ruby-cloud-api-id": "iamcredentials.googleapis.com",
-        "ruby-cloud-api-shortname": "iamcredentials",
-    }
+    bazel_target="//google/iam/credentials/v1:google-cloud-iam-credentials-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

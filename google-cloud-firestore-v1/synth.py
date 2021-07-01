@@ -19,26 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "firestore", "v1",
     proto_path="google/firestore/v1",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto"
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-firestore-v1",
-        "ruby-cloud-title": "Cloud Firestore V1",
-        "ruby-cloud-description": "Cloud Firestore is a NoSQL document database built for automatic scaling, high performance, and ease of application development.",
-        "ruby-cloud-env-prefix": "FIRESTORE",
-        "ruby-cloud-grpc-service-config": "google/firestore/v1/firestore_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/firestore",
-        "ruby-cloud-api-id": "firestore.googleapis.com",
-        "ruby-cloud-api-shortname": "firestore",
-    }
+    bazel_target="//google/firestore/v1:google-cloud-firestore-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

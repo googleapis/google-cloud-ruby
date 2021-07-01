@@ -19,26 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "datastore", "v1",
     proto_path="google/datastore/v1",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto"
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-datastore-v1",
-        "ruby-cloud-title": "Firestore in Datastore mode V1",
-        "ruby-cloud-description": "Firestore in Datastore mode is a NoSQL document database built for automatic scaling, high performance, and ease of application development.",
-        "ruby-cloud-env-prefix": "DATASTORE",
-        "ruby-cloud-grpc-service-config": "google/datastore/v1/datastore_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/datastore",
-        "ruby-cloud-api-id": "datastore.googleapis.com",
-        "ruby-cloud-api-shortname": "datastore",
-    }
+    bazel_target="//google/datastore/v1:google-cloud-datastore-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

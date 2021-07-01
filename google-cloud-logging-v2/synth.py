@@ -19,30 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "logging", "v2",
     proto_path="google/logging/v2",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-        "google/logging/type/http_request.proto",
-        "google/logging/type/log_severity.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-logging-v2",
-        "ruby-cloud-title": "Cloud Logging V2",
-        "ruby-cloud-description": "The Cloud Logging API lets you programmatically read and write log entries, set up exclusions, create logs-based metrics, and manage export sinks.",
-        "ruby-cloud-env-prefix": "LOGGING",
-        "ruby-cloud-grpc-service-config": "google/logging/v2/logging_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/logging",
-        "ruby-cloud-api-id": "logging.googleapis.com",
-        "ruby-cloud-api-shortname": "logging",
-        "ruby-cloud-service-override": "ConfigServiceV2=ConfigService;LoggingServiceV2=LoggingService;MetricsServiceV2=MetricsService",
-        "ruby-cloud-yard-strict": "false",
-    }
+    bazel_target="//google/logging/v2:google-cloud-logging-v2-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

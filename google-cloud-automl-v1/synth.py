@@ -19,26 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "automl", "v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-automl-v1",
-        "ruby-cloud-title": "Cloud AutoML V1",
-        "ruby-cloud-description": "AutoML makes the power of machine learning available to you even if you have limited knowledge of machine learning. You can use AutoML to build on Google's machine learning capabilities to create your own custom machine learning models that are tailored to your business needs, and then integrate those models into your applications and web sites.",
-        "ruby-cloud-env-prefix": "AUTOML",
-        "ruby-cloud-grpc-service-config": "google/cloud/automl/v1/automl_grpc_service_config.json",
-        "ruby-cloud-path-override": "auto_ml=automl",
-        "ruby-cloud-namespace-override": "AutoMl=AutoML;Automl=AutoML",
-        "ruby-cloud-yard-strict": "false",
-        "ruby-cloud-product-url": "https://cloud.google.com/automl",
-        "ruby-cloud-api-id": "automl.googleapis.com",
-        "ruby-cloud-api-shortname": "automl",
-    }
+    proto_path="google/cloud/automl/v1",
+    bazel_target="//google/cloud/automl/v1:google-cloud-automl-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

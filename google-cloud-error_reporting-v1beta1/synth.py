@@ -19,24 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "errorreporting", "v1beta1",
     proto_path="google/devtools/clouderrorreporting/v1beta1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-error_reporting-v1beta1",
-        "ruby-cloud-title": "Cloud Error Reporting V1beta1",
-        "ruby-cloud-description": "The Error Reporting API provides a simple endpoint to report errors from your running service, and read access to error groups and their associated errors.",
-        "ruby-cloud-env-prefix": "ERROR_REPORTING",
-        "ruby-cloud-grpc-service-config": "google/devtools/clouderrorreporting/v1beta1/errorreporting_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/error-reporting",
-        "ruby-cloud-api-id": "clouderrorreporting.googleapis.com",
-        "ruby-cloud-api-shortname": "clouderrorreporting",
-    }
+    bazel_target="//google/devtools/clouderrorreporting/v1beta1:google-cloud-devtools-clouderrorreporting-v1beta1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

@@ -19,24 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "monitoring/dashboard", "v1",
     proto_path="google/monitoring/dashboard/v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-monitoring-dashboard-v1",
-        "ruby-cloud-title": "Cloud Monitoring Dashboards V1",
-        "ruby-cloud-description": "Cloud Monitoring collects metrics, events, and metadata from Google Cloud, Amazon Web Services (AWS), hosted uptime probes, and application instrumentation. The Dashboards API manages arrangements of display widgets.",
-        "ruby-cloud-env-prefix": "MONITORING_DASHBOARD",
-        "ruby-cloud-grpc-service-config": "google/monitoring/dashboard/v1/dashboards_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/monitoring",
-        "ruby-cloud-api-id": "monitoring.googleapis.com",
-        "ruby-cloud-api-shortname": "monitoring",
-    }
+    bazel_target="//google/monitoring/dashboard/v1:google-cloud-monitoring-dashboard-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

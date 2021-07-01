@@ -21,22 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "retail", "v2",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-retail-v2",
-        "ruby-cloud-title": "Retail V2",
-        "ruby-cloud-description": "Retail enables you to build an end-to-end personalized recommendation system based on state-of-the-art deep learning ML models, without a need for expertise in ML or recommendation systems.",
-        "ruby-cloud-env-prefix": "RETAIL",
-        "ruby-cloud-grpc-service-config": "google/cloud/retail/v2/retail_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/retail/docs/apis",
-        "ruby-cloud-api-id": "retail.googleapis.com",
-        "ruby-cloud-api-shortname": "retail",
-    }
+    proto_path="google/cloud/retail/v2",
+    bazel_target="//google/cloud/retail/v2:google-cloud-retail-v2-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

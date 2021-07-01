@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "videointelligence", "v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-video_intelligence-v1",
-        "ruby-cloud-title": "Cloud Video Intelligence V1",
-        "ruby-cloud-description": "Detects objects, explicit content, and scene changes in videos. It also specifies the region for annotation and transcribes speech to text. Supports both asynchronous API and streaming API.",
-        "ruby-cloud-env-prefix": "VIDEO_INTELLIGENCE",
-        "ruby-cloud-grpc-service-config": "google/cloud/videointelligence/v1/videointelligence_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/video-intelligence",
-        "ruby-cloud-api-id": "videointelligence.googleapis.com",
-        "ruby-cloud-api-shortname": "videointelligence",
-    }
+    proto_path="google/cloud/videointelligence/v1",
+    bazel_target="//google/cloud/videointelligence/v1:google-cloud-videointelligence-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

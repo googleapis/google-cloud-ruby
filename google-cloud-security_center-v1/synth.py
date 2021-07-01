@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "securitycenter", "v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-security_center-v1",
-        "ruby-cloud-title": "Cloud Security Command Center V1",
-        "ruby-cloud-description": "Security Command Center API provides access to temporal views of assets and findings within an organization.",
-        "ruby-cloud-env-prefix": "SECURITY_CENTER",
-        "ruby-cloud-grpc-service-config": "google/cloud/securitycenter/v1/securitycenter_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/security-command-center",
-        "ruby-cloud-api-id": "securitycenter.googleapis.com",
-        "ruby-cloud-api-shortname": "securitycenter",
-    }
+    proto_path="google/cloud/securitycenter/v1",
+    bazel_target="//google/cloud/securitycenter/v1:google-cloud-securitycenter-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)
