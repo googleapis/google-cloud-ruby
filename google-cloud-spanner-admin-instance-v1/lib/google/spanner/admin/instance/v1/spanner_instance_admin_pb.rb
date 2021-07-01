@@ -30,6 +30,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :display_name, :string, 2
       repeated :replicas, :message, 3, "google.spanner.admin.instance.v1.ReplicaInfo"
+      repeated :leader_options, :string, 4
     end
     add_message "google.spanner.admin.instance.v1.Instance" do
       optional :name, :string, 1
