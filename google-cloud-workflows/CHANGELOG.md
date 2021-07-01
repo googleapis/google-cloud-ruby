@@ -1,5 +1,11 @@
 # Release History
 
+### 2.0.1 / 2021-07-01
+
+#### Bug Fixes
+
+* Expand dependencies to include future 1.x releases of versioned clients
+
 ### 2.0.0 / 2021-06-22
 
 #### Features
