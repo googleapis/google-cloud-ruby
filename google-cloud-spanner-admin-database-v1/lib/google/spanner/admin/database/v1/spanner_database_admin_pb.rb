@@ -31,6 +31,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :encryption_info, :message, 8, "google.spanner.admin.database.v1.EncryptionInfo"
       optional :version_retention_period, :string, 6
       optional :earliest_version_time, :message, 7, "google.protobuf.Timestamp"
+      optional :default_leader, :string, 9
     end
     add_enum "google.spanner.admin.database.v1.Database.State" do
       value :STATE_UNSPECIFIED, 0
