@@ -43,7 +43,8 @@ module Google
     #
     #     service ResourceService {
     #       rpc GetResource(GetResourceRequest) returns (google.api.HttpBody);
-    #       rpc UpdateResource(google.api.HttpBody) returns (google.protobuf.Empty);
+    #       rpc UpdateResource(google.api.HttpBody) returns
+    #       (google.protobuf.Empty);
     #     }
     #
     # Example with streaming methods:
@@ -59,10 +60,10 @@ module Google
     # handled, all other features will continue to work unchanged.
     # @!attribute [rw] content_type
     #   @return [::String]
-    #     The HTTP Content-Type string representing the content type of the body.
+    #     The HTTP Content-Type header value specifying the content type of the body.
     # @!attribute [rw] data
     #   @return [::String]
-    #     HTTP body binary data.
+    #     The HTTP request/response body as raw binary.
     # @!attribute [rw] extensions
     #   @return [::Array<::Google::Protobuf::Any>]
     #     Application specific response metadata. Must be set in the first response
