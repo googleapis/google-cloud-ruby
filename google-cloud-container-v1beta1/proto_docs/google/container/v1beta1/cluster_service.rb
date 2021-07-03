@@ -1427,6 +1427,10 @@ module Google
         # @!attribute [rw] desired_master
         #   @return [::Google::Cloud::Container::V1beta1::Master]
         #     Configuration for master components.
+        # @!attribute [rw] desired_authenticator_groups_config
+        #   @return [::Google::Cloud::Container::V1beta1::AuthenticatorGroupsConfig]
+        #     AuthenticatorGroupsConfig specifies the config for the cluster security
+        #     groups settings.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

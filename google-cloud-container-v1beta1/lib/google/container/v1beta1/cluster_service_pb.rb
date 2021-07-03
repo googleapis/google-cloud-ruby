@@ -312,6 +312,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :desired_workload_identity_config, :message, 47, "google.container.v1beta1.WorkloadIdentityConfig"
       optional :desired_shielded_nodes, :message, 48, "google.container.v1beta1.ShieldedNodes"
       optional :desired_master, :message, 52, "google.container.v1beta1.Master"
+      optional :desired_authenticator_groups_config, :message, 63, "google.container.v1beta1.AuthenticatorGroupsConfig"
     end
     add_message "google.container.v1beta1.Operation" do
       optional :name, :string, 1
