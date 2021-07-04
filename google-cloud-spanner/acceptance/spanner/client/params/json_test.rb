@@ -32,7 +32,7 @@ describe "Spanner Client", :params, :json, :spanner do
   end
 
   it "queries and returns a NULL string parameter" do
-    results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: types: { value: :JSON }
+    results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: { value: :JSON }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields[:value]).must_equal :JSON
