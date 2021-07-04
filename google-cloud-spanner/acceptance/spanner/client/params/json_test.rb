@@ -24,6 +24,8 @@ describe "Spanner Client", :params, :json, :spanner do
   end
 
   it "queries and returns a string parameter" do
+    skip if emulator_enabled?
+
     results = db.execute_query "SELECT @value AS value", params: { value: json_params }, types: { value: :JSON }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -32,6 +34,8 @@ describe "Spanner Client", :params, :json, :spanner do
   end
 
   it "queries and returns a NULL string parameter" do
+    skip if emulator_enabled?
+
     results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: { value: :JSON }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -40,6 +44,8 @@ describe "Spanner Client", :params, :json, :spanner do
   end
 
   it "queries and returns an array of json parameters" do
+    skip if emulator_enabled?
+
     results = db.execute_query "SELECT @value AS value", params: { value: json_array_params }, types: { value: [:JSON] }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -48,6 +54,8 @@ describe "Spanner Client", :params, :json, :spanner do
   end
 
   it "queries and returns an array of json parameters with a nil value" do
+    skip if emulator_enabled?
+
     params = [nil].concat(json_array_params)
     results = db.execute_query "SELECT @value AS value", params: { value: params }, types: { value: [:JSON] }
 
@@ -57,6 +65,8 @@ describe "Spanner Client", :params, :json, :spanner do
   end
 
   it "queries and returns an empty array of json parameters" do
+    skip if emulator_enabled?
+
     results = db.execute_query "SELECT @value AS value", params: { value: [] }, types: { value: [:JSON] }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -65,6 +75,8 @@ describe "Spanner Client", :params, :json, :spanner do
   end
 
   it "queries and returns a NULL array of json parameters" do
+    skip if emulator_enabled?
+
     results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: { value: [:JSON] }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
