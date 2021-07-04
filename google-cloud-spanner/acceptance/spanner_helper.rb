@@ -253,6 +253,7 @@ module Acceptance
           byte: File.open("acceptance/data/face.jpg", "rb"),
           date: Date.today + rand(-100..100),
           timestamp: Time.now + rand(-60*60*24.0..60*60*24.0),
+          json: { venue: "Yellow Lake", rating: 10 },
           ints: rand(2..10).times.map { rand(0..1000) },
           floats: rand(2..10).times.map { rand(0.0..100.0) },
           bools: rand(2..10).times.map { [true, false].sample },
@@ -262,6 +263,7 @@ module Acceptance
                   File.open("acceptance/data/logo.jpg", "rb")],
           dates: rand(2..10).times.map { Date.today + rand(-100..100) },
           timestamps: rand(2..10).times.map { Time.now + rand(-60*60*24.0..60*60*24.0) },
+          json_array: [{ venue: "Green Lake", rating: 8 }, { venue: "Blue Lake", rating: 9 }]
         }
       end
 

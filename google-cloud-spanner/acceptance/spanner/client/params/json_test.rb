@@ -16,9 +16,7 @@ require "spanner_helper"
 
 describe "Spanner Client", :params, :json, :spanner do
   let(:db) { spanner_client }
-  let(:json_type) { { value: :JSON } }
   let(:json_params) { { "venue" => "abc", "rating" => 10 } }
-  let(:json_array_type) { { value: [:JSON] } }
   let(:json_array_params) do
     3.times.map do |i|
       { "venue" => "abc-#{i}", "rating" => 10 + i }
@@ -26,7 +24,7 @@ describe "Spanner Client", :params, :json, :spanner do
   end
 
   it "queries and returns a string parameter" do
-    results = db.execute_query "SELECT @value AS value", params: { value: json_params }, types: json_type
+    results = db.execute_query "SELECT @value AS value", params: { value: json_params }, types: { value: :JSON }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields[:value]).must_equal :JSON
@@ -34,7 +32,7 @@ describe "Spanner Client", :params, :json, :spanner do
   end
 
   it "queries and returns a NULL string parameter" do
-    results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: json_type
+    results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: types: { value: :JSON }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields[:value]).must_equal :JSON
@@ -42,7 +40,7 @@ describe "Spanner Client", :params, :json, :spanner do
   end
 
   it "queries and returns an array of json parameters" do
-    results = db.execute_query "SELECT @value AS value", params: { value: json_array_params }, types: json_array_type
+    results = db.execute_query "SELECT @value AS value", params: { value: json_array_params }, types: { value: [:JSON] }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields[:value]).must_equal [:JSON]
@@ -51,7 +49,7 @@ describe "Spanner Client", :params, :json, :spanner do
 
   it "queries and returns an array of json parameters with a nil value" do
     params = [nil].concat(json_array_params)
-    results = db.execute_query "SELECT @value AS value", params: { value: params }, types: json_array_type
+    results = db.execute_query "SELECT @value AS value", params: { value: params }, types: { value: [:JSON] }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields[:value]).must_equal [:JSON]
@@ -59,7 +57,7 @@ describe "Spanner Client", :params, :json, :spanner do
   end
 
   it "queries and returns an empty array of json parameters" do
-    results = db.execute_query "SELECT @value AS value", params: { value: [] }, types: json_array_type
+    results = db.execute_query "SELECT @value AS value", params: { value: [] }, types: { value: [:JSON] }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields[:value]).must_equal [:JSON]
@@ -67,7 +65,7 @@ describe "Spanner Client", :params, :json, :spanner do
   end
 
   it "queries and returns a NULL array of json parameters" do
-    results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: json_array_type
+    results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: { value: [:JSON] }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields[:value]).must_equal [:JSON]

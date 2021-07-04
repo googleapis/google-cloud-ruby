@@ -223,7 +223,7 @@ module Google
             when :NUMERIC
               BigDecimal value.string_value
             when :JSON
-              JSON.parse value.string_value unless value.string_value.empty?
+              JSON.parse value.string_value
             end
           end
 

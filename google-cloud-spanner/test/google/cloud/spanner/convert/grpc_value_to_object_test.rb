@@ -143,11 +143,4 @@ describe Google::Cloud::Spanner::Convert, :grpc_value_to_object, :mock_spanner d
     raw = Google::Cloud::Spanner::Convert.grpc_value_to_object value, type
     _(raw).must_equal venue_detail
   end
-
-  it "converts empty JSON value to nil" do
-    value = Google::Protobuf::Value.new(string_value: '')
-    type = Google::Spanner::V1::Type.new(code: :JSON)
-    raw = Google::Cloud::Spanner::Convert.grpc_value_to_object value, type
-    _(raw).must_be :nil?
-  end
 end
