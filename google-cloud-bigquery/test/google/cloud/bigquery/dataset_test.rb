@@ -48,11 +48,11 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   let(:table_schema_gapi) do
     Google::Apis::BigqueryV2::TableSchema.new(
       fields: [
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name", type: "STRING", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name", type: "STRING", description: nil, fields: [], max_length: max_length_string),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age", type: "INTEGER", description: nil, fields: [], policy_tags: policy_tags_gapi),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score", type: "FLOAT", description: "A score from 0.0 to 10.0", fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active", type: "BOOLEAN", description: nil, fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar", type: "BYTES", description: nil, fields: [])
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar", type: "BYTES", description: nil, fields: [], max_length: max_length_bytes)
       ]
     )
   end
@@ -68,6 +68,8 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   let(:dataset_hash) { random_dataset_hash dataset_id, dataset_name, dataset_description, default_expiration }
   let(:dataset_gapi) { Google::Apis::BigqueryV2::Dataset.from_json dataset_hash.to_json }
   let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi, bigquery.service }
+  let(:max_length_string) { 50 }
+  let(:max_length_bytes) { 1024 }
 
   it "knows its attributes" do
     _(dataset.name).must_equal dataset_name
@@ -315,11 +317,11 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     table = dataset.create_table table_id do |t|
       t.name = table_name
       t.description = table_description
-      t.schema.string "name", mode: :required
+      t.schema.string "name", mode: :required, max_length: max_length_string
       t.schema.integer "age", policy_tags: policy_tags
       t.schema.float "score", description: "A score from 0.0 to 10.0"
       t.schema.boolean "active"
-      t.schema.bytes "avatar"
+      t.schema.bytes "avatar", max_length: max_length_bytes
     end
 
     mock.verify
@@ -341,13 +343,13 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       table_reference: Google::Apis::BigqueryV2::TableReference.new(
         project_id: project, dataset_id: dataset_id, table_id: table_id),
       schema: Google::Apis::BigqueryV2::TableSchema.new(fields: [
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name",          type: "STRING", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name",          type: "STRING", description: nil, fields: [], max_length: max_length_string),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", policy_tags: policy_tags_gapi, description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score",         type: "FLOAT", description: "A score from 0.0 to 10.0", fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "cost",          type: "NUMERIC", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_bignumeric", type: "BIGNUMERIC", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", description: nil, fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar",        type: "BYTES", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar",        type: "BYTES", description: nil, fields: [], max_length: max_length_bytes),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "creation_date", type: "TIMESTAMP", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "duration",      type: "TIME", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "target_end",    type: "DATETIME", description: nil, fields: []),
@@ -362,13 +364,13 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     table = dataset.create_table table_id do |schema|
-      schema.string "name", mode: :required
+      schema.string "name", mode: :required, max_length: max_length_string
       schema.integer "age", policy_tags: policy_tags
       schema.float "score", description: "A score from 0.0 to 10.0"
       schema.numeric "cost"
       schema.bignumeric "my_bignumeric"
       schema.boolean "active"
-      schema.bytes "avatar"
+      schema.bytes "avatar", max_length: max_length_bytes
       schema.timestamp "creation_date"
       schema.time "duration"
       schema.datetime "target_end"
@@ -409,11 +411,11 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       t.name = table_name
       t.description = table_description
       t.schema do |s|
-        s.string "name", mode: :required
+        s.string "name", mode: :required, max_length: max_length_string
         s.integer "age", policy_tags: policy_tags
         s.float "score", description: "A score from 0.0 to 10.0"
         s.boolean "active"
-        s.bytes "avatar"
+        s.bytes "avatar", max_length: max_length_bytes
       end
     end
 

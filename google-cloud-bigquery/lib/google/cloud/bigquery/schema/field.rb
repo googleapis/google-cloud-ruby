@@ -220,6 +220,18 @@ module Google
           end
 
           ##
+          # The maximum length of values of this field for {#string?} or {bytes?} fields. If `max_length` is not
+          # specified, no maximum length constraint is imposed on this field. If type = `STRING`, then `max_length`
+          # represents the maximum UTF-8 length of strings in this field. If type = `BYTES`, then `max_length`
+          # represents the maximum number of bytes in this field.
+          #
+          # @return [Integer, nil] The maximum length of values of this field, or `nil`.
+          #
+          def max_length
+            @gapi.max_length
+          end
+
+          ##
           # Checks if the type of the field is `STRING`.
           #
           # @return [Boolean] `true` when `STRING`, `false` otherwise.
@@ -414,11 +426,18 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          # @param [Integer] max_length The maximum UTF-8 length of strings
+          #   allowed in the field.
           #
-          def string name, description: nil, mode: :nullable, policy_tags: nil
+          def string name, description: nil, mode: :nullable, policy_tags: nil, max_length: nil
             record_check!
 
-            add_field name, :string, description: description, mode: mode, policy_tags: policy_tags
+            add_field name,
+                      :string,
+                      description: description,
+                      mode: mode,
+                      policy_tags: policy_tags,
+                      max_length: max_length
           end
 
           ##
@@ -575,11 +594,18 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          # @param [Integer] max_length The maximum the maximum number of
+          #   bytes in the field.
           #
-          def bytes name, description: nil, mode: :nullable, policy_tags: nil
+          def bytes name, description: nil, mode: :nullable, policy_tags: nil, max_length: nil
             record_check!
 
-            add_field name, :bytes, description: description, mode: mode, policy_tags: policy_tags
+            add_field name,
+                      :bytes,
+                      description: description,
+                      mode: mode,
+                      policy_tags: policy_tags,
+                      max_length: max_length
           end
 
           ##
@@ -767,7 +793,7 @@ module Google
                   "Cannot add fields to a non-RECORD field (#{type})"
           end
 
-          def add_field name, type, description: nil, mode: :nullable, policy_tags: nil
+          def add_field name, type, description: nil, mode: :nullable, policy_tags: nil, max_length: nil
             frozen_check!
 
             new_gapi = Google::Apis::BigqueryV2::TableFieldSchema.new(
@@ -781,6 +807,7 @@ module Google
               policy_tags = Array(policy_tags)
               new_gapi.policy_tags = Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags.new names: policy_tags
             end
+            new_gapi.max_length = max_length if max_length
             # Remove any existing field of this name
             @gapi.fields ||= []
             @gapi.fields.reject! { |f| f.name == new_gapi.name }
