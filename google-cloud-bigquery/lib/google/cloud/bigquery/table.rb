@@ -3242,6 +3242,8 @@ module Google
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
           #   At most 1 policy tag is currently allowed.
+          # @param [Integer] max_length The maximum UTF-8 length of strings
+          #   allowed in the field.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -3253,8 +3255,8 @@ module Google
           #   end
           #
           # @!group Schema
-          def string name, description: nil, mode: :nullable, policy_tags: nil
-            schema.string name, description: description, mode: mode, policy_tags: policy_tags
+          def string name, description: nil, mode: :nullable, policy_tags: nil, max_length: nil
+            schema.string name, description: description, mode: mode, policy_tags: policy_tags, max_length: max_length
           end
 
           ##
@@ -3456,6 +3458,8 @@ module Google
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
           #   At most 1 policy tag is currently allowed.
+          # @param [Integer] max_length The maximum the maximum number of
+          #   bytes in the field.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -3467,8 +3471,8 @@ module Google
           #   end
           #
           # @!group Schema
-          def bytes name, description: nil, mode: :nullable, policy_tags: nil
-            schema.bytes name, description: description, mode: mode, policy_tags: policy_tags
+          def bytes name, description: nil, mode: :nullable, policy_tags: nil, max_length: nil
+            schema.bytes name, description: description, mode: mode, policy_tags: policy_tags, max_length: max_length
           end
 
           ##

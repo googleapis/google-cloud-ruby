@@ -38,14 +38,16 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:policy_tag_2) { "projects/#{project}/locations/us/taxonomies/1/policyTags/2" }
   let(:policy_tags) { [ policy_tag, policy_tag_2 ] }
   let(:policy_tags_gapi) { Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags.new names: policy_tags }
+  let(:max_length_string) { 50 }
+  let(:max_length_bytes) { 1024 }
 
-  let(:field_string_required_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "first_name", type: "STRING", mode: "REQUIRED", description: nil, fields: [] }
+  let(:field_string_required_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "first_name", type: "STRING", mode: "REQUIRED", description: nil, fields: [], max_length: max_length_string }
   let(:field_integer_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", mode: "NULLABLE", fields: [] }
   let(:field_float_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "accuracy", type: "FLOAT", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_numeric_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "pi", type: "NUMERIC", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_bignumeric_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "my_bignumeric", type: "BIGNUMERIC", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_boolean_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "approved", type: "BOOLEAN", mode: "NULLABLE", description: nil, fields: [] }
-  let(:field_bytes_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "avatar", type: "BYTES", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_bytes_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "avatar", type: "BYTES", mode: "NULLABLE", description: nil, fields: [], max_length: max_length_bytes }
   let(:field_timestamp_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "started_at", type: "TIMESTAMP", mode: "NULLABLE", policy_tags: policy_tags_gapi, description: nil, fields: [] }
   let(:field_time_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "duration", type: "TIME", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_datetime_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "target_end", type: "DATETIME", mode: "NULLABLE", description: nil, fields: [] }
@@ -165,18 +167,22 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table.service.mocked_service = mock
 
     table.schema replace: true do |schema|
-      schema.string "first_name", mode: :required
+      schema.string "first_name", mode: :required, max_length: max_length_string
       schema.integer "rank", description: "An integer value from 1 to 100"
       schema.float "accuracy"
       schema.numeric "pi"
       schema.bignumeric "my_bignumeric"
       schema.boolean "approved"
-      schema.bytes "avatar"
+      schema.bytes "avatar", max_length: max_length_bytes
       schema.timestamp "started_at", policy_tags: policy_tags
       schema.time "duration"
       schema.datetime "target_end"
       schema.date "birthday"
     end
+
+    _(table.schema.field("first_name").max_length).must_equal max_length_string
+    _(table.schema.field("rank").max_length).must_be :nil?
+    _(table.schema.field("avatar").max_length).must_equal max_length_bytes
 
     mock.verify
   end
@@ -261,7 +267,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table.service.mocked_service = mock
 
     table.schema replace: true do |schema|
-      schema.string "first_name", mode: :required
+      schema.string "first_name", mode: :required, max_length: max_length_string
       schema.record "cities_lived", mode: :repeated do |nested|
         nested.integer "rank", description: "An integer value from 1 to 100"
         nested.timestamp "started_at", policy_tags: policy_tags
@@ -288,7 +294,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table.service.mocked_service = mock
 
     table.schema replace: true do |schema|
-      schema.string "first_name", mode: :required
+      schema.string "first_name", mode: :required, max_length: max_length_string
       schema.record "cities_lived", mode: :repeated do |nested|
         nested.integer "rank", description: "An integer value from 1 to 100"
         nested.timestamp "started_at", policy_tags: policy_tags
@@ -313,7 +319,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
       _(schema.field("first_name").mode).must_equal "REQUIRED"
       schema.field "cities_lived" do |nested|
         # Add a new field to the existing record
-        nested.string "first_name", mode: :required
+        nested.string "first_name", mode: :required, max_length: max_length_string
       end
     end
 

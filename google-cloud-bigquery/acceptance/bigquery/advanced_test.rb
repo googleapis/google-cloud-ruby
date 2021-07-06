@@ -22,6 +22,8 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
 
   let(:string_numeric) { "0.123456789" }
   let(:string_bignumeric) { "0.12345678901234567890123456789012345678" }
+  let(:max_length_string) { 50 }
+  let(:max_length_bytes) { 1024 }
 
   before do
     @table = get_or_create_example_table dataset, table_id
@@ -183,6 +185,12 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
     _(rows[0][:my_bignumeric]).must_equal BigDecimal(string_bignumeric)
   end
 
+  it "knows its schema max_length for string and bytes fields" do
+    _(table.schema.field("age").max_length).must_be :nil?
+    _(table.schema.field("name").max_length).must_equal max_length_string
+    _(table.schema.field("spells").field("icon").max_length).must_equal max_length_bytes
+  end
+
   def assert_rows_equal returned_row, example_row
     _(returned_row[:id]).must_equal example_row[:id]
     _(returned_row[:name]).must_equal example_row[:name]
@@ -208,7 +216,7 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
     if t.nil?
       t = dataset.create_table table_id do |schema|
         schema.integer "id", mode: :nullable
-        schema.string "name", mode: :nullable
+        schema.string "name", mode: :nullable, max_length: max_length_string
         schema.integer "age", mode: :nullable
         schema.float "weight", mode: :nullable
         schema.numeric "my_numeric", mode: :nullable
@@ -222,7 +230,7 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
             properties.string "name", mode: :nullable
             properties.float "power", mode: :nullable
           end
-          spells.bytes "icon", mode: :nullable
+          spells.bytes "icon", mode: :nullable, max_length: max_length_bytes
           spells.timestamp "last_used", mode: :nullable
         end
         schema.time "tea_time", mode: :nullable
