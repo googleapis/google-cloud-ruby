@@ -23,6 +23,18 @@ require "gapic/grpc/service_stub"
 require "google/cloud/monitoring/dashboard/v1/dashboards_service"
 
 class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientPathsTest < Minitest::Test
+  def test_alert_policy_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.alert_policy_path project: "value0", alert_policy: "value1"
+      assert_equal "projects/value0/alertPolicies/value1", path
+    end
+  end
+
   def test_dashboard_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
