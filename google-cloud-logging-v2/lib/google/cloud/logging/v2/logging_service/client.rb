@@ -68,49 +68,49 @@ module Google
                 default_config.rpcs.delete_log.timeout = 60.0
                 default_config.rpcs.delete_log.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 13, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.write_log_entries.timeout = 60.0
                 default_config.rpcs.write_log_entries.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 13, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.list_log_entries.timeout = 60.0
                 default_config.rpcs.list_log_entries.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 13, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.list_monitored_resource_descriptors.timeout = 60.0
                 default_config.rpcs.list_monitored_resource_descriptors.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 13, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.list_logs.timeout = 60.0
                 default_config.rpcs.list_logs.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 13, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.tail_log_entries.timeout = 3600.0
                 default_config.rpcs.tail_log_entries.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 13, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 13, 14]
                 }
 
                 default_config
