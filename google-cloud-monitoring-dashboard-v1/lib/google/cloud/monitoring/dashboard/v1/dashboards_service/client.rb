@@ -70,9 +70,9 @@ module Google
                   default_config.timeout = 30.0
                   default_config.retry_policy = {
                     initial_delay: 1.0,
-                  max_delay: 10.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 2]
+                    max_delay: 10.0,
+                    multiplier: 1.3,
+                    retry_codes: [14, 2]
                   }
 
                   default_config.rpcs.create_dashboard.timeout = 30.0
