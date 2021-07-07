@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "10c4d56206861dc33875c816935ba0a282fe4760"
+        "sha": "40711aec21334b8678557d4151a54f0fe673f3c0"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e9b2b616a20a11c97c7ac912536e82d33d006104",
-        "internalRef": "382318016"
+        "sha": "aa136fa6649f7d999bf3873d0e5fca75cb2354a5",
+        "internalRef": "382337225"
       }
     }
   ],
@@ -23,7 +23,7 @@
         "apiName": "pubsub",
         "apiVersion": "v1",
         "language": "ruby",
-        "generator": "gapic-generator-ruby"
+        "generator": "bazel"
       }
     }
   ],
@@ -59,7 +59,6 @@
     "lib/google/cloud/pubsub/v1/subscriber/credentials.rb",
     "lib/google/cloud/pubsub/v1/subscriber/paths.rb",
     "lib/google/cloud/pubsub/v1/version.rb",
-    "lib/google/iam/v1/iam_policy_services_pb.rb",
     "lib/google/pubsub/v1/pubsub_pb.rb",
     "lib/google/pubsub/v1/pubsub_services_pb.rb",
     "lib/google/pubsub/v1/schema_pb.rb",
