@@ -232,6 +232,32 @@ module Google
           end
 
           ##
+          # The precision (maximum number of total digits) for `NUMERIC` or `BIGNUMERIC` types. For {#numeric?} fields,
+          # acceptable values for precision must be `1 ≤ (precision - scale) ≤ 29` and values for scale must be `0 ≤
+          # scale ≤ 9`. For {#bignumeric?} fields, acceptable values for precision must be `1 ≤ (precision - scale) ≤
+          # 38` and values for scale must be `0 ≤ scale ≤ 38`. If the scale value is set, the precision value must be
+          # set as well.
+          #
+          # @return [Integer, nil] The precision for the field, or `nil`.
+          #
+          def precision
+            @gapi.precision
+          end
+
+          ##
+          # The scale (maximum number of digits in the fractional part) for `NUMERIC` or `BIGNUMERIC` types. For
+          # {#numeric?} fields, acceptable values for precision must be `1 ≤ (precision - scale) ≤ 29` and values for
+          # scale must be `0 ≤ scale ≤ 9`. For {#bignumeric?} fields, acceptable values for precision must be `1 ≤
+          # (precision - scale) ≤ 38` and values for scale must be `0 ≤ scale ≤ 38`. If the scale value is set, the
+          # precision value must be set as well.
+          #
+          # @return [Integer, nil] The scale for the field, or `nil`.
+          #
+          def scale
+            @gapi.scale
+          end
+
+          ##
           # Checks if the type of the field is `STRING`.
           #
           # @return [Boolean] `true` when `STRING`, `false` otherwise.
@@ -514,11 +540,27 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          # @param [Integer] precision The precision (maximum number of total
+          #   digits) for the field. Acceptable values for precision must be:
+          #   `1 ≤ (precision - scale) ≤ 29`. Values for scale must be:
+          #   `0 ≤ scale ≤ 9`. If the scale value is set, the precision value
+          #   must be set as well.
+          # @param [Integer] scale The scale (maximum number of digits in the
+          #   fractional part) for the field. Acceptable values for precision
+          #   must be: `1 ≤ (precision - scale) ≤ 29`. Values for scale must
+          #   be: `0 ≤ scale ≤ 9`. If the scale value is set, the precision
+          #   value must be set as well.
           #
-          def numeric name, description: nil, mode: :nullable, policy_tags: nil
+          def numeric name, description: nil, mode: :nullable, policy_tags: nil, precision: nil, scale: nil
             record_check!
 
-            add_field name, :numeric, description: description, mode: mode, policy_tags: policy_tags
+            add_field name,
+                      :numeric,
+                      description: description,
+                      mode: mode,
+                      policy_tags: policy_tags,
+                      precision: precision,
+                      scale: scale
           end
 
           ##
@@ -548,11 +590,27 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          # @param [Integer] precision The precision (maximum number of total
+          #   digits) for the field. Acceptable values for precision must be:
+          #   `1 ≤ (precision - scale) ≤ 38`. Values for scale must be:
+          #   `0 ≤ scale ≤ 38`. If the scale value is set, the precision value
+          #   must be set as well.
+          # @param [Integer] scale The scale (maximum number of digits in the
+          #   fractional part) for the field. Acceptable values for precision
+          #   must be: `1 ≤ (precision - scale) ≤ 38`. Values for scale must
+          #   be: `0 ≤ scale ≤ 38`. If the scale value is set, the precision
+          #   value must be set as well.
           #
-          def bignumeric name, description: nil, mode: :nullable, policy_tags: nil
+          def bignumeric name, description: nil, mode: :nullable, policy_tags: nil, precision: nil, scale: nil
             record_check!
 
-            add_field name, :bignumeric, description: description, mode: mode, policy_tags: policy_tags
+            add_field name,
+                      :bignumeric,
+                      description: description,
+                      mode: mode,
+                      policy_tags: policy_tags,
+                      precision: precision,
+                      scale: scale
           end
 
           ##

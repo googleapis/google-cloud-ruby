@@ -70,6 +70,10 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi, bigquery.service }
   let(:max_length_string) { 50 }
   let(:max_length_bytes) { 1024 }
+  let(:precision_numeric) { 10 }
+  let(:precision_bignumeric) { 38 }
+  let(:scale_numeric) { 9 }
+  let(:scale_bignumeric) { 37 }
 
   it "knows its attributes" do
     _(dataset.name).must_equal dataset_name
@@ -346,8 +350,8 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name",          type: "STRING", description: nil, fields: [], max_length: max_length_string),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", policy_tags: policy_tags_gapi, description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score",         type: "FLOAT", description: "A score from 0.0 to 10.0", fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "cost",          type: "NUMERIC", description: nil, fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_bignumeric", type: "BIGNUMERIC", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "cost",          type: "NUMERIC", description: nil, fields: [], precision: precision_numeric, scale: scale_numeric),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_bignumeric", type: "BIGNUMERIC", description: nil, fields: [], precision: precision_bignumeric, scale: scale_bignumeric),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar",        type: "BYTES", description: nil, fields: [], max_length: max_length_bytes),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "creation_date", type: "TIMESTAMP", description: nil, fields: []),
@@ -367,8 +371,8 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       schema.string "name", mode: :required, max_length: max_length_string
       schema.integer "age", policy_tags: policy_tags
       schema.float "score", description: "A score from 0.0 to 10.0"
-      schema.numeric "cost"
-      schema.bignumeric "my_bignumeric"
+      schema.numeric "cost", precision: precision_numeric, scale: scale_numeric
+      schema.bignumeric "my_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
       schema.boolean "active"
       schema.bytes "avatar", max_length: max_length_bytes
       schema.timestamp "creation_date"
