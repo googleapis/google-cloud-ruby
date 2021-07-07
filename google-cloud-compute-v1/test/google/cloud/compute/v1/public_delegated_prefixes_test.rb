@@ -19,10 +19,10 @@
 require "helper"
 
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/forwarding_rules"
+require "google/cloud/compute/v1/public_delegated_prefixes"
 
 
-class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
+class ::Google::Cloud::Compute::V1::PublicDelegatedPrefixes::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_count, :requests
 
@@ -64,7 +64,7 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
 
   def test_aggregated_list
     # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::ForwardingRuleAggregatedList.new
+    client_result = ::Google::Cloud::Compute::V1::PublicDelegatedPrefixAggregatedList.new
     http_response = OpenStruct.new body: client_result.to_json
 
     call_options = {}
@@ -96,7 +96,7 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, aggregated_list_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::ForwardingRules::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::PublicDelegatedPrefixes::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
@@ -111,7 +111,7 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListForwardingRulesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
+      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListPublicDelegatedPrefixesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
         assert_equal http_response, response
       end
 
@@ -121,7 +121,7 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListForwardingRulesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListPublicDelegatedPrefixesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
         assert_equal http_response, response
       end
 
@@ -138,8 +138,8 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
     call_options = {}
 
     # Create request parameters for a unary method.
-    forwarding_rule = "hello world"
     project = "hello world"
+    public_delegated_prefix = "hello world"
     region = "hello world"
     request_id = "hello world"
 
@@ -156,32 +156,32 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, delete_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::ForwardingRules::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::PublicDelegatedPrefixes::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
       # Use hash object
-      client.delete({ forwarding_rule: forwarding_rule, project: project, region: region, request_id: request_id }) do |result, response|
+      client.delete({ project: project, public_delegated_prefix: public_delegated_prefix, region: region, request_id: request_id }) do |result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete forwarding_rule: forwarding_rule, project: project, region: region, request_id: request_id do |result, response|
+      client.delete project: project, public_delegated_prefix: public_delegated_prefix, region: region, request_id: request_id do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteForwardingRuleRequest.new(forwarding_rule: forwarding_rule, project: project, region: region, request_id: request_id) do |result, response|
+      client.delete ::Google::Cloud::Compute::V1::DeletePublicDelegatedPrefixeRequest.new(project: project, public_delegated_prefix: public_delegated_prefix, region: region, request_id: request_id) do |result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete({ forwarding_rule: forwarding_rule, project: project, region: region, request_id: request_id }, call_options) do |result, response|
+      client.delete({ project: project, public_delegated_prefix: public_delegated_prefix, region: region, request_id: request_id }, call_options) do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteForwardingRuleRequest.new(forwarding_rule: forwarding_rule, project: project, region: region, request_id: request_id), call_options) do |result, response|
+      client.delete(::Google::Cloud::Compute::V1::DeletePublicDelegatedPrefixeRequest.new(project: project, public_delegated_prefix: public_delegated_prefix, region: region, request_id: request_id), call_options) do |result, response|
         assert_equal http_response, response
       end
 
@@ -192,14 +192,14 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
 
   def test_get
     # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::ForwardingRule.new
+    client_result = ::Google::Cloud::Compute::V1::PublicDelegatedPrefix.new
     http_response = OpenStruct.new body: client_result.to_json
 
     call_options = {}
 
     # Create request parameters for a unary method.
-    forwarding_rule = "hello world"
     project = "hello world"
+    public_delegated_prefix = "hello world"
     region = "hello world"
 
     get_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
@@ -214,32 +214,32 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, get_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::ForwardingRules::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::PublicDelegatedPrefixes::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
       # Use hash object
-      client.get({ forwarding_rule: forwarding_rule, project: project, region: region }) do |result, response|
+      client.get({ project: project, public_delegated_prefix: public_delegated_prefix, region: region }) do |result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get forwarding_rule: forwarding_rule, project: project, region: region do |result, response|
+      client.get project: project, public_delegated_prefix: public_delegated_prefix, region: region do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetForwardingRuleRequest.new(forwarding_rule: forwarding_rule, project: project, region: region) do |result, response|
+      client.get ::Google::Cloud::Compute::V1::GetPublicDelegatedPrefixeRequest.new(project: project, public_delegated_prefix: public_delegated_prefix, region: region) do |result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ forwarding_rule: forwarding_rule, project: project, region: region }, call_options) do |result, response|
+      client.get({ project: project, public_delegated_prefix: public_delegated_prefix, region: region }, call_options) do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetForwardingRuleRequest.new(forwarding_rule: forwarding_rule, project: project, region: region), call_options) do |result, response|
+      client.get(::Google::Cloud::Compute::V1::GetPublicDelegatedPrefixeRequest.new(project: project, public_delegated_prefix: public_delegated_prefix, region: region), call_options) do |result, response|
         assert_equal http_response, response
       end
 
@@ -256,8 +256,8 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
     call_options = {}
 
     # Create request parameters for a unary method.
-    forwarding_rule_resource = {}
     project = "hello world"
+    public_delegated_prefix_resource = {}
     region = "hello world"
     request_id = "hello world"
 
@@ -274,32 +274,32 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, insert_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::ForwardingRules::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::PublicDelegatedPrefixes::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
       # Use hash object
-      client.insert({ forwarding_rule_resource: forwarding_rule_resource, project: project, region: region, request_id: request_id }) do |result, response|
+      client.insert({ project: project, public_delegated_prefix_resource: public_delegated_prefix_resource, region: region, request_id: request_id }) do |result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert forwarding_rule_resource: forwarding_rule_resource, project: project, region: region, request_id: request_id do |result, response|
+      client.insert project: project, public_delegated_prefix_resource: public_delegated_prefix_resource, region: region, request_id: request_id do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertForwardingRuleRequest.new(forwarding_rule_resource: forwarding_rule_resource, project: project, region: region, request_id: request_id) do |result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertPublicDelegatedPrefixeRequest.new(project: project, public_delegated_prefix_resource: public_delegated_prefix_resource, region: region, request_id: request_id) do |result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ forwarding_rule_resource: forwarding_rule_resource, project: project, region: region, request_id: request_id }, call_options) do |result, response|
+      client.insert({ project: project, public_delegated_prefix_resource: public_delegated_prefix_resource, region: region, request_id: request_id }, call_options) do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertForwardingRuleRequest.new(forwarding_rule_resource: forwarding_rule_resource, project: project, region: region, request_id: request_id), call_options) do |result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertPublicDelegatedPrefixeRequest.new(project: project, public_delegated_prefix_resource: public_delegated_prefix_resource, region: region, request_id: request_id), call_options) do |result, response|
         assert_equal http_response, response
       end
 
@@ -310,7 +310,7 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
 
   def test_list
     # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::ForwardingRuleList.new
+    client_result = ::Google::Cloud::Compute::V1::PublicDelegatedPrefixList.new
     http_response = OpenStruct.new body: client_result.to_json
 
     call_options = {}
@@ -341,7 +341,7 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, list_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::ForwardingRules::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::PublicDelegatedPrefixes::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
@@ -356,7 +356,7 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListForwardingRulesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |result, response|
+      client.list ::Google::Cloud::Compute::V1::ListPublicDelegatedPrefixesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |result, response|
         assert_equal http_response, response
       end
 
@@ -366,7 +366,7 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListForwardingRulesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.list(::Google::Cloud::Compute::V1::ListPublicDelegatedPrefixesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |result, response|
         assert_equal http_response, response
       end
 
@@ -383,9 +383,9 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
     call_options = {}
 
     # Create request parameters for a unary method.
-    forwarding_rule = "hello world"
-    forwarding_rule_resource = {}
     project = "hello world"
+    public_delegated_prefix = "hello world"
+    public_delegated_prefix_resource = {}
     region = "hello world"
     request_id = "hello world"
 
@@ -402,32 +402,32 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, patch_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::ForwardingRules::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::PublicDelegatedPrefixes::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
       # Use hash object
-      client.patch({ forwarding_rule: forwarding_rule, forwarding_rule_resource: forwarding_rule_resource, project: project, region: region, request_id: request_id }) do |result, response|
+      client.patch({ project: project, public_delegated_prefix: public_delegated_prefix, public_delegated_prefix_resource: public_delegated_prefix_resource, region: region, request_id: request_id }) do |result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.patch forwarding_rule: forwarding_rule, forwarding_rule_resource: forwarding_rule_resource, project: project, region: region, request_id: request_id do |result, response|
+      client.patch project: project, public_delegated_prefix: public_delegated_prefix, public_delegated_prefix_resource: public_delegated_prefix_resource, region: region, request_id: request_id do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.patch ::Google::Cloud::Compute::V1::PatchForwardingRuleRequest.new(forwarding_rule: forwarding_rule, forwarding_rule_resource: forwarding_rule_resource, project: project, region: region, request_id: request_id) do |result, response|
+      client.patch ::Google::Cloud::Compute::V1::PatchPublicDelegatedPrefixeRequest.new(project: project, public_delegated_prefix: public_delegated_prefix, public_delegated_prefix_resource: public_delegated_prefix_resource, region: region, request_id: request_id) do |result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.patch({ forwarding_rule: forwarding_rule, forwarding_rule_resource: forwarding_rule_resource, project: project, region: region, request_id: request_id }, call_options) do |result, response|
+      client.patch({ project: project, public_delegated_prefix: public_delegated_prefix, public_delegated_prefix_resource: public_delegated_prefix_resource, region: region, request_id: request_id }, call_options) do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.patch(::Google::Cloud::Compute::V1::PatchForwardingRuleRequest.new(forwarding_rule: forwarding_rule, forwarding_rule_resource: forwarding_rule_resource, project: project, region: region, request_id: request_id), call_options) do |result, response|
+      client.patch(::Google::Cloud::Compute::V1::PatchPublicDelegatedPrefixeRequest.new(project: project, public_delegated_prefix: public_delegated_prefix, public_delegated_prefix_resource: public_delegated_prefix_resource, region: region, request_id: request_id), call_options) do |result, response|
         assert_equal http_response, response
       end
 
@@ -436,134 +436,12 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
     end
   end
 
-  def test_set_labels
-    # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::Operation.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    project = "hello world"
-    region = "hello world"
-    region_set_labels_request_resource = {}
-    request_id = "hello world"
-    resource = "hello world"
-
-    set_labels_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-
-      assert params.key? "requestId"
-      refute_nil body
-    end
-
-    Gapic::Rest::ClientStub.stub :new, set_labels_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::ForwardingRules::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
-
-      # Use hash object
-      client.set_labels({ project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource }) do |result, response|
-        assert_equal http_response, response
-      end
-
-      # Use named arguments
-      client.set_labels project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource do |result, response|
-        assert_equal http_response, response
-      end
-
-      # Use protobuf object
-      client.set_labels ::Google::Cloud::Compute::V1::SetLabelsForwardingRuleRequest.new(project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource) do |result, response|
-        assert_equal http_response, response
-      end
-
-      # Use hash object with options
-      client.set_labels({ project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource }, call_options) do |result, response|
-        assert_equal http_response, response
-      end
-
-      # Use protobuf object with options
-      client.set_labels(::Google::Cloud::Compute::V1::SetLabelsForwardingRuleRequest.new(project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource), call_options) do |result, response|
-        assert_equal http_response, response
-      end
-
-      # Verify method calls
-      assert_equal 5, set_labels_client_stub.call_count
-    end
-  end
-
-  def test_set_target
-    # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::Operation.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    forwarding_rule = "hello world"
-    project = "hello world"
-    region = "hello world"
-    request_id = "hello world"
-    target_reference_resource = {}
-
-    set_target_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-
-      assert params.key? "requestId"
-      refute_nil body
-    end
-
-    Gapic::Rest::ClientStub.stub :new, set_target_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::ForwardingRules::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
-
-      # Use hash object
-      client.set_target({ forwarding_rule: forwarding_rule, project: project, region: region, request_id: request_id, target_reference_resource: target_reference_resource }) do |result, response|
-        assert_equal http_response, response
-      end
-
-      # Use named arguments
-      client.set_target forwarding_rule: forwarding_rule, project: project, region: region, request_id: request_id, target_reference_resource: target_reference_resource do |result, response|
-        assert_equal http_response, response
-      end
-
-      # Use protobuf object
-      client.set_target ::Google::Cloud::Compute::V1::SetTargetForwardingRuleRequest.new(forwarding_rule: forwarding_rule, project: project, region: region, request_id: request_id, target_reference_resource: target_reference_resource) do |result, response|
-        assert_equal http_response, response
-      end
-
-      # Use hash object with options
-      client.set_target({ forwarding_rule: forwarding_rule, project: project, region: region, request_id: request_id, target_reference_resource: target_reference_resource }, call_options) do |result, response|
-        assert_equal http_response, response
-      end
-
-      # Use protobuf object with options
-      client.set_target(::Google::Cloud::Compute::V1::SetTargetForwardingRuleRequest.new(forwarding_rule: forwarding_rule, project: project, region: region, request_id: request_id, target_reference_resource: target_reference_resource), call_options) do |result, response|
-        assert_equal http_response, response
-      end
-
-      # Verify method calls
-      assert_equal 5, set_target_client_stub.call_count
-    end
-  end
-
   def test_configure
     credentials_token = :dummy_value
 
     client = block_config = config = nil
     Gapic::Rest::ClientStub.stub :new, nil do
-      client = ::Google::Cloud::Compute::V1::ForwardingRules::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::PublicDelegatedPrefixes::Rest::Client.new do |config|
         config.credentials = credentials_token
       end
     end
@@ -573,6 +451,6 @@ class ::Google::Cloud::Compute::V1::ForwardingRules::ClientTest < Minitest::Test
     end
 
     assert_same block_config, config
-    assert_kind_of ::Google::Cloud::Compute::V1::ForwardingRules::Rest::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Compute::V1::PublicDelegatedPrefixes::Rest::Client::Configuration, config
   end
 end

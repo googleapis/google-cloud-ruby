@@ -33,6 +33,8 @@ module Google
                 uri = "/compute/v1/locations/global/firewallPolicies/#{request_pb.firewall_policy}/addAssociation"
                 body = request_pb.firewall_policy_association_resource.to_json
                 query_string_params = {}
+                query_string_params["replaceExistingAssociation"] = request_pb.replace_existing_association.to_s if request_pb.has_replace_existing_association?
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -45,6 +47,7 @@ module Google
                 uri = "/compute/v1/locations/global/firewallPolicies/#{request_pb.firewall_policy}/addRule"
                 body = request_pb.firewall_policy_rule_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -135,6 +138,8 @@ module Google
                 uri = "/compute/v1/locations/global/firewallPolicies"
                 body = request_pb.firewall_policy_resource.to_json
                 query_string_params = {}
+                query_string_params["parentId"] = request_pb.parent_id.to_s if request_pb.has_parent_id?
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -192,6 +197,7 @@ module Google
                 uri = "/compute/v1/locations/global/firewallPolicies/#{request_pb.firewall_policy}"
                 body = request_pb.firewall_policy_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -204,6 +210,8 @@ module Google
                 uri = "/compute/v1/locations/global/firewallPolicies/#{request_pb.firewall_policy}/patchRule"
                 body = request_pb.firewall_policy_rule_resource.to_json
                 query_string_params = {}
+                query_string_params["priority"] = request_pb.priority.to_s if request_pb.has_priority?
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

@@ -255,7 +255,7 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               # @yield [result, env] Access the result along with the Faraday environment object
               # @yieldparam result [::Google::Cloud::Compute::V1::NodeGroupAggregatedList]
               # @yieldparam response [::Faraday::Response]
@@ -704,7 +704,7 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, env] Access the result along with the Faraday environment object
@@ -792,7 +792,7 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, env] Access the result along with the Faraday environment object

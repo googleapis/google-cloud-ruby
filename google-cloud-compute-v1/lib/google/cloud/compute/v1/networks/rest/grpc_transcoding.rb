@@ -63,6 +63,18 @@ module Google
                 [uri, body, query_string_params]
               end
 
+              # @param request_pb [::Google::Cloud::Compute::V1::GetEffectiveFirewallsNetworkRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_get_effective_firewalls request_pb
+                uri = "/compute/v1/projects/#{request_pb.project}/global/networks/#{request_pb.network}/getEffectiveFirewalls"
+                body = nil
+                query_string_params = {}
+
+                [uri, body, query_string_params]
+              end
+
               # @param request_pb [::Google::Cloud::Compute::V1::InsertNetworkRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]

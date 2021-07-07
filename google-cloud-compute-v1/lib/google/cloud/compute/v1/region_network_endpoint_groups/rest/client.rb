@@ -394,7 +394,7 @@ module Google
               #   @param region [::String]
               #     The name of the region where the network endpoint group is located. It should comply with RFC1035.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               # @yield [result, env] Access the result along with the Faraday environment object
               # @yieldparam result [::Google::Cloud::Compute::V1::NetworkEndpointGroupList]
               # @yieldparam response [::Faraday::Response]

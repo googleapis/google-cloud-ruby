@@ -348,6 +348,71 @@ module Google
               end
 
               ##
+              # Returns the effective firewalls on a given network.
+              #
+              # @overload get_effective_firewalls(request, options = nil)
+              #   Pass arguments to `get_effective_firewalls` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::GetEffectiveFirewallsNetworkRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::GetEffectiveFirewallsNetworkRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #     Note: currently retry functionality is not implemented. While it is possible
+              #     to set it using ::Gapic::CallOptions, it will not be applied
+              #
+              # @overload get_effective_firewalls(network: nil, project: nil)
+              #   Pass arguments to `get_effective_firewalls` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param network [::String]
+              #     Name of the network for this request.
+              #   @param project [::String]
+              #     Project ID for this request.
+              # @yield [result, env] Access the result along with the Faraday environment object
+              # @yieldparam result [::Google::Cloud::Compute::V1::NetworksGetEffectiveFirewallsResponse]
+              # @yieldparam response [::Faraday::Response]
+              #
+              # @return [::Google::Cloud::Compute::V1::NetworksGetEffectiveFirewallsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def get_effective_firewalls request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetEffectiveFirewallsNetworkRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = {}
+
+                # Set x-goog-api-client header
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     call_metadata
+
+                uri, _body, _query_string_params = transcode_get_effective_firewalls request
+                response = @client_stub.make_get_request(
+                  uri:     uri,
+                  options: options
+                )
+                result = ::Google::Cloud::Compute::V1::NetworksGetEffectiveFirewallsResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, response if block_given?
+                result
+              rescue ::Faraday::Error => e
+                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
+                raise ::Google::Cloud::Error.from_error(gapic_error)
+              end
+
+              ##
               # Creates a network in the specified project using the data included in the request.
               #
               # @overload insert(request, options = nil)
@@ -461,7 +526,7 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               # @yield [result, env] Access the result along with the Faraday environment object
               # @yieldparam result [::Google::Cloud::Compute::V1::NetworkList]
               # @yieldparam response [::Faraday::Response]
@@ -553,7 +618,7 @@ module Google
               #   @param region [::String]
               #     The region of the request. The response will include all subnet routes, static routes and dynamic routes in the region.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               # @yield [result, env] Access the result along with the Faraday environment object
               # @yieldparam result [::Google::Cloud::Compute::V1::ExchangedPeeringRoutesList]
               # @yieldparam response [::Faraday::Response]

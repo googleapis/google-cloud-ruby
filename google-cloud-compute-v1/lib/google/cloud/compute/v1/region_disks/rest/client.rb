@@ -533,7 +533,7 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
               #   @param source_image [::String]
-              #     Optional. Source image to restore onto a disk.
+              #     Source image to restore onto a disk. This field is optional.
               # @yield [result, env] Access the result along with the Faraday environment object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
               # @yieldparam response [::Faraday::Response]
@@ -620,7 +620,7 @@ module Google
               #   @param region [::String]
               #     Name of the region for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               # @yield [result, env] Access the result along with the Faraday environment object
               # @yieldparam result [::Google::Cloud::Compute::V1::DiskList]
               # @yieldparam response [::Faraday::Response]
