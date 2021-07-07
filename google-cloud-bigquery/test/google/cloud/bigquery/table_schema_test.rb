@@ -40,12 +40,16 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:policy_tags_gapi) { Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags.new names: policy_tags }
   let(:max_length_string) { 50 }
   let(:max_length_bytes) { 1024 }
+  let(:precision_numeric) { 10 }
+  let(:precision_bignumeric) { 38 }
+  let(:scale_numeric) { 9 }
+  let(:scale_bignumeric) { 37 }
 
   let(:field_string_required_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "first_name", type: "STRING", mode: "REQUIRED", description: nil, fields: [], max_length: max_length_string }
   let(:field_integer_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", mode: "NULLABLE", fields: [] }
   let(:field_float_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "accuracy", type: "FLOAT", mode: "NULLABLE", description: nil, fields: [] }
-  let(:field_numeric_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "pi", type: "NUMERIC", mode: "NULLABLE", description: nil, fields: [] }
-  let(:field_bignumeric_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "my_bignumeric", type: "BIGNUMERIC", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_numeric_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "pi", type: "NUMERIC", mode: "NULLABLE", description: nil, fields: [], precision: precision_numeric, scale: scale_numeric }
+  let(:field_bignumeric_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "my_bignumeric", type: "BIGNUMERIC", mode: "NULLABLE", description: nil, fields: [], precision: precision_bignumeric, scale: scale_bignumeric }
   let(:field_boolean_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "approved", type: "BOOLEAN", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_bytes_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "avatar", type: "BYTES", mode: "NULLABLE", description: nil, fields: [], max_length: max_length_bytes }
   let(:field_timestamp_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "started_at", type: "TIMESTAMP", mode: "NULLABLE", policy_tags: policy_tags_gapi, description: nil, fields: [] }
@@ -170,8 +174,8 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
       schema.string "first_name", mode: :required, max_length: max_length_string
       schema.integer "rank", description: "An integer value from 1 to 100"
       schema.float "accuracy"
-      schema.numeric "pi"
-      schema.bignumeric "my_bignumeric"
+      schema.numeric "pi", precision: precision_numeric, scale: scale_numeric
+      schema.bignumeric "my_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
       schema.boolean "approved"
       schema.bytes "avatar", max_length: max_length_bytes
       schema.timestamp "started_at", policy_tags: policy_tags
@@ -180,9 +184,15 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
       schema.date "birthday"
     end
 
-    _(table.schema.field("first_name").max_length).must_equal max_length_string
     _(table.schema.field("rank").max_length).must_be :nil?
+    _(table.schema.field("first_name").max_length).must_equal max_length_string
     _(table.schema.field("avatar").max_length).must_equal max_length_bytes
+    _(table.schema.field("rank").precision).must_be :nil?
+    _(table.schema.field("rank").scale).must_be :nil?
+    _(table.schema.field("pi").precision).must_equal precision_numeric
+    _(table.schema.field("pi").scale).must_equal scale_numeric
+    _(table.schema.field("my_bignumeric").precision).must_equal precision_bignumeric
+    _(table.schema.field("my_bignumeric").scale).must_equal scale_bignumeric
 
     mock.verify
   end

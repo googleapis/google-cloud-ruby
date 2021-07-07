@@ -3351,6 +3351,16 @@ module Google
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
           #   At most 1 policy tag is currently allowed.
+          # @param [Integer] precision The precision (maximum number of total
+          #   digits) for the field. Acceptable values for precision must be:
+          #   `1 ≤ (precision - scale) ≤ 29`. Values for scale must be:
+          #   `0 ≤ scale ≤ 9`. If the scale value is set, the precision value
+          #   must be set as well.
+          # @param [Integer] scale The scale (maximum number of digits in the
+          #   fractional part) for the field. Acceptable values for precision
+          #   must be: `1 ≤ (precision - scale) ≤ 29`. Values for scale must
+          #   be: `0 ≤ scale ≤ 9`. If the scale value is set, the precision
+          #   value must be set as well.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -3362,8 +3372,13 @@ module Google
           #   end
           #
           # @!group Schema
-          def numeric name, description: nil, mode: :nullable, policy_tags: nil
-            schema.numeric name, description: description, mode: mode, policy_tags: policy_tags
+          def numeric name, description: nil, mode: :nullable, policy_tags: nil, precision: nil, scale: nil
+            schema.numeric name,
+                           description: description,
+                           mode: mode,
+                           policy_tags: policy_tags,
+                           precision: precision,
+                           scale: scale
           end
 
           ##
@@ -3394,6 +3409,16 @@ module Google
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
           #   At most 1 policy tag is currently allowed.
+          # @param [Integer] precision The precision (maximum number of total
+          #   digits) for the field. Acceptable values for precision must be:
+          #   `1 ≤ (precision - scale) ≤ 38`. Values for scale must be:
+          #   `0 ≤ scale ≤ 38`. If the scale value is set, the precision value
+          #   must be set as well.
+          # @param [Integer] scale The scale (maximum number of digits in the
+          #   fractional part) for the field. Acceptable values for precision
+          #   must be: `1 ≤ (precision - scale) ≤ 38`. Values for scale must
+          #   be: `0 ≤ scale ≤ 38`. If the scale value is set, the precision
+          #   value must be set as well.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -3405,8 +3430,13 @@ module Google
           #   end
           #
           # @!group Schema
-          def bignumeric name, description: nil, mode: :nullable, policy_tags: nil
-            schema.bignumeric name, description: description, mode: mode, policy_tags: policy_tags
+          def bignumeric name, description: nil, mode: :nullable, policy_tags: nil, precision: nil, scale: nil
+            schema.bignumeric name,
+                              description: description,
+                              mode: mode,
+                              policy_tags: policy_tags,
+                              precision: precision,
+                              scale: scale
           end
 
           ##
