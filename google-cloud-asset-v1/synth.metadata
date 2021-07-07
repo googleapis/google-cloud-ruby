@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "98e412862d1229e0f54ba913f1d6640342d697af"
+        "sha": "40711aec21334b8678557d4151a54f0fe673f3c0"
       }
     },
     {
@@ -23,7 +23,7 @@
         "apiName": "asset",
         "apiVersion": "v1",
         "language": "ruby",
-        "generator": "gapic-generator-ruby"
+        "generator": "bazel"
       }
     }
   ],
@@ -52,12 +52,6 @@
     "lib/google/cloud/asset/v1/asset_service_services_pb.rb",
     "lib/google/cloud/asset/v1/assets_pb.rb",
     "lib/google/cloud/asset/v1/version.rb",
-    "lib/google/cloud/orgpolicy/v1/orgpolicy_pb.rb",
-    "lib/google/cloud/osconfig/v1/inventory_pb.rb",
-    "lib/google/identity/accesscontextmanager/type/device_resources_pb.rb",
-    "lib/google/identity/accesscontextmanager/v1/access_level_pb.rb",
-    "lib/google/identity/accesscontextmanager/v1/access_policy_pb.rb",
-    "lib/google/identity/accesscontextmanager/v1/service_perimeter_pb.rb",
     "proto_docs/README.md",
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
