@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/logging/v2"
 
 client = ::Google::Cloud::Logging::V2::ConfigService::Client.new
-request = my_create_request
+request = ::Google::Cloud::Logging::V2::ListBucketsRequest.new # (request fields as keyword arguments...)
 response = client.list_buckets request
 ```
 

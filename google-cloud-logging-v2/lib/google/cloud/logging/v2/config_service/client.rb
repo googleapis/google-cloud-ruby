@@ -67,52 +67,34 @@ module Google
 
                 default_config.rpcs.list_sinks.timeout = 60.0
                 default_config.rpcs.list_sinks.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.get_sink.timeout = 60.0
                 default_config.rpcs.get_sink.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.create_sink.timeout = 120.0
 
                 default_config.rpcs.update_sink.timeout = 60.0
                 default_config.rpcs.update_sink.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.delete_sink.timeout = 60.0
                 default_config.rpcs.delete_sink.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.list_exclusions.timeout = 60.0
                 default_config.rpcs.list_exclusions.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.get_exclusion.timeout = 60.0
                 default_config.rpcs.get_exclusion.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.create_exclusion.timeout = 120.0
@@ -121,10 +103,7 @@ module Google
 
                 default_config.rpcs.delete_exclusion.timeout = 60.0
                 default_config.rpcs.delete_exclusion.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config
@@ -195,7 +174,7 @@ module Google
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
