@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "98e412862d1229e0f54ba913f1d6640342d697af"
+        "sha": "40711aec21334b8678557d4151a54f0fe673f3c0"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "8d1d6694519ed9a1195067cd2138376ac1389883",
-        "internalRef": "379309757"
+        "sha": "aa136fa6649f7d999bf3873d0e5fca75cb2354a5",
+        "internalRef": "382337225"
       }
     }
   ],
@@ -23,7 +23,7 @@
         "apiName": "kms",
         "apiVersion": "v1",
         "language": "ruby",
-        "generator": "gapic-generator-ruby"
+        "generator": "bazel"
       }
     }
   ],
@@ -54,7 +54,6 @@
     "lib/google/cloud/kms/v1/service_pb.rb",
     "lib/google/cloud/kms/v1/service_services_pb.rb",
     "lib/google/cloud/kms/v1/version.rb",
-    "lib/google/iam/v1/iam_policy_services_pb.rb",
     "proto_docs/README.md",
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
