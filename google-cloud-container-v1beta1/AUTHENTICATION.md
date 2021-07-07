@@ -66,11 +66,11 @@ The environment variables that google-cloud-container-v1beta1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::Container::V1beta1::ClusterManager::Credentials}):
 
-1. `CONTAINER_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `CONTAINER_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `CONTAINER_CREDENTIALS` - Path to JSON file, or JSON contents
+* `CONTAINER_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/container/v1beta1"
