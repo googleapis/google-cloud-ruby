@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "98e412862d1229e0f54ba913f1d6640342d697af"
+        "sha": "40711aec21334b8678557d4151a54f0fe673f3c0"
       }
     },
     {
@@ -23,16 +23,14 @@
         "apiName": "tasks",
         "apiVersion": "v2beta2",
         "language": "ruby",
-        "generator": "gapic-generator-ruby"
+        "generator": "bazel"
       }
     }
   ],
   "generatedFiles": [
     ".gitignore",
-    ".repo-metadata.json",
     ".rubocop.yml",
     ".yardopts",
-    ".yardopts-cloudrad",
     "AUTHENTICATION.md",
     "CHANGELOG.md",
     "Gemfile",
@@ -49,7 +47,6 @@
     "lib/google/cloud/tasks/v2beta2/cloud_tasks/paths.rb",
     "lib/google/cloud/tasks/v2beta2/cloudtasks_pb.rb",
     "lib/google/cloud/tasks/v2beta2/cloudtasks_services_pb.rb",
-    "lib/google/cloud/tasks/v2beta2/old_target_pb.rb",
     "lib/google/cloud/tasks/v2beta2/queue_pb.rb",
     "lib/google/cloud/tasks/v2beta2/target_pb.rb",
     "lib/google/cloud/tasks/v2beta2/task_pb.rb",
