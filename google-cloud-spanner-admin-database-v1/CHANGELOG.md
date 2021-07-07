@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2021-07-07
+
+#### Features
+
+* Add default_leader field to Database type
+
 ### 0.6.1 / 2021-06-17
 
 #### Bug Fixes
