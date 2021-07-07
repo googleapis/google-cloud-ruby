@@ -754,6 +754,8 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          # @param [Integer] max_length The maximum UTF-8 length of strings
+          #   allowed in the field.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -765,8 +767,8 @@ module Google
           #   end
           #
           # @!group Schema
-          def string name, description: nil, mode: :nullable, policy_tags: nil
-            schema.string name, description: description, mode: mode, policy_tags: policy_tags
+          def string name, description: nil, mode: :nullable, policy_tags: nil, max_length: nil
+            schema.string name, description: description, mode: mode, policy_tags: policy_tags, max_length: max_length
           end
 
           ##
@@ -858,6 +860,16 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          # @param [Integer] precision The precision (maximum number of total
+          #   digits) for the field. Acceptable values for precision must be:
+          #   `1 ≤ (precision - scale) ≤ 29`. Values for scale must be:
+          #   `0 ≤ scale ≤ 9`. If the scale value is set, the precision value
+          #   must be set as well.
+          # @param [Integer] scale The scale (maximum number of digits in the
+          #   fractional part) for the field. Acceptable values for precision
+          #   must be: `1 ≤ (precision - scale) ≤ 29`. Values for scale must
+          #   be: `0 ≤ scale ≤ 9`. If the scale value is set, the precision
+          #   value must be set as well.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -869,8 +881,13 @@ module Google
           #   end
           #
           # @!group Schema
-          def numeric name, description: nil, mode: :nullable, policy_tags: nil
-            schema.numeric name, description: description, mode: mode, policy_tags: policy_tags
+          def numeric name, description: nil, mode: :nullable, policy_tags: nil, precision: nil, scale: nil
+            schema.numeric name,
+                           description: description,
+                           mode: mode,
+                           policy_tags: policy_tags,
+                           precision: precision,
+                           scale: scale
           end
 
           ##
@@ -900,6 +917,16 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          # @param [Integer] precision The precision (maximum number of total
+          #   digits) for the field. Acceptable values for precision must be:
+          #   `1 ≤ (precision - scale) ≤ 38`. Values for scale must be:
+          #   `0 ≤ scale ≤ 38`. If the scale value is set, the precision value
+          #   must be set as well.
+          # @param [Integer] scale The scale (maximum number of digits in the
+          #   fractional part) for the field. Acceptable values for precision
+          #   must be: `1 ≤ (precision - scale) ≤ 38`. Values for scale must
+          #   be: `0 ≤ scale ≤ 38`. If the scale value is set, the precision
+          #   value must be set as well.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -911,8 +938,13 @@ module Google
           #   end
           #
           # @!group Schema
-          def bignumeric name, description: nil, mode: :nullable, policy_tags: nil
-            schema.bignumeric name, description: description, mode: mode, policy_tags: policy_tags
+          def bignumeric name, description: nil, mode: :nullable, policy_tags: nil, precision: nil, scale: nil
+            schema.bignumeric name,
+                              description: description,
+                              mode: mode,
+                              policy_tags: policy_tags,
+                              precision: precision,
+                              scale: scale
           end
 
           ##
@@ -962,6 +994,8 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          # @param [Integer] max_length The maximum the maximum number of
+          #   bytes in the field.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -973,8 +1007,8 @@ module Google
           #   end
           #
           # @!group Schema
-          def bytes name, description: nil, mode: :nullable, policy_tags: nil
-            schema.bytes name, description: description, mode: mode, policy_tags: policy_tags
+          def bytes name, description: nil, mode: :nullable, policy_tags: nil, max_length: nil
+            schema.bytes name, description: description, mode: mode, policy_tags: policy_tags, max_length: max_length
           end
 
           ##
