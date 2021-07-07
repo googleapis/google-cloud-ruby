@@ -4,6 +4,7 @@
 require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
+require 'google/monitoring/dashboard/v1/alertchart_pb'
 require 'google/monitoring/dashboard/v1/scorecard_pb'
 require 'google/monitoring/dashboard/v1/text_pb'
 require 'google/monitoring/dashboard/v1/xychart_pb'
@@ -17,6 +18,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :scorecard, :message, 3, "google.monitoring.dashboard.v1.Scorecard"
         optional :text, :message, 4, "google.monitoring.dashboard.v1.Text"
         optional :blank, :message, 5, "google.protobuf.Empty"
+        optional :alert_chart, :message, 7, "google.monitoring.dashboard.v1.AlertChart"
       end
     end
   end

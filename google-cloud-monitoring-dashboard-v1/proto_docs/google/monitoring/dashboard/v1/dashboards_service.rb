@@ -33,6 +33,10 @@ module Google
           # @!attribute [rw] dashboard
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
           #     Required. The initial dashboard specification.
+          # @!attribute [rw] validate_only
+          #   @return [::Boolean]
+          #     If set, validate the request and preview the review, but do not actually
+          #     save it.
           class CreateDashboardRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -100,6 +104,10 @@ module Google
           # @!attribute [rw] dashboard
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
           #     Required. The dashboard that will replace the existing dashboard.
+          # @!attribute [rw] validate_only
+          #   @return [::Boolean]
+          #     If set, validate the request and preview the review, but do not actually
+          #     save it.
           class UpdateDashboardRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

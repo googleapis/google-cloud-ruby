@@ -39,6 +39,9 @@ module Google
           # @!attribute [rw] blank
           #   @return [::Google::Protobuf::Empty]
           #     A blank space.
+          # @!attribute [rw] alert_chart
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::AlertChart]
+          #     A chart of alert policy data.
           class Widget
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -164,12 +164,8 @@ module Google
               # Service calls
 
               ##
-              # Creates a new custom dashboard. For examples on how you can use this API to
-              # create dashboards, see [Managing dashboards by
-              # API](https://cloud.google.com/monitoring/dashboards/api-dashboard). This method requires the
-              # `monitoring.dashboards.create` permission on the specified project. For
-              # more information about permissions, see [Cloud Identity and Access
-              # Management](https://cloud.google.com/iam).
+              # Creates a new custom dashboard. For examples on how you can use this API to create dashboards, see [Managing dashboards by API](/monitoring/dashboards/api-dashboard).
+              # This method requires the `monitoring.dashboards.create` permission on the specified project. For more information about permissions, see [Cloud Identity and Access Management](/iam).
               #
               # @overload create_dashboard(request, options = nil)
               #   Pass arguments to `create_dashboard` via a request object, either of type
@@ -181,7 +177,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload create_dashboard(parent: nil, dashboard: nil)
+              # @overload create_dashboard(parent: nil, dashboard: nil, validate_only: nil)
               #   Pass arguments to `create_dashboard` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -194,6 +190,9 @@ module Google
               #     The `[PROJECT_ID_OR_NUMBER]` must match the dashboard resource name.
               #   @param dashboard [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard, ::Hash]
               #     Required. The initial dashboard specification.
+              #   @param validate_only [::Boolean]
+              #     If set, validate the request and preview the review, but do not actually
+              #     save it.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
@@ -483,13 +482,16 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload update_dashboard(dashboard: nil)
+              # @overload update_dashboard(dashboard: nil, validate_only: nil)
               #   Pass arguments to `update_dashboard` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param dashboard [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard, ::Hash]
               #     Required. The dashboard that will replace the existing dashboard.
+              #   @param validate_only [::Boolean]
+              #     If set, validate the request and preview the review, but do not actually
+              #     save it.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
