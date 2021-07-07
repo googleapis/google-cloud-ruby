@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2021-07-07
+
+#### Features
+
+* Add subscription properties to streaming pull response
+
 ### 0.4.1 / 2021-06-17
 
 #### Bug Fixes
