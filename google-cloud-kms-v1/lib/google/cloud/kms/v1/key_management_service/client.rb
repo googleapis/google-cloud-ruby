@@ -78,90 +78,57 @@ module Google
 
                 default_config.rpcs.list_key_rings.timeout = 60.0
                 default_config.rpcs.list_key_rings.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_crypto_keys.timeout = 60.0
                 default_config.rpcs.list_crypto_keys.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_crypto_key_versions.timeout = 60.0
                 default_config.rpcs.list_crypto_key_versions.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_import_jobs.timeout = 60.0
                 default_config.rpcs.list_import_jobs.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_key_ring.timeout = 60.0
                 default_config.rpcs.get_key_ring.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_crypto_key.timeout = 60.0
                 default_config.rpcs.get_crypto_key.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_crypto_key_version.timeout = 60.0
                 default_config.rpcs.get_crypto_key_version.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_public_key.timeout = 60.0
                 default_config.rpcs.get_public_key.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_import_job.timeout = 60.0
                 default_config.rpcs.get_import_job.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_key_ring.timeout = 60.0
                 default_config.rpcs.create_key_ring.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_crypto_key.timeout = 60.0
                 default_config.rpcs.create_crypto_key.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_crypto_key_version.timeout = 60.0
@@ -170,82 +137,52 @@ module Google
 
                 default_config.rpcs.create_import_job.timeout = 60.0
                 default_config.rpcs.create_import_job.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_crypto_key.timeout = 60.0
                 default_config.rpcs.update_crypto_key.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_crypto_key_version.timeout = 60.0
                 default_config.rpcs.update_crypto_key_version.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.encrypt.timeout = 60.0
                 default_config.rpcs.encrypt.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.decrypt.timeout = 60.0
                 default_config.rpcs.decrypt.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.asymmetric_sign.timeout = 60.0
                 default_config.rpcs.asymmetric_sign.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.asymmetric_decrypt.timeout = 60.0
                 default_config.rpcs.asymmetric_decrypt.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_crypto_key_primary_version.timeout = 60.0
                 default_config.rpcs.update_crypto_key_primary_version.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.destroy_crypto_key_version.timeout = 60.0
                 default_config.rpcs.destroy_crypto_key_version.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.restore_crypto_key_version.timeout = 60.0
                 default_config.rpcs.restore_crypto_key_version.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config
@@ -316,7 +253,7 @@ module Google
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
