@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "98e412862d1229e0f54ba913f1d6640342d697af"
+        "sha": "40711aec21334b8678557d4151a54f0fe673f3c0"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "cc4a85665e5118be2472eefadf28e6deb2aafb88",
-        "internalRef": "359094122"
+        "sha": "321ac4be7cffd9eca44a131d8ba900ce718b99af",
+        "internalRef": "364687773"
       }
     }
   ],
@@ -23,16 +23,14 @@
         "apiName": "datastore/admin",
         "apiVersion": "v1",
         "language": "ruby",
-        "generator": "gapic-generator-ruby"
+        "generator": "bazel"
       }
     }
   ],
   "generatedFiles": [
     ".gitignore",
-    ".repo-metadata.json",
     ".rubocop.yml",
     ".yardopts",
-    ".yardopts-cloudrad",
     "AUTHENTICATION.md",
     "CHANGELOG.md",
     "Gemfile",
@@ -51,13 +49,11 @@
     "lib/google/datastore/admin/v1/datastore_admin_pb.rb",
     "lib/google/datastore/admin/v1/datastore_admin_services_pb.rb",
     "lib/google/datastore/admin/v1/index_pb.rb",
-    "lib/google/datastore/admin/v1/migration_pb.rb",
     "proto_docs/README.md",
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/datastore/admin/v1/datastore_admin.rb",
     "proto_docs/google/datastore/admin/v1/index.rb",
-    "proto_docs/google/datastore/admin/v1/migration.rb",
     "proto_docs/google/longrunning/operations.rb",
     "proto_docs/google/protobuf/any.rb",
     "proto_docs/google/protobuf/duration.rb",
