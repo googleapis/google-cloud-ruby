@@ -19,13 +19,32 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
+AUTOSYNTH_MULTIPLE_COMMITS = True
+
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICBazel()
+gapic = gcp.GAPICMicrogenerator()
 library = gapic.ruby_library(
     "asset", "v1",
-    proto_path="google/cloud/asset/v1",
-    bazel_target="//google/cloud/asset/v1:google-cloud-asset-v1-ruby",
+    extra_proto_files=[
+        "google/cloud/common_resources.proto",
+        "google/cloud/orgpolicy/v1/orgpolicy.proto",
+        "google/cloud/osconfig/v1/inventory.proto",
+        "google/identity/accesscontextmanager/type/device_resources.proto",
+        "google/identity/accesscontextmanager/v1/access_level.proto",
+        "google/identity/accesscontextmanager/v1/access_policy.proto",
+        "google/identity/accesscontextmanager/v1/service_perimeter.proto",
+    ],
+    generator_args={
+        "ruby-cloud-gem-name": "google-cloud-asset-v1",
+        "ruby-cloud-title": "Cloud Asset V1",
+        "ruby-cloud-description": "A metadata inventory service that allows you to view, monitor, and analyze all your GCP and Anthos assets across projects and services.",
+        "ruby-cloud-env-prefix": "ASSET",
+        "ruby-cloud-grpc-service-config": "google/cloud/asset/v1/cloudasset_grpc_service_config.json",
+        "ruby-cloud-product-url": "https://cloud.google.com/asset-inventory/",
+        "ruby-cloud-api-id": "cloudasset.googleapis.com",
+        "ruby-cloud-api-shortname": "cloudasset",
+    }
 )
 
 s.copy(library, merge=ruby.global_merge)
