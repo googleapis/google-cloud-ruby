@@ -21,22 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "domains", "v1beta1",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-domains-v1beta1",
-        "ruby-cloud-title": "Cloud Domains V1beta1",
-        "ruby-cloud-description": "The Cloud Domains API provides registration, management and configuration of domain names.",
-        "ruby-cloud-env-prefix": "DOMAINS",
-        "ruby-cloud-grpc-service-config": "google/cloud/domains/v1beta1/domains_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/domains",
-        "ruby-cloud-api-id": "domains.googleapis.com",
-        "ruby-cloud-api-shortname": "domains",
-    }
+    proto_path="google/cloud/domains/v1beta1",
+    bazel_target="//google/cloud/domains/v1beta1:google-cloud-domains-v1beta1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "datacatalog", "v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-data_catalog-v1",
-        "ruby-cloud-title": "Data Catalog V1",
-        "ruby-cloud-description": "DataCatalog is a centralized and unified data catalog service for all your Cloud resources, where users and systems can discover data, explore and curate its semantics, understand how to act on it, and help govern its usage.",
-        "ruby-cloud-env-prefix": "DATA_CATALOG",
-        "ruby-cloud-grpc-service-config": "google/cloud/datacatalog/v1/datacatalog_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/data-catalog",
-        "ruby-cloud-api-id": "datacatalog.googleapis.com",
-        "ruby-cloud-api-shortname": "datacatalog",
-    }
+    proto_path="google/cloud/datacatalog/v1",
+    bazel_target="//google/cloud/datacatalog/v1:google-cloud-datacatalog-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

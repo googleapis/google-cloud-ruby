@@ -21,20 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "tasks", "v2",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-tasks-v2",
-        "ruby-cloud-title": "Cloud Tasks V2",
-        "ruby-cloud-description": "Cloud Tasks is a fully managed service that allows you to manage the execution, dispatch and delivery of a large number of distributed tasks. You can asynchronously perform work outside of a user request. Your tasks can be executed on App Engine or any arbitrary HTTP endpoint.",
-        "ruby-cloud-env-prefix": "TASKS",
-        "ruby-cloud-grpc-service-config": "google/cloud/tasks/v2/cloudtasks_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/tasks",
-        "ruby-cloud-api-id": "cloudtasks.googleapis.com",
-        "ruby-cloud-api-shortname": "cloudtasks",
-    }
+    proto_path="google/cloud/tasks/v2",
+    bazel_target="//google/cloud/tasks/v2:google-cloud-tasks-v2-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

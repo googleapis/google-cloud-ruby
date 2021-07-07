@@ -21,19 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "grafeas", "v1",
     proto_path="grafeas/v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "grafeas-v1",
-        "ruby-cloud-title": "Grafeas V1",
-        "ruby-cloud-description": "The Grafeas API stores, and enables querying and retrieval of, critical metadata about all of your software artifacts.",
-        "ruby-cloud-env-prefix": "GRAFEAS",
-        "ruby-cloud-grpc-service-config": "grafeas/v1/grafeas_grpc_service_config.json",
-        "ruby-cloud-generic-endpoint": "true",
-    }
+    bazel_target="//grafeas/v1:google-cloud-grafeas-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

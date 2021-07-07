@@ -19,24 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "recaptchaenterprise", "v1beta1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-recaptcha_enterprise-v1beta1",
-        "ruby-cloud-title": "reCAPTCHA Enterprise V1beta1",
-        "ruby-cloud-description": "reCAPTCHA Enterprise is a service that protects your site from spam and abuse.",
-        "ruby-cloud-env-prefix": "RECAPTCHA_ENTERPRISE",
-        "ruby-cloud-grpc-service-config": "google/cloud/recaptchaenterprise/v1beta1/recaptchaenterprise_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/recaptcha-enterprise",
-        "ruby-cloud-api-id": "recaptchaenterprise.googleapis.com",
-        "ruby-cloud-api-shortname": "recaptchaenterprise",
-        "ruby-cloud-service-override": "RecaptchaEnterpriseServiceV1Beta1=RecaptchaEnterpriseService",
-    }
+    proto_path="google/cloud/recaptchaenterprise/v1beta1",
+    bazel_target="//google/cloud/recaptchaenterprise/v1beta1:google-cloud-recaptchaenterprise-v1beta1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

@@ -21,22 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "memcache", "v1",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-memcache-v1",
-        "ruby-cloud-title": "Google Cloud Memorystore for Memcached V1",
-        "ruby-cloud-description": "Google Cloud Memorystore for Memcached API is used for creating and managing Memcached instances in GCP.",
-        "ruby-cloud-env-prefix": "MEMCACHE",
-        "ruby-cloud-grpc-service-config": "google/cloud/memcache/v1/memcache_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/memorystore/docs/memcached/",
-        "ruby-cloud-api-id": "memcache.googleapis.com",
-        "ruby-cloud-api-shortname": "memcache",
-    }
+    proto_path="google/cloud/memcache/v1",
+    bazel_target="//google/cloud/memcache/v1:google-cloud-memcache-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

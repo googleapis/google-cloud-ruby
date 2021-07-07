@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "bigquery/reservation", "v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-bigquery-reservation-v1",
-        "ruby-cloud-title": "BigQuery Reservation V1",
-        "ruby-cloud-description": "The BigQuery Reservation API provides the mechanisms by which enterprise users can provision and manage dedicated resources such as slots and BigQuery BI Engine memory allocations.",
-        "ruby-cloud-env-prefix": "BIGQUERY_RESERVATION",
-        "ruby-cloud-grpc-service-config": "google/cloud/bigquery/reservation/v1/bigqueryreservation_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/bigquery/docs/reference/reservations",
-        "ruby-cloud-api-id": "bigqueryreservation.googleapis.com",
-        "ruby-cloud-api-shortname": "bigqueryreservation",
-    }
+    proto_path="google/cloud/bigquery/reservation/v1",
+    bazel_target="//google/cloud/bigquery/reservation/v1:google-cloud-bigquery-reservation-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

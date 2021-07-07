@@ -21,22 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "gkehub", "v1beta1",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-gke_hub-v1beta1",
-        "ruby-cloud-title": "GKE Hub V1beta1",
-        "ruby-cloud-description": "The GKE Hub API centrally manages features and services on all your Kubernetes clusters running in a variety of environments, including Google cloud, on premises in customer datacenters, or other third party clouds.",
-        "ruby-cloud-env-prefix": "GKE_HUB",
-        "ruby-cloud-grpc-service-config": "google/cloud/gkehub/v1beta1/membership_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/anthos/clusters/docs",
-        "ruby-cloud-api-id": "gkehub.googleapis.com",
-        "ruby-cloud-api-shortname": "gkehub",
-    }
+    proto_path="google/cloud/gkehub/v1beta1",
+    bazel_target="//google/cloud/gkehub/v1beta1:google-cloud-gkehub-v1beta1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

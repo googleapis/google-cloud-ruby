@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "translate", "v3",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-translate-v3",
-        "ruby-cloud-title": "Cloud Translation V3",
-        "ruby-cloud-description": "Cloud Translation can dynamically translate text between thousands of language pairs. Translation lets websites and programs programmatically integrate with the translation service.",
-        "ruby-cloud-env-prefix": "TRANSLATE",
-        "ruby-cloud-grpc-service-config": "google/cloud/translate/v3/translate_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/translate",
-        "ruby-cloud-api-id": "translate.googleapis.com",
-        "ruby-cloud-api-shortname": "translate",
-    }
+    proto_path="google/cloud/translate/v3",
+    bazel_target="//google/cloud/translate/v3:google-cloud-translation-v3-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

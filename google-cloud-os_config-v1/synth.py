@@ -19,25 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "osconfig", "v1",
-    extra_proto_files=[
-      "google/cloud/common_resources.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-os_config-v1",
-        "ruby-cloud-title": "Cloud OS Config V1",
-        "ruby-cloud-description": "Cloud OS Config provides OS management tools that can be used for patch management, patch compliance, and configuration management on VM instances.",
-        "ruby-cloud-env-prefix": "OS_CONFIG",
-        "ruby-cloud-grpc-service-config": "google/cloud/osconfig/v1/osconfig_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/compute/docs/manage-os",
-        "ruby-cloud-api-id": "osconfig.googleapis.com",
-        "ruby-cloud-api-shortname": "osconfig",
-    }
+    proto_path="google/cloud/osconfig/v1",
+    bazel_target="//google/cloud/osconfig/v1:google-cloud-osconfig-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

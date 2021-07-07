@@ -19,24 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "security/privateca", "v1beta1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-security-private_ca-v1beta1",
-        "ruby-cloud-gem-namespace": "Google::Cloud::Security::PrivateCA::V1beta1",
-        "ruby-cloud-title": "Certificate Authority Service V1beta1",
-        "ruby-cloud-description": "Certificate Authority Service is a highly available, scalable Google Cloud service that enables you to simplify, automate, and customize the deployment, management, and security of private certificate authorities (CA).",
-        "ruby-cloud-env-prefix": "PRIVATE_CA",
-        "ruby-cloud-grpc-service-config": "google/cloud/security/privateca/v1beta1/privateca_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/certificate-authority-service/",
-        "ruby-cloud-api-id": "privateca.googleapis.com",
-        "ruby-cloud-api-shortname": "privateca",
-    }
+    proto_path="google/cloud/security/privateca/v1beta1",
+    bazel_target="//google/cloud/security/privateca/v1beta1:google-cloud-security-privateca-v1beta1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

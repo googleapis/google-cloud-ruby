@@ -20,23 +20,13 @@ import synthtool.languages.ruby as ruby
 import logging
 from subprocess import call
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "vision", "v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-vision-v1",
-        "ruby-cloud-title": "Cloud Vision V1",
-        "ruby-cloud-description": "Cloud Vision API allows developers to easily integrate vision detection features within applications, including image labeling, face and landmark detection, optical character recognition (OCR), and tagging of explicit content.",
-        "ruby-cloud-env-prefix": "VISION",
-        "ruby-cloud-grpc-service-config": "google/cloud/vision/v1/vision_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/vision",
-        "ruby-cloud-api-id": "vision.googleapis.com",
-        "ruby-cloud-api-shortname": "vision",
-    }
+    proto_path="google/cloud/vision/v1",
+    bazel_target="//google/cloud/vision/v1:google-cloud-vision-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "policytroubleshooter", "v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-policy_troubleshooter-v1",
-        "ruby-cloud-title": "IAM Policy Troubleshooter V1",
-        "ruby-cloud-description": "Policy Troubleshooter makes it easier to understand why a user has access to a resource or doesn't have permission to call an API. Given an email, resource, and permission, Policy Troubleshooter will examine all IAM policies that apply to the resource. It then reveals whether the member's roles include the permission on that resource and, if so, which policies bind the member to those roles.",
-        "ruby-cloud-env-prefix": "POLICY_TROUBLESHOOTER",
-        "ruby-cloud-grpc-service-config": "google/cloud/policytroubleshooter/v1/checker_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/iam/docs/troubleshooting-access",
-        "ruby-cloud-api-id": "policytroubleshooter.googleapis.com",
-        "ruby-cloud-api-shortname": "policytroubleshooter",
-    }
+    proto_path="google/cloud/policytroubleshooter/v1",
+    bazel_target="//google/cloud/policytroubleshooter/v1:google-cloud-policytroubleshooter-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

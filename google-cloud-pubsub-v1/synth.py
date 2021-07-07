@@ -19,30 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "pubsub", "v1",
     proto_path="google/pubsub/v1",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-        "google/iam/v1/iam_policy.proto"
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-pubsub-v1",
-        "ruby-cloud-title": "Cloud Pub/Sub V1",
-        "ruby-cloud-description": "Cloud Pub/Sub is a fully-managed real-time messaging service that allows you to send and receive messages between independent applications.",
-        "ruby-cloud-env-prefix": "PUBSUB",
-        "ruby-cloud-grpc-service-config": "google/pubsub/v1/pubsub_grpc_service_config.json",
-        "ruby-cloud-common-services": "google.iam.v1.IAMPolicy=google.pubsub.v1.Publisher",
-        "ruby-cloud-path-override": "pub_sub=pubsub",
-        "ruby-cloud-namespace-override": "Pubsub=PubSub",
-        "ruby-cloud-product-url": "https://cloud.google.com/pubsub",
-        "ruby-cloud-api-id": "pubsub.googleapis.com",
-        "ruby-cloud-api-shortname": "pubsub",
-    }
+    bazel_target="//google/pubsub/v1:google-cloud-pubsub-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

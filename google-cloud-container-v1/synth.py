@@ -19,24 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "container", "v1",
     proto_path="google/container/v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-container-v1",
-        "ruby-cloud-title": "Kubernetes Engine V1",
-        "ruby-cloud-description": "Builds and manages container-based applications, powered by the open source Kubernetes technology.",
-        "ruby-cloud-env-prefix": "CONTAINER",
-        "ruby-cloud-grpc-service-config": "google/container/v1/container_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/kubernetes-engine",
-        "ruby-cloud-api-id": "container.googleapis.com",
-        "ruby-cloud-api-shortname": "container",
-    }
+    bazel_target="//google/container/v1:google-cloud-container-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

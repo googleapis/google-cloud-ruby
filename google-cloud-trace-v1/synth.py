@@ -19,24 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "trace", "v1",
     proto_path="google/devtools/cloudtrace/v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-trace-v1",
-        "ruby-cloud-title": "Cloud Trace V1",
-        "ruby-cloud-description": "The Cloud Trace API lets you send and retrieve latency data to and from Cloud Trace. This API provides low-level interfaces for interacting directly with the feature. For some languages, you can use OpenCensus, a set of open source tracing and stats instrumentation libraries that work with multiple backends.",
-        "ruby-cloud-env-prefix": "TRACE",
-        "ruby-cloud-grpc-service-config": "google/devtools/cloudtrace/v1/cloudtrace_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/trace",
-        "ruby-cloud-api-id": "cloudtrace.googleapis.com",
-        "ruby-cloud-api-shortname": "cloudtrace",
-    }
+    bazel_target="//google/devtools/cloudtrace/v1:google-cloud-devtools-cloudtrace-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

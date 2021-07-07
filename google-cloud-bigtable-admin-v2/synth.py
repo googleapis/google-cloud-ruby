@@ -19,26 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "bigtable/admin", "v2",
     proto_path="google/bigtable/admin/v2",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto"
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-bigtable-admin-v2",
-        "ruby-cloud-title": "Cloud Bigtable Admin V2",
-        "ruby-cloud-description": "Cloud Bigtable is a fully managed, scalable NoSQL database service for large analytical and operational workloads.",
-        "ruby-cloud-env-prefix": "BIGTABLE",
-        "ruby-cloud-grpc-service-config": "google/bigtable/admin/v2/bigtableadmin_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/bigtable",
-        "ruby-cloud-api-id": "bigtable.googleapis.com",
-        "ruby-cloud-api-shortname": "bigtable",
-    }
+    bazel_target="//google/bigtable/admin/v2:google-cloud-bigtable-admin-v2-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "webrisk", "v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-web_risk-v1",
-        "ruby-cloud-title": "Web Risk V1",
-        "ruby-cloud-description": "Web Risk is an enterprise security product that lets your client applications check URLs against Google's constantly updated lists of unsafe web resources.",
-        "ruby-cloud-env-prefix": "WEBRISK",
-        "ruby-cloud-grpc-service-config": "google/cloud/webrisk/v1/webrisk_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/web-risk",
-        "ruby-cloud-api-id": "webrisk.googleapis.com",
-        "ruby-cloud-api-shortname": "webrisk",
-    }
+    proto_path="google/cloud/webrisk/v1",
+    bazel_target="//google/cloud/webrisk/v1:google-cloud-webrisk-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

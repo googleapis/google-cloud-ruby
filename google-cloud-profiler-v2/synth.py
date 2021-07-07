@@ -21,23 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "profiler", "v2",
     proto_path="google/devtools/cloudprofiler/v2",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-profiler-v2",
-        "ruby-cloud-title": "Cloud Profiler V2",
-        "ruby-cloud-description": "Cloud Profiler is a statistical, low-overhead profiler that continuously gathers CPU usage and memory-allocation information from your production applications. It attributes that information to the application's source code, helping you identify the parts of the application consuming the most resources, and otherwise illuminating the performance characteristics of the code.",
-        "ruby-cloud-env-prefix": "PROFILER",
-        "ruby-cloud-grpc-service-config": "google/devtools/cloudprofiler/v2/cloudprofiler_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/profiler/",
-        "ruby-cloud-api-id": "cloudprofiler.googleapis.com",
-        "ruby-cloud-api-shortname": "cloudprofiler",
-    }
+    bazel_target="//google/devtools/cloudprofiler/v2:google-cloud-devtools-cloudprofiler-v2-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

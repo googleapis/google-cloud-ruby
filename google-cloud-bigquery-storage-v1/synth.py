@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "bigquery/storage", "v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-bigquery-storage-v1",
-        "ruby-cloud-title": "BigQuery Storage V1",
-        "ruby-cloud-description": "The BigQuery Storage API provides fast access to BigQuery managed storage.",
-        "ruby-cloud-env-prefix": "BIGQUERY_STORAGE",
-        "ruby-cloud-grpc-service-config": "google/cloud/bigquery/storage/v1/bigquerystorage_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/bigquery/docs/reference/storage",
-        "ruby-cloud-api-id": "bigquerystorage.googleapis.com",
-        "ruby-cloud-api-shortname": "bigquerystorage",
-    }
+    proto_path="google/cloud/bigquery/storage/v1",
+    bazel_target="//google/cloud/bigquery/storage/v1:google-cloud-bigquery-storage-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

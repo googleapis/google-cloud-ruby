@@ -28,7 +28,7 @@ module Google
           # The Membership service is currently only available in the global location.
           class Service
 
-            include ::GRPC::GenericService
+            include GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode

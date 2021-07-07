@@ -19,7 +19,9 @@
 
 module Google
   module Type
-    # Represents civil time in one of a few possible ways:
+    # Represents civil time (or occasionally physical time).
+    #
+    # This type can represent a civil time in one of a few possible ways:
     #
     #  * When utc_offset is set and time_zone is unset: a civil time on a calendar
     #    day with a particular offset from UTC.
@@ -32,6 +34,12 @@ module Google
     #
     # If year is 0, the DateTime is considered not to have a specific year. month
     # and day must have valid, non-zero values.
+    #
+    # This type may also be used to represent a physical time if all the date and
+    # time fields are set and either case of the `time_offset` oneof is set.
+    # Consider using `Timestamp` message for physical time instead. If your use
+    # case also would like to store the user's timezone, that can be done in
+    # another field.
     #
     # This type is more flexible than some applications may want. Make sure to
     # document and validate your application's limitations.

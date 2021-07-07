@@ -19,24 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "documentai", "v1beta3",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-document_ai-v1beta3",
-        "ruby-cloud-title": "Document AI V1beta3",
-        "ruby-cloud-description": "Document AI uses machine learning on a single cloud-based platform to automatically classify, extract, and enrich data within your documents to unlock insights.",
-        "ruby-cloud-env-prefix": "DOCUMENT_AI",
-        "ruby-cloud-grpc-service-config": "google/cloud/documentai/v1beta3/documentai_v1beta3_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/document-ai/",
-        "ruby-cloud-api-id": "us-documentai.googleapis.com",
-        "ruby-cloud-api-shortname": "documentai",
-        "ruby-cloud-namespace-override": "DocumentAi=DocumentAI",
-    }
+    proto_path="google/cloud/documentai/v1beta3",
+    bazel_target="//google/cloud/documentai/v1beta3:google-cloud-documentai-v1beta3-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

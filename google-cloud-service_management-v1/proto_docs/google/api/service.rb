@@ -28,7 +28,6 @@ module Google
     # Example:
     #
     #     type: google.api.Service
-    #     config_version: 3
     #     name: calendar.googleapis.com
     #     title: Google Calendar API
     #     apis:
@@ -42,27 +41,24 @@ module Google
     #       - selector: "*"
     #         requirements:
     #           provider_id: google_calendar_auth
-    # @!attribute [rw] config_version
-    #   @return [::Google::Protobuf::UInt32Value]
-    #     The semantic version of the service configuration. The config version
-    #     affects the interpretation of the service configuration. For example,
-    #     certain features are enabled by default for certain config versions.
-    #     The latest config version is `3`.
     # @!attribute [rw] name
     #   @return [::String]
-    #     The DNS address at which this service is available,
-    #     e.g. `calendar.googleapis.com`.
-    # @!attribute [rw] id
-    #   @return [::String]
-    #     A unique ID for a specific instance of this message, typically assigned
-    #     by the client for tracking purpose. If empty, the server may choose to
-    #     generate one instead.
+    #     The service name, which is a DNS-like logical identifier for the
+    #     service, such as `calendar.googleapis.com`. The service name
+    #     typically goes through DNS verification to make sure the owner
+    #     of the service also owns the DNS name.
     # @!attribute [rw] title
     #   @return [::String]
     #     The product title for this service.
     # @!attribute [rw] producer_project_id
     #   @return [::String]
     #     The Google project that owns this service.
+    # @!attribute [rw] id
+    #   @return [::String]
+    #     A unique ID for a specific instance of this message, typically assigned
+    #     by the client for tracking purpose. Must be no longer than 63 characters
+    #     and only lower case letters, digits, '.', '_' and '-' are allowed. If
+    #     empty, the server may choose to generate one instead.
     # @!attribute [rw] apis
     #   @return [::Array<::Google::Protobuf::Api>]
     #     A list of API interfaces exported by this service. Only the `name` field
@@ -143,6 +139,12 @@ module Google
     # @!attribute [rw] source_info
     #   @return [::Google::Api::SourceInfo]
     #     Output only. The source information for this configuration if available.
+    # @!attribute [rw] config_version
+    #   @return [::Google::Protobuf::UInt32Value]
+    #     Obsolete. Do not use.
+    #
+    #     This field has no semantic meaning. The service config compiler always
+    #     sets this field to `3`.
     class Service
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

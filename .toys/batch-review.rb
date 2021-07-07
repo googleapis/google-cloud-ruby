@@ -63,14 +63,11 @@ REPO = "googleapis/google-cloud-ruby"
 
 desc "Interactive mass code review"
 
-required_arg :config_name do
-  accept CONFIGS.keys
-  desc "The config that determines which PRs to review. Values: gapics, wrappers, releases"
-end
+optional_arg :config_name, accept: CONFIGS.keys
 
-flag :title_regexp, accept: Regexp
-flag :message_type, accept: [:shared, :pr_title, :pr_title_number]
-flag :detail_type, accept: [:shared, :none]
+flag :title_regexp, accept: Regexp, default: //
+flag :message_type, accept: [:shared, :pr_title, :pr_title_number], default: :pr_title
+flag :detail_type, accept: [:shared, :none], default: :none
 flag :omit_paths, accept: Array
 flag :max_line_count, accept: Integer
 flag :editor, accept: String
