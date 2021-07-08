@@ -1,5 +1,11 @@
 # Release History
 
+### 0.36.2 / 2021-07-08
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
 ### 0.36.1 / 2021-06-17
 
 #### Bug Fixes
