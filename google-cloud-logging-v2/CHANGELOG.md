@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.2 / 2021-07-08
+
+#### Bug Fixes
+
+* Remove two proto files that are duplicated from the common-protos gem
+
 ### 0.5.1 / 2021-06-17
 
 #### Bug Fixes
