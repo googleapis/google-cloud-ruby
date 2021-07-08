@@ -11,8 +11,8 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "151bfbae10c02f51f07972097b3f72812738dcb9",
-        "internalRef": "358406243"
+        "sha": "ae26057251e84392b20bef7076f422661db9552b",
+        "internalRef": "370486085"
       }
     }
   ],
@@ -31,24 +31,32 @@
     ".gitignore",
     ".rubocop.yml",
     ".yardopts",
+    "AUTHENTICATION.md",
     "CHANGELOG.md",
     "Gemfile",
-    "LICENSE",
+    "LICENSE.md",
     "README.md",
     "Rakefile",
-    "empty_file",
-    "google-cloud-area120-tables.gemspec",
+    "gapic_metadata.json",
+    "google-area120-tables-v1alpha1.gemspec",
+    "lib/google-area120-tables-v1alpha1.rb",
+    "lib/google/area120/tables/v1alpha1.rb",
     "lib/google/area120/tables/v1alpha1/tables_pb.rb",
+    "lib/google/area120/tables/v1alpha1/tables_service.rb",
+    "lib/google/area120/tables/v1alpha1/tables_service/client.rb",
+    "lib/google/area120/tables/v1alpha1/tables_service/credentials.rb",
+    "lib/google/area120/tables/v1alpha1/tables_service/paths.rb",
     "lib/google/area120/tables/v1alpha1/tables_services_pb.rb",
-    "lib/google/cloud/area120/tables.rb",
-    "lib/google/cloud/area120/tables/v1alpha1.rb",
-    "lib/google/cloud/area120/tables/v1alpha1/credentials.rb",
-    "lib/google/cloud/area120/tables/v1alpha1/doc/google/area120/tables/v1alpha1/tables.rb",
-    "lib/google/cloud/area120/tables/v1alpha1/doc/google/protobuf/empty.rb",
-    "lib/google/cloud/area120/tables/v1alpha1/doc/google/protobuf/field_mask.rb",
-    "lib/google/cloud/area120/tables/v1alpha1/doc/google/protobuf/struct.rb",
-    "lib/google/cloud/area120/tables/v1alpha1/tables_service_client.rb",
-    "lib/google/cloud/area120/tables/v1alpha1/tables_service_client_config.json",
-    "test/google/cloud/area120/tables/v1alpha1/tables_service_client_test.rb"
+    "lib/google/area120/tables/v1alpha1/version.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/area120/tables/v1alpha1/tables.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/struct.rb",
+    "test/google/area120/tables/v1alpha1/tables_service_paths_test.rb",
+    "test/google/area120/tables/v1alpha1/tables_service_test.rb",
+    "test/helper.rb"
   ]
 }

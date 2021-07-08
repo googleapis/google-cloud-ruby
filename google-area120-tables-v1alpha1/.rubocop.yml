@@ -1,15 +1,29 @@
+inherit_gem:
+  google-style: google-style.yml
+
 AllCops:
   Exclude:
-    - "google-cloud-area120-tables.gemspec"
-    - "lib/google/**/*"
-    - "Rakefile"
+    - "google-area120-tables-v1alpha1.gemspec"
+    - "lib/**/*_pb.rb"
+    - "proto_docs/**/*"
     - "test/**/*"
     - "acceptance/**/*"
+    - "Rakefile"
 
-Documentation:
+Layout/LineLength:
   Enabled: false
-
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
-Style/MethodDefParentheses:
-  EnforcedStyle: require_no_parentheses
+Metrics/AbcSize:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Naming/FileName:
+  Exclude:
+    - "lib/google-area120-tables-v1alpha1.rb"
