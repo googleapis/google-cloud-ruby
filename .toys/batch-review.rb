@@ -63,11 +63,11 @@ REPO = "googleapis/google-cloud-ruby"
 
 desc "Interactive mass code review"
 
-optional_arg :config_name, accept: CONFIGS.keys
+optional_arg :config_name, accept: CONFIGS.keys, default: "all"
 
-flag :title_regexp, accept: Regexp, default: //
-flag :message_type, accept: [:shared, :pr_title, :pr_title_number], default: :pr_title
-flag :detail_type, accept: [:shared, :none], default: :none
+flag :title_regexp, accept: Regexp
+flag :message_type, accept: [:shared, :pr_title, :pr_title_number]
+flag :detail_type, accept: [:shared, :none]
 flag :omit_paths, accept: Array
 flag :max_line_count, accept: Integer
 flag :editor, accept: String
@@ -81,6 +81,7 @@ def run
   init_config
   find_prs.each do |pr_data|
     puts
+    next if check_automerge pr_data
     display_default pr_data
     handle_input pr_data
   end
@@ -100,10 +101,11 @@ def ensure_prerequisites
 end
 
 def init_config
-  CONFIGS[config_name]&.each { |k, v| set k, v if get(k).nil? }
+  CONFIGS[config_name].each { |k, v| set k, v if get(k).nil? }
   @commit_message = ""
   @commit_detail = ""
   @edit_enabled = true
+  @automerge_enabled = false
   @editor = editor || ENV["EDITOR"] || "/bin/nano"
   @max_line_count = max_line_count
   @omits = Array(omit_paths).map do |path|
@@ -123,6 +125,15 @@ def find_prs
     .map { |pr_resource| PrData.new self, pr_resource }
 end
 
+def check_automerge pr_data
+  return false unless @automerge_enabled
+  return false unless pr_data.diff_files.all? { |file| @omits.any? { |omit| omit.call file } }
+  display_pr_title pr_data
+  puts "Automerging..."
+  handle_merge pr_data
+  true
+end
+
 def handle_input pr_data
   loop do
     puts
@@ -137,16 +148,15 @@ def handle_input pr_data
       puts "... skipping this PR."
       return
     when "m"
-      get_commit_message pr_data
-      get_commit_detail pr_data if detail_type
-      do_approve pr_data
-      do_merge pr_data
+      handle_merge pr_data
       return
     when "q"
       puts "... quitting."
       exit 0
     when /^e\s*([+-])$/
       handle_edit Regexp.last_match[1]
+    when /^a\s*([+-])$/
+      handle_automerge Regexp.last_match[1]
     when /^d\s*(\S+)$/
       handle_display Regexp.last_match[1], pr_data
     when /^o\s*(\S(?:.*\S)?)$/
@@ -158,6 +168,13 @@ def handle_input pr_data
   end
 end
 
+def handle_merge pr_data
+  get_commit_message pr_data
+  get_commit_detail pr_data if detail_type
+  do_approve pr_data
+  do_merge pr_data
+end
+
 def handle_edit arg
   case arg
   when "+"
@@ -166,6 +183,17 @@ def handle_edit arg
   when "-"
     @edit_enabled = false
     puts "... disabling editing"
+  end
+end
+
+def handle_automerge arg
+  case arg
+  when "+"
+    @automerge_enabled = true
+    puts "... enabling automerge"
+  when "-"
+    @automerge_enabled = false
+    puts "... disabling automerge"
   end
 end
 
@@ -327,10 +355,9 @@ def do_approve pr_data
   if dry_run
     puts "(dry run)"
   else
-    exec ["gh", "api", "repos/#{REPO}/pulls/#{pr_data.id}/reviews",
-          "--field", "event=APPROVE",
-          "--field", "body=Approved using toys batch-review"],
-         e: true
+    retry_gh ["repos/#{REPO}/pulls/#{pr_data.id}/reviews",
+              "--field", "event=APPROVE",
+              "--field", "body=Approved using toys batch-review"]
   end
   puts "... approved."
 end
@@ -342,13 +369,24 @@ def do_merge pr_data
     puts "(message: #{message})", :bold
     puts "(details: #{@commit_detail})", :bold unless @commit_detail.empty?
   else
-    exec ["gh", "api", "-XPUT", "repos/#{REPO}/pulls/#{pr_data.id}/merge",
-          "--field", "merge_method=squash",
-          "--field", "commit_title=#{message}",
-          "--field", "commit_message=#{@commit_detail}"],
-         e: true
+    retry_gh ["-XPUT", "repos/#{REPO}/pulls/#{pr_data.id}/merge",
+              "--field", "merge_method=squash",
+              "--field", "commit_title=#{message}",
+              "--field", "commit_message=#{@commit_detail}"]
   end
   puts "... merged."
+end
+
+def retry_gh args, tries: 3
+  tries.times do |num|
+    result = exec ["gh", "api"] + args
+    return if result.success?
+    break unless result.error?
+    puts "waiting to retry..."
+    sleep 2 * (num + 1)
+  end
+  puts "Repeatedly failed to call gh", :red, :bold
+  exit 1
 end
 
 def api path, *args
