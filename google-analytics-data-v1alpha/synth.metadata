@@ -11,8 +11,8 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "9504e6c4173019b6fb3fff0e62e6c29ec84be12d",
-        "internalRef": "353094723"
+        "sha": "ae26057251e84392b20bef7076f422661db9552b",
+        "internalRef": "370486085"
       }
     }
   ],
@@ -31,22 +31,31 @@
     ".gitignore",
     ".rubocop.yml",
     ".yardopts",
+    "AUTHENTICATION.md",
     "CHANGELOG.md",
     "Gemfile",
-    "LICENSE",
+    "LICENSE.md",
     "README.md",
     "Rakefile",
-    "empty_file",
-    "google-analytics-data.gemspec",
+    "gapic_metadata.json",
+    "google-analytics-data-v1alpha.gemspec",
+    "lib/google-analytics-data-v1alpha.rb",
     "lib/google/analytics/data/v1alpha.rb",
-    "lib/google/analytics/data/v1alpha/alpha_analytics_data_client.rb",
-    "lib/google/analytics/data/v1alpha/alpha_analytics_data_client_config.json",
+    "lib/google/analytics/data/v1alpha/analytics_data.rb",
+    "lib/google/analytics/data/v1alpha/analytics_data/client.rb",
+    "lib/google/analytics/data/v1alpha/analytics_data/credentials.rb",
+    "lib/google/analytics/data/v1alpha/analytics_data/paths.rb",
     "lib/google/analytics/data/v1alpha/analytics_data_api_pb.rb",
     "lib/google/analytics/data/v1alpha/analytics_data_api_services_pb.rb",
-    "lib/google/analytics/data/v1alpha/credentials.rb",
     "lib/google/analytics/data/v1alpha/data_pb.rb",
-    "lib/google/analytics/data/v1alpha/doc/google/analytics/data/v1alpha/analytics_data_api.rb",
-    "lib/google/analytics/data/v1alpha/doc/google/analytics/data/v1alpha/data.rb",
-    "test/google/analytics/data/v1alpha/alpha_analytics_data_client_test.rb"
+    "lib/google/analytics/data/v1alpha/version.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/analytics/data/v1alpha/analytics_data_api.rb",
+    "proto_docs/google/analytics/data/v1alpha/data.rb",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "test/google/analytics/data/v1alpha/analytics_data_paths_test.rb",
+    "test/google/analytics/data/v1alpha/analytics_data_test.rb",
+    "test/helper.rb"
   ]
 }
