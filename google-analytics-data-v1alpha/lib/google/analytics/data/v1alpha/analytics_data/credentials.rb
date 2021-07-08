@@ -30,13 +30,13 @@ module Google
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
             self.env_vars = [
-              "ANALYTICS_CREDENTIALS",
-              "ANALYTICS_KEYFILE",
+              "ANALYTICS_DATA_CREDENTIALS",
+              "ANALYTICS_DATA_KEYFILE",
               "GOOGLE_CLOUD_CREDENTIALS",
               "GOOGLE_CLOUD_KEYFILE",
               "GCLOUD_KEYFILE",
-              "ANALYTICS_CREDENTIALS_JSON",
-              "ANALYTICS_KEYFILE_JSON",
+              "ANALYTICS_DATA_CREDENTIALS_JSON",
+              "ANALYTICS_DATA_KEYFILE_JSON",
               "GOOGLE_CLOUD_CREDENTIALS_JSON",
               "GOOGLE_CLOUD_KEYFILE_JSON",
               "GCLOUD_KEYFILE_JSON"

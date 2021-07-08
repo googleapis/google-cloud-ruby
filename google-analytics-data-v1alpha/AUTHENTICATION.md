@@ -19,7 +19,7 @@ during development.
 2. Set the [environment variable](#environment-variables).
 
 ```sh
-export ANALYTICS_CREDENTIALS=path/to/keyfile.json
+export ANALYTICS_DATA_CREDENTIALS=path/to/keyfile.json
 ```
 
 3. Initialize the client.
@@ -66,8 +66,8 @@ The environment variables that google-analytics-data-v1alpha
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Analytics::Data::V1alpha::AnalyticsData::Credentials}):
 
-1. `ANALYTICS_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `ANALYTICS_KEYFILE` - Path to JSON file, or JSON contents
+1. `ANALYTICS_DATA_CREDENTIALS` - Path to JSON file, or JSON contents
+2. `ANALYTICS_DATA_KEYFILE` - Path to JSON file, or JSON contents
 3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
 4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
 5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
@@ -75,7 +75,7 @@ checks for credentials are configured on the service Credentials class (such as
 ```ruby
 require "google/analytics/data/v1alpha"
 
-ENV["ANALYTICS_CREDENTIALS"] = "path/to/keyfile.json"
+ENV["ANALYTICS_DATA_CREDENTIALS"] = "path/to/keyfile.json"
 
 client = ::Google::Analytics::Data::V1alpha::AnalyticsData::Client.new
 ```
