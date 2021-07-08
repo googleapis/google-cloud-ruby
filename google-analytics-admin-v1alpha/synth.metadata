@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "98e412862d1229e0f54ba913f1d6640342d697af"
+        "sha": "e8045fde897f6e16d106374990d74bc2e513759b"
       }
     },
     {
@@ -23,16 +23,14 @@
         "apiName": "analytics/admin",
         "apiVersion": "v1alpha",
         "language": "ruby",
-        "generator": "gapic-generator-ruby"
+        "generator": "bazel"
       }
     }
   ],
   "generatedFiles": [
     ".gitignore",
-    ".repo-metadata.json",
     ".rubocop.yml",
     ".yardopts",
-    ".yardopts-cloudrad",
     "AUTHENTICATION.md",
     "CHANGELOG.md",
     "Gemfile",
