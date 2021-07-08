@@ -11,8 +11,8 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "c3bf1b727510ffc0e2020affff906fbc649cd563",
-        "internalRef": "375776214"
+        "sha": "46f4f7054fc945d7af9474fe5d70e623c46d0dd5",
+        "internalRef": "376951653"
       }
     }
   ],
@@ -29,8 +29,10 @@
   ],
   "generatedFiles": [
     ".gitignore",
+    ".repo-metadata.json",
     ".rubocop.yml",
     ".yardopts",
+    ".yardopts-cloudrad",
     "AUTHENTICATION.md",
     "CHANGELOG.md",
     "Gemfile",
