@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.1 / 2021-07-08
+
+#### Bug Fixes
+
+* Update timeout and retry policy
+
 ### 0.4.0 / 2021-06-29
 
 #### Features
