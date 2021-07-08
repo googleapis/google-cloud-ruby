@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.2 / 2021-07-08
+
+#### Bug Fixes
+
+* Add project_path helper
+
 ### 0.3.1 / 2021-06-17
 
 #### Bug Fixes
