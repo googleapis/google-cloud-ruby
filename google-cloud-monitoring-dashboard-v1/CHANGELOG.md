@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 / 2021-07-08
+
+#### Features
+
+* Support for validate-only mode in create_dashboard and update_dashboard; support for alert chart widgets
+
 ### 0.5.1 / 2021-06-17
 
 #### Bug Fixes
