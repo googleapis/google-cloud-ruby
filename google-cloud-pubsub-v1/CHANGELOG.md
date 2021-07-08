@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.1 / 2021-07-08
+
+#### Bug Fixes
+
+* Removed a proto file that is duplicated from the iam-v1 gem
+
 ### 0.5.0 / 2021-07-07
 
 #### Features
