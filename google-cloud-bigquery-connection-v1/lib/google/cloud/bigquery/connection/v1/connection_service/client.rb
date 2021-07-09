@@ -71,17 +71,17 @@ module Google
                   default_config.rpcs.get_connection.timeout = 60.0
                   default_config.rpcs.get_connection.retry_policy = {
                     initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [4, 14]
+                    max_delay: 60.0,
+                    multiplier: 1.3,
+                    retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.list_connections.timeout = 60.0
                   default_config.rpcs.list_connections.retry_policy = {
                     initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [4, 14]
+                    max_delay: 60.0,
+                    multiplier: 1.3,
+                    retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.update_connection.timeout = 60.0
@@ -89,9 +89,9 @@ module Google
                   default_config.rpcs.delete_connection.timeout = 60.0
                   default_config.rpcs.delete_connection.retry_policy = {
                     initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [4, 14]
+                    max_delay: 60.0,
+                    multiplier: 1.3,
+                    retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.get_iam_policy.timeout = 60.0
