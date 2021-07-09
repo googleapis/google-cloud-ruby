@@ -29,13 +29,13 @@ module Google
               "https://www.googleapis.com/auth/cloud-platform"
             ]
             self.env_vars = [
-              "API_GATEWAY_CREDENTIALS",
-              "API_GATEWAY_KEYFILE",
+              "V1_CREDENTIALS",
+              "V1_KEYFILE",
               "GOOGLE_CLOUD_CREDENTIALS",
               "GOOGLE_CLOUD_KEYFILE",
               "GCLOUD_KEYFILE",
-              "API_GATEWAY_CREDENTIALS_JSON",
-              "API_GATEWAY_KEYFILE_JSON",
+              "V1_CREDENTIALS_JSON",
+              "V1_KEYFILE_JSON",
               "GOOGLE_CLOUD_CREDENTIALS_JSON",
               "GOOGLE_CLOUD_KEYFILE_JSON",
               "GCLOUD_KEYFILE_JSON"

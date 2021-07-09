@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "98e412862d1229e0f54ba913f1d6640342d697af"
+        "sha": "e8045fde897f6e16d106374990d74bc2e513759b"
       }
     },
     {
@@ -23,16 +23,14 @@
         "apiName": "apigateway",
         "apiVersion": "v1",
         "language": "ruby",
-        "generator": "gapic-generator-ruby"
+        "generator": "bazel"
       }
     }
   ],
   "generatedFiles": [
     ".gitignore",
-    ".repo-metadata.json",
     ".rubocop.yml",
     ".yardopts",
-    ".yardopts-cloudrad",
     "AUTHENTICATION.md",
     "CHANGELOG.md",
     "Gemfile",
@@ -40,18 +38,18 @@
     "README.md",
     "Rakefile",
     "gapic_metadata.json",
-    "google-cloud-api_gateway-v1.gemspec",
-    "lib/google-cloud-api_gateway-v1.rb",
+    "google-cloud-apigateway-v1.gemspec",
+    "lib/google-cloud-apigateway-v1.rb",
     "lib/google/cloud/api_gateway/v1.rb",
     "lib/google/cloud/api_gateway/v1/api_gateway_service.rb",
     "lib/google/cloud/api_gateway/v1/api_gateway_service/client.rb",
     "lib/google/cloud/api_gateway/v1/api_gateway_service/credentials.rb",
     "lib/google/cloud/api_gateway/v1/api_gateway_service/operations.rb",
     "lib/google/cloud/api_gateway/v1/api_gateway_service/paths.rb",
-    "lib/google/cloud/api_gateway/v1/version.rb",
     "lib/google/cloud/apigateway/v1/apigateway_pb.rb",
     "lib/google/cloud/apigateway/v1/apigateway_service_pb.rb",
     "lib/google/cloud/apigateway/v1/apigateway_service_services_pb.rb",
+    "lib/google/cloud/apigateway/v1/version.rb",
     "proto_docs/README.md",
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",

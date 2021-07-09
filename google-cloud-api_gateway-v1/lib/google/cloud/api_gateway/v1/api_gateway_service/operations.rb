@@ -82,7 +82,7 @@ module Google
               # Create credentials
               credentials = @config.credentials
               credentials ||= Credentials.default scope: @config.scope
-              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
+              if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -157,7 +157,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::Apigateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -227,7 +227,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::Apigateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -297,7 +297,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::Apigateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -372,7 +372,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::Apigateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
@@ -450,7 +450,7 @@ module Google
               # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::ApiGateway::V1::VERSION
+                gapic_version: ::Google::Cloud::Apigateway::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               options.apply_defaults timeout:      @config.rpcs.wait_operation.timeout,

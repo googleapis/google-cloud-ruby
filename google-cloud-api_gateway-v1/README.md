@@ -1,21 +1,21 @@
-# Ruby Client for the API Gateway V1 API
+# Ruby Client for the Google Cloud Apigateway V1 API
 
-API Client library for the API Gateway V1 API
+API Client library for the Google Cloud Apigateway V1 API
 
-API Gateway enables you to provide secure access to your backend services through a well-defined REST API that is consistent across all of your services, regardless of the service implementation. Clients consume your REST APIS to implement standalone apps for a mobile device or tablet, through apps running in a browser, or through any other type of app that can make a request to an HTTP endpoint.
+google-cloud-apigateway-v1 is the official client library for the Google Cloud Apigateway V1 API.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the API Gateway V1 API. Most users should consider using
+specific version of the Google Cloud Apigateway V1 API. Most users should consider using
 the main client gem,
-[google-cloud-api_gateway](https://rubygems.org/gems/google-cloud-api_gateway).
+[google-cloud-apigateway](https://rubygems.org/gems/google-cloud-apigateway).
 See the section below titled *Which client should I use?* for more information.
 
 ## Installation
 
 ```
-$ gem install google-cloud-api_gateway-v1
+$ gem install google-cloud-apigateway-v1
 ```
 
 ## Before You Begin
@@ -24,8 +24,7 @@ In order to use this library, you first need to go through the following steps:
 
 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
 1. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-1. [Enable the API.](https://console.cloud.google.com/apis/library/apigateway.googleapis.com)
-1. [Set up authentication.](AUTHENTICATION.md)
+1. {file:AUTHENTICATION.md Set up authentication.}
 
 ## Quick Start
 
@@ -33,15 +32,12 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/api_gateway/v1"
 
 client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
-request = ::Google::Cloud::ApiGateway::V1::ListGatewaysRequest.new # (request fields as keyword arguments...)
+request = my_create_request
 response = client.list_gateways request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-api_gateway-v1/latest)
+View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-apigateway-v1/latest)
 for class and method documentation.
-
-See also the [Product Documentation](https://cloud.google.com/api-gateway/)
-for general usage information.
 
 ## Enabling Logging
 
@@ -83,9 +79,9 @@ about the Ruby support schedule.
 ## Which client should I use?
 
 Most modern Ruby client libraries for Google APIs come in two flavors: the main
-client library with a name such as `google-cloud-api_gateway`,
+client library with a name such as `google-cloud-apigateway`,
 and lower-level _versioned_ client libraries with names such as
-`google-cloud-api_gateway-v1`.
+`google-cloud-apigateway-v1`.
 _In most cases, you should install the main client._
 
 ### What's the difference between the main client and a versioned client?
@@ -110,7 +106,7 @@ service version.
 
 We recommend that most users install the main client gem for a service. You can
 identify this gem as the one _without_ a version in its name, e.g.
-`google-cloud-api_gateway`.
+`google-cloud-apigateway`.
 The main client is recommended because it will embody the best practices for
 accessing the service, and may also provide more convenient interfaces or
 tighter integration into frameworks and third-party libraries. In addition, the
@@ -123,7 +119,7 @@ You can use a versioned client if you are content with a possibly lower-level
 class interface, you explicitly want to avoid features provided by the main
 client, or you want to access a specific service version not be covered by the
 main client. You can identify versioned client gems because the service version
-is part of the name, e.g. `google-cloud-api_gateway-v1`.
+is part of the name, e.g. `google-cloud-apigateway-v1`.
 
 ### What about the google-apis-<name> clients?
 
