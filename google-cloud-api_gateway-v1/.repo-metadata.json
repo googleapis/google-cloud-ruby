@@ -1,0 +1,12 @@
+{
+    "api_id": "apigateway.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-api_gateway-v1/latest",
+    "distribution_name": "google-cloud-api_gateway-v1",
+    "language": "ruby",
+    "name": "apigateway",
+    "name_pretty": "API Gateway V1 API",
+    "product_documentation": "https://cloud.google.com/api-gateway/",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO"
+}
