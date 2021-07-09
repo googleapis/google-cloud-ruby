@@ -20,7 +20,7 @@ require "gapic/common"
 require "gapic/config"
 require "gapic/config/method"
 
-require "google/cloud/appengine/v1/version"
+require "google/cloud/app_engine/v1/version"
 
 require "google/cloud/app_engine/v1/versions/credentials"
 require "google/cloud/app_engine/v1/versions/operations"

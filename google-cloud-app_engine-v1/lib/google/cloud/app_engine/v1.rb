@@ -24,7 +24,7 @@ require "google/cloud/app_engine/v1/firewall"
 require "google/cloud/app_engine/v1/authorized_domains"
 require "google/cloud/app_engine/v1/authorized_certificates"
 require "google/cloud/app_engine/v1/domain_mappings"
-require "google/cloud/appengine/v1/version"
+require "google/cloud/app_engine/v1/version"
 
 module Google
   module Cloud

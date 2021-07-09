@@ -35,7 +35,7 @@ namespace :test do
   task :coverage do
     require "simplecov"
     SimpleCov.start do
-      command_name "google-cloud-appengine-v1"
+      command_name "google-cloud-app_engine-v1"
       track_files "lib/**/*.rb"
       add_filter "test/"
     end
@@ -55,7 +55,7 @@ namespace :smoke_test do
   task :coverage do
     require "simplecov"
     SimpleCov.start do
-      command_name "google-cloud-appengine-v1"
+      command_name "google-cloud-app_engine-v1"
       track_files "lib/**/*.rb"
       add_filter "test/"
     end
@@ -65,33 +65,33 @@ namespace :smoke_test do
 end
 
 # Acceptance tests
-desc "Run the google-cloud-appengine-v1 acceptance tests."
+desc "Run the google-cloud-app_engine-v1 acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
   project ||=
-    ENV["V1_TEST_PROJECT"] ||
+    ENV["APP_ENGINE_TEST_PROJECT"] ||
     ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
   keyfile ||=
-    ENV["V1_TEST_KEYFILE"] ||
+    ENV["APP_ENGINE_TEST_KEYFILE"] ||
     ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
     keyfile = File.read keyfile
   else
     keyfile ||=
-      ENV["V1_TEST_KEYFILE_JSON"] ||
+      ENV["APP_ENGINE_TEST_KEYFILE_JSON"] ||
       ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
-    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or V1_TEST_PROJECT=test123 V1_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or APP_ENGINE_TEST_PROJECT=test123 APP_ENGINE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/app_engine/v1/applications/credentials"
   ::Google::Cloud::AppEngine::V1::Applications::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
-  ENV["V1_PROJECT"] = project
-  ENV["V1_TEST_PROJECT"] = project
-  ENV["V1_KEYFILE_JSON"] = keyfile
+  ENV["APP_ENGINE_PROJECT"] = project
+  ENV["APP_ENGINE_TEST_PROJECT"] = project
+  ENV["APP_ENGINE_KEYFILE_JSON"] = keyfile
 
   Rake::Task["acceptance:run"].invoke
 end
@@ -101,7 +101,7 @@ namespace :acceptance do
     if File.directory? "acceptance"
       Rake::Task[:smoke_test].invoke
     else
-      puts "The google-cloud-appengine-v1 gem has no acceptance tests."
+      puts "The google-cloud-app_engine-v1 gem has no acceptance tests."
     end
   end
 
@@ -129,7 +129,7 @@ namespace :samples do
         end
       end
     else
-      puts "The google-cloud-appengine-v1 gem has no samples to test."
+      puts "The google-cloud-app_engine-v1 gem has no samples to test."
     end
   end
 
@@ -143,7 +143,7 @@ namespace :samples do
         end
       end
     else
-      puts "The google-cloud-appengine-v1 gem has no samples to test."
+      puts "The google-cloud-app_engine-v1 gem has no samples to test."
     end
   end
 end
@@ -156,22 +156,22 @@ end
 
 desc "Run yard-doctest example tests."
 task :doctest do
-  puts "The google-cloud-appengine-v1 gem does not have doctest tests."
+  puts "The google-cloud-app_engine-v1 gem does not have doctest tests."
 end
 
 task :cloudrad do
-  ENV["CLOUDRAD_GEM_NAME"] = "google-cloud-appengine-v1"
+  ENV["CLOUDRAD_GEM_NAME"] = "google-cloud-app_engine-v1"
   sh "bundle exec yard doc --fail-on-warning --yardopts .yardopts-cloudrad"
 end
 
 desc "Run the CI build"
 task :ci do
-  header "BUILDING google-cloud-appengine-v1"
-  header "google-cloud-appengine-v1 rubocop", "*"
+  header "BUILDING google-cloud-app_engine-v1"
+  header "google-cloud-app_engine-v1 rubocop", "*"
   Rake::Task[:rubocop].invoke
-  header "google-cloud-appengine-v1 yard", "*"
+  header "google-cloud-app_engine-v1 yard", "*"
   Rake::Task[:yard].invoke
-  header "google-cloud-appengine-v1 test", "*"
+  header "google-cloud-app_engine-v1 test", "*"
   Rake::Task[:test].invoke
 end
 
@@ -179,13 +179,13 @@ namespace :ci do
   desc "Run the CI build, with smoke tests."
   task :smoke_test do
     Rake::Task[:ci].invoke
-    header "google-cloud-appengine-v1 smoke_test", "*"
+    header "google-cloud-app_engine-v1 smoke_test", "*"
     Rake::Task[:smoke_test].invoke
   end
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
     Rake::Task[:ci].invoke
-    header "google-cloud-appengine-v1 acceptance", "*"
+    header "google-cloud-app_engine-v1 acceptance", "*"
     Rake::Task[:acceptance].invoke
   end
   task :a do

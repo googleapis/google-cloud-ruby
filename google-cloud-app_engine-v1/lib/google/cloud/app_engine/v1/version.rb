@@ -19,9 +19,9 @@
 
 module Google
   module Cloud
-    module Appengine
+    module AppEngine
       module V1
-        VERSION = "0.0.1"
+        VERSION = "0.3.1"
       end
     end
   end
