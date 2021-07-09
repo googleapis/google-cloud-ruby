@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.2 / 2021-07-09
+
+#### Documentation
+
+* Clarified some language around authentication configuration
+
 ### 0.2.1 / 2021-06-17
 
 #### Bug Fixes
