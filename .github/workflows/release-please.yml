@@ -13,7 +13,7 @@ on:
 
 jobs:
   release-please:
-    if: ${{ github.repository == 'googleapis/google-cloud-ruby' }}
+    if: ${{ github.repository == 'googleapis/google-cloud-ruby' && (!secrets.DISABLE_RELEASE_PLEASE || github.event_name == 'workflow_dispatch') }}
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
