@@ -25,6 +25,12 @@ module Google
       # Do not use this default value.
       LAUNCH_STAGE_UNSPECIFIED = 0
 
+      # The feature is not yet implemented. Users can not use it.
+      UNIMPLEMENTED = 6
+
+      # Prelaunch features are hidden from users and are only visible internally.
+      PRELAUNCH = 7
+
       # Early Access features are limited to a closed group of testers. To use
       # these features, you must sign up in advance and sign a Trusted Tester
       # agreement (which includes confidentiality provisions). These features may
@@ -36,7 +42,7 @@ module Google
       # for widespread use. By Alpha, all significant design issues are resolved
       # and we are in the process of verifying functionality. Alpha customers
       # need to apply for access, agree to applicable terms, and have their
-      # projects whitelisted. Alpha releases don’t have to be feature complete,
+      # projects allowlisted. Alpha releases don’t have to be feature complete,
       # no SLAs are provided, and there are no technical support obligations, but
       # they will be far enough along that customers can actually use them in
       # test environments or for limited-use tests -- just like they would in
