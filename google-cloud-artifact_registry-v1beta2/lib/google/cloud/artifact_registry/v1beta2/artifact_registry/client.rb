@@ -79,18 +79,12 @@ module Google
 
                 default_config.rpcs.list_repositories.timeout = 30.0
                 default_config.rpcs.list_repositories.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_repository.timeout = 30.0
                 default_config.rpcs.get_repository.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.create_repository.timeout = 30.0
@@ -99,90 +93,57 @@ module Google
 
                 default_config.rpcs.delete_repository.timeout = 30.0
                 default_config.rpcs.delete_repository.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_packages.timeout = 30.0
                 default_config.rpcs.list_packages.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_package.timeout = 30.0
                 default_config.rpcs.get_package.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.delete_package.timeout = 30.0
                 default_config.rpcs.delete_package.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_versions.timeout = 30.0
                 default_config.rpcs.list_versions.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_version.timeout = 30.0
                 default_config.rpcs.get_version.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.delete_version.timeout = 30.0
                 default_config.rpcs.delete_version.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_files.timeout = 30.0
                 default_config.rpcs.list_files.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_file.timeout = 30.0
                 default_config.rpcs.get_file.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_tags.timeout = 30.0
                 default_config.rpcs.list_tags.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_tag.timeout = 30.0
                 default_config.rpcs.get_tag.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.create_tag.timeout = 30.0
@@ -191,18 +152,12 @@ module Google
 
                 default_config.rpcs.delete_tag.timeout = 30.0
                 default_config.rpcs.delete_tag.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_iam_policy.timeout = 30.0
                 default_config.rpcs.get_iam_policy.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.test_iam_permissions.timeout = 30.0
@@ -275,7 +230,7 @@ module Google
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
