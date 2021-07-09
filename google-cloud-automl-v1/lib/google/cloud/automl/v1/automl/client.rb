@@ -82,19 +82,28 @@ module Google
 
                 default_config.rpcs.get_dataset.timeout = 5.0
                 default_config.rpcs.get_dataset.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1,
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_datasets.timeout = 5.0
                 default_config.rpcs.list_datasets.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1,
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_dataset.timeout = 5.0
 
                 default_config.rpcs.delete_dataset.timeout = 5.0
                 default_config.rpcs.delete_dataset.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1,
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.import_data.timeout = 5.0
@@ -103,24 +112,36 @@ module Google
 
                 default_config.rpcs.get_annotation_spec.timeout = 5.0
                 default_config.rpcs.get_annotation_spec.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1,
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_model.timeout = 5.0
 
                 default_config.rpcs.get_model.timeout = 5.0
                 default_config.rpcs.get_model.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1,
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_models.timeout = 5.0
                 default_config.rpcs.list_models.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1,
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.delete_model.timeout = 5.0
                 default_config.rpcs.delete_model.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1,
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_model.timeout = 5.0
@@ -133,12 +154,18 @@ module Google
 
                 default_config.rpcs.get_model_evaluation.timeout = 5.0
                 default_config.rpcs.get_model_evaluation.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1,
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_model_evaluations.timeout = 5.0
                 default_config.rpcs.list_model_evaluations.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1,
+              max_delay: 60.0,
+              multiplier: 1.3,
+              retry_codes: [4, 14]
                 }
 
                 default_config
@@ -209,7 +236,7 @@ module Google
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
+              if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
