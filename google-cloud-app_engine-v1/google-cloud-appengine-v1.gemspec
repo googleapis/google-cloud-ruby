@@ -1,16 +1,16 @@
 # -*- ruby -*-
 # encoding: utf-8
 
-require File.expand_path("lib/google/cloud/app_engine/v1/version", __dir__)
+require File.expand_path("lib/google/cloud/appengine/v1/version", __dir__)
 
 Gem::Specification.new do |gem|
-  gem.name          = "google-cloud-app_engine-v1"
-  gem.version       = Google::Cloud::AppEngine::V1::VERSION
+  gem.name          = "google-cloud-appengine-v1"
+  gem.version       = Google::Cloud::Appengine::V1::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "The App Engine Admin API provisions and manages your App Engine applications. Note that google-cloud-app_engine-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-app_engine instead. See the readme for more details."
-  gem.summary       = "API Client library for the App Engine Admin V1 API"
+  gem.description   = "google-cloud-appengine-v1 is the official client library for the Google Cloud Appengine V1 API. Note that google-cloud-appengine-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-appengine instead. See the readme for more details."
+  gem.summary       = "API Client library for the Google Cloud Appengine V1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.5"
 
-  gem.add_dependency "gapic-common", ">= 0.5", "< 2.a"
+  gem.add_dependency "gapic-common", "~> 0.4"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
 
   gem.add_development_dependency "google-style", "~> 1.25.1"

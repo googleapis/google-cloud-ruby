@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "98e412862d1229e0f54ba913f1d6640342d697af"
+        "sha": "e8045fde897f6e16d106374990d74bc2e513759b"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "a0d282daa691e95ec51131c81c3777fc95abf7f8",
-        "internalRef": "362664085"
+        "sha": "321ac4be7cffd9eca44a131d8ba900ce718b99af",
+        "internalRef": "364687773"
       }
     }
   ],
@@ -23,16 +23,14 @@
         "apiName": "appengine",
         "apiVersion": "v1",
         "language": "ruby",
-        "generator": "gapic-generator-ruby"
+        "generator": "bazel"
       }
     }
   ],
   "generatedFiles": [
     ".gitignore",
-    ".repo-metadata.json",
     ".rubocop.yml",
     ".yardopts",
-    ".yardopts-cloudrad",
     "AUTHENTICATION.md",
     "CHANGELOG.md",
     "Gemfile",
@@ -40,8 +38,8 @@
     "README.md",
     "Rakefile",
     "gapic_metadata.json",
-    "google-cloud-app_engine-v1.gemspec",
-    "lib/google-cloud-app_engine-v1.rb",
+    "google-cloud-appengine-v1.gemspec",
+    "lib/google-cloud-appengine-v1.rb",
     "lib/google/appengine/v1/app_yaml_pb.rb",
     "lib/google/appengine/v1/appengine_pb.rb",
     "lib/google/appengine/v1/appengine_services_pb.rb",
@@ -85,11 +83,11 @@
     "lib/google/cloud/app_engine/v1/services/client.rb",
     "lib/google/cloud/app_engine/v1/services/credentials.rb",
     "lib/google/cloud/app_engine/v1/services/operations.rb",
-    "lib/google/cloud/app_engine/v1/version.rb",
     "lib/google/cloud/app_engine/v1/versions.rb",
     "lib/google/cloud/app_engine/v1/versions/client.rb",
     "lib/google/cloud/app_engine/v1/versions/credentials.rb",
     "lib/google/cloud/app_engine/v1/versions/operations.rb",
+    "lib/google/cloud/appengine/v1/version.rb",
     "proto_docs/README.md",
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
