@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Security
       module PrivateCA
-        VERSION = "1.0.1"
+        VERSION = "1.0.2"
       end
     end
   end
