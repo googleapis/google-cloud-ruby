@@ -82,8 +82,8 @@ client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
 
 ### Configuration
 
-The **Credentials JSON** can be configured instead of placing them in
-environment variables. Either on an individual client initialization:
+The path to the **Credentials JSON** file can be configured instead of storing
+it in an environment variable. Either on an individual client initialization:
 
 ```ruby
 require "google/cloud/bigtable/admin/v2"
@@ -93,7 +93,7 @@ client = ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
 end
 ```
 
-Or configured globally for all clients:
+Or globally for all clients:
 
 ```ruby
 require "google/cloud/bigtable/admin/v2"
