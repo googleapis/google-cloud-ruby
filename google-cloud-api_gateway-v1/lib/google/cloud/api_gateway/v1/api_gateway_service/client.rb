@@ -67,74 +67,47 @@ module Google
 
                 default_config.rpcs.create_gateway.timeout = 60.0
                 default_config.rpcs.create_gateway.retry_policy = {
-                  initial_delay: 1.0,
-                  max_delay: 60.0,
-                  multiplier: 2,
-                  retry_codes: [2, 14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [2, 14]
                 }
 
                 default_config.rpcs.update_gateway.timeout = 60.0
                 default_config.rpcs.update_gateway.retry_policy = {
-                  initial_delay: 1.0,
-                  max_delay: 60.0,
-                  multiplier: 2,
-                  retry_codes: [2, 14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [2, 14]
                 }
 
                 default_config.rpcs.delete_gateway.timeout = 60.0
                 default_config.rpcs.delete_gateway.retry_policy = {
-                  initial_delay: 1.0,
-                  max_delay: 60.0,
-                  multiplier: 2,
-                  retry_codes: [2, 14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [2, 14]
                 }
 
                 default_config.rpcs.create_api.timeout = 60.0
                 default_config.rpcs.create_api.retry_policy = {
-                  initial_delay: 1.0,
-                  max_delay: 60.0,
-                  multiplier: 2,
-                  retry_codes: [2, 14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [2, 14]
                 }
 
                 default_config.rpcs.update_api.timeout = 60.0
                 default_config.rpcs.update_api.retry_policy = {
-                  initial_delay: 1.0,
-                  max_delay: 60.0,
-                  multiplier: 2,
-                  retry_codes: [2, 14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [2, 14]
                 }
 
                 default_config.rpcs.delete_api.timeout = 60.0
                 default_config.rpcs.delete_api.retry_policy = {
-                  initial_delay: 1.0,
-                  max_delay: 60.0,
-                  multiplier: 2,
-                  retry_codes: [2, 14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [2, 14]
                 }
 
                 default_config.rpcs.create_api_config.timeout = 60.0
                 default_config.rpcs.create_api_config.retry_policy = {
-                  initial_delay: 1.0,
-                  max_delay: 60.0,
-                  multiplier: 2,
-                  retry_codes: [2, 14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [2, 14]
                 }
 
                 default_config.rpcs.update_api_config.timeout = 60.0
                 default_config.rpcs.update_api_config.retry_policy = {
-                  initial_delay: 1.0,
-                  max_delay: 60.0,
-                  multiplier: 2,
-                  retry_codes: [2, 14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [2, 14]
                 }
 
                 default_config.rpcs.delete_api_config.timeout = 60.0
                 default_config.rpcs.delete_api_config.retry_policy = {
-                  initial_delay: 1.0,
-                  max_delay: 60.0,
-                  multiplier: 2,
-                  retry_codes: [2, 14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [2, 14]
                 }
 
                 default_config
@@ -205,7 +178,7 @@ module Google
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
