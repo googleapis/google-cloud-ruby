@@ -1,8 +1,8 @@
 --no-private
 --title=Data Catalog V1 API
 --exclude _pb\.rb$
---markup markdown
---markup-provider redcarpet
+--format yaml
+--template-path ../template
 
 ./lib/**/*.rb
 ./proto_docs/**/*.rb

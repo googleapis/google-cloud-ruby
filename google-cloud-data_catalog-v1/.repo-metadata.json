@@ -1,0 +1,12 @@
+{
+    "api_id": "datacatalog.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-data_catalog-v1/latest",
+    "distribution_name": "google-cloud-data_catalog-v1",
+    "language": "ruby",
+    "name": "datacatalog",
+    "name_pretty": "Data Catalog V1 API",
+    "product_documentation": "https://cloud.google.com/data-catalog",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO"
+}
