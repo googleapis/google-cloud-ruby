@@ -66,11 +66,11 @@ The environment variables that google-cloud-channel-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::Channel::V1::CloudChannelService::Credentials}):
 
-1. `CHANNEL_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `CHANNEL_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `CHANNEL_CREDENTIALS` - Path to JSON file, or JSON contents
+* `CHANNEL_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/channel/v1"
