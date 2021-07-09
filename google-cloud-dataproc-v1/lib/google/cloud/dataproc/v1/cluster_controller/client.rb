@@ -69,49 +69,49 @@ module Google
                 default_config.rpcs.create_cluster.timeout = 300.0
                 default_config.rpcs.create_cluster.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.update_cluster.timeout = 300.0
                 default_config.rpcs.update_cluster.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.delete_cluster.timeout = 300.0
                 default_config.rpcs.delete_cluster.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config.rpcs.get_cluster.timeout = 300.0
                 default_config.rpcs.get_cluster.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [13, 4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [13, 4, 14]
                 }
 
                 default_config.rpcs.list_clusters.timeout = 300.0
                 default_config.rpcs.list_clusters.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [13, 4, 14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [13, 4, 14]
                 }
 
                 default_config.rpcs.diagnose_cluster.timeout = 300.0
                 default_config.rpcs.diagnose_cluster.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  max_delay: 60.0,
+                  multiplier: 1.3,
+                  retry_codes: [14]
                 }
 
                 default_config
