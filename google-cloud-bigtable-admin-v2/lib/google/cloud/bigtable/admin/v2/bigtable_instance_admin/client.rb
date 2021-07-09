@@ -73,33 +73,33 @@ module Google
                   default_config.rpcs.get_instance.timeout = 60.0
                   default_config.rpcs.get_instance.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_instances.timeout = 60.0
                   default_config.rpcs.list_instances.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.update_instance.timeout = 60.0
                   default_config.rpcs.update_instance.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.partial_update_instance.timeout = 60.0
                   default_config.rpcs.partial_update_instance.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.delete_instance.timeout = 60.0
@@ -109,25 +109,25 @@ module Google
                   default_config.rpcs.get_cluster.timeout = 60.0
                   default_config.rpcs.get_cluster.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_clusters.timeout = 60.0
                   default_config.rpcs.list_clusters.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.update_cluster.timeout = 60.0
                   default_config.rpcs.update_cluster.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.delete_cluster.timeout = 60.0
@@ -137,25 +137,25 @@ module Google
                   default_config.rpcs.get_app_profile.timeout = 60.0
                   default_config.rpcs.get_app_profile.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_app_profiles.timeout = 60.0
                   default_config.rpcs.list_app_profiles.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.update_app_profile.timeout = 60.0
                   default_config.rpcs.update_app_profile.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.delete_app_profile.timeout = 60.0
@@ -163,9 +163,9 @@ module Google
                   default_config.rpcs.get_iam_policy.timeout = 60.0
                   default_config.rpcs.get_iam_policy.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.set_iam_policy.timeout = 60.0
@@ -173,9 +173,9 @@ module Google
                   default_config.rpcs.test_iam_permissions.timeout = 60.0
                   default_config.rpcs.test_iam_permissions.retry_policy = {
                     initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 2,
-                retry_codes: [14, 4]
+                    max_delay: 60.0,
+                    multiplier: 2,
+                    retry_codes: [14, 4]
                   }
 
                   default_config
