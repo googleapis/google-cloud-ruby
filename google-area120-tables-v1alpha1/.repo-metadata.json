@@ -1,0 +1,12 @@
+{
+    "api_id": "area120tables.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-area120-tables-v1alpha1/latest",
+    "distribution_name": "google-area120-tables-v1alpha1",
+    "language": "ruby",
+    "name": "area120tables",
+    "name_pretty": "Area 120 Tables V1alpha1 API",
+    "product_documentation": "https://tables.area120.google.com/u/0/about#/",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "library_type": "GAPIC_AUTO"
+}
