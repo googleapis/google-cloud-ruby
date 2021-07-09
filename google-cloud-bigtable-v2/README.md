@@ -25,7 +25,7 @@ In order to use this library, you first need to go through the following steps:
 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
 1. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
 1. [Enable the API.](https://console.cloud.google.com/apis/library/bigtable.googleapis.com)
-1. [Set up authentication.](AUTHENTICATION.md)
+1. {file:AUTHENTICATION.md Set up authentication.}
 
 ## Quick Start
 
@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/bigtable/v2"
 
 client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new
-request = ::Google::Cloud::Bigtable::V2::ReadRowsRequest.new # (request fields as keyword arguments...)
+request = my_create_request
 response = client.read_rows request
 ```
 
