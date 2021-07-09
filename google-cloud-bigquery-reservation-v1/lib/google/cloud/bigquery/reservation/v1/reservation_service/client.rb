@@ -84,26 +84,17 @@ module Google
 
                   default_config.rpcs.list_reservations.timeout = 60.0
                   default_config.rpcs.list_reservations.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.get_reservation.timeout = 60.0
                   default_config.rpcs.get_reservation.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.delete_reservation.timeout = 60.0
                   default_config.rpcs.delete_reservation.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.update_reservation.timeout = 60.0
@@ -112,26 +103,17 @@ module Google
 
                   default_config.rpcs.list_capacity_commitments.timeout = 60.0
                   default_config.rpcs.list_capacity_commitments.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.get_capacity_commitment.timeout = 60.0
                   default_config.rpcs.get_capacity_commitment.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.delete_capacity_commitment.timeout = 60.0
                   default_config.rpcs.delete_capacity_commitment.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.update_capacity_commitment.timeout = 60.0
@@ -144,36 +126,24 @@ module Google
 
                   default_config.rpcs.list_assignments.timeout = 60.0
                   default_config.rpcs.list_assignments.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.delete_assignment.timeout = 60.0
                   default_config.rpcs.delete_assignment.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.search_assignments.timeout = 60.0
                   default_config.rpcs.search_assignments.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.move_assignment.timeout = 60.0
 
                   default_config.rpcs.get_bi_reservation.timeout = 60.0
                   default_config.rpcs.get_bi_reservation.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
                   default_config.rpcs.update_bi_reservation.timeout = 60.0
@@ -246,7 +216,7 @@ module Google
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
-                if credentials.is_a?(String) || credentials.is_a?(Hash)
+                if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
                 @quota_project_id = @config.quota_project
