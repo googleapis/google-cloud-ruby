@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/binary_authorization/v1beta1"
 
 client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new
-request = my_create_request
+request = ::Google::Cloud::BinaryAuthorization::V1beta1::GetPolicyRequest.new # (request fields as keyword arguments...)
 response = client.get_policy request
 ```
 
