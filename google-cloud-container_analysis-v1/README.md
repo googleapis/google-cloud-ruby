@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/container_analysis/v1"
 
 client = ::Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client.new
-request = my_create_request
+request = ::Google::Iam::V1::SetIamPolicyRequest.new # (request fields as keyword arguments...)
 response = client.set_iam_policy request
 ```
 
