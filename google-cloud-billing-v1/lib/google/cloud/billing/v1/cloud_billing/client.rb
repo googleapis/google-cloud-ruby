@@ -67,76 +67,49 @@ module Google
 
                 default_config.rpcs.get_billing_account.timeout = 60.0
                 default_config.rpcs.get_billing_account.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_billing_accounts.timeout = 60.0
                 default_config.rpcs.list_billing_accounts.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_billing_account.timeout = 60.0
                 default_config.rpcs.update_billing_account.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_billing_account.timeout = 60.0
 
                 default_config.rpcs.list_project_billing_info.timeout = 60.0
                 default_config.rpcs.list_project_billing_info.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_project_billing_info.timeout = 60.0
                 default_config.rpcs.get_project_billing_info.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_project_billing_info.timeout = 60.0
                 default_config.rpcs.update_project_billing_info.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_iam_policy.timeout = 60.0
                 default_config.rpcs.get_iam_policy.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.set_iam_policy.timeout = 60.0
                 default_config.rpcs.set_iam_policy.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.test_iam_permissions.timeout = 60.0
                 default_config.rpcs.test_iam_permissions.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config
@@ -207,7 +180,7 @@ module Google
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
