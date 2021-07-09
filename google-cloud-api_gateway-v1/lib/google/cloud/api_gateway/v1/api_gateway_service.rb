@@ -20,7 +20,7 @@ require "gapic/common"
 require "gapic/config"
 require "gapic/config/method"
 
-require "google/cloud/apigateway/v1/version"
+require "google/cloud/api_gateway/v1/version"
 
 require "google/cloud/api_gateway/v1/api_gateway_service/credentials"
 require "google/cloud/api_gateway/v1/api_gateway_service/paths"
