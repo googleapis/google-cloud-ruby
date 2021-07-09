@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/area120/tables/v1alpha1"
 
 client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new
-request = my_create_request
+request = ::Google::Area120::Tables::V1alpha1::GetTableRequest.new # (request fields as keyword arguments...)
 response = client.get_table request
 ```
 
