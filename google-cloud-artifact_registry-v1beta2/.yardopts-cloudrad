@@ -1,8 +1,8 @@
 --no-private
 --title=Artifact Registry V1beta2 API
 --exclude _pb\.rb$
---markup markdown
---markup-provider redcarpet
+--format yaml
+--template-path ../template
 
 ./lib/**/*.rb
 ./proto_docs/**/*.rb
