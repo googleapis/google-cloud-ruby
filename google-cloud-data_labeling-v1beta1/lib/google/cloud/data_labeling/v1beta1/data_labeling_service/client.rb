@@ -70,25 +70,25 @@ module Google
                 default_config.rpcs.get_dataset.timeout = 30.0
                 default_config.rpcs.get_dataset.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_datasets.timeout = 30.0
                 default_config.rpcs.list_datasets.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.delete_dataset.timeout = 30.0
                 default_config.rpcs.delete_dataset.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.import_data.timeout = 30.0
@@ -96,41 +96,41 @@ module Google
                 default_config.rpcs.export_data.timeout = 30.0
                 default_config.rpcs.export_data.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_data_item.timeout = 30.0
                 default_config.rpcs.get_data_item.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_data_items.timeout = 30.0
                 default_config.rpcs.list_data_items.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_annotated_dataset.timeout = 30.0
                 default_config.rpcs.get_annotated_dataset.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_annotated_datasets.timeout = 30.0
                 default_config.rpcs.list_annotated_datasets.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.label_image.timeout = 30.0
@@ -142,17 +142,17 @@ module Google
                 default_config.rpcs.get_example.timeout = 30.0
                 default_config.rpcs.get_example.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_examples.timeout = 30.0
                 default_config.rpcs.list_examples.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_annotation_spec_set.timeout = 30.0
@@ -160,25 +160,25 @@ module Google
                 default_config.rpcs.get_annotation_spec_set.timeout = 30.0
                 default_config.rpcs.get_annotation_spec_set.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_annotation_spec_sets.timeout = 30.0
                 default_config.rpcs.list_annotation_spec_sets.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.delete_annotation_spec_set.timeout = 30.0
                 default_config.rpcs.delete_annotation_spec_set.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_instruction.timeout = 30.0
@@ -186,41 +186,41 @@ module Google
                 default_config.rpcs.get_instruction.timeout = 30.0
                 default_config.rpcs.get_instruction.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_instructions.timeout = 30.0
                 default_config.rpcs.list_instructions.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.delete_instruction.timeout = 30.0
                 default_config.rpcs.delete_instruction.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_evaluation.timeout = 30.0
                 default_config.rpcs.get_evaluation.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_evaluations.timeout = 30.0
                 default_config.rpcs.search_evaluations.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_example_comparisons.timeout = 30.0
@@ -232,9 +232,9 @@ module Google
                 default_config.rpcs.get_evaluation_job.timeout = 30.0
                 default_config.rpcs.get_evaluation_job.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.pause_evaluation_job.timeout = 30.0
@@ -244,17 +244,17 @@ module Google
                 default_config.rpcs.delete_evaluation_job.timeout = 30.0
                 default_config.rpcs.delete_evaluation_job.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_evaluation_jobs.timeout = 30.0
                 default_config.rpcs.list_evaluation_jobs.retry_policy = {
                   initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  max_delay: 30.0,
+                  multiplier: 1.3,
+                  retry_codes: [4, 14]
                 }
 
                 default_config
