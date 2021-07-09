@@ -71,18 +71,12 @@ module Google
 
                   default_config.rpcs.get_data_source.timeout = 20.0
                   default_config.rpcs.get_data_source.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_data_sources.timeout = 20.0
                   default_config.rpcs.list_data_sources.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.create_transfer_config.timeout = 30.0
@@ -91,68 +85,44 @@ module Google
 
                   default_config.rpcs.delete_transfer_config.timeout = 20.0
                   default_config.rpcs.delete_transfer_config.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.get_transfer_config.timeout = 20.0
                   default_config.rpcs.get_transfer_config.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_transfer_configs.timeout = 20.0
                   default_config.rpcs.list_transfer_configs.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.schedule_transfer_runs.timeout = 30.0
 
                   default_config.rpcs.get_transfer_run.timeout = 20.0
                   default_config.rpcs.get_transfer_run.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.delete_transfer_run.timeout = 20.0
                   default_config.rpcs.delete_transfer_run.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_transfer_runs.timeout = 20.0
                   default_config.rpcs.list_transfer_runs.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_transfer_logs.timeout = 20.0
                   default_config.rpcs.list_transfer_logs.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.check_valid_creds.timeout = 20.0
                   default_config.rpcs.check_valid_creds.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config
@@ -223,7 +193,7 @@ module Google
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
-                if credentials.is_a?(String) || credentials.is_a?(Hash)
+                if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
                 @quota_project_id = @config.quota_project

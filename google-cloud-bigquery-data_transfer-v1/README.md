@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/bigquery/data_transfer/v1"
 
 client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new
-request = my_create_request
+request = ::Google::Cloud::Bigquery::DataTransfer::V1::GetDataSourceRequest.new # (request fields as keyword arguments...)
 response = client.get_data_source request
 ```
 
