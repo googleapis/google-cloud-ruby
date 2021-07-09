@@ -25,7 +25,7 @@ In order to use this library, you first need to go through the following steps:
 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
 1. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
 1. [Enable the API.](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com)
-1. [Set up authentication.](AUTHENTICATION.md)
+1. {file:AUTHENTICATION.md Set up authentication.}
 
 ## Quick Start
 
@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/bigquery/connection/v1"
 
 client = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new
-request = ::Google::Cloud::Bigquery::Connection::V1::CreateConnectionRequest.new # (request fields as keyword arguments...)
+request = my_create_request
 response = client.create_connection request
 ```
 
