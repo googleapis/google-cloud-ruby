@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "98e412862d1229e0f54ba913f1d6640342d697af"
+        "sha": "e8045fde897f6e16d106374990d74bc2e513759b"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "96ca8bc1f621b7e972b958b35ad15af4c5476e16",
-        "internalRef": "342075900"
+        "sha": "321ac4be7cffd9eca44a131d8ba900ce718b99af",
+        "internalRef": "364687773"
       }
     }
   ],
@@ -23,16 +23,14 @@
         "apiName": "artifactregistry",
         "apiVersion": "v1beta2",
         "language": "ruby",
-        "generator": "gapic-generator-ruby"
+        "generator": "bazel"
       }
     }
   ],
   "generatedFiles": [
     ".gitignore",
-    ".repo-metadata.json",
     ".rubocop.yml",
     ".yardopts",
-    ".yardopts-cloudrad",
     "AUTHENTICATION.md",
     "CHANGELOG.md",
     "Gemfile",
