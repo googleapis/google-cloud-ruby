@@ -1167,6 +1167,9 @@ module Google
         # @!attribute [rw] desired_release_channel
         #   @return [::Google::Cloud::Container::V1::ReleaseChannel]
         #     The desired release channel configuration.
+        # @!attribute [rw] desired_authenticator_groups_config
+        #   @return [::Google::Cloud::Container::V1::AuthenticatorGroupsConfig]
+        #     The desired authenticator groups config for the cluster.
         # @!attribute [rw] desired_master_version
         #   @return [::String]
         #     The Kubernetes version to change the master to.
