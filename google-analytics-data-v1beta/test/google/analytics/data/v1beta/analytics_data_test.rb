@@ -404,6 +404,7 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
     metric_aggregations = [:METRIC_AGGREGATION_UNSPECIFIED]
     order_bys = [{}]
     return_property_quota = true
+    minute_ranges = [{}]
 
     run_realtime_report_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_realtime_report, name
@@ -417,6 +418,7 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
       assert_equal [:METRIC_AGGREGATION_UNSPECIFIED], request["metric_aggregations"]
       assert_kind_of ::Google::Analytics::Data::V1beta::OrderBy, request["order_bys"].first
       assert_equal true, request["return_property_quota"]
+      assert_kind_of ::Google::Analytics::Data::V1beta::MinuteRange, request["minute_ranges"].first
       refute_nil options
     end
 
@@ -427,31 +429,31 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.run_realtime_report({ property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota }) do |response, operation|
+      client.run_realtime_report({ property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota, minute_ranges: minute_ranges }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.run_realtime_report property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota do |response, operation|
+      client.run_realtime_report property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota, minute_ranges: minute_ranges do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.run_realtime_report ::Google::Analytics::Data::V1beta::RunRealtimeReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota) do |response, operation|
+      client.run_realtime_report ::Google::Analytics::Data::V1beta::RunRealtimeReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota, minute_ranges: minute_ranges) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.run_realtime_report({ property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota }, grpc_options) do |response, operation|
+      client.run_realtime_report({ property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota, minute_ranges: minute_ranges }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.run_realtime_report(::Google::Analytics::Data::V1beta::RunRealtimeReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota), grpc_options) do |response, operation|
+      client.run_realtime_report(::Google::Analytics::Data::V1beta::RunRealtimeReportRequest.new(property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, limit: limit, metric_aggregations: metric_aggregations, order_bys: order_bys, return_property_quota: return_property_quota, minute_ranges: minute_ranges), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

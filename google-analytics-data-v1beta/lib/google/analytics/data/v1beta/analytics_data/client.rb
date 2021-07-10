@@ -673,7 +673,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload run_realtime_report(property: nil, dimensions: nil, metrics: nil, dimension_filter: nil, metric_filter: nil, limit: nil, metric_aggregations: nil, order_bys: nil, return_property_quota: nil)
+            # @overload run_realtime_report(property: nil, dimensions: nil, metrics: nil, dimension_filter: nil, metric_filter: nil, limit: nil, metric_aggregations: nil, order_bys: nil, return_property_quota: nil, minute_ranges: nil)
             #   Pass arguments to `run_realtime_report` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -714,6 +714,12 @@ module Google
             #   @param return_property_quota [::Boolean]
             #     Toggles whether to return the current state of this Analytics Property's
             #     Realtime quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+            #   @param minute_ranges [::Array<::Google::Analytics::Data::V1beta::MinuteRange, ::Hash>]
+            #     The minute ranges of event data to read. If unspecified, one minute range
+            #     for the last 30 minutes will be used. If multiple minute ranges are
+            #     requested, each response row will contain a zero based minute range index.
+            #     If two minute ranges overlap, the event data for the overlapping minutes is
+            #     included in the response rows for both minute ranges.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Data::V1beta::RunRealtimeReportResponse]
