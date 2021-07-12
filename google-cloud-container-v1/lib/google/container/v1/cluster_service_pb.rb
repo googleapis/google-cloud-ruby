@@ -248,6 +248,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :desired_intra_node_visibility_config, :message, 26, "google.container.v1.IntraNodeVisibilityConfig"
       optional :desired_default_snat_status, :message, 28, "google.container.v1.DefaultSnatStatus"
       optional :desired_release_channel, :message, 31, "google.container.v1.ReleaseChannel"
+      optional :desired_authenticator_groups_config, :message, 63, "google.container.v1.AuthenticatorGroupsConfig"
       optional :desired_master_version, :string, 100
     end
     add_message "google.container.v1.Operation" do
