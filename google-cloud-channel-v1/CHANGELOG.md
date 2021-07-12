@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.1 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
 ### 0.7.0 / 2021-06-17
 
 #### Features
