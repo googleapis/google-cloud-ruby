@@ -22,12 +22,14 @@ flag :use_fork, "--fork"
 flag :delay, "--delay=SECS", default: "2"
 flag :retries, "--retry=TIMES", default: ""
 flag :retry_delay, "--retry-delay=SECS", default: "4"
+flag :github_event_name, "--github-event-name=NAME"
 remaining_args :gems, desc: "Release the specified gems. If no specific gem is provided, all gems are checked."
 
 include :exec, e: true
 include :terminal, styled: true
 
 def run
+  check_github_context
   Dir.chdir context_directory
   if install
     exec ["npm", "install", "release-please"]
@@ -51,6 +53,13 @@ def run
     @errors.each { |msg| puts msg, :bold, :red }
     exit 1
   end
+end
+
+def check_github_context
+  return if github_event_name == "workflow_dispatch"
+  return if ENV["DISABLE_RELEASE_PLEASE"].to_s.empty?
+  puts "Scheduled release-please jobs have been disabled", :bold
+  exit 0
 end
 
 def release_please orig_gem_name, cur_delay:, cur_retries:, cur_retry_delay:
