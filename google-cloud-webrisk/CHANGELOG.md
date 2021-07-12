@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.1 / 2021-07-12
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
 ### 0.6.0 / 2020-05-08
 
 This library is now deprecated, and will no longer receive updates.
