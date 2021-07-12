@@ -1,5 +1,15 @@
 # Release History
 
+### 0.10.2 / 2021-07-12
+
+#### Bug Fixes
+
+* Minor updates to retry policy for access_secret_version
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
 ### 0.10.1 / 2021-06-17
 
 #### Bug Fixes
