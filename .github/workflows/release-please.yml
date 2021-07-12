@@ -13,10 +13,11 @@ on:
 
 jobs:
   release-please:
-    if: ${{ github.repository == 'googleapis/google-cloud-ruby' && (!secrets.DISABLE_RELEASE_PLEASE || github.event_name == 'workflow_dispatch') }}
+    if: ${{ github.repository == 'googleapis/google-cloud-ruby' }}
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
+      DISABLE_RELEASE_PLEASE: ${{ secrets.DISABLE_RELEASE_PLEASE }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -31,4 +32,8 @@ jobs:
       - name: Install tools
         run: "gem install --no-document toys && npm install release-please"
       - name: execute
-        run: "toys release-please --fork --retry=${{ github.event.inputs.retries }} ${{ github.event.inputs.gem }}"
+        run: |
+          toys release-please --fork \
+            --github-event-name=${{ github.event_name }} \
+            --retry=${{ github.event.inputs.retries }} \
+            ${{ github.event.inputs.gem }}
