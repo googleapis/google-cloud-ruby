@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.1 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
 ### 0.2.0 / 2021-06-22
 
 #### Features
