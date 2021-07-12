@@ -754,6 +754,7 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -785,6 +786,7 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -816,6 +818,7 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -858,6 +861,7 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -900,6 +904,7 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -931,6 +936,7 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -962,6 +968,7 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -993,6 +1000,7 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -1024,6 +1032,7 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -1055,6 +1064,7 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -1086,6 +1096,7 @@ module Google
           # @param [Array<String>, String] policy_tags The policy tag list or
           #   single policy tag for the field. Policy tag identifiers are of
           #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
