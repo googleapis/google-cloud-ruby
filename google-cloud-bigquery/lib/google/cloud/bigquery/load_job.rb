@@ -751,6 +751,10 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -762,8 +766,8 @@ module Google
           #   end
           #
           # @!group Schema
-          def string name, description: nil, mode: :nullable
-            schema.string name, description: description, mode: mode
+          def string name, description: nil, mode: :nullable, policy_tags: nil
+            schema.string name, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -779,6 +783,10 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -790,8 +798,8 @@ module Google
           #   end
           #
           # @!group Schema
-          def integer name, description: nil, mode: :nullable
-            schema.integer name, description: description, mode: mode
+          def integer name, description: nil, mode: :nullable, policy_tags: nil
+            schema.integer name, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -807,6 +815,10 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -818,8 +830,8 @@ module Google
           #   end
           #
           # @!group Schema
-          def float name, description: nil, mode: :nullable
-            schema.float name, description: description, mode: mode
+          def float name, description: nil, mode: :nullable, policy_tags: nil
+            schema.float name, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -846,6 +858,10 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -857,8 +873,8 @@ module Google
           #   end
           #
           # @!group Schema
-          def numeric name, description: nil, mode: :nullable
-            schema.numeric name, description: description, mode: mode
+          def numeric name, description: nil, mode: :nullable, policy_tags: nil
+            schema.numeric name, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -885,6 +901,10 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -896,8 +916,8 @@ module Google
           #   end
           #
           # @!group Schema
-          def bignumeric name, description: nil, mode: :nullable
-            schema.bignumeric name, description: description, mode: mode
+          def bignumeric name, description: nil, mode: :nullable, policy_tags: nil
+            schema.bignumeric name, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -913,6 +933,10 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -924,8 +948,8 @@ module Google
           #   end
           #
           # @!group Schema
-          def boolean name, description: nil, mode: :nullable
-            schema.boolean name, description: description, mode: mode
+          def boolean name, description: nil, mode: :nullable, policy_tags: nil
+            schema.boolean name, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -941,6 +965,10 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -952,8 +980,8 @@ module Google
           #   end
           #
           # @!group Schema
-          def bytes name, description: nil, mode: :nullable
-            schema.bytes name, description: description, mode: mode
+          def bytes name, description: nil, mode: :nullable, policy_tags: nil
+            schema.bytes name, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -969,6 +997,10 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -980,8 +1012,8 @@ module Google
           #   end
           #
           # @!group Schema
-          def timestamp name, description: nil, mode: :nullable
-            schema.timestamp name, description: description, mode: mode
+          def timestamp name, description: nil, mode: :nullable, policy_tags: nil
+            schema.timestamp name, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -997,6 +1029,10 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -1008,8 +1044,8 @@ module Google
           #   end
           #
           # @!group Schema
-          def time name, description: nil, mode: :nullable
-            schema.time name, description: description, mode: mode
+          def time name, description: nil, mode: :nullable, policy_tags: nil
+            schema.time name, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -1025,6 +1061,10 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -1036,8 +1076,8 @@ module Google
           #   end
           #
           # @!group Schema
-          def datetime name, description: nil, mode: :nullable
-            schema.datetime name, description: description, mode: mode
+          def datetime name, description: nil, mode: :nullable, policy_tags: nil
+            schema.datetime name, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -1053,6 +1093,10 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -1064,8 +1108,8 @@ module Google
           #   end
           #
           # @!group Schema
-          def date name, description: nil, mode: :nullable
-            schema.date name, description: description, mode: mode
+          def date name, description: nil, mode: :nullable, policy_tags: nil
+            schema.date name, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##

@@ -58,6 +58,8 @@ task :acceptance, :project, :keyfile do |_t, args|
   ENV["BIGQUERY_KEYFILE_JSON"] = keyfile
   ENV["STORAGE_PROJECT"] = project
   ENV["STORAGE_KEYFILE_JSON"] = keyfile
+  ENV["DATA_CATALOG_CREDENTIALS"] = project
+  ENV["DATA_CATALOG_KEYFILE"] = keyfile
 
   Rake::Task["acceptance:run"].invoke
 end

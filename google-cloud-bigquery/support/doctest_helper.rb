@@ -841,6 +841,15 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Schema::Field#policy_tags" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
+      mock.expect :patch_table, table_full_gapi, ["my-project", "my_dataset", "my_table", Google::Apis::BigqueryV2::Table, Hash]
+      mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigquery::StandardSql" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]

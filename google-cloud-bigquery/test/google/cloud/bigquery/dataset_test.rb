@@ -41,23 +41,20 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   let(:clustering_gapi) do
     Google::Apis::BigqueryV2::Clustering.new fields: clustering_fields
   end
-  let(:table_schema) {
-    {
-      fields: [
-        { mode: "REQUIRED", name: "name", type: "STRING", description: nil, fields: [] },
-        { mode: "NULLABLE", name: "age", type: "INTEGER", description: nil, fields: [] },
-        { mode: "NULLABLE", name: "score", type: "FLOAT", description: "A score from 0.0 to 10.0", fields: [] },
-        { mode: "NULLABLE", name: "active", type: "BOOLEAN", description: nil, fields: [] },
-        { mode: "NULLABLE", name: "avatar", type: "BYTES", description: nil, fields: [] }
-      ]
-    }
-  }
+  let(:policy_tag) { "projects/#{project}/locations/us/taxonomies/1/policyTags/1" }
+  let(:policy_tag_2) { "projects/#{project}/locations/us/taxonomies/1/policyTags/2" }
+  let(:policy_tags) { [ policy_tag, policy_tag_2 ] }
+  let(:policy_tags_gapi) { Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags.new names: policy_tags }
   let(:table_schema_gapi) do
-    gapi = Google::Apis::BigqueryV2::TableSchema.from_json table_schema.to_json
-    gapi.fields.each do |f|
-      f.update! fields: []
-    end
-    gapi
+    Google::Apis::BigqueryV2::TableSchema.new(
+      fields: [
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name", type: "STRING", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age", type: "INTEGER", description: nil, fields: [], policy_tags: policy_tags_gapi),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score", type: "FLOAT", description: "A score from 0.0 to 10.0", fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active", type: "BOOLEAN", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar", type: "BYTES", description: nil, fields: [])
+      ]
+    )
   end
   let(:view_id) { "my_view" }
   let(:view_name) { "My View" }
@@ -319,7 +316,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       t.name = table_name
       t.description = table_description
       t.schema.string "name", mode: :required
-      t.schema.integer "age"
+      t.schema.integer "age", policy_tags: policy_tags
       t.schema.float "score", description: "A score from 0.0 to 10.0"
       t.schema.boolean "active"
       t.schema.bytes "avatar"
@@ -345,7 +342,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
         project_id: project, dataset_id: dataset_id, table_id: table_id),
       schema: Google::Apis::BigqueryV2::TableSchema.new(fields: [
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name",          type: "STRING", description: nil, fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", policy_tags: policy_tags_gapi, description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score",         type: "FLOAT", description: "A score from 0.0 to 10.0", fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "cost",          type: "NUMERIC", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_bignumeric", type: "BIGNUMERIC", description: nil, fields: []),
@@ -366,7 +363,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
 
     table = dataset.create_table table_id do |schema|
       schema.string "name", mode: :required
-      schema.integer "age"
+      schema.integer "age", policy_tags: policy_tags
       schema.float "score", description: "A score from 0.0 to 10.0"
       schema.numeric "cost"
       schema.bignumeric "my_bignumeric"
@@ -413,7 +410,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       t.description = table_description
       t.schema do |s|
         s.string "name", mode: :required
-        s.integer "age"
+        s.integer "age", policy_tags: policy_tags
         s.float "score", description: "A score from 0.0 to 10.0"
         s.boolean "active"
         s.bytes "avatar"

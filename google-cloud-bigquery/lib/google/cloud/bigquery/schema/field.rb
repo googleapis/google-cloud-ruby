@@ -164,6 +164,63 @@ module Google
           end
 
           ##
+          # The policy tag list for the field. Policy tag identifiers are of the form
+          # `projects/*/locations/*/taxonomies/*/policyTags/*`. At most 1 policy tag
+          # is currently allowed.
+          #
+          # @see https://cloud.google.com/bigquery/docs/column-level-security-intro
+          #   Introduction to BigQuery column-level security
+          #
+          # @return [Array<String>, nil] The policy tag list for the field, or `nil`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.table "my_table"
+          #
+          #   table.schema.field("age").policy_tags
+          #
+          def policy_tags
+            names = @gapi.policy_tags&.names
+            names.to_a if names && !names.empty?
+          end
+
+          ##
+          # Updates the policy tag list for the field.
+          #
+          # @see https://cloud.google.com/bigquery/docs/column-level-security-intro
+          #   Introduction to BigQuery column-level security
+          #
+          # @param [Array<String>, String, nil] new_policy_tags The policy tag list or
+          #   single policy tag for the field, or `nil` to remove the existing policy tags.
+          #   Policy tag identifiers are of the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.table "my_table"
+          #
+          #   policy_tag = "projects/my-project/locations/us/taxonomies/my-taxonomy/policyTags/my-policy-tag"
+          #   table.schema do |schema|
+          #     schema.field("age").policy_tags = policy_tag
+          #   end
+          #
+          #   table.schema.field("age").policy_tags
+          #
+          def policy_tags= new_policy_tags
+            # If new_policy_tags is nil, send an empty array.
+            # Sending a nil value for policy_tags results in no change.
+            new_policy_tags = Array(new_policy_tags)
+            policy_tag_list = Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags.new names: new_policy_tags
+            @gapi.update! policy_tags: policy_tag_list
+          end
+
+          ##
           # Checks if the type of the field is `STRING`.
           #
           # @return [Boolean] `true` when `STRING`, `false` otherwise.
@@ -355,11 +412,15 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
-          def string name, description: nil, mode: :nullable
+          def string name, description: nil, mode: :nullable, policy_tags: nil
             record_check!
 
-            add_field name, :string, description: description, mode: mode
+            add_field name, :string, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -375,11 +436,15 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
-          def integer name, description: nil, mode: :nullable
+          def integer name, description: nil, mode: :nullable, policy_tags: nil
             record_check!
 
-            add_field name, :integer, description: description, mode: mode
+            add_field name, :integer, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -396,11 +461,15 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
-          def float name, description: nil, mode: :nullable
+          def float name, description: nil, mode: :nullable, policy_tags: nil
             record_check!
 
-            add_field name, :float, description: description, mode: mode
+            add_field name, :float, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -427,11 +496,15 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
-          def numeric name, description: nil, mode: :nullable
+          def numeric name, description: nil, mode: :nullable, policy_tags: nil
             record_check!
 
-            add_field name, :numeric, description: description, mode: mode
+            add_field name, :numeric, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -458,11 +531,15 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
-          def bignumeric name, description: nil, mode: :nullable
+          def bignumeric name, description: nil, mode: :nullable, policy_tags: nil
             record_check!
 
-            add_field name, :bignumeric, description: description, mode: mode
+            add_field name, :bignumeric, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -478,11 +555,15 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
-          def boolean name, description: nil, mode: :nullable
+          def boolean name, description: nil, mode: :nullable, policy_tags: nil
             record_check!
 
-            add_field name, :boolean, description: description, mode: mode
+            add_field name, :boolean, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -498,11 +579,15 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
-          def bytes name, description: nil, mode: :nullable
+          def bytes name, description: nil, mode: :nullable, policy_tags: nil
             record_check!
 
-            add_field name, :bytes, description: description, mode: mode
+            add_field name, :bytes, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -518,11 +603,15 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
-          def timestamp name, description: nil, mode: :nullable
+          def timestamp name, description: nil, mode: :nullable, policy_tags: nil
             record_check!
 
-            add_field name, :timestamp, description: description, mode: mode
+            add_field name, :timestamp, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -538,11 +627,15 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
-          def time name, description: nil, mode: :nullable
+          def time name, description: nil, mode: :nullable, policy_tags: nil
             record_check!
 
-            add_field name, :time, description: description, mode: mode
+            add_field name, :time, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -558,11 +651,15 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
-          def datetime name, description: nil, mode: :nullable
+          def datetime name, description: nil, mode: :nullable, policy_tags: nil
             record_check!
 
-            add_field name, :datetime, description: description, mode: mode
+            add_field name, :datetime, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -578,11 +675,15 @@ module Google
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
-          def date name, description: nil, mode: :nullable
+          def date name, description: nil, mode: :nullable, policy_tags: nil
             record_check!
 
-            add_field name, :date, description: description, mode: mode
+            add_field name, :date, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -678,7 +779,7 @@ module Google
                   "Cannot add fields to a non-RECORD field (#{type})"
           end
 
-          def add_field name, type, description: nil, mode: :nullable
+          def add_field name, type, description: nil, mode: :nullable, policy_tags: nil
             frozen_check!
 
             new_gapi = Google::Apis::BigqueryV2::TableFieldSchema.new(
@@ -688,7 +789,10 @@ module Google
               mode:        verify_mode(mode),
               fields:      []
             )
-
+            if policy_tags
+              policy_tags = Array(policy_tags)
+              new_gapi.policy_tags = Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags.new names: policy_tags
+            end
             # Remove any existing field of this name
             @gapi.fields ||= []
             @gapi.fields.reject! { |f| f.name == new_gapi.name }
