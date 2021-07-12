@@ -165,7 +165,8 @@ module Google
 
           ##
           # The policy tag list for the field. Policy tag identifiers are of the form
-          # `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          # `projects/*/locations/*/taxonomies/*/policyTags/*`. At most 1 policy tag
+          # is currently allowed.
           #
           # @see https://cloud.google.com/bigquery/docs/column-level-security-intro
           #   Introduction to BigQuery column-level security
@@ -194,8 +195,8 @@ module Google
           #
           # @param [Array<String>, String, nil] new_policy_tags The policy tag list or
           #   single policy tag for the field, or `nil` to remove the existing policy tags.
-          #   Policy tag identifiers are of the form
-          #   `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   Policy tag identifiers are of the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
           # @example
           #   require "google/cloud/bigquery"
