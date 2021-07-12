@@ -30,12 +30,12 @@ class DataTransferServiceSmokeTest < Minitest::Test
     formatted_parent = data_transfer_client.project_path project: project_id
 
     # Iterate over all results.
-    data_transfer_client.list_data_sources(formatted_parent).each do |element|
+    data_transfer_client.list_data_sources(parent: formatted_parent).each do |element|
       # Process element.
     end
 
     # Or iterate over results one page at a time.
-    data_transfer_client.list_data_sources(formatted_parent).each_page do |page|
+    data_transfer_client.list_data_sources(parent: formatted_parent).each_page do |page|
       # Process each page at a time.
       page.each do |element|
         # Process element.
