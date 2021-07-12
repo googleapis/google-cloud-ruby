@@ -264,7 +264,10 @@ module Google
           execute backoff: true do
             service.insert_all_table_data(
               @project, dataset_id, table_id, insert_req,
-              options: { skip_serialization: true }
+              options: {
+                skip_serialization: true,
+                skip_deserialization: false
+              }
             )
           end
         end
