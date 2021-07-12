@@ -21,7 +21,7 @@ module Google
   module Cloud
     module AccessApproval
       module V1
-        VERSION = "0.4.1"
+        VERSION = "0.4.2"
       end
     end
   end
