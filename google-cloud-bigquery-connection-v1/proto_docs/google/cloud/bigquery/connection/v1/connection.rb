@@ -120,6 +120,9 @@ module Google
           # @!attribute [rw] aws
           #   @return [::Google::Cloud::Bigquery::Connection::V1::AwsProperties]
           #     Amazon Web Services (AWS) properties.
+          # @!attribute [rw] cloud_spanner
+          #   @return [::Google::Cloud::Bigquery::Connection::V1::CloudSpannerProperties]
+          #     Cloud Spanner properties.
           # @!attribute [r] creation_time
           #   @return [::Integer]
           #     Output only. The creation timestamp of the connection.
@@ -176,11 +179,27 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Connection properties specific to Cloud Spanner.
+          # @!attribute [rw] database
+          #   @return [::String]
+          #     Cloud Spanner database in the form `project/instance/database'
+          # @!attribute [rw] use_parallelism
+          #   @return [::Boolean]
+          #     If parallelism should be used when reading from Cloud Spanner
+          class CloudSpannerProperties
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Connection properties specific to Amazon Web Services (AWS).
           # @!attribute [rw] cross_account_role
           #   @return [::Google::Cloud::Bigquery::Connection::V1::AwsCrossAccountRole]
           #     Authentication using Google owned AWS IAM user's access key to assume
           #     into customer's AWS IAM Role.
+          # @!attribute [rw] access_role
+          #   @return [::Google::Cloud::Bigquery::Connection::V1::AwsAccessRole]
+          #     Authentication using Google owned service account to assume into
+          #     customer's AWS IAM Role.
           class AwsProperties
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -201,6 +220,21 @@ module Google
           #     External Id is also used for preventing the Confused Deputy Problem. See
           #     https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
           class AwsCrossAccountRole
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Authentication method for Amazon Web Services (AWS) that uses Google owned
+          # Google service account to assume into customer's AWS IAM Role.
+          # @!attribute [rw] iam_role_id
+          #   @return [::String]
+          #     The user’s AWS IAM Role that trusts the Google-owned AWS IAM user
+          #     Connection.
+          # @!attribute [rw] identity
+          #   @return [::String]
+          #     A unique Google-owned and Google-generated identity for the Connection.
+          #     This identity will be used to access the user's AWS IAM Role.
+          class AwsAccessRole
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
