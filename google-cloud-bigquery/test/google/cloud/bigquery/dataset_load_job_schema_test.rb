@@ -35,12 +35,6 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
 
   let(:table_name) { "My Table" }
   let(:table_description) { "This is my table" }
-
-  let(:policy_tag) { "projects/#{project}/locations/us/taxonomies/1/policyTags/1" }
-  let(:policy_tag_2) { "projects/#{project}/locations/us/taxonomies/1/policyTags/2" }
-  let(:policy_tags) { [ policy_tag, policy_tag_2 ] }
-  let(:policy_tags_gapi) { Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags.new names: policy_tags }
-
   let(:table_schema) {
     {
       fields: [
@@ -227,10 +221,8 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
 
   it "can specify a schema both as an option and in a block during load" do
     mock = Minitest::Mock.new
-    schema_gapi_with_policy_tags = table_schema_gapi.dup
-    schema_gapi_with_policy_tags.fields.last.policy_tags = policy_tags_gapi
     job_gapi = load_job_url_gapi table_reference, load_url
-    job_gapi.configuration.load.schema = schema_gapi_with_policy_tags
+    job_gapi.configuration.load.schema = table_schema_gapi
     job_gapi.configuration.load.create_disposition = "CREATE_IF_NEEDED"
     job_gapi.configuration.load.schema_update_options = schema_update_options
 
@@ -249,7 +241,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
       schema.bignumeric "my_bignumeric"
       schema.boolean "active"
       schema.bytes "avatar"
-      schema.timestamp "dob", mode: :required, policy_tags: policy_tags
+      schema.timestamp "dob", mode: :required
       schema.schema_update_options = schema_update_options
     end
     _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob

@@ -298,9 +298,16 @@ module Google
         #   single policy tag for the field. Policy tag identifiers are of
         #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
         #   At most 1 policy tag is currently allowed.
+        # @param [Integer] max_length The maximum UTF-8 length of strings
+        #   allowed in the field.
         #
-        def string name, description: nil, mode: :nullable, policy_tags: nil
-          add_field name, :string, description: description, mode: mode, policy_tags: policy_tags
+        def string name, description: nil, mode: :nullable, policy_tags: nil, max_length: nil
+          add_field name,
+                    :string,
+                    description: description,
+                    mode: mode,
+                    policy_tags: policy_tags,
+                    max_length: max_length
         end
 
         ##
@@ -369,9 +376,25 @@ module Google
         #   single policy tag for the field. Policy tag identifiers are of
         #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
         #   At most 1 policy tag is currently allowed.
+        # @param [Integer] precision The precision (maximum number of total
+        #   digits) for the field. Acceptable values for precision must be:
+        #   `1 ≤ (precision - scale) ≤ 29`. Values for scale must be:
+        #   `0 ≤ scale ≤ 9`. If the scale value is set, the precision value
+        #   must be set as well.
+        # @param [Integer] scale The scale (maximum number of digits in the
+        #   fractional part) for the field. Acceptable values for precision
+        #   must be: `1 ≤ (precision - scale) ≤ 29`. Values for scale must
+        #   be: `0 ≤ scale ≤ 9`. If the scale value is set, the precision
+        #   value must be set as well.
         #
-        def numeric name, description: nil, mode: :nullable, policy_tags: nil
-          add_field name, :numeric, description: description, mode: mode, policy_tags: policy_tags
+        def numeric name, description: nil, mode: :nullable, policy_tags: nil, precision: nil, scale: nil
+          add_field name,
+                    :numeric,
+                    description: description,
+                    mode: mode,
+                    policy_tags: policy_tags,
+                    precision: precision,
+                    scale: scale
         end
 
         ##
@@ -400,9 +423,25 @@ module Google
         #   single policy tag for the field. Policy tag identifiers are of
         #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
         #   At most 1 policy tag is currently allowed.
+        # @param [Integer] precision The precision (maximum number of total
+        #   digits) for the field. Acceptable values for precision must be:
+        #   `1 ≤ (precision - scale) ≤ 38`. Values for scale must be:
+        #   `0 ≤ scale ≤ 38`. If the scale value is set, the precision value
+        #   must be set as well.
+        # @param [Integer] scale The scale (maximum number of digits in the
+        #   fractional part) for the field. Acceptable values for precision
+        #   must be: `1 ≤ (precision - scale) ≤ 38`. Values for scale must
+        #   be: `0 ≤ scale ≤ 38`. If the scale value is set, the precision
+        #   value must be set as well.
         #
-        def bignumeric name, description: nil, mode: :nullable, policy_tags: nil
-          add_field name, :bignumeric, description: description, mode: mode, policy_tags: policy_tags
+        def bignumeric name, description: nil, mode: :nullable, policy_tags: nil, precision: nil, scale: nil
+          add_field name,
+                    :bignumeric,
+                    description: description,
+                    mode: mode,
+                    policy_tags: policy_tags,
+                    precision: precision,
+                    scale: scale
         end
 
         ##
@@ -440,9 +479,11 @@ module Google
         #   single policy tag for the field. Policy tag identifiers are of
         #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
         #   At most 1 policy tag is currently allowed.
+        # @param [Integer] max_length The maximum the maximum number of
+        #   bytes in the field.
         #
-        def bytes name, description: nil, mode: :nullable, policy_tags: nil
-          add_field name, :bytes, description: description, mode: mode, policy_tags: policy_tags
+        def bytes name, description: nil, mode: :nullable, policy_tags: nil, max_length: nil
+          add_field name, :bytes, description: description, mode: mode, policy_tags: policy_tags, max_length: max_length
         end
 
         ##
@@ -605,7 +646,14 @@ module Google
           raise ArgumentError, "Cannot modify a frozen schema"
         end
 
-        def add_field name, type, description: nil, mode: :nullable, policy_tags: nil
+        def add_field name,
+                      type,
+                      description: nil,
+                      mode: :nullable,
+                      policy_tags: nil,
+                      max_length: nil,
+                      precision: nil,
+                      scale: nil
           frozen_check!
 
           new_gapi = Google::Apis::BigqueryV2::TableFieldSchema.new(
@@ -619,6 +667,9 @@ module Google
             policy_tags = Array(policy_tags)
             new_gapi.policy_tags = Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags.new names: policy_tags
           end
+          new_gapi.max_length = max_length if max_length
+          new_gapi.precision = precision if precision
+          new_gapi.scale = scale if scale
           # Remove any existing field of this name
           @gapi.fields ||= []
           @gapi.fields.reject! { |f| f.name == new_gapi.name }
