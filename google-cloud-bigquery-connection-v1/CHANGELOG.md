@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2021-07-14
+
+#### Features
+
+* Support spanner properties and AWS access role
+
 ### 0.4.2 / 2021-07-12
 
 #### Documentation
