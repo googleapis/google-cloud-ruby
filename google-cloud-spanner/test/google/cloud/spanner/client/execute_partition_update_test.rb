@@ -45,7 +45,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
   it "can execute a PDML statement" do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
-    mock.expect :begin_transaction, transaction_grpc, [{ session: session_grpc.name, options: pdml_tx_opts }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{session: session_grpc.name, options: pdml_tx_opts }, default_options]
     spanner.service.mocked_service = mock
     expect_execute_streaming_sql results_enum, session_grpc.name, "UPDATE users SET active = true", transaction: tx_selector, options: default_options
 
@@ -338,5 +338,21 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
       _(row_count).must_equal 1
     end
+  end
+
+  it "can execute a PDML statement with request tag" do
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
+    mock.expect :begin_transaction, transaction_grpc, [{session: session_grpc.name, options: pdml_tx_opts }, default_options]
+    spanner.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session_grpc.name, "UPDATE users SET active = true",
+                                 transaction: tx_selector, request_options: { request_tag: "Tag-2" },
+                                 options: default_options
+
+    row_count = client.execute_partition_update "UPDATE users SET active = true", request_options: { tag: "Tag-2" }
+
+    mock.verify
+
+    _(row_count).must_equal 1
   end
 end

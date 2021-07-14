@@ -180,6 +180,29 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
     end
   end
 
+  it "can execute a barch DML with transaction and request tag" do
+    transaction = Google::Cloud::Spanner::Transaction.from_grpc transaction_grpc, session
+    transaction.transaction_tag = "Tag-1"
+
+    mock = Minitest::Mock.new
+    mock.expect :execute_batch_dml, batch_response_grpc, [{
+      session: session_grpc.name, transaction: tx_selector,
+      statements: [statement_grpc("UPDATE users SET active = true")], seqno: 1,
+      request_options: { transaction_tag: "Tag-1", request_tag: "Tag-1-1" }
+    }, default_options]
+    session.service.mocked_service = mock
+
+    request_options = { tag: "Tag-1-1" }
+    row_counts = transaction.batch_update request_options: request_options do |b|
+      b.batch_update "UPDATE users SET active = true"
+    end
+
+    mock.verify
+
+    _(row_counts.count).must_equal 1
+    _(row_counts.first).must_equal 1
+  end
+
   def statement_grpc sql, params: nil, param_types: {}
     Google::Cloud::Spanner::V1::ExecuteBatchDmlRequest::Statement.new \
       sql: sql, params: params, param_types: param_types

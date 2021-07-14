@@ -225,6 +225,29 @@ describe Google::Cloud::Spanner::Transaction, :read, :mock_spanner do
     assert_results results
   end
 
+  it "execute read with transaction and request tag" do
+    transaction = Google::Cloud::Spanner::Transaction.from_grpc transaction_grpc, session
+    transaction.transaction_tag = "Tag-1"
+    columns = [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
+
+    mock = Minitest::Mock.new
+    mock.expect :streaming_read, results_enum, [{
+      session: session_grpc.name, table: "my-table",
+      columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
+      key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true),
+      transaction: tx_selector, index: nil, limit: nil, resume_token: nil, partition_token: nil,
+      request_options: { transaction_tag: "Tag-1", request_tag: "Tag-1-1" }
+    }, default_options]
+    session.service.mocked_service = mock
+
+    results = transaction.read "my-table", columns,
+                               request_options: { tag: "Tag-1-1" }
+
+    mock.verify
+
+    assert_results results
+  end
+
   def assert_results results
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
 

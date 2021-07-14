@@ -236,6 +236,10 @@ module Google
         #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
         #     `:PRIORITY_HIGH`. If priority not set then default is
         #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
+        #   * `:tag` (String) A per-request tag which can be applied to
+        #     queries or reads, used for statistics collection. Tag must be a
+        #     valid identifier of the form: `[a-zA-Z][a-zA-Z0-9_\-]` between 2
+        #     and 64 characters in length.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -403,6 +407,21 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
+        # @example Query using tag for request query statistics collection.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   request_options = { tag: "Read-Users" }
+        #   results = db.execute_query "SELECT * FROM users",
+        #                              request_options: request_options
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
+        #   end
+        #
         def execute_query sql, params: nil, types: nil, single_use: nil,
                           query_options: nil, request_options: nil,
                           call_options: nil
@@ -410,7 +429,8 @@ module Google
           ensure_service!
 
           params, types = Convert.to_input_params_and_types params, types
-
+          request_options = Convert.to_request_options request_options,
+                                                       tag_type: :request_tag
           single_use_tx = single_use_transaction single_use
           results = nil
           @pool.with_session do |session|
@@ -580,6 +600,10 @@ module Google
         #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
         #     `:PRIORITY_HIGH`. If priority not set then default is
         #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
+        #   * `:tag` (String) A per-request tag which can be applied to
+        #     queries or reads, used for statistics collection. Tag must be a
+        #     valid identifier of the form: `[a-zA-Z][a-zA-Z0-9_\-]` between 2
+        #     and 64 characters in length.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -657,12 +681,27 @@ module Google
         #    "UPDATE users SET friends = NULL WHERE active = @active",
         #    params: { active: false }, request_options: request_options
         #
+        # @example Query using tag for request query statistics collection.
+        #
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   request_options = { tag: "Update-Users" }
+        #   row_count = db.execute_partition_update \
+        #     "UPDATE users SET friends = NULL WHERE active = false",
+        #     request_options: request_options
+        #
         def execute_partition_update sql, params: nil, types: nil,
                                      query_options: nil, request_options: nil,
                                      call_options: nil
           ensure_service!
 
           params, types = Convert.to_input_params_and_types params, types
+          request_options = Convert.to_request_options request_options,
+                                                       tag_type: :request_tag
+
           results = nil
           @pool.with_session do |session|
             results = session.execute_query \
@@ -761,6 +800,10 @@ module Google
         #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
         #     `:PRIORITY_HIGH`. If priority not set then default is
         #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
+        #   * `:tag` (String) A per-request tag which can be applied to
+        #     queries or reads, used for statistics collection. Tag must be a
+        #     valid identifier of the form: `[a-zA-Z][a-zA-Z0-9_\-]` between 2
+        #     and 64 characters in length.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -840,6 +883,22 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
+        # @example Read using tag for read statistics collection.
+        #
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   request_options = { tag: "Read-Users-All" }
+        #   results = db.read "users", [:id, :name],
+        #                     request_options: request_options
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
+        #   end
+        #
         def read table, columns, keys: nil, index: nil, limit: nil,
                  single_use: nil, request_options: nil, call_options: nil
           validate_single_use_args! single_use
@@ -847,8 +906,10 @@ module Google
 
           columns = Array(columns).map(&:to_s)
           keys = Convert.to_key_set keys
-
           single_use_tx = single_use_transaction single_use
+          request_options = Convert.to_request_options request_options,
+                                                       tag_type: :request_tag
+
           results = nil
           @pool.with_session do |session|
             results = session.read \
@@ -914,6 +975,9 @@ module Google
         #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
         #     `:PRIORITY_HIGH`. If priority not set then default is
         #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
+        #   * `:tag` (String) A tag used for statistics collection
+        #     about transaction. A tag must be a valid identifier of the format:
+        #     `[a-zA-Z][a-zA-Z0-9_\-]{0,49}`.
         #
         # @return [Time, CommitResponse] The timestamp at which the operation
         #   committed. If commit options are set it returns {CommitResponse}.
@@ -954,7 +1018,23 @@ module Google
         #   db.upsert "users", [{ id: 1, name: "Charlie", active: false }],
         #                      request_options: request_options
         #
+        # @example Upsert using tag for transaction statistics collection.
+        #
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   request_options = { tag: "Bulk-Upsert" }
+        #   db.upsert "users", [{ id: 1, name: "Charlie", active: false },
+        #                       { id: 2, name: "Harvey",  active: true }],
+        #                       request_options: request_options
+        #
         def upsert table, rows, commit_options: nil, request_options: nil
+          request_options = Convert.to_request_options \
+            request_options, tag_type: :transaction_tag
+
           @pool.with_session do |session|
             session.upsert table, rows, commit_options: commit_options,
                            request_options: request_options
@@ -999,7 +1079,6 @@ module Google
         #
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
-        #
         # @param [Hash] commit_options A hash of commit options.
         #   e.g., return_commit_stats. Commit options are optional.
         #   The following options can be provided:
@@ -1015,6 +1094,9 @@ module Google
         #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
         #     `:PRIORITY_HIGH`. If priority not set then default is
         #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
+        #   * `:tag` (String) A tag used for statistics collection
+        #     about transaction. A tag must be a valid identifier of the
+        #     format: `[a-zA-Z][a-zA-Z0-9_\-]{0,49}`.
         #
         # @return [Time, CommitResponse] The timestamp at which the operation
         #   committed. If commit options are set it returns {CommitResponse}.
@@ -1055,7 +1137,23 @@ module Google
         #   db.insert "users", [{ id: 1, name: "Charlie", active: false }],
         #                      request_options: request_options
         #
+        # @example Insert using tag for transaction statistics collection.
+        #
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   request_options = { tag: "BulkInsert-Users" }
+        #   db.insert "users", [{ id: 1, name: "Charlie", active: false },
+        #                       { id: 2, name: "Harvey",  active: true }],
+        #                       request_options: request_options
+        #
         def insert table, rows, commit_options: nil, request_options: nil
+          request_options = Convert.to_request_options \
+            request_options, tag_type: :transaction_tag
+
           @pool.with_session do |session|
             session.insert table, rows, commit_options: commit_options,
                            request_options: request_options
@@ -1099,7 +1197,6 @@ module Google
         #
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
-        #
         # @param [Hash] commit_options A hash of commit options.
         #   e.g., return_commit_stats. Commit options are optional.
         #   The following options can be provided:
@@ -1115,6 +1212,9 @@ module Google
         #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
         #     `:PRIORITY_HIGH`. If priority not set then default is
         #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
+        #   * `:tag` (String) A tag used for statistics collection
+        #     about transaction. A tag must be a valid identifier of the
+        #     format: `[a-zA-Z][a-zA-Z0-9_\-]{0,49}`.
         #
         # @return [Time, CommitResponse] The timestamp at which the operation
         #   committed. If commit options are set it returns {CommitResponse}.
@@ -1155,7 +1255,22 @@ module Google
         #   db.update "users", [{ id: 1, name: "Charlie", active: false }],
         #                      request_options: request_options
         #
+        # @example Updte using tag for transaction statistics collection.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   request_options = { tag: "BulkUpdate-Users" }
+        #   db.update "users", [{ id: 1, name: "Charlie", active: false },
+        #                       { id: 2, name: "Harvey",  active: true }],
+        #                      request_options: request_options
+        #
         def update table, rows, commit_options: nil, request_options: nil
+          request_options = Convert.to_request_options \
+            request_options, tag_type: :transaction_tag
+
           @pool.with_session do |session|
             session.update table, rows, commit_options: commit_options,
                            request_options: request_options
@@ -1201,7 +1316,6 @@ module Google
         #
         #   See [Data
         #   types](https://cloud.google.com/spanner/docs/data-definition-language#data_types).
-        #
         # @param [Hash] commit_options A hash of commit options.
         #   e.g., return_commit_stats. Commit options are optional.
         #   The following options can be provided:
@@ -1217,6 +1331,9 @@ module Google
         #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
         #     `:PRIORITY_HIGH`. If priority not set then default is
         #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
+        #   * `:tag` (String) A tag used for statistics collection
+        #     about transaction. A tag must be a valid identifier of the
+        #     format: `[a-zA-Z][a-zA-Z0-9_\-]{0,49}`.
         #
         # @return [Time, CommitResponse] The timestamp at which the operation
         #   committed. If commit options are set it returns {CommitResponse}.
@@ -1255,6 +1372,18 @@ module Google
         #
         #   request_options = { priority: :PRIORITY_MEDIUM }
         #   db.replace "users", [{ id: 1, name: "Charlie", active: false }],
+        #                       request_options: request_options
+        #
+        # @example Replace using tag for transaction statistics collection.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   request_options = { tag: "BulkReplace-Users" }
+        #   db.replace "users", [{ id: 1, name: "Charlie", active: false },
+        #                        { id: 2, name: "Harvey",  active: true }],
         #                       request_options: request_options
         #
         def replace table, rows, commit_options: nil, request_options: nil
@@ -1299,6 +1428,9 @@ module Google
         #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
         #     `:PRIORITY_HIGH`. If priority not set then default is
         #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
+        #   * `:tag` (String) A tag used for statistics collection
+        #     about transaction. A tag must be a valid identifier of the
+        #     format: `[a-zA-Z][a-zA-Z0-9_\-]{0,49}`.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -1348,8 +1480,21 @@ module Google
         #   request_options = { priority: :PRIORITY_MEDIUM }
         #   db.delete "users", [1, 2, 3], request_options: request_options
         #
+        # @example Delete using tag for transaction statistics collection.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   request_options = { tag: "BulkDelete-Users" }
+        #   db.delete "users", [1, 2, 3], request_options: request_options
+        #
         def delete table, keys = [], commit_options: nil, request_options: nil,
                    call_options: nil
+          request_options = Convert.to_request_options \
+            request_options, tag_type: :transaction_tag
+
           @pool.with_session do |session|
             session.delete table, keys, commit_options: commit_options,
                            request_options: request_options,
@@ -1387,6 +1532,9 @@ module Google
         #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
         #     `:PRIORITY_HIGH`. If priority not set then default is
         #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
+        #   * `:tag` (String) A tag used for statistics collection
+        #     about transaction. A tag must be a valid identifier of the
+        #     format: `[a-zA-Z][a-zA-Z0-9_\-]{0,49}`.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -1447,9 +1595,25 @@ module Google
         #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
         #   end
         #
+        # @example Commit using tag for transaction statistics collection.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   request_options = { tag: "BulkManipulate-Users" }
+        #   db.commit request_options: request_options do |c|
+        #     c.update "users", [{ id: 1, name: "Charlie", active: false }]
+        #     c.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+        #   end
+        #
         def commit commit_options: nil, request_options: nil,
                    call_options: nil, &block
           raise ArgumentError, "Must provide a block" unless block_given?
+
+          request_options = Convert.to_request_options \
+            request_options, tag_type: :transaction_tag
 
           @pool.with_session do |session|
             session.commit(
@@ -1494,6 +1658,11 @@ module Google
         #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
         #     `:PRIORITY_HIGH`. If priority not set then default is
         #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
+        #   * `:tag` (String)A tag used for statistics collection
+        #     about transaction. The value of a transaction tag should be the
+        #     same for all requests belonging to the same transaction. A tag must
+        #     be a valid identifier of the format: `[a-zA-Z][a-zA-Z0-9_\-]{0,49}`
+        #
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -1585,6 +1754,30 @@ module Google
         #                               request_options: request_options
         #   end
         #
+        # @example Tags for request and transaction statistics collection.
+        #
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   # Transaction tag will be set to "Users-Txn"
+        #   db.transaction request_options: { tag: "Users-Txn" } do |tx|
+        #     # The transaction tag set as "Users-Txn"
+        #     # The request tag set as "Users-Txn-1"
+        #     request_options = { tag: "Users-Txn-1" }
+        #     results = tx.execute_query "SELECT * FROM users",
+        #                                request_options: request_options
+        #
+        #     results.rows.each do |row|
+        #       puts "User #{row[:id]} is #{row[:name]}"
+        #     end
+        #
+        #     # The transaction tag set as "Users-Txn"
+        #     tx.update "users", [{ id: 1, name: "Charlie", active: false }]
+        #     tx.insert "users", [{ id: 2, name: "Harvey",  active: true }]
+        #   end
+        #
         def transaction deadline: 120, commit_options: nil,
                         request_options: nil, call_options: nil
           ensure_service!
@@ -1596,39 +1789,48 @@ module Google
           backoff = 1.0
           start_time = current_time
 
+          request_options = Convert.to_request_options \
+            request_options, tag_type: :transaction_tag
+
           @pool.with_transaction do |tx|
-            Thread.current[:transaction_id] = tx.transaction_id
-            yield tx
-            commit_resp = @project.service.commit \
-              tx.session.path, tx.mutations,
-              transaction_id: tx.transaction_id,
-              commit_options: commit_options,
-              request_options: request_options,
-              call_options: call_options
-            resp = CommitResponse.from_grpc commit_resp
-            commit_options ? resp : resp.timestamp
-          rescue GRPC::Aborted, Google::Cloud::AbortedError => e
-            # Re-raise if deadline has passed
-            if current_time - start_time > deadline
-              if e.is_a? GRPC::BadStatus
-                e = Google::Cloud::Error.from_error e
-              end
-              raise e
+            if request_options
+              tx.transaction_tag = request_options[:transaction_tag]
             end
-            # Sleep the amount from RetryDelay, or incremental backoff
-            sleep(delay_from_aborted(e) || backoff *= 1.3)
-            # Create new transaction on the session and retry the block
-            tx = tx.session.create_transaction
-            retry
-          rescue StandardError => e
-            # Rollback transaction when handling unexpected error
-            tx.session.rollback tx.transaction_id
-            # Return nil if raised with rollback.
-            return nil if e.is_a? Rollback
-            # Re-raise error.
-            raise e
-          ensure
-            Thread.current[:transaction_id] = nil
+
+            begin
+              Thread.current[:transaction_id] = tx.transaction_id
+              yield tx
+              commit_resp = @project.service.commit \
+                tx.session.path, tx.mutations,
+                transaction_id: tx.transaction_id,
+                commit_options: commit_options,
+                request_options: request_options,
+                call_options: call_options
+              resp = CommitResponse.from_grpc commit_resp
+              commit_options ? resp : resp.timestamp
+            rescue GRPC::Aborted, Google::Cloud::AbortedError => e
+              # Re-raise if deadline has passed
+              if current_time - start_time > deadline
+                if e.is_a? GRPC::BadStatus
+                  e = Google::Cloud::Error.from_error e
+                end
+                raise e
+              end
+              # Sleep the amount from RetryDelay, or incremental backoff
+              sleep(delay_from_aborted(e) || backoff *= 1.3)
+              # Create new transaction on the session and retry the block
+              tx = tx.session.create_transaction
+              retry
+            rescue StandardError => e
+              # Rollback transaction when handling unexpected error
+              tx.session.rollback tx.transaction_id
+              # Return nil if raised with rollback.
+              return nil if e.is_a? Rollback
+              # Re-raise error.
+              raise e
+            ensure
+              Thread.current[:transaction_id] = nil
+            end
           end
         end
 

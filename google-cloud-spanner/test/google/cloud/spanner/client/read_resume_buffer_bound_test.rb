@@ -111,7 +111,7 @@ describe Google::Cloud::Spanner::Client, :read, :resume, :buffer_bound, :mock_sp
       columns: ["id", "name", "active", "age", "score", "updated_at", "birthday", "avatar", "project_ids"],
       key_set: Google::Cloud::Spanner::V1::KeySet.new(all: true),
       transaction: nil, index: nil, limit: nil, resume_token: nil, partition_token: nil,
-      request_options: nil,
+      request_options: nil
     }, default_options]
     spanner.service.mocked_service = mock
 
