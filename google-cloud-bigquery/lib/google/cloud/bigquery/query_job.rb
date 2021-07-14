@@ -387,6 +387,39 @@ module Google
         end
 
         ##
+        # The number of deleted rows. Present only for DML statements `DELETE`,
+        # `MERGE` and `TRUNCATE`. (See {#statement_type}.)
+        #
+        # @return [Integer, nil] The number of deleted rows, or `nil` if not
+        #   applicable.
+        #
+        def deleted_row_count
+          @gapi.statistics.query&.dml_stats&.deleted_row_count
+        end
+
+        ##
+        # The number of inserted rows. Present only for DML statements `INSERT`
+        # and `MERGE`. (See {#statement_type}.)
+        #
+        # @return [Integer, nil] The number of inserted rows, or `nil` if not
+        #   applicable.
+        #
+        def inserted_row_count
+          @gapi.statistics.query&.dml_stats&.inserted_row_count
+        end
+
+        ##
+        # The number of updated rows. Present only for DML statements `UPDATE`
+        # and `MERGE`. (See {#statement_type}.)
+        #
+        # @return [Integer, nil] The number of updated rows, or `nil` if not
+        #   applicable.
+        #
+        def updated_row_count
+          @gapi.statistics.query&.dml_stats&.updated_row_count
+        end
+
+        ##
         # The table in which the query results are stored.
         #
         # @return [Table] A table instance.
