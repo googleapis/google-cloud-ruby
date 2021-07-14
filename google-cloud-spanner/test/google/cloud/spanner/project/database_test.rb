@@ -24,7 +24,7 @@ describe Google::Cloud::Spanner::Project, :database, :mock_spanner do
     encryption_config = Google::Cloud::Spanner::Admin::Database::V1::EncryptionConfig.new kms_key_name: kms_key_name
     default_leader = "regional-us-central1"
 
-    get_res = Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id, encryption_config: encryption_config)
+    get_res = Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id, encryption_config: encryption_config, default_leader: default_leader)
     mock = Minitest::Mock.new
     mock.expect :get_database, get_res, [{ name: database_path(instance_id, database_id) }, nil]
     spanner.service.mocked_databases = mock

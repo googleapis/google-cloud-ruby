@@ -1448,11 +1448,11 @@ def instance_configs_hash
   {
     instance_configs: [
       { name: "projects/#{project}/instanceConfigs/regional-europe-west1",
-        display_name: "EU West 1", leader_options: ["regional-europe-west1", "regional-europe-west2"]},
+        display_name: "EU West 1"},
         { name: "projects/#{project}/instanceConfigs/regional-us-west1",
-          display_name: "US West 1", leader_options: ["regional-us-west1", "regional-us-west2"]},
+          display_name: "US West 1"},
           { name: "projects/#{project}/instanceConfigs/regional-us-central1",
-            display_name: "US Central 1", leader_options: ["regional-us-central1", "regional-us-east4"]}
+            display_name: "US Central 1"}
     ]
   }
 end
@@ -1510,8 +1510,7 @@ end
 def database_hash instance_id: "my-instance", database_id: "my-database", state: "READY"
   {
     name: "projects/#{project}/instances/#{instance_id}/databases/#{database_id}",
-    state: state,
-    default_leader: "regional-us-central1"
+    state: state
   }
 end
 

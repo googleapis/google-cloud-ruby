@@ -58,11 +58,11 @@ class MockSpanner < Minitest::Spec
     {
       instance_configs: [
         { name: "projects/#{project}/instanceConfigs/regional-europe-west1",
-          display_name: "EU West 1"},
+          display_name: "EU West 1", leader_options: ["regional-europe-west1", "regional-europe-west4"]},
         { name: "projects/#{project}/instanceConfigs/regional-us-west1",
-          display_name: "US West 1"},
+          display_name: "US West 1", leader_options: ["regional-us-west1", "regional-us-west4"]},
         { name: "projects/#{project}/instanceConfigs/regional-us-central1",
-          display_name: "US Central 1"}
+          display_name: "US Central 1", leader_options: ["regional-us-central1", "regional-us-west4"]}
       ]
     }
   end
@@ -95,7 +95,7 @@ class MockSpanner < Minitest::Spec
   def database_hash instance_id: "my-instance-id", database_id: "database-#{rand(9999)}",
                     state: "READY", create_time: nil, restore_info: {},
                     version_retention_period: "", earliest_version_time: nil,
-                    encryption_config: {}, encryption_info: []
+                    encryption_config: {}, encryption_info: [], default_leader: ""
     {
       name: "projects/#{project}/instances/#{instance_id}/databases/#{database_id}",
       state: state,
@@ -104,7 +104,8 @@ class MockSpanner < Minitest::Spec
       version_retention_period: version_retention_period,
       earliest_version_time: earliest_version_time,
       encryption_config: encryption_config,
-      encryption_info: encryption_info
+      encryption_info: encryption_info,
+      default_leader: default_leader
     }
   end
 
