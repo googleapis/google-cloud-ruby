@@ -22,6 +22,7 @@ describe Google::Cloud::Spanner::Project, :database, :mock_spanner do
 
     kms_key_name = "projects/<project>/locations/<location>/keyRings/<key_ring>/cryptoKeys/<kms_key_name>"
     encryption_config = Google::Cloud::Spanner::Admin::Database::V1::EncryptionConfig.new kms_key_name: kms_key_name
+    default_leader = "regional-us-central1"
 
     get_res = Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id, encryption_config: encryption_config)
     mock = Minitest::Mock.new
@@ -36,6 +37,7 @@ describe Google::Cloud::Spanner::Project, :database, :mock_spanner do
     _(database.instance_id).must_equal instance_id
     _(database.database_id).must_equal database_id
     _(database.encryption_config).must_equal encryption_config
+    _(database.default_leader).must_equal default_leader
 
     _(database.path).must_equal database_path(instance_id, database_id)
 

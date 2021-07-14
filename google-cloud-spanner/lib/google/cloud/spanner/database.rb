@@ -91,6 +91,12 @@ module Google
           @grpc.version_retention_period
         end
 
+        # The default leader region for a database.
+        # @return [String]
+        def default_leader
+          @grpc.default_leader
+        end
+
         # The earliest available version time for a database.
         # @return [Time]
         def earliest_version_time

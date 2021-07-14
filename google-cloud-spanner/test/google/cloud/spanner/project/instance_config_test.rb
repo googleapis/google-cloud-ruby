@@ -32,6 +32,7 @@ describe Google::Cloud::Spanner::Project, :instance_config, :mock_spanner do
     _(config.path).must_equal instance_config_hash[:name]
     _(config.name).must_equal instance_config_hash[:display_name]
     _(config.display_name).must_equal instance_config_hash[:display_name]
+    _(config.leader_options).must_equal instance_config_hash[:leader_options]
   end
 
   it "returns nil when getting an non-existent instance config" do

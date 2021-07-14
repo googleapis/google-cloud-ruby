@@ -68,6 +68,14 @@ module Google
           end
 
           ##
+          # Available options fo the default_leader option when creating a
+          # database.
+          # @return [Array<String>]
+          def leader_options
+            @grpc.leader_options
+          end
+
+          ##
           # The name of this instance configuration as it appears in UIs.
           # @return [String]
           def name
