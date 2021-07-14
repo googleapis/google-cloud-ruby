@@ -68,7 +68,7 @@ module Google
           end
 
           ##
-          # Available options fo the default_leader option when creating a
+          # Available options fo the default leader region when creating a
           # database.
           # @return [Array<String>]
           def leader_options
