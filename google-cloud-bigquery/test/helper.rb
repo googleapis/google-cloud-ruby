@@ -659,9 +659,25 @@ class MockBigquery < Minitest::Spec
     job_ref
   end
 
-  def query_job_resp_gapi query, job_id: nil, target_routine: false, target_table: false, statement_type: "SELECT", num_dml_affected_rows: nil, ddl_operation_performed: nil
+  def query_job_resp_gapi query,
+                          job_id: nil,
+                          target_routine: false,
+                          target_table: false,
+                          statement_type: "SELECT",
+                          num_dml_affected_rows: nil,
+                          ddl_operation_performed: nil,
+                          deleted_row_count: nil,
+                          inserted_row_count: nil,
+                          updated_row_count: nil
     gapi = Google::Apis::BigqueryV2::Job.from_json query_job_resp_json query, job_id: job_id
-    gapi.statistics.query = statistics_query_gapi target_routine: target_routine, target_table: target_table, statement_type: statement_type, num_dml_affected_rows: num_dml_affected_rows, ddl_operation_performed: ddl_operation_performed
+    gapi.statistics.query = statistics_query_gapi target_routine: target_routine,
+                                                  target_table: target_table,
+                                                  statement_type: statement_type,
+                                                  num_dml_affected_rows: num_dml_affected_rows,
+                                                  ddl_operation_performed: ddl_operation_performed,
+                                                  deleted_row_count: deleted_row_count,
+                                                  inserted_row_count: inserted_row_count,
+                                                  updated_row_count: updated_row_count
     gapi
   end
 
@@ -692,7 +708,14 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
-  def statistics_query_gapi target_routine: false, target_table: false, statement_type: nil, num_dml_affected_rows: nil, ddl_operation_performed: nil
+  def statistics_query_gapi target_routine: false,
+                            target_table: false,
+                            statement_type: nil,
+                            num_dml_affected_rows: nil,
+                            ddl_operation_performed: nil,
+                            deleted_row_count: nil,
+                            inserted_row_count: nil,
+                            updated_row_count: nil
     ddl_target_routine = if target_routine
       Google::Apis::BigqueryV2::RoutineReference.new(
         project_id: "target_project_id",
@@ -707,12 +730,20 @@ class MockBigquery < Minitest::Spec
         table_id: "target_table_id"
       )
     end
+    dml_stats = if deleted_row_count || inserted_row_count || updated_row_count
+      Google::Apis::BigqueryV2::DmlStatistics.new(
+        deleted_row_count: deleted_row_count,
+        inserted_row_count: inserted_row_count,
+        updated_row_count: updated_row_count
+      )
+    end
     Google::Apis::BigqueryV2::JobStatistics2.new(
       billing_tier: 1,
       cache_hit: true,
       ddl_operation_performed: ddl_operation_performed,
       ddl_target_routine: ddl_target_routine,
       ddl_target_table: ddl_target_table,
+      dml_stats: dml_stats,
       num_dml_affected_rows: num_dml_affected_rows,
       query_plan: [
         Google::Apis::BigqueryV2::ExplainQueryStage.new(
