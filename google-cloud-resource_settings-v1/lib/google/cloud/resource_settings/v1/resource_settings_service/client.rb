@@ -81,6 +81,16 @@ module Google
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
+                default_config.rpcs.get_setting.timeout = 60.0
+                default_config.rpcs.get_setting.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.update_setting.timeout = 60.0
+                default_config.rpcs.update_setting.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
                 default_config
               end
               yield @configure if block_given?
