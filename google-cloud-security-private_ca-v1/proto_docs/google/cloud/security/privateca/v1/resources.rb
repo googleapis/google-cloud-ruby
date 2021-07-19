@@ -261,14 +261,14 @@ module Google
             # issued by any {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority} in the {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool}.
             # @!attribute [rw] publish_ca_cert
             #   @return [::Boolean]
-            #     Required. When true, publishes each {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}'s CA certificate and
+            #     Optional. When true, publishes each {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}'s CA certificate and
             #     includes its URL in the "Authority Information Access" X.509 extension
             #     in all issued {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificates}. If this is false, the CA
             #     certificate will not be published and the corresponding X.509 extension
             #     will not be written in issued certificates.
             # @!attribute [rw] publish_crl
             #   @return [::Boolean]
-            #     Required. When true, publishes each {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}'s CRL and includes its
+            #     Optional. When true, publishes each {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}'s CRL and includes its
             #     URL in the "CRL Distribution Points" X.509 extension in all issued
             #     {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificates}. If this is false, CRLs will not be published
             #     and the corresponding X.509 extension will not be written in issued
@@ -395,11 +395,11 @@ module Google
               # {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool}.
               # @!attribute [rw] allow_csr_based_issuance
               #   @return [::Boolean]
-              #     Required. When true, allows callers to create {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificates} by
+              #     Optional. When true, allows callers to create {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificates} by
               #     specifying a CSR.
               # @!attribute [rw] allow_config_based_issuance
               #   @return [::Boolean]
-              #     Required. When true, allows callers to create {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificates} by
+              #     Optional. When true, allows callers to create {::Google::Cloud::Security::PrivateCA::V1::Certificate Certificates} by
               #     specifying a {::Google::Cloud::Security::PrivateCA::V1::CertificateConfig CertificateConfig}.
               class IssuanceModes
                 include ::Google::Protobuf::MessageExts
@@ -845,13 +845,15 @@ module Google
             # @!attribute [rw] lifetime
             #   @return [::Google::Protobuf::Duration]
             #     For convenience, the actual lifetime of an issued certificate.
-            #     Corresponds to 'not_after_time' - 'not_before_time'.
             # @!attribute [rw] not_before_time
             #   @return [::Google::Protobuf::Timestamp]
             #     The time at which the certificate becomes valid.
             # @!attribute [rw] not_after_time
             #   @return [::Google::Protobuf::Timestamp]
-            #     The time at which the certificate expires.
+            #     The time after which the certificate is expired.
+            #     Per RFC 5280, the validity period for a certificate is the period of time
+            #     from not_before_time through not_after_time, inclusive.
+            #     Corresponds to 'not_before_time' + 'lifetime' - 1 second.
             class SubjectDescription
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -896,7 +898,7 @@ module Google
           #     Required. The OID for this X.509 extension.
           # @!attribute [rw] critical
           #   @return [::Boolean]
-          #     Required. Indicates whether or not this extension is critical (i.e., if the client
+          #     Optional. Indicates whether or not this extension is critical (i.e., if the client
           #     does not know how to handle this extension, the client should consider this
           #     to be an error).
           # @!attribute [rw] value
@@ -1051,18 +1053,17 @@ module Google
           #     Optional. A CEL expression that may be used to validate the resolved X.509 Subject
           #     and/or Subject Alternative Name before a certificate is signed.
           #     To see the full allowed syntax and some examples, see
-          #     https://cloud.google.com/certificate-authority-service/docs/cel-guide
+          #     https://cloud.google.com/certificate-authority-service/docs/using-cel
           # @!attribute [rw] allow_subject_passthrough
           #   @return [::Boolean]
           #     Required. If this is true, the {::Google::Cloud::Security::PrivateCA::V1::Subject Subject} field may be copied from a certificate
           #     request into the signed certificate. Otherwise, the requested {::Google::Cloud::Security::PrivateCA::V1::Subject Subject}
-          #     will be discarded. The bool is optional to indicate an unset field, which suggests a forgotten value that needs to be set by the caller.
+          #     will be discarded.
           # @!attribute [rw] allow_subject_alt_names_passthrough
           #   @return [::Boolean]
           #     Required. If this is true, the {::Google::Cloud::Security::PrivateCA::V1::SubjectAltNames SubjectAltNames} extension may be copied from a
           #     certificate request into the signed certificate. Otherwise, the requested
           #     {::Google::Cloud::Security::PrivateCA::V1::SubjectAltNames SubjectAltNames} will be discarded.
-          #     The bool is optional to indicate an unset field, which suggests a forgotten value that needs to be set by the caller.
           class CertificateIdentityConstraints
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
