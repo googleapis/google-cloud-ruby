@@ -29,7 +29,8 @@ require "google/cloud/compute/v1"
 # [END compute_instances_create]
 
 # [START compute_instances_create]
-# Send an instance creation request to the Compute Engine API and wait for it to complete.
+
+# Sends an instance creation request to the Compute Engine API and waits for it to complete.
 #
 # @param [String] project project ID or project number of the Cloud project you want to use.
 # @param [String] zone name of the zone you want to use. For example: “us-west3-b”
@@ -78,10 +79,8 @@ def create_instance project:, zone:, instance_name:,
   puts "Creating the #{instance_name} instance in #{zone}..."
   begin
     operation = client.insert request
-    if operation.status == :RUNNING
-      operation_client = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new
-      operation_client.wait operation: operation.name, project: project, zone: zone
-    end
+    operation_client = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new
+    operation = operation_client.wait operation: operation.name, project: project, zone: zone while operation.status == :RUNNING
     warn "Error during creation:", operation.error unless operation.error.nil?
     warn "Warning during creation:", operation.warnings unless operation.warnings.empty?
     puts "Instance #{instance_name} created."
@@ -90,11 +89,12 @@ def create_instance project:, zone:, instance_name:,
     warn "Exception during creation:", e
   end
 end
+
 # [END compute_instances_create]
 
 # [START compute_instances_list]
 
-# List all instances in the given zone in the specified project.
+# Lists all instances in the given zone in the specified project.
 #
 # @param [String] project project ID or project number of the Cloud project you want to use.
 # @param [String] zone name of the zone you want to use. For example: “us-west3-b”
@@ -113,7 +113,7 @@ end
 # [END compute_instances_list]
 
 # [START compute_instances_list_all]
-# Return a dictionary of all instances present in a project, grouped by their zone.
+# Returns a dictionary of all instances present in a project, grouped by their zone.
 #
 # @param [String] project project ID or project number of the Cloud project you want to use.
 # @return A hash with zone names as keys (in form of "zones/{zone_name}") and
@@ -135,9 +135,9 @@ def list_all_instances project:
 end
 # [END compute_instances_list_all]
 
-# [BEGIN compute_instances_delete]
+# [START compute_instances_delete]
 
-# Send an instance deletion request to the Compute Engine API and wait for it to complete.
+# Sends an instance deletion request to the Compute Engine API and waits for it to complete.
 #
 # @param [String] project project ID or project number of the Cloud project you want to use.
 # @param [String] zone name of the zone you want to use. For example: “us-west3-b”
@@ -148,10 +148,12 @@ def delete_instance project:, zone:, instance_name:
   puts "Deleting #{instance_name} from #{zone}..."
   begin
     operation = client.delete project: project, zone: zone, instance: instance_name
-    if operation.status == :RUNNING
-      operation_client = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new
-      operation_client.wait operation: operation.name, project: project, zone: zone
+    operation_client = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new do |config|
+      # Set the timeout to 120 seconds as delete requests tend take longer than the default
+      # Net::HTTP timeout of 60 seconds.
+      config.timeout = 120
     end
+    operation = operation_client.wait operation: operation.name, project: project, zone: zone while operation.status == :RUNNING
     warn "Error during deletion:", operation.error unless operation.error.nil?
     warn "Warning during deletion:", operation.warnings unless operation.warnings.empty?
     puts "Instance #{instance_name} deleted."
@@ -163,24 +165,25 @@ end
 # [END compute_instances_delete]
 
 # [START compute_instances_operation_check]
-# This method waits for an operation to be completed. Calling this function
+
+# Waits for an operation to be completed. Calling this function
 # will block until the operation is finished.
 #
-# @param [String] operation The Operation object representing the operation you want to wait on.
+# @param [::Google::Cloud::Compute::V1::Operation] operation The Operation object representing the operation you want to wait on.
 # @param [String] project project ID or project number of the Cloud project you want to use.
 # @return Finished Operation object.
 def wait_for_operation operation:, project:
-  args = { operation: operation }
+  request = { operation: operation.name, project: project }
   if !operation.zone.nil?
     client = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new
-    args[:zone] = operation.zone
+    request[:zone] = operation.zone.rpartition("/").last
   elsif !operation.region.nil?
     client = ::Google::Cloud::Compute::V1::RegionOperations::Rest::Client.new
-    args[:region] = operation.region
+    request[:region] = operation.region.rpartition("/").last
   else
     client = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::Client.new
   end
-  client.wait(**args)
+  operation = client.wait request while operation.status == :RUNNING
 end
 
 # [END compute_instances_operation_check]
