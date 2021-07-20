@@ -1,5 +1,17 @@
 # Release History
 
+### 1.34.0 / 2021-07-20
+
+#### Features
+
+* Add DmlStatistics
+  * Add QueryJob#deleted_row_count
+  * Add QueryJob#inserted_row_count
+  * Add QueryJob#updated_row_count
+  * Add Data#deleted_row_count
+  * Add Data#inserted_row_count
+  * Add Data#updated_row_count
+
 ### 1.33.0 / 2021-07-14
 
 #### Features
