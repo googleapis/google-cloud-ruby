@@ -1290,10 +1290,14 @@ module Google
         #     Storage.
         # @!attribute [rw] worker_pool
         #   @return [::String]
-        #     Option to specify a `WorkerPool` for the build.
-        #     Format: projects/\\{project}/locations/\\{location}/workerPools/\\{workerPool}
+        #     This field deprecated; please use `pool.name` instead.
+        # @!attribute [rw] pool
+        #   @return [::Google::Cloud::Build::V1::BuildOptions::PoolOption]
+        #     Optional. Specification for execution on a `WorkerPool`.
         #
-        #     This field is in beta and is available only to restricted users.
+        #     See [running builds in a private
+        #     pool](https://cloud.google.com/build/docs/private-pools/run-builds-in-private-pool)
+        #     for more information.
         # @!attribute [rw] logging
         #   @return [::Google::Cloud::Build::V1::BuildOptions::LoggingMode]
         #     Option to specify the logging mode, which determines if and where build
@@ -1326,6 +1330,23 @@ module Google
         class BuildOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Details about how a build should be executed on a `WorkerPool`.
+          #
+          # See [running builds in a private
+          # pool](https://cloud.google.com/build/docs/private-pools/run-builds-in-private-pool)
+          # for more information.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The `WorkerPool` resource to execute the build on.
+          #     You must have `cloudbuild.workerpools.use` on the project hosting the
+          #     WorkerPool.
+          #
+          #     Format projects/\\{project}/locations/\\{location}/workerPools/\\{workerPoolId}
+          class PoolOption
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Specifies the manner in which the build should be verified, if at all.
           module VerifyOption
@@ -1434,78 +1455,77 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Configuration for a WorkerPool to run the builds.
+        # Configuration for a `WorkerPool`.
         #
-        # Workers are machines that Cloud Build uses to run your builds. By default,
-        # all workers run in a project owned by Cloud Build. To have full control over
-        # the workers that execute your builds -- such as enabling them to access
-        # private resources on your private network -- you can request Cloud Build to
-        # run the workers in your own project by creating a custom workers pool.
-        # @!attribute [rw] name
+        # Cloud Build owns and maintains a pool of workers for general use and have no
+        # access to a project's private network. By default, builds submitted to
+        # Cloud Build will use a worker from this pool.
+        #
+        # If your build needs access to resources on a private network,
+        # create and use a `WorkerPool` to run your builds. Private `WorkerPool`s give
+        # your builds access to any single VPC network that you
+        # administer, including any on-prem resources connected to that VPC
+        # network. For an overview of private pools, see
+        # [Private pools
+        # overview](https://cloud.google.com/build/docs/private-pools/private-pools-overview).
+        # @!attribute [r] name
         #   @return [::String]
-        #     User-defined name of the `WorkerPool`.
-        # @!attribute [rw] project_id
+        #     Output only. The resource name of the `WorkerPool`, with format
+        #     `projects/{project}/locations/{location}/workerPools/{worker_pool}`.
+        #     The value of `{worker_pool}` is provided by `worker_pool_id` in
+        #     `CreateWorkerPool` request and the value of `{location}` is determined by
+        #     the endpoint accessed.
+        # @!attribute [rw] display_name
         #   @return [::String]
-        #     The project ID of the GCP project for which the `WorkerPool` is created.
-        # @!attribute [rw] service_account_email
+        #     A user-specified, human-readable name for the `WorkerPool`. If provided,
+        #     this value must be 1-63 characters.
+        # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. The service account used to manage the `WorkerPool`. The
-        #     service account must have the Compute Instance Admin (Beta) permission at
-        #     the project level.
-        # @!attribute [rw] worker_count
-        #   @return [::Integer]
-        #     Total number of workers to be created across all requested regions.
-        # @!attribute [rw] worker_config
-        #   @return [::Google::Cloud::Build::V1::WorkerConfig]
-        #     Configuration to be used for a creating workers in the `WorkerPool`.
-        # @!attribute [rw] regions
-        #   @return [::Array<::Google::Cloud::Build::V1::WorkerPool::Region>]
-        #     List of regions to create the `WorkerPool`. Regions can't be empty.
-        #     If Cloud Build adds a new GCP region in the future, the existing
-        #     `WorkerPool` will not be enabled in the new region automatically;
-        #     you must add the new region to the `regions` field to enable the
-        #     `WorkerPool` in that region.
-        # @!attribute [rw] create_time
+        #     Output only. A unique identifier for the `WorkerPool`.
+        # @!attribute [rw] annotations
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     User specified annotations. See https://google.aip.dev/128#annotations
+        #     for more details such as format and size limitations.
+        # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time at which the request to create the `WorkerPool` was
         #     received.
-        # @!attribute [rw] update_time
+        # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time at which the request to update the `WorkerPool` was
         #     received.
-        # @!attribute [rw] delete_time
+        # @!attribute [r] delete_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time at which the request to delete the `WorkerPool` was
         #     received.
-        # @!attribute [rw] status
-        #   @return [::Google::Cloud::Build::V1::WorkerPool::Status]
-        #     Output only. WorkerPool Status.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Build::V1::WorkerPool::State]
+        #     Output only. `WorkerPool` state.
+        # @!attribute [rw] private_pool_v1_config
+        #   @return [::Google::Cloud::Build::V1::PrivatePoolV1Config]
+        #     Private Pool using a v1 configuration.
+        # @!attribute [r] etag
+        #   @return [::String]
+        #     Output only. Checksum computed by the server. May be sent on update and
+        #     delete requests to ensure that the client has an up-to-date value before
+        #     proceeding.
         class WorkerPool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Supported GCP regions to create the `WorkerPool`.
-          module Region
-            # no region
-            REGION_UNSPECIFIED = 0
-
-            # us-central1 region
-            US_CENTRAL1 = 1
-
-            # us-west1 region
-            US_WEST1 = 2
-
-            # us-east1 region
-            US_EAST1 = 3
-
-            # us-east4 region
-            US_EAST4 = 4
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class AnnotationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # `WorkerPool` status
-          module Status
-            # Status of the `WorkerPool` is unknown.
-            STATUS_UNSPECIFIED = 0
+          # State of the `WorkerPool`.
+          module State
+            # State of the `WorkerPool` is unknown.
+            STATE_UNSPECIFIED = 0
 
             # `WorkerPool` is being created.
             CREATING = 1
@@ -1521,71 +1541,90 @@ module Google
           end
         end
 
-        # WorkerConfig defines the configuration to be used for a creating workers in
-        # the pool.
-        # @!attribute [rw] machine_type
-        #   @return [::String]
-        #     Machine Type of the worker, such as n1-standard-1.
-        #     See https://cloud.google.com/compute/docs/machine-types.
-        #     If left blank, Cloud Build will use a standard unspecified machine to
-        #     create the worker pool.
-        #     `machine_type` is overridden if you specify a different machine type in
-        #     `build_options`. In this case, the VM specified in the `build_options`
-        #     will be created on demand at build time. For more information see
-        #     https://cloud.google.com/cloud-build/docs/speeding-up-builds#using_custom_virtual_machine_sizes
-        # @!attribute [rw] disk_size_gb
-        #   @return [::Integer]
-        #     Size of the disk attached to the worker, in GB.
-        #     See https://cloud.google.com/compute/docs/disks/
-        #     If `0` is specified, Cloud Build will use a standard disk size.
-        #     `disk_size` is overridden if you specify a different disk size in
-        #     `build_options`. In this case, a VM with a disk size specified in the
-        #     `build_options` will be created on demand at build time. For more
-        #     information see
-        #     https://cloud.google.com/cloud-build/docs/api/reference/rest/v1/projects.builds#buildoptions
-        # @!attribute [rw] network
-        #   @return [::Google::Cloud::Build::V1::Network]
-        #     The network definition used to create the worker.
-        #     If this section is left empty, the workers will be created in
-        #     WorkerPool.project_id on the default network.
-        # @!attribute [rw] tag
-        #   @return [::String]
-        #     The tag applied to the worker, and the same tag used by the firewall rule.
-        #     It is used to identify the Cloud Build workers among other VMs.
-        #     The default value for tag is `worker`.
-        class WorkerConfig
+        # Configuration for a V1 `PrivatePool`.
+        # @!attribute [rw] worker_config
+        #   @return [::Google::Cloud::Build::V1::PrivatePoolV1Config::WorkerConfig]
+        #     Machine configuration for the workers in the pool.
+        # @!attribute [rw] network_config
+        #   @return [::Google::Cloud::Build::V1::PrivatePoolV1Config::NetworkConfig]
+        #     Network configuration for the pool.
+        class PrivatePoolV1Config
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
 
-        # Network describes the GCP network used to create workers in.
-        # @!attribute [rw] project_id
-        #   @return [::String]
-        #     Project id containing the defined network and subnetwork. For a peered VPC,
-        #     this will be the same as the project_id in which the workers are created.
-        #     For a shared VPC, this will be the project sharing the network with the
-        #     project_id project in which workers will be created. For custom workers
-        #     with no VPC, this will be the same as project_id.
-        # @!attribute [rw] network
-        #   @return [::String]
-        #     Network on which the workers are created.
-        #     "default" network is used if empty.
-        # @!attribute [rw] subnetwork
-        #   @return [::String]
-        #     Subnetwork on which the workers are created.
-        #     "default" subnetwork is used if empty.
-        class Network
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
+          # Defines the configuration to be used for creating workers in
+          # the pool.
+          # @!attribute [rw] machine_type
+          #   @return [::String]
+          #     Machine type of a worker, such as `e2-medium`.
+          #     See [Worker pool config
+          #     file](https://cloud.google.com/build/docs/private-pools/worker-pool-config-file-schema).
+          #     If left blank, Cloud Build will use a sensible default.
+          # @!attribute [rw] disk_size_gb
+          #   @return [::Integer]
+          #     Size of the disk attached to the worker, in GB.
+          #     See [Worker pool config
+          #     file](https://cloud.google.com/build/docs/private-pools/worker-pool-config-file-schema).
+          #     Specify a value of up to 1000. If `0` is specified, Cloud Build will use
+          #     a standard disk size.
+          class WorkerConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Defines the network configuration for the pool.
+          # @!attribute [rw] peered_network
+          #   @return [::String]
+          #     Required. Immutable. The network definition that the workers are peered
+          #     to. If this section is left empty, the workers will be peered to
+          #     `WorkerPool.project_id` on the service producer network. Must be in the
+          #     format `projects/{project}/global/networks/{network}`, where `{project}`
+          #     is a project number, such as `12345`, and `{network}` is the name of a
+          #     VPC network in the project. See
+          #     [Understanding network configuration
+          #     options](https://cloud.google.com/build/docs/private-pools/set-up-private-pool-environment)
+          # @!attribute [rw] egress_option
+          #   @return [::Google::Cloud::Build::V1::PrivatePoolV1Config::NetworkConfig::EgressOption]
+          #     Option to configure network egress for the workers.
+          class NetworkConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Defines the egress option for the pool.
+            module EgressOption
+              # If set, defaults to PUBLIC_EGRESS.
+              EGRESS_OPTION_UNSPECIFIED = 0
+
+              # If set, workers are created without any public address, which prevents
+              # network egress to public IPs unless a network proxy is configured.
+              NO_PUBLIC_EGRESS = 1
+
+              # If set, workers are created with a public address which allows for
+              # public internet egress.
+              PUBLIC_EGRESS = 2
+            end
+          end
         end
 
         # Request to create a new `WorkerPool`.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     ID of the parent project.
+        #     Required. The parent resource where this worker pool will be created.
+        #     Format: `projects/{project}/locations/{location}`.
         # @!attribute [rw] worker_pool
         #   @return [::Google::Cloud::Build::V1::WorkerPool]
-        #     `WorkerPool` resource to create.
+        #     Required. `WorkerPool` resource to create.
+        # @!attribute [rw] worker_pool_id
+        #   @return [::String]
+        #     Required. Immutable. The ID to use for the `WorkerPool`, which will become
+        #     the final component of the resource name.
+        #
+        #     This value should be 1-63 characters, and valid characters
+        #     are /[a-z][0-9]-/.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     If set, validate the request and preview the response, but do not actually
+        #     post it.
         class CreateWorkerPoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1594,8 +1633,8 @@ module Google
         # Request to get a `WorkerPool` with the specified name.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The field will contain name of the resource requested, for example:
-        #     "projects/project-1/workerPools/workerpool-name"
+        #     Required. The name of the `WorkerPool` to retrieve.
+        #     Format: `projects/{project}/locations/{location}/workerPools/{workerPool}`.
         class GetWorkerPoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1604,30 +1643,58 @@ module Google
         # Request to delete a `WorkerPool`.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The field will contain name of the resource requested, for example:
-        #     "projects/project-1/workerPools/workerpool-name"
+        #     Required. The name of the `WorkerPool` to delete.
+        #     Format:
+        #     `projects/{project}/locations/{workerPool}/workerPools/{workerPool}`.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. If this is provided, it must match the server's etag on the
+        #     workerpool for the request to be processed.
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     If set to true, and the `WorkerPool` is not found, the request will succeed
+        #     but no action will be taken on the server.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     If set, validate the request and preview the response, but do not actually
+        #     post it.
         class DeleteWorkerPoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request to update a `WorkerPool`.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     The field will contain name of the resource requested, for example:
-        #     "projects/project-1/workerPools/workerpool-name"
         # @!attribute [rw] worker_pool
         #   @return [::Google::Cloud::Build::V1::WorkerPool]
-        #     `WorkerPool` resource to update.
+        #     Required. The `WorkerPool` to update.
+        #
+        #     The `name` field is used to identify the `WorkerPool` to update.
+        #     Format: `projects/{project}/locations/{location}/workerPools/{workerPool}`.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     A mask specifying which fields in `worker_pool` to update.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     If set, validate the request and preview the response, but do not actually
+        #     post it.
         class UpdateWorkerPoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request to list `WorkerPools`.
+        # Request to list `WorkerPool`s.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     ID of the parent project.
+        #     Required. The parent of the collection of `WorkerPools`.
+        #     Format: `projects/{project}/locations/{location}`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of `WorkerPool`s to return. The service may return
+        #     fewer than this value. If omitted, the server will use a sensible default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListWorkerPools` call. Provide this
+        #     to retrieve the subsequent page.
         class ListWorkerPoolsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1636,8 +1703,64 @@ module Google
         # Response containing existing `WorkerPools`.
         # @!attribute [rw] worker_pools
         #   @return [::Array<::Google::Cloud::Build::V1::WorkerPool>]
-        #     `WorkerPools` for the project.
+        #     `WorkerPools` for the specified project.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Continuation token used to page through large result sets. Provide this
+        #     value in a subsequent ListWorkerPoolsRequest to return the next page of
+        #     results.
         class ListWorkerPoolsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata for the `CreateWorkerPool` operation.
+        # @!attribute [rw] worker_pool
+        #   @return [::String]
+        #     The resource name of the `WorkerPool` to create.
+        #     Format:
+        #     `projects/{project}/locations/{location}/workerPools/{worker_pool}`.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Time the operation was created.
+        # @!attribute [rw] complete_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Time the operation was completed.
+        class CreateWorkerPoolOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata for the `UpdateWorkerPool` operation.
+        # @!attribute [rw] worker_pool
+        #   @return [::String]
+        #     The resource name of the `WorkerPool` being updated.
+        #     Format:
+        #     `projects/{project}/locations/{location}/workerPools/{worker_pool}`.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Time the operation was created.
+        # @!attribute [rw] complete_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Time the operation was completed.
+        class UpdateWorkerPoolOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata for the `DeleteWorkerPool` operation.
+        # @!attribute [rw] worker_pool
+        #   @return [::String]
+        #     The resource name of the `WorkerPool` being deleted.
+        #     Format:
+        #     `projects/{project}/locations/{location}/workerPools/{worker_pool}`.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Time the operation was created.
+        # @!attribute [rw] complete_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Time the operation was completed.
+        class DeleteWorkerPoolOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

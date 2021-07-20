@@ -330,10 +330,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :dynamic_substitutions, :bool, 17
       optional :log_streaming_option, :enum, 5, "google.devtools.cloudbuild.v1.BuildOptions.LogStreamingOption"
       optional :worker_pool, :string, 7
+      optional :pool, :message, 19, "google.devtools.cloudbuild.v1.BuildOptions.PoolOption"
       optional :logging, :enum, 11, "google.devtools.cloudbuild.v1.BuildOptions.LoggingMode"
       repeated :env, :string, 12
       repeated :secret_env, :string, 13
       repeated :volumes, :message, 14, "google.devtools.cloudbuild.v1.Volume"
+    end
+    add_message "google.devtools.cloudbuild.v1.BuildOptions.PoolOption" do
+      optional :name, :string, 1
     end
     add_enum "google.devtools.cloudbuild.v1.BuildOptions.VerifyOption" do
       value :NOT_VERIFIED, 0
@@ -373,61 +377,86 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse" do
     end
     add_message "google.devtools.cloudbuild.v1.WorkerPool" do
-      optional :name, :string, 14
-      optional :project_id, :string, 2
-      optional :service_account_email, :string, 3
-      optional :worker_count, :int64, 4
-      optional :worker_config, :message, 16, "google.devtools.cloudbuild.v1.WorkerConfig"
-      repeated :regions, :enum, 9, "google.devtools.cloudbuild.v1.WorkerPool.Region"
-      optional :create_time, :message, 11, "google.protobuf.Timestamp"
-      optional :update_time, :message, 17, "google.protobuf.Timestamp"
-      optional :delete_time, :message, 12, "google.protobuf.Timestamp"
-      optional :status, :enum, 13, "google.devtools.cloudbuild.v1.WorkerPool.Status"
+      optional :name, :string, 1
+      optional :display_name, :string, 2
+      optional :uid, :string, 3
+      map :annotations, :string, :string, 4
+      optional :create_time, :message, 5, "google.protobuf.Timestamp"
+      optional :update_time, :message, 6, "google.protobuf.Timestamp"
+      optional :delete_time, :message, 7, "google.protobuf.Timestamp"
+      optional :state, :enum, 8, "google.devtools.cloudbuild.v1.WorkerPool.State"
+      optional :etag, :string, 11
+      oneof :config do
+        optional :private_pool_v1_config, :message, 12, "google.devtools.cloudbuild.v1.PrivatePoolV1Config"
+      end
     end
-    add_enum "google.devtools.cloudbuild.v1.WorkerPool.Region" do
-      value :REGION_UNSPECIFIED, 0
-      value :US_CENTRAL1, 1
-      value :US_WEST1, 2
-      value :US_EAST1, 3
-      value :US_EAST4, 4
-    end
-    add_enum "google.devtools.cloudbuild.v1.WorkerPool.Status" do
-      value :STATUS_UNSPECIFIED, 0
+    add_enum "google.devtools.cloudbuild.v1.WorkerPool.State" do
+      value :STATE_UNSPECIFIED, 0
       value :CREATING, 1
       value :RUNNING, 2
       value :DELETING, 3
       value :DELETED, 4
     end
-    add_message "google.devtools.cloudbuild.v1.WorkerConfig" do
+    add_message "google.devtools.cloudbuild.v1.PrivatePoolV1Config" do
+      optional :worker_config, :message, 1, "google.devtools.cloudbuild.v1.PrivatePoolV1Config.WorkerConfig"
+      optional :network_config, :message, 2, "google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig"
+    end
+    add_message "google.devtools.cloudbuild.v1.PrivatePoolV1Config.WorkerConfig" do
       optional :machine_type, :string, 1
       optional :disk_size_gb, :int64, 2
-      optional :network, :message, 3, "google.devtools.cloudbuild.v1.Network"
-      optional :tag, :string, 4
     end
-    add_message "google.devtools.cloudbuild.v1.Network" do
-      optional :project_id, :string, 1
-      optional :network, :string, 2
-      optional :subnetwork, :string, 3
+    add_message "google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig" do
+      optional :peered_network, :string, 1
+      optional :egress_option, :enum, 2, "google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig.EgressOption"
+    end
+    add_enum "google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig.EgressOption" do
+      value :EGRESS_OPTION_UNSPECIFIED, 0
+      value :NO_PUBLIC_EGRESS, 1
+      value :PUBLIC_EGRESS, 2
     end
     add_message "google.devtools.cloudbuild.v1.CreateWorkerPoolRequest" do
       optional :parent, :string, 1
       optional :worker_pool, :message, 2, "google.devtools.cloudbuild.v1.WorkerPool"
+      optional :worker_pool_id, :string, 3
+      optional :validate_only, :bool, 4
     end
     add_message "google.devtools.cloudbuild.v1.GetWorkerPoolRequest" do
       optional :name, :string, 1
     end
     add_message "google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest" do
       optional :name, :string, 1
+      optional :etag, :string, 2
+      optional :allow_missing, :bool, 3
+      optional :validate_only, :bool, 4
     end
     add_message "google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest" do
-      optional :name, :string, 2
-      optional :worker_pool, :message, 3, "google.devtools.cloudbuild.v1.WorkerPool"
+      optional :worker_pool, :message, 1, "google.devtools.cloudbuild.v1.WorkerPool"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+      optional :validate_only, :bool, 4
     end
     add_message "google.devtools.cloudbuild.v1.ListWorkerPoolsRequest" do
       optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
     end
     add_message "google.devtools.cloudbuild.v1.ListWorkerPoolsResponse" do
       repeated :worker_pools, :message, 1, "google.devtools.cloudbuild.v1.WorkerPool"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.devtools.cloudbuild.v1.CreateWorkerPoolOperationMetadata" do
+      optional :worker_pool, :string, 1
+      optional :create_time, :message, 2, "google.protobuf.Timestamp"
+      optional :complete_time, :message, 3, "google.protobuf.Timestamp"
+    end
+    add_message "google.devtools.cloudbuild.v1.UpdateWorkerPoolOperationMetadata" do
+      optional :worker_pool, :string, 1
+      optional :create_time, :message, 2, "google.protobuf.Timestamp"
+      optional :complete_time, :message, 3, "google.protobuf.Timestamp"
+    end
+    add_message "google.devtools.cloudbuild.v1.DeleteWorkerPoolOperationMetadata" do
+      optional :worker_pool, :string, 1
+      optional :create_time, :message, 2, "google.protobuf.Timestamp"
+      optional :complete_time, :message, 3, "google.protobuf.Timestamp"
     end
   end
 end
@@ -484,6 +513,7 @@ module Google
         DeleteBuildTriggerRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest").msgclass
         UpdateBuildTriggerRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest").msgclass
         BuildOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildOptions").msgclass
+        BuildOptions::PoolOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildOptions.PoolOption").msgclass
         BuildOptions::VerifyOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildOptions.VerifyOption").enummodule
         BuildOptions::MachineType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildOptions.MachineType").enummodule
         BuildOptions::SubstitutionOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildOptions.SubstitutionOption").enummodule
@@ -492,16 +522,20 @@ module Google
         ReceiveTriggerWebhookRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest").msgclass
         ReceiveTriggerWebhookResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse").msgclass
         WorkerPool = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.WorkerPool").msgclass
-        WorkerPool::Region = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.WorkerPool.Region").enummodule
-        WorkerPool::Status = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.WorkerPool.Status").enummodule
-        WorkerConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.WorkerConfig").msgclass
-        Network = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Network").msgclass
+        WorkerPool::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.WorkerPool.State").enummodule
+        PrivatePoolV1Config = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.PrivatePoolV1Config").msgclass
+        PrivatePoolV1Config::WorkerConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.PrivatePoolV1Config.WorkerConfig").msgclass
+        PrivatePoolV1Config::NetworkConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig").msgclass
+        PrivatePoolV1Config::NetworkConfig::EgressOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig.EgressOption").enummodule
         CreateWorkerPoolRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.CreateWorkerPoolRequest").msgclass
         GetWorkerPoolRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.GetWorkerPoolRequest").msgclass
         DeleteWorkerPoolRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest").msgclass
         UpdateWorkerPoolRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest").msgclass
         ListWorkerPoolsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.ListWorkerPoolsRequest").msgclass
         ListWorkerPoolsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.ListWorkerPoolsResponse").msgclass
+        CreateWorkerPoolOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.CreateWorkerPoolOperationMetadata").msgclass
+        UpdateWorkerPoolOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.UpdateWorkerPoolOperationMetadata").msgclass
+        DeleteWorkerPoolOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.DeleteWorkerPoolOperationMetadata").msgclass
       end
     end
   end
