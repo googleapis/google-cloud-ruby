@@ -433,7 +433,6 @@ end
 if $PROGRAM_NAME == __FILE__
   args    = ARGV.dup
   command = args.shift
-  project = ENV["GOOGLE_CLOUD_PROJECT"]
 
   case command
   when "access_secret_version"

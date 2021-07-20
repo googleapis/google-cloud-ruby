@@ -21,12 +21,12 @@ describe "Secret Manager Snippets" do
   let(:client) { Google::Cloud::SecretManager.secret_manager_service }
   let(:project_id) { ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT") }
 
-  let(:secret_id) { "ruby-quickstart-#{(Time.now.to_f*1000).to_i}" }
+  let(:secret_id) { "ruby-quickstart-#{(Time.now.to_f * 1000).to_i}" }
   let(:secret_name) { "projects/#{project_id}/secrets/#{secret_id}" }
 
   let(:iam_user) { "user:sethvargo@google.com" }
 
-  let(:secret) do
+  let :secret do
     client.create_secret(
       parent:    "projects/#{project_id}",
       secret_id: secret_id,
@@ -38,7 +38,7 @@ describe "Secret Manager Snippets" do
     )
   end
 
-  let(:secret_version) do
+  let :secret_version do
     client.add_secret_version(
       parent:  secret.name,
       payload: {
@@ -238,7 +238,7 @@ describe "Secret Manager Snippets" do
         members: [iam_user],
         role:    "roles/secretmanager.secretAccessor"
       )
-      new_policy = client.set_iam_policy resource: name, policy: policy
+      client.set_iam_policy resource: name, policy: policy
 
       expect {
         policy = iam_revoke_access(

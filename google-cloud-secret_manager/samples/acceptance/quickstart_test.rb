@@ -19,7 +19,7 @@ describe "Secret Manager Quickstart" do
   let(:client) { Google::Cloud::SecretManager.secret_manager_service }
   let(:project_id) { ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT") }
 
-  let(:secret_id) { "ruby-quickstart-#{(Time.now.to_f*1000).to_i}" }
+  let(:secret_id) { "ruby-quickstart-#{(Time.now.to_f * 1000).to_i}" }
   let(:secret_name) { "projects/#{project_id}/secrets/#{secret_id}" }
 
   after do
@@ -30,7 +30,7 @@ describe "Secret Manager Quickstart" do
 
   it "creates and accesses a secret" do
     assert_output "Plaintext: hello world!\n" do
-      quickstart(project_id: project_id, secret_id: secret_id)
+      quickstart project_id: project_id, secret_id: secret_id
     end
 
     secret = client.get_secret name: secret_name
