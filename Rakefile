@@ -508,7 +508,7 @@ namespace :kokoro do
   end
 
   task :publish_docs do
-    kokoro.devsite
+    # kokoro.devsite
     kokoro.cloudrad
     exit kokoro.exit_status
   end
