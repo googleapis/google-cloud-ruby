@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.2 / 2021-07-21
+
+#### Documentation
+
+* Fix a few broken links in the client class documentation
+
 ### 0.6.1 / 2021-07-12
 
 #### Documentation
