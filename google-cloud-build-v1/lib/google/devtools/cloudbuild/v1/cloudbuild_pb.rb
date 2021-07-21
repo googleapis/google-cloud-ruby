@@ -119,6 +119,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :service_account, :string, 42
       optional :available_secrets, :message, 47, "google.devtools.cloudbuild.v1.Secrets"
       repeated :warnings, :message, 49, "google.devtools.cloudbuild.v1.Build.Warning"
+      optional :failure_info, :message, 51, "google.devtools.cloudbuild.v1.Build.FailureInfo"
     end
     add_message "google.devtools.cloudbuild.v1.Build.Warning" do
       optional :text, :string, 1
@@ -129,6 +130,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :INFO, 1
       value :WARNING, 2
       value :ALERT, 3
+    end
+    add_message "google.devtools.cloudbuild.v1.Build.FailureInfo" do
+      optional :type, :enum, 1, "google.devtools.cloudbuild.v1.Build.FailureInfo.FailureType"
+      optional :detail, :string, 2
+    end
+    add_enum "google.devtools.cloudbuild.v1.Build.FailureInfo.FailureType" do
+      value :FAILURE_TYPE_UNSPECIFIED, 0
+      value :PUSH_FAILED, 1
+      value :PUSH_IMAGE_NOT_FOUND, 2
+      value :PUSH_NOT_AUTHORIZED, 3
+      value :LOGGING_FAILURE, 4
+      value :USER_BUILD_STEP, 5
+      value :FETCH_SOURCE_FAILED, 6
     end
     add_enum "google.devtools.cloudbuild.v1.Build.Status" do
       value :STATUS_UNKNOWN, 0
@@ -479,6 +493,8 @@ module Google
         Build = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Build").msgclass
         Build::Warning = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Build.Warning").msgclass
         Build::Warning::Priority = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Build.Warning.Priority").enummodule
+        Build::FailureInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Build.FailureInfo").msgclass
+        Build::FailureInfo::FailureType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Build.FailureInfo.FailureType").enummodule
         Build::Status = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Build.Status").enummodule
         Artifacts = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Artifacts").msgclass
         Artifacts::ArtifactObjects = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Artifacts.ArtifactObjects").msgclass

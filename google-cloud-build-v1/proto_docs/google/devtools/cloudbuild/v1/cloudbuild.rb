@@ -489,6 +489,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Build::V1::Build::Warning>]
         #     Output only. Non-fatal problems encountered during the execution of the
         #     build.
+        # @!attribute [r] failure_info
+        #   @return [::Google::Cloud::Build::V1::Build::FailureInfo]
+        #     Output only. Contains information about the build when status=FAILURE.
         class Build
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -517,6 +520,43 @@ module Google
 
               # e.g. alerts that a feature used in the build is pending removal
               ALERT = 3
+            end
+          end
+
+          # A fatal problem encountered during the execution of the build.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::Build::V1::Build::FailureInfo::FailureType]
+          #     The name of the failure.
+          # @!attribute [rw] detail
+          #   @return [::String]
+          #     Explains the failure issue in more detail using hard-coded text.
+          class FailureInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The name of a fatal problem encountered during the execution of the
+            # build.
+            module FailureType
+              # Type unspecified
+              FAILURE_TYPE_UNSPECIFIED = 0
+
+              # Unable to push the image to the repository.
+              PUSH_FAILED = 1
+
+              # Final image not found.
+              PUSH_IMAGE_NOT_FOUND = 2
+
+              # Unauthorized push of the final image.
+              PUSH_NOT_AUTHORIZED = 3
+
+              # Backend logging failures. Should retry.
+              LOGGING_FAILURE = 4
+
+              # A build step has failed.
+              USER_BUILD_STEP = 5
+
+              # The source fetching has failed.
+              FETCH_SOURCE_FAILED = 6
             end
           end
 
