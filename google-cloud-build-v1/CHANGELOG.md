@@ -1,5 +1,12 @@
 # Release History
 
+### 0.9.0 / 2021-07-21
+
+#### Features
+
+* Report build failure type and details
+* Update worker pool interfaces to their final form
+
 ### 0.8.1 / 2021-07-12
 
 #### Documentation
