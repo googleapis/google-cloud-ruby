@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.1.2 / 2021-07-21
+
+#### Bug Fixes
+
+* Update timeout and retry settings
+
 ### 0.1.1 / 2021-07-12
 
 #### Documentation
