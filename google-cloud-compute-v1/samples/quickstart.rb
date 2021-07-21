@@ -80,7 +80,8 @@ def create_instance project:, zone:, instance_name:,
   begin
     operation = client.insert request
     operation_client = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new
-    operation = operation_client.wait operation: operation.name, project: project, zone: zone while operation.status == :RUNNING
+    operation = operation_client.wait operation: operation.name, project: project,
+                                      zone: zone while operation.status == :RUNNING
     warn "Error during creation:", operation.error unless operation.error.nil?
     warn "Warning during creation:", operation.warnings unless operation.warnings.empty?
     puts "Instance #{instance_name} created."
@@ -153,7 +154,8 @@ def delete_instance project:, zone:, instance_name:
       # Net::HTTP timeout of 60 seconds.
       config.timeout = 120
     end
-    operation = operation_client.wait operation: operation.name, project: project, zone: zone while operation.status == :RUNNING
+    operation = operation_client.wait operation: operation.name, project: project,
+                                      zone: zone while operation.status == :RUNNING
     warn "Error during deletion:", operation.error unless operation.error.nil?
     warn "Warning during deletion:", operation.warnings unless operation.warnings.empty?
     puts "Instance #{instance_name} deleted."
@@ -169,7 +171,8 @@ end
 # Waits for an operation to be completed. Calling this function
 # will block until the operation is finished.
 #
-# @param [::Google::Cloud::Compute::V1::Operation] operation The Operation object representing the operation you want to wait on.
+# @param [::Google::Cloud::Compute::V1::Operation] operation The Operation object representing
+#   the operation you want to wait on.
 # @param [String] project project ID or project number of the Cloud project you want to use.
 # @return Finished Operation object.
 def wait_for_operation operation:, project:
