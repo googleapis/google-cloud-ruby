@@ -18,6 +18,7 @@ def create_logging_client
   logging = Google::Cloud::Logging.new
 
   puts "Created #{logging}"
+  logging
 end
 
 def list_log_sinks
