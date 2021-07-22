@@ -209,19 +209,14 @@ module Google
 
         protected
 
-        VALID_FIELD_PATH_CHARS = /\A[a-zA-Z_]+\Z/.freeze
-        INVALID_FIELD_PATH_CHARS = %r{[~*/\[\]]}.freeze
+        VALID_FIELD_PATH_CHARS = /\A[a-zA-Z_][a-zA-Z_0-9]+\Z/.freeze
 
         def escape_field_for_path field
           field = String field
 
           return field if VALID_FIELD_PATH_CHARS.match field
 
-          if INVALID_FIELD_PATH_CHARS.match(field) ||
-             field["."] || field["`"] || field["\\"]
-            escaped_field = field.gsub(/[`\\]/, "`" => "\\\`", "\\" => "\\\\")
-            return "`#{escaped_field}`"
-          end
+          field.gsub!(/[`\\]/, '`' => '\\\`', '\\' => '\\\\')
 
           "`#{field}`"
         end
