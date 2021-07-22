@@ -1,0 +1,30 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
+        "sha": "f6bd165cc89b737019bb9bb3a05774bcec6a0333"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "90f4259a631aec03c1330771462104bb11b8fe1c",
+        "internalRef": "385796337"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "datafusion",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "bazel"
+      }
+    }
+  ]
+}
