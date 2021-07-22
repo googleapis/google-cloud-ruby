@@ -210,12 +210,12 @@ module Google
         protected
 
         INVALID_FIELD_PATH_CHARS = %r{[~*/\[\]]}.freeze
-        UNESCAPED_FIELD_PATH_CHARS = /\A[a-zA-Z_][a-zA-Z_0-9]+\Z/.freeze
+        SIMPLE_FIELD_PATH_CHARS = /\A[a-zA-Z_][a-zA-Z_0-9]+\Z/.freeze
 
         def escape_field_for_path field
           field = String field
 
-          return field if UNESCAPED_FIELD_PATH_CHARS.match field
+          return field if SIMPLE_FIELD_PATH_CHARS.match field
 
           field = field.gsub(/[`\\]/, '`' => '\\\`', '\\' => '\\\\')
 
