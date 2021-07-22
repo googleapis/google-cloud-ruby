@@ -21,6 +21,7 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   Exclude:
     - "lib/google-cloud-logging.rb"
+    - "samples/acceptance/sample_test.rb"
 Metrics/ClassLength:
   Enabled: false
 Metrics/CyclomaticComplexity:
