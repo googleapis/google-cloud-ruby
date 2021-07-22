@@ -209,6 +209,7 @@ module Google
 
         protected
 
+        INVALID_FIELD_PATH_CHARS = %r{[~*/\[\]]}.freeze
         VALID_FIELD_PATH_CHARS = /\A[a-zA-Z_][a-zA-Z_0-9]+\Z/.freeze
 
         def escape_field_for_path field
