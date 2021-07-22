@@ -216,7 +216,7 @@ module Google
 
           return field if VALID_FIELD_PATH_CHARS.match field
 
-          field.gsub!(/[`\\]/, '`' => '\\\`', '\\' => '\\\\')
+          field = field.gsub(/[`\\]/, '`' => '\\\`', '\\' => '\\\\')
 
           "`#{field}`"
         end
