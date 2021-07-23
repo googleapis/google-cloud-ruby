@@ -149,7 +149,7 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #   table = bigtable.table "my-instance", "my-table"
         #
-        #   rule = table.new_read_modify_write_rule("cf", "field01").append "append-xyz"
+        #   rule = table.new_read_modify_write_rule("cf", "field01").append("append-xyz")
         #
         #   row = table.read_modify_write_row "user01", rule
         #
