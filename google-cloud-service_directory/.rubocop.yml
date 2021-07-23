@@ -33,7 +33,3 @@ Metrics/PerceivedComplexity:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-service_directory.rb"
-
-Style/BlockDelimiters:
-  Exclude:
-    - "samples/acceptance/**/*"
