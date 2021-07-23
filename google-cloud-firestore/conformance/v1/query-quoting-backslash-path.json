@@ -1,0 +1,42 @@
+{
+  "tests": [
+    {
+      "description": "query: a backquote in a field path should be escaped and quoted in where clause",
+      "comment": "a backquote in a field path should be escaped and quoted.",
+      "query": {
+        "collPath": "projects/projectID/databases/(default)/documents/C",
+        "clauses": [
+          {
+            "where": {
+              "path": {
+                "field": [
+                  "fie\\ld"
+                ]
+              },
+              "op": "=",
+              "jsonValue": "0"
+            }
+          }
+        ],
+        "query": {
+          "from": [
+            {
+              "collectionId": "C"
+            }
+          ],
+          "where": {
+            "fieldFilter": {
+              "field": {
+                "fieldPath": "`fie\\\\ld`"
+              },
+              "op": "EQUAL",
+              "value": {
+                "integerValue": "0"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
