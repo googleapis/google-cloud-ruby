@@ -3,7 +3,7 @@ inherit_gem:
 
 AllCops:
   Exclude:
-    - "acceptance/**"
+    - "acceptance/**/*"
 
 Metrics/AbcSize:
   Enabled: false

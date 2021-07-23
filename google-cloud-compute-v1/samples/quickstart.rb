@@ -45,47 +45,40 @@ require "google/cloud/compute/v1"
 # @param [String] network_name name of the network you want the new instance to use.
 #         For example: "global/networks/default" represents the `default`
 #         network interface, which is created automatically for each project.
-# @return Instance object.
 def create_instance project:, zone:, instance_name:,
                     machine_type: "n2-standard-2",
                     source_image: "projects/debian-cloud/global/images/family/debian-10",
                     network_name: "global/networks/default"
   client = ::Google::Cloud::Compute::V1::Instances::Rest::Client.new
 
-  disk = ::Google::Cloud::Compute::V1::AttachedDisk.new
-  initialize_params = ::Google::Cloud::Compute::V1::AttachedDiskInitializeParams.new
-  initialize_params.source_image = source_image
-  initialize_params.disk_size_gb = "10"
-  disk.initialize_params = initialize_params
-  disk.auto_delete = true
-  disk.boot = true
-  disk.type = ::Google::Cloud::Compute::V1::AttachedDisk::Type::PERSISTENT
+  instance = {
+    name: instance_name,
+    disks: [{
+      auto_delete: true,
+      boot: true,
+      type: :PERSISTENT,
+      initialize_params: {
+        source_image: source_image,
+        disk_size_gb: "10"
+      }
+    }],
+    machine_type: "zones/#{zone}/machineTypes/#{machine_type}",
+    network_interfaces: [{ name: network_name }]
+  }
 
-  network_interface = ::Google::Cloud::Compute::V1::NetworkInterface.new
-  network_interface.name = network_name
-
-  instance = ::Google::Cloud::Compute::V1::Instance.new
-  instance.name = instance_name
-  instance.disks += [disk]
-  full_machine_type_name = "zones/#{zone}/machineTypes/#{machine_type}"
-  instance.machine_type = full_machine_type_name
-  instance.network_interfaces += [network_interface]
-
-  request = ::Google::Cloud::Compute::V1::InsertInstanceRequest.new
-  request.zone = zone
-  request.project = project
-  request.instance_resource = instance
+  request = { project: project, zone: zone, instance_resource: instance }
 
   puts "Creating the #{instance_name} instance in #{zone}..."
   begin
     operation = client.insert request
-    operation_client = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new
-    operation = operation_client.wait operation: operation.name, project: project,
-                                      zone: zone while operation.status == :RUNNING
-    warn "Error during creation:", operation.error unless operation.error.nil?
-    warn "Warning during creation:", operation.warnings unless operation.warnings.empty?
-    puts "Instance #{instance_name} created."
-    instance
+    operation = wait_until_done operation: operation, project: project
+
+    if operation.error.nil?
+      warn "Warning during creation:", operation.warnings unless operation.warnings.empty?
+      puts "Instance #{instance_name} created."
+    else
+      warn "Error during creation:", operation.error
+    end
   rescue ::Google::Cloud::Error => e
     warn "Exception during creation:", e
   end
@@ -99,7 +92,7 @@ end
 #
 # @param [String] project project ID or project number of the Cloud project you want to use.
 # @param [String] zone name of the zone you want to use. For example: “us-west3-b”
-# @return Array of instances.
+# @return [Array<::Google::Cloud::Compute::V1::Instance>] Array of instances.
 def list_instances project:, zone:
   client = ::Google::Cloud::Compute::V1::Instances::Rest::Client.new
   instance_list = client.list project: project, zone: zone
@@ -117,8 +110,8 @@ end
 # Returns a dictionary of all instances present in a project, grouped by their zone.
 #
 # @param [String] project project ID or project number of the Cloud project you want to use.
-# @return A hash with zone names as keys (in form of "zones/{zone_name}") and
-#   arrays of instances as values.
+# @return [Hash<String, Array<::Google::Cloud::Compute::V1::Instance>>] A hash with zone names
+#   as keys (in form of "zones/{zone_name}") and arrays of instances as values.
 def list_all_instances project:
   client = ::Google::Cloud::Compute::V1::Instances::Rest::Client.new
   agg_list = client.aggregated_list project: project
@@ -149,16 +142,14 @@ def delete_instance project:, zone:, instance_name:
   puts "Deleting #{instance_name} from #{zone}..."
   begin
     operation = client.delete project: project, zone: zone, instance: instance_name
-    operation_client = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new do |config|
-      # Set the timeout to 120 seconds as delete requests tend take longer than the default
-      # Net::HTTP timeout of 60 seconds.
-      config.timeout = 120
+    operation = wait_until_done operation: operation, project: project
+
+    if operation.error.nil?
+      warn "Warning during deletion:", operation.warnings unless operation.warnings.empty?
+      puts "Instance #{instance_name} deleted."
+    else
+      warn "Error during deletion:", operation.error
     end
-    operation = operation_client.wait operation: operation.name, project: project,
-                                      zone: zone while operation.status == :RUNNING
-    warn "Error during deletion:", operation.error unless operation.error.nil?
-    warn "Warning during deletion:", operation.warnings unless operation.warnings.empty?
-    puts "Instance #{instance_name} deleted."
   rescue ::Google::Cloud::Error => e
     warn "Exception during deletion:", e
   end
@@ -168,14 +159,16 @@ end
 
 # [START compute_instances_operation_check]
 
-# Waits for an operation to be completed. Calling this function
-# will block until the operation is finished.
+require "time"
+
+# Waits for an operation to be completed. Calling this method
+# will block until the operation is finished or timed out.
 #
-# @param [::Google::Cloud::Compute::V1::Operation] operation The Operation object representing
-#   the operation you want to wait on.
+# @param [::Google::Cloud::Compute::V1::Operation] operation The operation to wait for.
 # @param [String] project project ID or project number of the Cloud project you want to use.
-# @return Finished Operation object.
-def wait_for_operation operation:, project:
+# @param [Numeric] timeout seconds until timeout (default is 3 minutes)
+# @return [::Google::Cloud::Compute::V1::Operation] Finished Operation object.
+def wait_until_done operation:, project:, timeout: 3 * 60
   request = { operation: operation.name, project: project }
   if !operation.zone.nil?
     client = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new
@@ -186,7 +179,16 @@ def wait_for_operation operation:, project:
   else
     client = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::Client.new
   end
-  operation = client.wait request while operation.status == :RUNNING
+  deadline = Time.now + timeout
+  while operation.status == :RUNNING
+    now = Time.now
+    if now > deadline
+      raise "operation timed out"
+    end
+    options = { timeout: deadline - now }
+    operation = client.wait request, options
+  end
+  operation
 end
 
 # [END compute_instances_operation_check]
