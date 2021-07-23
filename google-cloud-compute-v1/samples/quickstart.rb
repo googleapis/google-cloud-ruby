@@ -170,10 +170,10 @@ require "time"
 # @return [::Google::Cloud::Compute::V1::Operation] Finished Operation object.
 def wait_until_done operation:, project:, timeout: 3 * 60
   request = { operation: operation.name, project: project }
-  if !operation.zone.nil?
+  if !operation.zone.empty?
     client = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new
     request[:zone] = operation.zone.rpartition("/").last
-  elsif !operation.region.nil?
+  elsif !operation.region.empty?
     client = ::Google::Cloud::Compute::V1::RegionOperations::Rest::Client.new
     request[:region] = operation.region.rpartition("/").last
   else
