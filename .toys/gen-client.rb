@@ -168,7 +168,7 @@ def determine_defaults
   @api_shortname = @api_name.tr "/", ""
   @api_id = "#{@api_shortname}.googleapis.com"
   @service_display_name = gem_shortname.split("_").map(&:capitalize).join " "
-  @env_prefix = gem_shortname.gsub("-", "_").upcase
+  @env_prefix = nil
   @description = replace_me_text
   @product_url = replace_me_text
   @service_override = nil
