@@ -26,10 +26,7 @@ class ComputeQuickstartTest < Minitest::Test
     client = ::Google::Cloud::Compute::V1::Instances::Rest::Client.new
     operation_client = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new
     @temp_instances.each do |instance|
-      operation = client.delete project: project, zone: zone, instance: instance
-      if operation.status == :RUNNING
-        operation_client.wait operation: operation.name, project: project, zone: zone
-      end
+      client.delete project: project, zone: zone, instance: instance
     rescue StandardError
     end
   end
