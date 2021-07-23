@@ -217,7 +217,7 @@ module Google
 
           return field if SIMPLE_FIELD_PATH_CHARS.match field
 
-          field = field.gsub(/[`\\]/, '`' => '\\`', '\\' => '\\\\')
+          field = field.gsub(/[`\\]/, "`" => "\\`", "\\" => "\\\\")
 
           "`#{field}`"
         end
