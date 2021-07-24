@@ -406,6 +406,24 @@ module Google
         #     `parentFullResourceName:"project-name"`
         #     * use a free text query. Example:
         #     `project-name`
+        # @!attribute [rw] versioned_resources
+        #   @return [::Array<::Google::Cloud::Asset::V1::VersionedResource>]
+        #     Versioned resource representations of this resource. This is repeated
+        #     because there could be multiple versions of resource representations during
+        #     version migration.
+        #
+        #     This `versioned_resources` field is not searchable. Some attributes of the
+        #     resource representations are exposed in `additional_attributes` field, so
+        #     as to allow users to search on them.
+        # @!attribute [rw] attached_resources
+        #   @return [::Array<::Google::Cloud::Asset::V1::AttachedResource>]
+        #     Attached resources of this resource. For example, an OSConfig
+        #     Inventory is an attached resource of a Compute Instance. This field is
+        #     repeated because a resource could have multiple attached resources.
+        #
+        #     This `attached_resources` field is not searchable. Some attributes
+        #     of the attached resources are exposed in `additional_attributes` field, so
+        #     as to allow users to search on them.
         # @!attribute [rw] parent_asset_type
         #   @return [::String]
         #     The type of this resource's immediate parent, if there is one.
@@ -428,6 +446,56 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Resource representation as defined by the corresponding service providing the
+        # resource for a given API version.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     API version of the resource.
+        #
+        #     Example:
+        #     If the resource is an instance provided by Compute Engine v1 API as defined
+        #     in `https://cloud.google.com/compute/docs/reference/rest/v1/instances`,
+        #     version will be "v1".
+        # @!attribute [rw] resource
+        #   @return [::Google::Protobuf::Struct]
+        #     JSON representation of the resource as defined by the corresponding
+        #     service providing this resource.
+        #
+        #     Example:
+        #     If the resource is an instance provided by Compute Engine, this field will
+        #     contain the JSON representation of the instance as defined by Compute
+        #     Engine:
+        #     `https://cloud.google.com/compute/docs/reference/rest/v1/instances`.
+        #
+        #     You can find the resource definition for each supported resource type in
+        #     this table:
+        #     `https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types`
+        class VersionedResource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Attached resource representation, which is defined by the corresponding
+        # service provider. It represents an attached resource's payload.
+        # @!attribute [rw] asset_type
+        #   @return [::String]
+        #     The type of this attached resource.
+        #
+        #     Example: `osconfig.googleapis.com/Inventory`
+        #
+        #     You can find the supported attached asset types of each resource in this
+        #     table:
+        #     `https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types`
+        # @!attribute [rw] versioned_resources
+        #   @return [::Array<::Google::Cloud::Asset::V1::VersionedResource>]
+        #     Versioned resource representations of this attached resource. This is
+        #     repeated because there could be multiple versions of the attached resource
+        #     representations during version migration.
+        class AttachedResource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A result of IAM Policy search, containing information of an IAM policy.
