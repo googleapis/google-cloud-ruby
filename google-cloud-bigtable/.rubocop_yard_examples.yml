@@ -1,0 +1,8 @@
+inherit_from: .rubocop.yml
+
+Layout/TrailingEmptyLines:
+  Enabled: false
+Lint/UselessAssignment:
+  Enabled: false
+Style/CommentedKeyword:
+  Enabled: false
