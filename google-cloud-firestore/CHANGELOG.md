@@ -1,5 +1,11 @@
 # Release History
 
+### 2.6.2 / 2021-07-26
+
+#### Bug Fixes
+
+* Update FieldPath#formatted_string to correctly escape non-simple characters
+
 ### 2.6.1 / 2021-07-08
 
 #### Documentation
