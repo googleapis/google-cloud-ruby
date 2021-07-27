@@ -4,4 +4,4 @@
 
 #### Features
 
-* Initial generation of google-cloud-iap ([#13146](https://www.github.com/googleapis/google-cloud-ruby/issues/13146))
+* Initial generation of google-cloud-iap
