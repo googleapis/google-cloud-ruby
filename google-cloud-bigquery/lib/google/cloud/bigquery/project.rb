@@ -303,6 +303,7 @@ module Google
         #   | `STRING`     | `String`                             |                                                    |
         #   | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
         #   | `DATE`       | `Date`                               |                                                    |
+        #   | `GEOGRAPHY`  |                                      | Query param values must be mapped in `types`.      |
         #   | `TIMESTAMP`  | `Time`                               |                                                    |
         #   | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                    |
         #   | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                    |
@@ -327,6 +328,7 @@ module Google
         #   * `:STRING`
         #   * `:DATETIME`
         #   * `:DATE`
+        #   * `:GEOGRAPHY`
         #   * `:TIMESTAMP`
         #   * `:TIME`
         #   * `:BYTES`
@@ -650,6 +652,7 @@ module Google
         #   | `STRING`     | `String`                             |                                                    |
         #   | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
         #   | `DATE`       | `Date`                               |                                                    |
+        #   | `GEOGRAPHY`  |                                      | Query param values must be mapped in `types`.      |
         #   | `TIMESTAMP`  | `Time`                               |                                                    |
         #   | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                    |
         #   | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                    |
@@ -674,6 +677,7 @@ module Google
         #   * `:STRING`
         #   * `:DATETIME`
         #   * `:DATE`
+        #   * `:GEOGRAPHY`
         #   * `:TIMESTAMP`
         #   * `:TIME`
         #   * `:BYTES`
