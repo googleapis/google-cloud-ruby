@@ -2,9 +2,24 @@
 
 [Google Cloud Spanner API](https://cloud.google.com/spanner/) ([docs](https://cloud.google.com/spanner/docs)) provides a fully managed, mission-critical, relational database service that offers transactional consistency at global scale, schemas, SQL (ANSI 2011 with extensions), and automatic, synchronous replication for high availability.
 
-- [google-cloud-spanner API documentation](https://googleapis.dev/ruby/google-cloud-spanner/latest)
-- [google-cloud-spanner on RubyGems](https://rubygems.org/gems/google-cloud-spanner)
-- [Google Cloud Spanner API documentation](https://cloud.google.com/spanner/docs)
+- [google-cloud-spanner API
+  documentation](https://googleapis.dev/ruby/google-cloud-spanner/latest)
+- [google-cloud-spanner on
+  RubyGems](https://rubygems.org/gems/google-cloud-spanner)
+- [Google Cloud Spanner API
+  documentation](https://cloud.google.com/spanner/docs)
+
+## NOTICE: Freezing development of `database` and `instance` classes.
+
+From `google-cloud-spanner/v3.0` onwards, **new features for mananging databases
+and instances will only be available through the
+[google-cloud-spanner-admin-instance-v1](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-spanner-admin-instance-v1)
+and
+[google-cloud-spanner-admin-database-v1](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-spanner-admin-database-v1)
+packages**. The `database` and `instance` classes in
+[google-cloud-spanner](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-spanner)
+will no longer be updated to support new features. Please refer to the [FAQ](#faq-for-freezing-development-of-database-and-instance-classes)
+for further details.
 
 ## Quick Start
 
@@ -57,6 +72,33 @@ module GRPC
   extend MyLogger
 end
 ```
+
+## FAQ for freezing development of `database` and `instance` classes
+
+### Can I keep using the `database` and `instance` classes?
+
+Yes, these classes can continue to be used for the forseeable future, even in
+production applications. P0/P1 bug fixes and security patches for up to 1 year
+will be provided after `google-cloud-spanner/v3.0` is released.
+
+### When should I use the `google-cloud-spanner-admin-instance-v1` and `google-cloud-spanner-admin-database-v1` packages?
+
+Only when your application needs to use Cloud Spanner features for managing
+databases and instances that are released after `google-cloud-spanner/v3.0`. You
+may continue to use the existing `database` and `instance` classes from
+`google-cloud-spanner` for all existing usages in your code for managing
+databases and instances.
+
+### Where can I find code samples?
+The code samples for all new features that relate to managing databases and
+instances will include code samples on how to use the feature through
+`google-cloud-spanner-admin-instance-v1` or
+`google-cloud-spanner-admin-database-v1` in the documentation.
+
+Some code samples that use `google-cloud-spanner-admin-instance-v1` and
+`google-cloud-spanner-admin-database-v1` to manage instances and databases can
+also be found in
+[OVERVIEW](https://github.com/googleapis/google-cloud-ruby/blob/master/google-cloud-spanner/OVERVIEW.md).
 
 ## Supported Ruby Versions
 

@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# DO NOT EDIT: Unless you're fixing a P0/P1 and/or a security issue. This class
+# is frozen to all new features from `google-cloud-spanner/v3.0` onwards.
+
 
 require "google/cloud/spanner/database/job"
 require "google/cloud/spanner/database/list"
@@ -24,6 +27,13 @@ module Google
     module Spanner
       ##
       # # Database
+      #
+      # NOTE: From `google-cloud-spanner/v3.0` onwards, **new features for
+      # mananging databases will only be available through the
+      # [google-cloud-spanner-admin-database-v1](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-spanner-admin-database-v1)
+      # client. See the
+      # [README](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-spanner#google-cloud-spanner)
+      # for further details.
       #
       # Represents a Cloud Spanner database. To use Cloud Spanner's read and
       # write operations, you must first create a database. A database belongs

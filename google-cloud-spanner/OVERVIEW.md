@@ -23,29 +23,33 @@ create an instance, you choose where your data is stored and how many nodes are
 used for your data. (For more information, see [Configuration
 Guide](https://googleapis.dev/ruby/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION.html).
 
-Use {Google::Cloud::Spanner::Project#create_instance Project#create_instance} to
-create an instance:
+Use {Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#create_instance
+Client#create_instance}
+to create an instance:
 
 ```ruby
 require "google/cloud/spanner"
 
-spanner = Google::Cloud::Spanner.new
+instance_admin_client = \
+  Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new
 
-job = spanner.create_instance "my-instance",
-                              name: "My Instance",
-                              config: "regional-us-central1",
-                              nodes: 5,
-                              labels: { production: :env }
+project_path = \
+  instance_admin_client.project_path project: "my-project"
+config_path = \
+  instance_admin_client.instance_config_path project: "my-project",
+  instance_config: "regional-us-central1"
 
-job.done? #=> false
-job.reload! # API call
-job.done? #=> true
+job = instance_admin_client.create_instance parent: project_path,
+  instance_id: "my-instance",
+  instance: Google::Cloud::Spanner::Admin::Instance::V1::Instance.new({
+    display_name: "My Instance",
+    config: config_path,
+    node_count: 5,
+    labels: { "production": :env }
+  })
 
-if job.error?
-  status = job.error
-else
-  instance = job.instance
-end
+job.wait_until_done!
+instance = job.results
 ```
 
 ## Creating databases
@@ -54,26 +58,23 @@ Now that you have created an instance, you can create a database. Cloud
 Spanner databases hold the tables and indexes that allow you to read and
 write data. You may create multiple databases in an instance.
 
-Use {Google::Cloud::Spanner::Project#create_database Project#create_database}
-(or {Google::Cloud::Spanner::Instance#create_database Instance#create_database})
+Use {Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_database Client#create_database}
 to create a database:
 
 ```ruby
 require "google/cloud/spanner"
 
-spanner = Google::Cloud::Spanner.new
+db_admin_client = \
+  Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
 
-job = spanner.create_database "my-instance", "my-database"
+instance_path = \
+  db_admin_client.instance_path project: "my-project", instance: "my-database"
 
-job.done? #=> false
-job.reload! # API call
-job.done? #=> true
+job = db_admin_client.create_database parent: instance_path,
+  create_statement: "CREATE DATABASE my-database",
 
-if job.error?
-  status = job.error
-else
-  database = job.database
-end
+job.wait_until_done!
+database = job.results
 ```
 
 ## Updating database schemas
@@ -89,10 +90,12 @@ more statements in Cloud Spanner's Data Definition Language (DDL):
 ```ruby
 require "google/cloud/spanner"
 
-spanner = Google::Cloud::Spanner.new
+db_admin_client = \
+  Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
 
-database = spanner.database "my-instance", "my-database"
-
+db_path = db_admin_client.database_path project: project_id,
+                                        instance: instance_id,
+                                        database: database_id
 add_users_table_sql = %q(
   CREATE TABLE users (
     id INT64 NOT NULL,
@@ -102,7 +105,11 @@ add_users_table_sql = %q(
   ) PRIMARY KEY(id)
 )
 
-database.update statements: [add_users_table_sql]
+job = db_admin_client.update_database_ddl database: db_path,
+  statements: [add_users_table_sql]
+
+job.wait_until_done!
+database = job.results
 ```
 
 ## Creating clients
@@ -289,16 +296,19 @@ end
 
 ## Deleting databases
 
-Use {Google::Cloud::Spanner::Database#drop Database#drop} to delete a database:
+Use {Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#drop Client#drop}
+to delete a database:
 
 ```ruby
 require "google/cloud/spanner"
 
-spanner = Google::Cloud::Spanner.new
+db_admin_client = \
+  Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
 
-database = spanner.database "my-instance", "my-database"
-
-database.drop
+db_path = db_admin_client.database_path project: "my-project",
+                                        instance: "my-instance",
+                                        database: "my-database"
+db_admin_client.drop_database database: db_path
 ```
 
 ## Deleting instances
@@ -311,11 +321,14 @@ Instance#delete} to delete an instance:
 ```ruby
 require "google/cloud/spanner"
 
-spanner = Google::Cloud::Spanner.new
+instance_admin_client = \
+  Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new
 
-instance = spanner.instance "my-instance"
+instance_path = \
+  instance_admin_client.instance_path project: "my-project",
+  instance: "my-instance"
 
-instance.delete
+instance_admin_client.delete_instance name: instance_path
 ```
 
 ## Additional information
