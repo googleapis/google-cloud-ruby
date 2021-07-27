@@ -4,4 +4,4 @@
 
 #### Features
 
-* Initial generation of google-cloud-data_fusion ([#13144](https://www.github.com/googleapis/google-cloud-ruby/issues/13144))
+* Initial generation of google-cloud-data_fusion
