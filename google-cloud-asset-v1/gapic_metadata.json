@@ -69,6 +69,11 @@
               "methods": [
                 "analyze_iam_policy_longrunning"
               ]
+            },
+            "AnalyzeMove": {
+              "methods": [
+                "analyze_move"
+              ]
             }
           }
         }

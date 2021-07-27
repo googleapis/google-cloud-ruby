@@ -14,9 +14,13 @@ require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/rpc/status_pb'
 require 'google/type/expr_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/asset/v1/asset_service.proto", :syntax => :proto3) do
+    add_message "google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata" do
+      optional :create_time, :message, 1, "google.protobuf.Timestamp"
+    end
     add_message "google.cloud.asset.v1.ExportAssetsRequest" do
       optional :parent, :string, 1
       optional :read_time, :message, 2, "google.protobuf.Timestamp"
@@ -130,6 +134,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :page_size, :int32, 4
       optional :page_token, :string, 5
       optional :order_by, :string, 6
+      optional :read_mask, :message, 8, "google.protobuf.FieldMask"
     end
     add_message "google.cloud.asset.v1.SearchAllResourcesResponse" do
       repeated :results, :message, 1, "google.cloud.asset.v1.ResourceSearchResult"
@@ -218,6 +223,33 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse" do
     end
+    add_message "google.cloud.asset.v1.AnalyzeMoveRequest" do
+      optional :resource, :string, 1
+      optional :destination_parent, :string, 2
+      optional :view, :enum, 3, "google.cloud.asset.v1.AnalyzeMoveRequest.AnalysisView"
+    end
+    add_enum "google.cloud.asset.v1.AnalyzeMoveRequest.AnalysisView" do
+      value :ANALYSIS_VIEW_UNSPECIFIED, 0
+      value :FULL, 1
+      value :BASIC, 2
+    end
+    add_message "google.cloud.asset.v1.AnalyzeMoveResponse" do
+      repeated :move_analysis, :message, 1, "google.cloud.asset.v1.MoveAnalysis"
+    end
+    add_message "google.cloud.asset.v1.MoveAnalysis" do
+      optional :display_name, :string, 1
+      oneof :result do
+        optional :analysis, :message, 2, "google.cloud.asset.v1.MoveAnalysisResult"
+        optional :error, :message, 3, "google.rpc.Status"
+      end
+    end
+    add_message "google.cloud.asset.v1.MoveAnalysisResult" do
+      repeated :blockers, :message, 1, "google.cloud.asset.v1.MoveImpact"
+      repeated :warnings, :message, 2, "google.cloud.asset.v1.MoveImpact"
+    end
+    add_message "google.cloud.asset.v1.MoveImpact" do
+      optional :detail, :string, 1
+    end
     add_enum "google.cloud.asset.v1.ContentType" do
       value :CONTENT_TYPE_UNSPECIFIED, 0
       value :RESOURCE, 1
@@ -233,6 +265,7 @@ module Google
   module Cloud
     module Asset
       module V1
+        AnalyzeIamPolicyLongrunningMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata").msgclass
         ExportAssetsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ExportAssetsRequest").msgclass
         ExportAssetsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ExportAssetsResponse").msgclass
         ListAssetsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ListAssetsRequest").msgclass
@@ -274,6 +307,12 @@ module Google
         IamPolicyAnalysisOutputConfig::BigQueryDestination::PartitionKey = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisOutputConfig.BigQueryDestination.PartitionKey").enummodule
         AnalyzeIamPolicyLongrunningRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest").msgclass
         AnalyzeIamPolicyLongrunningResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse").msgclass
+        AnalyzeMoveRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeMoveRequest").msgclass
+        AnalyzeMoveRequest::AnalysisView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeMoveRequest.AnalysisView").enummodule
+        AnalyzeMoveResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeMoveResponse").msgclass
+        MoveAnalysis = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.MoveAnalysis").msgclass
+        MoveAnalysisResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.MoveAnalysisResult").msgclass
+        MoveImpact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.MoveImpact").msgclass
         ContentType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ContentType").enummodule
       end
     end

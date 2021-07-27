@@ -21,6 +21,16 @@ module Google
   module Cloud
     module Asset
       module V1
+        # Represents the metadata of the longrunning operation for the
+        # AnalyzeIamPolicyLongrunning rpc.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the operation was created.
+        class AnalyzeIamPolicyLongrunningMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Export asset request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -518,7 +528,7 @@ module Google
         #     optional.
         #
         #     See our [user
-        #     guide](https://cloud.google.com/asset-inventory/docs/monitoring-asset-changes#feed_with_condition)
+        #     guide](https://cloud.google.com/asset-inventory/docs/monitoring-asset-changes-with-condition)
         #     for detailed instructions.
         class Feed
           include ::Google::Protobuf::MessageExts
@@ -565,8 +575,8 @@ module Google
         #       encryption key whose name contains the word "key".
         #     * `state:ACTIVE` to find Cloud resources whose state contains "ACTIVE" as a
         #       word.
-        #     * `NOT state:ACTIVE` to find \\{\\{gcp_name}} resources whose state
-        #       doesn't contain "ACTIVE" as a word.
+        #     * `NOT state:ACTIVE` to find Cloud resources whose state doesn't contain
+        #       "ACTIVE" as a word.
         #     * `createTime<1609459200` to find Cloud resources that were created before
         #       "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
         #       "2021-01-01 00:00:00 UTC" in seconds.
@@ -616,6 +626,7 @@ module Google
         #     to indicate descending order. Redundant space characters are ignored.
         #     Example: "location DESC, name".
         #     Only singular primitive fields in the response are sortable:
+        #
         #       * name
         #       * assetType
         #       * project
@@ -628,9 +639,40 @@ module Google
         #       * state
         #       * parentFullResourceName
         #       * parentAssetType
+        #
         #     All the other fields such as repeated fields (e.g., `networkTags`), map
         #     fields (e.g., `labels`) and struct fields (e.g., `additionalAttributes`)
         #     are not supported.
+        # @!attribute [rw] read_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. A comma-separated list of fields specifying which fields to be returned in
+        #     ResourceSearchResult. Only '*' or combination of top level fields can be
+        #     specified. Field names of both snake_case and camelCase are supported.
+        #     Examples: `"*"`, `"name,location"`, `"name,versionedResources"`.
+        #
+        #     The read_mask paths must be valid field paths listed but not limited to
+        #     (both snake_case and camelCase are supported):
+        #
+        #       * name
+        #       * assetType
+        #       * project
+        #       * displayName
+        #       * description
+        #       * location
+        #       * labels
+        #       * networkTags
+        #       * kmsKey
+        #       * createTime
+        #       * updateTime
+        #       * state
+        #       * additionalAttributes
+        #       * versionedResources
+        #
+        #     If read_mask is not specified, all fields except versionedResources will
+        #     be returned.
+        #     If only '*' is specified, all fields including versionedResources will be
+        #     returned.
+        #     Any invalid field path will trigger INVALID_ARGUMENT error.
         class SearchAllResourcesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1110,6 +1152,94 @@ module Google
 
         # A response message for {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy_longrunning AssetService.AnalyzeIamPolicyLongrunning}.
         class AnalyzeIamPolicyLongrunningResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for performing resource move analysis.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Required. Name of the resource to perform the analysis against.
+        #     Only GCP Project are supported as of today. Hence, this can only be Project
+        #     ID (such as "projects/my-project-id") or a Project Number (such as
+        #     "projects/12345").
+        # @!attribute [rw] destination_parent
+        #   @return [::String]
+        #     Required. Name of the GCP Folder or Organization to reparent the target
+        #     resource. The analysis will be performed against hypothetically moving the
+        #     resource to this specified desitination parent. This can only be a Folder
+        #     number (such as "folders/123") or an Organization number (such as
+        #     "organizations/123").
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::Asset::V1::AnalyzeMoveRequest::AnalysisView]
+        #     Analysis view indicating what information should be included in the
+        #     analysis response. If unspecified, the default view is FULL.
+        class AnalyzeMoveRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # View enum for supporting partial analysis responses.
+          module AnalysisView
+            # The default/unset value.
+            # The API will default to the FULL view.
+            ANALYSIS_VIEW_UNSPECIFIED = 0
+
+            # Full analysis including all level of impacts of the specified resource
+            # move.
+            FULL = 1
+
+            # Basic analysis only including blockers which will prevent the specified
+            # resource move at runtime.
+            BASIC = 2
+          end
+        end
+
+        # The response message for resource move analysis.
+        # @!attribute [rw] move_analysis
+        #   @return [::Array<::Google::Cloud::Asset::V1::MoveAnalysis>]
+        #     The list of analyses returned from performing the intended resource move
+        #     analysis. The analysis is grouped by different Cloud services.
+        class AnalyzeMoveResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A message to group the analysis information.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     The user friendly display name of the analysis. E.g. IAM, Organization
+        #     Policy etc.
+        # @!attribute [rw] analysis
+        #   @return [::Google::Cloud::Asset::V1::MoveAnalysisResult]
+        #     Analysis result of moving the target resource.
+        # @!attribute [rw] error
+        #   @return [::Google::Rpc::Status]
+        #     Description of error encountered when performing the analysis.
+        class MoveAnalysis
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An analysis result including blockers and warnings.
+        # @!attribute [rw] blockers
+        #   @return [::Array<::Google::Cloud::Asset::V1::MoveImpact>]
+        #     Blocking information that would prevent the target resource from moving
+        #     to the specified destination at runtime.
+        # @!attribute [rw] warnings
+        #   @return [::Array<::Google::Cloud::Asset::V1::MoveImpact>]
+        #     Warning information indicating that moving the target resource to the
+        #     specified destination might be unsafe. This can include important policy
+        #     information and configuration changes, but will not block moves at runtime.
+        class MoveAnalysisResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A message to group impacts of moving the target resource.
+        # @!attribute [rw] detail
+        #   @return [::String]
+        #     User friendly impact detail in a free form message.
+        class MoveImpact
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
