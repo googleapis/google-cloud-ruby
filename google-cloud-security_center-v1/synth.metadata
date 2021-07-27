@@ -4,14 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "33de88482a529898d2527ca88568d7e416b30d46"
+        "sha": "1b3bc9424393f131d0aec5697e5cbab08c2f9a30"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b2a7d2709887e38bcd3b5142424e563b0b386b6f"
+        "sha": "c3b8283ae6a67b575ee863764312645ec8b2d60f"
       }
     }
   ],
@@ -51,6 +51,7 @@
     "lib/google/cloud/securitycenter/v1/asset_pb.rb",
     "lib/google/cloud/securitycenter/v1/finding_pb.rb",
     "lib/google/cloud/securitycenter/v1/folder_pb.rb",
+    "lib/google/cloud/securitycenter/v1/indicator_pb.rb",
     "lib/google/cloud/securitycenter/v1/notification_config_pb.rb",
     "lib/google/cloud/securitycenter/v1/notification_message_pb.rb",
     "lib/google/cloud/securitycenter/v1/organization_settings_pb.rb",
@@ -66,6 +67,7 @@
     "proto_docs/google/cloud/securitycenter/v1/asset.rb",
     "proto_docs/google/cloud/securitycenter/v1/finding.rb",
     "proto_docs/google/cloud/securitycenter/v1/folder.rb",
+    "proto_docs/google/cloud/securitycenter/v1/indicator.rb",
     "proto_docs/google/cloud/securitycenter/v1/notification_config.rb",
     "proto_docs/google/cloud/securitycenter/v1/notification_message.rb",
     "proto_docs/google/cloud/securitycenter/v1/organization_settings.rb",
