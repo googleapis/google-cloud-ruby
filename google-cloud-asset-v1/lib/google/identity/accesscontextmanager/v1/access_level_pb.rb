@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/resource_pb'
 require 'google/identity/accesscontextmanager/type/device_resources_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/type/expr_pb'

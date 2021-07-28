@@ -29,7 +29,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Output only. Resource name of the `AccessPolicy`. Format:
-        #     `accessPolicies/{policy_id}`
+        #     `accessPolicies/{access_policy}`
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent of this `AccessPolicy` in the Cloud Resource
