@@ -31,7 +31,7 @@ module Google
     module DataCatalog
       module V1
         ##
-        # Policy Tag Manager API service allows clients to manage their policy tags and
+        # Policy Tag Manager API service allows you to manage your policy tags and
         # taxonomies.
         #
         # Policy tags are used to tag BigQuery columns and apply additional access

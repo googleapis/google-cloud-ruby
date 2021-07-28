@@ -7,6 +7,7 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/datacatalog/v1/bigquery_pb'
 require 'google/cloud/datacatalog/v1/common_pb'
 require 'google/cloud/datacatalog/v1/data_source_pb'
 require 'google/cloud/datacatalog/v1/gcs_fileset_spec_pb'
@@ -15,6 +16,7 @@ require 'google/cloud/datacatalog/v1/search_pb'
 require 'google/cloud/datacatalog/v1/table_spec_pb'
 require 'google/cloud/datacatalog/v1/tags_pb'
 require 'google/cloud/datacatalog/v1/timestamps_pb'
+require 'google/cloud/datacatalog/v1/usage_pb'
 require 'google/iam/v1/iam_policy_pb'
 require 'google/iam/v1/policy_pb'
 require 'google/protobuf/empty_pb'
@@ -34,6 +36,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :include_project_ids, :string, 3
       optional :include_gcp_public_datasets, :bool, 7
       repeated :restricted_locations, :string, 16
+      optional :include_public_tag_templates, :bool, 19
     end
     add_message "google.cloud.datacatalog.v1.SearchCatalogResponse" do
       repeated :results, :message, 1, "google.cloud.datacatalog.v1.SearchCatalogResult"
@@ -96,6 +99,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :description, :string, 4
       optional :schema, :message, 5, "google.cloud.datacatalog.v1.Schema"
       optional :source_system_timestamps, :message, 7, "google.cloud.datacatalog.v1.SystemTimestamps"
+      optional :usage_signal, :message, 13, "google.cloud.datacatalog.v1.UsageSignal"
+      map :labels, :string, :string, 14
       optional :data_source, :message, 20, "google.cloud.datacatalog.v1.DataSource"
       oneof :entry_type do
         optional :type, :enum, 2, "google.cloud.datacatalog.v1.EntryType"
@@ -112,6 +117,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       end
       oneof :spec do
         optional :database_table_spec, :message, 24, "google.cloud.datacatalog.v1.DatabaseTableSpec"
+        optional :data_source_connection_spec, :message, 27, "google.cloud.datacatalog.v1.DataSourceConnectionSpec"
+        optional :routine_spec, :message, 28, "google.cloud.datacatalog.v1.RoutineSpec"
       end
     end
     add_message "google.cloud.datacatalog.v1.DatabaseTableSpec" do
@@ -121,6 +128,35 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :TABLE_TYPE_UNSPECIFIED, 0
       value :NATIVE, 1
       value :EXTERNAL, 2
+    end
+    add_message "google.cloud.datacatalog.v1.DataSourceConnectionSpec" do
+      optional :bigquery_connection_spec, :message, 1, "google.cloud.datacatalog.v1.BigQueryConnectionSpec"
+    end
+    add_message "google.cloud.datacatalog.v1.RoutineSpec" do
+      optional :routine_type, :enum, 1, "google.cloud.datacatalog.v1.RoutineSpec.RoutineType"
+      optional :language, :string, 2
+      repeated :routine_arguments, :message, 3, "google.cloud.datacatalog.v1.RoutineSpec.Argument"
+      optional :return_type, :string, 4
+      optional :definition_body, :string, 5
+      oneof :system_spec do
+        optional :bigquery_routine_spec, :message, 6, "google.cloud.datacatalog.v1.BigQueryRoutineSpec"
+      end
+    end
+    add_message "google.cloud.datacatalog.v1.RoutineSpec.Argument" do
+      optional :name, :string, 1
+      optional :mode, :enum, 2, "google.cloud.datacatalog.v1.RoutineSpec.Argument.Mode"
+      optional :type, :string, 3
+    end
+    add_enum "google.cloud.datacatalog.v1.RoutineSpec.Argument.Mode" do
+      value :MODE_UNSPECIFIED, 0
+      value :IN, 1
+      value :OUT, 2
+      value :INOUT, 3
+    end
+    add_enum "google.cloud.datacatalog.v1.RoutineSpec.RoutineType" do
+      value :ROUTINE_TYPE_UNSPECIFIED, 0
+      value :SCALAR_FUNCTION, 1
+      value :PROCEDURE, 2
     end
     add_message "google.cloud.datacatalog.v1.EntryGroup" do
       optional :name, :string, 1
@@ -202,7 +238,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :MODEL, 5
       value :DATA_STREAM, 3
       value :FILESET, 4
+      value :CLUSTER, 6
       value :DATABASE, 7
+      value :DATA_SOURCE_CONNECTION, 8
+      value :ROUTINE, 9
       value :SERVICE, 14
     end
   end
@@ -229,6 +268,11 @@ module Google
         Entry = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.Entry").msgclass
         DatabaseTableSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.DatabaseTableSpec").msgclass
         DatabaseTableSpec::TableType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.DatabaseTableSpec.TableType").enummodule
+        DataSourceConnectionSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.DataSourceConnectionSpec").msgclass
+        RoutineSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.RoutineSpec").msgclass
+        RoutineSpec::Argument = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.RoutineSpec.Argument").msgclass
+        RoutineSpec::Argument::Mode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.RoutineSpec.Argument.Mode").enummodule
+        RoutineSpec::RoutineType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.RoutineSpec.RoutineType").enummodule
         EntryGroup = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.EntryGroup").msgclass
         CreateTagTemplateRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.CreateTagTemplateRequest").msgclass
         GetTagTemplateRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.GetTagTemplateRequest").msgclass

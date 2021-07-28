@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "33de88482a529898d2527ca88568d7e416b30d46"
+        "sha": "f3a6c5b58b8189cb58dc547942d7bede7d14fff9"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "54dc383991e3c25c12f9d1883e1b0375b7932f35",
-        "internalRef": "383721241"
+        "sha": "b4967c737377d073125a2758c81357ceb100778f",
+        "internalRef": "387410905"
       }
     }
   ],
@@ -56,6 +56,7 @@
     "lib/google/cloud/data_catalog/v1/policy_tag_manager_serialization/credentials.rb",
     "lib/google/cloud/data_catalog/v1/policy_tag_manager_serialization/paths.rb",
     "lib/google/cloud/data_catalog/v1/version.rb",
+    "lib/google/cloud/datacatalog/v1/bigquery_pb.rb",
     "lib/google/cloud/datacatalog/v1/common_pb.rb",
     "lib/google/cloud/datacatalog/v1/data_source_pb.rb",
     "lib/google/cloud/datacatalog/v1/datacatalog_pb.rb",
@@ -70,9 +71,11 @@
     "lib/google/cloud/datacatalog/v1/table_spec_pb.rb",
     "lib/google/cloud/datacatalog/v1/tags_pb.rb",
     "lib/google/cloud/datacatalog/v1/timestamps_pb.rb",
+    "lib/google/cloud/datacatalog/v1/usage_pb.rb",
     "proto_docs/README.md",
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/datacatalog/v1/bigquery.rb",
     "proto_docs/google/cloud/datacatalog/v1/common.rb",
     "proto_docs/google/cloud/datacatalog/v1/data_source.rb",
     "proto_docs/google/cloud/datacatalog/v1/datacatalog.rb",
@@ -84,6 +87,7 @@
     "proto_docs/google/cloud/datacatalog/v1/table_spec.rb",
     "proto_docs/google/cloud/datacatalog/v1/tags.rb",
     "proto_docs/google/cloud/datacatalog/v1/timestamps.rb",
+    "proto_docs/google/cloud/datacatalog/v1/usage.rb",
     "proto_docs/google/iam/v1/iam_policy.rb",
     "proto_docs/google/iam/v1/options.rb",
     "proto_docs/google/iam/v1/policy.rb",

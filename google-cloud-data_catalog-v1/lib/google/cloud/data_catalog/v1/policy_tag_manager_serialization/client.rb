@@ -27,9 +27,10 @@ module Google
           ##
           # Client for the PolicyTagManagerSerialization service.
           #
-          # Policy Tag Manager serialization API service allows clients to manipulate
-          # their policy tags and taxonomies in serialized format, where taxonomy is a
-          # hierarchical group of policy tags.
+          # Policy Tag Manager Serialization API service allows you to manipulate
+          # your policy tags and taxonomies in a serialized format.
+          #
+          # Taxonomy is a hierarchical group of policy tags.
           #
           class Client
             include Paths
@@ -155,15 +156,94 @@ module Google
             # Service calls
 
             ##
-            # Creates new taxonomies (including their policy tags) by importing from
-            # inlined source or cross-regional source. New taxonomies will be created in
-            # a given parent project.
+            # Replaces (updates) a taxonomy and all its policy tags.
             #
-            # If using the cross-regional source, a new taxonomy is created by copying
+            # The taxonomy and its entire hierarchy of policy tags must be
+            # represented literally by `SerializedTaxonomy` and the nested
+            # `SerializedPolicyTag` messages.
+            #
+            # This operation automatically does the following:
+            #
+            # - Deletes the existing policy tags that are missing from the
+            #   `SerializedPolicyTag`.
+            # - Creates policy tags that don't have resource names. They are considered
+            #   new.
+            # - Updates policy tags with valid resources names accordingly.
+            #
+            # @overload replace_taxonomy(request, options = nil)
+            #   Pass arguments to `replace_taxonomy` via a request object, either of type
+            #   {::Google::Cloud::DataCatalog::V1::ReplaceTaxonomyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DataCatalog::V1::ReplaceTaxonomyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload replace_taxonomy(name: nil, serialized_taxonomy: nil)
+            #   Pass arguments to `replace_taxonomy` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Resource name of the taxonomy to update.
+            #   @param serialized_taxonomy [::Google::Cloud::DataCatalog::V1::SerializedTaxonomy, ::Hash]
+            #     Required. Taxonomy to update along with its child policy tags.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DataCatalog::V1::Taxonomy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DataCatalog::V1::Taxonomy]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def replace_taxonomy request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DataCatalog::V1::ReplaceTaxonomyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.replace_taxonomy.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.replace_taxonomy.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.replace_taxonomy.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @policy_tag_manager_serialization_stub.call_rpc :replace_taxonomy, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates new taxonomies (including their policy tags) in a given project
+            # by importing from inlined or cross-regional sources.
+            #
+            # For a cross-regional source, new taxonomies are created by copying
             # from a source in another region.
             #
-            # If using the inlined source, this method provides a way to bulk create
-            # taxonomies and policy tags using nested proto structure.
+            # For an inlined source, taxonomies and policy tags are created in bulk using
+            # nested protocol buffer structures.
             #
             # @overload import_taxonomies(request, options = nil)
             #   Pass arguments to `import_taxonomies` via a request object, either of type
@@ -183,9 +263,9 @@ module Google
             #   @param parent [::String]
             #     Required. Resource name of project that the imported taxonomies will belong to.
             #   @param inline_source [::Google::Cloud::DataCatalog::V1::InlineSource, ::Hash]
-            #     Inline source used for taxonomies import.
+            #     Inline source taxonomy to import.
             #   @param cross_regional_source [::Google::Cloud::DataCatalog::V1::CrossRegionalSource, ::Hash]
-            #     Cross-regional source taxonomy to be imported.
+            #     Cross-regional source taxonomy to import.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::ImportTaxonomiesResponse]
@@ -233,12 +313,12 @@ module Google
             end
 
             ##
-            # Exports taxonomies as the requested type and returns the taxonomies
-            # including their policy tags. The requested taxonomies must belong to one
-            # project.
+            # Exports taxonomies in the requested type and returns them,
+            # including their policy tags. The requested taxonomies must belong to the
+            # same project.
             #
-            # SerializedTaxonomy protos with nested policy tags that are generated by
-            # this method can be used as input for future ImportTaxonomies calls.
+            # This method generates `SerializedTaxonomy` protocol buffers with nested
+            # policy tags that can be used as input for `ImportTaxonomies` calls.
             #
             # @overload export_taxonomies(request, options = nil)
             #   Pass arguments to `export_taxonomies` via a request object, either of type
@@ -258,10 +338,10 @@ module Google
             #   @param parent [::String]
             #     Required. Resource name of the project that the exported taxonomies belong to.
             #   @param taxonomies [::Array<::String>]
-            #     Required. Resource names of the taxonomies to be exported.
+            #     Required. Resource names of the taxonomies to export.
             #   @param serialized_taxonomies [::Boolean]
-            #     Export taxonomies as serialized taxonomies, which contain all the policy
-            #     tags as nested protos.
+            #     Serialized export taxonomies that contain all the policy
+            #     tags as nested protocol buffers.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::ExportTaxonomiesResponse]
@@ -323,19 +403,19 @@ module Google
             #
             # # Examples
             #
-            # To modify the global config, setting the timeout for import_taxonomies
+            # To modify the global config, setting the timeout for replace_taxonomy
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
             #     ::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client.configure do |config|
             #       config.timeout = 10.0
-            #       config.rpcs.import_taxonomies.timeout = 20.0
+            #       config.rpcs.replace_taxonomy.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
             #     client = ::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client.new do |config|
             #       config.timeout = 10.0
-            #       config.rpcs.import_taxonomies.timeout = 20.0
+            #       config.rpcs.replace_taxonomy.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
@@ -445,6 +525,11 @@ module Google
               #
               class Rpcs
                 ##
+                # RPC-specific configuration for `replace_taxonomy`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :replace_taxonomy
+                ##
                 # RPC-specific configuration for `import_taxonomies`
                 # @return [::Gapic::Config::Method]
                 #
@@ -457,6 +542,8 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
+                  replace_taxonomy_config = parent_rpcs.replace_taxonomy if parent_rpcs.respond_to? :replace_taxonomy
+                  @replace_taxonomy = ::Gapic::Config::Method.new replace_taxonomy_config
                   import_taxonomies_config = parent_rpcs.import_taxonomies if parent_rpcs.respond_to? :import_taxonomies
                   @import_taxonomies = ::Gapic::Config::Method.new import_taxonomies_config
                   export_taxonomies_config = parent_rpcs.export_taxonomies if parent_rpcs.respond_to? :export_taxonomies
