@@ -26,6 +26,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :bool_value, :bool, 4
         optional :timestamp_value, :message, 5, "google.protobuf.Timestamp"
         optional :enum_value, :message, 6, "google.cloud.datacatalog.v1.TagField.EnumValue"
+        optional :richtext_value, :string, 8
       end
     end
     add_message "google.cloud.datacatalog.v1.TagField.EnumValue" do
@@ -34,6 +35,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.datacatalog.v1.TagTemplate" do
       optional :name, :string, 1
       optional :display_name, :string, 2
+      optional :is_publicly_readable, :bool, 5
       map :fields, :string, :message, 3, "google.cloud.datacatalog.v1.TagTemplateField"
     end
     add_message "google.cloud.datacatalog.v1.TagTemplateField" do
@@ -62,6 +64,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :STRING, 2
       value :BOOL, 3
       value :TIMESTAMP, 4
+      value :RICHTEXT, 5
     end
   end
 end

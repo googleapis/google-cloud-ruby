@@ -27,7 +27,7 @@ module Google
           ##
           # Client for the PolicyTagManager service.
           #
-          # Policy Tag Manager API service allows clients to manage their policy tags and
+          # Policy Tag Manager API service allows you to manage your policy tags and
           # taxonomies.
           #
           # Policy tags are used to tag BigQuery columns and apply additional access
@@ -158,8 +158,9 @@ module Google
             # Service calls
 
             ##
-            # Creates a taxonomy in a specified project. The taxonomy is initially empty,
-            # i.e., does not contain policy tags.
+            # Creates a taxonomy in a specified project.
+            #
+            # The taxonomy is initially empty, that is, it doesn't contain policy tags.
             #
             # @overload create_taxonomy(request, options = nil)
             #   Pass arguments to `create_taxonomy` via a request object, either of type
@@ -179,7 +180,7 @@ module Google
             #   @param parent [::String]
             #     Required. Resource name of the project that the taxonomy will belong to.
             #   @param taxonomy [::Google::Cloud::DataCatalog::V1::Taxonomy, ::Hash]
-            #     The taxonomy to be created.
+            #     The taxonomy to create.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::Taxonomy]
@@ -227,7 +228,7 @@ module Google
             end
 
             ##
-            # Deletes a taxonomy. This method will also delete all policy tags in this
+            # Deletes a taxonomy, including all policy tags in this
             # taxonomy, their associated policies, and the policy tags references from
             # BigQuery columns.
             #
@@ -247,8 +248,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of the taxonomy to be deleted. All policy tags in
-            #     this taxonomy will also be deleted.
+            #     Required. Resource name of the taxonomy to delete.
+            #
+            #     Note: All policy tags in this taxonomy are also deleted.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -296,7 +298,7 @@ module Google
             end
 
             ##
-            # Updates a taxonomy. This method can update the taxonomy's display name,
+            # Updates a taxonomy, including its display name,
             # description, and activated policy types.
             #
             # @overload update_taxonomy(request, options = nil)
@@ -315,13 +317,14 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param taxonomy [::Google::Cloud::DataCatalog::V1::Taxonomy, ::Hash]
-            #     The taxonomy to update. Only description, display_name, and activated
-            #     policy types can be updated.
+            #     The taxonomy to update. You can update only its description, display name,
+            #     and activated policy types.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The update mask applies to the resource. For the `FieldMask` definition,
-            #     see
-            #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-            #     If not set, defaults to all of the fields that are allowed to update.
+            #     Specifies fields to update. If not set, defaults to all fields you can
+            #     update.
+            #
+            #     For more information, see [FieldMask]
+            #     (https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::Taxonomy]
@@ -369,8 +372,8 @@ module Google
             end
 
             ##
-            # Lists all taxonomies in a project in a particular location that the caller
-            # has permission to view.
+            # Lists all taxonomies in a project in a particular location that you
+            # have a permission to view.
             #
             # @overload list_taxonomies(request, options = nil)
             #   Pass arguments to `list_taxonomies` via a request object, either of type
@@ -390,11 +393,13 @@ module Google
             #   @param parent [::String]
             #     Required. Resource name of the project to list the taxonomies of.
             #   @param page_size [::Integer]
-            #     The maximum number of items to return. Must be a value between 1 and 1000.
-            #     If not set, defaults to 50.
+            #     The maximum number of items to return. Must be a value between 1 and 1000
+            #     inclusively. If not set, defaults to 50.
             #   @param page_token [::String]
-            #     The next_page_token value returned from a previous list request, if any. If
-            #     not set, defaults to an empty string.
+            #     The pagination token of the next results page. If not set,
+            #     the first page is returned.
+            #
+            #     The token is returned in the response to a previous list request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DataCatalog::V1::Taxonomy>]
@@ -461,7 +466,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of the requested taxonomy.
+            #     Required. Resource name of the taxonomy to get.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::Taxonomy]
@@ -527,9 +532,10 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of the taxonomy that the policy tag will belong to.
+            #     Required. Resource name of the taxonomy that the policy tag will belong to.<br /><br
+            #     />
             #   @param policy_tag [::Google::Cloud::DataCatalog::V1::PolicyTag, ::Hash]
-            #     The policy tag to be created.
+            #     The policy tag to create.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::PolicyTag]
@@ -577,12 +583,12 @@ module Google
             end
 
             ##
-            # Deletes a policy tag. This method also deletes:
+            # Deletes a policy tag together with the following:
             #
-            # * all of its descendant policy tags, if any
-            # * the policies associated with the policy tag and its descendants
-            # * references from BigQuery table schema of the policy tag and its
-            #   descendants.
+            # * All of its descendant policy tags, if any
+            # * Policies associated with the policy tag and its descendants
+            # * References from BigQuery table schema of the policy tag and its
+            #   descendants
             #
             # @overload delete_policy_tag(request, options = nil)
             #   Pass arguments to `delete_policy_tag` via a request object, either of type
@@ -600,8 +606,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of the policy tag to be deleted. All of its descendant
-            #     policy tags will also be deleted.
+            #     Required. Resource name of the policy tag to delete.
+            #
+            #     Note: All of its descendant policy tags are also deleted.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -649,7 +656,7 @@ module Google
             end
 
             ##
-            # Updates a policy tag. This method can update the policy tag's display
+            # Updates a policy tag, including its display
             # name, description, and parent policy tag.
             #
             # @overload update_policy_tag(request, options = nil)
@@ -668,16 +675,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param policy_tag [::Google::Cloud::DataCatalog::V1::PolicyTag, ::Hash]
-            #     The policy tag to update. Only the description, display_name, and
-            #     parent_policy_tag fields can be updated.
+            #     The policy tag to update. You can update only its description, display
+            #     name, and parent policy tag fields.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The update mask applies to the resource. Only display_name, description and
-            #     parent_policy_tag can be updated and thus can be listed in the mask. If
-            #     update_mask is not provided, all allowed fields (i.e. display_name,
-            #     description and parent) will be updated. For more information including the
-            #     `FieldMask` definition, see
-            #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-            #     If not set, defaults to all of the fields that are allowed to update.
+            #     Specifies the fields to update.
+            #
+            #     You can update only display name, description, and parent policy tag.
+            #     If not set, defaults to all updatable fields.
+            #     For more information, see [FieldMask]
+            #     (https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::PolicyTag]
@@ -745,11 +751,14 @@ module Google
             #   @param parent [::String]
             #     Required. Resource name of the taxonomy to list the policy tags of.
             #   @param page_size [::Integer]
-            #     The maximum number of items to return. Must be a value between 1 and 1000.
+            #     The maximum number of items to return. Must be a value between 1 and 1000
+            #     inclusively.
             #     If not set, defaults to 50.
             #   @param page_token [::String]
-            #     The next_page_token value returned from a previous List request, if any. If
-            #     not set, defaults to an empty string.
+            #     The pagination token of the next results page. If not set, returns the
+            #     first page.
+            #
+            #     The token is returned in the response to a previous list request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DataCatalog::V1::PolicyTag>]
@@ -816,7 +825,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Resource name of the requested policy tag.
+            #     Required. Resource name of the policy tag.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::PolicyTag]
@@ -1006,7 +1015,7 @@ module Google
             end
 
             ##
-            # Returns the permissions that a caller has on a specified policy tag or
+            # Returns your permissions on a specified policy tag or
             # taxonomy.
             #
             # @overload test_iam_permissions(request, options = nil)

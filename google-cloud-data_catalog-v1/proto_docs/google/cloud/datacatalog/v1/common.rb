@@ -21,8 +21,7 @@ module Google
   module Cloud
     module DataCatalog
       module V1
-        # This enum describes all the possible systems that Data Catalog integrates
-        # with.
+        # This enum lists all the systems that Data Catalog integrates with.
         module IntegratedSystem
           # Default unknown system.
           INTEGRATED_SYSTEM_UNSPECIFIED = 0
