@@ -21,49 +21,28 @@ module Google
   module Cloud
     module Retail
       module V2
-        module UserEventService
-          # Path helper methods for the UserEventService API.
+        module SearchService
+          # Path helper methods for the SearchService API.
           module Paths
             ##
-            # Create a fully-qualified Catalog resource string.
+            # Create a fully-qualified Branch resource string.
             #
             # The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/catalogs/{catalog}`
-            #
-            # @param project [String]
-            # @param location [String]
-            # @param catalog [String]
-            #
-            # @return [::String]
-            def catalog_path project:, location:, catalog:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-
-              "projects/#{project}/locations/#{location}/catalogs/#{catalog}"
-            end
-
-            ##
-            # Create a fully-qualified Product resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}`
+            # `projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}`
             #
             # @param project [String]
             # @param location [String]
             # @param catalog [String]
             # @param branch [String]
-            # @param product [String]
             #
             # @return [::String]
-            def product_path project:, location:, catalog:, branch:, product:
+            def branch_path project:, location:, catalog:, branch:
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
               raise ::ArgumentError, "catalog cannot contain /" if catalog.to_s.include? "/"
-              raise ::ArgumentError, "branch cannot contain /" if branch.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/catalogs/#{catalog}/branches/#{branch}/products/#{product}"
+              "projects/#{project}/locations/#{location}/catalogs/#{catalog}/branches/#{branch}"
             end
 
             extend self
