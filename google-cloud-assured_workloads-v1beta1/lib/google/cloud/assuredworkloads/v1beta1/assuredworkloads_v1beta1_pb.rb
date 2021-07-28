@@ -97,6 +97,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :US_REGIONAL_ACCESS, 5
       value :HIPAA, 6
       value :HITRUST, 7
+      value :EU_REGIONS_AND_SUPPORT, 8
     end
     add_message "google.cloud.assuredworkloads.v1beta1.CreateWorkloadOperationMetadata" do
       optional :create_time, :message, 1, "google.protobuf.Timestamp"
