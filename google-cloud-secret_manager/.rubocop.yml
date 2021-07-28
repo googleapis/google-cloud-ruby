@@ -36,4 +36,4 @@ Naming/FileName:
 
 Style/BlockDelimiters:
   Exclude:
-    - "samples/acceptance/*.rb"
+    - "samples/**/acceptance/*.rb"
