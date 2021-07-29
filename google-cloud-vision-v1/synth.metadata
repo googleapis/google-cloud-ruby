@@ -4,14 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "33de88482a529898d2527ca88568d7e416b30d46"
+        "sha": "e2dbca3a072c36b027be4af3ec96b9b046397472"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b2a7d2709887e38bcd3b5142424e563b0b386b6f"
+        "sha": "558bdfec34e4f19e95e8f4b686bd60aeeea2c45a",
+        "internalRef": "387657808"
       }
     }
   ],
@@ -80,6 +81,30 @@
     "proto_docs/google/rpc/status.rb",
     "proto_docs/google/type/color.rb",
     "proto_docs/google/type/latlng.rb",
+    "snippets/Gemfile",
+    "snippets/image_annotator/async_batch_annotate_files.rb",
+    "snippets/image_annotator/async_batch_annotate_images.rb",
+    "snippets/image_annotator/batch_annotate_files.rb",
+    "snippets/image_annotator/batch_annotate_images.rb",
+    "snippets/product_search/add_product_to_product_set.rb",
+    "snippets/product_search/create_product.rb",
+    "snippets/product_search/create_product_set.rb",
+    "snippets/product_search/create_reference_image.rb",
+    "snippets/product_search/delete_product.rb",
+    "snippets/product_search/delete_product_set.rb",
+    "snippets/product_search/delete_reference_image.rb",
+    "snippets/product_search/get_product.rb",
+    "snippets/product_search/get_product_set.rb",
+    "snippets/product_search/get_reference_image.rb",
+    "snippets/product_search/import_product_sets.rb",
+    "snippets/product_search/list_product_sets.rb",
+    "snippets/product_search/list_products.rb",
+    "snippets/product_search/list_products_in_product_set.rb",
+    "snippets/product_search/list_reference_images.rb",
+    "snippets/product_search/purge_products.rb",
+    "snippets/product_search/remove_product_from_product_set.rb",
+    "snippets/product_search/update_product.rb",
+    "snippets/product_search/update_product_set.rb",
     "test/google/cloud/vision/v1/image_annotator_operations_test.rb",
     "test/google/cloud/vision/v1/image_annotator_paths_test.rb",
     "test/google/cloud/vision/v1/image_annotator_test.rb",
