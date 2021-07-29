@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.1 / 2021-07-29
+
+#### Documentation
+
+* Document the SETUPBUILD key for the build timing field
+
 ### 0.9.0 / 2021-07-21
 
 #### Features
