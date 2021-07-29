@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 / 2021-07-29
+
+#### Features
+
+* Provide information on how much billed time an operation consumed
+
 ### 0.9.2 / 2021-07-12
 
 #### Documentation
