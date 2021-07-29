@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.0 / 2021-07-29
+
+#### Features
+
+* Support filters when listing secrets and secret versions
+
 ### 0.10.2 / 2021-07-12
 
 #### Bug Fixes
