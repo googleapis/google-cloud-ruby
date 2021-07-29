@@ -6,6 +6,7 @@
     "name": "compute",
     "name_pretty": "Google Cloud Compute V1 (ALPHA) API",
     "product_documentation": "https://cloud.google.com/compute/",
+    "release_level": "alpha",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "google-cloud-compute-v1 is the official client library for the Google Cloud Compute V1 API. This library is considered to be in alpha. This means it is still a work-in-progress and under active development. Any release is subject to backwards-incompatible changes at any time.",
