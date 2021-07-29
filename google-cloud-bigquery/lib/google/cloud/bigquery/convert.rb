@@ -75,8 +75,6 @@ module Google
             format_row value[:v], field.fields
           elsif field.type == "STRING"
             String value[:v]
-          elsif field.type == "GEOGRAPHY"
-            String value[:v]
           elsif field.type == "INTEGER"
             Integer value[:v]
           elsif field.type == "FLOAT"
@@ -105,6 +103,8 @@ module Google
             ::Time.parse("#{value[:v]} UTC").to_datetime
           elsif field.type == "DATE"
             Date.parse value[:v]
+          elsif field.type == "GEOGRAPHY"
+            String value[:v]
           else
             value[:v]
           end

@@ -56,6 +56,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:field_time_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "duration", type: "TIME", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_datetime_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "target_end", type: "DATETIME", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_date_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "birthday", type: "DATE", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_geography_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "home", type: "GEOGRAPHY", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_record_repeated_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "cities_lived", type: "RECORD", mode: "REPEATED", description: nil, fields: [ field_integer_gapi, field_timestamp_gapi ] }
 
   let(:short_field_string_required_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "first_name", type: "STRING", mode: "REQUIRED" }
@@ -84,7 +85,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   it "gets the schema, fields, and headers" do
     _(table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
     _(table.schema).must_be :frozen?
-    _(table.schema.fields.count).must_equal 11
+    _(table.schema.fields.count).must_equal 12
 
     _(table.schema.fields[0].name).must_equal "name"
     _(table.schema.fields[0].type).must_equal "STRING"
@@ -141,10 +142,15 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     _(table.schema.fields[10].description).must_be :nil?
     _(table.schema.fields[10].mode).must_equal "NULLABLE"
 
-    _(table.fields.count).must_equal 11
+    _(table.schema.fields[11].name).must_equal "home"
+    _(table.schema.fields[11].type).must_equal "GEOGRAPHY"
+    _(table.schema.fields[11].description).must_be :nil?
+    _(table.schema.fields[11].mode).must_equal "NULLABLE"
+
+    _(table.fields.count).must_equal 12
     _(table.fields.map(&:name)).must_equal table.schema.fields.map(&:name)
-    _(table.headers).must_equal [:name, :age, :score, :pi, :my_bignumeric, :active, :avatar, :started_at, :duration, :target_end, :birthday]
-    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, my_bignumeric: :BIGNUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
+    _(table.headers).must_equal [:name, :age, :score, :pi, :my_bignumeric, :active, :avatar, :started_at, :duration, :target_end, :birthday, :home]
+    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, my_bignumeric: :BIGNUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE, home: :GEOGRAPHY })
   end
 
   it "sets a flat schema via a block with replace option true" do
@@ -159,7 +165,8 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
                field_timestamp_gapi,
                field_time_gapi,
                field_datetime_gapi,
-               field_date_gapi])
+               field_date_gapi,
+               field_geography_gapi])
 
     mock = Minitest::Mock.new
     returned_table_gapi = table_gapi.dup
@@ -182,6 +189,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
       schema.time "duration"
       schema.datetime "target_end"
       schema.date "birthday"
+      schema.geography "home"
     end
 
     _(table.schema.field("rank").max_length).must_be :nil?

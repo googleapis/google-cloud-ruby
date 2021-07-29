@@ -97,6 +97,7 @@ module Google
           #   * `DATETIME`
           #   * `FLOAT`
           #   * `FLOAT64` (same as `FLOAT`)
+          #   * `GEOGRAPHY`
           #   * `INTEGER`
           #   * `INT64` (same as `INTEGER`)
           #   * `NUMERIC`
@@ -123,6 +124,7 @@ module Google
           #   * `DATETIME`
           #   * `FLOAT`
           #   * `FLOAT64` (same as `FLOAT`)
+          #   * `GEOGRAPHY`
           #   * `INTEGER`
           #   * `INT64` (same as `INTEGER`)
           #   * `NUMERIC`
