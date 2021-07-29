@@ -44,9 +44,9 @@ module Google
       #     "my-instance",
       #     display_name: "Instance for user data",
       #     type: :DEVELOPMENT,
-      #     labels: { "env" => "dev"}
+      #     labels: { "env" => "dev" }
       #   ) do |clusters|
-      #     clusters.add("test-cluster", "us-east1-b") # nodes not allowed
+      #     clusters.add "test-cluster", "us-east1-b" # nodes not allowed
       #   end
       #
       #   job.done? #=> false
@@ -203,7 +203,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #
         #   instance.development? # true
         #   instance.type = :PRODUCTION
@@ -267,7 +267,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #   instance.display_name = "My app dev instance"  # Set display name
         #   instance.labels = { env: "dev", data: "users" }
         #   job = instance.save
@@ -314,7 +314,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #   instance.delete
         #
         def delete
@@ -340,7 +340,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #
         #   instance.clusters.all do |cluster|
         #     puts cluster.cluster_id
@@ -366,9 +366,9 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #
-        #   cluster = instance.cluster("my-instance-cluster")
+        #   cluster = instance.cluster "my-cluster"
         #   puts cluster.cluster_id
         #
         def cluster cluster_id
@@ -403,7 +403,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #   job = instance.create_cluster(
         #     "my-new-cluster",
         #     "us-east-1b",
@@ -450,7 +450,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #
         #   # Default name-only view
         #   instance.tables.all do |table|
@@ -490,14 +490,14 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #
-        #   table = instance.table("my-table", perform_lookup: true)
+        #   table = instance.table "my-table", perform_lookup: true
         #   puts table.name
         #   puts table.column_families
         #
         #   # Name-only view
-        #   table = instance.table("my-table", view: :NAME_ONLY, perform_lookup: true)
+        #   table = instance.table "my-table", view: :NAME_ONLY, perform_lookup: true
         #   puts table.name
         #
         # @example  Mutate rows.
@@ -505,17 +505,17 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   entry = table.new_mutation_entry("user-1")
+        #   entry = table.new_mutation_entry "user-1"
         #   entry.set_cell(
         #     "cf1",
         #     "field1",
         #     "XYZ",
-        #     timestamp: (Time.now.to_f * 1000000).round(-3) # microseconds
-        #   ).delete_cells("cf2", "field02")
+        #     timestamp: (Time.now.to_f * 1_000_000).round(-3) # microseconds
+        #   ).delete_cells "cf2", "field02"
         #
-        #   table.mutate_row(entry)
+        #   table.mutate_row entry
         #
         def table table_id, view: nil, perform_lookup: nil, app_profile_id: nil
           ensure_service!
@@ -581,9 +581,9 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #
-        #   table = instance.create_table("my-table")
+        #   table = instance.create_table "my-table"
         #   puts table.name
         #
         # @example Create a table with initial splits and column families.
@@ -591,18 +591,18 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #
         #   initial_splits = ["user-00001", "user-100000", "others"]
-        #   table = instance.create_table("my-table", initial_splits: initial_splits) do |cfm|
-        #     cfm.add('cf1', gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5))
-        #     cfm.add('cf2', gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600))
+        #   table = instance.create_table "my-table", initial_splits: initial_splits do |cfm|
+        #     cfm.add "cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5)
+        #     cfm.add "cf2", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600)
         #
         #     gc_rule = Google::Cloud::Bigtable::GcRule.union(
-        #        Google::Cloud::Bigtable::GcRule.max_age(1800),
+        #       Google::Cloud::Bigtable::GcRule.max_age(1800),
         #       Google::Cloud::Bigtable::GcRule.max_versions(3)
         #     )
-        #     cfm.add('cf3', gc_rule: gc_rule)
+        #     cfm.add "cf3", gc_rule: gc_rule
         #   end
         #
         #   puts table
@@ -660,10 +660,10 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #
         #   routing_policy = Google::Cloud::Bigtable::AppProfile.single_cluster_routing(
-        #     "my-instance-cluster-1",
+        #     "my-cluster",
         #     allow_transactional_writes: true
         #   )
         #
@@ -679,7 +679,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #
         #   routing_policy = Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
         #
@@ -695,7 +695,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #
         #   routing_policy = Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
         #
@@ -746,9 +746,9 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #
-        #   app_profile = instance.app_profile("my-app-profile")
+        #   app_profile = instance.app_profile "my-app-profile"
         #
         #   if app_profile
         #     puts app_profile.name
@@ -776,7 +776,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #
         #   instance.app_profiles.all do |app_profile|
         #     puts app_profile.name
@@ -808,17 +808,17 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #   policy = instance.policy
         #
         # @example Update the policy by passing a block.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #
         #   instance.policy do |p|
-        #     p.add("roles/owner", "user:owner@example.com")
+        #     p.add "roles/owner", "user:owner@example.com"
         #   end # 2 API calls
         #
         def policy
@@ -849,11 +849,11 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #
         #   policy = instance.policy
-        #   policy.add("roles/owner", "user:owner@example.com")
-        #   updated_policy = instance.update_policy(policy)
+        #   policy.add "roles/owner", "user:owner@example.com"
+        #   updated_policy = instance.update_policy policy
         #
         #   puts updated_policy.roles
         #
@@ -892,7 +892,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #
         #   permissions = instance.test_iam_permissions(
         #     "bigtable.instances.get",

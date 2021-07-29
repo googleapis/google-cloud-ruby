@@ -49,8 +49,8 @@ module Google
       #   instance = bigtable.instance "my-instance"
       #
       #   policy = instance.policy
-      #   policy.remove("roles/owner", "user:owner@example.com")
-      #   policy.add("roles/owner", "user:newowner@example.com")
+      #   policy.remove "roles/owner", "user:owner@example.com"
+      #   policy.add "roles/owner", "user:newowner@example.com"
       #   policy.roles["roles/viewer"] = ["allUsers"]
       #
       class Policy
@@ -85,7 +85,7 @@ module Google
         #   instance = bigtable.instance "my-instance"
         #
         #   policy = instance.policy
-        #   policy.add("roles/owner", "user:newowner@example.com")
+        #   policy.add "roles/owner", "user:newowner@example.com"
         #
         def add role_name, member
           role(role_name) << member
@@ -111,7 +111,7 @@ module Google
         #   instance = bigtable.instance "my-instance"
         #
         #   policy = instance.policy
-        #   policy.remove("roles/owner", "user:newowner@example.com")
+        #   policy.remove "roles/owner", "user:newowner@example.com"
         #
         def remove role_name, member
           role(role_name).delete member
