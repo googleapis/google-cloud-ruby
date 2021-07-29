@@ -207,14 +207,14 @@ describe Google::Cloud::Bigquery, :positional_params, :bigquery do
   end
 
   it "queries the data with a WKT geography parameter and geography type" do
-    rows = bigquery.query "SELECT ? AS value", params: ["POINT(1 2)"], types: [:GEOGRAPHY]
+    rows = bigquery.query "SELECT ? AS value", params: ["POINT(-122.335503 47.625536)"], types: [:GEOGRAPHY]
 
     _(rows.class).must_equal Google::Cloud::Bigquery::Data
     _(rows.fields.count).must_equal 1
     _(rows.fields.first.name).must_equal "value"
     _(rows.fields.first).must_be :geography?
     _(rows.count).must_equal 1
-    _(rows.first[:value]).must_equal "POINT(1 2)"
+    _(rows.first[:value]).must_equal "POINT(-122.335503 47.625536)"
   end
 
   it "queries the data with a nil parameter and geography type" do

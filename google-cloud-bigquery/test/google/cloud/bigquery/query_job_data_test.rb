@@ -49,6 +49,7 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     _(data[0][:duration]).must_equal Google::Cloud::Bigquery::Time.new("04:00:00")
     _(data[0][:target_end]).must_equal Time.parse("2017-01-01 00:00:00 UTC").to_datetime
     _(data[0][:birthday]).must_equal Date.parse("1968-10-20")
+    _(data[0][:home]).must_equal "POINT(-122.335503 47.625536)"
 
     _(data[1]).must_be_kind_of Hash
     _(data[1][:name]).must_equal "Aaron"
@@ -102,6 +103,7 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     _(data[0][:duration]).must_equal Google::Cloud::Bigquery::Time.new("04:00:00")
     _(data[0][:target_end]).must_equal Time.parse("2017-01-01 00:00:00 UTC").to_datetime
     _(data[0][:birthday]).must_equal Date.parse("1968-10-20")
+    _(data[0][:home]).must_equal "POINT(-122.335503 47.625536)"
 
     _(data[1]).must_be_kind_of Hash
     _(data[1][:name]).must_equal "Aaron"

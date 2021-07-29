@@ -210,7 +210,7 @@ describe Google::Cloud::Bigquery, :named_params, :bigquery do
 
   it "queries the data with a WKT geography parameter and geography type" do
     rows = bigquery.query "SELECT @value AS value", 
-                          params: { value: "POINT(1 2)" },
+                          params: { value: "POINT(-122.335503 47.625536)" },
                           types: { value: :GEOGRAPHY }
 
     _(rows.class).must_equal Google::Cloud::Bigquery::Data
@@ -218,7 +218,7 @@ describe Google::Cloud::Bigquery, :named_params, :bigquery do
     _(rows.fields.first.name).must_equal "value"
     _(rows.fields.first).must_be :geography?
     _(rows.count).must_equal 1
-    _(rows.first[:value]).must_equal "POINT(1 2)"
+    _(rows.first[:value]).must_equal "POINT(-122.335503 47.625536)"
   end
 
   it "queries the data with a nil parameter and geography type" do
