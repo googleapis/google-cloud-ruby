@@ -33,7 +33,7 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the catalog under which the events are
         #     created. The format is
-        #     "projects/$\\{projectId}/locations/global/catalogs/$\\{catalogId}"
+        #     `projects/${projectId}/locations/global/catalogs/${catalogId}`
         # @!attribute [rw] filter
         #   @return [::String]
         #     Required. The filter string to specify the events to be deleted with a

@@ -5,11 +5,13 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/cloud/retail/v2/product_pb'
 require 'google/cloud/retail/v2/user_event_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
+require 'google/type/date_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/retail/v2/import_config.proto", :syntax => :proto3) do
     add_message "google.cloud.retail.v2.GcsSource" do
@@ -22,6 +24,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :table_id, :string, 2
       optional :gcs_staging_dir, :string, 3
       optional :data_schema, :string, 4
+      oneof :partition do
+        optional :partition_date, :message, 6, "google.type.Date"
+      end
     end
     add_message "google.cloud.retail.v2.ProductInlineSource" do
       repeated :products, :message, 1, "google.cloud.retail.v2.Product"
@@ -36,14 +41,27 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.retail.v2.ImportProductsRequest" do
       optional :parent, :string, 1
+      optional :request_id, :string, 6
       optional :input_config, :message, 2, "google.cloud.retail.v2.ProductInputConfig"
       optional :errors_config, :message, 3, "google.cloud.retail.v2.ImportErrorsConfig"
       optional :update_mask, :message, 4, "google.protobuf.FieldMask"
+      optional :reconciliation_mode, :enum, 5, "google.cloud.retail.v2.ImportProductsRequest.ReconciliationMode"
+      optional :notification_pubsub_topic, :string, 7
+    end
+    add_enum "google.cloud.retail.v2.ImportProductsRequest.ReconciliationMode" do
+      value :RECONCILIATION_MODE_UNSPECIFIED, 0
+      value :INCREMENTAL, 1
+      value :FULL, 2
     end
     add_message "google.cloud.retail.v2.ImportUserEventsRequest" do
       optional :parent, :string, 1
       optional :input_config, :message, 2, "google.cloud.retail.v2.UserEventInputConfig"
       optional :errors_config, :message, 3, "google.cloud.retail.v2.ImportErrorsConfig"
+    end
+    add_message "google.cloud.retail.v2.ImportCompletionDataRequest" do
+      optional :parent, :string, 1
+      optional :input_config, :message, 2, "google.cloud.retail.v2.CompletionDataInputConfig"
+      optional :notification_pubsub_topic, :string, 3
     end
     add_message "google.cloud.retail.v2.ProductInputConfig" do
       oneof :source do
@@ -59,11 +77,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :big_query_source, :message, 3, "google.cloud.retail.v2.BigQuerySource"
       end
     end
+    add_message "google.cloud.retail.v2.CompletionDataInputConfig" do
+      oneof :source do
+        optional :big_query_source, :message, 1, "google.cloud.retail.v2.BigQuerySource"
+      end
+    end
     add_message "google.cloud.retail.v2.ImportMetadata" do
       optional :create_time, :message, 1, "google.protobuf.Timestamp"
       optional :update_time, :message, 2, "google.protobuf.Timestamp"
       optional :success_count, :int64, 3
       optional :failure_count, :int64, 4
+      optional :request_id, :string, 5
+      optional :notification_pubsub_topic, :string, 6
     end
     add_message "google.cloud.retail.v2.ImportProductsResponse" do
       repeated :error_samples, :message, 1, "google.rpc.Status"
@@ -78,6 +103,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :joined_events_count, :int64, 1
       optional :unjoined_events_count, :int64, 2
     end
+    add_message "google.cloud.retail.v2.ImportCompletionDataResponse" do
+      repeated :error_samples, :message, 1, "google.rpc.Status"
+    end
   end
 end
 
@@ -91,13 +119,17 @@ module Google
         UserEventInlineSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.UserEventInlineSource").msgclass
         ImportErrorsConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.ImportErrorsConfig").msgclass
         ImportProductsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.ImportProductsRequest").msgclass
+        ImportProductsRequest::ReconciliationMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.ImportProductsRequest.ReconciliationMode").enummodule
         ImportUserEventsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.ImportUserEventsRequest").msgclass
+        ImportCompletionDataRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.ImportCompletionDataRequest").msgclass
         ProductInputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.ProductInputConfig").msgclass
         UserEventInputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.UserEventInputConfig").msgclass
+        CompletionDataInputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.CompletionDataInputConfig").msgclass
         ImportMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.ImportMetadata").msgclass
         ImportProductsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.ImportProductsResponse").msgclass
         ImportUserEventsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.ImportUserEventsResponse").msgclass
         UserEventImportSummary = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.UserEventImportSummary").msgclass
+        ImportCompletionDataResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.ImportCompletionDataResponse").msgclass
       end
     end
   end

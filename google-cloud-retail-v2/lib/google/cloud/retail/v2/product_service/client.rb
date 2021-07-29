@@ -329,6 +329,144 @@ module Google
             end
 
             ##
+            # Gets a list of {::Google::Cloud::Retail::V2::Product Product}s.
+            #
+            # @overload list_products(request, options = nil)
+            #   Pass arguments to `list_products` via a request object, either of type
+            #   {::Google::Cloud::Retail::V2::ListProductsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Retail::V2::ListProductsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_products(parent: nil, page_size: nil, page_token: nil, filter: nil, read_mask: nil)
+            #   Pass arguments to `list_products` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent branch resource name, such as
+            #     `projects/*/locations/global/catalogs/default_catalog/branches/0`. Use
+            #     `default_branch` as the branch ID, to list products under the default
+            #     branch.
+            #
+            #     If the caller does not have permission to list
+            #     {::Google::Cloud::Retail::V2::Product Product}s under this branch, regardless of
+            #     whether or not this branch exists, a PERMISSION_DENIED error is returned.
+            #   @param page_size [::Integer]
+            #     Maximum number of {::Google::Cloud::Retail::V2::Product Product}s to return. If
+            #     unspecified, defaults to 100. The maximum allowed value is 1000. Values
+            #     above 1000 will be coerced to 1000.
+            #
+            #     If this field is negative, an INVALID_ARGUMENT error is returned.
+            #   @param page_token [::String]
+            #     A page token
+            #     {::Google::Cloud::Retail::V2::ListProductsResponse#next_page_token ListProductsResponse.next_page_token},
+            #     received from a previous
+            #     {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}
+            #     call. Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to
+            #     {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}
+            #     must match the call that provided the page token. Otherwise, an
+            #     INVALID_ARGUMENT error is returned.
+            #   @param filter [::String]
+            #     A filter to apply on the list results. Supported features:
+            #
+            #     * List all the products under the parent branch if
+            #     {::Google::Cloud::Retail::V2::ListProductsRequest#filter filter} is unset.
+            #     * List {::Google::Cloud::Retail::V2::Product::Type::VARIANT Product.Type.VARIANT}
+            #     {::Google::Cloud::Retail::V2::Product Product}s sharing the same
+            #       {::Google::Cloud::Retail::V2::Product::Type::PRIMARY Product.Type.PRIMARY}
+            #       {::Google::Cloud::Retail::V2::Product Product}. For example:
+            #         `primary_product_id = "some_product_id"`
+            #     * List {::Google::Cloud::Retail::V2::Product Product}s bundled in a
+            #     {::Google::Cloud::Retail::V2::Product::Type::COLLECTION Product.Type.COLLECTION}
+            #     {::Google::Cloud::Retail::V2::Product Product}.
+            #       For example:
+            #         `collection_product_id = "some_product_id"`
+            #     * List {::Google::Cloud::Retail::V2::Product Product}s with a partibular type.
+            #     For example:
+            #         `type = "PRIMARY"`
+            #         `type = "VARIANT"`
+            #         `type = "COLLECTION"`
+            #
+            #     If the field is unrecognizable, an INVALID_ARGUMENT error is returned.
+            #
+            #     If the specified
+            #     {::Google::Cloud::Retail::V2::Product::Type::PRIMARY Product.Type.PRIMARY}
+            #     {::Google::Cloud::Retail::V2::Product Product} or
+            #     {::Google::Cloud::Retail::V2::Product::Type::COLLECTION Product.Type.COLLECTION}
+            #     {::Google::Cloud::Retail::V2::Product Product} does not exist, a NOT_FOUND error
+            #     is returned.
+            #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The fields of {::Google::Cloud::Retail::V2::Product Product} to return in the
+            #     responses. If not set or empty, the following fields are returned:
+            #
+            #     * {::Google::Cloud::Retail::V2::Product#name Product.name}
+            #     * {::Google::Cloud::Retail::V2::Product#id Product.id}
+            #     * {::Google::Cloud::Retail::V2::Product#title Product.title}
+            #     * {::Google::Cloud::Retail::V2::Product#uri Product.uri}
+            #     * {::Google::Cloud::Retail::V2::Product#images Product.images}
+            #     * {::Google::Cloud::Retail::V2::Product#price_info Product.price_info}
+            #     * {::Google::Cloud::Retail::V2::Product#brands Product.brands}
+            #
+            #     If "*" is provided, all fields are returned.
+            #     {::Google::Cloud::Retail::V2::Product#name Product.name} is always returned no
+            #     matter what mask is set.
+            #
+            #     If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
+            #     is returned.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Retail::V2::Product>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Retail::V2::Product>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def list_products request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Retail::V2::ListProductsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_products.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Retail::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_products.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_products.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @product_service_stub.call_rpc :list_products, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @product_service_stub, :list_products, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Updates a {::Google::Cloud::Retail::V2::Product Product}.
             #
             # @overload update_product(request, options = nil)
@@ -341,7 +479,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_product(product: nil, update_mask: nil)
+            # @overload update_product(product: nil, update_mask: nil, allow_missing: nil)
             #   Pass arguments to `update_product` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -353,8 +491,10 @@ module Google
             #     {::Google::Cloud::Retail::V2::Product Product}, regardless of whether or not it
             #     exists, a PERMISSION_DENIED error is returned.
             #
-            #     If the {::Google::Cloud::Retail::V2::Product Product} to update does not exist,
-            #     a NOT_FOUND error is returned.
+            #     If the {::Google::Cloud::Retail::V2::Product Product} to update does not exist
+            #     and
+            #     {::Google::Cloud::Retail::V2::UpdateProductRequest#allow_missing allow_missing}
+            #     is not set, a NOT_FOUND error is returned.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Indicates which fields in the provided
             #     {::Google::Cloud::Retail::V2::Product Product} to update. The immutable and
@@ -363,6 +503,10 @@ module Google
             #
             #     If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
             #     is returned.
+            #   @param allow_missing [::Boolean]
+            #     If set to true, and the {::Google::Cloud::Retail::V2::Product Product} is not
+            #     found, a new {::Google::Cloud::Retail::V2::Product Product} will be created. In
+            #     this situation, `update_mask` is ignored.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Retail::V2::Product]
@@ -439,6 +583,17 @@ module Google
             #     If the {::Google::Cloud::Retail::V2::Product Product} to delete does not exist,
             #     a NOT_FOUND error is returned.
             #
+            #     The {::Google::Cloud::Retail::V2::Product Product} to delete can neither be a
+            #     {::Google::Cloud::Retail::V2::Product::Type::COLLECTION Product.Type.COLLECTION}
+            #     {::Google::Cloud::Retail::V2::Product Product} member nor a
+            #     {::Google::Cloud::Retail::V2::Product::Type::PRIMARY Product.Type.PRIMARY}
+            #     {::Google::Cloud::Retail::V2::Product Product} with more than one
+            #     {::Google::Cloud::Retail::V2::Product::Type::VARIANT variants}. Otherwise, an
+            #     INVALID_ARGUMENT error is returned.
+            #
+            #     All inventory information for the named
+            #     {::Google::Cloud::Retail::V2::Product Product} will be deleted.
+            #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
@@ -503,7 +658,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload import_products(parent: nil, input_config: nil, errors_config: nil, update_mask: nil)
+            # @overload import_products(parent: nil, request_id: nil, input_config: nil, errors_config: nil, update_mask: nil, reconciliation_mode: nil, notification_pubsub_topic: nil)
             #   Pass arguments to `import_products` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -514,6 +669,16 @@ module Google
             #
             #     If no updateMask is specified, requires products.create permission.
             #     If updateMask is specified, requires products.update permission.
+            #   @param request_id [::String]
+            #     Unique identifier provided by client, within the ancestor
+            #     dataset scope. Ensures idempotency and used for request deduplication.
+            #     Server-generated if unspecified. Up to 128 characters long and must match
+            #     the pattern: "[a-zA-Z0-9_]+". This is returned as [Operation.name][] in
+            #     {::Google::Cloud::Retail::V2::ImportMetadata ImportMetadata}.
+            #
+            #     Only supported when
+            #     {::Google::Cloud::Retail::V2::ImportProductsRequest#reconciliation_mode ImportProductsRequest.reconciliation_mode}
+            #     is set to `FULL`.
             #   @param input_config [::Google::Cloud::Retail::V2::ProductInputConfig, ::Hash]
             #     Required. The desired input location of the data.
             #   @param errors_config [::Google::Cloud::Retail::V2::ImportErrorsConfig, ::Hash]
@@ -521,6 +686,20 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Indicates which fields in the provided imported 'products' to update. If
             #     not set, will by default update all fields.
+            #   @param reconciliation_mode [::Google::Cloud::Retail::V2::ImportProductsRequest::ReconciliationMode]
+            #     The mode of reconciliation between existing products and the products to be
+            #     imported. Defaults to
+            #     {::Google::Cloud::Retail::V2::ImportProductsRequest::ReconciliationMode::INCREMENTAL ReconciliationMode.INCREMENTAL}.
+            #   @param notification_pubsub_topic [::String]
+            #     Pub/Sub topic for receiving notification. If this field is set,
+            #     when the import is finished, a notification will be sent to
+            #     specified Pub/Sub topic. The message data will be JSON string of a
+            #     {::Google::Longrunning::Operation Operation}.
+            #     Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`.
+            #
+            #     Only supported when
+            #     {::Google::Cloud::Retail::V2::ImportProductsRequest#reconciliation_mode ImportProductsRequest.reconciliation_mode}
+            #     is set to `FULL`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -560,6 +739,427 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @product_service_stub.call_rpc :import_products, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates inventory information for a
+            # {::Google::Cloud::Retail::V2::Product Product} while respecting the last update
+            # timestamps of each inventory field.
+            #
+            # This process is asynchronous and does not require the
+            # {::Google::Cloud::Retail::V2::Product Product} to exist before updating
+            # fulfillment information. If the request is valid, the update will be
+            # enqueued and processed downstream. As a consequence, when a response is
+            # returned, updates are not immediately manifested in the
+            # {::Google::Cloud::Retail::V2::Product Product} queried by
+            # {::Google::Cloud::Retail::V2::ProductService::Client#get_product GetProduct} or
+            # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ListProducts}.
+            #
+            # When inventory is updated with
+            # {::Google::Cloud::Retail::V2::ProductService::Client#create_product CreateProduct} and
+            # {::Google::Cloud::Retail::V2::ProductService::Client#update_product UpdateProduct}, the
+            # specified inventory field value(s) will overwrite any existing value(s)
+            # while ignoring the last update time for this field. Furthermore, the last
+            # update time for the specified inventory fields will be overwritten to the
+            # time of the
+            # {::Google::Cloud::Retail::V2::ProductService::Client#create_product CreateProduct} or
+            # {::Google::Cloud::Retail::V2::ProductService::Client#update_product UpdateProduct}
+            # request.
+            #
+            # If no inventory fields are set in
+            # {::Google::Cloud::Retail::V2::CreateProductRequest#product CreateProductRequest.product},
+            # then any pre-existing inventory information for this product will be used.
+            #
+            # If no inventory fields are set in [UpdateProductRequest.set_mask][],
+            # then any existing inventory information will be preserved.
+            #
+            # Pre-existing inventory information can only be updated with
+            # {::Google::Cloud::Retail::V2::ProductService::Client#set_inventory SetInventory},
+            # {::Google::Cloud::Retail::V2::ProductService::Client#add_fulfillment_places AddFulfillmentPlaces},
+            # and
+            # {::Google::Cloud::Retail::V2::ProductService::Client#remove_fulfillment_places RemoveFulfillmentPlaces}.
+            #
+            # This feature is only available for users who have Retail Search enabled.
+            # Contact Retail Support (retail-search-support@google.com) if you are
+            # interested in using Retail Search.
+            #
+            # @overload set_inventory(request, options = nil)
+            #   Pass arguments to `set_inventory` via a request object, either of type
+            #   {::Google::Cloud::Retail::V2::SetInventoryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Retail::V2::SetInventoryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload set_inventory(inventory: nil, set_mask: nil, set_time: nil, allow_missing: nil)
+            #   Pass arguments to `set_inventory` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param inventory [::Google::Cloud::Retail::V2::Product, ::Hash]
+            #     Required. The inventory information to update. The allowable fields to
+            #     update are:
+            #     * {::Google::Cloud::Retail::V2::Product#price_info Product.price_info}
+            #     * {::Google::Cloud::Retail::V2::Product#availability Product.availability}
+            #     * {::Google::Cloud::Retail::V2::Product#available_quantity Product.available_quantity}
+            #     * {::Google::Cloud::Retail::V2::Product#fulfillment_info Product.fulfillment_info}
+            #     The updated inventory fields must be specified in
+            #     {::Google::Cloud::Retail::V2::SetInventoryRequest#set_mask SetInventoryRequest.set_mask}.
+            #
+            #     If [SetInventoryRequest.inventory.name][] is empty or invalid, an
+            #     INVALID_ARGUMENT error is returned.
+            #
+            #     If the caller does not have permission to update the
+            #     {::Google::Cloud::Retail::V2::Product Product} named in
+            #     {::Google::Cloud::Retail::V2::Product#name Product.name}, regardless of whether
+            #     or not it exists, a PERMISSION_DENIED error is returned.
+            #
+            #     If the {::Google::Cloud::Retail::V2::Product Product} to update does not have
+            #     existing inventory information, the provided inventory information will be
+            #     inserted.
+            #
+            #     If the {::Google::Cloud::Retail::V2::Product Product} to update has existing
+            #     inventory information, the provided inventory information will be merged
+            #     while respecting the last update time for each inventory field, using the
+            #     provided or default value for
+            #     {::Google::Cloud::Retail::V2::SetInventoryRequest#set_time SetInventoryRequest.set_time}.
+            #
+            #     The last update time is recorded for the following inventory fields:
+            #     * {::Google::Cloud::Retail::V2::Product#price_info Product.price_info}
+            #     * {::Google::Cloud::Retail::V2::Product#availability Product.availability}
+            #     * {::Google::Cloud::Retail::V2::Product#available_quantity Product.available_quantity}
+            #     * {::Google::Cloud::Retail::V2::Product#fulfillment_info Product.fulfillment_info}
+            #
+            #     If a full overwrite of inventory information while ignoring timestamps is
+            #     needed, [UpdateProduct][] should be invoked instead.
+            #   @param set_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Indicates which inventory fields in the provided
+            #     {::Google::Cloud::Retail::V2::Product Product} to update. If not set or set with
+            #     empty paths, all inventory fields will be updated.
+            #
+            #     If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
+            #     is returned and the entire update will be ignored.
+            #   @param set_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     The time when the request is issued, used to prevent
+            #     out-of-order updates on inventory fields with the last update time
+            #     recorded. If not provided, the internal system time will be used.
+            #   @param allow_missing [::Boolean]
+            #     If set to true, and the {::Google::Cloud::Retail::V2::Product Product} with name
+            #     {::Google::Cloud::Retail::V2::Product#name Product.name} is not found, the
+            #     inventory update will still be processed and retained for at most 1 day
+            #     until the {::Google::Cloud::Retail::V2::Product Product} is created. If set to
+            #     false, an INVALID_ARGUMENT error is returned if the
+            #     {::Google::Cloud::Retail::V2::Product Product} is not found.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def set_inventory request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Retail::V2::SetInventoryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.set_inventory.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Retail::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "inventory.name" => request.inventory.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.set_inventory.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.set_inventory.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @product_service_stub.call_rpc :set_inventory, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Incrementally adds place IDs to
+            # {::Google::Cloud::Retail::V2::FulfillmentInfo#place_ids Product.fulfillment_info.place_ids}.
+            #
+            # This process is asynchronous and does not require the
+            # {::Google::Cloud::Retail::V2::Product Product} to exist before updating
+            # fulfillment information. If the request is valid, the update will be
+            # enqueued and processed downstream. As a consequence, when a response is
+            # returned, the added place IDs are not immediately manifested in the
+            # {::Google::Cloud::Retail::V2::Product Product} queried by
+            # {::Google::Cloud::Retail::V2::ProductService::Client#get_product GetProduct} or
+            # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ListProducts}.
+            #
+            # This feature is only available for users who have Retail Search enabled.
+            # Contact Retail Support (retail-search-support@google.com) if you are
+            # interested in using Retail Search.
+            #
+            # @overload add_fulfillment_places(request, options = nil)
+            #   Pass arguments to `add_fulfillment_places` via a request object, either of type
+            #   {::Google::Cloud::Retail::V2::AddFulfillmentPlacesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Retail::V2::AddFulfillmentPlacesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload add_fulfillment_places(product: nil, type: nil, place_ids: nil, add_time: nil, allow_missing: nil)
+            #   Pass arguments to `add_fulfillment_places` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param product [::String]
+            #     Required. Full resource name of {::Google::Cloud::Retail::V2::Product Product},
+            #     such as
+            #     `projects/*/locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
+            #
+            #     If the caller does not have permission to access the
+            #     {::Google::Cloud::Retail::V2::Product Product}, regardless of whether or not it
+            #     exists, a PERMISSION_DENIED error is returned.
+            #   @param type [::String]
+            #     Required. The fulfillment type, including commonly used types (such as
+            #     pickup in store and same day delivery), and custom types.
+            #
+            #     Supported values:
+            #
+            #     * "pickup-in-store"
+            #     * "ship-to-store"
+            #     * "same-day-delivery"
+            #     * "next-day-delivery"
+            #     * "custom-type-1"
+            #     * "custom-type-2"
+            #     * "custom-type-3"
+            #     * "custom-type-4"
+            #     * "custom-type-5"
+            #
+            #     If this field is set to an invalid value other than these, an
+            #     INVALID_ARGUMENT error is returned.
+            #
+            #     This field directly corresponds to [Product.fulfillment_info.type][].
+            #   @param place_ids [::Array<::String>]
+            #     Required. The IDs for this
+            #     {::Google::Cloud::Retail::V2::AddFulfillmentPlacesRequest#type type}, such as
+            #     the store IDs for "pickup-in-store" or the region IDs for
+            #     "same-day-delivery" to be added for this
+            #     {::Google::Cloud::Retail::V2::AddFulfillmentPlacesRequest#type type}. Duplicate
+            #     IDs will be automatically ignored.
+            #
+            #     At least 1 value is required, and a maximum of 2000 values are allowed.
+            #     Each value must be a string with a length limit of 10 characters, matching
+            #     the pattern [a-zA-Z0-9_-]+, such as "store1" or "REGION-2". Otherwise, an
+            #     INVALID_ARGUMENT error is returned.
+            #
+            #     If the total number of place IDs exceeds 2000 for this
+            #     {::Google::Cloud::Retail::V2::AddFulfillmentPlacesRequest#type type} after
+            #     adding, then the update will be rejected.
+            #   @param add_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     The time when the fulfillment updates are issued, used to prevent
+            #     out-of-order updates on fulfillment information. If not provided, the
+            #     internal system time will be used.
+            #   @param allow_missing [::Boolean]
+            #     If set to true, and the {::Google::Cloud::Retail::V2::Product Product} is not
+            #     found, the fulfillment information will still be processed and retained for
+            #     at most 1 day and processed once the
+            #     {::Google::Cloud::Retail::V2::Product Product} is created. If set to false, an
+            #     INVALID_ARGUMENT error is returned if the
+            #     {::Google::Cloud::Retail::V2::Product Product} is not found.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def add_fulfillment_places request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Retail::V2::AddFulfillmentPlacesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.add_fulfillment_places.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Retail::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "product" => request.product
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.add_fulfillment_places.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.add_fulfillment_places.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @product_service_stub.call_rpc :add_fulfillment_places, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Incrementally removes place IDs from a
+            # {::Google::Cloud::Retail::V2::FulfillmentInfo#place_ids Product.fulfillment_info.place_ids}.
+            #
+            # This process is asynchronous and does not require the
+            # {::Google::Cloud::Retail::V2::Product Product} to exist before updating
+            # fulfillment information. If the request is valid, the update will be
+            # enqueued and processed downstream. As a consequence, when a response is
+            # returned, the removed place IDs are not immediately manifested in the
+            # {::Google::Cloud::Retail::V2::Product Product} queried by
+            # {::Google::Cloud::Retail::V2::ProductService::Client#get_product GetProduct} or
+            # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ListProducts}.
+            #
+            # This feature is only available for users who have Retail Search enabled.
+            # Contact Retail Support (retail-search-support@google.com) if you are
+            # interested in using Retail Search.
+            #
+            # @overload remove_fulfillment_places(request, options = nil)
+            #   Pass arguments to `remove_fulfillment_places` via a request object, either of type
+            #   {::Google::Cloud::Retail::V2::RemoveFulfillmentPlacesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Retail::V2::RemoveFulfillmentPlacesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload remove_fulfillment_places(product: nil, type: nil, place_ids: nil, remove_time: nil, allow_missing: nil)
+            #   Pass arguments to `remove_fulfillment_places` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param product [::String]
+            #     Required. Full resource name of {::Google::Cloud::Retail::V2::Product Product},
+            #     such as
+            #     `projects/*/locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
+            #
+            #     If the caller does not have permission to access the
+            #     {::Google::Cloud::Retail::V2::Product Product}, regardless of whether or not it
+            #     exists, a PERMISSION_DENIED error is returned.
+            #   @param type [::String]
+            #     Required. The fulfillment type, including commonly used types (such as
+            #     pickup in store and same day delivery), and custom types.
+            #
+            #     Supported values:
+            #
+            #     * "pickup-in-store"
+            #     * "ship-to-store"
+            #     * "same-day-delivery"
+            #     * "next-day-delivery"
+            #     * "custom-type-1"
+            #     * "custom-type-2"
+            #     * "custom-type-3"
+            #     * "custom-type-4"
+            #     * "custom-type-5"
+            #
+            #     If this field is set to an invalid value other than these, an
+            #     INVALID_ARGUMENT error is returned.
+            #
+            #     This field directly corresponds to [Product.fulfillment_info.type][].
+            #   @param place_ids [::Array<::String>]
+            #     Required. The IDs for this
+            #     {::Google::Cloud::Retail::V2::RemoveFulfillmentPlacesRequest#type type}, such as
+            #     the store IDs for "pickup-in-store" or the region IDs for
+            #     "same-day-delivery", to be removed for this
+            #     {::Google::Cloud::Retail::V2::RemoveFulfillmentPlacesRequest#type type}.
+            #
+            #     At least 1 value is required, and a maximum of 2000 values are allowed.
+            #     Each value must be a string with a length limit of 10 characters, matching
+            #     the pattern [a-zA-Z0-9_-]+, such as "store1" or "REGION-2". Otherwise, an
+            #     INVALID_ARGUMENT error is returned.
+            #   @param remove_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     The time when the fulfillment updates are issued, used to prevent
+            #     out-of-order updates on fulfillment information. If not provided, the
+            #     internal system time will be used.
+            #   @param allow_missing [::Boolean]
+            #     If set to true, and the {::Google::Cloud::Retail::V2::Product Product} is not
+            #     found, the fulfillment information will still be processed and retained for
+            #     at most 1 day and processed once the
+            #     {::Google::Cloud::Retail::V2::Product Product} is created. If set to false, an
+            #     INVALID_ARGUMENT error is returned if the
+            #     {::Google::Cloud::Retail::V2::Product Product} is not found.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def remove_fulfillment_places request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Retail::V2::RemoveFulfillmentPlacesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.remove_fulfillment_places.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Retail::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "product" => request.product
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.remove_fulfillment_places.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.remove_fulfillment_places.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @product_service_stub.call_rpc :remove_fulfillment_places, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
@@ -715,6 +1315,11 @@ module Google
                 #
                 attr_reader :get_product
                 ##
+                # RPC-specific configuration for `list_products`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_products
+                ##
                 # RPC-specific configuration for `update_product`
                 # @return [::Gapic::Config::Method]
                 #
@@ -729,6 +1334,21 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :import_products
+                ##
+                # RPC-specific configuration for `set_inventory`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :set_inventory
+                ##
+                # RPC-specific configuration for `add_fulfillment_places`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :add_fulfillment_places
+                ##
+                # RPC-specific configuration for `remove_fulfillment_places`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :remove_fulfillment_places
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -736,12 +1356,20 @@ module Google
                   @create_product = ::Gapic::Config::Method.new create_product_config
                   get_product_config = parent_rpcs.get_product if parent_rpcs.respond_to? :get_product
                   @get_product = ::Gapic::Config::Method.new get_product_config
+                  list_products_config = parent_rpcs.list_products if parent_rpcs.respond_to? :list_products
+                  @list_products = ::Gapic::Config::Method.new list_products_config
                   update_product_config = parent_rpcs.update_product if parent_rpcs.respond_to? :update_product
                   @update_product = ::Gapic::Config::Method.new update_product_config
                   delete_product_config = parent_rpcs.delete_product if parent_rpcs.respond_to? :delete_product
                   @delete_product = ::Gapic::Config::Method.new delete_product_config
                   import_products_config = parent_rpcs.import_products if parent_rpcs.respond_to? :import_products
                   @import_products = ::Gapic::Config::Method.new import_products_config
+                  set_inventory_config = parent_rpcs.set_inventory if parent_rpcs.respond_to? :set_inventory
+                  @set_inventory = ::Gapic::Config::Method.new set_inventory_config
+                  add_fulfillment_places_config = parent_rpcs.add_fulfillment_places if parent_rpcs.respond_to? :add_fulfillment_places
+                  @add_fulfillment_places = ::Gapic::Config::Method.new add_fulfillment_places_config
+                  remove_fulfillment_places_config = parent_rpcs.remove_fulfillment_places if parent_rpcs.respond_to? :remove_fulfillment_places
+                  @remove_fulfillment_places = ::Gapic::Config::Method.new remove_fulfillment_places_config
 
                   yield self if block_given?
                 end

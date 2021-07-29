@@ -6,6 +6,8 @@ require 'google/protobuf'
 require 'google/api/annotations_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/retail/v2/common_pb'
+require 'google/cloud/retail/v2/import_config_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/retail/v2/catalog.proto", :syntax => :proto3) do
     add_message "google.cloud.retail.v2.ProductLevelConfig" do

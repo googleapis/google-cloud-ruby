@@ -21,8 +21,8 @@ module Google
   module Cloud
     module Retail
       module V2
-        module UserEventService
-          # Path helper methods for the UserEventService API.
+        module CompletionService
+          # Path helper methods for the CompletionService API.
           module Paths
             ##
             # Create a fully-qualified Catalog resource string.
@@ -41,29 +41,6 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/catalogs/#{catalog}"
-            end
-
-            ##
-            # Create a fully-qualified Product resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}`
-            #
-            # @param project [String]
-            # @param location [String]
-            # @param catalog [String]
-            # @param branch [String]
-            # @param product [String]
-            #
-            # @return [::String]
-            def product_path project:, location:, catalog:, branch:, product:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ::ArgumentError, "catalog cannot contain /" if catalog.to_s.include? "/"
-              raise ::ArgumentError, "branch cannot contain /" if branch.to_s.include? "/"
-
-              "projects/#{project}/locations/#{location}/catalogs/#{catalog}/branches/#{branch}/products/#{product}"
             end
 
             extend self

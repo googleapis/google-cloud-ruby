@@ -8,26 +8,65 @@ require 'google/api/field_behavior_pb'
 require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/retail/v2/common.proto", :syntax => :proto3) do
+    add_message "google.cloud.retail.v2.Audience" do
+      repeated :genders, :string, 1
+      repeated :age_groups, :string, 2
+    end
+    add_message "google.cloud.retail.v2.ColorInfo" do
+      repeated :color_families, :string, 1
+      repeated :colors, :string, 2
+    end
     add_message "google.cloud.retail.v2.CustomAttribute" do
       repeated :text, :string, 1
       repeated :numbers, :double, 2
+      proto3_optional :searchable, :bool, 3
+      proto3_optional :indexable, :bool, 4
+    end
+    add_message "google.cloud.retail.v2.FulfillmentInfo" do
+      optional :type, :string, 1
+      repeated :place_ids, :string, 2
     end
     add_message "google.cloud.retail.v2.Image" do
       optional :uri, :string, 1
       optional :height, :int32, 2
       optional :width, :int32, 3
     end
+    add_message "google.cloud.retail.v2.Interval" do
+      oneof :min do
+        optional :minimum, :double, 1
+        optional :exclusive_minimum, :double, 2
+      end
+      oneof :max do
+        optional :maximum, :double, 3
+        optional :exclusive_maximum, :double, 4
+      end
+    end
     add_message "google.cloud.retail.v2.PriceInfo" do
       optional :currency_code, :string, 1
       optional :price, :float, 2
       optional :original_price, :float, 3
       optional :cost, :float, 4
+      optional :price_effective_time, :message, 5, "google.protobuf.Timestamp"
+      optional :price_expire_time, :message, 6, "google.protobuf.Timestamp"
+      optional :price_range, :message, 7, "google.cloud.retail.v2.PriceInfo.PriceRange"
+    end
+    add_message "google.cloud.retail.v2.PriceInfo.PriceRange" do
+      optional :price, :message, 1, "google.cloud.retail.v2.Interval"
+      optional :original_price, :message, 2, "google.cloud.retail.v2.Interval"
+    end
+    add_message "google.cloud.retail.v2.Rating" do
+      optional :rating_count, :int32, 1
+      optional :average_rating, :float, 2
+      repeated :rating_histogram, :int32, 3
     end
     add_message "google.cloud.retail.v2.UserInfo" do
       optional :user_id, :string, 1
       optional :ip_address, :string, 2
       optional :user_agent, :string, 3
       optional :direct_user_request, :bool, 4
+    end
+    add_message "google.cloud.retail.v2.Promotion" do
+      optional :promotion_id, :string, 1
     end
   end
 end
@@ -36,10 +75,17 @@ module Google
   module Cloud
     module Retail
       module V2
+        Audience = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.Audience").msgclass
+        ColorInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.ColorInfo").msgclass
         CustomAttribute = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.CustomAttribute").msgclass
+        FulfillmentInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.FulfillmentInfo").msgclass
         Image = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.Image").msgclass
+        Interval = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.Interval").msgclass
         PriceInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.PriceInfo").msgclass
+        PriceInfo::PriceRange = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.PriceInfo.PriceRange").msgclass
+        Rating = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.Rating").msgclass
         UserInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.UserInfo").msgclass
+        Promotion = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.Promotion").msgclass
       end
     end
   end
