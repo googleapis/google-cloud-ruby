@@ -188,7 +188,8 @@ module Google
           #   strip_value = Google::Cloud::Bigtable::RowFilter.strip_value
           #
           #   condition_filter = Google::Cloud::Bigtable::RowFilter.condition(predicate)
-          #                                                        .on_match(label).otherwise(strip_value)
+          #                                                        .on_match(label)
+          #                                                        .otherwise(strip_value)
           #
           #   filter = Google::Cloud::Bigtable::RowFilter.interleave.condition condition_filter
           #
