@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 / 2021-07-29
+
+#### Features
+
+* Support for the replace_taxonomy call
+
 ### 0.7.3 / 2021-07-12
 
 #### Documentation
