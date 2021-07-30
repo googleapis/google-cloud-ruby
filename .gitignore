@@ -14,7 +14,6 @@ jsondoc/*
 
 # Ignore devsite/cloudrad stuffs
 */docs.metadata
-*/doc
 
 # directories left by gh-pages
 _site/*
