@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/compute/v1/compute_pb"
+require "google/cloud/compute/v1/global_organization_operations/rest/service_stub"
 
 module Google
   module Cloud
@@ -31,8 +32,6 @@ module Google
             # The GlobalOrganizationOperations API.
             #
             class Client
-              include GrpcTranscoding
-
               # @private
               attr_reader :global_organization_operations_stub
 
@@ -113,10 +112,6 @@ module Google
               # @yieldparam config [Client::Configuration]
               #
               def initialize
-                # These require statements are intentionally placed here to initialize
-                # the REST modules only when it's required.
-                require "gapic/rest"
-
                 # Create the configuration object
                 @config = Configuration.new Client.configure
 
@@ -126,11 +121,11 @@ module Google
                 # Create credentials
                 credentials = @config.credentials
                 credentials ||= Credentials.default scope: @config.scope
-                if credentials.is_a?(String) || credentials.is_a?(Hash)
+                if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
 
-                @client_stub = ::Gapic::Rest::ClientStub.new endpoint: @config.endpoint, credentials: credentials
+                @global_organization_operations_stub = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
 
               # Service calls
@@ -159,7 +154,7 @@ module Google
               #     Name of the Operations resource to delete.
               #   @param parent_id [::String]
               #     Parent ID for this request.
-              # @yield [result, env] Access the result along with the Faraday environment object
+              # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Google::Cloud::Compute::V1::DeleteGlobalOrganizationOperationResponse]
               # @yieldparam response [::Faraday::Response]
               #
@@ -186,16 +181,10 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
 
-                uri, _body, query_string_params = transcode_delete request
-                response = @client_stub.make_delete_request(
-                  uri:     uri,
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::DeleteGlobalOrganizationOperationResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
+                @global_organization_operations_stub.delete request, options do |result, response|
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
                 gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
                 raise ::Google::Cloud::Error.from_error(gapic_error)
@@ -225,7 +214,7 @@ module Google
               #     Name of the Operations resource to return.
               #   @param parent_id [::String]
               #     Parent ID for this request.
-              # @yield [result, env] Access the result along with the Faraday environment object
+              # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
               # @yieldparam response [::Faraday::Response]
               #
@@ -252,16 +241,10 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
 
-                uri, _body, query_string_params = transcode_get request
-                response = @client_stub.make_get_request(
-                  uri:     uri,
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
+                @global_organization_operations_stub.get request, options do |result, response|
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
                 gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
                 raise ::Google::Cloud::Error.from_error(gapic_error)
@@ -308,12 +291,12 @@ module Google
               #   @param parent_id [::String]
               #     Parent ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::OperationList]
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Operation>]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::OperationList]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Operation>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def list request, options = nil
@@ -336,16 +319,11 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     call_metadata
 
-                uri, _body, query_string_params = transcode_list request
-                response = @client_stub.make_get_request(
-                  uri:     uri,
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::OperationList.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
+                @global_organization_operations_stub.list request, options do |result, response|
+                  result = ::Gapic::Rest::PagedEnumerable.new @global_organization_operations_stub, :list, "items", request, result, options
+                  yield result, response if block_given?
+                  return result
+                end
               rescue ::Faraday::Error => e
                 gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
                 raise ::Google::Cloud::Error.from_error(gapic_error)

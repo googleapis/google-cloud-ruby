@@ -29,8 +29,8 @@ library = gapic.ruby_library(
         "ruby-cloud-gem-name": "<%= @gem_name %>",
         "ruby-cloud-title": "<%= @service_display_name %>",
         "ruby-cloud-description": "<%= @description %>",
-        "ruby-cloud-env-prefix": "<%= @env_prefix %>",
-        "ruby-cloud-wrapper-of": "<%= @wrapper_expr %>",
+        <% if @env_prefix %>"ruby-cloud-env-prefix": "<%= @env_prefix %>",
+        <% end %>"ruby-cloud-wrapper-of": "<%= @wrapper_expr %>",
         "ruby-cloud-product-url": "<%= @product_url %>",
         "ruby-cloud-api-id": "<%= @api_id %>",
         "ruby-cloud-api-shortname": "<%= @api_shortname %>",<%= @service_override_section %><%= @path_override_section %><%= @namespace_override_section %>

@@ -343,7 +343,7 @@ module Google
             #   @param parent [::String]
             #     Required. The resource name of the catalog under which the events are
             #     created. The format is
-            #     "projects/$\\{projectId}/locations/global/catalogs/$\\{catalogId}"
+            #     `projects/${projectId}/locations/global/catalogs/${catalogId}`
             #   @param filter [::String]
             #     Required. The filter string to specify the events to be deleted with a
             #     length limit of 5,000 characters. Empty string filter is not allowed. The

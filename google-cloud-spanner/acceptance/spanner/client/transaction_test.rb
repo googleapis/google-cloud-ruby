@@ -206,7 +206,7 @@ describe "Spanner Client", :transaction, :spanner do
   end
 
   it "can execute sql with query options" do
-    query_options = { optimizer_version: "3", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
+    query_options = { optimizer_version: "3", optimizer_statistics_package: "latest" }
     db.transaction do |tx|
       tx_results = tx.execute_sql query_reputation, query_options: query_options
       _(tx_results.rows.first[:reputation]).must_equal 63.5

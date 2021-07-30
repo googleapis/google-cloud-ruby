@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 / 2021-07-29
+
+#### Features
+
+* Added class and indicator fields to security findings
+
 ### 0.7.2 / 2021-07-12
 
 #### Documentation

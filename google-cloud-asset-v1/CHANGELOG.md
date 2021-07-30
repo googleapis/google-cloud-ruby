@@ -1,5 +1,14 @@
 # Release History
 
+### 0.14.0 / 2021-07-29
+
+#### Features
+
+* Support for analyze_move.
+* Support for read masks in search_all_resources.
+* Returned versioned resources and attached resources from searches.
+* Support ingress and egress policies in the AccessContextManager service perimeter config
+
 ### 0.13.1 / 2021-07-12
 
 #### Documentation

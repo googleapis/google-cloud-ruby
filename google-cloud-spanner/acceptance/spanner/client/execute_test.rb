@@ -130,7 +130,7 @@ describe "Spanner Client", :execute_sql, :spanner do
   end
 
   it "runs a simple query with query options" do
-    query_options = { optimizer_version: "3", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
+    query_options = { optimizer_version: "3", optimizer_statistics_package: "latest" }
     results = db.execute_sql "SELECT 42 AS num", query_options: query_options
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
@@ -147,10 +147,10 @@ describe "Spanner Client", :execute_sql, :spanner do
   end
 
   it "runs a simple query when the client-level config of query options is set" do
-    query_options = { optimizer_version: "3", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
+    query_options = { optimizer_version: "3", optimizer_statistics_package: "latest" }
     new_spanner = Google::Cloud::Spanner.new
     new_db = new_spanner.client db.instance_id, db.database_id, query_options: query_options
-    _(new_db.query_options).must_equal({ optimizer_version: "3", optimizer_statistics_package: "auto_20191128_14_47_22UTC" })
+    _(new_db.query_options).must_equal({ optimizer_version: "3", optimizer_statistics_package: "latest" })
 
     results = new_db.execute_sql "SELECT 42 AS num"
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -175,7 +175,7 @@ describe "Spanner Client", :execute_sql, :spanner do
       origin_opt_version = ENV["SPANNER_OPTIMIZER_VERSION"]
       ENV["SPANNER_OPTIMIZER_VERSION"] = "3"
       origin_opt_stats_pkg = ENV["SPANNER_OPTIMIZER_STATISTICS_PACKAGE"]
-      ENV["SPANNER_OPTIMIZER_STATISTICS_PACKAGE"] = "auto_20191128_14_47_22UTC"
+      ENV["SPANNER_OPTIMIZER_STATISTICS_PACKAGE"] = "latest"
     end
 
     after do
@@ -186,7 +186,7 @@ describe "Spanner Client", :execute_sql, :spanner do
     it "runs a simple query " do
       new_spanner = Google::Cloud::Spanner.new
       new_db = new_spanner.client db.instance_id, db.database_id
-      _(new_db.project.query_options).must_equal({ optimizer_version: "3", optimizer_statistics_package: "auto_20191128_14_47_22UTC" })
+      _(new_db.project.query_options).must_equal({ optimizer_version: "3", optimizer_statistics_package: "latest" })
 
       results = new_db.execute_sql "SELECT 42 AS num"
       _(results).must_be_kind_of Google::Cloud::Spanner::Results

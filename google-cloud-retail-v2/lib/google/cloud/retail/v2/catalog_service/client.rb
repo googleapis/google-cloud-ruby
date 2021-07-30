@@ -274,10 +274,7 @@ module Google
             #     a NOT_FOUND error is returned.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Indicates which fields in the provided
-            #     {::Google::Cloud::Retail::V2::Catalog Catalog} to update. If not set, will only
-            #     update the
-            #     {::Google::Cloud::Retail::V2::Catalog#product_level_config Catalog.product_level_config}
-            #     field, which is also the only currently supported field to update.
+            #     {::Google::Cloud::Retail::V2::Catalog Catalog} to update.
             #
             #     If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
             #     is returned.
@@ -320,6 +317,194 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @catalog_service_stub.call_rpc :update_catalog, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Set a specified branch id as default branch. API methods such as
+            # {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search},
+            # {::Google::Cloud::Retail::V2::ProductService::Client#get_product ProductService.GetProduct},
+            # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}
+            # will treat requests using "default_branch" to the actual branch id set as
+            # default.
+            #
+            # For example, if `projects/*/locations/*/catalogs/*/branches/1` is set as
+            # default, setting
+            # {::Google::Cloud::Retail::V2::SearchRequest#branch SearchRequest.branch} to
+            # `projects/*/locations/*/catalogs/*/branches/default_branch` is equivalent
+            # to setting
+            # {::Google::Cloud::Retail::V2::SearchRequest#branch SearchRequest.branch} to
+            # `projects/*/locations/*/catalogs/*/branches/1`.
+            #
+            # Using multiple branches can be useful when developers would like
+            # to have a staging branch to test and verify for future usage. When it
+            # becomes ready, developers switch on the staging branch using this API while
+            # keeping using `projects/*/locations/*/catalogs/*/branches/default_branch`
+            # as {::Google::Cloud::Retail::V2::SearchRequest#branch SearchRequest.branch} to
+            # route the traffic to this staging branch.
+            #
+            # CAUTION: If you have live predict/search traffic, switching the default
+            # branch could potentially cause outages if the ID space of the new branch is
+            # very different from the old one.
+            #
+            # More specifically:
+            #
+            # * PredictionService will only return product IDs from branch \\{newBranch}.
+            # * SearchService will only return product IDs from branch \\{newBranch}
+            #   (if branch is not explicitly set).
+            # * UserEventService will only join events with products from branch
+            #   \\{newBranch}.
+            #
+            # This feature is only available for users who have Retail Search enabled.
+            # Contact Retail Support (retail-search-support@google.com) if you are
+            # interested in using Retail Search.
+            #
+            # @overload set_default_branch(request, options = nil)
+            #   Pass arguments to `set_default_branch` via a request object, either of type
+            #   {::Google::Cloud::Retail::V2::SetDefaultBranchRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Retail::V2::SetDefaultBranchRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload set_default_branch(catalog: nil, branch_id: nil, note: nil)
+            #   Pass arguments to `set_default_branch` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param catalog [::String]
+            #     Full resource name of the catalog, such as
+            #     `projects/*/locations/global/catalogs/default_catalog`.
+            #   @param branch_id [::String]
+            #     The final component of the resource name of a branch.
+            #
+            #     This field must be one of "0", "1" or "2". Otherwise, an INVALID_ARGUMENT
+            #     error is returned.
+            #   @param note [::String]
+            #     Some note on this request, this can be retrieved by
+            #     {::Google::Cloud::Retail::V2::CatalogService::Client#get_default_branch CatalogService.GetDefaultBranch}
+            #     before next valid default branch set occurs.
+            #
+            #     This field must be a UTF-8 encoded string with a length limit of 1,000
+            #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def set_default_branch request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Retail::V2::SetDefaultBranchRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.set_default_branch.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Retail::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "catalog" => request.catalog
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.set_default_branch.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.set_default_branch.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @catalog_service_stub.call_rpc :set_default_branch, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Get which branch is currently default branch set by
+            # {::Google::Cloud::Retail::V2::CatalogService::Client#set_default_branch CatalogService.SetDefaultBranch}
+            # method under a specified parent catalog.
+            #
+            # This feature is only available for users who have Retail Search enabled.
+            # Contact Retail Support (retail-search-support@google.com) if you are
+            # interested in using Retail Search.
+            #
+            # @overload get_default_branch(request, options = nil)
+            #   Pass arguments to `get_default_branch` via a request object, either of type
+            #   {::Google::Cloud::Retail::V2::GetDefaultBranchRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Retail::V2::GetDefaultBranchRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_default_branch(catalog: nil)
+            #   Pass arguments to `get_default_branch` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param catalog [::String]
+            #     The parent catalog resource name, such as
+            #     `projects/*/locations/global/catalogs/default_catalog`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Retail::V2::GetDefaultBranchResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Retail::V2::GetDefaultBranchResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def get_default_branch request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Retail::V2::GetDefaultBranchRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_default_branch.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Retail::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "catalog" => request.catalog
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_default_branch.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_default_branch.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @catalog_service_stub.call_rpc :get_default_branch, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -473,6 +658,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_catalog
+                ##
+                # RPC-specific configuration for `set_default_branch`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :set_default_branch
+                ##
+                # RPC-specific configuration for `get_default_branch`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_default_branch
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -480,6 +675,10 @@ module Google
                   @list_catalogs = ::Gapic::Config::Method.new list_catalogs_config
                   update_catalog_config = parent_rpcs.update_catalog if parent_rpcs.respond_to? :update_catalog
                   @update_catalog = ::Gapic::Config::Method.new update_catalog_config
+                  set_default_branch_config = parent_rpcs.set_default_branch if parent_rpcs.respond_to? :set_default_branch
+                  @set_default_branch = ::Gapic::Config::Method.new set_default_branch_config
+                  get_default_branch_config = parent_rpcs.get_default_branch if parent_rpcs.respond_to? :get_default_branch
+                  @get_default_branch = ::Gapic::Config::Method.new get_default_branch_config
 
                   yield self if block_given?
                 end

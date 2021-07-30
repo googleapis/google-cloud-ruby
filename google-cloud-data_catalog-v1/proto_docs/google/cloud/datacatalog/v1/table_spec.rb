@@ -27,12 +27,12 @@ module Google
         #     Output only. The table source type.
         # @!attribute [rw] view_spec
         #   @return [::Google::Cloud::DataCatalog::V1::ViewSpec]
-        #     Table view specification. This field should only be populated if
-        #     `table_source_type` is `BIGQUERY_VIEW`.
+        #     Table view specification. Populated only if
+        #     the `table_source_type` is `BIGQUERY_VIEW`.
         # @!attribute [rw] table_spec
         #   @return [::Google::Cloud::DataCatalog::V1::TableSpec]
-        #     Spec of a BigQuery table. This field should only be populated if
-        #     `table_source_type` is `BIGQUERY_TABLE`.
+        #     Specification of a BigQuery table. Populated only if
+        #     the `table_source_type` is `BIGQUERY_TABLE`.
         class BigQueryTableSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -47,31 +47,38 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Normal BigQuery table spec.
+        # Normal BigQuery table specification.
         # @!attribute [r] grouped_entry
         #   @return [::String]
-        #     Output only. If the table is a dated shard, i.e., with name pattern `[prefix]YYYYMMDD`,
-        #     `grouped_entry` is the Data Catalog resource name of the date sharded
-        #     grouped entry, for example,
-        #     `projects/{project_id}/locations/{location}/entrygroups/{entry_group_id}/entries/{entry_id}`.
+        #     Output only. If the table is date-sharded, that is, it matches the `[prefix]YYYYMMDD`
+        #     name pattern, this field is the Data Catalog resource name of the
+        #     date-sharded grouped entry. For example:
+        #
+        #     `projects/{PROJECT_ID}/locations/{LOCATION}/entrygroups/{ENTRY_GROUP_ID}/entries/{ENTRY_ID}`.
+        #
         #     Otherwise, `grouped_entry` is empty.
         class TableSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Spec for a group of BigQuery tables with name pattern `[prefix]YYYYMMDD`.
-        # Context:
-        # https://cloud.google.com/bigquery/docs/partitioned-tables#partitioning_versus_sharding
+        # Specification for a group of BigQuery tables with the `[prefix]YYYYMMDD` name
+        # pattern.
+        #
+        # For more information, see [Introduction to partitioned tables]
+        # (https://cloud.google.com/bigquery/docs/partitioned-tables#partitioning_versus_sharding).
         # @!attribute [r] dataset
         #   @return [::String]
         #     Output only. The Data Catalog resource name of the dataset entry the current table
-        #     belongs to, for example,
-        #     `projects/{project_id}/locations/{location}/entrygroups/{entry_group_id}/entries/{entry_id}`.
+        #     belongs to. For example:
+        #
+        #     `projects/{PROJECT_ID}/locations/{LOCATION}/entrygroups/{ENTRY_GROUP_ID}/entries/{ENTRY_ID}`.
         # @!attribute [r] table_prefix
         #   @return [::String]
-        #     Output only. The table name prefix of the shards. The name of any given shard is
-        #     `[table_prefix]YYYYMMDD`, for example, for shard `MyTable20180101`, the
+        #     Output only. The table name prefix of the shards.
+        #
+        #     The name of any given shard is `[table_prefix]YYYYMMDD`.
+        #     For example, for the `MyTable20180101` shard, the
         #     `table_prefix` is `MyTable`.
         # @!attribute [r] shard_count
         #   @return [::Integer]

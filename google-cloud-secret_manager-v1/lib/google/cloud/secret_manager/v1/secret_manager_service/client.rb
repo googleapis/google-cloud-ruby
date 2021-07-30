@@ -202,7 +202,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_secrets(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_secrets(parent: nil, page_size: nil, page_token: nil, filter: nil)
             #   Pass arguments to `list_secrets` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -217,6 +217,12 @@ module Google
             #   @param page_token [::String]
             #     Optional. Pagination token, returned earlier via
             #     {::Google::Cloud::SecretManager::V1::ListSecretsResponse#next_page_token ListSecretsResponse.next_page_token}.
+            #   @param filter [::String]
+            #     Optional. Filter string, adhering to the rules in
+            #     [List-operation
+            #     filtering](https://cloud.google.com/secret-manager/docs/filtering). List
+            #     only secrets matching the filter. If filter is empty, all secrets are
+            #     listed.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecretManager::V1::Secret>]
@@ -628,7 +634,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_secret_versions(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_secret_versions(parent: nil, page_size: nil, page_token: nil, filter: nil)
             #   Pass arguments to `list_secret_versions` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -644,6 +650,12 @@ module Google
             #   @param page_token [::String]
             #     Optional. Pagination token, returned earlier via
             #     ListSecretVersionsResponse.next_page_token][].
+            #   @param filter [::String]
+            #     Optional. Filter string, adhering to the rules in
+            #     [List-operation
+            #     filtering](https://cloud.google.com/secret-manager/docs/filtering). List
+            #     only secret versions matching the filter. If filter is empty, all secret
+            #     versions are listed.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecretManager::V1::SecretVersion>]

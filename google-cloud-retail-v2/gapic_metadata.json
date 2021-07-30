@@ -19,6 +19,35 @@
               "methods": [
                 "update_catalog"
               ]
+            },
+            "SetDefaultBranch": {
+              "methods": [
+                "set_default_branch"
+              ]
+            },
+            "GetDefaultBranch": {
+              "methods": [
+                "get_default_branch"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CompletionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::CompletionService::Client",
+          "rpcs": {
+            "CompleteQuery": {
+              "methods": [
+                "complete_query"
+              ]
+            },
+            "ImportCompletionData": {
+              "methods": [
+                "import_completion_data"
+              ]
             }
           }
         }
@@ -53,6 +82,11 @@
                 "get_product"
               ]
             },
+            "ListProducts": {
+              "methods": [
+                "list_products"
+              ]
+            },
             "UpdateProduct": {
               "methods": [
                 "update_product"
@@ -66,6 +100,35 @@
             "ImportProducts": {
               "methods": [
                 "import_products"
+              ]
+            },
+            "SetInventory": {
+              "methods": [
+                "set_inventory"
+              ]
+            },
+            "AddFulfillmentPlaces": {
+              "methods": [
+                "add_fulfillment_places"
+              ]
+            },
+            "RemoveFulfillmentPlaces": {
+              "methods": [
+                "remove_fulfillment_places"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SearchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::SearchService::Client",
+          "rpcs": {
+            "Search": {
+              "methods": [
+                "search"
               ]
             }
           }

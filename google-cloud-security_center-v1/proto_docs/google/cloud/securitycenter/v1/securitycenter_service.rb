@@ -33,8 +33,8 @@ module Google
         #     greater than 0 characters in length.
         # @!attribute [rw] finding
         #   @return [::Google::Cloud::SecurityCenter::V1::Finding]
-        #     Required. The Finding being created. The name and security_marks will be
-        #     ignored as they are both output only fields on this resource.
+        #     Required. The Finding being created. The name and security_marks will be ignored as
+        #     they are both output only fields on this resource.
         class CreateFindingRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -43,8 +43,8 @@ module Google
         # Request message for creating a notification config.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Resource name of the new notification config's parent. Its format
-        #     is "organizations/[organization_id]".
+        #     Required. Resource name of the new notification config's parent. Its format is
+        #     "organizations/[organization_id]".
         # @!attribute [rw] config_id
         #   @return [::String]
         #     Required.
@@ -53,9 +53,8 @@ module Google
         #     characters, underscores or hyphens only.
         # @!attribute [rw] notification_config
         #   @return [::Google::Cloud::SecurityCenter::V1::NotificationConfig]
-        #     Required. The notification config being created. The name and the service
-        #     account will be ignored as they are both output only fields on this
-        #     resource.
+        #     Required. The notification config being created. The name and the service account
+        #     will be ignored as they are both output only fields on this resource.
         class CreateNotificationConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -68,8 +67,8 @@ module Google
         #     "organizations/[organization_id]".
         # @!attribute [rw] source
         #   @return [::Google::Cloud::SecurityCenter::V1::Source]
-        #     Required. The Source being created, only the display_name and description
-        #     will be used. All other fields will be ignored.
+        #     Required. The Source being created, only the display_name and description will be
+        #     used. All other fields will be ignored.
         class CreateSourceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -98,8 +97,8 @@ module Google
         # Request message for getting organization settings.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the organization to get organization settings for. Its
-        #     format is "organizations/[organization_id]/organizationSettings".
+        #     Required. Name of the organization to get organization settings for. Its format is
+        #     "organizations/[organization_id]/organizationSettings".
         class GetOrganizationSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -187,9 +186,9 @@ module Google
         #     property not existing: `-resource_properties.my_property : ""`
         # @!attribute [rw] group_by
         #   @return [::String]
-        #     Required. Expression that defines what assets fields to use for grouping.
-        #     The string value should follow SQL syntax: comma separated list of fields.
-        #     For example:
+        #     Required. Expression that defines what assets fields to use for grouping. The string
+        #     value should follow SQL syntax: comma separated list of fields. For
+        #     example:
         #     "security_center_properties.resource_project,security_center_properties.project".
         #
         #     The following fields are supported when compare_duration is not set:
@@ -348,9 +347,9 @@ module Google
         #       * resource.type: `=`, `:`
         # @!attribute [rw] group_by
         #   @return [::String]
-        #     Required. Expression that defines what assets fields to use for grouping
-        #     (including `state_change`). The string value should follow SQL syntax:
-        #     comma separated list of fields. For example: "parent,resource_name".
+        #     Required. Expression that defines what assets fields to use for grouping (including
+        #     `state_change`). The string value should follow SQL syntax: comma separated
+        #     list of fields. For example: "parent,resource_name".
         #
         #     The following fields are supported:
         #
@@ -494,8 +493,8 @@ module Google
         # Request message for listing sources.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Resource name of the parent of sources to list. Its format should
-        #     be "organizations/[organization_id], folders/[folder_id], or
+        #     Required. Resource name of the parent of sources to list. Its format should be
+        #     "organizations/[organization_id], folders/[folder_id], or
         #     projects/[project_id]".
         # @!attribute [rw] page_token
         #   @return [::String]
@@ -978,8 +977,8 @@ module Google
         # Request message for running asset discovery for an organization.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Name of the organization to run asset discovery for. Its format
-        #     is "organizations/[organization_id]".
+        #     Required. Name of the organization to run asset discovery for. Its format is
+        #     "organizations/[organization_id]".
         class RunAssetDiscoveryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -988,8 +987,8 @@ module Google
         # Request message for updating or creating a finding.
         # @!attribute [rw] finding
         #   @return [::Google::Cloud::SecurityCenter::V1::Finding]
-        #     Required. The finding resource to update or create if it does not already
-        #     exist. parent, security_marks, and update_time will be ignored.
+        #     Required. The finding resource to update or create if it does not already exist.
+        #     parent, security_marks, and update_time will be ignored.
         #
         #     In the case of creation, the finding id portion of the name must be
         #     alphanumeric and less than or equal to 32 characters and greater than 0

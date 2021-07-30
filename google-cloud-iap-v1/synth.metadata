@@ -1,0 +1,29 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
+        "sha": "f6bd165cc89b737019bb9bb3a05774bcec6a0333"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "0078ca654a13c228bdc2e9911b97d48184d69cd7"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "iap",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "bazel"
+      }
+    }
+  ]
+}

@@ -893,7 +893,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_all_resources(scope: nil, query: nil, asset_types: nil, page_size: nil, page_token: nil, order_by: nil)
+            # @overload search_all_resources(scope: nil, query: nil, asset_types: nil, page_size: nil, page_token: nil, order_by: nil, read_mask: nil)
             #   Pass arguments to `search_all_resources` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -935,8 +935,8 @@ module Google
             #       encryption key whose name contains the word "key".
             #     * `state:ACTIVE` to find Cloud resources whose state contains "ACTIVE" as a
             #       word.
-            #     * `NOT state:ACTIVE` to find \\{\\{gcp_name}} resources whose state
-            #       doesn't contain "ACTIVE" as a word.
+            #     * `NOT state:ACTIVE` to find Cloud resources whose state doesn't contain
+            #       "ACTIVE" as a word.
             #     * `createTime<1609459200` to find Cloud resources that were created before
             #       "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
             #       "2021-01-01 00:00:00 UTC" in seconds.
@@ -982,6 +982,7 @@ module Google
             #     to indicate descending order. Redundant space characters are ignored.
             #     Example: "location DESC, name".
             #     Only singular primitive fields in the response are sortable:
+            #
             #       * name
             #       * assetType
             #       * project
@@ -994,9 +995,39 @@ module Google
             #       * state
             #       * parentFullResourceName
             #       * parentAssetType
+            #
             #     All the other fields such as repeated fields (e.g., `networkTags`), map
             #     fields (e.g., `labels`) and struct fields (e.g., `additionalAttributes`)
             #     are not supported.
+            #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. A comma-separated list of fields specifying which fields to be returned in
+            #     ResourceSearchResult. Only '*' or combination of top level fields can be
+            #     specified. Field names of both snake_case and camelCase are supported.
+            #     Examples: `"*"`, `"name,location"`, `"name,versionedResources"`.
+            #
+            #     The read_mask paths must be valid field paths listed but not limited to
+            #     (both snake_case and camelCase are supported):
+            #
+            #       * name
+            #       * assetType
+            #       * project
+            #       * displayName
+            #       * description
+            #       * location
+            #       * labels
+            #       * networkTags
+            #       * kmsKey
+            #       * createTime
+            #       * updateTime
+            #       * state
+            #       * additionalAttributes
+            #       * versionedResources
+            #
+            #     If read_mask is not specified, all fields except versionedResources will
+            #     be returned.
+            #     If only '*' is specified, all fields including versionedResources will be
+            #     returned.
+            #     Any invalid field path will trigger INVALID_ARGUMENT error.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::ResourceSearchResult>]
@@ -1293,7 +1324,7 @@ module Google
             # {::Google::Longrunning::Operation google.longrunning.Operation}, which allows you to track the operation
             # status. We recommend intervals of at least 2 seconds with exponential
             # backoff retry to poll the operation result. The metadata contains the
-            # request to help callers to map responses to requests.
+            # metadata for the long-running operation.
             #
             # @overload analyze_iam_policy_longrunning(request, options = nil)
             #   Pass arguments to `analyze_iam_policy_longrunning` via a request object, either of type
@@ -1354,6 +1385,88 @@ module Google
 
               @asset_service_stub.call_rpc :analyze_iam_policy_longrunning, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Analyze moving a resource to a specified destination without kicking off
+            # the actual move. The analysis is best effort depending on the user's
+            # permissions of viewing different hierarchical policies and configurations.
+            # The policies and configuration are subject to change before the actual
+            # resource migration takes place.
+            #
+            # @overload analyze_move(request, options = nil)
+            #   Pass arguments to `analyze_move` via a request object, either of type
+            #   {::Google::Cloud::Asset::V1::AnalyzeMoveRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Asset::V1::AnalyzeMoveRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload analyze_move(resource: nil, destination_parent: nil, view: nil)
+            #   Pass arguments to `analyze_move` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param resource [::String]
+            #     Required. Name of the resource to perform the analysis against.
+            #     Only GCP Project are supported as of today. Hence, this can only be Project
+            #     ID (such as "projects/my-project-id") or a Project Number (such as
+            #     "projects/12345").
+            #   @param destination_parent [::String]
+            #     Required. Name of the GCP Folder or Organization to reparent the target
+            #     resource. The analysis will be performed against hypothetically moving the
+            #     resource to this specified desitination parent. This can only be a Folder
+            #     number (such as "folders/123") or an Organization number (such as
+            #     "organizations/123").
+            #   @param view [::Google::Cloud::Asset::V1::AnalyzeMoveRequest::AnalysisView]
+            #     Analysis view indicating what information should be included in the
+            #     analysis response. If unspecified, the default view is FULL.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Asset::V1::AnalyzeMoveResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Asset::V1::AnalyzeMoveResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def analyze_move request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::AnalyzeMoveRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.analyze_move.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Asset::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "resource" => request.resource
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.analyze_move.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.analyze_move.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @asset_service_stub.call_rpc :analyze_move, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -1557,6 +1670,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :analyze_iam_policy_longrunning
+                ##
+                # RPC-specific configuration for `analyze_move`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :analyze_move
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1584,6 +1702,8 @@ module Google
                   @analyze_iam_policy = ::Gapic::Config::Method.new analyze_iam_policy_config
                   analyze_iam_policy_longrunning_config = parent_rpcs.analyze_iam_policy_longrunning if parent_rpcs.respond_to? :analyze_iam_policy_longrunning
                   @analyze_iam_policy_longrunning = ::Gapic::Config::Method.new analyze_iam_policy_longrunning_config
+                  analyze_move_config = parent_rpcs.analyze_move if parent_rpcs.respond_to? :analyze_move
+                  @analyze_move = ::Gapic::Config::Method.new analyze_move_config
 
                   yield self if block_given?
                 end

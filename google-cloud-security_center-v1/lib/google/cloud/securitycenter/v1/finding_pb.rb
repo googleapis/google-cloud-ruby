@@ -5,6 +5,7 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/securitycenter/v1/indicator_pb'
 require 'google/cloud/securitycenter/v1/security_marks_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
@@ -24,6 +25,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 10, "google.protobuf.Timestamp"
       optional :severity, :enum, 12, "google.cloud.securitycenter.v1.Finding.Severity"
       optional :canonical_name, :string, 14
+      optional :finding_class, :enum, 17, "google.cloud.securitycenter.v1.Finding.FindingClass"
+      optional :indicator, :message, 18, "google.cloud.securitycenter.v1.Indicator"
     end
     add_enum "google.cloud.securitycenter.v1.Finding.State" do
       value :STATE_UNSPECIFIED, 0
@@ -37,6 +40,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :MEDIUM, 3
       value :LOW, 4
     end
+    add_enum "google.cloud.securitycenter.v1.Finding.FindingClass" do
+      value :FINDING_CLASS_UNSPECIFIED, 0
+      value :THREAT, 1
+      value :VULNERABILITY, 2
+      value :MISCONFIGURATION, 3
+      value :OBSERVATION, 4
+    end
   end
 end
 
@@ -47,6 +57,7 @@ module Google
         Finding = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.Finding").msgclass
         Finding::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.Finding.State").enummodule
         Finding::Severity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.Finding.Severity").enummodule
+        Finding::FindingClass = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.Finding.FindingClass").enummodule
       end
     end
   end

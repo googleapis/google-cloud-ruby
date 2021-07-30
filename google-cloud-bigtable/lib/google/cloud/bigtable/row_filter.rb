@@ -127,10 +127,10 @@ module Google
       #   Google::Cloud::Bigtable::RowFilter.pass
       #
       #   # Key regex filter
-      #   Google::Cloud::Bigtable::RowFilter.key("user-*")
+      #   Google::Cloud::Bigtable::RowFilter.key "user-*"
       #
       #   # Cell limit filter
-      #   Google::Cloud::Bigtable::RowFilter.cells_per_row(10)
+      #   Google::Cloud::Bigtable::RowFilter.cells_per_row 10
       #
       module RowFilter
         # @private
@@ -166,7 +166,7 @@ module Google
         #   chain = Google::Cloud::Bigtable::RowFilter.chain
         #
         #   # Add filters to chain filter
-        #   chain.key("user-*")
+        #   chain.key "user-*"
         #   chain.strip_value
         #
         #   # OR
@@ -227,7 +227,7 @@ module Google
         #   interleave = Google::Cloud::Bigtable::RowFilter.interleave
         #
         #   # Add filters to interleave filter
-        #   interleave.key("user-*")
+        #   interleave.key "user-*"
         #   interleave.sink
         #
         #   # OR
@@ -267,10 +267,10 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   predicate = Google::Cloud::Bigtable::RowFilter.key("user-*")
-        #   condition = Google::Cloud::Bigtable::RowFilter.condition(predicate)
+        #   predicate = Google::Cloud::Bigtable::RowFilter.key "user-*"
+        #   condition = Google::Cloud::Bigtable::RowFilter.condition predicate
         #
-        #   label = Google::Cloud::Bigtable::RowFilter.label("user")
+        #   label = Google::Cloud::Bigtable::RowFilter.label "user"
         #   strip_value = Google::Cloud::Bigtable::RowFilter.strip_value
         #
         #   # On match apply label, else strip cell values
@@ -366,7 +366,7 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   filter = Google::Cloud::Bigtable::RowFilter.key("user-.*")
+        #   filter = Google::Cloud::Bigtable::RowFilter.key "user-.*"
         #
         def self.key regex
           SimpleFilter.new.key regex
@@ -385,7 +385,7 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   filter = Google::Cloud::Bigtable::RowFilter.sample(0.5)
+        #   filter = Google::Cloud::Bigtable::RowFilter.sample 0.5
         #
         def self.sample probability
           SimpleFilter.new.sample probability
@@ -409,7 +409,7 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   filter = Google::Cloud::Bigtable::RowFilter.family("cf-.*")
+        #   filter = Google::Cloud::Bigtable::RowFilter.family "cf-.*"
         #
         def self.family regex
           SimpleFilter.new.family regex
@@ -433,7 +433,7 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   filter = Google::Cloud::Bigtable::RowFilter.qualifier("user-name.*")
+        #   filter = Google::Cloud::Bigtable::RowFilter.qualifier "user-name.*"
         #
         def self.qualifier regex
           SimpleFilter.new.qualifier regex
@@ -456,7 +456,7 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   filter = Google::Cloud::Bigtable::RowFilter.value("abc.*")
+        #   filter = Google::Cloud::Bigtable::RowFilter.value "abc.*"
         #
         def self.value regex
           SimpleFilter.new.value regex
@@ -485,7 +485,7 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   filter = Google::Cloud::Bigtable::RowFilter.label("user-detail")
+        #   filter = Google::Cloud::Bigtable::RowFilter.label "user-detail"
         #
         def self.label value
           SimpleFilter.new.label value
@@ -504,7 +504,7 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   filter = Google::Cloud::Bigtable::RowFilter.cells_per_row_offset(3)
+        #   filter = Google::Cloud::Bigtable::RowFilter.cells_per_row_offset 3
         #
         def self.cells_per_row_offset offset
           SimpleFilter.new.cells_per_row_offset offset
@@ -523,7 +523,7 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   filter = Google::Cloud::Bigtable::RowFilter.cells_per_row(5)
+        #   filter = Google::Cloud::Bigtable::RowFilter.cells_per_row 5
         #
         def self.cells_per_row limit
           SimpleFilter.new.cells_per_row limit
@@ -542,7 +542,7 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   filter = Google::Cloud::Bigtable::RowFilter.cells_per_column(5)
+        #   filter = Google::Cloud::Bigtable::RowFilter.cells_per_column 5
         #
         def self.cells_per_column limit
           SimpleFilter.new.cells_per_column limit
@@ -561,17 +561,17 @@ module Google
         # @example
         #   require "google/cloud/bigtable"
         #
-        #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
-        #   from = timestamp_micros - 300000000
+        #   timestamp_micros = (Time.now.to_f * 1_000_000).round(-3)
+        #   from = timestamp_micros - 300_000_000
         #   to = timestamp_micros
         #
-        #   filter = Google::Cloud::Bigtable::RowFilter.timestamp_range(from: from, to: to)
+        #   filter = Google::Cloud::Bigtable::RowFilter.timestamp_range from: from, to: to
         #
         #   # From to infinity
-        #   filter = Google::Cloud::Bigtable::RowFilter.timestamp_range(from: from)
+        #   filter = Google::Cloud::Bigtable::RowFilter.timestamp_range from: from
         #
         #   # From 0 value to `to`
-        #   filter = Google::Cloud::Bigtable::RowFilter.timestamp_range(to: to)
+        #   filter = Google::Cloud::Bigtable::RowFilter.timestamp_range to: to
         #
         def self.timestamp_range from: nil, to: nil
           SimpleFilter.new.timestamp_range from, to
@@ -597,19 +597,19 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   range = table.new_value_range.from("value-001", inclusive: false)
-        #   filter = Google::Cloud::Bigtable::RowFilter.value_range(range)
+        #   range = table.new_value_range.from "value-001", inclusive: false
+        #   filter = Google::Cloud::Bigtable::RowFilter.value_range range
         #
         # @example Start exclusive to infinite end range.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   range = table.new_value_range.from("value-001", inclusive: false)
-        #   filter = Google::Cloud::Bigtable::RowFilter.value_range(range)
+        #   range = table.new_value_range.from "value-001", inclusive: false
+        #   filter = Google::Cloud::Bigtable::RowFilter.value_range range
         #
         def self.value_range range
           SimpleFilter.new.value_range range
@@ -628,7 +628,7 @@ module Google
         #
         #   range = Google::Cloud::Bigtable::ColumnRange.new("cf").from("field0").to("field5")
         #
-        #   filter = Google::Cloud::Bigtable::RowFilter.column_range(range)
+        #   filter = Google::Cloud::Bigtable::RowFilter.column_range range
         #
         def self.column_range range
           SimpleFilter.new.column_range range

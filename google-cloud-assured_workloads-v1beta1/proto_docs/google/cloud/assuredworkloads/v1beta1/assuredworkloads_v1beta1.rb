@@ -324,6 +324,9 @@ module Google
 
             # Health Information Trust Alliance controls
             HITRUST = 7
+
+            # Assured Workloads For EU Regions and Support controls
+            EU_REGIONS_AND_SUPPORT = 8
           end
         end
 

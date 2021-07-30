@@ -1,5 +1,11 @@
 # Release History
 
+### 2.9.0 / 2021-07-26
+
+#### Features
+
+* support request tagging ([#8163](https://www.github.com/googleapis/google-cloud-ruby/issues/8163))
+
 ### 2.8.1 / 2021-07-08
 
 #### Documentation

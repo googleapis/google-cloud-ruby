@@ -233,6 +233,11 @@
         "grpc": {
           "libraryClient": "::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client",
           "rpcs": {
+            "ReplaceTaxonomy": {
+              "methods": [
+                "replace_taxonomy"
+              ]
+            },
             "ImportTaxonomies": {
               "methods": [
                 "import_taxonomies"
