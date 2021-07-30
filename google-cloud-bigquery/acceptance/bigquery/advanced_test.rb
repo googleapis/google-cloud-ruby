@@ -23,7 +23,7 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
   let(:string_numeric) { "1.123456789" }
   let(:string_bignumeric) { "1.1234567890123456789012345678901234567" }
   let(:max_length_string) { 50 }
-  let(:max_length_bytes) { 1024 }
+  let(:max_length_bytes) { 2048 }
   let(:precision_numeric) { 10 }
   let(:precision_bignumeric) { 38 }
   let(:scale_numeric) { 9 }
@@ -250,14 +250,16 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
         schema.date "next_vacation", mode: :nullable
         schema.datetime "favorite_time", mode: :nullable
       end
-      t.insert example_table_rows
+      insert_resp = t.insert example_table_rows
+      raise "insert errors: #{insert_resp.insert_errors.inspect}" unless insert_resp.success?
     end
     t
   end
 
   def example_table_rows
     [
-      { id: 1,
+      {
+        id: 1,
         name: "Bilbo",
         age: 111,
         weight: 67.2,
