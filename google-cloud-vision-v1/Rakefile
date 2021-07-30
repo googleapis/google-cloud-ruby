@@ -161,7 +161,7 @@ end
 
 task :cloudrad do
   ENV["CLOUDRAD_GEM_NAME"] = "google-cloud-vision-v1"
-  sh "bundle exec yard doc --fail-on-warning --yardopts .yardopts-cloudrad"
+  sh "bundle exec yard doc --fail-on-warning --yardopts .yardopts-cloudrad --no-progress"
 end
 
 desc "Run the CI build"

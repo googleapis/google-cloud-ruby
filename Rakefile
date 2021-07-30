@@ -509,7 +509,7 @@ namespace :kokoro do
 
   task :publish_docs do
     kokoro.devsite
-    kokoro.cloudrad
+    # kokoro.cloudrad
     exit kokoro.exit_status
   end
 
@@ -525,6 +525,12 @@ namespace :kokoro do
 
   task :updated_local_docs_tests do
     kokoro.all_local_docs_tests only_updated: true
+    exit kokoro.exit_status
+  end
+
+  task :one_local_cloudrad_docs, [:gem] do |t, args|
+    gem = args[:gem]
+    kokoro.one_local_cloudrad_docs gem
     exit kokoro.exit_status
   end
 

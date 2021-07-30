@@ -3,7 +3,6 @@ Gemfile.lock
 gems.locked
 
 # Ignore documentation output
-doc/*
 .yardoc/*
 
 # Ignore test output
