@@ -1,5 +1,22 @@
 # Release History
 
+### 0.4.0 / 2021-07-30
+
+#### Features
+
+* Significant new features involving search, autocomplete, inventory, fulfillment, and more
+  * feat(retail-v2): Added a new SearchService client to support product search
+  * feat(retail-v2): Added a new CompletionService client to support auto-completion
+  * feat(retail-v2): Support for default branches in the CatalogService client
+  * feat(retail-v2): Support for listing products using the ProductService client
+  * feat(retail-v2): Support for managing inventory using the ProductService client
+  * feat(retail-v2): Support for managing fulfillment places using the ProductService client
+  * feat(retail-v2): Added partition date support to bigquery import
+  * feat(retail-v2): Support user-provided identifiers and reconcilation mode when importing products
+  * feat(retail-v2): Support pubsub notifications on import completion
+  * feat(retail-v2): Support for many additional product properties, including TTL, variants, rating, and fulfillment info.
+  * docs(retail-v2): Fixed some broken links and made other documentation updates
+
 ### 0.3.2 / 2021-07-12
 
 #### Documentation
