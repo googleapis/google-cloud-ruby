@@ -502,10 +502,10 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     _(insert_response.error_rows).must_be :empty?
 
     data = dataset.query "SELECT id, my_numeric, my_bignumeric FROM #{table_with_schema_id} WHERE id IN (7,8) ORDER BY id"
-    _(data[0][:id]).must_equal 7
+    _(data.count).must_equal 2
+    _(data.total).must_equal 2
     _(data[0][:my_numeric]).must_equal BigDecimal(string_numeric)
     _(data[0][:my_bignumeric]).must_equal BigDecimal(string_bignumeric)
-    _(data[1][:id]).must_equal 8
     _(data[1][:my_numeric]).must_equal BigDecimal(string_numeric)
     _(data[1][:my_bignumeric]).must_equal BigDecimal(string_numeric) # Rounded to scale 9.
   end
