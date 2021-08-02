@@ -508,8 +508,8 @@ namespace :kokoro do
   end
 
   task :publish_docs do
-    # kokoro.devsite
-    kokoro.cloudrad
+    kokoro.devsite
+    # kokoro.cloudrad
     exit kokoro.exit_status
   end
 
@@ -542,6 +542,46 @@ namespace :kokoro do
                            gems,
                            updated_gems,
                            gem: ENV["PACKAGE"]
+  end
+end
+
+task :one_local_cloudrad_docs, [:gem] do |t, args|
+  gem = args[:gem]
+  version = "0.1.0"
+  allowed_fields = ["name", "version", "language", "distribution-name", "product-page", "github-repository", "issue-tracker"]
+  Dir.chdir gem do
+    Bundler.with_clean_env do
+      sh "bundle update"
+      version = `bundle exec gem list`
+                .split("\n").select { |line| line.include? gem }
+                .first.split("(").last.split(")").first
+    end
+  end
+
+  Dir.chdir gem do
+    Bundler.with_clean_env do
+      sh "bundle update"
+      FileUtils.remove_dir "doc", true
+      sh "bundle exec rake cloudrad"
+
+      metadata = JSON.parse File.read(".repo-metadata.json")
+      metadata.transform_keys! { |k| k.sub "_", "-" }
+      metadata["version"] = version
+      metadata["name"] = metadata["distribution-name"]
+      metadata.delete_if { |k, _| !allowed_fields.include? k }
+      fields = metadata.to_a.map { |kv| "--#{kv[0]} #{kv[1]}" }
+      sh "python3 -m docuploader create-metadata #{fields.join ' '}"
+
+      gac = ENV["GOOGLE_APPLICATION_CREDENTIALS"]
+      ENV.delete "GOOGLE_APPLICATION_CREDENTIALS"
+      opts = [
+        "--credentials=''",
+        "--staging-bucket=#{ENV.fetch 'V2_STAGING_BUCKET', 'docs-staging-v2-dev'}",
+        "--metadata-file=./docs.metadata",
+        "--destination-prefix docfx"
+      ]
+      sh "python3 -m docuploader upload doc #{opts.join ' '}"
+    end
   end
 end
 
