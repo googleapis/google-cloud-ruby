@@ -181,15 +181,11 @@ task :rubocop_yard_examples do
   examples = registry.all.map { |object| object.tags(:example) }.flatten
 
   dir_name = "rubocop_yard_examples"
-  rm_rf dir_name if File.exist? dir_name
+  rm_rf dir_name
   mkdir_p dir_name
   hsh = examples.each_with_object({}) do |e, h|
     obj = e.object
-    # puts "\n\n"
-    # puts "location: #{obj.file}:#{obj.line}"
-    # puts "example: #{e.name}" if e.name&.length > 0
-    # puts "\n\n"
-    name = "#{obj.file.gsub %r{(\.|/|-)}, '_'}_#{obj.line}"
+    name = "#{obj.file.gsub(/\W/, '_')}_#{obj.line}"
     h[name] ||= []
     h[name] << e.text
   end
