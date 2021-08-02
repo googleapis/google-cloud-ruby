@@ -74,10 +74,10 @@ module Google
             # Not specified: DISABLE is assumed.
             GLOBAL_POLICY_EVALUATION_MODE_UNSPECIFIED = 0
 
-            # Enables global policy evaluation.
+            # Enables system policy evaluation.
             ENABLE = 1
 
-            # Disables global policy evaluation.
+            # Disables system policy evaluation.
             DISABLE = 2
           end
         end
