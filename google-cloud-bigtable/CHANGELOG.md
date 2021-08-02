@@ -1,5 +1,11 @@
 # Release History
 
+### 2.6.2 / 2021-08-02
+
+#### Documentation
+
+* Update inline doc samples to match library code style
+
 ### 2.6.1 / 2021-07-08
 
 #### Documentation
