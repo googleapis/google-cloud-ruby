@@ -109,12 +109,23 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     # fresh.location.must_equal "US"       TODO why nil? Set in dataset
   end
 
-  it "deletes itself and knows it no longer exists" do
-    _(dataset.exists?).must_equal true
-    dataset.tables.all(&:delete)
-    _(dataset.delete).must_equal true
-    _(dataset.exists?).must_equal false
-    _(dataset.exists?(force: true)).must_equal false
+  describe "#delete" do
+    let(:dataset_delete_id) { "#{prefix}_dataset_for_delete" }
+    let(:dataset_delete) do
+      d = bigquery.dataset dataset_delete_id
+      if d.nil?
+        d = bigquery.create_dataset dataset_delete_id
+      end
+      d
+    end
+
+    it "deletes itself and knows it no longer exists" do
+      _(dataset_delete.exists?).must_equal true
+      dataset_delete.tables.all(&:delete)
+      _(dataset_delete.delete).must_equal true
+      _(dataset_delete.exists?).must_equal false
+      _(dataset_delete.exists?(force: true)).must_equal false
+    end
   end
 
   it "should set & get metadata" do
