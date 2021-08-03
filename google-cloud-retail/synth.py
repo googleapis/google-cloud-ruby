@@ -29,7 +29,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Retail",
         "ruby-cloud-description": "Retail enables you to build an end-to-end personalized recommendation system based on state-of-the-art deep learning ML models, without a need for expertise in ML or recommendation systems.",
         "ruby-cloud-env-prefix": "RETAIL",
-        "ruby-cloud-wrapper-of": "v2:0.3",
+        "ruby-cloud-wrapper-of": "v2:0.4",
         "ruby-cloud-product-url": "https://cloud.google.com/retail/docs/apis",
         "ruby-cloud-api-id": "retail.googleapis.com",
         "ruby-cloud-api-shortname": "retail",
