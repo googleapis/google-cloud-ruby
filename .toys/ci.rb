@@ -306,7 +306,7 @@ def run_in_dir dir
       puts
       puts "#{dir}: #{task} ...", :bold, :cyan
       success = if task == "linkinator"
-        run_linkinator
+        run_linkinator dir
       else
         exec(["bundle", "exec", "rake", task.tr("-", ":")], env: @auth_env).success?
       end
@@ -315,8 +315,12 @@ def run_in_dir dir
   end
 end
 
-def run_linkinator
-  linkinator_cmd = ["npx", "linkinator", "./doc", "--skip", "\\w+\\.md$"]
+def run_linkinator dir
+  dir_without_version = dir.sub(/-v\d\w*$/, "")
+  linkinator_cmd = [
+    "npx", "linkinator", "./doc", "--skip",
+    "\\w+\\.md$ ^https://googleapis\\.dev/ruby/#{dir}/latest$ ^https://rubygems.org/gems/#{dir_without_version}"
+  ]
   result = exec linkinator_cmd, out: :capture, err: [:child, :out]
   puts result.captured_out
   checked_links = result.captured_out.split "\n"
