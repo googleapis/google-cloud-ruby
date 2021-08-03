@@ -87,8 +87,7 @@ module Google
         #   @return [::String]
         #     The filter syntax consists of an expression language for constructing a
         #     predicate from one or more fields of the products being filtered. Filter
-        #     expression is case-sensitive. See more details at this [user
-        #     guide](/retail/private/docs/filter-and-order#filter).
+        #     expression is case-sensitive.
         #
         #     If this field is unrecognizable, an INVALID_ARGUMENT is returned.
         # @!attribute [rw] canonical_filter
@@ -106,9 +105,7 @@ module Google
         #   @return [::String]
         #     The order in which products are returned. Products can be ordered by
         #     a field in an {::Google::Cloud::Retail::V2::Product Product} object. Leave it
-        #     unset if ordered by relevance. OrderBy expression is case-sensitive. See
-        #     more details at this [user
-        #     guide](/retail/private/docs/filter-and-order#order).
+        #     unset if ordered by relevance. OrderBy expression is case-sensitive.
         #
         #     If this field is unrecognizable, an INVALID_ARGUMENT is returned.
         # @!attribute [rw] facet_specs
@@ -127,13 +124,11 @@ module Google
         #     facet feature.
         # @!attribute [rw] boost_spec
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::BoostSpec]
-        #     Boost specification to boost certain products. See more details at this
-        #     [user guide](/retail/private/docs/boosting).
+        #     Boost specification to boost certain products.
         # @!attribute [rw] query_expansion_spec
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::QueryExpansionSpec]
         #     The query expansion specification that specifies the conditions under which
-        #     query expansion will occur. See more details at this [user
-        #     guide](/retail/private/docs/result-size#query_expansion).
+        #     query expansion will occur.
         # @!attribute [rw] variant_rollup_keys
         #   @return [::Array<::String>]
         #     The keys to fetch and rollup the matching
@@ -274,172 +269,35 @@ module Google
             #     {::Google::Cloud::Retail::V2::SearchRequest::FacetSpec::FacetKey#query FacetKey.query}
             #     is not specified:
             #
-            #     * textual_field =<br>
-            #         <font color='grey'>
-            #         *# The
-            #         {::Google::Cloud::Retail::V2::Product#brands Product.brands}.<br>*
-            #         </font>
-            #         "brands";
-            #         <br>
-            #         <font color='categories'>
-            #         *# The
-            #         {::Google::Cloud::Retail::V2::Product#categories Product.categories}.<br>*
-            #         </font>
-            #         "categories";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The
-            #         {::Google::Cloud::Retail::V2::Audience#genders Audience.genders}.<br>*
-            #         </font>
-            #         | "genders";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The
-            #         {::Google::Cloud::Retail::V2::Audience#age_groups Audience.age_groups}.<br>*
-            #         </font>
-            #         | "ageGroups";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The
-            #         {::Google::Cloud::Retail::V2::Product#availability Product.availability}.
-            #         Value is one of<br>*
-            #         *# "IN_STOCK", "OUT_OF_STOCK", PREORDER", "BACKORDER".<br>*
-            #         </font>
-            #         | "availability";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The
-            #         {::Google::Cloud::Retail::V2::ColorInfo#color_families ColorInfo.color_families}.<br>*
-            #         </font>
-            #         | "colorFamilies";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The
-            #         {::Google::Cloud::Retail::V2::ColorInfo#colors ColorInfo.colors}.<br>*
-            #         </font>
-            #         | "colors";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The {::Google::Cloud::Retail::V2::Product#sizes Product.sizes}.<br>*
-            #         </font>
-            #         | "sizes";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The
-            #         {::Google::Cloud::Retail::V2::Product#materials Product.materials}.<br>*
-            #         </font>
-            #         | "materials";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The
-            #         {::Google::Cloud::Retail::V2::Product#patterns Product.patterns}.<br>*
-            #         </font>
-            #         | "patterns";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The
-            #         {::Google::Cloud::Retail::V2::Product#conditions Product.conditions}.<br>*
-            #         </font>
-            #         | "conditions";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The textual custom attribute in
-            #         {::Google::Cloud::Retail::V2::Product Product} object. Key can<br>*
-            #         *# be any key in the
-            #         {::Google::Cloud::Retail::V2::Product#attributes Product.attributes}
-            #         map<br>*
-            #         *# if the attribute values are textual.<br>*
-            #         *# map.<br>*
-            #         </font>
-            #         | "attributes.key";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The [FulfillmentInfo.ids][] for type
-            #         *# [FulfillmentInfo.Type.PICKUP_IN_STORE][].<br>*
-            #         </font>
-            #         | "pickupInStore";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The [FulfillmentInfo.ids][] for type
-            #         *# [FulfillmentInfo.Type.SHIP_TO_STORE][].<br>*
-            #         </font>
-            #         | "shipToStore";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The [FulfillmentInfo.ids][] for type
-            #         *# [FulfillmentInfo.Type.SAME_DAY_DELIVERY][].<br>*
-            #         </font>
-            #         | "sameDayDelivery";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The [FulfillmentInfo.ids][] for type
-            #         *# [FulfillmentInfo.Type.NEXT_DAY_DELIVERY][].<br>*
-            #         </font>
-            #         | "nextDayDelivery";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The [FulfillmentInfo.ids][] for type
-            #         *# [FulfillmentInfo.Type.CUSTOM_TYPE_1][].<br>*
-            #         </font>
-            #         | "customFulfillment1";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The [FulfillmentInfo.ids][] for type
-            #         *# [FulfillmentInfo.Type.CUSTOM_TYPE_2][].<br>*
-            #         </font>
-            #         | "customFulfillment2";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The [FulfillmentInfo.ids][] for type
-            #         *# [FulfillmentInfo.Type.CUSTOM_TYPE_3][].<br>*
-            #         </font>
-            #         | "customFulfillment3";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The [FulfillmentInfo.ids][] for type
-            #         *# [FulfillmentInfo.Type.CUSTOM_TYPE_4][].<br>*
-            #         </font>
-            #         | "customFulfillment4";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The [FulfillmentInfo.ids][] for type
-            #         *# [FulfillmentInfo.Type.CUSTOM_TYPE_5][].<br>*
-            #         </font>
-            #         | "customFulfillment5";
+            #     Textual facet keys:
+            #     * brands
+            #     * categories
+            #     * genders
+            #     * ageGroups
+            #     * availability
+            #     * colorFamilies
+            #     * colors
+            #     * sizes
+            #     * materials
+            #     * patterns
+            #     * conditions
+            #     * attributes.key
+            #     * pickupInStore
+            #     * shipToStore
+            #     * sameDayDelivery
+            #     * nextDayDelivery
+            #     * customFulfillment1
+            #     * customFulfillment2
+            #     * customFulfillment3
+            #     * customFulfillment4
+            #     * customFulfillment5
             #
-            #     * numerical_field =<br>
-            #         <font color='grey'>
-            #         *# The
-            #         {::Google::Cloud::Retail::V2::PriceInfo#price PriceInfo.price}.<br>*
-            #         </font>
-            #         "price";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The discount. Computed by (original_price-price)/price <br>*
-            #         </font>
-            #         "discount";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The
-            #         {::Google::Cloud::Retail::V2::Rating#average_rating Rating.average_rating}.<br>*
-            #         </font>
-            #         "rating";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The
-            #         {::Google::Cloud::Retail::V2::Rating#rating_count Rating.rating_count}.<br>*
-            #         </font>
-            #         "ratingCount";
-            #         <br>
-            #         <font color='grey'>
-            #         *# The numerical custom attribute in
-            #         {::Google::Cloud::Retail::V2::Product Product} object. Key can<br>*
-            #         *# be any key in the
-            #         {::Google::Cloud::Retail::V2::Product#attributes Product.attributes}
-            #         map<br>*
-            #         *# if the attribute values are numerical.<br>*
-            #         </font>
-            #         | "attributes.key";
+            #     Numeric facet keys:
+            #     * price
+            #     * discount
+            #     * rating
+            #     * ratingCount
+            #     * attributes.key
             # @!attribute [rw] intervals
             #   @return [::Array<::Google::Cloud::Retail::V2::Interval>]
             #     Set only if values should be bucketized into intervals. Must be set
@@ -579,11 +437,12 @@ module Google
             #     Examples:
             #
             #     * To boost products with product ID "product_1" or "product_2", and
-            #     color
-            #       "Red" or "Blue":<br>
-            #       *(id: ANY("product_1", "product_2"))<br>*
-            #       *AND<br>*
-            #       *(colorFamilies: ANY("Red", "Blue"))<br>*
+            #     color "Red" or "Blue":
+            #       ```
+            #       (id: ANY("product_1", "product_2"))
+            #       AND
+            #       (colorFamilies: ANY("Red", "Blue"))
+            #       ```
             # @!attribute [rw] boost
             #   @return [::Float]
             #     Strength of the condition boost, which should be in [-1, 1]. Negative
