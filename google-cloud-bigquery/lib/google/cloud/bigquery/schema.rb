@@ -569,6 +569,8 @@ module Google
         ##
         # Adds a geography field to the schema.
         #
+        # @see https://cloud.google.com/bigquery/docs/gis-data Working with BigQuery GIS data
+        #
         # @param [String] name The field name. The name must contain only
         #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
         #   start with a letter or underscore. The maximum length is 128

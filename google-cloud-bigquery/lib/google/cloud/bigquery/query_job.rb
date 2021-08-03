@@ -891,7 +891,7 @@ module Google
           #   use named query parameters. When set, `legacy_sql` will automatically be set to false and `standard_sql`
           #   to true.
           #
-          #   Ruby types are mapped to BigQuery types as follows:
+          #   BigQuery types are converted from Ruby types as follows:
           #
           #   | BigQuery     | Ruby                                 | Notes                                            |
           #   |--------------|--------------------------------------|--------------------------------------------------|
@@ -899,11 +899,11 @@ module Google
           #   | `INT64`      | `Integer`                            |                                                  |
           #   | `FLOAT64`    | `Float`                              |                                                  |
           #   | `NUMERIC`    | `BigDecimal`                         | `BigDecimal` values will be rounded to scale 9.  |
-          #   | `BIGNUMERIC` |                                      | Query param values must be mapped in `types`.    |
+          #   | `BIGNUMERIC` | `BigDecimal`                         | NOT AUTOMATIC: Must be mapped using `types`.     |
           #   | `STRING`     | `String`                             |                                                  |
           #   | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.           |
           #   | `DATE`       | `Date`                               |                                                  |
-          #   | `GEOGRAPHY`  |                                      | Query param values must be mapped in `types`.    |
+          #   | `GEOGRAPHY`  | `String` (WKT or GeoJSON)            | NOT AUTOMATIC: Must be mapped using `types`.     |
           #   | `TIMESTAMP`  | `Time`                               |                                                  |
           #   | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                  |
           #   | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                  |
@@ -911,7 +911,8 @@ module Google
           #   | `STRUCT`     | `Hash`                               | Hash keys may be strings or symbols.             |
           #
           #   See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for an overview
-          #   of each BigQuery data type, including allowed values.
+          #   of each BigQuery data type, including allowed values. For the `GEOGRAPHY` type, see [Working with BigQuery
+          #   GIS data](https://cloud.google.com/bigquery/docs/gis-data).
           #
           # @!group Attributes
           def params= params
@@ -927,7 +928,7 @@ module Google
           #   use named query parameters. When set, `legacy_sql` will automatically be set to false and `standard_sql`
           #   to true.
           #
-          #   Ruby types are mapped to BigQuery types as follows:
+          #   BigQuery types are converted from Ruby types as follows:
           #
           #   | BigQuery     | Ruby                                 | Notes                                            |
           #   |--------------|--------------------------------------|--------------------------------------------------|
@@ -935,11 +936,11 @@ module Google
           #   | `INT64`      | `Integer`                            |                                                  |
           #   | `FLOAT64`    | `Float`                              |                                                  |
           #   | `NUMERIC`    | `BigDecimal`                         | `BigDecimal` values will be rounded to scale 9.  |
-          #   | `BIGNUMERIC` |                                      | Query param values must be mapped in `types`.    |
+          #   | `BIGNUMERIC` | `BigDecimal`                         | NOT AUTOMATIC: Must be mapped using `types`.     |
           #   | `STRING`     | `String`                             |                                                  |
           #   | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.           |
           #   | `DATE`       | `Date`                               |                                                  |
-          #   | `GEOGRAPHY`  |                                      | Query param values must be mapped in `types`.    |
+          #   | `GEOGRAPHY`  | `String` (WKT or GeoJSON)            | NOT AUTOMATIC: Must be mapped using `types`.     |
           #   | `TIMESTAMP`  | `Time`                               |                                                  |
           #   | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                  |
           #   | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                  |
@@ -947,7 +948,8 @@ module Google
           #   | `STRUCT`     | `Hash`                               | Hash keys may be strings or symbols.             |
           #
           #   See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for an overview
-          #   of each BigQuery data type, including allowed values.
+          #   of each BigQuery data type, including allowed values. For the `GEOGRAPHY` type, see [Working with BigQuery
+          #   GIS data](https://cloud.google.com/bigquery/docs/gis-data).
           # @param [Array, Hash] types Standard SQL only. Types of the SQL parameters in `params`. It is not always
           #   possible to infer the right SQL type from a value in `params`. In these cases, `types` must be used to
           #   specify the SQL type for these values.
