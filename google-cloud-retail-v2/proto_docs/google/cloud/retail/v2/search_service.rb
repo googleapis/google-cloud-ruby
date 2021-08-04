@@ -594,21 +594,23 @@ module Google
           #     string or double values with type
           #     {::Google::Protobuf::ListValue google.protobuf.ListValue}. For example, if
           #     there are two variants with colors "red" and "blue", the rollup values
-          #     are { key: "colorFamilies"
-          #       value {
-          #         list_value {
-          #           values { string_value: "red" }
-          #           values { string_value: "blue" }
-          #          }
-          #       }
-          #     }
+          #     are
+          #
+          #         { key: "colorFamilies"
+          #           value {
+          #             list_value {
+          #               values { string_value: "red" }
+          #               values { string_value: "blue" }
+          #              }
+          #           }
+          #         }
           #
           #     For
           #     {::Google::Cloud::Retail::V2::Product#fulfillment_info Product.fulfillment_info},
           #     the rollup values is a double value with type
-          #     {::Google::Protobuf::Value google.protobuf.Value}. For example, {key:
-          #     "pickupInStore.store1" value { number_value: 10 }} means a there are 10
-          #     variants in this product are available in the store "store1".
+          #     {::Google::Protobuf::Value google.protobuf.Value}. For example:
+          #     `{key: "pickupInStore.store1" value { number_value: 10 }}` means a there
+          #     are 10 variants in this product are available in the store "store1".
           class SearchResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
