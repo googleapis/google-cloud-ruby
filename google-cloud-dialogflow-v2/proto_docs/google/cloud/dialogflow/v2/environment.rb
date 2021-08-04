@@ -43,17 +43,21 @@ module Google
         #   @return [::String]
         #     Output only. The unique identifier of this agent environment.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent/environments/<Environment ID>`
         #     - `projects/<Project ID>/locations/<Location
         #       ID>/agent/environments/<Environment ID>`
+        #
+        #     The environment ID for the default environment is `-`.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. The developer-provided description for this environment.
         #     The maximum length is 500 characters. If exceeded, the request is rejected.
         # @!attribute [rw] agent_version
         #   @return [::String]
-        #     Required. The agent version loaded into this environment.
+        #     Optional. The agent version loaded into this environment.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent/versions/<Version ID>`
         #     - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
         #       ID>`
@@ -134,6 +138,7 @@ module Google
         #   @return [::String]
         #     Required. The agent to list all environments from.
         #     Format:
+        #
         #     - `projects/<Project ID>/agent`
         #     - `projects/<Project ID>/locations/<Location ID>/agent`
         # @!attribute [rw] page_size
@@ -167,9 +172,12 @@ module Google
         #   @return [::String]
         #     Required. The name of the environment.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent/environments/<Environment ID>`
         #     - `projects/<Project ID>/locations/<Location
         #       ID>/agent/environments/<Environment ID>`
+        #
+        #     The environment ID for the default environment is `-`.
         class GetEnvironmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -180,6 +188,7 @@ module Google
         #   @return [::String]
         #     Required. The agent to create an environment for.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent`
         #     - `projects/<Project ID>/locations/<Location ID>/agent`
         # @!attribute [rw] environment
@@ -202,10 +211,10 @@ module Google
         #     Required. The mask to control which fields get updated.
         # @!attribute [rw] allow_load_to_draft_and_discard_changes
         #   @return [::Boolean]
-        #     Optional. This field is used to prevent accidental overwrite of the draft
+        #     Optional. This field is used to prevent accidental overwrite of the default
         #     environment, which is an operation that cannot be undone. To confirm that
         #     the caller desires this overwrite, this field must be explicitly set to
-        #     true when updating the draft environment (environment ID = `-`).
+        #     true when updating the default environment (environment ID = `-`).
         class UpdateEnvironmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -216,9 +225,12 @@ module Google
         #   @return [::String]
         #     Required. The name of the environment to delete.
         #     / Format:
+        #
         #     - `projects/<Project ID>/agent/environments/<Environment ID>`
         #     - `projects/<Project ID>/locations/<Location
-        #     ID>/agent/environments/<Environment ID>`
+        #       ID>/agent/environments/<Environment ID>`
+        #
+        #     The environment ID for the default environment is `-`.
         class DeleteEnvironmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -229,9 +241,12 @@ module Google
         #   @return [::String]
         #     Required. The name of the environment to retrieve history for.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent/environments/<Environment ID>`
         #     - `projects/<Project ID>/locations/<Location
         #       ID>/agent/environments/<Environment ID>`
+        #
+        #     The environment ID for the default environment is `-`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of items to return in a single page. By default 100 and
@@ -249,9 +264,12 @@ module Google
         #   @return [::String]
         #     Output only. The name of the environment this history is for.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent/environments/<Environment ID>`
         #     - `projects/<Project ID>/locations/<Location
         #        ID>/agent/environments/<Environment ID>`
+        #
+        #     The environment ID for the default environment is `-`.
         # @!attribute [r] entries
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::EnvironmentHistory::Entry>]
         #     Output only. The list of agent environments. There will be a maximum number of items
