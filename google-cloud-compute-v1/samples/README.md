@@ -6,7 +6,7 @@ width="96"/>
 
 ## Description
 
-These samples show how to use the [Compute Engine API](https://cloud.google.com/compute/docs/reference/rest/v1).
+These samples show how to use the [Ruby API Client library](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-compute-v1) for the [Google Cloud Compute Engine API](https://cloud.google.com/compute/docs/reference/rest/v1)
 
 ## Contributing changes
 
