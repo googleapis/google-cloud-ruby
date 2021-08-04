@@ -23,6 +23,10 @@ def random_instance_name
   "i-#{SecureRandom.hex 6}"
 end
 
+def random_bucket_name
+  "test-#{SecureRandom.hex 10}"
+end
+
 def project
   ENV["GOOGLE_CLOUD_PROJECT"]
 end
