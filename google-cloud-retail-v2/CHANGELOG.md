@@ -1,5 +1,12 @@
 # Release History
 
+### 0.4.1 / 2021-08-05
+
+#### Documentation
+
+* Fix some formatting issues in the SearchResult description
+* Various formatting fixes
+
 ### 0.4.0 / 2021-07-30
 
 #### Features
