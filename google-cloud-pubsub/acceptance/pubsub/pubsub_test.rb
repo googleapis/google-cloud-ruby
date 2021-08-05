@@ -60,14 +60,22 @@ describe Google::Cloud::PubSub, :pubsub do
     end
 
     it "should be created, updated and deleted" do
-      topic = pubsub.create_topic new_topic_name, labels: labels
+      topic = pubsub.create_topic new_topic_name,
+                                  labels: labels,
+                                  retention: 600
       _(topic).must_be_kind_of Google::Cloud::PubSub::Topic
       topic = pubsub.topic(topic.name)
       _(topic).wont_be :nil?
+
       _(topic.labels).must_equal labels
       _(topic.labels).must_be :frozen?
       topic.labels = {}
       _(topic.labels).must_be :empty?
+
+      _(topic.retention).must_equal 600
+      topic.retention = -1
+      _(topic.retention).must_equal -1 # TODO: Should this be nil?
+
       topic.delete
       _(pubsub.topic(topic.name)).must_be :nil?
     end

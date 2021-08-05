@@ -306,6 +306,39 @@ module Google
         end
 
         ##
+        # Indicates the minimum duration to retain a message after it is published to
+        # the topic. If this field is set, messages published to the topic in the
+        # last `message_retention_duration` are always available to subscribers. For
+        # instance, it allows any attached subscription to [seek to a
+        # timestamp](https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time)
+        # that is up to `message_retention_duration` in the past. If this field is
+        # not set, message retention is controlled by settings on individual
+        # subscriptions. Cannot be more than 7 days or less than 10 minutes.
+        #
+        # Makes an API call to retrieve the retention value when called on a
+        # reference object. See {#reference?}.
+        #
+        # @return [Numeric] The message retention duration in seconds.
+        #
+        def retention
+          ensure_grpc!
+          Convert.duration_to_number @grpc.message_retention_duration
+        end
+
+        ##
+        # Sets the message retention duration in seconds. See {#retention}.
+        #
+        # @param [Numeric] new_retention The new retention value.
+        #
+        def retention= new_retention
+          new_retention_duration = Convert.number_to_duration new_retention
+          update_grpc = Google::Cloud::PubSub::V1::Topic.new name: name,
+                                                             message_retention_duration: new_retention_duration
+          @grpc = service.update_topic update_grpc, :message_retention_duration
+          @resource_name = nil
+        end
+
+        ##
         # Permanently deletes the topic.
         #
         # @return [Boolean] Returns `true` if the topic was deleted.
