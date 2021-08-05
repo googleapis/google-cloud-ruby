@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.1 / 2021-08-05
+
+#### Documentation
+
+* Various formatting fixes
+
 ### 0.4.0 / 2021-07-30
 
 #### Features
