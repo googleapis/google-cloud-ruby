@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.3 / 2021-08-05
+
+#### Documentation
+
+* Clarified descriptions of GlobalPolicyEvaluationMode values
+
 ### 0.3.2 / 2021-07-12
 
 #### Documentation
