@@ -111,10 +111,12 @@ def list_instances project:, zone:
   instance_list = client.list project: project, zone: zone
 
   puts "Instances found in zone #{zone}:"
-  instance_list.items.each do |instance|
+  instances = []
+  instance_list.each do |instance|
     puts " - #{instance.name} (#{instance.machine_type})"
+    instances << instance
   end
-  instance_list.items
+  instances
 end
 
 # [END compute_instances_list]
@@ -136,7 +138,7 @@ def list_all_instances project:
   puts "Instances found:"
   # The result contains a Map collection, where the key is a zone and the value
   # is a collection of instances in that zone.
-  agg_list.items.each do |zone, list|
+  agg_list.each do |zone, list|
     next if list.instances.empty?
     all_instances[zone] = list.instances
     puts " #{zone}:"
