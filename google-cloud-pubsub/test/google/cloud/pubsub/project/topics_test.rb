@@ -54,7 +54,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil]
+    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil, message_retention_duration: nil]
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_name
@@ -77,7 +77,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_path)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [name: new_topic_path, labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil]
+    mock.expect :create_topic, create_res, [name: new_topic_path, labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil, message_retention_duration: nil]
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_path
@@ -92,7 +92,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil]
+    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil, message_retention_duration: nil]
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.new_topic new_topic_name
@@ -115,7 +115,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name, labels: labels)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: labels, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil]
+    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: labels, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil, message_retention_duration: nil]
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_name, labels: labels
@@ -138,7 +138,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name, kms_key_name: kms_key)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: kms_key, message_storage_policy: nil, schema_settings: nil]
+    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: kms_key, message_storage_policy: nil, schema_settings: nil, message_retention_duration: nil]
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_name, kms_key: kms_key
@@ -162,7 +162,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name, persistence_regions: persistence_regions)
     mock = Minitest::Mock.new
     message_storage_policy = Google::Cloud::PubSub::V1::MessageStoragePolicy.new allowed_persistence_regions: persistence_regions
-    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: message_storage_policy, schema_settings: nil]
+    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: message_storage_policy, schema_settings: nil, message_retention_duration: nil]
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_name, persistence_regions: persistence_regions
@@ -187,7 +187,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name)
     create_res.schema_settings = schema_settings
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: schema_settings]
+    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: schema_settings, message_retention_duration: nil]
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_name, schema_name: schema_name, message_encoding: message_encoding
@@ -207,7 +207,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil]
+    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil, message_retention_duration: nil]
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_name, async: async
