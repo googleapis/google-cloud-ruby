@@ -66,7 +66,7 @@ def create_instance project:, zone:, instance_name:,
       type: :PERSISTENT,
       initialize_params: {
         source_image: source_image,
-        disk_size_gb: "10"
+        disk_size_gb: 10
       }
     }],
     network_interfaces: [{ name: network_name }]
