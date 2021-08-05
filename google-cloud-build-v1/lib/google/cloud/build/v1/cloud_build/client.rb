@@ -1154,9 +1154,7 @@ module Google
             end
 
             ##
-            # Creates a `WorkerPool` to run the builds, and returns the new worker pool.
-            #
-            # This API is experimental.
+            # Creates a `WorkerPool`.
             #
             # @overload create_worker_pool(request, options = nil)
             #   Pass arguments to `create_worker_pool` via a request object, either of type
@@ -1168,21 +1166,31 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_worker_pool(parent: nil, worker_pool: nil)
+            # @overload create_worker_pool(parent: nil, worker_pool: nil, worker_pool_id: nil, validate_only: nil)
             #   Pass arguments to `create_worker_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     ID of the parent project.
+            #     Required. The parent resource where this worker pool will be created.
+            #     Format: `projects/{project}/locations/{location}`.
             #   @param worker_pool [::Google::Cloud::Build::V1::WorkerPool, ::Hash]
-            #     `WorkerPool` resource to create.
+            #     Required. `WorkerPool` resource to create.
+            #   @param worker_pool_id [::String]
+            #     Required. Immutable. The ID to use for the `WorkerPool`, which will become
+            #     the final component of the resource name.
+            #
+            #     This value should be 1-63 characters, and valid characters
+            #     are /[a-z][0-9]-/.
+            #   @param validate_only [::Boolean]
+            #     If set, validate the request and preview the response, but do not actually
+            #     post it.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Cloud::Build::V1::WorkerPool]
+            # @yieldparam response [::Gapic::Operation]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [::Google::Cloud::Build::V1::WorkerPool]
+            # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
@@ -1203,6 +1211,12 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
               options.apply_defaults timeout:      @config.rpcs.create_worker_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_worker_pool.retry_policy
@@ -1210,6 +1224,7 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :create_worker_pool, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -1218,9 +1233,7 @@ module Google
             end
 
             ##
-            # Returns information about a `WorkerPool`.
-            #
-            # This API is experimental.
+            # Returns details of a `WorkerPool`.
             #
             # @overload get_worker_pool(request, options = nil)
             #   Pass arguments to `get_worker_pool` via a request object, either of type
@@ -1238,8 +1251,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     The field will contain name of the resource requested, for example:
-            #     "projects/project-1/workerPools/workerpool-name"
+            #     Required. The name of the `WorkerPool` to retrieve.
+            #     Format: `projects/{project}/locations/{location}/workerPools/{workerPool}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Build::V1::WorkerPool]
@@ -1266,6 +1279,12 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
               options.apply_defaults timeout:      @config.rpcs.get_worker_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_worker_pool.retry_policy
@@ -1281,9 +1300,7 @@ module Google
             end
 
             ##
-            # Deletes a `WorkerPool` by its project ID and WorkerPool name.
-            #
-            # This API is experimental.
+            # Deletes a `WorkerPool`.
             #
             # @overload delete_worker_pool(request, options = nil)
             #   Pass arguments to `delete_worker_pool` via a request object, either of type
@@ -1295,20 +1312,30 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_worker_pool(name: nil)
+            # @overload delete_worker_pool(name: nil, etag: nil, allow_missing: nil, validate_only: nil)
             #   Pass arguments to `delete_worker_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     The field will contain name of the resource requested, for example:
-            #     "projects/project-1/workerPools/workerpool-name"
+            #     Required. The name of the `WorkerPool` to delete.
+            #     Format:
+            #     `projects/{project}/locations/{workerPool}/workerPools/{workerPool}`.
+            #   @param etag [::String]
+            #     Optional. If this is provided, it must match the server's etag on the
+            #     workerpool for the request to be processed.
+            #   @param allow_missing [::Boolean]
+            #     If set to true, and the `WorkerPool` is not found, the request will succeed
+            #     but no action will be taken on the server.
+            #   @param validate_only [::Boolean]
+            #     If set, validate the request and preview the response, but do not actually
+            #     post it.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam response [::Gapic::Operation]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [::Google::Protobuf::Empty]
+            # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
@@ -1329,6 +1356,12 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
               options.apply_defaults timeout:      @config.rpcs.delete_worker_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_worker_pool.retry_policy
@@ -1336,6 +1369,7 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :delete_worker_pool, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -1344,9 +1378,7 @@ module Google
             end
 
             ##
-            # Update a `WorkerPool`.
-            #
-            # This API is experimental.
+            # Updates a `WorkerPool`.
             #
             # @overload update_worker_pool(request, options = nil)
             #   Pass arguments to `update_worker_pool` via a request object, either of type
@@ -1358,22 +1390,27 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_worker_pool(name: nil, worker_pool: nil)
+            # @overload update_worker_pool(worker_pool: nil, update_mask: nil, validate_only: nil)
             #   Pass arguments to `update_worker_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [::String]
-            #     The field will contain name of the resource requested, for example:
-            #     "projects/project-1/workerPools/workerpool-name"
             #   @param worker_pool [::Google::Cloud::Build::V1::WorkerPool, ::Hash]
-            #     `WorkerPool` resource to update.
+            #     Required. The `WorkerPool` to update.
+            #
+            #     The `name` field is used to identify the `WorkerPool` to update.
+            #     Format: `projects/{project}/locations/{location}/workerPools/{workerPool}`.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     A mask specifying which fields in `worker_pool` to update.
+            #   @param validate_only [::Boolean]
+            #     If set, validate the request and preview the response, but do not actually
+            #     post it.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Cloud::Build::V1::WorkerPool]
+            # @yieldparam response [::Gapic::Operation]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [::Google::Cloud::Build::V1::WorkerPool]
+            # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
@@ -1394,6 +1431,12 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
+              header_params = {
+                "worker_pool.name" => request.worker_pool.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
               options.apply_defaults timeout:      @config.rpcs.update_worker_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_worker_pool.retry_policy
@@ -1401,6 +1444,7 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :update_worker_pool, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -1409,9 +1453,7 @@ module Google
             end
 
             ##
-            # List project's `WorkerPools`.
-            #
-            # This API is experimental.
+            # Lists `WorkerPool`s.
             #
             # @overload list_worker_pools(request, options = nil)
             #   Pass arguments to `list_worker_pools` via a request object, either of type
@@ -1423,19 +1465,26 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_worker_pools(parent: nil)
+            # @overload list_worker_pools(parent: nil, page_size: nil, page_token: nil)
             #   Pass arguments to `list_worker_pools` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     ID of the parent project.
+            #     Required. The parent of the collection of `WorkerPools`.
+            #     Format: `projects/{project}/locations/{location}`.
+            #   @param page_size [::Integer]
+            #     The maximum number of `WorkerPool`s to return. The service may return
+            #     fewer than this value. If omitted, the server will use a sensible default.
+            #   @param page_token [::String]
+            #     A page token, received from a previous `ListWorkerPools` call. Provide this
+            #     to retrieve the subsequent page.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Cloud::Build::V1::ListWorkerPoolsResponse]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Build::V1::WorkerPool>]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [::Google::Cloud::Build::V1::ListWorkerPoolsResponse]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Build::V1::WorkerPool>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
@@ -1456,6 +1505,12 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
               options.apply_defaults timeout:      @config.rpcs.list_worker_pools.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_worker_pools.retry_policy
@@ -1463,6 +1518,7 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :list_worker_pools, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @cloud_build_stub, :list_worker_pools, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end

@@ -176,6 +176,7 @@ module Google
             #   @param parent [::String]
             #     Required. The agent to list all versions from.
             #     Supported formats:
+            #
             #     - `projects/<Project ID>/agent`
             #     - `projects/<Project ID>/locations/<Location ID>/agent`
             #   @param page_size [::Integer]
@@ -251,6 +252,7 @@ module Google
             #   @param name [::String]
             #     Required. The name of the version.
             #     Supported formats:
+            #
             #     - `projects/<Project ID>/agent/versions/<Version ID>`
             #     - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
             #       ID>`
@@ -323,6 +325,7 @@ module Google
             #   @param parent [::String]
             #     Required. The agent to create a version for.
             #     Supported formats:
+            #
             #     - `projects/<Project ID>/agent`
             #     - `projects/<Project ID>/locations/<Location ID>/agent`
             #   @param version [::Google::Cloud::Dialogflow::V2::Version, ::Hash]
@@ -398,6 +401,7 @@ module Google
             #   @param version [::Google::Cloud::Dialogflow::V2::Version, ::Hash]
             #     Required. The version to update.
             #     Supported formats:
+            #
             #     - `projects/<Project ID>/agent/versions/<Version ID>`
             #     - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
             #       ID>`
@@ -470,6 +474,7 @@ module Google
             #   @param name [::String]
             #     Required. The name of the version to delete.
             #     Supported formats:
+            #
             #     - `projects/<Project ID>/agent/versions/<Version ID>`
             #     - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
             #       ID>`

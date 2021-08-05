@@ -29,8 +29,7 @@ class AddressesSmokeTest < Minitest::Test
 
   def test_list
     insert_address
-    result = @client.list(project: @default_project, region: @default_region)["items"]
-    names = result.map(&:name)
+    names = @client.list(project: @default_project, region: @default_region).map(&:name)
     assert_includes names, @name
   end
 

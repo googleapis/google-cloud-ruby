@@ -10,11 +10,9 @@ require 'google/identity/accesscontextmanager/v1/access_level_pb'
 require 'google/identity/accesscontextmanager/v1/access_policy_pb'
 require 'google/cloud/osconfig/v1/inventory_pb'
 require 'google/identity/accesscontextmanager/v1/service_perimeter_pb'
-require 'google/protobuf/any_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/code_pb'
-require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/asset/v1/assets.proto", :syntax => :proto3) do
     add_message "google.cloud.asset.v1.TemporalAsset" do
@@ -76,7 +74,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :state, :string, 13
       optional :additional_attributes, :message, 9, "google.protobuf.Struct"
       optional :parent_full_resource_name, :string, 19
+      repeated :versioned_resources, :message, 16, "google.cloud.asset.v1.VersionedResource"
+      repeated :attached_resources, :message, 20, "google.cloud.asset.v1.AttachedResource"
       optional :parent_asset_type, :string, 103
+    end
+    add_message "google.cloud.asset.v1.VersionedResource" do
+      optional :version, :string, 1
+      optional :resource, :message, 2, "google.protobuf.Struct"
+    end
+    add_message "google.cloud.asset.v1.AttachedResource" do
+      optional :asset_type, :string, 1
+      repeated :versioned_resources, :message, 3, "google.cloud.asset.v1.VersionedResource"
     end
     add_message "google.cloud.asset.v1.IamPolicySearchResult" do
       optional :resource, :string, 1
@@ -155,6 +163,8 @@ module Google
         Asset = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.Asset").msgclass
         Resource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.Resource").msgclass
         ResourceSearchResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ResourceSearchResult").msgclass
+        VersionedResource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.VersionedResource").msgclass
+        AttachedResource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AttachedResource").msgclass
         IamPolicySearchResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicySearchResult").msgclass
         IamPolicySearchResult::Explanation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicySearchResult.Explanation").msgclass
         IamPolicySearchResult::Explanation::Permissions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions").msgclass

@@ -44,7 +44,7 @@ describe "Spanner Client", :pdml, :spanner do
     prior_results = db.execute_sql "SELECT * FROM accounts WHERE active = TRUE"
     _(prior_results.rows.count).must_equal 2
 
-    query_options = { optimizer_version: "3", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
+    query_options = { optimizer_version: "3", optimizer_statistics_package: "latest" }
     pdml_row_count = db.execute_partition_update "UPDATE accounts a SET a.active = TRUE WHERE a.active = FALSE", query_options: query_options
     _(pdml_row_count).must_equal 1
 

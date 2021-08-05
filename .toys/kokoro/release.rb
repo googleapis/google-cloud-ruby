@@ -37,5 +37,5 @@ def run
   releaser = Releaser.new package, package, dry_run: dry_run, logger: logger
   releaser.publish_gem if releaser.needs_gem_publish?
   releaser.publish_docs
-  releaser.publish_rad
+  # releaser.publish_rad
 end

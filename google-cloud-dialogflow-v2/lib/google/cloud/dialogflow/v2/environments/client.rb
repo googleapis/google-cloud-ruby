@@ -156,7 +156,7 @@ module Google
             # Service calls
 
             ##
-            # Returns the list of all non-draft environments of the specified agent.
+            # Returns the list of all non-default environments of the specified agent.
             #
             # @overload list_environments(request, options = nil)
             #   Pass arguments to `list_environments` via a request object, either of type
@@ -176,6 +176,7 @@ module Google
             #   @param parent [::String]
             #     Required. The agent to list all environments from.
             #     Format:
+            #
             #     - `projects/<Project ID>/agent`
             #     - `projects/<Project ID>/locations/<Location ID>/agent`
             #   @param page_size [::Integer]
@@ -251,9 +252,12 @@ module Google
             #   @param name [::String]
             #     Required. The name of the environment.
             #     Supported formats:
+            #
             #     - `projects/<Project ID>/agent/environments/<Environment ID>`
             #     - `projects/<Project ID>/locations/<Location
             #       ID>/agent/environments/<Environment ID>`
+            #
+            #     The environment ID for the default environment is `-`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dialogflow::V2::Environment]
@@ -321,6 +325,7 @@ module Google
             #   @param parent [::String]
             #     Required. The agent to create an environment for.
             #     Supported formats:
+            #
             #     - `projects/<Project ID>/agent`
             #     - `projects/<Project ID>/locations/<Location ID>/agent`
             #   @param environment [::Google::Cloud::Dialogflow::V2::Environment, ::Hash]
@@ -379,13 +384,13 @@ module Google
             # This method allows you to deploy new agent versions into the environment.
             # When an environment is pointed to a new agent version by setting
             # `environment.agent_version`, the environment is temporarily set to the
-            # `LOADING` state. During that time, the environment keeps on serving the
+            # `LOADING` state. During that time, the environment continues serving the
             # previous version of the agent. After the new agent version is done loading,
             # the environment is set back to the `RUNNING` state.
-            # You can use "-" as Environment ID in environment name to update version
-            # in "draft" environment. WARNING: this will negate all recent changes to
-            # draft and can't be undone. You may want to save the draft to a version
-            # before calling this function.
+            # You can use "-" as Environment ID in environment name to update an agent
+            # version in the default environment. WARNING: this will negate all recent
+            # changes to the draft agent and can't be undone. You may want to save the
+            # draft agent to a version before calling this method.
             #
             # @overload update_environment(request, options = nil)
             #   Pass arguments to `update_environment` via a request object, either of type
@@ -407,10 +412,10 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. The mask to control which fields get updated.
             #   @param allow_load_to_draft_and_discard_changes [::Boolean]
-            #     Optional. This field is used to prevent accidental overwrite of the draft
+            #     Optional. This field is used to prevent accidental overwrite of the default
             #     environment, which is an operation that cannot be undone. To confirm that
             #     the caller desires this overwrite, this field must be explicitly set to
-            #     true when updating the draft environment (environment ID = `-`).
+            #     true when updating the default environment (environment ID = `-`).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dialogflow::V2::Environment]
@@ -478,9 +483,12 @@ module Google
             #   @param name [::String]
             #     Required. The name of the environment to delete.
             #     / Format:
+            #
             #     - `projects/<Project ID>/agent/environments/<Environment ID>`
             #     - `projects/<Project ID>/locations/<Location
-            #     ID>/agent/environments/<Environment ID>`
+            #       ID>/agent/environments/<Environment ID>`
+            #
+            #     The environment ID for the default environment is `-`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -548,9 +556,12 @@ module Google
             #   @param parent [::String]
             #     Required. The name of the environment to retrieve history for.
             #     Supported formats:
+            #
             #     - `projects/<Project ID>/agent/environments/<Environment ID>`
             #     - `projects/<Project ID>/locations/<Location
             #       ID>/agent/environments/<Environment ID>`
+            #
+            #     The environment ID for the default environment is `-`.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of items to return in a single page. By default 100 and
             #     at most 1000.

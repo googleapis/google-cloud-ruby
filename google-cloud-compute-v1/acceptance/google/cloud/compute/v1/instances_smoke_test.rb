@@ -37,15 +37,14 @@ class InstancesSmokeTest < Minitest::Test
   def test_aggregated_list
     insert_resource
     result = @client.aggregated_list project: @default_project
-    instances = result.items["zones/#{@default_zone}"].instances
+    instances = result.page.response.items["zones/#{@default_zone}"].instances
     names = instances.map(&:name)
     assert_includes names, @name
   end
 
   def test_list
     insert_resource
-    result = @client.list(project: @default_project, zone: @default_zone)["items"]
-    names = result.map(&:name)
+    names = @client.list(project: @default_project, zone: @default_zone).map(&:name)
     assert_includes names, @name
   end
 

@@ -43,7 +43,7 @@ module Google
         #     associated with certain entities.
         # @!attribute [rw] error_message
         #   @return [::String]
-        #     The detailed error messsage.
+        #     The detailed error message.
         class ValidationError
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

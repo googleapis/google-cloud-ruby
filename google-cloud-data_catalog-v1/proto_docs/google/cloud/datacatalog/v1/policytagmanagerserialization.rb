@@ -21,15 +21,16 @@ module Google
   module Cloud
     module DataCatalog
       module V1
-        # Message representing a taxonomy, including its policy tags in hierarchy, as a
-        # nested proto. Used for taxonomy replacement, import, and export.
+        # A nested protocol buffer that represents a taxonomy and the hierarchy of its
+        # policy tags. Used for taxonomy replacement, import, and
+        # export.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. Display name of the taxonomy. At most 200 bytes when encoded in UTF-8.
         # @!attribute [rw] description
         #   @return [::String]
-        #     Description of the serialized taxonomy. At most 2000 bytes when encoded in
-        #     UTF-8. If not set, defaults to an empty description.
+        #     Description of the serialized taxonomy. At most 2000 bytes when
+        #     encoded in UTF-8. If not set, defaults to an empty description.
         # @!attribute [rw] policy_tags
         #   @return [::Array<::Google::Cloud::DataCatalog::V1::SerializedPolicyTag>]
         #     Top level policy tags associated with the taxonomy, if any.
@@ -41,25 +42,39 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message representing one policy tag, including all its descendant policy
-        # tags, as a nested proto.
+        # A nested protocol buffer that represents a policy tag and all its
+        # descendants.
         # @!attribute [rw] policy_tag
         #   @return [::String]
         #     Resource name of the policy tag.
         #
-        #     This field will be ignored when calling ImportTaxonomies.
+        #     This field is ignored when calling `ImportTaxonomies`.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Required. Display name of the policy tag. At most 200 bytes when encoded in UTF-8.
+        #     Required. Display name of the policy tag. At most 200 bytes when encoded
+        #     in UTF-8.
         # @!attribute [rw] description
         #   @return [::String]
-        #     Description of the serialized policy tag. The length of the description is
-        #     limited to 2000 bytes when encoded in UTF-8. If not set, defaults to an
+        #     Description of the serialized policy tag. At most
+        #     2000 bytes when encoded in UTF-8. If not set, defaults to an
         #     empty description.
         # @!attribute [rw] child_policy_tags
         #   @return [::Array<::Google::Cloud::DataCatalog::V1::SerializedPolicyTag>]
         #     Children of the policy tag, if any.
         class SerializedPolicyTag
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client#replace_taxonomy ReplaceTaxonomy}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of the taxonomy to update.
+        # @!attribute [rw] serialized_taxonomy
+        #   @return [::Google::Cloud::DataCatalog::V1::SerializedTaxonomy]
+        #     Required. Taxonomy to update along with its child policy tags.
+        class ReplaceTaxonomyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -71,10 +86,10 @@ module Google
         #     Required. Resource name of project that the imported taxonomies will belong to.
         # @!attribute [rw] inline_source
         #   @return [::Google::Cloud::DataCatalog::V1::InlineSource]
-        #     Inline source used for taxonomies import.
+        #     Inline source taxonomy to import.
         # @!attribute [rw] cross_regional_source
         #   @return [::Google::Cloud::DataCatalog::V1::CrossRegionalSource]
-        #     Cross-regional source taxonomy to be imported.
+        #     Cross-regional source taxonomy to import.
         class ImportTaxonomiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -83,7 +98,7 @@ module Google
         # Inline source containing taxonomies to import.
         # @!attribute [rw] taxonomies
         #   @return [::Array<::Google::Cloud::DataCatalog::V1::SerializedTaxonomy>]
-        #     Required. Taxonomies to be imported.
+        #     Required. Taxonomies to import.
         class InlineSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -93,7 +108,7 @@ module Google
         # region.
         # @!attribute [rw] taxonomy
         #   @return [::String]
-        #     Required. The resource name of the source taxonomy to be imported.
+        #     Required. The resource name of the source taxonomy to import.
         class CrossRegionalSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -103,7 +118,7 @@ module Google
         # {::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client#import_taxonomies ImportTaxonomies}.
         # @!attribute [rw] taxonomies
         #   @return [::Array<::Google::Cloud::DataCatalog::V1::Taxonomy>]
-        #     Taxonomies that were imported.
+        #     Imported taxonomies.
         class ImportTaxonomiesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -116,11 +131,11 @@ module Google
         #     Required. Resource name of the project that the exported taxonomies belong to.
         # @!attribute [rw] taxonomies
         #   @return [::Array<::String>]
-        #     Required. Resource names of the taxonomies to be exported.
+        #     Required. Resource names of the taxonomies to export.
         # @!attribute [rw] serialized_taxonomies
         #   @return [::Boolean]
-        #     Export taxonomies as serialized taxonomies, which contain all the policy
-        #     tags as nested protos.
+        #     Serialized export taxonomies that contain all the policy
+        #     tags as nested protocol buffers.
         class ExportTaxonomiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -130,7 +145,7 @@ module Google
         # {::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client#export_taxonomies ExportTaxonomies}.
         # @!attribute [rw] taxonomies
         #   @return [::Array<::Google::Cloud::DataCatalog::V1::SerializedTaxonomy>]
-        #     List of taxonomies and policy tags as nested protos.
+        #     List of taxonomies and policy tags as nested protocol buffers.
         class ExportTaxonomiesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

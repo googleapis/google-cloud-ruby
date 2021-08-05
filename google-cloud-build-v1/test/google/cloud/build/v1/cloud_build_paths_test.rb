@@ -77,6 +77,18 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_network_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.network_path project: "value0", network: "value1"
+      assert_equal "projects/value0/global/networks/value1", path
+    end
+  end
+
   def test_project_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -134,6 +146,18 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientPathsTest < Minitest::Test
 
       path = client.topic_path project: "value0", topic: "value1"
       assert_equal "projects/value0/topics/value1", path
+    end
+  end
+
+  def test_worker_pool_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.worker_pool_path project: "value0", location: "value1", worker_pool: "value2"
+      assert_equal "projects/value0/locations/value1/workerPools/value2", path
     end
   end
 end

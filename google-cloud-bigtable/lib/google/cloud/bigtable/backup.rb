@@ -34,10 +34,10 @@ module Google
       #   require "google/cloud/bigtable"
       #
       #   bigtable = Google::Cloud::Bigtable.new
-      #   instance = bigtable.instance("my-instance")
-      #   cluster = instance.cluster("my-cluster")
+      #   instance = bigtable.instance "my-instance"
+      #   cluster = instance.cluster "my-cluster"
       #
-      #   backup = cluster.backup("my-backup")
+      #   backup = cluster.backup "my-backup"
       #
       #   # Update
       #   backup.expire_time = Time.now + 60 * 60 * 7
@@ -216,10 +216,10 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   instance = bigtable.instance("my-instance")
-        #   cluster = instance.cluster("my-cluster")
+        #   instance = bigtable.instance "my-instance"
+        #   cluster = instance.cluster "my-cluster"
         #
-        #   backup = cluster.backup("my-backup")
+        #   backup = cluster.backup "my-backup"
         #
         #   encryption_info = backup.encryption_info
         #   encryption_info.encryption_type #=> :GOOGLE_DEFAULT_ENCRYPTION
@@ -247,10 +247,10 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   instance = bigtable.instance("my-instance")
-        #   cluster = instance.cluster("my-cluster")
+        #   instance = bigtable.instance "my-instance"
+        #   cluster = instance.cluster "my-cluster"
         #
-        #   backup = cluster.backup("my-backup")
+        #   backup = cluster.backup "my-backup"
         #
         #   policy = backup.policy
         #
@@ -258,13 +258,13 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   instance = bigtable.instance("my-instance")
-        #   cluster = instance.cluster("my-cluster")
+        #   instance = bigtable.instance "my-instance"
+        #   cluster = instance.cluster "my-cluster"
         #
-        #   backup = cluster.backup("my-backup")
+        #   backup = cluster.backup "my-backup"
         #
         #   backup.policy do |p|
-        #     p.add("roles/owner", "user:owner@example.com")
+        #     p.add "roles/owner", "user:owner@example.com"
         #   end # 2 API calls
         #
         def policy
@@ -294,14 +294,14 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   instance = bigtable.instance("my-instance")
-        #   cluster = instance.cluster("my-cluster")
+        #   instance = bigtable.instance "my-instance"
+        #   cluster = instance.cluster "my-cluster"
         #
-        #   backup = cluster.backup("my-backup")
+        #   backup = cluster.backup "my-backup"
         #
         #   policy = backup.policy
-        #   policy.add("roles/owner", "user:owner@example.com")
-        #   updated_policy = backup.update_policy(policy)
+        #   policy.add "roles/owner", "user:owner@example.com"
+        #   updated_policy = backup.update_policy policy
         #
         #   puts updated_policy.roles
         #
@@ -330,10 +330,10 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   instance = bigtable.instance("my-instance")
-        #   cluster = instance.cluster("my-cluster")
+        #   instance = bigtable.instance "my-instance"
+        #   cluster = instance.cluster "my-cluster"
         #
-        #   backup = cluster.backup("my-backup")
+        #   backup = cluster.backup "my-backup"
         #
         #   permissions = backup.test_iam_permissions(
         #     "bigtable.backups.delete",
@@ -363,12 +363,12 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   instance = bigtable.instance("my-instance")
-        #   cluster = instance.cluster("my-cluster")
+        #   instance = bigtable.instance "my-instance"
+        #   cluster = instance.cluster "my-cluster"
         #
-        #   backup = cluster.backup("my-backup")
+        #   backup = cluster.backup "my-backup"
         #
-        #   job = backup.restore("my-new-table")
+        #   job = backup.restore "my-new-table"
         #
         #   job.wait_until_done!
         #   job.done? #=> true
@@ -384,13 +384,13 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   instance = bigtable.instance("my-instance")
-        #   cluster = instance.cluster("my-cluster")
+        #   instance = bigtable.instance "my-instance"
+        #   cluster = instance.cluster "my-cluster"
         #
-        #   backup = cluster.backup("my-backup")
+        #   backup = cluster.backup "my-backup"
         #
-        #   table_instance = bigtable.instance("my-other-instance")
-        #   job = backup.restore("my-new-table", instance: table_instance)
+        #   table_instance = bigtable.instance "my-other-instance"
+        #   job = backup.restore "my-new-table", instance: table_instance
         #
         #   job.wait_until_done!
         #   job.done? #=> true
@@ -423,10 +423,10 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   instance = bigtable.instance("my-instance")
-        #   cluster = instance.cluster("my-cluster")
+        #   instance = bigtable.instance "my-instance"
+        #   cluster = instance.cluster "my-cluster"
         #
-        #   backup = cluster.backup("my-backup")
+        #   backup = cluster.backup "my-backup"
         #
         #   # Update
         #   backup.expire_time = Time.now + 60 * 60 * 7
@@ -458,10 +458,10 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   instance = bigtable.instance("my-instance")
-        #   cluster = instance.cluster("my-cluster")
+        #   instance = bigtable.instance "my-instance"
+        #   cluster = instance.cluster "my-cluster"
         #
-        #   backup = cluster.backup("my-backup")
+        #   backup = cluster.backup "my-backup"
         #
         #   backup.delete
         #

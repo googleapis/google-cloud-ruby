@@ -43,6 +43,7 @@ module Google
         #   @return [::String]
         #     Output only. The unique identifier of this agent version.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent/versions/<Version ID>`
         #     - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
         #       ID>`
@@ -86,6 +87,7 @@ module Google
         #   @return [::String]
         #     Required. The agent to list all versions from.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent`
         #     - `projects/<Project ID>/locations/<Location ID>/agent`
         # @!attribute [rw] page_size
@@ -119,6 +121,7 @@ module Google
         #   @return [::String]
         #     Required. The name of the version.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent/versions/<Version ID>`
         #     - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
         #       ID>`
@@ -132,6 +135,7 @@ module Google
         #   @return [::String]
         #     Required. The agent to create a version for.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent`
         #     - `projects/<Project ID>/locations/<Location ID>/agent`
         # @!attribute [rw] version
@@ -147,6 +151,7 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::Version]
         #     Required. The version to update.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent/versions/<Version ID>`
         #     - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
         #       ID>`
@@ -163,6 +168,7 @@ module Google
         #   @return [::String]
         #     Required. The name of the version to delete.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent/versions/<Version ID>`
         #     - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
         #       ID>`

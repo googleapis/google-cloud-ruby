@@ -26,6 +26,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :catalog, :message, 1, "google.cloud.retail.v2.Catalog"
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
     end
+    add_message "google.cloud.retail.v2.SetDefaultBranchRequest" do
+      optional :catalog, :string, 1
+      optional :branch_id, :string, 2
+      optional :note, :string, 3
+    end
+    add_message "google.cloud.retail.v2.GetDefaultBranchRequest" do
+      optional :catalog, :string, 1
+    end
+    add_message "google.cloud.retail.v2.GetDefaultBranchResponse" do
+      optional :branch, :string, 1
+      optional :set_time, :message, 2, "google.protobuf.Timestamp"
+      optional :note, :string, 3
+    end
   end
 end
 
@@ -36,6 +49,9 @@ module Google
         ListCatalogsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.ListCatalogsRequest").msgclass
         ListCatalogsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.ListCatalogsResponse").msgclass
         UpdateCatalogRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.UpdateCatalogRequest").msgclass
+        SetDefaultBranchRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SetDefaultBranchRequest").msgclass
+        GetDefaultBranchRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.GetDefaultBranchRequest").msgclass
+        GetDefaultBranchResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.GetDefaultBranchResponse").msgclass
       end
     end
   end

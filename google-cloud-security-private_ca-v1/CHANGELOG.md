@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.1.2 / 2021-07-21
+
+#### Documentation
+
+* Various corrections to data type field documentation
+
 ### 0.1.1 / 2021-07-12
 
 #### Documentation

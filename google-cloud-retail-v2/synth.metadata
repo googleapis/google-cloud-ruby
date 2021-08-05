@@ -4,14 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "33de88482a529898d2527ca88568d7e416b30d46"
+        "sha": "685698e34b5b455318154d07dff305487b9d3b85"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b2a7d2709887e38bcd3b5142424e563b0b386b6f"
+        "sha": "a47f0a4aa9ef834edf40d5b8269e9b6c277bb699",
+        "internalRef": "388769359"
       }
     }
   ],
@@ -50,6 +51,13 @@
     "lib/google/cloud/retail/v2/catalog_service_pb.rb",
     "lib/google/cloud/retail/v2/catalog_service_services_pb.rb",
     "lib/google/cloud/retail/v2/common_pb.rb",
+    "lib/google/cloud/retail/v2/completion_service.rb",
+    "lib/google/cloud/retail/v2/completion_service/client.rb",
+    "lib/google/cloud/retail/v2/completion_service/credentials.rb",
+    "lib/google/cloud/retail/v2/completion_service/operations.rb",
+    "lib/google/cloud/retail/v2/completion_service/paths.rb",
+    "lib/google/cloud/retail/v2/completion_service_pb.rb",
+    "lib/google/cloud/retail/v2/completion_service_services_pb.rb",
     "lib/google/cloud/retail/v2/import_config_pb.rb",
     "lib/google/cloud/retail/v2/prediction_service.rb",
     "lib/google/cloud/retail/v2/prediction_service/client.rb",
@@ -66,6 +74,12 @@
     "lib/google/cloud/retail/v2/product_service_pb.rb",
     "lib/google/cloud/retail/v2/product_service_services_pb.rb",
     "lib/google/cloud/retail/v2/purge_config_pb.rb",
+    "lib/google/cloud/retail/v2/search_service.rb",
+    "lib/google/cloud/retail/v2/search_service/client.rb",
+    "lib/google/cloud/retail/v2/search_service/credentials.rb",
+    "lib/google/cloud/retail/v2/search_service/paths.rb",
+    "lib/google/cloud/retail/v2/search_service_pb.rb",
+    "lib/google/cloud/retail/v2/search_service_services_pb.rb",
     "lib/google/cloud/retail/v2/user_event_pb.rb",
     "lib/google/cloud/retail/v2/user_event_service.rb",
     "lib/google/cloud/retail/v2/user_event_service/client.rb",
@@ -82,11 +96,13 @@
     "proto_docs/google/cloud/retail/v2/catalog.rb",
     "proto_docs/google/cloud/retail/v2/catalog_service.rb",
     "proto_docs/google/cloud/retail/v2/common.rb",
+    "proto_docs/google/cloud/retail/v2/completion_service.rb",
     "proto_docs/google/cloud/retail/v2/import_config.rb",
     "proto_docs/google/cloud/retail/v2/prediction_service.rb",
     "proto_docs/google/cloud/retail/v2/product.rb",
     "proto_docs/google/cloud/retail/v2/product_service.rb",
     "proto_docs/google/cloud/retail/v2/purge_config.rb",
+    "proto_docs/google/cloud/retail/v2/search_service.rb",
     "proto_docs/google/cloud/retail/v2/user_event.rb",
     "proto_docs/google/cloud/retail/v2/user_event_service.rb",
     "proto_docs/google/longrunning/operations.rb",
@@ -98,13 +114,19 @@
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/protobuf/wrappers.rb",
     "proto_docs/google/rpc/status.rb",
+    "proto_docs/google/type/date.rb",
     "test/google/cloud/retail/v2/catalog_service_paths_test.rb",
     "test/google/cloud/retail/v2/catalog_service_test.rb",
+    "test/google/cloud/retail/v2/completion_service_operations_test.rb",
+    "test/google/cloud/retail/v2/completion_service_paths_test.rb",
+    "test/google/cloud/retail/v2/completion_service_test.rb",
     "test/google/cloud/retail/v2/prediction_service_paths_test.rb",
     "test/google/cloud/retail/v2/prediction_service_test.rb",
     "test/google/cloud/retail/v2/product_service_operations_test.rb",
     "test/google/cloud/retail/v2/product_service_paths_test.rb",
     "test/google/cloud/retail/v2/product_service_test.rb",
+    "test/google/cloud/retail/v2/search_service_paths_test.rb",
+    "test/google/cloud/retail/v2/search_service_test.rb",
     "test/google/cloud/retail/v2/user_event_service_operations_test.rb",
     "test/google/cloud/retail/v2/user_event_service_paths_test.rb",
     "test/google/cloud/retail/v2/user_event_service_test.rb",
