@@ -238,14 +238,14 @@ module Google
         #   * `JSON` - JSON encoding.
         #   * `BINARY` - Binary encoding, as defined by the schema type. For some
         #     schema types, binary encoding may not be available.
-        # @param [Numeric] retention Indicates the minimum duration to retain a message
+        # @param [Numeric] retention Indicates the minimum number of seconds to retain a message
         #   after it is published to the topic. If this field is set, messages published
-        #   to the topic in the last `message_retention_duration` are always available to
+        #   to the topic within the `retention` number of seconds are always available to
         #   subscribers. For instance, it allows any attached subscription to [seek to a
         #   timestamp](https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time)
-        #   that is up to `message_retention_duration` in the past. If this field is
+        #   that is up to `retention` number of seconds in the past. If this field is
         #   not set, message retention is controlled by settings on individual
-        #   subscriptions. Cannot be more than 7 days or less than 10 minutes.
+        #   subscriptions. Cannot be less than 600 (10 minutes) or more than 604,800 (7 days).
         #
         # @return [Google::Cloud::PubSub::Topic]
         #
