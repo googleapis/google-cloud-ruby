@@ -23,6 +23,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :next_rotation_time, :message, 7, "google.protobuf.Timestamp"
       optional :version_template, :message, 11, "google.cloud.kms.v1.CryptoKeyVersionTemplate"
       map :labels, :string, :string, 10
+      optional :import_only, :bool, 13
+      optional :destroy_scheduled_duration, :message, 14, "google.protobuf.Duration"
       oneof :rotation_schedule do
         optional :rotation_period, :message, 8, "google.protobuf.Duration"
       end
@@ -32,6 +34,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :ENCRYPT_DECRYPT, 1
       value :ASYMMETRIC_SIGN, 5
       value :ASYMMETRIC_DECRYPT, 6
+      value :MAC, 9
     end
     add_message "google.cloud.kms.v1.CryptoKeyVersionTemplate" do
       optional :protection_level, :enum, 1, "google.cloud.kms.v1.ProtectionLevel"
@@ -79,6 +82,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :EC_SIGN_P256_SHA256, 12
       value :EC_SIGN_P384_SHA384, 13
       value :EC_SIGN_SECP256K1_SHA256, 31
+      value :HMAC_SHA256, 32
       value :EXTERNAL_SYMMETRIC_ENCRYPTION, 18
     end
     add_enum "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState" do
@@ -100,6 +104,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :algorithm, :enum, 2, "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm"
       optional :pem_crc32c, :message, 3, "google.protobuf.Int64Value"
       optional :name, :string, 4
+      optional :protection_level, :enum, 5, "google.cloud.kms.v1.ProtectionLevel"
     end
     add_message "google.cloud.kms.v1.ImportJob" do
       optional :name, :string, 1
