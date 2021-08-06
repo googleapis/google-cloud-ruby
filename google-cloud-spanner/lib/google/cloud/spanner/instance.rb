@@ -48,6 +48,10 @@ module Google
       # {Google::Cloud::Spanner::Project#instance}, and
       # {Google::Cloud::Spanner::Project#create_instance}.
       #
+      # @deprecated Use
+      # {Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client}
+      # instead.
+      #
       # @example
       #   require "google/cloud/spanner"
       #

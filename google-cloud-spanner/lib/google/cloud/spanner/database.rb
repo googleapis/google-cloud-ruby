@@ -48,6 +48,10 @@ module Google
       # of {Google::Cloud::Spanner::Client}. See
       # {Google::Cloud::Spanner::Project#client}.
       #
+      # @deprecated Use
+      # {Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client}
+      # instead.
+      #
       # @example
       #   require "google/cloud"
       #
