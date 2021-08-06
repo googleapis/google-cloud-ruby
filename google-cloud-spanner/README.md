@@ -9,15 +9,23 @@
 - [Google Cloud Spanner API
   documentation](https://cloud.google.com/spanner/docs)
 
-## NOTICE: Freezing development of `database` and `instance` classes.
+## NOTICE: Freezing development of `Database`, `Instance` and `Backup` classes.
 
-From `google-cloud-spanner/v3.0` onwards, **new features for mananging databases
-and instances will only be available through the
+From `google-cloud-spanner/v3.0` onwards, **new features for mananging
+databases, instances and backups will only be available through the
 [google-cloud-spanner-admin-instance-v1](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-spanner-admin-instance-v1)
 and
 [google-cloud-spanner-admin-database-v1](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-spanner-admin-database-v1)
-packages**. The `database` and `instance` classes in
+packages**. The
+`[Database](https://github.com/googleapis/google-cloud-ruby/blob/master/google-cloud-spanner/lib/google/cloud/spanner/database.rb)`,
+
+`[Instance](https://github.com/googleapis/google-cloud-ruby/blob/master/google-cloud-spanner/lib/google/cloud/spanner/instance.rb)` and
+`[Backup](https://github.com/googleapis/google-cloud-ruby/blob/master/google-cloud-spanner/lib/google/cloud/spanner/backup.rb)`
+classes in
 [google-cloud-spanner](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-spanner)
+and methods related to database and instance management in the
+`[Project](https://github.com/googleapis/google-cloud-ruby/blob/master/google-cloud-spanner/lib/google/cloud/spanner/project.rb)`
+class,
 will no longer be updated to support new features. Please refer to the [FAQ](#faq-for-freezing-development-of-database-and-instance-classes)
 for further details.
 
@@ -73,21 +81,57 @@ module GRPC
 end
 ```
 
-## FAQ for freezing development of `database` and `instance` classes
+## FAQ for freezing development of `Database`, `Instance` and `Backup` classes
 
-### Can I keep using the `database` and `instance` classes?
+### Can I keep using the frozen classes and methods?
 
-Yes, these classes can continue to be used for the forseeable future, even in
-production applications. P0/P1 bug fixes and security patches for up to 1 year
-will be provided after `google-cloud-spanner/v3.0` is released.
+Yes, these classes and methods can continue to be used for the forseeable
+future, even in production applications. P0/P1 bug fixes and security patches
+for up to 1 year will be provided after `google-cloud-spanner/v3.0` is released.
 
 ### When should I use the `google-cloud-spanner-admin-instance-v1` and `google-cloud-spanner-admin-database-v1` packages?
 
 Only when your application needs to use Cloud Spanner features for managing
 databases and instances that are released after `google-cloud-spanner/v3.0`. You
-may continue to use the existing `database` and `instance` classes from
-`google-cloud-spanner` for all existing usages in your code for managing
-databases and instances.
+may continue to use the existing `Database`, `Instance` and `Backup` classes
+from `google-cloud-spanner`, and the methods from the `Project` class for all
+existing usages in your code for managing databases, instances and backups.
+
+### Which classes and methods are subject to the freeze?
+
+#### `Backup`
+* `Google::Cloud::Spanner::Backup`
+* `Google::Cloud::Spanner::Backup::Job`
+* `Google::Cloud::Spanner::Backup::Job::List`
+* `Google::Cloud::Spanner::Backup::List`
+* `Google::Cloud::Spanner::Backup::Restore::Job`
+
+#### `Database`
+* `Google::Cloud::Spanner::Database`
+* `Google::Cloud::Spanner::Database::BackupInfo`
+* `Google::Cloud::Spanner::Database::Config`
+* `Google::Cloud::Spanner::Database::Job`
+* `Google::Cloud::Spanner::Database::Job::List`
+* `Google::Cloud::Spanner::Database::List`
+* `Google::Cloud::Spanner::Database::RestoreInfo`
+
+#### `Instance`
+* `Google::Cloud::Spanner::Instance`
+* `Google::Cloud::Spanner::Instance::Config`
+* `Google::Cloud::Spanner::Instance::Job`
+* `Google::Cloud::Spanner::Instance::Job::List`
+* `Google::Cloud::Spanner::Instance::List`
+
+#### `Project`
+* `Google::Cloud::Spanner::Project#create_database`
+* `Google::Cloud::Spanner::Project#create_instance`
+* `Google::Cloud::Spanner::Project#database`
+* `Google::Cloud::Spanner::Project#databases`
+* `Google::Cloud::Spanner::Project#database_path`
+* `Google::Cloud::Spanner::Project#instance`
+* `Google::Cloud::Spanner::Project#instances`
+* `Google::Cloud::Spanner::Project#instance_config`
+* `Google::Cloud::Spanner::Project#instance_configs`
 
 ### Where can I find code samples?
 The code samples for all new features that relate to managing databases and
