@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 / 2021-08-06
+
+#### Features
+
+* Support for the new CompletionService and SearchService clients
+
 ### 1.0.2 / 2021-07-12
 
 #### Documentation
