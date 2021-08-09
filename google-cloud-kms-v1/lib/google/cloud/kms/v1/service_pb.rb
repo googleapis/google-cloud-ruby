@@ -113,6 +113,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :crypto_key_version, :message, 1, "google.cloud.kms.v1.CryptoKeyVersion"
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
     end
+    add_message "google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest" do
+      optional :name, :string, 1
+      optional :crypto_key_version_id, :string, 2
+    end
+    add_message "google.cloud.kms.v1.DestroyCryptoKeyVersionRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.kms.v1.RestoreCryptoKeyVersionRequest" do
+      optional :name, :string, 1
+    end
     add_message "google.cloud.kms.v1.EncryptRequest" do
       optional :name, :string, 1
       optional :plaintext, :bytes, 2
@@ -137,9 +147,22 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :ciphertext, :bytes, 3
       optional :ciphertext_crc32c, :message, 4, "google.protobuf.Int64Value"
     end
-    add_message "google.cloud.kms.v1.DecryptResponse" do
-      optional :plaintext, :bytes, 1
-      optional :plaintext_crc32c, :message, 2, "google.protobuf.Int64Value"
+    add_message "google.cloud.kms.v1.MacSignRequest" do
+      optional :name, :string, 1
+      optional :data, :bytes, 2
+      optional :data_crc32c, :message, 3, "google.protobuf.Int64Value"
+    end
+    add_message "google.cloud.kms.v1.MacVerifyRequest" do
+      optional :name, :string, 1
+      optional :data, :bytes, 2
+      optional :data_crc32c, :message, 3, "google.protobuf.Int64Value"
+      optional :mac, :bytes, 4
+      optional :mac_crc32c, :message, 5, "google.protobuf.Int64Value"
+    end
+    add_message "google.cloud.kms.v1.GenerateRandomBytesRequest" do
+      optional :location, :string, 1
+      optional :length_bytes, :int32, 2
+      optional :protection_level, :enum, 3, "google.cloud.kms.v1.ProtectionLevel"
     end
     add_message "google.cloud.kms.v1.EncryptResponse" do
       optional :name, :string, 1
@@ -147,27 +170,45 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :ciphertext_crc32c, :message, 4, "google.protobuf.Int64Value"
       optional :verified_plaintext_crc32c, :bool, 5
       optional :verified_additional_authenticated_data_crc32c, :bool, 6
+      optional :protection_level, :enum, 7, "google.cloud.kms.v1.ProtectionLevel"
+    end
+    add_message "google.cloud.kms.v1.DecryptResponse" do
+      optional :plaintext, :bytes, 1
+      optional :plaintext_crc32c, :message, 2, "google.protobuf.Int64Value"
+      optional :used_primary, :bool, 3
+      optional :protection_level, :enum, 4, "google.cloud.kms.v1.ProtectionLevel"
     end
     add_message "google.cloud.kms.v1.AsymmetricSignResponse" do
       optional :signature, :bytes, 1
       optional :signature_crc32c, :message, 2, "google.protobuf.Int64Value"
       optional :verified_digest_crc32c, :bool, 3
       optional :name, :string, 4
+      optional :protection_level, :enum, 6, "google.cloud.kms.v1.ProtectionLevel"
     end
     add_message "google.cloud.kms.v1.AsymmetricDecryptResponse" do
       optional :plaintext, :bytes, 1
       optional :plaintext_crc32c, :message, 2, "google.protobuf.Int64Value"
       optional :verified_ciphertext_crc32c, :bool, 3
+      optional :protection_level, :enum, 4, "google.cloud.kms.v1.ProtectionLevel"
     end
-    add_message "google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest" do
+    add_message "google.cloud.kms.v1.MacSignResponse" do
       optional :name, :string, 1
-      optional :crypto_key_version_id, :string, 2
+      optional :mac, :bytes, 2
+      optional :mac_crc32c, :message, 3, "google.protobuf.Int64Value"
+      optional :verified_data_crc32c, :bool, 4
+      optional :protection_level, :enum, 5, "google.cloud.kms.v1.ProtectionLevel"
     end
-    add_message "google.cloud.kms.v1.DestroyCryptoKeyVersionRequest" do
+    add_message "google.cloud.kms.v1.MacVerifyResponse" do
       optional :name, :string, 1
+      optional :success, :bool, 2
+      optional :verified_data_crc32c, :bool, 3
+      optional :verified_mac_crc32c, :bool, 4
+      optional :verified_success_integrity, :bool, 5
+      optional :protection_level, :enum, 6, "google.cloud.kms.v1.ProtectionLevel"
     end
-    add_message "google.cloud.kms.v1.RestoreCryptoKeyVersionRequest" do
-      optional :name, :string, 1
+    add_message "google.cloud.kms.v1.GenerateRandomBytesResponse" do
+      optional :data, :bytes, 1
+      optional :data_crc32c, :message, 3, "google.protobuf.Int64Value"
     end
     add_message "google.cloud.kms.v1.Digest" do
       oneof :digest do
@@ -207,17 +248,23 @@ module Google
         CreateImportJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.CreateImportJobRequest").msgclass
         UpdateCryptoKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.UpdateCryptoKeyRequest").msgclass
         UpdateCryptoKeyVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.UpdateCryptoKeyVersionRequest").msgclass
+        UpdateCryptoKeyPrimaryVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest").msgclass
+        DestroyCryptoKeyVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.DestroyCryptoKeyVersionRequest").msgclass
+        RestoreCryptoKeyVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.RestoreCryptoKeyVersionRequest").msgclass
         EncryptRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.EncryptRequest").msgclass
         DecryptRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.DecryptRequest").msgclass
         AsymmetricSignRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.AsymmetricSignRequest").msgclass
         AsymmetricDecryptRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.AsymmetricDecryptRequest").msgclass
-        DecryptResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.DecryptResponse").msgclass
+        MacSignRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.MacSignRequest").msgclass
+        MacVerifyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.MacVerifyRequest").msgclass
+        GenerateRandomBytesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.GenerateRandomBytesRequest").msgclass
         EncryptResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.EncryptResponse").msgclass
+        DecryptResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.DecryptResponse").msgclass
         AsymmetricSignResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.AsymmetricSignResponse").msgclass
         AsymmetricDecryptResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.AsymmetricDecryptResponse").msgclass
-        UpdateCryptoKeyPrimaryVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest").msgclass
-        DestroyCryptoKeyVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.DestroyCryptoKeyVersionRequest").msgclass
-        RestoreCryptoKeyVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.RestoreCryptoKeyVersionRequest").msgclass
+        MacSignResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.MacSignResponse").msgclass
+        MacVerifyResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.MacVerifyResponse").msgclass
+        GenerateRandomBytesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.GenerateRandomBytesResponse").msgclass
         Digest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.Digest").msgclass
         LocationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.LocationMetadata").msgclass
       end

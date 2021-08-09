@@ -150,6 +150,21 @@ module Google
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
+                default_config.rpcs.update_crypto_key_primary_version.timeout = 60.0
+                default_config.rpcs.update_crypto_key_primary_version.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.destroy_crypto_key_version.timeout = 60.0
+                default_config.rpcs.destroy_crypto_key_version.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.restore_crypto_key_version.timeout = 60.0
+                default_config.rpcs.restore_crypto_key_version.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
                 default_config.rpcs.encrypt.timeout = 60.0
                 default_config.rpcs.encrypt.retry_policy = {
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
@@ -167,21 +182,6 @@ module Google
 
                 default_config.rpcs.asymmetric_decrypt.timeout = 60.0
                 default_config.rpcs.asymmetric_decrypt.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
-                }
-
-                default_config.rpcs.update_crypto_key_primary_version.timeout = 60.0
-                default_config.rpcs.update_crypto_key_primary_version.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
-                }
-
-                default_config.rpcs.destroy_crypto_key_version.timeout = 60.0
-                default_config.rpcs.destroy_crypto_key_version.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
-                }
-
-                default_config.rpcs.restore_crypto_key_version.timeout = 60.0
-                default_config.rpcs.restore_crypto_key_version.retry_policy = {
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
@@ -1501,413 +1501,6 @@ module Google
             end
 
             ##
-            # Encrypts data, so that it can only be recovered by a call to {::Google::Cloud::Kms::V1::KeyManagementService::Client#decrypt Decrypt}.
-            # The {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose} must be
-            # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
-            #
-            # @overload encrypt(request, options = nil)
-            #   Pass arguments to `encrypt` via a request object, either of type
-            #   {::Google::Cloud::Kms::V1::EncryptRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Cloud::Kms::V1::EncryptRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload encrypt(name: nil, plaintext: nil, additional_authenticated_data: nil, plaintext_crc32c: nil, additional_authenticated_data_crc32c: nil)
-            #   Pass arguments to `encrypt` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param name [::String]
-            #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} or {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
-            #     to use for encryption.
-            #
-            #     If a {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} is specified, the server will use its
-            #     {::Google::Cloud::Kms::V1::CryptoKey#primary primary version}.
-            #   @param plaintext [::String]
-            #     Required. The data to encrypt. Must be no larger than 64KiB.
-            #
-            #     The maximum size depends on the key version's
-            #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}. For
-            #     {::Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE} keys, the plaintext must be no larger
-            #     than 64KiB. For {::Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of the
-            #     plaintext and additional_authenticated_data fields must be no larger than
-            #     8KiB.
-            #   @param additional_authenticated_data [::String]
-            #     Optional. Optional data that, if specified, must also be provided during decryption
-            #     through {::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest.additional_authenticated_data}.
-            #
-            #     The maximum size depends on the key version's
-            #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}. For
-            #     {::Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE} keys, the AAD must be no larger than
-            #     64KiB. For {::Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of the
-            #     plaintext and additional_authenticated_data fields must be no larger than
-            #     8KiB.
-            #   @param plaintext_crc32c [::Google::Protobuf::Int64Value, ::Hash]
-            #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::EncryptRequest#plaintext EncryptRequest.plaintext}. If
-            #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
-            #     received {::Google::Cloud::Kms::V1::EncryptRequest#plaintext EncryptRequest.plaintext} using this checksum.
-            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
-            #     fails. If you receive a checksum error, your client should verify that
-            #     CRC32C({::Google::Cloud::Kms::V1::EncryptRequest#plaintext EncryptRequest.plaintext}) is equal to
-            #     {::Google::Cloud::Kms::V1::EncryptRequest#plaintext_crc32c EncryptRequest.plaintext_crc32c}, and if so, perform a limited number of
-            #     retries. A persistent mismatch may indicate an issue in your computation of
-            #     the CRC32C checksum.
-            #     Note: This field is defined as int64 for reasons of compatibility across
-            #     different languages. However, it is a non-negative integer, which will
-            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
-            #     that support this type.
-            #
-            #     NOTE: This field is in Beta.
-            #   @param additional_authenticated_data_crc32c [::Google::Protobuf::Int64Value, ::Hash]
-            #     Optional. An optional CRC32C checksum of the
-            #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest.additional_authenticated_data}. If specified,
-            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the received
-            #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest.additional_authenticated_data} using this checksum.
-            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
-            #     fails. If you receive a checksum error, your client should verify that
-            #     CRC32C({::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest.additional_authenticated_data}) is equal to
-            #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data_crc32c EncryptRequest.additional_authenticated_data_crc32c}, and if so, perform
-            #     a limited number of retries. A persistent mismatch may indicate an issue in
-            #     your computation of the CRC32C checksum.
-            #     Note: This field is defined as int64 for reasons of compatibility across
-            #     different languages. However, it is a non-negative integer, which will
-            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
-            #     that support this type.
-            #
-            #     NOTE: This field is in Beta.
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Cloud::Kms::V1::EncryptResponse]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Google::Cloud::Kms::V1::EncryptResponse]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            def encrypt request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::EncryptRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.encrypt.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::Kms::V1::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {
-                "name" => request.name
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.encrypt.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.encrypt.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @key_management_service_stub.call_rpc :encrypt, request, options: options do |response, operation|
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
-            # Decrypts data that was protected by {::Google::Cloud::Kms::V1::KeyManagementService::Client#encrypt Encrypt}. The {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
-            # must be {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
-            #
-            # @overload decrypt(request, options = nil)
-            #   Pass arguments to `decrypt` via a request object, either of type
-            #   {::Google::Cloud::Kms::V1::DecryptRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Cloud::Kms::V1::DecryptRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload decrypt(name: nil, ciphertext: nil, additional_authenticated_data: nil, ciphertext_crc32c: nil, additional_authenticated_data_crc32c: nil)
-            #   Pass arguments to `decrypt` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param name [::String]
-            #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} to use for decryption.
-            #     The server will choose the appropriate version.
-            #   @param ciphertext [::String]
-            #     Required. The encrypted data originally returned in
-            #     {::Google::Cloud::Kms::V1::EncryptResponse#ciphertext EncryptResponse.ciphertext}.
-            #   @param additional_authenticated_data [::String]
-            #     Optional. Optional data that must match the data originally supplied in
-            #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest.additional_authenticated_data}.
-            #   @param ciphertext_crc32c [::Google::Protobuf::Int64Value, ::Hash]
-            #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::DecryptRequest#ciphertext DecryptRequest.ciphertext}. If
-            #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
-            #     received {::Google::Cloud::Kms::V1::DecryptRequest#ciphertext DecryptRequest.ciphertext} using this checksum.
-            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
-            #     fails. If you receive a checksum error, your client should verify that
-            #     CRC32C({::Google::Cloud::Kms::V1::DecryptRequest#ciphertext DecryptRequest.ciphertext}) is equal to
-            #     {::Google::Cloud::Kms::V1::DecryptRequest#ciphertext_crc32c DecryptRequest.ciphertext_crc32c}, and if so, perform a limited number
-            #     of retries. A persistent mismatch may indicate an issue in your computation
-            #     of the CRC32C checksum.
-            #     Note: This field is defined as int64 for reasons of compatibility across
-            #     different languages. However, it is a non-negative integer, which will
-            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
-            #     that support this type.
-            #
-            #     NOTE: This field is in Beta.
-            #   @param additional_authenticated_data_crc32c [::Google::Protobuf::Int64Value, ::Hash]
-            #     Optional. An optional CRC32C checksum of the
-            #     {::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest.additional_authenticated_data}. If specified,
-            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the received
-            #     {::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest.additional_authenticated_data} using this checksum.
-            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
-            #     fails. If you receive a checksum error, your client should verify that
-            #     CRC32C({::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest.additional_authenticated_data}) is equal to
-            #     {::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data_crc32c DecryptRequest.additional_authenticated_data_crc32c}, and if so, perform
-            #     a limited number of retries. A persistent mismatch may indicate an issue in
-            #     your computation of the CRC32C checksum.
-            #     Note: This field is defined as int64 for reasons of compatibility across
-            #     different languages. However, it is a non-negative integer, which will
-            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
-            #     that support this type.
-            #
-            #     NOTE: This field is in Beta.
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Cloud::Kms::V1::DecryptResponse]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Google::Cloud::Kms::V1::DecryptResponse]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            def decrypt request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::DecryptRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.decrypt.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::Kms::V1::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {
-                "name" => request.name
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.decrypt.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.decrypt.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @key_management_service_stub.call_rpc :decrypt, request, options: options do |response, operation|
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
-            # Signs data using a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
-            # ASYMMETRIC_SIGN, producing a signature that can be verified with the public
-            # key retrieved from {::Google::Cloud::Kms::V1::KeyManagementService::Client#get_public_key GetPublicKey}.
-            #
-            # @overload asymmetric_sign(request, options = nil)
-            #   Pass arguments to `asymmetric_sign` via a request object, either of type
-            #   {::Google::Cloud::Kms::V1::AsymmetricSignRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Cloud::Kms::V1::AsymmetricSignRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload asymmetric_sign(name: nil, digest: nil, digest_crc32c: nil)
-            #   Pass arguments to `asymmetric_sign` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param name [::String]
-            #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for signing.
-            #   @param digest [::Google::Cloud::Kms::V1::Digest, ::Hash]
-            #     Required. The digest of the data to sign. The digest must be produced with
-            #     the same digest algorithm as specified by the key version's
-            #     {::Google::Cloud::Kms::V1::CryptoKeyVersion#algorithm algorithm}.
-            #   @param digest_crc32c [::Google::Protobuf::Int64Value, ::Hash]
-            #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest AsymmetricSignRequest.digest}. If
-            #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
-            #     received {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest AsymmetricSignRequest.digest} using this checksum.
-            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
-            #     fails. If you receive a checksum error, your client should verify that
-            #     CRC32C({::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest AsymmetricSignRequest.digest}) is equal to
-            #     {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest_crc32c AsymmetricSignRequest.digest_crc32c}, and if so, perform a limited
-            #     number of retries. A persistent mismatch may indicate an issue in your
-            #     computation of the CRC32C checksum.
-            #     Note: This field is defined as int64 for reasons of compatibility across
-            #     different languages. However, it is a non-negative integer, which will
-            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
-            #     that support this type.
-            #
-            #     NOTE: This field is in Beta.
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Cloud::Kms::V1::AsymmetricSignResponse]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Google::Cloud::Kms::V1::AsymmetricSignResponse]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            def asymmetric_sign request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::AsymmetricSignRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.asymmetric_sign.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::Kms::V1::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {
-                "name" => request.name
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.asymmetric_sign.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.asymmetric_sign.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @key_management_service_stub.call_rpc :asymmetric_sign, request, options: options do |response, operation|
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
-            # Decrypts data that was encrypted with a public key retrieved from
-            # {::Google::Cloud::Kms::V1::KeyManagementService::Client#get_public_key GetPublicKey} corresponding to a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with
-            # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose} ASYMMETRIC_DECRYPT.
-            #
-            # @overload asymmetric_decrypt(request, options = nil)
-            #   Pass arguments to `asymmetric_decrypt` via a request object, either of type
-            #   {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Cloud::Kms::V1::AsymmetricDecryptRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload asymmetric_decrypt(name: nil, ciphertext: nil, ciphertext_crc32c: nil)
-            #   Pass arguments to `asymmetric_decrypt` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param name [::String]
-            #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for
-            #     decryption.
-            #   @param ciphertext [::String]
-            #     Required. The data encrypted with the named {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}'s public
-            #     key using OAEP.
-            #   @param ciphertext_crc32c [::Google::Protobuf::Int64Value, ::Hash]
-            #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext AsymmetricDecryptRequest.ciphertext}.
-            #     If specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
-            #     received {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext AsymmetricDecryptRequest.ciphertext} using this checksum.
-            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
-            #     fails. If you receive a checksum error, your client should verify that
-            #     CRC32C({::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext AsymmetricDecryptRequest.ciphertext}) is equal to
-            #     {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext_crc32c AsymmetricDecryptRequest.ciphertext_crc32c}, and if so, perform a
-            #     limited number of retries. A persistent mismatch may indicate an issue in
-            #     your computation of the CRC32C checksum.
-            #     Note: This field is defined as int64 for reasons of compatibility across
-            #     different languages. However, it is a non-negative integer, which will
-            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
-            #     that support this type.
-            #
-            #     NOTE: This field is in Beta.
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Cloud::Kms::V1::AsymmetricDecryptResponse]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Google::Cloud::Kms::V1::AsymmetricDecryptResponse]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            def asymmetric_decrypt request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::AsymmetricDecryptRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.asymmetric_decrypt.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::Kms::V1::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {
-                "name" => request.name
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.asymmetric_decrypt.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.asymmetric_decrypt.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @key_management_service_stub.call_rpc :asymmetric_decrypt, request, options: options do |response, operation|
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
             # Update the version of a {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} that will be used in {::Google::Cloud::Kms::V1::KeyManagementService::Client#encrypt Encrypt}.
             #
             # Returns an error if called on a key whose purpose is not
@@ -2120,6 +1713,661 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :restore_crypto_key_version, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Encrypts data, so that it can only be recovered by a call to {::Google::Cloud::Kms::V1::KeyManagementService::Client#decrypt Decrypt}.
+            # The {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose} must be
+            # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
+            #
+            # @overload encrypt(request, options = nil)
+            #   Pass arguments to `encrypt` via a request object, either of type
+            #   {::Google::Cloud::Kms::V1::EncryptRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Kms::V1::EncryptRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload encrypt(name: nil, plaintext: nil, additional_authenticated_data: nil, plaintext_crc32c: nil, additional_authenticated_data_crc32c: nil)
+            #   Pass arguments to `encrypt` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} or {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
+            #     to use for encryption.
+            #
+            #     If a {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} is specified, the server will use its
+            #     {::Google::Cloud::Kms::V1::CryptoKey#primary primary version}.
+            #   @param plaintext [::String]
+            #     Required. The data to encrypt. Must be no larger than 64KiB.
+            #
+            #     The maximum size depends on the key version's
+            #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}. For
+            #     {::Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE} keys, the plaintext must be no larger
+            #     than 64KiB. For {::Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of the
+            #     plaintext and additional_authenticated_data fields must be no larger than
+            #     8KiB.
+            #   @param additional_authenticated_data [::String]
+            #     Optional. Optional data that, if specified, must also be provided during decryption
+            #     through {::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest.additional_authenticated_data}.
+            #
+            #     The maximum size depends on the key version's
+            #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}. For
+            #     {::Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE} keys, the AAD must be no larger than
+            #     64KiB. For {::Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of the
+            #     plaintext and additional_authenticated_data fields must be no larger than
+            #     8KiB.
+            #   @param plaintext_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+            #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::EncryptRequest#plaintext EncryptRequest.plaintext}. If
+            #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+            #     received {::Google::Cloud::Kms::V1::EncryptRequest#plaintext EncryptRequest.plaintext} using this checksum.
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+            #     fails. If you receive a checksum error, your client should verify that
+            #     CRC32C({::Google::Cloud::Kms::V1::EncryptRequest#plaintext EncryptRequest.plaintext}) is equal to
+            #     {::Google::Cloud::Kms::V1::EncryptRequest#plaintext_crc32c EncryptRequest.plaintext_crc32c}, and if so, perform a limited number of
+            #     retries. A persistent mismatch may indicate an issue in your computation of
+            #     the CRC32C checksum.
+            #     Note: This field is defined as int64 for reasons of compatibility across
+            #     different languages. However, it is a non-negative integer, which will
+            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+            #     that support this type.
+            #   @param additional_authenticated_data_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+            #     Optional. An optional CRC32C checksum of the
+            #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest.additional_authenticated_data}. If specified,
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the received
+            #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest.additional_authenticated_data} using this checksum.
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+            #     fails. If you receive a checksum error, your client should verify that
+            #     CRC32C({::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest.additional_authenticated_data}) is equal to
+            #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data_crc32c EncryptRequest.additional_authenticated_data_crc32c}, and if so, perform
+            #     a limited number of retries. A persistent mismatch may indicate an issue in
+            #     your computation of the CRC32C checksum.
+            #     Note: This field is defined as int64 for reasons of compatibility across
+            #     different languages. However, it is a non-negative integer, which will
+            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+            #     that support this type.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Kms::V1::EncryptResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Kms::V1::EncryptResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def encrypt request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::EncryptRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.encrypt.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Kms::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.encrypt.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.encrypt.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @key_management_service_stub.call_rpc :encrypt, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Decrypts data that was protected by {::Google::Cloud::Kms::V1::KeyManagementService::Client#encrypt Encrypt}. The {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
+            # must be {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
+            #
+            # @overload decrypt(request, options = nil)
+            #   Pass arguments to `decrypt` via a request object, either of type
+            #   {::Google::Cloud::Kms::V1::DecryptRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Kms::V1::DecryptRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload decrypt(name: nil, ciphertext: nil, additional_authenticated_data: nil, ciphertext_crc32c: nil, additional_authenticated_data_crc32c: nil)
+            #   Pass arguments to `decrypt` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} to use for decryption.
+            #     The server will choose the appropriate version.
+            #   @param ciphertext [::String]
+            #     Required. The encrypted data originally returned in
+            #     {::Google::Cloud::Kms::V1::EncryptResponse#ciphertext EncryptResponse.ciphertext}.
+            #   @param additional_authenticated_data [::String]
+            #     Optional. Optional data that must match the data originally supplied in
+            #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest.additional_authenticated_data}.
+            #   @param ciphertext_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+            #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::DecryptRequest#ciphertext DecryptRequest.ciphertext}. If
+            #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+            #     received {::Google::Cloud::Kms::V1::DecryptRequest#ciphertext DecryptRequest.ciphertext} using this checksum.
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+            #     fails. If you receive a checksum error, your client should verify that
+            #     CRC32C({::Google::Cloud::Kms::V1::DecryptRequest#ciphertext DecryptRequest.ciphertext}) is equal to
+            #     {::Google::Cloud::Kms::V1::DecryptRequest#ciphertext_crc32c DecryptRequest.ciphertext_crc32c}, and if so, perform a limited number
+            #     of retries. A persistent mismatch may indicate an issue in your computation
+            #     of the CRC32C checksum.
+            #     Note: This field is defined as int64 for reasons of compatibility across
+            #     different languages. However, it is a non-negative integer, which will
+            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+            #     that support this type.
+            #   @param additional_authenticated_data_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+            #     Optional. An optional CRC32C checksum of the
+            #     {::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest.additional_authenticated_data}. If specified,
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the received
+            #     {::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest.additional_authenticated_data} using this checksum.
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+            #     fails. If you receive a checksum error, your client should verify that
+            #     CRC32C({::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest.additional_authenticated_data}) is equal to
+            #     {::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data_crc32c DecryptRequest.additional_authenticated_data_crc32c}, and if so, perform
+            #     a limited number of retries. A persistent mismatch may indicate an issue in
+            #     your computation of the CRC32C checksum.
+            #     Note: This field is defined as int64 for reasons of compatibility across
+            #     different languages. However, it is a non-negative integer, which will
+            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+            #     that support this type.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Kms::V1::DecryptResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Kms::V1::DecryptResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def decrypt request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::DecryptRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.decrypt.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Kms::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.decrypt.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.decrypt.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @key_management_service_stub.call_rpc :decrypt, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Signs data using a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
+            # ASYMMETRIC_SIGN, producing a signature that can be verified with the public
+            # key retrieved from {::Google::Cloud::Kms::V1::KeyManagementService::Client#get_public_key GetPublicKey}.
+            #
+            # @overload asymmetric_sign(request, options = nil)
+            #   Pass arguments to `asymmetric_sign` via a request object, either of type
+            #   {::Google::Cloud::Kms::V1::AsymmetricSignRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Kms::V1::AsymmetricSignRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload asymmetric_sign(name: nil, digest: nil, digest_crc32c: nil)
+            #   Pass arguments to `asymmetric_sign` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for signing.
+            #   @param digest [::Google::Cloud::Kms::V1::Digest, ::Hash]
+            #     Required. The digest of the data to sign. The digest must be produced with
+            #     the same digest algorithm as specified by the key version's
+            #     {::Google::Cloud::Kms::V1::CryptoKeyVersion#algorithm algorithm}.
+            #   @param digest_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+            #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest AsymmetricSignRequest.digest}. If
+            #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+            #     received {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest AsymmetricSignRequest.digest} using this checksum.
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+            #     fails. If you receive a checksum error, your client should verify that
+            #     CRC32C({::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest AsymmetricSignRequest.digest}) is equal to
+            #     {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest_crc32c AsymmetricSignRequest.digest_crc32c}, and if so, perform a limited
+            #     number of retries. A persistent mismatch may indicate an issue in your
+            #     computation of the CRC32C checksum.
+            #     Note: This field is defined as int64 for reasons of compatibility across
+            #     different languages. However, it is a non-negative integer, which will
+            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+            #     that support this type.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Kms::V1::AsymmetricSignResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Kms::V1::AsymmetricSignResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def asymmetric_sign request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::AsymmetricSignRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.asymmetric_sign.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Kms::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.asymmetric_sign.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.asymmetric_sign.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @key_management_service_stub.call_rpc :asymmetric_sign, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Decrypts data that was encrypted with a public key retrieved from
+            # {::Google::Cloud::Kms::V1::KeyManagementService::Client#get_public_key GetPublicKey} corresponding to a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with
+            # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose} ASYMMETRIC_DECRYPT.
+            #
+            # @overload asymmetric_decrypt(request, options = nil)
+            #   Pass arguments to `asymmetric_decrypt` via a request object, either of type
+            #   {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Kms::V1::AsymmetricDecryptRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload asymmetric_decrypt(name: nil, ciphertext: nil, ciphertext_crc32c: nil)
+            #   Pass arguments to `asymmetric_decrypt` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for
+            #     decryption.
+            #   @param ciphertext [::String]
+            #     Required. The data encrypted with the named {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}'s public
+            #     key using OAEP.
+            #   @param ciphertext_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+            #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext AsymmetricDecryptRequest.ciphertext}.
+            #     If specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+            #     received {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext AsymmetricDecryptRequest.ciphertext} using this checksum.
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+            #     fails. If you receive a checksum error, your client should verify that
+            #     CRC32C({::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext AsymmetricDecryptRequest.ciphertext}) is equal to
+            #     {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext_crc32c AsymmetricDecryptRequest.ciphertext_crc32c}, and if so, perform a
+            #     limited number of retries. A persistent mismatch may indicate an issue in
+            #     your computation of the CRC32C checksum.
+            #     Note: This field is defined as int64 for reasons of compatibility across
+            #     different languages. However, it is a non-negative integer, which will
+            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+            #     that support this type.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Kms::V1::AsymmetricDecryptResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Kms::V1::AsymmetricDecryptResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def asymmetric_decrypt request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::AsymmetricDecryptRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.asymmetric_decrypt.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Kms::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.asymmetric_decrypt.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.asymmetric_decrypt.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @key_management_service_stub.call_rpc :asymmetric_decrypt, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Signs data using a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
+            # MAC, producing a tag that can be verified by another source with the
+            # same key.
+            #
+            # @overload mac_sign(request, options = nil)
+            #   Pass arguments to `mac_sign` via a request object, either of type
+            #   {::Google::Cloud::Kms::V1::MacSignRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Kms::V1::MacSignRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload mac_sign(name: nil, data: nil, data_crc32c: nil)
+            #   Pass arguments to `mac_sign` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for signing.
+            #   @param data [::String]
+            #     Required. The data to sign. The MAC tag is computed over this data field based on
+            #     the specific algorithm.
+            #   @param data_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+            #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::MacSignRequest#data MacSignRequest.data}. If
+            #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+            #     received {::Google::Cloud::Kms::V1::MacSignRequest#data MacSignRequest.data} using this checksum.
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+            #     fails. If you receive a checksum error, your client should verify that
+            #     CRC32C({::Google::Cloud::Kms::V1::MacSignRequest#data MacSignRequest.data}) is equal to
+            #     {::Google::Cloud::Kms::V1::MacSignRequest#data_crc32c MacSignRequest.data_crc32c}, and if so, perform a limited
+            #     number of retries. A persistent mismatch may indicate an issue in your
+            #     computation of the CRC32C checksum.
+            #     Note: This field is defined as int64 for reasons of compatibility across
+            #     different languages. However, it is a non-negative integer, which will
+            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+            #     that support this type.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Kms::V1::MacSignResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Kms::V1::MacSignResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def mac_sign request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::MacSignRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.mac_sign.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Kms::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.mac_sign.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.mac_sign.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @key_management_service_stub.call_rpc :mac_sign, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Verifies MAC tag using a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
+            # MAC, and returns a response that indicates whether or not the verification
+            # was successful.
+            #
+            # @overload mac_verify(request, options = nil)
+            #   Pass arguments to `mac_verify` via a request object, either of type
+            #   {::Google::Cloud::Kms::V1::MacVerifyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Kms::V1::MacVerifyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload mac_verify(name: nil, data: nil, data_crc32c: nil, mac: nil, mac_crc32c: nil)
+            #   Pass arguments to `mac_verify` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for verification.
+            #   @param data [::String]
+            #     Required. The data used previously as a {::Google::Cloud::Kms::V1::MacSignRequest#data MacSignRequest.data} to generate the MAC
+            #     tag.
+            #   @param data_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+            #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::MacVerifyRequest#data MacVerifyRequest.data}. If
+            #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+            #     received {::Google::Cloud::Kms::V1::MacVerifyRequest#data MacVerifyRequest.data} using this checksum.
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+            #     fails. If you receive a checksum error, your client should verify that
+            #     CRC32C({::Google::Cloud::Kms::V1::MacVerifyRequest#data MacVerifyRequest.data}) is equal to
+            #     {::Google::Cloud::Kms::V1::MacVerifyRequest#data_crc32c MacVerifyRequest.data_crc32c}, and if so, perform a limited
+            #     number of retries. A persistent mismatch may indicate an issue in your
+            #     computation of the CRC32C checksum.
+            #     Note: This field is defined as int64 for reasons of compatibility across
+            #     different languages. However, it is a non-negative integer, which will
+            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+            #     that support this type.
+            #   @param mac [::String]
+            #     Required. The signature to verify.
+            #   @param mac_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+            #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::MacVerifyRequest#mac MacVerifyRequest.mac}. If
+            #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+            #     received {::Google::Cloud::Kms::V1::MacVerifyRequest#mac MacVerifyRequest.mac} using this checksum.
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+            #     fails. If you receive a checksum error, your client should verify that
+            #     CRC32C([MacVerifyRequest.tag][]) is equal to
+            #     {::Google::Cloud::Kms::V1::MacVerifyRequest#mac_crc32c MacVerifyRequest.mac_crc32c}, and if so, perform a limited
+            #     number of retries. A persistent mismatch may indicate an issue in your
+            #     computation of the CRC32C checksum.
+            #     Note: This field is defined as int64 for reasons of compatibility across
+            #     different languages. However, it is a non-negative integer, which will
+            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+            #     that support this type.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Kms::V1::MacVerifyResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Kms::V1::MacVerifyResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def mac_verify request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::MacVerifyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.mac_verify.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Kms::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.mac_verify.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.mac_verify.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @key_management_service_stub.call_rpc :mac_verify, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Generate random bytes using the Cloud KMS randomness source in the provided
+            # location.
+            #
+            # @overload generate_random_bytes(request, options = nil)
+            #   Pass arguments to `generate_random_bytes` via a request object, either of type
+            #   {::Google::Cloud::Kms::V1::GenerateRandomBytesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Kms::V1::GenerateRandomBytesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload generate_random_bytes(location: nil, length_bytes: nil, protection_level: nil)
+            #   Pass arguments to `generate_random_bytes` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param location [::String]
+            #     The project-specific location in which to generate random bytes.
+            #     For example, "projects/my-project/locations/us-central1".
+            #   @param length_bytes [::Integer]
+            #     The length in bytes of the amount of randomness to retrieve.  Minimum 8
+            #     bytes, maximum 1024 bytes.
+            #   @param protection_level [::Google::Cloud::Kms::V1::ProtectionLevel]
+            #     The {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} to use when generating the random data. Defaults to
+            #     {::Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE}.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Kms::V1::GenerateRandomBytesResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Kms::V1::GenerateRandomBytesResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def generate_random_bytes request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::GenerateRandomBytesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.generate_random_bytes.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Kms::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "location" => request.location
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.generate_random_bytes.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.generate_random_bytes.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @key_management_service_stub.call_rpc :generate_random_bytes, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -2344,6 +2592,21 @@ module Google
                 #
                 attr_reader :update_crypto_key_version
                 ##
+                # RPC-specific configuration for `update_crypto_key_primary_version`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_crypto_key_primary_version
+                ##
+                # RPC-specific configuration for `destroy_crypto_key_version`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :destroy_crypto_key_version
+                ##
+                # RPC-specific configuration for `restore_crypto_key_version`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :restore_crypto_key_version
+                ##
                 # RPC-specific configuration for `encrypt`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2364,20 +2627,20 @@ module Google
                 #
                 attr_reader :asymmetric_decrypt
                 ##
-                # RPC-specific configuration for `update_crypto_key_primary_version`
+                # RPC-specific configuration for `mac_sign`
                 # @return [::Gapic::Config::Method]
                 #
-                attr_reader :update_crypto_key_primary_version
+                attr_reader :mac_sign
                 ##
-                # RPC-specific configuration for `destroy_crypto_key_version`
+                # RPC-specific configuration for `mac_verify`
                 # @return [::Gapic::Config::Method]
                 #
-                attr_reader :destroy_crypto_key_version
+                attr_reader :mac_verify
                 ##
-                # RPC-specific configuration for `restore_crypto_key_version`
+                # RPC-specific configuration for `generate_random_bytes`
                 # @return [::Gapic::Config::Method]
                 #
-                attr_reader :restore_crypto_key_version
+                attr_reader :generate_random_bytes
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -2413,6 +2676,12 @@ module Google
                   @update_crypto_key = ::Gapic::Config::Method.new update_crypto_key_config
                   update_crypto_key_version_config = parent_rpcs.update_crypto_key_version if parent_rpcs.respond_to? :update_crypto_key_version
                   @update_crypto_key_version = ::Gapic::Config::Method.new update_crypto_key_version_config
+                  update_crypto_key_primary_version_config = parent_rpcs.update_crypto_key_primary_version if parent_rpcs.respond_to? :update_crypto_key_primary_version
+                  @update_crypto_key_primary_version = ::Gapic::Config::Method.new update_crypto_key_primary_version_config
+                  destroy_crypto_key_version_config = parent_rpcs.destroy_crypto_key_version if parent_rpcs.respond_to? :destroy_crypto_key_version
+                  @destroy_crypto_key_version = ::Gapic::Config::Method.new destroy_crypto_key_version_config
+                  restore_crypto_key_version_config = parent_rpcs.restore_crypto_key_version if parent_rpcs.respond_to? :restore_crypto_key_version
+                  @restore_crypto_key_version = ::Gapic::Config::Method.new restore_crypto_key_version_config
                   encrypt_config = parent_rpcs.encrypt if parent_rpcs.respond_to? :encrypt
                   @encrypt = ::Gapic::Config::Method.new encrypt_config
                   decrypt_config = parent_rpcs.decrypt if parent_rpcs.respond_to? :decrypt
@@ -2421,12 +2690,12 @@ module Google
                   @asymmetric_sign = ::Gapic::Config::Method.new asymmetric_sign_config
                   asymmetric_decrypt_config = parent_rpcs.asymmetric_decrypt if parent_rpcs.respond_to? :asymmetric_decrypt
                   @asymmetric_decrypt = ::Gapic::Config::Method.new asymmetric_decrypt_config
-                  update_crypto_key_primary_version_config = parent_rpcs.update_crypto_key_primary_version if parent_rpcs.respond_to? :update_crypto_key_primary_version
-                  @update_crypto_key_primary_version = ::Gapic::Config::Method.new update_crypto_key_primary_version_config
-                  destroy_crypto_key_version_config = parent_rpcs.destroy_crypto_key_version if parent_rpcs.respond_to? :destroy_crypto_key_version
-                  @destroy_crypto_key_version = ::Gapic::Config::Method.new destroy_crypto_key_version_config
-                  restore_crypto_key_version_config = parent_rpcs.restore_crypto_key_version if parent_rpcs.respond_to? :restore_crypto_key_version
-                  @restore_crypto_key_version = ::Gapic::Config::Method.new restore_crypto_key_version_config
+                  mac_sign_config = parent_rpcs.mac_sign if parent_rpcs.respond_to? :mac_sign
+                  @mac_sign = ::Gapic::Config::Method.new mac_sign_config
+                  mac_verify_config = parent_rpcs.mac_verify if parent_rpcs.respond_to? :mac_verify
+                  @mac_verify = ::Gapic::Config::Method.new mac_verify_config
+                  generate_random_bytes_config = parent_rpcs.generate_random_bytes if parent_rpcs.respond_to? :generate_random_bytes
+                  @generate_random_bytes = ::Gapic::Config::Method.new generate_random_bytes_config
 
                   yield self if block_given?
                 end

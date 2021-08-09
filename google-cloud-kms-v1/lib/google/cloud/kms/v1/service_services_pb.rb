@@ -100,21 +100,6 @@ module Google
             # method. See [DestroyCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.DestroyCryptoKeyVersion] and [RestoreCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion] to
             # move between other states.
             rpc :UpdateCryptoKeyVersion, ::Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest, ::Google::Cloud::Kms::V1::CryptoKeyVersion
-            # Encrypts data, so that it can only be recovered by a call to [Decrypt][google.cloud.kms.v1.KeyManagementService.Decrypt].
-            # The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
-            # [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].
-            rpc :Encrypt, ::Google::Cloud::Kms::V1::EncryptRequest, ::Google::Cloud::Kms::V1::EncryptResponse
-            # Decrypts data that was protected by [Encrypt][google.cloud.kms.v1.KeyManagementService.Encrypt]. The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose]
-            # must be [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].
-            rpc :Decrypt, ::Google::Cloud::Kms::V1::DecryptRequest, ::Google::Cloud::Kms::V1::DecryptResponse
-            # Signs data using a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose]
-            # ASYMMETRIC_SIGN, producing a signature that can be verified with the public
-            # key retrieved from [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey].
-            rpc :AsymmetricSign, ::Google::Cloud::Kms::V1::AsymmetricSignRequest, ::Google::Cloud::Kms::V1::AsymmetricSignResponse
-            # Decrypts data that was encrypted with a public key retrieved from
-            # [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey] corresponding to a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with
-            # [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] ASYMMETRIC_DECRYPT.
-            rpc :AsymmetricDecrypt, ::Google::Cloud::Kms::V1::AsymmetricDecryptRequest, ::Google::Cloud::Kms::V1::AsymmetricDecryptResponse
             # Update the version of a [CryptoKey][google.cloud.kms.v1.CryptoKey] that will be used in [Encrypt][google.cloud.kms.v1.KeyManagementService.Encrypt].
             #
             # Returns an error if called on a key whose purpose is not
@@ -141,6 +126,32 @@ module Google
             # will be set to [DISABLED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED],
             # and [destroy_time][google.cloud.kms.v1.CryptoKeyVersion.destroy_time] will be cleared.
             rpc :RestoreCryptoKeyVersion, ::Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest, ::Google::Cloud::Kms::V1::CryptoKeyVersion
+            # Encrypts data, so that it can only be recovered by a call to [Decrypt][google.cloud.kms.v1.KeyManagementService.Decrypt].
+            # The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be
+            # [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].
+            rpc :Encrypt, ::Google::Cloud::Kms::V1::EncryptRequest, ::Google::Cloud::Kms::V1::EncryptResponse
+            # Decrypts data that was protected by [Encrypt][google.cloud.kms.v1.KeyManagementService.Encrypt]. The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose]
+            # must be [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].
+            rpc :Decrypt, ::Google::Cloud::Kms::V1::DecryptRequest, ::Google::Cloud::Kms::V1::DecryptResponse
+            # Signs data using a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose]
+            # ASYMMETRIC_SIGN, producing a signature that can be verified with the public
+            # key retrieved from [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey].
+            rpc :AsymmetricSign, ::Google::Cloud::Kms::V1::AsymmetricSignRequest, ::Google::Cloud::Kms::V1::AsymmetricSignResponse
+            # Decrypts data that was encrypted with a public key retrieved from
+            # [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey] corresponding to a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with
+            # [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] ASYMMETRIC_DECRYPT.
+            rpc :AsymmetricDecrypt, ::Google::Cloud::Kms::V1::AsymmetricDecryptRequest, ::Google::Cloud::Kms::V1::AsymmetricDecryptResponse
+            # Signs data using a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose]
+            # MAC, producing a tag that can be verified by another source with the
+            # same key.
+            rpc :MacSign, ::Google::Cloud::Kms::V1::MacSignRequest, ::Google::Cloud::Kms::V1::MacSignResponse
+            # Verifies MAC tag using a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose]
+            # MAC, and returns a response that indicates whether or not the verification
+            # was successful.
+            rpc :MacVerify, ::Google::Cloud::Kms::V1::MacVerifyRequest, ::Google::Cloud::Kms::V1::MacVerifyResponse
+            # Generate random bytes using the Cloud KMS randomness source in the provided
+            # location.
+            rpc :GenerateRandomBytes, ::Google::Cloud::Kms::V1::GenerateRandomBytesRequest, ::Google::Cloud::Kms::V1::GenerateRandomBytesResponse
           end
 
           Stub = Service.rpc_stub_class

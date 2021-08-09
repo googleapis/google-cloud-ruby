@@ -90,6 +90,21 @@
                 "update_crypto_key_version"
               ]
             },
+            "UpdateCryptoKeyPrimaryVersion": {
+              "methods": [
+                "update_crypto_key_primary_version"
+              ]
+            },
+            "DestroyCryptoKeyVersion": {
+              "methods": [
+                "destroy_crypto_key_version"
+              ]
+            },
+            "RestoreCryptoKeyVersion": {
+              "methods": [
+                "restore_crypto_key_version"
+              ]
+            },
             "Encrypt": {
               "methods": [
                 "encrypt"
@@ -110,19 +125,19 @@
                 "asymmetric_decrypt"
               ]
             },
-            "UpdateCryptoKeyPrimaryVersion": {
+            "MacSign": {
               "methods": [
-                "update_crypto_key_primary_version"
+                "mac_sign"
               ]
             },
-            "DestroyCryptoKeyVersion": {
+            "MacVerify": {
               "methods": [
-                "destroy_crypto_key_version"
+                "mac_verify"
               ]
             },
-            "RestoreCryptoKeyVersion": {
+            "GenerateRandomBytes": {
               "methods": [
-                "restore_crypto_key_version"
+                "generate_random_bytes"
               ]
             }
           }
