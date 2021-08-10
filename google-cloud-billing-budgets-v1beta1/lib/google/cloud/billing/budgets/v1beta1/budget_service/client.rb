@@ -43,13 +43,12 @@ module Google
               # See {::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client::Configuration}
               # for a description of the configuration fields.
               #
-              # ## Example
+              # @example
               #
-              # To modify the configuration for all BudgetService clients:
-              #
-              #     ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client.configure do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Modify the configuration for all BudgetService clients
+              #   ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client.configure do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the Client client.
               # @yieldparam config [Client::Configuration]
@@ -118,19 +117,15 @@ module Google
               ##
               # Create a new BudgetService client object.
               #
-              # ## Examples
+              # @example
               #
-              # To create a new BudgetService client with the default
-              # configuration:
+              #   # Create a client using the default configuration
+              #   client = ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client.new
               #
-              #     client = ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client.new
-              #
-              # To create a new BudgetService client with a custom
-              # configuration:
-              #
-              #     client = ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client.new do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Create a client using a custom configuration
+              #   client = ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client.new do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the BudgetService client.
               # @yieldparam config [Client::Configuration]
@@ -150,10 +145,9 @@ module Google
 
                 # Create credentials
                 credentials = @config.credentials
-                # Use self-signed JWT if the scope and endpoint are unchanged from default,
+                # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                         @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -234,7 +228,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.create_budget.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.create_budget.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @budget_service_stub.call_rpc :create_budget, request, options: options do |response, operation|
@@ -312,7 +308,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.update_budget.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.update_budget.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @budget_service_stub.call_rpc :update_budget, request, options: options do |response, operation|
@@ -384,7 +382,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.get_budget.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_budget.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @budget_service_stub.call_rpc :get_budget, request, options: options do |response, operation|
@@ -463,7 +463,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.list_budgets.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_budgets.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @budget_service_stub.call_rpc :list_budgets, request, options: options do |response, operation|
@@ -531,7 +533,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.delete_budget.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.delete_budget.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @budget_service_stub.call_rpc :delete_budget, request, options: options do |response, operation|
@@ -555,22 +559,21 @@ module Google
               # Configuration can be applied globally to all clients, or to a single client
               # on construction.
               #
-              # # Examples
+              # @example
               #
-              # To modify the global config, setting the timeout for create_budget
-              # to 20 seconds, and all remaining timeouts to 10 seconds:
+              #   # Modify the global config, setting the timeout for
+              #   # create_budget to 20 seconds,
+              #   # and all remaining timeouts to 10 seconds.
+              #   ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client.configure do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.create_budget.timeout = 20.0
+              #   end
               #
-              #     ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client.configure do |config|
-              #       config.timeout = 10.0
-              #       config.rpcs.create_budget.timeout = 20.0
-              #     end
-              #
-              # To apply the above configuration only to a new client:
-              #
-              #     client = ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client.new do |config|
-              #       config.timeout = 10.0
-              #       config.rpcs.create_budget.timeout = 20.0
-              #     end
+              #   # Apply the above configuration only to a new client.
+              #   client = ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client.new do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.create_budget.timeout = 20.0
+              #   end
               #
               # @!attribute [rw] endpoint
               #   The hostname or hostname:port of the service endpoint.
