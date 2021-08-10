@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Iot::V1::DeviceManager::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all DeviceManager clients:
-            #
-            #     ::Google::Cloud::Iot::V1::DeviceManager::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all DeviceManager clients
+            #   ::Google::Cloud::Iot::V1::DeviceManager::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -162,19 +161,15 @@ module Google
             ##
             # Create a new DeviceManager client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new DeviceManager client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Iot::V1::DeviceManager::Client.new
             #
-            #     client = ::Google::Cloud::Iot::V1::DeviceManager::Client.new
-            #
-            # To create a new DeviceManager client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Iot::V1::DeviceManager::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Iot::V1::DeviceManager::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the DeviceManager client.
             # @yieldparam config [Client::Configuration]
@@ -194,10 +189,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -278,7 +272,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_device_registry.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_device_registry.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :create_device_registry, request, options: options do |response, operation|
@@ -345,7 +341,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_device_registry.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_device_registry.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :get_device_registry, request, options: options do |response, operation|
@@ -419,7 +417,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_device_registry.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_device_registry.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :update_device_registry, request, options: options do |response, operation|
@@ -486,7 +486,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_device_registry.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_device_registry.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :delete_device_registry, request, options: options do |response, operation|
@@ -562,7 +564,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_device_registries.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_device_registries.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :list_device_registries, request, options: options do |response, operation|
@@ -635,7 +639,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_device.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_device.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :create_device, request, options: options do |response, operation|
@@ -707,7 +713,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_device.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_device.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :get_device, request, options: options do |response, operation|
@@ -781,7 +789,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_device.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_device.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :update_device, request, options: options do |response, operation|
@@ -849,7 +859,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_device.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_device.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :delete_device, request, options: options do |response, operation|
@@ -938,7 +950,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_devices.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_devices.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :list_devices, request, options: options do |response, operation|
@@ -1017,7 +1031,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.modify_cloud_to_device_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.modify_cloud_to_device_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :modify_cloud_to_device_config, request, options: options do |response, operation|
@@ -1090,7 +1106,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_device_config_versions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_device_config_versions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :list_device_config_versions, request, options: options do |response, operation|
@@ -1163,7 +1181,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_device_states.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_device_states.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :list_device_states, request, options: options do |response, operation|
@@ -1236,7 +1256,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_iam_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :set_iam_policy, request, options: options do |response, operation|
@@ -1308,7 +1330,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_iam_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :get_iam_policy, request, options: options do |response, operation|
@@ -1382,7 +1406,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.test_iam_permissions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :test_iam_permissions, request, options: options do |response, operation|
@@ -1470,7 +1496,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.send_command_to_device.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.send_command_to_device.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :send_command_to_device, request, options: options do |response, operation|
@@ -1544,7 +1572,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.bind_device_to_gateway.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.bind_device_to_gateway.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :bind_device_to_gateway, request, options: options do |response, operation|
@@ -1618,7 +1648,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.unbind_device_from_gateway.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.unbind_device_from_gateway.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :unbind_device_from_gateway, request, options: options do |response, operation|
@@ -1642,22 +1674,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_device_registry
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_device_registry to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Iot::V1::DeviceManager::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_device_registry.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Iot::V1::DeviceManager::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_device_registry.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Iot::V1::DeviceManager::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_device_registry.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Iot::V1::DeviceManager::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_device_registry.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
