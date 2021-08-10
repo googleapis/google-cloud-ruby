@@ -44,13 +44,12 @@ module Google
             # See {::Google::Cloud::OsConfig::V1::OsConfigService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all OsConfigService clients:
-            #
-            #     ::Google::Cloud::OsConfig::V1::OsConfigService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all OsConfigService clients
+            #   ::Google::Cloud::OsConfig::V1::OsConfigService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -102,19 +101,15 @@ module Google
             ##
             # Create a new OsConfigService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new OsConfigService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new
             #
-            #     client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new
-            #
-            # To create a new OsConfigService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the OsConfigService client.
             # @yieldparam config [Client::Configuration]
@@ -134,10 +129,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -232,7 +226,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.execute_patch_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.execute_patch_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_config_service_stub.call_rpc :execute_patch_job, request, options: options do |response, operation|
@@ -299,7 +295,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_patch_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_patch_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_config_service_stub.call_rpc :get_patch_job, request, options: options do |response, operation|
@@ -366,7 +364,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.cancel_patch_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.cancel_patch_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_config_service_stub.call_rpc :cancel_patch_job, request, options: options do |response, operation|
@@ -441,7 +441,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_patch_jobs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_patch_jobs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_config_service_stub.call_rpc :list_patch_jobs, request, options: options do |response, operation|
@@ -518,7 +520,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_patch_job_instance_details.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_patch_job_instance_details.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_config_service_stub.call_rpc :list_patch_job_instance_details, request, options: options do |response, operation|
@@ -596,7 +600,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_patch_deployment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_patch_deployment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_config_service_stub.call_rpc :create_patch_deployment, request, options: options do |response, operation|
@@ -663,7 +669,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_patch_deployment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_patch_deployment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_config_service_stub.call_rpc :get_patch_deployment, request, options: options do |response, operation|
@@ -736,7 +744,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_patch_deployments.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_patch_deployments.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_config_service_stub.call_rpc :list_patch_deployments, request, options: options do |response, operation|
@@ -804,7 +814,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_patch_deployment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_patch_deployment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_config_service_stub.call_rpc :delete_patch_deployment, request, options: options do |response, operation|
@@ -828,22 +840,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for execute_patch_job
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # execute_patch_job to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::OsConfig::V1::OsConfigService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.execute_patch_job.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::OsConfig::V1::OsConfigService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.execute_patch_job.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.execute_patch_job.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.execute_patch_job.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
