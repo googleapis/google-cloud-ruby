@@ -53,13 +53,12 @@ module Google
             # See {::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all ArtifactRegistry clients:
-            #
-            #     ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all ArtifactRegistry clients
+            #   ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -191,19 +190,15 @@ module Google
             ##
             # Create a new ArtifactRegistry client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new ArtifactRegistry client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.new
             #
-            #     client = ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.new
-            #
-            # To create a new ArtifactRegistry client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the ArtifactRegistry client.
             # @yieldparam config [Client::Configuration]
@@ -223,10 +218,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -319,7 +313,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_repositories.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_repositories.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :list_repositories, request, options: options do |response, operation|
@@ -386,7 +382,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_repository.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_repository.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :get_repository, request, options: options do |response, operation|
@@ -457,7 +455,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_repository.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_repository.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :create_repository, request, options: options do |response, operation|
@@ -528,7 +528,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_repository.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_repository.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :update_repository, request, options: options do |response, operation|
@@ -596,7 +598,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_repository.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_repository.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :delete_repository, request, options: options do |response, operation|
@@ -668,7 +672,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_packages.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_packages.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :list_packages, request, options: options do |response, operation|
@@ -735,7 +741,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_package.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_package.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :get_package, request, options: options do |response, operation|
@@ -802,7 +810,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_package.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_package.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :delete_package, request, options: options do |response, operation|
@@ -876,7 +886,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_versions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_versions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :list_versions, request, options: options do |response, operation|
@@ -945,7 +957,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_version.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_version.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :get_version, request, options: options do |response, operation|
@@ -1015,7 +1029,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_version.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_version.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :delete_version, request, options: options do |response, operation|
@@ -1099,7 +1115,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_files.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_files.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :list_files, request, options: options do |response, operation|
@@ -1166,7 +1184,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_file.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_file.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :get_file, request, options: options do |response, operation|
@@ -1247,7 +1267,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_tags.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_tags.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :list_tags, request, options: options do |response, operation|
@@ -1314,7 +1336,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_tag.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_tag.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :get_tag, request, options: options do |response, operation|
@@ -1384,7 +1408,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_tag.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_tag.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :create_tag, request, options: options do |response, operation|
@@ -1454,7 +1480,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_tag.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_tag.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :update_tag, request, options: options do |response, operation|
@@ -1520,7 +1548,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_tag.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_tag.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :delete_tag, request, options: options do |response, operation|
@@ -1592,7 +1622,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_iam_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :set_iam_policy, request, options: options do |response, operation|
@@ -1662,7 +1694,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_iam_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :get_iam_policy, request, options: options do |response, operation|
@@ -1734,7 +1768,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.test_iam_permissions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @artifact_registry_stub.call_rpc :test_iam_permissions, request, options: options do |response, operation|
@@ -1758,22 +1794,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_repositories
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_repositories to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_repositories.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_repositories.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_repositories.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_repositories.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
