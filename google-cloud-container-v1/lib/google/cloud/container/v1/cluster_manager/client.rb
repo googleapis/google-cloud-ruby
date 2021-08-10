@@ -39,13 +39,12 @@ module Google
             # See {::Google::Cloud::Container::V1::ClusterManager::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all ClusterManager clients:
-            #
-            #     ::Google::Cloud::Container::V1::ClusterManager::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all ClusterManager clients
+            #   ::Google::Cloud::Container::V1::ClusterManager::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -179,19 +178,15 @@ module Google
             ##
             # Create a new ClusterManager client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new ClusterManager client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Container::V1::ClusterManager::Client.new
             #
-            #     client = ::Google::Cloud::Container::V1::ClusterManager::Client.new
-            #
-            # To create a new ClusterManager client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Container::V1::ClusterManager::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Container::V1::ClusterManager::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the ClusterManager client.
             # @yieldparam config [Client::Configuration]
@@ -211,10 +206,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -302,7 +296,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_clusters.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_clusters.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :list_clusters, request, options: options do |response, operation|
@@ -381,7 +377,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_cluster.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_cluster.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :get_cluster, request, options: options do |response, operation|
@@ -473,7 +471,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_cluster.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_cluster.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :create_cluster, request, options: options do |response, operation|
@@ -554,7 +554,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_cluster.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_cluster.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :update_cluster, request, options: options do |response, operation|
@@ -661,7 +663,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_node_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_node_pool.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :update_node_pool, request, options: options do |response, operation|
@@ -746,7 +750,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_node_pool_autoscaling.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_node_pool_autoscaling.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_node_pool_autoscaling, request, options: options do |response, operation|
@@ -837,7 +843,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_logging_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_logging_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_logging_service, request, options: options do |response, operation|
@@ -928,7 +936,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_monitoring_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_monitoring_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_monitoring_service, request, options: options do |response, operation|
@@ -1010,7 +1020,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_addons_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_addons_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_addons_config, request, options: options do |response, operation|
@@ -1026,6 +1038,8 @@ module Google
             # Deprecated. Use
             # [projects.locations.clusters.update](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters/update)
             # instead.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload set_locations(request, options = nil)
             #   Pass arguments to `set_locations` via a request object, either of type
@@ -1100,7 +1114,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_locations.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_locations.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_locations, request, options: options do |response, operation|
@@ -1190,7 +1206,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_master.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_master.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :update_master, request, options: options do |response, operation|
@@ -1275,7 +1293,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_master_auth.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_master_auth.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_master_auth, request, options: options do |response, operation|
@@ -1362,7 +1382,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_cluster.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_cluster.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :delete_cluster, request, options: options do |response, operation|
@@ -1439,7 +1461,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_operations.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_operations.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :list_operations, request, options: options do |response, operation|
@@ -1518,7 +1542,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_operation.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_operation.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :get_operation, request, options: options do |response, operation|
@@ -1597,7 +1623,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.cancel_operation.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.cancel_operation.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :cancel_operation, request, options: options do |response, operation|
@@ -1673,7 +1701,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_server_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_server_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :get_server_config, request, options: options do |response, operation|
@@ -1743,7 +1773,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_json_web_keys.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_json_web_keys.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :get_json_web_keys, request, options: options do |response, operation|
@@ -1822,7 +1854,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_node_pools.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_node_pools.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :list_node_pools, request, options: options do |response, operation|
@@ -1905,7 +1939,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_node_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_node_pool.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :get_node_pool, request, options: options do |response, operation|
@@ -1987,7 +2023,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_node_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_node_pool.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :create_node_pool, request, options: options do |response, operation|
@@ -2070,7 +2108,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_node_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_node_pool.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :delete_node_pool, request, options: options do |response, operation|
@@ -2154,7 +2194,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.rollback_node_pool_upgrade.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.rollback_node_pool_upgrade.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :rollback_node_pool_upgrade, request, options: options do |response, operation|
@@ -2239,7 +2281,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_node_pool_management.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_node_pool_management.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_node_pool_management, request, options: options do |response, operation|
@@ -2327,7 +2371,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_labels.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_labels.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_labels, request, options: options do |response, operation|
@@ -2408,7 +2454,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_legacy_abac.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_legacy_abac.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_legacy_abac, request, options: options do |response, operation|
@@ -2489,7 +2537,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.start_ip_rotation.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.start_ip_rotation.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :start_ip_rotation, request, options: options do |response, operation|
@@ -2568,7 +2618,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.complete_ip_rotation.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.complete_ip_rotation.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :complete_ip_rotation, request, options: options do |response, operation|
@@ -2653,7 +2705,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_node_pool_size.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_node_pool_size.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_node_pool_size, request, options: options do |response, operation|
@@ -2734,7 +2788,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_network_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_network_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_network_policy, request, options: options do |response, operation|
@@ -2814,7 +2870,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_maintenance_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_maintenance_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_maintenance_policy, request, options: options do |response, operation|
@@ -2894,7 +2952,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_usable_subnetworks.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_usable_subnetworks.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :list_usable_subnetworks, request, options: options do |response, operation|
@@ -2919,22 +2979,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_clusters
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_clusters to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Container::V1::ClusterManager::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_clusters.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Container::V1::ClusterManager::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_clusters.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Container::V1::ClusterManager::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_clusters.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Container::V1::ClusterManager::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_clusters.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
