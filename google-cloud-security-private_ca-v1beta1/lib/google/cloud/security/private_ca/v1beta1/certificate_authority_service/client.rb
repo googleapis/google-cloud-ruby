@@ -43,13 +43,12 @@ module Google
               # See {::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client::Configuration}
               # for a description of the configuration fields.
               #
-              # ## Example
+              # @example
               #
-              # To modify the configuration for all CertificateAuthorityService clients:
-              #
-              #     ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.configure do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Modify the configuration for all CertificateAuthorityService clients
+              #   ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.configure do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the Client client.
               # @yieldparam config [Client::Configuration]
@@ -101,19 +100,15 @@ module Google
               ##
               # Create a new CertificateAuthorityService client object.
               #
-              # ## Examples
+              # @example
               #
-              # To create a new CertificateAuthorityService client with the default
-              # configuration:
+              #   # Create a client using the default configuration
+              #   client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
               #
-              #     client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
-              #
-              # To create a new CertificateAuthorityService client with a custom
-              # configuration:
-              #
-              #     client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Create a client using a custom configuration
+              #   client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the CertificateAuthorityService client.
               # @yieldparam config [Client::Configuration]
@@ -133,10 +128,9 @@ module Google
 
                 # Create credentials
                 credentials = @config.credentials
-                # Use self-signed JWT if the scope and endpoint are unchanged from default,
+                # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                         @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -248,7 +242,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.create_certificate.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.create_certificate.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :create_certificate, request, options: options do |response, operation|
@@ -314,7 +310,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.get_certificate.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_certificate.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :get_certificate, request, options: options do |response, operation|
@@ -400,7 +398,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.list_certificates.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_certificates.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :list_certificates, request, options: options do |response, operation|
@@ -484,7 +484,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.revoke_certificate.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.revoke_certificate.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :revoke_certificate, request, options: options do |response, operation|
@@ -567,7 +569,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.update_certificate.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.update_certificate.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :update_certificate, request, options: options do |response, operation|
@@ -659,7 +663,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.activate_certificate_authority.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.activate_certificate_authority.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :activate_certificate_authority, request, options: options do |response, operation|
@@ -747,7 +753,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.create_certificate_authority.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.create_certificate_authority.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :create_certificate_authority, request, options: options do |response, operation|
@@ -829,7 +837,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.disable_certificate_authority.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.disable_certificate_authority.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :disable_certificate_authority, request, options: options do |response, operation|
@@ -911,7 +921,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.enable_certificate_authority.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.enable_certificate_authority.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :enable_certificate_authority, request, options: options do |response, operation|
@@ -985,7 +997,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.fetch_certificate_authority_csr.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.fetch_certificate_authority_csr.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :fetch_certificate_authority_csr, request, options: options do |response, operation|
@@ -1052,7 +1066,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.get_certificate_authority.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_certificate_authority.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :get_certificate_authority, request, options: options do |response, operation|
@@ -1134,7 +1150,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.list_certificate_authorities.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_certificate_authorities.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :list_certificate_authorities, request, options: options do |response, operation|
@@ -1216,7 +1234,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.restore_certificate_authority.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.restore_certificate_authority.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :restore_certificate_authority, request, options: options do |response, operation|
@@ -1298,7 +1318,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.schedule_delete_certificate_authority.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.schedule_delete_certificate_authority.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :schedule_delete_certificate_authority, request, options: options do |response, operation|
@@ -1381,7 +1403,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.update_certificate_authority.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.update_certificate_authority.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :update_certificate_authority, request, options: options do |response, operation|
@@ -1449,7 +1473,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.get_certificate_revocation_list.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_certificate_revocation_list.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :get_certificate_revocation_list, request, options: options do |response, operation|
@@ -1531,7 +1557,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.list_certificate_revocation_lists.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_certificate_revocation_lists.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :list_certificate_revocation_lists, request, options: options do |response, operation|
@@ -1614,7 +1642,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.update_certificate_revocation_list.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.update_certificate_revocation_list.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :update_certificate_revocation_list, request, options: options do |response, operation|
@@ -1681,7 +1711,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.get_reusable_config.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_reusable_config.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :get_reusable_config, request, options: options do |response, operation|
@@ -1763,7 +1795,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.list_reusable_configs.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_reusable_configs.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :list_reusable_configs, request, options: options do |response, operation|
@@ -1788,22 +1822,21 @@ module Google
               # Configuration can be applied globally to all clients, or to a single client
               # on construction.
               #
-              # # Examples
+              # @example
               #
-              # To modify the global config, setting the timeout for create_certificate
-              # to 20 seconds, and all remaining timeouts to 10 seconds:
+              #   # Modify the global config, setting the timeout for
+              #   # create_certificate to 20 seconds,
+              #   # and all remaining timeouts to 10 seconds.
+              #   ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.configure do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.create_certificate.timeout = 20.0
+              #   end
               #
-              #     ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.configure do |config|
-              #       config.timeout = 10.0
-              #       config.rpcs.create_certificate.timeout = 20.0
-              #     end
-              #
-              # To apply the above configuration only to a new client:
-              #
-              #     client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
-              #       config.timeout = 10.0
-              #       config.rpcs.create_certificate.timeout = 20.0
-              #     end
+              #   # Apply the above configuration only to a new client.
+              #   client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.create_certificate.timeout = 20.0
+              #   end
               #
               # @!attribute [rw] endpoint
               #   The hostname or hostname:port of the service endpoint.
