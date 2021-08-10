@@ -44,13 +44,12 @@ module Google
             # See {::Google::Cloud::Profiler::V2::ProfilerService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all ProfilerService clients:
-            #
-            #     ::Google::Cloud::Profiler::V2::ProfilerService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all ProfilerService clients
+            #   ::Google::Cloud::Profiler::V2::ProfilerService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -108,19 +107,15 @@ module Google
             ##
             # Create a new ProfilerService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new ProfilerService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Profiler::V2::ProfilerService::Client.new
             #
-            #     client = ::Google::Cloud::Profiler::V2::ProfilerService::Client.new
-            #
-            # To create a new ProfilerService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Profiler::V2::ProfilerService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Profiler::V2::ProfilerService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the ProfilerService client.
             # @yieldparam config [Client::Configuration]
@@ -140,10 +135,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -235,7 +229,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_profile.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_profile.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @profiler_service_stub.call_rpc :create_profile, request, options: options do |response, operation|
@@ -305,7 +301,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_offline_profile.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_offline_profile.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @profiler_service_stub.call_rpc :create_offline_profile, request, options: options do |response, operation|
@@ -379,7 +377,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_profile.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_profile.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @profiler_service_stub.call_rpc :update_profile, request, options: options do |response, operation|
@@ -403,22 +403,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_profile
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_profile to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Profiler::V2::ProfilerService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_profile.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Profiler::V2::ProfilerService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_profile.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Profiler::V2::ProfilerService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_profile.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Profiler::V2::ProfilerService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_profile.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
