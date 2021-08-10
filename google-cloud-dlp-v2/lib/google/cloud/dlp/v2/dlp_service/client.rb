@@ -49,13 +49,12 @@ module Google
             # See {::Google::Cloud::Dlp::V2::DlpService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all DlpService clients:
-            #
-            #     ::Google::Cloud::Dlp::V2::DlpService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all DlpService clients
+            #   ::Google::Cloud::Dlp::V2::DlpService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -230,19 +229,15 @@ module Google
             ##
             # Create a new DlpService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new DlpService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Dlp::V2::DlpService::Client.new
             #
-            #     client = ::Google::Cloud::Dlp::V2::DlpService::Client.new
-            #
-            # To create a new DlpService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the DlpService client.
             # @yieldparam config [Client::Configuration]
@@ -262,10 +257,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -377,7 +371,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.inspect_content.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.inspect_content.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :inspect_content, request, options: options do |response, operation|
@@ -476,7 +472,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.redact_image.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.redact_image.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :redact_image, request, options: options do |response, operation|
@@ -588,7 +586,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.deidentify_content.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.deidentify_content.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :deidentify_content, request, options: options do |response, operation|
@@ -703,7 +703,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.reidentify_content.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.reidentify_content.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :reidentify_content, request, options: options do |response, operation|
@@ -778,7 +780,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_info_types.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_info_types.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :list_info_types, request, options: options do |response, operation|
@@ -874,7 +878,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_inspect_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_inspect_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :create_inspect_template, request, options: options do |response, operation|
@@ -947,7 +953,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_inspect_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_inspect_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :update_inspect_template, request, options: options do |response, operation|
@@ -1016,7 +1024,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_inspect_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_inspect_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :get_inspect_template, request, options: options do |response, operation|
@@ -1124,7 +1134,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_inspect_templates.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_inspect_templates.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :list_inspect_templates, request, options: options do |response, operation|
@@ -1194,7 +1206,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_inspect_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_inspect_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :delete_inspect_template, request, options: options do |response, operation|
@@ -1291,7 +1305,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_deidentify_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_deidentify_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :create_deidentify_template, request, options: options do |response, operation|
@@ -1365,7 +1381,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_deidentify_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_deidentify_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :update_deidentify_template, request, options: options do |response, operation|
@@ -1435,7 +1453,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_deidentify_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_deidentify_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :get_deidentify_template, request, options: options do |response, operation|
@@ -1544,7 +1564,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_deidentify_templates.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_deidentify_templates.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :list_deidentify_templates, request, options: options do |response, operation|
@@ -1615,7 +1637,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_deidentify_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_deidentify_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :delete_deidentify_template, request, options: options do |response, operation|
@@ -1707,7 +1731,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_job_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_job_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :create_job_trigger, request, options: options do |response, operation|
@@ -1779,7 +1805,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_job_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_job_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :update_job_trigger, request, options: options do |response, operation|
@@ -1853,7 +1881,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.hybrid_inspect_job_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.hybrid_inspect_job_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :hybrid_inspect_job_trigger, request, options: options do |response, operation|
@@ -1921,7 +1951,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_job_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_job_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :get_job_trigger, request, options: options do |response, operation|
@@ -2052,7 +2084,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_job_triggers.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_job_triggers.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :list_job_triggers, request, options: options do |response, operation|
@@ -2121,7 +2155,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_job_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_job_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :delete_job_trigger, request, options: options do |response, operation|
@@ -2189,7 +2225,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.activate_job_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.activate_job_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :activate_job_trigger, request, options: options do |response, operation|
@@ -2287,7 +2325,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_dlp_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_dlp_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :create_dlp_job, request, options: options do |response, operation|
@@ -2421,7 +2461,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_dlp_jobs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_dlp_jobs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :list_dlp_jobs, request, options: options do |response, operation|
@@ -2490,7 +2532,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_dlp_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_dlp_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :get_dlp_job, request, options: options do |response, operation|
@@ -2560,7 +2604,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_dlp_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_dlp_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :delete_dlp_job, request, options: options do |response, operation|
@@ -2630,7 +2676,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.cancel_dlp_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.cancel_dlp_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :cancel_dlp_job, request, options: options do |response, operation|
@@ -2726,7 +2774,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_stored_info_type.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_stored_info_type.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :create_stored_info_type, request, options: options do |response, operation|
@@ -2803,7 +2853,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_stored_info_type.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_stored_info_type.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :update_stored_info_type, request, options: options do |response, operation|
@@ -2873,7 +2925,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_stored_info_type.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_stored_info_type.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :get_stored_info_type, request, options: options do |response, operation|
@@ -2983,7 +3037,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_stored_info_types.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_stored_info_types.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :list_stored_info_types, request, options: options do |response, operation|
@@ -3054,7 +3110,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_stored_info_type.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_stored_info_type.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :delete_stored_info_type, request, options: options do |response, operation|
@@ -3128,7 +3186,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.hybrid_inspect_dlp_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.hybrid_inspect_dlp_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :hybrid_inspect_dlp_job, request, options: options do |response, operation|
@@ -3198,7 +3258,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.finish_dlp_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.finish_dlp_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :finish_dlp_job, request, options: options do |response, operation|
@@ -3222,22 +3284,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for inspect_content
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # inspect_content to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Dlp::V2::DlpService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.inspect_content.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Dlp::V2::DlpService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.inspect_content.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.inspect_content.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.inspect_content.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
