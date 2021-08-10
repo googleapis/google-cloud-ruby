@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all IdentityAwareProxyOAuthService clients:
-            #
-            #     ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all IdentityAwareProxyOAuthService clients
+            #   ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -96,19 +95,15 @@ module Google
             ##
             # Create a new IdentityAwareProxyOAuthService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new IdentityAwareProxyOAuthService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new
             #
-            #     client = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new
-            #
-            # To create a new IdentityAwareProxyOAuthService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the IdentityAwareProxyOAuthService client.
             # @yieldparam config [Client::Configuration]
@@ -128,10 +123,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -208,7 +202,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_brands.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_brands.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @identity_aware_proxy_o_auth_service_stub.call_rpc :list_brands, request, options: options do |response, operation|
@@ -283,7 +279,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_brand.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_brand.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @identity_aware_proxy_o_auth_service_stub.call_rpc :create_brand, request, options: options do |response, operation|
@@ -350,7 +348,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_brand.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_brand.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @identity_aware_proxy_o_auth_service_stub.call_rpc :get_brand, request, options: options do |response, operation|
@@ -423,7 +423,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_identity_aware_proxy_client.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_identity_aware_proxy_client.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @identity_aware_proxy_o_auth_service_stub.call_rpc :create_identity_aware_proxy_client, request, options: options do |response, operation|
@@ -502,7 +504,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_identity_aware_proxy_clients.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_identity_aware_proxy_clients.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @identity_aware_proxy_o_auth_service_stub.call_rpc :list_identity_aware_proxy_clients, request, options: options do |response, operation|
@@ -572,7 +576,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_identity_aware_proxy_client.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_identity_aware_proxy_client.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @identity_aware_proxy_o_auth_service_stub.call_rpc :get_identity_aware_proxy_client, request, options: options do |response, operation|
@@ -641,7 +647,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.reset_identity_aware_proxy_client_secret.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.reset_identity_aware_proxy_client_secret.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @identity_aware_proxy_o_auth_service_stub.call_rpc :reset_identity_aware_proxy_client_secret, request, options: options do |response, operation|
@@ -711,7 +719,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_identity_aware_proxy_client.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_identity_aware_proxy_client.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @identity_aware_proxy_o_auth_service_stub.call_rpc :delete_identity_aware_proxy_client, request, options: options do |response, operation|
@@ -735,22 +745,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_brands
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_brands to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_brands.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_brands.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_brands.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_brands.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
