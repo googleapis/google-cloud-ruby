@@ -41,13 +41,12 @@ module Google
             # See {::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all AnalyticsAdminService clients:
-            #
-            #     ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all AnalyticsAdminService clients
+            #   ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -185,19 +184,15 @@ module Google
             ##
             # Create a new AnalyticsAdminService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new AnalyticsAdminService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
             #
-            #     client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
-            #
-            # To create a new AnalyticsAdminService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the AnalyticsAdminService client.
             # @yieldparam config [Client::Configuration]
@@ -217,10 +212,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -298,7 +292,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_account.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_account.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :get_account, request, options: options do |response, operation|
@@ -374,7 +370,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_accounts.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_accounts.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :list_accounts, request, options: options do |response, operation|
@@ -453,7 +451,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_account.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_account.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :delete_account, request, options: options do |response, operation|
@@ -524,7 +524,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_account.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_account.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :update_account, request, options: options do |response, operation|
@@ -587,7 +589,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.provision_account_ticket.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.provision_account_ticket.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :provision_account_ticket, request, options: options do |response, operation|
@@ -655,7 +659,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_account_summaries.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_account_summaries.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :list_account_summaries, request, options: options do |response, operation|
@@ -724,7 +730,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_property.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_property.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :get_property, request, options: options do |response, operation|
@@ -815,7 +823,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_properties.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_properties.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :list_properties, request, options: options do |response, operation|
@@ -877,7 +887,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_property.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_property.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :create_property, request, options: options do |response, operation|
@@ -955,7 +967,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_property.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_property.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :delete_property, request, options: options do |response, operation|
@@ -1027,7 +1041,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_property.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_property.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :update_property, request, options: options do |response, operation|
@@ -1093,7 +1109,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_user_link.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_user_link.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :get_user_link, request, options: options do |response, operation|
@@ -1166,7 +1184,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.batch_get_user_links.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_get_user_links.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :batch_get_user_links, request, options: options do |response, operation|
@@ -1242,7 +1262,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_user_links.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_user_links.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :list_user_links, request, options: options do |response, operation|
@@ -1327,7 +1349,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.audit_user_links.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.audit_user_links.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :audit_user_links, request, options: options do |response, operation|
@@ -1403,7 +1427,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_user_link.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_user_link.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :create_user_link, request, options: options do |response, operation|
@@ -1482,7 +1508,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.batch_create_user_links.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_create_user_links.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :batch_create_user_links, request, options: options do |response, operation|
@@ -1548,7 +1576,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_user_link.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_user_link.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :update_user_link, request, options: options do |response, operation|
@@ -1620,7 +1650,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.batch_update_user_links.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_update_user_links.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :batch_update_user_links, request, options: options do |response, operation|
@@ -1686,7 +1718,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_user_link.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_user_link.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :delete_user_link, request, options: options do |response, operation|
@@ -1758,7 +1792,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.batch_delete_user_links.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_delete_user_links.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :batch_delete_user_links, request, options: options do |response, operation|
@@ -1826,7 +1862,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_web_data_stream.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_web_data_stream.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :get_web_data_stream, request, options: options do |response, operation|
@@ -1894,7 +1932,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_web_data_stream.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_web_data_stream.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :delete_web_data_stream, request, options: options do |response, operation|
@@ -1965,7 +2005,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_web_data_stream.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_web_data_stream.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :update_web_data_stream, request, options: options do |response, operation|
@@ -2034,7 +2076,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_web_data_stream.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_web_data_stream.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :create_web_data_stream, request, options: options do |response, operation|
@@ -2114,7 +2158,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_web_data_streams.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_web_data_streams.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :list_web_data_streams, request, options: options do |response, operation|
@@ -2183,7 +2229,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_ios_app_data_stream.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_ios_app_data_stream.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :get_ios_app_data_stream, request, options: options do |response, operation|
@@ -2251,7 +2299,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_ios_app_data_stream.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_ios_app_data_stream.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :delete_ios_app_data_stream, request, options: options do |response, operation|
@@ -2322,7 +2372,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_ios_app_data_stream.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_ios_app_data_stream.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :update_ios_app_data_stream, request, options: options do |response, operation|
@@ -2402,7 +2454,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_ios_app_data_streams.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_ios_app_data_streams.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :list_ios_app_data_streams, request, options: options do |response, operation|
@@ -2471,7 +2525,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_android_app_data_stream.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_android_app_data_stream.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :get_android_app_data_stream, request, options: options do |response, operation|
@@ -2539,7 +2595,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_android_app_data_stream.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_android_app_data_stream.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :delete_android_app_data_stream, request, options: options do |response, operation|
@@ -2610,7 +2668,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_android_app_data_stream.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_android_app_data_stream.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :update_android_app_data_stream, request, options: options do |response, operation|
@@ -2692,7 +2752,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_android_app_data_streams.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_android_app_data_streams.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :list_android_app_data_streams, request, options: options do |response, operation|
@@ -2764,7 +2826,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_enhanced_measurement_settings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_enhanced_measurement_settings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :get_enhanced_measurement_settings, request, options: options do |response, operation|
@@ -2837,7 +2901,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_enhanced_measurement_settings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_enhanced_measurement_settings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :update_enhanced_measurement_settings, request, options: options do |response, operation|
@@ -2908,7 +2974,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_firebase_link.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_firebase_link.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :create_firebase_link, request, options: options do |response, operation|
@@ -2978,7 +3046,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_firebase_link.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_firebase_link.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :update_firebase_link, request, options: options do |response, operation|
@@ -3045,7 +3115,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_firebase_link.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_firebase_link.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :delete_firebase_link, request, options: options do |response, operation|
@@ -3123,7 +3195,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_firebase_links.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_firebase_links.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :list_firebase_links, request, options: options do |response, operation|
@@ -3194,7 +3268,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_global_site_tag.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_global_site_tag.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :get_global_site_tag, request, options: options do |response, operation|
@@ -3262,7 +3338,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_google_ads_link.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_google_ads_link.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :create_google_ads_link, request, options: options do |response, operation|
@@ -3332,7 +3410,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_google_ads_link.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_google_ads_link.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :update_google_ads_link, request, options: options do |response, operation|
@@ -3398,7 +3478,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_google_ads_link.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_google_ads_link.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :delete_google_ads_link, request, options: options do |response, operation|
@@ -3474,7 +3556,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_google_ads_links.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_google_ads_links.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :list_google_ads_links, request, options: options do |response, operation|
@@ -3544,7 +3628,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_data_sharing_settings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_data_sharing_settings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :get_data_sharing_settings, request, options: options do |response, operation|
@@ -3614,7 +3700,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_measurement_protocol_secret.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_measurement_protocol_secret.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :get_measurement_protocol_secret, request, options: options do |response, operation|
@@ -3694,7 +3782,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_measurement_protocol_secrets.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_measurement_protocol_secrets.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :list_measurement_protocol_secrets, request, options: options do |response, operation|
@@ -3766,7 +3856,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_measurement_protocol_secret.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_measurement_protocol_secret.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :create_measurement_protocol_secret, request, options: options do |response, operation|
@@ -3836,7 +3928,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_measurement_protocol_secret.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_measurement_protocol_secret.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :delete_measurement_protocol_secret, request, options: options do |response, operation|
@@ -3904,7 +3998,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_measurement_protocol_secret.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_measurement_protocol_secret.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :update_measurement_protocol_secret, request, options: options do |response, operation|
@@ -3996,7 +4092,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.search_change_history_events.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.search_change_history_events.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :search_change_history_events, request, options: options do |response, operation|
@@ -4064,7 +4162,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_google_signals_settings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_google_signals_settings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :get_google_signals_settings, request, options: options do |response, operation|
@@ -4135,7 +4235,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_google_signals_settings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_google_signals_settings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :update_google_signals_settings, request, options: options do |response, operation|
@@ -4204,7 +4306,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_conversion_event.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_conversion_event.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :create_conversion_event, request, options: options do |response, operation|
@@ -4272,7 +4376,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_conversion_event.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_conversion_event.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :get_conversion_event, request, options: options do |response, operation|
@@ -4340,7 +4446,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_conversion_event.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_conversion_event.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :delete_conversion_event, request, options: options do |response, operation|
@@ -4418,7 +4526,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_conversion_events.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_conversion_events.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :list_conversion_events, request, options: options do |response, operation|
@@ -4487,7 +4597,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_custom_dimension.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_custom_dimension.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :create_custom_dimension, request, options: options do |response, operation|
@@ -4557,7 +4669,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_custom_dimension.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_custom_dimension.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :update_custom_dimension, request, options: options do |response, operation|
@@ -4633,7 +4747,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_custom_dimensions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_custom_dimensions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :list_custom_dimensions, request, options: options do |response, operation|
@@ -4701,7 +4817,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.archive_custom_dimension.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.archive_custom_dimension.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :archive_custom_dimension, request, options: options do |response, operation|
@@ -4768,7 +4886,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_custom_dimension.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_custom_dimension.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :get_custom_dimension, request, options: options do |response, operation|
@@ -4836,7 +4956,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_custom_metric.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_custom_metric.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :create_custom_metric, request, options: options do |response, operation|
@@ -4906,7 +5028,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_custom_metric.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_custom_metric.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :update_custom_metric, request, options: options do |response, operation|
@@ -4982,7 +5106,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_custom_metrics.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_custom_metrics.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :list_custom_metrics, request, options: options do |response, operation|
@@ -5050,7 +5176,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.archive_custom_metric.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.archive_custom_metric.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :archive_custom_metric, request, options: options do |response, operation|
@@ -5117,7 +5245,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_custom_metric.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_custom_metric.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @analytics_admin_service_stub.call_rpc :get_custom_metric, request, options: options do |response, operation|
@@ -5141,22 +5271,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for get_account
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # get_account to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_account.timeout = 20.0
+            #   end
             #
-            #     ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_account.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_account.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_account.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
