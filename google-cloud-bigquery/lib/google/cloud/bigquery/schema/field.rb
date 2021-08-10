@@ -40,8 +40,25 @@ module Google
           MODES = ["NULLABLE", "REQUIRED", "REPEATED"].freeze
 
           # @private
-          TYPES = ["STRING", "INTEGER", "INT64", "FLOAT", "FLOAT64", "NUMERIC", "BIGNUMERIC", "BOOLEAN", "BOOL",
-                   "BYTES", "TIMESTAMP", "TIME", "DATETIME", "DATE", "RECORD", "STRUCT"].freeze
+          TYPES = [
+            "BIGNUMERIC",
+            "BOOL",
+            "BOOLEAN",
+            "BYTES",
+            "DATE",
+            "DATETIME",
+            "FLOAT",
+            "FLOAT64",
+            "GEOGRAPHY",
+            "INTEGER",
+            "INT64",
+            "NUMERIC",
+            "RECORD",
+            "STRING",
+            "STRUCT",
+            "TIME",
+            "TIMESTAMP"
+          ].freeze
 
           ##
           # The name of the field.
@@ -70,12 +87,25 @@ module Google
           ##
           # The data type of the field.
           #
-          # @return [String] The field data type. Possible values include
-          #   `STRING`, `BYTES`, `INTEGER`, `INT64` (same as `INTEGER`),
-          #   `FLOAT`, `FLOAT64` (same as `FLOAT`), `NUMERIC`, `BIGNUMERIC`,
-          #   `BOOLEAN`, `BOOL` (same as `BOOLEAN`), `TIMESTAMP`, `DATE`,
-          #   `TIME`, `DATETIME`, `RECORD` (where `RECORD` indicates that the
-          #   field contains a nested schema) or `STRUCT` (same as `RECORD`).
+          # @return [String] The field data type. Possible values include:
+          #
+          #   * `BIGNUMERIC`
+          #   * `BOOL`
+          #   * `BOOLEAN` (same as `BOOL`)
+          #   * `BYTES`
+          #   * `DATE`
+          #   * `DATETIME`
+          #   * `FLOAT`
+          #   * `FLOAT64` (same as `FLOAT`)
+          #   * `GEOGRAPHY`
+          #   * `INTEGER`
+          #   * `INT64` (same as `INTEGER`)
+          #   * `NUMERIC`
+          #   * `RECORD` (where `RECORD` indicates that the field contains a nested schema)
+          #   * `STRING`
+          #   * `STRUCT` (same as `RECORD`)
+          #   * `TIME`
+          #   * `TIMESTAMP`
           #
           def type
             @gapi.type
@@ -84,12 +114,25 @@ module Google
           ##
           # Updates the data type of the field.
           #
-          # @param [String] new_type The data type. Possible values include
-          #   `STRING`, `BYTES`, `INTEGER`, `INT64` (same as `INTEGER`),
-          #   `FLOAT`, `FLOAT64` (same as `FLOAT`), `NUMERIC`, `BIGNUMERIC`,
-          #   `BOOLEAN`, `BOOL` (same as `BOOLEAN`), `TIMESTAMP`, `DATE`,
-          #   `TIME`, `DATETIME`, `RECORD` (where `RECORD` indicates that the
-          #   field contains a nested schema) or `STRUCT` (same as `RECORD`).
+          # @param [String] new_type The data type. Possible values include:
+          #
+          #   * `BIGNUMERIC`
+          #   * `BOOL`
+          #   * `BOOLEAN` (same as `BOOL`)
+          #   * `BYTES`
+          #   * `DATE`
+          #   * `DATETIME`
+          #   * `FLOAT`
+          #   * `FLOAT64` (same as `FLOAT`)
+          #   * `GEOGRAPHY`
+          #   * `INTEGER`
+          #   * `INT64` (same as `INTEGER`)
+          #   * `NUMERIC`
+          #   * `RECORD` (where `RECORD` indicates that the field contains a nested schema)
+          #   * `STRING`
+          #   * `STRUCT` (same as `RECORD`)
+          #   * `TIME`
+          #   * `TIMESTAMP`
           #
           def type= new_type
             @gapi.update! type: verify_type(new_type)
@@ -355,6 +398,15 @@ module Google
           #
           def date?
             type == "DATE"
+          end
+
+          ##
+          # Checks if the type of the field is `GEOGRAPHY`.
+          #
+          # @return [Boolean] `true` when `GEOGRAPHY`, `false` otherwise.
+          #
+          def geography?
+            type == "GEOGRAPHY"
           end
 
           ##

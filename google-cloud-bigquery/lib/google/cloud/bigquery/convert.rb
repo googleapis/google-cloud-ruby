@@ -38,6 +38,7 @@ module Google
       #   | `STRING`     | `String`                             |                                                    |
       #   | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
       #   | `DATE`       | `Date`                               |                                                    |
+      #   | `GEOGRAPHY`  | `String`                             |                                                    |
       #   | `TIMESTAMP`  | `Time`                               |                                                    |
       #   | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                    |
       #   | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                    |
@@ -102,6 +103,8 @@ module Google
             ::Time.parse("#{value[:v]} UTC").to_datetime
           elsif field.type == "DATE"
             Date.parse value[:v]
+          elsif field.type == "GEOGRAPHY"
+            String value[:v]
           else
             value[:v]
           end

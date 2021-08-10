@@ -2369,11 +2369,14 @@ module Google
         # | `BIGNUMERIC` | `String`                             | Pass as `String` to avoid rounding to scale 9.     |
         # | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
         # | `DATE`       | `Date`                               |                                                    |
+        # | `GEOGRAPHY`  | `String`                             | Well-known text (WKT) or GeoJSON.                  |
         # | `TIMESTAMP`  | `Time`                               |                                                    |
         # | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                    |
         # | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                    |
         # | `ARRAY`      | `Array`                              | Nested arrays, `nil` values are not supported.     |
         # | `STRUCT`     | `Hash`                               | Hash keys may be strings or symbols.               |
+        #
+        # For `GEOGRAPHY` data, see [Working with BigQuery GIS data](https://cloud.google.com/bigquery/docs/gis-data).
         #
         # Because BigQuery's streaming API is designed for high insertion rates,
         # modifications to the underlying table metadata are eventually
