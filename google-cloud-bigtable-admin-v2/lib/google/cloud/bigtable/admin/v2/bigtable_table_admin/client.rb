@@ -46,13 +46,12 @@ module Google
               # See {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client::Configuration}
               # for a description of the configuration fields.
               #
-              # ## Example
+              # @example
               #
-              # To modify the configuration for all BigtableTableAdmin clients:
-              #
-              #     ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.configure do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Modify the configuration for all BigtableTableAdmin clients
+              #   ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.configure do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the Client client.
               # @yieldparam config [Client::Configuration]
@@ -169,19 +168,15 @@ module Google
               ##
               # Create a new BigtableTableAdmin client object.
               #
-              # ## Examples
+              # @example
               #
-              # To create a new BigtableTableAdmin client with the default
-              # configuration:
+              #   # Create a client using the default configuration
+              #   client = ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
               #
-              #     client = ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
-              #
-              # To create a new BigtableTableAdmin client with a custom
-              # configuration:
-              #
-              #     client = ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Create a client using a custom configuration
+              #   client = ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the BigtableTableAdmin client.
               # @yieldparam config [Client::Configuration]
@@ -201,10 +196,9 @@ module Google
 
                 # Create credentials
                 credentials = @config.credentials
-                # Use self-signed JWT if the scope and endpoint are unchanged from default,
+                # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                         @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -318,7 +312,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.create_table.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.create_table.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :create_table, request, options: options do |response, operation|
@@ -400,7 +396,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.create_table_from_snapshot.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.create_table_from_snapshot.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :create_table_from_snapshot, request, options: options do |response, operation|
@@ -483,7 +481,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.list_tables.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_tables.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :list_tables, request, options: options do |response, operation|
@@ -555,7 +555,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.get_table.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_table.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :get_table, request, options: options do |response, operation|
@@ -623,7 +625,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.delete_table.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.delete_table.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :delete_table, request, options: options do |response, operation|
@@ -699,7 +703,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.modify_column_families.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.modify_column_families.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :modify_column_families, request, options: options do |response, operation|
@@ -774,7 +780,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.drop_row_range.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.drop_row_range.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :drop_row_range, request, options: options do |response, operation|
@@ -845,7 +853,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.generate_consistency_token.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.generate_consistency_token.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :generate_consistency_token, request, options: options do |response, operation|
@@ -917,7 +927,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.check_consistency.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.check_consistency.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :check_consistency, request, options: options do |response, operation|
@@ -1008,7 +1020,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.snapshot_table.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.snapshot_table.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :snapshot_table, request, options: options do |response, operation|
@@ -1083,7 +1097,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.get_snapshot.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_snapshot.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :get_snapshot, request, options: options do |response, operation|
@@ -1164,7 +1180,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.list_snapshots.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_snapshots.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :list_snapshots, request, options: options do |response, operation|
@@ -1239,7 +1257,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.delete_snapshot.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.delete_snapshot.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :delete_snapshot, request, options: options do |response, operation|
@@ -1323,7 +1343,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.create_backup.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.create_backup.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :create_backup, request, options: options do |response, operation|
@@ -1392,7 +1414,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.get_backup.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_backup.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :get_backup, request, options: options do |response, operation|
@@ -1467,7 +1491,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.update_backup.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.update_backup.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :update_backup, request, options: options do |response, operation|
@@ -1535,7 +1561,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.delete_backup.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.delete_backup.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :delete_backup, request, options: options do |response, operation|
@@ -1667,7 +1695,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.list_backups.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_backups.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :list_backups, request, options: options do |response, operation|
@@ -1751,7 +1781,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.restore_table.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.restore_table.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :restore_table, request, options: options do |response, operation|
@@ -1824,7 +1856,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_iam_policy.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :get_iam_policy, request, options: options do |response, operation|
@@ -1897,7 +1931,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.set_iam_policy.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :set_iam_policy, request, options: options do |response, operation|
@@ -1969,7 +2005,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.test_iam_permissions.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @bigtable_table_admin_stub.call_rpc :test_iam_permissions, request, options: options do |response, operation|
@@ -1993,22 +2031,21 @@ module Google
               # Configuration can be applied globally to all clients, or to a single client
               # on construction.
               #
-              # # Examples
+              # @example
               #
-              # To modify the global config, setting the timeout for create_table
-              # to 20 seconds, and all remaining timeouts to 10 seconds:
+              #   # Modify the global config, setting the timeout for
+              #   # create_table to 20 seconds,
+              #   # and all remaining timeouts to 10 seconds.
+              #   ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.configure do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.create_table.timeout = 20.0
+              #   end
               #
-              #     ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.configure do |config|
-              #       config.timeout = 10.0
-              #       config.rpcs.create_table.timeout = 20.0
-              #     end
-              #
-              # To apply the above configuration only to a new client:
-              #
-              #     client = ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new do |config|
-              #       config.timeout = 10.0
-              #       config.rpcs.create_table.timeout = 20.0
-              #     end
+              #   # Apply the above configuration only to a new client.
+              #   client = ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.create_table.timeout = 20.0
+              #   end
               #
               # @!attribute [rw] endpoint
               #   The hostname or hostname:port of the service endpoint.
