@@ -39,13 +39,12 @@ module Google
             # See {::Google::Cloud::Dataproc::V1beta2::JobController::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all JobController clients:
-            #
-            #     ::Google::Cloud::Dataproc::V1beta2::JobController::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all JobController clients
+            #   ::Google::Cloud::Dataproc::V1beta2::JobController::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -127,19 +126,15 @@ module Google
             ##
             # Create a new JobController client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new JobController client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Dataproc::V1beta2::JobController::Client.new
             #
-            #     client = ::Google::Cloud::Dataproc::V1beta2::JobController::Client.new
-            #
-            # To create a new JobController client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the JobController client.
             # @yieldparam config [Client::Configuration]
@@ -159,10 +154,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -268,7 +262,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.submit_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.submit_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_controller_stub.call_rpc :submit_job, request, options: options do |response, operation|
@@ -352,7 +348,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.submit_job_as_operation.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.submit_job_as_operation.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_controller_stub.call_rpc :submit_job_as_operation, request, options: options do |response, operation|
@@ -426,7 +424,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_controller_stub.call_rpc :get_job, request, options: options do |response, operation|
@@ -524,7 +524,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_jobs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_jobs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_controller_stub.call_rpc :list_jobs, request, options: options do |response, operation|
@@ -607,7 +609,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_controller_stub.call_rpc :update_job, request, options: options do |response, operation|
@@ -621,9 +625,9 @@ module Google
             ##
             # Starts a job cancellation request. To access the job resource
             # after cancellation, call
-            # [regions/\\{region}/jobs.list](https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/list)
+            # regions/\\{region}/jobs.list
             # or
-            # [regions/\\{region}/jobs.get](https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/get).
+            # regions/\\{region}/jobs.get.
             #
             # @overload cancel_job(request, options = nil)
             #   Pass arguments to `cancel_job` via a request object, either of type
@@ -684,7 +688,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.cancel_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.cancel_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_controller_stub.call_rpc :cancel_job, request, options: options do |response, operation|
@@ -758,7 +764,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_controller_stub.call_rpc :delete_job, request, options: options do |response, operation|
@@ -782,22 +790,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for submit_job
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # submit_job to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Dataproc::V1beta2::JobController::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.submit_job.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Dataproc::V1beta2::JobController::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.submit_job.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.submit_job.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.submit_job.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

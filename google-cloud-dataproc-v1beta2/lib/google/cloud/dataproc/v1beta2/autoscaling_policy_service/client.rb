@@ -42,13 +42,12 @@ module Google
             # See {::Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all AutoscalingPolicyService clients:
-            #
-            #     ::Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all AutoscalingPolicyService clients
+            #   ::Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -114,19 +113,15 @@ module Google
             ##
             # Create a new AutoscalingPolicyService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new AutoscalingPolicyService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client.new
             #
-            #     client = ::Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client.new
-            #
-            # To create a new AutoscalingPolicyService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the AutoscalingPolicyService client.
             # @yieldparam config [Client::Configuration]
@@ -146,10 +141,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -236,7 +230,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_autoscaling_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_autoscaling_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @autoscaling_policy_service_stub.call_rpc :create_autoscaling_policy, request, options: options do |response, operation|
@@ -305,7 +301,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_autoscaling_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_autoscaling_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @autoscaling_policy_service_stub.call_rpc :update_autoscaling_policy, request, options: options do |response, operation|
@@ -380,7 +378,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_autoscaling_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_autoscaling_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @autoscaling_policy_service_stub.call_rpc :get_autoscaling_policy, request, options: options do |response, operation|
@@ -461,7 +461,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_autoscaling_policies.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_autoscaling_policies.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @autoscaling_policy_service_stub.call_rpc :list_autoscaling_policies, request, options: options do |response, operation|
@@ -538,7 +540,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_autoscaling_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_autoscaling_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @autoscaling_policy_service_stub.call_rpc :delete_autoscaling_policy, request, options: options do |response, operation|
@@ -562,22 +566,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_autoscaling_policy
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_autoscaling_policy to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_autoscaling_policy.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_autoscaling_policy.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_autoscaling_policy.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_autoscaling_policy.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
