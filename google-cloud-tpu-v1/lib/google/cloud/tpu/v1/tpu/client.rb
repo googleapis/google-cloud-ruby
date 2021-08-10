@@ -43,13 +43,12 @@ module Google
             # See {::Google::Cloud::Tpu::V1::Tpu::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Tpu clients:
-            #
-            #     ::Google::Cloud::Tpu::V1::Tpu::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Tpu clients
+            #   ::Google::Cloud::Tpu::V1::Tpu::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -98,19 +97,15 @@ module Google
             ##
             # Create a new Tpu client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Tpu client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Tpu::V1::Tpu::Client.new
             #
-            #     client = ::Google::Cloud::Tpu::V1::Tpu::Client.new
-            #
-            # To create a new Tpu client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Tpu client.
             # @yieldparam config [Client::Configuration]
@@ -130,10 +125,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -225,7 +219,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_nodes.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_nodes.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tpu_stub.call_rpc :list_nodes, request, options: options do |response, operation|
@@ -292,7 +288,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_node.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_node.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tpu_stub.call_rpc :get_node, request, options: options do |response, operation|
@@ -362,7 +360,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_node.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_node.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tpu_stub.call_rpc :create_node, request, options: options do |response, operation|
@@ -429,7 +429,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_node.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_node.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tpu_stub.call_rpc :delete_node, request, options: options do |response, operation|
@@ -498,7 +500,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.reimage_node.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.reimage_node.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tpu_stub.call_rpc :reimage_node, request, options: options do |response, operation|
@@ -565,7 +569,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.stop_node.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.stop_node.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tpu_stub.call_rpc :stop_node, request, options: options do |response, operation|
@@ -632,7 +638,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.start_node.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.start_node.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tpu_stub.call_rpc :start_node, request, options: options do |response, operation|
@@ -707,7 +715,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_tensor_flow_versions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_tensor_flow_versions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tpu_stub.call_rpc :list_tensor_flow_versions, request, options: options do |response, operation|
@@ -774,7 +784,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_tensor_flow_version.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_tensor_flow_version.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tpu_stub.call_rpc :get_tensor_flow_version, request, options: options do |response, operation|
@@ -848,7 +860,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_accelerator_types.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_accelerator_types.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tpu_stub.call_rpc :list_accelerator_types, request, options: options do |response, operation|
@@ -915,7 +929,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_accelerator_type.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_accelerator_type.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tpu_stub.call_rpc :get_accelerator_type, request, options: options do |response, operation|
@@ -939,22 +955,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_nodes
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_nodes to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Tpu::V1::Tpu::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_nodes.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Tpu::V1::Tpu::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_nodes.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_nodes.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Tpu::V1::Tpu::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_nodes.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
