@@ -80,6 +80,16 @@ module Google
         #   @return [::Boolean]
         #     Reserved for future use. This field is set only in responses from the
         #     server; it is ignored if it is set in any requests.
+        # @!attribute [rw] message_retention_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Indicates the minimum duration to retain a message after it is published to
+        #     the topic. If this field is set, messages published to the topic in the
+        #     last `message_retention_duration` are always available to subscribers. For
+        #     instance, it allows any attached subscription to [seek to a
+        #     timestamp](https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time)
+        #     that is up to `message_retention_duration` in the past. If this field is
+        #     not set, message retention is controlled by settings on individual
+        #     subscriptions. Cannot be more than 7 days or less than 10 minutes.
         class Topic
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -362,8 +372,9 @@ module Google
         #     Indicates whether to retain acknowledged messages. If true, then
         #     messages are not expunged from the subscription's backlog, even if they are
         #     acknowledged, until they fall out of the `message_retention_duration`
-        #     window. This must be true if you would like to [Seek to a timestamp]
-        #     (https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time).
+        #     window. This must be true if you would like to [`Seek` to a timestamp]
+        #     (https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time) in
+        #     the past to replay previously-acknowledged messages.
         # @!attribute [rw] message_retention_duration
         #   @return [::Google::Protobuf::Duration]
         #     How long to retain unacknowledged messages in the subscription's backlog,
@@ -423,6 +434,14 @@ module Google
         #     backlog. `Pull` and `StreamingPull` requests will return
         #     FAILED_PRECONDITION. If the subscription is a push subscription, pushes to
         #     the endpoint will not be made.
+        # @!attribute [r] topic_message_retention_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Output only. Indicates the minimum duration for which a message is retained
+        #     after it is published to the subscription's topic. If this field is set,
+        #     messages published to the subscription's topic in the last
+        #     `topic_message_retention_duration` are always available to subscribers. See
+        #     the `message_retention_duration` field in `Topic`. This field is set only
+        #     in responses from the server; it is ignored if it is set in any requests.
         class Subscription
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

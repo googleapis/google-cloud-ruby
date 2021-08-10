@@ -150,6 +150,7 @@ module Google
         end
 
         # Response for the `ValidateSchema` method.
+        # Empty for now.
         class ValidateSchemaResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -180,6 +181,7 @@ module Google
         end
 
         # Response for the `ValidateMessage` method.
+        # Empty for now.
         class ValidateMessageResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
