@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::CloudDMS::V1::DataMigrationService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all DataMigrationService clients:
-            #
-            #     ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all DataMigrationService clients
+            #   ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -133,19 +132,15 @@ module Google
             ##
             # Create a new DataMigrationService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new DataMigrationService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
             #
-            #     client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
-            #
-            # To create a new DataMigrationService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the DataMigrationService client.
             # @yieldparam config [Client::Configuration]
@@ -165,10 +160,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -280,7 +274,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_migration_jobs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_migration_jobs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :list_migration_jobs, request, options: options do |response, operation|
@@ -347,7 +343,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :get_migration_job, request, options: options do |response, operation|
@@ -427,7 +425,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :create_migration_job, request, options: options do |response, operation|
@@ -505,7 +505,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :update_migration_job, request, options: options do |response, operation|
@@ -584,7 +586,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :delete_migration_job, request, options: options do |response, operation|
@@ -651,7 +655,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.start_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.start_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :start_migration_job, request, options: options do |response, operation|
@@ -718,7 +724,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.stop_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.stop_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :stop_migration_job, request, options: options do |response, operation|
@@ -786,7 +794,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.resume_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.resume_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :resume_migration_job, request, options: options do |response, operation|
@@ -854,7 +864,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.promote_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.promote_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :promote_migration_job, request, options: options do |response, operation|
@@ -922,7 +934,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.verify_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.verify_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :verify_migration_job, request, options: options do |response, operation|
@@ -991,7 +1005,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.restart_migration_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.restart_migration_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :restart_migration_job, request, options: options do |response, operation|
@@ -1067,7 +1083,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.generate_ssh_script.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.generate_ssh_script.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :generate_ssh_script, request, options: options do |response, operation|
@@ -1156,7 +1174,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_connection_profiles.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_connection_profiles.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :list_connection_profiles, request, options: options do |response, operation|
@@ -1223,7 +1243,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_connection_profile.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_connection_profile.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :get_connection_profile, request, options: options do |response, operation|
@@ -1301,7 +1323,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_connection_profile.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_connection_profile.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :create_connection_profile, request, options: options do |response, operation|
@@ -1379,7 +1403,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_connection_profile.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_connection_profile.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :update_connection_profile, request, options: options do |response, operation|
@@ -1459,7 +1485,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_connection_profile.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_connection_profile.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_migration_service_stub.call_rpc :delete_connection_profile, request, options: options do |response, operation|
@@ -1484,22 +1512,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_migration_jobs
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_migration_jobs to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_migration_jobs.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_migration_jobs.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_migration_jobs.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_migration_jobs.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
