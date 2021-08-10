@@ -45,13 +45,12 @@ module Google
             # See {::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all PredictionApiKeyRegistry clients:
-            #
-            #     ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all PredictionApiKeyRegistry clients
+            #   ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -113,19 +112,15 @@ module Google
             ##
             # Create a new PredictionApiKeyRegistry client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new PredictionApiKeyRegistry client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.new
             #
-            #     client = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.new
-            #
-            # To create a new PredictionApiKeyRegistry client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the PredictionApiKeyRegistry client.
             # @yieldparam config [Client::Configuration]
@@ -145,10 +140,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -227,7 +221,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_prediction_api_key_registration.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_prediction_api_key_registration.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @prediction_api_key_registry_stub.call_rpc :create_prediction_api_key_registration, request, options: options do |response, operation|
@@ -299,7 +295,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_prediction_api_key_registrations.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_prediction_api_key_registrations.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @prediction_api_key_registry_stub.call_rpc :list_prediction_api_key_registrations, request, options: options do |response, operation|
@@ -367,7 +365,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_prediction_api_key_registration.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_prediction_api_key_registration.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @prediction_api_key_registry_stub.call_rpc :delete_prediction_api_key_registration, request, options: options do |response, operation|
@@ -391,22 +391,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_prediction_api_key_registration
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_prediction_api_key_registration to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_prediction_api_key_registration.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_prediction_api_key_registration.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_prediction_api_key_registration.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_prediction_api_key_registration.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
