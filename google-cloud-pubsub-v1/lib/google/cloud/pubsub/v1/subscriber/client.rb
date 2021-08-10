@@ -43,13 +43,12 @@ module Google
             # See {::Google::Cloud::PubSub::V1::Subscriber::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Subscriber clients:
-            #
-            #     ::Google::Cloud::PubSub::V1::Subscriber::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Subscriber clients
+            #   ::Google::Cloud::PubSub::V1::Subscriber::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -176,19 +175,15 @@ module Google
             ##
             # Create a new Subscriber client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Subscriber client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::PubSub::V1::Subscriber::Client.new
             #
-            #     client = ::Google::Cloud::PubSub::V1::Subscriber::Client.new
-            #
-            # To create a new Subscriber client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::PubSub::V1::Subscriber::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::PubSub::V1::Subscriber::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Subscriber client.
             # @yieldparam config [Client::Configuration]
@@ -208,10 +203,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -388,7 +382,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_subscription.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_subscription.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :create_subscription, request, options: options do |response, operation|
@@ -455,7 +451,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_subscription.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_subscription.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :get_subscription, request, options: options do |response, operation|
@@ -525,7 +523,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_subscription.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_subscription.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :update_subscription, request, options: options do |response, operation|
@@ -598,7 +598,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_subscriptions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_subscriptions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :list_subscriptions, request, options: options do |response, operation|
@@ -670,7 +672,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_subscription.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_subscription.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :delete_subscription, request, options: options do |response, operation|
@@ -752,7 +756,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.modify_ack_deadline.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.modify_ack_deadline.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :modify_ack_deadline, request, options: options do |response, operation|
@@ -829,7 +835,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.acknowledge.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.acknowledge.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :acknowledge, request, options: options do |response, operation|
@@ -910,7 +918,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.pull.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.pull.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :pull, request, options: options do |response, operation|
@@ -968,7 +978,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.streaming_pull.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.streaming_pull.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :streaming_pull, request, options: options do |response, operation|
@@ -1047,7 +1059,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.modify_push_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.modify_push_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :modify_push_config, request, options: options do |response, operation|
@@ -1118,7 +1132,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_snapshot.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_snapshot.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :get_snapshot, request, options: options do |response, operation|
@@ -1195,7 +1211,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_snapshots.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_snapshots.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :list_snapshots, request, options: options do |response, operation|
@@ -1295,7 +1313,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_snapshot.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_snapshot.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :create_snapshot, request, options: options do |response, operation|
@@ -1369,7 +1389,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_snapshot.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_snapshot.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :update_snapshot, request, options: options do |response, operation|
@@ -1444,7 +1466,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_snapshot.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_snapshot.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :delete_snapshot, request, options: options do |response, operation|
@@ -1532,7 +1556,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.seek.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.seek.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :seek, request, options: options do |response, operation|
@@ -1556,22 +1582,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_subscription
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_subscription to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::PubSub::V1::Subscriber::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_subscription.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::PubSub::V1::Subscriber::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_subscription.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::PubSub::V1::Subscriber::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_subscription.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::PubSub::V1::Subscriber::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_subscription.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
