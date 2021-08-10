@@ -42,13 +42,12 @@ module Google
             # See {::Google::Cloud::Retail::V2::ProductService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all ProductService clients:
-            #
-            #     ::Google::Cloud::Retail::V2::ProductService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all ProductService clients
+            #   ::Google::Cloud::Retail::V2::ProductService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -100,19 +99,15 @@ module Google
             ##
             # Create a new ProductService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new ProductService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Retail::V2::ProductService::Client.new
             #
-            #     client = ::Google::Cloud::Retail::V2::ProductService::Client.new
-            #
-            # To create a new ProductService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the ProductService client.
             # @yieldparam config [Client::Configuration]
@@ -132,10 +127,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -242,7 +236,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_product.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_product.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @product_service_stub.call_rpc :create_product, request, options: options do |response, operation|
@@ -317,7 +313,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_product.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_product.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @product_service_stub.call_rpc :get_product, request, options: options do |response, operation|
@@ -454,7 +452,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_products.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_products.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @product_service_stub.call_rpc :list_products, request, options: options do |response, operation|
@@ -542,7 +542,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_product.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_product.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @product_service_stub.call_rpc :update_product, request, options: options do |response, operation|
@@ -628,7 +630,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_product.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_product.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @product_service_stub.call_rpc :delete_product, request, options: options do |response, operation|
@@ -735,7 +739,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.import_products.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.import_products.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @product_service_stub.call_rpc :import_products, request, options: options do |response, operation|
@@ -893,7 +899,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_inventory.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_inventory.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @product_service_stub.call_rpc :set_inventory, request, options: options do |response, operation|
@@ -1027,7 +1035,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.add_fulfillment_places.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.add_fulfillment_places.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @product_service_stub.call_rpc :add_fulfillment_places, request, options: options do |response, operation|
@@ -1156,7 +1166,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.remove_fulfillment_places.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.remove_fulfillment_places.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @product_service_stub.call_rpc :remove_fulfillment_places, request, options: options do |response, operation|
@@ -1181,22 +1193,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_product
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_product to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Retail::V2::ProductService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_product.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Retail::V2::ProductService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_product.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_product.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_product.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
