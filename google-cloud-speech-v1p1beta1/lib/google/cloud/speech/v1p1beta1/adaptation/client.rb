@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Speech::V1p1beta1::Adaptation::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Adaptation clients:
-            #
-            #     ::Google::Cloud::Speech::V1p1beta1::Adaptation::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Adaptation clients
+            #   ::Google::Cloud::Speech::V1p1beta1::Adaptation::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -94,19 +93,15 @@ module Google
             ##
             # Create a new Adaptation client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Adaptation client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
             #
-            #     client = ::Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
-            #
-            # To create a new Adaptation client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Adaptation client.
             # @yieldparam config [Client::Configuration]
@@ -126,10 +121,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -217,7 +211,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_phrase_set.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_phrase_set.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @adaptation_stub.call_rpc :create_phrase_set, request, options: options do |response, operation|
@@ -285,7 +281,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_phrase_set.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_phrase_set.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @adaptation_stub.call_rpc :get_phrase_set, request, options: options do |response, operation|
@@ -364,7 +362,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_phrase_set.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_phrase_set.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @adaptation_stub.call_rpc :list_phrase_set, request, options: options do |response, operation|
@@ -437,7 +437,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_phrase_set.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_phrase_set.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @adaptation_stub.call_rpc :update_phrase_set, request, options: options do |response, operation|
@@ -505,7 +507,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_phrase_set.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_phrase_set.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @adaptation_stub.call_rpc :delete_phrase_set, request, options: options do |response, operation|
@@ -581,7 +585,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_custom_class.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_custom_class.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @adaptation_stub.call_rpc :create_custom_class, request, options: options do |response, operation|
@@ -649,7 +655,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_custom_class.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_custom_class.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @adaptation_stub.call_rpc :get_custom_class, request, options: options do |response, operation|
@@ -728,7 +736,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_custom_classes.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_custom_classes.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @adaptation_stub.call_rpc :list_custom_classes, request, options: options do |response, operation|
@@ -801,7 +811,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_custom_class.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_custom_class.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @adaptation_stub.call_rpc :update_custom_class, request, options: options do |response, operation|
@@ -869,7 +881,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_custom_class.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_custom_class.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @adaptation_stub.call_rpc :delete_custom_class, request, options: options do |response, operation|
@@ -893,22 +907,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_phrase_set
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_phrase_set to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Speech::V1p1beta1::Adaptation::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_phrase_set.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Speech::V1p1beta1::Adaptation::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_phrase_set.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_phrase_set.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_phrase_set.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
