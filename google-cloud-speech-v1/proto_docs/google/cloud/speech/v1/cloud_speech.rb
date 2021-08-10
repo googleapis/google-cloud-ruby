@@ -92,6 +92,16 @@ module Google
         #     `END_OF_SINGLE_UTTERANCE` event and cease recognition. It will return no
         #     more than one `StreamingRecognitionResult` with the `is_final` flag set to
         #     `true`.
+        #
+        #     The `single_utterance` field can only be used with specified models,
+        #     otherwise an error is thrown. The `model` field in [`RecognitionConfig`][]
+        #     must be set to:
+        #
+        #     * `command_and_search`
+        #     * `phone_call` AND additional field `useEnhanced`=`true`
+        #     * The `model` field is left undefined. In this case the API auto-selects
+        #       a model based on any other parameters that you set in
+        #       `RecognitionConfig`.
         # @!attribute [rw] interim_results
         #   @return [::Boolean]
         #     If `true`, interim results (tentative hypotheses) may be
@@ -166,7 +176,7 @@ module Google
         #     A means to provide context to assist the speech recognition. For more
         #     information, see
         #     [speech
-        #     adaptation](https://cloud.google.com/speech-to-text/docs/context-strength).
+        #     adaptation](https://cloud.google.com/speech-to-text/docs/adaptation).
         # @!attribute [rw] enable_word_time_offsets
         #   @return [::Boolean]
         #     If `true`, the top result includes a list of words and
@@ -179,9 +189,6 @@ module Google
         #     This feature is only available in select languages. Setting this for
         #     requests in other languages has no effect at all.
         #     The default 'false' value does not add punctuation to result hypotheses.
-        #     Note: This is currently offered as an experimental service, complimentary
-        #     to all users. In the future this may be exclusively available as a
-        #     premium feature.
         # @!attribute [rw] diarization_config
         #   @return [::Google::Cloud::Speech::V1::SpeakerDiarizationConfig]
         #     Config to enable speaker diarization and set additional
@@ -217,7 +224,7 @@ module Google
         #       </tr>
         #       <tr>
         #         <td><code>video</code></td>
-        #         <td>Best for audio that originated from from video or includes multiple
+        #         <td>Best for audio that originated from video or includes multiple
         #             speakers. Ideally the audio is recorded at a 16khz or greater
         #             sampling rate. This is a premium model that costs more than the
         #             standard rate.</td>
@@ -253,7 +260,7 @@ module Google
           # a lossless encoding (`FLAC` or `LINEAR16`). The accuracy of the speech
           # recognition can be reduced if lossy codecs are used to capture or transmit
           # audio, particularly if background noise is present. Lossy codecs include
-          # `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, `SPEEX_WITH_HEADER_BYTE`, and `MP3`.
+          # `MULAW`, `AMR`, `AMR_WB`, `OGG_OPUS`, `SPEEX_WITH_HEADER_BYTE`, `MP3`.
           #
           # The `FLAC` and `WAV` audio file formats include a header that describes the
           # included audio content. You can request recognition for `WAV` files that
@@ -329,7 +336,7 @@ module Google
         #     number of speakers. If not set, the default value is 6.
         # @!attribute [r] speaker_tag
         #   @return [::Integer]
-        #     Unused.
+        #     Output only. Unused.
         class SpeakerDiarizationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -516,6 +523,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Speech::V1::SpeechRecognitionResult>]
         #     Sequential list of transcription results corresponding to
         #     sequential portions of audio.
+        # @!attribute [rw] total_billed_time
+        #   @return [::Google::Protobuf::Duration]
+        #     When available, billed audio seconds for the corresponding request.
         class RecognizeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -530,6 +540,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Speech::V1::SpeechRecognitionResult>]
         #     Sequential list of transcription results corresponding to
         #     sequential portions of audio.
+        # @!attribute [rw] total_billed_time
+        #   @return [::Google::Protobuf::Duration]
+        #     When available, billed audio seconds for the corresponding request.
         class LongRunningRecognizeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -548,6 +561,10 @@ module Google
         # @!attribute [rw] last_update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Time of the most recent processing update.
+        # @!attribute [r] uri
+        #   @return [::String]
+        #     Output only. The URI of the audio file being transcribed. Empty if the audio was sent
+        #     as byte content.
         class LongRunningRecognizeMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -559,8 +576,8 @@ module Google
         # audio, and `single_utterance` is set to false, then no messages are streamed
         # back to the client.
         #
-        # Here's an example of a series of ten `StreamingRecognizeResponse`s that might
-        # be returned while processing audio:
+        # Here's an example of a series of `StreamingRecognizeResponse`s that might be
+        # returned while processing audio:
         #
         # 1. results { alternatives { transcript: "tube" } stability: 0.01 }
         #
@@ -615,6 +632,10 @@ module Google
         # @!attribute [rw] speech_event_type
         #   @return [::Google::Cloud::Speech::V1::StreamingRecognizeResponse::SpeechEventType]
         #     Indicates the type of speech event.
+        # @!attribute [rw] total_billed_time
+        #   @return [::Google::Protobuf::Duration]
+        #     When available, billed audio seconds for the stream.
+        #     Set only if this is the last response in the stream.
         class StreamingRecognizeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -738,7 +759,7 @@ module Google
         #     The word corresponding to this set of information.
         # @!attribute [r] speaker_tag
         #   @return [::Integer]
-        #     A distinct integer value is assigned for every speaker within
+        #     Output only. A distinct integer value is assigned for every speaker within
         #     the audio. This field specifies which one of those speakers was detected to
         #     have spoken this word. Value ranges from '1' to diarization_speaker_count.
         #     speaker_tag is set if enable_speaker_diarization = 'true' and only in the
