@@ -48,13 +48,12 @@ module Google
             # See {::Google::Cloud::Build::V1::CloudBuild::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all CloudBuild clients:
-            #
-            #     ::Google::Cloud::Build::V1::CloudBuild::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all CloudBuild clients
+            #   ::Google::Cloud::Build::V1::CloudBuild::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -154,19 +153,15 @@ module Google
             ##
             # Create a new CloudBuild client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new CloudBuild client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Build::V1::CloudBuild::Client.new
             #
-            #     client = ::Google::Cloud::Build::V1::CloudBuild::Client.new
-            #
-            # To create a new CloudBuild client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the CloudBuild client.
             # @yieldparam config [Client::Configuration]
@@ -186,10 +181,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -286,7 +280,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_build.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_build.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :create_build, request, options: options do |response, operation|
@@ -362,7 +358,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_build.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_build.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :get_build, request, options: options do |response, operation|
@@ -448,7 +446,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_builds.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_builds.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :list_builds, request, options: options do |response, operation|
@@ -521,7 +521,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.cancel_build.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.cancel_build.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :cancel_build, request, options: options do |response, operation|
@@ -619,7 +621,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.retry_build.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.retry_build.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :retry_build, request, options: options do |response, operation|
@@ -693,7 +697,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_build_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_build_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :create_build_trigger, request, options: options do |response, operation|
@@ -767,7 +773,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_build_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_build_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :get_build_trigger, request, options: options do |response, operation|
@@ -842,7 +850,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_build_triggers.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_build_triggers.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :list_build_triggers, request, options: options do |response, operation|
@@ -917,7 +927,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_build_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_build_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :delete_build_trigger, request, options: options do |response, operation|
@@ -990,7 +1002,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_build_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_build_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :update_build_trigger, request, options: options do |response, operation|
@@ -1064,7 +1078,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.run_build_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.run_build_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :run_build_trigger, request, options: options do |response, operation|
@@ -1142,7 +1158,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.receive_trigger_webhook.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.receive_trigger_webhook.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :receive_trigger_webhook, request, options: options do |response, operation|
@@ -1220,7 +1238,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_worker_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_worker_pool.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :create_worker_pool, request, options: options do |response, operation|
@@ -1288,7 +1308,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_worker_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_worker_pool.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :get_worker_pool, request, options: options do |response, operation|
@@ -1365,7 +1387,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_worker_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_worker_pool.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :delete_worker_pool, request, options: options do |response, operation|
@@ -1440,7 +1464,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_worker_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_worker_pool.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :update_worker_pool, request, options: options do |response, operation|
@@ -1514,7 +1540,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_worker_pools.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_worker_pools.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :list_worker_pools, request, options: options do |response, operation|
@@ -1539,22 +1567,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_build
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_build to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Build::V1::CloudBuild::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_build.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Build::V1::CloudBuild::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_build.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_build.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_build.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
