@@ -52,13 +52,12 @@ module Google
             # See {::Google::Cloud::Kms::V1::KeyManagementService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all KeyManagementService clients:
-            #
-            #     ::Google::Cloud::Kms::V1::KeyManagementService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all KeyManagementService clients
+            #   ::Google::Cloud::Kms::V1::KeyManagementService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -214,19 +213,15 @@ module Google
             ##
             # Create a new KeyManagementService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new KeyManagementService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new
             #
-            #     client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new
-            #
-            # To create a new KeyManagementService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the KeyManagementService client.
             # @yieldparam config [Client::Configuration]
@@ -246,10 +241,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -344,7 +338,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_key_rings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_key_rings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :list_key_rings, request, options: options do |response, operation|
@@ -432,7 +428,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_crypto_keys.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_crypto_keys.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :list_crypto_keys, request, options: options do |response, operation|
@@ -521,7 +519,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_crypto_key_versions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_crypto_key_versions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :list_crypto_key_versions, request, options: options do |response, operation|
@@ -607,7 +607,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_import_jobs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_import_jobs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :list_import_jobs, request, options: options do |response, operation|
@@ -674,7 +676,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_key_ring.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_key_ring.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :get_key_ring, request, options: options do |response, operation|
@@ -741,7 +745,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_crypto_key.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_crypto_key.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :get_crypto_key, request, options: options do |response, operation|
@@ -807,7 +813,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_crypto_key_version.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_crypto_key_version.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :get_crypto_key_version, request, options: options do |response, operation|
@@ -877,7 +885,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_public_key.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_public_key.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :get_public_key, request, options: options do |response, operation|
@@ -943,7 +953,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_import_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_import_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :get_import_job, request, options: options do |response, operation|
@@ -1015,7 +1027,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_key_ring.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_key_ring.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :create_key_ring, request, options: options do |response, operation|
@@ -1097,7 +1111,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_crypto_key.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_crypto_key.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :create_crypto_key, request, options: options do |response, operation|
@@ -1170,7 +1186,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_crypto_key_version.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_crypto_key_version.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :create_crypto_key_version, request, options: options do |response, operation|
@@ -1273,7 +1291,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.import_crypto_key_version.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.import_crypto_key_version.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :import_crypto_key_version, request, options: options do |response, operation|
@@ -1347,7 +1367,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_import_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_import_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :create_import_job, request, options: options do |response, operation|
@@ -1415,7 +1437,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_crypto_key.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_crypto_key.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :update_crypto_key, request, options: options do |response, operation|
@@ -1489,7 +1513,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_crypto_key_version.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_crypto_key_version.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :update_crypto_key_version, request, options: options do |response, operation|
@@ -1560,7 +1586,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_crypto_key_primary_version.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_crypto_key_primary_version.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :update_crypto_key_primary_version, request, options: options do |response, operation|
@@ -1637,7 +1665,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.destroy_crypto_key_version.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.destroy_crypto_key_version.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :destroy_crypto_key_version, request, options: options do |response, operation|
@@ -1709,7 +1739,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.restore_crypto_key_version.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.restore_crypto_key_version.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :restore_crypto_key_version, request, options: options do |response, operation|
@@ -1829,7 +1861,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.encrypt.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.encrypt.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :encrypt, request, options: options do |response, operation|
@@ -1932,7 +1966,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.decrypt.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.decrypt.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :decrypt, request, options: options do |response, operation|
@@ -2018,7 +2054,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.asymmetric_sign.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.asymmetric_sign.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :asymmetric_sign, request, options: options do |response, operation|
@@ -2104,7 +2142,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.asymmetric_decrypt.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.asymmetric_decrypt.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :asymmetric_decrypt, request, options: options do |response, operation|
@@ -2189,7 +2229,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.mac_sign.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.mac_sign.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :mac_sign, request, options: options do |response, operation|
@@ -2290,7 +2332,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.mac_verify.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.mac_verify.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :mac_verify, request, options: options do |response, operation|
@@ -2364,7 +2408,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.generate_random_bytes.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.generate_random_bytes.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :generate_random_bytes, request, options: options do |response, operation|
@@ -2388,22 +2434,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_key_rings
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_key_rings to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Kms::V1::KeyManagementService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_key_rings.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Kms::V1::KeyManagementService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_key_rings.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_key_rings.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_key_rings.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
