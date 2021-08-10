@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Dialogflow::V2::Agents::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Agents clients:
-            #
-            #     ::Google::Cloud::Dialogflow::V2::Agents::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Agents clients
+            #   ::Google::Cloud::Dialogflow::V2::Agents::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -99,19 +98,15 @@ module Google
             ##
             # Create a new Agents client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Agents client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new
             #
-            #     client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new
-            #
-            # To create a new Agents client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Agents client.
             # @yieldparam config [Client::Configuration]
@@ -131,10 +126,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -223,7 +217,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_agent.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_agent.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @agents_stub.call_rpc :get_agent, request, options: options do |response, operation|
@@ -295,7 +291,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_agent.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_agent.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @agents_stub.call_rpc :set_agent, request, options: options do |response, operation|
@@ -362,7 +360,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_agent.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_agent.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @agents_stub.call_rpc :delete_agent, request, options: options do |response, operation|
@@ -440,7 +440,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.search_agents.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.search_agents.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @agents_stub.call_rpc :search_agents, request, options: options do |response, operation|
@@ -513,7 +515,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.train_agent.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.train_agent.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @agents_stub.call_rpc :train_agent, request, options: options do |response, operation|
@@ -586,7 +590,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.export_agent.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.export_agent.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @agents_stub.call_rpc :export_agent, request, options: options do |response, operation|
@@ -674,7 +680,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.import_agent.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.import_agent.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @agents_stub.call_rpc :import_agent, request, options: options do |response, operation|
@@ -761,7 +769,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.restore_agent.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.restore_agent.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @agents_stub.call_rpc :restore_agent, request, options: options do |response, operation|
@@ -836,7 +846,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_validation_result.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_validation_result.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @agents_stub.call_rpc :get_validation_result, request, options: options do |response, operation|
@@ -860,22 +872,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for get_agent
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # get_agent to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Dialogflow::V2::Agents::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_agent.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Dialogflow::V2::Agents::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_agent.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_agent.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_agent.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

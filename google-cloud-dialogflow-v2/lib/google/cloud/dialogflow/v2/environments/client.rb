@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Dialogflow::V2::Environments::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Environments clients:
-            #
-            #     ::Google::Cloud::Dialogflow::V2::Environments::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Environments clients
+            #   ::Google::Cloud::Dialogflow::V2::Environments::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -99,19 +98,15 @@ module Google
             ##
             # Create a new Environments client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Environments client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new
             #
-            #     client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new
-            #
-            # To create a new Environments client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Environments client.
             # @yieldparam config [Client::Configuration]
@@ -131,10 +126,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -219,7 +213,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_environments.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_environments.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @environments_stub.call_rpc :list_environments, request, options: options do |response, operation|
@@ -293,7 +289,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_environment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_environment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @environments_stub.call_rpc :get_environment, request, options: options do |response, operation|
@@ -367,7 +365,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_environment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_environment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @environments_stub.call_rpc :create_environment, request, options: options do |response, operation|
@@ -451,7 +451,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_environment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_environment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @environments_stub.call_rpc :update_environment, request, options: options do |response, operation|
@@ -524,7 +526,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_environment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_environment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @environments_stub.call_rpc :delete_environment, request, options: options do |response, operation|
@@ -602,7 +606,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_environment_history.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_environment_history.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @environments_stub.call_rpc :get_environment_history, request, options: options do |response, operation|
@@ -627,22 +633,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_environments
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_environments to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Dialogflow::V2::Environments::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_environments.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Dialogflow::V2::Environments::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_environments.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_environments.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_environments.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
