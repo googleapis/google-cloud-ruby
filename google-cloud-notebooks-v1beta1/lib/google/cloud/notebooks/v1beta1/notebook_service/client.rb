@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Notebooks::V1beta1::NotebookService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all NotebookService clients:
-            #
-            #     ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all NotebookService clients
+            #   ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -137,19 +136,15 @@ module Google
             ##
             # Create a new NotebookService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new NotebookService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
             #
-            #     client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
-            #
-            # To create a new NotebookService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the NotebookService client.
             # @yieldparam config [Client::Configuration]
@@ -169,10 +164,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -266,7 +260,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_instances.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_instances.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :list_instances, request, options: options do |response, operation|
@@ -334,7 +330,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :get_instance, request, options: options do |response, operation|
@@ -405,7 +403,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :create_instance, request, options: options do |response, operation|
@@ -481,7 +481,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.register_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.register_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :register_instance, request, options: options do |response, operation|
@@ -556,7 +558,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_instance_accelerator.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_instance_accelerator.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :set_instance_accelerator, request, options: options do |response, operation|
@@ -627,7 +631,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_instance_machine_type.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_instance_machine_type.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :set_instance_machine_type, request, options: options do |response, operation|
@@ -698,7 +704,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_instance_labels.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_instance_labels.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :set_instance_labels, request, options: options do |response, operation|
@@ -766,7 +774,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :delete_instance, request, options: options do |response, operation|
@@ -834,7 +844,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.start_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.start_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :start_instance, request, options: options do |response, operation|
@@ -902,7 +914,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.stop_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.stop_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :stop_instance, request, options: options do |response, operation|
@@ -970,7 +984,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.reset_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.reset_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :reset_instance, request, options: options do |response, operation|
@@ -1047,7 +1063,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.report_instance_info.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.report_instance_info.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :report_instance_info, request, options: options do |response, operation|
@@ -1115,7 +1133,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.is_instance_upgradeable.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.is_instance_upgradeable.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :is_instance_upgradeable, request, options: options do |response, operation|
@@ -1182,7 +1202,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.upgrade_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.upgrade_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :upgrade_instance, request, options: options do |response, operation|
@@ -1254,7 +1276,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.upgrade_instance_internal.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.upgrade_instance_internal.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :upgrade_instance_internal, request, options: options do |response, operation|
@@ -1326,7 +1350,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_environments.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_environments.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :list_environments, request, options: options do |response, operation|
@@ -1394,7 +1420,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_environment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_environment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :get_environment, request, options: options do |response, operation|
@@ -1467,7 +1495,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_environment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_environment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :create_environment, request, options: options do |response, operation|
@@ -1535,7 +1565,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_environment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_environment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :delete_environment, request, options: options do |response, operation|
@@ -1560,22 +1592,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_instances
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_instances to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_instances.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_instances.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_instances.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_instances.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
