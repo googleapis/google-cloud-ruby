@@ -41,13 +41,12 @@ module Google
               # See {::Google::Cloud::Compute::V1::RegionInstances::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
-              # ## Example
+              # @example
               #
-              # To modify the configuration for all RegionInstances clients:
-              #
-              #     ::Google::Cloud::Compute::V1::RegionInstances::Rest::Client.configure do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Modify the configuration for all RegionInstances clients
+              #   ::Google::Cloud::Compute::V1::RegionInstances::Rest::Client.configure do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the Client client.
               # @yieldparam config [Client::Configuration]
@@ -64,6 +63,8 @@ module Google
                                     namespace.pop
                                   end
                   default_config = Client::Configuration.new parent_config
+
+                  default_config.rpcs.bulk_insert.timeout = 600.0
 
                   default_config
                 end
@@ -94,19 +95,15 @@ module Google
               ##
               # Create a new RegionInstances REST client object.
               #
-              # ## Examples
+              # @example
               #
-              # To create a new RegionInstances REST client with the default
-              # configuration:
+              #   # Create a client using the default configuration
+              #   client = ::Google::Cloud::Compute::V1::RegionInstances::Rest::Client.new
               #
-              #     client = ::Google::Cloud::Compute::V1::RegionInstances::Rest::Client.new
-              #
-              # To create a new RegionInstances REST client with a custom
-              # configuration:
-              #
-              #     client = ::Google::Cloud::Compute::V1::RegionInstances::Rest::Client.new do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Create a client using a custom configuration
+              #   client = ::Google::Cloud::Compute::V1::RegionInstances::Rest::Client.new do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the RegionInstances client.
               # @yieldparam config [Client::Configuration]
@@ -178,7 +175,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.bulk_insert.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -186,8 +183,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.bulk_insert.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @region_instances_stub.bulk_insert request, options do |result, response|
                   yield result, response if block_given?
@@ -247,6 +247,9 @@ module Google
               # @!attribute [rw] timeout
               #   The call timeout in seconds.
               #   @return [::Numeric]
+              # @!attribute [rw] metadata
+              #   Additional REST headers to be sent with the call.
+              #   @return [::Hash{::Symbol=>::String}]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -260,12 +263,53 @@ module Google
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
                 config_attr :timeout,       nil, ::Numeric, nil
+                config_attr :metadata,      nil, ::Hash, nil
 
                 # @private
                 def initialize parent_config = nil
                   @parent_config = parent_config unless parent_config.nil?
 
                   yield self if block_given?
+                end
+
+                ##
+                # Configurations for individual RPCs
+                # @return [Rpcs]
+                #
+                def rpcs
+                  @rpcs ||= begin
+                    parent_rpcs = nil
+                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
+                    Rpcs.new parent_rpcs
+                  end
+                end
+
+                ##
+                # Configuration RPC class for the RegionInstances API.
+                #
+                # Includes fields providing the configuration for each RPC in this service.
+                # Each configuration object is of type `Gapic::Config::Method` and includes
+                # the following configuration fields:
+                #
+                #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
+                #
+                # there is one other field (`retry_policy`) that can be set
+                # but is currently not supported for REST Gapic libraries.
+                #
+                class Rpcs
+                  ##
+                  # RPC-specific configuration for `bulk_insert`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :bulk_insert
+
+                  # @private
+                  def initialize parent_rpcs = nil
+                    bulk_insert_config = parent_rpcs.bulk_insert if parent_rpcs.respond_to? :bulk_insert
+                    @bulk_insert = ::Gapic::Config::Method.new bulk_insert_config
+
+                    yield self if block_given?
+                  end
                 end
               end
             end
