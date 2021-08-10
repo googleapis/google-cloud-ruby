@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Bigtable::V2::Bigtable::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Bigtable clients:
-            #
-            #     ::Google::Cloud::Bigtable::V2::Bigtable::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Bigtable clients
+            #   ::Google::Cloud::Bigtable::V2::Bigtable::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -124,19 +123,15 @@ module Google
             ##
             # Create a new Bigtable client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Bigtable client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new
             #
-            #     client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new
-            #
-            # To create a new Bigtable client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Bigtable client.
             # @yieldparam config [Client::Configuration]
@@ -156,10 +151,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -252,7 +246,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.read_rows.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.read_rows.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @bigtable_stub.call_rpc :read_rows, request, options: options do |response, operation|
@@ -326,7 +322,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.sample_row_keys.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.sample_row_keys.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @bigtable_stub.call_rpc :sample_row_keys, request, options: options do |response, operation|
@@ -404,7 +402,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.mutate_row.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.mutate_row.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @bigtable_stub.call_rpc :mutate_row, request, options: options do |response, operation|
@@ -481,7 +481,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.mutate_rows.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.mutate_rows.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @bigtable_stub.call_rpc :mutate_rows, request, options: options do |response, operation|
@@ -572,7 +574,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.check_and_mutate_row.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.check_and_mutate_row.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @bigtable_stub.call_rpc :check_and_mutate_row, request, options: options do |response, operation|
@@ -654,7 +658,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.read_modify_write_row.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.read_modify_write_row.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @bigtable_stub.call_rpc :read_modify_write_row, request, options: options do |response, operation|
@@ -678,22 +684,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for read_rows
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # read_rows to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Bigtable::V2::Bigtable::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.read_rows.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Bigtable::V2::Bigtable::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.read_rows.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.read_rows.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.read_rows.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
