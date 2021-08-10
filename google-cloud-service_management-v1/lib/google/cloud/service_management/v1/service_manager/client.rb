@@ -39,13 +39,12 @@ module Google
             # See {::Google::Cloud::ServiceManagement::V1::ServiceManager::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all ServiceManager clients:
-            #
-            #     ::Google::Cloud::ServiceManagement::V1::ServiceManager::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all ServiceManager clients
+            #   ::Google::Cloud::ServiceManagement::V1::ServiceManager::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -92,19 +91,15 @@ module Google
             ##
             # Create a new ServiceManager client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new ServiceManager client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
             #
-            #     client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
-            #
-            # To create a new ServiceManager client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the ServiceManager client.
             # @yieldparam config [Client::Configuration]
@@ -124,10 +119,9 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -229,7 +223,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_services.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_services.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_manager_stub.call_rpc :list_services, request, options: options do |response, operation|
@@ -298,7 +294,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_manager_stub.call_rpc :get_service, request, options: options do |response, operation|
@@ -361,7 +359,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_manager_stub.call_rpc :create_service, request, options: options do |response, operation|
@@ -434,7 +434,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_manager_stub.call_rpc :delete_service, request, options: options do |response, operation|
@@ -507,7 +509,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.undelete_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.undelete_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_manager_stub.call_rpc :undelete_service, request, options: options do |response, operation|
@@ -581,7 +585,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_service_configs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_service_configs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_manager_stub.call_rpc :list_service_configs, request, options: options do |response, operation|
@@ -658,7 +664,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_service_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_service_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_manager_stub.call_rpc :get_service_config, request, options: options do |response, operation|
@@ -734,7 +742,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_service_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_service_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_manager_stub.call_rpc :create_service_config, request, options: options do |response, operation|
@@ -819,7 +829,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.submit_config_source.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.submit_config_source.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_manager_stub.call_rpc :submit_config_source, request, options: options do |response, operation|
@@ -902,7 +914,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_service_rollouts.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_service_rollouts.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_manager_stub.call_rpc :list_service_rollouts, request, options: options do |response, operation|
@@ -973,7 +987,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_service_rollout.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_service_rollout.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_manager_stub.call_rpc :get_service_rollout, request, options: options do |response, operation|
@@ -1055,7 +1071,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_service_rollout.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_service_rollout.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_manager_stub.call_rpc :create_service_rollout, request, options: options do |response, operation|
@@ -1136,7 +1154,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.generate_config_report.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.generate_config_report.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_manager_stub.call_rpc :generate_config_report, request, options: options do |response, operation|
@@ -1154,6 +1174,8 @@ module Google
             # more information.
             #
             # Operation<response: EnableServiceResponse>
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload enable_service(request, options = nil)
             #   Pass arguments to `enable_service` via a request object, either of type
@@ -1218,7 +1240,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.enable_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.enable_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_manager_stub.call_rpc :enable_service, request, options: options do |response, operation|
@@ -1236,6 +1260,8 @@ module Google
             # unexpected billing charges or security leaks.
             #
             # Operation<response: DisableServiceResponse>
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload disable_service(request, options = nil)
             #   Pass arguments to `disable_service` via a request object, either of type
@@ -1300,7 +1326,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.disable_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.disable_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_manager_stub.call_rpc :disable_service, request, options: options do |response, operation|
@@ -1325,22 +1353,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_services
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_services to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::ServiceManagement::V1::ServiceManager::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_services.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::ServiceManagement::V1::ServiceManager::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_services.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_services.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_services.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
