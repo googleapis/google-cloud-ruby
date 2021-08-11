@@ -204,7 +204,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_topic(name: nil, labels: nil, message_storage_policy: nil, kms_key_name: nil, schema_settings: nil, satisfies_pzs: nil)
+            # @overload create_topic(name: nil, labels: nil, message_storage_policy: nil, kms_key_name: nil, schema_settings: nil, satisfies_pzs: nil, message_retention_duration: nil)
             #   Pass arguments to `create_topic` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -233,6 +233,15 @@ module Google
             #   @param satisfies_pzs [::Boolean]
             #     Reserved for future use. This field is set only in responses from the
             #     server; it is ignored if it is set in any requests.
+            #   @param message_retention_duration [::Google::Protobuf::Duration, ::Hash]
+            #     Indicates the minimum duration to retain a message after it is published to
+            #     the topic. If this field is set, messages published to the topic in the
+            #     last `message_retention_duration` are always available to subscribers. For
+            #     instance, it allows any attached subscription to [seek to a
+            #     timestamp](https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time)
+            #     that is up to `message_retention_duration` in the past. If this field is
+            #     not set, message retention is controlled by settings on individual
+            #     subscriptions. Cannot be more than 7 days or less than 10 minutes.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Topic]
