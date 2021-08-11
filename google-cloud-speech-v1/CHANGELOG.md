@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2021-08-11
+
+#### Features
+
+* Report total billed time, and honor client-level timeout configuration
+
 ### 0.4.2 / 2021-07-12
 
 #### Documentation
