@@ -36,13 +36,11 @@ class ComputeDefaultValuesTest < Minitest::Test
     assert_output(/default prefix of `usage_gce`/) do
       set_usage_export_bucket project: project, bucket_name: @bucket.name
     end
-    sleep 5 # To make sure the settings are properly updated
     uel = get_usage_export_bucket project: project
     assert_equal @bucket.name, uel.bucket_name
     assert_equal "usage_gce", uel.report_name_prefix
 
     disable_usage_export project: project
-    sleep 5 # To make sure the settings are properly updated
     assert_nil get_usage_export_bucket project: project
   end
 
@@ -52,13 +50,11 @@ class ComputeDefaultValuesTest < Minitest::Test
                               report_name_prefix: TEST_PREFIX
     end
     refute_match(/usage_gce/, out.first)
-    sleep 5 # To make sure the settings are properly updated
     uel = get_usage_export_bucket project: project
     assert_equal @bucket.name, uel.bucket_name
     assert_equal TEST_PREFIX, uel.report_name_prefix
 
     disable_usage_export project: project
-    sleep 5 # To make sure the settings are properly updated
     assert_nil get_usage_export_bucket project: project
   end
 end
