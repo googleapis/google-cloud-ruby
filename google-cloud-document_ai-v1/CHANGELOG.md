@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.2 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
 ### 0.2.1 / 2021-07-12
 
 #### Documentation
