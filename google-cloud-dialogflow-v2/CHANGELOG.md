@@ -1,5 +1,15 @@
 # Release History
 
+### 0.11.1 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+#### Documentation
+
+* Document root_followup_intent_name and followup_intent_info fields of Intent as read-only
+
 ### 0.11.0 / 2021-08-05
 
 #### Features
