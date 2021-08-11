@@ -21,7 +21,7 @@ module Google
   module Iam
     module Credentials
       module V1
-        VERSION = "0.3.2"
+        VERSION = "0.3.3"
       end
     end
   end
