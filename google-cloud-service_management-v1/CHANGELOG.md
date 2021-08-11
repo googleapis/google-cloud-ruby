@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.4 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
 ### 0.3.3 / 2021-07-12
 
 #### Documentation
