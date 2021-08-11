@@ -4,6 +4,12 @@
 
 * Clarify Finding#event_time description
 
+### 0.7.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
 ### 0.7.2 / 2021-07-12
 
 #### Documentation
