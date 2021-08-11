@@ -12,25 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START bigquery_dependencies]
-source "https://rubygems.org"
+require_relative "../insert_geojson"
+require_relative "helper"
 
-# [END bigquery_dependencies]
+describe "GEOGRAPHY" do
+  before do
+    @dataset = create_temp_dataset
+    @table = @dataset.create_table "test_geojson_table" do |schema|
+      schema.geography "geo"
+    end
+  end
 
-if ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
-  gem "google-cloud-bigquery", path: "../../../google-cloud-bigquery"
-else
-  # [START bigquery_dependencies]
-  gem "google-cloud-bigquery"
-  # [END bigquery_dependencies]
-end
-gem "rgeo"
-gem "rgeo-geojson"
+  it "inserts a GeoJSON row into a GEOGRAPHY column in a table" do
+    output = capture_io { insert_geojson @dataset.dataset_id, @table.table_id }
 
-group :test do
-  gem "google-cloud-storage"
-  gem "google-style", "~> 1.25.1"
-  gem "minitest", "~> 5.14"
-  gem "minitest-focus", "~> 1.1"
-  gem "rake"
+    assert_equal "Inserted GeoJSON row successfully\n", output.first
+  end
 end
