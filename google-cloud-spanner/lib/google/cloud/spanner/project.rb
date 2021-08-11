@@ -553,6 +553,77 @@ module Google
         end
 
         ##
+        # Creates a Cloud Spanner Instance Admin client. It can be used to
+        # manage a Cloud Spanner instance.
+        #
+        # @return [Admin::Instance::V1::InstanceAdmin::Client] The newly
+        # created client.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   instance_admin_client = spanner.instance_client
+        #
+        #   project_path = \
+        #   instance_admin_client.project_path project: "my-project"
+        #   config_path = \
+        #     instance_admin_client.instance_config_path project: "my-project",
+        #   instance_config: "regional-us-central1"
+        #   job = \
+        #     instance_admin_client.create_instance parent: project_path,
+        #       instance_id: "my-instance",
+        #       instance: Google::Cloud::Spanner::Admin::Instance::V1::Instance.new({
+        #         display_name: "My Instance",
+        #         config: config_path,
+        #         node_count: 5,
+        #         labels: { "production": :env }
+        #        })
+        #   job.wait_until_done!
+        #   instance = job.results
+        #
+        def instance_client
+          Admin::Instance::V1::InstanceAdmin::Client.new do |config|
+            config.credentials = service.channel
+            config.timeout = service.timeout if service.timeout
+            config.endpoint = service.host if service.host
+            config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
+          end
+        end
+
+        ##
+        # Creates a Cloud Spanner Database Admin client. It can be used to
+        # manage a Cloud Spanner database.
+        #
+        # @return [Admin::Database::V1::DatabaseAdmin::Client] The newly
+        # created client.
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db_admin_client = spanner.database_client
+        #
+        #   instance_path = \
+        #     db_admin_client.instance_path project: "my-project",
+        #                                   instance: "my-instance"
+        #   job = db_admin_client.create_database parent: instance_path,
+        #     create_statement: "CREATE DATABASE my-database",
+        #   job.wait_until_done!
+        #   database = job.results
+        #
+        def database_client
+          Admin::Database::V1::DatabaseAdmin::Client.new do |config|
+            config.credentials = service.channel
+            config.timeout = service.timeout if service.timeout
+            config.endpoint = service.host if service.host
+            config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
+          end
+        end
+
+        ##
         # Creates a Cloud Spanner batch client. A batch client is used to read
         # data across multiple machines or processes.
         #
