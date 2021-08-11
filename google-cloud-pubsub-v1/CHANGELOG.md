@@ -1,5 +1,15 @@
 # Release History
 
+### 0.6.0 / 2021-08-11
+
+#### Features
+
+* Support setting message retention duration on a topic
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
 ### 0.5.2 / 2021-07-12
 
 #### Documentation
