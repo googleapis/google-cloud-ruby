@@ -68,7 +68,7 @@ db_admin_client = \
   Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
 
 instance_path = \
-  db_admin_client.instance_path project: "my-project", instance: "my-database"
+  db_admin_client.instance_path project: "my-project", instance: "my-instance"
 
 job = db_admin_client.create_database parent: instance_path,
   create_statement: "CREATE DATABASE my-database",
@@ -93,9 +93,9 @@ require "google/cloud/spanner"
 db_admin_client = \
   Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
 
-db_path = db_admin_client.database_path project: project_id,
-                                        instance: instance_id,
-                                        database: database_id
+db_path = db_admin_client.database_path project: "my-project",
+                                        instance: "my-instance",
+                                        database: "my-database"
 add_users_table_sql = %q(
   CREATE TABLE users (
     id INT64 NOT NULL,
@@ -106,7 +106,7 @@ add_users_table_sql = %q(
 )
 
 job = db_admin_client.update_database_ddl database: db_path,
-  statements: [add_users_table_sql]
+                                          statements: [add_users_table_sql]
 
 job.wait_until_done!
 database = job.results
@@ -326,7 +326,7 @@ instance_admin_client = \
 
 instance_path = \
   instance_admin_client.instance_path project: "my-project",
-  instance: "my-instance"
+                                      instance: "my-instance"
 
 instance_admin_client.delete_instance name: instance_path
 ```
