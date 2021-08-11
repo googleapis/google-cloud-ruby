@@ -21,7 +21,7 @@ module Google
   module Cloud
     module ResourceSettings
       module V1
-        VERSION = "0.1.2"
+        VERSION = "0.1.3"
       end
     end
   end
