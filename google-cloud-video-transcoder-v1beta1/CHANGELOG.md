@@ -1,5 +1,19 @@
 # Release History
 
+### 0.3.0 / 2021-08-11
+
+#### Features
+
+* Additional features involving job TTL, sprite quality, and video preprocessing
+  * Support for Job TTL
+  * Supoprt for SpriteSheet quality
+  * Support for cropping and padding during video preprocessing
+  * Various updates to reference documentation
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
 ### 0.2.2 / 2021-07-12
 
 #### Documentation
