@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Logging
       module V2
-        VERSION = "0.5.3"
+        VERSION = "0.5.4"
       end
     end
   end
