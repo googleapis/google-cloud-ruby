@@ -206,8 +206,7 @@ def analyze_iam_policy_longrunning_gcs scope: "", full_resource_name: "", uri: "
   )
 
   operation.wait_until_done!
-  metadata = operation.metadata
-  puts "Wrote analysis results to: #{metadata.output_config.gcs_destination.uri}"
+  puts "Wrote analysis results to: #{uri}"
   # Do things with the result
   # [END asset_quickstart_analyze_iam_policy_lognrunning_gcs]
 end
@@ -245,8 +244,7 @@ def analyze_iam_policy_longrunning_bigquery scope: "", full_resource_name: "", d
   )
 
   operation.wait_until_done!
-  metadata = operation.metadata
-  puts "Wrote analysis results to: #{metadata.output_config.bigquery_destination.dataset}"
+  puts "Wrote analysis results to: #{dataset}"
   # Do things with the result
   # [END analyze_iam_policy_longrunning_bigquery]
 end

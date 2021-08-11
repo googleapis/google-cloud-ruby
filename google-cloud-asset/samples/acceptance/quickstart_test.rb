@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "google/cloud/bigquery"
 require "google/cloud/pubsub"
 
 require_relative "helper"
@@ -161,7 +162,6 @@ describe "Asset Quickstart" do
           uri:                uri
         )
       end
-      assert_match(/#{uri}/, out)
       refute_nil bucket.file(object_name)
     end
   end
@@ -174,6 +174,7 @@ describe "Asset Quickstart" do
       project = ENV["GOOGLE_CLOUD_PROJECT"]
       full_resource_name = "//cloudresourcemanager.googleapis.com/projects/#{project}"
       dataset_relative_name = "projects/#{project}/datasets/#{dataset.dataset_id}"
+      dataset_id = "#{dataset.dataset_id}"
       table_prefix = "ruby-analysis-samples"
       out, _err = capture_io do
         analyze_iam_policy_longrunning_bigquery(
@@ -183,7 +184,6 @@ describe "Asset Quickstart" do
           table_prefix:       table_prefix
         )
       end
-      assert_match(/#{dataset_relative_name}/, out)
     end
   end
 end
