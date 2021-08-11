@@ -41,13 +41,12 @@ module Google
               # See {::Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
-              # ## Example
+              # @example
               #
-              # To modify the configuration for all NetworkEndpointGroups clients:
-              #
-              #     ::Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::Client.configure do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Modify the configuration for all NetworkEndpointGroups clients
+              #   ::Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::Client.configure do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the Client client.
               # @yieldparam config [Client::Configuration]
@@ -64,6 +63,33 @@ module Google
                                     namespace.pop
                                   end
                   default_config = Client::Configuration.new parent_config
+
+                  default_config.rpcs.aggregated_list.timeout = 600.0
+                  default_config.rpcs.aggregated_list.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.attach_network_endpoints.timeout = 600.0
+
+                  default_config.rpcs.delete.timeout = 600.0
+
+                  default_config.rpcs.detach_network_endpoints.timeout = 600.0
+
+                  default_config.rpcs.get.timeout = 600.0
+                  default_config.rpcs.get.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.insert.timeout = 600.0
+
+                  default_config.rpcs.list.timeout = 600.0
+                  default_config.rpcs.list.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.list_network_endpoints.timeout = 600.0
+
+                  default_config.rpcs.test_iam_permissions.timeout = 600.0
 
                   default_config
                 end
@@ -94,19 +120,15 @@ module Google
               ##
               # Create a new NetworkEndpointGroups REST client object.
               #
-              # ## Examples
+              # @example
               #
-              # To create a new NetworkEndpointGroups REST client with the default
-              # configuration:
+              #   # Create a client using the default configuration
+              #   client = ::Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::Client.new
               #
-              #     client = ::Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::Client.new
-              #
-              # To create a new NetworkEndpointGroups REST client with a custom
-              # configuration:
-              #
-              #     client = ::Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::Client.new do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Create a client using a custom configuration
+              #   client = ::Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::Client.new do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the NetworkEndpointGroups client.
               # @yieldparam config [Client::Configuration]
@@ -190,7 +212,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.aggregated_list.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -198,8 +220,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.aggregated_list.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @network_endpoint_groups_stub.aggregated_list request, options do |result, response|
                   result = ::Gapic::Rest::PagedEnumerable.new @network_endpoint_groups_stub, :aggregated_list, "items", request, result, options
@@ -261,7 +286,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.attach_network_endpoints.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -269,8 +294,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.attach_network_endpoints.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @network_endpoint_groups_stub.attach_network_endpoints request, options do |result, response|
                   yield result, response if block_given?
@@ -329,7 +357,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.delete.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -337,8 +365,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.delete.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @network_endpoint_groups_stub.delete request, options do |result, response|
                   yield result, response if block_given?
@@ -399,7 +430,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.detach_network_endpoints.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -407,8 +438,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.detach_network_endpoints.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @network_endpoint_groups_stub.detach_network_endpoints request, options do |result, response|
                   yield result, response if block_given?
@@ -461,7 +495,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.get.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -469,8 +503,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.get.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @network_endpoint_groups_stub.get request, options do |result, response|
                   yield result, response if block_given?
@@ -529,7 +566,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.insert.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -537,8 +574,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.insert.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @network_endpoint_groups_stub.insert request, options do |result, response|
                   yield result, response if block_given?
@@ -609,7 +649,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.list.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -617,8 +657,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.list.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @network_endpoint_groups_stub.list request, options do |result, response|
                   result = ::Gapic::Rest::PagedEnumerable.new @network_endpoint_groups_stub, :list, "items", request, result, options
@@ -694,7 +737,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.list_network_endpoints.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -702,8 +745,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.list_network_endpoints.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @network_endpoint_groups_stub.list_network_endpoints request, options do |result, response|
                   result = ::Gapic::Rest::PagedEnumerable.new @network_endpoint_groups_stub, :list_network_endpoints, "items", request, result, options
@@ -759,7 +805,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.test_iam_permissions.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -767,8 +813,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @network_endpoint_groups_stub.test_iam_permissions request, options do |result, response|
                   yield result, response if block_given?
@@ -828,6 +877,9 @@ module Google
               # @!attribute [rw] timeout
               #   The call timeout in seconds.
               #   @return [::Numeric]
+              # @!attribute [rw] metadata
+              #   Additional REST headers to be sent with the call.
+              #   @return [::Hash{::Symbol=>::String}]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -841,12 +893,109 @@ module Google
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
                 config_attr :timeout,       nil, ::Numeric, nil
+                config_attr :metadata,      nil, ::Hash, nil
 
                 # @private
                 def initialize parent_config = nil
                   @parent_config = parent_config unless parent_config.nil?
 
                   yield self if block_given?
+                end
+
+                ##
+                # Configurations for individual RPCs
+                # @return [Rpcs]
+                #
+                def rpcs
+                  @rpcs ||= begin
+                    parent_rpcs = nil
+                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
+                    Rpcs.new parent_rpcs
+                  end
+                end
+
+                ##
+                # Configuration RPC class for the NetworkEndpointGroups API.
+                #
+                # Includes fields providing the configuration for each RPC in this service.
+                # Each configuration object is of type `Gapic::Config::Method` and includes
+                # the following configuration fields:
+                #
+                #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
+                #
+                # there is one other field (`retry_policy`) that can be set
+                # but is currently not supported for REST Gapic libraries.
+                #
+                class Rpcs
+                  ##
+                  # RPC-specific configuration for `aggregated_list`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :aggregated_list
+                  ##
+                  # RPC-specific configuration for `attach_network_endpoints`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :attach_network_endpoints
+                  ##
+                  # RPC-specific configuration for `delete`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete
+                  ##
+                  # RPC-specific configuration for `detach_network_endpoints`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :detach_network_endpoints
+                  ##
+                  # RPC-specific configuration for `get`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get
+                  ##
+                  # RPC-specific configuration for `insert`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :insert
+                  ##
+                  # RPC-specific configuration for `list`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list
+                  ##
+                  # RPC-specific configuration for `list_network_endpoints`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_network_endpoints
+                  ##
+                  # RPC-specific configuration for `test_iam_permissions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :test_iam_permissions
+
+                  # @private
+                  def initialize parent_rpcs = nil
+                    aggregated_list_config = parent_rpcs.aggregated_list if parent_rpcs.respond_to? :aggregated_list
+                    @aggregated_list = ::Gapic::Config::Method.new aggregated_list_config
+                    attach_network_endpoints_config = parent_rpcs.attach_network_endpoints if parent_rpcs.respond_to? :attach_network_endpoints
+                    @attach_network_endpoints = ::Gapic::Config::Method.new attach_network_endpoints_config
+                    delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete
+                    @delete = ::Gapic::Config::Method.new delete_config
+                    detach_network_endpoints_config = parent_rpcs.detach_network_endpoints if parent_rpcs.respond_to? :detach_network_endpoints
+                    @detach_network_endpoints = ::Gapic::Config::Method.new detach_network_endpoints_config
+                    get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
+                    @get = ::Gapic::Config::Method.new get_config
+                    insert_config = parent_rpcs.insert if parent_rpcs.respond_to? :insert
+                    @insert = ::Gapic::Config::Method.new insert_config
+                    list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
+                    @list = ::Gapic::Config::Method.new list_config
+                    list_network_endpoints_config = parent_rpcs.list_network_endpoints if parent_rpcs.respond_to? :list_network_endpoints
+                    @list_network_endpoints = ::Gapic::Config::Method.new list_network_endpoints_config
+                    test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
+                    @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+
+                    yield self if block_given?
+                  end
                 end
               end
             end

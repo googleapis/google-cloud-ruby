@@ -41,13 +41,12 @@ module Google
               # See {::Google::Cloud::Compute::V1::RegionDisks::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
-              # ## Example
+              # @example
               #
-              # To modify the configuration for all RegionDisks clients:
-              #
-              #     ::Google::Cloud::Compute::V1::RegionDisks::Rest::Client.configure do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Modify the configuration for all RegionDisks clients
+              #   ::Google::Cloud::Compute::V1::RegionDisks::Rest::Client.configure do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the Client client.
               # @yieldparam config [Client::Configuration]
@@ -64,6 +63,39 @@ module Google
                                     namespace.pop
                                   end
                   default_config = Client::Configuration.new parent_config
+
+                  default_config.rpcs.add_resource_policies.timeout = 600.0
+
+                  default_config.rpcs.create_snapshot.timeout = 600.0
+
+                  default_config.rpcs.delete.timeout = 600.0
+
+                  default_config.rpcs.get.timeout = 600.0
+                  default_config.rpcs.get.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.get_iam_policy.timeout = 600.0
+                  default_config.rpcs.get_iam_policy.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.insert.timeout = 600.0
+
+                  default_config.rpcs.list.timeout = 600.0
+                  default_config.rpcs.list.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.remove_resource_policies.timeout = 600.0
+
+                  default_config.rpcs.resize.timeout = 600.0
+
+                  default_config.rpcs.set_iam_policy.timeout = 600.0
+
+                  default_config.rpcs.set_labels.timeout = 600.0
+
+                  default_config.rpcs.test_iam_permissions.timeout = 600.0
 
                   default_config
                 end
@@ -94,19 +126,15 @@ module Google
               ##
               # Create a new RegionDisks REST client object.
               #
-              # ## Examples
+              # @example
               #
-              # To create a new RegionDisks REST client with the default
-              # configuration:
+              #   # Create a client using the default configuration
+              #   client = ::Google::Cloud::Compute::V1::RegionDisks::Rest::Client.new
               #
-              #     client = ::Google::Cloud::Compute::V1::RegionDisks::Rest::Client.new
-              #
-              # To create a new RegionDisks REST client with a custom
-              # configuration:
-              #
-              #     client = ::Google::Cloud::Compute::V1::RegionDisks::Rest::Client.new do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Create a client using a custom configuration
+              #   client = ::Google::Cloud::Compute::V1::RegionDisks::Rest::Client.new do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the RegionDisks client.
               # @yieldparam config [Client::Configuration]
@@ -180,7 +208,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.add_resource_policies.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -188,8 +216,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.add_resource_policies.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @region_disks_stub.add_resource_policies request, options do |result, response|
                   yield result, response if block_given?
@@ -250,7 +281,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.create_snapshot.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -258,8 +289,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.create_snapshot.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @region_disks_stub.create_snapshot request, options do |result, response|
                   yield result, response if block_given?
@@ -318,7 +352,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.delete.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -326,8 +360,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.delete.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @region_disks_stub.delete request, options do |result, response|
                   yield result, response if block_given?
@@ -380,7 +417,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.get.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -388,8 +425,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.get.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @region_disks_stub.get request, options do |result, response|
                   yield result, response if block_given?
@@ -444,7 +484,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.get_iam_policy.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -452,8 +492,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @region_disks_stub.get_iam_policy request, options do |result, response|
                   yield result, response if block_given?
@@ -514,7 +557,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.insert.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -522,8 +565,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.insert.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @region_disks_stub.insert request, options do |result, response|
                   yield result, response if block_given?
@@ -594,7 +640,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.list.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -602,8 +648,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.list.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @region_disks_stub.list request, options do |result, response|
                   result = ::Gapic::Rest::PagedEnumerable.new @region_disks_stub, :list, "items", request, result, options
@@ -665,7 +714,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.remove_resource_policies.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -673,8 +722,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.remove_resource_policies.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @region_disks_stub.remove_resource_policies request, options do |result, response|
                   yield result, response if block_given?
@@ -735,7 +787,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.resize.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -743,8 +795,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.resize.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @region_disks_stub.resize request, options do |result, response|
                   yield result, response if block_given?
@@ -799,7 +854,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.set_iam_policy.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -807,8 +862,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @region_disks_stub.set_iam_policy request, options do |result, response|
                   yield result, response if block_given?
@@ -869,7 +927,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.set_labels.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -877,8 +935,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.set_labels.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @region_disks_stub.set_labels request, options do |result, response|
                   yield result, response if block_given?
@@ -933,7 +994,7 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.test_iam_permissions.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -941,8 +1002,11 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.timeout,
+                options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
                                        metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
 
                 @region_disks_stub.test_iam_permissions request, options do |result, response|
                   yield result, response if block_given?
@@ -1002,6 +1066,9 @@ module Google
               # @!attribute [rw] timeout
               #   The call timeout in seconds.
               #   @return [::Numeric]
+              # @!attribute [rw] metadata
+              #   Additional REST headers to be sent with the call.
+              #   @return [::Hash{::Symbol=>::String}]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -1015,12 +1082,130 @@ module Google
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
                 config_attr :timeout,       nil, ::Numeric, nil
+                config_attr :metadata,      nil, ::Hash, nil
 
                 # @private
                 def initialize parent_config = nil
                   @parent_config = parent_config unless parent_config.nil?
 
                   yield self if block_given?
+                end
+
+                ##
+                # Configurations for individual RPCs
+                # @return [Rpcs]
+                #
+                def rpcs
+                  @rpcs ||= begin
+                    parent_rpcs = nil
+                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
+                    Rpcs.new parent_rpcs
+                  end
+                end
+
+                ##
+                # Configuration RPC class for the RegionDisks API.
+                #
+                # Includes fields providing the configuration for each RPC in this service.
+                # Each configuration object is of type `Gapic::Config::Method` and includes
+                # the following configuration fields:
+                #
+                #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
+                #
+                # there is one other field (`retry_policy`) that can be set
+                # but is currently not supported for REST Gapic libraries.
+                #
+                class Rpcs
+                  ##
+                  # RPC-specific configuration for `add_resource_policies`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :add_resource_policies
+                  ##
+                  # RPC-specific configuration for `create_snapshot`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_snapshot
+                  ##
+                  # RPC-specific configuration for `delete`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete
+                  ##
+                  # RPC-specific configuration for `get`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get
+                  ##
+                  # RPC-specific configuration for `get_iam_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_iam_policy
+                  ##
+                  # RPC-specific configuration for `insert`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :insert
+                  ##
+                  # RPC-specific configuration for `list`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list
+                  ##
+                  # RPC-specific configuration for `remove_resource_policies`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :remove_resource_policies
+                  ##
+                  # RPC-specific configuration for `resize`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :resize
+                  ##
+                  # RPC-specific configuration for `set_iam_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :set_iam_policy
+                  ##
+                  # RPC-specific configuration for `set_labels`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :set_labels
+                  ##
+                  # RPC-specific configuration for `test_iam_permissions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :test_iam_permissions
+
+                  # @private
+                  def initialize parent_rpcs = nil
+                    add_resource_policies_config = parent_rpcs.add_resource_policies if parent_rpcs.respond_to? :add_resource_policies
+                    @add_resource_policies = ::Gapic::Config::Method.new add_resource_policies_config
+                    create_snapshot_config = parent_rpcs.create_snapshot if parent_rpcs.respond_to? :create_snapshot
+                    @create_snapshot = ::Gapic::Config::Method.new create_snapshot_config
+                    delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete
+                    @delete = ::Gapic::Config::Method.new delete_config
+                    get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
+                    @get = ::Gapic::Config::Method.new get_config
+                    get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
+                    @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
+                    insert_config = parent_rpcs.insert if parent_rpcs.respond_to? :insert
+                    @insert = ::Gapic::Config::Method.new insert_config
+                    list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
+                    @list = ::Gapic::Config::Method.new list_config
+                    remove_resource_policies_config = parent_rpcs.remove_resource_policies if parent_rpcs.respond_to? :remove_resource_policies
+                    @remove_resource_policies = ::Gapic::Config::Method.new remove_resource_policies_config
+                    resize_config = parent_rpcs.resize if parent_rpcs.respond_to? :resize
+                    @resize = ::Gapic::Config::Method.new resize_config
+                    set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
+                    @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
+                    set_labels_config = parent_rpcs.set_labels if parent_rpcs.respond_to? :set_labels
+                    @set_labels = ::Gapic::Config::Method.new set_labels_config
+                    test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
+                    @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+
+                    yield self if block_given?
+                  end
                 end
               end
             end
