@@ -51,6 +51,7 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
   end
 
   it "knows its default attributes" do
+    _(job_defaults.transaction_id).must_be :nil?
     _(job_defaults.delimiter).must_equal ","
     _(job_defaults.skip_leading_rows).must_equal 0
     _(job_defaults).must_be :utf8?

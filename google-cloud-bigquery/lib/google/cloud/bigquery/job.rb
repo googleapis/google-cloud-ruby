@@ -227,6 +227,15 @@ module Google
         end
 
         ##
+        # The ID of a multi-statement transaction.
+        #
+        # @return [String, nil] The transaction ID, or `nil` if not associated with a transaction.
+        #
+        def transaction_id
+          @gapi.statistics.transaction_info&.transaction_id
+        end
+
+        ##
         # The statistics including stack frames for a child job of a script.
         #
         # @return [Google::Cloud::Bigquery::Job::ScriptStatistics, nil] The script statistics, or `nil` if the job is

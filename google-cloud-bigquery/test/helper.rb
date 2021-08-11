@@ -581,7 +581,7 @@ class MockBigquery < Minitest::Spec
     Google::Apis::BigqueryV2::Routine.from_json json
   end
 
-  def random_job_hash id = "job_9876543210", state = "running", location: "US"
+  def random_job_hash id = "job_9876543210", state = "running", location: "US", transaction_id: nil
     hash = {
       "kind" => "bigquery#job",
       "etag" => "etag",
@@ -627,6 +627,7 @@ class MockBigquery < Minitest::Spec
       "user_email" => "user@example.com"
     }
     hash["jobReference"]["location"] = location if location
+    hash["statistics"]["transactionInfo"] = { "transactionId": transaction_id } if transaction_id
     hash
   end
 

@@ -124,6 +124,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     job = bigquery.query_job publicdata_query, job_id: job_id
     _(job).must_be_kind_of Google::Cloud::Bigquery::Job
     _(job.job_id).must_equal job_id
+    _(job.transaction_id).must_be :nil?
     _(job.user_email).wont_be_nil
 
     _(job.range_partitioning?).must_equal false

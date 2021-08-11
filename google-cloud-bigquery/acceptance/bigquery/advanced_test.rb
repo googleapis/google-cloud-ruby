@@ -118,10 +118,11 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
     assert_equal -Float::INFINITY, row[:negative_infinity]
   end
 
-  it "executes SQL with multiple statements and creates child jobs with script_statistics" do
+  it "executes SQL with multiple statements in a transaction and creates child jobs with script_statistics and transaction_info" do
     multi_statement_sql = <<~SQL
       -- Declare a variable to hold names as an array.
       DECLARE top_names ARRAY<STRING>;
+      BEGIN TRANSACTION;
       -- Build an array of the top 100 names from the year 2017.
       SET top_names = (
       SELECT ARRAY_AGG(name ORDER BY number DESC LIMIT 100)
@@ -136,6 +137,7 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
       SELECT word
       FROM `bigquery-public-data.samples.shakespeare`
       );
+      COMMIT TRANSACTION;
     SQL
 
     job = bigquery.query_job multi_statement_sql
@@ -143,39 +145,71 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
     _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
     job.wait_until_done!
     _(job).wont_be :failed?
-    _(job.num_child_jobs).must_equal 2
+    _(job.num_child_jobs).must_equal 4
     _(job.parent_job_id).must_be :nil?
 
     _(job.script_statistics).must_be :nil?
 
     child_jobs = bigquery.jobs parent_job: job
-    _(child_jobs.count).must_equal 2
+    _(child_jobs.count).must_equal 4
 
     _(child_jobs[0].parent_job_id).must_equal job.job_id
+    transaction_id = child_jobs[0].transaction_id
+    _(transaction_id).must_be_instance_of String
+    _(transaction_id).wont_be :empty?
     _(child_jobs[0].script_statistics).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStatistics
     _(child_jobs[0].script_statistics.evaluation_kind).must_equal "STATEMENT"
     _(child_jobs[0].script_statistics.stack_frames).wont_be :nil?
     _(child_jobs[0].script_statistics.stack_frames).must_be_kind_of Array
     _(child_jobs[0].script_statistics.stack_frames.count).must_equal 1
     _(child_jobs[0].script_statistics.stack_frames[0]).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStackFrame
-    _(child_jobs[0].script_statistics.stack_frames[0].start_line).must_equal 10
+    _(child_jobs[0].script_statistics.stack_frames[0].start_line).must_equal 18
     _(child_jobs[0].script_statistics.stack_frames[0].start_column).must_equal 1
-    _(child_jobs[0].script_statistics.stack_frames[0].end_line).must_equal 16
-    _(child_jobs[0].script_statistics.stack_frames[0].end_column).must_equal 2
-    _(child_jobs[0].script_statistics.stack_frames[0].text.length).must_be :>, 0
+    _(child_jobs[0].script_statistics.stack_frames[0].end_line).must_equal 18
+    _(child_jobs[0].script_statistics.stack_frames[0].end_column).must_equal 19
+    _(child_jobs[0].script_statistics.stack_frames[0].text).wont_be :empty?
 
     _(child_jobs[1].parent_job_id).must_equal job.job_id
+    _(child_jobs[1].transaction_id).must_equal transaction_id
     _(child_jobs[1].script_statistics).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStatistics
-    _(child_jobs[1].script_statistics.evaluation_kind).must_equal "EXPRESSION"
+    _(child_jobs[1].script_statistics.evaluation_kind).must_equal "STATEMENT"
     _(child_jobs[1].script_statistics.stack_frames).wont_be :nil?
     _(child_jobs[1].script_statistics.stack_frames).must_be_kind_of Array
     _(child_jobs[1].script_statistics.stack_frames.count).must_equal 1
     _(child_jobs[1].script_statistics.stack_frames[0]).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStackFrame
-    _(child_jobs[1].script_statistics.stack_frames[0].start_line).must_equal 4
-    _(child_jobs[1].script_statistics.stack_frames[0].start_column).must_equal 17
-    _(child_jobs[1].script_statistics.stack_frames[0].end_line).must_equal 8
+    _(child_jobs[1].script_statistics.stack_frames[0].start_line).must_equal 11
+    _(child_jobs[1].script_statistics.stack_frames[0].start_column).must_equal 1
+    _(child_jobs[1].script_statistics.stack_frames[0].end_line).must_equal 17
     _(child_jobs[1].script_statistics.stack_frames[0].end_column).must_equal 2
-    _(child_jobs[1].script_statistics.stack_frames[0].text.length).must_be :>, 0
+    _(child_jobs[1].script_statistics.stack_frames[0].text).wont_be :empty?
+
+    _(child_jobs[2].parent_job_id).must_equal job.job_id
+    _(child_jobs[2].transaction_id).must_equal transaction_id
+    _(child_jobs[2].script_statistics).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStatistics
+    _(child_jobs[2].script_statistics.evaluation_kind).must_equal "EXPRESSION"
+    _(child_jobs[2].script_statistics.stack_frames).wont_be :nil?
+    _(child_jobs[2].script_statistics.stack_frames).must_be_kind_of Array
+    _(child_jobs[2].script_statistics.stack_frames.count).must_equal 1
+    _(child_jobs[2].script_statistics.stack_frames[0]).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStackFrame
+    _(child_jobs[2].script_statistics.stack_frames[0].start_line).must_equal 5
+    _(child_jobs[2].script_statistics.stack_frames[0].start_column).must_equal 17
+    _(child_jobs[2].script_statistics.stack_frames[0].end_line).must_equal 9
+    _(child_jobs[2].script_statistics.stack_frames[0].end_column).must_equal 2
+    _(child_jobs[2].script_statistics.stack_frames[0].text).wont_be :empty?
+
+    _(child_jobs[3].parent_job_id).must_equal job.job_id
+    _(child_jobs[3].transaction_id).must_equal transaction_id
+    _(child_jobs[3].script_statistics).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStatistics
+    _(child_jobs[3].script_statistics.evaluation_kind).must_equal "STATEMENT"
+    _(child_jobs[3].script_statistics.stack_frames).wont_be :nil?
+    _(child_jobs[3].script_statistics.stack_frames).must_be_kind_of Array
+    _(child_jobs[3].script_statistics.stack_frames.count).must_equal 1
+    _(child_jobs[3].script_statistics.stack_frames[0]).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStackFrame
+    _(child_jobs[3].script_statistics.stack_frames[0].start_line).must_equal 3
+    _(child_jobs[3].script_statistics.stack_frames[0].start_column).must_equal 1
+    _(child_jobs[3].script_statistics.stack_frames[0].end_line).must_equal 3
+    _(child_jobs[3].script_statistics.stack_frames[0].end_column).must_equal 18
+    _(child_jobs[3].script_statistics.stack_frames[0].text).wont_be :empty?
   end
 
   it "queries max scale numeric and bignumeric values" do
