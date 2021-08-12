@@ -1,5 +1,18 @@
 # Release History
 
+### 1.35.0 / 2021-08-12
+
+#### Features
+
+* Add GEOGRAPHY schema helpers
+  * Add LoadJob#geography
+  * Add Schema::Field#geography
+  * Add Table::Updater#geography
+* Add support for GEOGRAPHY type
+  * Add Schema#geography
+* Add support for multistatement transaction statistics in jobs
+  * Add Job#transaction_id
+
 ### 1.34.0 / 2021-07-20
 
 #### Features
