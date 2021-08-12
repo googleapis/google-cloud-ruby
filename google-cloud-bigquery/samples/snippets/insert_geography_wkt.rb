@@ -23,11 +23,11 @@ def insert_geography_wkt dataset_id = "your_dataset_id", table_id = "your_table_
 
   # Use the RGeo library to generate WKT of a line from LAX to
   # JFK airports. Alternatively, you may define WKT data directly.
-  factory = RGeo::Cartesian.factory
-  my_geography = factory.line_string([factory.point(-118.4085, 33.9416), factory.point(-73.7781, 40.6413)])
+  factory = RGeo::Geographic.spherical_factory
+  my_line = factory.line_string([factory.point(-118.4085, 33.9416), factory.point(-73.7781, 40.6413)])
   row_data = [
     # Convert data into a WKT string: "LINESTRING (-118.4085 33.9416, -73.7781 40.6413)"
-    { geo: my_geography.to_s }
+    { geo: my_line.as_text }
   ]
 
   # Table already exists and has a column named "geo" with data type GEOGRAPHY.

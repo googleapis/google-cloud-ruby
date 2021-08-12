@@ -25,11 +25,11 @@ def insert_geojson dataset_id = "your_dataset_id", table_id = "your_table_id"
   # Use the RGeo library to generate GeoJSON of a line from LAX to
   # JFK airports. Alternatively, you may define GeoJSON data directly, but it
   # must be converted to a string before loading it into BigQuery.
-  factory = RGeo::Cartesian.factory
-  my_geography = factory.line_string([factory.point(-118.4085, 33.9416), factory.point(-73.7781, 40.6413)])
+  factory = RGeo::Geographic.spherical_factory
+  my_line = factory.line_string([factory.point(-118.4085, 33.9416), factory.point(-73.7781, 40.6413)])
   row_data = [
     # Convert GeoJSON data into a string.
-    { geo: RGeo::GeoJSON.encode(my_geography).to_json }
+    { geo: RGeo::GeoJSON.encode(my_line).to_json }
   ]
 
   # Table already exists and has a column named "geo" with data type GEOGRAPHY.
