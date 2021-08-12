@@ -358,8 +358,10 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "duration",      type: "TIME", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "target_end",    type: "DATETIME", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "birthday",      type: "DATE", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "home",          type: "GEOGRAPHY", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REPEATED", name: "cities_lived",  type: "RECORD", description: nil, fields: [
           Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "place",           type: "STRING",  description: nil, fields: []),
+          Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "location",        type: "GEOGRAPHY",  description: nil, fields: []),
           Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "number_of_years", type: "INTEGER", description: nil, fields: [])])
         ]))
     return_table = create_table_gapi table_id, table_name, table_description
@@ -379,8 +381,10 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       schema.time "duration"
       schema.datetime "target_end"
       schema.date "birthday"
+      schema.geography "home"
       schema.record "cities_lived", mode: :repeated do |nested_schema|
         nested_schema.string "place"
+        nested_schema.geography "location"
         nested_schema.integer "number_of_years"
       end
     end
