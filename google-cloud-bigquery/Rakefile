@@ -197,14 +197,14 @@ end
 namespace :samples do
   task :latest do
     Dir.chdir "samples/simple_app" do
-      Bundler.with_clean_env do
+      Bundler.with_unbundled_env do
         ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
         sh "bundle update"
         sh "bundle exec rake test"
       end
     end
     Dir.chdir "samples/snippets" do
-      Bundler.with_clean_env do
+      Bundler.with_unbundled_env do
         ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
         sh "bundle update"
         sh "bundle exec rake test"
@@ -214,14 +214,14 @@ namespace :samples do
 
   task :master do
     Dir.chdir "samples/simple_app" do
-      Bundler.with_clean_env do
+      Bundler.with_unbundled_env do
         ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
         sh "bundle update"
         sh "bundle exec rake test"
       end
     end
     Dir.chdir "samples/snippets" do
-      Bundler.with_clean_env do
+      Bundler.with_unbundled_env do
         ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
         sh "bundle update"
         sh "bundle exec rake test"
