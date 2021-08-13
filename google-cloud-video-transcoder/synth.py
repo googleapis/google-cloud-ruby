@@ -23,13 +23,13 @@ logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICMicrogenerator()
 library = gapic.ruby_library(
-    "video/transcoder", "v1beta1",
+    "video/transcoder", "v1",
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-video-transcoder",
         "ruby-cloud-title": "Transcoder",
         "ruby-cloud-description": "The Transcoder API allows you to convert video files and package them for optimized delivery to web, mobile and connected TVs.",
         "ruby-cloud-env-prefix": "TRANSCODER",
-        "ruby-cloud-wrapper-of": "v1beta1:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.0;v1beta1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/transcoder/",
         "ruby-cloud-api-id": "transcoder.googleapis.com",
         "ruby-cloud-api-shortname": "transcoder",
