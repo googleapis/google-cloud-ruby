@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "5c6652bdb87d5684046fcfcc49639f27458eb307"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "5697663ab1bc1a65ba2f019375749ee280f4d50b"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "41521e288c8c2a4586dd46938bf574d0d36872e9",
-        "internalRef": "387960382"
+        "sha": "c47ff19bccfcd8a8eeb2929821dcc926d95339f1",
+        "internalRef": "390391198"
       }
     }
   ],
@@ -26,5 +26,47 @@
         "generator": "bazel"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "gapic_metadata.json",
+    "google-cloud-filestore-v1.gemspec",
+    "lib/google-cloud-filestore-v1.rb",
+    "lib/google/cloud/filestore/v1.rb",
+    "lib/google/cloud/filestore/v1/cloud_filestore_manager.rb",
+    "lib/google/cloud/filestore/v1/cloud_filestore_manager/client.rb",
+    "lib/google/cloud/filestore/v1/cloud_filestore_manager/credentials.rb",
+    "lib/google/cloud/filestore/v1/cloud_filestore_manager/operations.rb",
+    "lib/google/cloud/filestore/v1/cloud_filestore_manager/paths.rb",
+    "lib/google/cloud/filestore/v1/cloud_filestore_service_pb.rb",
+    "lib/google/cloud/filestore/v1/cloud_filestore_service_services_pb.rb",
+    "lib/google/cloud/filestore/v1/version.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/common/operation_metadata.rb",
+    "proto_docs/google/cloud/filestore/v1/cloud_filestore_service.rb",
+    "proto_docs/google/longrunning/operations.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/duration.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/protobuf/wrappers.rb",
+    "proto_docs/google/rpc/status.rb",
+    "test/google/cloud/filestore/v1/cloud_filestore_manager_operations_test.rb",
+    "test/google/cloud/filestore/v1/cloud_filestore_manager_paths_test.rb",
+    "test/google/cloud/filestore/v1/cloud_filestore_manager_test.rb",
+    "test/helper.rb"
   ]
 }
