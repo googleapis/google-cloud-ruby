@@ -39,6 +39,7 @@ describe "Cloud KMS samples" do
   let(:asymmetric_sign_rsa_key_id) { "#{prefix}-asymmetric_sign_rsa_key" }
   let(:symmetric_key_id) { "#{prefix}-symmetric_key" }
   let(:hsm_key_id) { "#{prefix}-hsm_key" }
+  let(:mac_key_id) { "#{prefix}-mac_key" }
   let(:asymmetric_decrypt_key_id) { "#{prefix}-asymmetric_decrypt_key" }
 
   let(:rotation_period_seconds) { 60 * 60 * 24 * 30 }
@@ -110,6 +111,23 @@ describe "Cloud KMS samples" do
       assert_equal "cc1234", key.labels["cost_center"]
     end
     assert_match(/Created labeled key/, out.first)
+  end
+
+  it "create_key_mac" do
+    out = capture_io do
+      key = instance.create_key_mac(
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        id:          SecureRandom.uuid
+      )
+
+      assert key
+      assert key.version_template
+      assert_equal :MAC, key.purpose
+      assert_equal :HMAC_SHA256, key.version_template.algorithm
+    end
+    assert_match(/Created mac key/, out.first)
   end
 
   it "create_key_ring" do
@@ -309,6 +327,25 @@ describe "Cloud KMS samples" do
     assert_equal plaintext, decrypt_response.plaintext
   end
 
+  it "generate_random_bytes" do
+    random_bytes = nil
+
+    out = capture_io do
+      response = instance.generate_random_bytes(
+        project_id:  project_id,
+        location_id: location_id,
+        num_bytes:   256
+      )
+
+      assert response
+      assert response.data
+      random_bytes = response.data
+    end
+    assert_match(/Random bytes/, out.first)
+    assert_equal 256, random_bytes.length
+  end
+
+
   it "get_key_labels" do
     out = capture_io do
       key = instance.get_key_labels(
@@ -440,6 +477,24 @@ describe "Cloud KMS samples" do
       assert signature
       # NOTE: we can't verify the signature because we can't customize the
       # padding.
+    end
+    assert_match(/Signature/, out.first)
+  end
+
+  it "sign_mac" do
+    data = "my data"
+
+    out = capture_io do
+      signature = instance.sign_mac(
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      mac_key_id,
+        version_id:  "1",
+        data:        data
+      )
+
+      assert signature
     end
     assert_match(/Signature/, out.first)
   end
@@ -580,5 +635,30 @@ describe "Cloud KMS samples" do
       end
       assert_match(/Verified/, out.first)
     end
+  end
+
+  it "verify_mac" do
+    data = "my data"
+    key_version_name = client.crypto_key_version_path project:            project_id,
+                                                      location:           location_id,
+                                                      key_ring:           key_ring_id,
+                                                      crypto_key:         mac_key_id,
+                                                      crypto_key_version: "1"
+    sign_response = client.mac_sign name: key_version_name, data: data
+
+    out = capture_io do
+      verified = instance.verify_mac(
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      mac_key_id,
+        version_id:  "1",
+        data:        data,
+        signature:   sign_response.mac
+      )
+
+      assert verified
+    end
+    assert_match(/Verified: true/, out.first)
   end
 end

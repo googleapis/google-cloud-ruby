@@ -37,6 +37,11 @@ class Snippets
       purpose:          :ASYMMETRIC_DECRYPT,
       version_template: {
         algorithm: :RSA_DECRYPT_OAEP_2048_SHA256
+      },
+
+      # Optional: customize how long key versions should be kept before destroying.
+      destroy_scheduled_duration: {
+        seconds: 24 * 60 * 60
       }
     }
 
@@ -70,6 +75,11 @@ class Snippets
       purpose:          :ASYMMETRIC_SIGN,
       version_template: {
         algorithm: :RSA_SIGN_PKCS1_2048_SHA256
+      },
+
+      # Optional: customize how long key versions should be kept before destroying.
+      destroy_scheduled_duration: {
+        seconds: 24 * 60 * 60
       }
     }
 
@@ -104,6 +114,11 @@ class Snippets
       version_template: {
         algorithm:        :GOOGLE_SYMMETRIC_ENCRYPTION,
         protection_level: :HSM
+      },
+
+      # Optional: customize how long key versions should be kept before destroying.
+      destroy_scheduled_duration: {
+        seconds: 24 * 60 * 60
       }
     }
 
@@ -148,6 +163,39 @@ class Snippets
     created_key = client.create_crypto_key parent: key_ring_name, crypto_key_id: id, crypto_key: key
     puts "Created labeled key: #{created_key.name}"
     # [END kms_create_key_labels]
+
+    created_key
+  end
+
+  def create_key_mac project_id:, location_id:, key_ring_id:, id:
+    # [START kms_create_key_mac]
+    # TODO(developer): uncomment these values before running the sample.
+    # project_id  = "my-project"
+    # location_id = "us-east1"
+    # key_ring_id = "my-key-ring"
+    # id          = "my-mac-key"
+
+    # Require the library.
+    require "google/cloud/kms"
+
+    # Create the client.
+    client = Google::Cloud::Kms.key_management_service
+
+    # Build the parent key ring name.
+    key_ring_name = client.key_ring_path project: project_id, location: location_id, key_ring: key_ring_id
+
+    # Build the key.
+    key = {
+      purpose:          :MAC,
+      version_template: {
+        algorithm: :HMAC_SHA256
+      }
+    }
+
+    # Call the API.
+    created_key = client.create_crypto_key parent: key_ring_name, crypto_key_id: id, crypto_key: key
+    puts "Created mac key: #{created_key.name}"
+    # [END kms_create_key_mac]
 
     created_key
   end
@@ -497,6 +545,36 @@ class Snippets
     response
   end
 
+  def generate_random_bytes project_id:, location_id:, num_bytes:
+    # [START kms_generate_random_bytes]
+    # TODO(developer): uncomment these values before running the sample.
+    # project_id  = "my-project"
+    # location_id = "us-east1"
+    # num_bytes = 256
+
+    # Require the library.
+    require "google/cloud/kms"
+
+    # Create the client.
+    client = Google::Cloud::Kms.key_management_service
+
+    # Build the parent location name.
+    location_name = client.location_path project:    project_id,
+                                         location:   location_id
+
+    # Call the API.
+    response = client.generate_random_bytes location: location_name, length_bytes: num_bytes, protection_level: :HSM
+
+    # The data comes back as raw bytes, which may include non-printable
+    # characters. This base64-encodes the result so it can be printed below.
+    encoded_data = Base64.strict_encode64 response.data
+
+    puts "Random bytes: #{encoded_data}"
+    # [END kms_generate_random_bytes]
+
+    response
+  end
+
   def get_key_labels project_id:, location_id:, key_ring_id:, key_id:
     # [START kms_get_key_labels]
     # TODO(developer): uncomment these values before running the sample.
@@ -826,6 +904,45 @@ class Snippets
     sign_response
   end
 
+  def sign_mac project_id:, location_id:, key_ring_id:, key_id:, version_id:, data:
+    # [START kms_sign_mac]
+    # TODO(developer): uncomment these values before running the sample.
+    # project_id  = "my-project"
+    # location_id = "us-east1"
+    # key_ring_id = "my-key-ring"
+    # key_id      = "my-key"
+    # version_id  = "123"
+    # data        = "my data"
+
+    # Require the library.
+    require "google/cloud/kms"
+
+    # Require digest.
+    require "digest"
+
+    # Create the client.
+    client = Google::Cloud::Kms.key_management_service
+
+    # Build the key version name.
+    key_version_name = client.crypto_key_version_path project:            project_id,
+                                                      location:           location_id,
+                                                      key_ring:           key_ring_id,
+                                                      crypto_key:         key_id,
+                                                      crypto_key_version: version_id
+
+    # Call the API.
+    sign_response = client.mac_sign name: key_version_name, data: data
+
+    # The data comes back as raw bytes, which may include non-printable
+    # characters. This base64-encodes the result so it can be printed below.
+    encoded_signature = Base64.strict_encode64 sign_response.mac
+
+    puts "Signature: #{encoded_signature}"
+    # [END kms_sign_mac]
+
+    sign_response
+  end
+
   def update_key_add_rotation project_id:, location_id:, key_ring_id:, key_id:
     # [START kms_update_key_add_rotation_schedule]
     # TODO(developer): uncomment these values before running the sample.
@@ -1096,6 +1213,41 @@ class Snippets
 
       verified
     end
+  end
+
+  def verify_mac project_id:, location_id:, key_ring_id:, key_id:, version_id:, data:, signature:
+    # [START kms_verify_mac]
+    # TODO(developer): uncomment these values before running the sample.
+    # project_id  = "my-project"
+    # location_id = "us-east1"
+    # key_ring_id = "my-key-ring"
+    # key_id      = "my-key"
+    # version_id  = "123"
+    # data        = "my data"
+    # signature   = "..."
+
+    # Require the library.
+    require "google/cloud/kms"
+
+    # Require digest.
+    require "digest"
+
+    # Create the client.
+    client = Google::Cloud::Kms.key_management_service
+
+    # Build the key version name.
+    key_version_name = client.crypto_key_version_path project:            project_id,
+                                                      location:           location_id,
+                                                      key_ring:           key_ring_id,
+                                                      crypto_key:         key_id,
+                                                      crypto_key_version: version_id
+
+    # Call the API.
+    verify_response = client.mac_verify name: key_version_name, data: data, mac: signature
+    puts "Verified: #{verify_response.success}"
+    # [END kms_verify_mac]
+
+    verify_response
   end
 end
 # rubocop:enable Metrics/ClassLength
