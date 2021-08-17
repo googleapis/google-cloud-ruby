@@ -8,7 +8,7 @@ def init
   toc
 end
 
-def serialize(object)
+def serialize object
   file_name = "#{object.path.gsub "::", "-"}.yml"
 
   Templates::Engine.with_serializer file_name, options.serializer do
