@@ -238,6 +238,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :COMMUTE_METHOD_UNSPECIFIED, 0
       value :DRIVING, 1
       value :TRANSIT, 2
+      value :WALKING, 3
+      value :CYCLING, 4
+      value :TRANSIT_ACCESSIBLE, 5
     end
   end
 end

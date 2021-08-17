@@ -764,10 +764,13 @@ module Google
             #
             #     The fields eligible for filtering are:
             #
-            #     * `companyName` (Required)
+            #     * `companyName`
             #     * `requisitionId`
             #     * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
             #     OPEN if no value is specified.
+            #
+            #     At least one of `companyName` and `requisitionId` must present or an
+            #     INVALID_ARGUMENT error is thrown.
             #
             #     Sample Query:
             #
@@ -776,6 +779,8 @@ module Google
             #     requisitionId = "req-1"
             #     * companyName = "projects/foo/tenants/bar/companies/baz" AND
             #     status = "EXPIRED"
+            #     * requisitionId = "req-1"
+            #     * requisitionId = "req-1" AND status = "EXPIRED"
             #   @param page_token [::String]
             #     The starting point of a query result.
             #   @param page_size [::Integer]
@@ -919,6 +924,9 @@ module Google
             #       "FULL_TIME", "PART_TIME".
             #     * company_size: histogram by {::Google::Cloud::Talent::V4::CompanySize CompanySize}, for example, "SMALL",
             #     "MEDIUM", "BIG".
+            #     * publish_time_in_day: histogram by the {::Google::Cloud::Talent::V4::Job#posting_publish_time Job.posting_publish_time}
+            #       in days.
+            #       Must specify list of numeric buckets in spec.
             #     * publish_time_in_month: histogram by the {::Google::Cloud::Talent::V4::Job#posting_publish_time Job.posting_publish_time}
             #       in months.
             #       Must specify list of numeric buckets in spec.
@@ -972,7 +980,7 @@ module Google
             #     bucket(100000, MAX)])`
             #     * `count(string_custom_attribute["some-string-custom-attribute"])`
             #     * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
-            #       [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
+            #       [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])`
             #   @param job_view [::Google::Cloud::Talent::V4::JobView]
             #     The desired job attributes returned for jobs in the search response.
             #     Defaults to {::Google::Cloud::Talent::V4::JobView::JOB_VIEW_SMALL JobView.JOB_VIEW_SMALL} if no value is specified.
@@ -1213,6 +1221,9 @@ module Google
             #       "FULL_TIME", "PART_TIME".
             #     * company_size: histogram by {::Google::Cloud::Talent::V4::CompanySize CompanySize}, for example, "SMALL",
             #     "MEDIUM", "BIG".
+            #     * publish_time_in_day: histogram by the {::Google::Cloud::Talent::V4::Job#posting_publish_time Job.posting_publish_time}
+            #       in days.
+            #       Must specify list of numeric buckets in spec.
             #     * publish_time_in_month: histogram by the {::Google::Cloud::Talent::V4::Job#posting_publish_time Job.posting_publish_time}
             #       in months.
             #       Must specify list of numeric buckets in spec.
@@ -1266,7 +1277,7 @@ module Google
             #     bucket(100000, MAX)])`
             #     * `count(string_custom_attribute["some-string-custom-attribute"])`
             #     * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
-            #       [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
+            #       [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])`
             #   @param job_view [::Google::Cloud::Talent::V4::JobView]
             #     The desired job attributes returned for jobs in the search response.
             #     Defaults to {::Google::Cloud::Talent::V4::JobView::JOB_VIEW_SMALL JobView.JOB_VIEW_SMALL} if no value is specified.
