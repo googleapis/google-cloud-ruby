@@ -478,6 +478,10 @@ module Google
         #
         #     If the build does not specify source or images,
         #     these keys will not be included.
+        # @!attribute [r] approval
+        #   @return [::Google::Cloud::Build::V1::BuildApproval]
+        #     Output only. Describes this build's approval configuration, status,
+        #     and result.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     IAM service account whose credentials will be used at build runtime.
@@ -583,6 +587,10 @@ module Google
           module Status
             # Status of the build is unknown.
             STATUS_UNKNOWN = 0
+
+            # Build has been created and is pending execution and queuing. It has not
+            # been queued.
+            PENDING = 10
 
             # Build or step is queued; work has not yet begun.
             QUEUED = 1
@@ -933,6 +941,103 @@ module Google
         class CancelBuildRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to approve or reject a pending build.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the target build.
+        #     For example: "projects/\\{$project_id}/builds/\\{$build_id}"
+        # @!attribute [rw] approval_result
+        #   @return [::Google::Cloud::Build::V1::ApprovalResult]
+        #     Approval decision and metadata.
+        class ApproveBuildRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # BuildApproval describes a build's approval configuration, state, and
+        # result.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Build::V1::BuildApproval::State]
+        #     Output only. The state of this build's approval.
+        # @!attribute [r] config
+        #   @return [::Google::Cloud::Build::V1::ApprovalConfig]
+        #     Output only. Configuration for manual approval of this build.
+        # @!attribute [r] result
+        #   @return [::Google::Cloud::Build::V1::ApprovalResult]
+        #     Output only. Result of manual approval for this Build.
+        class BuildApproval
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies the current state of a build's approval.
+          module State
+            # Default enum type. This should not be used.
+            STATE_UNSPECIFIED = 0
+
+            # Build approval is pending.
+            PENDING = 1
+
+            # Build approval has been approved.
+            APPROVED = 2
+
+            # Build approval has been rejected.
+            REJECTED = 3
+
+            # Build was cancelled while it was still pending approval.
+            CANCELLED = 5
+          end
+        end
+
+        # ApprovalConfig describes configuration for manual approval of a build.
+        # @!attribute [rw] approval_required
+        #   @return [::Boolean]
+        #     Whether or not approval is needed. If this is set on a build, it will
+        #     become pending when created, and will need to be explicitly approved
+        #     to start.
+        class ApprovalConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ApprovalResult describes the decision and associated metadata of a manual
+        # approval of a build.
+        # @!attribute [r] approver_account
+        #   @return [::String]
+        #     Output only. Email of the user that called the ApproveBuild API to
+        #     approve or reject a build at the time that the API was called.
+        # @!attribute [r] approval_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the approval decision was made.
+        # @!attribute [rw] decision
+        #   @return [::Google::Cloud::Build::V1::ApprovalResult::Decision]
+        #     Required. The decision of this manual approval.
+        # @!attribute [rw] comment
+        #   @return [::String]
+        #     Optional. An optional comment for this manual approval result.
+        # @!attribute [rw] url
+        #   @return [::String]
+        #     Optional. An optional URL tied to this manual approval result. This field
+        #     is essentially the same as comment, except that it will be rendered by the
+        #     UI differently. An example use case is a link to an external job that
+        #     approved this Build.
+        class ApprovalResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies whether or not this manual approval result is to approve
+          # or reject a build.
+          module Decision
+            # Default enum type. This should not be used.
+            DECISION_UNSPECIFIED = 0
+
+            # Build is approved.
+            APPROVED = 1
+
+            # Build is rejected.
+            REJECTED = 2
+          end
         end
 
         # Configuration for an automated build in response to source repository
