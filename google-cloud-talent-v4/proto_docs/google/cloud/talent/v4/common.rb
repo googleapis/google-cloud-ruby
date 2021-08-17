@@ -865,7 +865,8 @@ module Google
           SIMPLE_FORMATTING_ONLY = 2
         end
 
-        # Method for commute.
+        # Method for commute. Walking, biking and wheelchair accessible transit is
+        # still in the Preview stage.
         module CommuteMethod
           # Commute method isn't specified.
           COMMUTE_METHOD_UNSPECIFIED = 0
@@ -876,6 +877,16 @@ module Google
           # Commute time is calculated based on public transit including bus, metro,
           # subway, and so on.
           TRANSIT = 2
+
+          # Commute time is calculated based on walking time.
+          WALKING = 3
+
+          # Commute time is calculated based on biking time.
+          CYCLING = 4
+
+          # Commute time is calculated based on public transit that is wheelchair
+          # accessible.
+          TRANSIT_ACCESSIBLE = 5
         end
       end
     end
