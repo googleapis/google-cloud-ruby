@@ -376,6 +376,71 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientTest < Minitest::Test
     end
   end
 
+  def test_approve_build
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    approval_result = {}
+
+    approve_build_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :approve_build, name
+      assert_kind_of ::Google::Cloud::Build::V1::ApproveBuildRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Build::V1::ApprovalResult), request["approval_result"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, approve_build_client_stub do
+      # Create client
+      client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.approve_build({ name: name, approval_result: approval_result }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.approve_build name: name, approval_result: approval_result do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.approve_build ::Google::Cloud::Build::V1::ApproveBuildRequest.new(name: name, approval_result: approval_result) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.approve_build({ name: name, approval_result: approval_result }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.approve_build(::Google::Cloud::Build::V1::ApproveBuildRequest.new(name: name, approval_result: approval_result), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, approve_build_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_build_trigger
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Build::V1::BuildTrigger.new

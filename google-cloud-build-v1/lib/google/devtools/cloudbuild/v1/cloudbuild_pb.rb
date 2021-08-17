@@ -116,6 +116,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :tags, :string, 31
       repeated :secrets, :message, 32, "google.devtools.cloudbuild.v1.Secret"
       map :timing, :string, :message, 33, "google.devtools.cloudbuild.v1.TimeSpan"
+      optional :approval, :message, 44, "google.devtools.cloudbuild.v1.BuildApproval"
       optional :service_account, :string, 42
       optional :available_secrets, :message, 47, "google.devtools.cloudbuild.v1.Secrets"
       repeated :warnings, :message, 49, "google.devtools.cloudbuild.v1.Build.Warning"
@@ -146,6 +147,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_enum "google.devtools.cloudbuild.v1.Build.Status" do
       value :STATUS_UNKNOWN, 0
+      value :PENDING, 10
       value :QUEUED, 1
       value :WORKING, 2
       value :SUCCESS, 3
@@ -230,6 +232,37 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 4
       optional :project_id, :string, 1
       optional :id, :string, 2
+    end
+    add_message "google.devtools.cloudbuild.v1.ApproveBuildRequest" do
+      optional :name, :string, 1
+      optional :approval_result, :message, 2, "google.devtools.cloudbuild.v1.ApprovalResult"
+    end
+    add_message "google.devtools.cloudbuild.v1.BuildApproval" do
+      optional :state, :enum, 1, "google.devtools.cloudbuild.v1.BuildApproval.State"
+      optional :config, :message, 2, "google.devtools.cloudbuild.v1.ApprovalConfig"
+      optional :result, :message, 3, "google.devtools.cloudbuild.v1.ApprovalResult"
+    end
+    add_enum "google.devtools.cloudbuild.v1.BuildApproval.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :PENDING, 1
+      value :APPROVED, 2
+      value :REJECTED, 3
+      value :CANCELLED, 5
+    end
+    add_message "google.devtools.cloudbuild.v1.ApprovalConfig" do
+      optional :approval_required, :bool, 1
+    end
+    add_message "google.devtools.cloudbuild.v1.ApprovalResult" do
+      optional :approver_account, :string, 2
+      optional :approval_time, :message, 3, "google.protobuf.Timestamp"
+      optional :decision, :enum, 4, "google.devtools.cloudbuild.v1.ApprovalResult.Decision"
+      optional :comment, :string, 5
+      optional :url, :string, 6
+    end
+    add_enum "google.devtools.cloudbuild.v1.ApprovalResult.Decision" do
+      value :DECISION_UNSPECIFIED, 0
+      value :APPROVED, 1
+      value :REJECTED, 2
     end
     add_message "google.devtools.cloudbuild.v1.BuildTrigger" do
       optional :resource_name, :string, 34
@@ -513,6 +546,12 @@ module Google
         ListBuildsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.ListBuildsRequest").msgclass
         ListBuildsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.ListBuildsResponse").msgclass
         CancelBuildRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.CancelBuildRequest").msgclass
+        ApproveBuildRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.ApproveBuildRequest").msgclass
+        BuildApproval = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildApproval").msgclass
+        BuildApproval::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildApproval.State").enummodule
+        ApprovalConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.ApprovalConfig").msgclass
+        ApprovalResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.ApprovalResult").msgclass
+        ApprovalResult::Decision = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.ApprovalResult.Decision").enummodule
         BuildTrigger = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildTrigger").msgclass
         GitHubEventsConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.GitHubEventsConfig").msgclass
         PubsubConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.PubsubConfig").msgclass

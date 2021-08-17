@@ -636,6 +636,83 @@ module Google
             end
 
             ##
+            # Approves or rejects a pending build.
+            #
+            # If approved, the returned LRO will be analogous to the LRO returned from
+            # a CreateBuild call.
+            #
+            # If rejected, the returned LRO will be immediately done.
+            #
+            # @overload approve_build(request, options = nil)
+            #   Pass arguments to `approve_build` via a request object, either of type
+            #   {::Google::Cloud::Build::V1::ApproveBuildRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Build::V1::ApproveBuildRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload approve_build(name: nil, approval_result: nil)
+            #   Pass arguments to `approve_build` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the target build.
+            #     For example: "projects/\\{$project_id}/builds/\\{$build_id}"
+            #   @param approval_result [::Google::Cloud::Build::V1::ApprovalResult, ::Hash]
+            #     Approval decision and metadata.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def approve_build request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Build::V1::ApproveBuildRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.approve_build.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Build::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.approve_build.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.approve_build.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_build_stub.call_rpc :approve_build, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Creates a new `BuildTrigger`.
             #
             # This API is experimental.
@@ -1715,6 +1792,11 @@ module Google
                 #
                 attr_reader :retry_build
                 ##
+                # RPC-specific configuration for `approve_build`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :approve_build
+                ##
                 # RPC-specific configuration for `create_build_trigger`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1787,6 +1869,8 @@ module Google
                   @cancel_build = ::Gapic::Config::Method.new cancel_build_config
                   retry_build_config = parent_rpcs.retry_build if parent_rpcs.respond_to? :retry_build
                   @retry_build = ::Gapic::Config::Method.new retry_build_config
+                  approve_build_config = parent_rpcs.approve_build if parent_rpcs.respond_to? :approve_build
+                  @approve_build = ::Gapic::Config::Method.new approve_build_config
                   create_build_trigger_config = parent_rpcs.create_build_trigger if parent_rpcs.respond_to? :create_build_trigger
                   @create_build_trigger = ::Gapic::Config::Method.new create_build_trigger_config
                   get_build_trigger_config = parent_rpcs.get_build_trigger if parent_rpcs.respond_to? :get_build_trigger

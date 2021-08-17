@@ -86,6 +86,13 @@ module Google
             # object, which may or may not be available depending on the bucket's
             # lifecycle management settings.
             rpc :RetryBuild, ::Google::Cloud::Build::V1::RetryBuildRequest, ::Google::Longrunning::Operation
+            # Approves or rejects a pending build.
+            #
+            # If approved, the returned LRO will be analogous to the LRO returned from
+            # a CreateBuild call.
+            #
+            # If rejected, the returned LRO will be immediately done.
+            rpc :ApproveBuild, ::Google::Cloud::Build::V1::ApproveBuildRequest, ::Google::Longrunning::Operation
             # Creates a new `BuildTrigger`.
             #
             # This API is experimental.
