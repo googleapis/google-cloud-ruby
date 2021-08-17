@@ -59,6 +59,31 @@
               "methods": [
                 "export_metadata"
               ]
+            },
+            "RestoreService": {
+              "methods": [
+                "restore_service"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "list_backups"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "get_backup"
+              ]
+            },
+            "CreateBackup": {
+              "methods": [
+                "create_backup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "delete_backup"
+              ]
             }
           }
         }

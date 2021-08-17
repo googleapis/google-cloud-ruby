@@ -28,8 +28,8 @@ module Google
           # Client for the DataprocMetastore service.
           #
           # Configures and manages metastore services.
-          # Metastore services are fully managed, highly available, auto-scaled,
-          # auto-healing, OSS-native deployments of technical metadata management
+          # Metastore services are fully managed, highly available, autoscaled,
+          # autohealing, OSS-native deployments of technical metadata management
           # software. Each metastore service exposes a network endpoint through which
           # metadata queries are served. Metadata queries can originate from a variety
           # of sources, including Apache Hive, Apache Presto, and Apache Spark.
@@ -96,6 +96,12 @@ module Google
                 default_config.rpcs.update_metadata_import.timeout = 60.0
 
                 default_config.rpcs.export_metadata.timeout = 60.0
+
+                default_config.rpcs.restore_service.timeout = 60.0
+
+                default_config.rpcs.create_backup.timeout = 60.0
+
+                default_config.rpcs.delete_backup.timeout = 60.0
 
                 default_config
               end
@@ -1065,6 +1071,440 @@ module Google
             end
 
             ##
+            # Restores a service from a backup.
+            #
+            # @overload restore_service(request, options = nil)
+            #   Pass arguments to `restore_service` via a request object, either of type
+            #   {::Google::Cloud::Metastore::V1::RestoreServiceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Metastore::V1::RestoreServiceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload restore_service(service: nil, backup: nil, restore_type: nil, request_id: nil)
+            #   Pass arguments to `restore_service` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param service [::String]
+            #     Required. The relative resource name of the metastore service to run restore, in the
+            #     following form:
+            #
+            #     `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+            #   @param backup [::String]
+            #     Required. The relative resource name of the metastore service backup to restore
+            #     from, in the following form:
+            #
+            #     `projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
+            #   @param restore_type [::Google::Cloud::Metastore::V1::Restore::RestoreType]
+            #     Optional. The type of restore. If unspecified, defaults to `METADATA_ONLY`.
+            #   @param request_id [::String]
+            #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
+            #     request if it has completed. The server will ignore subsequent requests
+            #     that provide a duplicate request ID for at least 60 minutes after the first
+            #     request.
+            #
+            #     For example, if an initial request times out, followed by another request
+            #     with the same request ID, the server ignores the second request to prevent
+            #     the creation of duplicate commitments.
+            #
+            #     The request ID must be a valid
+            #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format).
+            #     A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def restore_service request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Metastore::V1::RestoreServiceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.restore_service.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Metastore::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "service" => request.service
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.restore_service.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.restore_service.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataproc_metastore_stub.call_rpc :restore_service, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists backups in a service.
+            #
+            # @overload list_backups(request, options = nil)
+            #   Pass arguments to `list_backups` via a request object, either of type
+            #   {::Google::Cloud::Metastore::V1::ListBackupsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Metastore::V1::ListBackupsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_backups(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_backups` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The relative resource name of the service whose backups to
+            #     list, in the following form:
+            #
+            #     `projects/{project_number}/locations/{location_id}/services/{service_id}/backups`.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of backups to return. The response may contain less
+            #     than the maximum number. If unspecified, no more than 500 backups are
+            #     returned. The maximum value is 1000; values above 1000 are changed to 1000.
+            #   @param page_token [::String]
+            #     Optional. A page token, received from a previous {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_backups DataprocMetastore.ListBackups}
+            #     call. Provide this token to retrieve the subsequent page.
+            #
+            #     To retrieve the first page, supply an empty page token.
+            #
+            #     When paginating, other parameters provided to
+            #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_backups DataprocMetastore.ListBackups} must match the call that provided the
+            #     page token.
+            #   @param filter [::String]
+            #     Optional. The filter to apply to list results.
+            #   @param order_by [::String]
+            #     Optional. Specify the ordering of results as described in [Sorting
+            #     Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
+            #     If not specified, the results will be sorted in the default order.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Metastore::V1::Backup>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Metastore::V1::Backup>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def list_backups request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Metastore::V1::ListBackupsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_backups.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Metastore::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_backups.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_backups.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataproc_metastore_stub.call_rpc :list_backups, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @dataproc_metastore_stub, :list_backups, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of a single backup.
+            #
+            # @overload get_backup(request, options = nil)
+            #   Pass arguments to `get_backup` via a request object, either of type
+            #   {::Google::Cloud::Metastore::V1::GetBackupRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Metastore::V1::GetBackupRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_backup(name: nil)
+            #   Pass arguments to `get_backup` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The relative resource name of the backup to retrieve, in the
+            #     following form:
+            #
+            #     `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Metastore::V1::Backup]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Metastore::V1::Backup]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def get_backup request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Metastore::V1::GetBackupRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_backup.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Metastore::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_backup.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_backup.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataproc_metastore_stub.call_rpc :get_backup, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new backup in a given project and location.
+            #
+            # @overload create_backup(request, options = nil)
+            #   Pass arguments to `create_backup` via a request object, either of type
+            #   {::Google::Cloud::Metastore::V1::CreateBackupRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Metastore::V1::CreateBackupRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_backup(parent: nil, backup_id: nil, backup: nil, request_id: nil)
+            #   Pass arguments to `create_backup` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The relative resource name of the service in which to create a backup
+            #     of the following form:
+            #
+            #     `projects/{project_number}/locations/{location_id}/services/{service_id}`.
+            #   @param backup_id [::String]
+            #     Required. The ID of the backup, which is used as the final component of the
+            #     backup's name.
+            #
+            #     This value must be between 1 and 64 characters long, begin with a letter,
+            #     end with a letter or number, and consist of alpha-numeric ASCII characters
+            #     or hyphens.
+            #   @param backup [::Google::Cloud::Metastore::V1::Backup, ::Hash]
+            #     Required. The backup to create. The `name` field is ignored. The ID of the created
+            #     backup must be provided in the request's `backup_id` field.
+            #   @param request_id [::String]
+            #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
+            #     request if it has completed. The server will ignore subsequent requests
+            #     that provide a duplicate request ID for at least 60 minutes after the first
+            #     request.
+            #
+            #     For example, if an initial request times out, followed by another request
+            #     with the same request ID, the server ignores the second request to prevent
+            #     the creation of duplicate commitments.
+            #
+            #     The request ID must be a valid
+            #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
+            #     A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def create_backup request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Metastore::V1::CreateBackupRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_backup.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Metastore::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_backup.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_backup.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataproc_metastore_stub.call_rpc :create_backup, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a single backup.
+            #
+            # @overload delete_backup(request, options = nil)
+            #   Pass arguments to `delete_backup` via a request object, either of type
+            #   {::Google::Cloud::Metastore::V1::DeleteBackupRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Metastore::V1::DeleteBackupRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_backup(name: nil, request_id: nil)
+            #   Pass arguments to `delete_backup` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The relative resource name of the backup to delete, in the
+            #     following form:
+            #
+            #     `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
+            #   @param request_id [::String]
+            #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
+            #     request if it has completed. The server will ignore subsequent requests
+            #     that provide a duplicate request ID for at least 60 minutes after the first
+            #     request.
+            #
+            #     For example, if an initial request times out, followed by another request
+            #     with the same request ID, the server ignores the second request to prevent
+            #     the creation of duplicate commitments.
+            #
+            #     The request ID must be a valid
+            #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
+            #     A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def delete_backup request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Metastore::V1::DeleteBackupRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_backup.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Metastore::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_backup.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_backup.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataproc_metastore_stub.call_rpc :delete_backup, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the DataprocMetastore API.
             #
             # This class represents the configuration for DataprocMetastore,
@@ -1249,6 +1689,31 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :export_metadata
+                ##
+                # RPC-specific configuration for `restore_service`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :restore_service
+                ##
+                # RPC-specific configuration for `list_backups`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_backups
+                ##
+                # RPC-specific configuration for `get_backup`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_backup
+                ##
+                # RPC-specific configuration for `create_backup`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_backup
+                ##
+                # RPC-specific configuration for `delete_backup`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_backup
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1272,6 +1737,16 @@ module Google
                   @update_metadata_import = ::Gapic::Config::Method.new update_metadata_import_config
                   export_metadata_config = parent_rpcs.export_metadata if parent_rpcs.respond_to? :export_metadata
                   @export_metadata = ::Gapic::Config::Method.new export_metadata_config
+                  restore_service_config = parent_rpcs.restore_service if parent_rpcs.respond_to? :restore_service
+                  @restore_service = ::Gapic::Config::Method.new restore_service_config
+                  list_backups_config = parent_rpcs.list_backups if parent_rpcs.respond_to? :list_backups
+                  @list_backups = ::Gapic::Config::Method.new list_backups_config
+                  get_backup_config = parent_rpcs.get_backup if parent_rpcs.respond_to? :get_backup
+                  @get_backup = ::Gapic::Config::Method.new get_backup_config
+                  create_backup_config = parent_rpcs.create_backup if parent_rpcs.respond_to? :create_backup
+                  @create_backup = ::Gapic::Config::Method.new create_backup_config
+                  delete_backup_config = parent_rpcs.delete_backup if parent_rpcs.respond_to? :delete_backup
+                  @delete_backup = ::Gapic::Config::Method.new delete_backup_config
 
                   yield self if block_given?
                 end
