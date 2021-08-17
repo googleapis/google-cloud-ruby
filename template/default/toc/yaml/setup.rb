@@ -1,21 +1,35 @@
 def init
-  roots = options.item
-  text = []
-  roots.each do |root|
-    populate_items root, text
-  end
-  @text = text
+  @roots = options.item
   sections :toc
 end
 
-def populate_items obj, text, indent = "    "
-  text << "#{indent}- uid: #{obj.path}"
-  text << "#{indent}  name: #{obj.name}"
+def objects
+  return @objects_list if @objects_list
+
+  @objects_list = []
+  @roots.each do |root|
+    populate_objects root
+  end
+  @objects_list.uniq!
+  @objects_list.sort_by! { |obj| obj.path }
+  @objects_list
+end
+
+def populate_objects obj
+  objects << obj
   children = obj.children.reject { |child| [:method, :constant].include? child.type }
   unless children.empty?
-    text << "#{indent}  items:"
     children.each do |child|
-      populate_items child, text, "#{indent}  "
+      populate_objects child
     end
   end
+end
+
+def toc_text
+  text = []
+  objects.each do |obj|
+    text << "  - uid: #{obj.path}"
+    text << "    name: #{obj.path}"
+  end
+  text.join "\n"
 end

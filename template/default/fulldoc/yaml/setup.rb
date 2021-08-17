@@ -1,16 +1,10 @@
 def init
   options.serializer = Serializers::FileSystemSerializer.new :extension => "yml"
   options.objects.each do |object|
-    begin
-      next if object.root?
-      serialize(object)
-    rescue => e
-      path = options.serializer.serialized_path(object)
-      log.error "Exception occurred while generating '#{path}'"
-      log.backtrace(e)
-    end
+    next if object.root?
+    serialize(object)
   end
-  serialize_index options
+  copy_files
   toc
 end
 
@@ -22,10 +16,13 @@ def serialize(object)
   end
 end
 
-def serialize_index(options)
-  return
-  Templates::Engine.with_serializer('index.yml', options.serializer) do
-    T('layout').run(options.merge(:index => true))
+def copy_files
+  options.files.each do |file|
+    if file.path == "README"
+      FileUtils.cp file.filename, "#{options.serializer.basepath}/index.md"
+    else
+      FileUtils.cp file.filename, "#{options.serializer.basepath}/#{file.filename}"
+    end
   end
 end
 

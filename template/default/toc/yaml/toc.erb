@@ -1,4 +1,10 @@
 - uid: <%= ENV["CLOUDRAD_GEM_NAME"] %>
   name: <%= ENV["CLOUDRAD_GEM_NAME"] %>
   items:
-<%= @text.join "\n" %>
+  - name: Overview
+    items:
+    - name: Getting started
+      href: index.md
+    - name: Authenticating the library
+      href: AUTHENTICATION.md
+<%= toc_text %>

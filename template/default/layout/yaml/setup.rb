@@ -1,13 +1,11 @@
-require_relative "./method.rb"
 require_relative "./format.rb"
+require_relative "./method.rb"
 
 def init
   @object = options.item
   @method_list = object_methods @object
-
   @constants = @object.children.select { |child| child.type == :constant }
   @references = @object.children.reject { |child| [:method, :constant].include? child.type }
-  @children = @constants + @references
   @object_text = ERB.new(File.read"#{__dir__}/_object.erb").result binding
 
   @method_text = @method_list.map { |method|
@@ -22,9 +20,9 @@ def init
   }.join("\n")
 
   if @references.empty?
-    @reference_text = "[]"
+    @reference_text = "references: []"
   else
-    @reference_text = "\n" + @references.map { |reference|
+    @reference_text = "references:\n" + @references.map { |reference|
       @reference = reference
       ERB.new(File.read "#{__dir__}/_reference.erb").result binding
     }.join("\n")
@@ -55,12 +53,10 @@ end
 def children_list
   return @children_list if @children_list
 
-  
   @children_list = object_methods(@object)
   @children_list += @object.children.reject { |child| [:method, :constant].include? child.type }
   @children_list
 end
-
 
 def children_text
   if children_list.empty?
@@ -68,8 +64,60 @@ def children_text
   else
     out = "\n"
     out += children_list.map { |child|
-      "      - #{child.path}"
+      if child.type == :method
+        child.path.include?("#") ? "  - #{child.path}(instance)" : "  - #{child.path}(class)"
+      else
+        "  - #{child.path}"
+      end
     }.join("\n")
     out
   end
+end
+
+def includes_text
+  return "" if @object.mixins.empty?
+
+  text = @object.mixins.map do |mix| 
+    url = "./#{mix.path.gsub("::", "-")}"
+    "  - \"#{link url, mix.name.to_s}\""
+  end
+  text.unshift "  includes:"
+  text.join "\n"
+end
+
+def inheritance_text
+  text = []
+  if @object.respond_to? "superclass"
+    text << "inherits:"
+    text << "- \"#{link_objects @object.superclass.path}\""
+  end
+  
+  if (extended_by = run_verifier object.mixins(:class)).size > 0
+    text << "extendedBy:"
+    text += extended_by.map { |obj| "- \"#{link_objects obj.path}\"" }.sort
+  end
+
+  if (includes = run_verifier object.mixins(:instance)).size > 0
+    text << "includes:"
+    text += includes.map { |obj| "- \"#{link_objects obj.path}\"" }.sort
+  end
+
+  if (mixed_into = mixed_into(object)).size > 0
+    text << "includedIn:"
+    text += mixed_into.map { |obj| "- \"#{link_objects obj.path}\"" }.sort
+  end
+  return "" if text.size == 1
+  text.map { |line| "  #{line}" }.join "\n"
+end
+
+
+def mixed_into(object)
+  # stolen from https://github.com/lsegal/yard
+  unless globals.mixed_into
+    globals.mixed_into = {}
+    list = run_verifier Registry.all(:class, :module)
+    list.each {|o| o.mixins.each {|m| (globals.mixed_into[m.path] ||= []) << o } }
+  end
+
+  globals.mixed_into[object.path] || []
 end
