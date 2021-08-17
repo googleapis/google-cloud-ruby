@@ -27,6 +27,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :asset_types, :string, 3
       optional :content_type, :enum, 4, "google.cloud.asset.v1.ContentType"
       optional :output_config, :message, 5, "google.cloud.asset.v1.OutputConfig"
+      repeated :relationship_types, :string, 6
     end
     add_message "google.cloud.asset.v1.ExportAssetsResponse" do
       optional :read_time, :message, 1, "google.protobuf.Timestamp"
@@ -40,6 +41,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :content_type, :enum, 4, "google.cloud.asset.v1.ContentType"
       optional :page_size, :int32, 5
       optional :page_token, :string, 6
+      repeated :relationship_types, :string, 7
     end
     add_message "google.cloud.asset.v1.ListAssetsResponse" do
       optional :read_time, :message, 1, "google.protobuf.Timestamp"
@@ -51,6 +53,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :asset_names, :string, 2
       optional :content_type, :enum, 3, "google.cloud.asset.v1.ContentType"
       optional :read_time_window, :message, 4, "google.cloud.asset.v1.TimeWindow"
+      repeated :relationship_types, :string, 5
     end
     add_message "google.cloud.asset.v1.BatchGetAssetsHistoryResponse" do
       repeated :assets, :message, 1, "google.cloud.asset.v1.TemporalAsset"
@@ -126,6 +129,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :content_type, :enum, 4, "google.cloud.asset.v1.ContentType"
       optional :feed_output_config, :message, 5, "google.cloud.asset.v1.FeedOutputConfig"
       optional :condition, :message, 6, "google.type.Expr"
+      repeated :relationship_types, :string, 7
     end
     add_message "google.cloud.asset.v1.SearchAllResourcesRequest" do
       optional :scope, :string, 1
@@ -257,6 +261,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :ORG_POLICY, 4
       value :ACCESS_POLICY, 5
       value :OS_INVENTORY, 6
+      value :RELATIONSHIP, 7
     end
   end
 end

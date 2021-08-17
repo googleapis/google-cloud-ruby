@@ -25,7 +25,7 @@ module Google
         # AnalyzeIamPolicyLongrunning rpc.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The time the operation was created.
+        #     Output only. The time the operation was created.
         class AnalyzeIamPolicyLongrunningMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -72,6 +72,23 @@ module Google
         # @!attribute [rw] output_config
         #   @return [::Google::Cloud::Asset::V1::OutputConfig]
         #     Required. Output configuration indicating where the results will be output to.
+        # @!attribute [rw] relationship_types
+        #   @return [::Array<::String>]
+        #     A list of relationship types to export, for example:
+        #     `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+        #     content_type=RELATIONSHIP.
+        #     * If specified:
+        #     it snapshots specified relationships. It returns an error if
+        #     any of the [relationship_types] doesn't belong to the supported
+        #     relationship types of the [asset_types] or if any of the [asset_types]
+        #     doesn't belong to the source types of the [relationship_types].
+        #     * Otherwise:
+        #     it snapshots the supported relationships for all [asset_types] or returns
+        #     an error if any of the [asset_types] has no relationship support.
+        #     An unspecified asset types field means all supported asset_types.
+        #     See [Introduction to Cloud Asset
+        #     Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
+        #     supported asset types and relationship types.
         class ExportAssetsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -145,6 +162,23 @@ module Google
         #     The `next_page_token` returned from the previous `ListAssetsResponse`, or
         #     unspecified for the first `ListAssetsRequest`. It is a continuation of a
         #     prior `ListAssets` call, and the API should return the next page of assets.
+        # @!attribute [rw] relationship_types
+        #   @return [::Array<::String>]
+        #     A list of relationship types to output, for example:
+        #     `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+        #     content_type=RELATIONSHIP.
+        #     * If specified:
+        #     it snapshots specified relationships. It returns an error if
+        #     any of the [relationship_types] doesn't belong to the supported
+        #     relationship types of the [asset_types] or if any of the [asset_types]
+        #     doesn't belong to the source types of the [relationship_types].
+        #     * Otherwise:
+        #     it snapshots the supported relationships for all [asset_types] or returns
+        #     an error if any of the [asset_types] has no relationship support.
+        #     An unspecified asset types field means all supported asset_types.
+        #     See [Introduction to Cloud Asset
+        #     Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+        #     for all supported asset types and relationship types.
         class ListAssetsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -194,6 +228,24 @@ module Google
         #     If start_time is not set, the snapshot of the assets at end_time will be
         #     returned. The returned results contain all temporal assets whose time
         #     window overlap with read_time_window.
+        # @!attribute [rw] relationship_types
+        #   @return [::Array<::String>]
+        #     Optional. A list of relationship types to output, for example:
+        #     `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+        #     content_type=RELATIONSHIP.
+        #     * If specified:
+        #     it outputs specified relationships' history on the [asset_names]. It
+        #     returns an error if any of the [relationship_types] doesn't belong to the
+        #     supported relationship types of the [asset_names] or if any of the
+        #     [asset_names]'s types doesn't belong to the source types of the
+        #     [relationship_types].
+        #     * Otherwise:
+        #     it outputs the supported relationships' history on the [asset_names] or
+        #     returns an error if any of the [asset_names]'s types has no relationship
+        #     support.
+        #     See [Introduction to Cloud Asset
+        #     Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
+        #     supported asset types and relationship types.
         class BatchGetAssetsHistoryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -530,6 +582,24 @@ module Google
         #     See our [user
         #     guide](https://cloud.google.com/asset-inventory/docs/monitoring-asset-changes-with-condition)
         #     for detailed instructions.
+        # @!attribute [rw] relationship_types
+        #   @return [::Array<::String>]
+        #     A list of relationship types to output, for example:
+        #     `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+        #     content_type=RELATIONSHIP.
+        #     * If specified:
+        #     it outputs specified relationship updates on the [asset_names] or the
+        #     [asset_types]. It returns an error if any of the [relationship_types]
+        #     doesn't belong to the supported relationship types of the [asset_names] or
+        #     [asset_types], or any of the [asset_names] or the [asset_types] doesn't
+        #     belong to the source types of the [relationship_types].
+        #     * Otherwise:
+        #     it outputs the supported relationships of the types of [asset_names] and
+        #     [asset_types] or returns an error if any of the [asset_names] or the
+        #     [asset_types] has no replationship support.
+        #     See [Introduction to Cloud Asset
+        #     Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+        #     for all supported asset types and relationship types.
         class Feed
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1263,6 +1333,9 @@ module Google
 
           # The runtime OS Inventory information.
           OS_INVENTORY = 6
+
+          # The related resources.
+          RELATIONSHIP = 7
         end
       end
     end

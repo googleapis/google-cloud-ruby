@@ -10,9 +10,11 @@ require 'google/identity/accesscontextmanager/v1/access_level_pb'
 require 'google/identity/accesscontextmanager/v1/access_policy_pb'
 require 'google/cloud/osconfig/v1/inventory_pb'
 require 'google/identity/accesscontextmanager/v1/service_perimeter_pb'
+require 'google/protobuf/any_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/code_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/asset/v1/assets.proto", :syntax => :proto3) do
     add_message "google.cloud.asset.v1.TemporalAsset" do
@@ -41,6 +43,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :iam_policy, :message, 4, "google.iam.v1.Policy"
       repeated :org_policy, :message, 6, "google.cloud.orgpolicy.v1.Policy"
       optional :os_inventory, :message, 12, "google.cloud.osconfig.v1.Inventory"
+      optional :related_assets, :message, 13, "google.cloud.asset.v1.RelatedAssets"
       repeated :ancestors, :string, 10
       oneof :access_context_policy do
         optional :access_policy, :message, 7, "google.identity.accesscontextmanager.v1.AccessPolicy"
@@ -56,6 +59,21 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 5
       optional :data, :message, 6, "google.protobuf.Struct"
       optional :location, :string, 8
+    end
+    add_message "google.cloud.asset.v1.RelatedAssets" do
+      optional :relationship_attributes, :message, 1, "google.cloud.asset.v1.RelationshipAttributes"
+      repeated :assets, :message, 2, "google.cloud.asset.v1.RelatedAsset"
+    end
+    add_message "google.cloud.asset.v1.RelationshipAttributes" do
+      optional :type, :string, 4
+      optional :source_resource_type, :string, 1
+      optional :target_resource_type, :string, 2
+      optional :action, :string, 3
+    end
+    add_message "google.cloud.asset.v1.RelatedAsset" do
+      optional :asset, :string, 1
+      optional :asset_type, :string, 2
+      repeated :ancestors, :string, 3
     end
     add_message "google.cloud.asset.v1.ResourceSearchResult" do
       optional :name, :string, 1
@@ -162,6 +180,9 @@ module Google
         TimeWindow = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.TimeWindow").msgclass
         Asset = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.Asset").msgclass
         Resource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.Resource").msgclass
+        RelatedAssets = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.RelatedAssets").msgclass
+        RelationshipAttributes = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.RelationshipAttributes").msgclass
+        RelatedAsset = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.RelatedAsset").msgclass
         ResourceSearchResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ResourceSearchResult").msgclass
         VersionedResource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.VersionedResource").msgclass
         AttachedResource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AttachedResource").msgclass

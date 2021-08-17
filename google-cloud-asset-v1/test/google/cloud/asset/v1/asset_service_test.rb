@@ -60,6 +60,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     asset_types = ["hello world"]
     content_type = :CONTENT_TYPE_UNSPECIFIED
     output_config = {}
+    relationship_types = ["hello world"]
 
     export_assets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :export_assets, name
@@ -69,6 +70,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       assert_equal ["hello world"], request["asset_types"]
       assert_equal :CONTENT_TYPE_UNSPECIFIED, request["content_type"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::OutputConfig), request["output_config"]
+      assert_equal ["hello world"], request["relationship_types"]
       refute_nil options
     end
 
@@ -79,35 +81,35 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.export_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config }) do |response, operation|
+      client.export_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_assets parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config do |response, operation|
+      client.export_assets parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_assets ::Google::Cloud::Asset::V1::ExportAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config) do |response, operation|
+      client.export_assets ::Google::Cloud::Asset::V1::ExportAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config }, grpc_options) do |response, operation|
+      client.export_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_assets(::Google::Cloud::Asset::V1::ExportAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config), grpc_options) do |response, operation|
+      client.export_assets(::Google::Cloud::Asset::V1::ExportAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -132,6 +134,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     content_type = :CONTENT_TYPE_UNSPECIFIED
     page_size = 42
     page_token = "hello world"
+    relationship_types = ["hello world"]
 
     list_assets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_assets, name
@@ -142,6 +145,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       assert_equal :CONTENT_TYPE_UNSPECIFIED, request["content_type"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal ["hello world"], request["relationship_types"]
       refute_nil options
     end
 
@@ -152,35 +156,35 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_assets parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_assets parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_assets ::Google::Cloud::Asset::V1::ListAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_assets ::Google::Cloud::Asset::V1::ListAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_assets(::Google::Cloud::Asset::V1::ListAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_assets(::Google::Cloud::Asset::V1::ListAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -203,6 +207,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     asset_names = ["hello world"]
     content_type = :CONTENT_TYPE_UNSPECIFIED
     read_time_window = {}
+    relationship_types = ["hello world"]
 
     batch_get_assets_history_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_get_assets_history, name
@@ -211,6 +216,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       assert_equal ["hello world"], request["asset_names"]
       assert_equal :CONTENT_TYPE_UNSPECIFIED, request["content_type"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::TimeWindow), request["read_time_window"]
+      assert_equal ["hello world"], request["relationship_types"]
       refute_nil options
     end
 
@@ -221,31 +227,31 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.batch_get_assets_history({ parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window }) do |response, operation|
+      client.batch_get_assets_history({ parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_get_assets_history parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window do |response, operation|
+      client.batch_get_assets_history parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_get_assets_history ::Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest.new(parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window) do |response, operation|
+      client.batch_get_assets_history ::Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest.new(parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_get_assets_history({ parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window }, grpc_options) do |response, operation|
+      client.batch_get_assets_history({ parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_get_assets_history(::Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest.new(parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window), grpc_options) do |response, operation|
+      client.batch_get_assets_history(::Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest.new(parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
