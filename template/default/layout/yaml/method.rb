@@ -14,7 +14,6 @@ end
 def method_signature
   sign = @method.path[@method.path.size - @method.name.to_s.size - 1]
   text = ""
-  yield_tags = @method.tags.select { |tag| tag.tag_name == "yield" }
   yield_params = @method.tags.select { |tag| tag.tag_name == "yieldparam" }
   overloads = @method.tags.select { |tag| tag.tag_name == "overload" }
   returns = @method.tags.select { |tag| tag.tag_name == "return" }
@@ -34,48 +33,150 @@ def method_signature
   end
   
   if overloads.empty?
-    text += sign 
-    text += @method.signature[4..-1]
+    text += "def "
+    text += "self." if sign == "."
+    text += @method.name.to_s
+    unless @method.parameters.empty?
+      text += "("
+      params = @method.parameters.map do |param|
+        entry = param[0]
+        if param[1]
+          if entry.end_with? ":"
+            entry += " #{param[1]}"
+          else
+            entry += " = #{param[1]}"
+          end
+        end
+        entry
+      end
+      text += params.join ", "
+      text += ")"
+    end
     text += block_text
     text += return_text
   else
-    text += overloads.map { |overload| "#{sign}#{overload.signature}#{return_text}" }.join "\\n"
+    overload_sig = overloads.map do |overload|
+      head = "def "
+      head += "self." if sign == "."
+      "#{head}#{overload.signature}#{return_text}"
+    end
+    text += overload_sig.join "\\n"
   end
   text
 end
 
 def param_text
   text = []
-  params.each do |param|
-    text << "- id: #{param.name.to_s}"
-    text << "  type:"
-    param.types.each do |type|
-      text << "    - \"#{type}\""
+  overloads = @method.tags.select { |tag| tag.tag_name == "overload" }
+  if overloads.empty?
+    params = @method.tags.select { |tag| tag.tag_name == "param" }
+    text << arg_text(@method, params, "    ")
+  else
+    text << "    overloads:"
+    overloads.each do |overload|
+      text << "    - content: \"#{method_signature.split("\\n").select { |sig| sig.include? overload.signature }.first}\""
+      text << "      description: \"#{pre_format overload.docstring}\"" unless overload.docstring.empty?
+      text << "      example: #{example_text overload, "    "}"
+      params = overload.tags.select { |tag| tag.tag_name == "param" }
+      text << arg_text(@method, params, "      ")
     end
-    text << "  description: \"#{pre_format param.text}\"" unless param.text.empty?
   end
 
-  return "        []" if text.empty?
-  text.map { |line| line = "        #{line}" }.join("\n")
+  text.join("\n")
 end
 
-def params
-  # p @method.tags.select { |tag| tag.tag_name == "overload" }
+def arg_text method, params, indent
+  return "#{indent}arguments: []" if params.empty?
+
+  text = ["arguments:"]
+  params.each do |arg|
+    entry = "- description: \"#{bold arg.name}"
+    types = arg.types.map { |type| link_objects type }
+    entry += " (#{types.join ", "})" unless types.empty?
+    default_value ||= method.parameters.select { |n| n[0] == "#{arg.name}:" }.last
+    if default_value && default_value.last
+      defaults = "(defaults to: #{default_value.last})"
+      entry += " #{italic defaults}"
+    end
+    entry += " — #{pre_format arg.text}" unless arg.text.empty?
+    entry += "\""
+    text << entry
+  end
+  text.map { |line| "#{indent}#{line}" }.join "\n"
+end
+
+def example_text item, indent = ""
+  text = [""]
+  examples = item.tags.select { |tag| tag.tag_name == "example" }
+  return "[]" if examples.empty?
+
+  examples.each do |example|
+    text << "- \"#{codeblock escapes(example.text)}\""
+  end
+  text.map { |line| "#{indent}#{line}" }.join "\n"
+end
+
+def yield_text
+  yield_tags = @method.tags.select { |tag| tag.tag_name == "yield" }
+  return "    yields: []" if yield_tags.empty?
+
+  text = ["yields:"]
+  yield_tags.each do |tag|
+    text << tag_content(tag)
+  end
+
+  text.map { |line| line = "    #{line}" }.join("\n")
+end
+
+def yield_param_text
+  yield_params = @method.tags.select { |tag| tag.tag_name == "yieldparam" }
+  return "    yieldparams: []" if yield_params.empty?
   
-  @method.tags.select { |tag| tag.tag_name == "param" }
+  text = ["yieldparams:"]
+  yield_params.each do |tag|
+    text << tag_content(tag)
+  end
+  text.map { |line| line = "    #{line}" }.join("\n")
 end
 
 def return_text
-  text = []
-  returns = @method.tags.select { |tag| tag.tag_name == "return" }
-  returns.each do |entry|
-    text << "  type:"
-    entry.types.each do |type|
-      text << "    - \"#{type}\""
-    end
-    text << "  description: \"#{pre_format entry.text}\"" unless entry.text.empty?
+  return_tags = @method.tags.select { |tag| tag.tag_name == "return" }
+  return "    returnValues: []" if return_tags.empty?
+
+  text = ["returnValues:"]
+  return_tags.each do |tag|
+    text << tag_content(tag)
   end
 
-  return "        []" if text.empty?
-  text.map { |line| line = "        #{line}" }.join("\n")
+  text.map { |line| line = "    #{line}" }.join("\n")
+end
+
+def raise_text
+  raise_tags = @method.tags.select { |tag| tag.tag_name == "raise" }
+  return "    raises: []" if raise_tags.empty?
+
+  text = ["raises:"]
+  raise_tags.each do |tag|
+    text << tag_content(tag)
+  end
+
+  text.map { |line| line = "    #{line}" }.join("\n")
+end
+
+def tag_content tag
+  types = tag.types.map { |type| link_objects type }
+  entry = "- description: \""
+  entry += "#{bold tag.name} " if tag.name && !tag.name.empty?
+  entry += "(#{types.join ", "})" unless types.empty?
+  entry += " — #{pre_format tag.text}" unless tag.text.empty?
+  entry += "\""
+  entry
+end
+
+def bold text
+  "<strong>#{text}</strong>"
+end
+
+def italic text
+  "<em>#{text}</em>"
 end
