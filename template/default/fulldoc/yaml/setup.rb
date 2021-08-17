@@ -2,7 +2,7 @@ def init
   options.serializer = Serializers::FileSystemSerializer.new :extension => "yml"
   options.objects.each do |object|
     next if object.root?
-    serialize(object)
+    serialize object
   end
   copy_files
   toc
@@ -11,8 +11,8 @@ end
 def serialize(object)
   file_name = "#{object.path.gsub "::", "-"}.yml"
 
-  Templates::Engine.with_serializer(file_name, options.serializer) do
-    T('layout').run(options.merge(:item => object))
+  Templates::Engine.with_serializer file_name, options.serializer do
+    T('layout').run options.merge(:item => object)
   end
 end
 
@@ -33,7 +33,7 @@ def toc
     roots << object if object.parent.root?
   end
 
-  Templates::Engine.with_serializer("toc.yml", options.serializer) do
-    T('toc').run(options.merge(:item => roots))
+  Templates::Engine.with_serializer "toc.yml", options.serializer do
+    T('toc').run options.merge(:item => roots)
   end
 end
