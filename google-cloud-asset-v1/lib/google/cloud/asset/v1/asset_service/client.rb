@@ -226,7 +226,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload export_assets(parent: nil, read_time: nil, asset_types: nil, content_type: nil, output_config: nil)
+            # @overload export_assets(parent: nil, read_time: nil, asset_types: nil, content_type: nil, output_config: nil, relationship_types: nil)
             #   Pass arguments to `export_assets` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -266,6 +266,22 @@ module Google
             #     returned.
             #   @param output_config [::Google::Cloud::Asset::V1::OutputConfig, ::Hash]
             #     Required. Output configuration indicating where the results will be output to.
+            #   @param relationship_types [::Array<::String>]
+            #     A list of relationship types to export, for example:
+            #     `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+            #     content_type=RELATIONSHIP.
+            #     * If specified:
+            #     it snapshots specified relationships. It returns an error if
+            #     any of the [relationship_types] doesn't belong to the supported
+            #     relationship types of the [asset_types] or if any of the [asset_types]
+            #     doesn't belong to the source types of the [relationship_types].
+            #     * Otherwise:
+            #     it snapshots the supported relationships for all [asset_types] or returns
+            #     an error if any of the [asset_types] has no relationship support.
+            #     An unspecified asset types field means all supported asset_types.
+            #     See [Introduction to Cloud Asset
+            #     Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
+            #     supported asset types and relationship types.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -329,7 +345,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_assets(parent: nil, read_time: nil, asset_types: nil, content_type: nil, page_size: nil, page_token: nil)
+            # @overload list_assets(parent: nil, read_time: nil, asset_types: nil, content_type: nil, page_size: nil, page_token: nil, relationship_types: nil)
             #   Pass arguments to `list_assets` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -374,6 +390,22 @@ module Google
             #     The `next_page_token` returned from the previous `ListAssetsResponse`, or
             #     unspecified for the first `ListAssetsRequest`. It is a continuation of a
             #     prior `ListAssets` call, and the API should return the next page of assets.
+            #   @param relationship_types [::Array<::String>]
+            #     A list of relationship types to output, for example:
+            #     `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+            #     content_type=RELATIONSHIP.
+            #     * If specified:
+            #     it snapshots specified relationships. It returns an error if
+            #     any of the [relationship_types] doesn't belong to the supported
+            #     relationship types of the [asset_types] or if any of the [asset_types]
+            #     doesn't belong to the source types of the [relationship_types].
+            #     * Otherwise:
+            #     it snapshots the supported relationships for all [asset_types] or returns
+            #     an error if any of the [asset_types] has no relationship support.
+            #     An unspecified asset types field means all supported asset_types.
+            #     See [Introduction to Cloud Asset
+            #     Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+            #     for all supported asset types and relationship types.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::Asset>]
@@ -442,7 +474,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload batch_get_assets_history(parent: nil, asset_names: nil, content_type: nil, read_time_window: nil)
+            # @overload batch_get_assets_history(parent: nil, asset_names: nil, content_type: nil, read_time_window: nil, relationship_types: nil)
             #   Pass arguments to `batch_get_assets_history` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -469,6 +501,23 @@ module Google
             #     If start_time is not set, the snapshot of the assets at end_time will be
             #     returned. The returned results contain all temporal assets whose time
             #     window overlap with read_time_window.
+            #   @param relationship_types [::Array<::String>]
+            #     Optional. A list of relationship types to output, for example:
+            #     `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+            #     content_type=RELATIONSHIP.
+            #     * If specified:
+            #     it outputs specified relationships' history on the [asset_names]. It
+            #     returns an error if any of the [relationship_types] doesn't belong to the
+            #     supported relationship types of the [asset_names] or if any of the
+            #     [asset_names]'s types doesn't belong to the source types of the
+            #     [relationship_types].
+            #     * Otherwise:
+            #     it outputs the supported relationships' history on the [asset_names] or
+            #     returns an error if any of the [asset_names]'s types has no relationship
+            #     support.
+            #     See [Introduction to Cloud Asset
+            #     Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
+            #     supported asset types and relationship types.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Asset::V1::BatchGetAssetsHistoryResponse]
