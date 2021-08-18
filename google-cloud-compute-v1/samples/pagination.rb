@@ -31,7 +31,7 @@ def print_images_list project:
   request = {
     project: project,
     # max_results indicates the maximum number of items that will be returned per page.
-    max_results: 3,
+    max_results: 100,
     # Listing only non-deprecated images to reduce the size of the reply.
     filter: "deprecated.state != DEPRECATED"
   }
