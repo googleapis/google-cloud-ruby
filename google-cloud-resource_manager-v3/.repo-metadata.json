@@ -1,0 +1,15 @@
+{
+    "api_id": "cloudresourcemanager.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-resource_manager-v3/latest",
+    "distribution_name": "google-cloud-resource_manager-v3",
+    "language": "ruby",
+    "name": "cloudresourcemanager",
+    "name_pretty": "Resource Manager V3 API",
+    "product_documentation": "https://cloud.google.com/resource-manager/",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Google Cloud provides container resources such as organizations and projects that allow you to group and hierarchically organize other Google Cloud resources. This hierarchical organization helps you manage common aspects of your resources, such as access control and configuration settings. The Resource Manager API enables you to programmatically manage these container resources. Note that google-cloud-resource_manager-v3 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-resource_manager instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "RESOURCE_MANAGER",
+    "ruby-cloud-product-url": "https://cloud.google.com/resource-manager/",
+    "library_type": "GAPIC_AUTO"
+}
