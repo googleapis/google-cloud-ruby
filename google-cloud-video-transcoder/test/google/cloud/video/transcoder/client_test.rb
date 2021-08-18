@@ -28,7 +28,7 @@ class Google::Cloud::Video::Transcoder::ClientConstructionMinitest < Minitest::T
       client = Google::Cloud::Video::Transcoder.transcoder_service do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::Client, client
+      assert_kind_of Google::Cloud::Video::Transcoder::V1::TranscoderService::Client, client
     end
   end
 end

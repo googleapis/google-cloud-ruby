@@ -2,4 +2,5 @@ source "https://rubygems.org"
 
 gemspec
 
+gem "google-cloud-video-transcoder-v1", path: "../google-cloud-video-transcoder-v1"
 gem "google-cloud-video-transcoder-v1beta1", path: "../google-cloud-video-transcoder-v1beta1"

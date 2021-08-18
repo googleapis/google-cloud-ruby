@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-video-transcoder
 checks for credentials are configured on the service Credentials class (such as
-`::Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::Credentials`):
+`::Google::Cloud::Video::Transcoder::V1::TranscoderService::Credentials`):
 
 * `TRANSCODER_CREDENTIALS` - Path to JSON file, or JSON contents
 * `TRANSCODER_KEYFILE` - Path to JSON file, or JSON contents
