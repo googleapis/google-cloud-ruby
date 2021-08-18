@@ -117,6 +117,14 @@ namespace :fixtures do
                              "asymmetric_decrypt_key",
                              :ASYMMETRIC_DECRYPT,
                              :RSA_DECRYPT_OAEP_2048_SHA256
+
+    get_or_create_crypto_key client,
+                             project_id,
+                             location_id,
+                             key_ring_id,
+                             "mac_key",
+                             :MAC,
+                             :HMAC_SHA256
   end
 end
 
