@@ -53,6 +53,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       end
     end
     add_message "google.bigtable.admin.v2.AppProfile.MultiClusterRoutingUseAny" do
+      repeated :cluster_ids, :string, 1
     end
     add_message "google.bigtable.admin.v2.AppProfile.SingleClusterRouting" do
       optional :cluster_id, :string, 1
