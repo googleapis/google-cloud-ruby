@@ -4,7 +4,7 @@
 
 #### Features
 
-* Support for related assets
+* Support for related assets and asset relationship information
 
 ### 0.14.1 / 2021-08-11
 
