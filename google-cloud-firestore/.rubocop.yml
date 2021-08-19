@@ -21,6 +21,8 @@ Metrics/ClassLength:
   Enabled: false
 Metrics/CyclomaticComplexity:
   Max: 17
+Metrics/MethodLength:
+  Max: 32
 Metrics/PerceivedComplexity:
   Max: 17
 Naming/FileName:
