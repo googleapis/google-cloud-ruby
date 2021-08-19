@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.0 / 2021-08-19
+
+#### Features
+
+* Support for backups and restores
+
 ### 0.1.3 / 2021-08-11
 
 #### Bug Fixes
