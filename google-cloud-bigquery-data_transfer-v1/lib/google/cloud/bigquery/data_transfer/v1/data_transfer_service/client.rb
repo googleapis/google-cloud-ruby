@@ -700,7 +700,8 @@ module Google
               end
 
               ##
-              # Returns information about all data transfers in the project.
+              # Returns information about all transfer configs owned by a project in the
+              # specified location.
               #
               # @overload list_transfer_configs(request, options = nil)
               #   Pass arguments to `list_transfer_configs` via a request object, either of type

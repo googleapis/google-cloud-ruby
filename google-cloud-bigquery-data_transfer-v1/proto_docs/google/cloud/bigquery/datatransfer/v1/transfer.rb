@@ -66,12 +66,11 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     The resource name of the transfer config.
-          #     Transfer config names have the form of
+          #     Transfer config names have the form
           #     `projects/{project_id}/locations/{region}/transferConfigs/{config_id}`.
-          #     The name is automatically generated based on the config_id specified in
-          #     CreateTransferConfigRequest along with project_id and region. If config_id
-          #     is not provided, usually a uuid, even though it is not guaranteed or
-          #     required, will be generated for config_id.
+          #     Where `config_id` is usually a uuid, even though it is not
+          #     guaranteed or required. The name is ignored when creating a transfer
+          #     config.
           # @!attribute [rw] destination_dataset_id
           #   @return [::String]
           #     The BigQuery target dataset id.
@@ -83,7 +82,10 @@ module Google
           #     Data source id. Cannot be changed once data transfer is created.
           # @!attribute [rw] params
           #   @return [::Google::Protobuf::Struct]
-          #     Data transfer specific parameters.
+          #     Parameters specific to each data source. For more information see the
+          #     bq tab in the 'Setting up a data transfer' section for each data source.
+          #     For example the parameters for Cloud Storage transfers are listed here:
+          #     https://cloud.google.com/bigquery-transfer/docs/cloud-storage-transfer#bq
           # @!attribute [rw] schedule
           #   @return [::String]
           #     Data transfer schedule.
@@ -132,6 +134,9 @@ module Google
           #   @return [::String]
           #     Pub/Sub topic where notifications will be sent after transfer runs
           #     associated with this transfer config finish.
+          #
+          #     The format for specifying a pubsub topic is:
+          #     `projects/{project}/topics/{topic}`
           # @!attribute [rw] email_preferences
           #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::EmailPreferences]
           #     Email notifications will be sent according to these preferences
@@ -171,7 +176,10 @@ module Google
           #     Output only. Last time the data transfer run state was updated.
           # @!attribute [r] params
           #   @return [::Google::Protobuf::Struct]
-          #     Output only. Data transfer specific parameters.
+          #     Output only. Parameters specific to each data source. For more information see the
+          #     bq tab in the 'Setting up a data transfer' section for each data source.
+          #     For example the parameters for Cloud Storage transfers are listed here:
+          #     https://cloud.google.com/bigquery-transfer/docs/cloud-storage-transfer#bq
           # @!attribute [r] destination_dataset_id
           #   @return [::String]
           #     Output only. The BigQuery target dataset id.
@@ -194,7 +202,10 @@ module Google
           # @!attribute [r] notification_pubsub_topic
           #   @return [::String]
           #     Output only. Pub/Sub topic where a notification will be sent after this
-          #     transfer run finishes
+          #     transfer run finishes.
+          #
+          #     The format for specifying a pubsub topic is:
+          #     `projects/{project}/topics/{topic}`
           # @!attribute [r] email_preferences
           #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::EmailPreferences]
           #     Output only. Email notifications will be sent according to these
@@ -250,23 +261,23 @@ module Google
 
           # Represents data transfer run state.
           module TransferState
-            # State placeholder.
+            # State placeholder (0).
             TRANSFER_STATE_UNSPECIFIED = 0
 
             # Data transfer is scheduled and is waiting to be picked up by
-            # data transfer backend.
+            # data transfer backend (2).
             PENDING = 2
 
-            # Data transfer is in progress.
+            # Data transfer is in progress (3).
             RUNNING = 3
 
-            # Data transfer completed successfully.
+            # Data transfer completed successfully (4).
             SUCCEEDED = 4
 
-            # Data transfer failed.
+            # Data transfer failed (5).
             FAILED = 5
 
-            # Data transfer is cancelled.
+            # Data transfer is cancelled (6).
             CANCELLED = 6
           end
         end
