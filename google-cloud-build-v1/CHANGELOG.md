@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 / 2021-08-19
+
+#### Features
+
+* Support for build approval
+
 ### 0.9.2 / 2021-08-11
 
 #### Bug Fixes
