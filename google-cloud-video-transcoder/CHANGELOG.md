@@ -2,13 +2,9 @@
 
 ### 1.0.0 / 2021-08-19
 
-#### ⚠ BREAKING CHANGES
-
-* **video-transcoder:** Changed the default service version from v1beta1 to v1
-
 #### Features
 
-* Changed the default service version from v1beta1 to v1
+* BREAKING CHANGE: Supported service version v1, and changed the default from v1beta1 to v1
 
 ### 0.2.2 / 2021-07-12
 
