@@ -28,7 +28,7 @@ library = gapic.ruby_library(
     generator_args={
         "ruby-cloud-gem-name": "google-analytics-admin",
         "ruby-cloud-title": "Google Analytics Admin",
-        "ruby-cloud-description": "The Analytics Admin API allows for programmatic access to the Google Analytics App+Web configuration data. You can use the Google Analytics Admin API to manage accounts and App+Web properties. Note that google-analytics-admin-v1alpha is a version-specific client library. For most uses, we recommend installing the main client library google-analytics-admin instead. See the readme for more details.",
+        "ruby-cloud-description": "The Analytics Admin API allows for programmatic access to the Google Analytics App+Web configuration data. You can use the Google Analytics Admin API to manage accounts and App+Web properties.",
         "ruby-cloud-env-prefix": "ANALYTICS_ADMIN",
         "ruby-cloud-wrapper-of": "v1alpha:0.0",
         "ruby-cloud-api-id": "analyticsadmin.googleapis.com",
