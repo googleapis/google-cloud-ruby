@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.0 / 2021-08-19
+
+#### Features
+
+* Support for related assets and asset relationship information
+
 ### 0.14.1 / 2021-08-11
 
 #### Bug Fixes
