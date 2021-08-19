@@ -2,7 +2,7 @@
 
 API Client library for the Google Analytics Admin API
 
-The Analytics Admin API allows for programmatic access to the Google Analytics App+Web configuration data. You can use the Google Analytics Admin API to manage accounts and App+Web properties. Note that google-analytics-admin-v1alpha is a version-specific client library. For most uses, we recommend installing the main client library google-analytics-admin instead. See the readme for more details.
+The Analytics Admin API allows for programmatic access to the Google Analytics App+Web configuration data. You can use the Google Analytics Admin API to manage accounts and App+Web properties.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-analytics-admin-v*`.
