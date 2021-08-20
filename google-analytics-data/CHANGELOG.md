@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.1.3 / 2021-08-19
+
+#### Documentation
+
+* Removed a misleading note about version-specific clients from the gem description
+
 ### 0.1.2 / 2021-07-12
 
 #### Documentation
