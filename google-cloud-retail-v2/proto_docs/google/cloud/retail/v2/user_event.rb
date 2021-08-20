@@ -260,9 +260,21 @@ module Google
         #   @return [::Google::Cloud::Retail::V2::Product]
         #     Required. {::Google::Cloud::Retail::V2::Product Product} information.
         #
-        #     Only {::Google::Cloud::Retail::V2::Product#id Product.id} field is used when
-        #     ingesting an event, all other product fields are ignored as we will look
-        #     them up from the catalog.
+        #     Required field(s):
+        #
+        #     * {::Google::Cloud::Retail::V2::Product#id Product.id}
+        #
+        #     Optional override field(s):
+        #
+        #     * {::Google::Cloud::Retail::V2::Product#price_info Product.price_info}
+        #
+        #     If any supported optional fields are provided, we will treat them as a full
+        #     override when looking up product information from the catalog. Thus, it is
+        #     important to ensure that the overriding fields are accurate and
+        #     complete.
+        #
+        #     All other product fields are ignored and instead populated via catalog
+        #     lookup after event ingestion.
         # @!attribute [rw] quantity
         #   @return [::Google::Protobuf::Int32Value]
         #     Quantity of the product associated with the user event.

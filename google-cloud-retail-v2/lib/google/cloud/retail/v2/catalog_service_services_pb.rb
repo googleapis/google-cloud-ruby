@@ -73,16 +73,16 @@ module Google
             #   {newBranch}.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Contact Retail Support (retail-search-support@google.com) if you are
-            # interested in using Retail Search.
+            # Please submit a form [here](https://cloud.google.com/contact) to contact
+            # cloud sales if you are interested in using Retail Search.
             rpc :SetDefaultBranch, ::Google::Cloud::Retail::V2::SetDefaultBranchRequest, ::Google::Protobuf::Empty
             # Get which branch is currently default branch set by
             # [CatalogService.SetDefaultBranch][google.cloud.retail.v2.CatalogService.SetDefaultBranch]
             # method under a specified parent catalog.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Contact Retail Support (retail-search-support@google.com) if you are
-            # interested in using Retail Search.
+            # Please submit a form [here](https://cloud.google.com/contact) to contact
+            # cloud sales if you are interested in using Retail Search.
             rpc :GetDefaultBranch, ::Google::Cloud::Retail::V2::GetDefaultBranchRequest, ::Google::Cloud::Retail::V2::GetDefaultBranchResponse
           end
 

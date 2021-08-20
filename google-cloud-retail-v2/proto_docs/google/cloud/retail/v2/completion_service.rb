@@ -80,13 +80,15 @@ module Google
         #     * user-data
         #
         #     * cloud-retail
-        #       This option is not automatically enabled. Before using cloud-retail,
-        #       contact retail-search-support@google.com first.
+        #       This option requires additional allowlisting. Before using cloud-retail,
+        #       contact Cloud Retail support team first.
         # @!attribute [rw] max_suggestions
         #   @return [::Integer]
-        #     Completion max suggestions.
+        #     Completion max suggestions. If left unset or set to 0, then will fallback
+        #     to the configured value [CompletionConfig.max_suggestions][].
         #
-        #     The maximum allowed max suggestions is 20. The default value is 20.
+        #     The maximum allowed max suggestions is 20. If it is set higher, it will be
+        #     capped by 20.
         class CompleteQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -105,9 +107,9 @@ module Google
         #     performance.
         # @!attribute [rw] recent_search_results
         #   @return [::Array<::Google::Cloud::Retail::V2::CompleteQueryResponse::RecentSearchResult>]
-        #     Matched recent searches of this user. This field is a restricted feature.
-        #     Contact Retail Support (retail-search-support@google.com) if you are
-        #     interested in enabling it.
+        #     Matched recent searches of this user. The maximum number of recent searches
+        #     is 10. This field is a restricted feature. Contact Retail Search support
+        #     team if you are interested in enabling it.
         #
         #     This feature is only available when
         #     {::Google::Cloud::Retail::V2::CompleteQueryRequest#visitor_id CompleteQueryRequest.visitor_id}

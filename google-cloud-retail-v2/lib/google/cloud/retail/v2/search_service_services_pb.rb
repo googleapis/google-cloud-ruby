@@ -27,8 +27,8 @@ module Google
           # Service for search.
           #
           # This feature is only available for users who have Retail Search enabled.
-          # Contact Retail Support (retail-search-support@google.com) if you are
-          # interested in using Retail Search.
+          # Please submit a form [here](https://cloud.google.com/contact) to contact
+          # cloud sales if you are interested in using Retail Search.
           class Service
 
             include GRPC::GenericService
@@ -40,8 +40,8 @@ module Google
             # Performs a search.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Contact Retail Support (retail-search-support@google.com) if you are
-            # interested in using Retail Search.
+            # Please submit a form [here](https://cloud.google.com/contact) to contact
+            # cloud sales if you are interested in using Retail Search.
             rpc :Search, ::Google::Cloud::Retail::V2::SearchRequest, ::Google::Cloud::Retail::V2::SearchResponse
           end
 

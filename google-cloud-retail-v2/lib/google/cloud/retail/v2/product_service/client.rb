@@ -792,8 +792,8 @@ module Google
             # {::Google::Cloud::Retail::V2::ProductService::Client#remove_fulfillment_places RemoveFulfillmentPlaces}.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Contact Retail Support (retail-search-support@google.com) if you are
-            # interested in using Retail Search.
+            # Please submit a form [here](https://cloud.google.com/contact) to contact
+            # cloud sales if you are interested in using Retail Search.
             #
             # @overload set_inventory(request, options = nil)
             #   Pass arguments to `set_inventory` via a request object, either of type
@@ -927,8 +927,8 @@ module Google
             # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ListProducts}.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Contact Retail Support (retail-search-support@google.com) if you are
-            # interested in using Retail Search.
+            # Please submit a form [here](https://cloud.google.com/contact) to contact
+            # cloud sales if you are interested in using Retail Search.
             #
             # @overload add_fulfillment_places(request, options = nil)
             #   Pass arguments to `add_fulfillment_places` via a request object, either of type
@@ -1063,8 +1063,8 @@ module Google
             # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ListProducts}.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Contact Retail Support (retail-search-support@google.com) if you are
-            # interested in using Retail Search.
+            # Please submit a form [here](https://cloud.google.com/contact) to contact
+            # cloud sales if you are interested in using Retail Search.
             #
             # @overload remove_fulfillment_places(request, options = nil)
             #   Pass arguments to `remove_fulfillment_places` via a request object, either of type

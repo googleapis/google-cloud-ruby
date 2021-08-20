@@ -87,7 +87,8 @@ module Google
         #   @return [::String]
         #     The filter syntax consists of an expression language for constructing a
         #     predicate from one or more fields of the products being filtered. Filter
-        #     expression is case-sensitive.
+        #     expression is case-sensitive. See more details at this [user
+        #     guide](/retail/private/docs/filter-and-order#filter).
         #
         #     If this field is unrecognizable, an INVALID_ARGUMENT is returned.
         # @!attribute [rw] canonical_filter
@@ -105,7 +106,9 @@ module Google
         #   @return [::String]
         #     The order in which products are returned. Products can be ordered by
         #     a field in an {::Google::Cloud::Retail::V2::Product Product} object. Leave it
-        #     unset if ordered by relevance. OrderBy expression is case-sensitive.
+        #     unset if ordered by relevance. OrderBy expression is case-sensitive. See
+        #     more details at this [user
+        #     guide](/retail/private/docs/filter-and-order#order).
         #
         #     If this field is unrecognizable, an INVALID_ARGUMENT is returned.
         # @!attribute [rw] facet_specs
@@ -119,16 +122,17 @@ module Google
         #     The specification for dynamically generated facets. Notice that only
         #     textual facets can be dynamically generated.
         #
-        #     This feature requires additional allowlisting. Contact Retail Support
-        #     (retail-search-support@google.com) if you are interested in using dynamic
-        #     facet feature.
+        #     This feature requires additional allowlisting. Contact Retail Search
+        #     support team if you are interested in using dynamic facet feature.
         # @!attribute [rw] boost_spec
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::BoostSpec]
-        #     Boost specification to boost certain products.
+        #     Boost specification to boost certain products. See more details at this
+        #     [user guide](/retail/private/docs/boosting).
         # @!attribute [rw] query_expansion_spec
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::QueryExpansionSpec]
         #     The query expansion specification that specifies the conditions under which
-        #     query expansion will occur.
+        #     query expansion will occur. See more details at this [user
+        #     guide](/retail/private/docs/result-size#query_expansion).
         # @!attribute [rw] variant_rollup_keys
         #   @return [::Array<::String>]
         #     The keys to fetch and rollup the matching
@@ -140,10 +144,9 @@ module Google
         #     {::Google::Cloud::Retail::V2::Product Product}s attributes will lead to extra
         #     query latency. Maximum number of keys is 10.
         #
-        #     For
-        #     {::Google::Cloud::Retail::V2::Product#fulfillment_info Product.fulfillment_info},
-        #     a fulfillment type and a fulfillment ID must be provided in the format of
-        #     "fulfillmentType.filfillmentId". E.g., in "pickupInStore.store123",
+        #     For {::Google::Cloud::Retail::V2::FulfillmentInfo FulfillmentInfo}, a
+        #     fulfillment type and a fulfillment ID must be provided in the format of
+        #     "fulfillmentType.fulfillmentId". E.g., in "pickupInStore.store123",
         #     "pickupInStore" is fulfillment type and "store123" is the store ID.
         #
         #     Supported keys are:
@@ -154,24 +157,42 @@ module Google
         #     * discount
         #     * attributes.key, where key is any key in the
         #       {::Google::Cloud::Retail::V2::Product#attributes Product.attributes} map.
-        #     * pickupInStore.id, where id is any [FulfillmentInfo.ids][] for type
-        #       [FulfillmentInfo.Type.PICKUP_IN_STORE][].
-        #     * shipToStore.id, where id is any [FulfillmentInfo.ids][] for type
-        #       [FulfillmentInfo.Type.SHIP_TO_STORE][].
-        #     * sameDayDelivery.id, where id is any [FulfillmentInfo.ids][] for type
-        #       [FulfillmentInfo.Type.SAME_DAY_DELIVERY][].
-        #     * nextDayDelivery.id, where id is any [FulfillmentInfo.ids][] for type
-        #       [FulfillmentInfo.Type.NEXT_DAY_DELIVERY][].
-        #     * customFulfillment1.id, where id is any [FulfillmentInfo.ids][] for type
-        #       [FulfillmentInfo.Type.CUSTOM_TYPE_1][].
-        #     * customFulfillment2.id, where id is any [FulfillmentInfo.ids][] for type
-        #       [FulfillmentInfo.Type.CUSTOM_TYPE_2][].
-        #     * customFulfillment3.id, where id is any [FulfillmentInfo.ids][] for type
-        #       [FulfillmentInfo.Type.CUSTOM_TYPE_3][].
-        #     * customFulfillment4.id, where id is any [FulfillmentInfo.ids][] for type
-        #       [FulfillmentInfo.Type.CUSTOM_TYPE_4][].
-        #     * customFulfillment5.id, where id is any [FulfillmentInfo.ids][] for type
-        #       [FulfillmentInfo.Type.CUSTOM_TYPE_5][].
+        #     * pickupInStore.id, where id is any
+        #     {::Google::Cloud::Retail::V2::FulfillmentInfo#place_ids FulfillmentInfo.place_ids}
+        #     for {::Google::Cloud::Retail::V2::FulfillmentInfo#type FulfillmentInfo.type}
+        #       "pickup-in-store".
+        #     * shipToStore.id, where id is any
+        #     {::Google::Cloud::Retail::V2::FulfillmentInfo#place_ids FulfillmentInfo.place_ids}
+        #     for {::Google::Cloud::Retail::V2::FulfillmentInfo#type FulfillmentInfo.type}
+        #       "ship-to-store".
+        #     * sameDayDelivery.id, where id is any
+        #     {::Google::Cloud::Retail::V2::FulfillmentInfo#place_ids FulfillmentInfo.place_ids}
+        #     for {::Google::Cloud::Retail::V2::FulfillmentInfo#type FulfillmentInfo.type}
+        #       "same-day-delivery".
+        #     * nextDayDelivery.id, where id is any
+        #     {::Google::Cloud::Retail::V2::FulfillmentInfo#place_ids FulfillmentInfo.place_ids}
+        #     for {::Google::Cloud::Retail::V2::FulfillmentInfo#type FulfillmentInfo.type}
+        #       "next-day-delivery".
+        #     * customFulfillment1.id, where id is any
+        #     {::Google::Cloud::Retail::V2::FulfillmentInfo#place_ids FulfillmentInfo.place_ids}
+        #     for {::Google::Cloud::Retail::V2::FulfillmentInfo#type FulfillmentInfo.type}
+        #       "custom-type-1".
+        #     * customFulfillment2.id, where id is any
+        #     {::Google::Cloud::Retail::V2::FulfillmentInfo#place_ids FulfillmentInfo.place_ids}
+        #     for {::Google::Cloud::Retail::V2::FulfillmentInfo#type FulfillmentInfo.type}
+        #       "custom-type-2".
+        #     * customFulfillment3.id, where id is any
+        #     {::Google::Cloud::Retail::V2::FulfillmentInfo#place_ids FulfillmentInfo.place_ids}
+        #     for {::Google::Cloud::Retail::V2::FulfillmentInfo#type FulfillmentInfo.type}
+        #       "custom-type-3".
+        #     * customFulfillment4.id, where id is any
+        #     {::Google::Cloud::Retail::V2::FulfillmentInfo#place_ids FulfillmentInfo.place_ids}
+        #     for {::Google::Cloud::Retail::V2::FulfillmentInfo#type FulfillmentInfo.type}
+        #       "custom-type-4".
+        #     * customFulfillment5.id, where id is any
+        #     {::Google::Cloud::Retail::V2::FulfillmentInfo#place_ids FulfillmentInfo.place_ids}
+        #     for {::Google::Cloud::Retail::V2::FulfillmentInfo#type FulfillmentInfo.type}
+        #       "custom-type-5".
         #
         #     If this field is set to an invalid value other than these, an
         #     INVALID_ARGUMENT error is returned.
@@ -269,35 +290,35 @@ module Google
             #     {::Google::Cloud::Retail::V2::SearchRequest::FacetSpec::FacetKey#query FacetKey.query}
             #     is not specified:
             #
-            #     Textual facet keys:
-            #     * brands
-            #     * categories
-            #     * genders
-            #     * ageGroups
-            #     * availability
-            #     * colorFamilies
-            #     * colors
-            #     * sizes
-            #     * materials
-            #     * patterns
-            #     * conditions
-            #     * attributes.key
-            #     * pickupInStore
-            #     * shipToStore
-            #     * sameDayDelivery
-            #     * nextDayDelivery
-            #     * customFulfillment1
-            #     * customFulfillment2
-            #     * customFulfillment3
-            #     * customFulfillment4
-            #     * customFulfillment5
+            #     * textual_field =
+            #         * "brands"
+            #         * "categories"
+            #         * "genders"
+            #         * "ageGroups"
+            #         * "availability"
+            #         * "colorFamilies"
+            #         * "colors"
+            #         * "sizes"
+            #         * "materials"
+            #         * "patterns"
+            #         * "conditions"
+            #         * "attributes.key"
+            #         * "pickupInStore"
+            #         * "shipToStore"
+            #         * "sameDayDelivery"
+            #         * "nextDayDelivery"
+            #         * "customFulfillment1"
+            #         * "customFulfillment2"
+            #         * "customFulfillment3"
+            #         * "customFulfillment4"
+            #         * "customFulfillment5"
             #
-            #     Numeric facet keys:
-            #     * price
-            #     * discount
-            #     * rating
-            #     * ratingCount
-            #     * attributes.key
+            #     * numerical_field =
+            #         * "price"
+            #         * "discount"
+            #         * "rating"
+            #         * "ratingCount"
+            #         * "attributes.key"
             # @!attribute [rw] intervals
             #   @return [::Array<::Google::Cloud::Retail::V2::Interval>]
             #     Set only if values should be bucketized into intervals. Must be set
@@ -361,7 +382,8 @@ module Google
             #     order](https://en.wikipedia.org/wiki/Natural_sort_order); numerical
             #     intervals are sorted in the order given by
             #     {::Google::Cloud::Retail::V2::SearchRequest::FacetSpec::FacetKey#intervals FacetSpec.FacetKey.intervals};
-            #     [FulfillmentInfo.ids][] are sorted in the order given by
+            #     {::Google::Cloud::Retail::V2::FulfillmentInfo#place_ids FulfillmentInfo.place_ids}
+            #     are sorted in the order given by
             #     {::Google::Cloud::Retail::V2::SearchRequest::FacetSpec::FacetKey#restricted_values FacetSpec.FacetKey.restricted_values}.
             # @!attribute [rw] query
             #   @return [::String]
@@ -437,12 +459,11 @@ module Google
             #     Examples:
             #
             #     * To boost products with product ID "product_1" or "product_2", and
-            #     color "Red" or "Blue":
-            #       ```
-            #       (id: ANY("product_1", "product_2"))
-            #       AND
-            #       (colorFamilies: ANY("Red", "Blue"))
-            #       ```
+            #     color
+            #       "Red" or "Blue":<br>
+            #       *(id: ANY("product_1", "product_2"))<br>*
+            #       *AND<br>*
+            #       *(colorFamilies: ANY("Red", "Blue"))<br>*
             # @!attribute [rw] boost
             #   @return [::Float]
             #     Strength of the condition boost, which should be in [-1, 1]. Negative
@@ -474,6 +495,11 @@ module Google
           #   @return [::Google::Cloud::Retail::V2::SearchRequest::QueryExpansionSpec::Condition]
           #     The condition under which query expansion should occur. Default to
           #     {::Google::Cloud::Retail::V2::SearchRequest::QueryExpansionSpec::Condition::DISABLED Condition.DISABLED}.
+          # @!attribute [rw] pin_unexpanded_results
+          #   @return [::Boolean]
+          #     Whether to pin unexpanded results. If this field is set to true,
+          #     unexpanded products are always at the top of the search results, followed
+          #     by the expanded results.
           class QueryExpansionSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -605,10 +631,9 @@ module Google
           #           }
           #         }
           #
-          #     For
-          #     {::Google::Cloud::Retail::V2::Product#fulfillment_info Product.fulfillment_info},
-          #     the rollup values is a double value with type
-          #     {::Google::Protobuf::Value google.protobuf.Value}. For example:
+          #     For {::Google::Cloud::Retail::V2::FulfillmentInfo FulfillmentInfo}, the rollup
+          #     values is a double value with type
+          #     {::Google::Protobuf::Value google.protobuf.Value}. For example,
           #     `{key: "pickupInStore.store1" value { number_value: 10 }}` means a there
           #     are 10 variants in this product are available in the store "store1".
           class SearchResult
@@ -670,6 +695,11 @@ module Google
           # @!attribute [rw] expanded_query
           #   @return [::Boolean]
           #     Bool describing whether query expansion has occurred.
+          # @!attribute [rw] pinned_result_count
+          #   @return [::Integer]
+          #     Number of pinned results. This field will only be set when expansion
+          #     happens and [SearchRequest.query_expansion_spec.pin_unexpanded_results][]
+          #     is set to true.
           class QueryExpansionInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
