@@ -50,6 +50,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :max_alternatives, :int32, 4
       optional :profanity_filter, :bool, 5
       optional :adaptation, :message, 20, "google.cloud.speech.v1p1beta1.SpeechAdaptation"
+      optional :transcript_normalization, :message, 24, "google.cloud.speech.v1p1beta1.TranscriptNormalization"
       repeated :speech_contexts, :message, 6, "google.cloud.speech.v1p1beta1.SpeechContext"
       optional :enable_word_time_offsets, :bool, 8
       optional :enable_word_confidence, :bool, 15

@@ -205,6 +205,12 @@ module Google
         #     `speech_contexts` field. For more information, see the [speech
         #     adaptation](https://cloud.google.com/speech-to-text/docs/adaptation)
         #     documentation.
+        # @!attribute [rw] transcript_normalization
+        #   @return [::Google::Cloud::Speech::V1p1beta1::TranscriptNormalization]
+        #     Use transcription normalization to automatically replace parts of the
+        #     transcript with phrases of your choosing. For StreamingRecognize, this
+        #     normalization only applies to stable partial transcripts (stability > 0.8)
+        #     and final transcripts.
         # @!attribute [rw] speech_contexts
         #   @return [::Array<::Google::Cloud::Speech::V1p1beta1::SpeechContext>]
         #     Array of {::Google::Cloud::Speech::V1p1beta1::SpeechContext SpeechContext}.
