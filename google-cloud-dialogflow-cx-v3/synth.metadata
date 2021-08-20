@@ -1,0 +1,30 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
+        "sha": "c89378df13b7d6df7d8a51fcf9529ed67d9ab938"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "06345f7b95c4b4a3ffe4303f1f2984ccc304b2e0",
+        "internalRef": "392067151"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "dialogflow/cx",
+        "apiVersion": "v3",
+        "language": "ruby",
+        "generator": "bazel"
+      }
+    }
+  ]
+}
