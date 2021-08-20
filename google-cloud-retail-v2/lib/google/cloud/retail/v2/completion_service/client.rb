@@ -30,8 +30,8 @@ module Google
           # Auto-completion service for retail.
           #
           # This feature is only available for users who have Retail Search enabled.
-          # Contact Retail Support (retail-search-support@google.com) if you are
-          # interested in using Retail Search.
+          # Please submit a form [here](https://cloud.google.com/contact) to contact
+          # cloud sales if you are interested in using Retail Search.
           #
           class Client
             include Paths
@@ -169,8 +169,8 @@ module Google
             # Completes the specified prefix with keyword suggestions.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Contact Retail Support (retail-search-support@google.com) if you are
-            # interested in using Retail Search.
+            # Please submit a form [here](https://cloud.google.com/contact) to contact
+            # cloud sales if you are interested in using Retail Search.
             #
             # @overload complete_query(request, options = nil)
             #   Pass arguments to `complete_query` via a request object, either of type
@@ -239,12 +239,14 @@ module Google
             #     * user-data
             #
             #     * cloud-retail
-            #       This option is not automatically enabled. Before using cloud-retail,
-            #       contact retail-search-support@google.com first.
+            #       This option requires additional allowlisting. Before using cloud-retail,
+            #       contact Cloud Retail support team first.
             #   @param max_suggestions [::Integer]
-            #     Completion max suggestions.
+            #     Completion max suggestions. If left unset or set to 0, then will fallback
+            #     to the configured value [CompletionConfig.max_suggestions][].
             #
-            #     The maximum allowed max suggestions is 20. The default value is 20.
+            #     The maximum allowed max suggestions is 20. If it is set higher, it will be
+            #     capped by 20.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Retail::V2::CompleteQueryResponse]
@@ -299,8 +301,8 @@ module Google
             # Request processing may be synchronous. Partial updating is not supported.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Contact Retail Support (retail-search-support@google.com) if you are
-            # interested in using Retail Search.
+            # Please submit a form [here](https://cloud.google.com/contact) to contact
+            # cloud sales if you are interested in using Retail Search.
             #
             # @overload import_completion_data(request, options = nil)
             #   Pass arguments to `import_completion_data` via a request object, either of type

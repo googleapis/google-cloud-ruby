@@ -66,6 +66,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.retail.v2.SearchRequest.QueryExpansionSpec" do
       optional :condition, :enum, 1, "google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.Condition"
+      optional :pin_unexpanded_results, :bool, 2
     end
     add_enum "google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.Condition" do
       value :CONDITION_UNSPECIFIED, 0
@@ -103,6 +104,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.retail.v2.SearchResponse.QueryExpansionInfo" do
       optional :expanded_query, :bool, 1
+      optional :pinned_result_count, :int64, 2
     end
   end
 end
