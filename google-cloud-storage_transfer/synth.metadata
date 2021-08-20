@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "fd8cdb70ea7e6254f4b2fdb5b68b7b80fa0cffcc"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "f0dc97767aaa135adc7ac9b2f2a7496bda9b87d8"
       }
     },
     {
@@ -26,5 +26,25 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-storage_transfer.gemspec",
+    "lib/google-cloud-storage_transfer.rb",
+    "lib/google/cloud/storage_transfer.rb",
+    "lib/google/cloud/storage_transfer/version.rb",
+    "test/google/cloud/storage_transfer/client_test.rb",
+    "test/google/cloud/storage_transfer/version_test.rb",
+    "test/helper.rb"
   ]
 }
