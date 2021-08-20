@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.4 / 2021-08-20
+
+#### Documentation
+
+* Updated various proto field descriptions
+
 ### 0.4.3 / 2021-08-11
 
 #### Bug Fixes
