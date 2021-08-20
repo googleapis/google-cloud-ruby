@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-network_connectivity
 checks for credentials are configured on the service Credentials class (such as
-`::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Credentials`):
+`::Google::Cloud::NetworkConnectivity::V1::HubService::Credentials`):
 
 * `NETWORK_CONNECTIVITY_CREDENTIALS` - Path to JSON file, or JSON contents
 * `NETWORK_CONNECTIVITY_KEYFILE` - Path to JSON file, or JSON contents

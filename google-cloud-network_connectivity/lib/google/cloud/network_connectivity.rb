@@ -48,8 +48,8 @@ module Google
       # Create a new client object for HubService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client](https://googleapis.dev/ruby/google-cloud-network_connectivity-v1alpha1/latest/Google/Cloud/NetworkConnectivity/V1alpha1/HubService/Client.html)
-      # for version V1alpha1 of the API.
+      # [Google::Cloud::NetworkConnectivity::V1::HubService::Client](https://googleapis.dev/ruby/google-cloud-network_connectivity-v1/latest/Google/Cloud/NetworkConnectivity/V1/HubService/Client.html)
+      # for version V1 of the API.
       # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the HubService service is
       # supported by that API version, and the corresponding gem is available, the
@@ -57,16 +57,15 @@ module Google
       #
       # ## About HubService
       #
-      # Network Connectivity Center is a hub-and-spoke abstraction for
-      # network connectivity management in Google Cloud. It reduces
-      # operational complexity through a simple, centralized connectivity management
-      # model.
+      # Network Connectivity Center is a hub-and-spoke abstraction for network
+      # connectivity management in Google Cloud. It reduces operational complexity
+      # through a simple, centralized connectivity management model.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1alpha1`.
+      #   Defaults to `:v1`.
       # @return [HubService::Client] A client object for the specified version.
       #
-      def self.hub_service version: :v1alpha1, &block
+      def self.hub_service version: :v1, &block
         require "google/cloud/network_connectivity/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::NetworkConnectivity
