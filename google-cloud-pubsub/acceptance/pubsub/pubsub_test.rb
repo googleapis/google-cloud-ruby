@@ -80,7 +80,7 @@ describe Google::Cloud::PubSub, :pubsub do
       _(topic.retention).must_equal new_topic_retention
 
       subscription = topic.subscribe "#{$topic_prefix}-sub-topic-retention"
-      _(subscription.topic_retention).must_be :nil?
+      _(subscription.topic_retention).must_equal new_topic_retention
       subscription.reload!
       _(subscription.topic_retention).must_equal new_topic_retention
 
