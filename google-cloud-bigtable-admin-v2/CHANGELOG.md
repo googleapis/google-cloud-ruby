@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 / 2021-08-20
+
+#### Features
+
+* Add MultiClusterRoutingUseAny#cluster_ids field
+
 ### 0.5.4 / 2021-08-11
 
 #### Bug Fixes
