@@ -1,5 +1,15 @@
 # Release History
 
+### 1.0.0 / 2021-08-20
+
+#### ⚠ BREAKING CHANGES
+
+* **network_connectivity:** Use the generally-available service version (v1) by default
+
+#### Features
+
+* Use the generally-available service version (v1) by default
+
 ### 0.2.2 / 2021-07-12
 
 #### Documentation
