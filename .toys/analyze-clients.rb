@@ -14,13 +14,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-desc "Runs several status analyses on clients and reports results"
+desc "Runs various analyses on client status and reports results."
 
-ANALYSES = [:unreleased, :unwrapped]
+ANALYSES = {
+  unreleased: "List gems that have no releases.",
+  unwrapped: "List gapic gems that have no corresponding wrapper.",
+  gapic_prerelease: "List gapic gems whose service is GA but do not have a 1.0 release",
+  wrapper_prerelease: "List wrapper gems whose service is GA but do not have a 1.0 release"
+}
 
-flag :all
-ANALYSES.each do |analysis|
-  flag analysis, "--[no-]#{analysis.to_s.tr '_', '-'}"
+at_least_one desc: "Analyses" do
+  flag :all, desc: "Run all analyses except those explicitly disabled"
+  ANALYSES.each do |analysis, desc|
+    flag analysis, "--[no-]#{analysis.to_s.tr '_', '-'}", desc: desc.strip
+  end
 end
 
 include :exec, e: true
@@ -28,7 +35,7 @@ include :terminal
 
 def run
   require "repo_info"
-  ANALYSES.each do |analysis|
+  ANALYSES.keys.each do |analysis|
     next unless all || self[analysis]
     name = "#{analysis}_analysis"
     puts "**** Running #{name} ... ****", :bold
@@ -86,6 +93,34 @@ def unwrapped_analysis
   all_versioned_gems.each do |gem_name|
     unless all_wrapper_gems.include? expected_wrapper_of gem_name
       puts gem_name
+      count += 1
+    end
+  end
+  puts "Total: #{count}", :cyan
+end
+
+def wrapper_prerelease_analysis
+  count = 0
+  all_versioned_gems.each do |gem_name|
+    next unless /-v\d+$/.match? gem_name
+    wrapper_name = expected_wrapper_of gem_name
+    next unless all_wrapper_gems.include? wrapper_name
+    version = gem_version wrapper_name
+    if version.start_with? "0."
+      puts "#{wrapper_name} #{version}"
+      count += 1
+    end
+  end
+  puts "Total: #{count}", :cyan
+end
+
+def gapic_prerelease_analysis
+  count = 0
+  all_versioned_gems.each do |gem_name|
+    next unless /-v\d+$/.match? gem_name
+    version = gem_version gem_name
+    if version.start_with? "0."
+      puts "#{gem_name} #{version}"
       count += 1
     end
   end
