@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.1 / 2021-08-23
+
+#### Documentation
+
+* Update sales contact link for retail search
+
 ### 1.1.0 / 2021-08-06
 
 #### Features
