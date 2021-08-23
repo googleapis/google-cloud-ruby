@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
-        "sha": "09ce06e1313bb4c4498dfe91c2f94df86c5d2c9b"
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "74d41c28e19fa179a5231149ecb66229395c3036"
       }
     },
     {
@@ -26,5 +26,25 @@
         "generator": "gapic-generator-ruby"
       }
     }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-dialogflow-cx.gemspec",
+    "lib/google-cloud-dialogflow-cx.rb",
+    "lib/google/cloud/dialogflow/cx.rb",
+    "lib/google/cloud/dialogflow/cx/version.rb",
+    "test/google/cloud/dialogflow/cx/client_test.rb",
+    "test/google/cloud/dialogflow/cx/version_test.rb",
+    "test/helper.rb"
   ]
 }
