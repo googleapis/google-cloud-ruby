@@ -26,7 +26,7 @@ module Google
         ##
         # @private
         # Represents the Translation API REST service, exposing the API calls.
-        class Service #:nodoc:
+        class Service # :nodoc:
           API_VERSION = "v2".freeze
           API_HOST = "translate.googleapis.com".freeze
 
@@ -161,14 +161,14 @@ module Google
             self.reasons = ["rateLimitExceeded", "userRateLimitExceeded"]
             self.backoff = ->(retries) { sleep retries.to_i }
 
-            def initialize options = {} #:nodoc:
+            def initialize options = {} # :nodoc:
               @max_retries  = (options[:retries]    || Backoff.retries).to_i
               @http_codes   = (options[:http_codes] || Backoff.http_codes).to_a
               @reasons      = (options[:reasons]    || Backoff.reasons).to_a
               @backoff      =  options[:backoff]    || Backoff.backoff
             end
 
-            def execute #:nodoc:
+            def execute # :nodoc:
               current_retries = 0
               loop do
                 response = yield # Expecting Faraday::Response
@@ -181,7 +181,7 @@ module Google
 
             protected
 
-            def retry? result, current_retries #:nodoc:
+            def retry? result, current_retries # :nodoc:
               if current_retries < @max_retries
                 return true if retry_http_code? result
                 return true if retry_error_reason? result
@@ -189,11 +189,11 @@ module Google
               false
             end
 
-            def retry_http_code? response #:nodoc:
+            def retry_http_code? response # :nodoc:
               @http_codes.include? response.status
             end
 
-            def retry_error_reason? response #:nodoc:
+            def retry_error_reason? response # :nodoc:
               result = JSON.parse response.body
               if result && result["error"] && result["error"]["errors"]
                 Array(result["error"]["errors"]).each do |error|
