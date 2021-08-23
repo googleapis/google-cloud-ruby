@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.0 / 2021-08-23
+
+#### Features
+
+* Support for transcript normalization
+
 ### 0.10.1 / 2021-08-11
 
 #### Bug Fixes
