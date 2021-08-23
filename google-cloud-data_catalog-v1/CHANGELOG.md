@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.2 / 2021-08-23
+
+#### Documentation
+
+* Fix links to the search syntax reference
+
 ### 0.8.1 / 2021-08-11
 
 #### Bug Fixes
