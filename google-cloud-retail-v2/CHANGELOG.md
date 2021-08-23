@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2021-08-23
+
+#### Features
+
+* Support for pinned search results
+
 ### 0.4.2 / 2021-08-11
 
 #### Bug Fixes
