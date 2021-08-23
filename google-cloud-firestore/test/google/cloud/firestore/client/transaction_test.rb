@@ -398,54 +398,6 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
   end
 
   describe :retry do
-
-    it "retries when an unavailable error is raised" do
-      # Unable to use mocks to define the responses, so stub the methods instead
-      def firestore_mock.begin_transaction req, options
-        if @first_begin_transaction.nil?
-          @first_begin_transaction = true
-          raise "bad first begin_transaction" unless req[:options].read_write.retry_transaction.empty?
-          return Google::Cloud::Firestore::V1::BeginTransactionResponse.new(transaction: "transaction123")
-        end
-
-        raise "bad second begin_transaction" unless req[:options].read_write.retry_transaction == "transaction123"
-        Google::Cloud::Firestore::V1::BeginTransactionResponse.new(transaction: "new_transaction_xyz")
-      end
-      def firestore_mock.commit req, options
-        if @first_commit.nil?
-          @first_commit = true
-          raise "bad first commit" unless req[:transaction] == "transaction123"
-          raise Google::Cloud::UnavailableError.new("unavailable")
-        end
-
-        raise "bad second commit" unless req[:transaction] == "new_transaction_xyz"
-        Google::Cloud::Firestore::V1::CommitResponse.new(
-          commit_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now),
-          write_results: [Google::Cloud::Firestore::V1::WriteResult.new(
-            update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(Time.now))]
-          )
-      end
-
-      def firestore.set_sleep_mock sleep_mock
-        @sleep_mock = sleep_mock
-      end
-      def firestore.sleep num
-        @sleep_mock.sleep num
-      end
-      sleep_mock = Minitest::Mock.new
-      sleep_mock.expect :sleep, nil, [1.0]
-      firestore.set_sleep_mock sleep_mock
-
-      firestore.transaction do |tx|
-        tx.create(document_path, { name: "Alice" })
-        tx.set(document_path, { name: "Alice" })
-        tx.update(document_path, { name: "Alice" })
-        tx.delete document_path
-      end
-
-      sleep_mock.verify
-    end
-
     it "retries multiple times when an unavailable error is raised" do
       # Unable to use mocks to define the responses, so stub the methods instead
       def firestore_mock.begin_transaction req, options
@@ -488,12 +440,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
       sleep_mock.expect :sleep, nil, [1.3*1.3]
       firestore.set_sleep_mock sleep_mock
 
-      firestore.transaction do |tx|
-        tx.create(document_path, { name: "Alice" })
-        tx.set(document_path, { name: "Alice" })
-        tx.update(document_path, { name: "Alice" })
-        tx.delete document_path
-      end
+      do_transaction
 
       sleep_mock.verify
     end
@@ -531,12 +478,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
       sleep_mock.expect :sleep, nil, [1.0]
       firestore.set_sleep_mock sleep_mock
 
-      firestore.transaction do |tx|
-        tx.create(document_path, { name: "Alice" })
-        tx.set(document_path, { name: "Alice" })
-        tx.update(document_path, { name: "Alice" })
-        tx.delete document_path
-      end
+      do_transaction
 
       sleep_mock.verify
     end
@@ -551,14 +493,104 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
       end
 
       error = expect do
-        firestore.transaction do |tx|
-          tx.create(document_path, { name: "Alice" })
-          tx.set(document_path, { name: "Alice" })
-          tx.update(document_path, { name: "Alice" })
-          tx.delete document_path
-        end
+        do_transaction
       end.must_raise RuntimeError
       _(error.message).must_equal "unsupported"
+    end
+
+    describe "success on second attempt" do
+      before do
+        def firestore_mock.begin_transaction req, options
+          if @first_begin_transaction.nil?
+            @first_begin_transaction = true
+            return Google::Cloud::Firestore::V1::BeginTransactionResponse.new(transaction: "transaction123")
+          end
+          Google::Cloud::Firestore::V1::BeginTransactionResponse.new(transaction: "new_transaction_xyz")
+        end
+
+        def firestore_mock.set_commit_response_and_error resp, err
+          @commit_resp = resp
+          @first_commit_error = err
+        end
+
+        def firestore_mock.commit req, options
+          if @first_commit.nil?
+            @first_commit = true
+            raise @first_commit_error
+          end
+          @commit_resp
+        end
+
+        @sleep_mock = Minitest::Mock.new
+        @sleep_mock.expect :sleep, nil, [1.0]
+
+        def firestore.set_sleep_mock sleep_mock
+          @sleep_mock = sleep_mock
+        end
+
+        def firestore.sleep num
+          @sleep_mock.sleep num
+        end
+        firestore.set_sleep_mock @sleep_mock
+      end
+
+      after do
+        @sleep_mock.verify
+      end
+
+      it "retries when Google::Cloud::AbortedError is raised" do
+        firestore_mock.set_commit_response_and_error write_commit_resp, Google::Cloud::AbortedError.new("aborted")
+        do_transaction
+      end
+
+      it "retries when Google::Cloud::CanceledError is raised" do
+        firestore_mock.set_commit_response_and_error write_commit_resp, Google::Cloud::CanceledError.new("canceled")
+        do_transaction
+      end
+
+      it "retries when Google::Cloud::UnknownError is raised" do
+        firestore_mock.set_commit_response_and_error write_commit_resp, Google::Cloud::UnknownError.new("unknown")
+        do_transaction
+      end
+
+      it "retries when Google::Cloud::DeadlineExceededError is raised" do
+        firestore_mock.set_commit_response_and_error write_commit_resp, Google::Cloud::DeadlineExceededError.new("deadline exceeded")
+        do_transaction
+      end
+
+      it "retries when Google::Cloud::InternalError is raised" do
+        firestore_mock.set_commit_response_and_error write_commit_resp, Google::Cloud::InternalError.new("internal")
+        do_transaction
+      end
+
+      it "retries when Google::Cloud::UnauthenticatedError is raised" do
+        firestore_mock.set_commit_response_and_error write_commit_resp, Google::Cloud::UnauthenticatedError.new("unauthenticated")
+        do_transaction
+      end
+
+      it "retries when Google::Cloud::ResourceExhaustedError is raised" do
+        firestore_mock.set_commit_response_and_error write_commit_resp, Google::Cloud::ResourceExhaustedError.new("resource exhausted")
+        do_transaction
+      end
+
+      it "retries when Google::Cloud::UnavailableError is raised" do
+        firestore_mock.set_commit_response_and_error write_commit_resp, Google::Cloud::UnavailableError.new("unavailable")
+        do_transaction
+      end
+
+      it "retries when Google::Cloud::InvalidArgumentError with message matching 'transaction has expired' is raised" do
+        firestore_mock.set_commit_response_and_error write_commit_resp, Google::Cloud::InvalidArgumentError.new("The transaction has expired.")
+        do_transaction
+      end
+    end
+
+    def do_transaction
+      firestore.transaction do |tx|
+        tx.create(document_path, { name: "Alice" })
+        tx.set(document_path, { name: "Alice" })
+        tx.update(document_path, { name: "Alice" })
+        tx.delete document_path
+      end
     end
   end
 

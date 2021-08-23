@@ -628,7 +628,24 @@ module Google
             commit_return = transaction.commit
             # Conditional return value, depending on truthy commit_response
             commit_response ? commit_return : transaction_return
-          rescue Google::Cloud::UnavailableError => e
+          rescue Google::Cloud::AbortedError,
+                 Google::Cloud::CanceledError,
+                 Google::Cloud::UnknownError,
+                 Google::Cloud::DeadlineExceededError,
+                 Google::Cloud::InternalError,
+                 Google::Cloud::UnauthenticatedError,
+                 Google::Cloud::ResourceExhaustedError,
+                 Google::Cloud::UnavailableError,
+                 Google::Cloud::InvalidArgumentError => e
+
+            if e.instance_of? Google::Cloud::InvalidArgumentError
+              # Return if a previous call was retried but ultimately succeeded
+              return nil if backoff[:current].positive?
+              # The Firestore backend uses "INVALID_ARGUMENT" for transaction IDs that have expired.
+              # While INVALID_ARGUMENT is generally not retryable, we retry this specific case.
+              raise e unless e.message =~ /transaction has expired/
+            end
+
             # Re-raise if retried more than the max
             raise e if backoff[:current] > backoff[:max]
 
@@ -643,12 +660,6 @@ module Google
             transaction = Transaction.from_client \
               self, previous_transaction: transaction.transaction_id
             retry
-          rescue Google::Cloud::InvalidArgumentError => e
-            # Return if a previous call was retried but ultimately succeeded
-            return nil if backoff[:current].positive?
-
-            # Re-raise error.
-            raise e
           rescue StandardError => e
             # Rollback transaction when handling unexpected error
             transaction.rollback rescue nil
