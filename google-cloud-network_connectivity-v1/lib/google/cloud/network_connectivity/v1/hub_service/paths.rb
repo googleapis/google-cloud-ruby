@@ -97,6 +97,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Network resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/global/networks/{resource_id}`
+            #
+            # @param project [String]
+            # @param resource_id [String]
+            #
+            # @return [::String]
+            def network_path project:, resource_id:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/global/networks/#{resource_id}"
+            end
+
+            ##
             # Create a fully-qualified Spoke resource string.
             #
             # The resource will be in the following format:

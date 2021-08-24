@@ -51,6 +51,14 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Cloud::NetworkConnectivity::V1::State]
         #     Output only. The current lifecycle state of this hub.
+        # @!attribute [rw] routing_vpcs
+        #   @return [::Array<::Google::Cloud::NetworkConnectivity::V1::RoutingVPC>]
+        #     The VPC network associated with this hub's spokes. All of the VPN tunnels,
+        #     VLAN attachments, and router appliance instances referenced by this hub's
+        #     spokes must belong to this VPC network.
+        #
+        #     This field is read-only. Network Connectivity Center automatically
+        #     populates it based on the set of spokes attached to the hub.
         class Hub
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -63,6 +71,16 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # RoutingsVPC contains information about a VPC network that is associated with
+        # a hub's spokes.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     The URI of a VPC network.
+        class RoutingVPC
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A spoke represents a connection between your Google Cloud network resources
@@ -395,56 +413,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#deactivate_spoke HubService.DeactivateSpoke}.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the spoke to deactivate.
-        # @!attribute [rw] request_id
-        #   @return [::String]
-        #     Optional. A unique request ID (optional). If you specify this ID, you can use it
-        #     in cases when you need to retry your request. When you need to retry, this
-        #     ID lets the server know that it can ignore the request if it has already
-        #     been completed. The server guarantees that for at least 60 minutes after
-        #     the first request.
-        #
-        #     For example, consider a situation where you make an initial request and
-        #     the request times out. If you make the request again with the same request
-        #     ID, the server can check to see whether the original operation
-        #     was received. If it was, the server ignores the second request. This
-        #     behavior prevents clients from mistakenly creating duplicate commitments.
-        #
-        #     The request ID must be a valid UUID, with the exception that zero UUID is
-        #     not supported (00000000-0000-0000-0000-000000000000).
-        class DeactivateSpokeRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The request for {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#activate_spoke HubService.ActivateSpoke}.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the spoke to activate.
-        # @!attribute [rw] request_id
-        #   @return [::String]
-        #     Optional. A unique request ID (optional). If you specify this ID, you can use it
-        #     in cases when you need to retry your request. When you need to retry, this
-        #     ID lets the server know that it can ignore the request if it has already
-        #     been completed. The server guarantees that for at least 60 minutes after
-        #     the first request.
-        #
-        #     For example, consider a situation where you make an initial request and
-        #     the request times out. If you make the request again with the same request
-        #     ID, the server can check to see whether the original operation
-        #     was received. If it was, the server ignores the second request. This
-        #     behavior prevents clients from mistakenly creating duplicate commitments.
-        #
-        #     The request ID must be a valid UUID, with the exception that zero UUID is
-        #     not supported (00000000-0000-0000-0000-000000000000).
-        class ActivateSpokeRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # A collection of Cloud VPN tunnel resources. These resources should be
         # redundant HA VPN tunnels that all advertise the same prefixes to Google
         # Cloud. Alternatively, in a passive/active configuration, all tunnels
@@ -455,12 +423,8 @@ module Google
         # @!attribute [rw] site_to_site_data_transfer
         #   @return [::Boolean]
         #     A value that controls whether site-to-site data transfer is enabled for
-        #     these resources. If true, routes are propagated between the spoke
-        #     associated with these resources and other spokes in the hub that have data
-        #     transfer enabled. If false, the spoke associated with these resources
-        #     provides connectivity only between the external site and Google Cloud. In
-        #     regions where data transfer is unsupported, you cannot set this field
-        #     to true.
+        #     these resources. This field is set to false by default, but you must set it
+        #     to true. Note that data transfer is available only in supported locations.
         class LinkedVpnTunnels
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -476,12 +440,8 @@ module Google
         # @!attribute [rw] site_to_site_data_transfer
         #   @return [::Boolean]
         #     A value that controls whether site-to-site data transfer is enabled for
-        #     these resources. If true, routes are propagated between the spoke
-        #     associated with these resources and other spokes in the hub that have data
-        #     transfer enabled. If false, the spoke associated with these resources
-        #     provides connectivity only between the external site and Google Cloud. In
-        #     regions where data transfer is unsupported, you cannot set this field
-        #     to true.
+        #     these resources. This field is set to false by default, but you must set it
+        #     to true. Note that data transfer is available only in supported locations.
         class LinkedInterconnectAttachments
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -496,12 +456,8 @@ module Google
         # @!attribute [rw] site_to_site_data_transfer
         #   @return [::Boolean]
         #     A value that controls whether site-to-site data transfer is enabled for
-        #     these resources. If true, routes are propagated between the spoke
-        #     associated with these resources and other spokes in the hub that have data
-        #     transfer enabled. If false, the spoke associated with these resources
-        #     provides connectivity only between the external site and Google Cloud. In
-        #     regions where data transfer is unsupported, you cannot set this field
-        #     to true.
+        #     these resources. This field is set to false by default, but you must set it
+        #     to true. Note that data transfer is available only in supported locations.
         class LinkedRouterApplianceInstances
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

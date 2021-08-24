@@ -81,10 +81,6 @@ module Google
 
                 default_config.rpcs.update_spoke.timeout = 60.0
 
-                default_config.rpcs.deactivate_spoke.timeout = 60.0
-
-                default_config.rpcs.activate_spoke.timeout = 60.0
-
                 default_config.rpcs.delete_spoke.timeout = 60.0
 
                 default_config
@@ -910,177 +906,6 @@ module Google
             end
 
             ##
-            # Deactivates the specified spoke. Deactivating keeps the spoke information
-            # for future re-activation, but disconnects the Google Cloud network from
-            # non-Google-Cloud network.
-            #
-            # @overload deactivate_spoke(request, options = nil)
-            #   Pass arguments to `deactivate_spoke` via a request object, either of type
-            #   {::Google::Cloud::NetworkConnectivity::V1::DeactivateSpokeRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Cloud::NetworkConnectivity::V1::DeactivateSpokeRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload deactivate_spoke(name: nil, request_id: nil)
-            #   Pass arguments to `deactivate_spoke` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param name [::String]
-            #     Required. The name of the spoke to deactivate.
-            #   @param request_id [::String]
-            #     Optional. A unique request ID (optional). If you specify this ID, you can use it
-            #     in cases when you need to retry your request. When you need to retry, this
-            #     ID lets the server know that it can ignore the request if it has already
-            #     been completed. The server guarantees that for at least 60 minutes after
-            #     the first request.
-            #
-            #     For example, consider a situation where you make an initial request and
-            #     the request times out. If you make the request again with the same request
-            #     ID, the server can check to see whether the original operation
-            #     was received. If it was, the server ignores the second request. This
-            #     behavior prevents clients from mistakenly creating duplicate commitments.
-            #
-            #     The request ID must be a valid UUID, with the exception that zero UUID is
-            #     not supported (00000000-0000-0000-0000-000000000000).
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Gapic::Operation]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Gapic::Operation]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            def deactivate_spoke request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkConnectivity::V1::DeactivateSpokeRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.deactivate_spoke.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::NetworkConnectivity::V1::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {
-                "name" => request.name
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.deactivate_spoke.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.deactivate_spoke.retry_policy
-
-              options.apply_defaults timeout:      @config.timeout,
-                                     metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @hub_service_stub.call_rpc :deactivate_spoke, request, options: options do |response, operation|
-                response = ::Gapic::Operation.new response, @operations_client, options: options
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
-            # Activates the specified spoke. Activating reconnects the Google Cloud
-            # network with the non-Google-Cloud network.
-            #
-            # @overload activate_spoke(request, options = nil)
-            #   Pass arguments to `activate_spoke` via a request object, either of type
-            #   {::Google::Cloud::NetworkConnectivity::V1::ActivateSpokeRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Cloud::NetworkConnectivity::V1::ActivateSpokeRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload activate_spoke(name: nil, request_id: nil)
-            #   Pass arguments to `activate_spoke` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param name [::String]
-            #     Required. The name of the spoke to activate.
-            #   @param request_id [::String]
-            #     Optional. A unique request ID (optional). If you specify this ID, you can use it
-            #     in cases when you need to retry your request. When you need to retry, this
-            #     ID lets the server know that it can ignore the request if it has already
-            #     been completed. The server guarantees that for at least 60 minutes after
-            #     the first request.
-            #
-            #     For example, consider a situation where you make an initial request and
-            #     the request times out. If you make the request again with the same request
-            #     ID, the server can check to see whether the original operation
-            #     was received. If it was, the server ignores the second request. This
-            #     behavior prevents clients from mistakenly creating duplicate commitments.
-            #
-            #     The request ID must be a valid UUID, with the exception that zero UUID is
-            #     not supported (00000000-0000-0000-0000-000000000000).
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Gapic::Operation]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Gapic::Operation]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            def activate_spoke request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetworkConnectivity::V1::ActivateSpokeRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.activate_spoke.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::NetworkConnectivity::V1::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {
-                "name" => request.name
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.activate_spoke.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.activate_spoke.retry_policy
-
-              options.apply_defaults timeout:      @config.timeout,
-                                     metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @hub_service_stub.call_rpc :activate_spoke, request, options: options do |response, operation|
-                response = ::Gapic::Operation.new response, @operations_client, options: options
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
             # Deletes the specified spoke.
             #
             # @overload delete_spoke(request, options = nil)
@@ -1345,16 +1170,6 @@ module Google
                 #
                 attr_reader :update_spoke
                 ##
-                # RPC-specific configuration for `deactivate_spoke`
-                # @return [::Gapic::Config::Method]
-                #
-                attr_reader :deactivate_spoke
-                ##
-                # RPC-specific configuration for `activate_spoke`
-                # @return [::Gapic::Config::Method]
-                #
-                attr_reader :activate_spoke
-                ##
                 # RPC-specific configuration for `delete_spoke`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1380,10 +1195,6 @@ module Google
                   @create_spoke = ::Gapic::Config::Method.new create_spoke_config
                   update_spoke_config = parent_rpcs.update_spoke if parent_rpcs.respond_to? :update_spoke
                   @update_spoke = ::Gapic::Config::Method.new update_spoke_config
-                  deactivate_spoke_config = parent_rpcs.deactivate_spoke if parent_rpcs.respond_to? :deactivate_spoke
-                  @deactivate_spoke = ::Gapic::Config::Method.new deactivate_spoke_config
-                  activate_spoke_config = parent_rpcs.activate_spoke if parent_rpcs.respond_to? :activate_spoke
-                  @activate_spoke = ::Gapic::Config::Method.new activate_spoke_config
                   delete_spoke_config = parent_rpcs.delete_spoke if parent_rpcs.respond_to? :delete_spoke
                   @delete_spoke = ::Gapic::Config::Method.new delete_spoke_config
 

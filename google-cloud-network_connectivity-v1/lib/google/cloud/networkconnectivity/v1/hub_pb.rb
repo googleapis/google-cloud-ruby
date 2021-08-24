@@ -20,6 +20,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :description, :string, 5
       optional :unique_id, :string, 8
       optional :state, :enum, 9, "google.cloud.networkconnectivity.v1.State"
+      repeated :routing_vpcs, :message, 10, "google.cloud.networkconnectivity.v1.RoutingVPC"
+    end
+    add_message "google.cloud.networkconnectivity.v1.RoutingVPC" do
+      optional :uri, :string, 1
     end
     add_message "google.cloud.networkconnectivity.v1.Spoke" do
       optional :name, :string, 1
@@ -94,14 +98,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :request_id, :string, 2
     end
-    add_message "google.cloud.networkconnectivity.v1.DeactivateSpokeRequest" do
-      optional :name, :string, 1
-      optional :request_id, :string, 2
-    end
-    add_message "google.cloud.networkconnectivity.v1.ActivateSpokeRequest" do
-      optional :name, :string, 1
-      optional :request_id, :string, 2
-    end
     add_message "google.cloud.networkconnectivity.v1.LinkedVpnTunnels" do
       repeated :uris, :string, 1
       optional :site_to_site_data_transfer, :bool, 2
@@ -132,6 +128,7 @@ module Google
     module NetworkConnectivity
       module V1
         Hub = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.Hub").msgclass
+        RoutingVPC = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.RoutingVPC").msgclass
         Spoke = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.Spoke").msgclass
         ListHubsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.ListHubsRequest").msgclass
         ListHubsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.ListHubsResponse").msgclass
@@ -145,8 +142,6 @@ module Google
         CreateSpokeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.CreateSpokeRequest").msgclass
         UpdateSpokeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.UpdateSpokeRequest").msgclass
         DeleteSpokeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.DeleteSpokeRequest").msgclass
-        DeactivateSpokeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.DeactivateSpokeRequest").msgclass
-        ActivateSpokeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.ActivateSpokeRequest").msgclass
         LinkedVpnTunnels = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.LinkedVpnTunnels").msgclass
         LinkedInterconnectAttachments = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.LinkedInterconnectAttachments").msgclass
         LinkedRouterApplianceInstances = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.networkconnectivity.v1.LinkedRouterApplianceInstances").msgclass
