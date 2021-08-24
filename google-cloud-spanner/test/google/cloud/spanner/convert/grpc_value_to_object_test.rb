@@ -134,4 +134,13 @@ describe Google::Cloud::Spanner::Convert, :grpc_value_to_object, :mock_spanner d
     raw = Google::Cloud::Spanner::Convert.grpc_value_to_object value, type
     _(raw).must_equal BigDecimal(number)
   end
+
+  it "converts a JSON value" do
+    venue_detail = { "name" => "ABC", "open" => true, "rating" => 10 }
+
+    value = Google::Protobuf::Value.new(string_value: venue_detail.to_json)
+    type = Google::Spanner::V1::Type.new(code: :JSON)
+    raw = Google::Cloud::Spanner::Convert.grpc_value_to_object value, type
+    _(raw).must_equal venue_detail
+  end
 end

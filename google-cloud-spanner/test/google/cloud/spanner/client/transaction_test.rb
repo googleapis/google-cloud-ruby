@@ -480,6 +480,42 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
   end
 
   it "commits multiple mutations" do
+    mutations = [
+      Google::Cloud::Spanner::V1::Mutation.new(
+        update: Google::Cloud::Spanner::V1::Mutation::Write.new(
+          table: "users", columns: %w(id name active address),
+          values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([1, "Charlie", false, { postcode: 1234 }]).list_value]
+        )
+      ),
+      Google::Cloud::Spanner::V1::Mutation.new(
+        insert: Google::Cloud::Spanner::V1::Mutation::Write.new(
+          table: "users", columns: %w(id name active),
+          values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([2, "Harvey", true]).list_value]
+        )
+      ),
+      Google::Cloud::Spanner::V1::Mutation.new(
+        insert_or_update: Google::Cloud::Spanner::V1::Mutation::Write.new(
+          table: "users", columns: %w(id name active),
+          values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([3, "Marley", false]).list_value]
+        )
+      ),
+      Google::Cloud::Spanner::V1::Mutation.new(
+        replace: Google::Cloud::Spanner::V1::Mutation::Write.new(
+          table: "users", columns: %w(id name active),
+          values: [Google::Cloud::Spanner::Convert.object_to_grpc_value([4, "Henry", true]).list_value]
+        )
+      ),
+      Google::Cloud::Spanner::V1::Mutation.new(
+        delete: Google::Cloud::Spanner::V1::Mutation::Delete.new(
+          table: "users", key_set: Google::Cloud::Spanner::V1::KeySet.new(
+            keys: [1, 2, 3, 4, 5].map do |i|
+              Google::Cloud::Spanner::Convert.object_to_grpc_value([i]).list_value
+            end
+          )
+        )
+      )
+    ]
+
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [{ database: database_path(instance_id, database_id), session: nil }, default_options]
     mock.expect :begin_transaction, transaction_grpc, [{
@@ -496,7 +532,7 @@ describe Google::Cloud::Spanner::Client, :transaction, :mock_spanner do
     spanner.service.mocked_service = mock
 
     timestamp = client.transaction do |tx|
-      tx.update "users", [{ id: 1, name: "Charlie", active: false }]
+      tx.update "users", [{ id: 1, name: "Charlie", active: false, address: { "postcode" => 1234 } }]
       tx.insert "users", [{ id: 2, name: "Harvey",  active: true }]
       tx.upsert "users", [{ id: 3, name: "Marley",  active: false }]
       tx.replace "users", [{ id: 4, name: "Henry",  active: true }]

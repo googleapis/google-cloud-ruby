@@ -99,8 +99,7 @@ module Google
               if field.is_a? Fields
                 field.struct(obj).to_grpc_value
               else
-                raise ArgumentError,
-                      "A hash value cannot be set to type #{field}."
+                Google::Protobuf::Value.new string_value: obj.to_json
               end
             else
               if obj.respond_to?(:read) && obj.respond_to?(:rewind)
@@ -223,6 +222,8 @@ module Google
               Data.from_grpc value.list_value.values, type.struct_type.fields
             when :NUMERIC
               BigDecimal value.string_value
+            when :JSON
+              JSON.parse value.string_value
             end
           end
 

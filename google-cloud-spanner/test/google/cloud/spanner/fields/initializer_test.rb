@@ -16,13 +16,13 @@ require "helper"
 
 describe Google::Cloud::Spanner::Fields, :initializer do
   it "creates with an array of fields" do
-    fields = Google::Cloud::Spanner::Fields.new [:INT64, :STRING, :BOOL]
+    fields = Google::Cloud::Spanner::Fields.new [:INT64, :STRING, :BOOL, :JSON]
 
-    _(fields.types).must_equal [:INT64, :STRING, :BOOL]
-    _(fields.keys).must_equal [0, 1, 2]
-    _(fields.pairs).must_equal [[0, :INT64], [1, :STRING], [2, :BOOL]]
-    _(fields.to_a).must_equal [:INT64, :STRING, :BOOL]
-    _(fields.to_h).must_equal({ 0=>:INT64, 1=>:STRING, 2=>:BOOL })
+    _(fields.types).must_equal [:INT64, :STRING, :BOOL, :JSON]
+    _(fields.keys).must_equal [0, 1, 2, 3]
+    _(fields.pairs).must_equal [[0, :INT64], [1, :STRING], [2, :BOOL], [3, :JSON]]
+    _(fields.to_a).must_equal [:INT64, :STRING, :BOOL, :JSON]
+    _(fields.to_h).must_equal({ 0 => :INT64, 1 => :STRING, 2 => :BOOL, 3 => :JSON })
   end
 
   it "creates with an array of type pairs" do
