@@ -53,13 +53,6 @@ module Google
             rpc :CreateSpoke, ::Google::Cloud::NetworkConnectivity::V1::CreateSpokeRequest, ::Google::Longrunning::Operation
             # Updates the parameters of the specified spoke.
             rpc :UpdateSpoke, ::Google::Cloud::NetworkConnectivity::V1::UpdateSpokeRequest, ::Google::Longrunning::Operation
-            # Deactivates the specified spoke. Deactivating keeps the spoke information
-            # for future re-activation, but disconnects the Google Cloud network from
-            # non-Google-Cloud network.
-            rpc :DeactivateSpoke, ::Google::Cloud::NetworkConnectivity::V1::DeactivateSpokeRequest, ::Google::Longrunning::Operation
-            # Activates the specified spoke. Activating reconnects the Google Cloud
-            # network with the non-Google-Cloud network.
-            rpc :ActivateSpoke, ::Google::Cloud::NetworkConnectivity::V1::ActivateSpokeRequest, ::Google::Longrunning::Operation
             # Deletes the specified spoke.
             rpc :DeleteSpoke, ::Google::Cloud::NetworkConnectivity::V1::DeleteSpokeRequest, ::Google::Longrunning::Operation
           end

@@ -55,16 +55,6 @@
                 "update_spoke"
               ]
             },
-            "DeactivateSpoke": {
-              "methods": [
-                "deactivate_spoke"
-              ]
-            },
-            "ActivateSpoke": {
-              "methods": [
-                "activate_spoke"
-              ]
-            },
             "DeleteSpoke": {
               "methods": [
                 "delete_spoke"
