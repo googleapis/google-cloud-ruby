@@ -1,10 +1,16 @@
 # Release History
 
+### 2.10.0 / 2021-08-24
+
+#### Features
+
+* add field JSON type support
+
 ### 2.9.0 / 2021-07-26
 
 #### Features
 
-* support request tagging ([#8163](https://www.github.com/googleapis/google-cloud-ruby/issues/8163))
+* support request tagging
 
 ### 2.8.1 / 2021-07-08
 
@@ -16,44 +22,25 @@
 
 #### Features
 
-* create instance using processing units/node count ([#11379](https://www.github.com/googleapis/google-cloud-ruby/issues/11379))
-  * create instance using processing units/node count
-  * fix typo
-  * removed node count and processing unit validations
-  * update orignal value on instance save
-  * remove orignal_values to current_valuess
+* create instance using processing units/node count
 
 ### 2.7.0 / 2021-06-09
 
 #### Features
 
-* add the support of optimizer statistics package ([#7591](https://www.github.com/googleapis/google-cloud-ruby/issues/7591))
-  * feat(spanner): add the support of optimizer statistics package
-  * Fix rubocop issues.
-  * Fix the env issue.
-* database create time access method ([#11617](https://www.github.com/googleapis/google-cloud-ruby/issues/11617))
-  * added database create time method
-  * remove assert for databse create time
-* RPC priority request option. ([#11258](https://www.github.com/googleapis/google-cloud-ruby/issues/11258))
+* add the support of optimizer statistics package
+* database create time access method 
+* RPC priority request option.
 
 #### Bug Fixes
 
-* extract binary retry info from error ([#11656](https://www.github.com/googleapis/google-cloud-ruby/issues/11656))
-  * fix: extract binary retry info from error
-  * fix: remove unrelated frozen_string_literal change
-  * fix: remove unnecessary parentheses
+* extract binary retry info from error
 
 ### 2.6.0 / 2021-03-31
 
 #### Features
 
-* add cmek backup support - ext of [#8142](https://www.github.com/googleapis/google-cloud-ruby/issues/8142) ([#8168](https://www.github.com/googleapis/google-cloud-ruby/issues/8168))
-  * feat(spanner): add cmek backup support
-  * Add encryption_config to restore database.
-  * doc example for backup create with encryption config
-  * create backup with encryption type
-  * backup restore with encryption type changes
-  * fix typo
+* add cmek backup support
 * add cmek db support
 
 ### 2.5.0 / 2021-03-10
@@ -66,27 +53,14 @@
 
 #### Features
 
-* Point In Time Recovery (PITR) ([#8169](https://www.github.com/googleapis/google-cloud-ruby/issues/8169))
-  * feat(spanner): support pitr-lite
-  * feature(spanner): adds test for throttled
-  * feat(spanner): adds version time to backup
-  * test(spanner): adds unit test for create backup
-  * feat(spanner): exposes version time in backup
-  * chore: fixes rubocop violations
-  * fix: addresses PR comments
-  * test: adds integration tests for pitr backup
+* Point In Time Recovery (PITR)
 
 ### 2.3.0 / 2021-02-09
 
 #### Features
 
-* CommitStats in CommitResponse ([#8058](https://www.github.com/googleapis/google-cloud-ruby/issues/8058))
-* optionalize `credentials` when using cloud spanner emulator host ([#8416](https://www.github.com/googleapis/google-cloud-ruby/issues/8416))
-  * Optionalize `credentials` when using Cloud Spanner Emulator
-  * Remove unnecessary credentials stub for emulator_host in Google::Cloud::Spanner.new
-  * Add test of explicit project_id in Google::Cloud::Spanner.new
-  * Update document for `emulator_host` without credentials
-  * Tidy code according to rubocop settings
+* CommitStats in CommitResponse
+* optionalize `credentials` when using cloud spanner emulator host
 
 ### 2.2.0 / 2020-09-15
 
@@ -146,25 +120,20 @@ please review the docs for the new `google-cloud-spanner-v1` gem. In particular:
 
 #### Features
 
-* Added support for backing up and restoring databases  ([#5053](https://www.github.com/googleapis/google-cloud-ruby/issues/5053))
+* Added support for backing up and restoring databases
 
 ### 1.15.0 / 2020-03-15
 
 #### Features
 
-* Added support for query options ([#4907](https://www.github.com/googleapis/google-cloud-ruby/issues/4907))
-  * Added support for specifying the query optimizer version.
+* Added support for query options
 * Support separate project setting for quota/billing
 
 ### 1.14.0 / 2020-02-18
 
 #### Features
 
-* allow custom lib name and version for telemetry purpose ([#4762](https://www.github.com/googleapis/google-cloud-ruby/issues/4762))
-  * allow custom lib name and version for telemetry purpose
-  * format docs
-  * added custom lib name and version prefix
-  * update test cases for lib name and version
+* allow custom lib name and version for telemetry purpose
 
 ### 1.13.1 / 2020-01-22
 
