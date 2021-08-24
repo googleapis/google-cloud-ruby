@@ -1,5 +1,16 @@
 # Release History
 
+### 2.10.0 / 2021-08-24
+
+#### Features
+
+* add field JSON type support ([#11648](https://www.github.com/googleapis/google-cloud-ruby/issues/11648))
+  * add JSON type support
+  * refectored tests
+  * fix test
+  * skip json tests for emulator
+  * fix json acceptance test
+
 ### 2.9.0 / 2021-07-26
 
 #### Features
