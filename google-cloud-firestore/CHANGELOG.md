@@ -1,5 +1,11 @@
 # Release History
 
+### 2.6.3 / 2021-08-24
+
+#### Bug Fixes
+
+* Fix transaction retry behavior
+
 ### 2.6.2 / 2021-07-26
 
 #### Bug Fixes
