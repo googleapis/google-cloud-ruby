@@ -120,7 +120,7 @@ describe "Spanner Client", :types, :json, :spanner do
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal({ id: :INT64, json_array: [:JSON] })
-    _(results.rows.first.to_h).must_equal({ id: id, strings: [nil, "howdy", "hola", "hello"] })
+    _(results.rows.first.to_h).must_equal({ id: id, json_array: params })
   end
 
   it "writes and reads empty array of json" do
