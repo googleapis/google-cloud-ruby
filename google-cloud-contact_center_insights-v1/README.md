@@ -40,7 +40,7 @@ response = client.create_conversation request
 View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-contact_center_insights-v1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/contact-center/insights/)
+See also the [Product Documentation](https://cloud.google.com/contact-center/insights/docs)
 for general usage information.
 
 ## Enabling Logging
