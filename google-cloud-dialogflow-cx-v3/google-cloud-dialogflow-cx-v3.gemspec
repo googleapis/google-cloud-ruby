@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Dialogflow is an end-to-end, build-once deploy-everywhere development suite for creating conversational interfaces for websites, mobile applications, popular messaging platforms, and IoT devices. You can use it to build interfaces (such as chatbots and conversational IVR) that enable natural and rich interactions between your users and your business. Note that google-cloud-dialogflow-cx-v3 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-dialogflow-cx instead. See the readme for more details."
+  gem.description   = "Dialogflow is an end-to-end, build-once deploy-everywhere development suite for creating conversational interfaces for websites, mobile applications, popular messaging platforms, and IoT devices. You can use it to build interfaces (such as chatbots and conversational IVR) that enable natural and rich interactions between your users and your business. This client is for Dialogflow CX, providing an advanced agent type suitable for large or very complex agents. Note that google-cloud-dialogflow-cx-v3 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-dialogflow-cx instead. See the readme for more details."
   gem.summary       = "API Client library for the Dialogflow CX V3 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
