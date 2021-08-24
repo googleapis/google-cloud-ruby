@@ -101,6 +101,20 @@ module Google
             end
 
             ##
+            # Create a fully-qualified DataRetentionSettings resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/dataRetentionSettings`
+            #
+            # @param property [String]
+            #
+            # @return [::String]
+            def data_retention_settings_path property:
+              "properties/#{property}/dataRetentionSettings"
+            end
+
+            ##
             # Create a fully-qualified DataSharingSettings resource string.
             #
             # The resource will be in the following format:
@@ -112,6 +126,40 @@ module Google
             # @return [::String]
             def data_sharing_settings_path account:
               "accounts/#{account}/dataSharingSettings"
+            end
+
+            ##
+            # Create a fully-qualified DisplayVideo360AdvertiserLink resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/displayVideo360AdvertiserLinks/{display_video_360_advertiser_link}`
+            #
+            # @param property [String]
+            # @param display_video_360_advertiser_link [String]
+            #
+            # @return [::String]
+            def display_video360_advertiser_link_path property:, display_video_360_advertiser_link:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/displayVideo360AdvertiserLinks/#{display_video_360_advertiser_link}"
+            end
+
+            ##
+            # Create a fully-qualified DisplayVideo360AdvertiserLinkProposal resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/displayVideo360AdvertiserLinkProposals/{display_video_360_advertiser_link_proposal}`
+            #
+            # @param property [String]
+            # @param display_video_360_advertiser_link_proposal [String]
+            #
+            # @return [::String]
+            def display_video360_advertiser_link_proposal_path property:, display_video_360_advertiser_link_proposal:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/displayVideo360AdvertiserLinkProposals/#{display_video_360_advertiser_link_proposal}"
             end
 
             ##
