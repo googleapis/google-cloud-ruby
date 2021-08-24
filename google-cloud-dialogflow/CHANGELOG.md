@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.3 / 2021-08-24
+
+#### Documentation
+
+* Updated gem description to clarify this client is for Dialogflow ES
+
 ### 1.3.2 / 2021-07-12
 
 #### Documentation
