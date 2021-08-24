@@ -1,182 +1,122 @@
 # Authentication
 
-In general, the google-cloud-resource_manager library uses [Service
-Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
-credentials to connect to Google Cloud services. When running on Google Cloud
-Platform (GCP), including Google Compute Engine (GCE), Google Kubernetes Engine
-(GKE), Google App Engine (GAE), Google Cloud Functions (GCF) and Cloud Run,
-the credentials will be discovered automatically. When running on other
-environments, the Service Account credentials can be specified by providing the
-path to the [JSON
-keyfile](https://cloud.google.com/iam/docs/managing-service-account-keys) for
-the account (or the JSON itself) in environment variables. Additionally, Cloud
-SDK credentials can also be discovered automatically, but this is only
-recommended during development.
+The recommended way to authenticate to the google-cloud-resource_manager library is to use
+[Application Default Credentials (ADC)](https://cloud.google.com/docs/authentication/application-default-credentials).
+To review all of your authentication options, see [Credentials lookup](#credential-lookup).
 
-## Project and Credential Lookup
+## Quickstart
 
-The google-cloud-resource_manager library aims to make authentication as simple
-as possible, and provides several mechanisms to configure your system without
-providing **Project ID** and **Service Account Credentials** directly in code.
+The following example shows how to set up authentication for a local development
+environment with your user credentials. 
 
-**Project ID** is discovered in the following order:
+**NOTE:** This method is _not_ recommended for running in production. User credentials
+should be used only during development.
 
-1. Specify project ID in method arguments
-2. Specify project ID in configuration
-3. Discover project ID in environment variables
-4. Discover GCE project ID
+1. [Download and install the Google Cloud CLI](https://cloud.google.com/sdk).
+2. Set up a local ADC file with your user credentials:
 
-**Credentials** are discovered in the following order:
+```sh
+gcloud auth application-default login
+```
 
-1. Specify credentials in method arguments
-2. Specify credentials in configuration
-3. Discover credentials path in environment variables
-4. Discover credentials JSON in environment variables
-5. Discover credentials file in the Cloud SDK's path
-6. Discover GCE credentials
+3. Write code as if already authenticated.
 
-### Google Cloud Platform environments
+For more information about setting up authentication for a local development environment, see
+[Set up Application Default Credentials](https://cloud.google.com/docs/authentication/provide-credentials-adc#local-dev).
 
-While running on Google Cloud Platform environments such as Google Compute
-Engine, Google App Engine and Google Kubernetes Engine, no extra work is needed.
-The **Project ID** and **Credentials** and are discovered automatically. Code
-should be written as if already authenticated. Just be sure when you [set up the
-GCE instance][gce-how-to], you add the correct scopes for the APIs you want to
-access. For example:
+## Credential Lookup
 
-  * **All APIs**
-    * `https://www.googleapis.com/auth/cloud-platform`
-    * `https://www.googleapis.com/auth/cloud-platform.read-only`
-  * **BigQuery**
-    * `https://www.googleapis.com/auth/bigquery`
-    * `https://www.googleapis.com/auth/bigquery.insertdata`
-  * **Compute Engine**
-    * `https://www.googleapis.com/auth/compute`
-  * **Datastore**
-    * `https://www.googleapis.com/auth/datastore`
-    * `https://www.googleapis.com/auth/userinfo.email`
-  * **DNS**
-    * `https://www.googleapis.com/auth/ndev.clouddns.readwrite`
-  * **Pub/Sub**
-    * `https://www.googleapis.com/auth/pubsub`
-  * **Storage**
-    * `https://www.googleapis.com/auth/devstorage.full_control`
-    * `https://www.googleapis.com/auth/devstorage.read_only`
-    * `https://www.googleapis.com/auth/devstorage.read_write`
+The google-cloud-resource_manager library provides several mechanisms to configure your system.
+Generally, using Application Default Credentials to facilitate automatic 
+credentials discovery is the easist method. But if you need to explicitly specify
+credentials, there are several methods available to you.
 
-### Environment Variables
+Credentials are accepted in the following ways, in the following order or precedence:
 
-The **Project ID** and **Credentials JSON** can be placed in environment
-variables instead of declaring them directly in code. Each service has its own
-environment variable, allowing for different service accounts to be used for
-different services. (See the READMEs for the individual service gems for
-details.) The path to the **Credentials JSON** file can be stored in the
-environment variable, or the **Credentials JSON** itself can be stored for
-environments such as Docker containers where writing files is difficult or not
-encouraged.
+1. Credentials specified in method arguments
+2. Credentials specified in configuration
+3. Credentials pointed to or included in environment variables
+4. Credentials found in local ADC file
+5. Credentials returned by the metadata server for the attached service account (GCP)
 
-The environment variables that Resource Manager checks for project ID are:
+### Configuration
 
-1. `RESOURCE_MANAGER_PROJECT`
-2. `GOOGLE_CLOUD_PROJECT`
+You can configure a path to a JSON credentials file, either for an individual client object or
+globally, for all client objects. The JSON file can contain credentials created for
+[workload identity federation](https://cloud.google.com/iam/docs/workload-identity-federation),
+[workforce identity federation](https://cloud.google.com/iam/docs/workforce-identity-federation), or a
+[service account key](https://cloud.google.com/docs/authentication/provide-credentials-adc#local-key).
 
-The environment variables that Resource Manager checks for credentials are
-configured on {Google::Cloud::ResourceManager::Credentials}:
+Note: Service account keys are a security risk if not managed correctly. You should
+[choose a more secure alternative to service account keys](https://cloud.google.com/docs/authentication#auth-decision-tree)
+whenever possible.
 
-1. `RESOURCE_MANAGER_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `RESOURCE_MANAGER_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+To configure a credentials file for an individual client initialization:
 
 ```ruby
 require "google/cloud/resource_manager"
 
-ENV["RESOURCE_MANAGER_PROJECT"]     = "my-project-id"
-ENV["RESOURCE_MANAGER_CREDENTIALS"] = "path/to/keyfile.json"
-
-resource_manager = Google::Cloud::ResourceManager.new
+client = Google::Cloud::ResourceManager.folders do |config|
+  config.credentials = "path/to/credentialfile.json"
+end
 ```
 
-### Configuration
-
-The **Project ID** and the path to the **Credentials JSON** file can be configured
-instead of placing them in environment variables or providing them as arguments.
+To configure a credentials file globally for all clients:
 
 ```ruby
 require "google/cloud/resource_manager"
 
 Google::Cloud::ResourceManager.configure do |config|
-  config.project_id  = "my-project-id"
-  config.credentials = "path/to/keyfile.json"
+  config.credentials = "path/to/credentialfile.json"
 end
 
-resource_manager = Google::Cloud::ResourceManager.new
+client = Google::Cloud::ResourceManager.folders
 ```
 
-### Cloud SDK
+### Environment Variables
 
-This option allows for an easy way to authenticate during development. If
-credentials are not provided in code or in environment variables, then Cloud SDK
-credentials are discovered.
+You can also use an environment variable to provide a JSON credentials file.
+The environment variable can contain a path to the credentials file or, for
+environments such as Docker containers where writing files is not encouraged,
+you can include the credentials file itself.
 
-To configure your system for this, simply:
+The JSON file can contain credentials created for
+[workload identity federation](https://cloud.google.com/iam/docs/workload-identity-federation),
+[workforce identity federation](https://cloud.google.com/iam/docs/workforce-identity-federation), or a
+[service account key](https://cloud.google.com/docs/authentication/provide-credentials-adc#local-key).
 
-1. [Download and install the Cloud SDK](https://cloud.google.com/sdk)
-2. Authenticate using OAuth 2.0 `$ gcloud auth login`
-3. Write code as if already authenticated.
+Note: Service account keys are a security risk if not managed correctly. You should
+[choose a more secure alternative to service account keys](https://cloud.google.com/docs/authentication#auth-decision-tree)
+whenever possible.
 
-**NOTE:** This is _not_ recommended for running in production. The Cloud SDK
-*should* only be used during development.
+The environment variables that google-cloud-resource_manager
+checks for credentials are:
 
-[gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
-[dev-console]: https://console.cloud.google.com/project
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
-[enable-apis]: https://raw.githubusercontent.com/GoogleCloudPlatform/gcloud-common/master/authentication/enable-apis.png
+```ruby
+require "google/cloud/resource_manager"
 
-[create-new-service-account]: https://raw.githubusercontent.com/GoogleCloudPlatform/gcloud-common/master/authentication/create-new-service-account.png
-[create-new-service-account-existing-keys]: https://raw.githubusercontent.com/GoogleCloudPlatform/gcloud-common/master/authentication/create-new-service-account-existing-keys.png
-[reuse-service-account]: https://raw.githubusercontent.com/GoogleCloudPlatform/gcloud-common/master/authentication/reuse-service-account.png
+ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-## Creating a Service Account
+client = Google::Cloud::ResourceManager.folders
+```
 
-Google Cloud requires a **Project ID** and **Service Account Credentials** to
-connect to the APIs. You will use the **Project ID** and **JSON key file** to
-connect to most services with google-cloud-resource_manager.
+### Local ADC file
 
-If you are not running this client on Google Compute Engine, you need a Google
-Developers service account.
+You can set up a local ADC file with your user credentials for authentication during
+development. If credentials are not provided in code or in environment variables,
+then the local ADC credentials are discovered.
 
-1. Visit the [Google Developers Console][dev-console].
-1. Create a new project or click on an existing project.
-1. Activate the slide-out navigation tray and select **API Manager**. From
-   here, you will enable the APIs that your application requires.
+Follow the steps in [Quickstart](#quickstart) to set up a local ADC file.
 
-   ![Enable the APIs that your application requires][enable-apis]
+### Google Cloud Platform environments
 
-   *Note: You may need to enable billing in order to use these services.*
+When running on Google Cloud Platform (GCP), including Google Compute Engine
+(GCE), Google Kubernetes Engine (GKE), Google App Engine (GAE), Google Cloud
+Functions (GCF) and Cloud Run, credentials are retrieved from the attached
+service account automatically. Code should be written as if already authenticated.
 
-1. Select **Credentials** from the side navigation.
-
-   You should see a screen like one of the following.
-
-   ![Create a new service account][create-new-service-account]
-
-   ![Create a new service account With Existing Keys][create-new-service-account-existing-keys]
-
-   Find the "Add credentials" drop down and select "Service account" to be
-   guided through downloading a new JSON key file.
-
-   If you want to re-use an existing service account, you can easily generate a
-   new key file. Just select the account you wish to re-use, and click "Generate
-   new JSON key":
-
-   ![Re-use an existing service account][reuse-service-account]
-
-   The key file you download will be used by this library to authenticate API
-   requests and should be stored in a secure location.
-
-## Troubleshooting
-
-If you're having trouble authenticating you can ask for help by following the
-[Troubleshooting Guide](TROUBLESHOOTING.md).
+For more information, see
+[Set up ADC for Google Cloud services](https://cloud.google.com/docs/authentication/provide-credentials-adc#attached-sa).

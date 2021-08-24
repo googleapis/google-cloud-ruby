@@ -1,10 +1,15 @@
 {
     "api_id": "cloudresourcemanager.googleapis.com",
     "api_shortname": "cloudresourcemanager",
-    "name": "resourcemanager",
-    "language": "ruby",
-    "distribution_name": "google-cloud-resource_manager",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-resource_manager/latest",
-    "release_level": "preview",
+    "distribution_name": "google-cloud-resource_manager",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "cloudresourcemanager",
+    "name_pretty": "Cloud Resource Manager API",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Creates, reads, and updates metadata for Google Cloud Platform resource containers.",
     "library_type": "GAPIC_MANUAL"
 }
