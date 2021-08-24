@@ -166,8 +166,6 @@ module Google
             #
             # Properties can have at most one FirebaseLink.
             rpc :CreateFirebaseLink, ::Google::Analytics::Admin::V1alpha::CreateFirebaseLinkRequest, ::Google::Analytics::Admin::V1alpha::FirebaseLink
-            # Updates a FirebaseLink on a property
-            rpc :UpdateFirebaseLink, ::Google::Analytics::Admin::V1alpha::UpdateFirebaseLinkRequest, ::Google::Analytics::Admin::V1alpha::FirebaseLink
             # Deletes a FirebaseLink on a property
             rpc :DeleteFirebaseLink, ::Google::Analytics::Admin::V1alpha::DeleteFirebaseLinkRequest, ::Google::Protobuf::Empty
             # Lists FirebaseLinks on a property.
@@ -215,6 +213,39 @@ module Google
             #
             # Returns an empty list if no conversion events are found.
             rpc :ListConversionEvents, ::Google::Analytics::Admin::V1alpha::ListConversionEventsRequest, ::Google::Analytics::Admin::V1alpha::ListConversionEventsResponse
+            # Look up a single DisplayVideo360AdvertiserLink
+            rpc :GetDisplayVideo360AdvertiserLink, ::Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkRequest, ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink
+            # Lists all DisplayVideo360AdvertiserLinks on a property.
+            rpc :ListDisplayVideo360AdvertiserLinks, ::Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinksRequest, ::Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinksResponse
+            # Creates a DisplayVideo360AdvertiserLink.
+            # This can only be utilized by users who have proper authorization both on
+            # the Google Analytics property and on the Display & Video 360 advertiser.
+            # Users who do not have access to the Display & Video 360 advertiser should
+            # instead seek to create a DisplayVideo360LinkProposal.
+            rpc :CreateDisplayVideo360AdvertiserLink, ::Google::Analytics::Admin::V1alpha::CreateDisplayVideo360AdvertiserLinkRequest, ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink
+            # Deletes a DisplayVideo360AdvertiserLink on a property.
+            rpc :DeleteDisplayVideo360AdvertiserLink, ::Google::Analytics::Admin::V1alpha::DeleteDisplayVideo360AdvertiserLinkRequest, ::Google::Protobuf::Empty
+            # Updates a DisplayVideo360AdvertiserLink on a property.
+            rpc :UpdateDisplayVideo360AdvertiserLink, ::Google::Analytics::Admin::V1alpha::UpdateDisplayVideo360AdvertiserLinkRequest, ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink
+            # Lookup for a single DisplayVideo360AdvertiserLinkProposal.
+            rpc :GetDisplayVideo360AdvertiserLinkProposal, ::Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkProposalRequest, ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal
+            # Lists DisplayVideo360AdvertiserLinkProposals on a property.
+            rpc :ListDisplayVideo360AdvertiserLinkProposals, ::Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinkProposalsRequest, ::Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinkProposalsResponse
+            # Creates a DisplayVideo360AdvertiserLinkProposal.
+            rpc :CreateDisplayVideo360AdvertiserLinkProposal, ::Google::Analytics::Admin::V1alpha::CreateDisplayVideo360AdvertiserLinkProposalRequest, ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal
+            # Deletes a DisplayVideo360AdvertiserLinkProposal on a property.
+            # This can only be used on cancelled proposals.
+            rpc :DeleteDisplayVideo360AdvertiserLinkProposal, ::Google::Analytics::Admin::V1alpha::DeleteDisplayVideo360AdvertiserLinkProposalRequest, ::Google::Protobuf::Empty
+            # Approves a DisplayVideo360AdvertiserLinkProposal.
+            # The DisplayVideo360AdvertiserLinkProposal will be deleted and a new
+            # DisplayVideo360AdvertiserLink will be created.
+            rpc :ApproveDisplayVideo360AdvertiserLinkProposal, ::Google::Analytics::Admin::V1alpha::ApproveDisplayVideo360AdvertiserLinkProposalRequest, ::Google::Analytics::Admin::V1alpha::ApproveDisplayVideo360AdvertiserLinkProposalResponse
+            # Cancels a DisplayVideo360AdvertiserLinkProposal.
+            # Cancelling can mean either:
+            # - Declining a proposal initiated from Display & Video 360
+            # - Withdrawing a proposal initiated from Google Analytics
+            # After being cancelled, a proposal will eventually be deleted automatically.
+            rpc :CancelDisplayVideo360AdvertiserLinkProposal, ::Google::Analytics::Admin::V1alpha::CancelDisplayVideo360AdvertiserLinkProposalRequest, ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal
             # Creates a CustomDimension.
             rpc :CreateCustomDimension, ::Google::Analytics::Admin::V1alpha::CreateCustomDimensionRequest, ::Google::Analytics::Admin::V1alpha::CustomDimension
             # Updates a CustomDimension on a property.
@@ -235,6 +266,10 @@ module Google
             rpc :ArchiveCustomMetric, ::Google::Analytics::Admin::V1alpha::ArchiveCustomMetricRequest, ::Google::Protobuf::Empty
             # Lookup for a single CustomMetric.
             rpc :GetCustomMetric, ::Google::Analytics::Admin::V1alpha::GetCustomMetricRequest, ::Google::Analytics::Admin::V1alpha::CustomMetric
+            # Returns the singleton data retention settings for this property.
+            rpc :GetDataRetentionSettings, ::Google::Analytics::Admin::V1alpha::GetDataRetentionSettingsRequest, ::Google::Analytics::Admin::V1alpha::DataRetentionSettings
+            # Updates the singleton data retention settings for this property.
+            rpc :UpdateDataRetentionSettings, ::Google::Analytics::Admin::V1alpha::UpdateDataRetentionSettingsRequest, ::Google::Analytics::Admin::V1alpha::DataRetentionSettings
           end
 
           Stub = Service.rpc_stub_class

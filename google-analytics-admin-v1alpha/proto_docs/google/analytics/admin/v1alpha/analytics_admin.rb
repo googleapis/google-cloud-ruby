@@ -702,20 +702,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for UpdateFirebaseLink RPC
-        # @!attribute [rw] firebase_link
-        #   @return [::Google::Analytics::Admin::V1alpha::FirebaseLink]
-        #     Required. The Firebase link to update.
-        # @!attribute [rw] update_mask
-        #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Field names must be in snake case
-        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-        #     the entire entity, use one path with the string "*" to match all fields.
-        class UpdateFirebaseLinkRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # Request message for DeleteFirebaseLink RPC
         # @!attribute [rw] name
         #   @return [::String]
@@ -1125,6 +1111,185 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for GetDisplayVideo360AdvertiserLink RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DisplayVideo360AdvertiserLink to get.
+        #     Example format: properties/1234/displayVideo360AdvertiserLink/5678
+        class GetDisplayVideo360AdvertiserLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListDisplayVideo360AdvertiserLinks RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListDisplayVideo360AdvertiserLinks`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListDisplayVideo360AdvertiserLinks` must match the call that provided the
+        #     page token.
+        class ListDisplayVideo360AdvertiserLinksRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListDisplayVideo360AdvertiserLinks RPC.
+        # @!attribute [rw] display_video_360_advertiser_links
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink>]
+        #     List of DisplayVideo360AdvertiserLinks.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListDisplayVideo360AdvertiserLinksResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateDisplayVideo360AdvertiserLink RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] display_video_360_advertiser_link
+        #   @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
+        #     Required. The DisplayVideo360AdvertiserLink to create.
+        class CreateDisplayVideo360AdvertiserLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteDisplayVideo360AdvertiserLink RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DisplayVideo360AdvertiserLink to delete.
+        #     Example format: properties/1234/displayVideo360AdvertiserLinks/5678
+        class DeleteDisplayVideo360AdvertiserLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateDisplayVideo360AdvertiserLink RPC.
+        # @!attribute [rw] display_video_360_advertiser_link
+        #   @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
+        #     The DisplayVideo360AdvertiserLink to update
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Omitted fields will not be updated.
+        #     To replace the entire entity, use one path with the string "*" to match
+        #     all fields.
+        class UpdateDisplayVideo360AdvertiserLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetDisplayVideo360AdvertiserLinkProposal RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DisplayVideo360AdvertiserLinkProposal to get.
+        #     Example format: properties/1234/displayVideo360AdvertiserLinkProposals/5678
+        class GetDisplayVideo360AdvertiserLinkProposalRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListDisplayVideo360AdvertiserLinkProposals RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous
+        #     `ListDisplayVideo360AdvertiserLinkProposals` call. Provide this to retrieve
+        #     the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListDisplayVideo360AdvertiserLinkProposals` must match the call that
+        #     provided the page token.
+        class ListDisplayVideo360AdvertiserLinkProposalsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListDisplayVideo360AdvertiserLinkProposals RPC.
+        # @!attribute [rw] display_video_360_advertiser_link_proposals
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal>]
+        #     List of DisplayVideo360AdvertiserLinkProposals.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListDisplayVideo360AdvertiserLinkProposalsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateDisplayVideo360AdvertiserLinkProposal RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] display_video_360_advertiser_link_proposal
+        #   @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal]
+        #     Required. The DisplayVideo360AdvertiserLinkProposal to create.
+        class CreateDisplayVideo360AdvertiserLinkProposalRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteDisplayVideo360AdvertiserLinkProposal RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DisplayVideo360AdvertiserLinkProposal to delete.
+        #     Example format: properties/1234/displayVideo360AdvertiserLinkProposals/5678
+        class DeleteDisplayVideo360AdvertiserLinkProposalRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ApproveDisplayVideo360AdvertiserLinkProposal RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DisplayVideo360AdvertiserLinkProposal to approve.
+        #     Example format: properties/1234/displayVideo360AdvertiserLinkProposals/5678
+        class ApproveDisplayVideo360AdvertiserLinkProposalRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ApproveDisplayVideo360AdvertiserLinkProposal RPC.
+        # @!attribute [rw] display_video_360_advertiser_link
+        #   @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
+        #     The DisplayVideo360AdvertiserLink created as a result of approving the
+        #     proposal.
+        class ApproveDisplayVideo360AdvertiserLinkProposalResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CancelDisplayVideo360AdvertiserLinkProposal RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DisplayVideo360AdvertiserLinkProposal to cancel.
+        #     Example format: properties/1234/displayVideo360AdvertiserLinkProposals/5678
+        class CancelDisplayVideo360AdvertiserLinkProposalRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for CreateCustomDimension RPC.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -1281,6 +1446,33 @@ module Google
         #     Required. The name of the CustomMetric to get.
         #     Example format: properties/1234/customMetrics/5678
         class GetCustomMetricRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetDataRetentionSettings RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the settings to lookup.
+        #     Format:
+        #     properties/\\{property}/dataRetentionSettings
+        #     Example: "properties/1000/dataRetentionSettings"
+        class GetDataRetentionSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateDataRetentionSettings RPC.
+        # @!attribute [rw] data_retention_settings
+        #   @return [::Google::Analytics::Admin::V1alpha::DataRetentionSettings]
+        #     Required. The settings to update.
+        #     The `name` field is used to identify the settings to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake case
+        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+        #     the entire entity, use one path with the string "*" to match all fields.
+        class UpdateDataRetentionSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

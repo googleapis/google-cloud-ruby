@@ -139,8 +139,6 @@ module Google
 
                 default_config.rpcs.create_firebase_link.timeout = 60.0
 
-                default_config.rpcs.update_firebase_link.timeout = 60.0
-
                 default_config.rpcs.delete_firebase_link.timeout = 60.0
 
                 default_config.rpcs.list_firebase_links.timeout = 60.0
@@ -2988,78 +2986,6 @@ module Google
             end
 
             ##
-            # Updates a FirebaseLink on a property
-            #
-            # @overload update_firebase_link(request, options = nil)
-            #   Pass arguments to `update_firebase_link` via a request object, either of type
-            #   {::Google::Analytics::Admin::V1alpha::UpdateFirebaseLinkRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Analytics::Admin::V1alpha::UpdateFirebaseLinkRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload update_firebase_link(firebase_link: nil, update_mask: nil)
-            #   Pass arguments to `update_firebase_link` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param firebase_link [::Google::Analytics::Admin::V1alpha::FirebaseLink, ::Hash]
-            #     Required. The Firebase link to update.
-            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Field names must be in snake case
-            #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-            #     the entire entity, use one path with the string "*" to match all fields.
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Analytics::Admin::V1alpha::FirebaseLink]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Google::Analytics::Admin::V1alpha::FirebaseLink]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            def update_firebase_link request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateFirebaseLinkRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.update_firebase_link.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {
-                "firebase_link.name" => request.firebase_link.name
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.update_firebase_link.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.update_firebase_link.retry_policy
-
-              options.apply_defaults timeout:      @config.timeout,
-                                     metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @analytics_admin_service_stub.call_rpc :update_firebase_link, request, options: options do |response, operation|
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
             # Deletes a FirebaseLink on a property
             #
             # @overload delete_firebase_link(request, options = nil)
@@ -4541,6 +4467,804 @@ module Google
             end
 
             ##
+            # Look up a single DisplayVideo360AdvertiserLink
+            #
+            # @overload get_display_video360_advertiser_link(request, options = nil)
+            #   Pass arguments to `get_display_video360_advertiser_link` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_display_video360_advertiser_link(name: nil)
+            #   Pass arguments to `get_display_video360_advertiser_link` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the DisplayVideo360AdvertiserLink to get.
+            #     Example format: properties/1234/displayVideo360AdvertiserLink/5678
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def get_display_video360_advertiser_link request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_display_video360_advertiser_link.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_display_video360_advertiser_link.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_display_video360_advertiser_link.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :get_display_video360_advertiser_link, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists all DisplayVideo360AdvertiserLinks on a property.
+            #
+            # @overload list_display_video360_advertiser_links(request, options = nil)
+            #   Pass arguments to `list_display_video360_advertiser_links` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinksRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinksRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_display_video360_advertiser_links(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_display_video360_advertiser_links` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Example format: properties/1234
+            #   @param page_size [::Integer]
+            #     The maximum number of resources to return.
+            #     If unspecified, at most 50 resources will be returned.
+            #     The maximum value is 200 (higher values will be coerced to the maximum).
+            #   @param page_token [::String]
+            #     A page token, received from a previous `ListDisplayVideo360AdvertiserLinks`
+            #     call. Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to
+            #     `ListDisplayVideo360AdvertiserLinks` must match the call that provided the
+            #     page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def list_display_video360_advertiser_links request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinksRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_display_video360_advertiser_links.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_display_video360_advertiser_links.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_display_video360_advertiser_links.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :list_display_video360_advertiser_links, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_display_video360_advertiser_links, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a DisplayVideo360AdvertiserLink.
+            # This can only be utilized by users who have proper authorization both on
+            # the Google Analytics property and on the Display & Video 360 advertiser.
+            # Users who do not have access to the Display & Video 360 advertiser should
+            # instead seek to create a DisplayVideo360LinkProposal.
+            #
+            # @overload create_display_video360_advertiser_link(request, options = nil)
+            #   Pass arguments to `create_display_video360_advertiser_link` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::CreateDisplayVideo360AdvertiserLinkRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::CreateDisplayVideo360AdvertiserLinkRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_display_video360_advertiser_link(parent: nil, display_video_360_advertiser_link: nil)
+            #   Pass arguments to `create_display_video360_advertiser_link` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Example format: properties/1234
+            #   @param display_video_360_advertiser_link [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink, ::Hash]
+            #     Required. The DisplayVideo360AdvertiserLink to create.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def create_display_video360_advertiser_link request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateDisplayVideo360AdvertiserLinkRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_display_video360_advertiser_link.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_display_video360_advertiser_link.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_display_video360_advertiser_link.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :create_display_video360_advertiser_link, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a DisplayVideo360AdvertiserLink on a property.
+            #
+            # @overload delete_display_video360_advertiser_link(request, options = nil)
+            #   Pass arguments to `delete_display_video360_advertiser_link` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::DeleteDisplayVideo360AdvertiserLinkRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::DeleteDisplayVideo360AdvertiserLinkRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_display_video360_advertiser_link(name: nil)
+            #   Pass arguments to `delete_display_video360_advertiser_link` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the DisplayVideo360AdvertiserLink to delete.
+            #     Example format: properties/1234/displayVideo360AdvertiserLinks/5678
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def delete_display_video360_advertiser_link request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::DeleteDisplayVideo360AdvertiserLinkRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_display_video360_advertiser_link.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_display_video360_advertiser_link.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_display_video360_advertiser_link.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :delete_display_video360_advertiser_link, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a DisplayVideo360AdvertiserLink on a property.
+            #
+            # @overload update_display_video360_advertiser_link(request, options = nil)
+            #   Pass arguments to `update_display_video360_advertiser_link` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::UpdateDisplayVideo360AdvertiserLinkRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::UpdateDisplayVideo360AdvertiserLinkRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_display_video360_advertiser_link(display_video_360_advertiser_link: nil, update_mask: nil)
+            #   Pass arguments to `update_display_video360_advertiser_link` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param display_video_360_advertiser_link [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink, ::Hash]
+            #     The DisplayVideo360AdvertiserLink to update
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. The list of fields to be updated. Omitted fields will not be updated.
+            #     To replace the entire entity, use one path with the string "*" to match
+            #     all fields.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def update_display_video360_advertiser_link request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateDisplayVideo360AdvertiserLinkRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_display_video360_advertiser_link.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "display_video_360_advertiser_link.name" => request.display_video_360_advertiser_link.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_display_video360_advertiser_link.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_display_video360_advertiser_link.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :update_display_video360_advertiser_link, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lookup for a single DisplayVideo360AdvertiserLinkProposal.
+            #
+            # @overload get_display_video360_advertiser_link_proposal(request, options = nil)
+            #   Pass arguments to `get_display_video360_advertiser_link_proposal` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkProposalRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkProposalRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_display_video360_advertiser_link_proposal(name: nil)
+            #   Pass arguments to `get_display_video360_advertiser_link_proposal` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the DisplayVideo360AdvertiserLinkProposal to get.
+            #     Example format: properties/1234/displayVideo360AdvertiserLinkProposals/5678
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def get_display_video360_advertiser_link_proposal request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkProposalRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_display_video360_advertiser_link_proposal.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_display_video360_advertiser_link_proposal.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_display_video360_advertiser_link_proposal.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :get_display_video360_advertiser_link_proposal, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists DisplayVideo360AdvertiserLinkProposals on a property.
+            #
+            # @overload list_display_video360_advertiser_link_proposals(request, options = nil)
+            #   Pass arguments to `list_display_video360_advertiser_link_proposals` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinkProposalsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinkProposalsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_display_video360_advertiser_link_proposals(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_display_video360_advertiser_link_proposals` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Example format: properties/1234
+            #   @param page_size [::Integer]
+            #     The maximum number of resources to return.
+            #     If unspecified, at most 50 resources will be returned.
+            #     The maximum value is 200 (higher values will be coerced to the maximum).
+            #   @param page_token [::String]
+            #     A page token, received from a previous
+            #     `ListDisplayVideo360AdvertiserLinkProposals` call. Provide this to retrieve
+            #     the subsequent page.
+            #
+            #     When paginating, all other parameters provided to
+            #     `ListDisplayVideo360AdvertiserLinkProposals` must match the call that
+            #     provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def list_display_video360_advertiser_link_proposals request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinkProposalsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_display_video360_advertiser_link_proposals.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_display_video360_advertiser_link_proposals.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_display_video360_advertiser_link_proposals.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :list_display_video360_advertiser_link_proposals, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_display_video360_advertiser_link_proposals, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a DisplayVideo360AdvertiserLinkProposal.
+            #
+            # @overload create_display_video360_advertiser_link_proposal(request, options = nil)
+            #   Pass arguments to `create_display_video360_advertiser_link_proposal` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::CreateDisplayVideo360AdvertiserLinkProposalRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::CreateDisplayVideo360AdvertiserLinkProposalRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_display_video360_advertiser_link_proposal(parent: nil, display_video_360_advertiser_link_proposal: nil)
+            #   Pass arguments to `create_display_video360_advertiser_link_proposal` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Example format: properties/1234
+            #   @param display_video_360_advertiser_link_proposal [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal, ::Hash]
+            #     Required. The DisplayVideo360AdvertiserLinkProposal to create.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def create_display_video360_advertiser_link_proposal request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateDisplayVideo360AdvertiserLinkProposalRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_display_video360_advertiser_link_proposal.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_display_video360_advertiser_link_proposal.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_display_video360_advertiser_link_proposal.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :create_display_video360_advertiser_link_proposal, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a DisplayVideo360AdvertiserLinkProposal on a property.
+            # This can only be used on cancelled proposals.
+            #
+            # @overload delete_display_video360_advertiser_link_proposal(request, options = nil)
+            #   Pass arguments to `delete_display_video360_advertiser_link_proposal` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::DeleteDisplayVideo360AdvertiserLinkProposalRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::DeleteDisplayVideo360AdvertiserLinkProposalRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_display_video360_advertiser_link_proposal(name: nil)
+            #   Pass arguments to `delete_display_video360_advertiser_link_proposal` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the DisplayVideo360AdvertiserLinkProposal to delete.
+            #     Example format: properties/1234/displayVideo360AdvertiserLinkProposals/5678
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def delete_display_video360_advertiser_link_proposal request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::DeleteDisplayVideo360AdvertiserLinkProposalRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_display_video360_advertiser_link_proposal.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_display_video360_advertiser_link_proposal.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_display_video360_advertiser_link_proposal.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :delete_display_video360_advertiser_link_proposal, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Approves a DisplayVideo360AdvertiserLinkProposal.
+            # The DisplayVideo360AdvertiserLinkProposal will be deleted and a new
+            # DisplayVideo360AdvertiserLink will be created.
+            #
+            # @overload approve_display_video360_advertiser_link_proposal(request, options = nil)
+            #   Pass arguments to `approve_display_video360_advertiser_link_proposal` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::ApproveDisplayVideo360AdvertiserLinkProposalRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::ApproveDisplayVideo360AdvertiserLinkProposalRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload approve_display_video360_advertiser_link_proposal(name: nil)
+            #   Pass arguments to `approve_display_video360_advertiser_link_proposal` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the DisplayVideo360AdvertiserLinkProposal to approve.
+            #     Example format: properties/1234/displayVideo360AdvertiserLinkProposals/5678
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::ApproveDisplayVideo360AdvertiserLinkProposalResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::ApproveDisplayVideo360AdvertiserLinkProposalResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def approve_display_video360_advertiser_link_proposal request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ApproveDisplayVideo360AdvertiserLinkProposalRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.approve_display_video360_advertiser_link_proposal.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.approve_display_video360_advertiser_link_proposal.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.approve_display_video360_advertiser_link_proposal.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :approve_display_video360_advertiser_link_proposal, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Cancels a DisplayVideo360AdvertiserLinkProposal.
+            # Cancelling can mean either:
+            # - Declining a proposal initiated from Display & Video 360
+            # - Withdrawing a proposal initiated from Google Analytics
+            # After being cancelled, a proposal will eventually be deleted automatically.
+            #
+            # @overload cancel_display_video360_advertiser_link_proposal(request, options = nil)
+            #   Pass arguments to `cancel_display_video360_advertiser_link_proposal` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::CancelDisplayVideo360AdvertiserLinkProposalRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::CancelDisplayVideo360AdvertiserLinkProposalRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload cancel_display_video360_advertiser_link_proposal(name: nil)
+            #   Pass arguments to `cancel_display_video360_advertiser_link_proposal` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the DisplayVideo360AdvertiserLinkProposal to cancel.
+            #     Example format: properties/1234/displayVideo360AdvertiserLinkProposals/5678
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def cancel_display_video360_advertiser_link_proposal request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CancelDisplayVideo360AdvertiserLinkProposalRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.cancel_display_video360_advertiser_link_proposal.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.cancel_display_video360_advertiser_link_proposal.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.cancel_display_video360_advertiser_link_proposal.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :cancel_display_video360_advertiser_link_proposal, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Creates a CustomDimension.
             #
             # @overload create_custom_dimension(request, options = nil)
@@ -5259,6 +5983,150 @@ module Google
             end
 
             ##
+            # Returns the singleton data retention settings for this property.
+            #
+            # @overload get_data_retention_settings(request, options = nil)
+            #   Pass arguments to `get_data_retention_settings` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::GetDataRetentionSettingsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::GetDataRetentionSettingsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_data_retention_settings(name: nil)
+            #   Pass arguments to `get_data_retention_settings` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the settings to lookup.
+            #     Format:
+            #     properties/\\{property}/dataRetentionSettings
+            #     Example: "properties/1000/dataRetentionSettings"
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::DataRetentionSettings]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::DataRetentionSettings]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def get_data_retention_settings request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetDataRetentionSettingsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_data_retention_settings.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_data_retention_settings.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_data_retention_settings.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :get_data_retention_settings, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the singleton data retention settings for this property.
+            #
+            # @overload update_data_retention_settings(request, options = nil)
+            #   Pass arguments to `update_data_retention_settings` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::UpdateDataRetentionSettingsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::UpdateDataRetentionSettingsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_data_retention_settings(data_retention_settings: nil, update_mask: nil)
+            #   Pass arguments to `update_data_retention_settings` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param data_retention_settings [::Google::Analytics::Admin::V1alpha::DataRetentionSettings, ::Hash]
+            #     Required. The settings to update.
+            #     The `name` field is used to identify the settings to be updated.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. The list of fields to be updated. Field names must be in snake case
+            #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+            #     the entire entity, use one path with the string "*" to match all fields.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::DataRetentionSettings]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::DataRetentionSettings]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def update_data_retention_settings request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateDataRetentionSettingsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_data_retention_settings.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "data_retention_settings.name" => request.data_retention_settings.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_data_retention_settings.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_data_retention_settings.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :update_data_retention_settings, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the AnalyticsAdminService API.
             #
             # This class represents the configuration for AnalyticsAdminService,
@@ -5579,11 +6447,6 @@ module Google
                 #
                 attr_reader :create_firebase_link
                 ##
-                # RPC-specific configuration for `update_firebase_link`
-                # @return [::Gapic::Config::Method]
-                #
-                attr_reader :update_firebase_link
-                ##
                 # RPC-specific configuration for `delete_firebase_link`
                 # @return [::Gapic::Config::Method]
                 #
@@ -5684,6 +6547,61 @@ module Google
                 #
                 attr_reader :list_conversion_events
                 ##
+                # RPC-specific configuration for `get_display_video360_advertiser_link`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_display_video360_advertiser_link
+                ##
+                # RPC-specific configuration for `list_display_video360_advertiser_links`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_display_video360_advertiser_links
+                ##
+                # RPC-specific configuration for `create_display_video360_advertiser_link`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_display_video360_advertiser_link
+                ##
+                # RPC-specific configuration for `delete_display_video360_advertiser_link`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_display_video360_advertiser_link
+                ##
+                # RPC-specific configuration for `update_display_video360_advertiser_link`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_display_video360_advertiser_link
+                ##
+                # RPC-specific configuration for `get_display_video360_advertiser_link_proposal`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_display_video360_advertiser_link_proposal
+                ##
+                # RPC-specific configuration for `list_display_video360_advertiser_link_proposals`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_display_video360_advertiser_link_proposals
+                ##
+                # RPC-specific configuration for `create_display_video360_advertiser_link_proposal`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_display_video360_advertiser_link_proposal
+                ##
+                # RPC-specific configuration for `delete_display_video360_advertiser_link_proposal`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_display_video360_advertiser_link_proposal
+                ##
+                # RPC-specific configuration for `approve_display_video360_advertiser_link_proposal`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :approve_display_video360_advertiser_link_proposal
+                ##
+                # RPC-specific configuration for `cancel_display_video360_advertiser_link_proposal`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :cancel_display_video360_advertiser_link_proposal
+                ##
                 # RPC-specific configuration for `create_custom_dimension`
                 # @return [::Gapic::Config::Method]
                 #
@@ -5733,6 +6651,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_custom_metric
+                ##
+                # RPC-specific configuration for `get_data_retention_settings`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_data_retention_settings
+                ##
+                # RPC-specific configuration for `update_data_retention_settings`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_data_retention_settings
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -5810,8 +6738,6 @@ module Google
                   @update_enhanced_measurement_settings = ::Gapic::Config::Method.new update_enhanced_measurement_settings_config
                   create_firebase_link_config = parent_rpcs.create_firebase_link if parent_rpcs.respond_to? :create_firebase_link
                   @create_firebase_link = ::Gapic::Config::Method.new create_firebase_link_config
-                  update_firebase_link_config = parent_rpcs.update_firebase_link if parent_rpcs.respond_to? :update_firebase_link
-                  @update_firebase_link = ::Gapic::Config::Method.new update_firebase_link_config
                   delete_firebase_link_config = parent_rpcs.delete_firebase_link if parent_rpcs.respond_to? :delete_firebase_link
                   @delete_firebase_link = ::Gapic::Config::Method.new delete_firebase_link_config
                   list_firebase_links_config = parent_rpcs.list_firebase_links if parent_rpcs.respond_to? :list_firebase_links
@@ -5852,6 +6778,28 @@ module Google
                   @delete_conversion_event = ::Gapic::Config::Method.new delete_conversion_event_config
                   list_conversion_events_config = parent_rpcs.list_conversion_events if parent_rpcs.respond_to? :list_conversion_events
                   @list_conversion_events = ::Gapic::Config::Method.new list_conversion_events_config
+                  get_display_video360_advertiser_link_config = parent_rpcs.get_display_video360_advertiser_link if parent_rpcs.respond_to? :get_display_video360_advertiser_link
+                  @get_display_video360_advertiser_link = ::Gapic::Config::Method.new get_display_video360_advertiser_link_config
+                  list_display_video360_advertiser_links_config = parent_rpcs.list_display_video360_advertiser_links if parent_rpcs.respond_to? :list_display_video360_advertiser_links
+                  @list_display_video360_advertiser_links = ::Gapic::Config::Method.new list_display_video360_advertiser_links_config
+                  create_display_video360_advertiser_link_config = parent_rpcs.create_display_video360_advertiser_link if parent_rpcs.respond_to? :create_display_video360_advertiser_link
+                  @create_display_video360_advertiser_link = ::Gapic::Config::Method.new create_display_video360_advertiser_link_config
+                  delete_display_video360_advertiser_link_config = parent_rpcs.delete_display_video360_advertiser_link if parent_rpcs.respond_to? :delete_display_video360_advertiser_link
+                  @delete_display_video360_advertiser_link = ::Gapic::Config::Method.new delete_display_video360_advertiser_link_config
+                  update_display_video360_advertiser_link_config = parent_rpcs.update_display_video360_advertiser_link if parent_rpcs.respond_to? :update_display_video360_advertiser_link
+                  @update_display_video360_advertiser_link = ::Gapic::Config::Method.new update_display_video360_advertiser_link_config
+                  get_display_video360_advertiser_link_proposal_config = parent_rpcs.get_display_video360_advertiser_link_proposal if parent_rpcs.respond_to? :get_display_video360_advertiser_link_proposal
+                  @get_display_video360_advertiser_link_proposal = ::Gapic::Config::Method.new get_display_video360_advertiser_link_proposal_config
+                  list_display_video360_advertiser_link_proposals_config = parent_rpcs.list_display_video360_advertiser_link_proposals if parent_rpcs.respond_to? :list_display_video360_advertiser_link_proposals
+                  @list_display_video360_advertiser_link_proposals = ::Gapic::Config::Method.new list_display_video360_advertiser_link_proposals_config
+                  create_display_video360_advertiser_link_proposal_config = parent_rpcs.create_display_video360_advertiser_link_proposal if parent_rpcs.respond_to? :create_display_video360_advertiser_link_proposal
+                  @create_display_video360_advertiser_link_proposal = ::Gapic::Config::Method.new create_display_video360_advertiser_link_proposal_config
+                  delete_display_video360_advertiser_link_proposal_config = parent_rpcs.delete_display_video360_advertiser_link_proposal if parent_rpcs.respond_to? :delete_display_video360_advertiser_link_proposal
+                  @delete_display_video360_advertiser_link_proposal = ::Gapic::Config::Method.new delete_display_video360_advertiser_link_proposal_config
+                  approve_display_video360_advertiser_link_proposal_config = parent_rpcs.approve_display_video360_advertiser_link_proposal if parent_rpcs.respond_to? :approve_display_video360_advertiser_link_proposal
+                  @approve_display_video360_advertiser_link_proposal = ::Gapic::Config::Method.new approve_display_video360_advertiser_link_proposal_config
+                  cancel_display_video360_advertiser_link_proposal_config = parent_rpcs.cancel_display_video360_advertiser_link_proposal if parent_rpcs.respond_to? :cancel_display_video360_advertiser_link_proposal
+                  @cancel_display_video360_advertiser_link_proposal = ::Gapic::Config::Method.new cancel_display_video360_advertiser_link_proposal_config
                   create_custom_dimension_config = parent_rpcs.create_custom_dimension if parent_rpcs.respond_to? :create_custom_dimension
                   @create_custom_dimension = ::Gapic::Config::Method.new create_custom_dimension_config
                   update_custom_dimension_config = parent_rpcs.update_custom_dimension if parent_rpcs.respond_to? :update_custom_dimension
@@ -5872,6 +6820,10 @@ module Google
                   @archive_custom_metric = ::Gapic::Config::Method.new archive_custom_metric_config
                   get_custom_metric_config = parent_rpcs.get_custom_metric if parent_rpcs.respond_to? :get_custom_metric
                   @get_custom_metric = ::Gapic::Config::Method.new get_custom_metric_config
+                  get_data_retention_settings_config = parent_rpcs.get_data_retention_settings if parent_rpcs.respond_to? :get_data_retention_settings
+                  @get_data_retention_settings = ::Gapic::Config::Method.new get_data_retention_settings_config
+                  update_data_retention_settings_config = parent_rpcs.update_data_retention_settings if parent_rpcs.respond_to? :update_data_retention_settings
+                  @update_data_retention_settings = ::Gapic::Config::Method.new update_data_retention_settings_config
 
                   yield self if block_given?
                 end
