@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,6 +16,8 @@
 
 optional_arg :package
 flag :dry_run, default: ::ENV["RELEASE_DRY_RUN"] == "true"
+flag :base_dir, "--base-dir=PATH"
+flag :all, "--all=REGEX"
 
 include :exec, e: true
 include :gems
@@ -21,21 +25,31 @@ include :gems
 def run
   gem "gems", "~> 1.2"
   Dir.chdir context_directory
+  Dir.chdir base_dir if base_dir
   require "releaser"
   Releaser.load_env
-  set :package, Releaser.package_from_context unless package
-  raise "Unable to determine package" unless package
 
-  # TODO: Move link transformer into Toys lib directory.
-  require File.join(Dir.getwd, "rakelib", "link_transformer")
-  Dir.chdir package do
-    yard_link_transformer = LinkTransformer.new
-    files = yard_link_transformer.find_markdown_files
-    yard_link_transformer.transform_links_in_files files
+  packages = {}
+  if all
+    current_versions = Releaser.lookup_current_versions all
+    regex = Regexp.new all
+    Dir.glob("*/*.gemspec") do |path|
+      name = File.dirname path
+      packages[name] = cuurent_versions[name] if regex.match? name
+    end
+  else
+    name = package || Releaser.package_from_context
+    raise "Unable to determine package" unless name
+    packages[name] = nil
   end
 
-  releaser = Releaser.new package, package, dry_run: dry_run, logger: logger
-  releaser.publish_gem if releaser.needs_gem_publish?
-  releaser.publish_docs
-  # releaser.publish_rad
+  packages.each do |name, version|
+    releaser = Releaser.new name, current_version: version, dry_run: dry_run, logger: logger
+    releaser.transform_links
+    if releaser.needs_gem_publish?
+      releaser.publish_gem
+      releaser.publish_docs
+      # releaser.publish_rad
+    end
+  end
 end
