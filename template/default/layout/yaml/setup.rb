@@ -54,7 +54,7 @@ def children_list
   return @children_list if @children_list
 
   @children_list = object_methods(@object)
-  @children_list += @object.children.reject { |child| [:method, :constant].include? child.type }
+  @children_list += @object.children.reject { |child| [:method].include? child.type }
   @children_list
 end
 
@@ -111,7 +111,7 @@ def inheritance_text
 end
 
 
-def mixed_into(object)
+def mixed_into object
   # stolen from https://github.com/lsegal/yard
   unless globals.mixed_into
     globals.mixed_into = {}
@@ -120,4 +120,13 @@ def mixed_into(object)
   end
 
   globals.mixed_into[object.path] || []
+end
+
+def constant_summary
+  text = "<b>value: </b>#{pre_format @constant.value}"
+  if @constant.docstring.size > 0
+    text += "<br>"
+    text += pre_format @constant.docstring
+  end
+  text
 end
