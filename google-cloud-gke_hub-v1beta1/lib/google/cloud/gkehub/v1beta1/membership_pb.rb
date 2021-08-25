@@ -36,9 +36,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :MULTI_CLOUD, 2
     end
     add_message "google.cloud.gkehub.v1beta1.MembershipEndpoint" do
-      optional :gke_cluster, :message, 4, "google.cloud.gkehub.v1beta1.GkeCluster"
       optional :kubernetes_metadata, :message, 5, "google.cloud.gkehub.v1beta1.KubernetesMetadata"
       optional :kubernetes_resource, :message, 6, "google.cloud.gkehub.v1beta1.KubernetesResource"
+      oneof :type do
+        optional :gke_cluster, :message, 4, "google.cloud.gkehub.v1beta1.GkeCluster"
+        optional :on_prem_cluster, :message, 7, "google.cloud.gkehub.v1beta1.OnPremCluster"
+        optional :multi_cloud_cluster, :message, 8, "google.cloud.gkehub.v1beta1.MultiCloudCluster"
+      end
     end
     add_message "google.cloud.gkehub.v1beta1.KubernetesResource" do
       optional :membership_cr_manifest, :string, 1
@@ -56,6 +60,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.gkehub.v1beta1.GkeCluster" do
       optional :resource_link, :string, 1
+      optional :cluster_missing, :bool, 3
+    end
+    add_message "google.cloud.gkehub.v1beta1.OnPremCluster" do
+      optional :resource_link, :string, 1
+      optional :cluster_missing, :bool, 2
+      optional :admin_cluster, :bool, 3
+    end
+    add_message "google.cloud.gkehub.v1beta1.MultiCloudCluster" do
+      optional :resource_link, :string, 1
+      optional :cluster_missing, :bool, 2
     end
     add_message "google.cloud.gkehub.v1beta1.KubernetesMetadata" do
       optional :kubernetes_api_server_version, :string, 1
@@ -103,14 +117,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :membership_id, :string, 2
       optional :resource, :message, 3, "google.cloud.gkehub.v1beta1.Membership"
+      optional :request_id, :string, 4
     end
     add_message "google.cloud.gkehub.v1beta1.DeleteMembershipRequest" do
       optional :name, :string, 1
+      optional :request_id, :string, 4
     end
     add_message "google.cloud.gkehub.v1beta1.UpdateMembershipRequest" do
       optional :name, :string, 1
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
       optional :resource, :message, 3, "google.cloud.gkehub.v1beta1.Membership"
+      optional :request_id, :string, 4
     end
     add_message "google.cloud.gkehub.v1beta1.GenerateConnectManifestRequest" do
       optional :name, :string, 1
@@ -176,6 +193,8 @@ module Google
         ResourceOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.ResourceOptions").msgclass
         ResourceManifest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.ResourceManifest").msgclass
         GkeCluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.GkeCluster").msgclass
+        OnPremCluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.OnPremCluster").msgclass
+        MultiCloudCluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.MultiCloudCluster").msgclass
         KubernetesMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.KubernetesMetadata").msgclass
         Authority = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.Authority").msgclass
         MembershipState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.MembershipState").msgclass
