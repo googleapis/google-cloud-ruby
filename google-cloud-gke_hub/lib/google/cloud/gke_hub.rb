@@ -57,8 +57,14 @@ module Google
       #
       # ## About GkeHubMembershipService
       #
-      # GKE Hub CRUD API for the Membership resource.
-      # The Membership service is currently only available in the global location.
+      # The GKE Hub MembershipService handles the registration of many Kubernetes
+      # clusters to Google Cloud, represented with the Membership resource.
+      #
+      # GKE Hub is currently only available in the global region.
+      #
+      # **Membership management may be non-trivial:** it is recommended to use one
+      # of the Google-provided client libraries or tools where possible when working
+      # with Membership resources.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta1`.
