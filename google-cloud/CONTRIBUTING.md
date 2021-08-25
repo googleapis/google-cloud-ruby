@@ -53,7 +53,7 @@ there is a small amount of setup:
 In order to run code interactively, you can automatically load
 google-cloud and its dependencies in IRB. This requires that your
 developer environment has already been configured by following the steps
-described in the [Authentication Guide](AUTHENTICATION.md). An IRB console
+described in the {file:AUTHENTICATION.md Authentication Guide}. An IRB console
 can be created with:
 
 ```sh
@@ -138,4 +138,4 @@ $ bundle exec rake rubocop
 
 Please note that this project is released with a Contributor Code of Conduct. By
 participating in this project you agree to abide by its terms. See
-[Code of Conduct](CODE_OF_CONDUCT.md) for more information.
+{file:CODE_OF_CONDUCT.md Code of Conduct} for more information.
