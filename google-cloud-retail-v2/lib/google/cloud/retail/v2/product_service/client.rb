@@ -65,9 +65,14 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.timeout = 60.0
+                default_config.timeout = 30.0
                 default_config.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.import_products.timeout = 300.0
+                default_config.rpcs.import_products.retry_policy = {
+                  initial_delay: 0.1, max_delay: 300.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config
