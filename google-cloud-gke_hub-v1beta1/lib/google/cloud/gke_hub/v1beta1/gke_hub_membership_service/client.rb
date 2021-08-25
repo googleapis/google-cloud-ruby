@@ -27,8 +27,14 @@ module Google
           ##
           # Client for the GkeHubMembershipService service.
           #
-          # GKE Hub CRUD API for the Membership resource.
-          # The Membership service is currently only available in the global location.
+          # The GKE Hub MembershipService handles the registration of many Kubernetes
+          # clusters to Google Cloud, represented with the {::Google::Cloud::GkeHub::V1beta1::Membership Membership} resource.
+          #
+          # GKE Hub is currently only available in the global region.
+          #
+          # **Membership management may be non-trivial:** it is recommended to use one
+          # of the Google-provided client libraries or tools where possible when working
+          # with Membership resources.
           #
           class Client
             include Paths
@@ -334,7 +340,11 @@ module Google
             end
 
             ##
-            # Adds a new Membership.
+            # Creates a new Membership.
+            #
+            # **This is currently only supported for GKE clusters on Google Cloud**.
+            # To register other clusters, follow the instructions at
+            # https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster.
             #
             # @overload create_membership(request, options = nil)
             #   Pass arguments to `create_membership` via a request object, either of type
@@ -346,7 +356,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_membership(parent: nil, membership_id: nil, resource: nil)
+            # @overload create_membership(parent: nil, membership_id: nil, resource: nil, request_id: nil)
             #   Pass arguments to `create_membership` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -366,6 +376,20 @@ module Google
             #     with a maximum length of 63 characters.
             #   @param resource [::Google::Cloud::GkeHub::V1beta1::Membership, ::Hash]
             #     Required. The membership to create.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID
+            #     so that if you must retry your request, the server will know to ignore
+            #     the request if it has already been completed. The server will guarantee
+            #     that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -418,6 +442,10 @@ module Google
             ##
             # Removes a Membership.
             #
+            # **This is currently only supported for GKE clusters on Google Cloud**.
+            # To unregister other clusters, follow the instructions at
+            # https://cloud.google.com/anthos/multicluster-management/connect/unregistering-a-cluster.
+            #
             # @overload delete_membership(request, options = nil)
             #   Pass arguments to `delete_membership` via a request object, either of type
             #   {::Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest} or an equivalent Hash.
@@ -428,7 +456,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_membership(name: nil)
+            # @overload delete_membership(name: nil, request_id: nil)
             #   Pass arguments to `delete_membership` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -436,6 +464,20 @@ module Google
             #   @param name [::String]
             #     Required. The Membership resource name in the format
             #     `projects/*/locations/*/memberships/*`.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID
+            #     so that if you must retry your request, the server will know to ignore
+            #     the request if it has already been completed. The server will guarantee
+            #     that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -498,7 +540,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_membership(name: nil, update_mask: nil, resource: nil)
+            # @overload update_membership(name: nil, update_mask: nil, resource: nil, request_id: nil)
             #   Pass arguments to `update_membership` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -516,6 +558,22 @@ module Google
             #     If you are updating a map field, set the value of a key to null or empty
             #     string to delete the key from the map. It's not possible to update a key's
             #     value to the empty string.
+            #     If you specify the update_mask to be a special path "*", fully replaces all
+            #     user-modifiable fields to match `resource`.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID
+            #     so that if you must retry your request, the server will know to ignore
+            #     the request if it has already been completed. The server will guarantee
+            #     that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -567,6 +625,9 @@ module Google
 
             ##
             # Generates the manifest for deployment of the GKE connect agent.
+            #
+            # **This method is used internally by Google-provided libraries.**
+            # Most clients should not need to call this method directly.
             #
             # @overload generate_connect_manifest(request, options = nil)
             #   Pass arguments to `generate_connect_manifest` via a request object, either of type
