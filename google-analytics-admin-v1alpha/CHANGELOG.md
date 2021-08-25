@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 / 2021-08-25
+
+#### Features
+
+* Support new RPCs involving DisplayVideo360AdvertiserLink and DataRetentionSettings
+
 ### 0.8.2 / 2021-08-11
 
 #### Bug Fixes
