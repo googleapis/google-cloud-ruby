@@ -189,7 +189,7 @@ def bigtable_cluster_id
 end
 
 def bigtable_cluster_id_2
-  "#{$bigtable_instance_id}-clstr2"
+  "#{bigtable_instance_id}-clstr2"
 end
 
 def bigtable_kms_key
