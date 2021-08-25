@@ -29,7 +29,6 @@ require "google/cloud/compute/v1"
 # [END compute_instances_create]
 
 # [START compute_instances_create]
-
 # Sends an instance creation request to the Compute Engine API and waits for it to complete.
 #
 # @param [String] project project ID or project number of the Cloud project you want to use.
@@ -92,11 +91,9 @@ def create_instance project:, zone:, instance_name:,
     warn "Exception during creation:", e
   end
 end
-
 # [END compute_instances_create]
 
 # [START compute_instances_list]
-
 # Lists all instances in the given zone in the specified project.
 #
 # @param [String] project project ID or project number of the Cloud project you want to use.
@@ -118,7 +115,6 @@ def list_instances project:, zone:
   end
   instances
 end
-
 # [END compute_instances_list]
 
 # [START compute_instances_list_all]
@@ -151,7 +147,6 @@ end
 # [END compute_instances_list_all]
 
 # [START compute_instances_delete]
-
 # Sends an instance deletion request to the Compute Engine API and waits for it to complete.
 #
 # @param [String] project project ID or project number of the Cloud project you want to use.
@@ -179,11 +174,9 @@ def delete_instance project:, zone:, instance_name:
     warn "Exception during deletion:", e
   end
 end
-
 # [END compute_instances_delete]
 
 # [START compute_instances_operation_check]
-
 require "time"
 
 # Waits for an operation to be completed. Calling this method
@@ -220,5 +213,4 @@ def wait_until_done operation:, project:, timeout: 3 * 60
   end
   operation
 end
-
 # [END compute_instances_operation_check]
