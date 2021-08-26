@@ -1,5 +1,11 @@
 # Release History
 
+### 2.6.4 / 2021-08-26
+
+#### Bug Fixes
+
+* Fix google-cloud-resource-prefix header
+
 ### 2.6.3 / 2021-08-24
 
 #### Bug Fixes
