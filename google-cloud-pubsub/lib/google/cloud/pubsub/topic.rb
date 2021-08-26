@@ -314,11 +314,12 @@ module Google
         # that is up to `retention` number of seconds in the past. If this field is
         # not set, message retention is controlled by settings on individual
         # subscriptions. Cannot be less than 600 (10 minutes) or more than 604,800 (7 days).
+        # See {#retention=}.
         #
         # Makes an API call to retrieve the retention value when called on a
         # reference object. See {#reference?}.
         #
-        # @return [Numeric] The message retention duration in seconds.
+        # @return [Numeric, nil] The message retention duration in seconds, or `nil` if not set.
         #
         def retention
           ensure_grpc!
@@ -328,11 +329,10 @@ module Google
         ##
         # Sets the message retention duration in seconds. If set to a positive duration
         # between 600 (10 minutes) and 604,800 (7 days), inclusive, the message retention
-        # duration is changed. If set to a negative value, this clears message retention
-        # duration from the topic.
-        # See {#retention}.
+        # duration is changed. If set to `nil`, this clears message retention duration
+        # from the topic. See {#retention}.
         #
-        # @param [Numeric] new_retention The new message retention duration value.
+        # @param [Numeric, nil] new_retention The new message retention duration value.
         #
         def retention= new_retention
           new_retention_duration = Convert.number_to_duration new_retention

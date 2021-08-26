@@ -37,7 +37,7 @@ describe Google::Cloud::PubSub, :pubsub do
   let(:dead_letter_topic_name) { $topic_names[8] }
   let(:dead_letter_topic_name_2) { $topic_names[9] }
   let(:labels) { { "foo" => "bar" } }
-  let(:topic_retention) {50 * 60 }
+  let(:topic_retention) { 50 * 60 }
   let(:new_topic_retention) { 11 * 60 }
   let(:subscription_retention) { 10 * 60 }
   let(:filter) { "attributes.event_type = \"1\"" }

@@ -204,7 +204,8 @@ module Google
         # Makes an API call to retrieve the retention value when called on a
         # reference object. See {#reference?}.
         #
-        # @return [Numeric] The topic message retention duration in seconds.
+        # @return [Numeric, nil] The topic message retention duration in seconds,
+        #   or `nil` if not set.
         #
         def topic_retention
           ensure_grpc!
