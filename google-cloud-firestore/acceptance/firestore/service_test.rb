@@ -18,7 +18,11 @@
 require "firestore_helper"
 
 describe Google::Cloud::Firestore::Service, :firestore_acceptance do
-  let(:config_metadata) { { "google-cloud-resource-prefix": "projects/#{firestore.project_id}" } }
+  let :config_metadata do
+    {
+      "google-cloud-resource-prefix": "projects/#{firestore.project_id}/databases/(default)"
+    }
+  end
 
   it "passes the correct configuration to its v1 client" do
     _(firestore.project_id).wont_be :empty?
