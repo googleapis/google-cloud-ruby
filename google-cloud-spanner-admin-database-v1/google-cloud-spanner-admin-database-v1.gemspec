@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service. Note that google-cloud-spanner-admin-database-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-spanner-admin-database instead. See the readme for more details."
+  gem.description   = "Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service. Note that google-cloud-spanner-admin-database-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-spanner instead. See the readme for more details."
   gem.summary       = "API Client library for the Cloud Spanner Database Admin V1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
