@@ -9,7 +9,7 @@ https://github.com/googleapis/google-cloud-ruby
 This gem is a _versioned_ client. It provides basic client classes for a
 specific version of the Cloud Bigtable Admin V2 API. Most users should consider using
 the main client gem,
-[google-cloud-bigtable-admin](https://rubygems.org/gems/google-cloud-bigtable-admin).
+[google-cloud-bigtable](https://rubygems.org/gems/google-cloud-bigtable).
 See the section below titled *Which client should I use?* for more information.
 
 ## Installation
@@ -83,7 +83,7 @@ about the Ruby support schedule.
 ## Which client should I use?
 
 Most modern Ruby client libraries for Google APIs come in two flavors: the main
-client library with a name such as `google-cloud-bigtable-admin`,
+client library with a name such as `google-cloud-bigtable`,
 and lower-level _versioned_ client libraries with names such as
 `google-cloud-bigtable-admin-v2`.
 _In most cases, you should install the main client._
@@ -110,7 +110,7 @@ service version.
 
 We recommend that most users install the main client gem for a service. You can
 identify this gem as the one _without_ a version in its name, e.g.
-`google-cloud-bigtable-admin`.
+`google-cloud-bigtable`.
 The main client is recommended because it will embody the best practices for
 accessing the service, and may also provide more convenient interfaces or
 tighter integration into frameworks and third-party libraries. In addition, the
