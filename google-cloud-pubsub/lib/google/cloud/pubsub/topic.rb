@@ -306,6 +306,43 @@ module Google
         end
 
         ##
+        # Indicates the minimum number of seconds to retain a message after it is
+        # published to the topic. If this field is set, messages published to the topic
+        # within the `retention` number of seconds are always available to subscribers.
+        # For instance, it allows any attached subscription to [seek to a
+        # timestamp](https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time)
+        # that is up to `retention` number of seconds in the past. If this field is
+        # not set, message retention is controlled by settings on individual
+        # subscriptions. Cannot be less than 600 (10 minutes) or more than 604,800 (7 days).
+        # See {#retention=}.
+        #
+        # Makes an API call to retrieve the retention value when called on a
+        # reference object. See {#reference?}.
+        #
+        # @return [Numeric, nil] The message retention duration in seconds, or `nil` if not set.
+        #
+        def retention
+          ensure_grpc!
+          Convert.duration_to_number @grpc.message_retention_duration
+        end
+
+        ##
+        # Sets the message retention duration in seconds. If set to a positive duration
+        # between 600 (10 minutes) and 604,800 (7 days), inclusive, the message retention
+        # duration is changed. If set to `nil`, this clears message retention duration
+        # from the topic. See {#retention}.
+        #
+        # @param [Numeric, nil] new_retention The new message retention duration value.
+        #
+        def retention= new_retention
+          new_retention_duration = Convert.number_to_duration new_retention
+          update_grpc = Google::Cloud::PubSub::V1::Topic.new name: name,
+                                                             message_retention_duration: new_retention_duration
+          @grpc = service.update_topic update_grpc, :message_retention_duration
+          @resource_name = nil
+        end
+
+        ##
         # Permanently deletes the topic.
         #
         # @return [Boolean] Returns `true` if the topic was deleted.
