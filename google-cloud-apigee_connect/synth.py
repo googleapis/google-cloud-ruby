@@ -14,6 +14,7 @@
 
 """This script is used to synthesize generated parts of this library."""
 
+
 import synthtool as s
 import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
