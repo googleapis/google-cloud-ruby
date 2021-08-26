@@ -277,6 +277,11 @@ module Google
         #     Output only. Status of the build step. At this time, build step status is
         #     only updated on build completion; step status is not updated in real-time
         #     as the build progresses.
+        # @!attribute [rw] script
+        #   @return [::String]
+        #     A shell script to be executed in the step.
+        #
+        #     When script is provided, the user cannot specify the entrypoint or args.
         class BuildStep
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1139,6 +1144,13 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. A Common Expression Language string.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     The service account used for all user-controlled operations including
+        #     UpdateBuildTrigger, RunBuildTrigger, CreateBuild, and CancelBuild.
+        #     If no service account is set, then the standard Cloud Build service account
+        #     ([PROJECT_NUM]@system.gserviceaccount.com) will be used instead.
+        #     Format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT_ID_OR_EMAIL}`
         class BuildTrigger
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

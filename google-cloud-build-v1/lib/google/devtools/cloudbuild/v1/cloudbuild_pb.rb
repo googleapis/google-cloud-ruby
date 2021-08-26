@@ -74,6 +74,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :pull_timing, :message, 13, "google.devtools.cloudbuild.v1.TimeSpan"
       optional :timeout, :message, 11, "google.protobuf.Duration"
       optional :status, :enum, 12, "google.devtools.cloudbuild.v1.Build.Status"
+      optional :script, :string, 19
     end
     add_message "google.devtools.cloudbuild.v1.Volume" do
       optional :name, :string, 1
@@ -280,6 +281,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :ignored_files, :string, 15
       repeated :included_files, :string, 16
       optional :filter, :string, 30
+      optional :service_account, :string, 33
       oneof :build_template do
         optional :autodetect, :bool, 18
         optional :build, :message, 4, "google.devtools.cloudbuild.v1.Build"
