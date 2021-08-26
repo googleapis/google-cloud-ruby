@@ -8,7 +8,7 @@
     "product_documentation": "https://cloud.google.com/spanner",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
-    "ruby-cloud-description": "Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service. Note that google-cloud-spanner-admin-instance-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-spanner-admin-instance instead. See the readme for more details.",
+    "ruby-cloud-description": "Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service. Note that google-cloud-spanner-admin-instance-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-spanner instead. See the readme for more details.",
     "ruby-cloud-env-prefix": "SPANNER",
     "ruby-cloud-product-url": "https://cloud.google.com/spanner",
     "library_type": "GAPIC_AUTO"
