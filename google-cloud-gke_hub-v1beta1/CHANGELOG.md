@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.0 / 2021-08-27
+
+#### Features
+
+* Support on-prem and multi-cloud cluster info; support request ID mediated retry
+
 ### 0.1.3 / 2021-08-11
 
 #### Bug Fixes
