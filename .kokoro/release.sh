@@ -12,4 +12,4 @@ python3 -m pip install gcp-docuploader
 gem install --no-document toys
 
 python3 -m releasetool publish-reporter-script > /tmp/publisher-script; source /tmp/publisher-script
-toys kokoro release < /dev/null
+toys kokoro release -v --enable-docs < /dev/null
