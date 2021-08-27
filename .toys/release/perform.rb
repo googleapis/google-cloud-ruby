@@ -14,51 +14,112 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "fileutils"
-require "gems"
-require "rubygems"
-require "toys/utils/exec"
+desc "Performs a gem release"
 
-class Releaser
-  @loaded_env = false
+optional_arg :package
+flag :dry_run, default: ENV["RELEASE_DRY_RUN"] == "true"
+flag :base_dir, "--base-dir=PATH"
+flag :all, "--all=REGEX"
+flag :enable_docs
+flag :enable_rad
+flag :enable_ghpages
+flag :rubygems_api_token, "--rubygems-api-token=VALUE"
+flag :docs_staging_bucket, "--docs-staging-bucket=VALUE"
+flag :rad_staging_bucket, "--rad-staging-bucket=VALUE"
+flag :docuploader_credentials, "--docuploader-credentials=VALUE"
 
-  def self.load_env
-    return if @loaded_env
+include :exec, e: true
+include :gems
 
-    if ::ENV["KOKORO_GFILE_DIR"]
-      service_account = "#{::ENV['KOKORO_GFILE_DIR']}/service-account.json"
-      raise "#{service_account} is not a file" unless ::File.file? service_account
-      ::ENV["GOOGLE_APPLICATION_CREDENTIALS"] = service_account
+def run
+  gem "gems", "~> 1.2"
+  require "fileutils"
+  require "gems"
+  Dir.chdir context_directory
+  Dir.chdir base_dir if base_dir
+  load_env
 
-      filename = "#{::ENV['KOKORO_GFILE_DIR']}/ruby_env_vars.json"
-      raise "#{filename} is not a file" unless ::File.file? filename
-      env_vars = ::JSON.parse ::File.read filename
-      env_vars.each { |k, v| ::ENV[k] ||= v }
+  determine_packages.each do |name, version|
+    releaser = Performer.new name,
+                             last_version: version,
+                             dry_run: dry_run,
+                             logger: logger,
+                             enable_docs: enable_docs,
+                             enable_rad: enable_rad,
+                             enable_ghpages: enable_ghpages,
+                             rubygems_api_token: rubygems_api_token || ENV["RUBYGEMS_API_TOKEN"],
+                             docs_staging_bucket: docs_staging_bucket || ENV["STAGING_BUCKET"] || "docs-staging",
+                             rad_staging_bucket: rad_staging_bucket || ENV["V2_STAGING_BUCKET"] || "docs-staging-v2-dev",
+                             docuploader_credentials: docuploader_credentials || ENV["DOCUPLOADER_CREDENTIALS"]
 
-      ::ENV["DOCUPLOADER_CREDENTIALS"] ||= ::File.join ::ENV["KOKORO_GFILE_DIR"],
-                                                       "secret_manager", "docuploader_service_account"
-    end
-
-    @loaded_env = true
+    releaser.run
   end
+end
 
-  def self.lookup_current_versions regex
-    versions = {}
-    lines = `gem search '^#{regex}'`.split("\n")
-    lines.each do |line|
-      if line =~ /^(#{regex}) \(([\d.]+)\)/
-        versions[Regexp.last_match[1]] = Regexp.last_match[2]
-      end
+def load_env
+  kokoro_gfile_dir = ENV["KOKORO_GFILE_DIR"]
+  return unless kokoro_gfile_dir
+
+  service_account = File.join kokoro_gfile_dir, "service-account.json"
+  raise "#{service_account} is not a file" unless File.file? service_account
+  ENV["GOOGLE_APPLICATION_CREDENTIALS"] = service_account
+
+  filename = File.join kokoro_gfile_dir, "ruby_env_vars.json"
+  raise "#{filename} is not a file" unless File.file? filename
+  env_vars = JSON.parse File.read filename
+  env_vars.each { |k, v| ENV[k] ||= v }
+
+  ENV["DOCUPLOADER_CREDENTIALS"] ||= File.join kokoro_gfile_dir, "secret_manager", "docuploader_service_account"
+end
+
+def determine_packages
+  packages = {}
+  if all
+    current_versions = lookup_current_versions all
+    regex = Regexp.new all
+    Dir.glob("*/*.gemspec") do |path|
+      name = File.dirname path
+      packages[name] = cuurent_versions[name] if regex.match? name
     end
-    raise "Something went wrong getting all current gem versions" if versions.empty?
-    versions
+  else
+    packages[package || package_from_context] = nil
   end
+  packages
+end
 
-  def initialize gem_name: nil,
+def package_from_context
+  return ENV["RELEASE_PACKAGE"] unless ENV["RELEASE_PACKAGE"].to_s.empty?
+  tags = Array(ENV["KOKORO_GIT_COMMIT"])
+  logger.info "Got #{tags.inspect} from KOKORO_GIT_COMMIT"
+  tags += capture(["git", "describe", "--exact-match", "--tags"], err: :null, e: false).strip.split
+  logger.info "All tags: #{tags.inspect}"
+  tags.each do |tag|
+    if tag =~ %r{^([^/]+)/v\d+\.\d+\.\d+$}
+      return Regexp.last_match[1]
+    end
+  end
+  logger.error "Unable to determine package from context"
+  exit 1
+end
+
+def lookup_current_versions regex
+  versions = {}
+  lines = `gem search '^#{regex}'`.split("\n")
+  lines.each do |line|
+    if line =~ /^(#{regex}) \(([\d.]+)\)/
+      versions[Regexp.last_match[1]] = Regexp.last_match[2]
+    end
+  end
+  raise "Something went wrong getting all current gem versions" if versions.empty?
+  versions
+end
+
+class Performer
+  def initialize gem_name,
                  gem_dir: nil,
                  rubygems_api_token: nil,
                  docs_staging_bucket: nil,
-                 docs_staging_bucket_v2: nil,
+                 rad_staging_bucket: nil,
                  docuploader_credentials: nil,
                  dry_run: false,
                  last_version: nil,
@@ -66,17 +127,16 @@ class Releaser
                  enable_docs: false,
                  enable_rad: false,
                  enable_ghpages: false
+    @gem_name = gem_name
     @logger = logger
     result_callback = proc { |result| raise "Command failed" unless result.success? }
     @executor = Toys::Utils::Exec.new logger: @logger, result_callback: result_callback
-
-    @gem_name = gem_name || package_from_context
-    raise "Unable to determine gem name" unless @gem_name
-    @gem_dir = gem_dir || (File.directory?(@gem_name) ? File.expand_path(@gem_name) : Dir.getwd)
-    @rubygems_api_token = rubygems_api_token || ENV["RUBYGEMS_API_TOKEN"]
-    @docs_staging_bucket = docs_staging_bucket || ENV["STAGING_BUCKET"] || "docs-staging"
-    @docs_staging_bucket_v2 = docs_staging_bucket_v2 || ENV["V2_STAGING_BUCKET"] || "docs-staging-v2-dev"
-    @docuploader_credentials = docuploader_credentials || ENV["DOCUPLOADER_CREDENTIALS"]
+    @gem_dir = gem_dir
+    @gem_dir ||= (File.file?("#{@gem_name}/#{@gem_name}.gemspec") ? File.expand_path(@gem_name) : Dir.getwd)
+    @rubygems_api_token = rubygems_api_token
+    @docs_staging_bucket = docs_staging_bucket
+    @rad_staging_bucket = rad_staging_bucket
+    @docuploader_credentials = docuploader_credentials
     @dry_run = dry_run ? true : false
     @current_rubygems_version = Gem::Version.new last_version if last_version
     @bundle_updated = false
@@ -89,7 +149,7 @@ class Releaser
   attr_reader :gem_dir
   attr_reader :rubygems_api_token
   attr_reader :docs_staging_bucket
-  attr_reader :docs_staging_bucket_v2
+  attr_reader :rad_staging_bucket
   attr_reader :docuploader_credentials
   attr_reader :logger
 
@@ -115,21 +175,6 @@ class Releaser
     publish_docs if enable_docs?
     publish_rad if enable_rad?
     publish_ghpages if enable_ghpages?
-  end
-
-  def package_from_context
-    return ::ENV["RELEASE_PACKAGE"] if ::ENV["RELEASE_PACKAGE"]
-    tags = Array(::ENV["KOKORO_GIT_COMMIT"])
-    logger.info "Got #{tags.inspect} from KOKORO_GIT_COMMIT"
-    tags += @executor.capture(["git", "describe", "--exact-match", "--tags"],
-                              err: :null, result_callback: nil).strip.split
-    logger.info "All tags: #{tags.inspect}"
-    tags.each do |tag|
-      if tag =~ %r{^([^/]+)/v\d+\.\d+\.\d+$}
-        return Regexp.last_match[1]
-      end
-    end
-    nil
   end
 
   def transform_links
@@ -173,7 +218,7 @@ class Releaser
 
   def publish_rad
     logger.info "**** Starting publish_rad for #{gem_name}"
-    do_docuploader "rad", ".yardopts-cloudrad", "cloudrad", docs_staging_bucket_v2, ["--destination-prefix", "docfx"]
+    do_docuploader "rad", ".yardopts-cloudrad", "cloudrad", rad_staging_bucket, ["--destination-prefix", "docfx"]
   end
 
   def do_docuploader type, yardopts_file, rake_task, staging_bucket, docuploader_args
