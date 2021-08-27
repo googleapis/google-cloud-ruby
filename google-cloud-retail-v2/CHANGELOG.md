@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.1 / 2021-08-26
+
+#### Bug Fixes
+
+* Adjusted timeout settings
+
 ### 0.5.0 / 2021-08-23
 
 #### Features
