@@ -44,7 +44,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A closed time interval. It extends from the start time to the end time, and includes both: `[startTime, endTime]`. Valid time intervals depend on the [`MetricKind`](/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors#MetricKind) of the metric value. The end time must not be earlier than the start time. When writing data points, the start time must not be more than 25 hours in the past and the end time must not be more than five minutes in the future.
+        # A closed time interval. It extends from the start time to the end time, and includes both: `[startTime, endTime]`. Valid time intervals depend on the [`MetricKind`](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors#MetricKind) of the metric value. The end time must not be earlier than the start time. When writing data points, the start time must not be more than 25 hours in the past and the end time must not be more than five minutes in the future.
         #
         # * For `GAUGE` metrics, the `startTime` value is technically optional; if
         #   no value is specified, the start time defaults to the value of the
@@ -458,18 +458,6 @@ module Google
 
           # True if the left argument is not equal to the right argument.
           COMPARISON_NE = 6
-        end
-
-        # Obsolete.
-        module ServiceTier
-          # Obsolete.
-          SERVICE_TIER_UNSPECIFIED = 0
-
-          # Obsolete.
-          SERVICE_TIER_BASIC = 1
-
-          # Obsolete.
-          SERVICE_TIER_PREMIUM = 2
         end
       end
     end

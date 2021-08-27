@@ -67,34 +67,34 @@ module Google
 
                 default_config.rpcs.list_monitored_resource_descriptors.timeout = 30.0
                 default_config.rpcs.list_monitored_resource_descriptors.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_monitored_resource_descriptor.timeout = 30.0
                 default_config.rpcs.get_monitored_resource_descriptor.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_metric_descriptors.timeout = 30.0
                 default_config.rpcs.list_metric_descriptors.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_metric_descriptor.timeout = 30.0
                 default_config.rpcs.get_metric_descriptor.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.create_metric_descriptor.timeout = 12.0
 
                 default_config.rpcs.delete_metric_descriptor.timeout = 30.0
                 default_config.rpcs.delete_metric_descriptor.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.list_time_series.timeout = 30.0
+                default_config.rpcs.list_time_series.timeout = 90.0
                 default_config.rpcs.list_time_series.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.create_time_series.timeout = 12.0
@@ -198,7 +198,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The project on which to execute the request. The format is:
+            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
+            #     which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param filter [::String]
@@ -355,7 +356,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The project on which to execute the request. The format is:
+            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
+            #     which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param filter [::String]
@@ -516,8 +518,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The project on which to execute the request. The format is:
-            #
+            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
+            #     which to execute the request. The format is:
+            #     4
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param metric_descriptor [::Google::Api::MetricDescriptor, ::Hash]
             #     Required. The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
@@ -664,8 +667,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The project, organization or folder on which to execute the request. The
-            #     format is:
+            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name),
+            #     organization or folder on which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #         organizations/[ORGANIZATION_ID]
@@ -777,7 +780,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The project on which to execute the request. The format is:
+            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
+            #     which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param time_series [::Array<::Google::Cloud::Monitoring::V3::TimeSeries, ::Hash>]

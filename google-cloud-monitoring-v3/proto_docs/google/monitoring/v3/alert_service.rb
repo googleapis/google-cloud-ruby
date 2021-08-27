@@ -24,7 +24,8 @@ module Google
         # The protocol for the `CreateAlertPolicy` request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The project in which to create the alerting policy. The format is:
+        #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) in
+        #     which to create the alerting policy. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         #
@@ -59,7 +60,8 @@ module Google
         # The protocol for the `ListAlertPolicies` request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The project whose alert policies are to be listed. The format is:
+        #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name)
+        #     whose alert policies are to be listed. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         #

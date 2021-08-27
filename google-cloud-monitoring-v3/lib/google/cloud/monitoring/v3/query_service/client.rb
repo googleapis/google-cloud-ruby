@@ -163,7 +163,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The project on which to execute the request. The format is:
+            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
+            #     which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param query [::String]

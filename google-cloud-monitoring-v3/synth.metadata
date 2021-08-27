@@ -4,15 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "7e366e8c4192595f54e817a0f4136210f1ff6309"
+        "sha": "2f4a88ed3365fe5207ed3b5f7b58ba82621afcbf"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "411e51eea221af5b77f809cef2c6592df45f73d5",
-        "internalRef": "389760020"
+        "sha": "ccb73479aebb76f13698907884269bb7a38b4207"
       }
     }
   ],
@@ -103,6 +102,7 @@
     "proto_docs/google/api/metric.rb",
     "proto_docs/google/api/monitored_resource.rb",
     "proto_docs/google/api/resource.rb",
+    "proto_docs/google/longrunning/operations.rb",
     "proto_docs/google/monitoring/v3/alert.rb",
     "proto_docs/google/monitoring/v3/alert_service.rb",
     "proto_docs/google/monitoring/v3/common.rb",

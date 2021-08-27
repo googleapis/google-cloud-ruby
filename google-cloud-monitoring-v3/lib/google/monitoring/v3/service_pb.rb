@@ -13,6 +13,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :display_name, :string, 2
       optional :telemetry, :message, 13, "google.monitoring.v3.Service.Telemetry"
+      map :user_labels, :string, :string, 14
       oneof :identifier do
         optional :custom, :message, 6, "google.monitoring.v3.Service.Custom"
         optional :app_engine, :message, 7, "google.monitoring.v3.Service.AppEngine"
@@ -54,6 +55,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :display_name, :string, 11
       optional :service_level_indicator, :message, 3, "google.monitoring.v3.ServiceLevelIndicator"
       optional :goal, :double, 4
+      map :user_labels, :string, :string, 12
       oneof :period do
         optional :rolling_period, :message, 5, "google.protobuf.Duration"
         optional :calendar_period, :enum, 6, "google.type.CalendarPeriod"

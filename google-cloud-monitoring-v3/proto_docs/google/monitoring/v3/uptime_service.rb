@@ -24,7 +24,8 @@ module Google
         # The protocol for the `ListUptimeCheckConfigs` request.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The project whose Uptime check configurations are listed. The format is:
+        #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name)
+        #     whose Uptime check configurations are listed. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         # @!attribute [rw] page_size
@@ -77,7 +78,8 @@ module Google
         # The protocol for the `CreateUptimeCheckConfig` request.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The project in which to create the Uptime check. The format is:
+        #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) in
+        #     which to create the Uptime check. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]
         # @!attribute [rw] uptime_check_config
