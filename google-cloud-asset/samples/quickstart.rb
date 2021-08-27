@@ -84,8 +84,9 @@ def list_assets project_id:
     content_type:     content_type
   )
 
-  # Do things with the result
-  puts response.assets
+  #response.page.each do |resource|
+    puts resource
+  end
   # [END asset_quickstart_list_assets]
 end
 
