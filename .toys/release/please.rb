@@ -145,7 +145,7 @@ end
 
 def default_repo_url
   url = capture(["git", "remote", "get-url", "origin"]).strip
-  if url =~ %r{github\.com[:/]([\w.-]+/[\w.-]+)\.git$}
+  if url =~ %r{github\.com[:/]([\w.-]+/[\w.-]+)(?:\.git|/)?$}
     return Regexp.last_match[1]
   else
     logger.error "Unable to determine current github repo"
