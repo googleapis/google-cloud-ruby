@@ -148,7 +148,7 @@ module Google
         #     Output only. Immutable. The Workload creation timestamp.
         # @!attribute [rw] billing_account
         #   @return [::String]
-        #     Required. Input only. The billing account used for the resources which are
+        #     Input only. The billing account used for the resources which are
         #     direct children of workload. This billing account is initially associated
         #     with the resources created as part of Workload creation.
         #     After the initial creation of these resources, the customer can change
@@ -178,12 +178,11 @@ module Google
         # @!attribute [rw] provisioned_resources_parent
         #   @return [::String]
         #     Input only. The parent resource for the resources managed by this Assured Workload. May
-        #     be either an organization or a folder. Must be the same or a child of the
+        #     be either empty or a folder resource which is a child of the
         #     Workload parent. If not specified all resources are created under the
-        #     Workload parent.
-        #     Formats:
+        #     parent organization.
+        #     Format:
         #     folders/\\{folder_id}
-        #     organizations/\\{organization_id}
         # @!attribute [rw] kms_settings
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::KMSSettings]
         #     Input only. Settings used to create a CMEK crypto key. When set a project with a KMS
@@ -215,11 +214,18 @@ module Google
               # Unknown resource type.
               RESOURCE_TYPE_UNSPECIFIED = 0
 
-              # Consumer project.
+              # Deprecated. Existing workloads will continue to support this, but new
+              # CreateWorkloadRequests should not specify this as an input value.
               CONSUMER_PROJECT = 1
+
+              # Consumer Folder.
+              CONSUMER_FOLDER = 4
 
               # Consumer project containing encryption keys.
               ENCRYPTION_KEYS_PROJECT = 2
+
+              # Keyring resource that hosts encryption keys.
+              KEYRING = 3
             end
           end
 
@@ -285,6 +291,11 @@ module Google
           #     Indicates the type of resource. This field should be specified to
           #     correspond the id to the right project type (CONSUMER_PROJECT or
           #     ENCRYPTION_KEYS_PROJECT)
+          # @!attribute [rw] display_name
+          #   @return [::String]
+          #     User-assigned resource display name.
+          #     If not empty it will be used to create a resource with the specified
+          #     name.
           class ResourceSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -327,6 +338,9 @@ module Google
 
             # Assured Workloads For EU Regions and Support controls
             EU_REGIONS_AND_SUPPORT = 8
+
+            # Assured Workloads For Canada Regions and Support controls
+            CA_REGIONS_AND_SUPPORT = 9
           end
         end
 
@@ -344,6 +358,10 @@ module Google
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::ComplianceRegime]
         #     Optional. Compliance controls that should be applied to the resources managed by
         #     the workload.
+        # @!attribute [rw] resource_settings
+        #   @return [::Array<::Google::Cloud::AssuredWorkloads::V1beta1::Workload::ResourceSettings>]
+        #     Optional. Resource properties in the input that are used for creating/customizing
+        #     workload resources.
         class CreateWorkloadOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

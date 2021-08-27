@@ -66,7 +66,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType" do
       value :RESOURCE_TYPE_UNSPECIFIED, 0
       value :CONSUMER_PROJECT, 1
+      value :CONSUMER_FOLDER, 4
       value :ENCRYPTION_KEYS_PROJECT, 2
+      value :KEYRING, 3
     end
     add_message "google.cloud.assuredworkloads.v1beta1.Workload.KMSSettings" do
       optional :next_rotation_time, :message, 1, "google.protobuf.Timestamp"
@@ -87,6 +89,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings" do
       optional :resource_id, :string, 1
       optional :resource_type, :enum, 2, "google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType"
+      optional :display_name, :string, 3
     end
     add_enum "google.cloud.assuredworkloads.v1beta1.Workload.ComplianceRegime" do
       value :COMPLIANCE_REGIME_UNSPECIFIED, 0
@@ -98,12 +101,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :HIPAA, 6
       value :HITRUST, 7
       value :EU_REGIONS_AND_SUPPORT, 8
+      value :CA_REGIONS_AND_SUPPORT, 9
     end
     add_message "google.cloud.assuredworkloads.v1beta1.CreateWorkloadOperationMetadata" do
       optional :create_time, :message, 1, "google.protobuf.Timestamp"
       optional :display_name, :string, 2
       optional :parent, :string, 3
       optional :compliance_regime, :enum, 4, "google.cloud.assuredworkloads.v1beta1.Workload.ComplianceRegime"
+      repeated :resource_settings, :message, 5, "google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings"
     end
   end
 end
