@@ -1,5 +1,11 @@
 # Release History
 
+### 0.1.3 / 2021-08-27
+
+#### Documentation
+
+* Additional details in the service description
+
 ### 0.1.2 / 2021-07-12
 
 #### Documentation
