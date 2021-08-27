@@ -20,8 +20,9 @@ flag :install
 flag :use_fork, "--fork"
 flag :base_dir, "--base-dir=PATH"
 flag :release_type, "--release-type=TYPE", default: "ruby"
+flag :version_file, "--version-file=PATH"
 flag :repo_url, "--repo-url=NAME"
-flag :retries, "--retry=TIMES", default: 1
+flag :retries, "--retries=TIMES", default: 1, accept: Integer
 flag :delay, "--delay=SECS", default: 2, accept: Numeric
 flag :retry_delay, "--retry-delay=SECS", default: 4, accept: Numeric
 flag :github_event_name, "--github-event-name=NAME"
@@ -88,7 +89,7 @@ def interpret_input_gems
 end
 
 def release_please gem_name, release_as, dir
-  cur_version = gem_version gem_name
+  cur_version = gem_version gem_name, dir
   job_name = "release-please for #{gem_name} from version #{cur_version}"
   job_name = "#{job_name} as version #{release_as}" if release_as
   logger.info "Running #{job_name}"
@@ -115,9 +116,9 @@ def release_please gem_name, release_as, dir
   sleep delay
 end
 
-def gem_version gem_name
+def gem_version gem_name, dir
   func = proc do
-    Dir.chdir gem_name do
+    Dir.chdir dir do
       spec = Gem::Specification.load "#{gem_name}.gemspec"
       puts spec.version.to_s
     end
@@ -141,12 +142,13 @@ def build_command dir, gem_name, cur_version, release_as
   cmd += ["--last-package-version", cur_version] if cur_version && cur_version >= "0.1"
   cmd += ["--release-as", release_as] if release_as
   cmd += ["--token", github_token] if github_token
+  cmd += ["--version-file", version_file] if version_file
   cmd
 end
 
 def default_repo_url
   url = capture(["git", "remote", "get-url", "origin"]).strip
-  if url =~ %r{github\.com[:/]([\w.-]+/[\w.-]+)(?:\.git|/)?$}
+  if url =~ %r{github\.com[:/]([\w-]+/[\w-]+)(?:\.git|/)?$}
     return Regexp.last_match[1]
   else
     logger.error "Unable to determine current github repo"
