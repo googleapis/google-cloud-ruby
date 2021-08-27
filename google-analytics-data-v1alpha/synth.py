@@ -21,20 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "analytics/data", "v1alpha",
     proto_path="google/analytics/data/v1alpha",
-    generator_args={
-        "ruby-cloud-gem-name": "google-analytics-data-v1alpha",
-        "ruby-cloud-title": "Google Analytics Data V1alpha",
-        "ruby-cloud-description": "The Google Analytics Data API provides programmatic methods to access report data in Google Analytics App+Web properties. With the Google Analytics Data API, you can build custom dashboards to display Google Analytics data, automate complex reporting tasks to save time, and integrate your Google Analytics data with other business applications.",
-        "ruby-cloud-env-prefix": "ANALYTICS",
-        "ruby-cloud-grpc-service-config": "google/analytics/data/v1alpha/analytics_data_grpc_service_config.json",
-        "ruby-cloud-api-id": "analyticsdata.googleapis.com",
-        "ruby-cloud-api-shortname": "analyticsdata",
-        "ruby-cloud-service-override": "AlphaAnalyticsData=AnalyticsData",
-    }
+    bazel_target="//google/analytics/data/v1alpha:google-analytics-data-v1alpha-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

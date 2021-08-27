@@ -28,6 +28,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :kms_key_name, :string, 5
       optional :schema_settings, :message, 6, "google.pubsub.v1.SchemaSettings"
       optional :satisfies_pzs, :bool, 7
+      optional :message_retention_duration, :message, 8, "google.protobuf.Duration"
     end
     add_message "google.pubsub.v1.PubsubMessage" do
       optional :data, :bytes, 1
@@ -99,6 +100,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :dead_letter_policy, :message, 13, "google.pubsub.v1.DeadLetterPolicy"
       optional :retry_policy, :message, 14, "google.pubsub.v1.RetryPolicy"
       optional :detached, :bool, 15
+      optional :topic_message_retention_duration, :message, 17, "google.protobuf.Duration"
     end
     add_message "google.pubsub.v1.RetryPolicy" do
       optional :minimum_backoff, :message, 1, "google.protobuf.Duration"
@@ -179,6 +181,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.pubsub.v1.StreamingPullResponse" do
       repeated :received_messages, :message, 1, "google.pubsub.v1.ReceivedMessage"
+      optional :subscription_properties, :message, 4, "google.pubsub.v1.StreamingPullResponse.SubscriptionProperties"
+    end
+    add_message "google.pubsub.v1.StreamingPullResponse.SubscriptionProperties" do
+      optional :message_ordering_enabled, :bool, 2
     end
     add_message "google.pubsub.v1.CreateSnapshotRequest" do
       optional :name, :string, 1
@@ -262,6 +268,7 @@ module Google
         AcknowledgeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.AcknowledgeRequest").msgclass
         StreamingPullRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.StreamingPullRequest").msgclass
         StreamingPullResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.StreamingPullResponse").msgclass
+        StreamingPullResponse::SubscriptionProperties = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.StreamingPullResponse.SubscriptionProperties").msgclass
         CreateSnapshotRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.CreateSnapshotRequest").msgclass
         UpdateSnapshotRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.UpdateSnapshotRequest").msgclass
         Snapshot = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.Snapshot").msgclass

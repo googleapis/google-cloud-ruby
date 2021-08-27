@@ -53,6 +53,20 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Project resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}`
+            #
+            # @param project [String]
+            #
+            # @return [::String]
+            def project_path project:
+              "projects/#{project}"
+            end
+
+            ##
             # Create a fully-qualified UptimeCheckConfig resource string.
             #
             # @overload uptime_check_config_path(project:, uptime_check_config:)

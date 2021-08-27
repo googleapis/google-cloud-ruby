@@ -1,5 +1,11 @@
 # Release History
 
+### 2.7.1 / 2021-07-08
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
 ### 2.7.0 / 2021-06-15
 
 #### Features

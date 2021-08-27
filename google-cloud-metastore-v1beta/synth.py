@@ -21,22 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "metastore", "v1beta",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-metastore-v1beta",
-        "ruby-cloud-title": "Dataproc Metastore V1beta",
-        "ruby-cloud-description": "Dataproc Metastore is a fully managed, highly available within a region, autohealing serverless Apache Hive metastore (HMS) on Google Cloud for data analytics products. It supports HMS and serves as a critical component for managing the metadata of relational entities and provides interoperability between data processing applications in the open source data ecosystem.",
-        "ruby-cloud-env-prefix": "METASTORE",
-        "ruby-cloud-grpc-service-config": "google/cloud/metastore/v1beta/metastore_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/dataproc-metastore/",
-        "ruby-cloud-api-id": "metastore.googleapis.com",
-        "ruby-cloud-api-shortname": "metastore",
-    }
+    proto_path="google/cloud/metastore/v1beta",
+    bazel_target="//google/cloud/metastore/v1beta:google-cloud-metastore-v1beta-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

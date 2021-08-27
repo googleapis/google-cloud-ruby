@@ -21,22 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "orgpolicy", "v2",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-org_policy-v2",
-        "ruby-cloud-title": "Organization Policy V2",
-        "ruby-cloud-description": "The Cloud Org Policy service provides a simple mechanism for organizations to restrict the allowed configurations across their entire Cloud Resource hierarchy.",
-        "ruby-cloud-env-prefix": "ORG_POLICY",
-        "ruby-cloud-grpc-service-config": "google/cloud/orgpolicy/v2/orgpolicy_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/resource-manager/docs/organization-policy/overview",
-        "ruby-cloud-api-id": "orgpolicy.googleapis.com",
-        "ruby-cloud-api-shortname": "orgpolicy",
-    }
+    proto_path="google/cloud/orgpolicy/v2",
+    bazel_target="//google/cloud/orgpolicy/v2:google-cloud-orgpolicy-v2-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

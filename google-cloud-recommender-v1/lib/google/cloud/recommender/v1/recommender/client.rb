@@ -44,13 +44,12 @@ module Google
             # See {::Google::Cloud::Recommender::V1::Recommender::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Recommender clients:
-            #
-            #     ::Google::Cloud::Recommender::V1::Recommender::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Recommender clients
+            #   ::Google::Cloud::Recommender::V1::Recommender::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -70,36 +69,24 @@ module Google
 
                 default_config.rpcs.list_insights.timeout = 60.0
                 default_config.rpcs.list_insights.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_insight.timeout = 60.0
                 default_config.rpcs.get_insight.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.mark_insight_accepted.timeout = 60.0
 
                 default_config.rpcs.list_recommendations.timeout = 60.0
                 default_config.rpcs.list_recommendations.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_recommendation.timeout = 60.0
                 default_config.rpcs.get_recommendation.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.mark_recommendation_claimed.timeout = 60.0
@@ -137,19 +124,15 @@ module Google
             ##
             # Create a new Recommender client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Recommender client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Recommender::V1::Recommender::Client.new
             #
-            #     client = ::Google::Cloud::Recommender::V1::Recommender::Client.new
-            #
-            # To create a new Recommender client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Recommender client.
             # @yieldparam config [Client::Configuration]
@@ -169,14 +152,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -271,7 +253,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_insights.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_insights.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @recommender_stub.call_rpc :list_insights, request, options: options do |response, operation|
@@ -339,7 +323,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_insight.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_insight.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @recommender_stub.call_rpc :get_insight, request, options: options do |response, operation|
@@ -415,7 +401,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.mark_insight_accepted.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.mark_insight_accepted.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @recommender_stub.call_rpc :mark_insight_accepted, request, options: options do |response, operation|
@@ -504,7 +492,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_recommendations.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_recommendations.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @recommender_stub.call_rpc :list_recommendations, request, options: options do |response, operation|
@@ -572,7 +562,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_recommendation.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_recommendation.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @recommender_stub.call_rpc :get_recommendation, request, options: options do |response, operation|
@@ -654,7 +646,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.mark_recommendation_claimed.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.mark_recommendation_claimed.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @recommender_stub.call_rpc :mark_recommendation_claimed, request, options: options do |response, operation|
@@ -737,7 +731,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.mark_recommendation_succeeded.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.mark_recommendation_succeeded.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @recommender_stub.call_rpc :mark_recommendation_succeeded, request, options: options do |response, operation|
@@ -820,7 +816,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.mark_recommendation_failed.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.mark_recommendation_failed.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @recommender_stub.call_rpc :mark_recommendation_failed, request, options: options do |response, operation|
@@ -844,22 +842,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_insights
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_insights to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Recommender::V1::Recommender::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_insights.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Recommender::V1::Recommender::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_insights.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_insights.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_insights.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

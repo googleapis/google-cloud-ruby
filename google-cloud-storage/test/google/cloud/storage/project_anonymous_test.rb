@@ -45,7 +45,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
     bucket_name = "found-bucket"
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name, {user_project: nil}]
+    mock.expect :get_bucket, find_bucket_gapi(bucket_name), get_bucket_args(bucket_name)
 
     anonymous_storage.service.mocked_service = mock
 
@@ -61,7 +61,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
     num_files = 3
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name, {user_project: nil}]
+    mock.expect :get_bucket, find_bucket_gapi(bucket_name), get_bucket_args(bucket_name)
     mock.expect :list_objects, list_files_gapi(num_files),
       [bucket_name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil]
     anonymous_storage.service.mocked_service = mock
@@ -82,7 +82,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
     file_name = "file.ext"
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name, {user_project: nil}]
+    mock.expect :get_bucket, find_bucket_gapi(bucket_name), get_bucket_args(bucket_name)
     mock.expect :get_object, find_file_gapi(bucket_name, file_name), get_object_args(bucket_name, file_name)
 
     anonymous_storage.service.mocked_service = mock
@@ -104,7 +104,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
       tmpfile.write "yay!"
 
       mock = Minitest::Mock.new
-      mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name, {user_project: nil}]
+      mock.expect :get_bucket, find_bucket_gapi(bucket_name), get_bucket_args(bucket_name)
       mock.expect :get_object, find_file_gapi(bucket_name, file_name), get_object_args(bucket_name, file_name)
       mock.expect :get_object_with_response, [tmpfile, download_http_resp],
         [bucket_name, file_name, download_dest: tmpfile, generation: 1234567890, user_project: nil, options: {}]

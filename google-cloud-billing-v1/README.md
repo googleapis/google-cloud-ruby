@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/billing/v1"
 
 client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new
-request = my_create_request
+request = ::Google::Cloud::Billing::V1::GetBillingAccountRequest.new # (request fields as keyword arguments...)
 response = client.get_billing_account request
 ```
 

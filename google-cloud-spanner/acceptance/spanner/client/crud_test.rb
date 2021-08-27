@@ -159,7 +159,7 @@ describe "Spanner Client", :crud, :spanner do
     _(results.timestamp).wont_be :nil?
   end
 
-   describe "request options" do
+  describe "request options" do
     it "execute CRUD statement with priority options" do
       request_options = { priority: :PRIORITY_MEDIUM }
       results = db.read "accounts", ["account_id"], request_options: request_options
@@ -177,5 +177,27 @@ describe "Spanner Client", :crud, :spanner do
       results = db.read "accounts", ["account_id"]
       _(results.rows.count).must_equal 0
     end
+  end
+
+  it "inserts, updates, upserts, reads, and deletes records with request tagging options" do
+    timestamp = db.insert "accounts", default_account_rows[0],
+                          request_options: { tag: "Tag-CRUD-1" }
+    _(timestamp).wont_be :nil?
+
+    results = db.read "accounts", ["account_id"], single_use: { timestamp: @setup_timestamp },
+                      request_options: { tag: "Tag-CRUD-2" }
+    _(results.timestamp).wont_be :nil?
+
+    timestamp = db.update "accounts", default_account_rows[0],
+                          request_options: { tag: "Tag-CRUD-2" }
+    _(timestamp).wont_be :nil?
+
+    timestamp = db.upsert "accounts", default_account_rows[1],
+                          request_options: { tag: "Tag-CRUD-4" }
+    _(timestamp).wont_be :nil?
+
+    timestamp = db.delete "accounts", [1, 2, 3],
+                          request_options: { tag: "Tag-CRUD-5" }
+    _(timestamp).wont_be :nil?
   end
 end

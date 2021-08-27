@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Logging::V2::ConfigService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all ConfigService clients:
-            #
-            #     ::Google::Cloud::Logging::V2::ConfigService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all ConfigService clients
+            #   ::Google::Cloud::Logging::V2::ConfigService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -67,52 +66,34 @@ module Google
 
                 default_config.rpcs.list_sinks.timeout = 60.0
                 default_config.rpcs.list_sinks.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.get_sink.timeout = 60.0
                 default_config.rpcs.get_sink.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.create_sink.timeout = 120.0
 
                 default_config.rpcs.update_sink.timeout = 60.0
                 default_config.rpcs.update_sink.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.delete_sink.timeout = 60.0
                 default_config.rpcs.delete_sink.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.list_exclusions.timeout = 60.0
                 default_config.rpcs.list_exclusions.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.get_exclusion.timeout = 60.0
                 default_config.rpcs.get_exclusion.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.create_exclusion.timeout = 120.0
@@ -121,10 +102,7 @@ module Google
 
                 default_config.rpcs.delete_exclusion.timeout = 60.0
                 default_config.rpcs.delete_exclusion.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config
@@ -156,19 +134,15 @@ module Google
             ##
             # Create a new ConfigService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new ConfigService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Logging::V2::ConfigService::Client.new
             #
-            #     client = ::Google::Cloud::Logging::V2::ConfigService::Client.new
-            #
-            # To create a new ConfigService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the ConfigService client.
             # @yieldparam config [Client::Configuration]
@@ -188,14 +162,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -285,7 +258,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_buckets.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_buckets.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :list_buckets, request, options: options do |response, operation|
@@ -360,7 +335,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_bucket.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_bucket.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :get_bucket, request, options: options do |response, operation|
@@ -439,7 +416,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_bucket.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_bucket.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :create_bucket, request, options: options do |response, operation|
@@ -535,7 +514,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_bucket.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_bucket.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :update_bucket, request, options: options do |response, operation|
@@ -612,7 +593,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_bucket.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_bucket.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :delete_bucket, request, options: options do |response, operation|
@@ -687,7 +670,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.undelete_bucket.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.undelete_bucket.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :undelete_bucket, request, options: options do |response, operation|
@@ -764,7 +749,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_views.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_views.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :list_views, request, options: options do |response, operation|
@@ -836,7 +823,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_view.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_view.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :get_view, request, options: options do |response, operation|
@@ -912,7 +901,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_view.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_view.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :create_view, request, options: options do |response, operation|
@@ -995,7 +986,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_view.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_view.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :update_view, request, options: options do |response, operation|
@@ -1066,7 +1059,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_view.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_view.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :delete_view, request, options: options do |response, operation|
@@ -1146,7 +1141,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_sinks.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_sinks.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :list_sinks, request, options: options do |response, operation|
@@ -1220,7 +1217,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_sink.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_sink.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :get_sink, request, options: options do |response, operation|
@@ -1311,7 +1310,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_sink.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_sink.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :create_sink, request, options: options do |response, operation|
@@ -1419,7 +1420,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_sink.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_sink.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :update_sink, request, options: options do |response, operation|
@@ -1494,7 +1497,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_sink.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_sink.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :delete_sink, request, options: options do |response, operation|
@@ -1574,7 +1579,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_exclusions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_exclusions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :list_exclusions, request, options: options do |response, operation|
@@ -1648,7 +1655,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_exclusion.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_exclusion.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :get_exclusion, request, options: options do |response, operation|
@@ -1726,7 +1735,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_exclusion.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_exclusion.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :create_exclusion, request, options: options do |response, operation|
@@ -1810,7 +1821,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_exclusion.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_exclusion.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :update_exclusion, request, options: options do |response, operation|
@@ -1883,7 +1896,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_exclusion.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_exclusion.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :delete_exclusion, request, options: options do |response, operation|
@@ -1968,7 +1983,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_cmek_settings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_cmek_settings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :get_cmek_settings, request, options: options do |response, operation|
@@ -2073,7 +2090,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_cmek_settings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_cmek_settings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @config_service_stub.call_rpc :update_cmek_settings, request, options: options do |response, operation|
@@ -2097,22 +2116,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_buckets
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_buckets to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Logging::V2::ConfigService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_buckets.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Logging::V2::ConfigService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_buckets.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_buckets.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_buckets.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

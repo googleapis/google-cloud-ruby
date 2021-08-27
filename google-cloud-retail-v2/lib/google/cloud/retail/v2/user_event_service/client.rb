@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Retail::V2::UserEventService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all UserEventService clients:
-            #
-            #     ::Google::Cloud::Retail::V2::UserEventService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all UserEventService clients
+            #   ::Google::Cloud::Retail::V2::UserEventService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -65,12 +64,19 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.timeout = 60.0
+                default_config.timeout = 5.0
                 default_config.retry_policy = {
-                  initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 5.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.purge_user_events.timeout = 30.0
+                default_config.rpcs.purge_user_events.retry_policy = {
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.import_user_events.timeout = 300.0
+                default_config.rpcs.import_user_events.retry_policy = {
+                  initial_delay: 0.1, max_delay: 300.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config
@@ -102,19 +108,15 @@ module Google
             ##
             # Create a new UserEventService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new UserEventService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Retail::V2::UserEventService::Client.new
             #
-            #     client = ::Google::Cloud::Retail::V2::UserEventService::Client.new
-            #
-            # To create a new UserEventService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Retail::V2::UserEventService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Retail::V2::UserEventService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the UserEventService client.
             # @yieldparam config [Client::Configuration]
@@ -134,14 +136,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -228,7 +229,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.write_user_event.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.write_user_event.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @user_event_service_stub.call_rpc :write_user_event, request, options: options do |response, operation|
@@ -311,7 +314,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.collect_user_event.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.collect_user_event.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @user_event_service_stub.call_rpc :collect_user_event, request, options: options do |response, operation|
@@ -346,7 +351,7 @@ module Google
             #   @param parent [::String]
             #     Required. The resource name of the catalog under which the events are
             #     created. The format is
-            #     "projects/$\\{projectId}/locations/global/catalogs/$\\{catalogId}"
+            #     `projects/${projectId}/locations/global/catalogs/${catalogId}`
             #   @param filter [::String]
             #     Required. The filter string to specify the events to be deleted with a
             #     length limit of 5,000 characters. Empty string filter is not allowed. The
@@ -410,7 +415,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.purge_user_events.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.purge_user_events.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @user_event_service_stub.call_rpc :purge_user_events, request, options: options do |response, operation|
@@ -488,7 +495,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.import_user_events.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.import_user_events.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @user_event_service_stub.call_rpc :import_user_events, request, options: options do |response, operation|
@@ -567,7 +576,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.rejoin_user_events.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.rejoin_user_events.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @user_event_service_stub.call_rpc :rejoin_user_events, request, options: options do |response, operation|
@@ -592,22 +603,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for write_user_event
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # write_user_event to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Retail::V2::UserEventService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.write_user_event.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Retail::V2::UserEventService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.write_user_event.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Retail::V2::UserEventService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.write_user_event.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Retail::V2::UserEventService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.write_user_event.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

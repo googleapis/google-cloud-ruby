@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all SecurityCenter clients:
-            #
-            #     ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all SecurityCenter clients
+            #   ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -75,82 +74,52 @@ module Google
 
                 default_config.rpcs.get_iam_policy.timeout = 60.0
                 default_config.rpcs.get_iam_policy.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_notification_config.timeout = 60.0
                 default_config.rpcs.get_notification_config.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_organization_settings.timeout = 60.0
                 default_config.rpcs.get_organization_settings.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_source.timeout = 60.0
                 default_config.rpcs.get_source.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.group_assets.timeout = 480.0
                 default_config.rpcs.group_assets.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.group_findings.timeout = 480.0
                 default_config.rpcs.group_findings.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_assets.timeout = 480.0
                 default_config.rpcs.list_assets.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_findings.timeout = 480.0
                 default_config.rpcs.list_findings.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_notification_configs.timeout = 60.0
                 default_config.rpcs.list_notification_configs.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_sources.timeout = 60.0
                 default_config.rpcs.list_sources.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.run_asset_discovery.timeout = 60.0
@@ -161,10 +130,7 @@ module Google
 
                 default_config.rpcs.test_iam_permissions.timeout = 60.0
                 default_config.rpcs.test_iam_permissions.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_finding.timeout = 60.0
@@ -206,19 +172,15 @@ module Google
             ##
             # Create a new SecurityCenter client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new SecurityCenter client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
             #
-            #     client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
-            #
-            # To create a new SecurityCenter client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the SecurityCenter client.
             # @yieldparam config [Client::Configuration]
@@ -238,14 +200,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -296,8 +257,8 @@ module Google
             #     Required. Resource name of the new source's parent. Its format should be
             #     "organizations/[organization_id]".
             #   @param source [::Google::Cloud::SecurityCenter::V1::Source, ::Hash]
-            #     Required. The Source being created, only the display_name and description
-            #     will be used. All other fields will be ignored.
+            #     Required. The Source being created, only the display_name and description will be
+            #     used. All other fields will be ignored.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1::Source]
@@ -333,7 +294,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_source.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_source.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :create_source, request, options: options do |response, operation|
@@ -371,8 +334,8 @@ module Google
             #     It must be alphanumeric and less than or equal to 32 characters and
             #     greater than 0 characters in length.
             #   @param finding [::Google::Cloud::SecurityCenter::V1::Finding, ::Hash]
-            #     Required. The Finding being created. The name and security_marks will be
-            #     ignored as they are both output only fields on this resource.
+            #     Required. The Finding being created. The name and security_marks will be ignored as
+            #     they are both output only fields on this resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1::Finding]
@@ -408,7 +371,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_finding.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_finding.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :create_finding, request, options: options do |response, operation|
@@ -438,17 +403,16 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of the new notification config's parent. Its format
-            #     is "organizations/[organization_id]".
+            #     Required. Resource name of the new notification config's parent. Its format is
+            #     "organizations/[organization_id]".
             #   @param config_id [::String]
             #     Required.
             #     Unique identifier provided by the client within the parent scope.
             #     It must be between 1 and 128 characters, and contains alphanumeric
             #     characters, underscores or hyphens only.
             #   @param notification_config [::Google::Cloud::SecurityCenter::V1::NotificationConfig, ::Hash]
-            #     Required. The notification config being created. The name and the service
-            #     account will be ignored as they are both output only fields on this
-            #     resource.
+            #     Required. The notification config being created. The name and the service account
+            #     will be ignored as they are both output only fields on this resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1::NotificationConfig]
@@ -484,7 +448,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_notification_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_notification_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :create_notification_config, request, options: options do |response, operation|
@@ -551,7 +517,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_notification_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_notification_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :delete_notification_config, request, options: options do |response, operation|
@@ -621,7 +589,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_iam_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :get_iam_policy, request, options: options do |response, operation|
@@ -688,7 +658,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_notification_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_notification_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :get_notification_config, request, options: options do |response, operation|
@@ -718,8 +690,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Name of the organization to get organization settings for. Its
-            #     format is "organizations/[organization_id]/organizationSettings".
+            #     Required. Name of the organization to get organization settings for. Its format is
+            #     "organizations/[organization_id]/organizationSettings".
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1::OrganizationSettings]
@@ -755,7 +727,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_organization_settings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_organization_settings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :get_organization_settings, request, options: options do |response, operation|
@@ -822,7 +796,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_source.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_source.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :get_source, request, options: options do |response, operation|
@@ -920,9 +896,9 @@ module Google
             #     Use a negated partial match on the empty string to filter based on a
             #     property not existing: `-resource_properties.my_property : ""`
             #   @param group_by [::String]
-            #     Required. Expression that defines what assets fields to use for grouping.
-            #     The string value should follow SQL syntax: comma separated list of fields.
-            #     For example:
+            #     Required. Expression that defines what assets fields to use for grouping. The string
+            #     value should follow SQL syntax: comma separated list of fields. For
+            #     example:
             #     "security_center_properties.resource_project,security_center_properties.project".
             #
             #     The following fields are supported when compare_duration is not set:
@@ -1013,7 +989,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.group_assets.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.group_assets.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :group_assets, request, options: options do |response, operation|
@@ -1118,9 +1096,9 @@ module Google
             #       * resource.project_display_name: `=`, `:`
             #       * resource.type: `=`, `:`
             #   @param group_by [::String]
-            #     Required. Expression that defines what assets fields to use for grouping
-            #     (including `state_change`). The string value should follow SQL syntax:
-            #     comma separated list of fields. For example: "parent,resource_name".
+            #     Required. Expression that defines what assets fields to use for grouping (including
+            #     `state_change`). The string value should follow SQL syntax: comma separated
+            #     list of fields. For example: "parent,resource_name".
             #
             #     The following fields are supported:
             #
@@ -1213,7 +1191,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.group_findings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.group_findings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :group_findings, request, options: options do |response, operation|
@@ -1408,7 +1388,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_assets.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_assets.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :list_assets, request, options: options do |response, operation|
@@ -1610,7 +1592,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_findings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_findings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :list_findings, request, options: options do |response, operation|
@@ -1685,7 +1669,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_notification_configs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_notification_configs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :list_notification_configs, request, options: options do |response, operation|
@@ -1716,8 +1702,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of the parent of sources to list. Its format should
-            #     be "organizations/[organization_id], folders/[folder_id], or
+            #     Required. Resource name of the parent of sources to list. Its format should be
+            #     "organizations/[organization_id], folders/[folder_id], or
             #     projects/[project_id]".
             #   @param page_token [::String]
             #     The value returned by the last `ListSourcesResponse`; indicates
@@ -1761,7 +1747,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_sources.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_sources.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :list_sources, request, options: options do |response, operation|
@@ -1797,8 +1785,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Name of the organization to run asset discovery for. Its format
-            #     is "organizations/[organization_id]".
+            #     Required. Name of the organization to run asset discovery for. Its format is
+            #     "organizations/[organization_id]".
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1834,7 +1822,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.run_asset_discovery.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.run_asset_discovery.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :run_asset_discovery, request, options: options do |response, operation|
@@ -1908,7 +1898,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_finding_state.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_finding_state.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :set_finding_state, request, options: options do |response, operation|
@@ -1980,7 +1972,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_iam_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :set_iam_policy, request, options: options do |response, operation|
@@ -2052,7 +2046,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.test_iam_permissions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :test_iam_permissions, request, options: options do |response, operation|
@@ -2083,8 +2079,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param finding [::Google::Cloud::SecurityCenter::V1::Finding, ::Hash]
-            #     Required. The finding resource to update or create if it does not already
-            #     exist. parent, security_marks, and update_time will be ignored.
+            #     Required. The finding resource to update or create if it does not already exist.
+            #     parent, security_marks, and update_time will be ignored.
             #
             #     In the case of creation, the finding id portion of the name must be
             #     alphanumeric and less than or equal to 32 characters and greater than 0
@@ -2132,7 +2128,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_finding.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_finding.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :update_finding, request, options: options do |response, operation|
@@ -2203,7 +2201,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_notification_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_notification_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :update_notification_config, request, options: options do |response, operation|
@@ -2273,7 +2273,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_organization_settings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_organization_settings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :update_organization_settings, request, options: options do |response, operation|
@@ -2343,7 +2345,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_source.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_source.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :update_source, request, options: options do |response, operation|
@@ -2419,7 +2423,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_security_marks.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_security_marks.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :update_security_marks, request, options: options do |response, operation|
@@ -2443,22 +2449,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_source
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_source to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_source.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_source.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_source.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_source.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

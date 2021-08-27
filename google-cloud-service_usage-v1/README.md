@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/service_usage/v1"
 
 client = ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new
-request = my_create_request
+request = ::Google::Cloud::ServiceUsage::V1::EnableServiceRequest.new # (request fields as keyword arguments...)
 response = client.enable_service request
 ```
 

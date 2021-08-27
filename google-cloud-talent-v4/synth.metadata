@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "693ae20a741ede8ab36fbd7411e0b045976b7335"
+        "sha": "47c6b6ecfc11261569146db1cd5cbdfc704c6b90"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "9a69333d45ee0e03246d72127d3d55399eb16ac7",
-        "internalRef": "334643694"
+        "sha": "a6c8dc7f72206eaff566f22593213cd9196d2bf2",
+        "internalRef": "391131412"
       }
     }
   ],
@@ -23,7 +23,7 @@
         "apiName": "talent",
         "apiVersion": "v4",
         "language": "ruby",
-        "generator": "gapic-generator-ruby"
+        "generator": "bazel"
       }
     }
   ],

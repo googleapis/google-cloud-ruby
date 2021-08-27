@@ -29,7 +29,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Document AI",
         "ruby-cloud-description": "Document AI uses machine learning on a single cloud-based platform to automatically classify, extract, and enrich data within your documents to unlock insights.",
         "ruby-cloud-env-prefix": "DOCUMENT_AI",
-        "ruby-cloud-wrapper-of": "v1beta3:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.0;v1beta3:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/document-ai/",
         "ruby-cloud-api-id": "us-documentai.googleapis.com",
         "ruby-cloud-api-shortname": "documentai",

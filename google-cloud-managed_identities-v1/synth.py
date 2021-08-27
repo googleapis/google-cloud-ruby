@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "managedidentities", "v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-managed_identities-v1",
-        "ruby-cloud-title": "Managed Service for Microsoft Active Directory API V1",
-        "ruby-cloud-description": "The Managed Service for Microsoft Active Directory API is used for managing a highly available, hardened service running Microsoft Active Directory.",
-        "ruby-cloud-env-prefix": "MANAGED_IDENTITIES",
-        "ruby-cloud-grpc-service-config": "google/cloud/managedidentities/v1/managedidentities_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/managed-microsoft-ad/",
-        "ruby-cloud-api-id": "managedidentities.googleapis.com",
-        "ruby-cloud-api-shortname": "managedidentities",
-    }
+    proto_path="google/cloud/managedidentities/v1",
+    bazel_target="//google/cloud/managedidentities/v1:google-cloud-managedidentities-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

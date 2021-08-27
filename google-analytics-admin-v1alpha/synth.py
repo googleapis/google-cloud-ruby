@@ -21,19 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "analytics/admin", "v1alpha",
     proto_path="google/analytics/admin/v1alpha",
-    generator_args={
-        "ruby-cloud-gem-name": "google-analytics-admin-v1alpha",
-        "ruby-cloud-title": "Google Analytics Admin V1alpha",
-        "ruby-cloud-description": "The Analytics Admin API allows for programmatic access to the Google Analytics App+Web configuration data. You can use the Google Analytics Admin API to manage accounts and App+Web properties.",
-        "ruby-cloud-env-prefix": "ANALYTICS_ADMIN",
-        "ruby-cloud-grpc-service-config": "google/analytics/admin/v1alpha/admin_grpc_service_config.json",
-        "ruby-cloud-api-id": "analyticsadmin.googleapis.com",
-        "ruby-cloud-api-shortname": "analyticsadmin",
-    }
+    bazel_target="//google/analytics/admin/v1alpha:google-analytics-admin-v1alpha-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

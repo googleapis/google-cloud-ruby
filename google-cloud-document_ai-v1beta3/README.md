@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/document_ai/v1beta3"
 
 client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
-request = my_create_request
+request = ::Google::Cloud::DocumentAI::V1beta3::ProcessRequest.new # (request fields as keyword arguments...)
 response = client.process_document request
 ```
 

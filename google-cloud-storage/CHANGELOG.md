@@ -1,5 +1,48 @@
 # Release History
 
+### 1.34.1 / 2021-07-08
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
+### 1.34.0 / 2021-06-30
+
+#### Features
+
+* Add support for automatic crc32c and md5 upload verification
+  * Add checksum to Bucket#create_file
+
+### 1.33.0 / 2021-06-29
+
+#### Features
+
+* Add support for PublicAccessPrevention
+  * Add Bucket#public_access_prevention
+  * Add Bucket#public_access_prevention=
+  * Add Bucket#public_access_prevention_enforced?
+  * Add Bucket#public_access_prevention_unspecified?
+  * Add samples for PublicAccessPrevention
+
+### 1.32.0 / 2021-06-22
+
+#### Features
+
+* Add sources_if_generation_match to Bucket#compose
+* Add support for (meta)generation preconditions to File operations
+  * Add if_(meta)generation_match options to Bucket#compose
+  * Add if_(meta)generation_(not_)match options to Bucket#create_file
+  * Add if_(meta)generation_(not_)match options to Bucket#file
+  * Add if_(meta)generation_(not_)match options to File#delete.
+  * Add if_(meta)generation_(not_)match options to File#rewrite
+  * Add generation and if_(meta)generation_(not_)match options to File#update
+  * Add generation and if_(meta)generation_(not_)match options to File::Acl predefined_acl methods
+
+#### Bug Fixes
+
+* Expand googleauth dependency to support future 1.x versions
+* Update File::Verifier to test for File#to_path
+
 ### 1.31.1 / 2021-05-19
 
 #### Documentation

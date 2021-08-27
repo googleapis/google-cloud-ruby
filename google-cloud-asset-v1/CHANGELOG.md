@@ -1,5 +1,38 @@
 # Release History
 
+### 0.15.0 / 2021-08-19
+
+#### Features
+
+* Support for related assets and asset relationship information
+
+### 0.14.1 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.14.0 / 2021-07-29
+
+#### Features
+
+* Support for analyze_move.
+* Support for read masks in search_all_resources.
+* Returned versioned resources and attached resources from searches.
+* Support ingress and egress policies in the AccessContextManager service perimeter config
+
+### 0.13.1 / 2021-07-12
+
+#### Documentation
+
+* Clarified some language around authentication configuration
+
+### 0.13.0 / 2021-06-29
+
+#### Features
+
+* Support ordering and asset type filtering in search_all_iam_policies
+
 ### 0.12.0 / 2021-06-17
 
 #### Features

@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/assured_workloads/v1beta1"
 
 client = ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
-request = my_create_request
+request = ::Google::Cloud::AssuredWorkloads::V1beta1::CreateWorkloadRequest.new # (request fields as keyword arguments...)
 response = client.create_workload request
 ```
 

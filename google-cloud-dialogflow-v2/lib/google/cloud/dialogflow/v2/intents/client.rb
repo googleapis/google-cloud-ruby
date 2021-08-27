@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Dialogflow::V2::Intents::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Intents clients:
-            #
-            #     ::Google::Cloud::Dialogflow::V2::Intents::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Intents clients
+            #   ::Google::Cloud::Dialogflow::V2::Intents::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -67,10 +66,7 @@ module Google
 
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
-                  initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -102,19 +98,15 @@ module Google
             ##
             # Create a new Intents client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Intents client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new
             #
-            #     client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new
-            #
-            # To create a new Intents client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Intents client.
             # @yieldparam config [Client::Configuration]
@@ -134,14 +126,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -247,7 +238,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_intents.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_intents.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @intents_stub.call_rpc :list_intents, request, options: options do |response, operation|
@@ -323,7 +316,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_intent.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_intent.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @intents_stub.call_rpc :get_intent, request, options: options do |response, operation|
@@ -336,6 +331,10 @@ module Google
 
             ##
             # Creates an intent in the specified agent.
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             #
             # @overload create_intent(request, options = nil)
             #   Pass arguments to `create_intent` via a request object, either of type
@@ -400,7 +399,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_intent.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_intent.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @intents_stub.call_rpc :create_intent, request, options: options do |response, operation|
@@ -413,6 +414,10 @@ module Google
 
             ##
             # Updates the specified intent.
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             #
             # @overload update_intent(request, options = nil)
             #   Pass arguments to `update_intent` via a request object, either of type
@@ -476,7 +481,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_intent.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_intent.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @intents_stub.call_rpc :update_intent, request, options: options do |response, operation|
@@ -489,6 +496,10 @@ module Google
 
             ##
             # Deletes the specified intent and its direct or indirect followup intents.
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             #
             # @overload delete_intent(request, options = nil)
             #   Pass arguments to `delete_intent` via a request object, either of type
@@ -544,7 +555,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_intent.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_intent.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @intents_stub.call_rpc :delete_intent, request, options: options do |response, operation|
@@ -558,7 +571,10 @@ module Google
             ##
             # Updates/Creates multiple intents in the specified agent.
             #
-            # Operation <response: {::Google::Cloud::Dialogflow::V2::BatchUpdateIntentsResponse BatchUpdateIntentsResponse}>
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             #
             # @overload batch_update_intents(request, options = nil)
             #   Pass arguments to `batch_update_intents` via a request object, either of type
@@ -629,7 +645,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.batch_update_intents.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_update_intents.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @intents_stub.call_rpc :batch_update_intents, request, options: options do |response, operation|
@@ -644,7 +662,10 @@ module Google
             ##
             # Deletes intents in the specified agent.
             #
-            # Operation <response: {::Google::Protobuf::Empty google.protobuf.Empty}>
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             #
             # @overload batch_delete_intents(request, options = nil)
             #   Pass arguments to `batch_delete_intents` via a request object, either of type
@@ -702,7 +723,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.batch_delete_intents.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_delete_intents.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @intents_stub.call_rpc :batch_delete_intents, request, options: options do |response, operation|
@@ -727,22 +750,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_intents
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_intents to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Dialogflow::V2::Intents::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_intents.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Dialogflow::V2::Intents::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_intents.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_intents.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_intents.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

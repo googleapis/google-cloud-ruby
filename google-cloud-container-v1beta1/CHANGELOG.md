@@ -1,5 +1,27 @@
 # Release History
 
+### 0.7.1 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.7.0 / 2021-07-12
+
+#### Features
+
+* Support for updating a cluster's authenticator_groups_config
+  * changes without context
+  * chore(ruby): Use latest microgenerator for Bazel GAPIC generation
+  * chore(ruby): Use latest microgenerator for Bazel GAPIC generation
+  * chore(ruby): Switch Bazel jobs to use the Ruby gapic-generator 0.9.0
+  * feat: add new FieldBehavior NON_EMPTY_DEFAULT
+  * feat: allow updating security group on existing clusters
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
 ### 0.6.0 / 2021-06-17
 
 #### Features

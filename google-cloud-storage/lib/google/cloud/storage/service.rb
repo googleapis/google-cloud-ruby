@@ -83,9 +83,14 @@ module Google
         ##
         # Retrieves bucket by name.
         # Returns Google::Apis::StorageV1::Bucket.
-        def get_bucket bucket_name, user_project: nil
+        def get_bucket bucket_name,
+                       if_metageneration_match: nil,
+                       if_metageneration_not_match: nil,
+                       user_project: nil
           execute do
             service.get_bucket bucket_name,
+                               if_metageneration_match: if_metageneration_match,
+                               if_metageneration_not_match: if_metageneration_not_match,
                                user_project: user_project(user_project)
           end
         end
@@ -106,26 +111,38 @@ module Google
 
         ##
         # Updates a bucket, including its ACL metadata.
-        def patch_bucket bucket_name, bucket_gapi = nil, predefined_acl: nil,
-                         predefined_default_acl: nil, user_project: nil
+        def patch_bucket bucket_name,
+                         bucket_gapi = nil,
+                         predefined_acl: nil,
+                         predefined_default_acl: nil,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil,
+                         user_project: nil
           bucket_gapi ||= Google::Apis::StorageV1::Bucket.new
           bucket_gapi.acl = [] if predefined_acl
           bucket_gapi.default_object_acl = [] if predefined_default_acl
 
           execute do
-            service.patch_bucket \
-              bucket_name, bucket_gapi,
-              predefined_acl: predefined_acl,
-              predefined_default_object_acl: predefined_default_acl,
-              user_project: user_project(user_project)
+            service.patch_bucket bucket_name,
+                                 bucket_gapi,
+                                 predefined_acl: predefined_acl,
+                                 predefined_default_object_acl: predefined_default_acl,
+                                 if_metageneration_match: if_metageneration_match,
+                                 if_metageneration_not_match: if_metageneration_not_match,
+                                 user_project: user_project(user_project)
           end
         end
 
         ##
         # Permanently deletes an empty bucket.
-        def delete_bucket bucket_name, user_project: nil
+        def delete_bucket bucket_name,
+                          if_metageneration_match: nil,
+                          if_metageneration_not_match: nil,
+                          user_project: nil
           execute do
             service.delete_bucket bucket_name,
+                                  if_metageneration_match: if_metageneration_match,
+                                  if_metageneration_not_match: if_metageneration_not_match,
                                   user_project: user_project(user_project)
           end
         end
@@ -426,12 +443,14 @@ module Google
                          destination_gapi,
                          acl: nil,
                          key: nil,
+                         if_source_generation_match: nil,
                          if_generation_match: nil,
                          if_metageneration_match: nil,
                          user_project: nil
 
-          compose_req = Google::Apis::StorageV1::ComposeRequest.new \
-            source_objects: compose_file_source_objects(source_files), destination: destination_gapi
+          source_objects = compose_file_source_objects source_files, if_source_generation_match
+          compose_req = Google::Apis::StorageV1::ComposeRequest.new source_objects: source_objects,
+                                                                    destination: destination_gapi
 
           execute do
             service.compose_object bucket_name,
@@ -713,8 +732,8 @@ module Google
             "false" => "NONE" }[str_or_bool.to_s.downcase]
         end
 
-        def compose_file_source_objects source_files
-          source_files.map do |file|
+        def compose_file_source_objects source_files, if_source_generation_match
+          source_objects = source_files.map do |file|
             if file.is_a? Google::Cloud::Storage::File
               Google::Apis::StorageV1::ComposeRequest::SourceObject.new \
                 name: file.name,
@@ -724,6 +743,18 @@ module Google
                 name: file
             end
           end
+          return source_objects unless if_source_generation_match
+          if source_files.count != if_source_generation_match.count
+            raise ArgumentError, "if provided, if_source_generation_match length must match sources length"
+          end
+          if_source_generation_match.each_with_index do |generation, i|
+            next unless generation
+            object_preconditions = Google::Apis::StorageV1::ComposeRequest::SourceObject::ObjectPreconditions.new(
+              if_generation_match: generation
+            )
+            source_objects[i].object_preconditions = object_preconditions
+          end
+          source_objects
         end
 
         def execute

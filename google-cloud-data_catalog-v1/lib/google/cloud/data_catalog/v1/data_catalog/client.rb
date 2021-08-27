@@ -27,8 +27,8 @@ module Google
           ##
           # Client for the DataCatalog service.
           #
-          # Data Catalog API service allows clients to discover, understand, and manage
-          # their data.
+          # Data Catalog API service allows you to discover, understand, and manage
+          # your data.
           #
           class Client
             include Paths
@@ -42,13 +42,12 @@ module Google
             # See {::Google::Cloud::DataCatalog::V1::DataCatalog::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all DataCatalog clients:
-            #
-            #     ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all DataCatalog clients
+            #   ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -70,66 +69,42 @@ module Google
 
                 default_config.rpcs.search_catalog.timeout = 60.0
                 default_config.rpcs.search_catalog.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_entry_group.timeout = 60.0
                 default_config.rpcs.get_entry_group.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_entry_groups.timeout = 60.0
                 default_config.rpcs.list_entry_groups.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_entry.timeout = 60.0
                 default_config.rpcs.get_entry.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.lookup_entry.timeout = 60.0
                 default_config.rpcs.lookup_entry.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_entries.timeout = 60.0
                 default_config.rpcs.list_entries.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_tags.timeout = 60.0
                 default_config.rpcs.list_tags.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_iam_policy.timeout = 60.0
                 default_config.rpcs.get_iam_policy.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -161,19 +136,15 @@ module Google
             ##
             # Create a new DataCatalog client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new DataCatalog client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
             #
-            #     client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
-            #
-            # To create a new DataCatalog client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the DataCatalog client.
             # @yieldparam config [Client::Configuration]
@@ -193,14 +164,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -218,22 +188,21 @@ module Google
             # Service calls
 
             ##
-            # Searches Data Catalog for multiple resources like entries, tags that
+            # Searches Data Catalog for multiple resources like entries and tags that
             # match a query.
             #
-            # This is a custom method
-            # (https://cloud.google.com/apis/design/custom_methods) and does not return
-            # the complete resource, only the resource identifier and high level
-            # fields. Clients can subsequently call `Get` methods.
+            # This is a [Custom Method]
+            # (https://cloud.google.com/apis/design/custom_methods) that doesn't return
+            # all information on a resource, only its ID and high level fields. To get
+            # more information, you can subsequently call specific get methods.
             #
-            # Note that Data Catalog search queries do not guarantee full recall. Query
-            # results that match your query may not be returned, even in subsequent
-            # result pages. Also note that results returned (and not returned) can vary
-            # across repeated search queries.
+            # Note: Data Catalog search queries don't guarantee full recall. Results
+            # that match your query might not be returned, even in subsequent
+            # result pages. Additionally, returned (and not returned) results can vary
+            # if you repeat search queries.
             #
-            # See [Data Catalog Search
-            # Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference)
-            # for more information.
+            # For more information, see [Data Catalog search syntax]
+            # (https://cloud.google.com/data-catalog/docs/how-to/search-reference).
             #
             # @overload search_catalog(request, options = nil)
             #   Pass arguments to `search_catalog` via a request object, either of type
@@ -251,43 +220,47 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param scope [::Google::Cloud::DataCatalog::V1::SearchCatalogRequest::Scope, ::Hash]
-            #     Required. The scope of this search request. A `scope` that has empty
-            #     `include_org_ids`, `include_project_ids` AND false
-            #     `include_gcp_public_datasets` is considered invalid. Data Catalog will
-            #     return an error in such a case.
+            #     Required. The scope of this search request.
+            #
+            #     The `scope` is invalid if `include_org_ids`, `include_project_ids` are
+            #     empty AND `include_gcp_public_datasets` is set to `false`. In this case,
+            #     the request returns an error.
             #   @param query [::String]
-            #     Optional. The query string in search query syntax. An empty query string will result
-            #     in all data assets (in the specified scope) that the user has access to.
+            #     Optional. The query string with a minimum of 3 characters and specific syntax.
+            #     For more information, see
+            #     [Data Catalog search syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference).
             #
-            #     Query strings can be simple as "x" or more qualified as:
+            #     An empty query string returns all data assets (in the specified scope)
+            #     that you have access to.
             #
-            #     * name:x
-            #     * column:x
-            #     * description:y
+            #     A query string can be a simple `xyz` or qualified by predicates:
             #
-            #     Note: Query tokens need to have a minimum of 3 characters for substring
-            #     matching to work correctly. See [Data Catalog Search
-            #     Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference)
-            #     for more information.
+            #     * `name:x`
+            #     * `column:y`
+            #     * `description:z`
             #   @param page_size [::Integer]
-            #     Number of results in the search page. If <=0 then defaults to 10. Max limit
-            #     for page_size is 1000. Throws an invalid argument for page_size > 1000.
+            #     Number of results to return in a single search page.
+            #
+            #     Can't be negative or 0, defaults to 10 in this case.
+            #     The maximum number is 1000. If exceeded, throws an "invalid argument"
+            #     exception.
             #   @param page_token [::String]
-            #     Optional. Pagination token returned in an earlier
-            #     {::Google::Cloud::DataCatalog::V1::SearchCatalogResponse#next_page_token SearchCatalogResponse.next_page_token}, which
-            #     indicates that this is a continuation of a prior
+            #     Optional. Pagination token that, if specified, returns the next page of search
+            #     results. If empty, returns the first page.
+            #
+            #     This token is returned in the {::Google::Cloud::DataCatalog::V1::SearchCatalogResponse#next_page_token SearchCatalogResponse.next_page_token}
+            #     field of the response to a previous
             #     {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#search_catalog SearchCatalogRequest}
-            #     call, and that the system should return the next page of data. If empty,
-            #     the first page is returned.
+            #     call.
             #   @param order_by [::String]
-            #     Specifies the ordering of results, currently supported case-sensitive
-            #     choices are:
+            #     Specifies the order of results.
             #
-            #       * `relevance`, only supports descending
-            #       * `last_modified_timestamp [asc|desc]`, defaults to descending if not
-            #         specified
+            #     Currently supported case-sensitive values are:
             #
-            #     If not specified, defaults to `relevance` descending.
+            #     * `relevance` that can only be descending
+            #     * `last_modified_timestamp [asc|desc]` with descending (`desc`) as default
+            #
+            #     If this parameter is omitted, it defaults to the descending `relevance`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DataCatalog::V1::SearchCatalogResult>]
@@ -317,7 +290,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.search_catalog.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.search_catalog.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :search_catalog, request, options: options do |response, operation|
@@ -330,25 +305,33 @@ module Google
             end
 
             ##
-            # Creates an EntryGroup.
+            # Creates an entry group.
             #
-            # An entry group contains logically related entries together with Cloud
-            # Identity and Access Management policies that specify the users who can
-            # create, edit, and view entries within the entry group.
+            # An entry group contains logically related entries together with [Cloud
+            # Identity and Access Management](/data-catalog/docs/concepts/iam) policies.
+            # These policies specify users who can create, edit, and view entries
+            # within entry groups.
             #
-            # Data Catalog automatically creates an entry group for BigQuery entries
-            # ("@bigquery") and Pub/Sub topics ("@pubsub"). Users create their own entry
-            # group to contain Cloud Storage fileset entries or custom type entries,
-            # and the IAM policies associated with those entries. Entry groups, like
-            # entries, can be searched.
+            # Data Catalog automatically creates entry groups with names that start with
+            # the `@` symbol for the following resources:
+            #
+            # * BigQuery entries (`@bigquery`)
+            # * Pub/Sub topics (`@pubsub`)
+            # * Dataproc Metastore services (`@dataproc_metastore_{SERVICE_NAME_HASH}`)
+            #
+            # You can create your own entry groups for Cloud Storage fileset entries
+            # and custom entries together with the corresponding IAM policies.
+            # User-created entry groups can't contain the `@` symbol, it is reserved
+            # for automatically created groups.
+            #
+            # Entry groups, like entries, can be searched.
             #
             # A maximum of 10,000 entry groups may be created per organization across all
             # locations.
             #
-            # Users should enable the Data Catalog API in the project identified by
-            # the `parent` parameter (see [Data Catalog Resource Project]
-            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-            # more information).
+            # You must enable the Data Catalog API in the project identified by
+            # the `parent` parameter. For more information, see [Data Catalog resource
+            # project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
             #
             # @overload create_entry_group(request, options = nil)
             #   Pass arguments to `create_entry_group` via a request object, either of type
@@ -366,9 +349,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the project this entry group belongs to. Example:
-            #
-            #     `projects/{project_id}/locations/{location}`
+            #     Required. The names of the project and location that the new entry group belongs to.
             #
             #     Note: The entry group itself and its child resources might not be
             #     stored in the location specified in its name.
@@ -379,7 +360,7 @@ module Google
             #     underscores (_), and must start with a letter or underscore.
             #     The maximum size is 64 bytes when encoded in UTF-8.
             #   @param entry_group [::Google::Cloud::DataCatalog::V1::EntryGroup, ::Hash]
-            #     The entry group to create. Defaults to an empty entry group.
+            #     The entry group to create. Defaults to empty.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::EntryGroup]
@@ -415,7 +396,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_entry_group.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_entry_group.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :create_entry_group, request, options: options do |response, operation|
@@ -427,7 +410,7 @@ module Google
             end
 
             ##
-            # Gets an EntryGroup.
+            # Gets an entry group.
             #
             # @overload get_entry_group(request, options = nil)
             #   Pass arguments to `get_entry_group` via a request object, either of type
@@ -445,10 +428,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the entry group. For example,
-            #     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
+            #     Required. The name of the entry group to get.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The fields to return. If not set or empty, all fields are returned.
+            #     The fields to return. If empty or omitted, all fields are returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::EntryGroup]
@@ -484,7 +466,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_entry_group.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_entry_group.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :get_entry_group, request, options: options do |response, operation|
@@ -496,11 +480,12 @@ module Google
             end
 
             ##
-            # Updates an EntryGroup. The user should enable the Data Catalog API in the
-            # project identified by the `entry_group.name` parameter (see [Data Catalog
-            # Resource Project]
-            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-            # more information).
+            # Updates an entry group.
+            #
+            # You must enable the Data Catalog API in the project identified by
+            # the `entry_group.name` parameter. For more information, see [Data Catalog
+            # resource
+            # project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
             #
             # @overload update_entry_group(request, options = nil)
             #   Pass arguments to `update_entry_group` via a request object, either of type
@@ -518,7 +503,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param entry_group [::Google::Cloud::DataCatalog::V1::EntryGroup, ::Hash]
-            #     Required. The updated entry group. "name" field must be set.
+            #     Required. Updates for the entry group. The `name` field must be set.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Names of fields whose values to overwrite on an entry group.
             #
@@ -560,7 +545,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_entry_group.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_entry_group.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :update_entry_group, request, options: options do |response, operation|
@@ -572,11 +559,12 @@ module Google
             end
 
             ##
-            # Deletes an EntryGroup. Only entry groups that do not contain entries can be
-            # deleted. Users should enable the Data Catalog API in the project
-            # identified by the `name` parameter (see [Data Catalog Resource Project]
-            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-            # more information).
+            # Deletes an entry group.
+            #
+            # You must enable the Data Catalog API in the project
+            # identified by the `name` parameter. For more information, see [Data Catalog
+            # resource
+            # project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
             #
             # @overload delete_entry_group(request, options = nil)
             #   Pass arguments to `delete_entry_group` via a request object, either of type
@@ -594,8 +582,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the entry group. For example,
-            #     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
+            #     Required. The name of the entry group to delete.
             #   @param force [::Boolean]
             #     Optional. If true, deletes all entries in the entry group.
             #
@@ -633,7 +620,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_entry_group.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_entry_group.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :delete_entry_group, request, options: options do |response, operation|
@@ -663,16 +652,17 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the location that contains the entry groups, which can be
-            #     provided in URL format. Example:
+            #     Required. The name of the location that contains the entry groups to list.
             #
-            #     * projects/\\{project_id}/locations/\\{location}
+            #     Can be provided as a URL.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of items to return. Default is 10. Max limit is 1000.
-            #     Throws an invalid argument for `page_size > 1000`.
+            #     Optional. The maximum number of items to return.
+            #
+            #     Default is 10. Maximum limit is 1000.
+            #     Throws an invalid argument if `page_size` is greater than 1000.
             #   @param page_token [::String]
-            #     Optional. Token that specifies which page is requested. If empty, the first page is
-            #     returned.
+            #     Optional. Pagination token that specifies the next page to return.
+            #     If empty, returns the first page.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DataCatalog::V1::EntryGroup>]
@@ -708,7 +698,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_entry_groups.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_entry_groups.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :list_entry_groups, request, options: options do |response, operation|
@@ -721,15 +713,17 @@ module Google
             end
 
             ##
-            # Creates an entry. Only entries of types 'FILESET', 'CLUSTER', 'DATA_STREAM'
-            # or with a user-specified type can be created.
+            # Creates an entry.
             #
-            # Users should enable the Data Catalog API in the project identified by
-            # the `parent` parameter (see [Data Catalog Resource Project]
-            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-            # more information).
+            # You can create entries only with 'FILESET', 'CLUSTER', 'DATA_STREAM',
+            # or custom types. Data Catalog automatically creates entries with other
+            # types during metadata ingestion from integrated systems.
             #
-            # A maximum of 100,000 entries may be created per entry group.
+            # You must enable the Data Catalog API in the project identified by
+            # the `parent` parameter. For more information, see [Data Catalog resource
+            # project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
+            #
+            # An entry group can have a maximum of 100,000 entries.
             #
             # @overload create_entry(request, options = nil)
             #   Pass arguments to `create_entry` via a request object, either of type
@@ -747,9 +741,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the entry group this entry belongs to. Example:
-            #
-            #     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`
+            #     Required. The name of the entry group this entry belongs to.
             #
             #     Note: The entry itself and its child resources might not be stored in
             #     the location specified in its name.
@@ -796,7 +788,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_entry.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_entry.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :create_entry, request, options: options do |response, operation|
@@ -809,10 +803,11 @@ module Google
 
             ##
             # Updates an existing entry.
-            # Users should enable the Data Catalog API in the project identified by
-            # the `entry.name` parameter (see [Data Catalog Resource Project]
-            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-            # more information).
+            #
+            # You must enable the Data Catalog API in the project identified by
+            # the `entry.name` parameter. For more information, see [Data Catalog
+            # resource
+            # project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
             #
             # @overload update_entry(request, options = nil)
             #   Pass arguments to `update_entry` via a request object, either of type
@@ -830,7 +825,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param entry [::Google::Cloud::DataCatalog::V1::Entry, ::Hash]
-            #     Required. The updated entry. The "name" field must be set.
+            #     Required. Updates for the entry. The `name` field must be set.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Names of fields whose values to overwrite on an entry.
             #
@@ -838,24 +833,29 @@ module Google
             #     are overwritten. If such fields are non-required and omitted in the
             #     request body, their values are emptied.
             #
-            #     The following fields are modifiable:
+            #     You can modify only the fields listed below.
             #
-            #     * For entries with type `DATA_STREAM`:
-            #        * `schema`
-            #     * For entries with type `FILESET`:
-            #        * `schema`
-            #        * `display_name`
-            #        * `description`
-            #        * `gcs_fileset_spec`
-            #        * `gcs_fileset_spec.file_patterns`
-            #     * For entries with `user_specified_type`:
-            #        * `schema`
-            #        * `display_name`
-            #        * `description`
-            #        * `user_specified_type`
-            #        * `user_specified_system`
-            #        * `linked_resource`
-            #        * `source_system_timestamps`
+            #     For entries with type `DATA_STREAM`:
+            #
+            #     * `schema`
+            #
+            #     For entries with type `FILESET`:
+            #
+            #     * `schema`
+            #     * `display_name`
+            #     * `description`
+            #     * `gcs_fileset_spec`
+            #     * `gcs_fileset_spec.file_patterns`
+            #
+            #     For entries with `user_specified_type`:
+            #
+            #     * `schema`
+            #     * `display_name`
+            #     * `description`
+            #     * `user_specified_type`
+            #     * `user_specified_system`
+            #     * `linked_resource`
+            #     * `source_system_timestamps`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::Entry]
@@ -891,7 +891,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_entry.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_entry.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :update_entry, request, options: options do |response, operation|
@@ -903,13 +905,16 @@ module Google
             end
 
             ##
-            # Deletes an existing entry. Only entries created through
+            # Deletes an existing entry.
+            #
+            # You can delete only the entries created by the
             # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_entry CreateEntry}
-            # method can be deleted.
-            # Users should enable the Data Catalog API in the project identified by
-            # the `name` parameter (see [Data Catalog Resource Project]
-            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-            # more information).
+            # method.
+            #
+            # You must enable the Data Catalog API in the project identified by
+            # the `name` parameter. For more information, see [Data Catalog
+            # resource
+            # project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
             #
             # @overload delete_entry(request, options = nil)
             #   Pass arguments to `delete_entry` via a request object, either of type
@@ -927,9 +932,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the entry. Example:
-            #
-            #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}/entries/\\{entry_id}
+            #     Required. The name of the entry to delete.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -965,7 +968,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_entry.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_entry.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :delete_entry, request, options: options do |response, operation|
@@ -995,9 +1000,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the entry. Example:
-            #
-            #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}/entries/\\{entry_id}
+            #     Required. The name of the entry to get.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::Entry]
@@ -1033,7 +1036,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_entry.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_entry.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :get_entry, request, options: options do |response, operation|
@@ -1045,9 +1050,9 @@ module Google
             end
 
             ##
-            # Get an entry by target resource name. This method allows clients to use
-            # the resource name from the source Google Cloud Platform service to get the
-            # Data Catalog Entry.
+            # Gets an entry by its target resource name.
+            #
+            # The resource name comes from the source Google Cloud Platform service.
             #
             # @overload lookup_entry(request, options = nil)
             #   Pass arguments to `lookup_entry` via a request object, either of type
@@ -1066,27 +1071,27 @@ module Google
             #
             #   @param linked_resource [::String]
             #     The full name of the Google Cloud Platform resource the Data Catalog
-            #     entry represents. See:
-            #     https://cloud.google.com/apis/design/resource_names#full_resource_name.
-            #     Full names are case-sensitive.
+            #     entry represents. For more information, see [Full Resource Name]
+            #     (https://cloud.google.com/apis/design/resource_names#full_resource_name).
             #
-            #     Examples:
+            #     Full names are case-sensitive. For example:
             #
-            #      * //bigquery.googleapis.com/projects/projectId/datasets/datasetId/tables/tableId
-            #      * //pubsub.googleapis.com/projects/projectId/topics/topicId
+            #      * `//bigquery.googleapis.com/projects/{PROJECT_ID}/datasets/{DATASET_ID}/tables/{TABLE_ID}`
+            #      * `//pubsub.googleapis.com/projects/{PROJECT_ID}/topics/{TOPIC_ID}`
             #   @param sql_resource [::String]
             #     The SQL name of the entry. SQL names are case-sensitive.
             #
             #     Examples:
             #
-            #       * `pubsub.project_id.topic_id`
-            #       * ``pubsub.project_id.`topic.id.with.dots` ``
-            #       * `bigquery.table.project_id.dataset_id.table_id`
-            #       * `bigquery.dataset.project_id.dataset_id`
-            #       * `datacatalog.entry.project_id.location_id.entry_group_id.entry_id`
+            #     * `pubsub.topic.{PROJECT_ID}.{TOPIC_ID}`
+            #     * `pubsub.topic.{PROJECT_ID}.`\``{TOPIC.ID.SEPARATED.WITH.DOTS}`\`
+            #     * `bigquery.table.{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}`
+            #     * `bigquery.dataset.{PROJECT_ID}.{DATASET_ID}`
+            #     * `datacatalog.entry.{PROJECT_ID}.{LOCATION_ID}.{ENTRY_GROUP_ID}.{ENTRY_ID}`
             #
-            #     `*_id`s should satisfy the standard SQL rules for identifiers.
-            #     https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
+            #     Identifiers (`*_ID`) should comply with the
+            #     [Lexical structure in Standard SQL]
+            #     (https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical).
             #   @param fully_qualified_name [::String]
             #     Fully qualified name (FQN) of the resource.
             #
@@ -1102,7 +1107,7 @@ module Google
             #
             #     Example for a DPMS table:
             #
-            #     `dataproc_metastore:project_id.location_id.instance_id.database_id.table_id`
+            #     `dataproc_metastore:{PROJECT_ID}.{LOCATION_ID}.{INSTANCE_ID}.{DATABASE_ID}.{TABLE_ID}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::Entry]
@@ -1132,7 +1137,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.lookup_entry.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.lookup_entry.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :lookup_entry, request, options: options do |response, operation|
@@ -1162,21 +1169,21 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the entry group that contains the entries, which can
-            #     be provided in URL format. Example:
+            #     Required. The name of the entry group that contains the entries to list.
             #
-            #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}
+            #     Can be provided in URL format.
             #   @param page_size [::Integer]
-            #     The maximum number of items to return. Default is 10. Max limit is 1000.
-            #     Throws an invalid argument for `page_size > 1000`.
+            #     The maximum number of items to return. Default is 10. Maximum limit is
+            #     1000. Throws an invalid argument if `page_size` is more than 1000.
             #   @param page_token [::String]
-            #     Token that specifies which page is requested. If empty, the first page is
-            #     returned.
+            #     Pagination token that specifies the next page to return. If empty, the
+            #     first page is returned.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The fields to return for each Entry. If not set or empty, all
+            #     The fields to return for each entry. If empty or omitted, all
             #     fields are returned.
-            #     For example, setting read_mask to contain only one path "name" will cause
-            #     ListEntries to return a list of Entries with only "name" field.
+            #
+            #     For example, to return a list of entries with only the `name` field,
+            #     set `read_mask` to only one path with the `name` value.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DataCatalog::V1::Entry>]
@@ -1212,7 +1219,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_entries.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_entries.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :list_entries, request, options: options do |response, operation|
@@ -1225,11 +1234,12 @@ module Google
             end
 
             ##
-            # Creates a tag template. The user should enable the Data Catalog API in
-            # the project identified by the `parent` parameter (see [Data Catalog
-            # Resource
-            # Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project)
-            # for more information).
+            # Creates a tag template.
+            #
+            # You must enable the Data Catalog API in the project identified by the
+            # `parent` parameter.
+            # For more information, see [Data Catalog resource project]
+            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project).
             #
             # @overload create_tag_template(request, options = nil)
             #   Pass arguments to `create_tag_template` via a request object, either of type
@@ -1249,10 +1259,6 @@ module Google
             #   @param parent [::String]
             #     Required. The name of the project and the template location
             #     [region](https://cloud.google.com/data-catalog/docs/concepts/regions).
-            #
-            #     Example:
-            #
-            #     * projects/\\{project_id}/locations/us-central1
             #   @param tag_template_id [::String]
             #     Required. The ID of the tag template to create.
             #
@@ -1296,7 +1302,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_tag_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_tag_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :create_tag_template, request, options: options do |response, operation|
@@ -1326,9 +1334,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the tag template. Example:
-            #
-            #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}
+            #     Required. The name of the tag template to get.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::TagTemplate]
@@ -1364,7 +1370,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_tag_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_tag_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :get_tag_template, request, options: options do |response, operation|
@@ -1376,13 +1384,15 @@ module Google
             end
 
             ##
-            # Updates a tag template. This method cannot be used to update the fields of
-            # a template. The tag template fields are represented as separate resources
-            # and should be updated using their own create/update/delete methods.
-            # Users should enable the Data Catalog API in the project identified by
-            # the `tag_template.name` parameter (see [Data Catalog Resource Project]
-            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-            # more information).
+            # Updates a tag template.
+            #
+            # You can't update template fields with this method. These fields are
+            # separate resources with their own create, update, and delete methods.
+            #
+            # You must enable the Data Catalog API in the project identified by
+            # the `tag_template.name` parameter. For more information, see [Data Catalog
+            # resource
+            # project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
             #
             # @overload update_tag_template(request, options = nil)
             #   Pass arguments to `update_tag_template` via a request object, either of type
@@ -1400,12 +1410,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param tag_template [::Google::Cloud::DataCatalog::V1::TagTemplate, ::Hash]
-            #     Required. The template to update. The "name" field must be set.
+            #     Required. The template to update. The `name` field must be set.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Names of fields whose values to overwrite on a tag template. Currently,
             #     only `display_name` can be overwritten.
             #
-            #     In general, if this parameter is absent or empty, all modifiable fields
+            #     If this parameter is absent or empty, all modifiable fields
             #     are overwritten. If such fields are non-required and omitted in the
             #     request body, their values are emptied.
             #
@@ -1443,7 +1453,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_tag_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_tag_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :update_tag_template, request, options: options do |response, operation|
@@ -1455,11 +1467,11 @@ module Google
             end
 
             ##
-            # Deletes a tag template and all tags using the template.
-            # Users should enable the Data Catalog API in the project identified by
-            # the `name` parameter (see [Data Catalog Resource Project]
-            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-            # more information).
+            # Deletes a tag template and all tags that use it.
+            #
+            # You must enable the Data Catalog API in the project identified by
+            # the `name` parameter. For more information, see [Data Catalog resource
+            # project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
             #
             # @overload delete_tag_template(request, options = nil)
             #   Pass arguments to `delete_tag_template` via a request object, either of type
@@ -1477,13 +1489,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the tag template to delete. Example:
-            #
-            #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}
+            #     Required. The name of the tag template to delete.
             #   @param force [::Boolean]
-            #     Required. Currently, this field must always be set to `true`.
-            #     This confirms the deletion of any possible tags using this template.
-            #     `force = false` will be supported in the future.
+            #     Required. If true, deletes all tags that use this template.
+            #
+            #     Currently, `true` is the only supported value.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -1519,7 +1529,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_tag_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_tag_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :delete_tag_template, request, options: options do |response, operation|
@@ -1531,11 +1543,11 @@ module Google
             end
 
             ##
-            # Creates a field in a tag template. The user should enable the Data Catalog
-            # API in the project identified by the `parent` parameter (see
-            # [Data Catalog Resource
-            # Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project)
-            # for more information).
+            # Creates a field in a tag template.
+            #
+            # You must enable the Data Catalog API in the project identified by
+            # the `parent` parameter. For more information, see [Data Catalog resource
+            # project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
             #
             # @overload create_tag_template_field(request, options = nil)
             #   Pass arguments to `create_tag_template_field` via a request object, either of type
@@ -1555,10 +1567,6 @@ module Google
             #   @param parent [::String]
             #     Required. The name of the project and the template location
             #     [region](https://cloud.google.com/data-catalog/docs/concepts/regions).
-            #
-            #     Example:
-            #
-            #     * projects/\\{project_id}/locations/us-central1/tagTemplates/\\{tag_template_id}
             #   @param tag_template_field_id [::String]
             #     Required. The ID of the tag template field to create.
             #
@@ -1605,7 +1613,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_tag_template_field.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_tag_template_field.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :create_tag_template_field, request, options: options do |response, operation|
@@ -1617,11 +1627,14 @@ module Google
             end
 
             ##
-            # Updates a field in a tag template. This method cannot be used to update the
-            # field type. Users should enable the Data Catalog API in the project
-            # identified by the `name` parameter (see [Data Catalog Resource Project]
-            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-            # more information).
+            # Updates a field in a tag template.
+            #
+            # You can't update the field type with this method.
+            #
+            # You must enable the Data Catalog API in the project
+            # identified by the `name` parameter. For more information, see [Data Catalog
+            # resource
+            # project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
             #
             # @overload update_tag_template_field(request, options = nil)
             #   Pass arguments to `update_tag_template_field` via a request object, either of type
@@ -1639,18 +1652,16 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the tag template field. Example:
-            #
-            #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}/fields/\\{tag_template_field_id}
+            #     Required. The name of the tag template field.
             #   @param tag_template_field [::Google::Cloud::DataCatalog::V1::TagTemplateField, ::Hash]
             #     Required. The template to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. Names of fields whose values to overwrite on an individual field of a tag
             #     template. The following fields are modifiable:
             #
-            #       * `display_name`
-            #       * `type.enum_type`
-            #       * `is_required`
+            #     * `display_name`
+            #     * `type.enum_type`
+            #     * `is_required`
             #
             #     If this parameter is absent or empty, all modifiable fields
             #     are overwritten. If such fields are non-required and omitted in the request
@@ -1696,7 +1707,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_tag_template_field.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_tag_template_field.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :update_tag_template_field, request, options: options do |response, operation|
@@ -1708,11 +1721,11 @@ module Google
             end
 
             ##
-            # Renames a field in a tag template. The user should enable the Data Catalog
-            # API in the project identified by the `name` parameter (see [Data Catalog
-            # Resource
-            # Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project)
-            # for more information).
+            # Renames a field in a tag template.
+            #
+            # You must enable the Data Catalog API in the project identified by the
+            # `name` parameter. For more information, see [Data Catalog resource project]
+            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project).
             #
             # @overload rename_tag_template_field(request, options = nil)
             #   Pass arguments to `rename_tag_template_field` via a request object, either of type
@@ -1730,9 +1743,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the tag template. Example:
-            #
-            #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}/fields/\\{tag_template_field_id}
+            #     Required. The name of the tag template.
             #   @param new_tag_template_field_id [::String]
             #     Required. The new ID of this tag template field. For example, `my_new_field`.
             #
@@ -1770,7 +1781,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.rename_tag_template_field.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.rename_tag_template_field.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :rename_tag_template_field, request, options: options do |response, operation|
@@ -1782,8 +1795,9 @@ module Google
             end
 
             ##
-            # Renames an enum value in a tag template. The enum values have to be unique
-            # within one enum field.
+            # Renames an enum value in a tag template.
+            #
+            # Within a single enum field, enum values must be unique.
             #
             # @overload rename_tag_template_field_enum_value(request, options = nil)
             #   Pass arguments to `rename_tag_template_field_enum_value` via a request object, either of type
@@ -1801,9 +1815,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the enum field value. Example:
-            #
-            #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}/fields/\\{tag_template_field_id}/enumValues/\\{enum_value_display_name}
+            #     Required. The name of the enum field value.
             #   @param new_enum_value_display_name [::String]
             #     Required. The new display name of the enum value. For example, `my_new_enum_value`.
             #
@@ -1841,7 +1853,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.rename_tag_template_field_enum_value.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.rename_tag_template_field_enum_value.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :rename_tag_template_field_enum_value, request, options: options do |response, operation|
@@ -1853,11 +1867,12 @@ module Google
             end
 
             ##
-            # Deletes a field in a tag template and all uses of that field.
-            # Users should enable the Data Catalog API in the project identified by
-            # the `name` parameter (see [Data Catalog Resource Project]
-            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-            # more information).
+            # Deletes a field in a tag template and all uses of this field from the tags
+            # based on this template.
+            #
+            # You must enable the Data Catalog API in the project identified by
+            # the `name` parameter. For more information, see [Data Catalog resource
+            # project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
             #
             # @overload delete_tag_template_field(request, options = nil)
             #   Pass arguments to `delete_tag_template_field` via a request object, either of type
@@ -1875,13 +1890,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the tag template field to delete. Example:
-            #
-            #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}/fields/\\{tag_template_field_id}
+            #     Required. The name of the tag template field to delete.
             #   @param force [::Boolean]
-            #     Required. Currently, this field must always be set to `true`.
-            #     This confirms the deletion of this field from any tags using this field.
-            #     `force = false` will be supported in the future.
+            #     Required. If true, deletes this field from any tags that use it.
+            #
+            #     Currently, `true` is the only supported value.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -1917,7 +1930,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_tag_template_field.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_tag_template_field.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :delete_tag_template_field, request, options: options do |response, operation|
@@ -1929,13 +1944,18 @@ module Google
             end
 
             ##
-            # Creates a tag on an {::Google::Cloud::DataCatalog::V1::Entry Entry}.
-            # Note: The project identified by the `parent` parameter for the
-            # [tag](https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.entryGroups.entries.tags/create#path-parameters)
-            # and the
-            # [tag
-            # template](https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.tagTemplates/create#path-parameters)
-            # used to create the tag must be from the same organization.
+            # Creates a tag and assigns it to:
+            #
+            # * An {::Google::Cloud::DataCatalog::V1::Entry Entry} if the method name is
+            #   ``projects.locations.entryGroups.entries.tags.create``.
+            # * Or {::Google::Cloud::DataCatalog::V1::EntryGroup EntryGroup}if the method
+            #   name is ``projects.locations.entryGroups.tags.create``.
+            #
+            # Note: The project identified by the `parent` parameter for the [tag]
+            # (https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.entryGroups.entries.tags/create#path-parameters)
+            # and the [tag template]
+            # (https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.tagTemplates/create#path-parameters)
+            # used to create the tag must be in the same organization.
             #
             # @overload create_tag(request, options = nil)
             #   Pass arguments to `create_tag` via a request object, either of type
@@ -1953,10 +1973,10 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the resource to attach this tag to. Tags can be attached to
-            #     entries. An entry can have up to 1000 attached tags. Example:
+            #     Required. The name of the resource to attach this tag to.
             #
-            #     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}`
+            #     Tags can be attached to entries or entry groups. An entry can have up to
+            #     1000 attached tags.
             #
             #     Note: The tag and its child resources might not be stored in
             #     the location specified in its name.
@@ -1997,7 +2017,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_tag.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_tag.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :create_tag, request, options: options do |response, operation|
@@ -2070,7 +2092,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_tag.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_tag.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :update_tag, request, options: options do |response, operation|
@@ -2100,9 +2124,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the tag to delete. Example:
-            #
-            #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}/entries/\\{entry_id}/tags/\\{tag_id}
+            #     Required. The name of the tag to delete.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -2138,7 +2160,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_tag.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_tag.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :delete_tag, request, options: options do |response, operation|
@@ -2150,7 +2174,7 @@ module Google
             end
 
             ##
-            # Lists the tags on an {::Google::Cloud::DataCatalog::V1::Entry Entry}.
+            # Lists tags assigned to an {::Google::Cloud::DataCatalog::V1::Entry Entry}.
             #
             # @overload list_tags(request, options = nil)
             #   Pass arguments to `list_tags` via a request object, either of type
@@ -2168,19 +2192,16 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the Data Catalog resource to list the tags of. The resource
-            #     could be an {::Google::Cloud::DataCatalog::V1::Entry Entry} or an
-            #     {::Google::Cloud::DataCatalog::V1::EntryGroup EntryGroup}.
+            #     Required. The name of the Data Catalog resource to list the tags of.
             #
-            #     Examples:
-            #
-            #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}
-            #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}/entries/\\{entry_id}
+            #     The resource can be an {::Google::Cloud::DataCatalog::V1::Entry Entry}
+            #     or an {::Google::Cloud::DataCatalog::V1::EntryGroup EntryGroup}
+            #     (without `/entries/{entries}` at the end).
             #   @param page_size [::Integer]
-            #     The maximum number of tags to return. Default is 10. Max limit is 1000.
+            #     The maximum number of tags to return. Default is 10. Maximum limit is 1000.
             #   @param page_token [::String]
-            #     Token that specifies which page is requested. If empty, the first page is
-            #     returned.
+            #     Pagination token that specifies the next page to return. If empty, the
+            #     first page is returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DataCatalog::V1::Tag>]
@@ -2216,7 +2237,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_tags.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_tags.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :list_tags, request, options: options do |response, operation|
@@ -2229,20 +2252,23 @@ module Google
             end
 
             ##
-            # Sets the access control policy for a resource. Replaces any existing
+            # Sets an access control policy for a resource. Replaces any existing
             # policy.
-            # Supported resources are:
-            #   - Tag templates.
-            #   - Entries.
-            #   - Entry groups.
-            # Note, this method cannot be used to manage policies for BigQuery, Pub/Sub
-            # and any external Google Cloud Platform resources synced to Data Catalog.
             #
-            # Callers must have following Google IAM permission
-            #   - `datacatalog.tagTemplates.setIamPolicy` to set policies on tag
-            #     templates.
-            #   - `datacatalog.entries.setIamPolicy` to set policies on entries.
-            #   - `datacatalog.entryGroups.setIamPolicy` to set policies on entry groups.
+            # Supported resources are:
+            #
+            # - Tag templates
+            # - Entry groups
+            #
+            # Note: This method sets policies only within Data Catalog and can't be
+            # used to manage policies in BigQuery, Pub/Sub, Dataproc Metastore, and any
+            # external Google Cloud Platform resources synced with the Data Catalog.
+            #
+            # To call this method, you must have the following Google IAM permissions:
+            #
+            # - `datacatalog.tagTemplates.setIamPolicy` to set policies on tag
+            #   templates.
+            # - `datacatalog.entryGroups.setIamPolicy` to set policies on entry groups.
             #
             # @overload set_iam_policy(request, options = nil)
             #   Pass arguments to `set_iam_policy` via a request object, either of type
@@ -2302,7 +2328,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_iam_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :set_iam_policy, request, options: options do |response, operation|
@@ -2314,22 +2342,27 @@ module Google
             end
 
             ##
-            # Gets the access control policy for a resource. A `NOT_FOUND` error
-            # is returned if the resource does not exist. An empty policy is returned
-            # if the resource exists but does not have a policy set on it.
+            # Gets the access control policy for a resource.
+            #
+            # May return:
+            #
+            # * A`NOT_FOUND` error if the resource doesn't exist or you don't have the
+            #   permission to view it.
+            # * An empty policy if the resource exists but doesn't have a set policy.
             #
             # Supported resources are:
-            #   - Tag templates.
-            #   - Entries.
-            #   - Entry groups.
-            # Note, this method cannot be used to manage policies for BigQuery, Pub/Sub
-            # and any external Google Cloud Platform resources synced to Data Catalog.
             #
-            # Callers must have following Google IAM permission
-            #   - `datacatalog.tagTemplates.getIamPolicy` to get policies on tag
-            #     templates.
-            #   - `datacatalog.entries.getIamPolicy` to get policies on entries.
-            #   - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.
+            # - Tag templates
+            # - Entry groups
+            #
+            # Note: This method doesn't get policies from Google Cloud Platform
+            # resources ingested into Data Catalog.
+            #
+            # To call this method, you must have the following Google IAM permissions:
+            #
+            # - `datacatalog.tagTemplates.getIamPolicy` to get policies on tag
+            #   templates.
+            # - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.
             #
             # @overload get_iam_policy(request, options = nil)
             #   Pass arguments to `get_iam_policy` via a request object, either of type
@@ -2387,7 +2420,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_iam_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :get_iam_policy, request, options: options do |response, operation|
@@ -2399,19 +2434,20 @@ module Google
             end
 
             ##
-            # Returns the caller's permissions on a resource.
-            # If the resource does not exist, an empty set of permissions is returned
-            # (We don't return a `NOT_FOUND` error).
+            # Gets your permissions on a resource.
+            #
+            # Returns an empty set of permissions if the resource doesn't exist.
             #
             # Supported resources are:
-            #   - Tag templates.
-            #   - Entries.
-            #   - Entry groups.
-            # Note, this method cannot be used to manage policies for BigQuery, Pub/Sub
-            # and any external Google Cloud Platform resources synced to Data Catalog.
             #
-            # A caller is not required to have Google IAM permission to make this
-            # request.
+            # - Tag templates
+            # - Entry groups
+            #
+            # Note: This method gets policies only within Data Catalog and can't be
+            # used to get policies from BigQuery, Pub/Sub, Dataproc Metastore, and any
+            # external Google Cloud Platform resources ingested into Data Catalog.
+            #
+            # No Google IAM permissions are required to call this method.
             #
             # @overload test_iam_permissions(request, options = nil)
             #   Pass arguments to `test_iam_permissions` via a request object, either of type
@@ -2471,7 +2507,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.test_iam_permissions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_catalog_stub.call_rpc :test_iam_permissions, request, options: options do |response, operation|
@@ -2495,22 +2533,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for search_catalog
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # search_catalog to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.search_catalog.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.search_catalog.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.search_catalog.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.search_catalog.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

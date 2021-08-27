@@ -238,6 +238,14 @@ module Google
         #   * `JSON` - JSON encoding.
         #   * `BINARY` - Binary encoding, as defined by the schema type. For some
         #     schema types, binary encoding may not be available.
+        # @param [Numeric] retention Indicates the minimum number of seconds to retain a message
+        #   after it is published to the topic. If this field is set, messages published
+        #   to the topic within the `retention` number of seconds are always available to
+        #   subscribers. For instance, it allows any attached subscription to [seek to a
+        #   timestamp](https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time)
+        #   that is up to `retention` number of seconds in the past. If this field is
+        #   not set, message retention is controlled by settings on individual
+        #   subscriptions. Cannot be less than 600 (10 minutes) or more than 604,800 (7 days).
         #
         # @return [Google::Cloud::PubSub::Topic]
         #
@@ -253,14 +261,16 @@ module Google
                          persistence_regions: nil,
                          async: nil,
                          schema_name: nil,
-                         message_encoding: nil
+                         message_encoding: nil,
+                         retention: nil
           ensure_service!
           grpc = service.create_topic topic_name,
                                       labels:              labels,
                                       kms_key_name:        kms_key,
                                       persistence_regions: persistence_regions,
                                       schema_name:         schema_name,
-                                      message_encoding:    message_encoding
+                                      message_encoding:    message_encoding,
+                                      retention:           retention
           Topic.from_grpc grpc, service, async: async
         end
         alias new_topic create_topic

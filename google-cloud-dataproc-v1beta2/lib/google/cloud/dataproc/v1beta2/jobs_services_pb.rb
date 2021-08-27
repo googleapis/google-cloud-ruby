@@ -27,7 +27,7 @@ module Google
           # The JobController provides methods to manage jobs.
           class Service
 
-            include ::GRPC::GenericService
+            include GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode
@@ -45,9 +45,9 @@ module Google
             rpc :UpdateJob, ::Google::Cloud::Dataproc::V1beta2::UpdateJobRequest, ::Google::Cloud::Dataproc::V1beta2::Job
             # Starts a job cancellation request. To access the job resource
             # after cancellation, call
-            # [regions/{region}/jobs.list](https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/list)
+            # regions/{region}/jobs.list
             # or
-            # [regions/{region}/jobs.get](https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/get).
+            # regions/{region}/jobs.get.
             rpc :CancelJob, ::Google::Cloud::Dataproc::V1beta2::CancelJobRequest, ::Google::Cloud::Dataproc::V1beta2::Job
             # Deletes the job from the project. If the job is active, the delete fails,
             # and the response returns `FAILED_PRECONDITION`.

@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/iam/v1beta"
 
 client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new
-request = my_create_request
+request = ::Google::Iam::V1beta::ListWorkloadIdentityPoolsRequest.new # (request fields as keyword arguments...)
 response = client.list_workload_identity_pools request
 ```
 

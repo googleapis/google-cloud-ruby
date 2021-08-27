@@ -19,24 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "phishingprotection", "v1beta1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-phishing_protection-v1beta1",
-        "ruby-cloud-title": "Phishing Protection V1beta1",
-        "ruby-cloud-description": "Phishing Protection helps prevent users from accessing phishing sites by identifying various signals associated with malicious content, including the use of your brand assets, classifying malicious content that uses your brand and reporting the unsafe URLs to Google Safe Browsing.",
-        "ruby-cloud-env-prefix": "PHISHING_PROTECTION",
-        "ruby-cloud-grpc-service-config": "google/cloud/phishingprotection/v1beta1/phishingprotection_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/phishing-protection",
-        "ruby-cloud-api-id": "phishingprotection.googleapis.com",
-        "ruby-cloud-api-shortname": "phishingprotection",
-        "ruby-cloud-service-override": "PhishingProtectionServiceV1Beta1=PhishingProtectionService",
-    }
+    proto_path="google/cloud/phishingprotection/v1beta1",
+    bazel_target="//google/cloud/phishingprotection/v1beta1:google-cloud-phishingprotection-v1beta1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

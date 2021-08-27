@@ -19,26 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "spanner", "v1",
     proto_path="google/spanner/v1",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-spanner-v1",
-        "ruby-cloud-title": "Cloud Spanner V1",
-        "ruby-cloud-description": "Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service.",
-        "ruby-cloud-env-prefix": "SPANNER",
-        "ruby-cloud-grpc-service-config": "google/spanner/v1/spanner_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/spanner",
-        "ruby-cloud-api-id": "spanner.googleapis.com",
-        "ruby-cloud-api-shortname": "spanner",
-    }
+    bazel_target="//google/spanner/v1:google-cloud-spanner-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

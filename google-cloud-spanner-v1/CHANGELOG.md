@@ -1,10 +1,29 @@
 # Release History
 
-### 0.6.1 / 2021-04-23
+### 0.7.2 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.7.1 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.7.0 / 2021-06-24
+
+#### Features
+
+* Add support for the JSON type
+
+### 0.6.1 / 2021-06-23
 
 #### Bug Fixes
 
 * Moved CommitResponse into a separate proto file
+* Support future 1.x versions of gapic-common
 
 ### 0.6.0 / 2021-04-05
 

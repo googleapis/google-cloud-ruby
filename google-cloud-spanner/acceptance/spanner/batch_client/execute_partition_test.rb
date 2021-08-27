@@ -109,7 +109,7 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
     serialized_snapshot = batch_snapshot.dump
 
     sql = "SELECT s.id, s.bool FROM stuffs AS s WHERE s.id = 2 AND s.bool = false"
-    query_options = { optimizer_version: "3", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
+    query_options = { optimizer_version: "3", optimizer_statistics_package: "latest" }
     rows = []
     partitions = batch_snapshot.partition_query sql, query_options: query_options
     partitions.each do |partition|

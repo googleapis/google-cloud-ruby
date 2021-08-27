@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all DataLabelingService clients:
-            #
-            #     ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all DataLabelingService clients
+            #   ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -69,68 +68,44 @@ module Google
 
                 default_config.rpcs.get_dataset.timeout = 30.0
                 default_config.rpcs.get_dataset.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_datasets.timeout = 30.0
                 default_config.rpcs.list_datasets.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.delete_dataset.timeout = 30.0
                 default_config.rpcs.delete_dataset.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.import_data.timeout = 30.0
 
                 default_config.rpcs.export_data.timeout = 30.0
                 default_config.rpcs.export_data.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_data_item.timeout = 30.0
                 default_config.rpcs.get_data_item.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_data_items.timeout = 30.0
                 default_config.rpcs.list_data_items.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_annotated_dataset.timeout = 30.0
                 default_config.rpcs.get_annotated_dataset.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_annotated_datasets.timeout = 30.0
                 default_config.rpcs.list_annotated_datasets.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.label_image.timeout = 30.0
@@ -141,86 +116,56 @@ module Google
 
                 default_config.rpcs.get_example.timeout = 30.0
                 default_config.rpcs.get_example.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_examples.timeout = 30.0
                 default_config.rpcs.list_examples.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_annotation_spec_set.timeout = 30.0
 
                 default_config.rpcs.get_annotation_spec_set.timeout = 30.0
                 default_config.rpcs.get_annotation_spec_set.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_annotation_spec_sets.timeout = 30.0
                 default_config.rpcs.list_annotation_spec_sets.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.delete_annotation_spec_set.timeout = 30.0
                 default_config.rpcs.delete_annotation_spec_set.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_instruction.timeout = 30.0
 
                 default_config.rpcs.get_instruction.timeout = 30.0
                 default_config.rpcs.get_instruction.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_instructions.timeout = 30.0
                 default_config.rpcs.list_instructions.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.delete_instruction.timeout = 30.0
                 default_config.rpcs.delete_instruction.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_evaluation.timeout = 30.0
                 default_config.rpcs.get_evaluation.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_evaluations.timeout = 30.0
                 default_config.rpcs.search_evaluations.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_example_comparisons.timeout = 30.0
@@ -231,10 +176,7 @@ module Google
 
                 default_config.rpcs.get_evaluation_job.timeout = 30.0
                 default_config.rpcs.get_evaluation_job.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.pause_evaluation_job.timeout = 30.0
@@ -243,18 +185,12 @@ module Google
 
                 default_config.rpcs.delete_evaluation_job.timeout = 30.0
                 default_config.rpcs.delete_evaluation_job.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_evaluation_jobs.timeout = 30.0
                 default_config.rpcs.list_evaluation_jobs.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config
@@ -286,19 +222,15 @@ module Google
             ##
             # Create a new DataLabelingService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new DataLabelingService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
             #
-            #     client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
-            #
-            # To create a new DataLabelingService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the DataLabelingService client.
             # @yieldparam config [Client::Configuration]
@@ -318,14 +250,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -412,7 +343,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_dataset.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_dataset.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :create_dataset, request, options: options do |response, operation|
@@ -479,7 +412,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_dataset.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_dataset.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :get_dataset, request, options: options do |response, operation|
@@ -557,7 +492,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_datasets.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_datasets.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :list_datasets, request, options: options do |response, operation|
@@ -625,7 +562,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_dataset.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_dataset.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :delete_dataset, request, options: options do |response, operation|
@@ -701,7 +640,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.import_data.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.import_data.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :import_data, request, options: options do |response, operation|
@@ -782,7 +723,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.export_data.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.export_data.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :export_data, request, options: options do |response, operation|
@@ -851,7 +794,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_data_item.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_data_item.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :get_data_item, request, options: options do |response, operation|
@@ -930,7 +875,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_data_items.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_data_items.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :list_data_items, request, options: options do |response, operation|
@@ -999,7 +946,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_annotated_dataset.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_annotated_dataset.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :get_annotated_dataset, request, options: options do |response, operation|
@@ -1077,7 +1026,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_annotated_datasets.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_annotated_datasets.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :list_annotated_datasets, request, options: options do |response, operation|
@@ -1146,7 +1097,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_annotated_dataset.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_annotated_dataset.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :delete_annotated_dataset, request, options: options do |response, operation|
@@ -1234,7 +1187,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.label_image.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.label_image.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :label_image, request, options: options do |response, operation|
@@ -1323,7 +1278,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.label_video.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.label_video.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :label_video, request, options: options do |response, operation|
@@ -1404,7 +1361,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.label_text.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.label_text.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :label_text, request, options: options do |response, operation|
@@ -1477,7 +1436,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_example.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_example.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :get_example, request, options: options do |response, operation|
@@ -1557,7 +1518,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_examples.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_examples.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :list_examples, request, options: options do |response, operation|
@@ -1629,7 +1592,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_annotation_spec_set.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_annotation_spec_set.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :create_annotation_spec_set, request, options: options do |response, operation|
@@ -1696,7 +1661,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_annotation_spec_set.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_annotation_spec_set.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :get_annotation_spec_set, request, options: options do |response, operation|
@@ -1774,7 +1741,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_annotation_spec_sets.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_annotation_spec_sets.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :list_annotation_spec_sets, request, options: options do |response, operation|
@@ -1842,7 +1811,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_annotation_spec_set.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_annotation_spec_set.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :delete_annotation_spec_set, request, options: options do |response, operation|
@@ -1911,7 +1882,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_instruction.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_instruction.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :create_instruction, request, options: options do |response, operation|
@@ -1979,7 +1952,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_instruction.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_instruction.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :get_instruction, request, options: options do |response, operation|
@@ -2057,7 +2032,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_instructions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_instructions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :list_instructions, request, options: options do |response, operation|
@@ -2125,7 +2102,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_instruction.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_instruction.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :delete_instruction, request, options: options do |response, operation|
@@ -2194,7 +2173,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_evaluation.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_evaluation.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :get_evaluation, request, options: options do |response, operation|
@@ -2304,7 +2285,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.search_evaluations.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.search_evaluations.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :search_evaluations, request, options: options do |response, operation|
@@ -2387,7 +2370,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.search_example_comparisons.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.search_example_comparisons.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :search_example_comparisons, request, options: options do |response, operation|
@@ -2457,7 +2442,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_evaluation_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_evaluation_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :create_evaluation_job, request, options: options do |response, operation|
@@ -2538,7 +2525,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_evaluation_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_evaluation_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :update_evaluation_job, request, options: options do |response, operation|
@@ -2606,7 +2595,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_evaluation_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_evaluation_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :get_evaluation_job, request, options: options do |response, operation|
@@ -2675,7 +2666,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.pause_evaluation_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.pause_evaluation_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :pause_evaluation_job, request, options: options do |response, operation|
@@ -2744,7 +2737,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.resume_evaluation_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.resume_evaluation_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :resume_evaluation_job, request, options: options do |response, operation|
@@ -2812,7 +2807,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_evaluation_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_evaluation_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :delete_evaluation_job, request, options: options do |response, operation|
@@ -2898,7 +2895,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_evaluation_jobs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_evaluation_jobs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :list_evaluation_jobs, request, options: options do |response, operation|
@@ -2923,22 +2922,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_dataset
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_dataset to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_dataset.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_dataset.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_dataset.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_dataset.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

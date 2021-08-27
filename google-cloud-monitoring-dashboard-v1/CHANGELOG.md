@@ -1,5 +1,29 @@
 # Release History
 
+### 0.6.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.6.2 / 2021-07-21
+
+#### Documentation
+
+* Fix a few broken links in the client class documentation
+
+### 0.6.1 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.6.0 / 2021-07-08
+
+#### Features
+
+* Support for validate-only mode in create_dashboard and update_dashboard; support for alert chart widgets
+
 ### 0.5.1 / 2021-06-17
 
 #### Bug Fixes

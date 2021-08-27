@@ -113,14 +113,14 @@ end
 
 def setup_auth_env
   final_project = project || ENV["GCLOUD_TEST_PROJECT"] || ENV["GOOGLE_CLOUD_PROJECT"]
-  final_keyfile = keyfile || ENV["GCLOUD_TEST_KEYFILE"] || ENV["GOOGLE_APPLICATION_CREDENTIALS"]
+  final_keyfile = keyfile || ENV["GCLOUD_TEST_KEYFILE"]
   logger.info "Project for integration tests: #{final_project.inspect}"
   logger.info "Set keyfile for integration tests." if final_keyfile
   {
     "GCLOUD_TEST_PROJECT" => final_project,
     "GOOGLE_CLOUD_PROJECT" => final_project,
     "GCLOUD_TEST_KEYFILE" => final_keyfile,
-    "GOOGLE_APPLICATION_CREDENTIALS" => final_keyfile
+    "GOOGLE_APPLICATION_CREDENTIALS" => ENV["GOOGLE_APPLICATION_CREDENTIALS"]
   }
 end
 
@@ -306,7 +306,7 @@ def run_in_dir dir
       puts
       puts "#{dir}: #{task} ...", :bold, :cyan
       success = if task == "linkinator"
-        run_linkinator
+        run_linkinator dir
       else
         exec(["bundle", "exec", "rake", task.tr("-", ":")], env: @auth_env).success?
       end
@@ -315,8 +315,12 @@ def run_in_dir dir
   end
 end
 
-def run_linkinator
-  linkinator_cmd = ["npx", "linkinator", "./doc", "--skip", "\\w+\\.md$"]
+def run_linkinator dir
+  dir_without_version = dir.sub(/-v\d\w*$/, "")
+  linkinator_cmd = [
+    "npx", "linkinator", "./doc", "--skip",
+    "\\w+\\.md$ ^https://googleapis\\.dev/ruby/#{dir}/latest$ ^https://rubygems.org/gems/#{dir_without_version}"
+  ]
   result = exec linkinator_cmd, out: :capture, err: [:child, :out]
   puts result.captured_out
   checked_links = result.captured_out.split "\n"

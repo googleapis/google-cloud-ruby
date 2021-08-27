@@ -23,6 +23,18 @@ require "gapic/grpc/service_stub"
 require "google/cloud/metastore/v1/dataproc_metastore"
 
 class ::Google::Cloud::Metastore::V1::DataprocMetastore::ClientPathsTest < Minitest::Test
+  def test_backup_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.backup_path project: "value0", location: "value1", service: "value2", backup: "value3"
+      assert_equal "projects/value0/locations/value1/services/value2/backups/value3", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

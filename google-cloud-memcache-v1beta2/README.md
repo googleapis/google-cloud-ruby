@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/memcache/v1beta2"
 
 client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new
-request = my_create_request
+request = ::Google::Cloud::Memcache::V1beta2::ListInstancesRequest.new # (request fields as keyword arguments...)
 response = client.list_instances request
 ```
 

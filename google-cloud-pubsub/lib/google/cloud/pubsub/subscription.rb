@@ -168,9 +168,8 @@ module Google
         # backlog, from the moment a message is published. If
         # {#retain_acked} is `true`, then this also configures the retention of
         # acknowledged messages, and thus configures how far back in time a
-        # {#seek} can be done. Cannot be more than 604,800 seconds (7 days) or
-        # less than 600 seconds (10 minutes). Default is 604,800 seconds (7
-        # days).
+        # {#seek} can be done. Cannot be less than 600 (10 minutes) or more
+        # than 604,800 (7 days). Default is 604,800 seconds (7 days).
         #
         # Makes an API call to retrieve the retention value when called on a
         # reference object. See {#reference?}.
@@ -193,6 +192,24 @@ module Google
                                                                     message_retention_duration: new_retention_duration
           @grpc = service.update_subscription update_grpc, :message_retention_duration
           @resource_name = nil
+        end
+
+        ##
+        # Indicates the minimum duration for which a message is retained after
+        # it is published to the subscription's topic. If this field is set,
+        # messages published to the subscription's topic in the last
+        # `topic_message_retention_duration` are always available to subscribers.
+        # Output only. See {Topic#retention}.
+        #
+        # Makes an API call to retrieve the retention value when called on a
+        # reference object. See {#reference?}.
+        #
+        # @return [Numeric, nil] The topic message retention duration in seconds,
+        #   or `nil` if not set.
+        #
+        def topic_retention
+          ensure_grpc!
+          Convert.duration_to_number @grpc.topic_message_retention_duration
         end
 
         ##

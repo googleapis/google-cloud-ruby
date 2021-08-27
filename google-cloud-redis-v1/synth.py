@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "redis", "v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-redis-v1",
-        "ruby-cloud-title": "Google Cloud Memorystore for Redis V1",
-        "ruby-cloud-description": "Creates and manages Redis instances on the Google Cloud Platform.",
-        "ruby-cloud-env-prefix": "REDIS",
-        "ruby-cloud-grpc-service-config": "google/cloud/redis/v1/redis_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/memorystore/docs/redis",
-        "ruby-cloud-api-id": "redis.googleapis.com",
-        "ruby-cloud-api-shortname": "redis",
-    }
+    proto_path="google/cloud/redis/v1",
+    bazel_target="//google/cloud/redis/v1:google-cloud-redis-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

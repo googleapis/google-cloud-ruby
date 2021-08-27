@@ -31,6 +31,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :ARRAY, 8
       value :STRUCT, 9
       value :NUMERIC, 10
+      value :JSON, 11
     end
   end
 end

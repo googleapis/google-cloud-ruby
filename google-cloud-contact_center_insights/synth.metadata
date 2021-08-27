@@ -1,0 +1,50 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "74d41c28e19fa179a5231149ecb66229395c3036"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "68e5bf3045d7b3ef55f473494a0cd4566491f899",
+        "internalRef": "392141774"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "contactcenterinsights",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-contact_center_insights.gemspec",
+    "lib/google-cloud-contact_center_insights.rb",
+    "lib/google/cloud/contact_center_insights.rb",
+    "lib/google/cloud/contact_center_insights/version.rb",
+    "test/google/cloud/contact_center_insights/client_test.rb",
+    "test/google/cloud/contact_center_insights/version_test.rb",
+    "test/helper.rb"
+  ]
+}

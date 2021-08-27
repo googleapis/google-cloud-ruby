@@ -1,5 +1,29 @@
 # Release History
 
+### 2.6.4 / 2021-08-26
+
+#### Bug Fixes
+
+* Fix google-cloud-resource-prefix header
+
+### 2.6.3 / 2021-08-24
+
+#### Bug Fixes
+
+* Fix transaction retry behavior
+
+### 2.6.2 / 2021-07-26
+
+#### Bug Fixes
+
+* Update FieldPath#formatted_string to correctly escape non-simple characters
+
+### 2.6.1 / 2021-07-08
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
 ### 2.6.0 / 2021-06-15
 
 #### Features

@@ -1,5 +1,33 @@
 # Release History
 
+### 0.6.0 / 2021-08-11
+
+#### Features
+
+* Support setting message retention duration on a topic
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.5.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.5.1 / 2021-07-08
+
+#### Bug Fixes
+
+* Removed a proto file that is duplicated from the iam-v1 gem
+
+### 0.5.0 / 2021-07-07
+
+#### Features
+
+* Add subscription properties to streaming pull response
+
 ### 0.4.1 / 2021-06-17
 
 #### Bug Fixes

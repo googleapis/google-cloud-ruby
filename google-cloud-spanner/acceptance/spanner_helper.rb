@@ -121,6 +121,7 @@ module Acceptance
               date DATE,
               timestamp TIMESTAMP OPTIONS (allow_commit_timestamp=true),
               numeric NUMERIC,
+              json JSON,
               ints ARRAY<INT64>,
               floats ARRAY<FLOAT64>,
               bools ARRAY<BOOL>,
@@ -128,7 +129,8 @@ module Acceptance
               bytes ARRAY<BYTES(MAX)>,
               dates ARRAY<DATE>,
               timestamps ARRAY<TIMESTAMP>,
-              numerics ARRAY<NUMERIC>
+              numerics ARRAY<NUMERIC>,
+              json_array ARRAY<JSON>
             ) PRIMARY KEY (id)
           STUFFS
         end
@@ -230,13 +232,15 @@ module Acceptance
           byte: :BYTES,
           date: :DATE,
           timestamp: :TIMESTAMP,
+          json: :JSON,
           ints: [:INT64],
           floats: [:FLOAT64],
           bools: [:BOOL],
           strings: [:STRING],
           bytes: [:BYTES],
           dates: [:DATE],
-          timestamps: [:TIMESTAMP]
+          timestamps: [:TIMESTAMP],
+          jsons: [:JSON]
         }
       end
 
@@ -249,6 +253,7 @@ module Acceptance
           byte: File.open("acceptance/data/face.jpg", "rb"),
           date: Date.today + rand(-100..100),
           timestamp: Time.now + rand(-60*60*24.0..60*60*24.0),
+          json: { venue: "Yellow Lake", rating: 10 },
           ints: rand(2..10).times.map { rand(0..1000) },
           floats: rand(2..10).times.map { rand(0.0..100.0) },
           bools: rand(2..10).times.map { [true, false].sample },
@@ -257,7 +262,8 @@ module Acceptance
                   File.open("acceptance/data/landmark.jpg", "rb"),
                   File.open("acceptance/data/logo.jpg", "rb")],
           dates: rand(2..10).times.map { Date.today + rand(-100..100) },
-          timestamps: rand(2..10).times.map { Time.now + rand(-60*60*24.0..60*60*24.0) }
+          timestamps: rand(2..10).times.map { Time.now + rand(-60*60*24.0..60*60*24.0) },
+          json_array: [{ venue: "Green Lake", rating: 8 }, { venue: "Blue Lake", rating: 9 }]
         }
       end
 

@@ -1,5 +1,23 @@
 # Release History
 
+### 0.9.0 / 2021-08-25
+
+#### Features
+
+* Support new RPCs involving DisplayVideo360AdvertiserLink and DataRetentionSettings
+
+### 0.8.2 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.8.1 / 2021-07-12
+
+#### Documentation
+
+* Clarified some language around authentication configuration
+
 ### 0.8.0 / 2021-06-17
 
 #### Features

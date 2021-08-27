@@ -40,13 +40,12 @@ module Google
             # See {::Google::Cloud::Language::V1beta2::LanguageService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all LanguageService clients:
-            #
-            #     ::Google::Cloud::Language::V1beta2::LanguageService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all LanguageService clients
+            #   ::Google::Cloud::Language::V1beta2::LanguageService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -66,50 +65,32 @@ module Google
 
                 default_config.rpcs.analyze_sentiment.timeout = 600.0
                 default_config.rpcs.analyze_sentiment.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.analyze_entities.timeout = 600.0
                 default_config.rpcs.analyze_entities.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.analyze_entity_sentiment.timeout = 600.0
                 default_config.rpcs.analyze_entity_sentiment.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.analyze_syntax.timeout = 600.0
                 default_config.rpcs.analyze_syntax.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.classify_text.timeout = 600.0
                 default_config.rpcs.classify_text.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.annotate_text.timeout = 600.0
                 default_config.rpcs.annotate_text.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config
@@ -141,19 +122,15 @@ module Google
             ##
             # Create a new LanguageService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new LanguageService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Language::V1beta2::LanguageService::Client.new
             #
-            #     client = ::Google::Cloud::Language::V1beta2::LanguageService::Client.new
-            #
-            # To create a new LanguageService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Language::V1beta2::LanguageService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Language::V1beta2::LanguageService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the LanguageService client.
             # @yieldparam config [Client::Configuration]
@@ -173,14 +150,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -249,7 +225,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.analyze_sentiment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.analyze_sentiment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @language_service_stub.call_rpc :analyze_sentiment, request, options: options do |response, operation|
@@ -313,7 +291,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.analyze_entities.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.analyze_entities.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @language_service_stub.call_rpc :analyze_entities, request, options: options do |response, operation|
@@ -376,7 +356,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.analyze_entity_sentiment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.analyze_entity_sentiment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @language_service_stub.call_rpc :analyze_entity_sentiment, request, options: options do |response, operation|
@@ -440,7 +422,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.analyze_syntax.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.analyze_syntax.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @language_service_stub.call_rpc :analyze_syntax, request, options: options do |response, operation|
@@ -500,7 +484,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.classify_text.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.classify_text.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @language_service_stub.call_rpc :classify_text, request, options: options do |response, operation|
@@ -565,7 +551,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.annotate_text.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.annotate_text.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @language_service_stub.call_rpc :annotate_text, request, options: options do |response, operation|
@@ -589,22 +577,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for analyze_sentiment
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # analyze_sentiment to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Language::V1beta2::LanguageService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.analyze_sentiment.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Language::V1beta2::LanguageService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.analyze_sentiment.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Language::V1beta2::LanguageService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.analyze_sentiment.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Language::V1beta2::LanguageService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.analyze_sentiment.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

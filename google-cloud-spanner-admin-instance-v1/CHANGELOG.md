@@ -1,5 +1,23 @@
 # Release History
 
+### 0.5.2 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.5.1 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.5.0 / 2021-07-07
+
+#### Features
+
+* Add leader_options field to InstanceConfig type
+
 ### 0.4.0 / 2021-06-17
 
 #### Features

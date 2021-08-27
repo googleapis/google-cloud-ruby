@@ -42,13 +42,12 @@ module Google
             # See {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all WorkflowTemplateService clients:
-            #
-            #     ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all WorkflowTemplateService clients
+            #   ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -68,58 +67,37 @@ module Google
 
                 default_config.rpcs.create_workflow_template.timeout = 600.0
                 default_config.rpcs.create_workflow_template.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_workflow_template.timeout = 600.0
                 default_config.rpcs.get_workflow_template.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.instantiate_workflow_template.timeout = 600.0
                 default_config.rpcs.instantiate_workflow_template.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.instantiate_inline_workflow_template.timeout = 600.0
                 default_config.rpcs.instantiate_inline_workflow_template.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.update_workflow_template.timeout = 600.0
                 default_config.rpcs.update_workflow_template.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_workflow_templates.timeout = 600.0
                 default_config.rpcs.list_workflow_templates.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.delete_workflow_template.timeout = 600.0
                 default_config.rpcs.delete_workflow_template.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -151,19 +129,15 @@ module Google
             ##
             # Create a new WorkflowTemplateService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new WorkflowTemplateService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new
             #
-            #     client = ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new
-            #
-            # To create a new WorkflowTemplateService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the WorkflowTemplateService client.
             # @yieldparam config [Client::Configuration]
@@ -183,14 +157,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -285,7 +258,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_workflow_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_workflow_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @workflow_template_service_stub.call_rpc :create_workflow_template, request, options: options do |response, operation|
@@ -368,7 +343,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_workflow_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_workflow_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @workflow_template_service_stub.call_rpc :get_workflow_template, request, options: options do |response, operation|
@@ -482,7 +459,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.instantiate_workflow_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.instantiate_workflow_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @workflow_template_service_stub.call_rpc :instantiate_workflow_template, request, options: options do |response, operation|
@@ -594,7 +573,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.instantiate_inline_workflow_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.instantiate_inline_workflow_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @workflow_template_service_stub.call_rpc :instantiate_inline_workflow_template, request, options: options do |response, operation|
@@ -664,7 +645,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_workflow_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_workflow_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @workflow_template_service_stub.call_rpc :update_workflow_template, request, options: options do |response, operation|
@@ -744,7 +727,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_workflow_templates.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_workflow_templates.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @workflow_template_service_stub.call_rpc :list_workflow_templates, request, options: options do |response, operation|
@@ -824,7 +809,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_workflow_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_workflow_template.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @workflow_template_service_stub.call_rpc :delete_workflow_template, request, options: options do |response, operation|
@@ -848,22 +835,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_workflow_template
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_workflow_template to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_workflow_template.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_workflow_template.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_workflow_template.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_workflow_template.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

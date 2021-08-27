@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "693ae20a741ede8ab36fbd7411e0b045976b7335"
+        "sha": "f0dc97767aaa135adc7ac9b2f2a7496bda9b87d8"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "36a84fe3eaf841f56c4b6683d1c0403f7b503092",
-        "internalRef": "370523741"
+        "sha": "0b896069c16e32304f0289db165c16ee959ce35e",
+        "internalRef": "391849098"
       }
     }
   ],
@@ -23,7 +23,7 @@
         "apiName": "speech",
         "apiVersion": "v1p1beta1",
         "language": "ruby",
-        "generator": "gapic-generator-ruby"
+        "generator": "bazel"
       }
     }
   ],

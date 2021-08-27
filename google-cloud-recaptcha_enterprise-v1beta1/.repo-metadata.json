@@ -11,5 +11,6 @@
     "ruby-cloud-description": "reCAPTCHA Enterprise is a service that protects your site from spam and abuse. Note that google-cloud-recaptcha_enterprise-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-recaptcha_enterprise instead. See the readme for more details.",
     "ruby-cloud-env-prefix": "RECAPTCHA_ENTERPRISE",
     "ruby-cloud-product-url": "https://cloud.google.com/recaptcha-enterprise",
+    "ruby-cloud-service-override": "RecaptchaEnterpriseServiceV1Beta1=RecaptchaEnterpriseService",
     "library_type": "GAPIC_AUTO"
 }

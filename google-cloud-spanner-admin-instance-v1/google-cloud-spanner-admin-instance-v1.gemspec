@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service. Note that google-cloud-spanner-admin-instance-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-spanner-admin-instance instead. See the readme for more details."
+  gem.description   = "Cloud Spanner is a managed, mission-critical, globally consistent and scalable relational database service. Note that google-cloud-spanner-admin-instance-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-spanner instead. See the readme for more details."
   gem.summary       = "API Client library for the Cloud Spanner Instance Admin V1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.5"
 
-  gem.add_dependency "gapic-common", ">= 0.5", "< 2.a"
+  gem.add_dependency "gapic-common", ">= 0.7", "< 2.a"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
   gem.add_dependency "grpc-google-iam-v1", ">= 0.6.10", "< 2.a"
 

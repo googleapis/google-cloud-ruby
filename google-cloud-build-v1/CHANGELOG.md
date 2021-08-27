@@ -1,5 +1,46 @@
 # Release History
 
+### 0.10.0 / 2021-08-19
+
+#### Features
+
+* Support for build approval
+
+### 0.9.2 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.9.1 / 2021-07-29
+
+#### Documentation
+
+* Document the SETUPBUILD key for the build timing field
+
+### 0.9.0 / 2021-07-21
+
+#### Features
+
+* Report build failure type and details
+* Update worker pool interfaces to their final form
+
+### 0.8.1 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.8.0 / 2021-06-30
+
+#### Features
+
+* Standardize resource paths, and support warnings, webhook config, and build config autodetect
+
+#### Bug Fixes
+
+* Fixed an exception when setting credentials using a Hash
+
 ### 0.7.1 / 2021-06-17
 
 #### Bug Fixes

@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Vision
-      VERSION = "1.1.0"
+      VERSION = "1.1.2"
     end
   end
 end

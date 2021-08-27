@@ -59,13 +59,12 @@ module Google
             # See {::Google::Cloud::Channel::V1::CloudChannelService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all CloudChannelService clients:
-            #
-            #     ::Google::Cloud::Channel::V1::CloudChannelService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all CloudChannelService clients
+            #   ::Google::Cloud::Channel::V1::CloudChannelService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -85,10 +84,7 @@ module Google
 
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
-                  initial_delay: 1.0,
-                max_delay: 10.0,
-                multiplier: 1.3,
-                retry_codes: [14]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.provision_cloud_identity.timeout = 60.0
@@ -142,19 +138,15 @@ module Google
             ##
             # Create a new CloudChannelService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new CloudChannelService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new
             #
-            #     client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new
-            #
-            # To create a new CloudChannelService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the CloudChannelService client.
             # @yieldparam config [Client::Configuration]
@@ -174,14 +166,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -284,7 +275,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_customers.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_customers.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :list_customers, request, options: options do |response, operation|
@@ -363,7 +356,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_customer.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_customer.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :get_customer, request, options: options do |response, operation|
@@ -447,7 +442,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.check_cloud_identity_accounts_exist.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.check_cloud_identity_accounts_exist.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :check_cloud_identity_accounts_exist, request, options: options do |response, operation|
@@ -528,7 +525,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_customer.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_customer.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :create_customer, request, options: options do |response, operation|
@@ -608,7 +607,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_customer.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_customer.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :update_customer, request, options: options do |response, operation|
@@ -682,7 +683,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_customer.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_customer.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :delete_customer, request, options: options do |response, operation|
@@ -775,7 +778,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.provision_cloud_identity.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.provision_cloud_identity.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :provision_cloud_identity, request, options: options do |response, operation|
@@ -861,7 +866,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_entitlements.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_entitlements.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :list_entitlements, request, options: options do |response, operation|
@@ -974,7 +981,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_transferable_skus.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_transferable_skus.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :list_transferable_skus, request, options: options do |response, operation|
@@ -1078,7 +1087,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_transferable_offers.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_transferable_offers.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :list_transferable_offers, request, options: options do |response, operation|
@@ -1156,7 +1167,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_entitlement.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_entitlement.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :get_entitlement, request, options: options do |response, operation|
@@ -1273,7 +1286,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_entitlement.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_entitlement.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :create_entitlement, request, options: options do |response, operation|
@@ -1380,7 +1395,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.change_parameters.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.change_parameters.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :change_parameters, request, options: options do |response, operation|
@@ -1485,7 +1502,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.change_renewal_settings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.change_renewal_settings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :change_renewal_settings, request, options: options do |response, operation|
@@ -1593,7 +1612,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.change_offer.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.change_offer.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :change_offer, request, options: options do |response, operation|
@@ -1697,7 +1718,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.start_paid_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.start_paid_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :start_paid_service, request, options: options do |response, operation|
@@ -1798,7 +1821,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.suspend_entitlement.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.suspend_entitlement.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :suspend_entitlement, request, options: options do |response, operation|
@@ -1904,7 +1929,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.cancel_entitlement.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.cancel_entitlement.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :cancel_entitlement, request, options: options do |response, operation|
@@ -2011,7 +2038,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.activate_entitlement.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.activate_entitlement.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :activate_entitlement, request, options: options do |response, operation|
@@ -2127,7 +2156,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.transfer_entitlements.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.transfer_entitlements.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :transfer_entitlements, request, options: options do |response, operation|
@@ -2238,7 +2269,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.transfer_entitlements_to_google.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.transfer_entitlements_to_google.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :transfer_entitlements_to_google, request, options: options do |response, operation|
@@ -2328,7 +2361,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_channel_partner_links.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_channel_partner_links.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :list_channel_partner_links, request, options: options do |response, operation|
@@ -2411,7 +2446,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_channel_partner_link.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_channel_partner_link.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :get_channel_partner_link, request, options: options do |response, operation|
@@ -2504,7 +2541,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_channel_partner_link.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_channel_partner_link.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :create_channel_partner_link, request, options: options do |response, operation|
@@ -2599,7 +2638,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_channel_partner_link.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_channel_partner_link.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :update_channel_partner_link, request, options: options do |response, operation|
@@ -2676,7 +2717,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.lookup_offer.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.lookup_offer.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :lookup_offer, request, options: options do |response, operation|
@@ -2751,7 +2794,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_products.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_products.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :list_products, request, options: options do |response, operation|
@@ -2838,7 +2883,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_skus.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_skus.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :list_skus, request, options: options do |response, operation|
@@ -2926,7 +2973,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_offers.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_offers.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :list_offers, request, options: options do |response, operation|
@@ -3016,7 +3065,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_purchasable_skus.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_purchasable_skus.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :list_purchasable_skus, request, options: options do |response, operation|
@@ -3106,7 +3157,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_purchasable_offers.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_purchasable_offers.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :list_purchasable_offers, request, options: options do |response, operation|
@@ -3191,7 +3244,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.register_subscriber.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.register_subscriber.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :register_subscriber, request, options: options do |response, operation|
@@ -3279,7 +3334,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.unregister_subscriber.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.unregister_subscriber.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :unregister_subscriber, request, options: options do |response, operation|
@@ -3372,7 +3429,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_subscribers.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_subscribers.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_channel_service_stub.call_rpc :list_subscribers, request, options: options do |response, operation|
@@ -3396,22 +3455,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_customers
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_customers to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Channel::V1::CloudChannelService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_customers.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Channel::V1::CloudChannelService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_customers.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_customers.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_customers.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

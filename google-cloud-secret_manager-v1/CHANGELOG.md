@@ -1,5 +1,27 @@
 # Release History
 
+### 0.11.1 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.11.0 / 2021-07-29
+
+#### Features
+
+* Support filters when listing secrets and secret versions
+
+### 0.10.2 / 2021-07-12
+
+#### Bug Fixes
+
+* Minor updates to retry policy for access_secret_version
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
 ### 0.10.1 / 2021-06-17
 
 #### Bug Fixes

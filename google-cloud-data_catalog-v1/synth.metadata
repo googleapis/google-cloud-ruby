@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "693ae20a741ede8ab36fbd7411e0b045976b7335"
+        "sha": "f0dc97767aaa135adc7ac9b2f2a7496bda9b87d8"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "91eee3d039fbdbadee008393504900287bbc6f43",
-        "internalRef": "368687296"
+        "sha": "0b896069c16e32304f0289db165c16ee959ce35e",
+        "internalRef": "391849098"
       }
     }
   ],
@@ -23,7 +23,7 @@
         "apiName": "datacatalog",
         "apiVersion": "v1",
         "language": "ruby",
-        "generator": "gapic-generator-ruby"
+        "generator": "bazel"
       }
     }
   ],
@@ -56,6 +56,7 @@
     "lib/google/cloud/data_catalog/v1/policy_tag_manager_serialization/credentials.rb",
     "lib/google/cloud/data_catalog/v1/policy_tag_manager_serialization/paths.rb",
     "lib/google/cloud/data_catalog/v1/version.rb",
+    "lib/google/cloud/datacatalog/v1/bigquery_pb.rb",
     "lib/google/cloud/datacatalog/v1/common_pb.rb",
     "lib/google/cloud/datacatalog/v1/data_source_pb.rb",
     "lib/google/cloud/datacatalog/v1/datacatalog_pb.rb",
@@ -70,9 +71,11 @@
     "lib/google/cloud/datacatalog/v1/table_spec_pb.rb",
     "lib/google/cloud/datacatalog/v1/tags_pb.rb",
     "lib/google/cloud/datacatalog/v1/timestamps_pb.rb",
+    "lib/google/cloud/datacatalog/v1/usage_pb.rb",
     "proto_docs/README.md",
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/datacatalog/v1/bigquery.rb",
     "proto_docs/google/cloud/datacatalog/v1/common.rb",
     "proto_docs/google/cloud/datacatalog/v1/data_source.rb",
     "proto_docs/google/cloud/datacatalog/v1/datacatalog.rb",
@@ -84,6 +87,7 @@
     "proto_docs/google/cloud/datacatalog/v1/table_spec.rb",
     "proto_docs/google/cloud/datacatalog/v1/tags.rb",
     "proto_docs/google/cloud/datacatalog/v1/timestamps.rb",
+    "proto_docs/google/cloud/datacatalog/v1/usage.rb",
     "proto_docs/google/iam/v1/iam_policy.rb",
     "proto_docs/google/iam/v1/options.rb",
     "proto_docs/google/iam/v1/policy.rb",

@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "servicecontrol", "v1",
     proto_path="google/api/servicecontrol/v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-service_control-v1",
-        "ruby-cloud-title": "Service Control API V1",
-        "ruby-cloud-description": "The Service Control API provides control plane functionality to managed services, such as logging, monitoring, and status checks.",
-        "ruby-cloud-env-prefix": "SERVICE_CONTROL",
-        "ruby-cloud-product-url": "https://cloud.google.com/service-infrastructure/docs/overview/",
-        "ruby-cloud-api-id": "servicecontrol.googleapis.com",
-        "ruby-cloud-api-shortname": "servicecontrol",
-    }
+    bazel_target="//google/api/servicecontrol/v1:google-cloud-api-servicecontrol-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

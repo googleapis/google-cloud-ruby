@@ -32,7 +32,7 @@ module Google
         #     User-provided description of a function.
         # @!attribute [rw] source_archive_url
         #   @return [::String]
-        #     The Google Cloud Storage URL, starting with gs://, pointing to the zip
+        #     The Google Cloud Storage URL, starting with `gs://`, pointing to the zip
         #     archive which contains the function.
         # @!attribute [rw] source_repository
         #   @return [::Google::Cloud::Functions::V1::SourceRepository]
@@ -42,7 +42,11 @@ module Google
         # @!attribute [rw] source_upload_url
         #   @return [::String]
         #     The Google Cloud Storage signed URL used for source uploading, generated
-        #     by [google.cloud.functions.v1.GenerateUploadUrl][]
+        #     by calling [google.cloud.functions.v1.GenerateUploadUrl].
+        #
+        #     The signature is validated on write methods (Create, Update)
+        #     The signature is stripped from the Function object on read methods (Get,
+        #     List)
         # @!attribute [rw] https_trigger
         #   @return [::Google::Cloud::Functions::V1::HttpsTrigger]
         #     An HTTPS endpoint type of source that can be triggered via URL.
@@ -66,7 +70,7 @@ module Google
         #     function, optional when updating an existing function. For a complete
         #     list of possible choices, see the
         #     [`gcloud` command
-        #     reference](/sdk/gcloud/reference/functions/deploy#--runtime).
+        #     reference](https://cloud.google.com/sdk/gcloud/reference/functions/deploy#--runtime).
         # @!attribute [rw] timeout
         #   @return [::Google::Protobuf::Duration]
         #     The function execution timeout. Execution is considered failed and
@@ -101,8 +105,8 @@ module Google
         #     project. Otherwise, it must belong to a project within the same
         #     organization. The format of this field is either
         #     `projects/{project}/global/networks/{network}` or `{network}`, where
-        #     \\{project} is a project id where the network is defined, and \\{network} is
-        #     the short name of the network.
+        #     `{project}` is a project id where the network is defined, and `{network}`
+        #     is the short name of the network.
         #
         #     This field is mutually exclusive with `vpc_connector` and will be replaced
         #     by it.

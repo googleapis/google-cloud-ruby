@@ -1,5 +1,23 @@
 # Release History
 
+### 0.2.0 / 2021-08-19
+
+#### Features
+
+* Support for backups and restores
+
+### 0.1.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.1.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
 ### 0.1.1 / 2021-06-17
 
 #### Bug Fixes

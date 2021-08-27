@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "693ae20a741ede8ab36fbd7411e0b045976b7335"
+        "sha": "7e366e8c4192595f54e817a0f4136210f1ff6309"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e8857c4c36948e7e0500377cd7fcecbf2459afc8",
-        "internalRef": "344435830"
+        "sha": "411e51eea221af5b77f809cef2c6592df45f73d5",
+        "internalRef": "389760020"
       }
     }
   ],
@@ -23,7 +23,7 @@
         "apiName": "logging",
         "apiVersion": "v2",
         "language": "ruby",
-        "generator": "gapic-generator-ruby"
+        "generator": "bazel"
       }
     }
   ],
@@ -56,8 +56,6 @@
     "lib/google/cloud/logging/v2/metrics_service/credentials.rb",
     "lib/google/cloud/logging/v2/metrics_service/paths.rb",
     "lib/google/cloud/logging/v2/version.rb",
-    "lib/google/logging/type/http_request_pb.rb",
-    "lib/google/logging/type/log_severity_pb.rb",
     "lib/google/logging/v2/log_entry_pb.rb",
     "lib/google/logging/v2/logging_config_pb.rb",
     "lib/google/logging/v2/logging_config_services_pb.rb",
@@ -69,6 +67,7 @@
     "proto_docs/google/api/distribution.rb",
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/label.rb",
+    "proto_docs/google/api/launch_stage.rb",
     "proto_docs/google/api/metric.rb",
     "proto_docs/google/api/monitored_resource.rb",
     "proto_docs/google/api/resource.rb",

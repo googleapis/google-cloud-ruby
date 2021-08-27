@@ -41,15 +41,15 @@ module Google
       #
       #   bigtable = Google::Cloud::Bigtable.new
       #
-      #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
-      #     cfm.add('cf1', gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5))
-      #     cfm.add('cf2', gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600))
+      #   table = bigtable.create_table "my-instance", "my-table" do |cfm|
+      #     cfm.add "cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5)
+      #     cfm.add "cf2", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600)
       #
       #     gc_rule = Google::Cloud::Bigtable::GcRule.union(
       #       Google::Cloud::Bigtable::GcRule.max_age(1800),
       #       Google::Cloud::Bigtable::GcRule.max_versions(3)
       #     )
-      #     cfm.add('cf3', gc_rule: gc_rule)
+      #     cfm.add "cf3", gc_rule: gc_rule
       #   end
       #
       #   puts table.column_families
@@ -59,15 +59,15 @@ module Google
       #
       #   bigtable = Google::Cloud::Bigtable.new
       #
-      #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+      #   table = bigtable.table "my-instance", "my-table", perform_lookup: true
       #
       #   table.column_families do |cfm|
       #     cfm.add "cf4", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600)
       #     cfm.add "cf5", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5)
       #
-      #     rule_1 = Google::Cloud::Bigtable::GcRule.max_versions(3)
-      #     rule_2 = Google::Cloud::Bigtable::GcRule.max_age(600)
-      #     rule_union = Google::Cloud::Bigtable::GcRule.union(rule_1, rule_2)
+      #     rule_1 = Google::Cloud::Bigtable::GcRule.max_versions 3
+      #     rule_2 = Google::Cloud::Bigtable::GcRule.max_age 600
+      #     rule_union = Google::Cloud::Bigtable::GcRule.union rule_1, rule_2
       #     cfm.update "cf2", gc_rule: rule_union
       #
       #     cfm.delete "cf3"
@@ -196,7 +196,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+        #   table = bigtable.table "my-instance", "my-table", perform_lookup: true
         #
         #   table.column_families do |column_families|
         #     column_families.add "cf4", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600)
@@ -237,12 +237,12 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+        #   table = bigtable.table "my-instance", "my-table", perform_lookup: true
         #
         #   table.column_families do |column_families|
-        #     rule_1 = Google::Cloud::Bigtable::GcRule.max_versions(3)
-        #     rule_2 = Google::Cloud::Bigtable::GcRule.max_age(600)
-        #     rule_union = Google::Cloud::Bigtable::GcRule.union(rule_1, rule_2)
+        #     rule_1 = Google::Cloud::Bigtable::GcRule.max_versions 3
+        #     rule_2 = Google::Cloud::Bigtable::GcRule.max_age 600
+        #     rule_union = Google::Cloud::Bigtable::GcRule.union rule_1, rule_2
         #
         #     column_families.update "cf2", gc_rule: rule_union
         #   end
@@ -270,7 +270,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+        #   table = bigtable.table "my-instance", "my-table", perform_lookup: true
         #
         #   table.column_families do |column_families|
         #     column_families.delete "cf3"

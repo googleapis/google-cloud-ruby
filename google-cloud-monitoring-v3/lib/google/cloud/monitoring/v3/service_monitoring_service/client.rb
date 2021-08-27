@@ -44,13 +44,12 @@ module Google
             # See {::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all ServiceMonitoringService clients:
-            #
-            #     ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all ServiceMonitoringService clients
+            #   ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -72,56 +71,38 @@ module Google
 
                 default_config.rpcs.get_service.timeout = 30.0
                 default_config.rpcs.get_service.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_services.timeout = 30.0
                 default_config.rpcs.list_services.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_service.timeout = 30.0
 
                 default_config.rpcs.delete_service.timeout = 30.0
                 default_config.rpcs.delete_service.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_service_level_objective.timeout = 30.0
 
                 default_config.rpcs.get_service_level_objective.timeout = 30.0
                 default_config.rpcs.get_service_level_objective.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_service_level_objectives.timeout = 30.0
                 default_config.rpcs.list_service_level_objectives.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_service_level_objective.timeout = 30.0
 
                 default_config.rpcs.delete_service_level_objective.timeout = 30.0
                 default_config.rpcs.delete_service_level_objective.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 30.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config
@@ -153,19 +134,15 @@ module Google
             ##
             # Create a new ServiceMonitoringService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new ServiceMonitoringService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
             #
-            #     client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
-            #
-            # To create a new ServiceMonitoringService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the ServiceMonitoringService client.
             # @yieldparam config [Client::Configuration]
@@ -185,14 +162,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -271,7 +247,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :create_service, request, options: options do |response, operation|
@@ -339,7 +317,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :get_service, request, options: options do |response, operation|
@@ -436,7 +416,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_services.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_services.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :list_services, request, options: options do |response, operation|
@@ -506,7 +488,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :update_service, request, options: options do |response, operation|
@@ -574,7 +558,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :delete_service, request, options: options do |response, operation|
@@ -650,7 +636,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_service_level_objective.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_service_level_objective.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :create_service_level_objective, request, options: options do |response, operation|
@@ -723,7 +711,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_service_level_objective.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_service_level_objective.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :get_service_level_objective, request, options: options do |response, operation|
@@ -807,7 +797,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_service_level_objectives.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_service_level_objectives.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :list_service_level_objectives, request, options: options do |response, operation|
@@ -877,7 +869,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_service_level_objective.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_service_level_objective.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :update_service_level_objective, request, options: options do |response, operation|
@@ -945,7 +939,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_service_level_objective.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_service_level_objective.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :delete_service_level_objective, request, options: options do |response, operation|
@@ -969,22 +965,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_service
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_service to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_service.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_service.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_service.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_service.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

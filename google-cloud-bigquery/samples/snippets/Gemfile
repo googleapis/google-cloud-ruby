@@ -24,6 +24,8 @@ else
   gem "google-cloud-bigquery"
   # [END bigquery_dependencies]
 end
+gem "rgeo"
+gem "rgeo-geojson"
 
 group :test do
   gem "google-cloud-storage"

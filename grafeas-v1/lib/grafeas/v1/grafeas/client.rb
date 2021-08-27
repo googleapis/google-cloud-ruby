@@ -52,13 +52,12 @@ module Grafeas
         # See {::Grafeas::V1::Grafeas::Client::Configuration}
         # for a description of the configuration fields.
         #
-        # ## Example
+        # @example
         #
-        # To modify the configuration for all Grafeas clients:
-        #
-        #     ::Grafeas::V1::Grafeas::Client.configure do |config|
-        #       config.timeout = 10.0
-        #     end
+        #   # Modify the configuration for all Grafeas clients
+        #   ::Grafeas::V1::Grafeas::Client.configure do |config|
+        #     config.timeout = 10.0
+        #   end
         #
         # @yield [config] Configure the Client client.
         # @yieldparam config [Client::Configuration]
@@ -78,26 +77,17 @@ module Grafeas
 
             default_config.rpcs.get_occurrence.timeout = 30.0
             default_config.rpcs.get_occurrence.retry_policy = {
-              initial_delay: 0.1,
-          max_delay: 60.0,
-          multiplier: 1.3,
-          retry_codes: [14, 4]
+              initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
             }
 
             default_config.rpcs.list_occurrences.timeout = 30.0
             default_config.rpcs.list_occurrences.retry_policy = {
-              initial_delay: 0.1,
-          max_delay: 60.0,
-          multiplier: 1.3,
-          retry_codes: [14, 4]
+              initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
             }
 
             default_config.rpcs.delete_occurrence.timeout = 30.0
             default_config.rpcs.delete_occurrence.retry_policy = {
-              initial_delay: 0.1,
-          max_delay: 60.0,
-          multiplier: 1.3,
-          retry_codes: [14, 4]
+              initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
             }
 
             default_config.rpcs.create_occurrence.timeout = 30.0
@@ -108,34 +98,22 @@ module Grafeas
 
             default_config.rpcs.get_occurrence_note.timeout = 30.0
             default_config.rpcs.get_occurrence_note.retry_policy = {
-              initial_delay: 0.1,
-          max_delay: 60.0,
-          multiplier: 1.3,
-          retry_codes: [14, 4]
+              initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
             }
 
             default_config.rpcs.get_note.timeout = 30.0
             default_config.rpcs.get_note.retry_policy = {
-              initial_delay: 0.1,
-          max_delay: 60.0,
-          multiplier: 1.3,
-          retry_codes: [14, 4]
+              initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
             }
 
             default_config.rpcs.list_notes.timeout = 30.0
             default_config.rpcs.list_notes.retry_policy = {
-              initial_delay: 0.1,
-          max_delay: 60.0,
-          multiplier: 1.3,
-          retry_codes: [14, 4]
+              initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
             }
 
             default_config.rpcs.delete_note.timeout = 30.0
             default_config.rpcs.delete_note.retry_policy = {
-              initial_delay: 0.1,
-          max_delay: 60.0,
-          multiplier: 1.3,
-          retry_codes: [14, 4]
+              initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
             }
 
             default_config.rpcs.create_note.timeout = 30.0
@@ -146,10 +124,7 @@ module Grafeas
 
             default_config.rpcs.list_note_occurrences.timeout = 30.0
             default_config.rpcs.list_note_occurrences.retry_policy = {
-              initial_delay: 0.1,
-          max_delay: 60.0,
-          multiplier: 1.3,
-          retry_codes: [14, 4]
+              initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
             }
 
             default_config
@@ -181,19 +156,15 @@ module Grafeas
         ##
         # Create a new Grafeas client object.
         #
-        # ## Examples
+        # @example
         #
-        # To create a new Grafeas client with the default
-        # configuration:
+        #   # Create a client using the default configuration
+        #   client = ::Grafeas::V1::Grafeas::Client.new
         #
-        #     client = ::Grafeas::V1::Grafeas::Client.new
-        #
-        # To create a new Grafeas client with a custom
-        # configuration:
-        #
-        #     client = ::Grafeas::V1::Grafeas::Client.new do |config|
-        #       config.timeout = 10.0
-        #     end
+        #   # Create a client using a custom configuration
+        #   client = ::Grafeas::V1::Grafeas::Client.new do |config|
+        #     config.timeout = 10.0
+        #   end
         #
         # @yield [config] Configure the Grafeas client.
         # @yieldparam config [Client::Configuration]
@@ -283,7 +254,9 @@ module Grafeas
           options.apply_defaults timeout:      @config.rpcs.get_occurrence.timeout,
                                  metadata:     metadata,
                                  retry_policy: @config.rpcs.get_occurrence.retry_policy
-          options.apply_defaults metadata:     @config.metadata,
+
+          options.apply_defaults timeout:      @config.timeout,
+                                 metadata:     @config.metadata,
                                  retry_policy: @config.retry_policy
 
           @grafeas_stub.call_rpc :get_occurrence, request, options: options do |response, operation|
@@ -357,7 +330,9 @@ module Grafeas
           options.apply_defaults timeout:      @config.rpcs.list_occurrences.timeout,
                                  metadata:     metadata,
                                  retry_policy: @config.rpcs.list_occurrences.retry_policy
-          options.apply_defaults metadata:     @config.metadata,
+
+          options.apply_defaults timeout:      @config.timeout,
+                                 metadata:     @config.metadata,
                                  retry_policy: @config.retry_policy
 
           @grafeas_stub.call_rpc :list_occurrences, request, options: options do |response, operation|
@@ -427,7 +402,9 @@ module Grafeas
           options.apply_defaults timeout:      @config.rpcs.delete_occurrence.timeout,
                                  metadata:     metadata,
                                  retry_policy: @config.rpcs.delete_occurrence.retry_policy
-          options.apply_defaults metadata:     @config.metadata,
+
+          options.apply_defaults timeout:      @config.timeout,
+                                 metadata:     @config.metadata,
                                  retry_policy: @config.retry_policy
 
           @grafeas_stub.call_rpc :delete_occurrence, request, options: options do |response, operation|
@@ -496,7 +473,9 @@ module Grafeas
           options.apply_defaults timeout:      @config.rpcs.create_occurrence.timeout,
                                  metadata:     metadata,
                                  retry_policy: @config.rpcs.create_occurrence.retry_policy
-          options.apply_defaults metadata:     @config.metadata,
+
+          options.apply_defaults timeout:      @config.timeout,
+                                 metadata:     @config.metadata,
                                  retry_policy: @config.retry_policy
 
           @grafeas_stub.call_rpc :create_occurrence, request, options: options do |response, operation|
@@ -565,7 +544,9 @@ module Grafeas
           options.apply_defaults timeout:      @config.rpcs.batch_create_occurrences.timeout,
                                  metadata:     metadata,
                                  retry_policy: @config.rpcs.batch_create_occurrences.retry_policy
-          options.apply_defaults metadata:     @config.metadata,
+
+          options.apply_defaults timeout:      @config.timeout,
+                                 metadata:     @config.metadata,
                                  retry_policy: @config.retry_policy
 
           @grafeas_stub.call_rpc :batch_create_occurrences, request, options: options do |response, operation|
@@ -636,7 +617,9 @@ module Grafeas
           options.apply_defaults timeout:      @config.rpcs.update_occurrence.timeout,
                                  metadata:     metadata,
                                  retry_policy: @config.rpcs.update_occurrence.retry_policy
-          options.apply_defaults metadata:     @config.metadata,
+
+          options.apply_defaults timeout:      @config.timeout,
+                                 metadata:     @config.metadata,
                                  retry_policy: @config.retry_policy
 
           @grafeas_stub.call_rpc :update_occurrence, request, options: options do |response, operation|
@@ -704,7 +687,9 @@ module Grafeas
           options.apply_defaults timeout:      @config.rpcs.get_occurrence_note.timeout,
                                  metadata:     metadata,
                                  retry_policy: @config.rpcs.get_occurrence_note.retry_policy
-          options.apply_defaults metadata:     @config.metadata,
+
+          options.apply_defaults timeout:      @config.timeout,
+                                 metadata:     @config.metadata,
                                  retry_policy: @config.retry_policy
 
           @grafeas_stub.call_rpc :get_occurrence_note, request, options: options do |response, operation|
@@ -771,7 +756,9 @@ module Grafeas
           options.apply_defaults timeout:      @config.rpcs.get_note.timeout,
                                  metadata:     metadata,
                                  retry_policy: @config.rpcs.get_note.retry_policy
-          options.apply_defaults metadata:     @config.metadata,
+
+          options.apply_defaults timeout:      @config.timeout,
+                                 metadata:     @config.metadata,
                                  retry_policy: @config.retry_policy
 
           @grafeas_stub.call_rpc :get_note, request, options: options do |response, operation|
@@ -845,7 +832,9 @@ module Grafeas
           options.apply_defaults timeout:      @config.rpcs.list_notes.timeout,
                                  metadata:     metadata,
                                  retry_policy: @config.rpcs.list_notes.retry_policy
-          options.apply_defaults metadata:     @config.metadata,
+
+          options.apply_defaults timeout:      @config.timeout,
+                                 metadata:     @config.metadata,
                                  retry_policy: @config.retry_policy
 
           @grafeas_stub.call_rpc :list_notes, request, options: options do |response, operation|
@@ -913,7 +902,9 @@ module Grafeas
           options.apply_defaults timeout:      @config.rpcs.delete_note.timeout,
                                  metadata:     metadata,
                                  retry_policy: @config.rpcs.delete_note.retry_policy
-          options.apply_defaults metadata:     @config.metadata,
+
+          options.apply_defaults timeout:      @config.timeout,
+                                 metadata:     @config.metadata,
                                  retry_policy: @config.retry_policy
 
           @grafeas_stub.call_rpc :delete_note, request, options: options do |response, operation|
@@ -984,7 +975,9 @@ module Grafeas
           options.apply_defaults timeout:      @config.rpcs.create_note.timeout,
                                  metadata:     metadata,
                                  retry_policy: @config.rpcs.create_note.retry_policy
-          options.apply_defaults metadata:     @config.metadata,
+
+          options.apply_defaults timeout:      @config.timeout,
+                                 metadata:     @config.metadata,
                                  retry_policy: @config.retry_policy
 
           @grafeas_stub.call_rpc :create_note, request, options: options do |response, operation|
@@ -1053,7 +1046,9 @@ module Grafeas
           options.apply_defaults timeout:      @config.rpcs.batch_create_notes.timeout,
                                  metadata:     metadata,
                                  retry_policy: @config.rpcs.batch_create_notes.retry_policy
-          options.apply_defaults metadata:     @config.metadata,
+
+          options.apply_defaults timeout:      @config.timeout,
+                                 metadata:     @config.metadata,
                                  retry_policy: @config.retry_policy
 
           @grafeas_stub.call_rpc :batch_create_notes, request, options: options do |response, operation|
@@ -1124,7 +1119,9 @@ module Grafeas
           options.apply_defaults timeout:      @config.rpcs.update_note.timeout,
                                  metadata:     metadata,
                                  retry_policy: @config.rpcs.update_note.retry_policy
-          options.apply_defaults metadata:     @config.metadata,
+
+          options.apply_defaults timeout:      @config.timeout,
+                                 metadata:     @config.metadata,
                                  retry_policy: @config.retry_policy
 
           @grafeas_stub.call_rpc :update_note, request, options: options do |response, operation|
@@ -1199,7 +1196,9 @@ module Grafeas
           options.apply_defaults timeout:      @config.rpcs.list_note_occurrences.timeout,
                                  metadata:     metadata,
                                  retry_policy: @config.rpcs.list_note_occurrences.retry_policy
-          options.apply_defaults metadata:     @config.metadata,
+
+          options.apply_defaults timeout:      @config.timeout,
+                                 metadata:     @config.metadata,
                                  retry_policy: @config.retry_policy
 
           @grafeas_stub.call_rpc :list_note_occurrences, request, options: options do |response, operation|
@@ -1224,22 +1223,21 @@ module Grafeas
         # Configuration can be applied globally to all clients, or to a single client
         # on construction.
         #
-        # # Examples
+        # @example
         #
-        # To modify the global config, setting the timeout for get_occurrence
-        # to 20 seconds, and all remaining timeouts to 10 seconds:
+        #   # Modify the global config, setting the timeout for
+        #   # get_occurrence to 20 seconds,
+        #   # and all remaining timeouts to 10 seconds.
+        #   ::Grafeas::V1::Grafeas::Client.configure do |config|
+        #     config.timeout = 10.0
+        #     config.rpcs.get_occurrence.timeout = 20.0
+        #   end
         #
-        #     ::Grafeas::V1::Grafeas::Client.configure do |config|
-        #       config.timeout = 10.0
-        #       config.rpcs.get_occurrence.timeout = 20.0
-        #     end
-        #
-        # To apply the above configuration only to a new client:
-        #
-        #     client = ::Grafeas::V1::Grafeas::Client.new do |config|
-        #       config.timeout = 10.0
-        #       config.rpcs.get_occurrence.timeout = 20.0
-        #     end
+        #   # Apply the above configuration only to a new client.
+        #   client = ::Grafeas::V1::Grafeas::Client.new do |config|
+        #     config.timeout = 10.0
+        #     config.rpcs.get_occurrence.timeout = 20.0
+        #   end
         #
         # @!attribute [rw] endpoint
         #   The hostname or hostname:port of the service endpoint.

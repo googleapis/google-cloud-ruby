@@ -21,20 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "iam", "v1beta",
     proto_path="google/iam/v1beta",
-    generator_args={
-        "ruby-cloud-gem-name": "google-iam-v1beta",
-        "ruby-cloud-title": "Google IAM V1beta",
-        "ruby-cloud-description": "Pre-release client for the WorkloadIdentityPools service.",
-        "ruby-cloud-env-prefix": "IAM",
-        "ruby-cloud-grpc-service-config": "google/iam/v1beta/iam_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers",
-        "ruby-cloud-api-id": "iam.googleapis.com",
-        "ruby-cloud-api-shortname": "iam",
-    }
+    bazel_target="//google/iam/v1beta:google-iam-v1beta-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

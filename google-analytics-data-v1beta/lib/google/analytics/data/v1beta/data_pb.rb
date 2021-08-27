@@ -10,6 +10,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :end_date, :string, 2
       optional :name, :string, 3
     end
+    add_message "google.analytics.data.v1beta.MinuteRange" do
+      proto3_optional :start_minutes_ago, :int32, 1
+      proto3_optional :end_minutes_ago, :int32, 2
+      optional :name, :string, 3
+    end
     add_message "google.analytics.data.v1beta.Dimension" do
       optional :name, :string, 1
       optional :dimension_expression, :message, 2, "google.analytics.data.v1beta.DimensionExpression"
@@ -241,6 +246,7 @@ module Google
     module Data
       module V1beta
         DateRange = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.DateRange").msgclass
+        MinuteRange = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.MinuteRange").msgclass
         Dimension = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.Dimension").msgclass
         DimensionExpression = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.DimensionExpression").msgclass
         DimensionExpression::CaseExpression = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.DimensionExpression.CaseExpression").msgclass

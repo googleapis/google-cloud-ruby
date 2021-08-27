@@ -52,13 +52,12 @@ module Google
             # See {::Google::Area120::Tables::V1alpha1::TablesService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all TablesService clients:
-            #
-            #     ::Google::Area120::Tables::V1alpha1::TablesService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all TablesService clients
+            #   ::Google::Area120::Tables::V1alpha1::TablesService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -78,10 +77,7 @@ module Google
 
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
-                  initial_delay: 1.0,
-                max_delay: 10.0,
-                multiplier: 1.3,
-                retry_codes: [14]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_table.timeout = 60.0
@@ -137,19 +133,15 @@ module Google
             ##
             # Create a new TablesService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new TablesService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new
             #
-            #     client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new
-            #
-            # To create a new TablesService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the TablesService client.
             # @yieldparam config [Client::Configuration]
@@ -169,14 +161,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -249,7 +240,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_table.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_table.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :get_table, request, options: options do |response, operation|
@@ -319,7 +312,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_tables.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_tables.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :list_tables, request, options: options do |response, operation|
@@ -387,7 +382,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_workspace.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_workspace.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :get_workspace, request, options: options do |response, operation|
@@ -457,7 +454,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_workspaces.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_workspaces.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :list_workspaces, request, options: options do |response, operation|
@@ -528,7 +527,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_row.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_row.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :get_row, request, options: options do |response, operation|
@@ -614,7 +615,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_rows.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_rows.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :list_rows, request, options: options do |response, operation|
@@ -687,7 +690,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_row.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_row.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :create_row, request, options: options do |response, operation|
@@ -758,7 +763,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.batch_create_rows.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_create_rows.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :batch_create_rows, request, options: options do |response, operation|
@@ -829,7 +836,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_row.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_row.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :update_row, request, options: options do |response, operation|
@@ -900,7 +909,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.batch_update_rows.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_update_rows.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :batch_update_rows, request, options: options do |response, operation|
@@ -967,7 +978,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_row.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_row.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :delete_row, request, options: options do |response, operation|
@@ -1039,7 +1052,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.batch_delete_rows.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_delete_rows.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :batch_delete_rows, request, options: options do |response, operation|
@@ -1063,22 +1078,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for get_table
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # get_table to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Area120::Tables::V1alpha1::TablesService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_table.timeout = 20.0
+            #   end
             #
-            #     ::Google::Area120::Tables::V1alpha1::TablesService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_table.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_table.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_table.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

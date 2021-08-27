@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "recommender", "v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-recommender-v1",
-        "ruby-cloud-title": "Recommender V1",
-        "ruby-cloud-description": "Recommender is a service on Google Cloud that provides usage recommendations for Cloud products and services.",
-        "ruby-cloud-env-prefix": "RECOMMENDER",
-        "ruby-cloud-grpc-service-config": "google/cloud/recommender/v1/recommender_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/recommender",
-        "ruby-cloud-api-id": "recommender.googleapis.com",
-        "ruby-cloud-api-shortname": "recommender",
-    }
+    proto_path="google/cloud/recommender/v1",
+    bazel_target="//google/cloud/recommender/v1:google-cloud-recommender-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

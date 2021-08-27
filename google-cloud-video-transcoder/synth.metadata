@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "693ae20a741ede8ab36fbd7411e0b045976b7335"
+        "sha": "10ec48b4b35ecbf2055f93a1c7e84da1fac7b1c8"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "8ca872ced04c96c05a36db3d2113d568ac814be8",
-        "internalRef": "357863594"
+        "sha": "509489a93f7fa360e313744142290c84b68bbdbd",
+        "internalRef": "383681557"
       }
     }
   ],
@@ -21,7 +21,7 @@
       "client": {
         "source": "googleapis",
         "apiName": "video/transcoder",
-        "apiVersion": "v1beta1",
+        "apiVersion": "v1",
         "language": "ruby",
         "generator": "gapic-generator-ruby"
       }

@@ -19,24 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-AUTOSYNTH_MULTIPLE_COMMITS = True
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "secrets", "v1beta1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-secret_manager-v1beta1",
-        "ruby-cloud-title": "Secret Manager V1beta1",
-        "ruby-cloud-description": "Secret Manager is a secure and convenient storage system for API keys, passwords, certificates, and other sensitive data. Secret Manager provides a central place and single source of truth to manage, access, and audit secrets across Google Cloud.",
-        "ruby-cloud-env-prefix": "SECRET_MANAGER",
-        "ruby-cloud-grpc-service-config": "google/cloud/secrets/v1beta1/secretmanager_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/secret-manager",
-        "ruby-cloud-api-id": "secretmanager.googleapis.com",
-        "ruby-cloud-api-shortname": "secretmanager",
-    }
+    proto_path="google/cloud/secrets/v1beta1",
+    bazel_target="//google/cloud/secrets/v1beta1:google-cloud-secretmanager-v1beta1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

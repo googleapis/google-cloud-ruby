@@ -47,7 +47,7 @@ describe "Spanner Client", :snapshot, :spanner do
   end
 
   it "runs a query with query options" do
-    query_options = { optimizer_version: "3", optimizer_statistics_package: "auto_20191128_14_47_22UTC" }
+    query_options = { optimizer_version: "3", optimizer_statistics_package: "latest" }
     results = nil
     db.snapshot do |snp|
       _(snp.transaction_id).wont_be :nil?

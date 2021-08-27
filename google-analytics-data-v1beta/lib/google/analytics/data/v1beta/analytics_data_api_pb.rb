@@ -95,6 +95,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :metric_aggregations, :enum, 7, "google.analytics.data.v1beta.MetricAggregation"
       repeated :order_bys, :message, 8, "google.analytics.data.v1beta.OrderBy"
       optional :return_property_quota, :bool, 9
+      repeated :minute_ranges, :message, 10, "google.analytics.data.v1beta.MinuteRange"
     end
     add_message "google.analytics.data.v1beta.RunRealtimeReportResponse" do
       repeated :dimension_headers, :message, 1, "google.analytics.data.v1beta.DimensionHeader"

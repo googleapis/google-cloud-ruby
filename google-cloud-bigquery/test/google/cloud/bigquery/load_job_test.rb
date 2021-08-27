@@ -51,6 +51,7 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
   end
 
   it "knows its default attributes" do
+    _(job_defaults.transaction_id).must_be :nil?
     _(job_defaults.delimiter).must_equal ","
     _(job_defaults.skip_leading_rows).must_equal 0
     _(job_defaults).must_be :utf8?
@@ -95,7 +96,7 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
     _(job.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
     _(job.schema).must_be :frozen?
     _(job.schema.fields).wont_be :empty?
-    _(job.schema.fields.map(&:name)).must_equal ["name", "age", "score", "pi", "my_bignumeric", "active", "avatar", "started_at", "duration", "target_end", "birthday"]
+    _(job.schema.fields.map(&:name)).must_equal ["name", "age", "score", "pi", "my_bignumeric", "active", "avatar", "started_at", "duration", "target_end", "birthday", "home"]
   end
 
   it "knows its load config" do

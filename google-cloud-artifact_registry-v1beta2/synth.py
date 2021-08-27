@@ -19,24 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "artifactregistry", "v1beta2",
     proto_path="google/devtools/artifactregistry/v1beta2",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-artifact_registry-v1beta2",
-        "ruby-cloud-title": "Artifact Registry V1beta2",
-        "ruby-cloud-description": "Artifact Registry stores and manages build artifacts in a scalable and integrated service built on Google infrastructure.",
-        "ruby-cloud-env-prefix": "ARTIFACT_REGISTRY",
-        "ruby-cloud-grpc-service-config": "google/devtools/artifactregistry/v1beta2/artifactregistry_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/artifact-registry/",
-        "ruby-cloud-api-id": "artifactregistry.googleapis.com",
-        "ruby-cloud-api-shortname": "artifactregistry",
-    }
+    bazel_target="//google/devtools/artifactregistry/v1beta2:google-cloud-devtools-artifactregistry-v1beta2-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

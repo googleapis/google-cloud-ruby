@@ -21,25 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "debugger", "v2",
     proto_path="google/devtools/clouddebugger/v2",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-        "google/devtools/source/v1/source_context.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-debugger-v2",
-        "ruby-cloud-title": "Cloud Debugger V2",
-        "ruby-cloud-description": "The Cloud Debugger API allows applications to interact with the Google Cloud Debugger backends. It provides two interfaces: the Debugger interface and the Controller interface. The Controller interface allows you to implement an agent that sends state data -- for example, the value of program variables and the call stack -- to Cloud Debugger when the application is running. The Debugger interface allows you to implement a Cloud Debugger client that allows users to set and delete the breakpoints at which the state data is collected, as well as read the data that is captured.",
-        "ruby-cloud-env-prefix": "DEBUGGER",
-        "ruby-cloud-grpc-service-config": "google/devtools/clouddebugger/v2/clouddebugger_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/debugger",
-        "ruby-cloud-api-id": "clouddebugger.googleapis.com",
-        "ruby-cloud-api-shortname": "clouddebugger",
-        "ruby-cloud-service-override": "Controller2=Controller;Debugger2=Debugger",
-    }
+    bazel_target="//google/devtools/clouddebugger/v2:google-cloud-devtools-clouddebugger-v2-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

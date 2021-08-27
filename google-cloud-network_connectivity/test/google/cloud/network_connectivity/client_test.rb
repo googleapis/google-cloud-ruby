@@ -28,7 +28,7 @@ class Google::Cloud::NetworkConnectivity::ClientConstructionMinitest < Minitest:
       client = Google::Cloud::NetworkConnectivity.hub_service do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client, client
+      assert_kind_of Google::Cloud::NetworkConnectivity::V1::HubService::Client, client
     end
   end
 end

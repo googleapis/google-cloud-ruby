@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Dialogflow::V2::Environments::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Environments clients:
-            #
-            #     ::Google::Cloud::Dialogflow::V2::Environments::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Environments clients
+            #   ::Google::Cloud::Dialogflow::V2::Environments::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -67,10 +66,7 @@ module Google
 
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
-                  initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -102,19 +98,15 @@ module Google
             ##
             # Create a new Environments client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Environments client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new
             #
-            #     client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new
-            #
-            # To create a new Environments client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Environments client.
             # @yieldparam config [Client::Configuration]
@@ -134,14 +126,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -159,7 +150,7 @@ module Google
             # Service calls
 
             ##
-            # Returns the list of all non-draft environments of the specified agent.
+            # Returns the list of all non-default environments of the specified agent.
             #
             # @overload list_environments(request, options = nil)
             #   Pass arguments to `list_environments` via a request object, either of type
@@ -179,6 +170,7 @@ module Google
             #   @param parent [::String]
             #     Required. The agent to list all environments from.
             #     Format:
+            #
             #     - `projects/<Project ID>/agent`
             #     - `projects/<Project ID>/locations/<Location ID>/agent`
             #   @param page_size [::Integer]
@@ -221,7 +213,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_environments.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_environments.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @environments_stub.call_rpc :list_environments, request, options: options do |response, operation|
@@ -254,9 +248,12 @@ module Google
             #   @param name [::String]
             #     Required. The name of the environment.
             #     Supported formats:
+            #
             #     - `projects/<Project ID>/agent/environments/<Environment ID>`
             #     - `projects/<Project ID>/locations/<Location
             #       ID>/agent/environments/<Environment ID>`
+            #
+            #     The environment ID for the default environment is `-`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dialogflow::V2::Environment]
@@ -292,7 +289,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_environment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_environment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @environments_stub.call_rpc :get_environment, request, options: options do |response, operation|
@@ -324,6 +323,7 @@ module Google
             #   @param parent [::String]
             #     Required. The agent to create an environment for.
             #     Supported formats:
+            #
             #     - `projects/<Project ID>/agent`
             #     - `projects/<Project ID>/locations/<Location ID>/agent`
             #   @param environment [::Google::Cloud::Dialogflow::V2::Environment, ::Hash]
@@ -365,7 +365,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_environment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_environment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @environments_stub.call_rpc :create_environment, request, options: options do |response, operation|
@@ -382,13 +384,13 @@ module Google
             # This method allows you to deploy new agent versions into the environment.
             # When an environment is pointed to a new agent version by setting
             # `environment.agent_version`, the environment is temporarily set to the
-            # `LOADING` state. During that time, the environment keeps on serving the
+            # `LOADING` state. During that time, the environment continues serving the
             # previous version of the agent. After the new agent version is done loading,
             # the environment is set back to the `RUNNING` state.
-            # You can use "-" as Environment ID in environment name to update version
-            # in "draft" environment. WARNING: this will negate all recent changes to
-            # draft and can't be undone. You may want to save the draft to a version
-            # before calling this function.
+            # You can use "-" as Environment ID in environment name to update an agent
+            # version in the default environment. WARNING: this will negate all recent
+            # changes to the draft agent and can't be undone. You may want to save the
+            # draft agent to a version before calling this method.
             #
             # @overload update_environment(request, options = nil)
             #   Pass arguments to `update_environment` via a request object, either of type
@@ -410,10 +412,10 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. The mask to control which fields get updated.
             #   @param allow_load_to_draft_and_discard_changes [::Boolean]
-            #     Optional. This field is used to prevent accidental overwrite of the draft
+            #     Optional. This field is used to prevent accidental overwrite of the default
             #     environment, which is an operation that cannot be undone. To confirm that
             #     the caller desires this overwrite, this field must be explicitly set to
-            #     true when updating the draft environment (environment ID = `-`).
+            #     true when updating the default environment (environment ID = `-`).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dialogflow::V2::Environment]
@@ -449,7 +451,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_environment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_environment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @environments_stub.call_rpc :update_environment, request, options: options do |response, operation|
@@ -481,9 +485,12 @@ module Google
             #   @param name [::String]
             #     Required. The name of the environment to delete.
             #     / Format:
+            #
             #     - `projects/<Project ID>/agent/environments/<Environment ID>`
             #     - `projects/<Project ID>/locations/<Location
-            #     ID>/agent/environments/<Environment ID>`
+            #       ID>/agent/environments/<Environment ID>`
+            #
+            #     The environment ID for the default environment is `-`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -519,7 +526,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_environment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_environment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @environments_stub.call_rpc :delete_environment, request, options: options do |response, operation|
@@ -551,9 +560,12 @@ module Google
             #   @param parent [::String]
             #     Required. The name of the environment to retrieve history for.
             #     Supported formats:
+            #
             #     - `projects/<Project ID>/agent/environments/<Environment ID>`
             #     - `projects/<Project ID>/locations/<Location
             #       ID>/agent/environments/<Environment ID>`
+            #
+            #     The environment ID for the default environment is `-`.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of items to return in a single page. By default 100 and
             #     at most 1000.
@@ -594,7 +606,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_environment_history.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_environment_history.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @environments_stub.call_rpc :get_environment_history, request, options: options do |response, operation|
@@ -619,22 +633,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_environments
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_environments to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Dialogflow::V2::Environments::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_environments.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Dialogflow::V2::Environments::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_environments.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_environments.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_environments.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

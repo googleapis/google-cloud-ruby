@@ -21,22 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "apigateway", "v1",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-api_gateway-v1",
-        "ruby-cloud-title": "API Gateway V1",
-        "ruby-cloud-description": "API Gateway enables you to provide secure access to your backend services through a well-defined REST API that is consistent across all of your services, regardless of the service implementation. Clients consume your REST APIS to implement standalone apps for a mobile device or tablet, through apps running in a browser, or through any other type of app that can make a request to an HTTP endpoint.",
-        "ruby-cloud-env-prefix": "API_GATEWAY",
-        "ruby-cloud-grpc-service-config": "google/cloud/apigateway/v1/apigateway_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/api-gateway/",
-        "ruby-cloud-api-id": "apigateway.googleapis.com",
-        "ruby-cloud-api-shortname": "apigateway",
-    }
+    proto_path="google/cloud/apigateway/v1",
+    bazel_target="//google/cloud/apigateway/v1:google-cloud-apigateway-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

@@ -22,6 +22,8 @@ require "minitest/hooks/default"
 require_relative "../snippets"
 
 describe "Cloud KMS samples" do
+  let(:instance) { Snippets.new }
+
   let(:client) { Google::Cloud::Kms.key_management_service }
   let(:project_id) { ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT") }
   let(:location_id) { "us-east1" }
@@ -37,13 +39,14 @@ describe "Cloud KMS samples" do
   let(:asymmetric_sign_rsa_key_id) { "#{prefix}-asymmetric_sign_rsa_key" }
   let(:symmetric_key_id) { "#{prefix}-symmetric_key" }
   let(:hsm_key_id) { "#{prefix}-hsm_key" }
+  let(:mac_key_id) { "#{prefix}-mac_key" }
   let(:asymmetric_decrypt_key_id) { "#{prefix}-asymmetric_decrypt_key" }
 
   let(:rotation_period_seconds) { 60 * 60 * 24 * 30 }
 
   it "create_key_asymmetric_decrypt" do
     out = capture_io do
-      key = create_key_asymmetric_decrypt(
+      key = instance.create_key_asymmetric_decrypt(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -60,7 +63,7 @@ describe "Cloud KMS samples" do
 
   it "create_key_asymmetric_sign" do
     out = capture_io do
-      key = create_key_asymmetric_sign(
+      key = instance.create_key_asymmetric_sign(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -77,7 +80,7 @@ describe "Cloud KMS samples" do
 
   it "create_key_hsm" do
     out = capture_io do
-      key = create_key_hsm(
+      key = instance.create_key_hsm(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -95,7 +98,7 @@ describe "Cloud KMS samples" do
 
   it "create_key_labels" do
     out = capture_io do
-      key = create_key_labels(
+      key = instance.create_key_labels(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -110,9 +113,26 @@ describe "Cloud KMS samples" do
     assert_match(/Created labeled key/, out.first)
   end
 
+  it "create_key_mac" do
+    out = capture_io do
+      key = instance.create_key_mac(
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        id:          SecureRandom.uuid
+      )
+
+      assert key
+      assert key.version_template
+      assert_equal :MAC, key.purpose
+      assert_equal :HMAC_SHA256, key.version_template.algorithm
+    end
+    assert_match(/Created mac key/, out.first)
+  end
+
   it "create_key_ring" do
     out = capture_io do
-      key_ring = create_key_ring(
+      key_ring = instance.create_key_ring(
         project_id:  project_id,
         location_id: location_id,
         id:          SecureRandom.uuid
@@ -126,7 +146,7 @@ describe "Cloud KMS samples" do
 
   it "create_key_rotation_schedule" do
     out = capture_io do
-      key = create_key_rotation_schedule(
+      key = instance.create_key_rotation_schedule(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -143,7 +163,7 @@ describe "Cloud KMS samples" do
 
   it "create_key_symmetric_encrypt_decrypt" do
     out = capture_io do
-      key = create_key_symmetric_encrypt_decrypt(
+      key = instance.create_key_symmetric_encrypt_decrypt(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -160,7 +180,7 @@ describe "Cloud KMS samples" do
 
   it "create_key_version" do
     out = capture_io do
-      version = create_key_version(
+      version = instance.create_key_version(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -188,7 +208,7 @@ describe "Cloud KMS samples" do
     ciphertext = encrypt_response.ciphertext
 
     out = capture_io do
-      decrypt_response = decrypt_symmetric(
+      decrypt_response = instance.decrypt_symmetric(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -211,7 +231,7 @@ describe "Cloud KMS samples" do
     version_id = version.name.split("/").last
 
     out = capture_io do
-      version = destroy_key_version(
+      version = instance.destroy_key_version(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -225,7 +245,7 @@ describe "Cloud KMS samples" do
     assert_match(/Destroyed key version/, out.first)
 
     out = capture_io do
-      version = restore_key_version(
+      version = instance.restore_key_version(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -248,7 +268,7 @@ describe "Cloud KMS samples" do
     version_id = version.name.split("/").last
 
     out = capture_io do
-      version = disable_key_version(
+      version = instance.disable_key_version(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -262,7 +282,7 @@ describe "Cloud KMS samples" do
     assert_match(/Disabled key version/, out.first)
 
     out = capture_io do
-      version = enable_key_version(
+      version = instance.enable_key_version(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -285,7 +305,7 @@ describe "Cloud KMS samples" do
     ciphertext = nil
 
     out = capture_io do
-      encrypt_response = encrypt_symmetric(
+      encrypt_response = instance.encrypt_symmetric(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -307,9 +327,28 @@ describe "Cloud KMS samples" do
     assert_equal plaintext, decrypt_response.plaintext
   end
 
+  it "generate_random_bytes" do
+    random_bytes = nil
+
+    out = capture_io do
+      response = instance.generate_random_bytes(
+        project_id:  project_id,
+        location_id: location_id,
+        num_bytes:   256
+      )
+
+      assert response
+      assert response.data
+      random_bytes = response.data
+    end
+    assert_match(/Random bytes/, out.first)
+    assert_equal 256, random_bytes.length
+  end
+
+
   it "get_key_labels" do
     out = capture_io do
-      key = get_key_labels(
+      key = instance.get_key_labels(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -325,7 +364,7 @@ describe "Cloud KMS samples" do
 
   it "get_key_version_attestation" do
     out = capture_io do
-      attestation = get_key_version_attestation(
+      attestation = instance.get_key_version_attestation(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -341,7 +380,7 @@ describe "Cloud KMS samples" do
 
   it "get_key_version_attestation" do
     out = capture_io do
-      public_key = get_public_key(
+      public_key = instance.get_public_key(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -357,7 +396,7 @@ describe "Cloud KMS samples" do
 
   it "iam_add_member" do
     out = capture_io do
-      policy = iam_add_member(
+      policy = instance.iam_add_member(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -378,7 +417,7 @@ describe "Cloud KMS samples" do
 
   it "iam_get_policy" do
     out = capture_io do
-      policy = iam_get_policy(
+      policy = instance.iam_get_policy(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -392,7 +431,7 @@ describe "Cloud KMS samples" do
 
   it "iam_remove_member" do
     out = capture_io do
-      policy = iam_remove_member(
+      policy = instance.iam_remove_member(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -412,7 +451,7 @@ describe "Cloud KMS samples" do
 
   it "quickstart" do
     out = capture_io do
-      key_rings = quickstart(
+      key_rings = instance.quickstart(
         project_id:  project_id,
         location_id: location_id
       )
@@ -426,7 +465,7 @@ describe "Cloud KMS samples" do
     message = "my message"
 
     out = capture_io do
-      signature = sign_asymmetric(
+      signature = instance.sign_asymmetric(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -442,9 +481,27 @@ describe "Cloud KMS samples" do
     assert_match(/Signature/, out.first)
   end
 
+  it "sign_mac" do
+    data = "my data"
+
+    out = capture_io do
+      signature = instance.sign_mac(
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      mac_key_id,
+        version_id:  "1",
+        data:        data
+      )
+
+      assert signature
+    end
+    assert_match(/Signature/, out.first)
+  end
+
   it "update_key_add_rotation" do
     out = capture_io do
-      key = update_key_add_rotation(
+      key = instance.update_key_add_rotation(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -461,7 +518,7 @@ describe "Cloud KMS samples" do
 
   it "update_key_remove_labels" do
     out = capture_io do
-      key = update_key_remove_labels(
+      key = instance.update_key_remove_labels(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -476,7 +533,7 @@ describe "Cloud KMS samples" do
 
   it "update_key_remove_rotation" do
     out = capture_io do
-      key = update_key_remove_rotation(
+      key = instance.update_key_remove_rotation(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -492,7 +549,7 @@ describe "Cloud KMS samples" do
 
   it "update_key_set_primary" do
     out = capture_io do
-      key = update_key_set_primary(
+      key = instance.update_key_set_primary(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -509,7 +566,7 @@ describe "Cloud KMS samples" do
 
   it "update_key_update_labels" do
     out = capture_io do
-      key = update_key_update_labels(
+      key = instance.update_key_update_labels(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -535,7 +592,7 @@ describe "Cloud KMS samples" do
                                            }
 
     out = capture_io do
-      verified = verify_asymmetric_signature_ec(
+      verified = instance.verify_asymmetric_signature_ec(
         project_id:  project_id,
         location_id: location_id,
         key_ring_id: key_ring_id,
@@ -564,7 +621,7 @@ describe "Cloud KMS samples" do
                                              }
 
       out = capture_io do
-        verified = verify_asymmetric_signature_rsa(
+        verified = instance.verify_asymmetric_signature_rsa(
           project_id:  project_id,
           location_id: location_id,
           key_ring_id: key_ring_id,
@@ -578,5 +635,30 @@ describe "Cloud KMS samples" do
       end
       assert_match(/Verified/, out.first)
     end
+  end
+
+  it "verify_mac" do
+    data = "my data"
+    key_version_name = client.crypto_key_version_path project:            project_id,
+                                                      location:           location_id,
+                                                      key_ring:           key_ring_id,
+                                                      crypto_key:         mac_key_id,
+                                                      crypto_key_version: "1"
+    sign_response = client.mac_sign name: key_version_name, data: data
+
+    out = capture_io do
+      verified = instance.verify_mac(
+        project_id:  project_id,
+        location_id: location_id,
+        key_ring_id: key_ring_id,
+        key_id:      mac_key_id,
+        version_id:  "1",
+        data:        data,
+        signature:   sign_response.mac
+      )
+
+      assert verified
+    end
+    assert_match(/Verified: true/, out.first)
   end
 end

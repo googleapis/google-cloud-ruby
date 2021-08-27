@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/private_catalog/v1beta1"
 
 client = ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client.new
-request = my_create_request
+request = ::Google::Cloud::PrivateCatalog::V1beta1::SearchCatalogsRequest.new # (request fields as keyword arguments...)
 response = client.search_catalogs request
 ```
 

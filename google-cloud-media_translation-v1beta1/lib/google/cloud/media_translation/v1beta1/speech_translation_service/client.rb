@@ -39,13 +39,12 @@ module Google
             # See {::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all SpeechTranslationService clients:
-            #
-            #     ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all SpeechTranslationService clients
+            #   ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -65,10 +64,7 @@ module Google
 
                 default_config.timeout = 400.0
                 default_config.retry_policy = {
-                  initial_delay: 1.0,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14, 2, 4]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2, 4]
                 }
 
                 default_config.rpcs.streaming_translate_speech.timeout = 400.0
@@ -102,19 +98,15 @@ module Google
             ##
             # Create a new SpeechTranslationService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new SpeechTranslationService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client.new
             #
-            #     client = ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client.new
-            #
-            # To create a new SpeechTranslationService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the SpeechTranslationService client.
             # @yieldparam config [Client::Configuration]
@@ -134,14 +126,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -200,7 +191,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.streaming_translate_speech.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.streaming_translate_speech.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @speech_translation_service_stub.call_rpc :streaming_translate_speech, request, options: options do |response, operation|
@@ -224,22 +217,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for streaming_translate_speech
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # streaming_translate_speech to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.streaming_translate_speech.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.streaming_translate_speech.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.streaming_translate_speech.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.streaming_translate_speech.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/tasks/v2"
 
 client = ::Google::Cloud::Tasks::V2::CloudTasks::Client.new
-request = my_create_request
+request = ::Google::Cloud::Tasks::V2::ListQueuesRequest.new # (request fields as keyword arguments...)
 response = client.list_queues request
 ```
 

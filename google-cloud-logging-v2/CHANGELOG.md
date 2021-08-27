@@ -1,5 +1,23 @@
 # Release History
 
+### 0.5.4 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.5.3 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.5.2 / 2021-07-08
+
+#### Bug Fixes
+
+* Remove two proto files that are duplicated from the common-protos gem
+
 ### 0.5.1 / 2021-06-17
 
 #### Bug Fixes

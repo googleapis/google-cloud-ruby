@@ -25,6 +25,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "mini_mime", "~> 1.0"
 
   gem.add_development_dependency "autotest-suffix", "~> 1.1"
+  gem.add_development_dependency "google-cloud-data_catalog", "~> 1.2"
   gem.add_development_dependency "google-style", "~> 1.25.1"
   gem.add_development_dependency "minitest", "~> 5.14"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"

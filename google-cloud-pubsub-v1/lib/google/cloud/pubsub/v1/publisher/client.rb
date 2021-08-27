@@ -42,13 +42,12 @@ module Google
             # See {::Google::Cloud::PubSub::V1::Publisher::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Publisher clients:
-            #
-            #     ::Google::Cloud::PubSub::V1::Publisher::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Publisher clients
+            #   ::Google::Cloud::PubSub::V1::Publisher::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -68,74 +67,47 @@ module Google
 
                 default_config.rpcs.create_topic.timeout = 60.0
                 default_config.rpcs.create_topic.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.update_topic.timeout = 60.0
                 default_config.rpcs.update_topic.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.publish.timeout = 60.0
                 default_config.rpcs.publish.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [10, 1, 13, 8, 2, 14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 13, 8, 2, 14, 4]
                 }
 
                 default_config.rpcs.get_topic.timeout = 60.0
                 default_config.rpcs.get_topic.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [2, 10, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.list_topics.timeout = 60.0
                 default_config.rpcs.list_topics.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [2, 10, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.list_topic_subscriptions.timeout = 60.0
                 default_config.rpcs.list_topic_subscriptions.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [2, 10, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.list_topic_snapshots.timeout = 60.0
                 default_config.rpcs.list_topic_snapshots.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [2, 10, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.delete_topic.timeout = 60.0
                 default_config.rpcs.delete_topic.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.detach_subscription.timeout = 60.0
                 default_config.rpcs.detach_subscription.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -167,19 +139,15 @@ module Google
             ##
             # Create a new Publisher client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Publisher client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::PubSub::V1::Publisher::Client.new
             #
-            #     client = ::Google::Cloud::PubSub::V1::Publisher::Client.new
-            #
-            # To create a new Publisher client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::PubSub::V1::Publisher::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::PubSub::V1::Publisher::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Publisher client.
             # @yieldparam config [Client::Configuration]
@@ -199,14 +167,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -237,7 +204,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_topic(name: nil, labels: nil, message_storage_policy: nil, kms_key_name: nil, schema_settings: nil, satisfies_pzs: nil)
+            # @overload create_topic(name: nil, labels: nil, message_storage_policy: nil, kms_key_name: nil, schema_settings: nil, satisfies_pzs: nil, message_retention_duration: nil)
             #   Pass arguments to `create_topic` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -266,6 +233,15 @@ module Google
             #   @param satisfies_pzs [::Boolean]
             #     Reserved for future use. This field is set only in responses from the
             #     server; it is ignored if it is set in any requests.
+            #   @param message_retention_duration [::Google::Protobuf::Duration, ::Hash]
+            #     Indicates the minimum duration to retain a message after it is published to
+            #     the topic. If this field is set, messages published to the topic in the
+            #     last `message_retention_duration` are always available to subscribers. For
+            #     instance, it allows any attached subscription to [seek to a
+            #     timestamp](https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time)
+            #     that is up to `message_retention_duration` in the past. If this field is
+            #     not set, message retention is controlled by settings on individual
+            #     subscriptions. Cannot be more than 7 days or less than 10 minutes.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Topic]
@@ -301,7 +277,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_topic.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_topic.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @publisher_stub.call_rpc :create_topic, request, options: options do |response, operation|
@@ -374,7 +352,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_topic.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_topic.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @publisher_stub.call_rpc :update_topic, request, options: options do |response, operation|
@@ -444,7 +424,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.publish.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.publish.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @publisher_stub.call_rpc :publish, request, options: options do |response, operation|
@@ -511,7 +493,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_topic.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_topic.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @publisher_stub.call_rpc :get_topic, request, options: options do |response, operation|
@@ -584,7 +568,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_topics.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_topics.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @publisher_stub.call_rpc :list_topics, request, options: options do |response, operation|
@@ -658,7 +644,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_topic_subscriptions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_topic_subscriptions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @publisher_stub.call_rpc :list_topic_subscriptions, request, options: options do |response, operation|
@@ -735,7 +723,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_topic_snapshots.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_topic_snapshots.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @publisher_stub.call_rpc :list_topic_snapshots, request, options: options do |response, operation|
@@ -806,7 +796,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_topic.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_topic.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @publisher_stub.call_rpc :delete_topic, request, options: options do |response, operation|
@@ -876,7 +868,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.detach_subscription.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.detach_subscription.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @publisher_stub.call_rpc :detach_subscription, request, options: options do |response, operation|
@@ -900,22 +894,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_topic
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_topic to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::PubSub::V1::Publisher::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_topic.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::PubSub::V1::Publisher::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_topic.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::PubSub::V1::Publisher::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_topic.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::PubSub::V1::Publisher::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_topic.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

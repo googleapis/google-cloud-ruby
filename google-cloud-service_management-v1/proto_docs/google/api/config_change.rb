@@ -33,7 +33,7 @@ module Google
     #     'key' is used. If the field has no unique identifier, the numeric index
     #     is used.
     #     Examples:
-    #     - visibility.rules[selector=="google.LibraryService.CreateBook"].restriction
+    #     - visibility.rules[selector=="google.LibraryService.ListBooks"].restriction
     #     - quota.metric_rules[selector=="google"].metric_costs[key=="reads"].value
     #     - logging.producer_destinations[0]
     # @!attribute [rw] old_value

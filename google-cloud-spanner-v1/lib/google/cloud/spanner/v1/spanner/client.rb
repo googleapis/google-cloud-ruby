@@ -44,13 +44,12 @@ module Google
             # See {::Google::Cloud::Spanner::V1::Spanner::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Spanner clients:
-            #
-            #     ::Google::Cloud::Spanner::V1::Spanner::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Spanner clients
+            #   ::Google::Cloud::Spanner::V1::Spanner::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -70,110 +69,71 @@ module Google
 
                 default_config.rpcs.create_session.timeout = 30.0
                 default_config.rpcs.create_session.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.batch_create_sessions.timeout = 60.0
                 default_config.rpcs.batch_create_sessions.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_session.timeout = 30.0
                 default_config.rpcs.get_session.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_sessions.timeout = 3600.0
                 default_config.rpcs.list_sessions.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.delete_session.timeout = 30.0
                 default_config.rpcs.delete_session.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.execute_sql.timeout = 30.0
                 default_config.rpcs.execute_sql.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.execute_streaming_sql.timeout = 3600.0
 
                 default_config.rpcs.execute_batch_dml.timeout = 30.0
                 default_config.rpcs.execute_batch_dml.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.read.timeout = 30.0
                 default_config.rpcs.read.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.streaming_read.timeout = 3600.0
 
                 default_config.rpcs.begin_transaction.timeout = 30.0
                 default_config.rpcs.begin_transaction.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.commit.timeout = 3600.0
                 default_config.rpcs.commit.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.rollback.timeout = 30.0
                 default_config.rpcs.rollback.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.partition_query.timeout = 30.0
                 default_config.rpcs.partition_query.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.partition_read.timeout = 30.0
                 default_config.rpcs.partition_read.retry_policy = {
-                  initial_delay: 0.25,
-              max_delay: 32.0,
-              multiplier: 1.3,
-              retry_codes: [14]
+                  initial_delay: 0.25, max_delay: 32.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -205,19 +165,15 @@ module Google
             ##
             # Create a new Spanner client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Spanner client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Spanner::V1::Spanner::Client.new
             #
-            #     client = ::Google::Cloud::Spanner::V1::Spanner::Client.new
-            #
-            # To create a new Spanner client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Spanner::V1::Spanner::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Spanner::V1::Spanner::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Spanner client.
             # @yieldparam config [Client::Configuration]
@@ -237,14 +193,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -336,7 +291,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_session.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_session.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :create_session, request, options: options do |response, operation|
@@ -413,7 +370,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.batch_create_sessions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_create_sessions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :batch_create_sessions, request, options: options do |response, operation|
@@ -481,7 +440,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_session.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_session.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :get_session, request, options: options do |response, operation|
@@ -565,7 +526,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_sessions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_sessions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :list_sessions, request, options: options do |response, operation|
@@ -634,7 +597,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_session.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_session.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :delete_session, request, options: options do |response, operation|
@@ -777,7 +742,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.execute_sql.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.execute_sql.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :execute_sql, request, options: options do |response, operation|
@@ -914,7 +881,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.execute_streaming_sql.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.execute_streaming_sql.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :execute_streaming_sql, request, options: options do |response, operation|
@@ -1014,7 +983,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.execute_batch_dml.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.execute_batch_dml.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :execute_batch_dml, request, options: options do |response, operation|
@@ -1135,7 +1106,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.read.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.read.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :read, request, options: options do |response, operation|
@@ -1248,7 +1221,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.streaming_read.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.streaming_read.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :streaming_read, request, options: options do |response, operation|
@@ -1325,7 +1300,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.begin_transaction.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.begin_transaction.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :begin_transaction, request, options: options do |response, operation|
@@ -1426,7 +1403,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.commit.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.commit.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :commit, request, options: options do |response, operation|
@@ -1501,7 +1480,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.rollback.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.rollback.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :rollback, request, options: options do |response, operation|
@@ -1615,7 +1596,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.partition_query.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.partition_query.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :partition_query, request, options: options do |response, operation|
@@ -1715,7 +1698,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.partition_read.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.partition_read.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @spanner_stub.call_rpc :partition_read, request, options: options do |response, operation|
@@ -1739,22 +1724,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_session
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_session to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Spanner::V1::Spanner::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_session.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Spanner::V1::Spanner::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_session.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Spanner::V1::Spanner::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_session.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Spanner::V1::Spanner::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_session.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

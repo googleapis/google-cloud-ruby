@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/data_labeling/v1beta1"
 
 client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
-request = my_create_request
+request = ::Google::Cloud::DataLabeling::V1beta1::CreateDatasetRequest.new # (request fields as keyword arguments...)
 response = client.create_dataset request
 ```
 

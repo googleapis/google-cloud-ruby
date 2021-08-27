@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/container/v1beta1"
 
 client = ::Google::Cloud::Container::V1beta1::ClusterManager::Client.new
-request = my_create_request
+request = ::Google::Cloud::Container::V1beta1::ListClustersRequest.new # (request fields as keyword arguments...)
 response = client.list_clusters request
 ```
 

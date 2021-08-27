@@ -21,22 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "servicedirectory", "v1",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-service_directory-v1",
-        "ruby-cloud-title": "Service Directory V1",
-        "ruby-cloud-description": "Service Directory is the single place to register, browse, and resolve application services.",
-        "ruby-cloud-env-prefix": "SERVICE_DIRECTORY",
-        "ruby-cloud-grpc-service-config": "google/cloud/servicedirectory/v1/servicedirectory_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/service-directory",
-        "ruby-cloud-api-id": "servicedirectory.googleapis.com",
-        "ruby-cloud-api-shortname": "servicedirectory",
-    }
+    proto_path="google/cloud/servicedirectory/v1",
+    bazel_target="//google/cloud/servicedirectory/v1:google-cloud-servicedirectory-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

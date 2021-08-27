@@ -83,7 +83,7 @@ module Google
         #   @return [::String]
         #     [Output Only] An optional textual description of the resource.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -339,7 +339,7 @@ module Google
         #   @return [::String]
         #     An optional description of this resource. Provide this field when you create the resource.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] ip_version
         #   @return [::Google::Cloud::Compute::V1::Address::IpVersion]
@@ -360,7 +360,7 @@ module Google
         #     If this field is not specified, it is assumed to be PREMIUM.
         # @!attribute [rw] prefix_length
         #   @return [::Integer]
-        #     The prefix length if the resource reprensents an IP range.
+        #     The prefix length if the resource represents an IP range.
         # @!attribute [rw] purpose
         #   @return [::Google::Cloud::Compute::V1::Address::Purpose]
         #     The purpose of this resource, which can be one of the following values:
@@ -368,10 +368,10 @@ module Google
         #     - `DNS_RESOLVER` for a DNS resolver address in a subnetwork
         #     - `VPC_PEERING` for addresses that are reserved for VPC peer networks.
         #     - `NAT_AUTO` for addresses that are external IP addresses automatically reserved for Cloud NAT.
-        #     - `IPSEC_INTERCONNECT` for addresses created from a private IP range that are reserved for a VLAN attachment in an IPsec encrypted Interconnect configuration. These addresses are regional resources.
+        #     - `IPSEC_INTERCONNECT` for addresses created from a private IP range that are reserved for a VLAN attachment in an IPsec-encrypted Cloud Interconnect configuration. These addresses are regional resources.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] The URL of the region where the regional address resides. This field is not applicable to global addresses. You must specify this field as part of the HTTP request URL.
+        #     [Output Only] The URL of the region where a regional address resides. For regional addresses, you must specify the region as a path parameter in the HTTP request URL. This field is not applicable to global addresses.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined URL for the resource.
@@ -429,7 +429,7 @@ module Google
           # - `DNS_RESOLVER` for a DNS resolver address in a subnetwork
           # - `VPC_PEERING` for addresses that are reserved for VPC peer networks.
           # - `NAT_AUTO` for addresses that are external IP addresses automatically reserved for Cloud NAT.
-          # - `IPSEC_INTERCONNECT` for addresses created from a private IP range that are reserved for a VLAN attachment in an IPsec encrypted Interconnect configuration. These addresses are regional resources.
+          # - `IPSEC_INTERCONNECT` for addresses created from a private IP range that are reserved for a VLAN attachment in an IPsec-encrypted Cloud Interconnect configuration. These addresses are regional resources.
           module Purpose
             # A value indicating that the enum field is not set.
             UNDEFINED_PURPOSE = 0
@@ -438,7 +438,11 @@ module Google
 
             GCE_ENDPOINT = 230515243
 
+            IPSEC_INTERCONNECT = 340437251
+
             NAT_AUTO = 163666477
+
+            PRIVATE_SERVICE_CONNECT = 48134724
 
             SHARED_LOADBALANCER_VIP = 294447572
 
@@ -528,6 +532,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Specifies options for controlling advanced machine features. Options that would traditionally be configured in a BIOS belong here. Features that require operating system support may have corresponding entries in the GuestOsFeatures of an Image (e.g., whether or not the OS in the Image supports nested virtualization being enabled or disabled).
+        # @!attribute [rw] enable_nested_virtualization
+        #   @return [::Boolean]
+        #     Whether to enable nested virtualization or not (default is false).
+        # @!attribute [rw] threads_per_core
+        #   @return [::Integer]
+        #     The number of threads per physical core. To disable simultaneous multithreading (SMT) set this to 1. If unset, the maximum number of threads supported per core by the underlying processor is assumed.
+        class AdvancedMachineFeatures
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # An alias IP range attached to an instance's network interface.
         # @!attribute [rw] ip_cidr_range
         #   @return [::String]
@@ -541,7 +557,7 @@ module Google
         end
 
         # @!attribute [rw] disk_size_gb
-        #   @return [::String]
+        #   @return [::Integer]
         #     Specifies the size of the disk in base-2 GB.
         # @!attribute [rw] interface
         #   @return [::Google::Cloud::Compute::V1::AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk::Interface]
@@ -568,6 +584,9 @@ module Google
         # @!attribute [rw] local_ssds
         #   @return [::Array<::Google::Cloud::Compute::V1::AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk>]
         #     Specifies amount of local ssd to reserve with each instance. The type of disk is local-ssd.
+        # @!attribute [rw] location_hint
+        #   @return [::String]
+        #     An opaque location hint used to place the allocation close to other resources. This field is for use by internal tools that use the public API.
         # @!attribute [rw] machine_type
         #   @return [::String]
         #     Specifies type of machine (name only) which has fixed number of vCPUs and fixed amount of memory. This also includes specifying custom machine type following custom-NUMBER_OF_CPUS-AMOUNT_OF_MEMORY pattern.
@@ -581,10 +600,10 @@ module Google
 
         # This reservation type allows to pre allocate specific instance configuration.
         # @!attribute [rw] count
-        #   @return [::String]
+        #   @return [::Integer]
         #     Specifies the number of resources that are allocated.
         # @!attribute [rw] in_use_count
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] Indicates how many instances are in use.
         # @!attribute [rw] instance_properties
         #   @return [::Google::Cloud::Compute::V1::AllocationSpecificSKUAllocationReservedInstanceProperties]
@@ -652,7 +671,7 @@ module Google
         #   @return [::String]
         #     Specifies the disk name. If not specified, the default is to use the name of the instance. If a disk with the same name already exists in the given region, the existing disk is attached to the new instance and the new disk is not created.
         # @!attribute [rw] disk_size_gb
-        #   @return [::String]
+        #   @return [::Integer]
         #     Specifies the size of the disk in base-2 GB. The size must be at least 10 GB. If you specify a sourceImage, which is required for boot disks, the default size is the size of the sourceImage. If you do not specify a sourceImage, the default disk size is 500 GB.
         # @!attribute [rw] disk_type
         #   @return [::String]
@@ -670,6 +689,9 @@ module Google
         # @!attribute [rw] on_update_action
         #   @return [::Google::Cloud::Compute::V1::AttachedDiskInitializeParams::OnUpdateAction]
         #     Specifies which action to take on instance update with this disk. Default is to use the existing disk.
+        # @!attribute [rw] provisioned_iops
+        #   @return [::Integer]
+        #     Indicates how many IOPS must be provisioned for the disk.
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Resource policies applied to this disk for automatic snapshot creations. Specified using the full or partial URL. For instance template, specify only the resource policy name.
@@ -779,7 +801,7 @@ module Google
         #
         #     Instance templates do not store customer-supplied encryption keys, so you cannot use your own keys to encrypt disks in a managed instance group.
         # @!attribute [rw] disk_size_gb
-        #   @return [::String]
+        #   @return [::Integer]
         #     The size of the disk in GB.
         # @!attribute [rw] guest_os_features
         #   @return [::Array<::Google::Cloud::Compute::V1::GuestOsFeature>]
@@ -957,9 +979,21 @@ module Google
         #     Defines operating mode for this policy.
         # @!attribute [rw] scale_in_control
         #   @return [::Google::Cloud::Compute::V1::AutoscalingPolicyScaleInControl]
+        # @!attribute [rw] scaling_schedules
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::AutoscalingPolicyScalingSchedule}]
+        #     Scaling schedules defined for an autoscaler. Multiple schedules can be set on an autoscaler, and they can overlap. During overlapping periods the greatest min_required_replicas of all scaling schedules is applied. Up to 128 scaling schedules are allowed.
         class AutoscalingPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::AutoscalingPolicyScalingSchedule]
+          class ScalingSchedulesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Defines operating mode for this policy.
           module Mode
@@ -973,6 +1007,34 @@ module Google
             ONLY_SCALE_OUT = 152713670
 
             ONLY_UP = 478095374
+          end
+        end
+
+        # @!attribute [rw] last_start_time
+        #   @return [::String]
+        #     [Output Only] The last time the scaling schedule became active. Note: this is a timestamp when a schedule actually became active, not when it was planned to do so. The timestamp is in RFC3339 text format.
+        # @!attribute [rw] next_start_time
+        #   @return [::String]
+        #     [Output Only] The next time the scaling schedule is to become active. Note: this is a timestamp when a schedule is planned to run, but the actual time might be slightly different. The timestamp is in RFC3339 text format.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::Compute::V1::ScalingScheduleStatus::State]
+        #     [Output Only] The current state of a scaling schedule.
+        class ScalingScheduleStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # [Output Only] The current state of a scaling schedule.
+          module State
+            # A value indicating that the enum field is not set.
+            UNDEFINED_STATE = 0
+
+            ACTIVE = 314733318
+
+            DISABLED = 516696700
+
+            OBSOLETE = 66532761
+
+            READY = 77848963
           end
         end
 
@@ -1053,6 +1115,10 @@ module Google
 
             SCALING_TARGET_DOES_NOT_EXIST = 122636699
 
+            SCHEDULED_INSTANCES_GREATER_THAN_AUTOSCALER_MAX = 29275586
+
+            SCHEDULED_INSTANCES_LESS_THAN_AUTOSCALER_MIN = 398287669
+
             UNKNOWN = 433141802
 
             UNSUPPORTED_MAX_RATE_LOAD_BALANCING_CONFIGURATION = 330845009
@@ -1074,7 +1140,7 @@ module Google
         # For regional managed instance groups, use the regionAutoscalers resource. (== resource_for \\{$api_version}.autoscalers ==) (== resource_for \\{$api_version}.regionAutoscalers ==)
         # @!attribute [rw] autoscaling_policy
         #   @return [::Google::Cloud::Compute::V1::AutoscalingPolicy]
-        #     The configuration parameters for the autoscaling algorithm. You can define one or more of the policies for an autoscaler: cpuUtilization, customMetricUtilizations, and loadBalancingUtilization.
+        #     The configuration parameters for the autoscaling algorithm. You can define one or more signals for an autoscaler: cpuUtilization, customMetricUtilizations, and loadBalancingUtilization.
         #
         #     If none of these are specified, the default will be to autoscale based on cpuUtilization to 0.6 or 60%.
         # @!attribute [rw] creation_timestamp
@@ -1084,7 +1150,7 @@ module Google
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -1098,6 +1164,9 @@ module Google
         # @!attribute [rw] region
         #   @return [::String]
         #     [Output Only] URL of the region where the instance group resides (for autoscalers living in regional scope).
+        # @!attribute [rw] scaling_schedule_status
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::ScalingScheduleStatus}]
+        #     [Output Only] Status information of existing scaling schedules.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined URL for the resource.
@@ -1120,6 +1189,15 @@ module Google
         class Autoscaler
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::ScalingScheduleStatus]
+          class ScalingScheduleStatusEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # [Output Only] The status of the autoscaler configuration. Current set of possible values:
           # - PENDING: Autoscaler backend hasn't read new/updated configuration.
@@ -1211,6 +1289,11 @@ module Google
         end
 
         # CPU utilization policy.
+        # @!attribute [rw] predictive_method
+        #   @return [::Google::Cloud::Compute::V1::AutoscalingPolicyCpuUtilization::PredictiveMethod]
+        #     Indicates whether predictive autoscaling based on CPU metric is enabled. Valid values are:
+        #
+        #     * NONE (default). No predictive method is used. The autoscaler scales the group to meet current demand based on real-time metrics. * OPTIMIZE_AVAILABILITY. Predictive autoscaling improves availability by monitoring daily and weekly load patterns and scaling out ahead of anticipated demand.
         # @!attribute [rw] utilization_target
         #   @return [::Float]
         #     The target CPU utilization that the autoscaler maintains. Must be a float value in the range (0, 1]. If not specified, the default is 0.6.
@@ -1221,6 +1304,18 @@ module Google
         class AutoscalingPolicyCpuUtilization
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Indicates whether predictive autoscaling based on CPU metric is enabled. Valid values are:
+          #
+          # * NONE (default). No predictive method is used. The autoscaler scales the group to meet current demand based on real-time metrics. * OPTIMIZE_AVAILABILITY. Predictive autoscaling improves availability by monitoring daily and weekly load patterns and scaling out ahead of anticipated demand.
+          module PredictiveMethod
+            # A value indicating that the enum field is not set.
+            UNDEFINED_PREDICTIVE_METHOD = 0
+
+            NONE = 2402104
+
+            OPTIMIZE_AVAILABILITY = 11629437
+          end
         end
 
         # Custom utilization metric policy.
@@ -1296,6 +1391,30 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Scaling based on user-defined schedule. The message describes a single scaling schedule. A scaling schedule changes the minimum number of VM instances an autoscaler can recommend, which can trigger scaling out.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     A description of a scaling schedule.
+        # @!attribute [rw] disabled
+        #   @return [::Boolean]
+        #     A boolean value that specifies whether a scaling schedule can influence autoscaler recommendations. If set to true, then a scaling schedule has no effect. This field is optional, and its value is false by default.
+        # @!attribute [rw] duration_sec
+        #   @return [::Integer]
+        #     The duration of time intervals, in seconds, for which this scaling schedule is to run. The minimum allowed value is 300. This field is required.
+        # @!attribute [rw] min_required_replicas
+        #   @return [::Integer]
+        #     The minimum number of VM instances that the autoscaler will recommend in time intervals starting according to schedule. This field is required.
+        # @!attribute [rw] schedule
+        #   @return [::String]
+        #     The start timestamps of time intervals when this scaling schedule is to provide a scaling signal. This field uses the extended cron format (with an optional year field). The expression can describe a single timestamp if the optional year is set, in which case the scaling schedule runs once. The schedule is interpreted with respect to time_zone. This field is required. Note: These timestamps only describe when autoscaler starts providing the scaling signal. The VMs need additional time to become serving.
+        # @!attribute [rw] time_zone
+        #   @return [::String]
+        #     The time zone to use when interpreting the schedule. The value of this field must be a time zone name from the tz database: http://en.wikipedia.org/wiki/Tz_database. This field is assigned a default value of ?UTC? if left empty.
+        class AutoscalingPolicyScalingSchedule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Encapsulates numeric value that can be either absolute or relative.
         # @!attribute [rw] calculated
         #   @return [::Integer]
@@ -1318,28 +1437,14 @@ module Google
         # Message containing information of one individual backend.
         # @!attribute [rw] balancing_mode
         #   @return [::Google::Cloud::Compute::V1::Backend::BalancingMode]
-        #     Specifies the balancing mode for the backend.
-        #
-        #     When choosing a balancing mode, you need to consider the loadBalancingScheme, and protocol for the backend service, as well as the type of backend (instance group or NEG).
-        #
-        #
-        #     - If the load balancing mode is CONNECTION, then the load is spread based on how many concurrent connections the backend can handle.
-        #     You can use the CONNECTION balancing mode if the protocol for the backend service is SSL, TCP, or UDP.
-        #
-        #     If the loadBalancingScheme for the backend service is EXTERNAL (SSL Proxy and TCP Proxy load balancers), you must also specify exactly one of the following parameters: maxConnections (except for regional managed instance groups), maxConnectionsPerInstance, or maxConnectionsPerEndpoint.
-        #
-        #     If the loadBalancingScheme for the backend service is INTERNAL (internal TCP/UDP Load Balancers) or EXTERNAL  (Network Load Balancing), you cannot specify any additional parameters.
-        #
-        #     - If the load balancing mode is RATE, the load is spread based on the rate of HTTP requests per second (RPS).
-        #     You can use the RATE balancing mode if the protocol for the backend service is HTTP, HTTP2, or HTTPS. You must specify exactly one of the following parameters: maxRate (except for regional managed instance groups), maxRatePerInstance, or maxRatePerEndpoint.
-        #
-        #     - If the load balancing mode is UTILIZATION, the load is spread based on the backend utilization of instances in an instance group.
-        #     You can use the UTILIZATION balancing mode if the loadBalancingScheme of the backend service is EXTERNAL (except Network Load Balancing), INTERNAL_SELF_MANAGED, or INTERNAL_MANAGED and the backends are instance groups. There are no restrictions on the backend service protocol.
+        #     Specifies how to determine whether the backend of a load balancer can handle additional traffic or is fully loaded. For usage guidelines, see  Connection balancing mode.
         # @!attribute [rw] capacity_scaler
         #   @return [::Float]
-        #     A multiplier applied to the group's maximum servicing capacity (based on UTILIZATION, RATE or CONNECTION). Default value is 1, which means the group will serve up to 100% of its configured capacity (depending on balancingMode). A setting of 0 means the group is completely drained, offering 0% of its available capacity. Valid range is 0.0 and [0.1,1.0]. You cannot configure a setting larger than 0 and smaller than 0.1. You cannot configure a setting of 0 when there is only one backend attached to the backend service.
+        #     A multiplier applied to the backend's target capacity of its balancing mode. The default value is 1, which means the group serves up to 100% of its configured capacity (depending on balancingMode). A setting of 0 means the group is completely drained, offering 0% of its available capacity. The valid ranges are 0.0 and [0.1,1.0]. You cannot configure a setting larger than 0 and smaller than 0.1. You cannot configure a setting of 0 when there is only one backend attached to the backend service.
         #
-        #     This cannot be used for Internal TCP/UDP Load Balancing and Network Load Balancing.
+        #     Not supported by:
+        #
+        #     - Internal TCP/UDP Load Balancing - Network Load Balancing
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
@@ -1361,66 +1466,45 @@ module Google
         #     You must use the fully-qualified URL (starting with https://www.googleapis.com/) to specify the instance group or NEG. Partial URLs are not supported.
         # @!attribute [rw] max_connections
         #   @return [::Integer]
-        #     Defines a target maximum number of simultaneous connections that the backend can handle. Valid for network endpoint group and instance group backends (except for regional managed instance groups). If the backend's balancingMode is UTILIZATION, this is an optional parameter. If the backend's balancingMode is CONNECTION, and backend is attached to a backend service whose loadBalancingScheme is EXTERNAL (except Network Load Balancing), you must specify either this parameter, maxConnectionsPerInstance, or maxConnectionsPerEndpoint.
+        #     Defines a target maximum number of simultaneous connections. For usage guidelines, see Connection balancing mode and Utilization balancing mode. Not available if the backend's balancingMode is RATE. Not supported by:
         #
-        #     Not available if the backend's balancingMode is RATE. Cannot be specified for Network Load Balancing or Internal TCP/UDP Load Balancing, even though those load balancers require a balancing mode of CONNECTION.
+        #     - Internal TCP/UDP Load Balancing - Network Load Balancing
         # @!attribute [rw] max_connections_per_endpoint
         #   @return [::Integer]
-        #     Defines a target maximum number of simultaneous connections for an endpoint of a NEG. This is multiplied by the number of endpoints in the NEG to implicitly calculate a maximum number of target maximum simultaneous connections for the NEG. If the backend's balancingMode is CONNECTION, and backend is attached to a backend service whose loadBalancingScheme is EXTERNAL (except Network Load Balancing), you must specify either this parameter, maxConnections, or maxConnectionsPerInstance.
+        #     Defines a target maximum number of simultaneous connections. For usage guidelines, see Connection balancing mode and Utilization balancing mode.
         #
-        #     Not available if the backend's balancingMode is RATE. Cannot be specified for Network Load Balancing or Internal TCP/UDP Load Balancing, even though those load balancers require a balancing mode of CONNECTION.
+        #     Not available if the backend's balancingMode is RATE. Not supported by:
+        #
+        #     - Internal TCP/UDP Load Balancing - Network Load Balancing.
         # @!attribute [rw] max_connections_per_instance
         #   @return [::Integer]
-        #     Defines a target maximum number of simultaneous connections for a single VM in a backend instance group. This is multiplied by the number of instances in the instance group to implicitly calculate a target maximum number of simultaneous connections for the whole instance group. If the backend's balancingMode is UTILIZATION, this is an optional parameter. If the backend's balancingMode is CONNECTION, and backend is attached to a backend service whose loadBalancingScheme is EXTERNAL (except Network Load Balancing), you must specify either this parameter,  maxConnections, or maxConnectionsPerEndpoint.
+        #     Defines a target maximum number of simultaneous connections. For usage guidelines, see Connection balancing mode and Utilization balancing mode.
         #
-        #     Not available if the backend's balancingMode is RATE. Cannot be specified for Network Load Balancing or Internal TCP/UDP Load Balancing, even though those load balancers require a balancing mode of CONNECTION.
+        #     Not available if the backend's balancingMode is RATE. Not supported by:
+        #
+        #     - Internal TCP/UDP Load Balancing - Network Load Balancing.
         # @!attribute [rw] max_rate
         #   @return [::Integer]
-        #     Defines a maximum number of HTTP requests per second (RPS) that the backend can handle. Valid for network endpoint group and instance group backends (except for regional managed instance groups). Must not be defined if the backend is a managed instance group that uses autoscaling based on load balancing.
-        #
-        #     If the backend's balancingMode is UTILIZATION, this is an optional parameter. If the backend's balancingMode is RATE, you must specify maxRate, maxRatePerInstance, or maxRatePerEndpoint.
+        #     Defines a maximum number of HTTP requests per second (RPS). For usage guidelines, see Rate balancing mode and Utilization balancing mode.
         #
         #     Not available if the backend's balancingMode is CONNECTION.
         # @!attribute [rw] max_rate_per_endpoint
         #   @return [::Float]
-        #     Defines a maximum target for requests per second (RPS) for an endpoint of a NEG. This is multiplied by the number of endpoints in the NEG to implicitly calculate a target maximum rate for the NEG.
-        #
-        #     If the backend's balancingMode is RATE, you must specify either this parameter, maxRate (except for regional managed instance groups), or maxRatePerInstance.
+        #     Defines a maximum target for requests per second (RPS). For usage guidelines, see Rate balancing mode and Utilization balancing mode.
         #
         #     Not available if the backend's balancingMode is CONNECTION.
         # @!attribute [rw] max_rate_per_instance
         #   @return [::Float]
-        #     Defines a maximum target for requests per second (RPS) for a single VM in a backend instance group. This is multiplied by the number of instances in the instance group to implicitly calculate a target maximum rate for the whole instance group.
-        #
-        #     If the backend's balancingMode is UTILIZATION, this is an optional parameter. If the backend's balancingMode is RATE, you must specify either this parameter, maxRate (except for regional managed instance groups), or maxRatePerEndpoint.
+        #     Defines a maximum target for requests per second (RPS). For usage guidelines, see Rate balancing mode and Utilization balancing mode.
         #
         #     Not available if the backend's balancingMode is CONNECTION.
         # @!attribute [rw] max_utilization
         #   @return [::Float]
-        #     Defines the maximum average backend utilization of a backend VM in an instance group. The valid range is [0.0, 1.0]. This is an optional parameter if the backend's balancingMode is UTILIZATION.
-        #
-        #     This parameter can be used in conjunction with maxRate, maxRatePerInstance, maxConnections (except for regional managed instance groups), or maxConnectionsPerInstance.
         class Backend
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Specifies the balancing mode for the backend.
-          #
-          # When choosing a balancing mode, you need to consider the loadBalancingScheme, and protocol for the backend service, as well as the type of backend (instance group or NEG).
-          #
-          #
-          # - If the load balancing mode is CONNECTION, then the load is spread based on how many concurrent connections the backend can handle.
-          # You can use the CONNECTION balancing mode if the protocol for the backend service is SSL, TCP, or UDP.
-          #
-          # If the loadBalancingScheme for the backend service is EXTERNAL (SSL Proxy and TCP Proxy load balancers), you must also specify exactly one of the following parameters: maxConnections (except for regional managed instance groups), maxConnectionsPerInstance, or maxConnectionsPerEndpoint.
-          #
-          # If the loadBalancingScheme for the backend service is INTERNAL (internal TCP/UDP Load Balancers) or EXTERNAL  (Network Load Balancing), you cannot specify any additional parameters.
-          #
-          # - If the load balancing mode is RATE, the load is spread based on the rate of HTTP requests per second (RPS).
-          # You can use the RATE balancing mode if the protocol for the backend service is HTTP, HTTP2, or HTTPS. You must specify exactly one of the following parameters: maxRate (except for regional managed instance groups), maxRatePerInstance, or maxRatePerEndpoint.
-          #
-          # - If the load balancing mode is UTILIZATION, the load is spread based on the backend utilization of instances in an instance group.
-          # You can use the UTILIZATION balancing mode if the loadBalancingScheme of the backend service is EXTERNAL (except Network Load Balancing), INTERNAL_SELF_MANAGED, or INTERNAL_MANAGED and the backends are instance groups. There are no restrictions on the backend service protocol.
+          # Specifies how to determine whether the backend of a load balancer can handle additional traffic or is fully loaded. For usage guidelines, see  Connection balancing mode.
           module BalancingMode
             # A value indicating that the enum field is not set.
             UNDEFINED_BALANCING_MODE = 0
@@ -1434,6 +1518,9 @@ module Google
         end
 
         # Message containing Cloud CDN configuration for a backend bucket.
+        # @!attribute [rw] bypass_cache_on_request_headers
+        #   @return [::Array<::Google::Cloud::Compute::V1::BackendBucketCdnPolicyBypassCacheOnRequestHeader>]
+        #     Bypass the cache when the specified request headers are matched - e.g. Pragma or Authorization headers. Up to 5 headers can be specified. The cache is bypassed for all cdnPolicy.cacheMode settings.
         # @!attribute [rw] cache_mode
         #   @return [::Google::Cloud::Compute::V1::BackendBucketCdnPolicy::CacheMode]
         #     Specifies the cache setting for all responses from this backend. The possible values are:
@@ -1445,15 +1532,27 @@ module Google
         #     CACHE_ALL_STATIC Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached.
         # @!attribute [rw] client_ttl
         #   @return [::Integer]
-        #     Specifies a separate client (e.g. browser client) TTL, separate from the TTL for Cloud CDN's edge caches. Leaving this empty will use the same cache TTL for both Cloud CDN and the client-facing response. The maximum allowed value is 86400s (1 day).
+        #     Specifies a separate client (e.g. browser client) maximum TTL. This is used to clamp the max-age (or Expires) value sent to the client. With FORCE_CACHE_ALL, the lesser of client_ttl and default_ttl is used for the response max-age directive, along with a "public" directive. For cacheable content in CACHE_ALL_STATIC mode, client_ttl clamps the max-age from the origin (if specified), or else sets the response max-age directive to the lesser of the client_ttl and default_ttl, and also ensures a "public" cache-control directive is present. If a client TTL is not specified, a default value (1 hour) will be used. The maximum allowed value is 86400s (1 day).
         # @!attribute [rw] default_ttl
         #   @return [::Integer]
         #     Specifies the default TTL for cached content served by this origin for responses that do not have an existing valid TTL (max-age or s-max-age). Setting a TTL of "0" means "always revalidate". The value of defaultTTL cannot be set to a value greater than that of maxTTL, but can be equal. When the cacheMode is set to FORCE_CACHE_ALL, the defaultTTL will overwrite the TTL set in all responses. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
         # @!attribute [rw] max_ttl
         #   @return [::Integer]
         #     Specifies the maximum allowed TTL for cached content served by this origin. Cache directives that attempt to set a max-age or s-maxage higher than this, or an Expires header more than maxTTL seconds in the future will be capped at the value of maxTTL, as if it were the value of an s-maxage Cache-Control directive. Headers sent to the client will not be modified. Setting a TTL of "0" means "always revalidate". The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
+        # @!attribute [rw] negative_caching
+        #   @return [::Boolean]
+        #     Negative caching allows per-status code TTLs to be set, in order to apply fine-grained caching for common errors or redirects. This can reduce the load on your origin and improve end-user experience by reducing response latency. When the cache mode is set to CACHE_ALL_STATIC or USE_ORIGIN_HEADERS, negative caching applies to responses with the specified response code that lack any Cache-Control, Expires, or Pragma: no-cache directives. When the cache mode is set to FORCE_CACHE_ALL, negative caching applies to all responses with the specified response code, and override any caching headers. By default, Cloud CDN will apply the following default TTLs to these status codes: HTTP 300 (Multiple Choice), 301, 308 (Permanent Redirects): 10m HTTP 404 (Not Found), 410 (Gone), 451 (Unavailable For Legal Reasons): 120s HTTP 405 (Method Not Found), 421 (Misdirected Request), 501 (Not Implemented): 60s. These defaults can be overridden in negative_caching_policy.
+        # @!attribute [rw] negative_caching_policy
+        #   @return [::Array<::Google::Cloud::Compute::V1::BackendBucketCdnPolicyNegativeCachingPolicy>]
+        #     Sets a cache TTL for the specified HTTP status code. negative_caching must be enabled to configure negative_caching_policy. Omitting the policy and leaving negative_caching enabled will use Cloud CDN's default cache TTLs. Note that when specifying an explicit negative_caching_policy, you should take care to specify a cache TTL for all response codes that you wish to cache. Cloud CDN will not apply any default negative caching when a policy exists.
+        # @!attribute [rw] request_coalescing
+        #   @return [::Boolean]
+        #     If true then Cloud CDN will combine multiple concurrent cache fill requests into a small number of requests to the origin.
+        # @!attribute [rw] serve_while_stale
+        #   @return [::Integer]
+        #     Serve existing content from the cache (if available) when revalidating content with the origin, or when an error is encountered when refreshing the cache. This setting defines the default "max-stale" duration for any cached responses that do not specify a max-stale directive. Stale responses that exceed the TTL configured here will not be served. The default limit (max-stale) is 86400s (1 day), which will allow stale content to be served up to this limit beyond the max-age (or s-max-age) of a cached response. The maximum allowed value is 604800 (1 week). Set this to zero (0) to disable serve-while-stale.
         # @!attribute [rw] signed_url_cache_max_age_sec
-        #   @return [::String]
+        #   @return [::Integer]
         #     Maximum number of seconds the response to a signed URL request will be considered fresh. After this time period, the response will be revalidated before being served. Defaults to 1hr (3600s). When serving responses to signed URL requests, Cloud CDN will internally behave as though all responses from this backend had a "Cache-Control: public, max-age=[TTL]" header, regardless of any existing Cache-Control header. The actual headers served in responses will not be altered.
         # @!attribute [rw] signed_url_key_names
         #   @return [::Array<::String>]
@@ -1505,7 +1604,7 @@ module Google
         #   @return [::Boolean]
         #     If true, enable Cloud CDN for this BackendBucket.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] Unique identifier for the resource; defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -1517,6 +1616,27 @@ module Google
         #   @return [::String]
         #     [Output Only] Server-defined URL for the resource.
         class BackendBucket
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Bypass the cache when the specified request headers are present, e.g. Pragma or Authorization headers. Values are case insensitive. The presence of such a header overrides the cache_mode setting.
+        # @!attribute [rw] header_name
+        #   @return [::String]
+        #     The header field name to match on when bypassing cache. Values are case-insensitive.
+        class BackendBucketCdnPolicyBypassCacheOnRequestHeader
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specify CDN TTLs for response error codes.
+        # @!attribute [rw] code
+        #   @return [::Integer]
+        #     The HTTP status code to define a TTL against. Only HTTP status codes 300, 301, 302, 307, 308, 404, 405, 410, 421, 451 and 501 are can be specified as values, and you cannot specify a status code more than once.
+        # @!attribute [rw] ttl
+        #   @return [::Integer]
+        #     The TTL (in seconds) for which to cache responses with the corresponding status code. The maximum allowed value is 1800s (30 minutes), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
+        class BackendBucketCdnPolicyNegativeCachingPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1546,6 +1666,9 @@ module Google
         end
 
         # Message containing Cloud CDN configuration for a backend service.
+        # @!attribute [rw] bypass_cache_on_request_headers
+        #   @return [::Array<::Google::Cloud::Compute::V1::BackendServiceCdnPolicyBypassCacheOnRequestHeader>]
+        #     Bypass the cache when the specified request headers are matched - e.g. Pragma or Authorization headers. Up to 5 headers can be specified. The cache is bypassed for all cdnPolicy.cacheMode settings.
         # @!attribute [rw] cache_key_policy
         #   @return [::Google::Cloud::Compute::V1::CacheKeyPolicy]
         #     The CacheKeyPolicy for this CdnPolicy.
@@ -1560,15 +1683,27 @@ module Google
         #     CACHE_ALL_STATIC Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached.
         # @!attribute [rw] client_ttl
         #   @return [::Integer]
-        #     Specifies a separate client (e.g. browser client) TTL, separate from the TTL for Cloud CDN's edge caches. Leaving this empty will use the same cache TTL for both Cloud CDN and the client-facing response. The maximum allowed value is 86400s (1 day).
+        #     Specifies a separate client (e.g. browser client) maximum TTL. This is used to clamp the max-age (or Expires) value sent to the client. With FORCE_CACHE_ALL, the lesser of client_ttl and default_ttl is used for the response max-age directive, along with a "public" directive. For cacheable content in CACHE_ALL_STATIC mode, client_ttl clamps the max-age from the origin (if specified), or else sets the response max-age directive to the lesser of the client_ttl and default_ttl, and also ensures a "public" cache-control directive is present. If a client TTL is not specified, a default value (1 hour) will be used. The maximum allowed value is 86400s (1 day).
         # @!attribute [rw] default_ttl
         #   @return [::Integer]
         #     Specifies the default TTL for cached content served by this origin for responses that do not have an existing valid TTL (max-age or s-max-age). Setting a TTL of "0" means "always revalidate". The value of defaultTTL cannot be set to a value greater than that of maxTTL, but can be equal. When the cacheMode is set to FORCE_CACHE_ALL, the defaultTTL will overwrite the TTL set in all responses. The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
         # @!attribute [rw] max_ttl
         #   @return [::Integer]
         #     Specifies the maximum allowed TTL for cached content served by this origin. Cache directives that attempt to set a max-age or s-maxage higher than this, or an Expires header more than maxTTL seconds in the future will be capped at the value of maxTTL, as if it were the value of an s-maxage Cache-Control directive. Headers sent to the client will not be modified. Setting a TTL of "0" means "always revalidate". The maximum allowed value is 31,622,400s (1 year), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
+        # @!attribute [rw] negative_caching
+        #   @return [::Boolean]
+        #     Negative caching allows per-status code TTLs to be set, in order to apply fine-grained caching for common errors or redirects. This can reduce the load on your origin and improve end-user experience by reducing response latency. When the cache mode is set to CACHE_ALL_STATIC or USE_ORIGIN_HEADERS, negative caching applies to responses with the specified response code that lack any Cache-Control, Expires, or Pragma: no-cache directives. When the cache mode is set to FORCE_CACHE_ALL, negative caching applies to all responses with the specified response code, and override any caching headers. By default, Cloud CDN will apply the following default TTLs to these status codes: HTTP 300 (Multiple Choice), 301, 308 (Permanent Redirects): 10m HTTP 404 (Not Found), 410 (Gone), 451 (Unavailable For Legal Reasons): 120s HTTP 405 (Method Not Found), 421 (Misdirected Request), 501 (Not Implemented): 60s. These defaults can be overridden in negative_caching_policy.
+        # @!attribute [rw] negative_caching_policy
+        #   @return [::Array<::Google::Cloud::Compute::V1::BackendServiceCdnPolicyNegativeCachingPolicy>]
+        #     Sets a cache TTL for the specified HTTP status code. negative_caching must be enabled to configure negative_caching_policy. Omitting the policy and leaving negative_caching enabled will use Cloud CDN's default cache TTLs. Note that when specifying an explicit negative_caching_policy, you should take care to specify a cache TTL for all response codes that you wish to cache. Cloud CDN will not apply any default negative caching when a policy exists.
+        # @!attribute [rw] request_coalescing
+        #   @return [::Boolean]
+        #     If true then Cloud CDN will combine multiple concurrent cache fill requests into a small number of requests to the origin.
+        # @!attribute [rw] serve_while_stale
+        #   @return [::Integer]
+        #     Serve existing content from the cache (if available) when revalidating content with the origin, or when an error is encountered when refreshing the cache. This setting defines the default "max-stale" duration for any cached responses that do not specify a max-stale directive. Stale responses that exceed the TTL configured here will not be served. The default limit (max-stale) is 86400s (1 day), which will allow stale content to be served up to this limit beyond the max-age (or s-max-age) of a cached response. The maximum allowed value is 604800 (1 week). Set this to zero (0) to disable serve-while-stale.
         # @!attribute [rw] signed_url_cache_max_age_sec
-        #   @return [::String]
+        #   @return [::Integer]
         #     Maximum number of seconds the response to a signed URL request will be considered fresh. After this time period, the response will be revalidated before being served. Defaults to 1hr (3600s). When serving responses to signed URL requests, Cloud CDN will internally behave as though all responses from this backend had a "Cache-Control: public, max-age=[TTL]" header, regardless of any existing Cache-Control header. The actual headers served in responses will not be altered.
         # @!attribute [rw] signed_url_key_names
         #   @return [::Array<::String>]
@@ -1622,7 +1757,7 @@ module Google
         # Message containing connection draining configuration.
         # @!attribute [rw] draining_timeout_sec
         #   @return [::Integer]
-        #     The amount of time in seconds to allow existing connections to persist while on unhealthy backend VMs. Only applicable if the protocol is not UDP. The valid range is [0, 3600].
+        #     Configures a duration timeout for existing requests on a removed backend instance. For supported load balancers and protocols, as described in Enabling connection draining.
         class ConnectionDraining
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1636,7 +1771,7 @@ module Google
         #   @return [::String]
         #     The hash based on the value of the specified header field. This field is applicable if the sessionAffinity is set to HEADER_FIELD.
         # @!attribute [rw] minimum_ring_size
-        #   @return [::String]
+        #   @return [::Integer]
         #     The minimum number of virtual nodes to use for the hash ring. Defaults to 1024. Larger ring sizes result in more granular load distributions. If the number of hosts in the load balancing pool is larger than the ring size, each host will be assigned a single virtual node.
         class ConsistentHashLoadBalancerSettings
           include ::Google::Protobuf::MessageExts
@@ -1686,6 +1821,18 @@ module Google
         #   @return [::Float]
         #     This field can only be specified if logging is enabled for this backend service. The value of the field must be in [0, 1]. This configures the sampling rate of requests to the load balancer where 1.0 means all logged requests are reported and 0.0 means no logged requests are reported. The default value is 1.0.
         class BackendServiceLogConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Duration represents a fixed-length span of time represented as a count of seconds and fractions of seconds at nanosecond resolution. It is independent of any calendar and concepts like "day" or "month". Range is approximately 10,000 years.
+        # @!attribute [rw] nanos
+        #   @return [::Integer]
+        #     Span of time that's a fraction of a second at nanosecond resolution. Durations less than one second are represented with a 0 `seconds` field and a positive `nanos` field. Must be from 0 to 999,999,999 inclusive.
+        # @!attribute [rw] seconds
+        #   @return [::Integer]
+        #     Span of time at a resolution of a second. Must be from 0 to 315,576,000,000 inclusive. Note: these bounds are computed from: 60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years
+        class Duration
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1770,7 +1917,7 @@ module Google
         #     The list of backends that serve this BackendService.
         # @!attribute [rw] cdn_policy
         #   @return [::Google::Cloud::Compute::V1::BackendServiceCdnPolicy]
-        #     Cloud CDN configuration for this BackendService. Not available for Internal TCP/UDP Load Balancing and Network Load Balancing.
+        #     Cloud CDN configuration for this BackendService. Only available for  external HTTP(S) Load Balancing.
         # @!attribute [rw] circuit_breakers
         #   @return [::Google::Cloud::Compute::V1::CircuitBreakers]
         #     Settings controlling the volume of connections to a backend service. If not set, this feature is considered disabled.
@@ -1821,7 +1968,7 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::BackendServiceIAP]
         #     The configurations for Identity-Aware Proxy on this resource. Not available for Internal TCP/UDP Load Balancing and Network Load Balancing.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -1849,6 +1996,11 @@ module Google
         # @!attribute [rw] log_config
         #   @return [::Google::Cloud::Compute::V1::BackendServiceLogConfig]
         #     This field denotes the logging options for the load balancer traffic served by this backend service. If logging is enabled, logs will be exported to Stackdriver.
+        # @!attribute [rw] max_stream_duration
+        #   @return [::Google::Cloud::Compute::V1::Duration]
+        #     Specifies the default maximum duration (timeout) for streams to this service. Duration is computed from the beginning of the stream until the response has been completely processed, including all retries. A stream that does not complete in this duration is closed.
+        #     If not specified, there will be no timeout limit, i.e. the maximum duration is infinite.
+        #     This field is only allowed when the loadBalancingScheme of the backend service is INTERNAL_SELF_MANAGED.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
@@ -1868,7 +2020,7 @@ module Google
         #   @return [::Integer]
         #     Deprecated in favor of portName. The TCP port to connect on the backend. The default value is 80.
         #
-        #     This cannot be used if the loadBalancingScheme is INTERNAL (Internal TCP/UDP Load Balancing).
+        #     Backend services for Internal TCP/UDP Load Balancing and Network Load Balancing require you omit port.
         # @!attribute [rw] port_name
         #   @return [::String]
         #     A named port on a backend instance group representing the port for communication to the backend VMs in that group. Required when the loadBalancingScheme is EXTERNAL (except Network Load Balancing), INTERNAL_MANAGED, or  INTERNAL_SELF_MANAGED and the backends are instance groups. The named port must be defined on each backend instance group. This parameter has no meaning if the backends are NEGs.
@@ -1901,7 +2053,7 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::BackendService::SessionAffinity]
         #     Type of session affinity to use. The default is NONE.
         #
-        #     When the loadBalancingScheme is EXTERNAL: * For Network Load Balancing, the possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or CLIENT_IP_PORT_PROTO. * For all other load balancers that use loadBalancingScheme=EXTERNAL, the possible values are NONE, CLIENT_IP, or GENERATED_COOKIE. * You can use GENERATED_COOKIE if the protocol is HTTP, HTTP2, or HTTPS.
+        #     When the loadBalancingScheme is EXTERNAL: * For Network Load Balancing, the possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or  CLIENT_IP_PORT_PROTO. * For all other load balancers that use loadBalancingScheme=EXTERNAL, the possible values are NONE, CLIENT_IP, or GENERATED_COOKIE. * You can use GENERATED_COOKIE if the protocol is HTTP, HTTP2, or HTTPS.
         #
         #     When the loadBalancingScheme is INTERNAL, possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or CLIENT_IP_PORT_PROTO.
         #
@@ -1910,7 +2062,7 @@ module Google
         #     Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         # @!attribute [rw] timeout_sec
         #   @return [::Integer]
-        #     The backend service timeout has a different meaning depending on the type of load balancer. For more information see,  Backend service settings The default is 30 seconds.
+        #     The backend service timeout has a different meaning depending on the type of load balancer. For more information see,  Backend service settings The default is 30 seconds. The full range of timeout values allowed is 1 - 2,147,483,647 seconds.
         class BackendService
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1991,7 +2143,7 @@ module Google
 
           # Type of session affinity to use. The default is NONE.
           #
-          # When the loadBalancingScheme is EXTERNAL: * For Network Load Balancing, the possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or CLIENT_IP_PORT_PROTO. * For all other load balancers that use loadBalancingScheme=EXTERNAL, the possible values are NONE, CLIENT_IP, or GENERATED_COOKIE. * You can use GENERATED_COOKIE if the protocol is HTTP, HTTP2, or HTTPS.
+          # When the loadBalancingScheme is EXTERNAL: * For Network Load Balancing, the possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or  CLIENT_IP_PORT_PROTO. * For all other load balancers that use loadBalancingScheme=EXTERNAL, the possible values are NONE, CLIENT_IP, or GENERATED_COOKIE. * You can use GENERATED_COOKIE if the protocol is HTTP, HTTP2, or HTTPS.
           #
           # When the loadBalancingScheme is INTERNAL, possible values are NONE, CLIENT_IP, CLIENT_IP_PROTO, or CLIENT_IP_PORT_PROTO.
           #
@@ -2003,6 +2155,8 @@ module Google
             UNDEFINED_SESSION_AFFINITY = 0
 
             CLIENT_IP = 345665051
+
+            CLIENT_IP_NO_DESTINATION = 106122516
 
             CLIENT_IP_PORT_PROTO = 221722926
 
@@ -2065,6 +2219,15 @@ module Google
           end
         end
 
+        # Bypass the cache when the specified request headers are present, e.g. Pragma or Authorization headers. Values are case insensitive. The presence of such a header overrides the cache_mode setting.
+        # @!attribute [rw] header_name
+        #   @return [::String]
+        #     The header field name to match on when bypassing cache. Values are case-insensitive.
+        class BackendServiceCdnPolicyBypassCacheOnRequestHeader
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Message containing what to include in the cache key for a request for Cloud CDN.
         # @!attribute [rw] include_host
         #   @return [::Boolean]
@@ -2086,9 +2249,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Specify CDN TTLs for response error codes.
+        # @!attribute [rw] code
+        #   @return [::Integer]
+        #     The HTTP status code to define a TTL against. Only HTTP status codes 300, 301, 302, 307, 308, 404, 405, 410, 421, 451 and 501 are can be specified as values, and you cannot specify a status code more than once.
+        # @!attribute [rw] ttl
+        #   @return [::Integer]
+        #     The TTL (in seconds) for which to cache responses with the corresponding status code. The maximum allowed value is 1800s (30 minutes), noting that infrequently accessed objects may be evicted from the cache before the defined TTL.
+        class BackendServiceCdnPolicyNegativeCachingPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Metadata defined as annotations for network endpoint.
+        # @!attribute [rw] forwarding_rule
+        #   @return [::String]
+        #     URL of the forwarding rule associated with the health status of the instance.
+        # @!attribute [rw] forwarding_rule_ip
+        #   @return [::String]
+        #     A forwarding rule IP address assigned to this instance.
         # @!attribute [rw] health_state
         #   @return [::Google::Cloud::Compute::V1::HealthStatus::HealthState]
         #     Health state of the instance.
@@ -2097,7 +2278,7 @@ module Google
         #     URL of the instance resource.
         # @!attribute [rw] ip_address
         #   @return [::String]
-        #     A forwarding rule IP address assigned to this instance.
+        #     For target pool based Network Load Balancing, it indicates the forwarding rule's IP address assigned to this instance. For other types of load balancing, the field indicates VM internal ip.
         # @!attribute [rw] port
         #   @return [::Integer]
         #     The named port of the instance group, not necessarily the port that is health-checked.
@@ -2277,6 +2458,154 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] advanced_machine_features
+        #   @return [::Google::Cloud::Compute::V1::AdvancedMachineFeatures]
+        #     Controls for advanced machine-related behavior features.
+        # @!attribute [rw] can_ip_forward
+        #   @return [::Boolean]
+        #     Enables instances created based on these properties to send packets with source IP addresses other than their own and receive packets with destination IP addresses other than their own. If these instances will be used as an IP gateway or it will be set as the next-hop in a Route resource, specify true. If unsure, leave this set to false. See the Enable IP forwarding documentation for more information.
+        # @!attribute [rw] confidential_instance_config
+        #   @return [::Google::Cloud::Compute::V1::ConfidentialInstanceConfig]
+        #     Specifies the Confidential Instance options.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     An optional text description for the instances that are created from these properties.
+        # @!attribute [rw] disks
+        #   @return [::Array<::Google::Cloud::Compute::V1::AttachedDisk>]
+        #     An array of disks that are associated with the instances that are created from these properties.
+        # @!attribute [rw] guest_accelerators
+        #   @return [::Array<::Google::Cloud::Compute::V1::AcceleratorConfig>]
+        #     A list of guest accelerator cards' type and count to use for instances created from these properties.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Labels to apply to instances that are created from these properties.
+        # @!attribute [rw] machine_type
+        #   @return [::String]
+        #     The machine type to use for instances that are created from these properties.
+        # @!attribute [rw] metadata
+        #   @return [::Google::Cloud::Compute::V1::Metadata]
+        #     The metadata key/value pairs to assign to instances that are created from these properties. These pairs can consist of custom metadata or predefined keys. See Project and instance metadata for more information.
+        # @!attribute [rw] min_cpu_platform
+        #   @return [::String]
+        #     Minimum cpu/platform to be used by instances. The instance may be scheduled on the specified or newer cpu/platform. Applicable values are the friendly names of CPU platforms, such as minCpuPlatform: "Intel Haswell" or minCpuPlatform: "Intel Sandy Bridge". For more information, read Specifying a Minimum CPU Platform.
+        # @!attribute [rw] network_interfaces
+        #   @return [::Array<::Google::Cloud::Compute::V1::NetworkInterface>]
+        #     An array of network access configurations for this interface.
+        # @!attribute [rw] private_ipv6_google_access
+        #   @return [::Google::Cloud::Compute::V1::InstanceProperties::PrivateIpv6GoogleAccess]
+        #     The private IPv6 google access type for VMs. If not specified, use  INHERIT_FROM_SUBNETWORK as default.
+        # @!attribute [rw] reservation_affinity
+        #   @return [::Google::Cloud::Compute::V1::ReservationAffinity]
+        #     Specifies the reservations that instances can consume from.
+        # @!attribute [rw] resource_policies
+        #   @return [::Array<::String>]
+        #     Resource policies (names, not ULRs) applied to instances created from these properties.
+        # @!attribute [rw] scheduling
+        #   @return [::Google::Cloud::Compute::V1::Scheduling]
+        #     Specifies the scheduling options for the instances that are created from these properties.
+        # @!attribute [rw] service_accounts
+        #   @return [::Array<::Google::Cloud::Compute::V1::ServiceAccount>]
+        #     A list of service accounts with specified scopes. Access tokens for these service accounts are available to the instances that are created from these properties. Use metadata queries to obtain the access tokens for these instances.
+        # @!attribute [rw] shielded_instance_config
+        #   @return [::Google::Cloud::Compute::V1::ShieldedInstanceConfig]
+        # @!attribute [rw] tags
+        #   @return [::Google::Cloud::Compute::V1::Tags]
+        #     A list of tags to apply to the instances that are created from these properties. The tags identify valid sources or targets for network firewalls. The setTags method can modify this list of tags. Each tag within the list must comply with RFC1035.
+        class InstanceProperties
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The private IPv6 google access type for VMs. If not specified, use  INHERIT_FROM_SUBNETWORK as default.
+          module PrivateIpv6GoogleAccess
+            # A value indicating that the enum field is not set.
+            UNDEFINED_PRIVATE_IPV6_GOOGLE_ACCESS = 0
+
+            ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE = 427975994
+
+            ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE = 288210263
+
+            INHERIT_FROM_SUBNETWORK = 530256959
+          end
+        end
+
+        # Configuration for location policy among multiple possible locations (e.g. preferences for zone selection among zones in a single region).
+        # @!attribute [rw] locations
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::LocationPolicyLocation}]
+        #     Location configurations mapped by location name. Currently only zone names are supported and must be represented as valid internal URLs, such as zones/us-central1-a.
+        class LocationPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::LocationPolicyLocation]
+          class LocationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Per-instance properties to be set on individual instances. To be extended in the future.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     This field is only temporary. It will be removed. Do not use it.
+        class BulkInsertInstanceResourcePerInstanceProperties
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] count
+        #   @return [::Integer]
+        #     The maximum number of instances to create.
+        # @!attribute [rw] instance_properties
+        #   @return [::Google::Cloud::Compute::V1::InstanceProperties]
+        #     The instance properties defining the VM instances to be created. Required if sourceInstanceTemplate is not provided.
+        # @!attribute [rw] location_policy
+        #   @return [::Google::Cloud::Compute::V1::LocationPolicy]
+        #     Policy for chosing target zone.
+        # @!attribute [rw] min_count
+        #   @return [::Integer]
+        #     The minimum number of instances to create. If no min_count is specified then count is used as the default value. If min_count instances cannot be created, then no instances will be created and instances already created will be deleted.
+        # @!attribute [rw] name_pattern
+        #   @return [::String]
+        #     The string pattern used for the names of the VMs. Either name_pattern or per_instance_properties must be set. The pattern should contain one continuous sequence of placeholder hash characters (#) with each character corresponding to one digit of the generated instance name. Example: name_pattern of inst-#### will generate instance names such as inst-0001, inst-0002, ... . If there already exist instance(s) whose names match the name pattern in the same project and zone, then the generated instance numbers will start after the biggest existing number. For example, if there exists an instance with name inst-0050, then instance names generated using the pattern inst-#### will be inst-0051, inst-0052, etc. The name pattern placeholder #...# can contain up to 18 characters.
+        # @!attribute [rw] per_instance_properties
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::BulkInsertInstanceResourcePerInstanceProperties}]
+        #     Per-instance properties to be set on individual instances. Keys of this map specify requested instance names. Can be empty if name_pattern is used.
+        # @!attribute [rw] source_instance_template
+        #   @return [::String]
+        #     Specifies the instance template from which to create instances. You may combine sourceInstanceTemplate with instanceProperties to override specific values from an existing instance template. Bulk API follows the semantics of JSON Merge Patch described by RFC 7396.
+        #
+        #     It can be a full or partial URL. For example, the following are all valid URLs to an instance template:
+        #     - https://www.googleapis.com/compute/v1/projects/project/global/instanceTemplates/instanceTemplate
+        #     - projects/project/global/instanceTemplates/instanceTemplate
+        #     - global/instanceTemplates/instanceTemplate
+        #
+        #     This field is optional.
+        class BulkInsertInstanceResource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::BulkInsertInstanceResourcePerInstanceProperties]
+          class PerInstancePropertiesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # @!attribute [rw] host
         #   @return [::String]
         #     If set, this invalidation rule will only apply to requests with a Host header matching host.
@@ -2289,7 +2618,7 @@ module Google
 
         # Commitment for a particular license resource.
         # @!attribute [rw] amount
-        #   @return [::String]
+        #   @return [::Integer]
         #     The number of licenses purchased.
         # @!attribute [rw] cores_per_license
         #   @return [::String]
@@ -2313,7 +2642,7 @@ module Google
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -2321,6 +2650,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        # @!attribute [rw] satisfies_pzs
+        #   @return [::Boolean]
+        #     [Output Only] Reserved for future use.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined fully-qualified URL for this resource.
@@ -2362,7 +2694,7 @@ module Google
         #   @return [::String]
         #     Name of the accelerator type resource. Applicable only when the type is ACCELERATOR.
         # @!attribute [rw] amount
-        #   @return [::String]
+        #   @return [::Integer]
         #     The amount of the resource purchased (in a type-dependent unit, such as bytes). For vCPUs, this can just be an integer. For memory, this must be provided in MB. Memory must be a multiple of 256 MB, with up to 6.5GB of memory per every vCPU.
         # @!attribute [rw] type
         #   @return [::Google::Cloud::Compute::V1::ResourceCommitment::Type]
@@ -2404,7 +2736,7 @@ module Google
         #   @return [::String]
         #     [Output Only] Commitment end time in RFC3339 text format.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -2597,18 +2929,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A Duration represents a fixed-length span of time represented as a count of seconds and fractions of seconds at nanosecond resolution. It is independent of any calendar and concepts like "day" or "month". Range is approximately 10,000 years.
-        # @!attribute [rw] nanos
-        #   @return [::Integer]
-        #     Span of time that's a fraction of a second at nanosecond resolution. Durations less than one second are represented with a 0 `seconds` field and a positive `nanos` field. Must be from 0 to 999,999,999 inclusive.
-        # @!attribute [rw] seconds
-        #   @return [::String]
-        #     Span of time at a resolution of a second. Must be from 0 to 315,576,000,000 inclusive. Note: these bounds are computed from: 60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years
-        class Duration
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # The specification for allowing client side cross-origin requests. Please see W3C Recommendation for Cross Origin Resource Sharing
         # @!attribute [rw] allow_credentials
         #   @return [::Boolean]
@@ -2622,7 +2942,7 @@ module Google
         #     Specifies the content for the Access-Control-Allow-Methods header.
         # @!attribute [rw] allow_origin_regexes
         #   @return [::Array<::String>]
-        #     Specifies the regualar expression patterns that match allowed origins. For regular expression grammar please see en.cppreference.com/w/cpp/regex/ecmascript
+        #     Specifies the regualar expression patterns that match allowed origins. For regular expression grammar please see github.com/google/re2/wiki/Syntax
         #     An origin is allowed if it matches either an item in allowOrigins or an item in allowOriginRegexes.
         # @!attribute [rw] allow_origins
         #   @return [::Array<::String>]
@@ -2683,7 +3003,7 @@ module Google
         #   @return [::Array<::Google::Cloud::Compute::V1::GuestOsFeature>]
         #     A list of features to enable on the guest operating system. Applicable only for bootable images. Read  Enabling guest operating system features to see a list of available options.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -2703,11 +3023,14 @@ module Google
         #   @return [::String]
         #     [Output Only] Last detach timestamp in RFC3339 text format.
         # @!attribute [rw] license_codes
-        #   @return [::Array<::String>]
+        #   @return [::Array<::Integer>]
         #     Integer license codes indicating which licenses are attached to this disk.
         # @!attribute [rw] licenses
         #   @return [::Array<::String>]
         #     A list of publicly visible licenses. Reserved for Google's use.
+        # @!attribute [rw] location_hint
+        #   @return [::String]
+        #     An opaque location hint used to place the disk close to other resources. This field is for use by internal tools that use the public API.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
@@ -2715,8 +3038,11 @@ module Google
         #   @return [::String]
         #     Internal use only.
         # @!attribute [rw] physical_block_size_bytes
-        #   @return [::String]
+        #   @return [::Integer]
         #     Physical block size of the persistent disk, in bytes. If not present in a request, a default value is used. The currently supported size is 4096, other sizes may be added in the future. If an unsupported value is requested, the error message will list the supported values for the caller's project.
+        # @!attribute [rw] provisioned_iops
+        #   @return [::Integer]
+        #     Indicates how many IOPS must be provisioned for the disk.
         # @!attribute [rw] region
         #   @return [::String]
         #     [Output Only] URL of the region where the disk resides. Only applicable for regional resources. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.
@@ -2726,11 +3052,14 @@ module Google
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Resource policies applied to this disk for automatic snapshot creations.
+        # @!attribute [rw] satisfies_pzs
+        #   @return [::Boolean]
+        #     [Output Only] Reserved for future use.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined fully-qualified URL for this resource.
         # @!attribute [rw] size_gb
-        #   @return [::String]
+        #   @return [::Integer]
         #     Size, in GB, of the persistent disk. You can specify this field when creating a persistent disk using the sourceImage, sourceSnapshot, or sourceDisk parameter, or specify it alone to create an empty persistent disk.
         #
         #     If you specify this field along with a source, the value of sizeGb must not be less than the size of the source. Acceptable values are 1 to 65536, inclusive.
@@ -2738,8 +3067,11 @@ module Google
         #   @return [::String]
         #     The source disk used to create this disk. You can provide this as a partial or full URL to the resource. For example, the following are valid values:
         #     - https://www.googleapis.com/compute/v1/projects/project/zones/zone/disks/disk
+        #     - https://www.googleapis.com/compute/v1/projects/project/regions/region/disks/disk
         #     - projects/project/zones/zone/disks/disk
+        #     - projects/project/regions/region/disks/disk
         #     - zones/zone/disks/disk
+        #     - regions/region/disks/disk
         # @!attribute [rw] source_disk_id
         #   @return [::String]
         #     [Output Only] The unique ID of the disk used to create this disk. This value identifies the exact disk that was used to create this persistent disk. For example, if you created the persistent disk from a disk that was later deleted and recreated under the same name, the source disk ID would identify the exact version of the disk that was used.
@@ -2779,9 +3111,17 @@ module Google
         # @!attribute [rw] source_snapshot_id
         #   @return [::String]
         #     [Output Only] The unique ID of the snapshot used to create this disk. This value identifies the exact snapshot that was used to create this persistent disk. For example, if you created the persistent disk from a snapshot that was later deleted and recreated under the same name, the source snapshot ID would identify the exact version of the snapshot that was used.
+        # @!attribute [rw] source_storage_object
+        #   @return [::String]
+        #     The full Google Cloud Storage URI where the disk image is stored. This file must be a gzip-compressed tarball whose name ends in .tar.gz or virtual machine disk whose name ends in vmdk. Valid URIs may start with gs:// or https://storage.googleapis.com/. This flag is not optimized for creating multiple disks from a source storage object. To create many disks from a source storage object, use gcloud compute images import instead.
         # @!attribute [rw] status
         #   @return [::Google::Cloud::Compute::V1::Disk::Status]
-        #     [Output Only] The status of disk creation. CREATING: Disk is provisioning. RESTORING: Source data is being copied into the disk. FAILED: Disk creation failed. READY: Disk is ready for use. DELETING: Disk is deleting.
+        #     [Output Only] The status of disk creation.
+        #     - CREATING: Disk is provisioning.
+        #     - RESTORING: Source data is being copied into the disk.
+        #     - FAILED: Disk creation failed.
+        #     - READY: Disk is ready for use.
+        #     - DELETING: Disk is deleting.
         # @!attribute [rw] type
         #   @return [::String]
         #     URL of the disk type resource describing which disk type to use to create the disk. Provide this when creating the disk. For example: projects/project/zones/zone/diskTypes/pd-standard  or pd-ssd
@@ -2804,7 +3144,12 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # [Output Only] The status of disk creation. CREATING: Disk is provisioning. RESTORING: Source data is being copied into the disk. FAILED: Disk creation failed. READY: Disk is ready for use. DELETING: Disk is deleting.
+          # [Output Only] The status of disk creation.
+          # - CREATING: Disk is provisioning.
+          # - RESTORING: Source data is being copied into the disk.
+          # - FAILED: Disk creation failed.
+          # - READY: Disk is ready for use.
+          # - DELETING: Disk is deleting.
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
@@ -2971,7 +3316,7 @@ module Google
         #   @return [::String]
         #     [Output Only] Creation timestamp in RFC3339 text format.
         # @!attribute [rw] default_disk_size_gb
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] Server-defined default disk size in GB.
         # @!attribute [rw] deprecated
         #   @return [::Google::Cloud::Compute::V1::DeprecationStatus]
@@ -2980,7 +3325,7 @@ module Google
         #   @return [::String]
         #     [Output Only] An optional description of this resource.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -3092,7 +3437,7 @@ module Google
         end
 
         # @!attribute [rw] size_gb
-        #   @return [::String]
+        #   @return [::Integer]
         #     The new size of the persistent disk, which is specified in GB.
         class DisksResizeRequest
           include ::Google::Protobuf::MessageExts
@@ -3116,12 +3461,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] target_shape
+        #   @return [::Google::Cloud::Compute::V1::DistributionPolicy::TargetShape]
+        #     The distribution shape to which the group converges either proactively or on resize events (depending on the value set in updatePolicy.instanceRedistributionType).
         # @!attribute [rw] zones
         #   @return [::Array<::Google::Cloud::Compute::V1::DistributionPolicyZoneConfiguration>]
         #     Zones where the regional managed instance group will create and manage its instances.
         class DistributionPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The distribution shape to which the group converges either proactively or on resize events (depending on the value set in updatePolicy.instanceRedistributionType).
+          module TargetShape
+            # A value indicating that the enum field is not set.
+            UNDEFINED_TARGET_SHAPE = 0
+
+            ANY = 64972
+
+            BALANCED = 468409608
+
+            EVEN = 2140442
+          end
         end
 
         # @!attribute [rw] dest_range
@@ -3205,7 +3565,7 @@ module Google
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] interfaces
         #   @return [::Array<::Google::Cloud::Compute::V1::ExternalVpnGatewayInterface>]
@@ -3305,7 +3665,7 @@ module Google
           end
         end
 
-        # @!attribute [rw] i_p_protocol
+        # @!attribute [rw] I_p_protocol
         #   @return [::String]
         #     The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, ipip, sctp) or the IP protocol number.
         # @!attribute [rw] ports
@@ -3318,7 +3678,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # @!attribute [rw] i_p_protocol
+        # @!attribute [rw] I_p_protocol
         #   @return [::String]
         #     The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, ipip, sctp) or the IP protocol number.
         # @!attribute [rw] ports
@@ -3378,7 +3738,7 @@ module Google
         #   @return [::Boolean]
         #     Denotes whether the firewall rule is disabled. When set to true, the firewall rule is not enforced and the network behaves as if it did not exist. If this is unspecified, the firewall rule will be enabled.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -3457,6 +3817,184 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] attachment_target
+        #   @return [::String]
+        #     The target that the firewall policy is attached to.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     [Output Only] Deprecated, please use short name instead. The display name of the firewall policy of the association.
+        # @!attribute [rw] firewall_policy_id
+        #   @return [::String]
+        #     [Output Only] The firewall policy ID of the association.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name for an association.
+        # @!attribute [rw] short_name
+        #   @return [::String]
+        #     [Output Only] The short name of the firewall policy of the association.
+        class FirewallPolicyAssociation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] associations
+        #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyAssociation>]
+        #     A list of associations.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output Only] Type of firewallPolicy associations. Always compute#FirewallPoliciesListAssociations for lists of firewallPolicy associations.
+        class FirewallPoliciesListAssociationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a rule that describes one or more match conditions along with the action to be taken when traffic matches this condition (allow or deny).
+        # @!attribute [rw] action
+        #   @return [::String]
+        #     The Action to perform when the client connection triggers the rule. Can currently be either "allow" or "deny()" where valid values for status are 403, 404, and 502.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     An optional description for this resource.
+        # @!attribute [rw] direction
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicyRule::Direction]
+        #     The direction in which this rule applies.
+        # @!attribute [rw] disabled
+        #   @return [::Boolean]
+        #     Denotes whether the firewall policy rule is disabled. When set to true, the firewall policy rule is not enforced and traffic behaves as if it did not exist. If this is unspecified, the firewall policy rule will be enabled.
+        # @!attribute [rw] enable_logging
+        #   @return [::Boolean]
+        #     Denotes whether to enable logging for a particular rule. If logging is enabled, logs will be exported to the configured export destination in Stackdriver. Logs may be exported to BigQuery or Pub/Sub. Note: you cannot enable logging on "goto_next" rules.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output only] Type of the resource. Always compute#firewallPolicyRule for firewall policy rules
+        # @!attribute [rw] match
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicyRuleMatcher]
+        #     A match condition that incoming traffic is evaluated against. If it evaluates to true, the corresponding 'action' is enforced.
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     An integer indicating the priority of a rule in the list. The priority must be a positive value between 0 and 2147483647. Rules are evaluated from highest to lowest priority where 0 is the highest priority and 2147483647 is the lowest prority.
+        # @!attribute [rw] rule_tuple_count
+        #   @return [::Integer]
+        #     [Output Only] Calculation of the complexity of a single firewall policy rule.
+        # @!attribute [rw] target_resources
+        #   @return [::Array<::String>]
+        #     A list of network resource URLs to which this rule applies. This field allows you to control which network's VMs get this rule. If this field is left blank, all VMs within the organization will receive the rule.
+        # @!attribute [rw] target_service_accounts
+        #   @return [::Array<::String>]
+        #     A list of service accounts indicating the sets of instances that are applied with this rule.
+        class FirewallPolicyRule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The direction in which this rule applies.
+          module Direction
+            # A value indicating that the enum field is not set.
+            UNDEFINED_DIRECTION = 0
+
+            EGRESS = 432880501
+
+            INGRESS = 516931221
+          end
+        end
+
+        # Represents a Firewall Policy resource. (== resource_for \\{$api_version}.firewallPolicies ==)
+        # @!attribute [rw] associations
+        #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyAssociation>]
+        #     A list of associations that belong to this firewall policy.
+        # @!attribute [rw] creation_timestamp
+        #   @return [::String]
+        #     [Output Only] Creation timestamp in RFC3339 text format.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     An optional description of this resource. Provide this property when you create the resource.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Depreacted, please use short name instead. User-provided name of the Organization firewall plicy. The name should be unique in the organization in which the firewall policy is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        # @!attribute [rw] fingerprint
+        #   @return [::String]
+        #     Specifies a fingerprint for this resource, which is essentially a hash of the metadata's contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update metadata. You must always provide an up-to-date fingerprint hash in order to update or change metadata, otherwise the request will fail with error 412 conditionNotMet.
+        #
+        #     To see the latest fingerprint, make get() request to the firewall policy.
+        # @!attribute [rw] id
+        #   @return [::Integer]
+        #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output only] Type of the resource. Always compute#firewallPolicyfor firewall policies
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     [Output Only] Name of the resource. It is a numeric ID allocated by GCP which uniquely identifies the Firewall Policy.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     [Output Only] The parent of the firewall policy.
+        # @!attribute [rw] rule_tuple_count
+        #   @return [::Integer]
+        #     [Output Only] Total count of all firewall policy rule tuples. A firewall policy can not exceed a set number of tuples.
+        # @!attribute [rw] rules
+        #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRule>]
+        #     A list of rules that belong to this policy. There must always be a default rule (rule with priority 2147483647 and match "*"). If no rules are provided when creating a firewall policy, a default rule with action "allow" will be added.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for the resource.
+        # @!attribute [rw] self_link_with_id
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource with the resource id.
+        # @!attribute [rw] short_name
+        #   @return [::String]
+        #     User-provided name of the Organization firewall plicy. The name should be unique in the organization in which the firewall policy is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        class FirewallPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicy>]
+        #     A list of FirewallPolicy resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output Only] Type of resource. Always compute#firewallPolicyList for listsof FirewallPolicies
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class FirewallPolicyList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a match condition that incoming traffic is evaluated against. Exactly one field must be specified.
+        # @!attribute [rw] dest_ip_ranges
+        #   @return [::Array<::String>]
+        #     CIDR IP address range. Maximum number of destination CIDR IP ranges allowed is 256.
+        # @!attribute [rw] layer4_configs
+        #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRuleMatcherLayer4Config>]
+        #     Pairs of IP protocols and ports that the rule should match.
+        # @!attribute [rw] src_ip_ranges
+        #   @return [::Array<::String>]
+        #     CIDR IP address range. Maximum number of source CIDR IP ranges allowed is 256.
+        class FirewallPolicyRuleMatcher
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] ip_protocol
+        #   @return [::String]
+        #     The IP protocol to which this rule applies. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, ipip, sctp), or the IP protocol number.
+        # @!attribute [rw] ports
+        #   @return [::Array<::String>]
+        #     An optional list of ports to which this rule applies. This field is only applicable for UDP or TCP protocol. Each entry must be either an integer or a range. If not specified, this rule applies to connections through any port.
+        #
+        #     Example inputs include: ["22"], ["80","443"], and ["12345-12349"].
+        class FirewallPolicyRuleMatcherLayer4Config
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Opaque filter criteria used by loadbalancers to restrict routing configuration to a limited set of loadbalancing proxies. Proxies and sidecars involved in loadbalancing would typically present metadata to the loadbalancers which need to match criteria specified here. If a match takes place, the relevant configuration is made available to those proxies.
         # For each metadataFilter in this list, if its filterMatchCriteria is set to MATCH_ANY, at least one of the filterLabels must match the corresponding label provided in the metadata. If its filterMatchCriteria is set to MATCH_ALL, then all of its filterLabels must match with corresponding labels provided in the metadata.
         # An example for using metadataFilters would be: if loadbalancing involves  Envoys, they will only receive routing configuration when values in metadataFilters match values supplied in <a href="https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/core/base.proto#envoy-api-msg-core-node" Node metadata of their XDS requests to loadbalancers.
@@ -3490,6 +4028,21 @@ module Google
           end
         end
 
+        # Describes the auto-registration of the Forwarding Rule to Service Directory. The region and project of the Service Directory resource generated from this registration will be the same as this Forwarding Rule.
+        # @!attribute [rw] namespace
+        #   @return [::String]
+        #     Service Directory namespace to register the forwarding rule under.
+        # @!attribute [rw] service
+        #   @return [::String]
+        #     Service Directory service to register the forwarding rule under.
+        # @!attribute [rw] service_directory_region
+        #   @return [::String]
+        #     [Optional] Service Directory region to register this global forwarding rule under. Default to "us-central1". Only used for PSC for Google APIs. All PSC for Google APIs Forwarding Rules on the same network should use the same Service Directory region.
+        class ForwardingRuleServiceDirectoryRegistration
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents a Forwarding Rule resource.
         #
         # Forwarding rule resources in GCP can be either regional or global in scope:
@@ -3501,6 +4054,35 @@ module Google
         # For more information, read Forwarding rule concepts and Using protocol forwarding.
         #
         # (== resource_for \\{$api_version}.forwardingRules ==) (== resource_for \\{$api_version}.globalForwardingRules ==) (== resource_for \\{$api_version}.regionForwardingRules ==)
+        # @!attribute [rw] I_p_address
+        #   @return [::String]
+        #     IP address that this forwarding rule serves. When a client sends traffic to this IP address, the forwarding rule directs the traffic to the target that you specify in the forwarding rule.
+        #
+        #     If you don't specify a reserved IP address, an ephemeral IP address is assigned. Methods for specifying an IP address:
+        #
+        #     * IPv4 dotted decimal, as in `100.1.2.3` * Full URL, as in https://www.googleapis.com/compute/v1/projects/project_id/regions/region/addresses/address-name * Partial URL or by name, as in:
+        #     - projects/project_id/regions/region/addresses/address-name
+        #     - regions/region/addresses/address-name
+        #     - global/addresses/address-name
+        #     - address-name
+        #
+        #     The loadBalancingScheme and the forwarding rule's target determine the type of IP address that you can use. For detailed information, refer to [IP address specifications](/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications).
+        #
+        #     Must be set to `0.0.0.0` when the target is targetGrpcProxy that has validateForProxyless field set to true.
+        #
+        #     For Private Service Connect forwarding rules that forward traffic to Google APIs, IP address must be provided.
+        # @!attribute [rw] I_p_protocol
+        #   @return [::Google::Cloud::Compute::V1::ForwardingRule::IPProtocol]
+        #     The IP protocol to which this rule applies.
+        #
+        #     For protocol forwarding, valid options are TCP, UDP, ESP, AH, SCTP and ICMP.
+        #
+        #     The valid IP protocols are different for different load balancing products:
+        #     - Internal TCP/UDP Load Balancing: The load balancing scheme is INTERNAL, and one of TCP, UDP or ALL is valid.
+        #     - Traffic Director: The load balancing scheme is INTERNAL_SELF_MANAGED, and only TCP is valid.
+        #     - Internal HTTP(S) Load Balancing: The load balancing scheme is INTERNAL_MANAGED, and only TCP is valid.
+        #     - HTTP(S), SSL Proxy, and TCP Proxy Load Balancing: The load balancing scheme is EXTERNAL and only TCP is valid.
+        #     - Network Load Balancing: The load balancing scheme is EXTERNAL, and one of TCP or UDP is valid.
         # @!attribute [rw] all_ports
         #   @return [::Boolean]
         #     This field is used along with the backend_service field for internal load balancing or with the target field for internal TargetInstance. This field cannot be used with port or portRange fields.
@@ -3523,37 +4105,8 @@ module Google
         #     Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a ForwardingRule. Include the fingerprint in patch request to ensure that you do not overwrite changes that were applied from another concurrent request.
         #
         #     To see the latest fingerprint, make a get() request to retrieve a ForwardingRule.
-        # @!attribute [rw] i_p_address
-        #   @return [::String]
-        #     IP address that this forwarding rule serves. When a client sends traffic to this IP address, the forwarding rule directs the traffic to the target that you specify in the forwarding rule.
-        #
-        #     If you don't specify a reserved IP address, an ephemeral IP address is assigned. Methods for specifying an IP address:
-        #
-        #     * IPv4 dotted decimal, as in `100.1.2.3` * Full URL, as in https://www.googleapis.com/compute/v1/projects/project_id/regions/region/addresses/address-name * Partial URL or by name, as in:
-        #     - projects/project_id/regions/region/addresses/address-name
-        #     - regions/region/addresses/address-name
-        #     - global/addresses/address-name
-        #     - address-name
-        #
-        #     The loadBalancingScheme and the forwarding rule's target determine the type of IP address that you can use. For detailed information, refer to [IP address specifications](/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications).
-        #
-        #     Must be set to `0.0.0.0` when the target is targetGrpcProxy that has validateForProxyless field set to true.
-        #
-        #     For Private Service Connect forwarding rules that forward traffic to Google APIs, IP address must be provided.
-        # @!attribute [rw] i_p_protocol
-        #   @return [::Google::Cloud::Compute::V1::ForwardingRule::IPProtocol]
-        #     The IP protocol to which this rule applies.
-        #
-        #     For protocol forwarding, valid options are TCP, UDP, ESP, AH, SCTP and ICMP.
-        #
-        #     The valid IP protocols are different for different load balancing products:
-        #     - Internal TCP/UDP Load Balancing: The load balancing scheme is INTERNAL, and one of TCP, UDP or ALL is valid.
-        #     - Traffic Director: The load balancing scheme is INTERNAL_SELF_MANAGED, and only TCP is valid.
-        #     - Internal HTTP(S) Load Balancing: The load balancing scheme is INTERNAL_MANAGED, and only TCP is valid.
-        #     - HTTP(S), SSL Proxy, and TCP Proxy Load Balancing: The load balancing scheme is EXTERNAL and only TCP is valid.
-        #     - Network Load Balancing: The load balancing scheme is EXTERNAL, and one of TCP or UDP is valid.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] ip_version
         #   @return [::Google::Cloud::Compute::V1::ForwardingRule::IpVersion]
@@ -3564,6 +4117,14 @@ module Google
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of the resource. Always compute#forwardingRule for Forwarding Rule resources.
+        # @!attribute [rw] label_fingerprint
+        #   @return [::String]
+        #     A fingerprint for the labels being applied to this resource, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels, otherwise the request will fail with error 412 conditionNotMet.
+        #
+        #     To see the latest fingerprint, make a get() request to retrieve a ForwardingRule.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Labels for this resource. These can only be added or modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
         # @!attribute [rw] load_balancing_scheme
         #   @return [::Google::Cloud::Compute::V1::ForwardingRule::LoadBalancingScheme]
         #     Specifies the forwarding rule type.
@@ -3629,12 +4190,20 @@ module Google
         #     For Internal TCP/UDP Load Balancing, if you specify allPorts, you should not specify ports.
         #
         #     For more information, see [Port specifications](/load-balancing/docs/forwarding-rule-concepts#port_specifications).
+        # @!attribute [rw] psc_connection_id
+        #   @return [::Integer]
+        #     [Output Only] The PSC connection id of the PSC Forwarding Rule.
         # @!attribute [rw] region
         #   @return [::String]
         #     [Output Only] URL of the region where the regional forwarding rule resides. This field is not applicable to global forwarding rules. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined URL for the resource.
+        # @!attribute [rw] service_directory_registrations
+        #   @return [::Array<::Google::Cloud::Compute::V1::ForwardingRuleServiceDirectoryRegistration>]
+        #     Service Directory resources to register this forwarding rule with. Currently, only supports a single Service Directory resource.
+        #
+        #     It is only supported for Internal TCP/UDP Load Balancing and Internal HTTP(S) Load Balancing.
         # @!attribute [rw] service_label
         #   @return [::String]
         #     An optional prefix to the service name for this Forwarding Rule. If specified, the prefix is the first label of the fully qualified service name.
@@ -3656,16 +4225,18 @@ module Google
         #     If the network specified is in auto subnet mode, this field is optional. However, if the network is in custom subnet mode, a subnetwork must be specified.
         # @!attribute [rw] target
         #   @return [::String]
-        #     The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For more information, see the "Target" column in [Port specifications](/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications).
-        #
-        #     For Private Service Connect forwarding rules that forward traffic to Google APIs, provide the name of a supported Google API bundle. Currently, the supported Google API bundles include:
-        #
-        #
-        #     - vpc-sc - GCP APIs that support VPC Service Controls. For more information about which APIs support VPC Service Controls, refer to VPC-SC supported products and limitations.
-        #     - all-apis - All GCP APIs. For more information about which APIs are supported with this bundle, refer to Private Google Access-specific domains and VIPs.
         class ForwardingRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # The IP protocol to which this rule applies.
           #
@@ -3890,7 +4461,7 @@ module Google
         #     Optional IPv4 address of network endpoint. The IP address must belong to a VM in Compute Engine (either the primary IP or as part of an aliased IP range). If the IP address is not specified, then the primary IP address for the VM instance in the network that the network endpoint group belongs to will be used.
         # @!attribute [rw] port
         #   @return [::Integer]
-        #     Optional port number of network endpoint. If not specified and the NetworkEndpointGroup.network_endpoint_type is GCE_IP_PORT, the defaultPort for the network endpoint group will be used.
+        #     Optional port number of network endpoint. If not specified, the defaultPort for the network endpoint group will be used.
         class NetworkEndpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3919,26 +4490,6 @@ module Google
         class GlobalNetworkEndpointGroupsDetachEndpointsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # @!attribute [rw] label_fingerprint
-        #   @return [::String]
-        #     The fingerprint of the previous set of labels for this resource, used to detect conflicts. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash when updating or changing labels, otherwise the request will fail with error 412 conditionNotMet. Make a get() request to the resource to get the latest fingerprint.
-        # @!attribute [rw] labels
-        #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     A list of labels to apply for this resource. Each label key & value must comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash. For example, "webserver-frontend": "images". A label value can also be empty (e.g. "my-label": "").
-        class GlobalSetLabelsRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # @!attribute [rw] key
-          #   @return [::String]
-          # @!attribute [rw] value
-          #   @return [::String]
-          class LabelsEntry
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
         end
 
         # An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources.
@@ -3992,6 +4543,40 @@ module Google
         class Policy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] bindings
+        #   @return [::Array<::Google::Cloud::Compute::V1::Binding>]
+        #     Flatten Policy to create a backward compatible wire-format. Deprecated. Use 'policy' to specify bindings.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Flatten Policy to create a backward compatible wire-format. Deprecated. Use 'policy' to specify the etag.
+        # @!attribute [rw] policy
+        #   @return [::Google::Cloud::Compute::V1::Policy]
+        #     REQUIRED: The complete policy to be applied to the 'resource'. The size of the policy is limited to a few 10s of KB. An empty policy is in general a valid policy but certain services (like Projects) might reject them.
+        class GlobalOrganizationSetPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] label_fingerprint
+        #   @return [::String]
+        #     The fingerprint of the previous set of labels for this resource, used to detect conflicts. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash when updating or changing labels, otherwise the request will fail with error 412 conditionNotMet. Make a get() request to the resource to get the latest fingerprint.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     A list of labels to apply for this resource. Each label key & value must comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash. For example, "webserver-frontend": "images". A label value can also be empty (e.g. "my-label": "").
+        class GlobalSetLabelsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # @!attribute [rw] bindings
@@ -4396,7 +4981,7 @@ module Google
         # @!attribute [rw] https_health_check
         #   @return [::Google::Cloud::Compute::V1::HTTPSHealthCheck]
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -4406,7 +4991,7 @@ module Google
         #     Configure logging on this health check.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. For example, a name that is 1-63 characters long, matches the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?`, and otherwise complies with RFC1035. This regular expression describes a name where the first character is a lowercase letter, and all following characters are a dash, lowercase letter, or digit, except the last character, which isn't a dash.
         # @!attribute [rw] region
         #   @return [::String]
         #     [Output Only] Region where the health check resides. Not applicable to global health checks.
@@ -4507,7 +5092,7 @@ module Google
         #     - NO_AGGREGATION. An EndpointHealth message is returned for each backend in the health check service.
         #     - AND. If any backend's health check reports UNHEALTHY, then UNHEALTHY is the HealthState of the entire health check service. If all backend's are healthy, the HealthState of the health check service is HEALTHY. .
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -4749,10 +5334,10 @@ module Google
 
         # HttpRouteRuleMatch criteria for field values that must stay within the specified integer range.
         # @!attribute [rw] range_end
-        #   @return [::String]
+        #   @return [::Integer]
         #     The end of the range (exclusive) in signed long integer format.
         # @!attribute [rw] range_start
-        #   @return [::String]
+        #   @return [::Integer]
         #     The start of the range (inclusive) in signed long integer format.
         class Int64RangeMatch
           include ::Google::Protobuf::MessageExts
@@ -4794,7 +5379,7 @@ module Google
         #     Note that rangeMatch is not supported for Loadbalancers that have their loadBalancingScheme set to EXTERNAL.
         # @!attribute [rw] regex_match
         #   @return [::String]
-        #     The value of the header must match the regular expression specified in regexMatch. For regular expression grammar, please see:  en.cppreference.com/w/cpp/regex/ecmascript
+        #     The value of the header must match the regular expression specified in regexMatch. For regular expression grammar, please see:  github.com/google/re2/wiki/Syntax
         #     For matching against a port specified in the HTTP request, use a headerMatch with headerName set to PORT and a regular expression that satisfies the RFC2616 Host header's port specifier.
         #     Only one of exactMatch, prefixMatch, suffixMatch, regexMatch, presentMatch or rangeMatch must be set.
         #     Note that regexMatch only applies to Loadbalancers that have their loadBalancingScheme set to INTERNAL_SELF_MANAGED.
@@ -4821,7 +5406,7 @@ module Google
         #     Only one of presentMatch, exactMatch or regexMatch must be set.
         # @!attribute [rw] regex_match
         #   @return [::String]
-        #     The queryParameterMatch matches if the value of the parameter matches the regular expression specified by regexMatch. For the regular expression grammar, please see en.cppreference.com/w/cpp/regex/ecmascript
+        #     The queryParameterMatch matches if the value of the parameter matches the regular expression specified by regexMatch. For the regular expression grammar, please see github.com/google/re2/wiki/Syntax
         #     Only one of presentMatch, exactMatch or regexMatch must be set.
         #     Note that regexMatch only applies when the loadBalancingScheme is set to INTERNAL_SELF_MANAGED.
         class HttpQueryParameterMatch
@@ -4967,6 +5552,11 @@ module Google
         #     The specification for fault injection introduced into traffic to test the resiliency of clients to backend service failure. As part of fault injection, when clients send requests to a backend service, delays can be introduced by Loadbalancer on a percentage of requests before sending those request to the backend service. Similarly requests from clients can be aborted by the Loadbalancer for a percentage of requests.
         #     timeout and retry_policy will be ignored by clients that are configured with a fault_injection_policy.
         #     Not supported when the URL map is bound to target gRPC proxy that has validateForProxyless field set to true.
+        # @!attribute [rw] max_stream_duration
+        #   @return [::Google::Cloud::Compute::V1::Duration]
+        #     Specifies the maximum duration (timeout) for streams on the selected route. Unlike the timeout field where the timeout duration starts from the time the request has been fully processed (i.e. end-of-stream), the duration in this field is computed from the beginning of the stream until the response has been completely processed, including all retries. A stream that does not complete in this duration is closed.
+        #     If not specified, will use the largest maxStreamDuration among all backend services associated with the route.
+        #     This field is only allowed if the Url map is used with backend services with loadBalancingScheme set to INTERNAL_SELF_MANAGED.
         # @!attribute [rw] request_mirror_policy
         #   @return [::Google::Cloud::Compute::V1::RequestMirrorPolicy]
         #     Specifies the policy on how requests intended for the route's backends are shadowed to a separate mirrored backend service. Loadbalancer does not wait for responses from the shadow service. Prior to sending traffic to the shadow service, the host / authority header is suffixed with -shadow.
@@ -5027,7 +5617,7 @@ module Google
         #     Not supported when the URL map is bound to target gRPC proxy.
         # @!attribute [rw] regex_match
         #   @return [::String]
-        #     For satisfying the matchRule condition, the path of the request must satisfy the regular expression specified in regexMatch after removing any query parameters and anchor supplied with the original URL. For regular expression grammar please see en.cppreference.com/w/cpp/regex/ecmascript
+        #     For satisfying the matchRule condition, the path of the request must satisfy the regular expression specified in regexMatch after removing any query parameters and anchor supplied with the original URL. For regular expression grammar please see github.com/google/re2/wiki/Syntax
         #     Only one of prefixMatch, fullPathMatch or regexMatch must be specified.
         #     Note that regexMatch only applies to Loadbalancers that have their loadBalancingScheme set to INTERNAL_SELF_MANAGED.
         class HttpRouteRuleMatch
@@ -5100,7 +5690,7 @@ module Google
         #
         # You can use images to create boot disks for your VM instances. For more information, read Images. (== resource_for \\{$api_version}.images ==)
         # @!attribute [rw] archive_size_bytes
-        #   @return [::String]
+        #   @return [::Integer]
         #     Size of the image tar.gz archive stored in Google Cloud Storage (in bytes).
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
@@ -5112,7 +5702,7 @@ module Google
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
         # @!attribute [rw] disk_size_gb
-        #   @return [::String]
+        #   @return [::Integer]
         #     Size of the image when restored onto a persistent disk (in GB).
         # @!attribute [rw] family
         #   @return [::String]
@@ -5121,7 +5711,7 @@ module Google
         #   @return [::Array<::Google::Cloud::Compute::V1::GuestOsFeature>]
         #     A list of features to enable on the guest operating system. Applicable only for bootable images. Read  Enabling guest operating system features to see a list of available options.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] image_encryption_key
         #   @return [::Google::Cloud::Compute::V1::CustomerEncryptionKey]
@@ -5144,7 +5734,7 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels to apply to this image. These can be later modified by the setLabels method.
         # @!attribute [rw] license_codes
-        #   @return [::Array<::String>]
+        #   @return [::Array<::Integer>]
         #     Integer license codes indicating which licenses are attached to this image.
         # @!attribute [rw] licenses
         #   @return [::Array<::String>]
@@ -5155,6 +5745,9 @@ module Google
         # @!attribute [rw] raw_disk
         #   @return [::Google::Cloud::Compute::V1::RawDisk]
         #     The parameters of the raw disk image.
+        # @!attribute [rw] satisfies_pzs
+        #   @return [::Boolean]
+        #     [Output Only] Reserved for future use.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined URL for the resource.
@@ -5299,7 +5892,7 @@ module Google
         #     An array of alias IP ranges for this network interface. You can only specify this field for network interfaces in VPC networks.
         # @!attribute [rw] fingerprint
         #   @return [::String]
-        #     Fingerprint hash of contents stored in this network interface. This field will be ignored when inserting an Instance or adding a NetworkInterface. An up-to-date fingerprint must be provided in order to update the NetworkInterface, otherwise the request will fail with error 412 conditionNotMet.
+        #     Fingerprint hash of contents stored in this network interface. This field will be ignored when inserting an Instance or adding a NetworkInterface. An up-to-date fingerprint must be provided in order to update the NetworkInterface. The request will fail with error 400 Bad Request if the fingerprint is not provided, or 412 Precondition Failed if the fingerprint is out of date.
         # @!attribute [rw] ipv6_address
         #   @return [::String]
         #     [Output Only] An IPv6 internal network address for this network interface.
@@ -5374,7 +5967,7 @@ module Google
           end
         end
 
-        # Sets the scheduling options for an Instance. NextID: 13
+        # Sets the scheduling options for an Instance. NextID: 20
         # @!attribute [rw] automatic_restart
         #   @return [::Boolean]
         #     Specifies whether the instance should be automatically restarted if it is terminated by Compute Engine (not terminated by a user). You can only set the automatic restart option for standard instances. Preemptible instances cannot be automatically restarted.
@@ -5463,6 +6056,9 @@ module Google
         # Represents an Instance resource.
         #
         # An instance is a virtual machine that is hosted on Google Cloud Platform. For more information, read Virtual Machine Instances. (== resource_for \\{$api_version}.instances ==)
+        # @!attribute [rw] advanced_machine_features
+        #   @return [::Google::Cloud::Compute::V1::AdvancedMachineFeatures]
+        #     Controls for advanced machine-related behavior features.
         # @!attribute [rw] can_ip_forward
         #   @return [::Boolean]
         #     Allows this instance to send and receive packets with non-matching destination or source IPs. This is required if you plan to use this instance to forward routes. For more information, see Enabling IP Forwarding.
@@ -5498,7 +6094,7 @@ module Google
         #   @return [::String]
         #     Specifies the hostname of the instance. The specified hostname must be RFC1035 compliant. If hostname is not specified, the default hostname is [INSTANCE_NAME].c.[PROJECT_ID].internal when using the global DNS, and [INSTANCE_NAME].[ZONE].c.[PROJECT_ID].internal when using zonal DNS.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -5554,6 +6150,9 @@ module Google
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Resource policies applied to this instance.
+        # @!attribute [rw] satisfies_pzs
+        #   @return [::Boolean]
+        #     [Output Only] Reserved for future use.
         # @!attribute [rw] scheduling
         #   @return [::Google::Cloud::Compute::V1::Scheduling]
         #     Sets the scheduling options for this instance.
@@ -5717,7 +6316,7 @@ module Google
         #   @return [::String]
         #     [Output Only] The fingerprint of the named ports. The system uses this fingerprint to detect conflicts when multiple users change the named ports concurrently.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] A unique identifier for this instance group, generated by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -5901,7 +6500,7 @@ module Google
         #     - NONE: For non-autoscaled groups, proactive redistribution is disabled.
         # @!attribute [rw] max_surge
         #   @return [::Google::Cloud::Compute::V1::FixedOrPercent]
-        #     The maximum number of instances that can be created above the specified targetSize during the update process. By default, a fixed value of 1 is used. This value can be either a fixed number or a percentage if the instance group has 10 or more instances. If you set a percentage, the number of instances will be rounded up if necessary.
+        #     The maximum number of instances that can be created above the specified targetSize during the update process. This value can be either a fixed number or, if the group has 10 or more instances, a percentage. If you set a percentage, the number of instances is rounded up if necessary. The default value for maxSurge is a fixed value equal to the number of zones in which the managed instance group operates.
         #
         #     At least one of either maxSurge or maxUnavailable must be greater than 0. Learn more about maxSurge.
         # @!attribute [rw] max_unavailable
@@ -5910,7 +6509,7 @@ module Google
         #
         #
         #     - The instance's status is RUNNING.
-        #     - If there is a health check on the instance group, the instance's liveness health check result must be HEALTHY at least once. If there is no health check on the group, then the instance only needs to have a status of RUNNING to be considered available.  By default, a fixed value of 1 is used. This value can be either a fixed number or a percentage if the instance group has 10 or more instances. If you set a percentage, the number of instances will be rounded up if necessary.
+        #     - If there is a health check on the instance group, the instance's health check status must be HEALTHY at least once. If there is no health check on the group, then the instance only needs to have a status of RUNNING to be considered available.  This value can be either a fixed number or, if the group has 10 or more instances, a percentage. If you set a percentage, the number of instances is rounded up if necessary. The default value for maxUnavailable is a fixed value equal to the number of zones in which the managed instance group operates.
         #
         #     At least one of either maxSurge or maxUnavailable must be greater than 0. Learn more about maxUnavailable.
         # @!attribute [rw] minimal_action
@@ -5974,7 +6573,7 @@ module Google
         #
         #     To see the latest fingerprint, make a get() request to retrieve an InstanceGroupManager.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] A unique identifier for this resource type. The server generates this identifier.
         # @!attribute [rw] instance_group
         #   @return [::String]
@@ -6256,7 +6855,7 @@ module Google
         #     - REFRESHING The managed instance group is applying configuration changes to the instance without stopping it. For example, the group can update the target pool list for an instance without stopping that instance.
         #     - VERIFYING The managed instance group has created the instance and it is in the process of being verified.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output only] The unique identifier for this resource. This field is empty when instance does not exist.
         # @!attribute [rw] instance
         #   @return [::String]
@@ -6673,82 +7272,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # @!attribute [rw] can_ip_forward
-        #   @return [::Boolean]
-        #     Enables instances created based on these properties to send packets with source IP addresses other than their own and receive packets with destination IP addresses other than their own. If these instances will be used as an IP gateway or it will be set as the next-hop in a Route resource, specify true. If unsure, leave this set to false. See the Enable IP forwarding documentation for more information.
-        # @!attribute [rw] confidential_instance_config
-        #   @return [::Google::Cloud::Compute::V1::ConfidentialInstanceConfig]
-        #     Specifies the Confidential Instance options.
-        # @!attribute [rw] description
-        #   @return [::String]
-        #     An optional text description for the instances that are created from these properties.
-        # @!attribute [rw] disks
-        #   @return [::Array<::Google::Cloud::Compute::V1::AttachedDisk>]
-        #     An array of disks that are associated with the instances that are created from these properties.
-        # @!attribute [rw] guest_accelerators
-        #   @return [::Array<::Google::Cloud::Compute::V1::AcceleratorConfig>]
-        #     A list of guest accelerator cards' type and count to use for instances created from these properties.
-        # @!attribute [rw] labels
-        #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Labels to apply to instances that are created from these properties.
-        # @!attribute [rw] machine_type
-        #   @return [::String]
-        #     The machine type to use for instances that are created from these properties.
-        # @!attribute [rw] metadata
-        #   @return [::Google::Cloud::Compute::V1::Metadata]
-        #     The metadata key/value pairs to assign to instances that are created from these properties. These pairs can consist of custom metadata or predefined keys. See Project and instance metadata for more information.
-        # @!attribute [rw] min_cpu_platform
-        #   @return [::String]
-        #     Minimum cpu/platform to be used by instances. The instance may be scheduled on the specified or newer cpu/platform. Applicable values are the friendly names of CPU platforms, such as minCpuPlatform: "Intel Haswell" or minCpuPlatform: "Intel Sandy Bridge". For more information, read Specifying a Minimum CPU Platform.
-        # @!attribute [rw] network_interfaces
-        #   @return [::Array<::Google::Cloud::Compute::V1::NetworkInterface>]
-        #     An array of network access configurations for this interface.
-        # @!attribute [rw] private_ipv6_google_access
-        #   @return [::Google::Cloud::Compute::V1::InstanceProperties::PrivateIpv6GoogleAccess]
-        #     The private IPv6 google access type for VMs. If not specified, use  INHERIT_FROM_SUBNETWORK as default.
-        # @!attribute [rw] reservation_affinity
-        #   @return [::Google::Cloud::Compute::V1::ReservationAffinity]
-        #     Specifies the reservations that instances can consume from.
-        # @!attribute [rw] resource_policies
-        #   @return [::Array<::String>]
-        #     Resource policies (names, not ULRs) applied to instances created from these properties.
-        # @!attribute [rw] scheduling
-        #   @return [::Google::Cloud::Compute::V1::Scheduling]
-        #     Specifies the scheduling options for the instances that are created from these properties.
-        # @!attribute [rw] service_accounts
-        #   @return [::Array<::Google::Cloud::Compute::V1::ServiceAccount>]
-        #     A list of service accounts with specified scopes. Access tokens for these service accounts are available to the instances that are created from these properties. Use metadata queries to obtain the access tokens for these instances.
-        # @!attribute [rw] shielded_instance_config
-        #   @return [::Google::Cloud::Compute::V1::ShieldedInstanceConfig]
-        # @!attribute [rw] tags
-        #   @return [::Google::Cloud::Compute::V1::Tags]
-        #     A list of tags to apply to the instances that are created from these properties. The tags identify valid sources or targets for network firewalls. The setTags method can modify this list of tags. Each tag within the list must comply with RFC1035.
-        class InstanceProperties
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # @!attribute [rw] key
-          #   @return [::String]
-          # @!attribute [rw] value
-          #   @return [::String]
-          class LabelsEntry
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # The private IPv6 google access type for VMs. If not specified, use  INHERIT_FROM_SUBNETWORK as default.
-          module PrivateIpv6GoogleAccess
-            # A value indicating that the enum field is not set.
-            UNDEFINED_PRIVATE_IPV6_GOOGLE_ACCESS = 0
-
-            ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE = 427975994
-
-            ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE = 288210263
-
-            INHERIT_FROM_SUBNETWORK = 530256959
-          end
-        end
-
         # A specification of the parameters to use when creating the instance template from a source instance.
         # @!attribute [rw] disk_configs
         #   @return [::Array<::Google::Cloud::Compute::V1::DiskInstantiationConfig>]
@@ -6768,7 +7291,7 @@ module Google
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] A unique identifier for this instance template. The server defines this identifier.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -6823,6 +7346,47 @@ module Google
         #   @return [::Array<::String>]
         #     Resource policies to be added to this instance.
         class InstancesAddResourcePoliciesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     [Output Only] Deprecated, please use short name instead. The display name of the firewall policy.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     [Output Only] The name of the firewall policy.
+        # @!attribute [rw] rules
+        #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRule>]
+        #     The rules that apply to the network.
+        # @!attribute [rw] short_name
+        #   @return [::String]
+        #     [Output Only] The short name of the firewall policy.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Compute::V1::InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy::Type]
+        #     [Output Only] The type of the firewall policy.
+        class InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # [Output Only] The type of the firewall policy.
+          module Type
+            # A value indicating that the enum field is not set.
+            UNDEFINED_TYPE = 0
+
+            HIERARCHY = 69902869
+
+            UNSPECIFIED = 526786327
+          end
+        end
+
+        # @!attribute [rw] firewall_policys
+        #   @return [::Array<::Google::Cloud::Compute::V1::InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy>]
+        #     Effective firewalls from firewall policies.
+        # @!attribute [rw] firewalls
+        #   @return [::Array<::Google::Cloud::Compute::V1::Firewall>]
+        #     Effective firewalls on the instance.
+        class InstancesGetEffectiveFirewallsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -6924,7 +7488,7 @@ module Google
         #   @return [::String]
         #     A description about the purpose of the outage.
         # @!attribute [rw] end_time
-        #   @return [::String]
+        #   @return [::Integer]
         #     Scheduled end time for the outage (milliseconds since Unix epoch).
         # @!attribute [rw] issue_type
         #   @return [::Google::Cloud::Compute::V1::InterconnectOutageNotification::IssueType]
@@ -6939,7 +7503,7 @@ module Google
         #     The party that generated this notification, which can take the following value:
         #     - GOOGLE: this notification as generated by Google. Note that the value of NSRC_GOOGLE has been deprecated in favor of GOOGLE.
         # @!attribute [rw] start_time
-        #   @return [::String]
+        #   @return [::Integer]
         #     Scheduled start time for the outage (milliseconds since Unix epoch).
         # @!attribute [rw] state
         #   @return [::Google::Cloud::Compute::V1::InterconnectOutageNotification::State]
@@ -7024,7 +7588,7 @@ module Google
         #   @return [::String]
         #     [Output Only] Google reference ID to be used when raising support tickets with Google or otherwise to debug backend connectivity issues.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] interconnect_attachments
         #   @return [::Array<::String>]
@@ -7201,15 +7765,25 @@ module Google
         #     - AVAILABILITY_DOMAIN_ANY
         #     - AVAILABILITY_DOMAIN_1
         #     - AVAILABILITY_DOMAIN_2 For improved reliability, customers should configure a pair of attachments, one per availability domain. The selected availability domain will be provided to the Partner via the pairing key, so that the provisioned circuit will lie in the specified domain. If not specified, the value will default to AVAILABILITY_DOMAIN_ANY.
+        # @!attribute [rw] encryption
+        #   @return [::Google::Cloud::Compute::V1::InterconnectAttachment::Encryption]
+        #     Indicates the user-supplied encryption option of this interconnect attachment:
+        #     - NONE is the default value, which means that the attachment carries unencrypted traffic. VMs can send traffic to, or receive traffic from, this type of attachment.
+        #     - IPSEC indicates that the attachment carries only traffic encrypted by an IPsec device such as an HA VPN gateway. VMs cannot directly send traffic to, or receive traffic from, such an attachment. To use IPsec-encrypted Cloud Interconnect, create the attachment using this option.
+        #     Not currently available in all Interconnect locations.
         # @!attribute [rw] google_reference_id
         #   @return [::String]
         #     [Output Only] Google reference ID, to be used when raising support tickets with Google or otherwise to debug backend connectivity issues. [Deprecated] This field is not used.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] interconnect
         #   @return [::String]
         #     URL of the underlying Interconnect object that this attachment's traffic will traverse through.
+        # @!attribute [rw] ipsec_internal_addresses
+        #   @return [::Array<::String>]
+        #     URL of addresses that have been reserved for the interconnect attachment, Used only for interconnect attachment that has the encryption option as IPSEC. The addresses must be RFC 1918 IP address ranges. When creating HA VPN gateway over the interconnect attachment, if the attachment is configured to use an RFC 1918 IP address, then the VPN gateway's IP address will be allocated from the IP address range specified here. For example, if the HA VPN gateway's interface 0 is paired to this interconnect attachment, then an RFC 1918 IP address for the VPN gateway interface 0 will be allocated from the IP address specified for this interconnect attachment. If this field is not specified for interconnect attachment that has encryption option as IPSEC, later on when creating HA VPN gateway on this interconnect attachment, the HA VPN gateway's IP address will be allocated from regional external IP address pool.
+        #     Not currently available in all Interconnect locations.
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of the resource. Always compute#interconnectAttachment for interconnect attachments.
@@ -7228,7 +7802,7 @@ module Google
         #   @return [::String]
         #     [Output only for type PARTNER. Input only for PARTNER_PROVIDER. Not present for DEDICATED]. The opaque identifier of an PARTNER attachment used to initiate provisioning with a selected partner. Of the form "XXXXX/region/domain"
         # @!attribute [rw] partner_asn
-        #   @return [::String]
+        #   @return [::Integer]
         #     Optional BGP ASN for the router supplied by a Layer 3 Partner if they configured BGP on behalf of the customer. Output only for PARTNER type, input only for PARTNER_PROVIDER, not available for DEDICATED.
         # @!attribute [rw] partner_metadata
         #   @return [::Google::Cloud::Compute::V1::InterconnectAttachmentPartnerMetadata]
@@ -7322,6 +7896,19 @@ module Google
             AVAILABILITY_DOMAIN_2 = 349552091
 
             AVAILABILITY_DOMAIN_ANY = 375256373
+          end
+
+          # Indicates the user-supplied encryption option of this interconnect attachment:
+          # - NONE is the default value, which means that the attachment carries unencrypted traffic. VMs can send traffic to, or receive traffic from, this type of attachment.
+          # - IPSEC indicates that the attachment carries only traffic encrypted by an IPsec device such as an HA VPN gateway. VMs cannot directly send traffic to, or receive traffic from, such an attachment. To use IPsec-encrypted Cloud Interconnect, create the attachment using this option.
+          # Not currently available in all Interconnect locations.
+          module Encryption
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ENCRYPTION = 0
+
+            IPSEC = 69882282
+
+            NONE = 2402104
           end
 
           # [Output Only] The current status of whether or not this interconnect attachment is functional, which can take one of the following values:
@@ -7588,7 +8175,7 @@ module Google
 
         # Information about any potential InterconnectAttachments between an Interconnect at a specific InterconnectLocation, and a specific Cloud Region.
         # @!attribute [rw] expected_rtt_ms
-        #   @return [::String]
+        #   @return [::Integer]
         #     Expected round-trip time in milliseconds, from this InterconnectLocation to a VM in this region.
         # @!attribute [rw] location_presence
         #   @return [::Google::Cloud::Compute::V1::InterconnectLocationRegionInfo::LocationPresence]
@@ -7648,7 +8235,7 @@ module Google
         #   @return [::String]
         #     [Output Only] A provider-assigned Identifier for this facility (e.g., Ashburn-DC1).
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -7774,13 +8361,13 @@ module Google
         #   @return [::String]
         #     An optional textual description of the resource; provided by the client when the resource is created.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of resource. Always compute#license for licenses.
         # @!attribute [rw] license_code
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique code used to attach this license to images, snapshots, and disks.
         # @!attribute [rw] name
         #   @return [::String]
@@ -7819,7 +8406,7 @@ module Google
         #   @return [::String]
         #     [Output Only] Description of this License Code.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -7892,6 +8479,26 @@ module Google
         class LocalDisk
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] preference
+        #   @return [::Google::Cloud::Compute::V1::LocationPolicyLocation::Preference]
+        #     Preference for a given locaction: ALLOW or DENY.
+        class LocationPolicyLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Preference for a given locaction: ALLOW or DENY.
+          module Preference
+            # A value indicating that the enum field is not set.
+            UNDEFINED_PREFERENCE = 0
+
+            ALLOW = 62368553
+
+            DENY = 2094604
+
+            PREFERENCE_UNSPECIFIED = 496219571
+          end
         end
 
         # Write a Cloud Audit log
@@ -8024,7 +8631,7 @@ module Google
         #   @return [::Integer]
         #     [Output Only] The number of virtual CPUs that are available to the instance.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] image_space_gb
         #   @return [::Integer]
@@ -8039,7 +8646,7 @@ module Google
         #   @return [::Integer]
         #     [Output Only] Maximum persistent disks allowed.
         # @!attribute [rw] maximum_persistent_disks_size_gb
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] Maximum total persistent disks size (GB) allowed.
         # @!attribute [rw] memory_mb
         #   @return [::Integer]
@@ -8306,6 +8913,9 @@ module Google
         # Represents a VPC Network resource.
         #
         # Networks connect resources to each other and to the internet. For more information, read Virtual Private Cloud (VPC) Network. (== resource_for \\{$api_version}.networks ==)
+        # @!attribute [rw] I_pv4_range
+        #   @return [::String]
+        #     Deprecated in favor of subnet mode networks. The range of internal addresses that are legal on this network. This range is a CIDR specification, for example: 192.168.0.0/16. Provided by the client when the network is created.
         # @!attribute [rw] auto_create_subnetworks
         #   @return [::Boolean]
         #     Must be set to create a VPC network. If not set, a legacy network is created.
@@ -8324,11 +8934,8 @@ module Google
         # @!attribute [rw] gateway_i_pv4
         #   @return [::String]
         #     [Output Only] The gateway address for default routing out of the network, selected by GCP.
-        # @!attribute [rw] i_pv4_range
-        #   @return [::String]
-        #     Deprecated in favor of subnet mode networks. The range of internal addresses that are legal on this network. This range is a CIDR specification, for example: 192.168.0.0/16. Provided by the client when the network is created.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -8455,7 +9062,7 @@ module Google
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -8501,6 +9108,8 @@ module Google
           module NetworkEndpointType
             # A value indicating that the enum field is not set.
             UNDEFINED_NETWORK_ENDPOINT_TYPE = 0
+
+            GCE_VM_IP = 401880793
 
             GCE_VM_IP_PORT = 501838375
 
@@ -8689,6 +9298,49 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     [Output Only] Deprecated, please use short name instead. The display name of the firewall policy.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     [Output Only] The name of the firewall policy.
+        # @!attribute [rw] rules
+        #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRule>]
+        #     The rules that apply to the network.
+        # @!attribute [rw] short_name
+        #   @return [::String]
+        #     [Output Only] The short name of the firewall policy.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Compute::V1::NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy::Type]
+        #     [Output Only] The type of the firewall policy.
+        class NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # [Output Only] The type of the firewall policy.
+          module Type
+            # A value indicating that the enum field is not set.
+            UNDEFINED_TYPE = 0
+
+            HIERARCHY = 69902869
+
+            NETWORK = 413984270
+
+            UNSPECIFIED = 526786327
+          end
+        end
+
+        # @!attribute [rw] firewall_policys
+        #   @return [::Array<::Google::Cloud::Compute::V1::NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy>]
+        #     Effective firewalls from firewall policy.
+        # @!attribute [rw] firewalls
+        #   @return [::Array<::Google::Cloud::Compute::V1::Firewall>]
+        #     Effective firewalls on the network.
+        class NetworksGetEffectiveFirewallsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the peering, which should conform to RFC1035.
@@ -8759,11 +9411,14 @@ module Google
         # @!attribute [rw] fingerprint
         #   @return [::String]
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] The type of the resource. Always compute#nodeGroup for node group.
+        # @!attribute [rw] location_hint
+        #   @return [::String]
+        #     An opaque location hint used to place the Node close to other resources. This field is for use by internal tools that use the public API. The location hint here on the NodeGroup overrides any location_hint present in the NodeTemplate.
         # @!attribute [rw] maintenance_policy
         #   @return [::Google::Cloud::Compute::V1::NodeGroup::MaintenancePolicy]
         #     Specifies how to handle instances when a node in the group undergoes maintenance. Set to one of: DEFAULT, RESTART_IN_PLACE, or MIGRATE_WITHIN_NODE_GROUP. The default value is DEFAULT. For more information, see  Maintenance policies.
@@ -8925,6 +9580,9 @@ module Google
         # @!attribute [rw] node_type
         #   @return [::String]
         #     The type of this node.
+        # @!attribute [rw] satisfies_pzs
+        #   @return [::Boolean]
+        #     [Output Only] Reserved for future use.
         # @!attribute [rw] server_binding
         #   @return [::Google::Cloud::Compute::V1::ServerBinding]
         #     Binding properties for the physical server.
@@ -9040,7 +9698,7 @@ module Google
         # @!attribute [rw] disks
         #   @return [::Array<::Google::Cloud::Compute::V1::LocalDisk>]
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -9207,7 +9865,7 @@ module Google
         #   @return [::Integer]
         #     [Output Only] The number of virtual CPUs that are available to the node type.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -9338,7 +9996,7 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::NotificationEndpointGrpcSettings]
         #     Settings of the gRPC notification endpoint including the endpoint URL and the retry duration.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] A unique identifier for this resource type. The server generates this identifier.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -9496,7 +10154,7 @@ module Google
         #   @return [::Integer]
         #     [Output Only] If the operation fails, this field contains the HTTP error status code that was returned. For example, a `404` means the resource was not found.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the operation. This identifier is defined by the server.
         # @!attribute [rw] insert_time
         #   @return [::String]
@@ -9507,6 +10165,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     [Output Only] Name of the operation.
+        # @!attribute [rw] operation_group_id
+        #   @return [::String]
+        #     [Output Only] An ID that represents a group of operations, such as when a group of operations results from a `bulkInsert` API request.
         # @!attribute [rw] operation_type
         #   @return [::String]
         #     [Output Only] The type of operation, such as `insert`, `update`, or `delete`, and so on.
@@ -9529,7 +10190,7 @@ module Google
         #   @return [::String]
         #     [Output Only] An optional textual description of the current status of the operation.
         # @!attribute [rw] target_id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique target ID, which identifies a specific incarnation of the target resource.
         # @!attribute [rw] target_link
         #   @return [::String]
@@ -9641,15 +10302,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] I_p_protocols
+        #   @return [::Array<::String>]
+        #     Protocols that apply as filter on mirrored traffic. If no protocols are specified, all traffic that matches the specified CIDR ranges is mirrored. If neither cidrRanges nor IPProtocols is specified, all traffic is mirrored.
         # @!attribute [rw] cidr_ranges
         #   @return [::Array<::String>]
         #     IP CIDR ranges that apply as filter on the source (ingress) or destination (egress) IP in the IP header. Only IPv4 is supported. If no ranges are specified, all traffic that matches the specified IPProtocols is mirrored. If neither cidrRanges nor IPProtocols is specified, all traffic is mirrored.
         # @!attribute [rw] direction
         #   @return [::Google::Cloud::Compute::V1::PacketMirroringFilter::Direction]
         #     Direction of traffic to mirror, either INGRESS, EGRESS, or BOTH. The default is BOTH.
-        # @!attribute [rw] i_p_protocols
-        #   @return [::Array<::String>]
-        #     Protocols that apply as filter on mirrored traffic. If no protocols are specified, all traffic that matches the specified CIDR ranges is mirrored. If neither cidrRanges nor IPProtocols is specified, all traffic is mirrored.
         class PacketMirroringFilter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -9719,7 +10380,7 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::PacketMirroringFilter]
         #     Filter for mirrored traffic. If unspecified, all traffic is mirrored.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -10057,21 +10718,29 @@ module Google
 
             BACKEND_SERVICES = 269623753
 
+            C2D_CPUS = 508182517
+
             C2_CPUS = 317601211
 
             COMMITMENTS = 456141790
 
             COMMITTED_A2_CPUS = 59330902
 
+            COMMITTED_C2D_CPUS = 282390904
+
             COMMITTED_C2_CPUS = 223725528
 
             COMMITTED_CPUS = 292394702
+
+            COMMITTED_E2_CPUS = 388120154
 
             COMMITTED_LICENSES = 357606869
 
             COMMITTED_LOCAL_SSD_TOTAL_GB = 308393480
 
             COMMITTED_MEMORY_OPTIMIZED_CPUS = 489057886
+
+            COMMITTED_N2A_CPUS = 40064304
 
             COMMITTED_N2D_CPUS = 125951757
 
@@ -10094,6 +10763,8 @@ module Google
             CPUS_ALL_REGIONS = 470911149
 
             DISKS_TOTAL_GB = 353520543
+
+            E2_CPUS = 481995837
 
             EXTERNAL_NETWORK_LB_FORWARDING_RULES = 374298265
 
@@ -10149,6 +10820,8 @@ module Google
 
             MACHINE_IMAGES = 446986640
 
+            N2A_CPUS = 265855917
+
             N2D_CPUS = 351743370
 
             N2_CPUS = 416465286
@@ -10182,6 +10855,8 @@ module Google
             NVIDIA_V100_GPUS = 129293095
 
             PACKET_MIRRORINGS = 15578407
+
+            PD_EXTREME_TOTAL_PROVISIONED_IOPS = 69593965
 
             PREEMPTIBLE_CPUS = 251184841
 
@@ -10299,7 +10974,7 @@ module Google
         #   @return [::Array<::String>]
         #     Restricted features enabled for use on this project.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server. This is not the project ID, and is just a unique ID used by Compute Engine to identify resources.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -10422,6 +11097,279 @@ module Google
           end
         end
 
+        # Represents a CIDR range which can be used to assign addresses.
+        # @!attribute [rw] ip_range
+        #   @return [::String]
+        #     The IP address range of the public delegated prefix
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name of the public delegated prefix
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     The project number of the public delegated prefix
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The region of the public delegated prefix if it is regional. If absent, the prefix is global.
+        # @!attribute [rw] status
+        #   @return [::String]
+        #     The status of the public delegated prefix. Possible values are: INITIALIZING: The public delegated prefix is being initialized and addresses cannot be created yet. ANNOUNCED: The public delegated prefix is active.
+        class PublicAdvertisedPrefixPublicDelegatedPrefix
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A public advertised prefix represents an aggregated IP prefix or netblock which customers bring to cloud. The IP prefix is a single unit of route advertisement and is announced globally to the internet.
+        # @!attribute [rw] creation_timestamp
+        #   @return [::String]
+        #     [Output Only] Creation timestamp in RFC3339 text format.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     An optional description of this resource. Provide this property when you create the resource.
+        # @!attribute [rw] dns_verification_ip
+        #   @return [::String]
+        #     The IPv4 address to be used for reverse DNS verification.
+        # @!attribute [rw] fingerprint
+        #   @return [::String]
+        #     Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a new PublicAdvertisedPrefix. An up-to-date fingerprint must be provided in order to update the PublicAdvertisedPrefix, otherwise the request will fail with error 412 conditionNotMet.
+        #
+        #     To see the latest fingerprint, make a get() request to retrieve a PublicAdvertisedPrefix.
+        # @!attribute [rw] id
+        #   @return [::Integer]
+        #     [Output Only] The unique identifier for the resource type. The server generates this identifier.
+        # @!attribute [rw] ip_cidr_range
+        #   @return [::String]
+        #     The IPv4 address range, in CIDR format, represented by this public advertised prefix.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output Only] Type of the resource. Always compute#publicAdvertisedPrefix for public advertised prefixes.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        # @!attribute [rw] public_delegated_prefixs
+        #   @return [::Array<::Google::Cloud::Compute::V1::PublicAdvertisedPrefixPublicDelegatedPrefix>]
+        #     [Output Only] The list of public delegated prefixes that exist for this public advertised prefix.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for the resource.
+        # @!attribute [rw] shared_secret
+        #   @return [::String]
+        #     [Output Only] The shared secret to be used for reverse DNS verification.
+        # @!attribute [rw] status
+        #   @return [::Google::Cloud::Compute::V1::PublicAdvertisedPrefix::Status]
+        #     The status of the public advertised prefix.
+        class PublicAdvertisedPrefix
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The status of the public advertised prefix.
+          module Status
+            # A value indicating that the enum field is not set.
+            UNDEFINED_STATUS = 0
+
+            INITIAL = 518841124
+
+            PREFIX_CONFIGURATION_COMPLETE = 480889551
+
+            PREFIX_CONFIGURATION_IN_PROGRESS = 378550961
+
+            PREFIX_REMOVAL_IN_PROGRESS = 284375783
+
+            PTR_CONFIGURED = 513497167
+
+            REVERSE_DNS_LOOKUP_FAILED = 295755183
+
+            VALIDATED = 66197998
+          end
+        end
+
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Array<::Google::Cloud::Compute::V1::PublicAdvertisedPrefix>]
+        #     A list of PublicAdvertisedPrefix resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output Only] Type of the resource. Always compute#publicAdvertisedPrefix for public advertised prefixes.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class PublicAdvertisedPrefixList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a sub PublicDelegatedPrefix.
+        # @!attribute [rw] delegatee_project
+        #   @return [::String]
+        #     Name of the project scoping this PublicDelegatedSubPrefix.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     An optional description of this resource. Provide this property when you create the resource.
+        # @!attribute [rw] ip_cidr_range
+        #   @return [::String]
+        #     The IPv4 address range, in CIDR format, represented by this sub public delegated prefix.
+        # @!attribute [rw] is_address
+        #   @return [::Boolean]
+        #     Whether the sub prefix is delegated to create Address resources in the delegatee project.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name of the sub public delegated prefix.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     [Output Only] The region of the sub public delegated prefix if it is regional. If absent, the sub prefix is global.
+        # @!attribute [rw] status
+        #   @return [::Google::Cloud::Compute::V1::PublicDelegatedPrefixPublicDelegatedSubPrefix::Status]
+        #     [Output Only] The status of the sub public delegated prefix.
+        class PublicDelegatedPrefixPublicDelegatedSubPrefix
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # [Output Only] The status of the sub public delegated prefix.
+          module Status
+            # A value indicating that the enum field is not set.
+            UNDEFINED_STATUS = 0
+
+            ACTIVE = 314733318
+
+            INACTIVE = 270421099
+          end
+        end
+
+        # A PublicDelegatedPrefix resource represents an IP block within a PublicAdvertisedPrefix that is configured within a single cloud scope (global or region). IPs in the block can be allocated to resources within that scope. Public delegated prefixes may be further broken up into smaller IP blocks in the same scope as the parent block.
+        # @!attribute [rw] creation_timestamp
+        #   @return [::String]
+        #     [Output Only] Creation timestamp in RFC3339 text format.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     An optional description of this resource. Provide this property when you create the resource.
+        # @!attribute [rw] fingerprint
+        #   @return [::String]
+        #     Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a new PublicDelegatedPrefix. An up-to-date fingerprint must be provided in order to update the PublicDelegatedPrefix, otherwise the request will fail with error 412 conditionNotMet.
+        #
+        #     To see the latest fingerprint, make a get() request to retrieve a PublicDelegatedPrefix.
+        # @!attribute [rw] id
+        #   @return [::Integer]
+        #     [Output Only] The unique identifier for the resource type. The server generates this identifier.
+        # @!attribute [rw] ip_cidr_range
+        #   @return [::String]
+        #     The IPv4 address range, in CIDR format, represented by this public delegated prefix.
+        # @!attribute [rw] is_live_migration
+        #   @return [::Boolean]
+        #     If true, the prefix will be live migrated.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output Only] Type of the resource. Always compute#publicDelegatedPrefix for public delegated prefixes.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        # @!attribute [rw] parent_prefix
+        #   @return [::String]
+        #     The URL of parent prefix. Either PublicAdvertisedPrefix or PublicDelegatedPrefix.
+        # @!attribute [rw] public_delegated_sub_prefixs
+        #   @return [::Array<::Google::Cloud::Compute::V1::PublicDelegatedPrefixPublicDelegatedSubPrefix>]
+        #     The list of sub public delegated prefixes that exist for this public delegated prefix.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     [Output Only] URL of the region where the public delegated prefix resides. This field applies only to the region resource. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for the resource.
+        # @!attribute [rw] status
+        #   @return [::Google::Cloud::Compute::V1::PublicDelegatedPrefix::Status]
+        #     [Output Only] The status of the public delegated prefix.
+        class PublicDelegatedPrefix
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # [Output Only] The status of the public delegated prefix.
+          module Status
+            # A value indicating that the enum field is not set.
+            UNDEFINED_STATUS = 0
+
+            ANNOUNCED = 365103355
+
+            DELETING = 528602024
+
+            INITIALIZING = 306588749
+          end
+        end
+
+        # @!attribute [rw] public_delegated_prefixes
+        #   @return [::Array<::Google::Cloud::Compute::V1::PublicDelegatedPrefix>]
+        #     [Output Only] A list of PublicDelegatedPrefixes contained in this scope.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning which replaces the list of public delegated prefixes when the list is empty.
+        class PublicDelegatedPrefixesScopedList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::PublicDelegatedPrefixesScopedList}]
+        #     A list of PublicDelegatedPrefixesScopedList resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output Only] Type of the resource. Always compute#publicDelegatedPrefixAggregatedList for aggregated lists of public delegated prefixes.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] unreachables
+        #   @return [::Array<::String>]
+        #     [Output Only] Unreachable resources.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class PublicDelegatedPrefixAggregatedList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::PublicDelegatedPrefixesScopedList]
+          class ItemsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Array<::Google::Cloud::Compute::V1::PublicDelegatedPrefix>]
+        #     A list of PublicDelegatedPrefix resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output Only] Type of the resource. Always compute#publicDelegatedPrefixList for public delegated prefixes.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class PublicDelegatedPrefixList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents a Region resource.
         #
         # A region is a geographical area where a resource is located. For more information, read Regions and Zones. (== resource_for \\{$api_version}.regions ==)
@@ -10435,7 +11383,7 @@ module Google
         #   @return [::String]
         #     [Output Only] Textual description of the resource.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -10452,6 +11400,9 @@ module Google
         # @!attribute [rw] status
         #   @return [::Google::Cloud::Compute::V1::Region::Status]
         #     [Output Only] Status of the region, either UP or DOWN.
+        # @!attribute [rw] supports_pzs
+        #   @return [::Boolean]
+        #     [Output Only] Reserved for future use.
         # @!attribute [rw] zones
         #   @return [::Array<::String>]
         #     [Output Only] A list of zones available in this region, in the form of resource URLs.
@@ -10534,7 +11485,7 @@ module Google
         end
 
         # @!attribute [rw] size_gb
-        #   @return [::String]
+        #   @return [::Integer]
         #     The new size of the regional persistent disk, which is specified in GB.
         class RegionDisksResizeRequest
           include ::Google::Protobuf::MessageExts
@@ -10905,7 +11856,7 @@ module Google
         #   @return [::Array<::Google::Cloud::Compute::V1::HostRule>]
         #     The list of HostRules to use against the URL.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -11010,7 +11961,7 @@ module Google
         end
 
         # @!attribute [rw] specific_sku_count
-        #   @return [::String]
+        #   @return [::Integer]
         #     Number of allocated resources can be resized with minimum = 1 and maximum = 1000.
         class ReservationsResizeRequest
           include ::Google::Protobuf::MessageExts
@@ -11037,8 +11988,11 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::ResourcePolicyGroupPlacementPolicy]
         #     Resource policy for instances for placement configuration.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
+        # @!attribute [rw] instance_schedule_policy
+        #   @return [::Google::Cloud::Compute::V1::ResourcePolicyInstanceSchedulePolicy]
+        #     Resource policy for scheduling instance operations.
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of the resource. Always compute#resource_policies for resource policies.
@@ -11047,6 +12001,9 @@ module Google
         #     The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
         # @!attribute [rw] region
         #   @return [::String]
+        # @!attribute [rw] resource_status
+        #   @return [::Google::Cloud::Compute::V1::ResourcePolicyResourceStatus]
+        #     [Output Only] The system status of the resource policy.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined fully-qualified URL for this resource.
@@ -11068,6 +12025,8 @@ module Google
             CREATING = 455564985
 
             DELETING = 528602024
+
+            EXPIRED = 482489093
 
             INVALID = 530283991
 
@@ -11109,6 +12068,36 @@ module Google
 
             UNSPECIFIED_COLLOCATION = 464308205
           end
+        end
+
+        # An InstanceSchedulePolicy specifies when and how frequent certain operations are performed on the instance.
+        # @!attribute [rw] expiration_time
+        #   @return [::String]
+        #     The expiration time of the schedule. The timestamp is an RFC3339 string.
+        # @!attribute [rw] start_time
+        #   @return [::String]
+        #     The start time of the schedule. The timestamp is an RFC3339 string.
+        # @!attribute [rw] time_zone
+        #   @return [::String]
+        #     Specifies the time zone to be used in interpreting Schedule.schedule. The value of this field must be a time zone name from the tz database: http://en.wikipedia.org/wiki/Tz_database.
+        # @!attribute [rw] vm_start_schedule
+        #   @return [::Google::Cloud::Compute::V1::ResourcePolicyInstanceSchedulePolicySchedule]
+        #     Specifies the schedule for starting instances.
+        # @!attribute [rw] vm_stop_schedule
+        #   @return [::Google::Cloud::Compute::V1::ResourcePolicyInstanceSchedulePolicySchedule]
+        #     Specifies the schedule for stopping instances.
+        class ResourcePolicyInstanceSchedulePolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains output only fields. Use this sub-message for all output fields set on ResourcePolicy. The internal structure of this "status" field should mimic the structure of ResourcePolicy proto specification.
+        # @!attribute [rw] instance_schedule_policy
+        #   @return [::Google::Cloud::Compute::V1::ResourcePolicyResourceStatusInstanceSchedulePolicyStatus]
+        #     [Output Only] Specifies a set of output values reffering to the instance_schedule_policy system status. This field should have the same name as corresponding policy field.
+        class ResourcePolicyResourceStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A snapshot schedule policy specifies when and how frequently snapshots are to be created for the target disk. Also specifies how many and how long these scheduled snapshots should be retained.
@@ -11194,6 +12183,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Schedule for an instance operation.
+        # @!attribute [rw] schedule
+        #   @return [::String]
+        #     Specifies the frequency for the operation, using the unix-cron format.
+        class ResourcePolicyInstanceSchedulePolicySchedule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # @!attribute [rw] etag
         #   @return [::String]
         # @!attribute [rw] id
@@ -11215,6 +12213,17 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
         class ResourcePolicyList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] last_run_start_time
+        #   @return [::String]
+        #     [Output Only] The last time the schedule successfully ran. The timestamp is an RFC3339 string.
+        # @!attribute [rw] next_run_start_time
+        #   @return [::String]
+        #     [Output Only] The next time the schedule is planned to run. The actual time might be slightly different. The timestamp is an RFC3339 string.
+        class ResourcePolicyResourceStatusInstanceSchedulePolicyStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -11340,7 +12349,7 @@ module Google
         #   @return [::String]
         #     The destination range of outgoing packets that this route applies to. Both IPv4 and IPv6 are supported.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -11458,8 +12467,7 @@ module Google
         #   @return [::Array<::Google::Cloud::Compute::V1::RouterBgpPeer::AdvertisedGroups>]
         #     User-specified list of prefix groups to advertise in custom mode, which can take one of the following options:
         #     - ALL_SUBNETS: Advertises all available subnets, including peer VPC subnets.
-        #     - ALL_VPC_SUBNETS: Advertises the router's own VPC subnets.
-        #     - ALL_PEER_VPC_SUBNETS: Advertises peer subnets of the router's VPC network. Note that this field can only be populated if advertise_mode is CUSTOM and overrides the list defined for the router (in the "bgp" message). These groups are advertised in addition to any specified prefixes. Leave this field blank to advertise no custom groups.
+        #     - ALL_VPC_SUBNETS: Advertises the router's own VPC subnets. Note that this field can only be populated if advertise_mode is CUSTOM and overrides the list defined for the router (in the "bgp" message). These groups are advertised in addition to any specified prefixes. Leave this field blank to advertise no custom groups.
         # @!attribute [rw] advertised_ip_ranges
         #   @return [::Array<::Google::Cloud::Compute::V1::RouterAdvertisedIpRange>]
         #     User-specified list of individual IP ranges to advertise in custom mode. This field can only be populated if advertise_mode is CUSTOM and overrides the list defined for the router (in the "bgp" message). These IP ranges are advertised in addition to any specified groups. Leave this field blank to advertise no custom IP ranges.
@@ -11645,8 +12653,12 @@ module Google
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
+        # @!attribute [rw] encrypted_interconnect_router
+        #   @return [::Boolean]
+        #     Field to indicate if a router is dedicated to use with encrypted Interconnect Attachment (IPsec-encrypted Cloud Interconnect feature).
+        #     Not currently available in all Interconnect locations.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] interfaces
         #   @return [::Array<::Google::Cloud::Compute::V1::RouterInterface>]
@@ -11983,7 +12995,7 @@ module Google
         # Represents a rule that describes one or more match conditions along with the action to be taken when traffic matches this condition (allow or deny).
         # @!attribute [rw] action
         #   @return [::String]
-        #     The Action to preform when the client connection triggers the rule. Can currently be either "allow" or "deny()" where valid values for status are 403, 404, and 502.
+        #     The Action to perform when the client connection triggers the rule. Can currently be either "allow" or "deny()" where valid values for status are 403, 404, and 502.
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
@@ -12019,7 +13031,7 @@ module Google
         #
         #     To see the latest fingerprint, make get() request to the security policy.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -12104,13 +13116,13 @@ module Google
         #   @return [::String]
         #     [Output Only] Type of the resource. Always compute#serialPortOutput for serial port output.
         # @!attribute [rw] next
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The position of the next byte of content, regardless of whether the content exists, following the output returned in the `contents` property. Use this value in the next request as the start parameter.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined URL for this resource.
         # @!attribute [rw] start
-        #   @return [::String]
+        #   @return [::Integer]
         #     The starting byte position of the output that was returned. This should match the start parameter sent with the request. If the serial console output exceeds the size of the buffer (1 MB), older output is overwritten by newer content. The output start value will indicate the byte position of the output that was returned, which might be different than the `start` value that was specified in the request.
         class SerialPortOutput
           include ::Google::Protobuf::MessageExts
@@ -12172,13 +13184,13 @@ module Google
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
         # @!attribute [rw] disk_size_gb
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] Size of the source disk, specified in GB.
         # @!attribute [rw] download_bytes
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] Number of bytes downloaded to restore a snapshot to a disk.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -12192,14 +13204,20 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels to apply to this snapshot. These can be later modified by the setLabels method. Label values may be empty.
         # @!attribute [rw] license_codes
-        #   @return [::Array<::String>]
+        #   @return [::Array<::Integer>]
         #     [Output Only] Integer license codes indicating which licenses are attached to this snapshot.
         # @!attribute [rw] licenses
         #   @return [::Array<::String>]
         #     [Output Only] A list of public visible licenses that apply to this snapshot. This can be because the original image had licenses attached (such as a Windows image).
+        # @!attribute [rw] location_hint
+        #   @return [::String]
+        #     An opaque location hint used to place the snapshot close to other resources. This field is for use by internal tools that use the public API.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        # @!attribute [rw] satisfies_pzs
+        #   @return [::Boolean]
+        #     [Output Only] Reserved for future use.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined URL for the resource.
@@ -12225,7 +13243,7 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::Snapshot::Status]
         #     [Output Only] The status of the snapshot. This can be CREATING, DELETING, FAILED, READY, or UPLOADING.
         # @!attribute [rw] storage_bytes
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] A size of the storage used by the snapshot. As snapshots share storage, this number is expected to change with snapshot creation/deletion.
         # @!attribute [rw] storage_bytes_status
         #   @return [::Google::Cloud::Compute::V1::Snapshot::StorageBytesStatus]
@@ -12303,7 +13321,7 @@ module Google
         #     [Output only] Detailed statuses of the domains specified for managed certificate resource.
         # @!attribute [rw] domains
         #   @return [::Array<::String>]
-        #     The domains for which a managed SSL certificate will be generated. Currently only single-domain certs are supported.
+        #     The domains for which a managed SSL certificate will be generated. Each Google-managed SSL certificate supports up to the [maximum number of domains per Google-managed SSL certificate](/load-balancing/docs/quotas#ssl_certificates).
         # @!attribute [rw] status
         #   @return [::Google::Cloud::Compute::V1::SslCertificateManagedSslCertificate::Status]
         #     [Output only] Status of the managed certificate resource.
@@ -12379,7 +13397,7 @@ module Google
         #   @return [::String]
         #     [Output Only] Expire time of the certificate. RFC3339
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -12517,7 +13535,7 @@ module Google
         #
         #     To see the latest fingerprint, make a get() request to retrieve an SslPolicy.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -12657,7 +13675,7 @@ module Google
         #     Can only be specified if VPC flow logging for this subnetwork is enabled. The value of the field must be in [0, 1]. Set the sampling rate of VPC flow logs within the subnetwork where 1.0 means all collected logs are reported and 0.0 means no logs are reported. Default is 0.5, which means half of all collected logs are reported.
         # @!attribute [rw] metadata
         #   @return [::Google::Cloud::Compute::V1::SubnetworkLogConfig::Metadata]
-        #     Can only be specified if VPC flow logs for this subnetwork is enabled. Configures whether all, none or a subset of metadata fields should be added to the reported VPC flow logs. Default is INCLUDE_ALL_METADATA.
+        #     Can only be specified if VPC flow logs for this subnetwork is enabled. Configures whether all, none or a subset of metadata fields should be added to the reported VPC flow logs. Default is EXCLUDE_ALL_METADATA.
         # @!attribute [rw] metadata_fields
         #   @return [::Array<::String>]
         #     Can only be specified if VPC flow logs for this subnetwork is enabled and "metadata" was set to CUSTOM_METADATA.
@@ -12683,7 +13701,7 @@ module Google
             INTERVAL_5_SEC = 72752429
           end
 
-          # Can only be specified if VPC flow logs for this subnetwork is enabled. Configures whether all, none or a subset of metadata fields should be added to the reported VPC flow logs. Default is INCLUDE_ALL_METADATA.
+          # Can only be specified if VPC flow logs for this subnetwork is enabled. Configures whether all, none or a subset of metadata fields should be added to the reported VPC flow logs. Default is EXCLUDE_ALL_METADATA.
           module Metadata
             # A value indicating that the enum field is not set.
             UNDEFINED_METADATA = 0
@@ -12699,7 +13717,7 @@ module Google
         # Represents a secondary IP range of a subnetwork.
         # @!attribute [rw] ip_cidr_range
         #   @return [::String]
-        #     The range of IP addresses belonging to this subnetwork secondary range. Provide this property when you create the subnetwork. Ranges must be unique and non-overlapping with all primary and secondary IP ranges within a network. Only IPv4 is supported. This may be a RFC 1918 IP range, or a privately, non-RFC 1918 IP range, not belonging to Google.
+        #     The range of IP addresses belonging to this subnetwork secondary range. Provide this property when you create the subnetwork. Ranges must be unique and non-overlapping with all primary and secondary IP ranges within a network. Only IPv4 is supported. The range can be any range listed in the Valid ranges list.
         # @!attribute [rw] range_name
         #   @return [::String]
         #     The name associated with this subnetwork secondary range, used when adding an alias IP range to a VM instance. The name must be 1-63 characters long, and comply with RFC1035. The name must be unique within the subnetwork.
@@ -12729,11 +13747,11 @@ module Google
         #   @return [::String]
         #     [Output Only] The gateway address for default routes to reach destination addresses outside this subnetwork.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] ip_cidr_range
         #   @return [::String]
-        #     The range of internal addresses that are owned by this subnetwork. Provide this property when you create the subnetwork. For example, 10.0.0.0/8 or 100.64.0.0/10. Ranges must be unique and non-overlapping within a network. Only IPv4 is supported. This field is set at resource creation time. This may be a RFC 1918 IP range, or a privately routed, non-RFC 1918 IP range, not belonging to Google. The range can be expanded after creation using expandIpCidrRange.
+        #     The range of internal addresses that are owned by this subnetwork. Provide this property when you create the subnetwork. For example, 10.0.0.0/8 or 100.64.0.0/10. Ranges must be unique and non-overlapping within a network. Only IPv4 is supported. This field is set at resource creation time. The range can be any range listed in the Valid ranges list. The range can be expanded after creation using expandIpCidrRange.
         # @!attribute [rw] ipv6_cidr_range
         #   @return [::String]
         #     [Output Only] The range of internal IPv6 addresses that are owned by this subnetwork.
@@ -12774,7 +13792,7 @@ module Google
         #     [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] state
         #   @return [::Google::Cloud::Compute::V1::Subnetwork::State]
-        #     [Output Only] The state of the subnetwork, which can be one of the following values: READY: Subnetwork is created and ready to use DRAINING: only applicable to subnetworks that have the purpose set to INTERNAL_HTTPS_LOAD_BALANCER and indicates that connections to the load balancer are being drained. A subnetwork that is draining cannot be used or modified until it reaches a status of READY CREATING: Subnetwork is provisioning DELETING: Subnetwork is being deleted UPDATING: Subnetwork is being updated
+        #     [Output Only] The state of the subnetwork, which can be one of the following values: READY: Subnetwork is created and ready to use DRAINING: only applicable to subnetworks that have the purpose set to INTERNAL_HTTPS_LOAD_BALANCER and indicates that connections to the load balancer are being drained. A subnetwork that is draining cannot be used or modified until it reaches a status of READY
         class Subnetwork
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -12815,7 +13833,7 @@ module Google
             BACKUP = 341010882
           end
 
-          # [Output Only] The state of the subnetwork, which can be one of the following values: READY: Subnetwork is created and ready to use DRAINING: only applicable to subnetworks that have the purpose set to INTERNAL_HTTPS_LOAD_BALANCER and indicates that connections to the load balancer are being drained. A subnetwork that is draining cannot be used or modified until it reaches a status of READY CREATING: Subnetwork is provisioning DELETING: Subnetwork is being deleted UPDATING: Subnetwork is being updated
+          # [Output Only] The state of the subnetwork, which can be one of the following values: READY: Subnetwork is created and ready to use DRAINING: only applicable to subnetworks that have the purpose set to INTERNAL_HTTPS_LOAD_BALANCER and indicates that connections to the load balancer are being drained. A subnetwork that is draining cannot be used or modified until it reaches a status of READY
           module State
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
@@ -12913,7 +13931,7 @@ module Google
 
         # Represents a Target gRPC Proxy resource.
         #
-        # A target gRPC proxy is a component of load balancers intended for load balancing gRPC traffic. Global forwarding rules reference a target gRPC proxy. The Target gRPC Proxy references a URL map which specifies how traffic routes to gRPC backend services. (== resource_for \\{$api_version}.targetGrpcProxies ==)
+        # A target gRPC proxy is a component of load balancers intended for load balancing gRPC traffic. Only global forwarding rules with load balancing scheme INTERNAL_SELF_MANAGED can reference a target gRPC proxy. The target gRPC Proxy references a URL map that specifies how traffic is routed to gRPC backend services. (== resource_for \\{$api_version}.targetGrpcProxies ==)
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     [Output Only] Creation timestamp in RFC3339 text format.
@@ -12924,7 +13942,7 @@ module Google
         #   @return [::String]
         #     Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a TargetGrpcProxy. An up-to-date fingerprint must be provided in order to patch/update the TargetGrpcProxy; otherwise, the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve the TargetGrpcProxy.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource type. The server generates this identifier.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -12993,7 +14011,7 @@ module Google
         #   @return [::String]
         #     Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a TargetHttpProxy. An up-to-date fingerprint must be provided in order to patch/update the TargetHttpProxy; otherwise, the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve the TargetHttpProxy.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -13112,8 +14130,11 @@ module Google
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
-        # @!attribute [rw] id
+        # @!attribute [rw] fingerprint
         #   @return [::String]
+        #     Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a TargetHttpsProxy. An up-to-date fingerprint must be provided in order to patch the TargetHttpsProxy; otherwise, the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve the TargetHttpsProxy.
+        # @!attribute [rw] id
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -13135,7 +14156,6 @@ module Google
         #     - When quic-override is set to ENABLE, the load balancer uses QUIC when possible.
         #     - When quic-override is set to DISABLE, the load balancer doesn't use QUIC.
         #     - If the quic-override flag is not specified, NONE is implied.
-        #     -
         # @!attribute [rw] region
         #   @return [::String]
         #     [Output Only] URL of the region where the regional TargetHttpsProxy resides. This field is not applicable to global TargetHttpsProxies.
@@ -13169,7 +14189,6 @@ module Google
           # - When quic-override is set to ENABLE, the load balancer uses QUIC when possible.
           # - When quic-override is set to DISABLE, the load balancer doesn't use QUIC.
           # - If the quic-override flag is not specified, NONE is implied.
-          # -
           module QuicOverride
             # A value indicating that the enum field is not set.
             UNDEFINED_QUIC_OVERRIDE = 0
@@ -13290,7 +14309,7 @@ module Google
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] instance
         #   @return [::String]
@@ -13421,9 +14440,9 @@ module Google
         #     In case where failoverRatio is not set or all the instances in the backup pool are unhealthy, the traffic will be directed back to the primary pool in the "force" mode, where traffic will be spread to the healthy instances with the best effort, or to all instances when no instance is healthy.
         # @!attribute [rw] health_checks
         #   @return [::Array<::String>]
-        #     The URL of the HttpHealthCheck resource. A member instance in this pool is considered healthy if and only if the health checks pass. An empty list means all member instances will be considered healthy at all times. Only legacy HttpHealthChecks are supported. Only one health check may be specified.
+        #     The URL of the HttpHealthCheck resource. A member instance in this pool is considered healthy if and only if the health checks pass. Only legacy HttpHealthChecks are supported. Only one health check may be specified.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
@@ -13459,6 +14478,8 @@ module Google
             UNDEFINED_SESSION_AFFINITY = 0
 
             CLIENT_IP = 345665051
+
+            CLIENT_IP_NO_DESTINATION = 106122516
 
             CLIENT_IP_PORT_PROTO = 221722926
 
@@ -13643,7 +14664,7 @@ module Google
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -13741,7 +14762,7 @@ module Google
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -13749,6 +14770,13 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        # @!attribute [rw] proxy_bind
+        #   @return [::Boolean]
+        #     This field only applies when the forwarding rule that references this target proxy has a loadBalancingScheme set to INTERNAL_SELF_MANAGED.
+        #
+        #     When this field is set to true, Envoy proxies set up inbound traffic interception and bind to the IP address and port specified in the forwarding rule. This is generally useful when using Traffic Director to configure Envoy as a gateway or middle proxy (in other words, not a sidecar proxy). The Envoy proxy listens for inbound requests and handles requests when it receives them.
+        #
+        #     The default is false.
         # @!attribute [rw] proxy_header
         #   @return [::Google::Cloud::Compute::V1::TargetTcpProxy::ProxyHeader]
         #     Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
@@ -13810,7 +14838,7 @@ module Google
         #   @return [::Array<::String>]
         #     [Output Only] A list of URLs to the ForwardingRule resources. ForwardingRules are created using compute.forwardingRules.insert and associated with a VPN gateway.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -13922,12 +14950,39 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # HTTP headers used in UrlMapTests.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Header name.
+        # @!attribute [rw] value
+        #   @return [::String]
+        #     Header value.
+        class UrlMapTestHeader
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] actual_output_url
+        #   @return [::String]
+        #     The actual output URL evaluated by load balancer containing the scheme, host, path and query parameters.
+        # @!attribute [rw] actual_redirect_response_code
+        #   @return [::Integer]
+        #     Actual HTTP status code for rule with `urlRedirect` calculated by load balancer
         # @!attribute [rw] actual_service
         #   @return [::String]
         #     BackendService or BackendBucket returned by load balancer.
+        # @!attribute [rw] expected_output_url
+        #   @return [::String]
+        #     The expected output URL evaluated by load balancer containing the scheme, host, path and query parameters.
+        # @!attribute [rw] expected_redirect_response_code
+        #   @return [::Integer]
+        #     Expected HTTP status code for rule with `urlRedirect` calculated by load balancer
         # @!attribute [rw] expected_service
         #   @return [::String]
         #     Expected BackendService or BackendBucket resource the given URL should be mapped to.
+        # @!attribute [rw] headers
+        #   @return [::Array<::Google::Cloud::Compute::V1::UrlMapTestHeader>]
+        #     HTTP headers of the request.
         # @!attribute [rw] host
         #   @return [::String]
         #     Host portion of the URL.
@@ -13959,6 +15014,19 @@ module Google
         # @!attribute [rw] description
         #   @return [::String]
         #     Description of this test case.
+        # @!attribute [rw] expected_output_url
+        #   @return [::String]
+        #     The expected output URL evaluated by load balancer containing the scheme, host, path and query parameters.
+        #     For rules that forward requests to backends, the test passes only when expectedOutputUrl matches the request forwarded by load balancer to backends. For rules with urlRewrite, the test verifies that the forwarded request matches hostRewrite and pathPrefixRewrite in the urlRewrite action. When service is specified, expectedOutputUrl`s scheme is ignored.
+        #     For rules with urlRedirect, the test passes only if expectedOutputUrl matches the URL in the load balancer's redirect response. If urlRedirect specifies https_redirect, the test passes only if the scheme in expectedOutputUrl is also set to https. If urlRedirect specifies strip_query, the test passes only if expectedOutputUrl does not contain any query parameters.
+        #     expectedOutputUrl is optional when service is specified.
+        # @!attribute [rw] expected_redirect_response_code
+        #   @return [::Integer]
+        #     For rules with urlRedirect, the test passes only if expectedRedirectResponseCode matches the HTTP status code in load balancer's redirect response.
+        #     expectedRedirectResponseCode cannot be set when service is set.
+        # @!attribute [rw] headers
+        #   @return [::Array<::Google::Cloud::Compute::V1::UrlMapTestHeader>]
+        #     HTTP headers for this request. If headers contains a host header, then host must also match the header value.
         # @!attribute [rw] host
         #   @return [::String]
         #     Host portion of the URL. If headers contains a host header, then host must also match the header value.
@@ -14198,6 +15266,10 @@ module Google
         # @!attribute [rw] id
         #   @return [::Integer]
         #     The numeric ID of this VPN gateway interface.
+        # @!attribute [rw] interconnect_attachment
+        #   @return [::String]
+        #     URL of the interconnect attachment resource. When the value of this field is present, the VPN Gateway will be used for IPsec-encrypted Cloud Interconnect; all Egress or Ingress traffic for this VPN Gateway interface will go through the specified interconnect attachment resource.
+        #     Not currently available in all Interconnect locations.
         # @!attribute [rw] ip_address
         #   @return [::String]
         #     [Output Only] The external IP address for this VPN gateway interface.
@@ -14216,7 +15288,7 @@ module Google
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -14419,7 +15491,7 @@ module Google
         #   @return [::String]
         #     [Output Only] Detailed status message for the VPN tunnel.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] ike_version
         #   @return [::Integer]
@@ -14476,7 +15548,7 @@ module Google
         #     - DEPROVISIONING: Resources are being deallocated for the VPN tunnel.
         #     - FAILED: Tunnel creation has failed and the tunnel is not ready to be used.
         #     - NO_INCOMING_PACKETS: No incoming packets from peer.
-        #     - REJECTED: Tunnel configuration was rejected, can be result of being blacklisted.
+        #     - REJECTED: Tunnel configuration was rejected, can be result of being denied access.
         #     - ALLOCATING_RESOURCES: Cloud VPN is in the process of allocating all required resources.
         #     - STOPPED: Tunnel is stopped due to its Forwarding Rules being deleted for Classic VPN tunnels or the project is in frozen state.
         #     - PEER_IDENTITY_MISMATCH: Peer identity does not match peer IP, probably behind NAT.
@@ -14505,7 +15577,7 @@ module Google
           # - DEPROVISIONING: Resources are being deallocated for the VPN tunnel.
           # - FAILED: Tunnel creation has failed and the tunnel is not ready to be used.
           # - NO_INCOMING_PACKETS: No incoming packets from peer.
-          # - REJECTED: Tunnel configuration was rejected, can be result of being blacklisted.
+          # - REJECTED: Tunnel configuration was rejected, can be result of being denied access.
           # - ALLOCATING_RESOURCES: Cloud VPN is in the process of allocating all required resources.
           # - STOPPED: Tunnel is stopped due to its Forwarding Rules being deleted for Classic VPN tunnels or the project is in frozen state.
           # - PEER_IDENTITY_MISMATCH: Peer identity does not match peer IP, probably behind NAT.
@@ -14659,7 +15731,7 @@ module Google
         #   @return [::String]
         #     [Output Only] Textual description of the resource.
         # @!attribute [rw] id
-        #   @return [::String]
+        #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] kind
         #   @return [::String]
@@ -14676,6 +15748,9 @@ module Google
         # @!attribute [rw] status
         #   @return [::Google::Cloud::Compute::V1::Zone::Status]
         #     [Output Only] Status of the zone, either UP or DOWN.
+        # @!attribute [rw] supports_pzs
+        #   @return [::Boolean]
+        #     [Output Only] Reserved for future use.
         class Zone
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -14780,7 +15855,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListAcceleratorTypesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -14829,7 +15904,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -14869,7 +15944,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListAddressesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -14965,7 +16040,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListAddressesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -15002,7 +16077,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListAutoscalersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -15095,7 +16170,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     Name of the zone for this request.
@@ -15276,7 +16351,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListBackendBucketsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -15379,7 +16454,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListBackendServicesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -15499,7 +16574,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListBackendServicesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -15602,7 +16677,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListDiskTypesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -15651,7 +16726,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -15716,7 +16791,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListDisksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -15821,7 +16896,7 @@ module Google
         #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] source_image
         #   @return [::String]
-        #     Optional. Source image to restore onto a disk.
+        #     Source image to restore onto a disk. This field is optional.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -15858,7 +16933,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -16056,7 +17131,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListExternalVpnGatewaysRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16088,6 +17163,311 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
         #     The body resource for this request
         class TestIamPermissionsExternalVpnGatewayRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for FirewallPolicies.AddAssociation. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] firewall_policy_association_resource
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicyAssociation]
+        #     The body resource for this request
+        # @!attribute [rw] replace_existing_association
+        #   @return [::Boolean]
+        #     Indicates whether or not to replace it if an association of the attachment already exists. This is false by default, in which case an error will be returned if an association already exists.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class AddAssociationFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for FirewallPolicies.AddRule. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] firewall_policy_rule_resource
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicyRule]
+        #     The body resource for this request
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class AddRuleFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for FirewallPolicies.CloneRules. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] source_firewall_policy
+        #   @return [::String]
+        #     The firewall policy from which to copy rules.
+        class CloneRulesFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for FirewallPolicies.Delete. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to delete.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class DeleteFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for FirewallPolicies.Get. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to get.
+        class GetFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for FirewallPolicies.GetAssociation. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to which the queried rule belongs.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name of the association to get from the firewall policy.
+        class GetAssociationFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for FirewallPolicies.GetIamPolicy. See the method description for details.
+        # @!attribute [rw] options_requested_policy_version
+        #   @return [::Integer]
+        #     Requested IAM Policy version.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class GetIamPolicyFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for FirewallPolicies.GetRule. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to which the queried rule belongs.
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     The priority of the rule to get from the firewall policy.
+        class GetRuleFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for FirewallPolicies.Insert. See the method description for details.
+        # @!attribute [rw] firewall_policy_resource
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicy]
+        #     The body resource for this request
+        # @!attribute [rw] parent_id
+        #   @return [::String]
+        #     Parent ID for this request. The ID can be either be "folders/[FOLDER_ID]" if the parent is a folder or "organizations/[ORGANIZATION_ID]" if the parent is an organization.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class InsertFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for FirewallPolicies.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+        #
+        #     For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+        #
+        #     You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+        #
+        #     To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+        #
+        #     You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+        #
+        #     Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] parent_id
+        #   @return [::String]
+        #     Parent ID for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        class ListFirewallPoliciesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for FirewallPolicies.ListAssociations. See the method description for details.
+        # @!attribute [rw] target_resource
+        #   @return [::String]
+        #     The target resource to list associations. It is an organization, or a folder.
+        class ListAssociationsFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for FirewallPolicies.Move. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] parent_id
+        #   @return [::String]
+        #     The new parent of the firewall policy.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class MoveFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for FirewallPolicies.Patch. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] firewall_policy_resource
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicy]
+        #     The body resource for this request
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class PatchFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for FirewallPolicies.PatchRule. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] firewall_policy_rule_resource
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicyRule]
+        #     The body resource for this request
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     The priority of the rule to patch.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class PatchRuleFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for FirewallPolicies.RemoveAssociation. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name for the attachment that will be removed.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class RemoveAssociationFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for FirewallPolicies.RemoveRule. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     The priority of the rule to remove from the firewall policy.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class RemoveRuleFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for FirewallPolicies.SetIamPolicy. See the method description for details.
+        # @!attribute [rw] global_organization_set_policy_request_resource
+        #   @return [::Google::Cloud::Compute::V1::GlobalOrganizationSetPolicyRequest]
+        #     The body resource for this request
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class SetIamPolicyFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for FirewallPolicies.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -16170,7 +17550,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListFirewallsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16251,7 +17631,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListForwardingRulesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16347,7 +17727,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListForwardingRulesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16374,6 +17754,31 @@ module Google
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
         class PatchForwardingRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for ForwardingRules.SetLabels. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The region for this request.
+        # @!attribute [rw] region_set_labels_request_resource
+        #   @return [::Google::Cloud::Compute::V1::RegionSetLabelsRequest]
+        #     The body resource for this request
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class SetLabelsForwardingRuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -16481,7 +17886,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListGlobalAddressesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16565,7 +17970,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListGlobalForwardingRulesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16589,6 +17994,21 @@ module Google
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
         class PatchGlobalForwardingRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for GlobalForwardingRules.SetLabels. See the method description for details.
+        # @!attribute [rw] global_set_labels_request_resource
+        #   @return [::Google::Cloud::Compute::V1::GlobalSetLabelsRequest]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class SetLabelsGlobalForwardingRuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -16737,7 +18157,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListGlobalNetworkEndpointGroupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16774,7 +18194,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16811,7 +18231,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListGlobalOperationsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16875,7 +18295,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListGlobalOperationsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16951,8 +18371,114 @@ module Google
         #     Parent ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListGlobalOrganizationOperationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for GlobalPublicDelegatedPrefixes.Delete. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] public_delegated_prefix
+        #   @return [::String]
+        #     Name of the PublicDelegatedPrefix resource to delete.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class DeleteGlobalPublicDelegatedPrefixeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for GlobalPublicDelegatedPrefixes.Get. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] public_delegated_prefix
+        #   @return [::String]
+        #     Name of the PublicDelegatedPrefix resource to return.
+        class GetGlobalPublicDelegatedPrefixeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for GlobalPublicDelegatedPrefixes.Insert. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] public_delegated_prefix_resource
+        #   @return [::Google::Cloud::Compute::V1::PublicDelegatedPrefix]
+        #     The body resource for this request
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class InsertGlobalPublicDelegatedPrefixeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for GlobalPublicDelegatedPrefixes.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+        #
+        #     For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+        #
+        #     You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+        #
+        #     To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+        #
+        #     You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+        #
+        #     Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        class ListGlobalPublicDelegatedPrefixesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for GlobalPublicDelegatedPrefixes.Patch. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] public_delegated_prefix
+        #   @return [::String]
+        #     Name of the PublicDelegatedPrefix resource to patch.
+        # @!attribute [rw] public_delegated_prefix_resource
+        #   @return [::Google::Cloud::Compute::V1::PublicDelegatedPrefix]
+        #     The body resource for this request
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class PatchGlobalPublicDelegatedPrefixeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -16988,7 +18514,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListHealthChecksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17072,7 +18598,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListHealthChecksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17252,7 +18778,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListImagesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17381,7 +18907,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListInstanceGroupManagersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -17560,7 +19086,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone where the managed instance group is located.
@@ -17600,7 +19126,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone where the managed instance group is located. It should conform to RFC1035.
@@ -17640,7 +19166,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone where the managed instance group is located.
@@ -17680,7 +19206,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone where the managed instance group is located. It should conform to RFC1035.
@@ -17920,7 +19446,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListInstanceGroupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18013,7 +19539,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone where the instance group is located.
@@ -18056,7 +19582,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone where the instance group is located.
@@ -18208,7 +19734,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListInstanceTemplatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18328,7 +19854,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListInstancesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18358,6 +19884,28 @@ module Google
         #   @return [::String]
         #     The name of the zone for this request.
         class AttachDiskInstanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for Instances.BulkInsert. See the method description for details.
+        # @!attribute [rw] bulk_insert_instance_resource_resource
+        #   @return [::Google::Cloud::Compute::V1::BulkInsertInstanceResource]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class BulkInsertInstanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -18452,6 +20000,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for Instances.GetEffectiveFirewalls. See the method description for details.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Name of the instance scoping this request.
+        # @!attribute [rw] network_interface
+        #   @return [::String]
+        #     The name of the network interface to get the effective firewalls.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class GetEffectiveFirewallsInstanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Instances.GetGuestAttributes. See the method description for details.
         # @!attribute [rw] instance
         #   @return [::String]
@@ -18517,7 +20083,7 @@ module Google
         #   @return [::String]
         #     Project ID for this request.
         # @!attribute [rw] start
-        #   @return [::String]
+        #   @return [::Integer]
         #     Specifies the starting byte position of the output to return. To start with the first byte of output to the specified port, omit this field or set it to `0`.
         #
         #     If the output for that byte position is available, this field matches the `start` parameter sent with the request. If the amount of serial console output exceeds the size of the buffer (1 MB), the oldest output is discarded and is no longer available. If the requested start position refers to discarded output, the start position is adjusted to the oldest output still available, and the adjusted start position is returned as the `start` property value.
@@ -18604,7 +20170,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -18644,7 +20210,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -19266,7 +20832,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListInterconnectAttachmentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -19365,7 +20931,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListInterconnectAttachmentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -19436,7 +21002,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListInterconnectLocationsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -19532,7 +21098,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListInterconnectsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -19680,7 +21246,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListLicensesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -19747,7 +21313,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListMachineTypesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -19796,7 +21362,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -19836,7 +21402,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListNetworkEndpointGroupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -19979,7 +21545,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone where the network endpoint group is located. It should comply with RFC1035.
@@ -20022,7 +21588,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone where the network endpoint group is located. It should comply with RFC1035.
@@ -20102,6 +21668,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for Networks.GetEffectiveFirewalls. See the method description for details.
+        # @!attribute [rw] network
+        #   @return [::String]
+        #     Name of the network for this request.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        class GetEffectiveFirewallsNetworkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Networks.Insert. See the method description for details.
         # @!attribute [rw] network_resource
         #   @return [::Google::Cloud::Compute::V1::Network]
@@ -20149,7 +21727,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListNetworksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -20195,7 +21773,7 @@ module Google
         #     The region of the request. The response will include all subnet routes, static routes and dynamic routes in the region.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListPeeringRoutesNetworksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -20352,7 +21930,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListNodeGroupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -20491,7 +22069,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -20531,7 +22109,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -20657,7 +22235,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListNodeTemplatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -20771,7 +22349,7 @@ module Google
         #     The name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListNodeTemplatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -20844,7 +22422,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListNodeTypesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -20893,7 +22471,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -20933,7 +22511,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListPacketMirroringsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -21029,7 +22607,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListPacketMirroringsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -21194,7 +22772,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class GetXpnResourcesProjectsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -21231,7 +22809,7 @@ module Google
         #     The body resource for this request
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListXpnHostsProjectsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -21332,6 +22910,270 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for PublicAdvertisedPrefixes.Delete. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] public_advertised_prefix
+        #   @return [::String]
+        #     Name of the PublicAdvertisedPrefix resource to delete.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class DeletePublicAdvertisedPrefixeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for PublicAdvertisedPrefixes.Get. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] public_advertised_prefix
+        #   @return [::String]
+        #     Name of the PublicAdvertisedPrefix resource to return.
+        class GetPublicAdvertisedPrefixeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for PublicAdvertisedPrefixes.Insert. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] public_advertised_prefix_resource
+        #   @return [::Google::Cloud::Compute::V1::PublicAdvertisedPrefix]
+        #     The body resource for this request
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class InsertPublicAdvertisedPrefixeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for PublicAdvertisedPrefixes.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+        #
+        #     For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+        #
+        #     You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+        #
+        #     To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+        #
+        #     You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+        #
+        #     Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        class ListPublicAdvertisedPrefixesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for PublicAdvertisedPrefixes.Patch. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] public_advertised_prefix
+        #   @return [::String]
+        #     Name of the PublicAdvertisedPrefix resource to patch.
+        # @!attribute [rw] public_advertised_prefix_resource
+        #   @return [::Google::Cloud::Compute::V1::PublicAdvertisedPrefix]
+        #     The body resource for this request
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class PatchPublicAdvertisedPrefixeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for PublicDelegatedPrefixes.AggregatedList. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+        #
+        #     For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+        #
+        #     You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+        #
+        #     To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+        # @!attribute [rw] include_all_scopes
+        #   @return [::Boolean]
+        #     Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+        #
+        #     You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+        #
+        #     Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Name of the project scoping this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        class AggregatedListPublicDelegatedPrefixesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for PublicDelegatedPrefixes.Delete. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] public_delegated_prefix
+        #   @return [::String]
+        #     Name of the PublicDelegatedPrefix resource to delete.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region of this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class DeletePublicDelegatedPrefixeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for PublicDelegatedPrefixes.Get. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] public_delegated_prefix
+        #   @return [::String]
+        #     Name of the PublicDelegatedPrefix resource to return.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region of this request.
+        class GetPublicDelegatedPrefixeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for PublicDelegatedPrefixes.Insert. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] public_delegated_prefix_resource
+        #   @return [::Google::Cloud::Compute::V1::PublicDelegatedPrefix]
+        #     The body resource for this request
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region of this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class InsertPublicDelegatedPrefixeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for PublicDelegatedPrefixes.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+        #
+        #     For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+        #
+        #     You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+        #
+        #     To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+        #
+        #     You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+        #
+        #     Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region of this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        class ListPublicDelegatedPrefixesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for PublicDelegatedPrefixes.Patch. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] public_delegated_prefix
+        #   @return [::String]
+        #     Name of the PublicDelegatedPrefix resource to patch.
+        # @!attribute [rw] public_delegated_prefix_resource
+        #   @return [::Google::Cloud::Compute::V1::PublicDelegatedPrefix]
+        #     The body resource for this request
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class PatchPublicDelegatedPrefixeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionAutoscalers.Delete. See the method description for details.
         # @!attribute [rw] autoscaler
         #   @return [::String]
@@ -21422,7 +23264,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionAutoscalersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -21585,7 +23427,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionBackendServicesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -21672,7 +23514,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListRegionCommitmentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -21746,7 +23588,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionCommitmentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -21798,7 +23640,7 @@ module Google
         #     The name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionDiskTypesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -21928,7 +23770,7 @@ module Google
         #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] source_image
         #   @return [::String]
-        #     Optional. Source image to restore onto a disk.
+        #     Source image to restore onto a disk. This field is optional.
         class InsertRegionDiskRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -21965,7 +23807,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionDisksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -22172,7 +24014,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionHealthCheckServicesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -22293,7 +24135,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionHealthChecksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -22550,7 +24392,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionInstanceGroupManagersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -22590,7 +24432,7 @@ module Google
         #     Name of the region scoping this request. This should conform to RFC1035.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListErrorsRegionInstanceGroupManagersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -22630,7 +24472,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListManagedInstancesRegionInstanceGroupManagersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -22670,7 +24512,7 @@ module Google
         #     Name of the region scoping this request, should conform to RFC1035.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListPerInstanceConfigsRegionInstanceGroupManagersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -22897,7 +24739,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionInstanceGroupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -22940,7 +24782,7 @@ module Google
         #     The body resource for this request
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListInstancesRegionInstanceGroupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -22967,6 +24809,28 @@ module Google
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
         class SetNamedPortsRegionInstanceGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionInstances.BulkInsert. See the method description for details.
+        # @!attribute [rw] bulk_insert_instance_resource_resource
+        #   @return [::Google::Cloud::Compute::V1::BulkInsertInstanceResource]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        class BulkInsertRegionInstanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -23061,7 +24925,7 @@ module Google
         #     The name of the region where the network endpoint group is located. It should comply with RFC1035.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionNetworkEndpointGroupsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -23157,7 +25021,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionNotificationEndpointsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -23230,7 +25094,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionOperationsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -23341,7 +25205,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionSslCertificatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -23437,7 +25301,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionTargetHttpProxiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -23558,7 +25422,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionTargetHttpsProxiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -23696,7 +25560,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionUrlMapsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -23802,7 +25666,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -23839,7 +25703,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListReservationsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -23950,7 +25814,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     Name of the zone for this request.
@@ -24051,7 +25915,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListResourcePoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -24165,7 +26029,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListResourcePoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -24238,7 +26102,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListRoutersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -24312,7 +26176,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] router
         #   @return [::String]
         #     Name of the Router resource to query for Nat Mapping information of VM endpoints.
@@ -24389,7 +26253,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRoutersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -24541,7 +26405,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRoutesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -24655,7 +26519,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListSecurityPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -24689,7 +26553,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListPreconfiguredExpressionSetsSecurityPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -24824,7 +26688,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListSnapshotsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -24906,7 +26770,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListSslCertificatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -24990,7 +26854,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListSslCertificatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -25074,7 +26938,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListSslPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -25108,7 +26972,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListAvailableFeaturesSslPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -25167,7 +27031,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListSubnetworksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -25306,7 +27170,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListSubnetworksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -25340,7 +27204,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListUsableSubnetworksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -25513,7 +27377,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListTargetGrpcProxiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -25572,7 +27436,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListTargetHttpProxiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -25656,7 +27520,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListTargetHttpProxiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -25737,7 +27601,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListTargetHttpsProxiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -25821,8 +27685,30 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListTargetHttpsProxiesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for TargetHttpsProxies.Patch. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+        #
+        #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] target_https_proxy
+        #   @return [::String]
+        #     Name of the TargetHttpsProxy resource to patch.
+        # @!attribute [rw] target_https_proxy_resource
+        #   @return [::Google::Cloud::Compute::V1::TargetHttpsProxy]
+        #     The body resource for this request
+        class PatchTargetHttpsProxyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -25946,7 +27832,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListTargetInstancesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -26039,7 +27925,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     Name of the zone scoping this request.
@@ -26129,7 +28015,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListTargetPoolsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -26243,7 +28129,7 @@ module Google
         #     Name of the region scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListTargetPoolsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -26405,7 +28291,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListTargetSslProxiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -26577,7 +28463,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListTargetTcpProxiesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -26658,7 +28544,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListTargetVpnGatewaysRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -26754,7 +28640,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListTargetVpnGatewaysRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -26791,7 +28677,7 @@ module Google
         #     Name of the project scoping this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListUrlMapsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -26897,7 +28783,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListUrlMapsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -26993,7 +28879,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListVpnGatewaysRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -27104,7 +28990,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListVpnGatewaysRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -27184,7 +29070,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListVpnTunnelsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -27280,7 +29166,7 @@ module Google
         #     Name of the region for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListVpnTunnelsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -27350,7 +29236,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         # @!attribute [rw] zone
         #   @return [::String]
         #     Name of the zone for request.
@@ -27414,7 +29300,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListZonesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

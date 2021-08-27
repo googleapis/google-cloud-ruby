@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "dialogflow", "v2",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-dialogflow-v2",
-        "ruby-cloud-title": "Dialogflow V2",
-        "ruby-cloud-description": "Dialogflow is an end-to-end, build-once deploy-everywhere development suite for creating conversational interfaces for websites, mobile applications, popular messaging platforms, and IoT devices. You can use it to build interfaces (such as chatbots and conversational IVR) that enable natural and rich interactions between your users and your business.",
-        "ruby-cloud-env-prefix": "DIALOGFLOW",
-        "ruby-cloud-grpc-service-config": "google/cloud/dialogflow/v2/dialogflow_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/dialogflow",
-        "ruby-cloud-api-id": "dialogflow.googleapis.com",
-        "ruby-cloud-api-shortname": "dialogflow",
-    }
+    proto_path="google/cloud/dialogflow/v2",
+    bazel_target="//google/cloud/dialogflow/v2:google-cloud-dialogflow-v2-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

@@ -441,6 +441,13 @@ module Google
         #   @return [::Boolean]
         #     Toggles whether to return the current state of this Analytics Property's
         #     Realtime quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+        # @!attribute [rw] minute_ranges
+        #   @return [::Array<::Google::Analytics::Data::V1beta::MinuteRange>]
+        #     The minute ranges of event data to read. If unspecified, one minute range
+        #     for the last 30 minutes will be used. If multiple minute ranges are
+        #     requested, each response row will contain a zero based minute range index.
+        #     If two minute ranges overlap, the event data for the overlapping minutes is
+        #     included in the response rows for both minute ranges.
         class RunRealtimeReportRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

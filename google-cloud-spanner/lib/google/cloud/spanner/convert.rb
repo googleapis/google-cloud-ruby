@@ -99,8 +99,7 @@ module Google
               if field.is_a? Fields
                 field.struct(obj).to_grpc_value
               else
-                raise ArgumentError,
-                      "A hash value cannot be set to type #{field}."
+                Google::Protobuf::Value.new string_value: obj.to_json
               end
             else
               if obj.respond_to?(:read) && obj.respond_to?(:rewind)
@@ -223,6 +222,8 @@ module Google
               Data.from_grpc value.list_value.values, type.struct_type.fields
             when :NUMERIC
               BigDecimal value.string_value
+            when :JSON
+              JSON.parse value.string_value
             end
           end
 
@@ -323,6 +324,25 @@ module Google
             end
 
             [input_params, input_param_types]
+          end
+
+          ##
+          # Build request options by replacing tag to respecitve statistics
+          # collection tag type.
+          #
+          # @param [Hash] options Common request options.
+          #   * `:tag` (String) A tag used for statistics collection.
+          #
+          # @param [Symbol] tag_type Request tag type.
+          #   Possible values are `request_tag`, `transaction_tag`
+          # @return [Hash, nil]
+          #
+          def to_request_options options, tag_type: nil
+            return unless options
+
+            return options unless options.key? :tag
+
+            options.transform_keys { |k| k == :tag ? tag_type : k }
           end
         end
 

@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Cloud Monitoring collects metrics, events, and metadata from Google Cloud, Amazon Web Services (AWS), hosted uptime probes, and application instrumentation. The Dashboards API manages arrangements of display widgets. Note that google-cloud-monitoring-dashboard-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-monitoring-dashboard instead. See the readme for more details."
+  gem.description   = "Cloud Monitoring collects metrics, events, and metadata from Google Cloud, Amazon Web Services (AWS), hosted uptime probes, and application instrumentation. The Dashboards API manages arrangements of display widgets. Note that google-cloud-monitoring-dashboard-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-monitoring instead. See the readme for more details."
   gem.summary       = "API Client library for the Cloud Monitoring Dashboards V1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.5"
 
-  gem.add_dependency "gapic-common", ">= 0.5", "< 2.a"
+  gem.add_dependency "gapic-common", ">= 0.7", "< 2.a"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
 
   gem.add_development_dependency "google-style", "~> 1.25.1"

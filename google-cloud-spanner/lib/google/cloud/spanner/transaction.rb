@@ -77,6 +77,9 @@ module Google
         # @private The Session object.
         attr_accessor :session
 
+        # @private Transaction tag for statistics collection.
+        attr_accessor :transaction_tag
+
         def initialize
           @commit = Commit.new
           @seqno = 0
@@ -167,6 +170,10 @@ module Google
         #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
         #     `:PRIORITY_HIGH`. If priority not set then default is
         #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
+        #   * `:tag` (String) A per-request tag which can be applied to
+        #     queries or reads, used for statistics collection. Tag must be a
+        #     valid identifier of the form: `[a-zA-Z][a-zA-Z0-9_\-]` between 2
+        #     and 64 characters in length.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -333,6 +340,7 @@ module Google
           @seqno += 1
 
           params, types = Convert.to_input_params_and_types params, types
+          request_options = build_request_options request_options
           session.execute_query sql, params: params, types: types,
                                      transaction: tx_selector, seqno: @seqno,
                                      query_options: query_options,
@@ -419,6 +427,10 @@ module Google
         #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
         #     `:PRIORITY_HIGH`. If priority not set then default is
         #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
+        #   * `:tag` (String) A per-request tag which can be applied to
+        #     queries or reads, used for statistics collection. Tag must be a
+        #     valid identifier of the form: `[a-zA-Z][a-zA-Z0-9_\-]` between 2
+        #     and 64 characters in length.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -525,6 +537,10 @@ module Google
         #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
         #     `:PRIORITY_HIGH`. If priority not set then default is
         #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
+        #   * `:tag` (String) A per-request tag which can be applied to
+        #     queries or reads, used for statistics collection. Tag must be a
+        #     valid identifier of the form: `[a-zA-Z][a-zA-Z0-9_\-]` between 2
+        #     and 64 characters in length.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -597,6 +613,8 @@ module Google
         def batch_update request_options: nil, call_options: nil, &block
           ensure_session!
           @seqno += 1
+
+          request_options = build_request_options request_options
           session.batch_update tx_selector, @seqno,
                                request_options: request_options,
                                call_options: call_options, &block
@@ -626,6 +644,10 @@ module Google
         #     Valid values are `:PRIORITY_LOW`, `:PRIORITY_MEDIUM`,
         #     `:PRIORITY_HIGH`. If priority not set then default is
         #     `PRIORITY_UNSPECIFIED` is equivalent to `:PRIORITY_HIGH`.
+        #   * `:tag` (String) A per-request tag which can be applied to
+        #     queries or reads, used for statistics collection. Tag must be a
+        #     valid identifier of the form: `[a-zA-Z][a-zA-Z0-9_\-]` between 2
+        #     and 64 characters in length.
         # @param [Hash] call_options A hash of values to specify the custom
         #   call options, e.g., timeout, retries, etc. Call options are
         #   optional. The following settings can be provided:
@@ -663,7 +685,7 @@ module Google
 
           columns = Array(columns).map(&:to_s)
           keys = Convert.to_key_set keys
-
+          request_options = build_request_options request_options
           session.read table, columns, keys: keys, index: index, limit: limit,
                                        transaction: tx_selector,
                                        request_options: request_options,
@@ -1095,6 +1117,20 @@ module Google
         def tx_selector
           return nil if transaction_id.nil?
           V1::TransactionSelector.new id: transaction_id
+        end
+
+        ##
+        # @private Build request options. If transaction tag is set
+        #   then add into request options.
+        def build_request_options options
+          options = Convert.to_request_options options, tag_type: :request_tag
+
+          if transaction_tag
+            options ||= {}
+            options[:transaction_tag] = transaction_tag
+          end
+
+          options
         end
 
         ##

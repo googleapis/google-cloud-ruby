@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/apigee_connect/v1"
 
 client = ::Google::Cloud::ApigeeConnect::V1::ConnectionService::Client.new
-request = my_create_request
+request = ::Google::Cloud::ApigeeConnect::V1::ListConnectionsRequest.new # (request fields as keyword arguments...)
 response = client.list_connections request
 ```
 

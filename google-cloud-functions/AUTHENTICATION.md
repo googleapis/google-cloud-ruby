@@ -66,11 +66,11 @@ The environment variables that google-cloud-functions
 checks for credentials are configured on the service Credentials class (such as
 `::Google::Cloud::Functions::V1::CloudFunctionsService::Credentials`):
 
-1. `FUNCTIONS_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `FUNCTIONS_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `FUNCTIONS_CREDENTIALS` - Path to JSON file, or JSON contents
+* `FUNCTIONS_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/functions"
@@ -82,8 +82,8 @@ client = Google::Cloud::Functions.cloud_functions_service
 
 ### Configuration
 
-The **Credentials JSON** can be configured instead of placing them in
-environment variables. Either on an individual client initialization:
+The path to the **Credentials JSON** file can be configured instead of storing
+it in an environment variable. Either on an individual client initialization:
 
 ```ruby
 require "google/cloud/functions"
@@ -93,7 +93,7 @@ client = Google::Cloud::Functions.cloud_functions_service do |config|
 end
 ```
 
-Or configured globally for all clients:
+Or globally for all clients:
 
 ```ruby
 require "google/cloud/functions"

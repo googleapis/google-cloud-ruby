@@ -70,6 +70,9 @@ module Google
         # @!attribute [rw] explicit_buckets
         #   @return [::Google::Cloud::ServiceControl::V1::Distribution::ExplicitBuckets]
         #     Buckets with arbitrary user-provided width.
+        # @!attribute [rw] exemplars
+        #   @return [::Array<::Google::Api::Distribution::Exemplar>]
+        #     Example points. Must be in increasing order of `value` field.
         class Distribution
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

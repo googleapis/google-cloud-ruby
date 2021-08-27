@@ -4,15 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "693ae20a741ede8ab36fbd7411e0b045976b7335"
+        "sha": "720d14d3641a60c0fab0bf8519bdd730a753a897"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e1654206ff59f3a2a226828f9c9f354c253b36e4",
-        "internalRef": "363012458"
+        "sha": "8a770c332426e30d7ce89de33d92eabd8835b8f0"
       }
     }
   ],
@@ -23,7 +22,7 @@
         "apiName": "gkehub",
         "apiVersion": "v1beta1",
         "language": "ruby",
-        "generator": "gapic-generator-ruby"
+        "generator": "bazel"
       }
     }
   ],

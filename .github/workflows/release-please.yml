@@ -7,6 +7,9 @@ on:
       gem:
         description: "Name of single gem to release. Leave blank to check all gems."
         required: false
+      retries:
+        description: "Number of retries, 0 for no retry, or leave blank for the default of 1."
+        required: false
 
 jobs:
   release-please:
@@ -14,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
+      DISABLE_RELEASE_PLEASE: ${{ secrets.DISABLE_RELEASE_PLEASE }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -28,4 +32,8 @@ jobs:
       - name: Install tools
         run: "gem install --no-document toys && npm install release-please"
       - name: execute
-        run: "toys release-please --fork ${{ github.event.inputs.gem }}"
+        run: |
+          toys release-please --fork \
+            --github-event-name=${{ github.event_name }} \
+            --retry=${{ github.event.inputs.retries }} \
+            ${{ github.event.inputs.gem }}

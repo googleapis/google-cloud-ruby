@@ -1,0 +1,70 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "7e366e8c4192595f54e817a0f4136210f1ff6309"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "411e51eea221af5b77f809cef2c6592df45f73d5",
+        "internalRef": "389760020"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "iap",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "bazel"
+      }
+    }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "gapic_metadata.json",
+    "google-cloud-iap-v1.gemspec",
+    "lib/google-cloud-iap-v1.rb",
+    "lib/google/cloud/iap/v1.rb",
+    "lib/google/cloud/iap/v1/identity_aware_proxy_admin_service.rb",
+    "lib/google/cloud/iap/v1/identity_aware_proxy_admin_service/client.rb",
+    "lib/google/cloud/iap/v1/identity_aware_proxy_admin_service/credentials.rb",
+    "lib/google/cloud/iap/v1/identity_aware_proxy_o_auth_service.rb",
+    "lib/google/cloud/iap/v1/identity_aware_proxy_o_auth_service/client.rb",
+    "lib/google/cloud/iap/v1/identity_aware_proxy_o_auth_service/credentials.rb",
+    "lib/google/cloud/iap/v1/service_pb.rb",
+    "lib/google/cloud/iap/v1/service_services_pb.rb",
+    "lib/google/cloud/iap/v1/version.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/iap/v1/service.rb",
+    "proto_docs/google/iam/v1/iam_policy.rb",
+    "proto_docs/google/iam/v1/options.rb",
+    "proto_docs/google/iam/v1/policy.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/wrappers.rb",
+    "proto_docs/google/type/expr.rb",
+    "test/google/cloud/iap/v1/identity_aware_proxy_admin_service_test.rb",
+    "test/google/cloud/iap/v1/identity_aware_proxy_o_auth_service_test.rb",
+    "test/helper.rb"
+  ]
+}

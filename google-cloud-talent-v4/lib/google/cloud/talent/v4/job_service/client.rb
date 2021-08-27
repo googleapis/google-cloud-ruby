@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Talent::V4::JobService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all JobService clients:
-            #
-            #     ::Google::Cloud::Talent::V4::JobService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all JobService clients
+            #   ::Google::Cloud::Talent::V4::JobService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -71,10 +70,7 @@ module Google
 
                 default_config.rpcs.get_job.timeout = 30.0
                 default_config.rpcs.get_job.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_job.timeout = 30.0
@@ -83,20 +79,14 @@ module Google
 
                 default_config.rpcs.delete_job.timeout = 30.0
                 default_config.rpcs.delete_job.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.batch_delete_jobs.timeout = 30.0
 
                 default_config.rpcs.list_jobs.timeout = 30.0
                 default_config.rpcs.list_jobs.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_jobs.timeout = 30.0
@@ -132,19 +122,15 @@ module Google
             ##
             # Create a new JobService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new JobService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Talent::V4::JobService::Client.new
             #
-            #     client = ::Google::Cloud::Talent::V4::JobService::Client.new
-            #
-            # To create a new JobService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the JobService client.
             # @yieldparam config [Client::Configuration]
@@ -164,14 +150,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -263,7 +248,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_service_stub.call_rpc :create_job, request, options: options do |response, operation|
@@ -335,7 +322,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.batch_create_jobs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_create_jobs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_service_stub.call_rpc :batch_create_jobs, request, options: options do |response, operation|
@@ -407,7 +396,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_service_stub.call_rpc :get_job, request, options: options do |response, operation|
@@ -484,7 +475,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_service_stub.call_rpc :update_job, request, options: options do |response, operation|
@@ -571,7 +564,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.batch_update_jobs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_update_jobs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_service_stub.call_rpc :batch_update_jobs, request, options: options do |response, operation|
@@ -645,7 +640,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_service_stub.call_rpc :delete_job, request, options: options do |response, operation|
@@ -723,7 +720,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.batch_delete_jobs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_delete_jobs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_service_stub.call_rpc :batch_delete_jobs, request, options: options do |response, operation|
@@ -765,10 +764,13 @@ module Google
             #
             #     The fields eligible for filtering are:
             #
-            #     * `companyName` (Required)
+            #     * `companyName`
             #     * `requisitionId`
             #     * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
             #     OPEN if no value is specified.
+            #
+            #     At least one of `companyName` and `requisitionId` must present or an
+            #     INVALID_ARGUMENT error is thrown.
             #
             #     Sample Query:
             #
@@ -777,6 +779,8 @@ module Google
             #     requisitionId = "req-1"
             #     * companyName = "projects/foo/tenants/bar/companies/baz" AND
             #     status = "EXPIRED"
+            #     * requisitionId = "req-1"
+            #     * requisitionId = "req-1" AND status = "EXPIRED"
             #   @param page_token [::String]
             #     The starting point of a query result.
             #   @param page_size [::Integer]
@@ -825,7 +829,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_jobs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_jobs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_service_stub.call_rpc :list_jobs, request, options: options do |response, operation|
@@ -918,6 +924,9 @@ module Google
             #       "FULL_TIME", "PART_TIME".
             #     * company_size: histogram by {::Google::Cloud::Talent::V4::CompanySize CompanySize}, for example, "SMALL",
             #     "MEDIUM", "BIG".
+            #     * publish_time_in_day: histogram by the {::Google::Cloud::Talent::V4::Job#posting_publish_time Job.posting_publish_time}
+            #       in days.
+            #       Must specify list of numeric buckets in spec.
             #     * publish_time_in_month: histogram by the {::Google::Cloud::Talent::V4::Job#posting_publish_time Job.posting_publish_time}
             #       in months.
             #       Must specify list of numeric buckets in spec.
@@ -971,7 +980,7 @@ module Google
             #     bucket(100000, MAX)])`
             #     * `count(string_custom_attribute["some-string-custom-attribute"])`
             #     * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
-            #       [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
+            #       [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])`
             #   @param job_view [::Google::Cloud::Talent::V4::JobView]
             #     The desired job attributes returned for jobs in the search response.
             #     Defaults to {::Google::Cloud::Talent::V4::JobView::JOB_VIEW_SMALL JobView.JOB_VIEW_SMALL} if no value is specified.
@@ -1113,7 +1122,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.search_jobs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.search_jobs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_service_stub.call_rpc :search_jobs, request, options: options do |response, operation|
@@ -1210,6 +1221,9 @@ module Google
             #       "FULL_TIME", "PART_TIME".
             #     * company_size: histogram by {::Google::Cloud::Talent::V4::CompanySize CompanySize}, for example, "SMALL",
             #     "MEDIUM", "BIG".
+            #     * publish_time_in_day: histogram by the {::Google::Cloud::Talent::V4::Job#posting_publish_time Job.posting_publish_time}
+            #       in days.
+            #       Must specify list of numeric buckets in spec.
             #     * publish_time_in_month: histogram by the {::Google::Cloud::Talent::V4::Job#posting_publish_time Job.posting_publish_time}
             #       in months.
             #       Must specify list of numeric buckets in spec.
@@ -1263,7 +1277,7 @@ module Google
             #     bucket(100000, MAX)])`
             #     * `count(string_custom_attribute["some-string-custom-attribute"])`
             #     * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
-            #       [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
+            #       [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])`
             #   @param job_view [::Google::Cloud::Talent::V4::JobView]
             #     The desired job attributes returned for jobs in the search response.
             #     Defaults to {::Google::Cloud::Talent::V4::JobView::JOB_VIEW_SMALL JobView.JOB_VIEW_SMALL} if no value is specified.
@@ -1405,7 +1419,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.search_jobs_for_alert.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.search_jobs_for_alert.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @job_service_stub.call_rpc :search_jobs_for_alert, request, options: options do |response, operation|
@@ -1429,22 +1445,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_job
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_job to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Talent::V4::JobService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_job.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Talent::V4::JobService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_job.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_job.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Talent::V4::JobService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_job.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

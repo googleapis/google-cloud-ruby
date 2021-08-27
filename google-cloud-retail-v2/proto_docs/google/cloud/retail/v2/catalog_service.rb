@@ -89,14 +89,63 @@ module Google
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Indicates which fields in the provided
-        #     {::Google::Cloud::Retail::V2::Catalog Catalog} to update. If not set, will only
-        #     update the
-        #     {::Google::Cloud::Retail::V2::Catalog#product_level_config Catalog.product_level_config}
-        #     field, which is also the only currently supported field to update.
+        #     {::Google::Cloud::Retail::V2::Catalog Catalog} to update.
         #
         #     If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
         #     is returned.
         class UpdateCatalogRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to set a specified branch as new default_branch.
+        # @!attribute [rw] catalog
+        #   @return [::String]
+        #     Full resource name of the catalog, such as
+        #     `projects/*/locations/global/catalogs/default_catalog`.
+        # @!attribute [rw] branch_id
+        #   @return [::String]
+        #     The final component of the resource name of a branch.
+        #
+        #     This field must be one of "0", "1" or "2". Otherwise, an INVALID_ARGUMENT
+        #     error is returned.
+        # @!attribute [rw] note
+        #   @return [::String]
+        #     Some note on this request, this can be retrieved by
+        #     {::Google::Cloud::Retail::V2::CatalogService::Client#get_default_branch CatalogService.GetDefaultBranch}
+        #     before next valid default branch set occurs.
+        #
+        #     This field must be a UTF-8 encoded string with a length limit of 1,000
+        #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
+        class SetDefaultBranchRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to show which branch is currently the default branch.
+        # @!attribute [rw] catalog
+        #   @return [::String]
+        #     The parent catalog resource name, such as
+        #     `projects/*/locations/global/catalogs/default_catalog`.
+        class GetDefaultBranchRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message of
+        # {::Google::Cloud::Retail::V2::CatalogService::Client#get_default_branch CatalogService.GetDefaultBranch}.
+        # @!attribute [rw] branch
+        #   @return [::String]
+        #     Full resource name of the branch id currently set as default branch.
+        # @!attribute [rw] set_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when this branch is set to default.
+        # @!attribute [rw] note
+        #   @return [::String]
+        #     This corresponds to
+        #     {::Google::Cloud::Retail::V2::SetDefaultBranchRequest#note SetDefaultBranchRequest.note}
+        #     field, when this branch was set as default.
+        class GetDefaultBranchResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

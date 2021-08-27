@@ -165,6 +165,11 @@ module Google
         #   without verifying the bucket resource exists on the Storage service.
         #   Calls made on this object will raise errors if the bucket resource
         #   does not exist. Default is `false`.
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the bucket's current metageneration matches the given value.
+        # @param [Integer] if_metageneration_not_match Makes the operation
+        #   conditional on whether the bucket's current metageneration does not
+        #   match the given value.
         # @param [Boolean, String] user_project If this parameter is set to
         #   `true`, transit costs for operations on the requested bucket or a
         #   file it contains will be billed to the current project for this
@@ -208,12 +213,19 @@ module Google
         #                           user_project: "my-other-project"
         #   files = bucket.files # Billed to "my-other-project"
         #
-        def bucket bucket_name, skip_lookup: false, user_project: nil
+        def bucket bucket_name,
+                   skip_lookup: false,
+                   if_metageneration_match: nil,
+                   if_metageneration_not_match: nil,
+                   user_project: nil
           if skip_lookup
             return Bucket.new_lazy bucket_name, service,
                                    user_project: user_project
           end
-          gapi = service.get_bucket bucket_name, user_project: user_project
+          gapi = service.get_bucket bucket_name,
+                                    if_metageneration_match: if_metageneration_match,
+                                    if_metageneration_not_match: if_metageneration_not_match,
+                                    user_project: user_project
           Bucket.from_gapi gapi, service, user_project: user_project
         rescue Google::Cloud::NotFoundError
           nil

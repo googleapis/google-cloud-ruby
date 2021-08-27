@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Billing::V1::CloudBilling::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all CloudBilling clients:
-            #
-            #     ::Google::Cloud::Billing::V1::CloudBilling::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all CloudBilling clients
+            #   ::Google::Cloud::Billing::V1::CloudBilling::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -67,76 +66,49 @@ module Google
 
                 default_config.rpcs.get_billing_account.timeout = 60.0
                 default_config.rpcs.get_billing_account.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_billing_accounts.timeout = 60.0
                 default_config.rpcs.list_billing_accounts.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_billing_account.timeout = 60.0
                 default_config.rpcs.update_billing_account.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_billing_account.timeout = 60.0
 
                 default_config.rpcs.list_project_billing_info.timeout = 60.0
                 default_config.rpcs.list_project_billing_info.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_project_billing_info.timeout = 60.0
                 default_config.rpcs.get_project_billing_info.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_project_billing_info.timeout = 60.0
                 default_config.rpcs.update_project_billing_info.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_iam_policy.timeout = 60.0
                 default_config.rpcs.get_iam_policy.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.set_iam_policy.timeout = 60.0
                 default_config.rpcs.set_iam_policy.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.test_iam_permissions.timeout = 60.0
                 default_config.rpcs.test_iam_permissions.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config
@@ -168,19 +140,15 @@ module Google
             ##
             # Create a new CloudBilling client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new CloudBilling client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new
             #
-            #     client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new
-            #
-            # To create a new CloudBilling client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the CloudBilling client.
             # @yieldparam config [Client::Configuration]
@@ -200,14 +168,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -282,7 +249,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_billing_account.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_billing_account.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :get_billing_account, request, options: options do |response, operation|
@@ -356,7 +325,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_billing_accounts.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_billing_accounts.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :list_billing_accounts, request, options: options do |response, operation|
@@ -433,7 +404,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_billing_account.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_billing_account.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :update_billing_account, request, options: options do |response, operation|
@@ -505,7 +478,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_billing_account.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_billing_account.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :create_billing_account, request, options: options do |response, operation|
@@ -582,7 +557,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_project_billing_info.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_project_billing_info.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :list_project_billing_info, request, options: options do |response, operation|
@@ -653,7 +630,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_project_billing_info.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_project_billing_info.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :get_project_billing_info, request, options: options do |response, operation|
@@ -753,7 +732,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_project_billing_info.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_project_billing_info.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :update_project_billing_info, request, options: options do |response, operation|
@@ -826,7 +807,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_iam_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :get_iam_policy, request, options: options do |response, operation|
@@ -902,7 +885,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_iam_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :set_iam_policy, request, options: options do |response, operation|
@@ -976,7 +961,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.test_iam_permissions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_billing_stub.call_rpc :test_iam_permissions, request, options: options do |response, operation|
@@ -1000,22 +987,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for get_billing_account
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # get_billing_account to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Billing::V1::CloudBilling::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_billing_account.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Billing::V1::CloudBilling::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_billing_account.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_billing_account.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_billing_account.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

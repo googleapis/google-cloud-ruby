@@ -1,8 +1,10 @@
-  - uid: <%= @constant.path %>
-    fullName: <%= @constant.path %>
-    langs:
-      - ruby
-    module: <%= ENV["CLOUDRAD_GEM_NAME"] %>
-    id: <%= @constant.name %>
-    summary: "<%= docstring @constant %>"
-    type: '<%= @constant.type %>'
+- uid: <%= @constant.path %>
+  fullName: <%= @constant.path %>
+  name: <%= @constant.name %>
+  parent: <%= @constant.parent.path %>
+  langs:
+    - ruby
+  module: <%= ENV["CLOUDRAD_GEM_NAME"] %>
+  id: <%= @constant.name %>
+  summary: "<%= constant_summary %>"
+  type: const

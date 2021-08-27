@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/os_config/v1alpha"
 
 client = ::Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
-request = my_create_request
+request = ::Google::Cloud::OsConfig::V1alpha::CreateOSPolicyAssignmentRequest.new # (request fields as keyword arguments...)
 response = client.create_os_policy_assignment request
 ```
 

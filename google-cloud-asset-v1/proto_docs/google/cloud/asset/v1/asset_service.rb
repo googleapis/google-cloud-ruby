@@ -21,6 +21,16 @@ module Google
   module Cloud
     module Asset
       module V1
+        # Represents the metadata of the longrunning operation for the
+        # AnalyzeIamPolicyLongrunning rpc.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the operation was created.
+        class AnalyzeIamPolicyLongrunningMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Export asset request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -62,6 +72,23 @@ module Google
         # @!attribute [rw] output_config
         #   @return [::Google::Cloud::Asset::V1::OutputConfig]
         #     Required. Output configuration indicating where the results will be output to.
+        # @!attribute [rw] relationship_types
+        #   @return [::Array<::String>]
+        #     A list of relationship types to export, for example:
+        #     `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+        #     content_type=RELATIONSHIP.
+        #     * If specified:
+        #     it snapshots specified relationships. It returns an error if
+        #     any of the [relationship_types] doesn't belong to the supported
+        #     relationship types of the [asset_types] or if any of the [asset_types]
+        #     doesn't belong to the source types of the [relationship_types].
+        #     * Otherwise:
+        #     it snapshots the supported relationships for all [asset_types] or returns
+        #     an error if any of the [asset_types] has no relationship support.
+        #     An unspecified asset types field means all supported asset_types.
+        #     See [Introduction to Cloud Asset
+        #     Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
+        #     supported asset types and relationship types.
         class ExportAssetsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -135,6 +162,23 @@ module Google
         #     The `next_page_token` returned from the previous `ListAssetsResponse`, or
         #     unspecified for the first `ListAssetsRequest`. It is a continuation of a
         #     prior `ListAssets` call, and the API should return the next page of assets.
+        # @!attribute [rw] relationship_types
+        #   @return [::Array<::String>]
+        #     A list of relationship types to output, for example:
+        #     `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+        #     content_type=RELATIONSHIP.
+        #     * If specified:
+        #     it snapshots specified relationships. It returns an error if
+        #     any of the [relationship_types] doesn't belong to the supported
+        #     relationship types of the [asset_types] or if any of the [asset_types]
+        #     doesn't belong to the source types of the [relationship_types].
+        #     * Otherwise:
+        #     it snapshots the supported relationships for all [asset_types] or returns
+        #     an error if any of the [asset_types] has no relationship support.
+        #     An unspecified asset types field means all supported asset_types.
+        #     See [Introduction to Cloud Asset
+        #     Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+        #     for all supported asset types and relationship types.
         class ListAssetsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -184,6 +228,24 @@ module Google
         #     If start_time is not set, the snapshot of the assets at end_time will be
         #     returned. The returned results contain all temporal assets whose time
         #     window overlap with read_time_window.
+        # @!attribute [rw] relationship_types
+        #   @return [::Array<::String>]
+        #     Optional. A list of relationship types to output, for example:
+        #     `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+        #     content_type=RELATIONSHIP.
+        #     * If specified:
+        #     it outputs specified relationships' history on the [asset_names]. It
+        #     returns an error if any of the [relationship_types] doesn't belong to the
+        #     supported relationship types of the [asset_names] or if any of the
+        #     [asset_names]'s types doesn't belong to the source types of the
+        #     [relationship_types].
+        #     * Otherwise:
+        #     it outputs the supported relationships' history on the [asset_names] or
+        #     returns an error if any of the [asset_names]'s types has no relationship
+        #     support.
+        #     See [Introduction to Cloud Asset
+        #     Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
+        #     supported asset types and relationship types.
         class BatchGetAssetsHistoryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -518,8 +580,26 @@ module Google
         #     optional.
         #
         #     See our [user
-        #     guide](https://cloud.google.com/asset-inventory/docs/monitoring-asset-changes#feed_with_condition)
+        #     guide](https://cloud.google.com/asset-inventory/docs/monitoring-asset-changes-with-condition)
         #     for detailed instructions.
+        # @!attribute [rw] relationship_types
+        #   @return [::Array<::String>]
+        #     A list of relationship types to output, for example:
+        #     `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+        #     content_type=RELATIONSHIP.
+        #     * If specified:
+        #     it outputs specified relationship updates on the [asset_names] or the
+        #     [asset_types]. It returns an error if any of the [relationship_types]
+        #     doesn't belong to the supported relationship types of the [asset_names] or
+        #     [asset_types], or any of the [asset_names] or the [asset_types] doesn't
+        #     belong to the source types of the [relationship_types].
+        #     * Otherwise:
+        #     it outputs the supported relationships of the types of [asset_names] and
+        #     [asset_types] or returns an error if any of the [asset_names] or the
+        #     [asset_types] has no replationship support.
+        #     See [Introduction to Cloud Asset
+        #     Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+        #     for all supported asset types and relationship types.
         class Feed
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -565,8 +645,8 @@ module Google
         #       encryption key whose name contains the word "key".
         #     * `state:ACTIVE` to find Cloud resources whose state contains "ACTIVE" as a
         #       word.
-        #     * `NOT state:ACTIVE` to find \\{\\{gcp_name}} resources whose state
-        #       doesn't contain "ACTIVE" as a word.
+        #     * `NOT state:ACTIVE` to find Cloud resources whose state doesn't contain
+        #       "ACTIVE" as a word.
         #     * `createTime<1609459200` to find Cloud resources that were created before
         #       "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
         #       "2021-01-01 00:00:00 UTC" in seconds.
@@ -616,6 +696,7 @@ module Google
         #     to indicate descending order. Redundant space characters are ignored.
         #     Example: "location DESC, name".
         #     Only singular primitive fields in the response are sortable:
+        #
         #       * name
         #       * assetType
         #       * project
@@ -628,9 +709,40 @@ module Google
         #       * state
         #       * parentFullResourceName
         #       * parentAssetType
+        #
         #     All the other fields such as repeated fields (e.g., `networkTags`), map
         #     fields (e.g., `labels`) and struct fields (e.g., `additionalAttributes`)
         #     are not supported.
+        # @!attribute [rw] read_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. A comma-separated list of fields specifying which fields to be returned in
+        #     ResourceSearchResult. Only '*' or combination of top level fields can be
+        #     specified. Field names of both snake_case and camelCase are supported.
+        #     Examples: `"*"`, `"name,location"`, `"name,versionedResources"`.
+        #
+        #     The read_mask paths must be valid field paths listed but not limited to
+        #     (both snake_case and camelCase are supported):
+        #
+        #       * name
+        #       * assetType
+        #       * project
+        #       * displayName
+        #       * description
+        #       * location
+        #       * labels
+        #       * networkTags
+        #       * kmsKey
+        #       * createTime
+        #       * updateTime
+        #       * state
+        #       * additionalAttributes
+        #       * versionedResources
+        #
+        #     If read_mask is not specified, all fields except versionedResources will
+        #     be returned.
+        #     If only '*' is specified, all fields including versionedResources will be
+        #     returned.
+        #     Any invalid field path will trigger INVALID_ARGUMENT error.
         class SearchAllResourcesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -706,6 +818,10 @@ module Google
         #     * `resource:(instance1 OR instance2) policy:amy` to find
         #       IAM policy bindings that are set on resources "instance1" or
         #       "instance2" and also specify user "amy".
+        #     * `roles:roles/compute.admin` to find IAM policy bindings that specify the
+        #       Compute Admin role.
+        #     * `memberTypes:user` to find IAM policy bindings that contain the "user"
+        #       member type.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The page size for search result pagination. Page size is capped at 500 even
@@ -718,6 +834,36 @@ module Google
         #     this method. `page_token` must be the value of `next_page_token` from the
         #     previous response. The values of all other method parameters must be
         #     identical to those in the previous call.
+        # @!attribute [rw] asset_types
+        #   @return [::Array<::String>]
+        #     Optional. A list of asset types that the IAM policies are attached to. If empty, it
+        #     will search the IAM policies that are attached to all the [searchable asset
+        #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+        #
+        #     Regular expressions are also supported. For example:
+        #
+        #     * "compute.googleapis.com.*" snapshots IAM policies attached to asset type
+        #     starts with "compute.googleapis.com".
+        #     * ".*Instance" snapshots IAM policies attached to asset type ends with
+        #     "Instance".
+        #     * ".*Instance.*" snapshots IAM policies attached to asset type contains
+        #     "Instance".
+        #
+        #     See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+        #     regular expression syntax. If the regular expression does not match any
+        #     supported asset type, an INVALID_ARGUMENT error will be returned.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. A comma-separated list of fields specifying the sorting order of the
+        #     results. The default order is ascending. Add " DESC" after the field name
+        #     to indicate descending order. Redundant space characters are ignored.
+        #     Example: "assetType DESC, resource".
+        #     Only singular primitive fields in the response are sortable:
+        #       * resource
+        #       * assetType
+        #       * project
+        #     All the other fields such as repeated fields (e.g., `folders`) and
+        #     non-primitive fields (e.g., `policy`) are not supported.
         class SearchAllIamPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1080,6 +1226,94 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The request message for performing resource move analysis.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Required. Name of the resource to perform the analysis against.
+        #     Only GCP Project are supported as of today. Hence, this can only be Project
+        #     ID (such as "projects/my-project-id") or a Project Number (such as
+        #     "projects/12345").
+        # @!attribute [rw] destination_parent
+        #   @return [::String]
+        #     Required. Name of the GCP Folder or Organization to reparent the target
+        #     resource. The analysis will be performed against hypothetically moving the
+        #     resource to this specified desitination parent. This can only be a Folder
+        #     number (such as "folders/123") or an Organization number (such as
+        #     "organizations/123").
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::Asset::V1::AnalyzeMoveRequest::AnalysisView]
+        #     Analysis view indicating what information should be included in the
+        #     analysis response. If unspecified, the default view is FULL.
+        class AnalyzeMoveRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # View enum for supporting partial analysis responses.
+          module AnalysisView
+            # The default/unset value.
+            # The API will default to the FULL view.
+            ANALYSIS_VIEW_UNSPECIFIED = 0
+
+            # Full analysis including all level of impacts of the specified resource
+            # move.
+            FULL = 1
+
+            # Basic analysis only including blockers which will prevent the specified
+            # resource move at runtime.
+            BASIC = 2
+          end
+        end
+
+        # The response message for resource move analysis.
+        # @!attribute [rw] move_analysis
+        #   @return [::Array<::Google::Cloud::Asset::V1::MoveAnalysis>]
+        #     The list of analyses returned from performing the intended resource move
+        #     analysis. The analysis is grouped by different Cloud services.
+        class AnalyzeMoveResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A message to group the analysis information.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     The user friendly display name of the analysis. E.g. IAM, Organization
+        #     Policy etc.
+        # @!attribute [rw] analysis
+        #   @return [::Google::Cloud::Asset::V1::MoveAnalysisResult]
+        #     Analysis result of moving the target resource.
+        # @!attribute [rw] error
+        #   @return [::Google::Rpc::Status]
+        #     Description of error encountered when performing the analysis.
+        class MoveAnalysis
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An analysis result including blockers and warnings.
+        # @!attribute [rw] blockers
+        #   @return [::Array<::Google::Cloud::Asset::V1::MoveImpact>]
+        #     Blocking information that would prevent the target resource from moving
+        #     to the specified destination at runtime.
+        # @!attribute [rw] warnings
+        #   @return [::Array<::Google::Cloud::Asset::V1::MoveImpact>]
+        #     Warning information indicating that moving the target resource to the
+        #     specified destination might be unsafe. This can include important policy
+        #     information and configuration changes, but will not block moves at runtime.
+        class MoveAnalysisResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A message to group impacts of moving the target resource.
+        # @!attribute [rw] detail
+        #   @return [::String]
+        #     User friendly impact detail in a free form message.
+        class MoveImpact
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Asset content type.
         module ContentType
           # Unspecified content type.
@@ -1099,6 +1333,9 @@ module Google
 
           # The runtime OS Inventory information.
           OS_INVENTORY = 6
+
+          # The related resources.
+          RELATIONSHIP = 7
         end
       end
     end

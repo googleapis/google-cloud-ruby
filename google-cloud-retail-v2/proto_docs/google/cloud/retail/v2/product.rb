@@ -23,6 +23,40 @@ module Google
       module V2
         # Product captures all metadata information of items to be recommended or
         # searched.
+        # @!attribute [rw] expire_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The timestamp when this product becomes unavailable for
+        #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search}.
+        #
+        #     If it is set, the {::Google::Cloud::Retail::V2::Product Product} is not
+        #     available for
+        #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search} after
+        #     {::Google::Cloud::Retail::V2::Product#expire_time expire_time}. However, the
+        #     product can still be retrieved by
+        #     {::Google::Cloud::Retail::V2::ProductService::Client#get_product ProductService.GetProduct}
+        #     and
+        #     {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}.
+        #
+        #     Google Merchant Center property
+        #     [expiration_date](https://support.google.com/merchants/answer/6324499).
+        # @!attribute [rw] ttl
+        #   @return [::Google::Protobuf::Duration]
+        #     Input only. The TTL (time to live) of the product.
+        #
+        #     If it is set, {::Google::Cloud::Retail::V2::Product#expire_time expire_time}
+        #     is set as current timestamp plus
+        #     {::Google::Cloud::Retail::V2::Product#ttl ttl}. The derived
+        #     {::Google::Cloud::Retail::V2::Product#expire_time expire_time} is returned in
+        #     the output and {::Google::Cloud::Retail::V2::Product#ttl ttl} is left blank
+        #     when retrieving the {::Google::Cloud::Retail::V2::Product Product}.
+        #
+        #     If it is set, the product is not available for
+        #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search} after
+        #     current timestamp plus {::Google::Cloud::Retail::V2::Product#ttl ttl}.
+        #     However, the product can still be retrieved by
+        #     {::Google::Cloud::Retail::V2::ProductService::Client#get_product ProductService.GetProduct}
+        #     and
+        #     {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. Full resource name of the product, such as
@@ -45,7 +79,9 @@ module Google
         #     Property [Product.sku](https://schema.org/sku).
         # @!attribute [rw] type
         #   @return [::Google::Cloud::Retail::V2::Product::Type]
-        #     Immutable. The type of the product. This field is output-only.
+        #     Immutable. The type of the product. Default to
+        #     {::Google::Cloud::Retail::V2::ProductLevelConfig#ingestion_product_type Catalog.product_level_config.ingestion_product_type}
+        #     if unset.
         # @!attribute [rw] primary_product_id
         #   @return [::String]
         #     Variant group identifier. Must be an
@@ -69,6 +105,34 @@ module Google
         #
         #     This field must be enabled before it can be used. [Learn
         #     more](/recommendations-ai/docs/catalog#item-group-id).
+        # @!attribute [rw] collection_member_ids
+        #   @return [::Array<::String>]
+        #     The {::Google::Cloud::Retail::V2::Product#id id} of the collection members when
+        #     {::Google::Cloud::Retail::V2::Product#type type} is
+        #     {::Google::Cloud::Retail::V2::Product::Type::COLLECTION Type.COLLECTION}.
+        #
+        #     Should not set it for other types. A maximum of 1000 values are allowed.
+        #     Otherwise, an INVALID_ARGUMENT error is return.
+        # @!attribute [rw] gtin
+        #   @return [::String]
+        #     The Global Trade Item Number (GTIN) of the product.
+        #
+        #     This field must be a UTF-8 encoded string with a length limit of 128
+        #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
+        #
+        #     This field must be a Unigram. Otherwise, an INVALID_ARGUMENT error is
+        #     returned.
+        #
+        #     Google Merchant Center property
+        #     [gtin](https://support.google.com/merchants/answer/6324461).
+        #     Schema.org property
+        #     [Product.isbn](https://schema.org/isbn) or
+        #     [Product.gtin8](https://schema.org/gtin8) or
+        #     [Product.gtin12](https://schema.org/gtin12) or
+        #     [Product.gtin13](https://schema.org/gtin13) or
+        #     [Product.gtin14](https://schema.org/gtin14).
+        #
+        #     If the value is not a valid GTIN, an INVALID_ARGUMENT error is returned.
         # @!attribute [rw] categories
         #   @return [::Array<::String>]
         #     Product categories. This field is repeated for supporting one product
@@ -109,12 +173,23 @@ module Google
         #   @return [::String]
         #     Required. Product title.
         #
-        #     This field must be a UTF-8 encoded string with a length limit of 128
+        #     This field must be a UTF-8 encoded string with a length limit of 1,000
         #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
         #
         #     Google Merchant Center property
         #     [title](https://support.google.com/merchants/answer/6324415). Schema.org
         #     property [Product.name](https://schema.org/name).
+        # @!attribute [rw] brands
+        #   @return [::Array<::String>]
+        #     The brands of the product.
+        #
+        #     A maximum of 30 brands are allowed. Each brand must be a UTF-8 encoded
+        #     string with a length limit of 1,000 characters. Otherwise, an
+        #     INVALID_ARGUMENT error is returned.
+        #
+        #     Google Merchant Center property
+        #     [brand](https://support.google.com/merchants/answer/6324351). Schema.org
+        #     property [Product.brand](https://schema.org/brand).
         # @!attribute [rw] description
         #   @return [::String]
         #     Product description.
@@ -125,6 +200,18 @@ module Google
         #     Google Merchant Center property
         #     [description](https://support.google.com/merchants/answer/6324468).
         #     schema.org property [Product.description](https://schema.org/description).
+        # @!attribute [rw] language_code
+        #   @return [::String]
+        #     Language of the title/description and other string attributes. Use language
+        #     tags defined by [BCP 47][https://www.rfc-editor.org/rfc/bcp/bcp47.txt].
+        #
+        #     For product prediction, this field is ignored and the model automatically
+        #     detects the text language. The {::Google::Cloud::Retail::V2::Product Product}
+        #     can include text in different languages, but duplicating
+        #     {::Google::Cloud::Retail::V2::Product Product}s to provide text in multiple
+        #     languages can result in degraded model performance.
+        #
+        #     For product search this field is in use. It defaults to "en-US" if unset.
         # @!attribute [rw] attributes
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Retail::V2::CustomAttribute}]
         #     Highly encouraged. Extra product attributes to be included. For example,
@@ -143,11 +230,14 @@ module Google
         #     "lengths_cm": \\{"numbers":[2.3, 15.4]}, "heights_cm": \\{"numbers":[8.1, 6.4]}
         #     }`.
         #
-        #     A maximum of 150 attributes are allowed. Otherwise, an INVALID_ARGUMENT
-        #     error is returned.
+        #     This field needs to pass all below criteria, otherwise an INVALID_ARGUMENT
+        #     error is returned:
         #
-        #     The key must be a UTF-8 encoded string with a length limit of 5,000
-        #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
+        #     * Max entries count: 200.
+        #     * The key must be a UTF-8 encoded string with a length limit of 128
+        #       characters.
+        #     * For indexable attribute, the key must match the pattern:
+        #       [a-zA-Z0-9][a-zA-Z0-9_]*. For example, key0LikeThis or KEY_1_LIKE_THIS.
         # @!attribute [rw] tags
         #   @return [::Array<::String>]
         #     Custom tags associated with the product.
@@ -169,10 +259,14 @@ module Google
         #
         #     Google Merchant Center property
         #     [price](https://support.google.com/merchants/answer/6324371).
+        # @!attribute [rw] rating
+        #   @return [::Google::Cloud::Retail::V2::Rating]
+        #     The rating of this product.
         # @!attribute [rw] available_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The timestamp when this {::Google::Cloud::Retail::V2::Product Product} becomes
-        #     available recommendation and search.
+        #     available for
+        #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search}.
         # @!attribute [rw] availability
         #   @return [::Google::Cloud::Retail::V2::Product::Availability]
         #     The online availability of the {::Google::Cloud::Retail::V2::Product Product}.
@@ -185,9 +279,20 @@ module Google
         # @!attribute [rw] available_quantity
         #   @return [::Google::Protobuf::Int32Value]
         #     The available quantity of the item.
+        # @!attribute [rw] fulfillment_info
+        #   @return [::Array<::Google::Cloud::Retail::V2::FulfillmentInfo>]
+        #     Fulfillment information, such as the store IDs for in-store pickup or
+        #     region IDs for different shipping methods.
+        #
+        #     All the elements must have distinct
+        #     {::Google::Cloud::Retail::V2::FulfillmentInfo#type FulfillmentInfo.type}.
+        #     Otherwise, an INVALID_ARGUMENT error is returned.
         # @!attribute [rw] uri
         #   @return [::String]
         #     Canonical URL directly linking to the product detail page.
+        #
+        #     It is strongly recommended to provide a valid uri for the product,
+        #     otherwise the service performance could be significantly degraded.
         #
         #     This field must be a UTF-8 encoded string with a length limit of 5,000
         #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
@@ -197,13 +302,166 @@ module Google
         #     property [Offer.url](https://schema.org/url).
         # @!attribute [rw] images
         #   @return [::Array<::Google::Cloud::Retail::V2::Image>]
-        #     Product images for the product.
+        #     Product images for the product.Highly recommended to put the main image
+        #     to the first.
         #
         #     A maximum of 300 images are allowed.
         #
         #     Google Merchant Center property
         #     [image_link](https://support.google.com/merchants/answer/6324350).
         #     Schema.org property [Product.image](https://schema.org/image).
+        # @!attribute [rw] audience
+        #   @return [::Google::Cloud::Retail::V2::Audience]
+        #     The target group associated with a given audience (e.g. male, veterans,
+        #     car owners, musicians, etc.) of the product.
+        # @!attribute [rw] color_info
+        #   @return [::Google::Cloud::Retail::V2::ColorInfo]
+        #     The color of the product.
+        #
+        #     Google Merchant Center property
+        #     [color](https://support.google.com/merchants/answer/6324487). Schema.org
+        #     property [Product.color](https://schema.org/color).
+        # @!attribute [rw] sizes
+        #   @return [::Array<::String>]
+        #     The size of the product. To represent different size systems or size types,
+        #     consider using this format: [[[size_system:]size_type:]size_value].
+        #
+        #     For example, in "US:MENS:M", "US" represents size system; "MENS" represents
+        #     size type; "M" represents size value. In "GIRLS:27", size system is empty;
+        #     "GIRLS" represents size type; "27" represents size value. In "32 inches",
+        #     both size system and size type are empty, while size value is "32 inches".
+        #
+        #     A maximum of 20 values are allowed per
+        #     {::Google::Cloud::Retail::V2::Product Product}. Each value must be a UTF-8
+        #     encoded string with a length limit of 128 characters. Otherwise, an
+        #     INVALID_ARGUMENT error is returned.
+        #
+        #     Google Merchant Center property
+        #     [size](https://support.google.com/merchants/answer/6324492),
+        #     [size_type](https://support.google.com/merchants/answer/6324497) and
+        #     [size_system](https://support.google.com/merchants/answer/6324502).
+        #     Schema.org property [Product.size](https://schema.org/size).
+        # @!attribute [rw] materials
+        #   @return [::Array<::String>]
+        #     The material of the product. For example, "leather", "wooden".
+        #
+        #     A maximum of 20 values are allowed. Each value must be a UTF-8 encoded
+        #     string with a length limit of 128 characters. Otherwise, an
+        #     INVALID_ARGUMENT error is returned.
+        #
+        #     Google Merchant Center property
+        #     [material](https://support.google.com/merchants/answer/6324410). Schema.org
+        #     property [Product.material](https://schema.org/material).
+        # @!attribute [rw] patterns
+        #   @return [::Array<::String>]
+        #     The pattern or graphic print of the product. For example, "striped", "polka
+        #     dot", "paisley".
+        #
+        #     A maximum of 20 values are allowed per
+        #     {::Google::Cloud::Retail::V2::Product Product}. Each value must be a UTF-8
+        #     encoded string with a length limit of 128 characters. Otherwise, an
+        #     INVALID_ARGUMENT error is returned.
+        #
+        #     Google Merchant Center property
+        #     [pattern](https://support.google.com/merchants/answer/6324483). Schema.org
+        #     property [Product.pattern](https://schema.org/pattern).
+        # @!attribute [rw] conditions
+        #   @return [::Array<::String>]
+        #     The condition of the product. Strongly encouraged to use the standard
+        #     values: "new", "refurbished", "used".
+        #
+        #     A maximum of 5 values are allowed per
+        #     {::Google::Cloud::Retail::V2::Product Product}. Each value must be a UTF-8
+        #     encoded string with a length limit of 128 characters. Otherwise, an
+        #     INVALID_ARGUMENT error is returned.
+        #
+        #     Google Merchant Center property
+        #     [condition](https://support.google.com/merchants/answer/6324469).
+        #     Schema.org property
+        #     [Offer.itemCondition](https://schema.org/itemCondition).
+        # @!attribute [rw] promotions
+        #   @return [::Array<::Google::Cloud::Retail::V2::Promotion>]
+        #     The promotions applied to the product. A maximum of 10 values are allowed
+        #     per {::Google::Cloud::Retail::V2::Product Product}.
+        # @!attribute [rw] publish_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The timestamp when the product is published by the retailer for the first
+        #     time, which indicates the freshness of the products. Note that this field
+        #     is different from
+        #     {::Google::Cloud::Retail::V2::Product#available_time available_time}, given it
+        #     purely describes product freshness regardless of when it is available on
+        #     search and recommendation.
+        # @!attribute [rw] retrievable_fields
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Indicates which fields in the {::Google::Cloud::Retail::V2::Product Product}s
+        #     are returned in {::Google::Cloud::Retail::V2::SearchResponse SearchResponse}.
+        #
+        #     Supported fields for all {::Google::Cloud::Retail::V2::Product#type type}s:
+        #
+        #     * {::Google::Cloud::Retail::V2::Product#audience audience}
+        #     * {::Google::Cloud::Retail::V2::Product#availability availability}
+        #     * {::Google::Cloud::Retail::V2::Product#brands brands}
+        #     * {::Google::Cloud::Retail::V2::Product#color_info color_info}
+        #     * {::Google::Cloud::Retail::V2::Product#conditions conditions}
+        #     * {::Google::Cloud::Retail::V2::Product#gtin gtin}
+        #     * {::Google::Cloud::Retail::V2::Product#materials materials}
+        #     * {::Google::Cloud::Retail::V2::Product#name name}
+        #     * {::Google::Cloud::Retail::V2::Product#patterns patterns}
+        #     * {::Google::Cloud::Retail::V2::Product#price_info price_info}
+        #     * {::Google::Cloud::Retail::V2::Product#rating rating}
+        #     * {::Google::Cloud::Retail::V2::Product#sizes sizes}
+        #     * {::Google::Cloud::Retail::V2::Product#title title}
+        #     * {::Google::Cloud::Retail::V2::Product#uri uri}
+        #
+        #     Supported fields only for
+        #     {::Google::Cloud::Retail::V2::Product::Type::PRIMARY Type.PRIMARY} and
+        #     {::Google::Cloud::Retail::V2::Product::Type::COLLECTION Type.COLLECTION}:
+        #
+        #     * {::Google::Cloud::Retail::V2::Product#categories categories}
+        #     * {::Google::Cloud::Retail::V2::Product#description description}
+        #     * {::Google::Cloud::Retail::V2::Product#images images}
+        #
+        #     Supported fields only for
+        #     {::Google::Cloud::Retail::V2::Product::Type::VARIANT Type.VARIANT}:
+        #
+        #     * Only the first image in {::Google::Cloud::Retail::V2::Product#images images}
+        #
+        #     To mark {::Google::Cloud::Retail::V2::Product#attributes attributes} as
+        #     retrievable, include paths of the form "attributes.key" where "key" is the
+        #     key of a custom attribute, as specified in
+        #     {::Google::Cloud::Retail::V2::Product#attributes attributes}.
+        #
+        #     For {::Google::Cloud::Retail::V2::Product::Type::PRIMARY Type.PRIMARY} and
+        #     {::Google::Cloud::Retail::V2::Product::Type::COLLECTION Type.COLLECTION}, the
+        #     following fields are always returned in
+        #     {::Google::Cloud::Retail::V2::SearchResponse SearchResponse} by default:
+        #
+        #     * {::Google::Cloud::Retail::V2::Product#name name}
+        #
+        #     For {::Google::Cloud::Retail::V2::Product::Type::VARIANT Type.VARIANT}, the
+        #     following fields are always returned in by default:
+        #
+        #     * {::Google::Cloud::Retail::V2::Product#name name}
+        #     * {::Google::Cloud::Retail::V2::Product#color_info color_info}
+        #
+        #     Maximum number of paths is 30. Otherwise, an INVALID_ARGUMENT error is
+        #     returned.
+        #
+        #     Note: Returning more fields in
+        #     {::Google::Cloud::Retail::V2::SearchResponse SearchResponse} may increase
+        #     response payload size and serving latency.
+        # @!attribute [r] variants
+        #   @return [::Array<::Google::Cloud::Retail::V2::Product>]
+        #     Output only. Product variants grouped together on primary product which
+        #     share similar product attributes. It's automatically grouped by
+        #     {::Google::Cloud::Retail::V2::Product#primary_product_id primary_product_id} for
+        #     all the product variants. Only populated for
+        #     {::Google::Cloud::Retail::V2::Product::Type::PRIMARY Type.PRIMARY}
+        #     {::Google::Cloud::Retail::V2::Product Product}s.
+        #
+        #     Note: This field is OUTPUT_ONLY for
+        #     {::Google::Cloud::Retail::V2::ProductService::Client#get_product ProductService.GetProduct}.
+        #     Do not set this field in API requests.
         class Product
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -220,7 +478,8 @@ module Google
           # The type of this product.
           module Type
             # Default value. Default to
-            # {::Google::Cloud::Retail::V2::Product::Type::PRIMARY Type.PRIMARY} if unset.
+            # {::Google::Cloud::Retail::V2::ProductLevelConfig#ingestion_product_type Catalog.product_level_config.ingestion_product_type}
+            # if unset.
             TYPE_UNSPECIFIED = 0
 
             # The primary type.

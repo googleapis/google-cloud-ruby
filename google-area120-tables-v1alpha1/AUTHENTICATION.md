@@ -66,11 +66,11 @@ The environment variables that google-area120-tables-v1alpha1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Area120::Tables::V1alpha1::TablesService::Credentials}):
 
-1. `AREA120_TABLES_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `AREA120_TABLES_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `AREA120_TABLES_CREDENTIALS` - Path to JSON file, or JSON contents
+* `AREA120_TABLES_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/area120/tables/v1alpha1"
@@ -82,8 +82,8 @@ client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new
 
 ### Configuration
 
-The **Credentials JSON** can be configured instead of placing them in
-environment variables. Either on an individual client initialization:
+The path to the **Credentials JSON** file can be configured instead of storing
+it in an environment variable. Either on an individual client initialization:
 
 ```ruby
 require "google/area120/tables/v1alpha1"
@@ -93,7 +93,7 @@ client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |conf
 end
 ```
 
-Or configured globally for all clients:
+Or globally for all clients:
 
 ```ruby
 require "google/area120/tables/v1alpha1"

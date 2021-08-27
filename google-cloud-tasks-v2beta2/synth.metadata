@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "693ae20a741ede8ab36fbd7411e0b045976b7335"
+        "sha": "7e366e8c4192595f54e817a0f4136210f1ff6309"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "df616b587f0b4302f15387f315c286035c3b8bb1",
-        "internalRef": "376172241"
+        "sha": "411e51eea221af5b77f809cef2c6592df45f73d5",
+        "internalRef": "389760020"
       }
     }
   ],
@@ -23,7 +23,7 @@
         "apiName": "tasks",
         "apiVersion": "v2beta2",
         "language": "ruby",
-        "generator": "gapic-generator-ruby"
+        "generator": "bazel"
       }
     }
   ],
@@ -49,7 +49,6 @@
     "lib/google/cloud/tasks/v2beta2/cloud_tasks/paths.rb",
     "lib/google/cloud/tasks/v2beta2/cloudtasks_pb.rb",
     "lib/google/cloud/tasks/v2beta2/cloudtasks_services_pb.rb",
-    "lib/google/cloud/tasks/v2beta2/old_target_pb.rb",
     "lib/google/cloud/tasks/v2beta2/queue_pb.rb",
     "lib/google/cloud/tasks/v2beta2/target_pb.rb",
     "lib/google/cloud/tasks/v2beta2/task_pb.rb",

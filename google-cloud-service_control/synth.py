@@ -30,7 +30,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Service Control API",
         "ruby-cloud-description": "The Service Control API provides control plane functionality to managed services, such as logging, monitoring, and status checks.",
         "ruby-cloud-env-prefix": "SERVICE_CONTROL",
-        "ruby-cloud-wrapper-of": "v1:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.3",
         "ruby-cloud-product-url": "https://cloud.google.com/service-infrastructure/docs/overview/",
         "ruby-cloud-api-id": "servicecontrol.googleapis.com",
         "ruby-cloud-api-shortname": "servicecontrol",

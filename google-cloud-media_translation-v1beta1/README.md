@@ -31,10 +31,6 @@ In order to use this library, you first need to go through the following steps:
 
 ```ruby
 require "google/cloud/media_translation/v1beta1"
-
-client = ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client.new
-request = my_create_request
-response = client.streaming_translate_speech request
 ```
 
 View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-media_translation-v1beta1/latest)

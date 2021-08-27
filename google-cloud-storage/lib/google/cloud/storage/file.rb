@@ -260,6 +260,9 @@ module Google
         # directive for the file data. If omitted, and the file is accessible
         # to all anonymous users, the default will be `public, max-age=3600`.
         #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
+        #
         # @param [String] cache_control The Cache-Control directive.
         #
         def cache_control= cache_control
@@ -280,6 +283,9 @@ module Google
         ##
         # Updates the [Content-Disposition](https://tools.ietf.org/html/rfc6266)
         # of the file data.
+        #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
         #
         # @param [String] content_disposition The Content-Disposition of the
         #   file.
@@ -305,6 +311,9 @@ module Google
         # ](https://tools.ietf.org/html/rfc7231#section-3.1.2.2) of the file
         # data.
         #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
+        #
         # @param [String] content_encoding The Content-Encoding of the file.
         #
         def content_encoding= content_encoding
@@ -325,6 +334,9 @@ module Google
         ##
         # Updates the [Content-Language](http://tools.ietf.org/html/bcp47) of
         # the file data.
+        #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
         #
         # @param [String] content_language The Content-Language of the file.
         #
@@ -348,6 +360,9 @@ module Google
         # [Content-Type](https://tools.ietf.org/html/rfc2616#section-14.17) of
         # the file data.
         #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
+        #
         # @param [String] content_type The Content-Type of the file.
         #
         def content_type= content_type
@@ -369,6 +384,9 @@ module Google
         # custom_time can't be unset, and it can only be changed to a time in the
         # future. If custom_time must be unset, you must either perform a rewrite
         # operation, or upload the data again and create a new file.
+        #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
         #
         # @param [DateTime] custom_time A custom time specified by the user
         #   for the file.
@@ -395,6 +413,9 @@ module Google
         # Updates the hash of custom, user-provided web-safe keys and arbitrary
         # string values that will returned with requests for the file as
         # "x-goog-meta-" response headers.
+        #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
         #
         # @param [Hash(String => String)] metadata The user-provided metadata,
         #   in key/value pairs.
@@ -465,6 +486,9 @@ module Google
         # The  default value is the default storage class for the bucket. See
         # {Bucket#storage_class}.
         #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
+        #
         # @param [Symbol, String] storage_class Storage class of the file.
         #
         def storage_class= storage_class
@@ -505,6 +529,9 @@ module Google
         # removed, the file's `retention_expires_at` date is not changed. The
         # default value is `false`.
         #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
+        #
         # See {#retention_expires_at}.
         #
         # @example
@@ -532,6 +559,9 @@ module Google
         # default value is `false`.
         #
         # See {#retention_expires_at}.
+        #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
         #
         # @example
         #   require "google/cloud/storage"
@@ -643,6 +673,9 @@ module Google
         #   holds released prior to the effective date of the new policy may
         #   have already been deleted by the user.
         #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
+        #
         # @example
         #   require "google/cloud/storage"
         #
@@ -680,6 +713,9 @@ module Google
         # See {#event_based_hold?}, {#set_event_based_hold!},
         # {Bucket#default_event_based_hold?} and
         # {Bucket#default_event_based_hold=}.
+        #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
         #
         # @example
         #   require "google/cloud/storage"
@@ -810,6 +846,19 @@ module Google
         #     f.custom_time = DateTime.new 2025, 12, 31
         #     f.metadata["player"] = "Bob"
         #     f.metadata["score"] = "10"
+        #   end
+        #
+        # @example With a `if_generation_match` precondition:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   file.update if_generation_match: 1602263125261858 do |f|
+        #     f.cache_control = "private, max-age=0, no-cache"
         #   end
         #
         def update generation: nil,

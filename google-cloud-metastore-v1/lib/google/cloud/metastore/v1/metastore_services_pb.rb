@@ -25,8 +25,8 @@ module Google
       module V1
         module DataprocMetastore
           # Configures and manages metastore services.
-          # Metastore services are fully managed, highly available, auto-scaled,
-          # auto-healing, OSS-native deployments of technical metadata management
+          # Metastore services are fully managed, highly available, autoscaled,
+          # autohealing, OSS-native deployments of technical metadata management
           # software. Each metastore service exposes a network endpoint through which
           # metadata queries are served. Metadata queries can originate from a variety
           # of sources, including Apache Hive, Apache Presto, and Apache Spark.
@@ -43,7 +43,7 @@ module Google
           #   `/projects/{project_number}/locations/{location_id}/services/{service_id}`.
           class Service
 
-            include ::GRPC::GenericService
+            include GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode
@@ -70,6 +70,16 @@ module Google
             rpc :UpdateMetadataImport, ::Google::Cloud::Metastore::V1::UpdateMetadataImportRequest, ::Google::Longrunning::Operation
             # Exports metadata from a service.
             rpc :ExportMetadata, ::Google::Cloud::Metastore::V1::ExportMetadataRequest, ::Google::Longrunning::Operation
+            # Restores a service from a backup.
+            rpc :RestoreService, ::Google::Cloud::Metastore::V1::RestoreServiceRequest, ::Google::Longrunning::Operation
+            # Lists backups in a service.
+            rpc :ListBackups, ::Google::Cloud::Metastore::V1::ListBackupsRequest, ::Google::Cloud::Metastore::V1::ListBackupsResponse
+            # Gets details of a single backup.
+            rpc :GetBackup, ::Google::Cloud::Metastore::V1::GetBackupRequest, ::Google::Cloud::Metastore::V1::Backup
+            # Creates a new backup in a given project and location.
+            rpc :CreateBackup, ::Google::Cloud::Metastore::V1::CreateBackupRequest, ::Google::Longrunning::Operation
+            # Deletes a single backup.
+            rpc :DeleteBackup, ::Google::Cloud::Metastore::V1::DeleteBackupRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

@@ -2,7 +2,7 @@
 
 API Client library for the Dialogflow V2 API
 
-Dialogflow is an end-to-end, build-once deploy-everywhere development suite for creating conversational interfaces for websites, mobile applications, popular messaging platforms, and IoT devices. You can use it to build interfaces (such as chatbots and conversational IVR) that enable natural and rich interactions between your users and your business.
+Dialogflow is an end-to-end, build-once deploy-everywhere development suite for creating conversational interfaces for websites, mobile applications, popular messaging platforms, and IoT devices. You can use it to build interfaces (such as chatbots and conversational IVR) that enable natural and rich interactions between your users and your business. This client is for Dialogflow ES, providing the standard agent type suitable for small and simple agents.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/dialogflow/v2"
 
 client = ::Google::Cloud::Dialogflow::V2::Agents::Client.new
-request = my_create_request
+request = ::Google::Cloud::Dialogflow::V2::GetAgentRequest.new # (request fields as keyword arguments...)
 response = client.get_agent request
 ```
 

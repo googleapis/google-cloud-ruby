@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "websecurityscanner", "v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-web_security_scanner-v1",
-        "ruby-cloud-title": "Web Security Scanner V1",
-        "ruby-cloud-description": "Web Security Scanner scans your Compute and App Engine apps for common web vulnerabilities.",
-        "ruby-cloud-env-prefix": "WEB_SECURITY_SCANNER",
-        "ruby-cloud-grpc-service-config": "google/cloud/websecurityscanner/v1/websecurityscanner_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/",
-        "ruby-cloud-api-id": "websecurityscanner.googleapis.com",
-        "ruby-cloud-api-shortname": "websecurityscanner",
-    }
+    proto_path="google/cloud/websecurityscanner/v1",
+    bazel_target="//google/cloud/websecurityscanner/v1:google-cloud-websecurityscanner-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

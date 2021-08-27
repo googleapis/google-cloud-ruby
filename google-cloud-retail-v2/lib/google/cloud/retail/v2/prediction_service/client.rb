@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Retail::V2::PredictionService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all PredictionService clients:
-            #
-            #     ::Google::Cloud::Retail::V2::PredictionService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all PredictionService clients
+            #   ::Google::Cloud::Retail::V2::PredictionService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -65,12 +64,9 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.timeout = 60.0
+                default_config.timeout = 5.0
                 default_config.retry_policy = {
-                  initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 5.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config
@@ -102,19 +98,15 @@ module Google
             ##
             # Create a new PredictionService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new PredictionService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Retail::V2::PredictionService::Client.new
             #
-            #     client = ::Google::Cloud::Retail::V2::PredictionService::Client.new
-            #
-            # To create a new PredictionService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Retail::V2::PredictionService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Retail::V2::PredictionService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the PredictionService client.
             # @yieldparam config [Client::Configuration]
@@ -134,14 +126,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -179,30 +170,10 @@ module Google
             #   @param placement [::String]
             #     Required. Full resource name of the format:
             #     \\{name=projects/*/locations/global/catalogs/default_catalog/placements/*}
-            #     The id of the recommendation engine placement. This id is used to identify
-            #     the set of models that will be used to make the prediction.
-            #
-            #     We currently support three placements with the following IDs by default:
-            #
-            #     * `shopping_cart`: Predicts products frequently bought together with one or
-            #       more  products in the same shopping session. Commonly displayed after
-            #       `add-to-cart` events, on product detail pages, or on the shopping cart
-            #       page.
-            #
-            #     * `home_page`: Predicts the next product that a user will most likely
-            #       engage with or purchase based on the shopping or viewing history of the
-            #       specified `userId` or `visitorId`. For example - Recommendations for you.
-            #
-            #     * `product_detail`: Predicts the next product that a user will most likely
-            #       engage with or purchase. The prediction is based on the shopping or
-            #       viewing history of the specified `userId` or `visitorId` and its
-            #       relevance to a specified `CatalogItem`. Typically used on product detail
-            #       pages. For example - More products like this.
-            #
-            #     * `recently_viewed_default`: Returns up to 75 products recently viewed by
-            #       the specified `userId` or `visitorId`, most recent ones first. Returns
-            #       nothing if neither of them has viewed any products yet. For example -
-            #       Recently viewed.
+            #     The ID of the Recommendations AI placement. Before you can request
+            #     predictions from your model, you must create at least one placement for it.
+            #     For more information, see [Managing
+            #     placements](https://cloud.google.com/retail/recommendations-ai/docs/manage-placements).
             #
             #     The full list of available placements can be seen at
             #     https://console.cloud.google.com/recommendation/catalogs/default_catalog/placements
@@ -228,6 +199,9 @@ module Google
             #        tag values by a space. `-"tagA"` is also supported and is equivalent to
             #        `NOT "tagA"`. Tag values must be double quoted UTF-8 encoded strings
             #        with a size limit of 1,000 characters.
+            #
+            #        Note: "Recently viewed" models don't support tag filtering at the
+            #        moment.
             #
             #      * filterOutOfStockItems. Restricts predictions to products that do not
             #      have a
@@ -263,16 +237,34 @@ module Google
             #     * `strictFiltering`: Boolean. True by default. If set to false, the service
             #        will return generic (unfiltered) popular products instead of empty if
             #        your filter blocks all prediction results.
+            #     * `priceRerankLevel`: String. Default empty. If set to be non-empty, then
+            #        it needs to be one of {'no-price-reranking', 'low-price-reranking',
+            #        'medium-price-reranking', 'high-price-reranking'}. This gives
+            #        request-level control and adjusts prediction results based on product
+            #        price.
+            #     * `diversityLevel`: String. Default empty. If set to be non-empty, then
+            #        it needs to be one of {'no-diversity', 'low-diversity',
+            #        'medium-diversity', 'high-diversity', 'auto-diversity'}. This gives
+            #        request-level control and adjusts prediction results based on product
+            #        category.
             #   @param labels [::Hash{::String => ::String}]
-            #     The labels for the predict request.
+            #     The labels applied to a resource must meet the following requirements:
             #
-            #      * Label keys can contain lowercase letters, digits and hyphens, must start
-            #        with a letter, and must end with a letter or digit.
-            #      * Non-zero label values can contain lowercase letters, digits and hyphens,
-            #        must start with a letter, and must end with a letter or digit.
-            #      * No more than 64 labels can be associated with a given request.
+            #     * Each resource can have multiple labels, up to a maximum of 64.
+            #     * Each label must be a key-value pair.
+            #     * Keys have a minimum length of 1 character and a maximum length of 63
+            #       characters, and cannot be empty. Values can be empty, and have a maximum
+            #       length of 63 characters.
+            #     * Keys and values can contain only lowercase letters, numeric characters,
+            #       underscores, and dashes. All characters must use UTF-8 encoding, and
+            #       international characters are allowed.
+            #     * The key portion of a label must be unique. However, you can use the same
+            #       key with multiple resources.
+            #     * Keys must start with a lowercase letter or international character.
             #
-            #     See https://goo.gl/xmQnxf for more information on and examples of labels.
+            #     See [Google Cloud
+            #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+            #     for more details.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Retail::V2::PredictResponse]
@@ -308,7 +300,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.predict.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.predict.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @prediction_service_stub.call_rpc :predict, request, options: options do |response, operation|
@@ -332,22 +326,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for predict
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # predict to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Retail::V2::PredictionService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.predict.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Retail::V2::PredictionService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.predict.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Retail::V2::PredictionService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.predict.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Retail::V2::PredictionService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.predict.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

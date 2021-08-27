@@ -42,13 +42,12 @@ module Google
             # See {::Google::Cloud::WebRisk::V1::WebRiskService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all WebRiskService clients:
-            #
-            #     ::Google::Cloud::WebRisk::V1::WebRiskService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all WebRiskService clients
+            #   ::Google::Cloud::WebRisk::V1::WebRiskService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -68,26 +67,17 @@ module Google
 
                 default_config.rpcs.compute_threat_list_diff.timeout = 600.0
                 default_config.rpcs.compute_threat_list_diff.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_uris.timeout = 600.0
                 default_config.rpcs.search_uris.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_hashes.timeout = 600.0
                 default_config.rpcs.search_hashes.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_submission.timeout = 60.0
@@ -121,19 +111,15 @@ module Google
             ##
             # Create a new WebRiskService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new WebRiskService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new
             #
-            #     client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new
-            #
-            # To create a new WebRiskService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the WebRiskService client.
             # @yieldparam config [Client::Configuration]
@@ -153,14 +139,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -239,7 +224,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.compute_threat_list_diff.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.compute_threat_list_diff.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_risk_service_stub.call_rpc :compute_threat_list_diff, request, options: options do |response, operation|
@@ -305,7 +292,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.search_uris.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.search_uris.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_risk_service_stub.call_rpc :search_uris, request, options: options do |response, operation|
@@ -372,7 +361,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.search_hashes.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.search_hashes.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_risk_service_stub.call_rpc :search_hashes, request, options: options do |response, operation|
@@ -446,7 +437,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_submission.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_submission.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_risk_service_stub.call_rpc :create_submission, request, options: options do |response, operation|
@@ -470,22 +463,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for compute_threat_list_diff
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # compute_threat_list_diff to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::WebRisk::V1::WebRiskService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.compute_threat_list_diff.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::WebRisk::V1::WebRiskService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.compute_threat_list_diff.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.compute_threat_list_diff.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::WebRisk::V1::WebRiskService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.compute_threat_list_diff.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

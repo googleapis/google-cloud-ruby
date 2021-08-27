@@ -23,7 +23,7 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :mock_storage do
 
   it "retrieves the default ACL" do
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, bucket_gapi, [bucket_name, {user_project: nil}]
+    mock.expect :get_bucket, bucket_gapi, get_bucket_args(bucket_name)
     mock.expect :list_default_object_access_controls,
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_default_acl_hash(bucket_name).to_json),
       [bucket_name, user_project: nil]
@@ -40,7 +40,7 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :mock_storage do
 
   it "retrieves the default ACL with user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, bucket_gapi, [bucket_name, {user_project: "test"}]
+    mock.expect :get_bucket, bucket_gapi, get_bucket_args(bucket_name, user_project: "test")
     mock.expect :list_default_object_access_controls,
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_default_acl_hash(bucket_name).to_json),
       [bucket_name, user_project: "test"]
@@ -69,7 +69,7 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :mock_storage do
       }
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, bucket_gapi, [bucket_name, {user_project: nil}]
+    mock.expect :get_bucket, bucket_gapi, get_bucket_args(bucket_name)
     mock.expect :list_default_object_access_controls,
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_default_acl_hash(bucket_name).to_json),
       [bucket_name, user_project: nil]
@@ -106,7 +106,7 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :mock_storage do
       }
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, bucket_gapi, [bucket_name, {user_project: "test"}]
+    mock.expect :get_bucket, bucket_gapi, get_bucket_args(bucket_name, user_project: "test")
     mock.expect :list_default_object_access_controls,
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_default_acl_hash(bucket_name).to_json),
       [bucket_name, user_project: "test"]
@@ -133,7 +133,7 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :mock_storage do
     existing_reader_entity = "project-viewers-1234567890"
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, bucket_gapi, [bucket_name, {user_project: nil}]
+    mock.expect :get_bucket, bucket_gapi, get_bucket_args(bucket_name)
     mock.expect :list_default_object_access_controls,
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_default_acl_hash(bucket_name).to_json),
       [bucket_name, user_project: nil]
@@ -159,7 +159,7 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :mock_storage do
     existing_reader_entity = "project-viewers-1234567890"
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, bucket_gapi, [bucket_name, {user_project: "test"}]
+    mock.expect :get_bucket, bucket_gapi, get_bucket_args(bucket_name, user_project: "test")
     mock.expect :list_default_object_access_controls,
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_default_acl_hash(bucket_name).to_json),
       [bucket_name, user_project: "test"]
@@ -365,8 +365,7 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :mock_storage do
     mock = Minitest::Mock.new
     mock.expect :patch_bucket,
       Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket.name).to_json),
-      [bucket_name, Google::Apis::StorageV1::Bucket.new(default_object_acl: []),
-       predefined_acl: nil, predefined_default_object_acl: acl_role, user_project: nil]
+      patch_bucket_args(bucket_name, Google::Apis::StorageV1::Bucket.new(default_object_acl: []), predefined_default_object_acl: acl_role)
 
     storage.service.mocked_service = mock
 

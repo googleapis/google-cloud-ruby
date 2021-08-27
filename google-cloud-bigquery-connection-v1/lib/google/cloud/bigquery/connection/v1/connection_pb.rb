@@ -49,6 +49,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :properties do
         optional :cloud_sql, :message, 4, "google.cloud.bigquery.connection.v1.CloudSqlProperties"
         optional :aws, :message, 8, "google.cloud.bigquery.connection.v1.AwsProperties"
+        optional :cloud_spanner, :message, 21, "google.cloud.bigquery.connection.v1.CloudSpannerProperties"
       end
     end
     add_message "google.cloud.bigquery.connection.v1.CloudSqlProperties" do
@@ -66,15 +67,24 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :username, :string, 1
       optional :password, :string, 2
     end
+    add_message "google.cloud.bigquery.connection.v1.CloudSpannerProperties" do
+      optional :database, :string, 1
+      optional :use_parallelism, :bool, 2
+    end
     add_message "google.cloud.bigquery.connection.v1.AwsProperties" do
       oneof :authentication_method do
         optional :cross_account_role, :message, 2, "google.cloud.bigquery.connection.v1.AwsCrossAccountRole"
+        optional :access_role, :message, 3, "google.cloud.bigquery.connection.v1.AwsAccessRole"
       end
     end
     add_message "google.cloud.bigquery.connection.v1.AwsCrossAccountRole" do
       optional :iam_role_id, :string, 1
       optional :iam_user_id, :string, 2
       optional :external_id, :string, 3
+    end
+    add_message "google.cloud.bigquery.connection.v1.AwsAccessRole" do
+      optional :iam_role_id, :string, 1
+      optional :identity, :string, 2
     end
   end
 end
@@ -94,8 +104,10 @@ module Google
           CloudSqlProperties = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.connection.v1.CloudSqlProperties").msgclass
           CloudSqlProperties::DatabaseType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.connection.v1.CloudSqlProperties.DatabaseType").enummodule
           CloudSqlCredential = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.connection.v1.CloudSqlCredential").msgclass
+          CloudSpannerProperties = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.connection.v1.CloudSpannerProperties").msgclass
           AwsProperties = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.connection.v1.AwsProperties").msgclass
           AwsCrossAccountRole = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.connection.v1.AwsCrossAccountRole").msgclass
+          AwsAccessRole = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.connection.v1.AwsAccessRole").msgclass
         end
       end
     end

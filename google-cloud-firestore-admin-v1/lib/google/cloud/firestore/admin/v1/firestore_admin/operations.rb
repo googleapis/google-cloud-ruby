@@ -83,7 +83,7 @@ module Google
                 # Create credentials
                 credentials = @config.credentials
                 credentials ||= Credentials.default scope: @config.scope
-                if credentials.is_a?(String) || credentials.is_a?(Hash)
+                if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
                 @quota_project_id = @config.quota_project
@@ -170,7 +170,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.list_operations.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_operations.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @operations_stub.call_rpc :list_operations, request, options: options do |response, operation|
@@ -240,7 +242,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.get_operation.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_operation.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @operations_stub.call_rpc :get_operation, request, options: options do |response, operation|
@@ -310,7 +314,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.delete_operation.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.delete_operation.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @operations_stub.call_rpc :delete_operation, request, options: options do |response, operation|
@@ -385,7 +391,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.cancel_operation.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.cancel_operation.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @operations_stub.call_rpc :cancel_operation, request, options: options do |response, operation|
@@ -397,9 +405,9 @@ module Google
               end
 
               ##
-              # Waits for the specified long-running operation until it is done or reaches
-              # at most a specified timeout, returning the latest state.  If the operation
-              # is already done, the latest state is immediately returned.  If the timeout
+              # Waits until the specified long-running operation is done or reaches at most
+              # a specified timeout, returning the latest state.  If the operation is
+              # already done, the latest state is immediately returned.  If the timeout
               # specified is greater than the default HTTP/RPC timeout, the HTTP/RPC
               # timeout is used.  If the server does not support this method, it returns
               # `google.rpc.Code.UNIMPLEMENTED`.
@@ -457,7 +465,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.wait_operation.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.wait_operation.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @operations_stub.call_rpc :wait_operation, request, options: options do |response, operation|
@@ -482,22 +492,21 @@ module Google
               # Configuration can be applied globally to all clients, or to a single client
               # on construction.
               #
-              # # Examples
+              # @example
               #
-              # To modify the global config, setting the timeout for list_operations
-              # to 20 seconds, and all remaining timeouts to 10 seconds:
+              #   # Modify the global config, setting the timeout for
+              #   # list_operations to 20 seconds,
+              #   # and all remaining timeouts to 10 seconds.
+              #   ::Google::Longrunning::Operations::Client.configure do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.list_operations.timeout = 20.0
+              #   end
               #
-              #     ::Google::Longrunning::Operations::Client.configure do |config|
-              #       config.timeout = 10.0
-              #       config.rpcs.list_operations.timeout = 20.0
-              #     end
-              #
-              # To apply the above configuration only to a new client:
-              #
-              #     client = ::Google::Longrunning::Operations::Client.new do |config|
-              #       config.timeout = 10.0
-              #       config.rpcs.list_operations.timeout = 20.0
-              #     end
+              #   # Apply the above configuration only to a new client.
+              #   client = ::Google::Longrunning::Operations::Client.new do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.list_operations.timeout = 20.0
+              #   end
               #
               # @!attribute [rw] endpoint
               #   The hostname or hostname:port of the service endpoint.

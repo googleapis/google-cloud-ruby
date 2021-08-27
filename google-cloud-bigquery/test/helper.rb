@@ -171,6 +171,11 @@ class MockBigquery < Minitest::Spec
           "name" => "birthday",
           "type" => "DATE",
           "mode" => "NULLABLE"
+        },
+        {
+          "name" => "home",
+          "type" => "GEOGRAPHY",
+          "mode" => "NULLABLE"
         }
       ]
     }
@@ -190,7 +195,8 @@ class MockBigquery < Minitest::Spec
           { "v" => "1482670800.0" },
           { "v" => "04:00:00" },
           { "v" => "2017-01-01 00:00:00" },
-          { "v" => "1968-10-20" }
+          { "v" => "1968-10-20" },
+          { "v" => "POINT(-122.335503 47.625536)" }
         ]
       },
       {
@@ -205,12 +211,14 @@ class MockBigquery < Minitest::Spec
           { "v" => nil },
           { "v" => "04:32:10.555555" },
           { "v" => nil },
+          { "v" => nil },
           { "v" => nil }
         ]
       },
       {
         "f" => [
           { "v" => "Sally" },
+          { "v" => nil },
           { "v" => nil },
           { "v" => nil },
           { "v" => nil },
@@ -573,7 +581,7 @@ class MockBigquery < Minitest::Spec
     Google::Apis::BigqueryV2::Routine.from_json json
   end
 
-  def random_job_hash id = "job_9876543210", state = "running", location: "US"
+  def random_job_hash id = "job_9876543210", state = "running", location: "US", transaction_id: nil
     hash = {
       "kind" => "bigquery#job",
       "etag" => "etag",
@@ -619,6 +627,7 @@ class MockBigquery < Minitest::Spec
       "user_email" => "user@example.com"
     }
     hash["jobReference"]["location"] = location if location
+    hash["statistics"]["transactionInfo"] = { "transactionId": transaction_id } if transaction_id
     hash
   end
 
@@ -659,9 +668,25 @@ class MockBigquery < Minitest::Spec
     job_ref
   end
 
-  def query_job_resp_gapi query, job_id: nil, target_routine: false, target_table: false, statement_type: "SELECT", num_dml_affected_rows: nil, ddl_operation_performed: nil
+  def query_job_resp_gapi query,
+                          job_id: nil,
+                          target_routine: false,
+                          target_table: false,
+                          statement_type: "SELECT",
+                          num_dml_affected_rows: nil,
+                          ddl_operation_performed: nil,
+                          deleted_row_count: nil,
+                          inserted_row_count: nil,
+                          updated_row_count: nil
     gapi = Google::Apis::BigqueryV2::Job.from_json query_job_resp_json query, job_id: job_id
-    gapi.statistics.query = statistics_query_gapi target_routine: target_routine, target_table: target_table, statement_type: statement_type, num_dml_affected_rows: num_dml_affected_rows, ddl_operation_performed: ddl_operation_performed
+    gapi.statistics.query = statistics_query_gapi target_routine: target_routine,
+                                                  target_table: target_table,
+                                                  statement_type: statement_type,
+                                                  num_dml_affected_rows: num_dml_affected_rows,
+                                                  ddl_operation_performed: ddl_operation_performed,
+                                                  deleted_row_count: deleted_row_count,
+                                                  inserted_row_count: inserted_row_count,
+                                                  updated_row_count: updated_row_count
     gapi
   end
 
@@ -692,7 +717,14 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
-  def statistics_query_gapi target_routine: false, target_table: false, statement_type: nil, num_dml_affected_rows: nil, ddl_operation_performed: nil
+  def statistics_query_gapi target_routine: false,
+                            target_table: false,
+                            statement_type: nil,
+                            num_dml_affected_rows: nil,
+                            ddl_operation_performed: nil,
+                            deleted_row_count: nil,
+                            inserted_row_count: nil,
+                            updated_row_count: nil
     ddl_target_routine = if target_routine
       Google::Apis::BigqueryV2::RoutineReference.new(
         project_id: "target_project_id",
@@ -707,12 +739,20 @@ class MockBigquery < Minitest::Spec
         table_id: "target_table_id"
       )
     end
+    dml_stats = if deleted_row_count || inserted_row_count || updated_row_count
+      Google::Apis::BigqueryV2::DmlStatistics.new(
+        deleted_row_count: deleted_row_count,
+        inserted_row_count: inserted_row_count,
+        updated_row_count: updated_row_count
+      )
+    end
     Google::Apis::BigqueryV2::JobStatistics2.new(
       billing_tier: 1,
       cache_hit: true,
       ddl_operation_performed: ddl_operation_performed,
       ddl_target_routine: ddl_target_routine,
       ddl_target_table: ddl_target_table,
+      dml_stats: dml_stats,
       num_dml_affected_rows: num_dml_affected_rows,
       query_plan: [
         Google::Apis::BigqueryV2::ExplainQueryStage.new(
@@ -970,12 +1010,18 @@ class MockBigquery < Minitest::Spec
     )
   end
 
-  def load_job_url_gapi table_reference, urls, job_id: "job_9876543210", location: "US", hive_partitioning_options: nil
+  def load_job_url_gapi table_reference,
+                        urls,
+                        job_id: "job_9876543210",
+                        location: "US",
+                        hive_partitioning_options: nil,
+                        parquet_options: nil
     load = Google::Apis::BigqueryV2::JobConfigurationLoad.new(
       destination_table: table_reference,
       source_uris: [urls].flatten
     )
     load.hive_partitioning_options = hive_partitioning_options if hive_partitioning_options
+    load.parquet_options = parquet_options if parquet_options
     Google::Apis::BigqueryV2::Job.new(
       job_reference: job_reference_gapi(project, job_id, location: location),
       configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
@@ -991,7 +1037,8 @@ class MockBigquery < Minitest::Spec
                          location: "US",
                          labels: nil,
                          source_format: nil,
-                         hive_partitioning_options: nil
+                         hive_partitioning_options: nil,
+                         parquet_options: nil
     hash = random_job_hash job_id, location: location
     hash["configuration"]["load"] = {
       "sourceFormat" => source_format,
@@ -1006,6 +1053,7 @@ class MockBigquery < Minitest::Spec
     resp.status = status "done"
     resp.configuration.labels = labels if labels
     resp.configuration.load.hive_partitioning_options = hive_partitioning_options if hive_partitioning_options
+    resp.configuration.load.parquet_options = parquet_options if parquet_options
     resp
   end
 

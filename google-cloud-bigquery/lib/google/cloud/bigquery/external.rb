@@ -17,6 +17,7 @@ require "google/cloud/bigquery/external/data_source"
 require "google/cloud/bigquery/external/bigtable_source"
 require "google/cloud/bigquery/external/csv_source"
 require "google/cloud/bigquery/external/json_source"
+require "google/cloud/bigquery/external/parquet_source"
 require "google/cloud/bigquery/external/sheets_source"
 
 module Google
@@ -117,6 +118,7 @@ module Google
           Array(urls).each do |url|
             return "CSV" if url.end_with? ".csv"
             return "NEWLINE_DELIMITED_JSON" if url.end_with? ".json"
+            return "PARQUET" if url.end_with? ".parquet"
             return "AVRO" if url.end_with? ".avro"
             return "DATASTORE_BACKUP" if url.end_with? ".backup_info"
             return "GOOGLE_SHEETS" if url.start_with? "https://docs.google.com/spreadsheets/"
@@ -131,10 +133,11 @@ module Google
           case format
           when "CSV"                    then External::CsvSource
           when "NEWLINE_DELIMITED_JSON" then External::JsonSource
+          when "PARQUET"                then External::ParquetSource
           when "GOOGLE_SHEETS"          then External::SheetsSource
           when "BIGTABLE"               then External::BigtableSource
           else
-            # AVRO, DATASTORE_BACKUP, PARQUET
+            # AVRO, DATASTORE_BACKUP
             External::DataSource
           end
         end

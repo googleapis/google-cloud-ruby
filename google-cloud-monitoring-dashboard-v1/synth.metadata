@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "693ae20a741ede8ab36fbd7411e0b045976b7335"
+        "sha": "fb135024a7c0acd8d18d86b0cee942c816194aac"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "3ac97c83a5e31abd8352c04eb5cb69d8e0028745",
-        "internalRef": "369540262"
+        "sha": "4006aa5cbd12a86550d45fb215511a98a697f48f",
+        "internalRef": "393022593"
       }
     }
   ],
@@ -23,7 +23,7 @@
         "apiName": "monitoring/dashboard",
         "apiVersion": "v1",
         "language": "ruby",
-        "generator": "gapic-generator-ruby"
+        "generator": "bazel"
       }
     }
   ],
@@ -48,6 +48,7 @@
     "lib/google/cloud/monitoring/dashboard/v1/dashboards_service/credentials.rb",
     "lib/google/cloud/monitoring/dashboard/v1/dashboards_service/paths.rb",
     "lib/google/cloud/monitoring/dashboard/v1/version.rb",
+    "lib/google/monitoring/dashboard/v1/alertchart_pb.rb",
     "lib/google/monitoring/dashboard/v1/common_pb.rb",
     "lib/google/monitoring/dashboard/v1/dashboard_pb.rb",
     "lib/google/monitoring/dashboard/v1/dashboards_service_pb.rb",
@@ -64,6 +65,7 @@
     "proto_docs/google/api/distribution.rb",
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
+    "proto_docs/google/monitoring/dashboard/v1/alertchart.rb",
     "proto_docs/google/monitoring/dashboard/v1/common.rb",
     "proto_docs/google/monitoring/dashboard/v1/dashboard.rb",
     "proto_docs/google/monitoring/dashboard/v1/dashboards_service.rb",

@@ -23,6 +23,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :description, :string, 3
       repeated :child_policy_tags, :message, 4, "google.cloud.datacatalog.v1.SerializedPolicyTag"
     end
+    add_message "google.cloud.datacatalog.v1.ReplaceTaxonomyRequest" do
+      optional :name, :string, 1
+      optional :serialized_taxonomy, :message, 2, "google.cloud.datacatalog.v1.SerializedTaxonomy"
+    end
     add_message "google.cloud.datacatalog.v1.ImportTaxonomiesRequest" do
       optional :parent, :string, 1
       oneof :source do
@@ -58,6 +62,7 @@ module Google
       module V1
         SerializedTaxonomy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.SerializedTaxonomy").msgclass
         SerializedPolicyTag = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.SerializedPolicyTag").msgclass
+        ReplaceTaxonomyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ReplaceTaxonomyRequest").msgclass
         ImportTaxonomiesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ImportTaxonomiesRequest").msgclass
         InlineSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.InlineSource").msgclass
         CrossRegionalSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.CrossRegionalSource").msgclass

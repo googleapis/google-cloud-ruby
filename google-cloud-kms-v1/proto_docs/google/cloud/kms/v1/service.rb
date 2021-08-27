@@ -408,6 +408,36 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for {::Google::Cloud::Kms::V1::KeyManagementService::Client#update_crypto_key_primary_version KeyManagementService.UpdateCryptoKeyPrimaryVersion}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} to update.
+        # @!attribute [rw] crypto_key_version_id
+        #   @return [::String]
+        #     Required. The id of the child {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use as primary.
+        class UpdateCryptoKeyPrimaryVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for {::Google::Cloud::Kms::V1::KeyManagementService::Client#destroy_crypto_key_version KeyManagementService.DestroyCryptoKeyVersion}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to destroy.
+        class DestroyCryptoKeyVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for {::Google::Cloud::Kms::V1::KeyManagementService::Client#restore_crypto_key_version KeyManagementService.RestoreCryptoKeyVersion}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to restore.
+        class RestoreCryptoKeyVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for {::Google::Cloud::Kms::V1::KeyManagementService::Client#encrypt KeyManagementService.Encrypt}.
         # @!attribute [rw] name
         #   @return [::String]
@@ -452,8 +482,6 @@ module Google
         #     different languages. However, it is a non-negative integer, which will
         #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
         #     that support this type.
-        #
-        #     NOTE: This field is in Beta.
         # @!attribute [rw] additional_authenticated_data_crc32c
         #   @return [::Google::Protobuf::Int64Value]
         #     Optional. An optional CRC32C checksum of the
@@ -470,8 +498,6 @@ module Google
         #     different languages. However, it is a non-negative integer, which will
         #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
         #     that support this type.
-        #
-        #     NOTE: This field is in Beta.
         class EncryptRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -505,8 +531,6 @@ module Google
         #     different languages. However, it is a non-negative integer, which will
         #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
         #     that support this type.
-        #
-        #     NOTE: This field is in Beta.
         # @!attribute [rw] additional_authenticated_data_crc32c
         #   @return [::Google::Protobuf::Int64Value]
         #     Optional. An optional CRC32C checksum of the
@@ -523,8 +547,6 @@ module Google
         #     different languages. However, it is a non-negative integer, which will
         #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
         #     that support this type.
-        #
-        #     NOTE: This field is in Beta.
         class DecryptRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -554,8 +576,6 @@ module Google
         #     different languages. However, it is a non-negative integer, which will
         #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
         #     that support this type.
-        #
-        #     NOTE: This field is in Beta.
         class AsymmetricSignRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -585,35 +605,99 @@ module Google
         #     different languages. However, it is a non-negative integer, which will
         #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
         #     that support this type.
-        #
-        #     NOTE: This field is in Beta.
         class AsymmetricDecryptRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::Kms::V1::KeyManagementService::Client#decrypt KeyManagementService.Decrypt}.
-        # @!attribute [rw] plaintext
+        # Request message for {::Google::Cloud::Kms::V1::KeyManagementService::Client#mac_sign KeyManagementService.MacSign}.
+        # @!attribute [rw] name
         #   @return [::String]
-        #     The decrypted data originally supplied in {::Google::Cloud::Kms::V1::EncryptRequest#plaintext EncryptRequest.plaintext}.
-        # @!attribute [rw] plaintext_crc32c
+        #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for signing.
+        # @!attribute [rw] data
+        #   @return [::String]
+        #     Required. The data to sign. The MAC tag is computed over this data field based on
+        #     the specific algorithm.
+        # @!attribute [rw] data_crc32c
         #   @return [::Google::Protobuf::Int64Value]
-        #     Integrity verification field. A CRC32C checksum of the returned
-        #     {::Google::Cloud::Kms::V1::DecryptResponse#plaintext DecryptResponse.plaintext}. An integrity check of
-        #     {::Google::Cloud::Kms::V1::DecryptResponse#plaintext DecryptResponse.plaintext} can be performed by computing the CRC32C
-        #     checksum of {::Google::Cloud::Kms::V1::DecryptResponse#plaintext DecryptResponse.plaintext} and comparing your results to
-        #     this field. Discard the response in case of non-matching checksum values,
-        #     and perform a limited number of retries. A persistent mismatch may indicate
-        #     an issue in your computation of the CRC32C checksum. Note: receiving this
-        #     response message indicates that {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} is able to
-        #     successfully decrypt the {::Google::Cloud::Kms::V1::DecryptRequest#ciphertext ciphertext}.
+        #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::MacSignRequest#data MacSignRequest.data}. If
+        #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+        #     received {::Google::Cloud::Kms::V1::MacSignRequest#data MacSignRequest.data} using this checksum.
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+        #     fails. If you receive a checksum error, your client should verify that
+        #     CRC32C({::Google::Cloud::Kms::V1::MacSignRequest#data MacSignRequest.data}) is equal to
+        #     {::Google::Cloud::Kms::V1::MacSignRequest#data_crc32c MacSignRequest.data_crc32c}, and if so, perform a limited
+        #     number of retries. A persistent mismatch may indicate an issue in your
+        #     computation of the CRC32C checksum.
         #     Note: This field is defined as int64 for reasons of compatibility across
         #     different languages. However, it is a non-negative integer, which will
         #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
         #     that support this type.
-        #
-        #     NOTE: This field is in Beta.
-        class DecryptResponse
+        class MacSignRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for {::Google::Cloud::Kms::V1::KeyManagementService::Client#mac_verify KeyManagementService.MacVerify}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for verification.
+        # @!attribute [rw] data
+        #   @return [::String]
+        #     Required. The data used previously as a {::Google::Cloud::Kms::V1::MacSignRequest#data MacSignRequest.data} to generate the MAC
+        #     tag.
+        # @!attribute [rw] data_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::MacVerifyRequest#data MacVerifyRequest.data}. If
+        #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+        #     received {::Google::Cloud::Kms::V1::MacVerifyRequest#data MacVerifyRequest.data} using this checksum.
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+        #     fails. If you receive a checksum error, your client should verify that
+        #     CRC32C({::Google::Cloud::Kms::V1::MacVerifyRequest#data MacVerifyRequest.data}) is equal to
+        #     {::Google::Cloud::Kms::V1::MacVerifyRequest#data_crc32c MacVerifyRequest.data_crc32c}, and if so, perform a limited
+        #     number of retries. A persistent mismatch may indicate an issue in your
+        #     computation of the CRC32C checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        # @!attribute [rw] mac
+        #   @return [::String]
+        #     Required. The signature to verify.
+        # @!attribute [rw] mac_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::MacVerifyRequest#mac MacVerifyRequest.mac}. If
+        #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+        #     received {::Google::Cloud::Kms::V1::MacVerifyRequest#mac MacVerifyRequest.mac} using this checksum.
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+        #     fails. If you receive a checksum error, your client should verify that
+        #     CRC32C([MacVerifyRequest.tag][]) is equal to
+        #     {::Google::Cloud::Kms::V1::MacVerifyRequest#mac_crc32c MacVerifyRequest.mac_crc32c}, and if so, perform a limited
+        #     number of retries. A persistent mismatch may indicate an issue in your
+        #     computation of the CRC32C checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        class MacVerifyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for {::Google::Cloud::Kms::V1::KeyManagementService::Client#generate_random_bytes KeyManagementService.GenerateRandomBytes}.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     The project-specific location in which to generate random bytes.
+        #     For example, "projects/my-project/locations/us-central1".
+        # @!attribute [rw] length_bytes
+        #   @return [::Integer]
+        #     The length in bytes of the amount of randomness to retrieve.  Minimum 8
+        #     bytes, maximum 1024 bytes.
+        # @!attribute [rw] protection_level
+        #   @return [::Google::Cloud::Kms::V1::ProtectionLevel]
+        #     The {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} to use when generating the random data. Defaults to
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE}.
+        class GenerateRandomBytesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -639,8 +723,6 @@ module Google
         #     different languages. However, it is a non-negative integer, which will
         #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
         #     that support this type.
-        #
-        #     NOTE: This field is in Beta.
         # @!attribute [rw] verified_plaintext_crc32c
         #   @return [::Boolean]
         #     Integrity verification field. A flag indicating whether
@@ -651,8 +733,6 @@ module Google
         #     that it was not delivered to {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}. If you've set
         #     {::Google::Cloud::Kms::V1::EncryptRequest#plaintext_crc32c EncryptRequest.plaintext_crc32c} but this field is still false, discard
         #     the response and perform a limited number of retries.
-        #
-        #     NOTE: This field is in Beta.
         # @!attribute [rw] verified_additional_authenticated_data_crc32c
         #   @return [::Boolean]
         #     Integrity verification field. A flag indicating whether
@@ -664,9 +744,40 @@ module Google
         #     that it was not delivered to {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}. If you've set
         #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data_crc32c EncryptRequest.additional_authenticated_data_crc32c} but this field is
         #     still false, discard the response and perform a limited number of retries.
-        #
-        #     NOTE: This field is in Beta.
+        # @!attribute [rw] protection_level
+        #   @return [::Google::Cloud::Kms::V1::ProtectionLevel]
+        #     The {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} used in encryption.
         class EncryptResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for {::Google::Cloud::Kms::V1::KeyManagementService::Client#decrypt KeyManagementService.Decrypt}.
+        # @!attribute [rw] plaintext
+        #   @return [::String]
+        #     The decrypted data originally supplied in {::Google::Cloud::Kms::V1::EncryptRequest#plaintext EncryptRequest.plaintext}.
+        # @!attribute [rw] plaintext_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Integrity verification field. A CRC32C checksum of the returned
+        #     {::Google::Cloud::Kms::V1::DecryptResponse#plaintext DecryptResponse.plaintext}. An integrity check of
+        #     {::Google::Cloud::Kms::V1::DecryptResponse#plaintext DecryptResponse.plaintext} can be performed by computing the CRC32C
+        #     checksum of {::Google::Cloud::Kms::V1::DecryptResponse#plaintext DecryptResponse.plaintext} and comparing your results to
+        #     this field. Discard the response in case of non-matching checksum values,
+        #     and perform a limited number of retries. A persistent mismatch may indicate
+        #     an issue in your computation of the CRC32C checksum. Note: receiving this
+        #     response message indicates that {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} is able to
+        #     successfully decrypt the {::Google::Cloud::Kms::V1::DecryptRequest#ciphertext ciphertext}.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        # @!attribute [rw] used_primary
+        #   @return [::Boolean]
+        #     Whether the Decryption was performed using the primary key version.
+        # @!attribute [rw] protection_level
+        #   @return [::Google::Cloud::Kms::V1::ProtectionLevel]
+        #     The {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} used in decryption.
+        class DecryptResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -688,8 +799,6 @@ module Google
         #     different languages. However, it is a non-negative integer, which will
         #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
         #     that support this type.
-        #
-        #     NOTE: This field is in Beta.
         # @!attribute [rw] verified_digest_crc32c
         #   @return [::Boolean]
         #     Integrity verification field. A flag indicating whether
@@ -700,14 +809,13 @@ module Google
         #     unset or that it was not delivered to {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}. If you've
         #     set {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest_crc32c AsymmetricSignRequest.digest_crc32c} but this field is still false,
         #     discard the response and perform a limited number of retries.
-        #
-        #     NOTE: This field is in Beta.
         # @!attribute [rw] name
         #   @return [::String]
         #     The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} used for signing. Check
         #     this field to verify that the intended resource was used for signing.
-        #
-        #     NOTE: This field is in Beta.
+        # @!attribute [rw] protection_level
+        #   @return [::Google::Cloud::Kms::V1::ProtectionLevel]
+        #     The {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} used for signing.
         class AsymmetricSignResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -730,8 +838,6 @@ module Google
         #     different languages. However, it is a non-negative integer, which will
         #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
         #     that support this type.
-        #
-        #     NOTE: This field is in Beta.
         # @!attribute [rw] verified_ciphertext_crc32c
         #   @return [::Boolean]
         #     Integrity verification field. A flag indicating whether
@@ -742,39 +848,115 @@ module Google
         #     was left unset or that it was not delivered to {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}. If
         #     you've set {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest#ciphertext_crc32c AsymmetricDecryptRequest.ciphertext_crc32c} but this field is
         #     still false, discard the response and perform a limited number of retries.
-        #
-        #     NOTE: This field is in Beta.
+        # @!attribute [rw] protection_level
+        #   @return [::Google::Cloud::Kms::V1::ProtectionLevel]
+        #     The {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} used in decryption.
         class AsymmetricDecryptResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Kms::V1::KeyManagementService::Client#update_crypto_key_primary_version KeyManagementService.UpdateCryptoKeyPrimaryVersion}.
+        # Response message for {::Google::Cloud::Kms::V1::KeyManagementService::Client#mac_sign KeyManagementService.MacSign}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} to update.
-        # @!attribute [rw] crypto_key_version_id
+        #     The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} used for signing. Check
+        #     this field to verify that the intended resource was used for signing.
+        # @!attribute [rw] mac
         #   @return [::String]
-        #     Required. The id of the child {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use as primary.
-        class UpdateCryptoKeyPrimaryVersionRequest
+        #     The created signature.
+        # @!attribute [rw] mac_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Integrity verification field. A CRC32C checksum of the returned
+        #     {::Google::Cloud::Kms::V1::MacSignResponse#mac MacSignResponse.mac}. An integrity check of
+        #     {::Google::Cloud::Kms::V1::MacSignResponse#mac MacSignResponse.mac} can be performed by computing the
+        #     CRC32C checksum of {::Google::Cloud::Kms::V1::MacSignResponse#mac MacSignResponse.mac} and comparing your
+        #     results to this field. Discard the response in case of non-matching
+        #     checksum values, and perform a limited number of retries. A persistent
+        #     mismatch may indicate an issue in your computation of the CRC32C checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        # @!attribute [rw] verified_data_crc32c
+        #   @return [::Boolean]
+        #     Integrity verification field. A flag indicating whether
+        #     {::Google::Cloud::Kms::V1::MacSignRequest#data_crc32c MacSignRequest.data_crc32c} was received by
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} and used for the integrity verification of the
+        #     {::Google::Cloud::Kms::V1::MacSignRequest#data data}. A false value of this field
+        #     indicates either that {::Google::Cloud::Kms::V1::MacSignRequest#data_crc32c MacSignRequest.data_crc32c} was left
+        #     unset or that it was not delivered to {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}. If you've
+        #     set {::Google::Cloud::Kms::V1::MacSignRequest#data_crc32c MacSignRequest.data_crc32c} but this field is still false,
+        #     discard the response and perform a limited number of retries.
+        # @!attribute [rw] protection_level
+        #   @return [::Google::Cloud::Kms::V1::ProtectionLevel]
+        #     The {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} used for signing.
+        class MacSignResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Kms::V1::KeyManagementService::Client#destroy_crypto_key_version KeyManagementService.DestroyCryptoKeyVersion}.
+        # Response message for {::Google::Cloud::Kms::V1::KeyManagementService::Client#mac_verify KeyManagementService.MacVerify}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to destroy.
-        class DestroyCryptoKeyVersionRequest
+        #     The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} used for verification.
+        #     Check this field to verify that the intended resource was used for
+        #     verification.
+        # @!attribute [rw] success
+        #   @return [::Boolean]
+        #     This field indicates whether or not the verification operation for
+        #     {::Google::Cloud::Kms::V1::MacVerifyRequest#mac MacVerifyRequest.mac} over {::Google::Cloud::Kms::V1::MacVerifyRequest#data MacVerifyRequest.data} was successful.
+        # @!attribute [rw] verified_data_crc32c
+        #   @return [::Boolean]
+        #     Integrity verification field. A flag indicating whether
+        #     {::Google::Cloud::Kms::V1::MacVerifyRequest#data_crc32c MacVerifyRequest.data_crc32c} was received by
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} and used for the integrity verification of the
+        #     {::Google::Cloud::Kms::V1::MacVerifyRequest#data data}. A false value of this field
+        #     indicates either that {::Google::Cloud::Kms::V1::MacVerifyRequest#data_crc32c MacVerifyRequest.data_crc32c} was left
+        #     unset or that it was not delivered to {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}. If you've
+        #     set {::Google::Cloud::Kms::V1::MacVerifyRequest#data_crc32c MacVerifyRequest.data_crc32c} but this field is still false,
+        #     discard the response and perform a limited number of retries.
+        # @!attribute [rw] verified_mac_crc32c
+        #   @return [::Boolean]
+        #     Integrity verification field. A flag indicating whether
+        #     {::Google::Cloud::Kms::V1::MacVerifyRequest#mac_crc32c MacVerifyRequest.mac_crc32c} was received by
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} and used for the integrity verification of the
+        #     {::Google::Cloud::Kms::V1::MacVerifyRequest#mac data}. A false value of this field
+        #     indicates either that {::Google::Cloud::Kms::V1::MacVerifyRequest#mac_crc32c MacVerifyRequest.mac_crc32c} was left
+        #     unset or that it was not delivered to {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}. If you've
+        #     set {::Google::Cloud::Kms::V1::MacVerifyRequest#mac_crc32c MacVerifyRequest.mac_crc32c} but this field is still false,
+        #     discard the response and perform a limited number of retries.
+        # @!attribute [rw] verified_success_integrity
+        #   @return [::Boolean]
+        #     Integrity verification field. This value is used for the integrity
+        #     verification of [MacVerifyResponse.success]. If the value of this field
+        #     contradicts the value of [MacVerifyResponse.success], discard the response
+        #     and perform a limited number of retries.
+        # @!attribute [rw] protection_level
+        #   @return [::Google::Cloud::Kms::V1::ProtectionLevel]
+        #     The {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} used for verification.
+        class MacVerifyResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Kms::V1::KeyManagementService::Client#restore_crypto_key_version KeyManagementService.RestoreCryptoKeyVersion}.
-        # @!attribute [rw] name
+        # Response message for {::Google::Cloud::Kms::V1::KeyManagementService::Client#generate_random_bytes KeyManagementService.GenerateRandomBytes}.
+        # @!attribute [rw] data
         #   @return [::String]
-        #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to restore.
-        class RestoreCryptoKeyVersionRequest
+        #     The generated data.
+        # @!attribute [rw] data_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Integrity verification field. A CRC32C checksum of the returned
+        #     {::Google::Cloud::Kms::V1::GenerateRandomBytesResponse#data GenerateRandomBytesResponse.data}. An integrity check of
+        #     {::Google::Cloud::Kms::V1::GenerateRandomBytesResponse#data GenerateRandomBytesResponse.data} can be performed by computing the
+        #     CRC32C checksum of {::Google::Cloud::Kms::V1::GenerateRandomBytesResponse#data GenerateRandomBytesResponse.data} and comparing your
+        #     results to this field. Discard the response in case of non-matching
+        #     checksum values, and perform a limited number of retries. A persistent
+        #     mismatch may indicate an issue in your computation of the CRC32C checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        class GenerateRandomBytesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

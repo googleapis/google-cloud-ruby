@@ -96,6 +96,16 @@ module Google
         #     "projects/\\{project_number}/sources/\\{source_id}/findings/\\{finding_id}",
         #     depending on the closest CRM ancestor of the resource associated with the
         #     finding.
+        # @!attribute [rw] finding_class
+        #   @return [::Google::Cloud::SecurityCenter::V1::Finding::FindingClass]
+        #     The class of the finding.
+        # @!attribute [rw] indicator
+        #   @return [::Google::Cloud::SecurityCenter::V1::Indicator]
+        #     Represents what's commonly known as an Indicator of compromise (IoC) in
+        #     computer forensics. This is an artifact observed on a network or in an
+        #     operating system that, with high confidence, indicates a computer
+        #     intrusion.
+        #     Reference: https://en.wikipedia.org/wiki/Indicator_of_compromise
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -179,6 +189,26 @@ module Google
             # Indicates a threat that has obtained minimal access to an environment but
             # is not able to access data, execute code, or create resources.
             LOW = 4
+          end
+
+          # Represents what kind of Finding it is.
+          module FindingClass
+            # Unspecified finding class.
+            FINDING_CLASS_UNSPECIFIED = 0
+
+            # Describes unwanted or malicious activity.
+            THREAT = 1
+
+            # Describes a potential weakness in software that increases risk to
+            # Confidentiality & Integrity & Availability.
+            VULNERABILITY = 2
+
+            # Describes a potential weakness in cloud resource/asset configuration that
+            # increases risk.
+            MISCONFIGURATION = 3
+
+            # Describes a security observation that is for informational purposes.
+            OBSERVATION = 4
           end
         end
       end

@@ -1,5 +1,23 @@
 # Release History
 
+### 0.4.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.4.2 / 2021-07-12
+
+#### Documentation
+
+* Clarified some language around authentication configuration
+
+### 0.4.1 / 2021-06-18
+
+#### Bug Fixes
+
+* Support future 1.x releases of gapic-common
+
 ### 0.4.0 / 2021-03-08
 
 #### Features

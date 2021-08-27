@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/text_to_speech/v1"
 
 client = ::Google::Cloud::TextToSpeech::V1::TextToSpeech::Client.new
-request = my_create_request
+request = ::Google::Cloud::TextToSpeech::V1::ListVoicesRequest.new # (request fields as keyword arguments...)
 response = client.list_voices request
 ```
 

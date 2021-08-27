@@ -1,8 +1,18 @@
-  - uid: <%= @method.path %>
-    fullName: <%= @method.path %>
-    langs:
-      - ruby
-    module: <%= ENV["CLOUDRAD_GEM_NAME"] %>
-    id: <%= @method.name %>
-    summary: "<%= docstring @method %>"
-    type: '<%= @method.type %>'
+- uid: <%= @method.path.include?("#") ? "#{@method.path}(instance)" : "#{@method.path}(class)" %>
+  fullName: <%= @method.path %>
+  name: "<%= @method.path[@method.path.size - (@method.name.size + 1)..-1] %>"
+  langs:
+    - ruby
+  module: <%= ENV["CLOUDRAD_GEM_NAME"] %>
+  id: "<%= @method.path[@method.path.size - (@method.name.size + 1)..-1] %>"
+  summary: "<%= demote_headers pre_format(@method.docstring), 4 %>"
+  type: <%= @method.type %>
+  example: <%= example_text @method, "    " %>
+  syntax:
+    description: "<%= demote_headers pre_format(@method.docstring), 4 %>"
+    content: "<%= method_signature %>"
+<%= param_text %>
+<%= yield_text %>
+<%= yield_param_text %>
+<%= return_text %>
+<%= raise_text %>

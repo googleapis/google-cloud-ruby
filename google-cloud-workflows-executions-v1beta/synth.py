@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "workflows/executions", "v1beta",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-workflows-executions-v1beta",
-        "ruby-cloud-title": "Workflows Executions V1beta",
-        "ruby-cloud-description": "Workflows link series of serverless tasks together in an order you define. Combine the power of Google Cloud's APIs, serverless products like Cloud Functions and Cloud Run, and calls to external APIs to create flexible serverless applications. Workflows requires no infrastructure management and scales seamlessly with demand, including scaling down to zero..",
-        "ruby-cloud-env-prefix": "WORKFLOWS",
-        "ruby-cloud-grpc-service-config": "google/cloud/workflows/executions/v1beta/executions_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/workflows/",
-        "ruby-cloud-api-id": "workflowexecutions.googleapis.com",
-        "ruby-cloud-api-shortname": "workflowexecutions",
-    }
+    proto_path="google/cloud/workflows/executions/v1beta",
+    bazel_target="//google/cloud/workflows/executions/v1beta:google-cloud-workflows-executions-v1beta-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

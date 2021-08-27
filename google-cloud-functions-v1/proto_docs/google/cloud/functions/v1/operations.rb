@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] target
         #   @return [::String]
         #     Target of the operation - for example
-        #     projects/project-1/locations/region-1/functions/function-1
+        #     `projects/project-1/locations/region-1/functions/function-1`
         # @!attribute [rw] type
         #   @return [::Google::Cloud::Functions::V1::OperationType]
         #     Type of operation.

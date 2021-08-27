@@ -31,7 +31,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", view: :FULL, perform_lookup: true)
+        #   table = bigtable.table "my-instance", "my-table", view: :FULL, perform_lookup: true
         #
         #   table.cluster_states.each do |cs|
         #     puts cs.cluster_name

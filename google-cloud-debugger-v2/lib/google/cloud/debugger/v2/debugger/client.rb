@@ -50,13 +50,12 @@ module Google
             # See {::Google::Cloud::Debugger::V2::Debugger::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Debugger clients:
-            #
-            #     ::Google::Cloud::Debugger::V2::Debugger::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Debugger clients
+            #   ::Google::Cloud::Debugger::V2::Debugger::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -78,34 +77,22 @@ module Google
 
                 default_config.rpcs.get_breakpoint.timeout = 600.0
                 default_config.rpcs.get_breakpoint.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_breakpoint.timeout = 600.0
                 default_config.rpcs.delete_breakpoint.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_breakpoints.timeout = 600.0
                 default_config.rpcs.list_breakpoints.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_debuggees.timeout = 600.0
                 default_config.rpcs.list_debuggees.retry_policy = {
-                  initial_delay: 0.1,
-              max_delay: 60.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config
@@ -137,19 +124,15 @@ module Google
             ##
             # Create a new Debugger client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Debugger client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Debugger::V2::Debugger::Client.new
             #
-            #     client = ::Google::Cloud::Debugger::V2::Debugger::Client.new
-            #
-            # To create a new Debugger client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Debugger::V2::Debugger::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Debugger::V2::Debugger::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Debugger client.
             # @yieldparam config [Client::Configuration]
@@ -169,14 +152,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -254,7 +236,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.set_breakpoint.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_breakpoint.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @debugger_stub.call_rpc :set_breakpoint, request, options: options do |response, operation|
@@ -326,7 +310,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_breakpoint.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_breakpoint.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @debugger_stub.call_rpc :get_breakpoint, request, options: options do |response, operation|
@@ -398,7 +384,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_breakpoint.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_breakpoint.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @debugger_stub.call_rpc :delete_breakpoint, request, options: options do |response, operation|
@@ -484,7 +472,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_breakpoints.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_breakpoints.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @debugger_stub.call_rpc :list_breakpoints, request, options: options do |response, operation|
@@ -550,7 +540,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_debuggees.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_debuggees.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @debugger_stub.call_rpc :list_debuggees, request, options: options do |response, operation|
@@ -574,22 +566,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for set_breakpoint
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # set_breakpoint to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Debugger::V2::Debugger::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.set_breakpoint.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Debugger::V2::Debugger::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.set_breakpoint.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Debugger::V2::Debugger::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.set_breakpoint.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Debugger::V2::Debugger::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.set_breakpoint.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

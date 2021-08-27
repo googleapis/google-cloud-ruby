@@ -45,13 +45,12 @@ module Google
               # See {::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client::Configuration}
               # for a description of the configuration fields.
               #
-              # ## Example
+              # @example
               #
-              # To modify the configuration for all DataTransferService clients:
-              #
-              #     ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.configure do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Modify the configuration for all DataTransferService clients
+              #   ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.configure do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the Client client.
               # @yieldparam config [Client::Configuration]
@@ -71,18 +70,12 @@ module Google
 
                   default_config.rpcs.get_data_source.timeout = 20.0
                   default_config.rpcs.get_data_source.retry_policy = {
-                    initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_data_sources.timeout = 20.0
                   default_config.rpcs.list_data_sources.retry_policy = {
-                    initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.create_transfer_config.timeout = 30.0
@@ -91,68 +84,44 @@ module Google
 
                   default_config.rpcs.delete_transfer_config.timeout = 20.0
                   default_config.rpcs.delete_transfer_config.retry_policy = {
-                    initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.get_transfer_config.timeout = 20.0
                   default_config.rpcs.get_transfer_config.retry_policy = {
-                    initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_transfer_configs.timeout = 20.0
                   default_config.rpcs.list_transfer_configs.retry_policy = {
-                    initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.schedule_transfer_runs.timeout = 30.0
 
                   default_config.rpcs.get_transfer_run.timeout = 20.0
                   default_config.rpcs.get_transfer_run.retry_policy = {
-                    initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.delete_transfer_run.timeout = 20.0
                   default_config.rpcs.delete_transfer_run.retry_policy = {
-                    initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_transfer_runs.timeout = 20.0
                   default_config.rpcs.list_transfer_runs.retry_policy = {
-                    initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.list_transfer_logs.timeout = 20.0
                   default_config.rpcs.list_transfer_logs.retry_policy = {
-                    initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config.rpcs.check_valid_creds.timeout = 20.0
                   default_config.rpcs.check_valid_creds.retry_policy = {
-                    initial_delay: 0.1,
-                max_delay: 60.0,
-                multiplier: 1.3,
-                retry_codes: [14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                   }
 
                   default_config
@@ -184,19 +153,15 @@ module Google
               ##
               # Create a new DataTransferService client object.
               #
-              # ## Examples
+              # @example
               #
-              # To create a new DataTransferService client with the default
-              # configuration:
+              #   # Create a client using the default configuration
+              #   client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new
               #
-              #     client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new
-              #
-              # To create a new DataTransferService client with a custom
-              # configuration:
-              #
-              #     client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Create a client using a custom configuration
+              #   client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the DataTransferService client.
               # @yieldparam config [Client::Configuration]
@@ -216,14 +181,13 @@ module Google
 
                 # Create credentials
                 credentials = @config.credentials
-                # Use self-signed JWT if the scope and endpoint are unchanged from default,
+                # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                         @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
-                if credentials.is_a?(String) || credentials.is_a?(Hash)
+                if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
                 @quota_project_id = @config.quota_project
@@ -298,7 +262,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.get_data_source.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_data_source.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @data_transfer_service_stub.call_rpc :get_data_source, request, options: options do |response, operation|
@@ -375,7 +341,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.list_data_sources.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_data_sources.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @data_transfer_service_stub.call_rpc :list_data_sources, request, options: options do |response, operation|
@@ -476,7 +444,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.create_transfer_config.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.create_transfer_config.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @data_transfer_service_stub.call_rpc :create_transfer_config, request, options: options do |response, operation|
@@ -575,7 +545,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.update_transfer_config.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.update_transfer_config.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @data_transfer_service_stub.call_rpc :update_transfer_config, request, options: options do |response, operation|
@@ -644,7 +616,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.delete_transfer_config.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.delete_transfer_config.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @data_transfer_service_stub.call_rpc :delete_transfer_config, request, options: options do |response, operation|
@@ -712,7 +686,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.get_transfer_config.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_transfer_config.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @data_transfer_service_stub.call_rpc :get_transfer_config, request, options: options do |response, operation|
@@ -724,7 +700,8 @@ module Google
               end
 
               ##
-              # Returns information about all data transfers in the project.
+              # Returns information about all transfer configs owned by a project in the
+              # specified location.
               #
               # @overload list_transfer_configs(request, options = nil)
               #   Pass arguments to `list_transfer_configs` via a request object, either of type
@@ -790,7 +767,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.list_transfer_configs.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_transfer_configs.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @data_transfer_service_stub.call_rpc :list_transfer_configs, request, options: options do |response, operation|
@@ -808,6 +787,8 @@ module Google
               # range, one transfer run is created.
               # Note that runs are created per UTC time in the time range.
               # DEPRECATED: use StartManualTransferRuns instead.
+              #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
               #
               # @overload schedule_transfer_runs(request, options = nil)
               #   Pass arguments to `schedule_transfer_runs` via a request object, either of type
@@ -869,7 +850,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.schedule_transfer_runs.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.schedule_transfer_runs.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @data_transfer_service_stub.call_rpc :schedule_transfer_runs, request, options: options do |response, operation|
@@ -945,7 +928,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.start_manual_transfer_runs.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.start_manual_transfer_runs.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @data_transfer_service_stub.call_rpc :start_manual_transfer_runs, request, options: options do |response, operation|
@@ -1013,7 +998,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.get_transfer_run.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_transfer_run.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @data_transfer_service_stub.call_rpc :get_transfer_run, request, options: options do |response, operation|
@@ -1081,7 +1068,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.delete_transfer_run.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.delete_transfer_run.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @data_transfer_service_stub.call_rpc :delete_transfer_run, request, options: options do |response, operation|
@@ -1162,7 +1151,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.list_transfer_runs.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_transfer_runs.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @data_transfer_service_stub.call_rpc :list_transfer_runs, request, options: options do |response, operation|
@@ -1242,7 +1233,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.list_transfer_logs.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_transfer_logs.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @data_transfer_service_stub.call_rpc :list_transfer_logs, request, options: options do |response, operation|
@@ -1316,7 +1309,9 @@ module Google
                 options.apply_defaults timeout:      @config.rpcs.check_valid_creds.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.check_valid_creds.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @data_transfer_service_stub.call_rpc :check_valid_creds, request, options: options do |response, operation|
@@ -1340,22 +1335,21 @@ module Google
               # Configuration can be applied globally to all clients, or to a single client
               # on construction.
               #
-              # # Examples
+              # @example
               #
-              # To modify the global config, setting the timeout for get_data_source
-              # to 20 seconds, and all remaining timeouts to 10 seconds:
+              #   # Modify the global config, setting the timeout for
+              #   # get_data_source to 20 seconds,
+              #   # and all remaining timeouts to 10 seconds.
+              #   ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.configure do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.get_data_source.timeout = 20.0
+              #   end
               #
-              #     ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.configure do |config|
-              #       config.timeout = 10.0
-              #       config.rpcs.get_data_source.timeout = 20.0
-              #     end
-              #
-              # To apply the above configuration only to a new client:
-              #
-              #     client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new do |config|
-              #       config.timeout = 10.0
-              #       config.rpcs.get_data_source.timeout = 20.0
-              #     end
+              #   # Apply the above configuration only to a new client.
+              #   client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.get_data_source.timeout = 20.0
+              #   end
               #
               # @!attribute [rw] endpoint
               #   The hostname or hostname:port of the service endpoint.

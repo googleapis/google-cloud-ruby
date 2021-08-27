@@ -1,5 +1,32 @@
 # Release History
 
+### 0.7.0 / 2021-08-11
+
+#### Features
+
+* Support for signing and verifying MAC tags
+  * Support for the mac_sign call
+  * Support for the mac_verify call
+  * Support for the generate_random_bytes call
+  * Support the import_only and destroy_scheduled_duration fields of CryptoKey
+  * Support the protection_level field of PublicKey
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.6.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.6.1 / 2021-07-08
+
+#### Bug Fixes
+
+* Removed a proto file that is duplicated from the iam-v1 gem
+
 ### 0.6.0 / 2021-06-17
 
 #### Features

@@ -31,7 +31,7 @@ module Google
             # up the frontend.
             class Service
 
-              include ::GRPC::GenericService
+              include GRPC::GenericService
 
               self.marshal_class_method = :encode
               self.unmarshal_class_method = :decode
@@ -53,7 +53,8 @@ module Google
               rpc :DeleteTransferConfig, ::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferConfigRequest, ::Google::Protobuf::Empty
               # Returns information about a data transfer config.
               rpc :GetTransferConfig, ::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferConfigRequest, ::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig
-              # Returns information about all data transfers in the project.
+              # Returns information about all transfer configs owned by a project in the
+              # specified location.
               rpc :ListTransferConfigs, ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferConfigsRequest, ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferConfigsResponse
               # Creates transfer runs for a time range [start_time, end_time].
               # For each date - or whatever granularity the data source supports - in the

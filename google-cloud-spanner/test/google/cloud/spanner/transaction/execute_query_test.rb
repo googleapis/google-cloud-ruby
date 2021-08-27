@@ -283,6 +283,24 @@ describe Google::Cloud::Spanner::Transaction, :execute_query, :mock_spanner do
     assert_results results
   end
 
+  it "execute query with transaction and request tag" do
+    transaction = Google::Cloud::Spanner::Transaction.from_grpc transaction_grpc, session
+    transaction.transaction_tag = "Tag-1"
+    mock = Minitest::Mock.new
+    session.service.mocked_service = mock
+
+    mock = Minitest::Mock.new
+    session.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users",
+                                 transaction: tx_selector, seqno: 1,
+                                 request_options: { transaction_tag: "Tag-1", request_tag: "Tag-1-1"},
+                                 options: default_options
+
+    transaction.execute_query "SELECT * FROM users",
+                              request_options: { tag: "Tag-1-1"}
+    mock.verify
+  end
+
   def assert_results results
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
 

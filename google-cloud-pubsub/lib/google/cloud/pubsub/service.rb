@@ -127,6 +127,7 @@ module Google
                          persistence_regions: nil,
                          schema_name: nil,
                          message_encoding: nil,
+                         retention: nil,
                          options: {}
           if persistence_regions
             message_storage_policy = Google::Cloud::PubSub::V1::MessageStoragePolicy.new(
@@ -145,11 +146,12 @@ module Google
           end
 
           publisher.create_topic \
-            name:                   topic_path(topic_name, options),
-            labels:                 labels,
-            kms_key_name:           kms_key_name,
-            message_storage_policy: message_storage_policy,
-            schema_settings:        schema_settings
+            name:                       topic_path(topic_name, options),
+            labels:                     labels,
+            kms_key_name:               kms_key_name,
+            message_storage_policy:     message_storage_policy,
+            schema_settings:            schema_settings,
+            message_retention_duration: Convert.number_to_duration(retention)
         end
 
         def update_topic topic_obj, *fields

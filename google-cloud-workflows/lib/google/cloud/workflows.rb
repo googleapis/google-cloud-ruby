@@ -48,8 +48,8 @@ module Google
       # Create a new client object for Workflows.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Workflows::V1beta::Workflows::Client](https://googleapis.dev/ruby/google-cloud-workflows-v1beta/latest/Google/Cloud/Workflows/V1beta/Workflows/Client.html)
-      # for version V1beta of the API.
+      # [Google::Cloud::Workflows::V1::Workflows::Client](https://googleapis.dev/ruby/google-cloud-workflows-v1/latest/Google/Cloud/Workflows/V1/Workflows/Client.html)
+      # for version V1 of the API.
       # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the Workflows service is
       # supported by that API version, and the corresponding gem is available, the
@@ -62,10 +62,10 @@ module Google
       # networking interruptions.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1beta`.
+      #   Defaults to `:v1`.
       # @return [Workflows::Client] A client object for the specified version.
       #
-      def self.workflows version: :v1beta, &block
+      def self.workflows version: :v1, &block
         require "google/cloud/workflows/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Workflows

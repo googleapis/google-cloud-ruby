@@ -9,6 +9,10 @@ AllCops:
 Documentation:
   Enabled: false
 
+Layout/LineLength:
+  Exclude:
+    - "google-cloud-translate-v2.gemspec"
+
 Metrics/AbcSize:
   Exclude:
     - "lib/google/cloud/translate/v2.rb"
@@ -19,9 +23,6 @@ Metrics/BlockLength:
 Metrics/CyclomaticComplexity:
   Exclude:
     - "lib/google/cloud/translate/v2.rb"
-Metrics/LineLength:
-  Exclude:
-    - "google-cloud-translate-v2.gemspec"
 Metrics/MethodLength:
   Exclude:
     - "lib/google/cloud/translate-v2.rb"

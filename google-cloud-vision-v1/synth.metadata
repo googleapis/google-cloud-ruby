@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "693ae20a741ede8ab36fbd7411e0b045976b7335"
+        "sha": "7e366e8c4192595f54e817a0f4136210f1ff6309"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "9b95bf0e95501ec98537e0d2d9d36bb763ebd5b9",
-        "internalRef": "356556588"
+        "sha": "411e51eea221af5b77f809cef2c6592df45f73d5",
+        "internalRef": "389760020"
       }
     }
   ],
@@ -23,7 +23,7 @@
         "apiName": "vision",
         "apiVersion": "v1",
         "language": "ruby",
-        "generator": "gapic-generator-ruby"
+        "generator": "bazel"
       }
     }
   ],
@@ -81,6 +81,30 @@
     "proto_docs/google/rpc/status.rb",
     "proto_docs/google/type/color.rb",
     "proto_docs/google/type/latlng.rb",
+    "snippets/Gemfile",
+    "snippets/image_annotator/async_batch_annotate_files.rb",
+    "snippets/image_annotator/async_batch_annotate_images.rb",
+    "snippets/image_annotator/batch_annotate_files.rb",
+    "snippets/image_annotator/batch_annotate_images.rb",
+    "snippets/product_search/add_product_to_product_set.rb",
+    "snippets/product_search/create_product.rb",
+    "snippets/product_search/create_product_set.rb",
+    "snippets/product_search/create_reference_image.rb",
+    "snippets/product_search/delete_product.rb",
+    "snippets/product_search/delete_product_set.rb",
+    "snippets/product_search/delete_reference_image.rb",
+    "snippets/product_search/get_product.rb",
+    "snippets/product_search/get_product_set.rb",
+    "snippets/product_search/get_reference_image.rb",
+    "snippets/product_search/import_product_sets.rb",
+    "snippets/product_search/list_product_sets.rb",
+    "snippets/product_search/list_products.rb",
+    "snippets/product_search/list_products_in_product_set.rb",
+    "snippets/product_search/list_reference_images.rb",
+    "snippets/product_search/purge_products.rb",
+    "snippets/product_search/remove_product_from_product_set.rb",
+    "snippets/product_search/update_product.rb",
+    "snippets/product_search/update_product_set.rb",
     "test/google/cloud/vision/v1/image_annotator_operations_test.rb",
     "test/google/cloud/vision/v1/image_annotator_paths_test.rb",
     "test/google/cloud/vision/v1/image_annotator_test.rb",

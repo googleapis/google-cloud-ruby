@@ -66,11 +66,11 @@ The environment variables that google-cloud-firestore-v1
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::Firestore::V1::Firestore::Credentials}):
 
-1. `FIRESTORE_CREDENTIALS` - Path to JSON file, or JSON contents
-2. `FIRESTORE_KEYFILE` - Path to JSON file, or JSON contents
-3. `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
-4. `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
-5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
+* `FIRESTORE_CREDENTIALS` - Path to JSON file, or JSON contents
+* `FIRESTORE_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
+* `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
+* `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
 require "google/cloud/firestore/v1"
@@ -82,8 +82,8 @@ client = ::Google::Cloud::Firestore::V1::Firestore::Client.new
 
 ### Configuration
 
-The **Credentials JSON** can be configured instead of placing them in
-environment variables. Either on an individual client initialization:
+The path to the **Credentials JSON** file can be configured instead of storing
+it in an environment variable. Either on an individual client initialization:
 
 ```ruby
 require "google/cloud/firestore/v1"
@@ -93,7 +93,7 @@ client = ::Google::Cloud::Firestore::V1::Firestore::Client.new do |config|
 end
 ```
 
-Or configured globally for all clients:
+Or globally for all clients:
 
 ```ruby
 require "google/cloud/firestore/v1"

@@ -1,5 +1,23 @@
 # Release History
 
+### 1.0.2 / 2021-07-12
+
+#### Documentation
+
+* Clarified some language around authentication configuration
+
+### 1.0.1 / 2021-06-30
+
+#### Bug Fixes
+
+* Expand dependencies to include future 1.x releases of versioned clients
+
+### 1.0.0 / 2021-06-22
+
+#### Features
+
+* Now defaults to version V1 of the service (BREAKING CHANGE)
+
 ### 0.2.0 / 2021-03-08
 
 #### Features

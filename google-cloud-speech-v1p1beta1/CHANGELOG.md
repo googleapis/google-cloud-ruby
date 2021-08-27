@@ -1,5 +1,29 @@
 # Release History
 
+### 0.11.0 / 2021-08-23
+
+#### Features
+
+* Support for transcript normalization
+
+### 0.10.1 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.10.0 / 2021-07-29
+
+#### Features
+
+* Provide information on how much billed time an operation consumed
+
+### 0.9.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
 ### 0.9.1 / 2021-06-17
 
 #### Bug Fixes

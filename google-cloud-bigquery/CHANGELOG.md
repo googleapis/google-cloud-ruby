@@ -1,5 +1,85 @@
 # Release History
 
+### 1.35.0 / 2021-08-12
+
+#### Features
+
+* Add GEOGRAPHY schema helpers
+  * Add LoadJob#geography
+  * Add Schema::Field#geography
+  * Add Table::Updater#geography
+* Add support for GEOGRAPHY type
+  * Add Schema#geography
+* Add support for multistatement transaction statistics in jobs
+  * Add Job#transaction_id
+
+### 1.34.0 / 2021-07-20
+
+#### Features
+
+* Add DmlStatistics
+  * Add QueryJob#deleted_row_count
+  * Add QueryJob#inserted_row_count
+  * Add QueryJob#updated_row_count
+  * Add Data#deleted_row_count
+  * Add Data#inserted_row_count
+  * Add Data#updated_row_count
+
+### 1.33.0 / 2021-07-14
+
+#### Features
+
+* Add policy tag support (Column ACLs)
+  * Add policy_tags to LoadJob field helper methods
+  * Add policy_tags to Schema field helper methods
+  * Add policy_tags to Schema::Field field helper methods
+  * Add policy_tags to Table field helper methods
+  * Add Schema::Field#policy_tags
+  * Add Schema::Field#policy_tags=
+* Add support for parameterized types
+  * Add max_length to LoadJob::Updater#bytes
+  * Add max_length to LoadJob::Updater#string
+  * Add max_length to Schema#bytes
+  * Add max_length to Schema#string
+  * Add max_length to Schema::Field#bytes
+  * Add max_length to Schema::Field#string
+  * Add max_length to Table::Updater#bytes
+  * Add max_length to Table::Updater#string
+  * Add precision and scale to LoadJob::Updater#bignumeric
+  * Add precision and scale to LoadJob::Updater#numeric
+  * Add precision and scale to Schema#bignumeric
+  * Add precision and scale to Schema#numeric
+  * Add precision and scale to Schema::Field#bignumeric
+  * Add precision and scale to Schema::Field#numeric
+  * Add precision and scale to Table::Updater#bignumeric
+  * Add precision and scale to Table::Updater#numeric
+  * Add Schema::Field#max_length
+  * Add Schema::Field#precision
+  * Add Schema::Field#scale
+
+### 1.32.1 / 2021-07-08
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
+### 1.32.0 / 2021-06-21
+
+#### Features
+
+* Add support for Parquet options
+  * feat(bigquery): Add Bigquery::External::ParquetSource
+  * Add Parquet options to LoadJob
+    * Add LoadJob#parquet_options?
+    * Add LoadJob#parquet_enable_list_inference?
+    * Add LoadJob#parquet_enum_as_string?
+    * Add LoadJob::Updater#parquet_enable_list_inference=
+    * Add LoadJob::Updater#parquet_enum_as_string=
+
+#### Bug Fixes
+
+* Expand googleauth dependency to support future 1.x versions
+
 ### 1.31.0 / 2021-04-28
 
 #### Features

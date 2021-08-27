@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "693ae20a741ede8ab36fbd7411e0b045976b7335"
+        "sha": "7e366e8c4192595f54e817a0f4136210f1ff6309"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "336d6f419fe9466e4540083bbfa46a57f67dc92e",
-        "internalRef": "364666178"
+        "sha": "411e51eea221af5b77f809cef2c6592df45f73d5",
+        "internalRef": "389760020"
       }
     }
   ],
@@ -23,7 +23,7 @@
         "apiName": "servicecontrol",
         "apiVersion": "v1",
         "language": "ruby",
-        "generator": "gapic-generator-ruby"
+        "generator": "bazel"
       }
     }
   ],
@@ -61,6 +61,7 @@
     "lib/google/cloud/service_control/v1/service_controller/credentials.rb",
     "lib/google/cloud/service_control/v1/version.rb",
     "proto_docs/README.md",
+    "proto_docs/google/api/distribution.rb",
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/api/servicecontrol/v1/check_error.rb",
     "proto_docs/google/api/servicecontrol/v1/distribution.rb",

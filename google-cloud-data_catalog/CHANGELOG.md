@@ -1,5 +1,23 @@
 # Release History
 
+### 1.2.3 / 2021-07-29
+
+#### Documentation
+
+* Minor updates to reference docs
+
+### 1.2.2 / 2021-07-12
+
+#### Documentation
+
+* Clarified some language around authentication configuration
+
+### 1.2.1 / 2021-06-30
+
+#### Bug Fixes
+
+* Expand dependencies to include future 1.x releases of versioned clients
+
 ### 1.2.0 / 2021-04-05
 
 #### Features

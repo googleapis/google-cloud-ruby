@@ -60,13 +60,12 @@ module Google
             # See {::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all OrgPolicy clients:
-            #
-            #     ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all OrgPolicy clients
+            #   ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -86,58 +85,37 @@ module Google
 
                 default_config.rpcs.list_constraints.timeout = 60.0
                 default_config.rpcs.list_constraints.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_policies.timeout = 60.0
                 default_config.rpcs.list_policies.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_policy.timeout = 60.0
                 default_config.rpcs.get_policy.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_effective_policy.timeout = 60.0
                 default_config.rpcs.get_effective_policy.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_policy.timeout = 60.0
                 default_config.rpcs.create_policy.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_policy.timeout = 60.0
                 default_config.rpcs.update_policy.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_policy.timeout = 60.0
                 default_config.rpcs.delete_policy.retry_policy = {
-                  initial_delay: 1.0,
-              max_delay: 10.0,
-              multiplier: 1.3,
-              retry_codes: [14, 4]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config
@@ -169,19 +147,15 @@ module Google
             ##
             # Create a new OrgPolicy client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new OrgPolicy client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
             #
-            #     client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
-            #
-            # To create a new OrgPolicy client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the OrgPolicy client.
             # @yieldparam config [Client::Configuration]
@@ -201,14 +175,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -292,7 +265,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_constraints.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_constraints.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @org_policy_stub.call_rpc :list_constraints, request, options: options do |response, operation|
@@ -372,7 +347,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_policies.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_policies.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @org_policy_stub.call_rpc :list_policies, request, options: options do |response, operation|
@@ -443,7 +420,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @org_policy_stub.call_rpc :get_policy, request, options: options do |response, operation|
@@ -514,7 +493,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_effective_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_effective_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @org_policy_stub.call_rpc :get_effective_policy, request, options: options do |response, operation|
@@ -592,7 +573,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @org_policy_stub.call_rpc :create_policy, request, options: options do |response, operation|
@@ -666,7 +649,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @org_policy_stub.call_rpc :update_policy, request, options: options do |response, operation|
@@ -736,7 +721,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @org_policy_stub.call_rpc :delete_policy, request, options: options do |response, operation|
@@ -760,22 +747,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_constraints
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_constraints to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_constraints.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_constraints.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_constraints.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_constraints.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

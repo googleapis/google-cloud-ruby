@@ -27,8 +27,14 @@ module Google
           ##
           # Client for the GkeHubMembershipService service.
           #
-          # GKE Hub CRUD API for the Membership resource.
-          # The Membership service is currently only available in the global location.
+          # The GKE Hub MembershipService handles the registration of many Kubernetes
+          # clusters to Google Cloud, represented with the {::Google::Cloud::GkeHub::V1beta1::Membership Membership} resource.
+          #
+          # GKE Hub is currently only available in the global region.
+          #
+          # **Membership management may be non-trivial:** it is recommended to use one
+          # of the Google-provided client libraries or tools where possible when working
+          # with Membership resources.
           #
           class Client
             include Paths
@@ -42,13 +48,12 @@ module Google
             # See {::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all GkeHubMembershipService clients:
-            #
-            #     ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all GkeHubMembershipService clients
+            #   ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -68,10 +73,7 @@ module Google
 
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
-                  initial_delay: 1.0,
-                max_delay: 10.0,
-                multiplier: 1.3,
-                retry_codes: [14]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -103,19 +105,15 @@ module Google
             ##
             # Create a new GkeHubMembershipService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new GkeHubMembershipService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
             #
-            #     client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
-            #
-            # To create a new GkeHubMembershipService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the GkeHubMembershipService client.
             # @yieldparam config [Client::Configuration]
@@ -135,14 +133,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -259,7 +256,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_memberships.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_memberships.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @gke_hub_membership_service_stub.call_rpc :list_memberships, request, options: options do |response, operation|
@@ -327,7 +326,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.get_membership.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_membership.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @gke_hub_membership_service_stub.call_rpc :get_membership, request, options: options do |response, operation|
@@ -339,7 +340,11 @@ module Google
             end
 
             ##
-            # Adds a new Membership.
+            # Creates a new Membership.
+            #
+            # **This is currently only supported for GKE clusters on Google Cloud**.
+            # To register other clusters, follow the instructions at
+            # https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster.
             #
             # @overload create_membership(request, options = nil)
             #   Pass arguments to `create_membership` via a request object, either of type
@@ -351,7 +356,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_membership(parent: nil, membership_id: nil, resource: nil)
+            # @overload create_membership(parent: nil, membership_id: nil, resource: nil, request_id: nil)
             #   Pass arguments to `create_membership` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -371,6 +376,20 @@ module Google
             #     with a maximum length of 63 characters.
             #   @param resource [::Google::Cloud::GkeHub::V1beta1::Membership, ::Hash]
             #     Required. The membership to create.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID
+            #     so that if you must retry your request, the server will know to ignore
+            #     the request if it has already been completed. The server will guarantee
+            #     that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -406,7 +425,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_membership.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_membership.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @gke_hub_membership_service_stub.call_rpc :create_membership, request, options: options do |response, operation|
@@ -421,6 +442,10 @@ module Google
             ##
             # Removes a Membership.
             #
+            # **This is currently only supported for GKE clusters on Google Cloud**.
+            # To unregister other clusters, follow the instructions at
+            # https://cloud.google.com/anthos/multicluster-management/connect/unregistering-a-cluster.
+            #
             # @overload delete_membership(request, options = nil)
             #   Pass arguments to `delete_membership` via a request object, either of type
             #   {::Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest} or an equivalent Hash.
@@ -431,7 +456,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_membership(name: nil)
+            # @overload delete_membership(name: nil, request_id: nil)
             #   Pass arguments to `delete_membership` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -439,6 +464,20 @@ module Google
             #   @param name [::String]
             #     Required. The Membership resource name in the format
             #     `projects/*/locations/*/memberships/*`.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID
+            #     so that if you must retry your request, the server will know to ignore
+            #     the request if it has already been completed. The server will guarantee
+            #     that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -474,7 +513,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.delete_membership.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_membership.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @gke_hub_membership_service_stub.call_rpc :delete_membership, request, options: options do |response, operation|
@@ -499,7 +540,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_membership(name: nil, update_mask: nil, resource: nil)
+            # @overload update_membership(name: nil, update_mask: nil, resource: nil, request_id: nil)
             #   Pass arguments to `update_membership` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -517,6 +558,22 @@ module Google
             #     If you are updating a map field, set the value of a key to null or empty
             #     string to delete the key from the map. It's not possible to update a key's
             #     value to the empty string.
+            #     If you specify the update_mask to be a special path "*", fully replaces all
+            #     user-modifiable fields to match `resource`.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID
+            #     so that if you must retry your request, the server will know to ignore
+            #     the request if it has already been completed. The server will guarantee
+            #     that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -552,7 +609,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.update_membership.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_membership.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @gke_hub_membership_service_stub.call_rpc :update_membership, request, options: options do |response, operation|
@@ -566,6 +625,9 @@ module Google
 
             ##
             # Generates the manifest for deployment of the GKE connect agent.
+            #
+            # **This method is used internally by Google-provided libraries.**
+            # Most clients should not need to call this method directly.
             #
             # @overload generate_connect_manifest(request, options = nil)
             #   Pass arguments to `generate_connect_manifest` via a request object, either of type
@@ -632,7 +694,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.generate_connect_manifest.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.generate_connect_manifest.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @gke_hub_membership_service_stub.call_rpc :generate_connect_manifest, request, options: options do |response, operation|
@@ -706,7 +770,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.validate_exclusivity.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.validate_exclusivity.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @gke_hub_membership_service_stub.call_rpc :validate_exclusivity, request, options: options do |response, operation|
@@ -792,7 +858,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.generate_exclusivity_manifest.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.generate_exclusivity_manifest.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @gke_hub_membership_service_stub.call_rpc :generate_exclusivity_manifest, request, options: options do |response, operation|
@@ -816,22 +884,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_memberships
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_memberships to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_memberships.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_memberships.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_memberships.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_memberships.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.

@@ -94,6 +94,9 @@ module Google
         #
         #     Format: https://en.wikipedia.org/wiki/ISO_4217
         #     Examples: "USD", "EUR", "JPY"
+        # @!attribute [r] service_level
+        #   @return [::Google::Analytics::Admin::V1alpha::ServiceLevel]
+        #     Output only. The Google Analytics service level that applies to this property.
         # @!attribute [r] delete_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. If set, the time at which this property was trashed. If not set, then this
@@ -331,10 +334,6 @@ module Google
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when this FirebaseLink was originally created.
-        # @!attribute [rw] maximum_user_access
-        #   @return [::Google::Analytics::Admin::V1alpha::MaximumUserAccess]
-        #     Maximum user access to the GA4 property allowed to admins of
-        #     the linked Firebase project.
         class FirebaseLink
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -373,16 +372,16 @@ module Google
         #     Automatically publish my Google Analytics audience lists and Google
         #     Analytics remarketing events/parameters to the linked Google Ads account.
         #     If this field is not set on create/update, it will be defaulted to true.
-        # @!attribute [r] email_address
-        #   @return [::String]
-        #     Output only. Email address of the user that created the link.
-        #     An empty string will be returned if the email address can't be retrieved.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when this link was originally created.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when this link was last updated.
+        # @!attribute [r] creator_email_address
+        #   @return [::String]
+        #     Output only. Email address of the user that created the link.
+        #     An empty string will be returned if the email address can't be retrieved.
         class GoogleAdsLink
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -552,6 +551,14 @@ module Google
           # @!attribute [rw] google_signals_settings
           #   @return [::Google::Analytics::Admin::V1alpha::GoogleSignalsSettings]
           #     A snapshot of a GoogleSignalsSettings resource in change history.
+          # @!attribute [rw] display_video_360_advertiser_link
+          #   @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
+          #     A snapshot of a DisplayVideo360AdvertiserLink resource in change
+          #     history.
+          # @!attribute [rw] display_video_360_advertiser_link_proposal
+          #   @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal]
+          #     A snapshot of a DisplayVideo360AdvertiserLinkProposal resource in
+          #     change history.
           # @!attribute [rw] conversion_event
           #   @return [::Google::Analytics::Admin::V1alpha::ConversionEvent]
           #     A snapshot of a ConversionEvent resource in change history.
@@ -564,10 +571,112 @@ module Google
           # @!attribute [rw] custom_metric
           #   @return [::Google::Analytics::Admin::V1alpha::CustomMetric]
           #     A snapshot of a CustomMetric resource in change history.
+          # @!attribute [rw] data_retention_settings
+          #   @return [::Google::Analytics::Admin::V1alpha::DataRetentionSettings]
+          #     A snapshot of a data retention settings resource in change history.
           class ChangeHistoryResource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # A link between a GA4 property and a Display & Video 360 advertiser.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name for this DisplayVideo360AdvertiserLink resource.
+        #     Format: properties/\\{propertyId}/displayVideo360AdvertiserLinks/\\{linkId}
+        #
+        #     Note: linkId is not the Display & Video 360 Advertiser ID
+        # @!attribute [rw] advertiser_id
+        #   @return [::String]
+        #     Immutable. The Display & Video 360 Advertiser's advertiser ID.
+        # @!attribute [r] advertiser_display_name
+        #   @return [::String]
+        #     Output only. The display name of the Display & Video 360 Advertiser.
+        # @!attribute [rw] ads_personalization_enabled
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Enables personalized advertising features with this integration.
+        #     If this field is not set on create/update, it will be defaulted to true.
+        # @!attribute [rw] campaign_data_sharing_enabled
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Immutable. Enables the import of campaign data from Display & Video 360 into the GA4
+        #     property. After link creation, this can only be updated from the Display &
+        #     Video 360 product.
+        #     If this field is not set on create, it will be defaulted to true.
+        # @!attribute [rw] cost_data_sharing_enabled
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Immutable. Enables the import of cost data from Display & Video 360 into the GA4
+        #     property. This can only be enabled if campaign_data_import_enabled is
+        #     enabled. After link creation, this can only be updated from the Display &
+        #     Video 360 product.
+        #     If this field is not set on create, it will be defaulted to true.
+        class DisplayVideo360AdvertiserLink
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A proposal for a link between an GA4 property and a Display & Video 360
+        # advertiser.
+        #
+        # A proposal is converted to a DisplayVideo360AdvertiserLink once approved.
+        # Google Analytics admins approve inbound proposals while Display & Video 360
+        # admins approve outbound proposals.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name for this DisplayVideo360AdvertiserLinkProposal resource.
+        #     Format:
+        #     properties/\\{propertyId}/displayVideo360AdvertiserLinkProposals/\\{proposalId}
+        #
+        #     Note: proposalId is not the Display & Video 360 Advertiser ID
+        # @!attribute [rw] advertiser_id
+        #   @return [::String]
+        #     Immutable. The Display & Video 360 Advertiser's advertiser ID.
+        # @!attribute [r] link_proposal_status_details
+        #   @return [::Google::Analytics::Admin::V1alpha::LinkProposalStatusDetails]
+        #     Output only. The status information for this link proposal.
+        # @!attribute [r] advertiser_display_name
+        #   @return [::String]
+        #     Output only. The display name of the Display & Video Advertiser.
+        #     Only populated for proposals that originated from Display & Video 360.
+        # @!attribute [rw] validation_email
+        #   @return [::String]
+        #     Input only. On a proposal being sent to Display & Video 360, this field must be set to
+        #     the email address of an admin on the target advertiser. This is used to
+        #     verify that the Google Analytics admin is aware of at least one admin on
+        #     the Display & Video 360 Advertiser. This does not restrict approval of the
+        #     proposal to a single user. Any admin on the Display & Video 360 Advertiser
+        #     may approve the proposal.
+        # @!attribute [rw] ads_personalization_enabled
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Immutable. Enables personalized advertising features with this integration.
+        #     If this field is not set on create, it will be defaulted to true.
+        # @!attribute [rw] campaign_data_sharing_enabled
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Immutable. Enables the import of campaign data from Display & Video 360.
+        #     If this field is not set on create, it will be defaulted to true.
+        # @!attribute [rw] cost_data_sharing_enabled
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Immutable. Enables the import of cost data from Display & Video 360.
+        #     This can only be enabled if campaign_data_import_enabled is enabled.
+        #     If this field is not set on create, it will be defaulted to true.
+        class DisplayVideo360AdvertiserLinkProposal
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Status information for a link proposal.
+        # @!attribute [r] link_proposal_initiating_product
+        #   @return [::Google::Analytics::Admin::V1alpha::LinkProposalInitiatingProduct]
+        #     Output only. The source of this proposal.
+        # @!attribute [r] requestor_email
+        #   @return [::String]
+        #     Output only. The email address of the user that proposed this linkage.
+        # @!attribute [r] link_proposal_state
+        #   @return [::Google::Analytics::Admin::V1alpha::LinkProposalState]
+        #     Output only. The state of this proposal.
+        class LinkProposalStatusDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A conversion event in a Google Analytics property.
@@ -582,9 +691,17 @@ module Google
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when this conversion event was created in the property.
-        # @!attribute [r] is_deletable
+        # @!attribute [r] deletable
         #   @return [::Boolean]
         #     Output only. If set, this event can currently be deleted via DeleteConversionEvent.
+        # @!attribute [r] custom
+        #   @return [::Boolean]
+        #     Output only. If set to true, this conversion event refers to a custom event.  If set to
+        #     false, this conversion event refers to a default event in GA. Default
+        #     events typically have special meaning in GA. Default events are usually
+        #     created for you by the GA system, but in some cases can be created by
+        #     property admins. Custom events count towards the maximum number of
+        #     custom conversion events that may be created per property.
         class ConversionEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -686,7 +803,7 @@ module Google
         #     Max length of 150 characters.
         # @!attribute [rw] measurement_unit
         #   @return [::Google::Analytics::Admin::V1alpha::CustomMetric::MeasurementUnit]
-        #     Required. Immutable. The type for the custom metric's value.
+        #     Required. The type for the custom metric's value.
         # @!attribute [rw] scope
         #   @return [::Google::Analytics::Admin::V1alpha::CustomMetric::MetricScope]
         #     Required. Immutable. The scope of this custom metric.
@@ -743,25 +860,45 @@ module Google
           end
         end
 
-        # Maximum access settings that Firebase user receive on the linked Analytics
-        # property.
-        module MaximumUserAccess
-          # Unspecified maximum user access.
-          MAXIMUM_USER_ACCESS_UNSPECIFIED = 0
+        # Settings values for data retention. This is a singleton resource.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name for this DataRetentionSetting resource.
+        #     Format: properties/\\{property}/dataRetentionSettings
+        # @!attribute [rw] event_data_retention
+        #   @return [::Google::Analytics::Admin::V1alpha::DataRetentionSettings::RetentionDuration]
+        #     The length of time that event-level data is retained.
+        # @!attribute [rw] reset_user_data_on_new_activity
+        #   @return [::Boolean]
+        #     If true, reset the retention period for the user identifier with every
+        #     event from that user.
+        class DataRetentionSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Firebase users have no access to the Analytics property.
-          NO_ACCESS = 1
+          # Valid values for the data retention duration.
+          module RetentionDuration
+            # Data retention time duration is not specified.
+            RETENTION_DURATION_UNSPECIFIED = 0
 
-          # Firebase users have Read & Analyze access to the Analytics property.
-          READ_AND_ANALYZE = 2
+            # The data retention time duration is 2 months.
+            TWO_MONTHS = 1
 
-          # Firebase users have edit access to the Analytics property, but may not
-          # manage the Firebase link.
-          EDITOR_WITHOUT_LINK_MANAGEMENT = 3
+            # The data retention time duration is 14 months.
+            FOURTEEN_MONTHS = 3
 
-          # Firebase users have edit access to the Analytics property and may manage
-          # the Firebase link.
-          EDITOR_INCLUDING_LINK_MANAGEMENT = 4
+            # The data retention time duration is 26 months.
+            # Available to 360 properties only.
+            TWENTY_SIX_MONTHS = 4
+
+            # The data retention time duration is 38 months.
+            # Available to 360 properties only.
+            THIRTY_EIGHT_MONTHS = 5
+
+            # The data retention time duration is 50 months.
+            # Available to 360 properties only.
+            FIFTY_MONTHS = 6
+          end
         end
 
         # The category selected for this property, used for industry benchmarking.
@@ -848,6 +985,18 @@ module Google
           SHOPPING = 26
         end
 
+        # Various levels of service for Google Analytics.
+        module ServiceLevel
+          # Service level not specified or invalid.
+          SERVICE_LEVEL_UNSPECIFIED = 0
+
+          # The standard version of Google Analytics.
+          GOOGLE_ANALYTICS_STANDARD = 1
+
+          # The paid, premium version of Google Analytics.
+          GOOGLE_ANALYTICS_360 = 2
+        end
+
         # Different kinds of actors that can make changes to Google Analytics
         # resources.
         module ActorType
@@ -919,6 +1068,9 @@ module Google
 
           # CustomMetric resource
           CUSTOM_METRIC = 12
+
+          # DataRetentionSettings resource
+          DATA_RETENTION_SETTINGS = 13
         end
 
         # Status of the Google Signals settings (i.e., whether this feature has been
@@ -948,6 +1100,51 @@ module Google
 
           # Terms of service have not been accepted
           GOOGLE_SIGNALS_CONSENT_NOT_CONSENTED = 1
+        end
+
+        # An indication of which product the user initiated a link proposal from.
+        module LinkProposalInitiatingProduct
+          # Unspecified product.
+          LINK_PROPOSAL_INITIATING_PRODUCT_UNSPECIFIED = 0
+
+          # This proposal was created by a user from Google Analytics.
+          GOOGLE_ANALYTICS = 1
+
+          # This proposal was created by a user from a linked product (not Google
+          # Analytics).
+          LINKED_PRODUCT = 2
+        end
+
+        # The state of a link proposal resource.
+        module LinkProposalState
+          # Unspecified state
+          LINK_PROPOSAL_STATE_UNSPECIFIED = 0
+
+          # This proposal is awaiting review from a Google Analytics user. This
+          # proposal will automatically expire after some time.
+          AWAITING_REVIEW_FROM_GOOGLE_ANALYTICS = 1
+
+          # This proposal is awaiting review from a user of a linked product. This
+          # proposal will automatically expire after some time.
+          AWAITING_REVIEW_FROM_LINKED_PRODUCT = 2
+
+          # This proposal has been withdrawn by an admin on the initiating product.
+          # This proposal will be automatically deleted after some time.
+          WITHDRAWN = 3
+
+          # This proposal has been declined by an admin on the receiving product. This
+          # proposal will be automatically deleted after some time.
+          DECLINED = 4
+
+          # This proposal expired due to lack of response from an admin on the
+          # receiving product. This proposal will be automatically deleted after some
+          # time.
+          EXPIRED = 5
+
+          # This proposal has become obsolete because a link was directly created to
+          # the same external product resource that this proposal specifies. This
+          # proposal will be automatically deleted after some time.
+          OBSOLETE = 6
         end
       end
     end

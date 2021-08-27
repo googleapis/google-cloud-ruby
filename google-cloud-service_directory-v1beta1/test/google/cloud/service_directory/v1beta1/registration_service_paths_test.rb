@@ -59,6 +59,18 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientPat
     end
   end
 
+  def test_network_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.network_path project: "value0", network: "value1"
+      assert_equal "projects/value0/locations/global/networks/value1", path
+    end
+  end
+
   def test_service_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

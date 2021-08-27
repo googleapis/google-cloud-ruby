@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/access_approval/v1"
 
 client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
-request = my_create_request
+request = ::Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage.new # (request fields as keyword arguments...)
 response = client.list_approval_requests request
 ```
 

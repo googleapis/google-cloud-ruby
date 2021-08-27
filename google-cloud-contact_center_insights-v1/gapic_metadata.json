@@ -1,0 +1,158 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.contactcenterinsights.v1",
+  "libraryPackage": "::Google::Cloud::ContactCenterInsights::V1",
+  "services": {
+    "ContactCenterInsights": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client",
+          "rpcs": {
+            "CreateConversation": {
+              "methods": [
+                "create_conversation"
+              ]
+            },
+            "UpdateConversation": {
+              "methods": [
+                "update_conversation"
+              ]
+            },
+            "GetConversation": {
+              "methods": [
+                "get_conversation"
+              ]
+            },
+            "ListConversations": {
+              "methods": [
+                "list_conversations"
+              ]
+            },
+            "DeleteConversation": {
+              "methods": [
+                "delete_conversation"
+              ]
+            },
+            "CreateAnalysis": {
+              "methods": [
+                "create_analysis"
+              ]
+            },
+            "GetAnalysis": {
+              "methods": [
+                "get_analysis"
+              ]
+            },
+            "ListAnalyses": {
+              "methods": [
+                "list_analyses"
+              ]
+            },
+            "DeleteAnalysis": {
+              "methods": [
+                "delete_analysis"
+              ]
+            },
+            "ExportInsightsData": {
+              "methods": [
+                "export_insights_data"
+              ]
+            },
+            "CreateIssueModel": {
+              "methods": [
+                "create_issue_model"
+              ]
+            },
+            "UpdateIssueModel": {
+              "methods": [
+                "update_issue_model"
+              ]
+            },
+            "GetIssueModel": {
+              "methods": [
+                "get_issue_model"
+              ]
+            },
+            "ListIssueModels": {
+              "methods": [
+                "list_issue_models"
+              ]
+            },
+            "DeleteIssueModel": {
+              "methods": [
+                "delete_issue_model"
+              ]
+            },
+            "DeployIssueModel": {
+              "methods": [
+                "deploy_issue_model"
+              ]
+            },
+            "UndeployIssueModel": {
+              "methods": [
+                "undeploy_issue_model"
+              ]
+            },
+            "GetIssue": {
+              "methods": [
+                "get_issue"
+              ]
+            },
+            "ListIssues": {
+              "methods": [
+                "list_issues"
+              ]
+            },
+            "UpdateIssue": {
+              "methods": [
+                "update_issue"
+              ]
+            },
+            "CalculateIssueModelStats": {
+              "methods": [
+                "calculate_issue_model_stats"
+              ]
+            },
+            "CreatePhraseMatcher": {
+              "methods": [
+                "create_phrase_matcher"
+              ]
+            },
+            "GetPhraseMatcher": {
+              "methods": [
+                "get_phrase_matcher"
+              ]
+            },
+            "ListPhraseMatchers": {
+              "methods": [
+                "list_phrase_matchers"
+              ]
+            },
+            "DeletePhraseMatcher": {
+              "methods": [
+                "delete_phrase_matcher"
+              ]
+            },
+            "CalculateStats": {
+              "methods": [
+                "calculate_stats"
+              ]
+            },
+            "GetSettings": {
+              "methods": [
+                "get_settings"
+              ]
+            },
+            "UpdateSettings": {
+              "methods": [
+                "update_settings"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

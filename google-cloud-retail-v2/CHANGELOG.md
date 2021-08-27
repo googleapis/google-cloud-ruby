@@ -1,5 +1,55 @@
 # Release History
 
+### 0.5.1 / 2021-08-26
+
+#### Bug Fixes
+
+* Adjusted timeout settings
+
+### 0.5.0 / 2021-08-23
+
+#### Features
+
+* Support for pinned search results
+
+### 0.4.2 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.4.1 / 2021-08-05
+
+#### Documentation
+
+* Various formatting fixes
+
+### 0.4.0 / 2021-07-30
+
+#### Features
+
+* Added a new SearchService client to support product search
+* Added a new CompletionService client to support auto-completion
+* Support for default branches in the CatalogService client
+* Support for listing products using the ProductService client
+* Support for managing inventory using the ProductService client
+* Support for managing fulfillment places using the ProductService client
+* Added partition date support to bigquery import
+* Support user-provided identifiers and reconcilation mode when importing products
+* Support pubsub notifications on import completion
+* Support for many additional product properties, including TTL, variants, rating, and fulfillment info.
+
+#### Documentation
+
+* Fixed some broken links
+* Additional documentation updates
+
+### 0.3.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
 ### 0.3.1 / 2021-06-17
 
 #### Bug Fixes

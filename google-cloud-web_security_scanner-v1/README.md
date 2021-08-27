@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/web_security_scanner/v1"
 
 client = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new
-request = my_create_request
+request = ::Google::Cloud::WebSecurityScanner::V1::CreateScanConfigRequest.new # (request fields as keyword arguments...)
 response = client.create_scan_config request
 ```
 

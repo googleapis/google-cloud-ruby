@@ -30,7 +30,7 @@ module Google
             # The Read API can be used to read data from BigQuery.
             class Service
 
-              include ::GRPC::GenericService
+              include GRPC::GenericService
 
               self.marshal_class_method = :encode
               self.unmarshal_class_method = :decode

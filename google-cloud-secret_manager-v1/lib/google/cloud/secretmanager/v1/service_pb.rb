@@ -18,6 +18,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
+      optional :filter, :string, 4
     end
     add_message "google.cloud.secretmanager.v1.ListSecretsResponse" do
       repeated :secrets, :message, 1, "google.cloud.secretmanager.v1.Secret"
@@ -40,6 +41,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
+      optional :filter, :string, 4
     end
     add_message "google.cloud.secretmanager.v1.ListSecretVersionsResponse" do
       repeated :versions, :message, 1, "google.cloud.secretmanager.v1.SecretVersion"

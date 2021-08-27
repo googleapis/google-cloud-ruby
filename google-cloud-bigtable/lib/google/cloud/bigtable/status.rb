@@ -35,12 +35,12 @@ module Google
       #
       #   bigtable = Google::Cloud::Bigtable.new
       #
-      #   table = bigtable.table("my-instance", "my-table")
+      #   table = bigtable.table "my-instance", "my-table"
       #
       #   entries = []
       #   entries << table.new_mutation_entry("row-1").set_cell("cf1", "field1", "XYZ")
       #   entries << table.new_mutation_entry("row-2").set_cell("cf1", "field1", "ABC")
-      #   responses = table.mutate_rows(entries)
+      #   responses = table.mutate_rows entries
       #
       #   responses.each do |response|
       #     puts response.status.description

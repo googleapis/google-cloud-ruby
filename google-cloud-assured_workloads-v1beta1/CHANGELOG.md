@@ -1,5 +1,23 @@
 # Release History
 
+### 0.7.1 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.7.0 / 2021-07-29
+
+#### Features
+
+* Support the EU_REGIONS_AND_SUPPORT compliance regime
+
+### 0.6.2 / 2021-07-12
+
+#### Documentation
+
+* Clarified some language around authentication configuration
+
 ### 0.6.1 / 2021-06-17
 
 #### Bug Fixes

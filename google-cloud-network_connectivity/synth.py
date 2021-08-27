@@ -23,13 +23,13 @@ logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICMicrogenerator()
 library = gapic.ruby_library(
-    "networkconnectivity", "v1alpha1",
+    "networkconnectivity", "v1",
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-network_connectivity",
         "ruby-cloud-title": "Network Connectivity",
         "ruby-cloud-description": "Network Connectivity is Google's suite of products that provide enterprise connectivity from your on-premises network or from another cloud provider to your Virtual Private Cloud (VPC) network.",
         "ruby-cloud-env-prefix": "NETWORK_CONNECTIVITY",
-        "ruby-cloud-wrapper-of": "v1alpha1:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.0;v1alpha1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/network-connectivity/docs",
         "ruby-cloud-api-id": "networkconnectivity.googleapis.com",
         "ruby-cloud-api-shortname": "networkconnectivity",

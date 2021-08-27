@@ -83,6 +83,18 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
     end
   end
 
+  def test_data_retention_settings_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.data_retention_settings_path property: "value0"
+      assert_equal "properties/value0/dataRetentionSettings", path
+    end
+  end
+
   def test_data_sharing_settings_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -92,6 +104,30 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
       path = client.data_sharing_settings_path account: "value0"
       assert_equal "accounts/value0/dataSharingSettings", path
+    end
+  end
+
+  def test_display_video360_advertiser_link_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.display_video360_advertiser_link_path property: "value0", display_video_360_advertiser_link: "value1"
+      assert_equal "properties/value0/displayVideo360AdvertiserLinks/value1", path
+    end
+  end
+
+  def test_display_video360_advertiser_link_proposal_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.display_video360_advertiser_link_proposal_path property: "value0", display_video_360_advertiser_link_proposal: "value1"
+      assert_equal "properties/value0/displayVideo360AdvertiserLinkProposals/value1", path
     end
   end
 

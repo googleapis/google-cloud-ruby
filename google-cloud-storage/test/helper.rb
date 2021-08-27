@@ -195,18 +195,64 @@ class MockStorage < Minitest::Spec
     )
   end
 
-  def iam_configuration_gapi uniform_bucket_level_access: false, locked_time: false
-    ubla = Google::Apis::StorageV1::Bucket::IamConfiguration::UniformBucketLevelAccess.new(
-      enabled: uniform_bucket_level_access
-    )
-    ubla.locked_time = (Date.today + 1).to_datetime if locked_time
-    Google::Apis::StorageV1::Bucket::IamConfiguration.new(
-      uniform_bucket_level_access: ubla
-    )
+  def iam_configuration_gapi uniform_bucket_level_access: nil, locked_time: nil, public_access_prevention: nil
+    raise "uniform_bucket_level_access must be provided with locked_time" if !locked_time.nil? && uniform_bucket_level_access.nil?
+    gapi = Google::Apis::StorageV1::Bucket::IamConfiguration.new
+    if uniform_bucket_level_access
+      ubla = Google::Apis::StorageV1::Bucket::IamConfiguration::UniformBucketLevelAccess.new(
+        enabled: uniform_bucket_level_access
+      )
+      ubla.locked_time = (Date.today + 1).to_datetime if locked_time
+      gapi.uniform_bucket_level_access = ubla
+    end
+    gapi.public_access_prevention = public_access_prevention if public_access_prevention
+    gapi
   end
 
   def policy_gapi etag: "CAE=", version: 1, bindings: []
     Google::Apis::StorageV1::Policy.new etag: etag, version: version, bindings: bindings
+  end
+
+  def get_bucket_args bucket_name,
+                      if_metageneration_match: nil,
+                      if_metageneration_not_match: nil,
+                      user_project: nil
+    opts = {
+      if_metageneration_match: if_metageneration_match,
+      if_metageneration_not_match: if_metageneration_not_match,
+      user_project: user_project
+    }
+    [bucket_name, opts]
+  end
+
+  def patch_bucket_args bucket_name,
+                        bucket_gapi = nil,
+                        if_metageneration_match: nil,
+                        if_metageneration_not_match: nil,
+                        predefined_acl: nil,
+                        predefined_default_object_acl: nil,
+                        user_project: nil
+    bucket_gapi ||= Google::Apis::StorageV1::Bucket.new(acl: [])
+    opts = {
+      if_metageneration_match: if_metageneration_match,
+      if_metageneration_not_match: if_metageneration_not_match,
+      predefined_acl: predefined_acl,
+      predefined_default_object_acl: predefined_default_object_acl,
+      user_project: user_project
+    }
+    [bucket_name, bucket_gapi, opts]
+  end
+
+  def delete_bucket_args bucket_name,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil,
+                         user_project: nil
+    opts = {
+      if_metageneration_match: if_metageneration_match,
+      if_metageneration_not_match: if_metageneration_not_match,
+      user_project: user_project
+    }
+    [bucket_name, opts]
   end
 
   def insert_object_args bucket_name,
@@ -346,11 +392,12 @@ class MockStorage < Minitest::Spec
                           source_files,
                           destination_gapi = nil,
                           destination_predefined_acl: nil,
+                          if_source_generation_match: nil,
                           if_generation_match: nil,
                           if_metageneration_match: nil,
                           user_project: nil,
                           options: {}
-    req = compose_request source_files, destination_gapi
+    req = compose_request source_files, destination_gapi, if_source_generation_match
     opts = {
       destination_predefined_acl: destination_predefined_acl,
       if_generation_match: if_generation_match,
@@ -361,7 +408,7 @@ class MockStorage < Minitest::Spec
     [bucket_name, file_name, req, opts]
   end
 
-  def compose_request source_files, destination_gapi
+  def compose_request source_files, destination_gapi, if_source_generation_match
     source_objects = source_files.map do |file|
       if file.is_a? String
         Google::Apis::StorageV1::ComposeRequest::SourceObject.new \
@@ -370,6 +417,18 @@ class MockStorage < Minitest::Spec
         Google::Apis::StorageV1::ComposeRequest::SourceObject.new \
           name: file.name,
           generation: file.generation
+      end
+    end
+    if if_source_generation_match
+      if source_files.count != if_source_generation_match.count
+        raise ArgumentError, "if provided, if_source_generation_match length must match sources length"
+      end
+      if_source_generation_match.each_with_index do |generation, i|
+        next unless generation
+        object_preconditions = Google::Apis::StorageV1::ComposeRequest::SourceObject::ObjectPreconditions.new(
+          if_generation_match: generation
+        )
+        source_objects[i].object_preconditions = object_preconditions
       end
     end
     Google::Apis::StorageV1::ComposeRequest.new(

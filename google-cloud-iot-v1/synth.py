@@ -19,23 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
-
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "iot", "v1",
-    extra_proto_files=["google/cloud/common_resources.proto"],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-iot-v1",
-        "ruby-cloud-title": "Cloud IoT V1",
-        "ruby-cloud-description": "Registers and manages IoT (Internet of Things) devices that connect to the Google Cloud Platform.",
-        "ruby-cloud-env-prefix": "IOT",
-        "ruby-cloud-grpc-service-config": "google/cloud/iot/v1/cloudiot_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://cloud.google.com/iot",
-        "ruby-cloud-api-id": "cloudiot.googleapis.com",
-        "ruby-cloud-api-shortname": "cloudiot",
-    }
+    proto_path="google/cloud/iot/v1",
+    bazel_target="//google/cloud/iot/v1:google-cloud-iot-v1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

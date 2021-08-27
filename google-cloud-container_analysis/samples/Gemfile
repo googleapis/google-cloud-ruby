@@ -22,10 +22,10 @@ gem "google-cloud-container_analysis", path: master ? "../../google-cloud-contai
 gem "google-cloud-container_analysis-v1", path: master ? "../../google-cloud-container_analysis-v1" : nil
 gem "grafeas-v1", path: master ? "../../grafeas-v1" : nil
 
-gem "google-cloud-pubsub", "~> 1.7"
+gem "google-cloud-pubsub", "~> 2.0"
 
 group :test do
-  gem "google-style", "~> 1.24.0"
+  gem "google-style", "~> 1.25.1"
   gem "irb"
   gem "minitest", "~> 5.14"
   gem "minitest-focus", "~> 1.1"

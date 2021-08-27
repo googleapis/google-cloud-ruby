@@ -68,8 +68,8 @@ s.replace(
 )
 s.replace(
     "google-cloud-monitoring.gemspec",
-    '\n  gem.add_dependency "google-cloud-monitoring-v3", "~> 0.4"\n\n',
-    '\n  gem.add_dependency "google-cloud-monitoring-v3", "~> 0.4"\n  gem.add_dependency "google-cloud-monitoring-dashboard-v1", "~> 0.5"\n\n',
+    '\n  gem.add_dependency "google-cloud-monitoring-v3", ">= 0.4", "< 2.a"\n\n',
+    '\n  gem.add_dependency "google-cloud-monitoring-v3", ">= 0.4", "< 2.a"\n  gem.add_dependency "google-cloud-monitoring-dashboard-v1", ">= 0.5", "< 2.a"\n\n',
 )
 s.replace(
     "Gemfile",

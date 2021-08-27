@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/trace/v2"
 
 client = ::Google::Cloud::Trace::V2::TraceService::Client.new
-request = my_create_request
+request = ::Google::Cloud::Trace::V2::BatchWriteSpansRequest.new # (request fields as keyword arguments...)
 response = client.batch_write_spans request
 ```
 

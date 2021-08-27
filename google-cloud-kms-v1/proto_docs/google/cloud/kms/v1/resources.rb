@@ -97,6 +97,16 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels with user-defined metadata. For more information, see
         #     [Labeling Keys](https://cloud.google.com/kms/docs/labeling-keys).
+        # @!attribute [rw] import_only
+        #   @return [::Boolean]
+        #     Immutable. Whether this key may contain imported versions only.
+        # @!attribute [rw] destroy_scheduled_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Immutable. The period of time that versions of this key spend in the
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROY_SCHEDULED DESTROY_SCHEDULED}
+        #     state before transitioning to
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED DESTROYED}. If not
+        #     specified at creation time, the default duration is 24 hours.
         class CryptoKey
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -132,6 +142,10 @@ module Google
             # {::Google::Cloud::Kms::V1::KeyManagementService::Client#asymmetric_decrypt AsymmetricDecrypt} and
             # {::Google::Cloud::Kms::V1::KeyManagementService::Client#get_public_key GetPublicKey}.
             ASYMMETRIC_DECRYPT = 6
+
+            # {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used with
+            # {::Google::Cloud::Kms::V1::KeyManagementService::Client#mac_sign MacSign}.
+            MAC = 9
           end
         end
 
@@ -288,6 +302,12 @@ module Google
           # The fields in the name after "EC_SIGN_" correspond to the following
           # parameters: elliptic curve, digest algorithm.
           #
+          # Algorithms beginning with "HMAC_" are usable with {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
+          # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::MAC MAC}.
+          #
+          # The suffix following "HMAC_" corresponds to the hash algorithm being used
+          # (eg. SHA256).
+          #
           # For more information, see [Key purposes and algorithms]
           # (https://cloud.google.com/kms/docs/algorithms).
           module CryptoKeyVersionAlgorithm
@@ -343,6 +363,9 @@ module Google
             # HSM protection level.
             EC_SIGN_SECP256K1_SHA256 = 31
 
+            # HMAC-SHA256 signing with a 256 bit key.
+            HMAC_SHA256 = 32
+
             # Algorithm representing symmetric encryption by an external key manager.
             EXTERNAL_SYMMETRIC_ENCRYPTION = 18
           end
@@ -365,7 +388,6 @@ module Google
             DISABLED = 2
 
             # This version is destroyed, and the key material is no longer stored.
-            # A version may not leave this state once entered.
             DESTROYED = 3
 
             # This version is scheduled for destruction, and will be destroyed soon.
@@ -435,6 +457,9 @@ module Google
         #     Provided here for verification.
         #
         #     NOTE: This field is in Beta.
+        # @!attribute [rw] protection_level
+        #   @return [::Google::Cloud::Kms::V1::ProtectionLevel]
+        #     The {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} public key.
         class PublicKey
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

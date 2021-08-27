@@ -21,24 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "dataqna", "v1alpha",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-cloud-dataqna-v1alpha",
-        "ruby-cloud-title": "BigQuery Data QnA V1alpha",
-        "ruby-cloud-description": "Data QnA is a natural language question and answer service for BigQuery data.",
-        "ruby-cloud-env-prefix": "BIGQUERY_DATAQNA",
-        "ruby-cloud-grpc-service-config": "google/cloud/dataqna/v1alpha/dataqna_grpc_service_config.json",
-        "ruby-cloud-path-override": "data_qn_a=dataqna",
-        "ruby-cloud-namespace-override": "Dataqna=DataQnA",
-        "ruby-cloud-product-url": "https://cloud.google.com/bigquery/docs/dataqna/",
-        "ruby-cloud-api-id": "dataqna.googleapis.com",
-        "ruby-cloud-api-shortname": "dataqna",
-    }
+    proto_path="google/cloud/dataqna/v1alpha",
+    bazel_target="//google/cloud/dataqna/v1alpha:google-cloud-dataqna-v1alpha-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)

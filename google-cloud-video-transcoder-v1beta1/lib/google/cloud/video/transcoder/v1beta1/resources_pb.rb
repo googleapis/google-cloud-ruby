@@ -22,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 12, "google.protobuf.Timestamp"
       optional :start_time, :message, 13, "google.protobuf.Timestamp"
       optional :end_time, :message, 14, "google.protobuf.Timestamp"
+      optional :ttl_after_completion_days, :int32, 15
       oneof :job_config do
         optional :template_id, :string, 4
         optional :config, :message, 5, "google.cloud.video.transcoder.v1beta1.JobConfig"
@@ -109,6 +110,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :row_count, :int32, 6
       optional :start_time_offset, :message, 7, "google.protobuf.Duration"
       optional :end_time_offset, :message, 8, "google.protobuf.Duration"
+      optional :quality, :int32, 11
       oneof :extraction_strategy do
         optional :total_count, :int32, 9
         optional :interval, :message, 10, "google.protobuf.Duration"
@@ -157,6 +159,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :denoise, :message, 2, "google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Denoise"
       optional :deblock, :message, 3, "google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Deblock"
       optional :audio, :message, 4, "google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Audio"
+      optional :crop, :message, 5, "google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop"
+      optional :pad, :message, 6, "google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad"
     end
     add_message "google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Color" do
       optional :saturation, :double, 1
@@ -175,6 +179,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :lufs, :double, 1
       optional :high_boost, :bool, 2
       optional :low_boost, :bool, 3
+    end
+    add_message "google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop" do
+      optional :top_pixels, :int32, 1
+      optional :bottom_pixels, :int32, 2
+      optional :left_pixels, :int32, 3
+      optional :right_pixels, :int32, 4
+    end
+    add_message "google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad" do
+      optional :top_pixels, :int32, 1
+      optional :bottom_pixels, :int32, 2
+      optional :left_pixels, :int32, 3
+      optional :right_pixels, :int32, 4
     end
     add_message "google.cloud.video.transcoder.v1beta1.VideoStream" do
       optional :codec, :string, 1
@@ -303,6 +319,8 @@ module Google
           PreprocessingConfig::Denoise = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Denoise").msgclass
           PreprocessingConfig::Deblock = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Deblock").msgclass
           PreprocessingConfig::Audio = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Audio").msgclass
+          PreprocessingConfig::Crop = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop").msgclass
+          PreprocessingConfig::Pad = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad").msgclass
           VideoStream = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1beta1.VideoStream").msgclass
           AudioStream = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1beta1.AudioStream").msgclass
           AudioStream::AudioAtom = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1beta1.AudioStream.AudioAtom").msgclass

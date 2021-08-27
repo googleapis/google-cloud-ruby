@@ -205,6 +205,12 @@ module Google
         #     `speech_contexts` field. For more information, see the [speech
         #     adaptation](https://cloud.google.com/speech-to-text/docs/adaptation)
         #     documentation.
+        # @!attribute [rw] transcript_normalization
+        #   @return [::Google::Cloud::Speech::V1p1beta1::TranscriptNormalization]
+        #     Use transcription normalization to automatically replace parts of the
+        #     transcript with phrases of your choosing. For StreamingRecognize, this
+        #     normalization only applies to stable partial transcripts (stability > 0.8)
+        #     and final transcripts.
         # @!attribute [rw] speech_contexts
         #   @return [::Array<::Google::Cloud::Speech::V1p1beta1::SpeechContext>]
         #     Array of {::Google::Cloud::Speech::V1p1beta1::SpeechContext SpeechContext}.
@@ -616,6 +622,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Speech::V1p1beta1::SpeechRecognitionResult>]
         #     Sequential list of transcription results corresponding to
         #     sequential portions of audio.
+        # @!attribute [rw] total_billed_time
+        #   @return [::Google::Protobuf::Duration]
+        #     When available, billed audio seconds for the corresponding request.
         class RecognizeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -630,6 +639,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Speech::V1p1beta1::SpeechRecognitionResult>]
         #     Sequential list of transcription results corresponding to
         #     sequential portions of audio.
+        # @!attribute [rw] total_billed_time
+        #   @return [::Google::Protobuf::Duration]
+        #     When available, billed audio seconds for the corresponding request.
         # @!attribute [rw] output_config
         #   @return [::Google::Cloud::Speech::V1p1beta1::TranscriptOutputConfig]
         #     Original output config if present in the request.
@@ -728,6 +740,10 @@ module Google
         # @!attribute [rw] speech_event_type
         #   @return [::Google::Cloud::Speech::V1p1beta1::StreamingRecognizeResponse::SpeechEventType]
         #     Indicates the type of speech event.
+        # @!attribute [rw] total_billed_time
+        #   @return [::Google::Protobuf::Duration]
+        #     When available, billed audio seconds for the stream.
+        #     Set only if this is the last response in the stream.
         class StreamingRecognizeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

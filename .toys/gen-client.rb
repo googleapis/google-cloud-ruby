@@ -168,7 +168,7 @@ def determine_defaults
   @api_shortname = @api_name.tr "/", ""
   @api_id = "#{@api_shortname}.googleapis.com"
   @service_display_name = gem_shortname.split("_").map(&:capitalize).join " "
-  @env_prefix = gem_shortname.gsub("-", "_").upcase
+  @env_prefix = nil
   @description = replace_me_text
   @product_url = replace_me_text
   @service_override = nil
@@ -240,7 +240,8 @@ def lookup_precedents_in_repo_metadata file_path
     @service_display_name = repo_metadata["name_pretty"].sub(/\s+API$/, "").sub(/\s+V\d[a-z0-9]*$/, "")
   end
   if repo_metadata.include? "ruby-cloud-description"
-    @description = repo_metadata["ruby-cloud-description"]
+    versioned_suffix = /\sNote that [a-z0-9_-]+ is a version-specific client library\. For most uses, we recommend installing the main client library [a-z0-9_-]+ instead\. See the readme for more details\./
+    @description = repo_metadata["ruby-cloud-description"].sub(versioned_suffix, "")
   end
   if repo_metadata.include? "ruby-cloud-env-prefix"
     @env_prefix = repo_metadata["ruby-cloud-env-prefix"]

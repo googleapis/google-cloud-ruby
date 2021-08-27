@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/trace/v1"
 
 client = ::Google::Cloud::Trace::V1::TraceService::Client.new
-request = my_create_request
+request = ::Google::Cloud::Trace::V1::ListTracesRequest.new # (request fields as keyword arguments...)
 response = client.list_traces request
 ```
 

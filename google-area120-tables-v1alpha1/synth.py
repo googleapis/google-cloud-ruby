@@ -21,23 +21,11 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-gapic = gcp.GAPICMicrogenerator()
+gapic = gcp.GAPICBazel()
 library = gapic.ruby_library(
     "google/area120/tables", "v1alpha1",
     proto_path="google/area120/tables/v1alpha1",
-    extra_proto_files=[
-        "google/cloud/common_resources.proto",
-    ],
-    generator_args={
-        "ruby-cloud-gem-name": "google-area120-tables-v1alpha1",
-        "ruby-cloud-title": "Area 120 Tables V1alpha1",
-        "ruby-cloud-description": "Using the Area 120 Tables API, you can query for tables, and update/create/delete rows within tables programmatically.",
-        "ruby-cloud-env-prefix": "AREA120_TABLES",
-        "ruby-cloud-grpc-service-config": "google/area120/tables/v1alpha1/tables_grpc_service_config.json",
-        "ruby-cloud-product-url": "https://tables.area120.google.com/u/0/about#/",
-        "ruby-cloud-api-id": "area120tables.googleapis.com",
-        "ruby-cloud-api-shortname": "area120tables",
-    }
+    bazel_target="//google/area120/tables/v1alpha1:google-area120-tables-v1alpha1-ruby",
 )
 
 s.copy(library, merge=ruby.global_merge)
