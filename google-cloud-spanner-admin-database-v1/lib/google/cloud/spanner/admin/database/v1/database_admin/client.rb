@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -287,9 +287,11 @@ module Google
                     gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
                   metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                  header_params = {
-                    "parent" => request.parent
-                  }
+                  header_params = {}
+                  if request.parent &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+(\/)?$/.match?(request.parent)
+                    header_params["instance"] = request.parent
+                  end
                   request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                   metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -379,9 +381,11 @@ module Google
                     gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
                   metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                  header_params = {
-                    "parent" => request.parent
-                  }
+                  header_params = {}
+                  if request.parent &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+(\/)?$/.match?(request.parent)
+                    header_params["instance"] = request.parent
+                  end
                   request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                   metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -449,9 +453,11 @@ module Google
                     gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
                   metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                  header_params = {
-                    "name" => request.name
-                  }
+                  header_params = {}
+                  if request.name &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+(\/)?$/.match?(request.name)
+                    header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.name)[1]
+                  end
                   request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                   metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -545,9 +551,11 @@ module Google
                     gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
                   metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                  header_params = {
-                    "database" => request.database
-                  }
+                  header_params = {}
+                  if request.database &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+(\/)?$/.match?(request.database)
+                    header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.database)[1]
+                  end
                   request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                   metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -616,9 +624,11 @@ module Google
                     gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
                   metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                  header_params = {
-                    "database" => request.database
-                  }
+                  header_params = {}
+                  if request.database &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+(\/)?$/.match?(request.database)
+                    header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.database)[1]
+                  end
                   request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                   metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -688,9 +698,11 @@ module Google
                     gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
                   metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                  header_params = {
-                    "database" => request.database
-                  }
+                  header_params = {}
+                  if request.database &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+(\/)?$/.match?(request.database)
+                    header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.database)[1]
+                  end
                   request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                   metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -768,9 +780,19 @@ module Google
                     gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
                   metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                  header_params = {
-                    "resource" => request.resource
-                  }
+                  header_params = {}
+                  if request.resource &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+(\/)?$/.match?(request.resource)
+                    header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.resource)[1]
+                  end
+                  if request.resource &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+\/backups\/[^\/]+(\/)?$/.match?(request.resource)
+                    header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.resource)[1]
+                  end
+                  if request.resource &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+\/databaseRoles\/[^\/]+(\/)?$/.match?(request.resource)
+                    header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.resource)[1]
+                  end
                   request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                   metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -847,9 +869,19 @@ module Google
                     gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
                   metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                  header_params = {
-                    "resource" => request.resource
-                  }
+                  header_params = {}
+                  if request.resource &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+(\/)?$/.match?(request.resource)
+                    header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.resource)[1]
+                  end
+                  if request.resource &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+\/backups\/[^\/]+(\/)?$/.match?(request.resource)
+                    header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.resource)[1]
+                  end
+                  if request.resource &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+\/databaseRoles\/[^\/]+(\/)?$/.match?(request.resource)
+                    header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.resource)[1]
+                  end
                   request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                   metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -930,9 +962,19 @@ module Google
                     gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
                   metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                  header_params = {
-                    "resource" => request.resource
-                  }
+                  header_params = {}
+                  if request.resource &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+(\/)?$/.match?(request.resource)
+                    header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.resource)[1]
+                  end
+                  if request.resource &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+\/backups\/[^\/]+(\/)?$/.match?(request.resource)
+                    header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.resource)[1]
+                  end
+                  if request.resource &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+\/databaseRoles\/[^\/]+(\/)?$/.match?(request.resource)
+                    header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.resource)[1]
+                  end
                   request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                   metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1026,9 +1068,11 @@ module Google
                     gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
                   metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                  header_params = {
-                    "parent" => request.parent
-                  }
+                  header_params = {}
+                  if request.parent &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+(\/)?$/.match?(request.parent)
+                    header_params["instance"] = request.parent
+                  end
                   request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                   metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1097,9 +1141,11 @@ module Google
                     gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
                   metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                  header_params = {
-                    "name" => request.name
-                  }
+                  header_params = {}
+                  if request.name &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+\/backups\/[^\/]+(\/)?$/.match?(request.name)
+                    header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.name)[1]
+                  end
                   request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                   metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1174,9 +1220,11 @@ module Google
                     gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
                   metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                  header_params = {
-                    "backup.name" => request.backup.name
-                  }
+                  header_params = {}
+                  if request.backup.name &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+\/backups\/[^\/]+(\/)?$/.match?(request.backup.name)
+                    header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.backup.name)[1]
+                  end
                   request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                   metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1244,9 +1292,11 @@ module Google
                     gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
                   metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                  header_params = {
-                    "name" => request.name
-                  }
+                  header_params = {}
+                  if request.name &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+\/backups\/[^\/]+(\/)?$/.match?(request.name)
+                    header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.name)[1]
+                  end
                   request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                   metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1359,9 +1409,11 @@ module Google
                     gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
                   metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                  header_params = {
-                    "parent" => request.parent
-                  }
+                  header_params = {}
+                  if request.parent &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+(\/)?$/.match?(request.parent)
+                    header_params["instance"] = request.parent
+                  end
                   request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                   metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1463,9 +1515,11 @@ module Google
                     gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
                   metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                  header_params = {
-                    "parent" => request.parent
-                  }
+                  header_params = {}
+                  if request.parent &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+\/databases(\/)?$/.match?(request.parent)
+                    header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.parent)[1]
+                  end
                   request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                   metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1589,9 +1643,11 @@ module Google
                     gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
                   metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                  header_params = {
-                    "parent" => request.parent
-                  }
+                  header_params = {}
+                  if request.parent &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+(\/)?$/.match?(request.parent)
+                    header_params["instance"] = request.parent
+                  end
                   request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                   metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1716,9 +1772,11 @@ module Google
                     gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
                   metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                  header_params = {
-                    "parent" => request.parent
-                  }
+                  header_params = {}
+                  if request.parent &&
+                     /^projects\/[^\/]+\/instances\/[^\/]+(\/)?$/.match?(request.parent)
+                    header_params["instance"] = request.parent
+                  end
                   request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                   metadata[:"x-goog-request-params"] ||= request_params_header
 
