@@ -527,6 +527,13 @@ module Google
 
               ##
               # Exports the specified agent to a binary file.
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: An empty [Struct
+              #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::ExportAgentResponse ExportAgentResponse}
               #
               # @overload export_agent(request, options = nil)
               #   Pass arguments to `export_agent` via a request object, either of type
