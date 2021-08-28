@@ -190,8 +190,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name. Uses the form:
-            #
+            #     Required. The parent resource name, in the following form:
             #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/*`.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of items to return.  If unspecified, server
@@ -274,8 +273,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the game server config to retrieve. Uses the form:
-            #
+            #     Required. The name of the game server config to retrieve, in the following form:
             #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -346,8 +344,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name. Uses the form:
-            #
+            #     Required. The parent resource name, in the following form:
             #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/`.
             #   @param config_id [::String]
             #     Required. The ID of the game server config resource to be created.
@@ -422,8 +419,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the game server config to delete. Uses the form:
-            #
+            #     Required. The name of the game server config to delete, in the following form:
             #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation

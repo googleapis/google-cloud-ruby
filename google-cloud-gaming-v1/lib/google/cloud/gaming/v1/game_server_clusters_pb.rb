@@ -17,6 +17,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :page_token, :string, 3
       optional :filter, :string, 4
       optional :order_by, :string, 5
+      optional :view, :enum, 6, "google.cloud.gaming.v1.GameServerClusterView"
     end
     add_message "google.cloud.gaming.v1.ListGameServerClustersResponse" do
       repeated :game_server_clusters, :message, 1, "google.cloud.gaming.v1.GameServerCluster"
@@ -25,6 +26,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.gaming.v1.GetGameServerClusterRequest" do
       optional :name, :string, 1
+      optional :view, :enum, 6, "google.cloud.gaming.v1.GameServerClusterView"
     end
     add_message "google.cloud.gaming.v1.CreateGameServerClusterRequest" do
       optional :parent, :string, 1
@@ -36,10 +38,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :game_server_cluster_id, :string, 2
       optional :game_server_cluster, :message, 3, "google.cloud.gaming.v1.GameServerCluster"
       optional :preview_time, :message, 4, "google.protobuf.Timestamp"
+      optional :view, :enum, 6, "google.cloud.gaming.v1.GameServerClusterView"
     end
     add_message "google.cloud.gaming.v1.PreviewCreateGameServerClusterResponse" do
       optional :etag, :string, 2
       optional :target_state, :message, 3, "google.cloud.gaming.v1.TargetState"
+      optional :cluster_state, :message, 4, "google.cloud.gaming.v1.KubernetesClusterState"
     end
     add_message "google.cloud.gaming.v1.DeleteGameServerClusterRequest" do
       optional :name, :string, 1
@@ -82,6 +86,30 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :connection_info, :message, 5, "google.cloud.gaming.v1.GameServerClusterConnectionInfo"
       optional :etag, :string, 6
       optional :description, :string, 7
+      optional :cluster_state, :message, 11, "google.cloud.gaming.v1.KubernetesClusterState"
+    end
+    add_message "google.cloud.gaming.v1.KubernetesClusterState" do
+      optional :agones_version_installed, :string, 1
+      optional :kubernetes_version_installed, :string, 2
+      optional :installation_state, :enum, 3, "google.cloud.gaming.v1.KubernetesClusterState.InstallationState"
+      optional :version_installed_error_message, :string, 4
+      optional :provider, :string, 5
+      optional :agones_version_targeted, :string, 6
+    end
+    add_enum "google.cloud.gaming.v1.KubernetesClusterState.InstallationState" do
+      value :INSTALLATION_STATE_UNSPECIFIED, 0
+      value :AGONES_KUBERNETES_VERSION_SUPPORTED, 1
+      value :AGONES_VERSION_UNSUPPORTED, 2
+      value :AGONES_KUBERNETES_VERSION_UNSUPPORTED, 3
+      value :AGONES_VERSION_UNRECOGNIZED, 4
+      value :KUBERNETES_VERSION_UNRECOGNIZED, 5
+      value :VERSION_VERIFICATION_FAILED, 6
+      value :AGONES_NOT_INSTALLED, 7
+    end
+    add_enum "google.cloud.gaming.v1.GameServerClusterView" do
+      value :GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED, 0
+      value :BASIC, 1
+      value :FULL, 2
     end
   end
 end
@@ -105,6 +133,9 @@ module Google
         GameServerClusterConnectionInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gaming.v1.GameServerClusterConnectionInfo").msgclass
         GkeClusterReference = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gaming.v1.GkeClusterReference").msgclass
         GameServerCluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gaming.v1.GameServerCluster").msgclass
+        KubernetesClusterState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gaming.v1.KubernetesClusterState").msgclass
+        KubernetesClusterState::InstallationState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gaming.v1.KubernetesClusterState.InstallationState").enummodule
+        GameServerClusterView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gaming.v1.GameServerClusterView").enummodule
       end
     end
   end

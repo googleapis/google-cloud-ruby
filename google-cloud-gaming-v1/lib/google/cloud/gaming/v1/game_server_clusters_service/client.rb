@@ -201,16 +201,16 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_game_server_clusters(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            # @overload list_game_server_clusters(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil, view: nil)
             #   Pass arguments to `list_game_server_clusters` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name. Uses the form:
+            #     Required. The parent resource name, in the following form:
             #     "projects/\\{project}/locations/\\{location}/realms/\\{realm}".
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of items to return.  If unspecified, the server
+            #     Optional. The maximum number of items to return. If unspecified, the server
             #     will pick an appropriate default. The server may return fewer items than
             #     requested. A caller should only rely on response's
             #     {::Google::Cloud::Gaming::V1::ListGameServerClustersResponse#next_page_token next_page_token} to
@@ -222,6 +222,13 @@ module Google
             #   @param order_by [::String]
             #     Optional. Specifies the ordering of results following syntax at
             #     https://cloud.google.com/apis/design/design_patterns#sorting_order.
+            #   @param view [::Google::Cloud::Gaming::V1::GameServerClusterView]
+            #     Optional. View for the returned GameServerCluster objects. When `FULL` is
+            #     specified, the `cluster_state` field is also returned in the
+            #     GameServerCluster object, which includes the state of the referenced
+            #     Kubernetes cluster such as versions and provider info. The default/unset
+            #     value is GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED, same as BASIC, which does
+            #     not return the `cluster_state` field.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Gaming::V1::GameServerCluster>]
@@ -284,15 +291,21 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload get_game_server_cluster(name: nil)
+            # @overload get_game_server_cluster(name: nil, view: nil)
             #   Pass arguments to `get_game_server_cluster` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the game server cluster to retrieve. Uses the form:
-            #
+            #     Required. The name of the game server cluster to retrieve, in the following form:
             #     `projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}`.
+            #   @param view [::Google::Cloud::Gaming::V1::GameServerClusterView]
+            #     Optional. View for the returned GameServerCluster objects. When `FULL` is
+            #     specified, the `cluster_state` field is also returned in the
+            #     GameServerCluster object, which includes the state of the referenced
+            #     Kubernetes cluster such as versions and provider info. The default/unset
+            #     value is GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED, same as BASIC, which does
+            #     not return the `cluster_state` field.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Gaming::V1::GameServerCluster]
@@ -360,7 +373,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name. Uses the form:
+            #     Required. The parent resource name, in the following form:
             #     `projects/{project}/locations/{location}/realms/{realm-id}`.
             #   @param game_server_cluster_id [::String]
             #     Required. The ID of the game server cluster resource to be created.
@@ -429,13 +442,13 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload preview_create_game_server_cluster(parent: nil, game_server_cluster_id: nil, game_server_cluster: nil, preview_time: nil)
+            # @overload preview_create_game_server_cluster(parent: nil, game_server_cluster_id: nil, game_server_cluster: nil, preview_time: nil, view: nil)
             #   Pass arguments to `preview_create_game_server_cluster` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name. Uses the form:
+            #     Required. The parent resource name, in the following form:
             #     `projects/{project}/locations/{location}/realms/{realm}`.
             #   @param game_server_cluster_id [::String]
             #     Required. The ID of the game server cluster resource to be created.
@@ -443,6 +456,9 @@ module Google
             #     Required. The game server cluster resource to be created.
             #   @param preview_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Optional. The target timestamp to compute the preview.
+            #   @param view [::Google::Cloud::Gaming::V1::GameServerClusterView]
+            #     Optional. This field is deprecated, preview will always return
+            #     KubernetesClusterState.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Gaming::V1::PreviewCreateGameServerClusterResponse]
@@ -510,7 +526,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the game server cluster to delete. Uses the form:
+            #     Required. The name of the game server cluster to delete, in the following form:
             #     `projects/{project}/locations/{location}/gameServerClusters/{cluster}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -580,7 +596,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the game server cluster to delete. Uses the form:
+            #     Required. The name of the game server cluster to delete, in the following form:
             #     `projects/{project}/locations/{location}/gameServerClusters/{cluster}`.
             #   @param preview_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Optional. The target timestamp to compute the preview.
@@ -656,10 +672,7 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. Mask of fields to update. At least one path must be supplied in
             #     this field. For the `FieldMask` definition, see
-            #
-            #     https:
-            #     //developers.google.com/protocol-buffers
-            #     // /docs/reference/google.protobuf#fieldmask
+            #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -733,10 +746,7 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. Mask of fields to update. At least one path must be supplied in
             #     this field. For the `FieldMask` definition, see
-            #
-            #     https:
-            #     //developers.google.com/protocol-buffers
-            #     // /docs/reference/google.protobuf#fieldmask
+            #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
             #   @param preview_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Optional. The target timestamp to compute the preview.
             #
