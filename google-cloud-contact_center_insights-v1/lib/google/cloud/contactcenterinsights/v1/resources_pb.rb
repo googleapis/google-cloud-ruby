@@ -105,6 +105,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.contactcenterinsights.v1.IssueAssignment" do
       optional :issue, :string, 1
       optional :score, :double, 2
+      optional :display_name, :string, 3
     end
     add_message "google.cloud.contactcenterinsights.v1.CallAnnotation" do
       optional :channel_tag, :int32, 1
