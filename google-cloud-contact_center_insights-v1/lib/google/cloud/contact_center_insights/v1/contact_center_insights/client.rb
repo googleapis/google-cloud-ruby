@@ -399,10 +399,10 @@ module Google
             #   @param parent [::String]
             #     Required. The parent resource of the conversation.
             #   @param page_size [::Integer]
-            #     The maximum number of conversations to return in the response. If this
-            #     value is zero, the service will select a default size. A call might return
-            #     fewer objects than requested. A non-empty `next_page_token` in the response
-            #     indicates that more data is available.
+            #     The maximum number of conversations to return in the response. A valid page
+            #     size ranges from 0 to 1,000 inclusive. If the page size is zero or
+            #     unspecified, a default page size of 100 will be chosen. Note that a call
+            #     might return fewer results than the requested page size.
             #   @param page_token [::String]
             #     The value returned by the last `ListConversationsResponse`. This value
             #     indicates that this is a continuation of a prior `ListConversations` call
@@ -2108,7 +2108,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param settings [::Google::Cloud::ContactCenterInsights::V1::Settings, ::Hash]
-            #     Required. The new values for the conversation.
+            #     Required. The new settings values.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. The list of fields to be updated.
             #

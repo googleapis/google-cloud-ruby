@@ -162,10 +162,10 @@ module Google
         #     Required. The parent resource of the conversation.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of conversations to return in the response. If this
-        #     value is zero, the service will select a default size. A call might return
-        #     fewer objects than requested. A non-empty `next_page_token` in the response
-        #     indicates that more data is available.
+        #     The maximum number of conversations to return in the response. A valid page
+        #     size ranges from 0 to 1,000 inclusive. If the page size is zero or
+        #     unspecified, a default page size of 100 will be chosen. Note that a call
+        #     might return fewer results than the requested page size.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The value returned by the last `ListConversationsResponse`. This value
@@ -189,8 +189,9 @@ module Google
         #     The conversations that match the request.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token, which can be sent as `page_token` to retrieve the next page.
-        #     If this field is omitted, there are no subsequent pages.
+        #     A token which can be sent as `page_token` to retrieve the next page. If
+        #     this field is set, it means there is another page available. If it is not
+        #     set, it means no other pages are available.
         class ListConversationsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -658,7 +659,7 @@ module Google
         # The request to update project-level settings.
         # @!attribute [rw] settings
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Settings]
-        #     Required. The new values for the conversation.
+        #     Required. The new settings values.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. The list of fields to be updated.

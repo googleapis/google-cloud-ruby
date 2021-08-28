@@ -350,6 +350,10 @@ module Google
         #   @return [::Float]
         #     Score indicating the likelihood of the issue assignment.
         #     currently bounded on [0,1].
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Immutable. Display name of the assigned issue. This field is set at time of analyis
+        #     and immutable since then.
         class IssueAssignment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1180,6 +1184,7 @@ module Google
         #     A user-specified ID representing the participant.
         # @!attribute [rw] dialogflow_participant
         #   @return [::String]
+        #     Deprecated. Use `dialogflow_participant_name` instead.
         #     The name of the Dialogflow participant. Format:
         #     projects/\\{project}/locations/\\{location}/conversations/\\{conversation}/participants/\\{participant}
         # @!attribute [rw] role
