@@ -278,9 +278,11 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name &&
+                 /^projects\/[^\/]+\/databases\/[^\/]+\/documents\/[^\/]+(\/.*)?(\/)?$/.match?(request.name)
+                header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.name)[1]
+              end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -378,10 +380,15 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent,
-                "collection_id" => request.collection_id
-              }
+              header_params = {}
+              if request.parent &&
+                 /^projects\/[^\/]+\/databases\/[^\/]+\/documents(\/)?$/.match?(request.parent)
+                header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.parent)[1]
+              end
+              if request.parent &&
+                 /^projects\/[^\/]+\/databases\/[^\/]+\/documents\/[^\/]+(\/.*)?(\/)?$/.match?(request.parent)
+                header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.parent)[1]
+              end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -465,9 +472,11 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "document.name" => request.document.name
-              }
+              header_params = {}
+              if request.document.name &&
+                 /^projects\/[^\/]+\/databases\/[^\/]+\/documents\/[^\/]+(\/.*)?(\/)?$/.match?(request.document.name)
+                header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.document.name)[1]
+              end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -537,9 +546,11 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name &&
+                 /^projects\/[^\/]+\/databases\/[^\/]+\/documents\/[^\/]+(\/.*)?(\/)?$/.match?(request.name)
+                header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.name)[1]
+              end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -932,9 +943,15 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent &&
+                 /^projects\/[^\/]+\/databases\/[^\/]+\/documents(\/)?$/.match?(request.parent)
+                header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.parent)[1]
+              end
+              if request.parent &&
+                 /^projects\/[^\/]+\/databases\/[^\/]+\/documents\/[^\/]+(\/.*)?(\/)?$/.match?(request.parent)
+                header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.parent)[1]
+              end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1041,9 +1058,15 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent &&
+                 /^projects\/[^\/]+\/databases\/[^\/]+\/documents(\/)?$/.match?(request.parent)
+                header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.parent)[1]
+              end
+              if request.parent &&
+                 /^projects\/[^\/]+\/databases\/[^\/]+\/documents\/[^\/]+(\/.*)?(\/)?$/.match?(request.parent)
+                header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.parent)[1]
+              end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1226,9 +1249,15 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent &&
+                 /^projects\/[^\/]+\/databases\/[^\/]+\/documents(\/)?$/.match?(request.parent)
+                header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.parent)[1]
+              end
+              if request.parent &&
+                 /^projects\/[^\/]+\/databases\/[^\/]+\/documents\/[^\/]+(\/.*)?(\/)?$/.match?(request.parent)
+                header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.parent)[1]
+              end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1394,10 +1423,11 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent,
-                "collection_id" => request.collection_id
-              }
+              header_params = {}
+              if request.parent &&
+                 /^projects\/[^\/]+\/databases\/[^\/]+\/documents(\/.*)?(\/)?$/.match?(request.parent)
+                header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.parent)[1]
+              end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
