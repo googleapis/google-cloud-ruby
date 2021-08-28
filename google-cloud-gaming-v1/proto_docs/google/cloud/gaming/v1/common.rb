@@ -152,7 +152,6 @@ module Google
         # @!attribute [rw] game_server_config_name
         #   @return [::String]
         #     The game server config resource. Uses the form:
-        #
         #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment_id}/configs/{config_id}`.
         # @!attribute [rw] name
         #   @return [::String]
@@ -167,12 +166,10 @@ module Google
         # @!attribute [rw] game_server_cluster_name
         #   @return [::String]
         #     The game server cluster name. Uses the form:
-        #
         #     `projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}`.
         # @!attribute [rw] game_server_deployment_name
         #   @return [::String]
         #     The game server deployment name. Uses the form:
-        #
         #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment_id}`.
         # @!attribute [rw] fleet_details
         #   @return [::Array<::Google::Cloud::Gaming::V1::TargetDetails::TargetFleetDetails>]

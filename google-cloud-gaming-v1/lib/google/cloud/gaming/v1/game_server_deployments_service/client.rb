@@ -93,7 +93,7 @@ module Google
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.fetch_deployment_state.timeout = 120.0
+                default_config.rpcs.fetch_deployment_state.timeout = 60.0
                 default_config.rpcs.fetch_deployment_state.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
@@ -209,7 +209,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name. Uses the form:
+            #     Required. The parent resource name, in the following form:
             #     `projects/{project}/locations/{location}`.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of items to return.  If unspecified, the server
@@ -293,8 +293,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the game server delpoyment to retrieve. Uses the form:
-            #
+            #     Required. The name of the game server delpoyment to retrieve, in the following form:
             #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -363,7 +362,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name. Uses the form:
+            #     Required. The parent resource name, in the following form:
             #     `projects/{project}/locations/{location}`.
             #   @param deployment_id [::String]
             #     Required. The ID of the game server delpoyment resource to be created.
@@ -437,8 +436,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the game server delpoyment to delete. Uses the form:
-            #
+            #     Required. The name of the game server delpoyment to delete, in the following form:
             #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -513,10 +511,7 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. Mask of fields to update. At least one path must be supplied in
             #     this field. For the `FieldMask` definition, see
-            #
-            #     https:
-            #     //developers.google.com/protocol-buffers
-            #     // /docs/reference/google.protobuf#fieldmask
+            #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -585,8 +580,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the game server delpoyment to retrieve. Uses the form:
-            #
+            #     Required. The name of the game server delpoyment to retrieve, in the following form:
             #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -665,10 +659,7 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. Mask of fields to update. At least one path must be supplied in
             #     this field. For the `FieldMask` definition, see
-            #
-            #     https:
-            #     //developers.google.com/protocol-buffers
-            #     // /docs/reference/google.protobuf#fieldmask
+            #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -743,10 +734,7 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. Mask of fields to update. At least one path must be supplied in
             #     this field. For the `FieldMask` definition, see
-            #
-            #     https:
-            #     //developers.google.com/protocol-buffers
-            #     // /docs/reference/google.protobuf#fieldmask
+            #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
             #   @param preview_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Optional. The target timestamp to compute the preview. Defaults to the immediately
             #     after the proposed rollout completes.
@@ -819,8 +807,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the game server delpoyment. Uses the form:
-            #
+            #     Required. The name of the game server delpoyment, in the following form:
             #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation

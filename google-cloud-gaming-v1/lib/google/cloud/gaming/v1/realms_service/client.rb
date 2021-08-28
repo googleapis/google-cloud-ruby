@@ -197,7 +197,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name. Uses the form:
+            #     Required. The parent resource name, in the following form:
             #     `projects/{project}/locations/{location}`.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of items to return.  If unspecified, server
@@ -281,7 +281,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the realm to retrieve. Uses the form:
+            #     Required. The name of the realm to retrieve, in the following form:
             #     `projects/{project}/locations/{location}/realms/{realm}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -350,7 +350,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name. Uses the form:
+            #     Required. The parent resource name, in the following form:
             #     `projects/{project}/locations/{location}`.
             #   @param realm_id [::String]
             #     Required. The ID of the realm resource to be created.
@@ -424,7 +424,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the realm to delete. Uses the form:
+            #     Required. The name of the realm to delete, in the following form:
             #     `projects/{project}/locations/{location}/realms/{realm}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -499,10 +499,7 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. The update mask applies to the resource. For the `FieldMask`
             #     definition, see
-            #
-            #     https:
-            #     //developers.google.com/protocol-buffers
-            #     // /docs/reference/google.protobuf#fieldmask
+            #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -576,10 +573,7 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. The update mask applies to the resource. For the `FieldMask`
             #     definition, see
-            #
-            #     https:
-            #     //developers.google.com/protocol-buffers
-            #     // /docs/reference/google.protobuf#fieldmask
+            #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
             #   @param preview_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Optional. The target timestamp to compute the preview.
             #
