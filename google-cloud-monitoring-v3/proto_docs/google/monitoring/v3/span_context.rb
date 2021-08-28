@@ -21,8 +21,8 @@ module Google
   module Cloud
     module Monitoring
       module V3
-        # The context of a span, attached to
-        # [Exemplars][google.api.Distribution.Exemplars]
+        # The context of a span. This is attached to an
+        # {::Google::Api::Distribution::Exemplar Exemplar}
         # in {::Google::Api::Distribution Distribution} values during aggregation.
         #
         # It contains the name of a span with format:

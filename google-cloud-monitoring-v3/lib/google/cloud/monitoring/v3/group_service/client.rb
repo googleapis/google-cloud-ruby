@@ -77,29 +77,29 @@ module Google
 
                 default_config.rpcs.list_groups.timeout = 30.0
                 default_config.rpcs.list_groups.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_group.timeout = 30.0
                 default_config.rpcs.get_group.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.create_group.timeout = 30.0
 
-                default_config.rpcs.update_group.timeout = 30.0
+                default_config.rpcs.update_group.timeout = 180.0
                 default_config.rpcs.update_group.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.delete_group.timeout = 30.0
                 default_config.rpcs.delete_group.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_group_members.timeout = 30.0
                 default_config.rpcs.list_group_members.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -201,7 +201,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The project whose groups are to be listed. The format is:
+            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name)
+            #     whose groups are to be listed. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param children_of_group [::String]
@@ -372,7 +373,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The project in which to create the group. The format is:
+            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) in
+            #     which to create the group. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param group [::Google::Cloud::Monitoring::V3::Group, ::Hash]

@@ -73,11 +73,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :COMPARISON_EQ, 5
       value :COMPARISON_NE, 6
     end
-    add_enum "google.monitoring.v3.ServiceTier" do
-      value :SERVICE_TIER_UNSPECIFIED, 0
-      value :SERVICE_TIER_BASIC, 1
-      value :SERVICE_TIER_PREMIUM, 2
-    end
   end
 end
 
@@ -91,7 +86,6 @@ module Google
         Aggregation::Aligner = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Aggregation.Aligner").enummodule
         Aggregation::Reducer = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Aggregation.Reducer").enummodule
         ComparisonType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ComparisonType").enummodule
-        ServiceTier = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ServiceTier").enummodule
       end
     end
   end

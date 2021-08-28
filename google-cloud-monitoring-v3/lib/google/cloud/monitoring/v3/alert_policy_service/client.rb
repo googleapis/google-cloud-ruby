@@ -74,19 +74,19 @@ module Google
 
                 default_config.rpcs.list_alert_policies.timeout = 30.0
                 default_config.rpcs.list_alert_policies.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_alert_policy.timeout = 30.0
                 default_config.rpcs.get_alert_policy.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.create_alert_policy.timeout = 30.0
 
                 default_config.rpcs.delete_alert_policy.timeout = 30.0
                 default_config.rpcs.delete_alert_policy.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.update_alert_policy.timeout = 30.0
@@ -190,7 +190,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The project whose alert policies are to be listed. The format is:
+            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name)
+            #     whose alert policies are to be listed. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #
@@ -356,7 +357,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The project in which to create the alerting policy. The format is:
+            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) in
+            #     which to create the alerting policy. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #

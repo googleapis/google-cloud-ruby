@@ -67,22 +67,22 @@ module Google
 
                 default_config.rpcs.list_notification_channel_descriptors.timeout = 30.0
                 default_config.rpcs.list_notification_channel_descriptors.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_notification_channel_descriptor.timeout = 30.0
                 default_config.rpcs.get_notification_channel_descriptor.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_notification_channels.timeout = 30.0
                 default_config.rpcs.list_notification_channels.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_notification_channel.timeout = 30.0
                 default_config.rpcs.get_notification_channel.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.create_notification_channel.timeout = 30.0
@@ -91,19 +91,19 @@ module Google
 
                 default_config.rpcs.delete_notification_channel.timeout = 30.0
                 default_config.rpcs.delete_notification_channel.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.send_notification_channel_verification_code.timeout = 30.0
 
                 default_config.rpcs.get_notification_channel_verification_code.timeout = 30.0
                 default_config.rpcs.get_notification_channel_verification_code.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.verify_notification_channel.timeout = 30.0
                 default_config.rpcs.verify_notification_channel.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -211,8 +211,10 @@ module Google
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #
-            #     Note that this names the parent container in which to look for the
-            #     descriptors; to retrieve a single descriptor by name, use the
+            #     Note that this
+            #     [names](https://cloud.google.com/monitoring/api/v3#project_name) the parent
+            #     container in which to look for the descriptors; to retrieve a single
+            #     descriptor by name, use the
             #     {::Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel_descriptor GetNotificationChannelDescriptor}
             #     operation, instead.
             #   @param page_size [::Integer]
@@ -362,7 +364,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The project on which to execute the request. The format is:
+            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
+            #     which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #
@@ -536,7 +539,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The project on which to execute the request. The format is:
+            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
+            #     which to execute the request. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #

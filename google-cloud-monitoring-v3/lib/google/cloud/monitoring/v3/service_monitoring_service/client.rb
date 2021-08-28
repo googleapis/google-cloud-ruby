@@ -71,38 +71,38 @@ module Google
 
                 default_config.rpcs.get_service.timeout = 30.0
                 default_config.rpcs.get_service.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_services.timeout = 30.0
                 default_config.rpcs.list_services.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.update_service.timeout = 30.0
 
                 default_config.rpcs.delete_service.timeout = 30.0
                 default_config.rpcs.delete_service.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.create_service_level_objective.timeout = 30.0
 
                 default_config.rpcs.get_service_level_objective.timeout = 30.0
                 default_config.rpcs.get_service_level_objective.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_service_level_objectives.timeout = 30.0
                 default_config.rpcs.list_service_level_objectives.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.update_service_level_objective.timeout = 30.0
 
                 default_config.rpcs.delete_service_level_objective.timeout = 30.0
                 default_config.rpcs.delete_service_level_objective.retry_policy = {
-                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -204,7 +204,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of the parent workspace. The format is:
+            #     Required. Resource [name](https://cloud.google.com/monitoring/api/v3#project_name) of
+            #     the parent workspace. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param service_id [::String]
@@ -350,7 +351,8 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Resource name of the parent containing the listed services, either a
-            #     project or a Monitoring Workspace. The formats are:
+            #     [project](https://cloud.google.com/monitoring/api/v3#project_name) or a
+            #     Monitoring Workspace. The formats are:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #         workspaces/[HOST_PROJECT_ID_OR_NUMBER]
