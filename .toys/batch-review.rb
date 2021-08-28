@@ -306,16 +306,14 @@ def display_all_diffs pr_data, force_all: false
   diff_text = disp_files.map(&:text).join
   return if diff_text.empty?
   exec ["ydiff", "--width=0", "-s", "--wrap"],
-       in: [:string, diff_text],
-       e: true
+       in: [:string, diff_text]
 end
 
 def display_file pr_data, index
   diff_text = pr_data.diff_files[index].text
   return if diff_text.empty?
   exec ["ydiff", "--width=0", "-s", "--wrap"],
-       in: [:string, diff_text],
-       e: true
+       in: [:string, diff_text]
 end
 
 def get_commit_message pr_data
