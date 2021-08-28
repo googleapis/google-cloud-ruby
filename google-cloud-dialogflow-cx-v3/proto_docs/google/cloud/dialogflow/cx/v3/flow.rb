@@ -274,8 +274,8 @@ module Google
           #     Required. The flow to update.
           # @!attribute [rw] update_mask
           #   @return [::Google::Protobuf::FieldMask]
-          #     Required. The mask to control which fields get updated. If `update_mask` is not
-          #     specified, an error will be returned.
+          #     The mask to control which fields get updated. If the mask is not present,
+          #     all fields will be updated.
           # @!attribute [rw] language_code
           #   @return [::String]
           #     The language of the following fields in `flow`:

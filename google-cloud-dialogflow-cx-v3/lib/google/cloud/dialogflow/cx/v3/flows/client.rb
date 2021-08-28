@@ -529,8 +529,8 @@ module Google
               #   @param flow [::Google::Cloud::Dialogflow::CX::V3::Flow, ::Hash]
               #     Required. The flow to update.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. The mask to control which fields get updated. If `update_mask` is not
-              #     specified, an error will be returned.
+              #     The mask to control which fields get updated. If the mask is not present,
+              #     all fields will be updated.
               #   @param language_code [::String]
               #     The language of the following fields in `flow`:
               #

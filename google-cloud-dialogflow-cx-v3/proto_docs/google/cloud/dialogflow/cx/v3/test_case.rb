@@ -146,7 +146,7 @@ module Google
             #   @return [::Google::Protobuf::Struct]
             #     Required. Input only. The diagnostic
             #     [info][Session.DetectIntentResponse.QueryResult.diagnostic_info]
-            #     output for the turn.
+            #     output for the turn. Required to calculate the testing coverage.
             # @!attribute [rw] triggered_intent
             #   @return [::Google::Cloud::Dialogflow::CX::V3::Intent]
             #     The {::Google::Cloud::Dialogflow::CX::V3::Intent Intent} that triggered the response. Only name and displayName
@@ -494,6 +494,7 @@ module Google
           end
 
           # Metadata returned for the {::Google::Cloud::Dialogflow::CX::V3::TestCases::Client#run_test_case TestCases.RunTestCase} long running operation.
+          # This message currently has no fields.
           class RunTestCaseMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
