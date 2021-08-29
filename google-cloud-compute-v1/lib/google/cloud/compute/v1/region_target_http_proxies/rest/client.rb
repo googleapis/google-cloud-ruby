@@ -174,10 +174,10 @@ module Google
               #   @param target_http_proxy [::String]
               #     Name of the TargetHttpProxy resource to delete.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def delete request, options = nil
@@ -204,6 +204,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @region_target_http_proxies_stub.delete request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -310,10 +311,10 @@ module Google
               #   @param target_http_proxy_resource [::Google::Cloud::Compute::V1::TargetHttpProxy, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def insert request, options = nil
@@ -340,6 +341,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @region_target_http_proxies_stub.insert request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -467,10 +469,10 @@ module Google
               #   @param url_map_reference_resource [::Google::Cloud::Compute::V1::UrlMapReference, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_url_map request, options = nil
@@ -497,6 +499,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @region_target_http_proxies_stub.set_url_map request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end

@@ -184,10 +184,10 @@ module Google
               #   @param security_policy_rule_resource [::Google::Cloud::Compute::V1::SecurityPolicyRule, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def add_rule request, options = nil
@@ -214,6 +214,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @security_policies_stub.add_rule request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -253,10 +254,10 @@ module Google
               #   @param security_policy [::String]
               #     Name of the security policy to delete.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def delete request, options = nil
@@ -283,6 +284,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @security_policies_stub.delete request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -450,10 +452,10 @@ module Google
               #   @param security_policy_resource [::Google::Cloud::Compute::V1::SecurityPolicy, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def insert request, options = nil
@@ -480,6 +482,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @security_policies_stub.insert request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -684,10 +687,10 @@ module Google
               #   @param security_policy_resource [::Google::Cloud::Compute::V1::SecurityPolicy, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def patch request, options = nil
@@ -714,6 +717,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @security_policies_stub.patch request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -751,10 +755,10 @@ module Google
               #   @param security_policy_rule_resource [::Google::Cloud::Compute::V1::SecurityPolicyRule, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def patch_rule request, options = nil
@@ -781,6 +785,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @security_policies_stub.patch_rule request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -816,10 +821,10 @@ module Google
               #   @param security_policy [::String]
               #     Name of the security policy to update.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def remove_rule request, options = nil
@@ -846,6 +851,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @security_policies_stub.remove_rule request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
