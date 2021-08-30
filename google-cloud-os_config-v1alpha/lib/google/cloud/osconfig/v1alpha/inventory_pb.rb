@@ -6,6 +6,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/type/date_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/osconfig/v1alpha/inventory.proto", :syntax => :proto3) do
     add_message "google.cloud.osconfig.v1alpha.Inventory" do
@@ -54,6 +55,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :wua_package, :message, 6, "google.cloud.osconfig.v1alpha.Inventory.WindowsUpdatePackage"
         optional :qfe_package, :message, 7, "google.cloud.osconfig.v1alpha.Inventory.WindowsQuickFixEngineeringPackage"
         optional :cos_package, :message, 8, "google.cloud.osconfig.v1alpha.Inventory.VersionedPackage"
+        optional :windows_application, :message, 9, "google.cloud.osconfig.v1alpha.Inventory.WindowsApplication"
       end
     end
     add_message "google.cloud.osconfig.v1alpha.Inventory.VersionedPackage" do
@@ -87,6 +89,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :description, :string, 2
       optional :hot_fix_id, :string, 3
       optional :install_time, :message, 5, "google.protobuf.Timestamp"
+    end
+    add_message "google.cloud.osconfig.v1alpha.Inventory.WindowsApplication" do
+      optional :display_name, :string, 1
+      optional :display_version, :string, 2
+      optional :publisher, :string, 3
+      optional :install_date, :message, 4, "google.type.Date"
+      optional :help_link, :string, 5
     end
     add_message "google.cloud.osconfig.v1alpha.GetInventoryRequest" do
       optional :name, :string, 1
@@ -126,6 +135,7 @@ module Google
         Inventory::WindowsUpdatePackage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.Inventory.WindowsUpdatePackage").msgclass
         Inventory::WindowsUpdatePackage::WindowsUpdateCategory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.Inventory.WindowsUpdatePackage.WindowsUpdateCategory").msgclass
         Inventory::WindowsQuickFixEngineeringPackage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.Inventory.WindowsQuickFixEngineeringPackage").msgclass
+        Inventory::WindowsApplication = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.Inventory.WindowsApplication").msgclass
         GetInventoryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.GetInventoryRequest").msgclass
         ListInventoriesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.ListInventoriesRequest").msgclass
         ListInventoriesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1alpha.ListInventoriesResponse").msgclass
