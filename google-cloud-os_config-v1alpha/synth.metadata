@@ -4,15 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "b2044315a3019250e6eb17a311593b0dc9480a8d"
+        "sha": "66b764457b2107ce75e47992d4c84ecc9b2733bc"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e9da6f8b469c52b83f900e820be30762e9e05c57",
-        "internalRef": "393476621"
+        "sha": "577814ea106e5f5514e8779f72749b9cfefa54e4"
       }
     }
   ],
@@ -75,6 +74,7 @@
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
+    "proto_docs/google/type/date.rb",
     "test/google/cloud/os_config/v1alpha/os_config_zonal_service_operations_test.rb",
     "test/google/cloud/os_config/v1alpha/os_config_zonal_service_paths_test.rb",
     "test/google/cloud/os_config/v1alpha/os_config_zonal_service_test.rb",
