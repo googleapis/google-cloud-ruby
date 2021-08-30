@@ -1,5 +1,15 @@
 # Release History
 
+### 0.5.0 / 2021-08-30
+
+#### Features
+
+* Support for controlling how notification channels are notified when an alert fires
+* Support for log match conditions
+* Support for user label annotations on a service
+* Removed obsolete service tier field
+* Updated RPC retry and timeout settings
+
 ### 0.4.3 / 2021-08-11
 
 #### Bug Fixes
