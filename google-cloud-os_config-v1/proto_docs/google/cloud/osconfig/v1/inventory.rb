@@ -157,6 +157,9 @@ module Google
           # @!attribute [rw] cos_package
           #   @return [::Google::Cloud::OsConfig::V1::Inventory::VersionedPackage]
           #     Details of a COS package.
+          # @!attribute [rw] windows_application
+          #   @return [::Google::Cloud::OsConfig::V1::Inventory::WindowsApplication]
+          #     Details of a Windows Application
           class SoftwarePackage
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -265,6 +268,34 @@ module Google
           #   @return [::Google::Protobuf::Timestamp]
           #     Date that the QFE update was installed.  Mapped from installed_on field.
           class WindowsQuickFixEngineeringPackage
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Contains information about a Windows application as retrieved from the
+          # Windows Registry. For more information about these fields, see
+          #
+          # [Windows Installer Properties for the Uninstall
+          # Registry](https://docs.microsoft.com/en-us/windows/win32/msi/uninstall-registry-key){:
+          # class="external" }
+          # @!attribute [rw] display_name
+          #   @return [::String]
+          #     The name of the application or product.
+          # @!attribute [rw] display_version
+          #   @return [::String]
+          #     The version of the product or application in string format.
+          # @!attribute [rw] publisher
+          #   @return [::String]
+          #     The name of the manufacturer for the product or application.
+          # @!attribute [rw] install_date
+          #   @return [::Google::Type::Date]
+          #     The last time this product received service. The value of this property
+          #     is replaced each time a patch is applied or removed from the product or
+          #     the command-line option is used to repair the product.
+          # @!attribute [rw] help_link
+          #   @return [::String]
+          #     The internet address for technical support.
+          class WindowsApplication
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

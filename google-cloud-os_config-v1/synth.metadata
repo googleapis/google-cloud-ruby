@@ -4,15 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "b2044315a3019250e6eb17a311593b0dc9480a8d"
+        "sha": "66b764457b2107ce75e47992d4c84ecc9b2733bc"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e9da6f8b469c52b83f900e820be30762e9e05c57",
-        "internalRef": "393476621"
+        "sha": "577814ea106e5f5514e8779f72749b9cfefa54e4"
       }
     }
   ],
@@ -64,6 +63,7 @@
     "proto_docs/google/protobuf/duration.rb",
     "proto_docs/google/protobuf/empty.rb",
     "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/type/date.rb",
     "proto_docs/google/type/datetime.rb",
     "proto_docs/google/type/dayofweek.rb",
     "proto_docs/google/type/timeofday.rb",
