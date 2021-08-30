@@ -49,7 +49,7 @@ def run
                              enable_ghpages: enable_ghpages,
                              rubygems_api_token: rubygems_api_token || ENV["RUBYGEMS_API_TOKEN"],
                              docs_staging_bucket: docs_staging_bucket || ENV["STAGING_BUCKET"] || "docs-staging",
-                             rad_staging_bucket: rad_staging_bucket || ENV["V2_STAGING_BUCKET"] || "docs-staging-v2-dev",
+                             rad_staging_bucket: rad_staging_bucket || ENV["V2_STAGING_BUCKET"] || "docs-staging-v2",
                              docuploader_credentials: docuploader_credentials || ENV["DOCUPLOADER_CREDENTIALS"]
 
     releaser.run
