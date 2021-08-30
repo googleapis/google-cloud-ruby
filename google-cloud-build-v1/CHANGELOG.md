@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.0 / 2021-08-30
+
+#### Features
+
+* Support BuildStep#script and BuildTrigger#service_account fields
+
 ### 0.10.0 / 2021-08-19
 
 #### Features
