@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "b2044315a3019250e6eb17a311593b0dc9480a8d"
+        "sha": "66b764457b2107ce75e47992d4c84ecc9b2733bc"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b9e69f850f1c8b8c247078d90b92abdcb6aabffc",
-        "internalRef": "391065985"
+        "sha": "69fe13f7ca3ca96f34e042596c11e40bb3277924",
+        "internalRef": "393730900"
       }
     }
   ],
@@ -79,6 +79,7 @@
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/code.rb",
     "proto_docs/google/rpc/status.rb",
+    "proto_docs/google/type/date.rb",
     "proto_docs/google/type/expr.rb",
     "test/google/cloud/asset/v1/asset_service_operations_test.rb",
     "test/google/cloud/asset/v1/asset_service_paths_test.rb",
