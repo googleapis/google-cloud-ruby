@@ -8,7 +8,9 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/translate/v3/translation_service.proto", :syntax => :proto3) do
     add_message "google.cloud.translation.v3.TranslateTextGlossaryConfig" do
@@ -81,6 +83,40 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :destination do
         optional :gcs_destination, :message, 1, "google.cloud.translation.v3.GcsDestination"
       end
+    end
+    add_message "google.cloud.translation.v3.DocumentInputConfig" do
+      optional :mime_type, :string, 4
+      oneof :source do
+        optional :content, :bytes, 1
+        optional :gcs_source, :message, 2, "google.cloud.translation.v3.GcsSource"
+      end
+    end
+    add_message "google.cloud.translation.v3.DocumentOutputConfig" do
+      optional :mime_type, :string, 3
+      oneof :destination do
+        optional :gcs_destination, :message, 1, "google.cloud.translation.v3.GcsDestination"
+      end
+    end
+    add_message "google.cloud.translation.v3.TranslateDocumentRequest" do
+      optional :parent, :string, 1
+      optional :source_language_code, :string, 2
+      optional :target_language_code, :string, 3
+      optional :document_input_config, :message, 4, "google.cloud.translation.v3.DocumentInputConfig"
+      optional :document_output_config, :message, 5, "google.cloud.translation.v3.DocumentOutputConfig"
+      optional :model, :string, 6
+      optional :glossary_config, :message, 7, "google.cloud.translation.v3.TranslateTextGlossaryConfig"
+      map :labels, :string, :string, 8
+    end
+    add_message "google.cloud.translation.v3.DocumentTranslation" do
+      repeated :byte_stream_outputs, :bytes, 1
+      optional :mime_type, :string, 2
+      optional :detected_language_code, :string, 3
+    end
+    add_message "google.cloud.translation.v3.TranslateDocumentResponse" do
+      optional :document_translation, :message, 1, "google.cloud.translation.v3.DocumentTranslation"
+      optional :glossary_document_translation, :message, 2, "google.cloud.translation.v3.DocumentTranslation"
+      optional :model, :string, 3
+      optional :glossary_config, :message, 4, "google.cloud.translation.v3.TranslateTextGlossaryConfig"
     end
     add_message "google.cloud.translation.v3.BatchTranslateTextRequest" do
       optional :parent, :string, 1
@@ -188,6 +224,58 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :submit_time, :message, 2, "google.protobuf.Timestamp"
       optional :end_time, :message, 3, "google.protobuf.Timestamp"
     end
+    add_message "google.cloud.translation.v3.BatchTranslateDocumentRequest" do
+      optional :parent, :string, 1
+      optional :source_language_code, :string, 2
+      repeated :target_language_codes, :string, 3
+      repeated :input_configs, :message, 4, "google.cloud.translation.v3.BatchDocumentInputConfig"
+      optional :output_config, :message, 5, "google.cloud.translation.v3.BatchDocumentOutputConfig"
+      map :models, :string, :string, 6
+      map :glossaries, :string, :message, 7, "google.cloud.translation.v3.TranslateTextGlossaryConfig"
+      map :format_conversions, :string, :string, 8
+    end
+    add_message "google.cloud.translation.v3.BatchDocumentInputConfig" do
+      oneof :source do
+        optional :gcs_source, :message, 1, "google.cloud.translation.v3.GcsSource"
+      end
+    end
+    add_message "google.cloud.translation.v3.BatchDocumentOutputConfig" do
+      oneof :destination do
+        optional :gcs_destination, :message, 1, "google.cloud.translation.v3.GcsDestination"
+      end
+    end
+    add_message "google.cloud.translation.v3.BatchTranslateDocumentResponse" do
+      optional :total_pages, :int64, 1
+      optional :translated_pages, :int64, 2
+      optional :failed_pages, :int64, 3
+      optional :total_billable_pages, :int64, 4
+      optional :total_characters, :int64, 5
+      optional :translated_characters, :int64, 6
+      optional :failed_characters, :int64, 7
+      optional :total_billable_characters, :int64, 8
+      optional :submit_time, :message, 9, "google.protobuf.Timestamp"
+      optional :end_time, :message, 10, "google.protobuf.Timestamp"
+    end
+    add_message "google.cloud.translation.v3.BatchTranslateDocumentMetadata" do
+      optional :state, :enum, 1, "google.cloud.translation.v3.BatchTranslateDocumentMetadata.State"
+      optional :total_pages, :int64, 2
+      optional :translated_pages, :int64, 3
+      optional :failed_pages, :int64, 4
+      optional :total_billable_pages, :int64, 5
+      optional :total_characters, :int64, 6
+      optional :translated_characters, :int64, 7
+      optional :failed_characters, :int64, 8
+      optional :total_billable_characters, :int64, 9
+      optional :submit_time, :message, 10, "google.protobuf.Timestamp"
+    end
+    add_enum "google.cloud.translation.v3.BatchTranslateDocumentMetadata.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :RUNNING, 1
+      value :SUCCEEDED, 2
+      value :FAILED, 3
+      value :CANCELLING, 4
+      value :CANCELLED, 5
+    end
   end
 end
 
@@ -209,6 +297,11 @@ module Google
         InputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.InputConfig").msgclass
         GcsDestination = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.GcsDestination").msgclass
         OutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.OutputConfig").msgclass
+        DocumentInputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.DocumentInputConfig").msgclass
+        DocumentOutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.DocumentOutputConfig").msgclass
+        TranslateDocumentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.TranslateDocumentRequest").msgclass
+        DocumentTranslation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.DocumentTranslation").msgclass
+        TranslateDocumentResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.TranslateDocumentResponse").msgclass
         BatchTranslateTextRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.BatchTranslateTextRequest").msgclass
         BatchTranslateMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.BatchTranslateMetadata").msgclass
         BatchTranslateMetadata::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.BatchTranslateMetadata.State").enummodule
@@ -227,6 +320,12 @@ module Google
         DeleteGlossaryMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.DeleteGlossaryMetadata").msgclass
         DeleteGlossaryMetadata::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.DeleteGlossaryMetadata.State").enummodule
         DeleteGlossaryResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.DeleteGlossaryResponse").msgclass
+        BatchTranslateDocumentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.BatchTranslateDocumentRequest").msgclass
+        BatchDocumentInputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.BatchDocumentInputConfig").msgclass
+        BatchDocumentOutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.BatchDocumentOutputConfig").msgclass
+        BatchTranslateDocumentResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.BatchTranslateDocumentResponse").msgclass
+        BatchTranslateDocumentMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.BatchTranslateDocumentMetadata").msgclass
+        BatchTranslateDocumentMetadata::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.translation.v3.BatchTranslateDocumentMetadata.State").enummodule
       end
     end
   end

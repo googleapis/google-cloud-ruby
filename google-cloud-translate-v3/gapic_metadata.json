@@ -25,9 +25,19 @@
                 "get_supported_languages"
               ]
             },
+            "TranslateDocument": {
+              "methods": [
+                "translate_document"
+              ]
+            },
             "BatchTranslateText": {
               "methods": [
                 "batch_translate_text"
+              ]
+            },
+            "BatchTranslateDocument": {
+              "methods": [
+                "batch_translate_document"
               ]
             },
             "CreateGlossary": {
