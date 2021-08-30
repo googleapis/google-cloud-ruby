@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.3 / 2021-08-30
+
+#### Documentation
+
+* Fix the links to the corresponding main client library
+
 ### 0.7.2 / 2021-08-11
 
 #### Bug Fixes
