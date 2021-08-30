@@ -1,5 +1,15 @@
 # Release History
 
+### 2.8.0 / 2021-08-30
+
+#### Features
+
+* Add Pub/Sub topic retention fields
+  * Add retention to Project#create_topic
+  * Add Topic#retention
+  * Add Topic#retention=
+  * Add Subscription#topic_retention
+
 ### 2.7.1 / 2021-07-08
 
 #### Documentation
