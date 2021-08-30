@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 / 2021-08-30
+
+#### Features
+
+* Support resource display names and additional resource types
+
 ### 0.7.1 / 2021-08-11
 
 #### Bug Fixes
