@@ -239,7 +239,7 @@ module Google
 
               header_params = {}
               if request.table_name &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/tables\/[^\/]+(\/)?$/.match?(request.table_name)
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
               header_params["app_profile_id"] = request.app_profile_id if request.app_profile_id
@@ -318,7 +318,7 @@ module Google
 
               header_params = {}
               if request.table_name &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/tables\/[^\/]+(\/)?$/.match?(request.table_name)
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
               header_params["app_profile_id"] = request.app_profile_id if request.app_profile_id
@@ -401,7 +401,7 @@ module Google
 
               header_params = {}
               if request.table_name &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/tables\/[^\/]+(\/)?$/.match?(request.table_name)
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
               header_params["app_profile_id"] = request.app_profile_id if request.app_profile_id
@@ -483,7 +483,7 @@ module Google
 
               header_params = {}
               if request.table_name &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/tables\/[^\/]+(\/)?$/.match?(request.table_name)
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
               header_params["app_profile_id"] = request.app_profile_id if request.app_profile_id
@@ -579,7 +579,7 @@ module Google
 
               header_params = {}
               if request.table_name &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/tables\/[^\/]+(\/)?$/.match?(request.table_name)
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
               header_params["app_profile_id"] = request.app_profile_id if request.app_profile_id
@@ -666,7 +666,7 @@ module Google
 
               header_params = {}
               if request.table_name &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/tables\/[^\/]+(\/)?$/.match?(request.table_name)
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
               header_params["app_profile_id"] = request.app_profile_id if request.app_profile_id
