@@ -249,16 +249,16 @@ module Google
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED DESTROYED}.
         # @!attribute [r] import_job
         #   @return [::String]
-        #     Output only. The name of the {::Google::Cloud::Kms::V1::ImportJob ImportJob} used to import this
+        #     Output only. The name of the {::Google::Cloud::Kms::V1::ImportJob ImportJob} used in the most recent import of this
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Only present if the underlying key material was
         #     imported.
         # @!attribute [r] import_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time at which this {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}'s key material
-        #     was imported.
+        #     was most recently imported.
         # @!attribute [r] import_failure_reason
         #   @return [::String]
-        #     Output only. The root cause of an import failure. Only present if
+        #     Output only. The root cause of the most recent import failure. Only present if
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion#state state} is
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::IMPORT_FAILED IMPORT_FAILED}.
         # @!attribute [rw] external_protection_level_options
@@ -266,6 +266,11 @@ module Google
         #     ExternalProtectionLevelOptions stores a group of additional fields for
         #     configuring a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} that are specific to the
         #     {::Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL EXTERNAL} protection level.
+        # @!attribute [r] reimport_eligible
+        #   @return [::Boolean]
+        #     Output only. Whether or not this key version is eligible for reimport, by being
+        #     specified as a target in
+        #     {::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest#crypto_key_version ImportCryptoKeyVersionRequest.crypto_key_version}.
         class CryptoKeyVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -388,6 +393,10 @@ module Google
             DISABLED = 2
 
             # This version is destroyed, and the key material is no longer stored.
+            # This version may only become {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} again if this version is
+            # {::Google::Cloud::Kms::V1::CryptoKeyVersion#reimport_eligible reimport_eligible} and the original
+            # key material is reimported with a call to
+            # {::Google::Cloud::Kms::V1::KeyManagementService::Client#import_crypto_key_version KeyManagementService.ImportCryptoKeyVersion}.
             DESTROYED = 3
 
             # This version is scheduled for destruction, and will be destroyed soon.
