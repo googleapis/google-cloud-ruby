@@ -243,9 +243,11 @@ module Google
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
-                if request.parent &&
-                   /^projects\/[^\/]+\/databases\/[^\/]+\/collectionGroups\/[^\/]+(\/)?$/.match?(request.parent)
-                  header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.parent)[1]
+                if request.parent
+                  regex_match = %r{^(?<database>projects/[^/]+/databases/[^/]+)/collectionGroups/[^/]+/?$}.match request.parent
+                  if regex_match
+                    header_params["database"] = regex_match["database".to_s]
+                  end
                 end
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
@@ -323,9 +325,11 @@ module Google
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
-                if request.parent &&
-                   /^projects\/[^\/]+\/databases\/[^\/]+\/collectionGroups\/[^\/]+(\/)?$/.match?(request.parent)
-                  header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.parent)[1]
+                if request.parent
+                  regex_match = %r{^(?<database>projects/[^/]+/databases/[^/]+)/collectionGroups/[^/]+/?$}.match request.parent
+                  if regex_match
+                    header_params["database"] = regex_match["database".to_s]
+                  end
                 end
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
@@ -395,9 +399,11 @@ module Google
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
-                if request.name &&
-                   /^projects\/[^\/]+\/databases\/[^\/]+\/collectionGroups\/[^\/]+\/indexes\/[^\/]+(\/)?$/.match?(request.name)
-                  header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.name)[1]
+                if request.name
+                  regex_match = %r{^(?<database>projects/[^/]+/databases/[^/]+)/collectionGroups/[^/]+/indexes/[^/]+/?$}.match request.name
+                  if regex_match
+                    header_params["database"] = regex_match["database".to_s]
+                  end
                 end
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
@@ -466,9 +472,11 @@ module Google
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
-                if request.name &&
-                   /^projects\/[^\/]+\/databases\/[^\/]+\/collectionGroups\/[^\/]+\/indexes\/[^\/]+(\/)?$/.match?(request.name)
-                  header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.name)[1]
+                if request.name
+                  regex_match = %r{^(?<database>projects/[^/]+/databases/[^/]+)/collectionGroups/[^/]+/indexes/[^/]+/?$}.match request.name
+                  if regex_match
+                    header_params["database"] = regex_match["database".to_s]
+                  end
                 end
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
@@ -537,9 +545,11 @@ module Google
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
-                if request.name &&
-                   /^projects\/[^\/]+\/databases\/[^\/]+\/collectionGroups\/[^\/]+\/fields\/[^\/]+(\/)?$/.match?(request.name)
-                  header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.name)[1]
+                if request.name
+                  regex_match = %r{^(?<database>projects/[^/]+/databases/[^/]+)/collectionGroups/[^/]+/fields/[^/]+/?$}.match request.name
+                  if regex_match
+                    header_params["database"] = regex_match["database".to_s]
+                  end
                 end
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
@@ -622,9 +632,11 @@ module Google
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
-                if request.field.name &&
-                   /^projects\/[^\/]+\/databases\/[^\/]+\/collectionGroups\/[^\/]+\/indexes\/[^\/]+(\/)?$/.match?(request.field.name)
-                  header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.field.name)[1]
+                if request.field&.name
+                  regex_match = %r{^(?<database>projects/[^/]+/databases/[^/]+)/collectionGroups/[^/]+/indexes/[^/]+/?$}.match request.field.name
+                  if regex_match
+                    header_params["database"] = regex_match["database".to_s]
+                  end
                 end
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
@@ -711,9 +723,11 @@ module Google
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
                 header_params = {}
-                if request.parent &&
-                   /^projects\/[^\/]+\/databases\/[^\/]+\/collectionGroups\/[^\/]+(\/)?$/.match?(request.parent)
-                  header_params["database"] = /(?<database>projects\/[^\/]+\/databases\/[^\/]+)/.match(request.parent)[1]
+                if request.parent
+                  regex_match = %r{^(?<database>projects/[^/]+/databases/[^/]+)/collectionGroups/[^/]+/?$}.match request.parent
+                  if regex_match
+                    header_params["database"] = regex_match["database".to_s]
+                  end
                 end
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
@@ -802,7 +816,7 @@ module Google
 
                 header_params = {}
                 if request.name &&
-                   /^projects\/[^\/]+\/databases\/[^\/]+(\/)?$/.match?(request.name)
+                   %r{^projects/[^/]+/databases/[^/]+/?$}.match?(request.name)
                   header_params["database"] = request.name
                 end
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
@@ -887,7 +901,7 @@ module Google
 
                 header_params = {}
                 if request.name &&
-                   /^projects\/[^\/]+\/databases\/[^\/]+(\/)?$/.match?(request.name)
+                   %r{^projects/[^/]+/databases/[^/]+/?$}.match?(request.name)
                   header_params["database"] = request.name
                 end
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
