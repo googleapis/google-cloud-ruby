@@ -77,9 +77,9 @@ def create_instance project:, zone:, instance_name:,
   puts "Creating the #{instance_name} instance in #{zone}..."
   begin
     # Send the insert request.
-    operation = client.insert request
+    gapic_op = client.insert request
     # Wait for the create operation to complete.
-    operation = wait_until_done operation: operation, project: project
+    operation = wait_until_done operation: gapic_op.operation, project: project
 
     if operation.error.nil?
       warn "Warning during creation:", operation.warnings unless operation.warnings.empty?
@@ -160,9 +160,9 @@ def delete_instance project:, zone:, instance_name:
   puts "Deleting #{instance_name} from #{zone}..."
   begin
     # Make the request to delete a VM instance.
-    operation = client.delete project: project, zone: zone, instance: instance_name
+    gapic_op = client.delete project: project, zone: zone, instance: instance_name
     # Wait for the delete operation to complete.
-    operation = wait_until_done operation: operation, project: project
+    operation = wait_until_done operation: gapic_op.operation, project: project
 
     if operation.error.nil?
       warn "Warning during deletion:", operation.warnings unless operation.warnings.empty?
