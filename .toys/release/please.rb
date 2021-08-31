@@ -142,7 +142,8 @@ def build_command dir, gem_name, cur_version, release_as
   cmd += ["--last-package-version", cur_version] if cur_version && cur_version >= "0.1"
   cmd += ["--release-as", release_as] if release_as
   cmd += ["--token", github_token] if github_token
-  cmd += ["--version-file", version_file] if version_file
+  version_path = version_file || default_version_path(dir, gem_name)
+  cmd += ["--version-file", version_path] if version_path
   cmd
 end
 
@@ -154,4 +155,9 @@ def default_repo_url
     logger.error "Unable to determine current github repo"
     exit 1
   end
+end
+
+def default_version_path dir, gem_name
+  gem_path = gem_name.gsub "-", "/"
+  File.join "lib", gem_path, "version.rb"
 end
