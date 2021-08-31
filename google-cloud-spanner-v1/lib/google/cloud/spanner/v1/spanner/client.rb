@@ -283,9 +283,11 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.database &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+(\/)?$/.match?(request.database)
-                header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.database)[1]
+              if request.database
+                regex_match = %r{^(?<instance>projects/[^/]+/instances/[^/]+)/databases/[^/]+/?$}.match request.database
+                if regex_match
+                  header_params["instance"] = regex_match["instance".to_s]
+                end
               end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -364,9 +366,11 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.database &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+(\/)?$/.match?(request.database)
-                header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.database)[1]
+              if request.database
+                regex_match = %r{^(?<instance>projects/[^/]+/instances/[^/]+)/databases/[^/]+/?$}.match request.database
+                if regex_match
+                  header_params["instance"] = regex_match["instance".to_s]
+                end
               end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -436,9 +440,11 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.name &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+\/sessions\/[^\/]+(\/)?$/.match?(request.name)
-                header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.name)[1]
+              if request.name
+                regex_match = %r{^(?<instance>projects/[^/]+/instances/[^/]+)/databases/[^/]+/sessions/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["instance"] = regex_match["instance".to_s]
+                end
               end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -524,9 +530,11 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.database &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+(\/)?$/.match?(request.database)
-                header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.database)[1]
+              if request.database
+                regex_match = %r{^(?<instance>projects/[^/]+/instances/[^/]+)/databases/[^/]+/?$}.match request.database
+                if regex_match
+                  header_params["instance"] = regex_match["instance".to_s]
+                end
               end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -597,9 +605,11 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.name &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+\/sessions\/[^\/]+(\/)?$/.match?(request.name)
-                header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.name)[1]
+              if request.name
+                regex_match = %r{^(?<instance>projects/[^/]+/instances/[^/]+)/databases/[^/]+/sessions/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["instance"] = regex_match["instance".to_s]
+                end
               end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -744,9 +754,11 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.session &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+\/sessions\/[^\/]+(\/)?$/.match?(request.session)
-                header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.session)[1]
+              if request.session
+                regex_match = %r{^(?<instance>projects/[^/]+/instances/[^/]+)/databases/[^/]+/sessions/[^/]+/?$}.match request.session
+                if regex_match
+                  header_params["instance"] = regex_match["instance".to_s]
+                end
               end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -885,9 +897,11 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.session &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+\/sessions\/[^\/]+(\/)?$/.match?(request.session)
-                header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.session)[1]
+              if request.session
+                regex_match = %r{^(?<instance>projects/[^/]+/instances/[^/]+)/databases/[^/]+/sessions/[^/]+/?$}.match request.session
+                if regex_match
+                  header_params["instance"] = regex_match["instance".to_s]
+                end
               end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -989,9 +1003,11 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.session &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+\/sessions\/[^\/]+(\/)?$/.match?(request.session)
-                header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.session)[1]
+              if request.session
+                regex_match = %r{^(?<instance>projects/[^/]+/instances/[^/]+)/databases/[^/]+/sessions/[^/]+/?$}.match request.session
+                if regex_match
+                  header_params["instance"] = regex_match["instance".to_s]
+                end
               end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -1114,9 +1130,11 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.session &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+\/sessions\/[^\/]+(\/)?$/.match?(request.session)
-                header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.session)[1]
+              if request.session
+                regex_match = %r{^(?<instance>projects/[^/]+/instances/[^/]+)/databases/[^/]+/sessions/[^/]+/?$}.match request.session
+                if regex_match
+                  header_params["instance"] = regex_match["instance".to_s]
+                end
               end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -1231,9 +1249,11 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.session &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+\/sessions\/[^\/]+(\/)?$/.match?(request.session)
-                header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.session)[1]
+              if request.session
+                regex_match = %r{^(?<instance>projects/[^/]+/instances/[^/]+)/databases/[^/]+/sessions/[^/]+/?$}.match request.session
+                if regex_match
+                  header_params["instance"] = regex_match["instance".to_s]
+                end
               end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -1312,9 +1332,11 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.session &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+\/sessions\/[^\/]+(\/)?$/.match?(request.session)
-                header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.session)[1]
+              if request.session
+                regex_match = %r{^(?<instance>projects/[^/]+/instances/[^/]+)/databases/[^/]+/sessions/[^/]+/?$}.match request.session
+                if regex_match
+                  header_params["instance"] = regex_match["instance".to_s]
+                end
               end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -1417,9 +1439,11 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.session &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+\/sessions\/[^\/]+(\/)?$/.match?(request.session)
-                header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.session)[1]
+              if request.session
+                regex_match = %r{^(?<instance>projects/[^/]+/instances/[^/]+)/databases/[^/]+/sessions/[^/]+/?$}.match request.session
+                if regex_match
+                  header_params["instance"] = regex_match["instance".to_s]
+                end
               end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -1496,9 +1520,11 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.session &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+\/sessions\/[^\/]+(\/)?$/.match?(request.session)
-                header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.session)[1]
+              if request.session
+                regex_match = %r{^(?<instance>projects/[^/]+/instances/[^/]+)/databases/[^/]+/sessions/[^/]+/?$}.match request.session
+                if regex_match
+                  header_params["instance"] = regex_match["instance".to_s]
+                end
               end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -1614,9 +1640,11 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.session &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+\/sessions\/[^\/]+(\/)?$/.match?(request.session)
-                header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.session)[1]
+              if request.session
+                regex_match = %r{^(?<instance>projects/[^/]+/instances/[^/]+)/databases/[^/]+/sessions/[^/]+/?$}.match request.session
+                if regex_match
+                  header_params["instance"] = regex_match["instance".to_s]
+                end
               end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -1718,9 +1746,11 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.session &&
-                 /^projects\/[^\/]+\/instances\/[^\/]+\/databases\/[^\/]+\/sessions\/[^\/]+(\/)?$/.match?(request.session)
-                header_params["instance"] = /(?<instance>projects\/[^\/]+\/instances\/[^\/]+)/.match(request.session)[1]
+              if request.session
+                regex_match = %r{^(?<instance>projects/[^/]+/instances/[^/]+)/databases/[^/]+/sessions/[^/]+/?$}.match request.session
+                if regex_match
+                  header_params["instance"] = regex_match["instance".to_s]
+                end
               end
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
