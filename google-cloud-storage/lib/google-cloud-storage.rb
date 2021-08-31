@@ -71,9 +71,9 @@ module Google
       Google::Cloud.storage @project, @keyfile, scope: scope,
                                                 retries: (retries || @retries),
                                                 timeout: (timeout || @timeout),
-                                                open_timeout: (open_timeout || timeout || @timeout),
-                                                read_timeout: (read_timeout || timeout || @timeout),
-                                                send_timeout: (send_timeout || timeout || @timeout)
+                                                open_timeout: (open_timeout || timeout),
+                                                read_timeout: (read_timeout || timeout),
+                                                send_timeout: (send_timeout || timeout)
     end
 
     ##
@@ -121,8 +121,8 @@ module Google
       Google::Cloud::Storage.new project_id: project_id,
                                  credentials: credentials,
                                  scope: scope, retries: retries,
-                                 timeout: timeout, open_timeout: open_timeout || timeout,
-                                 read_timeout: read_timeout || timeout, send_timeout: send_timeout || timeout
+                                 timeout: timeout, open_timeout: (open_timeout || timeout),
+                                 read_timeout: (read_timeout || timeout), send_timeout: (send_timeout || timeout)
     end
   end
 end

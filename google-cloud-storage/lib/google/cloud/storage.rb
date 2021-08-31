@@ -138,8 +138,8 @@ module Google
                          read_timeout: nil, send_timeout: nil, endpoint: nil
         Storage::Project.new(
           Storage::Service.new(
-            nil, nil, retries: retries, timeout: timeout, open_timeout: open_timeout || timeout,
-            read_timeout: read_timeout || timeout, send_timeout: send_timeout || timeout, host: endpoint
+            nil, nil, retries: retries, timeout: timeout, open_timeout: (open_timeout || timeout),
+            read_timeout: (read_timeout || timeout), send_timeout: (send_timeout || timeout), host: endpoint
           )
         )
       end
