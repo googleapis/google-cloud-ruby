@@ -63,6 +63,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :import_time, :message, 15, "google.protobuf.Timestamp"
       optional :import_failure_reason, :string, 16
       optional :external_protection_level_options, :message, 17, "google.cloud.kms.v1.ExternalProtectionLevelOptions"
+      optional :reimport_eligible, :bool, 18
     end
     add_enum "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm" do
       value :CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED, 0

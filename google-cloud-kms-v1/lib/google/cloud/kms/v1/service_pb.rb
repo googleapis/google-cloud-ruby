@@ -94,6 +94,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.kms.v1.ImportCryptoKeyVersionRequest" do
       optional :parent, :string, 1
+      optional :crypto_key_version, :string, 6
       optional :algorithm, :enum, 2, "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm"
       optional :import_job, :string, 4
       oneof :wrapped_key_material do

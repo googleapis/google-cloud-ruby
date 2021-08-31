@@ -325,8 +325,27 @@ module Google
         # Request message for {::Google::Cloud::Kms::V1::KeyManagementService::Client#import_crypto_key_version KeyManagementService.ImportCryptoKeyVersion}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The {::Google::Cloud::Kms::V1::CryptoKey#name name} of the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} to
-        #     be imported into.
+        #     Required. The {::Google::Cloud::Kms::V1::CryptoKey#name name} of the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} to be imported into.
+        #
+        #     The create permission is only required on this key when creating a new
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}.
+        # @!attribute [rw] crypto_key_version
+        #   @return [::String]
+        #     Optional. The optional {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of an existing
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to target for an import operation.
+        #     If this field is not present, a new {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} containing the
+        #     supplied key material is created.
+        #
+        #     If this field is present, the supplied key material is imported into
+        #     the existing {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. To import into an existing
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} must be a child of
+        #     {::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest#parent ImportCryptoKeyVersionRequest.parent}, have been previously created via
+        #     [ImportCryptoKeyVersion][], and be in
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED DESTROYED} or
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::IMPORT_FAILED IMPORT_FAILED}
+        #     state. The key material and algorithm must match the previous
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} exactly if the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} has ever contained
+        #     key material.
         # @!attribute [rw] algorithm
         #   @return [::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm]
         #     Required. The {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm algorithm} of
