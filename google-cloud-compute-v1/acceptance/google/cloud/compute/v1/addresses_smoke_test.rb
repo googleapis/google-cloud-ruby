@@ -36,8 +36,8 @@ class AddressesSmokeTest < Minitest::Test
   def test_delete
     insert_address
     @addresses.delete @name
-    op = @client.delete project: @default_project, region: @default_region, address: @name
-    wait_for_regional_op op, "delete"
+    gapic_op = @client.delete project: @default_project, region: @default_region, address: @name
+    wait_for_regional_op gapic_op, "delete"
   end
 
   def test_non_ascii
@@ -45,9 +45,9 @@ class AddressesSmokeTest < Minitest::Test
       name: @name,
       description: "тест"
     }
-    op = @client.insert project: @default_project, region: @default_region, address_resource: address_resource
+    gapic_op = @client.insert project: @default_project, region: @default_region, address_resource: address_resource
     @addresses.append @name
-    wait_for_regional_op op, "insert"
+    wait_for_regional_op gapic_op, "insert"
     address = @client.get project: @default_project, region: @default_region, address: @name
     assert_equal @name, address.name
     assert_equal "тест", address.description
@@ -60,13 +60,14 @@ class AddressesSmokeTest < Minitest::Test
       name: @name
     }
     $stdout.puts "Inserting address #{@name}."
-    op = @client.insert project: @default_project, region: @default_region, address_resource: address_resource
+    gapic_op = @client.insert project: @default_project, region: @default_region, address_resource: address_resource
     @addresses.append @name
-    wait_for_regional_op op, "insert"
+    wait_for_regional_op gapic_op, "insert"
     $stdout.puts "Operation to insert address #{@name} completed."
   end
 
-  def wait_for_regional_op operation, op_type
+  def wait_for_regional_op gapic_op, op_type
+    operation = gapic_op.operation
     $stdout.puts "Waiting for regional #{op_type} operation #{operation.name}."
     starttime = Time.now
     while (operation.status != :DONE) && (Time.now < starttime + 60)
