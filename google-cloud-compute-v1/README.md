@@ -1,8 +1,8 @@
-# Ruby Client for the Google Cloud Compute V1 API
+# Ruby Client for the Google Cloud Compute V1 (BETA) API
 
-API Client library for the Google Cloud Compute V1 API
+API Client library for the Google Cloud Compute V1 (BETA) API
 
-google-cloud-compute-v1 is the official client library for the Google Cloud Compute V1 API.
+google-cloud-compute-v1 is the official client library for the Google Cloud Compute V1 API. This library is considered to be in beta. This means while stable it is still a work-in-progress and under active development, and might get backwards-incompatible changes at any time.
 
 https://github.com/googleapis/google-cloud-ruby
 

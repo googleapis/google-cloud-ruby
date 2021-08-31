@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "google-cloud-compute-v1 is the official client library for the Google Cloud Compute V1 API."
-  gem.summary       = "API Client library for the Google Cloud Compute V1 API"
+  gem.summary       = "API Client library for the Google Cloud Compute V1 (BETA) API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
