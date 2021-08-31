@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2021-08-31
+
+#### Features
+
+* Support Windows applications in the software package inventory
+
 ### 0.4.3 / 2021-08-11
 
 #### Bug Fixes
