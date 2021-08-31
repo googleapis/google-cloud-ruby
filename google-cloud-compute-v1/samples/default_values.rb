@@ -48,7 +48,7 @@ def set_usage_export_bucket project:, bucket_name:, report_name_prefix: ""
   end
   projects_client = ::Google::Cloud::Compute::V1::Projects::Rest::Client.new
   gapic_op = projects_client.set_usage_export_bucket project: project,
-                                                      usage_export_location_resource: export_location
+                                                     usage_export_location_resource: export_location
   wait_until_done project: project, operation: gapic_op.operation
 end
 
