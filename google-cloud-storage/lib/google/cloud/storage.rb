@@ -56,6 +56,9 @@ module Google
       # @param [Integer] retries Number of times to retry requests on server
       #   error. The default value is `3`. Optional.
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [Integer] open_timeout Timeout to use for open timeout. Optional.
+      # @param [Integer] read_timeout Timeout to use for read timeout. Optional.
+      # @param [Integer] send_timeout Timeout to use for send timeout. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
@@ -76,12 +79,16 @@ module Google
       #   file = bucket.file "path/to/my-file.ext"
       #
       def self.new project_id: nil, credentials: nil, scope: nil, retries: nil,
-                   timeout: nil, endpoint: nil, project: nil, keyfile: nil
-        scope       ||= configure.scope
-        retries     ||= configure.retries
-        timeout     ||= configure.timeout
-        endpoint    ||= configure.endpoint
-        credentials ||= (keyfile || default_credentials(scope: scope))
+                   timeout: nil, open_timeout: nil, read_timeout: nil,
+                   send_timeout: nil, endpoint: nil, project: nil, keyfile: nil
+        scope        ||= configure.scope
+        retries      ||= configure.retries
+        timeout      ||= configure.timeout
+        open_timeout ||= configure.open_timeout || timeout
+        read_timeout ||= configure.read_timeout || timeout
+        send_timeout ||= configure.send_timeout || timeout
+        endpoint     ||= configure.endpoint
+        credentials  ||= (keyfile || default_credentials(scope: scope))
 
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Storage::Credentials.new credentials, scope: scope
@@ -93,8 +100,9 @@ module Google
         Storage::Project.new(
           Storage::Service.new(
             project_id, credentials,
-            retries: retries, timeout: timeout, host: endpoint,
-            quota_project: configure.quota_project
+            retries: retries, timeout: timeout, open_timeout: open_timeout,
+            read_timeout: read_timeout, send_timeout: send_timeout,
+            host: endpoint, quota_project: configure.quota_project
           )
         )
       end
@@ -106,6 +114,9 @@ module Google
       # @param [Integer] retries Number of times to retry requests on server
       #   error. The default value is `3`. Optional.
       # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [Integer] open_timeout Timeout to use for open timeout. Optional.
+      # @param [Integer] read_timeout Timeout to use for read timeout. Optional.
+      # @param [Integer] send_timeout Timeout to use for send timeout. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
       #
@@ -123,10 +134,12 @@ module Google
       #   downloaded.rewind
       #   downloaded.read #=> "Hello world!"
       #
-      def self.anonymous retries: nil, timeout: nil, endpoint: nil
+      def self.anonymous retries: nil, timeout: nil, open_timeout: nil,
+                         read_timeout: nil, send_timeout: nil, endpoint: nil
         Storage::Project.new(
           Storage::Service.new(
-            nil, nil, retries: retries, timeout: timeout, host: endpoint
+            nil, nil, retries: retries, timeout: timeout, open_timeout: open_timeout || timeout,
+            read_timeout: read_timeout || timeout, send_timeout: send_timeout || timeout, host: endpoint
           )
         )
       end
@@ -149,6 +162,9 @@ module Google
       # * `retries` - (Integer) Number of times to retry requests on server
       #   error.
       # * `timeout` - (Integer) Default timeout to use in requests.
+      # @param [Integer] open_timeout Timeout to use for open timeout. Optional.
+      # @param [Integer] read_timeout Timeout to use for read timeout. Optional.
+      # @param [Integer] send_timeout Timeout to use for send timeout. Optional.
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Storage library uses.

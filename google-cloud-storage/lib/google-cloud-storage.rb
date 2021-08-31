@@ -46,6 +46,9 @@ module Google
     # @param [Integer] retries Number of times to retry requests on server
     #   error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Integer] open_timeout Timeout to use for open timeout. Optional.
+    # @param [Integer] read_timeout Timeout to use for read timeout. Optional.
+    # @param [Integer] send_timeout Timeout to use for send timeout. Optional.
     #
     # @return [Google::Cloud::Storage::Project]
     #
@@ -64,10 +67,13 @@ module Google
     #   readonly_scope = "https://www.googleapis.com/auth/devstorage.read_only"
     #   readonly_storage = gcloud.storage scope: readonly_scope
     #
-    def storage scope: nil, retries: nil, timeout: nil
+    def storage scope: nil, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil
       Google::Cloud.storage @project, @keyfile, scope: scope,
                                                 retries: (retries || @retries),
-                                                timeout: (timeout || @timeout)
+                                                timeout: (timeout || @timeout),
+                                                open_timeout: (open_timeout || timeout || @timeout),
+                                                read_timeout: (read_timeout || timeout || @timeout),
+                                                send_timeout: (send_timeout || timeout || @timeout)
     end
 
     ##
@@ -94,6 +100,9 @@ module Google
     # @param [Integer] retries Number of times to retry requests on server
     #   error. The default value is `3`. Optional.
     # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Integer] open_timeout Timeout to use for open timeout. Optional.
+    # @param [Integer] read_timeout Timeout to use for read timeout. Optional.
+    # @param [Integer] send_timeout Timeout to use for send timeout. Optional.
     #
     # @return [Google::Cloud::Storage::Project]
     #
@@ -107,12 +116,13 @@ module Google
     #   file = bucket.file "path/to/my-file.ext"
     #
     def self.storage project_id = nil, credentials = nil, scope: nil,
-                     retries: nil, timeout: nil
+                     retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil
       require "google/cloud/storage"
       Google::Cloud::Storage.new project_id: project_id,
                                  credentials: credentials,
                                  scope: scope, retries: retries,
-                                 timeout: timeout
+                                 timeout: timeout, open_timeout: open_timeout || timeout,
+                                 read_timeout: read_timeout || timeout, send_timeout: send_timeout || timeout
     end
   end
 end
@@ -139,6 +149,9 @@ Google::Cloud.configure.add_config! :storage do |config|
   config.add_field! :quota_project, nil, match: String
   config.add_field! :retries, nil, match: Integer
   config.add_field! :timeout, nil, match: Integer
+  config.add_field! :open_timeout, nil, match: Integer
+  config.add_field! :read_timeout, nil, match: Integer
+  config.add_field! :send_timeout, nil, match: Integer
   # TODO: Remove once discovery document is updated.
   config.add_field! :endpoint, "https://storage.googleapis.com/", match: String
 end
