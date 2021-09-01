@@ -78,6 +78,7 @@ module Google
       #   bucket = storage.bucket "my-bucket"
       #   file = bucket.file "path/to/my-file.ext"
       #
+      # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       def self.new project_id: nil, credentials: nil, scope: nil, retries: nil,
                    timeout: nil, open_timeout: nil, read_timeout: nil,
                    send_timeout: nil, endpoint: nil, project: nil, keyfile: nil
@@ -106,6 +107,7 @@ module Google
           )
         )
       end
+      # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
       ##
       # Creates an unauthenticated, anonymous client for retrieving public data
