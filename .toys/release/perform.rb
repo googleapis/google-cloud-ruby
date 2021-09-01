@@ -192,9 +192,7 @@ class Performer
     logger.info "**** Starting publish_gem for #{gem_name}"
     Dir.chdir gem_dir do
       FileUtils.rm_rf "pkg"
-      isolate_bundle do
-        @executor.exec ["bundle", "exec", "rake", "build"]
-      end
+      run_aux_task "build"
       built_gem_path = "pkg/#{gem_name}-#{gem_version}.gem"
       raise "Failed to build #{built_gem_path}" unless File.file? built_gem_path
       if gem_version <= current_rubygems_version
@@ -221,7 +219,7 @@ class Performer
     do_docuploader "rad", ".yardopts-cloudrad", "cloudrad", rad_staging_bucket, ["--destination-prefix", "docfx"]
   end
 
-  def do_docuploader type, yardopts_file, rake_task, staging_bucket, docuploader_args
+  def do_docuploader type, yardopts_file, task_name, staging_bucket, docuploader_args
     Dir.chdir gem_dir do
       unless File.file? yardopts_file
         logger.warn "**** No #{yardopts_file} file present. Skipping #{type} upload of #{gem_name}"
@@ -229,9 +227,7 @@ class Performer
       end
       FileUtils.rm_rf "doc"
       FileUtils.rm_rf ".yardoc"
-      isolate_bundle do
-        @executor.exec ["bundle", "exec", "rake", rake_task]
-      end
+      run_aux_task task_name
       Dir.chdir "doc" do
         @executor.exec [
           "python3", "-m", "docuploader", "create-metadata",
@@ -263,6 +259,16 @@ class Performer
     logger.info "**** Starting publish_ghpages for #{gem_name}"
     logger.warn "Not yet implemented"
     # TODO
+  end
+
+  def run_aux_task task_name
+    if File.file? "Rakefile"
+      isolate_bundle do
+        @executor.exec ["bundle", "exec", "rake", task_name]
+      end
+    else
+      @executor.exec ["toys", task_name]
+    end
   end
 
   def current_rubygems_version
