@@ -62,9 +62,9 @@ class InstancesSmokeTest < Minitest::Test
       sleep 10
     end
     assert_equal false, instance.shielded_instance_config.enable_secure_boot
-    gapic_op = @client.update_shielded_instance_config(instance: @name, zone: @default_zone, project: @default_project,
+    operation = @client.update_shielded_instance_config(instance: @name, zone: @default_zone, project: @default_project,
                                                  shielded_instance_config_resource: resource)
-    wait_for_zonal_op gapic_op, "update"
+    wait_for_zonal_op operation, "update"
     instance = read_instance
     assert_equal true, instance.shielded_instance_config.enable_secure_boot
   end
@@ -92,8 +92,8 @@ class InstancesSmokeTest < Minitest::Test
     assert_equal "test", instance.description
     assert_equal 0, instance.scheduling.min_node_cpus
     instance.description = ""
-    gapic_op = @client.update instance: @name, instance_resource: instance, project: @default_project, zone: @default_zone
-    wait_for_zonal_op gapic_op, "update"
+    operation = @client.update instance: @name, instance_resource: instance, project: @default_project, zone: @default_zone
+    wait_for_zonal_op operation, "update"
     fetched = read_instance
     assert_equal "", fetched.description
     assert_equal 0, fetched.scheduling.min_node_cpus
@@ -101,8 +101,8 @@ class InstancesSmokeTest < Minitest::Test
 
   private
 
-  def wait_for_zonal_op gapic_op, op_type
-    operation = gapic_op.operation
+  def wait_for_zonal_op operation, op_type
+    operation = operation.operation
     $stdout.puts "Waiting for zonal #{op_type} operation #{operation.name}."
     starttime = Time.now
     while (operation.status != :DONE) && (Time.now < starttime + 200)
@@ -139,10 +139,10 @@ class InstancesSmokeTest < Minitest::Test
         }
       ]
     }
-    gapic_op = @client.insert project: @default_project, zone: @default_zone, instance_resource: instance_resource
+    operation = @client.insert project: @default_project, zone: @default_zone, instance_resource: instance_resource
     $stdout.puts "Inserting instance #{@name}."
     @instances.append @name
-    wait_for_zonal_op gapic_op, "insert"
+    wait_for_zonal_op operation, "insert"
     $stdout.puts "Operation to insert instance #{@name} completed."
   end
 end
