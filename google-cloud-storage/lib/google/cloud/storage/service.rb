@@ -47,9 +47,9 @@ module Google
           @service.client_options.application_name    = "gcloud-ruby"
           @service.client_options.application_version = \
             Google::Cloud::Storage::VERSION
-          @service.client_options.open_timeout_sec = open_timeout || timeout
-          @service.client_options.read_timeout_sec = read_timeout || timeout
-          @service.client_options.send_timeout_sec = send_timeout || timeout
+          @service.client_options.open_timeout_sec = (open_timeout || timeout)
+          @service.client_options.read_timeout_sec = (read_timeout || timeout)
+          @service.client_options.send_timeout_sec = (send_timeout || timeout)
           @service.client_options.transparent_gzip_decompression = false
           @service.request_options.retries = retries || 3
           @service.request_options.header ||= {}

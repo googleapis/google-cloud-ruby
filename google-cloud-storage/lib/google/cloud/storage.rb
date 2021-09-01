@@ -85,9 +85,9 @@ module Google
         scope        ||= configure.scope
         retries      ||= configure.retries
         timeout      ||= configure.timeout
-        open_timeout ||= configure.open_timeout || timeout
-        read_timeout ||= configure.read_timeout || timeout
-        send_timeout ||= configure.send_timeout || timeout
+        open_timeout ||= (configure.open_timeout || timeout)
+        read_timeout ||= (configure.read_timeout || timeout)
+        send_timeout ||= (configure.send_timeout || timeout)
         endpoint     ||= configure.endpoint
         credentials  ||= (keyfile || default_credentials(scope: scope))
 
@@ -138,10 +138,13 @@ module Google
       #
       def self.anonymous retries: nil, timeout: nil, open_timeout: nil,
                          read_timeout: nil, send_timeout: nil, endpoint: nil
+        open_timeout ||= timeout
+        read_timeout ||= timeout
+        send_timeout ||= timeout
         Storage::Project.new(
           Storage::Service.new(
-            nil, nil, retries: retries, timeout: timeout, open_timeout: (open_timeout || timeout),
-            read_timeout: (read_timeout || timeout), send_timeout: (send_timeout || timeout), host: endpoint
+            nil, nil, retries: retries, timeout: timeout, open_timeout: open_timeout,
+            read_timeout: read_timeout, send_timeout: send_timeout, host: endpoint
           )
         )
       end
