@@ -167,9 +167,9 @@ module Google
       # * `retries` - (Integer) Number of times to retry requests on server
       #   error.
       # * `timeout` - (Integer) Default timeout to use in requests.
-      # @param [Integer] open_timeout Timeout to use for open timeout. Optional.
-      # @param [Integer] read_timeout Timeout to use for read timeout. Optional.
-      # @param [Integer] send_timeout Timeout to use for send timeout. Optional.
+      # * `open_timeout` - (Integer) Timeout to use for open timeout.
+      # * `read_timeout` - (Integer) Timeout to use for read timeout.
+      # * `send_timeout` - (Integer) Timeout to use for send timeout.
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Storage library uses.
