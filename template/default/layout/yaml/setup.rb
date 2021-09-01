@@ -6,7 +6,9 @@ def init
   @method_list = object_methods @object
   @constants = @object.children.select { |child| child.type == :constant }.sort_by { |child| child.path }
   @references = @object.children.reject { |child| [:method, :constant].include? child.type }
-  @references.reject! { |ref| ref.visibility == :private }
+  @references.reject! do |ref| 
+    ref.visibility == :private || ref.tags.any? { |tag| tag.tag_name == "private" }
+  end
   @object_text = ERB.new(File.read"#{__dir__}/_object.erb").result binding
 
   @method_text = @method_list.map { |method|
