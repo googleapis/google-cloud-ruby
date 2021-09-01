@@ -4,6 +4,17 @@ def object_methods object = nil
   method_list.reject! do |method| 
     method.visibility == :private || method.tags.any? { |tag| tag.tag_name == "private" }
   end
+  dot_methods = []
+  instance_methods = []
+  method_list.each do |method|
+    if method.path.include? "#"
+      instance_methods << method
+    else
+      dot_methods << method
+    end
+  end
+  method_list = dot_methods.sort_by { |method| method.path }
+  method_list += instance_methods.sort_by { |method| method.path }
   method_list
 end
 
@@ -42,9 +53,9 @@ def method_signature
         entry = param[0]
         if param[1]
           if entry.end_with? ":"
-            entry += " #{param[1]}"
+            entry += " #{escapes param[1]}"
           else
-            entry += " = #{param[1]}"
+            entry += " = #{escapes param[1]}"
           end
         end
         entry
@@ -98,7 +109,7 @@ def arg_text method, params, indent
       defaults = "(defaults to: #{default_value.last})"
       entry += " #{italic defaults}"
     end
-    entry += " — #{pre_format arg.text}" unless arg.text.empty?
+    entry += " — #{pre_format arg.text}" unless arg.text.nil? || arg.text.empty?
     entry += "\""
     text << entry
   end
