@@ -45,10 +45,11 @@ module Google
     #   * `https://www.googleapis.com/auth/devstorage.full_control`
     # @param [Integer] retries Number of times to retry requests on server
     #   error. The default value is `3`. Optional.
-    # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Integer] open_timeout Timeout to use for open timeout. Optional.
-    # @param [Integer] read_timeout Timeout to use for read timeout. Optional.
-    # @param [Integer] send_timeout Timeout to use for send timeout. Optional.
+    # @param [Integer] timeout (default timeout) The maximum duration, in seconds, to wait before timing out. Optional.
+    #    If left blank, the wait will be at most the time permitted by the underlying HTTP/RPC protocol.
+    # @param [Integer] open_timeout How long, in seconds, before failed connections time out. Optional.
+    # @param [Integer] read_timeout How long, in seconds, before requests time out. Optional.
+    # @param [Integer] send_timeout How long, in seconds, before receiving response from server times out. Optional.
     #
     # @return [Google::Cloud::Storage::Project]
     #
@@ -99,10 +100,11 @@ module Google
     #   * `https://www.googleapis.com/auth/devstorage.full_control`
     # @param [Integer] retries Number of times to retry requests on server
     #   error. The default value is `3`. Optional.
-    # @param [Integer] timeout Default timeout to use in requests. Optional.
-    # @param [Integer] open_timeout Timeout to use for open timeout. Optional.
-    # @param [Integer] read_timeout Timeout to use for read timeout. Optional.
-    # @param [Integer] send_timeout Timeout to use for send timeout. Optional.
+    # @param [Integer] timeout (default timeout) The maximum duration, in seconds, to wait before timing out. Optional.
+    #    If left blank, the wait will be at most the time permitted by the underlying HTTP/RPC protocol.
+    # @param [Integer] open_timeout How long, in seconds, before failed connections time out. Optional.
+    # @param [Integer] read_timeout How long, in seconds, before requests time out. Optional.
+    # @param [Integer] send_timeout How long, in seconds, before receiving response from server times out. Optional.
     #
     # @return [Google::Cloud::Storage::Project]
     #
@@ -120,9 +122,12 @@ module Google
       require "google/cloud/storage"
       Google::Cloud::Storage.new project_id: project_id,
                                  credentials: credentials,
-                                 scope: scope, retries: retries,
-                                 timeout: timeout, open_timeout: (open_timeout || timeout),
-                                 read_timeout: (read_timeout || timeout), send_timeout: (send_timeout || timeout)
+                                 scope: scope,
+                                 retries: retries,
+                                 timeout: timeout,
+                                 open_timeout: (open_timeout || timeout),
+                                 read_timeout: (read_timeout || timeout),
+                                 send_timeout: (send_timeout || timeout)
     end
   end
 end

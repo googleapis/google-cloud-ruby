@@ -55,10 +55,11 @@ module Google
       #   * `https://www.googleapis.com/auth/devstorage.full_control`
       # @param [Integer] retries Number of times to retry requests on server
       #   error. The default value is `3`. Optional.
-      # @param [Integer] timeout Default timeout to use in requests. Optional.
-      # @param [Integer] open_timeout Timeout to use for open timeout. Optional.
-      # @param [Integer] read_timeout Timeout to use for read timeout. Optional.
-      # @param [Integer] send_timeout Timeout to use for send timeout. Optional.
+      # @param [Integer] timeout (default timeout) The maximum duration, in seconds, to wait before timing out. Optional.
+      #    If left blank, the wait will be at most the time permitted by the underlying HTTP/RPC protocol.
+      # @param [Integer] open_timeout How long, in seconds, before failed connections time out. Optional.
+      # @param [Integer] read_timeout How long, in seconds, before requests time out. Optional.
+      # @param [Integer] send_timeout How long, in seconds, before receiving response from server times out. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
@@ -115,10 +116,11 @@ module Google
       #
       # @param [Integer] retries Number of times to retry requests on server
       #   error. The default value is `3`. Optional.
-      # @param [Integer] timeout Default timeout to use in requests. Optional.
-      # @param [Integer] open_timeout Timeout to use for open timeout. Optional.
-      # @param [Integer] read_timeout Timeout to use for read timeout. Optional.
-      # @param [Integer] send_timeout Timeout to use for send timeout. Optional.
+      # @param [Integer] timeout (default timeout) The maximum duration, in seconds, to wait before timing out. Optional.
+      #    If left blank, the wait will be at most the time permitted by the underlying HTTP/RPC protocol.
+      # @param [Integer] open_timeout How long, in seconds, before failed connections time out. Optional.
+      # @param [Integer] read_timeout How long, in seconds, before requests time out. Optional.
+      # @param [Integer] send_timeout How long, in seconds, before receiving response from server times out. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
       #
@@ -166,10 +168,11 @@ module Google
       #   the set of resources and operations that the connection can access.
       # * `retries` - (Integer) Number of times to retry requests on server
       #   error.
-      # * `timeout` - (Integer) Default timeout to use in requests.
-      # * `open_timeout` - (Integer) Timeout to use for open timeout.
-      # * `read_timeout` - (Integer) Timeout to use for read timeout.
-      # * `send_timeout` - (Integer) Timeout to use for send timeout.
+      # * `timeout` - (Integer) (default timeout) The maximum duration, in seconds, to wait before timing out.
+      #       If left blank, the wait will be at most the time permitted by the underlying HTTP/RPC protocol.
+      # * `open_timeout` - (Integer) How long, in seconds, before failed connections time out.
+      # * `read_timeout` - (Integer) How long, in seconds, before requests time out.
+      # * `send_timeout` - (Integer) How long, in seconds, before receiving response from server times out.
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Storage library uses.
