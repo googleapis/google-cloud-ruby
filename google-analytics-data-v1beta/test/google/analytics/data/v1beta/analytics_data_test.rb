@@ -463,6 +463,74 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
     end
   end
 
+  def test_check_compatibility
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Data::V1beta::CheckCompatibilityResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    property = "hello world"
+    dimensions = [{}]
+    metrics = [{}]
+    dimension_filter = {}
+    metric_filter = {}
+    compatibility_filter = :COMPATIBILITY_UNSPECIFIED
+
+    check_compatibility_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :check_compatibility, name
+      assert_kind_of ::Google::Analytics::Data::V1beta::CheckCompatibilityRequest, request
+      assert_equal "hello world", request["property"]
+      assert_kind_of ::Google::Analytics::Data::V1beta::Dimension, request["dimensions"].first
+      assert_kind_of ::Google::Analytics::Data::V1beta::Metric, request["metrics"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1beta::FilterExpression), request["dimension_filter"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Data::V1beta::FilterExpression), request["metric_filter"]
+      assert_equal :COMPATIBILITY_UNSPECIFIED, request["compatibility_filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, check_compatibility_client_stub do
+      # Create client
+      client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.check_compatibility({ property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, compatibility_filter: compatibility_filter }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.check_compatibility property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, compatibility_filter: compatibility_filter do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.check_compatibility ::Google::Analytics::Data::V1beta::CheckCompatibilityRequest.new(property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, compatibility_filter: compatibility_filter) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.check_compatibility({ property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, compatibility_filter: compatibility_filter }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.check_compatibility(::Google::Analytics::Data::V1beta::CheckCompatibilityRequest.new(property: property, dimensions: dimensions, metrics: metrics, dimension_filter: dimension_filter, metric_filter: metric_filter, compatibility_filter: compatibility_filter), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, check_compatibility_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
