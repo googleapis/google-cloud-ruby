@@ -26,4 +26,14 @@ describe "LanguageServiceSmokeTest v1" do
     response.document_sentiment.score.must_be_kind_of Numeric
     response.language.must_equal "en"
   end
+
+  it "surfaces error code, message, and status details" do
+    language_service_client = Google::Cloud::Language.language_service version: :v1  
+    document = { content: "This is a test", type: :PLAIN_TEXT, language: "zz" }
+    err = ->{ language_service_client.analyze_sentiment(document: document) }.must_raise ::Google::Cloud::Error
+    err.code.must_equal 3
+    err.details.must_match /document.language is not valid/
+    err.status_details[0].field_violations[0].field.must_equal "document.language"
+    err.status_details[0].field_violations[0].description.must_match /document language is not valid/
+  end
 end
