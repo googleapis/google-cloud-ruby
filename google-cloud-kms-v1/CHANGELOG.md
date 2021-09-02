@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 / 2021-09-02
+
+#### Features
+
+* Ability to target an existing crypto_key_version for import
+
 ### 0.7.0 / 2021-08-11
 
 #### Features
