@@ -203,12 +203,13 @@ module Google
             #     response rows for both date ranges. In a cohort request, this `dateRanges`
             #     must be unspecified.
             #   @param dimension_filter [::Google::Analytics::Data::V1beta::FilterExpression, ::Hash]
-            #     The filter clause of dimensions. Dimensions must be requested to be used in
-            #     this filter. Metrics cannot be used in this filter.
+            #     Dimension filters allow you to ask for only specific dimension values in
+            #     the report. To learn more, see [Fundamentals of Dimension
+            #     Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
+            #     for examples. Metrics cannot be used in this filter.
             #   @param metric_filter [::Google::Analytics::Data::V1beta::FilterExpression, ::Hash]
             #     The filter clause of metrics. Applied at post aggregation phase, similar to
-            #     SQL having-clause. Metrics must be requested to be used in this filter.
-            #     Dimensions cannot be used in this filter.
+            #     SQL having-clause. Dimensions cannot be used in this filter.
             #   @param offset [::Integer]
             #     The row count of the start row. The first row is counted as row 0.
             #
@@ -773,6 +774,108 @@ module Google
             end
 
             ##
+            # This compatibility method lists dimensions and metrics that can be added to
+            # a report request and maintain compatibility. This method fails if the
+            # request's dimensions and metrics are incompatible.
+            #
+            # In Google Analytics, reports fail if they request incompatible dimensions
+            # and/or metrics; in that case, you will need to remove dimensions and/or
+            # metrics from the incompatible report until the report is compatible.
+            #
+            # The Realtime and Core reports have different compatibility rules. This
+            # method checks compatibility for Core reports.
+            #
+            # @overload check_compatibility(request, options = nil)
+            #   Pass arguments to `check_compatibility` via a request object, either of type
+            #   {::Google::Analytics::Data::V1beta::CheckCompatibilityRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Data::V1beta::CheckCompatibilityRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload check_compatibility(property: nil, dimensions: nil, metrics: nil, dimension_filter: nil, metric_filter: nil, compatibility_filter: nil)
+            #   Pass arguments to `check_compatibility` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param property [::String]
+            #     A Google Analytics GA4 property identifier whose events are tracked. To
+            #     learn more, see [where to find your Property
+            #     ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
+            #     `property` should be the same value as in your `runReport` request.
+            #
+            #     Example: properties/1234
+            #
+            #     Set the Property ID to 0 for compatibility checking on dimensions and
+            #     metrics common to all properties. In this special mode, this method will
+            #     not return custom dimensions and metrics.
+            #   @param dimensions [::Array<::Google::Analytics::Data::V1beta::Dimension, ::Hash>]
+            #     The dimensions in this report. `dimensions` should be the same value as in
+            #     your `runReport` request.
+            #   @param metrics [::Array<::Google::Analytics::Data::V1beta::Metric, ::Hash>]
+            #     The metrics in this report. `metrics` should be the same value as in your
+            #     `runReport` request.
+            #   @param dimension_filter [::Google::Analytics::Data::V1beta::FilterExpression, ::Hash]
+            #     The filter clause of dimensions. `dimensionFilter` should be the same value
+            #     as in your `runReport` request.
+            #   @param metric_filter [::Google::Analytics::Data::V1beta::FilterExpression, ::Hash]
+            #     The filter clause of metrics. `metricFilter` should be the same value as in
+            #     your `runReport` request
+            #   @param compatibility_filter [::Google::Analytics::Data::V1beta::Compatibility]
+            #     Filters the dimensions and metrics in the response to just this
+            #     compatibility. Commonly used as `”compatibilityFilter”: “COMPATIBLE”`
+            #     to only return compatible dimensions & metrics.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Data::V1beta::CheckCompatibilityResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Data::V1beta::CheckCompatibilityResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def check_compatibility request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Data::V1beta::CheckCompatibilityRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.check_compatibility.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Data::V1beta::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "property" => request.property
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.check_compatibility.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.check_compatibility.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_data_stub.call_rpc :check_compatibility, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the AnalyticsData API.
             #
             # This class represents the configuration for AnalyticsData,
@@ -937,6 +1040,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :run_realtime_report
+                ##
+                # RPC-specific configuration for `check_compatibility`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :check_compatibility
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -952,6 +1060,8 @@ module Google
                   @get_metadata = ::Gapic::Config::Method.new get_metadata_config
                   run_realtime_report_config = parent_rpcs.run_realtime_report if parent_rpcs.respond_to? :run_realtime_report
                   @run_realtime_report = ::Gapic::Config::Method.new run_realtime_report_config
+                  check_compatibility_config = parent_rpcs.check_compatibility if parent_rpcs.respond_to? :check_compatibility
+                  @check_compatibility = ::Gapic::Config::Method.new check_compatibility_config
 
                   yield self if block_given?
                 end

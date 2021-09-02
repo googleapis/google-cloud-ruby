@@ -820,6 +820,10 @@ module Google
         # @!attribute [rw] custom_definition
         #   @return [::Boolean]
         #     True if the dimension is a custom dimension for this property.
+        # @!attribute [rw] category
+        #   @return [::String]
+        #     The display name of the category that this dimension belongs to. Similar
+        #     dimensions and metrics are categorized together.
         class DimensionMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -854,7 +858,41 @@ module Google
         # @!attribute [rw] custom_definition
         #   @return [::Boolean]
         #     True if the metric is a custom metric for this property.
+        # @!attribute [rw] category
+        #   @return [::String]
+        #     The display name of the category that this metrics belongs to. Similar
+        #     dimensions and metrics are categorized together.
         class MetricMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The compatibility for a single dimension.
+        # @!attribute [rw] dimension_metadata
+        #   @return [::Google::Analytics::Data::V1beta::DimensionMetadata]
+        #     The dimension metadata contains the API name for this compatibility
+        #     information. The dimension metadata also contains other helpful information
+        #     like the UI name and description.
+        # @!attribute [rw] compatibility
+        #   @return [::Google::Analytics::Data::V1beta::Compatibility]
+        #     The compatibility of this dimension. If the compatibility is COMPATIBLE,
+        #     this dimension can be successfully added to the report.
+        class DimensionCompatibility
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The compatibility for a single metric.
+        # @!attribute [rw] metric_metadata
+        #   @return [::Google::Analytics::Data::V1beta::MetricMetadata]
+        #     The metric metadata contains the API name for this compatibility
+        #     information. The metric metadata also contains other helpful information
+        #     like the UI name and description.
+        # @!attribute [rw] compatibility
+        #   @return [::Google::Analytics::Data::V1beta::Compatibility]
+        #     The compatibility of this metric. If the compatibility is COMPATIBLE,
+        #     this metric can be successfully added to the report.
+        class MetricCompatibility
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -917,6 +955,20 @@ module Google
 
           # A length in kilometers; a special floating point type.
           TYPE_KILOMETERS = 13
+        end
+
+        # The compatibility types for a single dimension or metric.
+        module Compatibility
+          # Unspecified compatibility.
+          COMPATIBILITY_UNSPECIFIED = 0
+
+          # The dimension or metric is compatible. This dimension or metric can be
+          # successfully added to a report.
+          COMPATIBLE = 1
+
+          # The dimension or metric is incompatible. This dimension or metric cannot be
+          # successfully added to a report.
+          INCOMPATIBLE = 2
         end
       end
     end

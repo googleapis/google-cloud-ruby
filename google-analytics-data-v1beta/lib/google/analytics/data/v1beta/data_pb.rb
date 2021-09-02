@@ -206,6 +206,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :description, :string, 3
       repeated :deprecated_api_names, :string, 4
       optional :custom_definition, :bool, 5
+      optional :category, :string, 7
     end
     add_message "google.analytics.data.v1beta.MetricMetadata" do
       optional :api_name, :string, 1
@@ -215,6 +216,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :type, :enum, 5, "google.analytics.data.v1beta.MetricType"
       optional :expression, :string, 6
       optional :custom_definition, :bool, 7
+      optional :category, :string, 10
+    end
+    add_message "google.analytics.data.v1beta.DimensionCompatibility" do
+      proto3_optional :dimension_metadata, :message, 1, "google.analytics.data.v1beta.DimensionMetadata"
+      proto3_optional :compatibility, :enum, 2, "google.analytics.data.v1beta.Compatibility"
+    end
+    add_message "google.analytics.data.v1beta.MetricCompatibility" do
+      proto3_optional :metric_metadata, :message, 1, "google.analytics.data.v1beta.MetricMetadata"
+      proto3_optional :compatibility, :enum, 2, "google.analytics.data.v1beta.Compatibility"
     end
     add_enum "google.analytics.data.v1beta.MetricAggregation" do
       value :METRIC_AGGREGATION_UNSPECIFIED, 0
@@ -237,6 +247,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :TYPE_MILES, 11
       value :TYPE_METERS, 12
       value :TYPE_KILOMETERS, 13
+    end
+    add_enum "google.analytics.data.v1beta.Compatibility" do
+      value :COMPATIBILITY_UNSPECIFIED, 0
+      value :COMPATIBLE, 1
+      value :INCOMPATIBLE, 2
     end
   end
 end
@@ -286,8 +301,11 @@ module Google
         QuotaStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.QuotaStatus").msgclass
         DimensionMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.DimensionMetadata").msgclass
         MetricMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.MetricMetadata").msgclass
+        DimensionCompatibility = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.DimensionCompatibility").msgclass
+        MetricCompatibility = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.MetricCompatibility").msgclass
         MetricAggregation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.MetricAggregation").enummodule
         MetricType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.MetricType").enummodule
+        Compatibility = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.Compatibility").enummodule
       end
     end
   end
