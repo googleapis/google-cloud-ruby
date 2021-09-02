@@ -17,12 +17,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :slot_capacity, :int64, 2
       optional :ignore_idle_slots, :bool, 4
+      optional :creation_time, :message, 8, "google.protobuf.Timestamp"
+      optional :update_time, :message, 9, "google.protobuf.Timestamp"
     end
     add_message "google.cloud.bigquery.reservation.v1.CapacityCommitment" do
       optional :name, :string, 1
       optional :slot_count, :int64, 2
       optional :plan, :enum, 3, "google.cloud.bigquery.reservation.v1.CapacityCommitment.CommitmentPlan"
       optional :state, :enum, 4, "google.cloud.bigquery.reservation.v1.CapacityCommitment.State"
+      optional :commitment_start_time, :message, 9, "google.protobuf.Timestamp"
       optional :commitment_end_time, :message, 5, "google.protobuf.Timestamp"
       optional :failure_status, :message, 7, "google.rpc.Status"
       optional :renewal_plan, :enum, 8, "google.cloud.bigquery.reservation.v1.CapacityCommitment.CommitmentPlan"
@@ -68,6 +71,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :capacity_commitment, :message, 2, "google.cloud.bigquery.reservation.v1.CapacityCommitment"
       optional :enforce_single_admin_project_per_org, :bool, 4
+      optional :capacity_commitment_id, :string, 5
     end
     add_message "google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest" do
       optional :parent, :string, 1
@@ -83,6 +87,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest" do
       optional :name, :string, 1
+      optional :force, :bool, 3
     end
     add_message "google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest" do
       optional :capacity_commitment, :message, 1, "google.cloud.bigquery.reservation.v1.CapacityCommitment"
@@ -110,6 +115,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :JOB_TYPE_UNSPECIFIED, 0
       value :PIPELINE, 1
       value :QUERY, 2
+      value :ML_EXTERNAL, 3
     end
     add_enum "google.cloud.bigquery.reservation.v1.Assignment.State" do
       value :STATE_UNSPECIFIED, 0
@@ -119,6 +125,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.bigquery.reservation.v1.CreateAssignmentRequest" do
       optional :parent, :string, 1
       optional :assignment, :message, 2, "google.cloud.bigquery.reservation.v1.Assignment"
+      optional :assignment_id, :string, 4
     end
     add_message "google.cloud.bigquery.reservation.v1.ListAssignmentsRequest" do
       optional :parent, :string, 1
@@ -138,7 +145,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :page_size, :int32, 3
       optional :page_token, :string, 4
     end
+    add_message "google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest" do
+      optional :parent, :string, 1
+      optional :query, :string, 2
+      optional :page_size, :int32, 3
+      optional :page_token, :string, 4
+    end
     add_message "google.cloud.bigquery.reservation.v1.SearchAssignmentsResponse" do
+      repeated :assignments, :message, 1, "google.cloud.bigquery.reservation.v1.Assignment"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse" do
       repeated :assignments, :message, 1, "google.cloud.bigquery.reservation.v1.Assignment"
       optional :next_page_token, :string, 2
     end
@@ -193,7 +210,9 @@ module Google
           ListAssignmentsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.ListAssignmentsResponse").msgclass
           DeleteAssignmentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest").msgclass
           SearchAssignmentsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest").msgclass
+          SearchAllAssignmentsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest").msgclass
           SearchAssignmentsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.SearchAssignmentsResponse").msgclass
+          SearchAllAssignmentsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse").msgclass
           MoveAssignmentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.MoveAssignmentRequest").msgclass
           BiReservation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.BiReservation").msgclass
           GetBiReservationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.GetBiReservationRequest").msgclass

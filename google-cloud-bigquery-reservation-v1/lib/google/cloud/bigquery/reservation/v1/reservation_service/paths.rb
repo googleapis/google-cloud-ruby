@@ -51,7 +51,7 @@ module Google
               #
               # The resource will be in the following format:
               #
-              # `projects/{project}/locations/{location}/bireservation`
+              # `projects/{project}/locations/{location}/biReservation`
               #
               # @param project [String]
               # @param location [String]
@@ -60,7 +60,7 @@ module Google
               def bi_reservation_path project:, location:
                 raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
-                "projects/#{project}/locations/#{location}/bireservation"
+                "projects/#{project}/locations/#{location}/biReservation"
               end
 
               ##

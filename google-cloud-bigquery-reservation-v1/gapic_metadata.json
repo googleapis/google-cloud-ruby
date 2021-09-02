@@ -90,6 +90,11 @@
                 "search_assignments"
               ]
             },
+            "SearchAllAssignments": {
+              "methods": [
+                "search_all_assignments"
+              ]
+            },
             "MoveAssignment": {
               "methods": [
                 "move_assignment"
