@@ -55,7 +55,7 @@ module Google
       #   * `https://www.googleapis.com/auth/devstorage.full_control`
       # @param [Integer] retries Number of times to retry requests on server
       #   error. The default value is `3`. Optional.
-      # @param [Integer] timeout (default timeout) The maximum duration, in seconds, to wait before timing out. Optional.
+      # @param [Integer] timeout (default timeout) The max duration, in seconds, to wait before timing out. Optional.
       #    If left blank, the wait will be at most the time permitted by the underlying HTTP/RPC protocol.
       # @param [Integer] open_timeout How long, in seconds, before failed connections time out. Optional.
       # @param [Integer] read_timeout How long, in seconds, before requests time out. Optional.
@@ -116,7 +116,7 @@ module Google
       #
       # @param [Integer] retries Number of times to retry requests on server
       #   error. The default value is `3`. Optional.
-      # @param [Integer] timeout (default timeout) The maximum duration, in seconds, to wait before timing out. Optional.
+      # @param [Integer] timeout (default timeout) The max duration, in seconds, to wait before timing out. Optional.
       #    If left blank, the wait will be at most the time permitted by the underlying HTTP/RPC protocol.
       # @param [Integer] open_timeout How long, in seconds, before failed connections time out. Optional.
       # @param [Integer] read_timeout How long, in seconds, before requests time out. Optional.
@@ -168,7 +168,7 @@ module Google
       #   the set of resources and operations that the connection can access.
       # * `retries` - (Integer) Number of times to retry requests on server
       #   error.
-      # * `timeout` - (Integer) (default timeout) The maximum duration, in seconds, to wait before timing out.
+      # * `timeout` - (Integer) (default timeout) The max duration, in seconds, to wait before timing out.
       #       If left blank, the wait will be at most the time permitted by the underlying HTTP/RPC protocol.
       # * `open_timeout` - (Integer) How long, in seconds, before failed connections time out.
       # * `read_timeout` - (Integer) How long, in seconds, before requests time out.
