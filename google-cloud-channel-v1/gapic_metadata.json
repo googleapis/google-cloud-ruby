@@ -40,6 +40,11 @@
                 "delete_customer"
               ]
             },
+            "ImportCustomer": {
+              "methods": [
+                "import_customer"
+              ]
+            },
             "ProvisionCloudIdentity": {
               "methods": [
                 "provision_cloud_identity"
