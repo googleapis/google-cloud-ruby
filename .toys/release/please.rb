@@ -26,7 +26,7 @@ flag :retries, "--retries=TIMES", default: 1, accept: Integer
 flag :delay, "--delay=SECS", default: 2, accept: Numeric
 flag :retry_delay, "--retry-delay=SECS", default: 4, accept: Numeric
 flag :github_event_name, "--github-event-name=NAME"
-flag :github_token, "--github-token=TOKEN", default: ENV["GITHUB_TOKEN"]
+flag :github_token, "--github-token=TOKEN"
 
 remaining_args :input_gems, desc: "Release the specified gems. If no specific gem is provided, all gems are checked."
 
@@ -38,6 +38,7 @@ def run
   Dir.chdir context_directory
   handle_install
   set :repo_url, default_repo_url unless repo_url
+  set :github_token, default_github_token unless github_token
   gem_info = input_gems.empty? ? find_all_gems : interpret_input_gems
 
   @errors = []
@@ -157,7 +158,29 @@ def default_repo_url
   end
 end
 
+def default_github_token
+  result = exec ["gh", "auth", "status", "-t"], out: :capture, err: :capture
+  match = /Token: (\w+)/.match(result.captured_out + result.captured_err)
+  return match[1] if match
+  value = ENV["GITHUB_TOKEN"].to_s
+  return value unless value.empty?
+  nil
+end
+
 def default_version_path dir, gem_name
-  gem_path = gem_name.gsub "-", "/"
-  File.join "lib", gem_path, "version.rb"
+  path = nil
+  Dir.chdir dir do
+    path = File.join "lib", gem_name.gsub("-", "/"), "version.rb"
+    path = nil unless File.file? path
+    if path.nil?
+      paths = Dir.glob "lib/**/version.rb"
+      path = paths[0] if paths.size == 1
+    end
+  end
+  if path
+    logger.info "Updating version at #{path}"
+  else
+    logger.warn "Unable to find version.rb!"
+  end
+  path
 end

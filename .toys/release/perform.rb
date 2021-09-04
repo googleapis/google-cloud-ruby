@@ -23,6 +23,7 @@ flag :all, "--all=REGEX"
 flag :enable_docs
 flag :enable_rad
 flag :enable_ghpages
+flag :force_republish
 flag :rubygems_api_token, "--rubygems-api-token=VALUE"
 flag :docs_staging_bucket, "--docs-staging-bucket=VALUE"
 flag :rad_staging_bucket, "--rad-staging-bucket=VALUE"
@@ -42,17 +43,17 @@ def run
   determine_packages.each do |name, version|
     releaser = Performer.new name,
                              last_version: version,
-                             dry_run: dry_run,
                              logger: logger,
-                             enable_docs: enable_docs,
-                             enable_rad: enable_rad,
-                             enable_ghpages: enable_ghpages,
                              rubygems_api_token: rubygems_api_token || ENV["RUBYGEMS_API_TOKEN"],
                              docs_staging_bucket: docs_staging_bucket || ENV["STAGING_BUCKET"] || "docs-staging",
                              rad_staging_bucket: rad_staging_bucket || ENV["V2_STAGING_BUCKET"] || "docs-staging-v2",
                              docuploader_credentials: docuploader_credentials || ENV["DOCUPLOADER_CREDENTIALS"]
 
-    releaser.run
+    releaser.run force_republish: force_republish,
+                 enable_docs: enable_docs,
+                 enable_rad: enable_rad,
+                 enable_ghpages: enable_ghpages,
+                 dry_run: dry_run
   end
 end
 
@@ -121,12 +122,8 @@ class Performer
                  docs_staging_bucket: nil,
                  rad_staging_bucket: nil,
                  docuploader_credentials: nil,
-                 dry_run: false,
                  last_version: nil,
-                 logger: nil,
-                 enable_docs: false,
-                 enable_rad: false,
-                 enable_ghpages: false
+                 logger: nil
     @gem_name = gem_name
     @logger = logger
     result_callback = proc { |result| raise "Command failed" unless result.success? }
@@ -140,9 +137,6 @@ class Performer
     @dry_run = dry_run ? true : false
     @current_rubygems_version = Gem::Version.new last_version if last_version
     @bundle_updated = false
-    @enable_docs = enable_docs
-    @enable_rad = enable_rad
-    @enable_ghpages = enable_ghpages
   end
 
   attr_reader :gem_name
@@ -153,28 +147,24 @@ class Performer
   attr_reader :docuploader_credentials
   attr_reader :logger
 
-  def dry_run?
-    @dry_run
+  def needs_gem_publish?
+    gem_version > current_rubygems_version
   end
 
-  def enable_docs?
-    @enable_docs
-  end
-
-  def enable_rad?
-    @enable_rad
-  end
-
-  def enable_ghpages?
-    @enable_ghpages
-  end
-
-  def run
+  def run force_republish: false,
+          enable_docs: false,
+          enable_rad: false
+          enable_ghpages: false,
+          dry_run: false
+    if !force_republish && !needs_gem_publish?
+      logger.warn "**** Gem #{gem_name} is already up to date at version #{gem_version}. Skipping."
+      return
+    end
     transform_links
-    publish_gem
-    publish_docs if enable_docs?
-    publish_rad if enable_rad?
-    publish_ghpages if enable_ghpages?
+    publish_gem dry_run: dry_run
+    publish_docs dry_run: dry_run if enable_docs
+    publish_rad dry_run: dry_run if enable_rad
+    publish_ghpages dry_run: dry_run if enable_ghpages
   end
 
   def transform_links
@@ -188,18 +178,18 @@ class Performer
     end
   end
 
-  def publish_gem
+  def publish_gem dry_run: false
     logger.info "**** Starting publish_gem for #{gem_name}"
     Dir.chdir gem_dir do
       FileUtils.rm_rf "pkg"
       run_aux_task "build"
       built_gem_path = "pkg/#{gem_name}-#{gem_version}.gem"
       raise "Failed to build #{built_gem_path}" unless File.file? built_gem_path
-      if gem_version <= current_rubygems_version
+      unless needs_gem_publish?
         logger.warn "**** Already published. Skipping gem publish of #{gem_name}"
         return
       end
-      if dry_run?
+      if dry_run
         logger.warn "**** In dry run mode. Skipping gem publish of #{gem_name}"
         return
       end
@@ -209,17 +199,27 @@ class Performer
     end
   end
 
-  def publish_docs
+  def publish_docs dry_run: false
     logger.info "**** Starting publish_docs for #{gem_name}"
-    do_docuploader "docs", ".yardopts", "yard", docs_staging_bucket, []
+    do_docuploader type: "docs",
+                   yardopts_file: ".yardopts",
+                   task_name: "yard",
+                   staging_bucket: docs_staging_bucket,
+                   docuploader_args: [],
+                   dry_run: dry_run
   end
 
-  def publish_rad
+  def publish_rad dry_run: false
     logger.info "**** Starting publish_rad for #{gem_name}"
-    do_docuploader "rad", ".yardopts-cloudrad", "cloudrad", rad_staging_bucket, ["--destination-prefix", "docfx"]
+    do_docuploader type: "rad",
+                   yardopts_file: ".yardopts-cloudrad",
+                   task_name: "cloudrad",
+                   staging_bucket: rad_staging_bucket,
+                   docuploader_args: ["--destination-prefix", "docfx"],
+                   dry_run: dry_run
   end
 
-  def do_docuploader type, yardopts_file, task_name, staging_bucket, docuploader_args
+  def do_docuploader type:, yardopts_file:, task_name:, staging_bucket:, docuploader_args:, dry_run: false
     Dir.chdir gem_dir do
       unless File.file? yardopts_file
         logger.warn "**** No #{yardopts_file} file present. Skipping #{type} upload of #{gem_name}"
@@ -240,7 +240,7 @@ class Performer
           logger.warn "**** No credentials available. Skipping #{type} upload of #{gem_name}"
           return
         end
-        if dry_run?
+        if dry_run
           logger.warn "**** In dry run mode. Skipping #{type} upload of #{gem_name}"
           return
         end
@@ -255,7 +255,7 @@ class Performer
     end
   end
 
-  def publish_ghpages
+  def publish_ghpages dry_run: false
     logger.info "**** Starting publish_ghpages for #{gem_name}"
     logger.warn "Not yet implemented"
     # TODO
