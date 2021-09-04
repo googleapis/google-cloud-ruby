@@ -94,6 +94,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent_full_resource_name, :string, 19
       repeated :versioned_resources, :message, 16, "google.cloud.asset.v1.VersionedResource"
       repeated :attached_resources, :message, 20, "google.cloud.asset.v1.AttachedResource"
+      map :relationships, :string, :message, 21, "google.cloud.asset.v1.RelatedResources"
       optional :parent_asset_type, :string, 103
     end
     add_message "google.cloud.asset.v1.VersionedResource" do
@@ -103,6 +104,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.asset.v1.AttachedResource" do
       optional :asset_type, :string, 1
       repeated :versioned_resources, :message, 3, "google.cloud.asset.v1.VersionedResource"
+    end
+    add_message "google.cloud.asset.v1.RelatedResources" do
+      repeated :related_resources, :message, 1, "google.cloud.asset.v1.RelatedResource"
+    end
+    add_message "google.cloud.asset.v1.RelatedResource" do
+      optional :asset_type, :string, 1
+      optional :full_resource_name, :string, 2
     end
     add_message "google.cloud.asset.v1.IamPolicySearchResult" do
       optional :resource, :string, 1
@@ -186,6 +194,8 @@ module Google
         ResourceSearchResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ResourceSearchResult").msgclass
         VersionedResource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.VersionedResource").msgclass
         AttachedResource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AttachedResource").msgclass
+        RelatedResources = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.RelatedResources").msgclass
+        RelatedResource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.RelatedResource").msgclass
         IamPolicySearchResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicySearchResult").msgclass
         IamPolicySearchResult::Explanation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicySearchResult.Explanation").msgclass
         IamPolicySearchResult::Explanation::Permissions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions").msgclass
