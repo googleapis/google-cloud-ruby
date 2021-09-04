@@ -58,6 +58,35 @@
           }
         }
       }
+    },
+    "OsConfigZonalService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::OsConfig::V1::OsConfigZonalService::Client",
+          "rpcs": {
+            "GetInventory": {
+              "methods": [
+                "get_inventory"
+              ]
+            },
+            "ListInventories": {
+              "methods": [
+                "list_inventories"
+              ]
+            },
+            "GetVulnerabilityReport": {
+              "methods": [
+                "get_vulnerability_report"
+              ]
+            },
+            "ListVulnerabilityReports": {
+              "methods": [
+                "list_vulnerability_reports"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }
