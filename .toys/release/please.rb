@@ -159,11 +159,11 @@ def default_repo_url
 end
 
 def default_github_token
+  value = ENV["GITHUB_TOKEN"].to_s
+  return value unless value.empty?
   result = exec ["gh", "auth", "status", "-t"], out: :capture, err: :capture
   match = /Token: (\w+)/.match(result.captured_out + result.captured_err)
   return match[1] if match
-  value = ENV["GITHUB_TOKEN"].to_s
-  return value unless value.empty?
   nil
 end
 
