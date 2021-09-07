@@ -1,5 +1,12 @@
 # Release History
 
+### 0.17.0 / 2021-09-07
+
+#### Features
+
+* Support for OsConfig inventory name and update time
+* Support for relationships in resource search results
+
 ### 0.16.0 / 2021-08-31
 
 #### Features
