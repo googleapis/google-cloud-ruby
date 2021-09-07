@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 / 2021-09-07
+
+#### Features
+
+* Support for the check_compatibility RPC
+
 ### 0.2.1 / 2021-08-11
 
 #### Bug Fixes
