@@ -1,5 +1,21 @@
 # Release History
 
+### 0.4.0 / 2021-09-07
+
+#### Features
+
+* Support setting the ID in create_capacity_commitment and create_assignment
+* Support for force-deleting capacity commitments
+* Deprecated search_assignments call and added search_all_assignments as replacement
+* Added creation and update time fields to Reservation
+* Added start time field to CapacityCommitment
+* Added ML_EXTERNAL job type
+
+#### Bug Fixes
+
+* Update RPC timeout settings
+* Fixed a typo in the paths returned by the bi_reservation_path helper
+
 ### 0.3.3 / 2021-08-11
 
 #### Bug Fixes
