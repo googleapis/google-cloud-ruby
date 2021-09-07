@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 / 2021-09-07
+
+#### Features
+
+* Support OsConfigZonalService including inventory and vulnerability report calls
+
 ### 0.5.0 / 2021-08-31
 
 #### Features
