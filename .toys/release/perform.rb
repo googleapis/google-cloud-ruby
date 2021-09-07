@@ -153,7 +153,7 @@ class Performer
 
   def run force_republish: false,
           enable_docs: false,
-          enable_rad: false
+          enable_rad: false,
           enable_ghpages: false,
           dry_run: false
     if !force_republish && !needs_gem_publish?
