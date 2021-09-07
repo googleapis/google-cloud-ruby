@@ -54,6 +54,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.channel.v1.DeleteCustomerRequest" do
       optional :name, :string, 1
     end
+    add_message "google.cloud.channel.v1.ImportCustomerRequest" do
+      optional :parent, :string, 1
+      optional :auth_token, :string, 4
+      optional :overwrite_if_exists, :bool, 5
+      optional :channel_partner_id, :string, 6
+      optional :customer, :string, 7
+      oneof :customer_identity do
+        optional :domain, :string, 2
+        optional :cloud_identity_id, :string, 3
+      end
+    end
     add_message "google.cloud.channel.v1.ProvisionCloudIdentityRequest" do
       optional :customer, :string, 1
       optional :cloud_identity_info, :message, 2, "google.cloud.channel.v1.CloudIdentityInfo"
@@ -309,6 +320,7 @@ module Google
         CreateCustomerRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.CreateCustomerRequest").msgclass
         UpdateCustomerRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.UpdateCustomerRequest").msgclass
         DeleteCustomerRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.DeleteCustomerRequest").msgclass
+        ImportCustomerRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ImportCustomerRequest").msgclass
         ProvisionCloudIdentityRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ProvisionCloudIdentityRequest").msgclass
         ListEntitlementsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListEntitlementsRequest").msgclass
         ListEntitlementsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.channel.v1.ListEntitlementsResponse").msgclass
