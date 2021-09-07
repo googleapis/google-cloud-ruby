@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.2 / 2021-09-07
+
+#### Features
+
+* Updated documentation for long-running calls
+
 ### 0.11.1 / 2021-08-11
 
 #### Bug Fixes
