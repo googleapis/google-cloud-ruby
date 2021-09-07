@@ -2,7 +2,7 @@
 
 ### 0.11.2 / 2021-09-07
 
-#### Features
+#### Documentation
 
 * Updated documentation for long-running calls
 
