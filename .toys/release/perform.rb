@@ -134,7 +134,6 @@ class Performer
     @docs_staging_bucket = docs_staging_bucket
     @rad_staging_bucket = rad_staging_bucket
     @docuploader_credentials = docuploader_credentials
-    @dry_run = dry_run ? true : false
     @current_rubygems_version = Gem::Version.new last_version if last_version
     @bundle_updated = false
   end
