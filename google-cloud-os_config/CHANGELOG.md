@@ -5,8 +5,6 @@
 #### Features
 
 * Added method to construct a client for OsConfigZonalService
-  * feat: add OSConfigZonalService API Committer: @jaiminsh
-  * Depend on os_config-v1 0.6
 
 ### 1.1.2 / 2021-07-12
 
