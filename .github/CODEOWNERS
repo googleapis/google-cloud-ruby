@@ -18,7 +18,7 @@
 /google-cloud-pubsub*/.              @googleapis/yoshi-ruby @googleapis/api-pubsub
 /google-cloud-spanner*/              @googleapis/yoshi-ruby @googleapis/api-spanner-ruby
 /google-cloud-speech*/.              @googleapis/yoshi-ruby @googleapis/ml-apis
-/google-cloud-storage/               @googleapis/yoshi-ruby @googleapis/storage-dpe
+/google-cloud-storage/               @googleapis/yoshi-ruby @googleapis/cloud-storage-dpe
 /google-cloud-talent*/.              @googleapis/yoshi-ruby @googleapis/ml-apis
 /google-cloud-text_to_speech*/.      @googleapis/yoshi-ruby @googleapis/ml-apis
 /google-cloud-translate*/.           @googleapis/yoshi-ruby @googleapis/ml-apis
