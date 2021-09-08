@@ -271,10 +271,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone where the network endpoint group is located. It should comply with RFC1035.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def attach_network_endpoints request, options = nil
@@ -301,6 +301,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @network_endpoint_groups_stub.attach_network_endpoints request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -342,10 +343,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone where the network endpoint group is located. It should comply with RFC1035.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def delete request, options = nil
@@ -372,6 +373,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @network_endpoint_groups_stub.delete request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -415,10 +417,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone where the network endpoint group is located. It should comply with RFC1035.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def detach_network_endpoints request, options = nil
@@ -445,6 +447,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @network_endpoint_groups_stub.detach_network_endpoints request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -551,10 +554,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone where you want to create the network endpoint group. It should comply with RFC1035.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def insert request, options = nil
@@ -581,6 +584,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @network_endpoint_groups_stub.insert request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
