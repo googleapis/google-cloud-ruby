@@ -46,7 +46,7 @@ class QueryParamsSmokeTest < Minitest::Test
     }
 
     begin
-      stdout.puts "inserting instance template #{template_name}"
+      $stdout.puts "inserting instance template #{template_name}"
       operation = @templates_client.insert project: @default_project, instance_template_resource: template_resource
       wait_for_global_op operation, "insert instance template #{template_name}"
 
@@ -57,7 +57,7 @@ class QueryParamsSmokeTest < Minitest::Test
         name: igm_name
       }
 
-      stdout.puts "inserting instance_group_manager #{igm_resource[:name]}"
+      $stdout.puts "inserting instance_group_manager #{igm_resource[:name]}"
       op = @igm_client.insert project: @default_project, zone: @default_zone, instance_group_manager_resource: igm_resource
       wait_for_zonal_op op, "insert instance_group_manager #{igm_resource[:name]}"
 
@@ -77,7 +77,7 @@ class QueryParamsSmokeTest < Minitest::Test
       igm = @igm_client.get project: @default_project, zone: @default_zone, instance_group_manager: igm_name
       assert_equal igm.target_size, 0
     ensure
-      stdout.puts "deleting instance_group_manager #{igm_name}"
+      $stdout.puts "deleting instance_group_manager #{igm_name}"
       del_op = @igm_client.delete project: @default_project, zone: @default_zone, instance_group_manager: igm_name
       wait_for_zonal_op del_op, "delete instance_group_manager #{igm_name}"
 
@@ -91,7 +91,7 @@ class QueryParamsSmokeTest < Minitest::Test
 
   def wait_for_global_op operation, op_type
     operation = operation.operation
-    stdout.puts "Waiting for global #{op_type} operation #{operation.name}."
+    $stdout.puts "Waiting for global #{op_type} operation #{operation.name}."
     starttime = Time.now
     while (operation.status != :DONE) && (Time.now < starttime + 100)
       operation = @global_ops_client.get operation: operation.name, project: @default_project
