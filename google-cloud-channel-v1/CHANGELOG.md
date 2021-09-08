@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 / 2021-09-08
+
+#### Features
+
+* Support for import_customer RPC
+
 ### 0.7.2 / 2021-08-11
 
 #### Bug Fixes
