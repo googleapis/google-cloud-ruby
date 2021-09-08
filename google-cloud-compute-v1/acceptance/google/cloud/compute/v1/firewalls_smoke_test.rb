@@ -21,14 +21,14 @@ class FirewallsSmokeTest < Minitest::Test
   end
 
   def test_create_fetch
-    # we want to test here a field like 'IPProtocol'
+    # we want to test here a field like IPProtocol
     resource = {
       name: @name,
-      source_ranges: ['0.0.0.0/0'],
+      source_ranges: ["0.0.0.0/0"],
       allowed: [
         {
-          I_p_protocol: 'tcp',
-          ports: ['80'],
+          I_p_protocol: "tcp",
+          ports: ["80"],
         },
       ],
     }
@@ -36,7 +36,7 @@ class FirewallsSmokeTest < Minitest::Test
     @client_ops.wait operation: operation.name, project: @default_project
     @firewalls.append @name
     fetched = @client.get project: @default_project, firewall: @name
-    assert_equal 'tcp', fetched.allowed[0].I_p_protocol
+    assert_equal "tcp", fetched.allowed[0].I_p_protocol
   end
 
 end
