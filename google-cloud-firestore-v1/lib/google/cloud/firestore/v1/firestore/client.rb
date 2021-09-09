@@ -384,12 +384,6 @@ module Google
 
               header_params = {}
               if request.parent
-                regex_match = %r{^(?<database>projects/[^/]+/databases/[^/]+)/documents/?$}.match request.parent
-                if regex_match
-                  header_params["database"] = regex_match["database".to_s]
-                end
-              end
-              if request.parent
                 regex_match = %r{^(?<database>projects/[^/]+/databases/[^/]+)/documents/[^/]+(?:/.*)?$}.match request.parent
                 if regex_match
                   header_params["database"] = regex_match["database".to_s]
@@ -446,7 +440,7 @@ module Google
             #     deleted from the document on the server.
             #   @param mask [::Google::Cloud::Firestore::V1::DocumentMask, ::Hash]
             #     The fields to return. If not set, returns all fields.
-            #
+            #     rpc RunQuery
             #     If the document has a field that is not present in this mask, that field
             #     will not be returned in the response.
             #   @param current_document [::Google::Cloud::Firestore::V1::Precondition, ::Hash]
