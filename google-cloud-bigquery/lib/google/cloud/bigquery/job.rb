@@ -74,8 +74,8 @@ module Google
         ##
         # The ID of the job.
         #
-        # @return [String] The ID must contain only letters (a-z, A-Z), numbers
-        #   (0-9), underscores (_), or dashes (-). The maximum length is 1,024
+        # @return [String] The ID must contain only letters (`[A-Za-z]`), numbers
+        #   (`[0-9]`), underscores (`_`), or dashes (`-`). The maximum length is 1,024
         #   characters.
         #
         def job_id
