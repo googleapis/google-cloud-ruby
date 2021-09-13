@@ -38,7 +38,7 @@ describe "LanguageServiceSmokeTest v1" do
     err.status_details[0].field_violations[0].field.must_equal "document.language"
     err.status_details[0].field_violations[0].description.must_match /document language is not valid/
 
-    # Since ErrorInfo is not present, the field surfaced from it should be nil
+    # Since ErrorInfo is not present, the fields surfaced from it should be nil
     err.reason.must_be_nil
     err.domain.must_be_nil
     err.error_metadata.must_be_nil
