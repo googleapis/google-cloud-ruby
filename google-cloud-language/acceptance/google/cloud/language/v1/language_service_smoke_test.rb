@@ -33,12 +33,19 @@ describe "LanguageServiceSmokeTest v1" do
     err = ->{ language_service_client.analyze_sentiment(document: document) }.must_raise ::Google::Cloud::Error
     err.code.must_equal 3
     err.details.must_match /document.language is not valid/
+    
+    # Decoding BadRequest.FieldViolation from RPC error metadata
     err.status_details[0].field_violations[0].field.must_equal "document.language"
     err.status_details[0].field_violations[0].description.must_match /document language is not valid/
+
+    # Since ErrorInfo is not present, the field surfaced from it should be nil
+    err.reason.must_be_nil
+    err.domain.must_be_nil
+    err.error_metadata.must_be_nil
   end
 
   it "surfaces error code, message, and status details 2" do
-    language_service_client = Google::Cloud::Language.language_service version: :v1  do |config|
+    language_service_client = Google::Cloud::Language.language_service version: :v1 do |config|
       config.quota_project = "this_project_does_not_exist"
     end
     document = { content: "This is a test", type: :PLAIN_TEXT, language: "zz" }
@@ -47,14 +54,14 @@ describe "LanguageServiceSmokeTest v1" do
     
     err_infos = err.status_details.find_all { |status| status.is_a? ::Google::Rpc::ErrorInfo }
     err_infos.length.must_equal 1
-    
+
+    # Since ErrorInfo is present, its fields should be surfaced to the wrapper
     err_info = err_infos[0]
     err_info.reason.must_match /PROJECT_DENIED/
-
+    
     err.reason.must_match err_info.reason
     err.domain.must_match err_info.domain
     err.error_metadata.must_be_kind_of Hash
-
 
     err_info.metadata.each do |key, value|
       err.error_metadata.key?(key).must_equal true

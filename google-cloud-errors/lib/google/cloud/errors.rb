@@ -143,7 +143,7 @@ module Google
       #
       # @return [Object, nil]
       def domain
-        return nill unless error_info.respond_to? :domain
+        return nil unless error_info.respond_to? :domain
         error_info.domain
       end
 
