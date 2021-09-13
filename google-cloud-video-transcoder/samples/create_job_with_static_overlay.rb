@@ -31,6 +31,8 @@ def create_job_with_static_overlay project_id:, location:, input_uri:, overlay_i
 
   # Build the job config.
   new_job = {
+    input_uri: input_uri,
+    output_uri: output_uri,
     config: {
       elementary_streams: [
         {
@@ -96,8 +98,6 @@ def create_job_with_static_overlay project_id:, location:, input_uri:, overlay_i
       ]
     }
   }
-  new_job[:input_uri] = input_uri
-  new_job[:output_uri] = output_uri
 
   job = client.create_job parent: parent, job: new_job
 

@@ -30,6 +30,8 @@ def create_job_with_set_number_images_spritesheet project_id:, location:, input_
 
   # Build the job config.
   new_job = {
+    input_uri: input_uri,
+    output_uri: output_uri,
     config: {
       elementary_streams: [
         {
@@ -81,8 +83,6 @@ def create_job_with_set_number_images_spritesheet project_id:, location:, input_
       ]
     }
   }
-  new_job[:input_uri] = input_uri
-  new_job[:output_uri] = output_uri
 
   job = client.create_job parent: parent, job: new_job
 
