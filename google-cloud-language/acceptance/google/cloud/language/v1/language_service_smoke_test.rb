@@ -44,7 +44,7 @@ describe "LanguageServiceSmokeTest v1" do
     err.error_metadata.must_be_nil
   end
 
-  it "surfaces error code, message, and status details 2" do
+  it "surfaces ErrorInfo fields if present" do
     language_service_client = Google::Cloud::Language.language_service version: :v1 do |config|
       config.quota_project = "this_project_does_not_exist"
     end
