@@ -126,10 +126,14 @@ module Google
       #
       # @return [::Google::Rpc::ErrorInfo, nil]
       def error_info
-        return nil unless status_details.is_a? Array
-        error_infos = status_details.find_all { |status| status.is_a?(::Google::Rpc::ErrorInfo) }
-        return nil unless error_infos.length == 1
-        error_infos[0]
+        @error_info ||= begin
+          if status_details.is_a? Array
+            error_infos = status_details.find_all { |status| status.is_a?(::Google::Rpc::ErrorInfo) }
+            if error_infos.length == 1
+              error_infos[0]
+            end
+          end
+        end
       end
 
       ##
