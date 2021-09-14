@@ -1,5 +1,11 @@
 # Release History
 
+### 1.35.1 / 2021-09-14
+
+#### Documentation
+
+* Wrap character class regex in backticks
+
 ### 1.35.0 / 2021-08-12
 
 #### Features
