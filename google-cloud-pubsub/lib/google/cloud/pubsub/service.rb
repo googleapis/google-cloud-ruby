@@ -174,7 +174,9 @@ module Google
         # The messages parameter is an array of arrays.
         # The first element is the data, second is attributes hash.
         def publish topic, messages
-          publisher.publish topic: topic_path(topic), messages: messages
+          execute retries: true do
+            publisher.publish topic: topic_path(topic), messages: messages
+          end
         end
 
         ##
@@ -475,6 +477,59 @@ module Google
             policy.max_delivery_attempts = options[:dead_letter_max_delivery_attempts]
           end
           policy
+        end
+
+        ##
+        # @param retries [Boolean,Hash,nil] If Boolean, whether to attempt retries with default options.
+        #   If Hash, the options for retries. If nil, retries will not be attempted.
+        #
+        def execute retries: nil, &block
+          retries = {} if retries == true
+          if retries
+            Retries.new(retries).execute(&block)
+          else
+            yield
+          end
+        end
+
+        class Retries
+          class << self
+            attr_accessor :sleep_for
+          end
+          self.sleep_for = lambda do |delay|
+            sleep delay
+          end
+
+          def initialize retry_options
+            @retry_options = retry_options
+            @retries = retry_options[:retries] || 5
+            @retryable_errors = retry_options[:retryable_errors] || [Google::Cloud::UnavailableError]
+            @delay = 0.1
+            @delay_multiplier = 1.3
+            @max_delay = 60.0
+          end
+
+          def execute
+            current_retries = 0
+            loop do
+              return yield
+            rescue Google::Cloud::Error => e
+              raise e unless retry? e, current_retries
+
+              @delay = [@delay * @delay_multiplier, @max_delay].min
+              Retries.sleep_for.call @delay
+              current_retries += 1
+            end
+          end
+
+          protected
+
+          def retry? err, current_retries
+            if current_retries < @retries && @retryable_errors.include?(err.class)
+              return true
+            end
+            false
+          end
         end
       end
     end
