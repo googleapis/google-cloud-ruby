@@ -29,7 +29,7 @@ class ImagesSmokeTest < Minitest::Test
         "projects/debian-cloud/global/images/debian-10-buster-v20210721",
     }
     operation = @client.insert project: @default_project, image_resource: resource
-    @client_ops.wait operation: operation.name, project: @default_project
+    @client_ops.wait operation: operation.operation.name, project: @default_project
     @images.append @name
     fetched = @client.get project: @default_project, image: @name
     assert_equal 5543610867827062957, fetched.license_codes[0]

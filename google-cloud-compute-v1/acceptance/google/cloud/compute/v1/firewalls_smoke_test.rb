@@ -33,7 +33,7 @@ class FirewallsSmokeTest < Minitest::Test
       ],
     }
     operation = @client.insert project: @default_project, firewall_resource: resource
-    @client_ops.wait operation: operation.name, project: @default_project
+    @client_ops.wait operation: operation.operation.name, project: @default_project
     @firewalls.append @name
     fetched = @client.get project: @default_project, firewall: @name
     assert_equal "tcp", fetched.allowed[0].I_p_protocol
