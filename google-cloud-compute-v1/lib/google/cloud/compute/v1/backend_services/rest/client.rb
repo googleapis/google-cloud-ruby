@@ -189,10 +189,10 @@ module Google
               #   @param signed_url_key_resource [::Google::Cloud::Compute::V1::SignedUrlKey, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def add_signed_url_key request, options = nil
@@ -219,6 +219,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @backend_services_stub.add_signed_url_key request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -342,10 +343,10 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def delete request, options = nil
@@ -372,6 +373,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @backend_services_stub.delete request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -413,10 +415,10 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def delete_signed_url_key request, options = nil
@@ -443,6 +445,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @backend_services_stub.delete_signed_url_key request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -613,10 +616,10 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def insert request, options = nil
@@ -643,6 +646,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @backend_services_stub.insert request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -766,10 +770,10 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def patch request, options = nil
@@ -796,6 +800,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @backend_services_stub.patch request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -837,10 +842,10 @@ module Google
               #   @param security_policy_reference_resource [::Google::Cloud::Compute::V1::SecurityPolicyReference, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_security_policy request, options = nil
@@ -867,6 +872,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @backend_services_stub.set_security_policy request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -908,10 +914,10 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def update request, options = nil
@@ -938,6 +944,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @backend_services_stub.update request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
