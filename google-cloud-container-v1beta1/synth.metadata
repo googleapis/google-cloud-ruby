@@ -4,15 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "b2044315a3019250e6eb17a311593b0dc9480a8d"
+        "sha": "c989ea408272876723f48e54b20413549e5d5026"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e9da6f8b469c52b83f900e820be30762e9e05c57",
-        "internalRef": "393476621"
+        "sha": "a27fb7a8923743e1b68c094a07d5c1b9175ac47a"
       }
     }
   ],
@@ -60,6 +59,7 @@
     "proto_docs/google/protobuf/wrappers.rb",
     "proto_docs/google/rpc/code.rb",
     "proto_docs/google/rpc/status.rb",
+    "proto_docs/google/type/date.rb",
     "test/google/cloud/container/v1beta1/cluster_manager_paths_test.rb",
     "test/google/cloud/container/v1beta1/cluster_manager_test.rb",
     "test/helper.rb"
