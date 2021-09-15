@@ -860,7 +860,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_jobs(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, histogram_queries: nil, job_view: nil, offset: nil, max_page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil)
+            # @overload search_jobs(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, histogram_queries: nil, job_view: nil, offset: nil, max_page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil, keyword_match_mode: nil)
             #   Pass arguments to `search_jobs` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1068,6 +1068,14 @@ module Google
             #     Controls over how job documents get ranked on top of existing relevance
             #     score (determined by API algorithm).
             #   @param disable_keyword_match [::Boolean]
+            #     This field is deprecated. Please use
+            #     {::Google::Cloud::Talent::V4::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} going forward.
+            #
+            #     To migrate, disable_keyword_match set to false maps to
+            #     {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL}, and disable_keyword_match set to
+            #     true maps to {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_DISABLED KeywordMatchMode.KEYWORD_MATCH_DISABLED}. If
+            #     {::Google::Cloud::Talent::V4::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} is set, this field is ignored.
+            #
             #     Controls whether to disable exact keyword match on {::Google::Cloud::Talent::V4::Job#title Job.title},
             #     {::Google::Cloud::Talent::V4::Job#description Job.description}, {::Google::Cloud::Talent::V4::Job#company_display_name Job.company_display_name}, {::Google::Cloud::Talent::V4::Job#addresses Job.addresses},
             #     {::Google::Cloud::Talent::V4::Job#qualifications Job.qualifications}. When disable keyword match is turned off, a
@@ -1087,6 +1095,12 @@ module Google
             #     requests.
             #
             #     Defaults to false.
+            #   @param keyword_match_mode [::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode]
+            #     Controls what keyword match options to use. If both keyword_match_mode and
+            #     disable_keyword_match are set, keyword_match_mode will take precedence.
+            #
+            #     Defaults to {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL} if no value
+            #     is specified.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Talent::V4::SearchJobsResponse]
@@ -1157,7 +1171,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_jobs_for_alert(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, histogram_queries: nil, job_view: nil, offset: nil, max_page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil)
+            # @overload search_jobs_for_alert(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, histogram_queries: nil, job_view: nil, offset: nil, max_page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil, keyword_match_mode: nil)
             #   Pass arguments to `search_jobs_for_alert` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1365,6 +1379,14 @@ module Google
             #     Controls over how job documents get ranked on top of existing relevance
             #     score (determined by API algorithm).
             #   @param disable_keyword_match [::Boolean]
+            #     This field is deprecated. Please use
+            #     {::Google::Cloud::Talent::V4::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} going forward.
+            #
+            #     To migrate, disable_keyword_match set to false maps to
+            #     {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL}, and disable_keyword_match set to
+            #     true maps to {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_DISABLED KeywordMatchMode.KEYWORD_MATCH_DISABLED}. If
+            #     {::Google::Cloud::Talent::V4::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} is set, this field is ignored.
+            #
             #     Controls whether to disable exact keyword match on {::Google::Cloud::Talent::V4::Job#title Job.title},
             #     {::Google::Cloud::Talent::V4::Job#description Job.description}, {::Google::Cloud::Talent::V4::Job#company_display_name Job.company_display_name}, {::Google::Cloud::Talent::V4::Job#addresses Job.addresses},
             #     {::Google::Cloud::Talent::V4::Job#qualifications Job.qualifications}. When disable keyword match is turned off, a
@@ -1384,6 +1406,12 @@ module Google
             #     requests.
             #
             #     Defaults to false.
+            #   @param keyword_match_mode [::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode]
+            #     Controls what keyword match options to use. If both keyword_match_mode and
+            #     disable_keyword_match are set, keyword_match_mode will take precedence.
+            #
+            #     Defaults to {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL} if no value
+            #     is specified.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Talent::V4::SearchJobsResponse]

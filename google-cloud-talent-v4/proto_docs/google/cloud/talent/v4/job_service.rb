@@ -370,6 +370,14 @@ module Google
         #     score (determined by API algorithm).
         # @!attribute [rw] disable_keyword_match
         #   @return [::Boolean]
+        #     This field is deprecated. Please use
+        #     {::Google::Cloud::Talent::V4::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} going forward.
+        #
+        #     To migrate, disable_keyword_match set to false maps to
+        #     {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL}, and disable_keyword_match set to
+        #     true maps to {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_DISABLED KeywordMatchMode.KEYWORD_MATCH_DISABLED}. If
+        #     {::Google::Cloud::Talent::V4::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} is set, this field is ignored.
+        #
         #     Controls whether to disable exact keyword match on {::Google::Cloud::Talent::V4::Job#title Job.title},
         #     {::Google::Cloud::Talent::V4::Job#description Job.description}, {::Google::Cloud::Talent::V4::Job#company_display_name Job.company_display_name}, {::Google::Cloud::Talent::V4::Job#addresses Job.addresses},
         #     {::Google::Cloud::Talent::V4::Job#qualifications Job.qualifications}. When disable keyword match is turned off, a
@@ -389,6 +397,13 @@ module Google
         #     requests.
         #
         #     Defaults to false.
+        # @!attribute [rw] keyword_match_mode
+        #   @return [::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode]
+        #     Controls what keyword match options to use. If both keyword_match_mode and
+        #     disable_keyword_match are set, keyword_match_mode will take precedence.
+        #
+        #     Defaults to {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL} if no value
+        #     is specified.
         class SearchJobsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -415,7 +430,7 @@ module Google
           #     integer/double value or an expression that can be evaluated to a number.
           #
           #     Parenthesis are supported to adjust calculation precedence. The
-          #     expression must be < 100 characters in length.
+          #     expression must be < 200 characters in length.
           #
           #     The expression is considered invalid for a job if the expression
           #     references custom attributes that are not populated on the job or if the
@@ -490,6 +505,11 @@ module Google
           # clustered so that only one representative job of the cluster is
           # displayed to the job seeker higher up in the results, with the other jobs
           # being displayed lower down in the results.
+          #
+          # If you are using pageToken to page through the result set,
+          # latency might be lower but we can't guarantee that all results are
+          # returned. If you are using page offset, latency might be higher but all
+          # results are returned.
           module DiversificationLevel
             # The diversification level isn't specified.
             DIVERSIFICATION_LEVEL_UNSPECIFIED = 0
@@ -501,11 +521,57 @@ module Google
 
             # Default diversifying behavior. The result list is ordered so that
             # highly similar results are pushed to the end of the last page of search
-            # results. If you are using pageToken to page through the result set,
-            # latency might be lower but we can't guarantee that all results are
-            # returned. If you are using page offset, latency might be higher but all
-            # results are returned.
+            # results.
             SIMPLE = 2
+
+            # Only one job from the same company will be shown at once, other jobs
+            # under same company are pushed to the end of the last page of search
+            # result.
+            ONE_PER_COMPANY = 3
+
+            # Similar to ONE_PER_COMPANY, but it allows at most two jobs in the
+            # same company to be shown at once, the other jobs under same company are
+            # pushed to the end of the last page of search result.
+            TWO_PER_COMPANY = 4
+
+            # The result list is ordered such that somewhat similar results are pushed
+            # to the end of the last page of the search results. This option is
+            # recommended if SIMPLE diversification does not diversify enough.
+            DIVERSIFY_BY_LOOSER_SIMILARITY = 5
+          end
+
+          # Controls what keyword matching behavior the search has. When keyword
+          # matching is enabled, a keyword match returns jobs that may not match given
+          # category filters when there are matching keywords. For example, for the
+          # query "program manager" with KeywordMatchMode set to KEYWORD_MATCH_ALL, a
+          # job posting with the title "software developer," which doesn't fall into
+          # "program manager" ontology, and "program manager" appearing in its
+          # description will be surfaced.
+          #
+          # For queries like "cloud" that don't contain title or
+          # location specific ontology, jobs with "cloud" keyword matches are returned
+          # regardless of this enum's value.
+          #
+          # Use {::Google::Cloud::Talent::V4::Company#keyword_searchable_job_custom_attributes Company.keyword_searchable_job_custom_attributes} if
+          # company-specific globally matched custom field/attribute string values are
+          # needed. Enabling keyword match improves recall of subsequent search
+          # requests.
+          module KeywordMatchMode
+            # The keyword match option isn't specified. Defaults to
+            # {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL} behavior.
+            KEYWORD_MATCH_MODE_UNSPECIFIED = 0
+
+            # Disables keyword matching.
+            KEYWORD_MATCH_DISABLED = 1
+
+            # Enable keyword matching over {::Google::Cloud::Talent::V4::Job#title Job.title},
+            # {::Google::Cloud::Talent::V4::Job#description Job.description}, {::Google::Cloud::Talent::V4::Job#company_display_name Job.company_display_name}, {::Google::Cloud::Talent::V4::Job#addresses Job.addresses},
+            # {::Google::Cloud::Talent::V4::Job#qualifications Job.qualifications}, and keyword searchable {::Google::Cloud::Talent::V4::Job#custom_attributes Job.custom_attributes}
+            # fields.
+            KEYWORD_MATCH_ALL = 2
+
+            # Only enable keyword matching over {::Google::Cloud::Talent::V4::Job#title Job.title}.
+            KEYWORD_MATCH_TITLE_ONLY = 3
           end
         end
 
