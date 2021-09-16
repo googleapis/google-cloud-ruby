@@ -59,6 +59,11 @@ module Google
           #     request_stream_count values *may* result in this list being unpopulated,
           #     in that case, the user will need to use a List method to get the streams
           #     instead, which is not yet available.
+          # @!attribute [r] estimated_total_bytes_scanned
+          #   @return [::Integer]
+          #     Output only. An estimate on the number of bytes this session will scan when
+          #     all streams are completely consumed. This estimate is based on
+          #     metadata from the table which might be incomplete or stale.
           class ReadSession
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -53,7 +53,7 @@ module Google
               # limits are enforced based on the number of pre-filtered rows, so some
               # filters can lead to lopsided assignments.
               #
-              # Read sessions automatically expire 24 hours after they are created and do
+              # Read sessions automatically expire 6 hours after they are created and do
               # not require manual clean-up by the caller.
               rpc :CreateReadSession, ::Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest, ::Google::Cloud::Bigquery::Storage::V1::ReadSession
               # Reads rows from the stream in the format prescribed by the ReadSession.
