@@ -41,12 +41,17 @@ module Google
         #     "projects/\\{project}/assessments/\\{assessment}".
         # @!attribute [rw] annotation
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Annotation]
-        #     Required. The annotation that will be assigned to the Event.
+        #     Optional. The annotation that will be assigned to the Event. This field can be left
+        #     empty to provide reasons that apply to an event without concluding whether
+        #     the event is legitimate or fraudulent.
+        # @!attribute [rw] reasons
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Reason>]
+        #     Optional. Optional reasons for the annotation that will be assigned to the Event.
         class AnnotateAssessmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Enum that reprensents the types of annotations.
+          # Enum that represents the types of annotations.
           module Annotation
             # Default unspecified type.
             ANNOTATION_UNSPECIFIED = 0
@@ -58,12 +63,47 @@ module Google
             FRAUDULENT = 2
 
             # Provides information that the event was related to a login event in which
-            # the user typed the correct password.
+            # the user typed the correct password. Deprecated, prefer indicating
+            # CORRECT_PASSWORD through the reasons field instead.
             PASSWORD_CORRECT = 3
 
             # Provides information that the event was related to a login event in which
-            # the user typed the incorrect password.
+            # the user typed the incorrect password. Deprecated, prefer indicating
+            # INCORRECT_PASSWORD through the reasons field instead.
             PASSWORD_INCORRECT = 4
+          end
+
+          # Enum that represents potential reasons for annotating an assessment.
+          module Reason
+            # Default unspecified reason.
+            REASON_UNSPECIFIED = 0
+
+            # Indicates a chargeback for fraud was issued for the transaction
+            # associated with the assessment.
+            CHARGEBACK = 1
+
+            # Indicates the transaction associated with the assessment is suspected of
+            # being fraudulent based on the payment method, billing details, shipping
+            # address or other transaction information.
+            PAYMENT_HEURISTICS = 2
+
+            # Indicates that the user was served a 2FA challenge. An old assessment
+            # with `ENUM_VALUES.INITIATED_TWO_FACTOR` reason that has not been
+            # overwritten with `PASSED_TWO_FACTOR` is treated as an abandoned 2FA flow.
+            # This is equivalent to `FAILED_TWO_FACTOR`.
+            INITIATED_TWO_FACTOR = 7
+
+            # Indicates that the user passed a 2FA challenge.
+            PASSED_TWO_FACTOR = 3
+
+            # Indicates that the user failed a 2FA challenge.
+            FAILED_TWO_FACTOR = 4
+
+            # Indicates the user provided the correct password.
+            CORRECT_PASSWORD = 5
+
+            # Indicates the user provided an incorrect password.
+            INCORRECT_PASSWORD = 6
           end
         end
 
@@ -130,7 +170,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # LINT.IfChange(classification_reason)
           # Reasons contributing to the risk analysis verdict.
           module ClassificationReason
             # Default unspecified type.
@@ -178,7 +217,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # LINT.IfChange
           # Enum that represents the types of invalid token reasons.
           module InvalidReason
             # Default unspecified type.
@@ -198,6 +236,10 @@ module Google
 
             # The user verification token was not present.
             MISSING = 5
+
+            # A retriable error (such as network failure) occurred on the browser.
+            # Could easily be simulated by an attacker.
+            BROWSER_ERROR = 6
           end
         end
 
@@ -261,7 +303,7 @@ module Google
         #     Required. The key to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Optional. The mask to control which field of the key get updated. If the mask is not
+        #     Optional. The mask to control which fields of the key get updated. If the mask is not
         #     present, all fields will be updated.
         class UpdateKeyRequest
           include ::Google::Protobuf::MessageExts
@@ -274,6 +316,48 @@ module Google
         #     Required. The name of the key to be deleted, in the format
         #     "projects/\\{project}/keys/\\{key}".
         class DeleteKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The migrate key request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the key to be migrated, in the format
+        #     "projects/\\{project}/keys/\\{key}".
+        class MigrateKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The get metrics request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the requested metrics, in the format
+        #     "projects/\\{project}/keys/\\{key}/metrics".
+        class GetMetricsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metrics for a single Key.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The name of the metrics, in the format
+        #     "projects/\\{project}/keys/\\{key}/metrics".
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Inclusive start time aligned to a day (UTC).
+        # @!attribute [rw] score_metrics
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::ScoreMetrics>]
+        #     Metrics will be continuous and in order by dates, and in the granularity
+        #     of day. All Key types should have score-based data.
+        # @!attribute [rw] challenge_metrics
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::ChallengeMetrics>]
+        #     Metrics will be continuous and in order by dates, and in the granularity
+        #     of day. Only challenge-based keys (CHECKBOX, INVISIBLE), will have
+        #     challenge-based data.
+        class Metrics
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -298,11 +382,14 @@ module Google
         #     Settings for keys that can be used by iOS apps.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. See <a href="https://cloud.google.com/recaptcha-enterprise/docs/labels">
+        #     See <a href="https://cloud.google.com/recaptcha-enterprise/docs/labels">
         #     Creating and managing labels</a>.
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The timestamp corresponding to the creation of this Key.
+        # @!attribute [rw] testing_options
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TestingOptions]
+        #     Options for user acceptance testing.
         class Key
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -314,6 +401,37 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Options for user acceptance testing.
+        # @!attribute [rw] testing_score
+        #   @return [::Float]
+        #     All assessments for this Key will return this score. Must be between 0
+        #     (likely not legitimate) and 1 (likely legitimate) inclusive.
+        # @!attribute [rw] testing_challenge
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TestingOptions::TestingChallenge]
+        #     For challenge-based keys only (CHECKBOX, INVISIBLE), all challenge requests
+        #     for this site will return nocaptcha if NOCAPTCHA, or an unsolvable
+        #     challenge if CHALLENGE.
+        class TestingOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enum that represents the challenge option for challenge-based (CHECKBOX,
+          # INVISIBLE) testing keys.
+          module TestingChallenge
+            # Perform the normal risk analysis and return either nocaptcha or a
+            # challenge depending on risk and trust factors.
+            TESTING_CHALLENGE_UNSPECIFIED = 0
+
+            # Challenge requests for this key will always return a nocaptcha, which
+            # does not require a solution.
+            NOCAPTCHA = 1
+
+            # Challenge requests for this key will always return an unsolvable
+            # challenge.
+            UNSOLVABLE_CHALLENGE = 2
           end
         end
 
@@ -330,6 +448,7 @@ module Google
         # @!attribute [rw] allow_amp_traffic
         #   @return [::Boolean]
         #     Required. Whether this key can be used on AMP (Accelerated Mobile Pages) websites.
+        #     This can only be set for the SCORE integration type.
         # @!attribute [rw] integration_type
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WebKeySettings::IntegrationType]
         #     Required. Describes how this key is integrated with the website.
@@ -380,6 +499,9 @@ module Google
         end
 
         # Settings specific to keys that can be used by Android apps.
+        # @!attribute [rw] allow_all_package_names
+        #   @return [::Boolean]
+        #     If set to true, it means allowed_package_names will not be enforced.
         # @!attribute [rw] allowed_package_names
         #   @return [::Array<::String>]
         #     Android package names of apps allowed to use the key.
@@ -390,11 +512,79 @@ module Google
         end
 
         # Settings specific to keys that can be used by iOS apps.
+        # @!attribute [rw] allow_all_bundle_ids
+        #   @return [::Boolean]
+        #     If set to true, it means allowed_bundle_ids will not be enforced.
         # @!attribute [rw] allowed_bundle_ids
         #   @return [::Array<::String>]
         #     iOS bundle ids of apps allowed to use the key.
         #     Example: 'com.companyname.productname.appname'
         class IOSKeySettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Score distribution.
+        # @!attribute [rw] score_buckets
+        #   @return [::Google::Protobuf::Map{::Integer => ::Integer}]
+        #     Map key is score value multiplied by 100. The scores are discrete values
+        #     between [0, 1]. The maximum number of buckets is on order of a few dozen,
+        #     but typically much lower (ie. 10).
+        class ScoreDistribution
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::Integer]
+          # @!attribute [rw] value
+          #   @return [::Integer]
+          class ScoreBucketsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Metrics related to scoring.
+        # @!attribute [rw] overall_metrics
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::ScoreDistribution]
+        #     Aggregated score metrics for all traffic.
+        # @!attribute [rw] action_metrics
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::RecaptchaEnterprise::V1::ScoreDistribution}]
+        #     Action-based metrics. The map key is the action name which specified by the
+        #     site owners at time of the "execute" client-side call.
+        #     Populated only for SCORE keys.
+        class ScoreMetrics
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::RecaptchaEnterprise::V1::ScoreDistribution]
+          class ActionMetricsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Metrics related to challenges.
+        # @!attribute [rw] pageload_count
+        #   @return [::Integer]
+        #     Count of reCAPTCHA checkboxes or badges rendered. This is mostly equivalent
+        #     to a count of pageloads for pages that include reCAPTCHA.
+        # @!attribute [rw] nocaptcha_count
+        #   @return [::Integer]
+        #     Count of nocaptchas (successful verification without a challenge) issued.
+        # @!attribute [rw] failed_count
+        #   @return [::Integer]
+        #     Count of submitted challenge solutions that were incorrect or otherwise
+        #     deemed suspicious such that a subsequent challenge was triggered.
+        # @!attribute [rw] passed_count
+        #   @return [::Integer]
+        #     Count of nocaptchas (successful verification without a challenge) plus
+        #     submitted challenge solutions that were correct and resulted in
+        #     verification.
+        class ChallengeMetrics
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -44,6 +44,16 @@
               "methods": [
                 "delete_key"
               ]
+            },
+            "MigrateKey": {
+              "methods": [
+                "migrate_key"
+              ]
+            },
+            "GetMetrics": {
+              "methods": [
+                "get_metrics"
+              ]
             }
           }
         }

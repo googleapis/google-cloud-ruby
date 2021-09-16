@@ -19,6 +19,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest" do
       optional :name, :string, 1
       optional :annotation, :enum, 2, "google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation"
+      repeated :reasons, :enum, 3, "google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason"
     end
     add_enum "google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation" do
       value :ANNOTATION_UNSPECIFIED, 0
@@ -26,6 +27,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :FRAUDULENT, 2
       value :PASSWORD_CORRECT, 3
       value :PASSWORD_INCORRECT, 4
+    end
+    add_enum "google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason" do
+      value :REASON_UNSPECIFIED, 0
+      value :CHARGEBACK, 1
+      value :PAYMENT_HEURISTICS, 2
+      value :INITIATED_TWO_FACTOR, 7
+      value :PASSED_TWO_FACTOR, 3
+      value :FAILED_TWO_FACTOR, 4
+      value :CORRECT_PASSWORD, 5
+      value :INCORRECT_PASSWORD, 6
     end
     add_message "google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse" do
     end
@@ -68,6 +79,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :EXPIRED, 3
       value :DUPE, 4
       value :MISSING, 5
+      value :BROWSER_ERROR, 6
     end
     add_message "google.cloud.recaptchaenterprise.v1.CreateKeyRequest" do
       optional :parent, :string, 1
@@ -92,16 +104,38 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.recaptchaenterprise.v1.DeleteKeyRequest" do
       optional :name, :string, 1
     end
+    add_message "google.cloud.recaptchaenterprise.v1.MigrateKeyRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.GetMetricsRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.Metrics" do
+      optional :name, :string, 4
+      optional :start_time, :message, 1, "google.protobuf.Timestamp"
+      repeated :score_metrics, :message, 2, "google.cloud.recaptchaenterprise.v1.ScoreMetrics"
+      repeated :challenge_metrics, :message, 3, "google.cloud.recaptchaenterprise.v1.ChallengeMetrics"
+    end
     add_message "google.cloud.recaptchaenterprise.v1.Key" do
       optional :name, :string, 1
       optional :display_name, :string, 2
       map :labels, :string, :string, 6
       optional :create_time, :message, 7, "google.protobuf.Timestamp"
+      optional :testing_options, :message, 9, "google.cloud.recaptchaenterprise.v1.TestingOptions"
       oneof :platform_settings do
         optional :web_settings, :message, 3, "google.cloud.recaptchaenterprise.v1.WebKeySettings"
         optional :android_settings, :message, 4, "google.cloud.recaptchaenterprise.v1.AndroidKeySettings"
         optional :ios_settings, :message, 5, "google.cloud.recaptchaenterprise.v1.IOSKeySettings"
       end
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.TestingOptions" do
+      optional :testing_score, :float, 1
+      optional :testing_challenge, :enum, 2, "google.cloud.recaptchaenterprise.v1.TestingOptions.TestingChallenge"
+    end
+    add_enum "google.cloud.recaptchaenterprise.v1.TestingOptions.TestingChallenge" do
+      value :TESTING_CHALLENGE_UNSPECIFIED, 0
+      value :NOCAPTCHA, 1
+      value :UNSOLVABLE_CHALLENGE, 2
     end
     add_message "google.cloud.recaptchaenterprise.v1.WebKeySettings" do
       optional :allow_all_domains, :bool, 3
@@ -123,10 +157,25 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :SECURITY, 3
     end
     add_message "google.cloud.recaptchaenterprise.v1.AndroidKeySettings" do
+      optional :allow_all_package_names, :bool, 2
       repeated :allowed_package_names, :string, 1
     end
     add_message "google.cloud.recaptchaenterprise.v1.IOSKeySettings" do
+      optional :allow_all_bundle_ids, :bool, 2
       repeated :allowed_bundle_ids, :string, 1
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.ScoreDistribution" do
+      map :score_buckets, :int32, :int64, 1
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.ScoreMetrics" do
+      optional :overall_metrics, :message, 1, "google.cloud.recaptchaenterprise.v1.ScoreDistribution"
+      map :action_metrics, :string, :message, 2, "google.cloud.recaptchaenterprise.v1.ScoreDistribution"
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.ChallengeMetrics" do
+      optional :pageload_count, :int64, 1
+      optional :nocaptcha_count, :int64, 2
+      optional :failed_count, :int64, 3
+      optional :passed_count, :int64, 4
     end
   end
 end
@@ -138,6 +187,7 @@ module Google
         CreateAssessmentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest").msgclass
         AnnotateAssessmentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest").msgclass
         AnnotateAssessmentRequest::Annotation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation").enummodule
+        AnnotateAssessmentRequest::Reason = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason").enummodule
         AnnotateAssessmentResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse").msgclass
         Assessment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.Assessment").msgclass
         Event = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.Event").msgclass
@@ -151,12 +201,20 @@ module Google
         GetKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.GetKeyRequest").msgclass
         UpdateKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.UpdateKeyRequest").msgclass
         DeleteKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.DeleteKeyRequest").msgclass
+        MigrateKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.MigrateKeyRequest").msgclass
+        GetMetricsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.GetMetricsRequest").msgclass
+        Metrics = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.Metrics").msgclass
         Key = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.Key").msgclass
+        TestingOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.TestingOptions").msgclass
+        TestingOptions::TestingChallenge = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.TestingOptions.TestingChallenge").enummodule
         WebKeySettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.WebKeySettings").msgclass
         WebKeySettings::IntegrationType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.WebKeySettings.IntegrationType").enummodule
         WebKeySettings::ChallengeSecurityPreference = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.WebKeySettings.ChallengeSecurityPreference").enummodule
         AndroidKeySettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.AndroidKeySettings").msgclass
         IOSKeySettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.IOSKeySettings").msgclass
+        ScoreDistribution = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.ScoreDistribution").msgclass
+        ScoreMetrics = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.ScoreMetrics").msgclass
+        ChallengeMetrics = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.ChallengeMetrics").msgclass
       end
     end
   end

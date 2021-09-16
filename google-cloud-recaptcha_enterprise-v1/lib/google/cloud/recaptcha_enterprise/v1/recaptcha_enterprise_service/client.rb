@@ -231,7 +231,7 @@ module Google
 
             ##
             # Annotates a previously created Assessment to provide additional information
-            # on whether the event turned out to be authentic or fradulent.
+            # on whether the event turned out to be authentic or fraudulent.
             #
             # @overload annotate_assessment(request, options = nil)
             #   Pass arguments to `annotate_assessment` via a request object, either of type
@@ -243,7 +243,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload annotate_assessment(name: nil, annotation: nil)
+            # @overload annotate_assessment(name: nil, annotation: nil, reasons: nil)
             #   Pass arguments to `annotate_assessment` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -252,7 +252,11 @@ module Google
             #     Required. The resource name of the Assessment, in the format
             #     "projects/\\{project}/assessments/\\{assessment}".
             #   @param annotation [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Annotation]
-            #     Required. The annotation that will be assigned to the Event.
+            #     Optional. The annotation that will be assigned to the Event. This field can be left
+            #     empty to provide reasons that apply to an event without concluding whether
+            #     the event is legitimate or fraudulent.
+            #   @param reasons [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Reason>]
+            #     Optional. Optional reasons for the annotation that will be assigned to the Event.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentResponse]
@@ -538,7 +542,7 @@ module Google
             #   @param key [::Google::Cloud::RecaptchaEnterprise::V1::Key, ::Hash]
             #     Required. The key to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Optional. The mask to control which field of the key get updated. If the mask is not
+            #     Optional. The mask to control which fields of the key get updated. If the mask is not
             #     present, all fields will be updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -650,6 +654,150 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @recaptcha_enterprise_service_stub.call_rpc :delete_key, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Migrates an existing key from reCAPTCHA to reCAPTCHA Enterprise.
+            # Once a key is migrated, it can be used from either product. SiteVerify
+            # requests are billed as CreateAssessment calls. You must be
+            # authenticated as one of the current owners of the reCAPTCHA Site Key, and
+            # your user must have the reCAPTCHA Enterprise Admin IAM role in the
+            # destination project.
+            #
+            # @overload migrate_key(request, options = nil)
+            #   Pass arguments to `migrate_key` via a request object, either of type
+            #   {::Google::Cloud::RecaptchaEnterprise::V1::MigrateKeyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::RecaptchaEnterprise::V1::MigrateKeyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload migrate_key(name: nil)
+            #   Pass arguments to `migrate_key` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the key to be migrated, in the format
+            #     "projects/\\{project}/keys/\\{key}".
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::Key]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::RecaptchaEnterprise::V1::Key]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def migrate_key request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::RecaptchaEnterprise::V1::MigrateKeyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.migrate_key.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::RecaptchaEnterprise::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.migrate_key.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.migrate_key.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @recaptcha_enterprise_service_stub.call_rpc :migrate_key, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Get some aggregated metrics for a Key. This data can be used to build
+            # dashboards.
+            #
+            # @overload get_metrics(request, options = nil)
+            #   Pass arguments to `get_metrics` via a request object, either of type
+            #   {::Google::Cloud::RecaptchaEnterprise::V1::GetMetricsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::RecaptchaEnterprise::V1::GetMetricsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_metrics(name: nil)
+            #   Pass arguments to `get_metrics` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the requested metrics, in the format
+            #     "projects/\\{project}/keys/\\{key}/metrics".
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::Metrics]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::RecaptchaEnterprise::V1::Metrics]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def get_metrics request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::RecaptchaEnterprise::V1::GetMetricsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_metrics.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::RecaptchaEnterprise::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_metrics.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_metrics.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @recaptcha_enterprise_service_stub.call_rpc :get_metrics, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -827,6 +975,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_key
+                ##
+                # RPC-specific configuration for `migrate_key`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :migrate_key
+                ##
+                # RPC-specific configuration for `get_metrics`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_metrics
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -844,6 +1002,10 @@ module Google
                   @update_key = ::Gapic::Config::Method.new update_key_config
                   delete_key_config = parent_rpcs.delete_key if parent_rpcs.respond_to? :delete_key
                   @delete_key = ::Gapic::Config::Method.new delete_key_config
+                  migrate_key_config = parent_rpcs.migrate_key if parent_rpcs.respond_to? :migrate_key
+                  @migrate_key = ::Gapic::Config::Method.new migrate_key_config
+                  get_metrics_config = parent_rpcs.get_metrics if parent_rpcs.respond_to? :get_metrics
+                  @get_metrics = ::Gapic::Config::Method.new get_metrics_config
 
                   yield self if block_given?
                 end
