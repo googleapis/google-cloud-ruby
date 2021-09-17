@@ -118,21 +118,21 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud.pubsub" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, [Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash, nil]
     end
   end
 
   doctest.before "Google::Cloud#pubsub" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, [Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash, nil]
     end
   end
 
   doctest.before "Google::Cloud::PubSub" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, [Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash, nil]
     end
   end
 
@@ -141,7 +141,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::PubSub::Message" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, [Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash, nil]
       mock_subscriber.expect :get_subscription, subscription_resp, [Hash]
       mock_subscriber.expect :streaming_pull, [OpenStruct.new(received_messages: [Google::Cloud::PubSub::V1::ReceivedMessage.new(ack_id: "2", message: pubsub_message)])].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
@@ -166,7 +166,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::PubSub::Project" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, [Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash, nil]
     end
   end
 
@@ -191,7 +191,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::PubSub::Project#topic@Configuring AsyncPublisher to increase concurrent callbacks:" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, [Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash, nil]
     end
   end
 
@@ -652,7 +652,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::PubSub::Topic" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, [Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash, nil]
     end
   end
 
@@ -726,14 +726,14 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::PubSub::Topic#publish" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, [Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash, nil]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#publish@Additionally, a message can be published with attributes:" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, [Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash, nil]
     end
   end
 
@@ -745,14 +745,14 @@ YARD::Doctest.configure do |doctest|
         pubsub_message("task 2 completed", { "foo" => "baz" }),
         pubsub_message("task 3 completed", { "foo" => "bif" })
       ]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1", "2", "3"]), [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1", "2", "3"]), [Hash, nil]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Topic#publish_async@Ordered messages are supported using ordering_key:" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, [Hash]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1"]), [Hash, nil]
     end
   end
 
@@ -827,7 +827,7 @@ YARD::Doctest.configure do |doctest|
         pubsub_message("task 2 completed", { "foo" => "baz" }),
         pubsub_message("task 3 completed", { "foo" => "bif" })
       ]
-      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1", "2", "3"]), [Hash]
+      mock_publisher.expect :publish, OpenStruct.new(message_ids: ["1", "2", "3"]), [Hash, nil]
     end
   end
 end

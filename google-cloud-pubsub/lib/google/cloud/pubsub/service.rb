@@ -18,6 +18,7 @@ require "google/cloud/pubsub/credentials"
 require "google/cloud/pubsub/convert"
 require "google/cloud/pubsub/version"
 require "google/cloud/pubsub/v1"
+require "gapic/call_options"
 require "securerandom"
 
 module Google
@@ -174,8 +175,9 @@ module Google
         # The messages parameter is an array of arrays.
         # The first element is the data, second is attributes hash.
         def publish topic, messages
-          execute retries: true do
-            publisher.publish topic: topic_path(topic), messages: messages
+          execute retries: true do |options|
+            request = { topic: topic_path(topic), messages: messages }
+            publisher.publish request, options
           end
         end
 
@@ -493,17 +495,14 @@ module Google
         end
 
         class Retries
-          class << self
-            attr_accessor :sleep_for
-          end
-          self.sleep_for = lambda do |delay|
-            sleep delay
-          end
-
           def initialize retry_options
+            @retries = 5
             @retry_options = retry_options
-            @retries = retry_options[:retries] || 5
             @retryable_errors = retry_options[:retryable_errors] || [Google::Cloud::UnavailableError]
+            @rpc_timeout = 5.0
+            @rpc_timeout_multiplier = 1.3
+            @max_rpc_timeout = 60.0
+            @total_timeout = 600.0
             @delay = 0.1
             @delay_multiplier = 1.3
             @max_delay = 60.0
@@ -511,13 +510,15 @@ module Google
 
           def execute
             current_retries = 0
+            options = nil # Gapic::CallOptions.new timeout: nil
             loop do
-              return yield
+              return yield options
             rescue Google::Cloud::Error => e
               raise e unless retry? e, current_retries
 
               @delay = [@delay * @delay_multiplier, @max_delay].min
-              Retries.sleep_for.call @delay
+              # Call Kernel.sleep so unit tests can stub it.
+              Kernel.sleep @delay
               current_retries += 1
             end
           end

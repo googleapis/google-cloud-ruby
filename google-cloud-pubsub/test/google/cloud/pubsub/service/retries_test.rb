@@ -19,21 +19,23 @@ describe Google::Cloud::PubSub::Service::Retries, :mock_pubsub do
   let(:topic_grpc) { Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name) }
   let(:topic) { Google::Cloud::PubSub::Topic.from_grpc topic_grpc, pubsub.service }
 
-  it "handles a single UnavailableError (retriable) and retries publish with backoff" do
-    stub = Object.new # Stub the V1::Publisher::Client
-    def stub.publish *args
-      @tries ||= 0
-      @tries += 1
-      raise Google::Cloud::UnavailableError.new "unavailable" if @tries == 1
-
-      Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
-    end
-    topic.service.mocked_publisher = stub
-
+  it "handles UnavailableError (retriable) and retries publish with incremental backoff" do
+    message = "new-message-here"
+    encoded_msg = message.encode(Encoding::ASCII_8BIT)
+    messages = [
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: encoded_msg)
+    ]
+    publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
-    mock.expect :sleep, nil, [0.13]
-    mocked_sleep_for = lambda { |i| mock.sleep i }
-    Google::Cloud::PubSub::Service::Retries.stub :sleep_for, -> { mocked_sleep_for } do
+    mock.expect :publish, publish_res, [{topic: topic_path(topic_name), messages: messages}, nil]
+    topic.service.mocked_publisher = PublisherClientStub.new mock
+
+    sleep_mock = Minitest::Mock.new
+    [0.13, 0.169, 0.21970000000000003].each do |delay|
+      sleep_mock.expect :sleep, nil, [delay]
+    end
+    mocked_sleep_for = -> (delay) { sleep_mock.sleep delay }
+    Kernel.stub :sleep, mocked_sleep_for do
       msg = topic.publish message
 
       _(msg).must_be_kind_of Google::Cloud::PubSub::Message
@@ -41,5 +43,20 @@ describe Google::Cloud::PubSub::Service::Retries, :mock_pubsub do
     end
 
     mock.verify
+    sleep_mock.verify
+  end
+
+  class PublisherClientStub
+    def initialize mock, errors: 3
+      @mock = mock
+      @errors = errors
+      @tries = 0
+    end
+
+    def publish *args
+      @tries += 1
+      raise Google::Cloud::UnavailableError.new "unavailable: #{@tries}" if @tries < @errors + 1
+      @mock.publish *args
+    end
   end
 end
