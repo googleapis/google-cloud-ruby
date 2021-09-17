@@ -195,6 +195,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig" do
       optional :medium, :enum, 1, "google.cloud.contactcenterinsights.v1.Conversation.Medium"
       optional :training_conversations_count, :int64, 2
+      optional :filter, :string, 3
     end
     add_enum "google.cloud.contactcenterinsights.v1.IssueModel.State" do
       value :STATE_UNSPECIFIED, 0
@@ -230,6 +231,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :phrase_match_rule_groups, :message, 8, "google.cloud.contactcenterinsights.v1.PhraseMatchRuleGroup"
       optional :activation_update_time, :message, 9, "google.protobuf.Timestamp"
       optional :role_match, :enum, 10, "google.cloud.contactcenterinsights.v1.ConversationParticipant.Role"
+      optional :update_time, :message, 11, "google.protobuf.Timestamp"
     end
     add_enum "google.cloud.contactcenterinsights.v1.PhraseMatcher.PhraseMatcherType" do
       value :PHRASE_MATCHER_TYPE_UNSPECIFIED, 0

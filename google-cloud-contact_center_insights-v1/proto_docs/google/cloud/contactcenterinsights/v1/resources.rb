@@ -670,10 +670,16 @@ module Google
           # Configs for the input data used to create the issue model.
           # @!attribute [rw] medium
           #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation::Medium]
-          #     Required. Medium of conversations used in training data.
+          #     Medium of conversations used in training data. This field is being
+          #     deprecated. To specify the medium to be used in training a new issue
+          #     model, set the `medium` field on `filter`.
           # @!attribute [r] training_conversations_count
           #   @return [::Integer]
           #     Output only. Number of conversations used in training. Output only.
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     A filter to reduce the conversations used for training the model to a
+          #     specific subset.
           class InputDataConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -801,6 +807,9 @@ module Google
         #     The role whose utterances the phrase matcher should be matched
         #     against. If the role is ROLE_UNSPECIFIED it will be matched against any
         #     utterances in the transcript.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The most recent time at which the phrase matcher was updated.
         class PhraseMatcher
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
