@@ -142,10 +142,12 @@ module PullRequestGenerator
                        "--body", @pr_body,
                        "--repo", "googleapis/google-cloud-ruby"]
         @context.logger.info "Created pull request"
+        @context.exec ["git", "switch", @orig_branch_name]
       else
         @context.logger.info "No files changed; no pull request created"
+        @context.exec ["git", "switch", @orig_branch_name]
+        @context.exec ["gh", "branch", "-d", @branch_name]
       end
-      @context.exec ["git", "switch", @orig_branch_name]
       @context.exec ["git", "clean", "-df"]
       result
     end

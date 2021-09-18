@@ -32,3 +32,6 @@ package-lock.json
 
 # Ignore RubyMine project files
 .idea
+
+/owl-bot-staging
+/tmp

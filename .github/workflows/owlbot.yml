@@ -1,0 +1,23 @@
+name: OwlBot Manual Run
+on:
+  workflow_dispatch:
+    inputs:
+      gems:
+        description: "List of gems, or --all for all gems"
+        required: true
+
+jobs:
+  CI:
+    if: ${{ github.repository == 'googleapis/google-cloud-ruby' }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Install Ruby 3.0
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: "3.0"
+    - name: Install tools
+      run: "gem install --no-document toys"
+    - name: OwlBot
+      run: toys owlbot -v --pull --git-remote=origin ${{ github.event.inputs.gems }}
