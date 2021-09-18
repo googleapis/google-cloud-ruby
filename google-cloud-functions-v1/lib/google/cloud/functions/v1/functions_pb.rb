@@ -61,6 +61,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.functions.v1.HttpsTrigger" do
       optional :url, :string, 1
+      optional :security_level, :enum, 2, "google.cloud.functions.v1.HttpsTrigger.SecurityLevel"
+    end
+    add_enum "google.cloud.functions.v1.HttpsTrigger.SecurityLevel" do
+      value :SECURITY_LEVEL_UNSPECIFIED, 0
+      value :SECURE_ALWAYS, 1
+      value :SECURE_OPTIONAL, 2
     end
     add_message "google.cloud.functions.v1.EventTrigger" do
       optional :event_type, :string, 1
@@ -141,6 +147,7 @@ module Google
         CloudFunction::IngressSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.CloudFunction.IngressSettings").enummodule
         SourceRepository = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.SourceRepository").msgclass
         HttpsTrigger = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.HttpsTrigger").msgclass
+        HttpsTrigger::SecurityLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.HttpsTrigger.SecurityLevel").enummodule
         EventTrigger = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.EventTrigger").msgclass
         FailurePolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.FailurePolicy").msgclass
         FailurePolicy::Retry = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.FailurePolicy.Retry").msgclass
