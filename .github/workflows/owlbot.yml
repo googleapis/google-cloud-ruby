@@ -8,7 +8,7 @@ on:
         required: true
 
 jobs:
-  CI:
+  OwlBot:
     if: ${{ github.repository == 'googleapis/google-cloud-ruby' }}
     runs-on: ubuntu-latest
     env:
@@ -23,4 +23,4 @@ jobs:
     - name: Install tools
       run: "gem install --no-document toys"
     - name: OwlBot
-      run: toys owlbot -v --pull --git-remote=origin ${{ github.event.inputs.gems }}
+      run: toys owlbot -v --pull --remote=origin ${{ github.event.inputs.gems }}
