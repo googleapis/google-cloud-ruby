@@ -60,6 +60,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :diversification_level, :enum, 13, "google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel"
       optional :custom_ranking_info, :message, 14, "google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo"
       optional :disable_keyword_match, :bool, 16
+      optional :keyword_match_mode, :enum, 18, "google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode"
     end
     add_message "google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo" do
       optional :importance_level, :enum, 1, "google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.ImportanceLevel"
@@ -83,6 +84,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DIVERSIFICATION_LEVEL_UNSPECIFIED, 0
       value :DISABLED, 1
       value :SIMPLE, 2
+      value :ONE_PER_COMPANY, 3
+      value :TWO_PER_COMPANY, 4
+      value :DIVERSIFY_BY_LOOSER_SIMILARITY, 5
+    end
+    add_enum "google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode" do
+      value :KEYWORD_MATCH_MODE_UNSPECIFIED, 0
+      value :KEYWORD_MATCH_DISABLED, 1
+      value :KEYWORD_MATCH_ALL, 2
+      value :KEYWORD_MATCH_TITLE_ONLY, 3
     end
     add_message "google.cloud.talent.v4.SearchJobsResponse" do
       repeated :matching_jobs, :message, 1, "google.cloud.talent.v4.SearchJobsResponse.MatchingJob"
@@ -156,6 +166,7 @@ module Google
         SearchJobsRequest::CustomRankingInfo::ImportanceLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.ImportanceLevel").enummodule
         SearchJobsRequest::SearchMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.SearchJobsRequest.SearchMode").enummodule
         SearchJobsRequest::DiversificationLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel").enummodule
+        SearchJobsRequest::KeywordMatchMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode").enummodule
         SearchJobsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.SearchJobsResponse").msgclass
         SearchJobsResponse::MatchingJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.SearchJobsResponse.MatchingJob").msgclass
         SearchJobsResponse::CommuteInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.SearchJobsResponse.CommuteInfo").msgclass
