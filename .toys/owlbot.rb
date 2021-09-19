@@ -40,6 +40,7 @@ def run
   require "fileutils"
   require "pull_request_generator"
   extend PullRequestGenerator
+  ensure_docker
 
   gems = choose_gems
   Dir.chdir context_directory
@@ -52,29 +53,35 @@ def run
   final_output results
 end
 
+def ensure_docker
+  result = exec ["docker", "--version"], out: :capture, e: false
+  error "Docker not installed" unless result.success?
+  logger.info "Verified docker present"
+end
+
 def choose_gems
   gems = gem_names
-  if gems.empty?
-    gems =
-      if all
-        Dir.glob("*/#{OWLBOT_CONFIG_FILE_NAME}").map { |path| File.dirname path }
-      else
-        Array(gem_from_subdirectory)
-      end
-    gems.delete_if do |name|
-      !File.file? File.join(context_directory, name, "#{name}.gemspec")
-    end
-  end
+  gems = all ? all_gems : gems_from_subdirectory if gems.empty?
   error "You must specify at least one gem name" if gems.empty?
   logger.info "Gems: #{gems}"
   gems
 end
 
-def gem_from_subdirectory
+def gems_from_subdirectory
   curwd = Dir.getwd
-  return nil if context_directory == curwd
+  return [] if context_directory == curwd
   error "unexpected current directory #{curwd}" unless curwd.start_with? context_directory
-  curwd.sub("#{context_directory}/", "").split("/").first
+  Array(curwd.sub("#{context_directory}/", "").split("/").first)
+end
+
+def all_gems
+  Dir.chdir context_directory do
+    gems = Dir.glob("*/#{OWLBOT_CONFIG_FILE_NAME}").map { |path| File.dirname path }
+    gems.delete_if do |name|
+      !File.file? File.join(context_directory, name, "#{name}.gemspec")
+    end
+    gems
+  end
 end
 
 def pull_images
@@ -131,7 +138,7 @@ def process_gems gems
     branch_name = "owlbot/#{name}-#{timestamp}"
     result = generate_pull_request gem_name: name,
                                    git_remote: git_remote,
-                                   commit_message: "[CHANGE ME] Catch-up run of OwlBot for #{name}" do
+                                   commit_message: "[CHANGE ME] OwlBot on-demand for #{name}" do
       docker_run "#{POSTPROCESSOR_IMAGE}:#{owlbot_cli_tag}", "--gem", name
     end
     case result
