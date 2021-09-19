@@ -21,6 +21,10 @@ jobs:
       with:
         ruby-version: "3.0"
     - name: Install tools
-      run: "gem install --no-document toys"
+      run: |
+        git config --global user.email "70984784+yoshi-code-bot@users.noreply.github.com"
+        git config --global user.name "yoshi-code-bot"
+        gem install --no-document toys
     - name: OwlBot
-      run: toys owlbot -v --pull --remote=origin ${{ github.event.inputs.gems }}
+      run: |
+        toys owlbot -v --pull --remote=origin ${{ github.event.inputs.gems }}
