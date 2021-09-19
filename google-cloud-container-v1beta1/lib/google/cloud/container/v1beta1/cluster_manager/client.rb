@@ -592,7 +592,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, locations: nil, workload_metadata_config: nil, name: nil, upgrade_settings: nil, linux_node_config: nil, kubelet_config: nil)
+            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, locations: nil, workload_metadata_config: nil, name: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, gvnic: nil)
             #   Pass arguments to `update_node_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -640,10 +640,24 @@ module Google
             #     `projects/*/locations/*/clusters/*/nodePools/*`.
             #   @param upgrade_settings [::Google::Cloud::Container::V1beta1::NodePool::UpgradeSettings, ::Hash]
             #     Upgrade settings control disruption and speed of the upgrade.
+            #   @param tags [::Google::Cloud::Container::V1beta1::NetworkTags, ::Hash]
+            #     The desired network tags to be applied to all nodes in the node pool.
+            #     If this field is not present, the tags will not be changed. Otherwise,
+            #     the existing network tags will be *replaced* with the provided tags.
+            #   @param taints [::Google::Cloud::Container::V1beta1::NodeTaints, ::Hash]
+            #     The desired node taints to be applied to all nodes in the node pool.
+            #     If this field is not present, the taints will not be changed. Otherwise,
+            #     the existing node taints will be *replaced* with the provided taints.
+            #   @param labels [::Google::Cloud::Container::V1beta1::NodeLabels, ::Hash]
+            #     The desired node labels to be applied to all nodes in the node pool.
+            #     If this field is not present, the labels will not be changed. Otherwise,
+            #     the existing node labels will be *replaced* with the provided labels.
             #   @param linux_node_config [::Google::Cloud::Container::V1beta1::LinuxNodeConfig, ::Hash]
             #     Parameters that can be configured on Linux nodes.
             #   @param kubelet_config [::Google::Cloud::Container::V1beta1::NodeKubeletConfig, ::Hash]
             #     Node kubelet configs.
+            #   @param gvnic [::Google::Cloud::Container::V1beta1::VirtualNIC, ::Hash]
+            #     Enable or disable gvnic on the node pool.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
@@ -996,8 +1010,8 @@ module Google
             #     Required. Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
             #   @param addons_config [::Google::Cloud::Container::V1beta1::AddonsConfig, ::Hash]
-            #     Required. The desired configurations for the various addons available to run in the
-            #     cluster.
+            #     Required. The desired configurations for the various addons available to
+            #     run in the cluster.
             #   @param name [::String]
             #     The name (project, location, cluster) of the cluster to set addons.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
@@ -2648,7 +2662,9 @@ module Google
             end
 
             ##
-            # Sets the size for a specific node pool.
+            # SetNodePoolSizeRequest sets the size of a node pool. The new size will be
+            # used for all replicas, including future replicas created by modifying
+            # {::Google::Cloud::Container::V1beta1::NodePool#locations NodePool.locations}.
             #
             # @overload set_node_pool_size(request, options = nil)
             #   Pass arguments to `set_node_pool_size` via a request object, either of type

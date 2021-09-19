@@ -120,7 +120,9 @@ module Google
             rpc :StartIPRotation, ::Google::Cloud::Container::V1beta1::StartIPRotationRequest, ::Google::Cloud::Container::V1beta1::Operation
             # Completes master IP rotation.
             rpc :CompleteIPRotation, ::Google::Cloud::Container::V1beta1::CompleteIPRotationRequest, ::Google::Cloud::Container::V1beta1::Operation
-            # Sets the size for a specific node pool.
+            # SetNodePoolSizeRequest sets the size of a node pool. The new size will be
+            # used for all replicas, including future replicas created by modifying
+            # [NodePool.locations][google.container.v1beta1.NodePool.locations].
             rpc :SetNodePoolSize, ::Google::Cloud::Container::V1beta1::SetNodePoolSizeRequest, ::Google::Cloud::Container::V1beta1::Operation
             # Enables or disables Network Policy for a cluster.
             rpc :SetNetworkPolicy, ::Google::Cloud::Container::V1beta1::SetNetworkPolicyRequest, ::Google::Cloud::Container::V1beta1::Operation
