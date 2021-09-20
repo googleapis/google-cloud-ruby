@@ -1,3 +1,5 @@
 deep-copy-regex:
   - source: /google/cloud/automl/v1/[^/]+-ruby/(.*)
     dest: /owl-bot-staging/google-cloud-automl-v1/$1
+docker:
+  image: gcr.io/cloud-devrel-public-resources/owlbot-ruby:latest
