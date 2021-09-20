@@ -61,9 +61,9 @@ flag :pull do
 end
 
 static :replace_me_text, "(REPLACE ME)"
-static :synth_script_name "synth.py"
-static :owlbot_config_name ".OwlBot.yaml"
-static :owlbot_script_name ".owlbot.rb"
+static :synth_script_name, "synth.py"
+static :owlbot_config_name, ".OwlBot.yaml"
+static :owlbot_script_name, ".owlbot.rb"
 
 include :exec, e: true
 include :fileutils
