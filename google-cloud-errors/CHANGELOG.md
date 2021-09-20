@@ -4,7 +4,7 @@
 
 #### Features
 
-* Surface ErrorInfo fields Google::Cloud::Error
+* Surface ErrorInfo fields in Google::Cloud::Error
 
 ### 1.1.0 / 2021-03-10
 
