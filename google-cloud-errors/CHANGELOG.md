@@ -1,5 +1,11 @@
 # Release History
 
+### 1.2.0 / 2021-09-20
+
+#### Features
+
+* Surface ErrorInfo fields in Google::Cloud::Error
+
 ### 1.1.0 / 2021-03-10
 
 #### Features
