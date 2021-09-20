@@ -1,33 +1,5 @@
 {
-  "sources": [
-    {
-      "git": {
-        "name": ".",
-        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "b2044315a3019250e6eb17a311593b0dc9480a8d"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "e9da6f8b469c52b83f900e820be30762e9e05c57",
-        "internalRef": "393476621"
-      }
-    }
-  ],
-  "destinations": [
-    {
-      "client": {
-        "source": "googleapis",
-        "apiName": "containeranalysis",
-        "apiVersion": "v1",
-        "language": "ruby",
-        "generator": "bazel"
-      }
-    }
-  ],
-  "generatedFiles": [
+  "generated": [
     ".gitignore",
     ".repo-metadata.json",
     ".rubocop.yml",
@@ -66,5 +38,10 @@
     "test/google/cloud/container_analysis/v1/container_analysis_paths_test.rb",
     "test/google/cloud/container_analysis/v1/container_analysis_test.rb",
     "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    "lib/google/cloud/container_analysis/v1/container_analysis/helpers.rb",
+    "test/google/cloud/container_analysis/v1/grafeas_client_test.rb"
   ]
 }

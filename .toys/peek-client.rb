@@ -27,7 +27,7 @@ include :terminal
 
 def run
   piper_client_dir = capture("p4 g4d #{piper_client}").strip
-  bazel_base_dir = File.join piper_client_dir, "third_party", "googleapis"
+  bazel_base_dir = File.join piper_client_dir, "third_party", "googleapis", "stable"
   generated_dir = File.join bazel_base_dir, "bazel-bin", library_path, bazel_target
   exec ["bazel", "build", "#{library_path}:#{bazel_target}"], chdir: bazel_base_dir
   set :output_dir, File.join(Dir.mktmpdir, "client") unless output_dir
