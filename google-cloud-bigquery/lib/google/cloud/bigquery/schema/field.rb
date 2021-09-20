@@ -939,7 +939,14 @@ module Google
                   "Cannot add fields to a non-RECORD field (#{type})"
           end
 
-          def add_field name, type, description: nil, mode: :nullable, policy_tags: nil, max_length: nil
+          def add_field name,
+                        type,
+                        description: nil,
+                        mode: :nullable,
+                        policy_tags: nil,
+                        max_length: nil,
+                        precision: nil,
+                        scale: nil
             frozen_check!
 
             new_gapi = Google::Apis::BigqueryV2::TableFieldSchema.new(
@@ -954,6 +961,8 @@ module Google
               new_gapi.policy_tags = Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags.new names: policy_tags
             end
             new_gapi.max_length = max_length if max_length
+            new_gapi.precision = precision if precision
+            new_gapi.scale = scale if scale
             # Remove any existing field of this name
             @gapi.fields ||= []
             @gapi.fields.reject! { |f| f.name == new_gapi.name }

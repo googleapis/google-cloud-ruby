@@ -50,9 +50,11 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
       Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "birthday",      type: "DATE", description: nil, fields: []),
       Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "home",          type: "GEOGRAPHY", description: nil, fields: []),
       Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REPEATED", name: "cities_lived",  type: "RECORD", description: nil, fields: [
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "place",           type: "STRING",  description: nil, fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "location",        type: "GEOGRAPHY",  description: nil, fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "number_of_years", type: "INTEGER", description: nil, fields: [])
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "place",                type: "STRING",  description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "location",             type: "GEOGRAPHY",  description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "number_of_years",      type: "INTEGER", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_nested_numeric",    type: "NUMERIC", description: nil, fields: [], precision: precision_numeric, scale: scale_numeric),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_nested_bignumeric", type: "BIGNUMERIC", description: nil, fields: [], precision: precision_bignumeric, scale: scale_bignumeric)
       ])
     ]
   end
@@ -124,6 +126,8 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
         nested_schema.string "place"
         nested_schema.geography "location"
         nested_schema.integer "number_of_years"
+        nested_schema.numeric "my_nested_numeric", precision: precision_numeric, scale: scale_numeric
+        nested_schema.bignumeric "my_nested_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
       end
       job.schema_update_options = schema_update_options
       job.range_partitioning_field = "age"
@@ -182,6 +186,8 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
         nested_schema.string "place"
         nested_schema.geography "location"
         nested_schema.integer "number_of_years"
+        nested_schema.numeric "my_nested_numeric", precision: precision_numeric, scale: scale_numeric
+        nested_schema.bignumeric "my_nested_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
       end
       job.schema_update_options = schema_update_options
       job.time_partitioning_type = "DAY"
@@ -235,6 +241,8 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
       nested_schema.string "place"
       nested_schema.geography "location"
       nested_schema.integer "number_of_years"
+      nested_schema.numeric "my_nested_numeric", precision: precision_numeric, scale: scale_numeric
+      nested_schema.bignumeric "my_nested_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
     end
 
     job = dataset.load_job table_id, load_file, create: :needed, schema: schema
@@ -290,6 +298,8 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
         nested_schema.string "place"
         nested_schema.geography "location"
         nested_schema.integer "number_of_years"
+        nested_schema.numeric "my_nested_numeric", precision: precision_numeric, scale: scale_numeric
+        nested_schema.bignumeric "my_nested_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
       end
       schema.schema_update_options = schema_update_options
     end
