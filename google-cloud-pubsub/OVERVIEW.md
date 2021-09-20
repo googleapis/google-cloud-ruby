@@ -524,5 +524,5 @@ sub.topic.name #=> "projects/other-project-id/topics/other-topic"
 ## Additional information
 
 Google Cloud Pub/Sub can be configured to use an emulator or to enable gRPC's
-logging. To learn more, see the [Emulator guide}](EMULATOR.md) and
+logging. To learn more, see the [Emulator guide](EMULATOR.md) and
 [Logging guide](LOGGING.md).
