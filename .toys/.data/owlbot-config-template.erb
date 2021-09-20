@@ -1,3 +1,5 @@
 deep-copy-regex:
   - source: /<%= @proto_path_base %>/<%= @api_version %>/[^/]+-ruby/(.*)
     dest: /owl-bot-staging/<%= @gem_name %>/$1
+docker:
+  image: gcr.io/cloud-devrel-public-resources/owlbot-ruby:latest
