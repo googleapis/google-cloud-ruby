@@ -250,7 +250,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload long_running_recognize(config: nil, audio: nil)
+            # @overload long_running_recognize(config: nil, audio: nil, output_config: nil)
             #   Pass arguments to `long_running_recognize` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -260,6 +260,8 @@ module Google
             #     process the request.
             #   @param audio [::Google::Cloud::Speech::V1::RecognitionAudio, ::Hash]
             #     Required. The audio data to be recognized.
+            #   @param output_config [::Google::Cloud::Speech::V1::TranscriptOutputConfig, ::Hash]
+            #     Optional. Specifies an optional destination for the recognition results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]

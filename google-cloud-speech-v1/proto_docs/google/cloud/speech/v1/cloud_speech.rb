@@ -43,7 +43,21 @@ module Google
         # @!attribute [rw] audio
         #   @return [::Google::Cloud::Speech::V1::RecognitionAudio]
         #     Required. The audio data to be recognized.
+        # @!attribute [rw] output_config
+        #   @return [::Google::Cloud::Speech::V1::TranscriptOutputConfig]
+        #     Optional. Specifies an optional destination for the recognition results.
         class LongRunningRecognizeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specifies an optional destination for the recognition results.
+        # @!attribute [rw] gcs_uri
+        #   @return [::String]
+        #     Specifies a Cloud Storage URI for the recognition results. Must be
+        #     specified in the format: `gs://bucket_name/object_name`, and the bucket
+        #     must already exist.
+        class TranscriptOutputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
