@@ -13,7 +13,7 @@ remaining_args :gem_names do
   desc "The gems for which to run owlbot."
 end
 flag :all do
-  desc "Run OwlBot on all gems in this repo."
+  desc "Run owlbot on all gems in this repo."
 end
 flag :postprocessor_tag, "--postprocessor-tag=TAG", default: "latest" do
   desc "The tag for the Ruby postprocessor image. Defaults to 'latest'."
@@ -24,13 +24,18 @@ end
 flag :pull do
   desc "Pull the latest images before running"
 end
-flag :git_remote, "--remote NAME" do
+flag :git_remote, "--remote=NAME" do
   desc "The name of the git remote to use as the pull request head. If omitted, does not open a pull request."
+end
+flag :commit_message, "--message=MESSAGE" do
+  desc "The conventional commit message"
 end
 
 OWLBOT_CONFIG_FILE_NAME = ".OwlBot.yaml"
 OWLBOT_CLI_IMAGE = "gcr.io/cloud-devrel-public-resources/owlbot-cli"
 POSTPROCESSOR_IMAGE = "gcr.io/cloud-devrel-public-resources/owlbot-ruby"
+STAGING_DIR_NAME = "owl-bot-staging"
+TMP_DIR_NAME = "tmp"
 
 include :exec, e: true
 include :terminal
@@ -99,7 +104,9 @@ def collect_sources gems
     deep_copy_regexes = config["deep-copy-regex"]
     error "Expected exactly one deep-copy-regex for gem #{name}" unless deep_copy_regexes.size == 1
     deep_copy_regex = deep_copy_regexes.first
-    error "Wrong dest deep-copy-regex for gem #{name}" unless deep_copy_regex["dest"] == "/owl-bot-staging/#{name}/$1"
+    unless deep_copy_regex["dest"] == "/#{STAGING_DIR_NAME}/#{name}/$1"
+      error "Wrong dest deep-copy-regex for gem #{name}"
+    end
     error "Source missing in deep-copy-regex for gem #{name}" unless deep_copy_regex["source"]
     sources[name] = deep_copy_regex["source"]
   end
@@ -107,13 +114,13 @@ def collect_sources gems
 end
 
 def run_owlbot sources
-  FileUtils.mkdir_p "tmp"
-  temp_config = File.join "tmp", OWLBOT_CONFIG_FILE_NAME
+  FileUtils.mkdir_p TMP_DIR_NAME
+  temp_config = File.join TMP_DIR_NAME, OWLBOT_CONFIG_FILE_NAME
   FileUtils.rm_f temp_config
   combined_deep_copy_regex = sources.map do |name, source|
     {
       "source" => source,
-      "dest" => "/owl-bot-staging/#{name}/$1"
+      "dest" => "/#{STAGING_DIR_NAME}/#{name}/$1"
     }
   end
   combined_config = {"deep-copy-regex" => combined_deep_copy_regex}
@@ -125,52 +132,61 @@ end
 
 def verify_staging gems
   gems.each do |name|
-    staging_dir = File.join "owl-bot-staging", name
+    staging_dir = File.join STAGING_DIR_NAME, name
     error "Gem #{name} did not output a staging directory" unless File.directory? staging_dir
     error "Gem #{name} staging directory is empty" if Dir.children(staging_dir).empty?
   end
 end
 
 def process_gems gems
+  temp_staging_dir = File.join TMP_DIR_NAME, STAGING_DIR_NAME
+  FileUtils.rm_rf temp_staging_dir
+  FileUtils.mv STAGING_DIR_NAME, temp_staging_dir
   results = {}
-  gems.each do |name|
+  gems.each_with_index do |name, index|
+    FileUtils.mkdir_p STAGING_DIR_NAME
+    FileUtils.mv File.join(temp_staging_dir, name), File.join(STAGING_DIR_NAME, name)
     timestamp = Time.now.utc.strftime("%Y%m%d-%H%M%S")
     branch_name = "owlbot/#{name}-#{timestamp}"
     result = generate_pull_request gem_name: name,
                                    git_remote: git_remote,
-                                   commit_message: "[CHANGE ME] OwlBot on-demand for #{name}" do
+                                   commit_message: build_commit_message(name) do
       docker_run "#{POSTPROCESSOR_IMAGE}:#{owlbot_cli_tag}", "--gem", name
     end
-    case result
-    when :opened
-      puts "#{name}: Created pull request", :bold
-    when :unchanged
-      puts "#{name}: No pull request created because nothing changed", :bold
-    when :disabled
-      puts "#{name}: Results left in the local directory", :bold
-    else
-      puts "#{name}: Unknown result #{result.inspect}", :bold
-    end
-    results[name] = result
+    puts "Results for #{name} (#{index}/#{gems.size})..."
+    results[name] = output_result name, result, :bold
   end
   results
+end
+
+def build_commit_message name
+  if commit_message
+    match = /^(\w+)(?:\([^)]+\))?(!?):(.*)/.match commit_message
+    return "#{match[1]}(#{name})#{match[2]}:#{match[3]}" if match
+  end
+  "[CHANGE ME] OwlBot on-demand for #{name}"
 end
 
 def final_output results
   puts
   puts "Final results:", :bold
   results.each do |name, result|
-    case result
-    when :opened
-      puts "#{name}: Created pull request"
-    when :unchanged
-      puts "#{name}: No pull request created because nothing changed"
-    when :disabled
-      puts "#{name}: Results left in the local directory"
-    else
-      puts "#{name}: Unknown result #{result.inspect}"
-    end
+    output_result name, result
   end
+end
+
+def output_result name, result, *style
+  case result
+  when :opened
+    puts "#{name}: Created pull request", *style
+  when :unchanged
+    puts "#{name}: No pull request created because nothing changed", *style
+  when :disabled
+    puts "#{name}: Results left in the local directory", *style
+  else
+    puts "#{name}: Unknown result #{result.inspect}", *style
+  end
+  result
 end
 
 def docker_run *args
