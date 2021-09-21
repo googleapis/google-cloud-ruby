@@ -248,6 +248,15 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     mock.verify
   end
 
+  it "can delete itself" do
+    mock = Minitest::Mock.new
+    mock.expect :delete_job, nil, [project, job_id, location: region]
+    bigquery.service.mocked_service = mock
+
+    job.delete
+    mock.verify
+  end
+
   def get_job_resp state
     Google::Apis::BigqueryV2::Job.from_json(random_job_hash(job_id, state, location: region).to_json)
   end
