@@ -521,6 +521,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Job#delete" do
+    mock_bigquery do |mock|
+      mock.expect :get_job, query_job_gapi, ["my-project", "my_job", Hash]
+      mock.expect :delete_job, nil, ["my-project", "1234567890", Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigquery::Job#rerun!" do
     mock_bigquery do |mock|
       mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]

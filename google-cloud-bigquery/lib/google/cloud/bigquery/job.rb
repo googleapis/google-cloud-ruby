@@ -393,6 +393,28 @@ module Google
         end
 
         ##
+        # Requests that a job is deleted. This call will return when the job is deleted.
+        #
+        # @return [Boolean] Returns `true` if the job was deleted.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.job "my_job"
+        #
+        #   job.delete
+        #
+        # @!group Lifecycle
+        #
+        def delete
+          ensure_service!
+          service.delete_job job_id, location: location
+          true
+        end
+
+        ##
         # Created a new job with the current configuration.
         #
         # @example
