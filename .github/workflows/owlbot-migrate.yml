@@ -1,4 +1,4 @@
-name: OwlBot Manual Run
+name: OwlBot Migration
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ on:
         required: true
 
 jobs:
-  OwlBot:
+  OwlBot-Migrate:
     if: ${{ github.repository == 'googleapis/google-cloud-ruby' }}
     runs-on: ubuntu-latest
     env:
@@ -25,6 +25,6 @@ jobs:
         git config --global user.email "70984784+yoshi-code-bot@users.noreply.github.com"
         git config --global user.name "Yoshi Code Bot"
         gem install --no-document toys
-    - name: OwlBot
+    - name: OwlBot Migrate
       run: |
-        toys owlbot -v --pull --remote=origin ${{ github.event.inputs.gems }}
+        toys owlbot-migrate -v --pull --remote=origin ${{ github.event.inputs.gems }}

@@ -30,6 +30,9 @@ end
 flag :commit_message, "--message=MESSAGE" do
   desc "The conventional commit message"
 end
+flag :source_repo, "--source-repo=PATH" do
+  desc "Path to the googleapis-gen source repo"
+end
 
 OWLBOT_CONFIG_FILE_NAME = ".OwlBot.yaml"
 OWLBOT_CLI_IMAGE = "gcr.io/cloud-devrel-public-resources/owlbot-cli"
@@ -127,7 +130,11 @@ def run_owlbot sources
   File.open temp_config, "w" do |file|
     file.puts Psych.dump combined_config
   end
-  docker_run "#{OWLBOT_CLI_IMAGE}:#{owlbot_cli_tag}", "copy-code", "--config-file", temp_config
+  cmd = ["#{OWLBOT_CLI_IMAGE}:#{owlbot_cli_tag}", "copy-code", "--config-file", temp_config]
+  if source_repo
+    cmd = ["-v", "#{source_repo}:/googleapis-gen"] + cmd + ["--source-repo", "/googleapis-gen"]
+  end
+  docker_run(*cmd)
 end
 
 def verify_staging gems
@@ -144,13 +151,15 @@ def process_gems gems
   FileUtils.mv STAGING_DIR_NAME, temp_staging_dir
   results = {}
   gems.each_with_index do |name, index|
-    FileUtils.mkdir_p STAGING_DIR_NAME
-    FileUtils.mv File.join(temp_staging_dir, name), File.join(STAGING_DIR_NAME, name)
     timestamp = Time.now.utc.strftime("%Y%m%d-%H%M%S")
     branch_name = "owlbot/#{name}-#{timestamp}"
+    message = build_commit_message name
     result = generate_pull_request gem_name: name,
                                    git_remote: git_remote,
-                                   commit_message: build_commit_message(name) do
+                                   branch_name: branch_name,
+                                   commit_message: message do
+      FileUtils.mkdir_p STAGING_DIR_NAME
+      FileUtils.mv File.join(temp_staging_dir, name), File.join(STAGING_DIR_NAME, name)
       docker_run "#{POSTPROCESSOR_IMAGE}:#{owlbot_cli_tag}", "--gem", name
     end
     puts "Results for #{name} (#{index}/#{gems.size})..."
