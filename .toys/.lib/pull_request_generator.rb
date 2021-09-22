@@ -17,15 +17,15 @@ module PullRequestGenerator
     PullRequestGenerator.ensure_dependencies context: self
   end
 
-  def generate_pull_request gem_name:,
-                            git_remote:,
+  def generate_pull_request git_remote:,
+                            gem_name: nil,
                             branch_name: nil,
                             commit_message: nil,
                             pr_body: nil,
                             &block
     PullRequestGenerator.generate context: self,
-                                  gem_name: gem_name,
                                   git_remote: git_remote,
+                                  gem_name: gem_name,
                                   branch_name: branch_name,
                                   commit_message: commit_message,
                                   pr_body: pr_body,
@@ -36,8 +36,8 @@ module PullRequestGenerator
 
   class << self
     def generate context:,
-                 gem_name:,
                  git_remote:,
+                 gem_name: nil,
                  branch_name: nil,
                  commit_message: nil,
                  pr_body: nil
@@ -161,7 +161,8 @@ module PullRequestGenerator
     end
 
     def generate_default_commit_message
-      "[CHANGE ME] Automated change to #{@gem_name}"
+      name = @gem_name || "(multiple gems)"
+      "[CHANGE ME] Automated change to #{name}"
     end
 
     def generate_default_pr_body
