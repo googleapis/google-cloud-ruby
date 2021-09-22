@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,14 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$LOAD_PATH.unshift File.expand_path("../lib", __dir__)
+OwlBot.move_files
+
+####
+# Helper file generation
+####
+
+Dir.chdir OwlBot.gem_dir
+
+ENV["BUNDLE_PATH"] = "vendor/bundle"
+system "bundle install"
+require "bundler/setup"
+
 require "google/cloud/vision/v1p3beta1"
 require "erb"
 require "fileutils"
 
-##
 # Simple code generator
-#
 class HelperGenerator
   def initialize
     @helper_methods = {}
@@ -33,18 +42,20 @@ class HelperGenerator
 
   def generate source, dest_path
     data_binding = binding
-    template = File.read "synth/#{source}"
+    template = File.read "owlbot-templates/#{source}"
     content = ERB.new(template).result(data_binding)
     FileUtils.mkdir_p File.dirname dest_path
     File.open(dest_path, "w") { |f| f.write content }
   end
 end
 
-Dir.chdir File.dirname __dir__
-
 generator = HelperGenerator.new
 
-generator.generate "image_annotator_helpers.erb", "lib/google/cloud/vision/v1p3beta1/image_annotator/helpers.rb"
+generator.generate "image_annotator_helpers.erb",
+                   "lib/google/cloud/vision/v1p3beta1/image_annotator/helpers.rb"
 generator.generate "image_annotator_helpers_test.erb",
                    "test/google/cloud/vision/v1p3beta1/image_annotator_helpers_test.rb"
-generator.generate "helpers_smoke_test.erb", "acceptance/google/cloud/vision/v1p3beta1/helpers_smoke_test.rb"
+generator.generate "helpers_smoke_test.erb",
+                   "acceptance/google/cloud/vision/v1p3beta1/helpers_smoke_test.rb"
+
+FileUtils.rm_rf "vendor"

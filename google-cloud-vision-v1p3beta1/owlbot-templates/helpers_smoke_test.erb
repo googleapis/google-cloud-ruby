@@ -15,21 +15,21 @@
 require "simplecov"
 require "minitest/autorun"
 
-require "google/cloud/vision/v1"
+require "google/cloud/vision/v1p3beta1"
 
 class ImageAnnotatorHelpersSmokeTest < Minitest::Test
   def gs_image
-    "gs://gapic-toolkit/President_Barack_Obama.jpg"
+    "gs://gcloud-ruby-acceptance-public-read/obama-happy.jpg"
   end
 
   def image_annotator_client
-    Google::Cloud::Vision::V1::ImageAnnotator::Client.new
+    Google::Cloud::Vision::V1p3beta1::ImageAnnotator::Client.new
   end
 
   def options
     {
       images: [],
-      image: "gs://gapic-toolkit/President_Barack_Obama.jpg",
+      image: gs_image,
       max_results: 10,
       async: false,
       mime_type: nil,

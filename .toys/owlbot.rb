@@ -50,6 +50,7 @@ def run
   extend PullRequestGenerator
   ensure_docker
 
+  set :source_repo, File.expand_path(source_repo) if source_repo
   gems = choose_gems
   Dir.chdir context_directory
   sources = collect_sources gems
