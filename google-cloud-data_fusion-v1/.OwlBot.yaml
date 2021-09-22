@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/datafusion/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-data_fusion-v1/$1

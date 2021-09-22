@@ -1,0 +1,40 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "gapic_metadata.json",
+    "google-cloud-os_login-v1beta.gemspec",
+    "lib/google-cloud-os_login-v1beta.rb",
+    "lib/google/cloud/os_login/v1beta.rb",
+    "lib/google/cloud/os_login/v1beta/os_login_service.rb",
+    "lib/google/cloud/os_login/v1beta/os_login_service/client.rb",
+    "lib/google/cloud/os_login/v1beta/os_login_service/credentials.rb",
+    "lib/google/cloud/os_login/v1beta/os_login_service/paths.rb",
+    "lib/google/cloud/os_login/v1beta/version.rb",
+    "lib/google/cloud/oslogin/common/common_pb.rb",
+    "lib/google/cloud/oslogin/v1beta/oslogin_pb.rb",
+    "lib/google/cloud/oslogin/v1beta/oslogin_services_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/oslogin/common/common.rb",
+    "proto_docs/google/cloud/oslogin/v1beta/oslogin.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "test/google/cloud/os_login/v1beta/os_login_service_paths_test.rb",
+    "test/google/cloud/os_login/v1beta/os_login_service_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/api/serviceusage/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-service_usage-v1/$1

@@ -27,7 +27,7 @@ module Google
           # The API Gateway Service is the interface for managing API Gateways.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode

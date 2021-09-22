@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/billing/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-billing-v1/$1

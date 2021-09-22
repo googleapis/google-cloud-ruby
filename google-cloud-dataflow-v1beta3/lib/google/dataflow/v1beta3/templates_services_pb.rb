@@ -27,7 +27,7 @@ module Google
           # Provides a method to create Cloud Dataflow jobs from templates.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode
@@ -47,7 +47,7 @@ module Google
           # Provides a service for Flex templates. This feature is not ready yet.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode

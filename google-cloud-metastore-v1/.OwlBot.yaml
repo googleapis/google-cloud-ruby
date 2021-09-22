@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/metastore/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-metastore-v1/$1

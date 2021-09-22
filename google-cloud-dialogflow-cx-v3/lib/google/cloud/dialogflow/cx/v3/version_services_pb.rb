@@ -28,7 +28,7 @@ module Google
             # Service for managing [Versions][google.cloud.dialogflow.cx.v3.Version].
             class Service
 
-              include GRPC::GenericService
+              include ::GRPC::GenericService
 
               self.marshal_class_method = :encode
               self.unmarshal_class_method = :decode
