@@ -87,6 +87,7 @@
   ],
   "static": [
     ".OwlBot.yaml",
+    ".owlbot.rb",
     "acceptance/data/ChromeCast.mp4",
     "acceptance/data/CloudPlatform_128px_Retina.png",
     "acceptance/data/abc.txt",
@@ -108,10 +109,9 @@
     "acceptance/google/cloud/vision/v1/helpers_smoke_test.rb",
     "acceptance/google/cloud/vision/v1/image_annotator_smoke_test.rb",
     "lib/google/cloud/vision/v1/image_annotator/helpers.rb",
-    "synth/generate_helpers.rb",
-    "synth/helpers_smoke_test.erb",
-    "synth/image_annotator_helpers.erb",
-    "synth/image_annotator_helpers_test.erb",
+    "owlbot-templates/helpers_smoke_test.erb",
+    "owlbot-templates/image_annotator_helpers.erb",
+    "owlbot-templates/image_annotator_helpers_test.erb",
     "test/google/cloud/vision/v1/image_annotator_helpers_test.rb"
   ]
 }
