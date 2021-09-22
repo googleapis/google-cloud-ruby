@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 / 2021-09-21
+
+#### Features
+
+* Added InputDataConfig#filter and PhraseMatcher#update_time
+
 ### 0.2.0 / 2021-08-30
 
 #### Features
