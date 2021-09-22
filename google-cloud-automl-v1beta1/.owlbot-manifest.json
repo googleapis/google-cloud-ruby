@@ -105,6 +105,7 @@
   ],
   "static": [
     ".OwlBot.yaml",
+    ".owlbot.rb",
     "lib/google/cloud/automl/v1beta1/_helpers.rb"
   ]
 }
