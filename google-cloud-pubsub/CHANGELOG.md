@@ -1,5 +1,15 @@
 # Release History
 
+### 2.8.1 / 2021-09-22
+
+#### Bug Fixes
+
+* Change IAM and Schema client metadata hash keys to symbols
+
+#### Documentation
+
+* Fix typo in Emulator guide links
+
 ### 2.8.0 / 2021-08-30
 
 #### Features
