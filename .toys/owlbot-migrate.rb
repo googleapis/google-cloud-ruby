@@ -6,6 +6,7 @@ end
 flag :all do
   desc "Run owlbot-migrate on all gems in this repo."
 end
+flag :except, "--except=GEM", default: [], handler: :push
 flag :pull do
   desc "Pull the latest images before running"
 end
@@ -46,6 +47,7 @@ def choose_gems
   if gems.empty?
     if all
       gems = Dir.glob("*/#{SYNTH_CONFIG_FILE_NAME}", base: context_directory).map { |path| File.dirname path }
+      gems -= except
       auto_gems = true
     else
       curwd = Dir.getwd
@@ -65,7 +67,12 @@ def choose_gems
       next if auto_gems
       error "Synth script for #{name} doesn't seem to invoke bazel"
     end
-    gems_and_paths[name] = proto_path_from_synth_content name, content
+    proto_path = proto_path_from_synth_content name, content
+    unless proto_path
+      next if auto_gems
+      error "Unable to determine proto path for #{name}"
+    end
+    gems_and_paths[name] = proto_path
   end
   gems_and_paths
 end
@@ -75,8 +82,7 @@ def proto_path_from_synth_content name, content
   return match[1] if match
   match = %r{gapic\.ruby_library\(\s*"([^"]+)",}.match content
   return "google/cloud/#{match[1]}" if match
-  error "Unable to determine proto path for #{name}"
-  # name.tr("-", "/").sub(%r{/v\d\w*$}, "")
+  nil
 end
 
 def switch_files name, proto_base
@@ -106,6 +112,11 @@ def run_owlbot names
   end
   cmd.append names
   exec_tool cmd
+end
+
+def error str
+  logger.error str
+  exit 1
 end
 
 class OwlBotParams
