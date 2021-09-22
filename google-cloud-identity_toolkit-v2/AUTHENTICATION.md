@@ -1,6 +1,6 @@
 # Authentication
 
-In general, the google-cloud-identitytoolkit-v2 library uses
+In general, the google-cloud-identity_toolkit-v2 library uses
 [Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
 credentials to connect to Google Cloud services. When running within
 [Google Cloud Platform environments](#google-cloud-platform-environments) the
@@ -32,7 +32,7 @@ client = ::Google::Cloud::IdentityToolkit::V2::AccountManagementService::Client.
 
 ## Credential Lookup
 
-The google-cloud-identitytoolkit-v2 library aims to make authentication
+The google-cloud-identity_toolkit-v2 library aims to make authentication
 as simple as possible, and provides several mechanisms to configure your system
 without requiring **Service Account Credentials** directly in code.
 
@@ -62,7 +62,7 @@ the READMEs for the individual service gems for details.) The path to the
 **Credentials JSON** itself can be stored for environments such as Docker
 containers where writing files is difficult or not encouraged.
 
-The environment variables that google-cloud-identitytoolkit-v2
+The environment variables that google-cloud-identity_toolkit-v2
 checks for credentials are configured on the service Credentials class (such as
 {::Google::Cloud::IdentityToolkit::V2::AccountManagementService::Credentials}):
 
@@ -131,7 +131,7 @@ To configure your system for this, simply:
 
 Google Cloud requires **Service Account Credentials** to
 connect to the APIs. You will use the **JSON key file** to
-connect to most services with google-cloud-identitytoolkit-v2.
+connect to most services with google-cloud-identity_toolkit-v2.
 
 If you are not running this client within
 [Google Cloud Platform environments](#google-cloud-platform-environments), you

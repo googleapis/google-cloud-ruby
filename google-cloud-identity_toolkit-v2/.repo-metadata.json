@@ -1,10 +1,14 @@
 {
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-identitytoolkit-v2/latest",
-    "distribution_name": "google-cloud-identitytoolkit-v2",
+    "api_id": "identitytoolkit.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-identity_toolkit-v2/latest",
+    "distribution_name": "google-cloud-identity_toolkit-v2",
     "language": "ruby",
-    "name_pretty": "Google Cloud Identitytoolkit V2 API",
+    "name": "identitytoolkit",
+    "name_pretty": "Identity Platform V2 API",
+    "product_documentation": "https://cloud.google.com/identity-platform/",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
-    "ruby-cloud-description": "google-cloud-identitytoolkit-v2 is the official client library for the Google Cloud Identitytoolkit V2 API. Note that google-cloud-identitytoolkit-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-identitytoolkit instead. See the readme for more details.",
+    "ruby-cloud-description": "The Google Identity Toolkit API lets you use open standards to verify a user's identity. Note that google-cloud-identity_toolkit-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-identity_toolkit instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/identity-platform/",
     "library_type": "GAPIC_AUTO"
 }

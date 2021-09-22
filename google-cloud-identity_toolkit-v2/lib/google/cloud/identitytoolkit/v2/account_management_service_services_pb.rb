@@ -27,7 +27,7 @@ module Google
           # Account management for Identity Toolkit
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode

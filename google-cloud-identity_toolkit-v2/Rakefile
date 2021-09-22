@@ -35,7 +35,7 @@ namespace :test do
   task :coverage do
     require "simplecov"
     SimpleCov.start do
-      command_name "google-cloud-identitytoolkit-v2"
+      command_name "google-cloud-identity_toolkit-v2"
       track_files "lib/**/*.rb"
       add_filter "test/"
     end
@@ -55,7 +55,7 @@ namespace :smoke_test do
   task :coverage do
     require "simplecov"
     SimpleCov.start do
-      command_name "google-cloud-identitytoolkit-v2"
+      command_name "google-cloud-identity_toolkit-v2"
       track_files "lib/**/*.rb"
       add_filter "test/"
     end
@@ -65,7 +65,7 @@ namespace :smoke_test do
 end
 
 # Acceptance tests
-desc "Run the google-cloud-identitytoolkit-v2 acceptance tests."
+desc "Run the google-cloud-identity_toolkit-v2 acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
   project ||=
@@ -101,7 +101,7 @@ namespace :acceptance do
     if File.directory? "acceptance"
       Rake::Task[:smoke_test].invoke
     else
-      puts "The google-cloud-identitytoolkit-v2 gem has no acceptance tests."
+      puts "The google-cloud-identity_toolkit-v2 gem has no acceptance tests."
     end
   end
 
@@ -129,7 +129,7 @@ namespace :samples do
         end
       end
     else
-      puts "The google-cloud-identitytoolkit-v2 gem has no samples to test."
+      puts "The google-cloud-identity_toolkit-v2 gem has no samples to test."
     end
   end
 
@@ -143,7 +143,7 @@ namespace :samples do
         end
       end
     else
-      puts "The google-cloud-identitytoolkit-v2 gem has no samples to test."
+      puts "The google-cloud-identity_toolkit-v2 gem has no samples to test."
     end
   end
 end
@@ -156,22 +156,22 @@ end
 
 desc "Run yard-doctest example tests."
 task :doctest do
-  puts "The google-cloud-identitytoolkit-v2 gem does not have doctest tests."
+  puts "The google-cloud-identity_toolkit-v2 gem does not have doctest tests."
 end
 
 task :cloudrad do
-  ENV["CLOUDRAD_GEM_NAME"] = "google-cloud-identitytoolkit-v2"
+  ENV["CLOUDRAD_GEM_NAME"] = "google-cloud-identity_toolkit-v2"
   sh "bundle exec yard doc --fail-on-warning --yardopts .yardopts-cloudrad"
 end
 
 desc "Run the CI build"
 task :ci do
-  header "BUILDING google-cloud-identitytoolkit-v2"
-  header "google-cloud-identitytoolkit-v2 rubocop", "*"
+  header "BUILDING google-cloud-identity_toolkit-v2"
+  header "google-cloud-identity_toolkit-v2 rubocop", "*"
   Rake::Task[:rubocop].invoke
-  header "google-cloud-identitytoolkit-v2 yard", "*"
+  header "google-cloud-identity_toolkit-v2 yard", "*"
   Rake::Task[:yard].invoke
-  header "google-cloud-identitytoolkit-v2 test", "*"
+  header "google-cloud-identity_toolkit-v2 test", "*"
   Rake::Task[:test].invoke
 end
 
@@ -179,13 +179,13 @@ namespace :ci do
   desc "Run the CI build, with smoke tests."
   task :smoke_test do
     Rake::Task[:ci].invoke
-    header "google-cloud-identitytoolkit-v2 smoke_test", "*"
+    header "google-cloud-identity_toolkit-v2 smoke_test", "*"
     Rake::Task[:smoke_test].invoke
   end
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
     Rake::Task[:ci].invoke
-    header "google-cloud-identitytoolkit-v2 acceptance", "*"
+    header "google-cloud-identity_toolkit-v2 acceptance", "*"
     Rake::Task[:acceptance].invoke
   end
   task :a do

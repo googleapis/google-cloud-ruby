@@ -20,7 +20,7 @@ require "gapic/common"
 require "gapic/config"
 require "gapic/config/method"
 
-require "google/cloud/identitytoolkit/v2/version"
+require "google/cloud/identity_toolkit/v2/version"
 
 require "google/cloud/identity_toolkit/v2/authentication_service/credentials"
 require "google/cloud/identity_toolkit/v2/authentication_service/client"

@@ -18,7 +18,7 @@
 
 require "google/cloud/identity_toolkit/v2/account_management_service"
 require "google/cloud/identity_toolkit/v2/authentication_service"
-require "google/cloud/identitytoolkit/v2/version"
+require "google/cloud/identity_toolkit/v2/version"
 
 module Google
   module Cloud

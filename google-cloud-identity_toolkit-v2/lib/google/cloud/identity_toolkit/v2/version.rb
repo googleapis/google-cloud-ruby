@@ -19,7 +19,7 @@
 
 module Google
   module Cloud
-    module Identitytoolkit
+    module IdentityToolkit
       module V2
         VERSION = "0.0.1"
       end
