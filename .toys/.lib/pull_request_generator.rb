@@ -146,7 +146,7 @@ module PullRequestGenerator
       else
         @context.logger.info "No files changed; no pull request created"
         @context.exec ["git", "switch", @orig_branch_name]
-        @context.exec ["gh", "branch", "-d", @branch_name]
+        @context.exec ["git", "branch", "-D", @branch_name]
       end
       @context.exec ["git", "clean", "-df"]
       result
