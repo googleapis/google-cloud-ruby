@@ -10,11 +10,14 @@ flag :except, "--except=GEM", default: [], handler: :push
 flag :pull do
   desc "Pull the latest images before running"
 end
-flag :git_remote, "--remote NAME" do
+flag :git_remote, "--remote=NAME" do
   desc "The name of the git remote to use as the pull request head. If omitted, does not open a pull request."
 end
 flag :commit_message, "--message=MESSAGE" do
   desc "The conventional commit message"
+end
+flag :branch_name, "--branch=NAME" do
+  desc "The branch name"
 end
 
 OWLBOT_CONFIG_FILE_NAME = ".OwlBot.yaml"
@@ -33,12 +36,18 @@ def run
   logger.info "Gems: #{gems_and_paths.keys}"
   Dir.chdir context_directory
 
-  gems_and_paths.each_with_index do |(name, proto_base), index|
-    logger.info "Editing #{name} (#{index}/#{gems_and_paths.size})"
-    switch_files name, proto_base
+  default_commit_stuff gems_and_paths.keys
+  result = generate_pull_request gem_name: nil,
+                                 git_remote: git_remote,
+                                 branch_name: branch_name,
+                                 commit_message: commit_message do
+    gems_and_paths.each_with_index do |(name, proto_base), index|
+      logger.info "Editing #{name} (#{index}/#{gems_and_paths.size})"
+      switch_files name, proto_base
+    end
+    logger.info "Running owlbot..."
+    run_owlbot gems_and_paths.keys
   end
-  logger.info "Running owlbot..."
-  run_owlbot gems_and_paths.keys
 end
 
 def choose_gems
@@ -85,6 +94,20 @@ def proto_path_from_synth_content name, content
   nil
 end
 
+def default_commit_stuff gems
+  if branch_name.nil?
+    timestamp = Time.now.utc.strftime "%Y%m%d-%H%H%S"
+    set :branch_name, "pr/owlbot-migration-#{timestamp}"
+  end
+  if commit_message.nil?
+    if gems.size == 1
+      set :commit_message, "chore(#{gems.first}): Migrate from autosynth to owlbot"
+    else
+      set :commit_message, "chore: Migrate #{gems.size} gems from autosynth to owlbot"
+    end
+  end
+end
+
 def switch_files name, proto_base
   Dir.chdir name do
     b = OwlBotParams.new(name, proto_base)._binding
@@ -103,8 +126,6 @@ end
 def run_owlbot names
   cmd = ["owlbot"]
   cmd << "--pull" if pull
-  cmd << "--remote=#{git_remote}" if git_remote
-  cmd << "--message" << (commit_message || "chore: Migrate from autosynth to owlbot")
   if verbosity < 0
     cmd << "-#{'q' * (-verbosity)}"
   elsif verbosity > 0
