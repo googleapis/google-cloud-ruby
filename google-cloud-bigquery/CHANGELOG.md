@@ -1,5 +1,15 @@
 # Release History
 
+### 1.36.0 / 2021-09-22
+
+#### Features
+
+* Add Job#delete
+
+#### Bug Fixes
+
+* Add precision and scale to Field#add_field
+
 ### 1.35.1 / 2021-09-14
 
 #### Documentation

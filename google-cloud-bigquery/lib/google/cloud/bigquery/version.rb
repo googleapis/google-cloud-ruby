@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Bigquery
-      VERSION = "1.35.1".freeze
+      VERSION = "1.36.0".freeze
     end
   end
 end
