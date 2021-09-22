@@ -28,7 +28,7 @@ module Google
           # Retrieves GCP Console billing accounts and associates them with projects.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode

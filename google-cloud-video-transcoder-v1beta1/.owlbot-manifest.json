@@ -1,0 +1,41 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "gapic_metadata.json",
+    "google-cloud-video-transcoder-v1beta1.gemspec",
+    "lib/google-cloud-video-transcoder-v1beta1.rb",
+    "lib/google/cloud/video/transcoder/v1beta1.rb",
+    "lib/google/cloud/video/transcoder/v1beta1/resources_pb.rb",
+    "lib/google/cloud/video/transcoder/v1beta1/services_pb.rb",
+    "lib/google/cloud/video/transcoder/v1beta1/services_services_pb.rb",
+    "lib/google/cloud/video/transcoder/v1beta1/transcoder_service.rb",
+    "lib/google/cloud/video/transcoder/v1beta1/transcoder_service/client.rb",
+    "lib/google/cloud/video/transcoder/v1beta1/transcoder_service/credentials.rb",
+    "lib/google/cloud/video/transcoder/v1beta1/transcoder_service/paths.rb",
+    "lib/google/cloud/video/transcoder/v1beta1/version.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/video/transcoder/v1beta1/resources.rb",
+    "proto_docs/google/cloud/video/transcoder/v1beta1/services.rb",
+    "proto_docs/google/protobuf/duration.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "test/google/cloud/video/transcoder/v1beta1/transcoder_service_paths_test.rb",
+    "test/google/cloud/video/transcoder/v1beta1/transcoder_service_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

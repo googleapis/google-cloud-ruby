@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/clouddms/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-cloud_dms-v1/$1

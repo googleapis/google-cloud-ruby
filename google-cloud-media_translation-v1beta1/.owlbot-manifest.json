@@ -1,0 +1,36 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "gapic_metadata.json",
+    "google-cloud-media_translation-v1beta1.gemspec",
+    "lib/google-cloud-media_translation-v1beta1.rb",
+    "lib/google/cloud/media_translation/v1beta1.rb",
+    "lib/google/cloud/media_translation/v1beta1/speech_translation_service.rb",
+    "lib/google/cloud/media_translation/v1beta1/speech_translation_service/client.rb",
+    "lib/google/cloud/media_translation/v1beta1/speech_translation_service/credentials.rb",
+    "lib/google/cloud/media_translation/v1beta1/version.rb",
+    "lib/google/cloud/mediatranslation/v1beta1/media_translation_pb.rb",
+    "lib/google/cloud/mediatranslation/v1beta1/media_translation_services_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/mediatranslation/v1beta1/media_translation.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/rpc/status.rb",
+    "test/google/cloud/media_translation/v1beta1/speech_translation_service_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "gapic_metadata.json",
+    "google-cloud-container-v1.gemspec",
+    "lib/google-cloud-container-v1.rb",
+    "lib/google/cloud/container/v1.rb",
+    "lib/google/cloud/container/v1/cluster_manager.rb",
+    "lib/google/cloud/container/v1/cluster_manager/client.rb",
+    "lib/google/cloud/container/v1/cluster_manager/credentials.rb",
+    "lib/google/cloud/container/v1/version.rb",
+    "lib/google/container/v1/cluster_service_pb.rb",
+    "lib/google/container/v1/cluster_service_services_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/container/v1/cluster_service.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "test/google/cloud/container/v1/cluster_manager_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

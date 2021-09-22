@@ -28,7 +28,7 @@ module Google
           # messages to a topic.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode
@@ -76,7 +76,7 @@ module Google
           # establishing a bi-directional stream using the `StreamingPull` method.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode

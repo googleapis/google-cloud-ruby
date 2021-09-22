@@ -1,0 +1,43 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "gapic_metadata.json",
+    "google-cloud-life_sciences-v2beta.gemspec",
+    "lib/google-cloud-life_sciences-v2beta.rb",
+    "lib/google/cloud/life_sciences/v2beta.rb",
+    "lib/google/cloud/life_sciences/v2beta/version.rb",
+    "lib/google/cloud/life_sciences/v2beta/workflows_service.rb",
+    "lib/google/cloud/life_sciences/v2beta/workflows_service/client.rb",
+    "lib/google/cloud/life_sciences/v2beta/workflows_service/credentials.rb",
+    "lib/google/cloud/life_sciences/v2beta/workflows_service/operations.rb",
+    "lib/google/cloud/lifesciences/v2beta/workflows_pb.rb",
+    "lib/google/cloud/lifesciences/v2beta/workflows_services_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/lifesciences/v2beta/workflows.rb",
+    "proto_docs/google/longrunning/operations.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/duration.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/rpc/code.rb",
+    "proto_docs/google/rpc/status.rb",
+    "test/google/cloud/life_sciences/v2beta/workflows_service_operations_test.rb",
+    "test/google/cloud/life_sciences/v2beta/workflows_service_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

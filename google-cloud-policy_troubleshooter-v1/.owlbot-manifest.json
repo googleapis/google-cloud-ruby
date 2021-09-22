@@ -1,0 +1,38 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "gapic_metadata.json",
+    "google-cloud-policy_troubleshooter-v1.gemspec",
+    "lib/google-cloud-policy_troubleshooter-v1.rb",
+    "lib/google/cloud/policy_troubleshooter/v1.rb",
+    "lib/google/cloud/policy_troubleshooter/v1/iam_checker.rb",
+    "lib/google/cloud/policy_troubleshooter/v1/iam_checker/client.rb",
+    "lib/google/cloud/policy_troubleshooter/v1/iam_checker/credentials.rb",
+    "lib/google/cloud/policy_troubleshooter/v1/version.rb",
+    "lib/google/cloud/policytroubleshooter/v1/checker_pb.rb",
+    "lib/google/cloud/policytroubleshooter/v1/checker_services_pb.rb",
+    "lib/google/cloud/policytroubleshooter/v1/explanations_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/policytroubleshooter/v1/checker.rb",
+    "proto_docs/google/cloud/policytroubleshooter/v1/explanations.rb",
+    "proto_docs/google/iam/v1/policy.rb",
+    "proto_docs/google/type/expr.rb",
+    "test/google/cloud/policy_troubleshooter/v1/iam_checker_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}
