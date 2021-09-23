@@ -1,0 +1,52 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.identitytoolkit.v2",
+  "libraryPackage": "::Google::Cloud::IdentityToolkit::V2",
+  "services": {
+    "AccountManagementService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::IdentityToolkit::V2::AccountManagementService::Client",
+          "rpcs": {
+            "FinalizeMfaEnrollment": {
+              "methods": [
+                "finalize_mfa_enrollment"
+              ]
+            },
+            "StartMfaEnrollment": {
+              "methods": [
+                "start_mfa_enrollment"
+              ]
+            },
+            "WithdrawMfa": {
+              "methods": [
+                "withdraw_mfa"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AuthenticationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::IdentityToolkit::V2::AuthenticationService::Client",
+          "rpcs": {
+            "FinalizeMfaSignIn": {
+              "methods": [
+                "finalize_mfa_sign_in"
+              ]
+            },
+            "StartMfaSignIn": {
+              "methods": [
+                "start_mfa_sign_in"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
