@@ -1,0 +1,42 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "gapic_metadata.json",
+    "google-cloud-artifact_registry-v1.gemspec",
+    "lib/google-cloud-artifact_registry-v1.rb",
+    "lib/google/cloud/artifact_registry/v1.rb",
+    "lib/google/cloud/artifact_registry/v1/artifact_registry.rb",
+    "lib/google/cloud/artifact_registry/v1/artifact_registry/client.rb",
+    "lib/google/cloud/artifact_registry/v1/artifact_registry/credentials.rb",
+    "lib/google/cloud/artifact_registry/v1/artifact_registry/paths.rb",
+    "lib/google/cloud/artifact_registry/v1/version.rb",
+    "lib/google/devtools/artifactregistry/v1/artifact_pb.rb",
+    "lib/google/devtools/artifactregistry/v1/repository_pb.rb",
+    "lib/google/devtools/artifactregistry/v1/service_pb.rb",
+    "lib/google/devtools/artifactregistry/v1/service_services_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/devtools/artifactregistry/v1/artifact.rb",
+    "proto_docs/google/devtools/artifactregistry/v1/repository.rb",
+    "proto_docs/google/iam/v1/policy.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/type/expr.rb",
+    "test/google/cloud/artifact_registry/v1/artifact_registry_paths_test.rb",
+    "test/google/cloud/artifact_registry/v1/artifact_registry_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}
