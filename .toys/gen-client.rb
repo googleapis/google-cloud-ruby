@@ -59,11 +59,15 @@ end
 flag :pull do
   desc "Pull the latest images before running"
 end
+flag :source_repo, "--source-repo=PATH" do
+  desc "Path to the googleapis-gen source repo"
+end
 
 static :replace_me_text, "(REPLACE ME)"
 static :synth_script_name, "synth.py"
 static :owlbot_config_name, ".OwlBot.yaml"
 static :owlbot_script_name, ".owlbot.rb"
+static :repo_metadata_name, ".repo-metadata.json"
 
 include :exec, e: true
 include :fileutils
@@ -73,6 +77,7 @@ def run
   require "erb"
   require "fileutils"
   require "json"
+  require "psych"
   require "pull_request_generator"
   extend PullRequestGenerator
 
@@ -145,6 +150,7 @@ def generate_owlbot
   puts "\nGenerating library...", :bold
   cmd = ["owlbot", @gem_name]
   cmd << "--pull" if pull
+  cmd << "--source-repo" << source_repo if source_repo
   if verbosity < 0
     cmd << "-#{'q' * (-verbosity)}"
   elsif verbosity > 0
@@ -214,8 +220,11 @@ end
 
 def determine_existing_versions
   dirs = Dir.glob "#{@base_gem_name}-v*"
-  dirs.delete_if { |dir| dir !~ /^#{@base_gem_name}-v\d[a-z0-9]*$/ }
-  dirs.delete_if { |dir| !File.file?("#{dir}/#{dir}.gemspec") || !File.file?("#{dir}/#{synth_script_name}") }
+  dirs.delete_if do |dir|
+    dir !~ /^#{@base_gem_name}-v\d[a-z0-9]*$/ ||
+      !File.file?("#{dir}/#{dir}.gemspec") ||
+      !File.file?("#{dir}/#{synth_script_name}") && !File.file?("#{dir}/#{owlbot_config_name}")
+  end
   @existing_versions = dirs.map { |dir| dir.sub "#{@base_gem_name}-", "" }.sort
   default_version_candidates = @existing_versions.find_all { |v| v =~ /^v\d+$/ }
   default_version_candidates = @existing_versions if default_version_candidates.empty?
@@ -227,8 +236,26 @@ end
 
 def lookup_precedents
   @existing_versions.reverse_each do |version|
-    lookup_precedents_in_synth "#{@base_gem_name}-#{version}/#{synth_script_name}", version
-    lookup_precedents_in_repo_metadata "#{@base_gem_name}-#{version}/.repo-metadata.json"
+    precedent_gem = "#{@base_gem_name}-#{version}"
+    path = File.join precedent_gem, owlbot_config_name
+    lookup_precedents_in_owlbot path, version if File.file? path
+    path = File.join precedent_gem, synth_script_name
+    lookup_precedents_in_synth path, version if File.file? path
+    path = File.join precedent_gem, repo_metadata_name
+    lookup_precedents_in_repo_metadata path if File.file? path
+  end
+end
+
+def lookup_precedents_in_owlbot file_path, version
+  logger.info "Looking for existing settings in #{file_path}..."
+  config = Psych.load_file file_path
+
+  deep_copy_regex = Array(config["deep-copy-regex"]).first
+  if deep_copy_regex&.include? "source"
+    source = deep_copy_regex["source"]
+    if source =~ %r{^/([\w/-]+)/#{version}/\[\^/\]\+-ruby/\(\.\*\)$}
+      @proto_path_base = Regexp.last_match 1
+    end
   end
 end
 
