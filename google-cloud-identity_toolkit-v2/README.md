@@ -40,7 +40,7 @@ response = client.finalize_mfa_enrollment request
 View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-identity_toolkit-v2/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/identity-platform/)
+See also the [Product Documentation](https://cloud.google.com/identity-platform/docs/reference/rest)
 for general usage information.
 
 ## Enabling Logging
