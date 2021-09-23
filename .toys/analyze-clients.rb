@@ -20,7 +20,8 @@ ANALYSES = {
   unreleased: "List gems that have no releases.",
   unwrapped: "List gapic gems that have no corresponding wrapper.",
   gapic_prerelease: "List gapic gems whose service is GA but do not have a 1.0 release",
-  wrapper_prerelease: "List wrapper gems whose service is GA but do not have a 1.0 release"
+  wrapper_prerelease: "List wrapper gems whose service is GA but do not have a 1.0 release",
+  outdated_wrappers: "List wrapper gems prioritizing an outdated gapic"
 }
 
 at_least_one desc: "Analyses" do
@@ -121,6 +122,38 @@ def gapic_prerelease_analysis
     version = gem_version gem_name
     if version.start_with? "0."
       puts "#{gem_name} #{version}"
+      count += 1
+    end
+  end
+  puts "Total: #{count}", :cyan
+end
+
+def outdated_wrappers_analysis
+  count = 0
+  all_wrapper_gems.each do |gem_name|
+    pre_versions = []
+    ga_versions = []
+    all_versioned_gems.each do |versioned_name|
+      match = /^#{gem_name}-(v\d+[a-z]\w*)$/.match versioned_name
+      pre_versions << match[1] if match
+      match = /^#{gem_name}-(v\d+)$/.match versioned_name
+      ga_versions << match[1] if match
+    end
+    expected_version = (ga_versions.empty? ? pre_versions : ga_versions).sort.last
+    unless expected_version
+      puts "#{gem_name}: No expected version"
+      next
+    end
+    path = gem_name.tr "-", "/"
+    content = File.read "#{gem_name}/lib/#{path}.rb"
+    match = / version: :(v\d\w*), /.match content
+    unless match
+      puts "#{gem_name}: No version found"
+      next
+    end
+    version = match[1]
+    unless version == expected_version
+      puts "#{gem_name}: Expected #{expected_version} but found #{version}", :yellow
       count += 1
     end
   end
