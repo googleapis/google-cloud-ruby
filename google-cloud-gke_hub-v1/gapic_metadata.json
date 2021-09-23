@@ -1,0 +1,73 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.gkehub.v1",
+  "libraryPackage": "::Google::Cloud::GkeHub::V1",
+  "services": {
+    "GkeHub": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::GkeHub::V1::GkeHub::Client",
+          "rpcs": {
+            "ListMemberships": {
+              "methods": [
+                "list_memberships"
+              ]
+            },
+            "ListFeatures": {
+              "methods": [
+                "list_features"
+              ]
+            },
+            "GetMembership": {
+              "methods": [
+                "get_membership"
+              ]
+            },
+            "GetFeature": {
+              "methods": [
+                "get_feature"
+              ]
+            },
+            "CreateMembership": {
+              "methods": [
+                "create_membership"
+              ]
+            },
+            "CreateFeature": {
+              "methods": [
+                "create_feature"
+              ]
+            },
+            "DeleteMembership": {
+              "methods": [
+                "delete_membership"
+              ]
+            },
+            "DeleteFeature": {
+              "methods": [
+                "delete_feature"
+              ]
+            },
+            "UpdateMembership": {
+              "methods": [
+                "update_membership"
+              ]
+            },
+            "UpdateFeature": {
+              "methods": [
+                "update_feature"
+              ]
+            },
+            "GenerateConnectManifest": {
+              "methods": [
+                "generate_connect_manifest"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
