@@ -1,5 +1,11 @@
 # Release History
 
+### 0.17.1 / 2021-09-24
+
+#### Bug Fixes
+
+* Depend on the existing access_context_manager and os_config clients rather than copying their classes into the asset client
+
 ### 0.17.0 / 2021-09-07
 
 #### Features
