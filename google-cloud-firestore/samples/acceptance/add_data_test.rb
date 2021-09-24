@@ -46,6 +46,13 @@ describe "Google Cloud Firestore API samples - Add Data" do
     assert_includes out, "Set multiple data-type data for the one document in the data collection."
   end
 
+  it "data_set_from_custom_type" do
+    out, _err = capture_io do
+      data_set_from_custom_type project_id: @firestore_project, collection_path: @collection_path
+    end
+    assert_includes out, "Set custom type data for the LA document in the cities collection."
+  end
+
   it "set_requires_id" do
     out, _err = capture_io do
       set_requires_id project_id: @firestore_project, collection_path: @collection_path

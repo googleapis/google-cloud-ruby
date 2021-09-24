@@ -72,6 +72,54 @@ def set_document_data_types project_id:, collection_path: "data"
   puts "Set multiple data-type data for the one document in the data collection."
 end
 
+# [START firestore_data_custom_type_definition]
+class City
+  attr_accessor :name, :state, :country, :capital, :population, :regions
+
+  def initialize name, state, country, capital: false, population: 0, regions: []
+    @name = name
+    @state = state
+    @country = country
+    @capital = capital
+    @population = population
+    @regions = regions
+  end
+
+  def self.from_h source
+    city = new source[:name], source[:state], source[:country]
+    city.capital = source[:capital] if source[:capital]
+    city.population = source[:population] if source[:population]
+    city.regions = source[:regions] if source[:regions]
+    city
+  end
+
+  def to_h
+    hsh = {
+      name: name,
+      state: state,
+      country: country
+    }
+    hsh[:capital] = capital if capital
+    hsh[:population] = population if population
+    hsh[:regions] = regions if regions
+    hsh
+  end
+end
+# [END firestore_data_custom_type_definition]
+
+def data_set_from_custom_type project_id:, collection_path: "cities"
+  # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
+
+  firestore = Google::Cloud::Firestore.new project_id: project_id
+  # [START firestore_data_set_from_custom_type]
+  city = City.new "Los Angeles", "CA", "USA"
+
+  firestore.col(collection_path).doc("LA").set(city.to_h)
+  # [END firestore_data_set_from_custom_type]
+  puts "Set custom type data for the LA document in the cities collection."
+end
+
 def set_requires_id project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
   # collection_path = "cities"

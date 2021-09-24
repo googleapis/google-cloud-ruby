@@ -24,3 +24,5 @@ Lint/UselessAssignment:
     - "paginate_data.rb"
     - "query_data.rb"
     - "quickstart.rb"
+Style/AccessorGrouping:
+  Enabled: false
