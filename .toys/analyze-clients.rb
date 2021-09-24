@@ -21,7 +21,8 @@ ANALYSES = {
   unwrapped: "List gapic gems that have no corresponding wrapper.",
   gapic_prerelease: "List gapic gems whose service is GA but do not have a 1.0 release",
   wrapper_prerelease: "List wrapper gems whose service is GA but do not have a 1.0 release",
-  outdated_wrappers: "List wrapper gems prioritizing an outdated gapic"
+  outdated_wrappers: "List wrapper gems prioritizing an outdated gapic",
+  incomplete_bazel: "List unfinished Ruby bazel configs"
 }
 
 at_least_one desc: "Analyses" do
@@ -31,17 +32,33 @@ at_least_one desc: "Analyses" do
   end
 end
 
+flag :googleapis_repo, "--googleapis-repo=PATH"
+
 include :exec, e: true
 include :terminal
 
 def run
   require "repo_info"
+  require "fileutils"
+  require "tmpdir"
   ANALYSES.keys.each do |analysis|
     next unless all || self[analysis]
     name = "#{analysis}_analysis"
     puts "**** Running #{name} ... ****", :bold
     send name.to_sym
     puts
+  end
+end
+
+def googleapis_path
+  return googleapis_repo if googleapis_repo
+  @googleapis_path ||= begin
+    dir = Dir.mktmpdir
+    at_exit { FileUtils.rm_rf dir }
+    Dir.chdir dir do
+      exec ["git", "clone", "--depth=1", "https://github.com/googleapis/googleapis.git"]
+    end
+    File.join dir, "googleapis"
   end
 end
 
@@ -155,6 +172,24 @@ def outdated_wrappers_analysis
     unless version == expected_version
       puts "#{gem_name}: Expected #{expected_version} but found #{version}", :yellow
       count += 1
+    end
+  end
+  puts "Total: #{count}", :cyan
+end
+
+def incomplete_bazel_analysis
+  count = 0
+  Dir.chdir googleapis_path do
+    Dir.glob("**/BUILD.bazel") do |build_file|
+      content = File.read build_file
+      next unless content.include? "ruby_cloud_gapic_library"
+      unless content.include?("ruby-cloud-api-id=") &&
+             content.include?("ruby-cloud-api-shortname=") &&
+             content.include?("ruby_cloud_description") &&
+             content.include?("ruby_cloud_title")
+        puts build_file
+        count += 1
+      end
     end
   end
   puts "Total: #{count}", :cyan
