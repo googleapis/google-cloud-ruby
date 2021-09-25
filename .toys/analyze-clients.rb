@@ -22,7 +22,8 @@ ANALYSES = {
   gapic_prerelease: "List gapic gems whose service is GA but do not have a 1.0 release",
   wrapper_prerelease: "List wrapper gems whose service is GA but do not have a 1.0 release",
   outdated_wrappers: "List wrapper gems prioritizing an outdated gapic",
-  incomplete_bazel: "List unfinished Ruby bazel configs"
+  incomplete_bazel: "List incomplete Ruby bazel configs",
+  gapic_ready: "List complete Ruby bazel configs that haven't yet been generated"
 }
 
 at_least_one desc: "Analyses" do
@@ -97,6 +98,7 @@ end
 
 def unreleased_analysis
   count = 0
+  puts "Results:", :cyan
   all_gems.each do |gem_name|
     if gem_version(gem_name) == "0.0.1"
       puts gem_name
@@ -108,6 +110,7 @@ end
 
 def unwrapped_analysis
   count = 0
+  puts "Results:", :cyan
   all_versioned_gems.each do |gem_name|
     unless all_wrapper_gems.include? expected_wrapper_of gem_name
       puts gem_name
@@ -119,6 +122,7 @@ end
 
 def wrapper_prerelease_analysis
   count = 0
+  puts "Results:", :cyan
   all_versioned_gems.each do |gem_name|
     next unless /-v\d+$/.match? gem_name
     wrapper_name = expected_wrapper_of gem_name
@@ -134,6 +138,7 @@ end
 
 def gapic_prerelease_analysis
   count = 0
+  puts "Results:", :cyan
   all_versioned_gems.each do |gem_name|
     next unless /-v\d+$/.match? gem_name
     version = gem_version gem_name
@@ -147,6 +152,7 @@ end
 
 def outdated_wrappers_analysis
   count = 0
+  puts "Results:", :cyan
   all_wrapper_gems.each do |gem_name|
     pre_versions = []
     ga_versions = []
@@ -179,6 +185,7 @@ end
 
 def incomplete_bazel_analysis
   count = 0
+  puts "Results:", :cyan
   Dir.chdir googleapis_path do
     Dir.glob("**/BUILD.bazel") do |build_file|
       content = File.read build_file
@@ -188,6 +195,30 @@ def incomplete_bazel_analysis
              content.include?("ruby_cloud_description") &&
              content.include?("ruby_cloud_title")
         puts build_file
+        count += 1
+      end
+    end
+  end
+  puts "Total: #{count}", :cyan
+end
+
+def gapic_ready_analysis
+  count = 0
+  puts "Results:", :cyan
+  Dir.chdir googleapis_path do
+    Dir.glob("**/BUILD.bazel") do |build_file|
+      content = File.read build_file
+      next unless content.include?("ruby_cloud_gapic_library") &&
+                  content.include?("ruby-cloud-api-id=") &&
+                  content.include?("ruby-cloud-api-shortname=") &&
+                  content.include?("ruby_cloud_description") &&
+                  content.include?("ruby_cloud_title")
+      match = /ruby-cloud-gem-name=([\w-]+)/.match content
+      next unless match
+      gem_name = match[1]
+      gemspec_path = File.join context_directory, gem_name, "#{gem_name}.gemspec"
+      unless File.file? gemspec_path
+        puts "#{gem_name} (#{File.dirname build_file})"
         count += 1
       end
     end
