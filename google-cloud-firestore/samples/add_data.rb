@@ -87,22 +87,22 @@ class City
 
   def self.from_h source
     city = new source[:name], source[:state], source[:country]
-    city.capital = source[:capital] if source[:capital]
-    city.population = source[:population] if source[:population]
-    city.regions = source[:regions] if source[:regions]
+    city.capital = source[:capital] if source.key? :capital
+    city.population = source[:population] if source.key? :population
+    city.regions = source[:regions] if source.key? :regions
     city
   end
 
   def to_h
-    hsh = {
+    # Serialize to sparse hash that omits nil values for optional fields.
+    {
       name: name,
       state: state,
-      country: country
-    }
-    hsh[:capital] = capital if capital
-    hsh[:population] = population if population
-    hsh[:regions] = regions if regions
-    hsh
+      country: country,
+      capital: capital,
+      population: population,
+      regions: regions
+    }.delete_if { |_, v| v.nil? }
   end
 end
 # [END firestore_data_custom_type_definition]
