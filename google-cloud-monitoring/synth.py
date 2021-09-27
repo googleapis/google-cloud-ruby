@@ -49,30 +49,47 @@ library2 = gapic.ruby_library(
         "ruby-cloud-gem-name": "google-cloud-monitoring-dashboard",
         "ruby-cloud-title": "Cloud Monitoring Dashboards",
         "ruby-cloud-description": "Cloud Monitoring collects metrics, events, and metadata from Google Cloud, Amazon Web Services (AWS), hosted uptime probes, and application instrumentation.",
-        "ruby-cloud-env-prefix": "MONITORING_DASHBOARD",
+        "ruby-cloud-env-prefix": "MONITORING",
         "ruby-cloud-wrapper-of": "v1:0.5",
         "ruby-cloud-product-url": "https://cloud.google.com/monitoring",
         "ruby-cloud-api-id": "monitoring.googleapis.com",
         "ruby-cloud-api-shortname": "monitoring",
-        "ruby-cloud-migration-version": "1.0",
     }
 )
 s.copy(library2 / "lib/google/cloud/monitoring/dashboard.rb", merge=ruby.global_merge)
 s.copy(library2 / "test/google/cloud/monitoring/dashboard/client_test.rb", merge=ruby.global_merge)
 
+# Generate the wrapper for monitoring-metrics_scope, and copy only the factory methods and tests
+library3 = gapic.ruby_library(
+    "monitoring/metricsscope", "v1",
+    proto_path="google/monitoring/metricsscope/v1",
+    generator_args={
+        "ruby-cloud-gem-name": "google-cloud-monitoring-metrics_scope",
+        "ruby-cloud-title": "Cloud Monitoring Metrics Scopes",
+        "ruby-cloud-description": "Cloud Monitoring collects metrics, events, and metadata from Google Cloud, Amazon Web Services (AWS), hosted uptime probes, and application instrumentation.",
+        "ruby-cloud-env-prefix": "MONITORING",
+        "ruby-cloud-wrapper-of": "v1:0.0",
+        "ruby-cloud-product-url": "https://cloud.google.com/monitoring",
+        "ruby-cloud-api-id": "monitoring.googleapis.com",
+        "ruby-cloud-api-shortname": "monitoring",
+    }
+)
+s.copy(library3 / "lib/google/cloud/monitoring/metrics_scope.rb", merge=ruby.global_merge)
+s.copy(library3 / "test/google/cloud/monitoring/metrics_scope/client_test.rb", merge=ruby.global_merge)
+
 # Ensure the gemspec includes monitoring-dashboard, and the entrypoint references it.
 s.replace(
     "lib/google-cloud-monitoring.rb",
     '\nrequire "google/cloud/monitoring" unless defined\\? Google::Cloud::Monitoring::VERSION\n',
-    '\nrequire "google/cloud/monitoring" unless defined? Google::Cloud::Monitoring::VERSION\nrequire "google/cloud/monitoring/dashboard" unless defined? Google::Cloud::Monitoring::Dashboard::VERSION\n'
+    '\nrequire "google/cloud/monitoring" unless defined? Google::Cloud::Monitoring::VERSION\nrequire "google/cloud/monitoring/dashboard" unless defined? Google::Cloud::Monitoring::Dashboard::VERSION\nrequire "google/cloud/monitoring/metrics_scope" unless defined? Google::Cloud::Monitoring::MetricsScope::VERSION\n'
 )
 s.replace(
     "google-cloud-monitoring.gemspec",
     '\n  gem.add_dependency "google-cloud-monitoring-v3", ">= 0.4", "< 2.a"\n\n',
-    '\n  gem.add_dependency "google-cloud-monitoring-v3", ">= 0.4", "< 2.a"\n  gem.add_dependency "google-cloud-monitoring-dashboard-v1", ">= 0.5", "< 2.a"\n\n',
+    '\n  gem.add_dependency "google-cloud-monitoring-v3", ">= 0.4", "< 2.a"\n  gem.add_dependency "google-cloud-monitoring-dashboard-v1", ">= 0.5", "< 2.a"\n  gem.add_dependency "google-cloud-monitoring-metrics_scope-v1", ">= 0.0", "< 2.a"\n\n',
 )
 s.replace(
     "Gemfile",
     '\ngem "google-cloud-monitoring-v3", path: "../google-cloud-monitoring-v3"\n',
-    '\ngem "google-cloud-monitoring-v3", path: "../google-cloud-monitoring-v3"\ngem "google-cloud-monitoring-dashboard-v1", path: "../google-cloud-monitoring-dashboard-v1"\n',
+    '\ngem "google-cloud-monitoring-v3", path: "../google-cloud-monitoring-v3"\ngem "google-cloud-monitoring-dashboard-v1", path: "../google-cloud-monitoring-dashboard-v1"\ngem "google-cloud-monitoring-metrics_scope-v1", path: "../google-cloud-monitoring-metrics_scope-v1"\n',
 )
