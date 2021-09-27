@@ -23,13 +23,13 @@ logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICMicrogenerator()
 library = gapic.ruby_library(
-    "billing/budgets", "v1beta1",
+    "billing/budgets", "v1",
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-billing-budgets",
         "ruby-cloud-title": "Billing Budgets",
         "ruby-cloud-description": "Provides methods to view, create, and manage Cloud Billing budgets programmatically at scale.",
         "ruby-cloud-env-prefix": "BILLING_BUDGETS",
-        "ruby-cloud-wrapper-of": "v1beta1:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.0;v1beta1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/billing/docs/how-to/budget-api-overview",
         "ruby-cloud-api-id": "billingbudgets.googleapis.com",
         "ruby-cloud-api-shortname": "billingbudgets",

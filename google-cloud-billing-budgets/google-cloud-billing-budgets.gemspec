@@ -22,6 +22,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.5"
 
+  gem.add_dependency "google-cloud-billing-budgets-v1", ">= 0.0", "< 2.a"
   gem.add_dependency "google-cloud-billing-budgets-v1beta1", ">= 0.0", "< 2.a"
   gem.add_dependency "google-cloud-core", "~> 1.6"
 
