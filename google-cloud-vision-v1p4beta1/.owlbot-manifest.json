@@ -64,6 +64,13 @@
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml"
+    ".OwlBot.yaml",
+    ".owlbot.rb",
+    "acceptance/google/cloud/vision/v1p4beta1/helpers_smoke_test.rb",
+    "lib/google/cloud/vision/v1p4beta1/image_annotator/helpers.rb",
+    "owlbot-templates/helpers_smoke_test.erb",
+    "owlbot-templates/image_annotator_helpers.erb",
+    "owlbot-templates/image_annotator_helpers_test.erb",
+    "test/google/cloud/vision/v1p4beta1/image_annotator_helpers_test.rb"
   ]
 }
