@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-assured_workloads
 checks for credentials are configured on the service Credentials class (such as
-`::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Credentials`):
+`::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Credentials`):
 
 * `ASSURED_WORKLOADS_CREDENTIALS` - Path to JSON file, or JSON contents
 * `ASSURED_WORKLOADS_KEYFILE` - Path to JSON file, or JSON contents
