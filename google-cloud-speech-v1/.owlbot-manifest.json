@@ -39,24 +39,7 @@
   ],
   "static": [
     ".OwlBot.yaml",
-    "acceptance/data/ChromeCast.mp4",
-    "acceptance/data/CloudPlatform_128px_Retina.png",
-    "acceptance/data/abc.txt",
-    "acceptance/data/audio.raw",
-    "acceptance/data/bicycle.jpg",
-    "acceptance/data/db.example.com",
-    "acceptance/data/example.csv",
-    "acceptance/data/face.jpg",
-    "acceptance/data/index.yaml",
-    "acceptance/data/kitten-test-data.json",
-    "acceptance/data/landmark.jpg",
-    "acceptance/data/logo.jpg",
-    "acceptance/data/overlay.jpg",
-    "acceptance/data/schema.json",
-    "acceptance/data/text.png",
-    "acceptance/data/three-mb-file.tif",
-    "acceptance/data/us-states.orc",
-    "acceptance/data/us-states.parquet",
+    "acceptance/data",
     "acceptance/google/cloud/speech/v1/speech_smoke_test.rb"
   ]
 }
