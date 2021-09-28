@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.0 / 2021-09-28
+
+#### Features
+
+* Added support for the MetricsScope service
+
 ### 1.2.2 / 2021-07-12
 
 #### Documentation
