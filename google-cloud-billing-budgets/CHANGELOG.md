@@ -1,5 +1,15 @@
 # Release History
 
+### 2.0.0 / 2021-09-28
+
+#### ⚠ BREAKING CHANGES
+
+* **billing-budgets:** Support V1 of the service and make it the default
+
+#### Features
+
+* Support V1 of the service and make it the default
+
 ### 1.1.2 / 2021-07-12
 
 #### Documentation
