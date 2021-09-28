@@ -3,16 +3,16 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "720d14d3641a60c0fab0bf8519bdd730a753a897"
+        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
+        "sha": "4c688666e2d28043de390eaecbb3471eab5090c6"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "8c0e4a368056920eaa1039cd740a637c9d12cccb",
-        "internalRef": "392706843"
+        "sha": "15759865d1c54e3d46429010f7e472fe6c3d3715",
+        "internalRef": "399287285"
       }
     }
   ],
@@ -21,30 +21,10 @@
       "client": {
         "source": "googleapis",
         "apiName": "gkehub",
-        "apiVersion": "v1beta1",
+        "apiVersion": "v1",
         "language": "ruby",
         "generator": "gapic-generator-ruby"
       }
     }
-  ],
-  "generatedFiles": [
-    ".gitignore",
-    ".repo-metadata.json",
-    ".rubocop.yml",
-    ".yardopts",
-    ".yardopts-cloudrad",
-    "AUTHENTICATION.md",
-    "CHANGELOG.md",
-    "Gemfile",
-    "LICENSE.md",
-    "README.md",
-    "Rakefile",
-    "google-cloud-gke_hub.gemspec",
-    "lib/google-cloud-gke_hub.rb",
-    "lib/google/cloud/gke_hub.rb",
-    "lib/google/cloud/gke_hub/version.rb",
-    "test/google/cloud/gke_hub/client_test.rb",
-    "test/google/cloud/gke_hub/version_test.rb",
-    "test/helper.rb"
   ]
 }
