@@ -1,5 +1,16 @@
 # Release History
 
+### 1.3.3 / 2021-09-28
+
+#### Features
+
+* add an acceptance test showcasing Ruby Cloud Error surfacing ([#13936](https://www.github.com/googleapis/google-cloud-ruby/issues/13936))
+  * feat: add an acceptance test showcasing Ruby Cloud Error surfacing
+
+#### Bug Fixes
+
+* Update versions of gapic clients
+
 ### 1.3.2 / 2021-07-12
 
 #### Documentation
