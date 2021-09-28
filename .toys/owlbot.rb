@@ -96,7 +96,7 @@ end
 def pull_images
   return unless pull
   exec ["docker", "pull", "#{OWLBOT_CLI_IMAGE}:#{owlbot_cli_tag}"]
-  exec ["docker", "pull", "#{POSTPROCESSOR_IMAGE}:#{owlbot_cli_tag}"]
+  exec ["docker", "pull", "#{POSTPROCESSOR_IMAGE}:#{postprocessor_tag}"]
 end
 
 def collect_sources gems
@@ -161,7 +161,7 @@ def process_gems gems
                                    commit_message: message do
       FileUtils.mkdir_p STAGING_DIR_NAME
       FileUtils.mv File.join(temp_staging_dir, name), File.join(STAGING_DIR_NAME, name)
-      docker_run "#{POSTPROCESSOR_IMAGE}:#{owlbot_cli_tag}", "--gem", name
+      docker_run "#{POSTPROCESSOR_IMAGE}:#{postprocessor_tag}", "--gem", name
     end
     puts "Results for #{name} (#{index}/#{gems.size})..."
     results[name] = output_result name, result, :bold
