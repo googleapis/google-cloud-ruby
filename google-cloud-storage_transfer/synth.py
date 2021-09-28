@@ -29,7 +29,7 @@ library = gapic.ruby_library(
         "ruby-cloud-gem-name": "google-cloud-storage_transfer",
         "ruby-cloud-title": "Storage Transfer Service",
         "ruby-cloud-description": "Storage Transfer Service allows you to quickly import online data into Cloud Storage. You can also set up a repeating schedule for transferring data, as well as transfer data within Cloud Storage, from one bucket to another.",
-        "ruby-cloud-wrapper-of": "v1:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.1",
         "ruby-cloud-product-url": "https://cloud.google.com/storage-transfer-service/",
         "ruby-cloud-api-id": "storagetransfer.googleapis.com",
         "ruby-cloud-api-shortname": "storagetransfer",
