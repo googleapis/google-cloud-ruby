@@ -29,7 +29,7 @@ library = gapic.ruby_library(
         "ruby-cloud-gem-name": "google-cloud-filestore",
         "ruby-cloud-title": "Filestore",
         "ruby-cloud-description": "Filestore instances are fully managed NFS file servers on Google Cloud for use with applications running on Compute Engine virtual machines (VMs) instances or Google Kubernetes Engine clusters.",
-        "ruby-cloud-wrapper-of": "v1:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.1",
         "ruby-cloud-product-url": "https://cloud.google.com/filestore/",
         "ruby-cloud-api-id": "file.googleapis.com",
         "ruby-cloud-api-shortname": "file",
