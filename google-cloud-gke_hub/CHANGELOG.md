@@ -1,5 +1,15 @@
 # Release History
 
+### 1.0.0 / 2021-09-28
+
+#### ⚠ BREAKING CHANGES
+
+* **gke_hub:** Support V1 of the service and make it the default
+
+#### Features
+
+* Support V1 of the service and make it the default
+
 ### 0.1.3 / 2021-08-27
 
 #### Documentation
