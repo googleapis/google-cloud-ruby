@@ -11,6 +11,6 @@
     "ruby-cloud-description": "Binary Authorization is a service on Google Cloud that provides centralized software supply-chain security for applications that run on Google Kubernetes Engine (GKE) and GKE on-prem.",
     "ruby-cloud-env-prefix": "BINARY_AUTHORIZATION",
     "ruby-cloud-product-url": "https://cloud.google.com/binary-authorization/",
-    "ruby-cloud-service-override": "BinauthzManagementServiceV1Beta1=BinauthzManagementService",
+    "ruby-cloud-service-override": "BinauthzManagementServiceV1=BinauthzManagementService;SystemPolicyV1=SystemPolicy;ValidationHelperV1=ValidationHelper",
     "library_type": "GAPIC_AUTO"
 }
