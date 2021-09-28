@@ -40,7 +40,7 @@ response = client.get_metrics_scope request
 View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-monitoring-metrics_scope-v1/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/monitoring)
+See also the [Product Documentation](https://cloud.google.com/monitoring/settings/manage-api)
 for general usage information.
 
 ## Enabling Logging
