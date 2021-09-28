@@ -28,7 +28,7 @@ class Google::Cloud::Billing::Budgets::ClientConstructionMinitest < Minitest::Te
       client = Google::Cloud::Billing::Budgets.budget_service do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client, client
+      assert_kind_of Google::Cloud::Billing::Budgets::V1::BudgetService::Client, client
     end
   end
 end
