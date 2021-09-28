@@ -42,18 +42,24 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :transcript_segments, :message, 1, "google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment"
     end
     add_message "google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment" do
+      optional :message_time, :message, 6, "google.protobuf.Timestamp"
       optional :text, :string, 1
       optional :confidence, :float, 2
       repeated :words, :message, 3, "google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.WordInfo"
       optional :language_code, :string, 4
       optional :channel_tag, :int32, 5
       optional :segment_participant, :message, 9, "google.cloud.contactcenterinsights.v1.ConversationParticipant"
+      optional :dialogflow_segment_metadata, :message, 10, "google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata"
+      optional :sentiment, :message, 11, "google.cloud.contactcenterinsights.v1.SentimentData"
     end
     add_message "google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.WordInfo" do
       optional :start_offset, :message, 1, "google.protobuf.Duration"
       optional :end_offset, :message, 2, "google.protobuf.Duration"
       optional :word, :string, 3
       optional :confidence, :float, 4
+    end
+    add_message "google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata" do
+      optional :smart_reply_allowlist_covered, :bool, 1
     end
     add_enum "google.cloud.contactcenterinsights.v1.Conversation.Medium" do
       value :MEDIUM_UNSPECIFIED, 0
@@ -331,6 +337,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.contactcenterinsights.v1.ConversationParticipant" do
       optional :dialogflow_participant, :string, 1
+      optional :obfuscated_external_user_id, :string, 3
       optional :role, :enum, 2, "google.cloud.contactcenterinsights.v1.ConversationParticipant.Role"
       oneof :participant do
         optional :dialogflow_participant_name, :string, 5
@@ -356,6 +363,7 @@ module Google
         Conversation::Transcript = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.Conversation.Transcript").msgclass
         Conversation::Transcript::TranscriptSegment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment").msgclass
         Conversation::Transcript::TranscriptSegment::WordInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.WordInfo").msgclass
+        Conversation::Transcript::TranscriptSegment::DialogflowSegmentMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.DialogflowSegmentMetadata").msgclass
         Conversation::Medium = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.Conversation.Medium").enummodule
         Analysis = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.Analysis").msgclass
         ConversationDataSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ConversationDataSource").msgclass

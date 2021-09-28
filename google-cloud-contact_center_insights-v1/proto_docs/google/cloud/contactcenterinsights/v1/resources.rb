@@ -110,6 +110,9 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # A segment of a full transcript.
+            # @!attribute [rw] message_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     The time that the message occurred, if provided.
             # @!attribute [rw] text
             #   @return [::String]
             #     The text of this segment.
@@ -134,6 +137,12 @@ module Google
             # @!attribute [rw] segment_participant
             #   @return [::Google::Cloud::ContactCenterInsights::V1::ConversationParticipant]
             #     The participant of this segment.
+            # @!attribute [rw] dialogflow_segment_metadata
+            #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation::Transcript::TranscriptSegment::DialogflowSegmentMetadata]
+            #     CCAI metadata relating to the current transcript segment.
+            # @!attribute [rw] sentiment
+            #   @return [::Google::Cloud::ContactCenterInsights::V1::SentimentData]
+            #     The sentiment for this transcript segment.
             class TranscriptSegment
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -155,6 +164,16 @@ module Google
               #     A confidence estimate between 0.0 and 1.0 of the fidelity of this
               #     word. A default value of 0.0 indicates that the value is unset.
               class WordInfo
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Metadata from Dialogflow relating to the current transcript segment.
+              # @!attribute [rw] smart_reply_allowlist_covered
+              #   @return [::Boolean]
+              #     Whether the transcript segment was covered under the configured smart
+              #     reply allowlist in Agent Assist.
+              class DialogflowSegmentMetadata
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
@@ -1196,6 +1215,9 @@ module Google
         #     Deprecated. Use `dialogflow_participant_name` instead.
         #     The name of the Dialogflow participant. Format:
         #     projects/\\{project}/locations/\\{location}/conversations/\\{conversation}/participants/\\{participant}
+        # @!attribute [rw] obfuscated_external_user_id
+        #   @return [::String]
+        #     Obfuscated user ID from Dialogflow.
         # @!attribute [rw] role
         #   @return [::Google::Cloud::ContactCenterInsights::V1::ConversationParticipant::Role]
         #     The role of the participant.
