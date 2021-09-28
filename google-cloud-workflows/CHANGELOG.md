@@ -1,5 +1,11 @@
 # Release History
 
+### 2.1.0 / 2021-09-28
+
+#### Features
+
+* Use workflows-executions v1 by default instead of v1beta
+
 ### 2.0.2 / 2021-07-12
 
 #### Documentation
