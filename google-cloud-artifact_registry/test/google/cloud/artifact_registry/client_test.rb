@@ -28,7 +28,7 @@ class Google::Cloud::ArtifactRegistry::ClientConstructionMinitest < Minitest::Te
       client = Google::Cloud::ArtifactRegistry.artifact_registry do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client, client
+      assert_kind_of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client, client
     end
   end
 end
