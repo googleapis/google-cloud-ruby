@@ -59,3 +59,5 @@ generator.generate "helpers_smoke_test.erb",
                    "acceptance/google/cloud/vision/v1/helpers_smoke_test.rb"
 
 FileUtils.rm_rf "vendor"
+
+OwlBot.update_manifest

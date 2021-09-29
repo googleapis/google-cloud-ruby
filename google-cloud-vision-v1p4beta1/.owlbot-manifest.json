@@ -66,6 +66,7 @@
   "static": [
     ".OwlBot.yaml",
     ".owlbot.rb",
+    "acceptance/data",
     "acceptance/google/cloud/vision/v1p4beta1/helpers_smoke_test.rb",
     "lib/google/cloud/vision/v1p4beta1/image_annotator/helpers.rb",
     "owlbot-templates/helpers_smoke_test.erb",
