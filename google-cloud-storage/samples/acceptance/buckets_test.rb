@@ -43,7 +43,7 @@ require_relative "../storage_remove_cors_configuration"
 require_relative "../storage_remove_retention_policy"
 require_relative "../storage_set_bucket_default_kms_key"
 require_relative "../storage_set_public_access_prevention_enforced"
-require_relative "../storage_set_public_access_prevention_public_inherited"
+require_relative "../storage_set_public_access_prevention_inherited"
 require_relative "../storage_set_retention_policy"
 
 describe "Buckets Snippets" do
