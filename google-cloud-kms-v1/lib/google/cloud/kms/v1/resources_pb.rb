@@ -80,6 +80,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :RSA_DECRYPT_OAEP_3072_SHA256, 9
       value :RSA_DECRYPT_OAEP_4096_SHA256, 10
       value :RSA_DECRYPT_OAEP_4096_SHA512, 17
+      value :RSA_DECRYPT_OAEP_2048_SHA1, 37
+      value :RSA_DECRYPT_OAEP_3072_SHA1, 38
+      value :RSA_DECRYPT_OAEP_4096_SHA1, 39
       value :EC_SIGN_P256_SHA256, 12
       value :EC_SIGN_P384_SHA384, 13
       value :EC_SIGN_SECP256K1_SHA256, 31
