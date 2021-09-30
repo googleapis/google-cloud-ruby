@@ -228,9 +228,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The project and location for which to retrieve instance information,
-            #     in the format `projects/{project_id}/locations/{location}`. In Cloud
-            #     Filestore, locations map to GCP zones, for example **us-west1-b**. To
+            #     Required. The project and location for which to retrieve instance
+            #     information, in the format `projects/{project_id}/locations/{location}`. In
+            #     Cloud Filestore, locations map to GCP zones, for example **us-west1-b**. To
             #     retrieve instance information for all locations, use "-" for the
             #     `{location}` value.
             #   @param page_size [::Integer]
@@ -542,8 +542,8 @@ module Google
             #     Required. The resource name of the instance, in the format
             #     `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
             #   @param file_share [::String]
-            #     Required. Name of the file share in the Cloud Filestore instance that the backup
-            #     is being restored to.
+            #     Required. Name of the file share in the Cloud Filestore instance that the
+            #     backup is being restored to.
             #   @param source_backup [::String]
             #     The resource name of the backup, in the format
             #     `projects/{project_number}/locations/{location_id}/backups/{backup_id}`.
@@ -686,11 +686,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The project and location for which to retrieve backup information,
-            #     in the format `projects/{project_number}/locations/{location}`.
-            #     In Cloud Filestore, backup locations map to GCP regions,
-            #     for example **us-west1**.
-            #     To retrieve backup information for all locations, use "-" for the
+            #     Required. The project and location for which to retrieve backup
+            #     information, in the format
+            #     `projects/{project_number}/locations/{location}`. In Cloud Filestore,
+            #     backup locations map to GCP regions, for example **us-west1**. To retrieve
+            #     backup information for all locations, use "-" for the
             #     `{location}` value.
             #   @param page_size [::Integer]
             #     The maximum number of items to return.
@@ -991,8 +991,8 @@ module Google
             #   @param backup [::Google::Cloud::Filestore::V1::Backup, ::Hash]
             #     Required. A {::Google::Cloud::Filestore::V1::Backup backup resource}
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. Mask of fields to update.  At least one path must be supplied in this
-            #     field.
+            #     Required. Mask of fields to update.  At least one path must be supplied in
+            #     this field.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
