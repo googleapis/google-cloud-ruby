@@ -66,7 +66,7 @@ module Google
         #     Output only. The conversation transcript.
         # @!attribute [rw] medium
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation::Medium]
-        #     Immutable. The conversation medium.
+        #     Immutable. The conversation medium, if unspecified will default to PHONE_CALL.
         # @!attribute [r] duration
         #   @return [::Google::Protobuf::Duration]
         #     Output only. The duration of the conversation.
@@ -200,7 +200,7 @@ module Google
 
           # Possible media for the conversation.
           module Medium
-            # Default value.
+            # Default value, if unspecified will default to PHONE_CALL.
             MEDIUM_UNSPECIFIED = 0
 
             # The format for conversations that took place over the phone.

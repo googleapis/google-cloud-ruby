@@ -59,6 +59,7 @@ module Google
         #     matches in the set of conversations. Key has the format:
         #     `projects/<Project ID>/locations/<Location ID>/issueModels/<Issue Model
         #     ID>/issues/<Issue ID>`
+        #     Deprecated, use `issue_matches_stats` field instead.
         # @!attribute [rw] conversation_count_time_series
         #   @return [::Google::Cloud::ContactCenterInsights::V1::CalculateStatsResponse::TimeSeries]
         #     A time series representing the count of conversations created over time
