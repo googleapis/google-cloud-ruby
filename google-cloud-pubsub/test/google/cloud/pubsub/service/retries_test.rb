@@ -27,7 +27,9 @@ describe Google::Cloud::PubSub::Service::Retries, :mock_pubsub do
     ]
     publish_res = Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: ["msg1"] })
     mock = Minitest::Mock.new
-    mock.expect :publish, publish_res, [{topic: topic_path(topic_name), messages: messages}, nil]
+    [5.0, 10.0, 20.0, 40.0].each do |timeout|
+      mock.expect :publish, publish_res.dup, [{topic: topic_path(topic_name), messages: messages}, { timeout: timeout }]
+    end
     topic.service.mocked_publisher = PublisherClientStub.new mock
 
     sleep_mock = Minitest::Mock.new
@@ -54,9 +56,10 @@ describe Google::Cloud::PubSub::Service::Retries, :mock_pubsub do
     end
 
     def publish *args
+      ret = @mock.publish *args
       @tries += 1
       raise Google::Cloud::UnavailableError.new "unavailable: #{@tries}" if @tries < @errors + 1
-      @mock.publish *args
+      ret
     end
   end
 end

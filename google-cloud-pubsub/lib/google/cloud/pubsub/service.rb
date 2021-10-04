@@ -500,7 +500,7 @@ module Google
             @retry_options = retry_options
             @retryable_errors = retry_options[:retryable_errors] || [Google::Cloud::UnavailableError]
             @rpc_timeout = 5.0
-            @rpc_timeout_multiplier = 1.3
+            @rpc_timeout_multiplier = 2.0
             @max_rpc_timeout = 60.0
             @total_timeout = 600.0
             @delay = 0.1
@@ -510,8 +510,9 @@ module Google
 
           def execute
             current_retries = 0
-            options = nil # Gapic::CallOptions.new timeout: nil
             loop do
+              # deadline = calculate_deadline options
+              options = @rpc_timeout.nil? ? nil : { timeout: @rpc_timeout }
               return yield options
             rescue Google::Cloud::Error => e
               raise e unless retry? e, current_retries
@@ -520,6 +521,9 @@ module Google
               # Call Kernel.sleep so unit tests can stub it.
               Kernel.sleep @delay
               current_retries += 1
+              timeout_cal = @rpc_timeout && @rpc_timeout_multiplier ? @rpc_timeout * @rpc_timeout_multiplier : 0
+              @max_rpc_timeout ||= 0
+              @rpc_timeout = [timeout_cal, @max_rpc_timeout].min
             end
           end
 
@@ -530,6 +534,13 @@ module Google
               return true
             end
             false
+          end
+
+          def calculate_deadline timeout
+            return if timeout.nil?
+            return if timeout.negative?
+
+            Time.now + timeout
           end
         end
       end
