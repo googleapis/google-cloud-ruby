@@ -106,6 +106,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :trigger_intent, :string, 11
         optional :transcript, :string, 12
         optional :trigger_event, :string, 14
+        optional :dtmf, :message, 23, "google.cloud.dialogflow.cx.v3.DtmfInput"
       end
     end
     add_message "google.cloud.dialogflow.cx.v3.TextInput" do

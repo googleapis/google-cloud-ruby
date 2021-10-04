@@ -528,6 +528,7 @@ module Google
 
               ##
               # Kicks off a test case run.
+              #
               # This method is a [long-running
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
               # The returned `Operation` type has the following method-specific fields:
@@ -608,6 +609,13 @@ module Google
 
               ##
               # Kicks off a batch run of test cases.
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::BatchRunTestCasesMetadata BatchRunTestCasesMetadata}
+              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::BatchRunTestCasesResponse BatchRunTestCasesResponse}
               #
               # @overload batch_run_test_cases(request, options = nil)
               #   Pass arguments to `batch_run_test_cases` via a request object, either of type
@@ -759,6 +767,13 @@ module Google
               # always creates new test cases and won't overwite any existing ones. The
               # provided ID in the imported test case is neglected.
               #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::ImportTestCasesMetadata ImportTestCasesMetadata}
+              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::ImportTestCasesResponse ImportTestCasesResponse}
+              #
               # @overload import_test_cases(request, options = nil)
               #   Pass arguments to `import_test_cases` via a request object, either of type
               #   {::Google::Cloud::Dialogflow::CX::V3::ImportTestCasesRequest} or an equivalent Hash.
@@ -835,6 +850,13 @@ module Google
               ##
               # Exports the test cases under the agent to a Cloud Storage bucket or a local
               # file. Filter can be applied to export a subset of test cases.
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::ExportTestCasesMetadata ExportTestCasesMetadata}
+              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::ExportTestCasesResponse ExportTestCasesResponse}
               #
               # @overload export_test_cases(request, options = nil)
               #   Pass arguments to `export_test_cases` via a request object, either of type

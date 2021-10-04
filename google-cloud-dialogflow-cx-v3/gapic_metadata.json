@@ -186,6 +186,25 @@
         }
       }
     },
+    "Deployments": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::Deployments::Client",
+          "rpcs": {
+            "ListDeployments": {
+              "methods": [
+                "list_deployments"
+              ]
+            },
+            "GetDeployment": {
+              "methods": [
+                "get_deployment"
+              ]
+            }
+          }
+        }
+      }
+    },
     "EntityTypes": {
       "clients": {
         "grpc": {
@@ -463,6 +482,11 @@
             "ListContinuousTestResults": {
               "methods": [
                 "list_continuous_test_results"
+              ]
+            },
+            "DeployFlow": {
+              "methods": [
+                "deploy_flow"
               ]
             }
           }
