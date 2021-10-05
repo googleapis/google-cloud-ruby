@@ -26,7 +26,7 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     The resource name of the job.
-          #     Format: `projects/{project}/locations/{location}/jobs/{job}`
+          #     Format: `projects/{project_number}/locations/{location}/jobs/{job}`
           # @!attribute [rw] input_uri
           #   @return [::String]
           #     Input only. Specify the `input_uri` to populate empty `uri` fields in each element of
@@ -101,7 +101,7 @@ module Google
           #   @return [::String]
           #     The resource name of the job template.
           #     Format:
-          #     `projects/{project}/locations/{location}/jobTemplates/{job_template}`
+          #     `projects/{project_number}/locations/{location}/jobTemplates/{job_template}`
           # @!attribute [rw] config
           #   @return [::Google::Cloud::Video::Transcoder::V1::JobConfig]
           #     The configuration for this template.
@@ -233,32 +233,30 @@ module Google
           # @!attribute [rw] key
           #   @return [::String]
           #     A unique key for this multiplexed stream. HLS media manifests will be
-          #     named `MuxStream.key` with the `".m3u8"` extension suffix.
+          #     named `MuxStream.key` with the `.m3u8` extension suffix.
           # @!attribute [rw] file_name
           #   @return [::String]
           #     The name of the generated file. The default is `MuxStream.key` with the
           #     extension suffix corresponding to the `MuxStream.container`.
           #
           #     Individual segments also have an incremental 10-digit zero-padded suffix
-          #     starting from 0 before the extension, such as `"mux_stream0000000123.ts"`.
+          #     starting from 0 before the extension, such as `mux_stream0000000123.ts`.
           # @!attribute [rw] container
           #   @return [::String]
-          #     The container format. The default is `"mp4"`
+          #     The container format. The default is `mp4`
           #
           #     Supported container formats:
-          #     - 'ts'
-          #     - 'fmp4'- the corresponding file extension is `".m4s"`
-          #     - 'mp4'
-          #     - 'vtt'
+          #
+          #     - `ts`
+          #     - `fmp4`- the corresponding file extension is `.m4s`
+          #     - `mp4`
+          #     - `vtt`
           # @!attribute [rw] elementary_streams
           #   @return [::Array<::String>]
           #     List of `ElementaryStream.key`s multiplexed in this stream.
           # @!attribute [rw] segment_settings
           #   @return [::Google::Cloud::Video::Transcoder::V1::SegmentSettings]
-          #     Segment settings for `"ts"`, `"fmp4"` and `"vtt"`.
-          # @!attribute [rw] encryption
-          #   @return [::Google::Cloud::Video::Transcoder::V1::Encryption]
-          #     Encryption settings.
+          #     Segment settings for `ts`, `fmp4` and `vtt`.
           class MuxStream
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -267,11 +265,11 @@ module Google
           # Manifest configuration.
           # @!attribute [rw] file_name
           #   @return [::String]
-          #     The name of the generated file. The default is `"manifest"` with the
+          #     The name of the generated file. The default is `manifest` with the
           #     extension suffix corresponding to the `Manifest.type`.
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Video::Transcoder::V1::Manifest::ManifestType]
-          #     Required. Type of the manifest, can be "HLS" or "DASH".
+          #     Required. Type of the manifest, can be `HLS` or `DASH`.
           # @!attribute [rw] mux_streams
           #   @return [::Array<::String>]
           #     Required. List of user given `MuxStream.key`s that should appear in this manifest.
@@ -283,15 +281,15 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # The manifest type can be either `"HLS"` or `"DASH"`.
+            # The manifest type can be either `HLS` or `DASH`.
             module ManifestType
               # The manifest type is not specified.
               MANIFEST_TYPE_UNSPECIFIED = 0
 
-              # Create `"HLS"` manifest. The corresponding file extension is `".m3u8"`.
+              # Create `HLS` manifest. The corresponding file extension is `.m3u8`.
               HLS = 1
 
-              # Create `"DASH"` manifest. The corresponding file extension is `".mpd"`.
+              # Create `DASH` manifest. The corresponding file extension is `.mpd`.
               DASH = 2
             end
           end
@@ -309,16 +307,17 @@ module Google
           # Sprite sheet configuration.
           # @!attribute [rw] format
           #   @return [::String]
-          #     Format type. The default is `"jpeg"`.
+          #     Format type. The default is `jpeg`.
           #
           #     Supported formats:
-          #     - 'jpeg'
+          #
+          #     - `jpeg`
           # @!attribute [rw] file_prefix
           #   @return [::String]
           #     Required. File name prefix for the generated sprite sheets.
           #
           #     Each sprite sheet has an incremental 10-digit zero-padded suffix starting
-          #     from 0 before the extension, such as `"sprite_sheet0000000123.jpeg"`.
+          #     from 0 before the extension, such as `sprite_sheet0000000123.jpeg`.
           # @!attribute [rw] sprite_width_pixels
           #   @return [::Integer]
           #     Required. The width of sprite in pixels. Must be an even integer. To preserve the
@@ -542,11 +541,12 @@ module Google
             #     the value, the smoother the image. 0 is no denoising. The default is 0.
             # @!attribute [rw] tune
             #   @return [::String]
-            #     Set the denoiser mode. The default is `"standard"`.
+            #     Set the denoiser mode. The default is `standard`.
             #
             #     Supported denoiser modes:
-            #     - 'standard'
-            #     - 'grain'
+            #
+            #     - `standard`
+            #     - `grain`
             class Denoise
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -666,29 +666,31 @@ module Google
             #     more information.
             # @!attribute [rw] bitrate_bps
             #   @return [::Integer]
-            #     Required. The video bitrate in bits per second. Must be between 1 and
-            #     1,000,000,000.
+            #     Required. The video bitrate in bits per second. The minimum value is 1,000.
+            #     The maximum value is 800,000,000.
             # @!attribute [rw] pixel_format
             #   @return [::String]
-            #     Pixel format to use. The default is `"yuv420p"`.
+            #     Pixel format to use. The default is `yuv420p`.
             #
             #     Supported pixel formats:
-            #     - 'yuv420p' pixel format.
-            #     - 'yuv422p' pixel format.
-            #     - 'yuv444p' pixel format.
-            #     - 'yuv420p10' 10-bit HDR pixel format.
-            #     - 'yuv422p10' 10-bit HDR pixel format.
-            #     - 'yuv444p10' 10-bit HDR pixel format.
-            #     - 'yuv420p12' 12-bit HDR pixel format.
-            #     - 'yuv422p12' 12-bit HDR pixel format.
-            #     - 'yuv444p12' 12-bit HDR pixel format.
+            #
+            #     - `yuv420p` pixel format
+            #     - `yuv422p` pixel format
+            #     - `yuv444p` pixel format
+            #     - `yuv420p10` 10-bit HDR pixel format
+            #     - `yuv422p10` 10-bit HDR pixel format
+            #     - `yuv444p10` 10-bit HDR pixel format
+            #     - `yuv420p12` 12-bit HDR pixel format
+            #     - `yuv422p12` 12-bit HDR pixel format
+            #     - `yuv444p12` 12-bit HDR pixel format
             # @!attribute [rw] rate_control_mode
             #   @return [::String]
-            #     Specify the `rate_control_mode`. The default is `"vbr"`.
+            #     Specify the `rate_control_mode`. The default is `vbr`.
             #
             #     Supported rate control modes:
-            #     - 'vbr' - variable bitrate
-            #     - 'crf' - constant rate factor
+            #
+            #     - `vbr` - variable bitrate
+            #     - `crf` - constant rate factor
             # @!attribute [rw] crf_level
             #   @return [::Integer]
             #     Target CRF level. Must be between 10 and 36, where 10 is the highest
@@ -704,14 +706,14 @@ module Google
             # @!attribute [rw] gop_duration
             #   @return [::Google::Protobuf::Duration]
             #     Select the GOP size based on the specified duration. The default is
-            #     `"3s"`. Note that `gopDuration` must be less than or equal to
+            #     `3s`. Note that `gopDuration` must be less than or equal to
             #     [`segmentDuration`](#SegmentSettings), and
             #     [`segmentDuration`](#SegmentSettings) must be divisible by
             #     `gopDuration`.
             # @!attribute [rw] enable_two_pass
             #   @return [::Boolean]
             #     Use two-pass encoding strategy to achieve better video quality.
-            #     `VideoStream.rate_control_mode` must be `"vbr"`. The default is `false`.
+            #     `VideoStream.rate_control_mode` must be `vbr`. The default is `false`.
             # @!attribute [rw] vbv_size_bits
             #   @return [::Integer]
             #     Size of the Video Buffering Verifier (VBV) buffer in bits. Must be
@@ -723,11 +725,12 @@ module Google
             #     `VideoStream.vbv_size_bits`.
             # @!attribute [rw] entropy_coder
             #   @return [::String]
-            #     The entropy coder to use. The default is `"cabac"`.
+            #     The entropy coder to use. The default is `cabac`.
             #
             #     Supported entropy coders:
-            #     - 'cavlc'
-            #     - 'cabac'
+            #
+            #     - `cavlc`
+            #     - `cabac`
             # @!attribute [rw] b_pyramid
             #   @return [::Boolean]
             #     Allow B-pyramid for reference frame selection. This may not be supported
@@ -752,23 +755,23 @@ module Google
             #     *   `high` (default)
             #
             #     The available options are
-            #     [FFmpeg-compatible](https://trac.ffmpeg.org/wiki/Encode/H.264#Profile){:
-            #     class="external" }. Note that certain values for this field may cause the
+            #     [FFmpeg-compatible](https://trac.ffmpeg.org/wiki/Encode/H.264#Tune).
+            #     Note that certain values for this field may cause the
             #     transcoder to override other fields you set in the `H264CodecSettings`
             #     message.
             # @!attribute [rw] tune
             #   @return [::String]
             #     Enforces the specified codec tune. The available options are
-            #     [FFmpeg-compatible](https://trac.ffmpeg.org/wiki/Encode/H.264#Tune){:
-            #     class="external" }. Note that certain values for this field may cause the
+            #     [FFmpeg-compatible](https://trac.ffmpeg.org/wiki/Encode/H.264#Tune).
+            #     Note that certain values for this field may cause the
             #     transcoder to override other fields you set in the `H264CodecSettings`
             #     message.
             # @!attribute [rw] preset
             #   @return [::String]
             #     Enforces the specified codec preset. The default is `veryfast`. The
             #     available options are
-            #     [FFmpeg-compatible](https://trac.ffmpeg.org/wiki/Encode/H.264#Preset){:
-            #     class="external" }. Note that certain values for this field may cause the
+            #     [FFmpeg-compatible](https://trac.ffmpeg.org/wiki/Encode/H.264#Preset).
+            #     Note that certain values for this field may cause the
             #     transcoder to override other fields you set in the `H264CodecSettings`
             #     message.
             class H264CodecSettings
@@ -798,29 +801,31 @@ module Google
             #     more information.
             # @!attribute [rw] bitrate_bps
             #   @return [::Integer]
-            #     Required. The video bitrate in bits per second. Must be between 1 and
-            #     1,000,000,000.
+            #     Required. The video bitrate in bits per second. The minimum value is 1,000.
+            #     The maximum value is 800,000,000.
             # @!attribute [rw] pixel_format
             #   @return [::String]
-            #     Pixel format to use. The default is `"yuv420p"`.
+            #     Pixel format to use. The default is `yuv420p`.
             #
             #     Supported pixel formats:
-            #     - 'yuv420p' pixel format.
-            #     - 'yuv422p' pixel format.
-            #     - 'yuv444p' pixel format.
-            #     - 'yuv420p10' 10-bit HDR pixel format.
-            #     - 'yuv422p10' 10-bit HDR pixel format.
-            #     - 'yuv444p10' 10-bit HDR pixel format.
-            #     - 'yuv420p12' 12-bit HDR pixel format.
-            #     - 'yuv422p12' 12-bit HDR pixel format.
-            #     - 'yuv444p12' 12-bit HDR pixel format.
+            #
+            #     - `yuv420p` pixel format
+            #     - `yuv422p` pixel format
+            #     - `yuv444p` pixel format
+            #     - `yuv420p10` 10-bit HDR pixel format
+            #     - `yuv422p10` 10-bit HDR pixel format
+            #     - `yuv444p10` 10-bit HDR pixel format
+            #     - `yuv420p12` 12-bit HDR pixel format
+            #     - `yuv422p12` 12-bit HDR pixel format
+            #     - `yuv444p12` 12-bit HDR pixel format
             # @!attribute [rw] rate_control_mode
             #   @return [::String]
-            #     Specify the `rate_control_mode`. The default is `"vbr"`.
+            #     Specify the `rate_control_mode`. The default is `vbr`.
             #
             #     Supported rate control modes:
-            #     - 'vbr' - variable bitrate
-            #     - 'crf' - constant rate factor
+            #
+            #     - `vbr` - variable bitrate
+            #     - `crf` - constant rate factor
             # @!attribute [rw] crf_level
             #   @return [::Integer]
             #     Target CRF level. Must be between 10 and 36, where 10 is the highest
@@ -836,14 +841,14 @@ module Google
             # @!attribute [rw] gop_duration
             #   @return [::Google::Protobuf::Duration]
             #     Select the GOP size based on the specified duration. The default is
-            #     `"3s"`. Note that `gopDuration` must be less than or equal to
+            #     `3s`. Note that `gopDuration` must be less than or equal to
             #     [`segmentDuration`](#SegmentSettings), and
             #     [`segmentDuration`](#SegmentSettings) must be divisible by
             #     `gopDuration`.
             # @!attribute [rw] enable_two_pass
             #   @return [::Boolean]
             #     Use two-pass encoding strategy to achieve better video quality.
-            #     `VideoStream.rate_control_mode` must be `"vbr"`. The default is `false`.
+            #     `VideoStream.rate_control_mode` must be `vbr`. The default is `false`.
             # @!attribute [rw] vbv_size_bits
             #   @return [::Integer]
             #     Size of the Video Buffering Verifier (VBV) buffer in bits. Must be
@@ -872,45 +877,43 @@ module Google
             #     Enforces the specified codec profile. The following profiles are
             #     supported:
             #
-            #     8bit profiles
-            #     *   `main` (default)
-            #     *   `main-intra`
-            #     *   `mainstillpicture`
-            #
-            #     10bit profiles
-            #     *   `main10` (default)
-            #     *   `main10-intra`
-            #     *   `main422-10`
-            #     *   `main422-10-intra`
-            #     *   `main444-10`
-            #     *   `main444-10-intra`
-            #
-            #     12bit profiles
-            #     *   `main12` (default)
-            #     *   `main12-intra`
-            #     *   `main422-12`
-            #     *   `main422-12-intra`
-            #     *   `main444-12`
-            #     *   `main444-12-intra`
+            #     *   8-bit profiles
+            #         *   `main` (default)
+            #         *   `main-intra`
+            #         *   `mainstillpicture`
+            #     *   10-bit profiles
+            #         *   `main10` (default)
+            #         *   `main10-intra`
+            #         *   `main422-10`
+            #         *   `main422-10-intra`
+            #         *   `main444-10`
+            #         *   `main444-10-intra`
+            #     *   12-bit profiles
+            #         *   `main12` (default)
+            #         *   `main12-intra`
+            #         *   `main422-12`
+            #         *   `main422-12-intra`
+            #         *   `main444-12`
+            #         *   `main444-12-intra`
             #
             #     The available options are
-            #     [FFmpeg-compatible](https://x265.readthedocs.io/){:
-            #     class="external" }. Note that certain values for this field may cause the
+            #     [FFmpeg-compatible](https://x265.readthedocs.io/).
+            #     Note that certain values for this field may cause the
             #     transcoder to override other fields you set in the `H265CodecSettings`
             #     message.
             # @!attribute [rw] tune
             #   @return [::String]
             #     Enforces the specified codec tune. The available options are
-            #     [FFmpeg-compatible](https://trac.ffmpeg.org/wiki/Encode/H.265){:
-            #     class="external" }. Note that certain values for this field may cause the
+            #     [FFmpeg-compatible](https://trac.ffmpeg.org/wiki/Encode/H.265).
+            #     Note that certain values for this field may cause the
             #     transcoder to override other fields you set in the `H265CodecSettings`
             #     message.
             # @!attribute [rw] preset
             #   @return [::String]
             #     Enforces the specified codec preset. The default is `veryfast`. The
             #     available options are
-            #     [FFmpeg-compatible](https://trac.ffmpeg.org/wiki/Encode/H.265){:
-            #     class="external" }. Note that certain values for this field may cause the
+            #     [FFmpeg-compatible](https://trac.ffmpeg.org/wiki/Encode/H.265).
+            #     Note that certain values for this field may cause the
             #     transcoder to override other fields you set in the `H265CodecSettings`
             #     message.
             class H265CodecSettings
@@ -940,29 +943,31 @@ module Google
             #     more information.
             # @!attribute [rw] bitrate_bps
             #   @return [::Integer]
-            #     Required. The video bitrate in bits per second. Must be between 1 and
-            #     1,000,000,000.
+            #     Required. The video bitrate in bits per second. The minimum value is 1,000.
+            #     The maximum value is 480,000,000.
             # @!attribute [rw] pixel_format
             #   @return [::String]
-            #     Pixel format to use. The default is `"yuv420p"`.
+            #     Pixel format to use. The default is `yuv420p`.
             #
             #     Supported pixel formats:
-            #     - 'yuv420p' pixel format.
-            #     - 'yuv422p' pixel format.
-            #     - 'yuv444p' pixel format.
-            #     - 'yuv420p10' 10-bit HDR pixel format.
-            #     - 'yuv422p10' 10-bit HDR pixel format.
-            #     - 'yuv444p10' 10-bit HDR pixel format.
-            #     - 'yuv420p12' 12-bit HDR pixel format.
-            #     - 'yuv422p12' 12-bit HDR pixel format.
-            #     - 'yuv444p12' 12-bit HDR pixel format.
+            #
+            #     - `yuv420p` pixel format
+            #     - `yuv422p` pixel format
+            #     - `yuv444p` pixel format
+            #     - `yuv420p10` 10-bit HDR pixel format
+            #     - `yuv422p10` 10-bit HDR pixel format
+            #     - `yuv444p10` 10-bit HDR pixel format
+            #     - `yuv420p12` 12-bit HDR pixel format
+            #     - `yuv422p12` 12-bit HDR pixel format
+            #     - `yuv444p12` 12-bit HDR pixel format
             # @!attribute [rw] rate_control_mode
             #   @return [::String]
-            #     Specify the `rate_control_mode`. The default is `"vbr"`.
+            #     Specify the `rate_control_mode`. The default is `vbr`.
             #
             #     Supported rate control modes:
-            #     - 'vbr' - variable bitrate
-            #     - 'crf' - constant rate factor
+            #
+            #     - `vbr` - variable bitrate
+            #     - `crf` - constant rate factor
             # @!attribute [rw] crf_level
             #   @return [::Integer]
             #     Target CRF level. Must be between 10 and 36, where 10 is the highest
@@ -974,7 +979,7 @@ module Google
             # @!attribute [rw] gop_duration
             #   @return [::Google::Protobuf::Duration]
             #     Select the GOP size based on the specified duration. The default is
-            #     `"3s"`. Note that `gopDuration` must be less than or equal to
+            #     `3s`. Note that `gopDuration` must be less than or equal to
             #     [`segmentDuration`](#SegmentSettings), and
             #     [`segmentDuration`](#SegmentSettings) must be divisible by
             #     `gopDuration`.
@@ -989,8 +994,8 @@ module Google
             #     *   `profile3`
             #
             #     The available options are
-            #     [WebM-compatible](https://www.webmproject.org/vp9/profiles/){:
-            #     class="external" }. Note that certain values for this field may cause the
+            #     [WebM-compatible](https://www.webmproject.org/vp9/profiles/).
+            #     Note that certain values for this field may cause the
             #     transcoder to override other fields you set in the `Vp9CodecSettings`
             #     message.
             class Vp9CodecSettings
@@ -1002,15 +1007,16 @@ module Google
           # Audio stream resource.
           # @!attribute [rw] codec
           #   @return [::String]
-          #     The codec for this audio stream. The default is `"aac"`.
+          #     The codec for this audio stream. The default is `aac`.
           #
           #     Supported audio codecs:
-          #     - 'aac'
-          #     - 'aac-he'
-          #     - 'aac-he-v2'
-          #     - 'mp3'
-          #     - 'ac3'
-          #     - 'eac3'
+          #
+          #     - `aac`
+          #     - `aac-he`
+          #     - `aac-he-v2`
+          #     - `mp3`
+          #     - `ac3`
+          #     - `eac3`
           # @!attribute [rw] bitrate_bps
           #   @return [::Integer]
           #     Required. Audio bitrate in bits per second. Must be between 1 and 10,000,000.
@@ -1024,12 +1030,13 @@ module Google
           #     supported by the specified format. The default is `["fl", "fr"]`.
           #
           #     Supported channel names:
-          #     - 'fl' - Front left channel
-          #     - 'fr' - Front right channel
-          #     - 'sl' - Side left channel
-          #     - 'sr' - Side right channel
-          #     - 'fc' - Front center channel
-          #     - 'lfe' - Low frequency
+          #
+          #     - `fl` - Front left channel
+          #     - `fr` - Front right channel
+          #     - `sl` - Side left channel
+          #     - `sr` - Side right channel
+          #     - `fc` - Front center channel
+          #     - `lfe` - Low frequency
           # @!attribute [rw] mapping
           #   @return [::Array<::Google::Cloud::Video::Transcoder::V1::AudioStream::AudioMapping>]
           #     The mapping for the `Job.edit_list` atoms with audio `EditAtom.inputs`.
@@ -1070,14 +1077,15 @@ module Google
           # Encoding of a text stream. For example, closed captions or subtitles.
           # @!attribute [rw] codec
           #   @return [::String]
-          #     The codec for this text stream. The default is `"webvtt"`.
+          #     The codec for this text stream. The default is `webvtt`.
           #
           #     Supported text codecs:
-          #     - 'srt'
-          #     - 'ttml'
-          #     - 'cea608'
-          #     - 'cea708'
-          #     - 'webvtt'
+          #
+          #     - `srt`
+          #     - `ttml`
+          #     - `cea608`
+          #     - `cea708`
+          #     - `webvtt`
           # @!attribute [rw] mapping
           #   @return [::Array<::Google::Cloud::Video::Transcoder::V1::TextStream::TextMapping>]
           #     The mapping for the `Job.edit_list` atoms with text `EditAtom.inputs`.
@@ -1102,10 +1110,10 @@ module Google
             end
           end
 
-          # Segment settings for `"ts"`, `"fmp4"` and `"vtt"`.
+          # Segment settings for `ts`, `fmp4` and `vtt`.
           # @!attribute [rw] segment_duration
           #   @return [::Google::Protobuf::Duration]
-          #     Duration of the segments in seconds. The default is `"6.0s"`. Note that
+          #     Duration of the segments in seconds. The default is `6.0s`. Note that
           #     `segmentDuration` must be greater than or equal to
           #     [`gopDuration`](#videostream), and `segmentDuration` must be divisible by
           #     [`gopDuration`](#videostream).
@@ -1115,65 +1123,6 @@ module Google
           class SegmentSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # Encryption settings.
-          # @!attribute [rw] key
-          #   @return [::String]
-          #     Required. 128 bit encryption key represented as lowercase hexadecimal digits.
-          # @!attribute [rw] iv
-          #   @return [::String]
-          #     Required. 128 bit Initialization Vector (IV) represented as lowercase hexadecimal
-          #     digits.
-          # @!attribute [rw] aes_128
-          #   @return [::Google::Cloud::Video::Transcoder::V1::Encryption::Aes128Encryption]
-          #     Configuration for AES-128 encryption.
-          # @!attribute [rw] sample_aes
-          #   @return [::Google::Cloud::Video::Transcoder::V1::Encryption::SampleAesEncryption]
-          #     Configuration for SAMPLE-AES encryption.
-          # @!attribute [rw] mpeg_cenc
-          #   @return [::Google::Cloud::Video::Transcoder::V1::Encryption::MpegCommonEncryption]
-          #     Configuration for MPEG Common Encryption (MPEG-CENC).
-          class Encryption
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-
-            # Configuration for AES-128 encryption.
-            # @!attribute [rw] key_uri
-            #   @return [::String]
-            #     Required. URI of the key delivery service. This URI is inserted into the M3U8
-            #     header.
-            class Aes128Encryption
-              include ::Google::Protobuf::MessageExts
-              extend ::Google::Protobuf::MessageExts::ClassMethods
-            end
-
-            # Configuration for SAMPLE-AES encryption.
-            # @!attribute [rw] key_uri
-            #   @return [::String]
-            #     Required. URI of the key delivery service. This URI is inserted into the M3U8
-            #     header.
-            class SampleAesEncryption
-              include ::Google::Protobuf::MessageExts
-              extend ::Google::Protobuf::MessageExts::ClassMethods
-            end
-
-            # Configuration for MPEG Common Encryption (MPEG-CENC).
-            # @!attribute [rw] key_id
-            #   @return [::String]
-            #     Required. 128 bit Key ID represented as lowercase hexadecimal digits for use with
-            #     common encryption.
-            # @!attribute [rw] scheme
-            #   @return [::String]
-            #     Required. Specify the encryption scheme.
-            #
-            #     Supported encryption schemes:
-            #     - 'cenc'
-            #     - 'cbcs'
-            class MpegCommonEncryption
-              include ::Google::Protobuf::MessageExts
-              extend ::Google::Protobuf::MessageExts::ClassMethods
-            end
           end
         end
       end

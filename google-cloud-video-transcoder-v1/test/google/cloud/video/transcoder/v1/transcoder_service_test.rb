@@ -245,11 +245,13 @@ class ::Google::Cloud::Video::Transcoder::V1::TranscoderService::ClientTest < Mi
 
     # Create request parameters for a unary method.
     name = "hello world"
+    allow_missing = true
 
     delete_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_job, name
       assert_kind_of ::Google::Cloud::Video::Transcoder::V1::DeleteJobRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal true, request["allow_missing"]
       refute_nil options
     end
 
@@ -260,31 +262,31 @@ class ::Google::Cloud::Video::Transcoder::V1::TranscoderService::ClientTest < Mi
       end
 
       # Use hash object
-      client.delete_job({ name: name }) do |response, operation|
+      client.delete_job({ name: name, allow_missing: allow_missing }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_job name: name do |response, operation|
+      client.delete_job name: name, allow_missing: allow_missing do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_job ::Google::Cloud::Video::Transcoder::V1::DeleteJobRequest.new(name: name) do |response, operation|
+      client.delete_job ::Google::Cloud::Video::Transcoder::V1::DeleteJobRequest.new(name: name, allow_missing: allow_missing) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_job({ name: name }, grpc_options) do |response, operation|
+      client.delete_job({ name: name, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_job(::Google::Cloud::Video::Transcoder::V1::DeleteJobRequest.new(name: name), grpc_options) do |response, operation|
+      client.delete_job(::Google::Cloud::Video::Transcoder::V1::DeleteJobRequest.new(name: name, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -494,11 +496,13 @@ class ::Google::Cloud::Video::Transcoder::V1::TranscoderService::ClientTest < Mi
 
     # Create request parameters for a unary method.
     name = "hello world"
+    allow_missing = true
 
     delete_job_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_job_template, name
       assert_kind_of ::Google::Cloud::Video::Transcoder::V1::DeleteJobTemplateRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal true, request["allow_missing"]
       refute_nil options
     end
 
@@ -509,31 +513,31 @@ class ::Google::Cloud::Video::Transcoder::V1::TranscoderService::ClientTest < Mi
       end
 
       # Use hash object
-      client.delete_job_template({ name: name }) do |response, operation|
+      client.delete_job_template({ name: name, allow_missing: allow_missing }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_job_template name: name do |response, operation|
+      client.delete_job_template name: name, allow_missing: allow_missing do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_job_template ::Google::Cloud::Video::Transcoder::V1::DeleteJobTemplateRequest.new(name: name) do |response, operation|
+      client.delete_job_template ::Google::Cloud::Video::Transcoder::V1::DeleteJobTemplateRequest.new(name: name, allow_missing: allow_missing) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_job_template({ name: name }, grpc_options) do |response, operation|
+      client.delete_job_template({ name: name, allow_missing: allow_missing }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_job_template(::Google::Cloud::Video::Transcoder::V1::DeleteJobTemplateRequest.new(name: name), grpc_options) do |response, operation|
+      client.delete_job_template(::Google::Cloud::Video::Transcoder::V1::DeleteJobTemplateRequest.new(name: name, allow_missing: allow_missing), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
