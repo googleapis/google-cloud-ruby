@@ -26,10 +26,6 @@ module Google
           # This returns an instance of
           # [Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client](https://googleapis.dev/ruby/google-cloud-spanner-admin-database-v1/latest/Google/Cloud/Spanner/Admin/Database/V1/DatabaseAdmin/Client.html)
           # for version V1 of the API.
-          # However, you can specify specify a different API version by passing it in the
-          # `version` parameter. If the DatabaseAdmin service is
-          # supported by that API version, and the corresponding gem is available, the
-          # appropriate versioned client will be returned.
           #
           # ## About DatabaseAdmin
           #
@@ -40,19 +36,87 @@ module Google
           # databases. It can be also used to create, delete and list backups for a
           # database and to restore from an existing backup.
           #
-          # @param version [::String, ::Symbol] The API version to connect to. Optional.
-          #   Defaults to `:v1`.
-          # @return [Admin::Database::V1::DatabaseAdmin::Client] A client object for the specified version.
+          # For more information on connecting to Google Cloud see the
+          # {file:AUTHENTICATION.md Authentication Guide}.
           #
-          def self.new
-            if configure.emulator_host
-              return Admin::Database::V1::DatabaseAdmin::Client.new do |config|
-                config.credentials = :this_channel_is_insecure
-                config.endpoint = configure.emulator_host
+          # @param [String] project_id Project identifier for the Spanner service
+          #   you are connecting to. If not present, the default project for the
+          #   credentials is used.
+          # @param [String, Hash, Google::Auth::Credentials] credentials The path to
+          #   the keyfile as a String, the contents of the keyfile as a Hash, or a
+          #   Google::Auth::Credentials object. (See {Spanner::Credentials})
+          #   If `emulator_host` is present, this becomes optional and the value is
+          #   internally overriden with `:this_channel_is_insecure`.
+          # @param [String, Array<String>] scope The OAuth 2.0 scopes controlling
+          #   the set of resources and operations that the connection can access.
+          #   See [Using OAuth 2.0 to Access Google
+          #   APIs](https://developers.google.com/identity/protocols/OAuth2).
+          #
+          #   The default scopes are:
+          #
+          #   * `https://www.googleapis.com/auth/spanner`
+          #   * `https://www.googleapis.com/auth/spanner.data`
+          # @param [Integer] timeout Default timeout to use in requests. Optional.
+          # @param [String] endpoint Override of the endpoint host name. Optional.
+          #   If the param is nil, uses `emulator_host` or the default endpoint.
+          # @param [String] project Alias for the `project_id` argument. Deprecated.
+          # @param [String] keyfile Alias for the `credentials` argument.
+          #   Deprecated.
+          # @param [String] emulator_host Spanner emulator host. Optional.
+          #   If the param is nil, uses the value of the `emulator_host` config.
+          # @param [String] lib_name Library name. This will be added as a prefix
+          #   to the API call tracking header `x-goog-api-client` with provided
+          #   lib version for telemetry. Optional. For example prefix looks like
+          #   `spanner-activerecord/0.0.1 gccl/1.13.1`. Here,
+          #   `spanner-activerecord/0.0.1` is provided custom library name and
+          #   version and `gccl/1.13.1` represents the Cloud Spanner Ruby library
+          #   with version.
+          # @param [String] lib_version Library version. This will be added as a
+          #   prefix to the API call tracking header `x-goog-api-client` with
+          #   provided lib name for telemetry. Optional. For example prefix look like
+          #   `spanner-activerecord/0.0.1 gccl/1.13.1`. Here,
+          #   `spanner-activerecord/0.0.1` is provided custom library name and
+          #   version and `gccl/1.13.1` represents the Cloud Spanner Ruby library
+          #   with version.
+          #
+          # @return [Admin::Database::V1::DatabaseAdmin::Client] A client object of version V1.
+          #
+          def self.new project_id: nil, credentials: nil, scope: nil,
+                       timeout: nil, endpoint: nil, project: nil, keyfile: nil,
+                       emulator_host: nil, lib_name: nil, lib_version: nil
+            project_id    ||= project || default_project_id
+            scope         ||= configure.scope
+            timeout       ||= configure.timeout
+            emulator_host ||= configure.emulator_host
+            endpoint      ||= emulator_host || configure.endpoint
+            credentials   ||= keyfile
+            lib_name      ||= configure.lib_name
+            lib_version   ||= configure.lib_version
+
+            if emulator_host
+              credentials = :this_channel_is_insecure
+            else
+              credentials ||= default_credentials scope: scope
+              unless credentials.is_a? Google::Auth::Credentials
+                credentials = Spanner::Credentials.new credentials, scope: scope
+              end
+
+              if credentials.respond_to? :project_id
+                project_id ||= credentials.project_id
               end
             end
 
-            Admin::Database::V1::DatabaseAdmin::Client.new
+            project_id = project_id.to_s # Always cast to a string
+            raise ArgumentError, "project_id is missing" if project_id.empty?
+
+            Admin::Database::V1::DatabaseAdmin::Client.new do |config|
+              config.credentials = channel endpoint, credentials
+              config.timeout = timeout if timeout
+              config.endpoint = endpoint if endpoint
+              config.lib_name = lib_name_with_prefix lib_name, lib_version
+              config.lib_version = Google::Cloud::Spanner::VERSION
+              config.metadata = { "google-cloud-resource-prefix" => "projects/#{project_id}" }
+            end
           end
 
           ##
@@ -89,6 +153,54 @@ module Google
             yield ::Google::Cloud.configure.spanner if block_given?
 
             ::Google::Cloud.configure.spanner
+          end
+
+          ##
+          # @private Default project.
+          def self.default_project_id
+            Google::Cloud.configure.spanner.project_id ||
+              Google::Cloud.configure.project_id ||
+              Google::Cloud.env.project_id
+          end
+
+          ##
+          # @private Default credentials.
+          def self.default_credentials scope: nil
+            Google::Cloud.configure.spanner.credentials ||
+              Google::Cloud.configure.credentials ||
+              Spanner::Credentials.default(scope: scope)
+          end
+
+          ##
+          # @private gRPC channel.
+          def self.channel host, credentials
+            require "grpc"
+            GRPC::Core::Channel.new host, chan_args, chan_creds(credentials)
+          end
+
+          ##
+          # @private gRPC channel args.
+          def self.chan_args
+            { "grpc.service_config_disable_resolution" => 1 }
+          end
+
+          ##
+          # @private gRPC channel credentials
+          def self.chan_creds credentials
+            return credentials if credentials == :this_channel_is_insecure
+            require "grpc"
+            GRPC::Core::ChannelCredentials.new.compose \
+              GRPC::Core::CallCredentials.new credentials.client.updater_proc
+          end
+
+          ##
+          # @private Spanner client library version with the prefix.
+          def self.lib_name_with_prefix lib_name, lib_version
+            return "gccl" if [nil, "gccl"].include? lib_name
+
+            value = lib_name.dup
+            value << "/#{lib_version}" if lib_version
+            value << " gccl"
           end
         end
       end

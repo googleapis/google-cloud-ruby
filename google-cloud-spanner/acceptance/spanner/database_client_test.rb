@@ -20,7 +20,7 @@ describe "Spanner Databases Client", :spanner do
   let(:database_id) { "#{$spanner_database_id}-crud" }
 
   it "creates, gets, updates, and drops a database" do
-    client = Google::Cloud::Spanner::Admin::Database.new
+    client = Google::Cloud::Spanner::Admin::Database.new project_id: spanner.project
 
     instance_path = \
       client.instance_path project: spanner.project, instance: instance_id
@@ -62,7 +62,7 @@ describe "Spanner Databases Client", :spanner do
   end
 
   it "lists databases" do
-    client = Google::Cloud::Spanner::Admin::Database.new
+    client = Google::Cloud::Spanner::Admin::Database.new project_id: spanner.project
 
     instance_path = \
       client.instance_path project: spanner.project, instance: instance_id
