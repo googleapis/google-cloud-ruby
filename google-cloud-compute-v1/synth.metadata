@@ -4,14 +4,14 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "72d5c4e6204f4c8454a89cab88f89c0bf9b9f558"
+        "sha": "34bba65ccf38ff6e384364815f5caf65dfbab9a6"
       }
     },
     {
       "git": {
         "name": "googleapis-discovery",
         "remote": "https://github.com/googleapis/googleapis-discovery.git",
-        "sha": "f50369296321de6cb5db975bea529ad65dc35105"
+        "sha": "34478e2969042ed837d33684360f1ee3be7d2f74"
       }
     }
   ],
@@ -437,6 +437,7 @@
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/cloud/compute/v1/compute.rb",
+    "proto_docs/google/cloud/extended_operations.rb",
     "test/google/cloud/compute/v1/accelerator_types_test.rb",
     "test/google/cloud/compute/v1/addresses_test.rb",
     "test/google/cloud/compute/v1/autoscalers_test.rb",
