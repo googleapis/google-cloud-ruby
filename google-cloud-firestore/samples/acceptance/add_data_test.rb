@@ -76,6 +76,13 @@ describe "Google Cloud Firestore API samples - Add Data" do
     assert_includes out, "Updated the capital field of the DC document in the cities collection."
   end
 
+  it "update_doc_array" do
+    out, _err = capture_io do
+      update_doc_array project_id: @firestore_project, collection_path: @collection_path
+    end
+    assert_includes out, "Updated the regions field of the DC document in the cities collection."
+  end
+
   it "update_nested_fields" do
     out, _err = capture_io do
       update_nested_fields project_id: @firestore_project, collection_path: @collection_path
