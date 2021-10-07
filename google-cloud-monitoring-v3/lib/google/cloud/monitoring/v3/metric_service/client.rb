@@ -499,6 +499,8 @@ module Google
 
             ##
             # Creates a new metric descriptor.
+            # The creation is executed asynchronously and callers may check the returned
+            # operation to track its progress.
             # User-created metric descriptors define
             # [custom metrics](https://cloud.google.com/monitoring/custom-metrics).
             #
@@ -841,6 +843,93 @@ module Google
             end
 
             ##
+            # Creates or adds data to one or more service time series. A service time
+            # series is a time series for a metric from a Google Cloud service. The
+            # response is empty if all time series in the request were written. If any
+            # time series could not be written, a corresponding failure message is
+            # included in the error response. This endpoint rejects writes to
+            # user-defined metrics.
+            # This method is only for use by Google Cloud services. Use
+            # {::Google::Cloud::Monitoring::V3::MetricService::Client#create_time_series projects.timeSeries.create}
+            # instead.
+            #
+            # @overload create_service_time_series(request, options = nil)
+            #   Pass arguments to `create_service_time_series` via a request object, either of type
+            #   {::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_service_time_series(name: nil, time_series: nil)
+            #   Pass arguments to `create_service_time_series` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) on
+            #     which to execute the request. The format is:
+            #
+            #         projects/[PROJECT_ID_OR_NUMBER]
+            #   @param time_series [::Array<::Google::Cloud::Monitoring::V3::TimeSeries, ::Hash>]
+            #     Required. The new data to be added to a list of time series.
+            #     Adds at most one data point to each of several time series.  The new data
+            #     point must be more recent than any other point in its time series.  Each
+            #     `TimeSeries` value must fully specify a unique time series by supplying
+            #     all label values for the metric and the monitored resource.
+            #
+            #     The maximum number of `TimeSeries` objects per `Create` request is 200.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def create_service_time_series request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_service_time_series.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "name" => request.name
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_service_time_series.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_service_time_series.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @metric_service_stub.call_rpc :create_service_time_series, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the MetricService API.
             #
             # This class represents the configuration for MetricService,
@@ -1015,6 +1104,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_time_series
+                ##
+                # RPC-specific configuration for `create_service_time_series`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_service_time_series
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1034,6 +1128,8 @@ module Google
                   @list_time_series = ::Gapic::Config::Method.new list_time_series_config
                   create_time_series_config = parent_rpcs.create_time_series if parent_rpcs.respond_to? :create_time_series
                   @create_time_series = ::Gapic::Config::Method.new create_time_series_config
+                  create_service_time_series_config = parent_rpcs.create_service_time_series if parent_rpcs.respond_to? :create_service_time_series
+                  @create_service_time_series = ::Gapic::Config::Method.new create_service_time_series_config
 
                   yield self if block_given?
                 end

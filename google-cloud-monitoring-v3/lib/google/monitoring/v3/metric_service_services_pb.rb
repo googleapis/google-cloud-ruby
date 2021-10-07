@@ -43,6 +43,8 @@ module Google
             # Gets a single metric descriptor. This method does not require a Workspace.
             rpc :GetMetricDescriptor, ::Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest, ::Google::Api::MetricDescriptor
             # Creates a new metric descriptor.
+            # The creation is executed asynchronously and callers may check the returned
+            # operation to track its progress.
             # User-created metric descriptors define
             # [custom metrics](https://cloud.google.com/monitoring/custom-metrics).
             rpc :CreateMetricDescriptor, ::Google::Cloud::Monitoring::V3::CreateMetricDescriptorRequest, ::Google::Api::MetricDescriptor
@@ -57,6 +59,16 @@ module Google
             # If any time series could not be written, a corresponding failure message is
             # included in the error response.
             rpc :CreateTimeSeries, ::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest, ::Google::Protobuf::Empty
+            # Creates or adds data to one or more service time series. A service time
+            # series is a time series for a metric from a Google Cloud service. The
+            # response is empty if all time series in the request were written. If any
+            # time series could not be written, a corresponding failure message is
+            # included in the error response. This endpoint rejects writes to
+            # user-defined metrics.
+            # This method is only for use by Google Cloud services. Use
+            # [projects.timeSeries.create][google.monitoring.v3.MetricService.CreateTimeSeries]
+            # instead.
+            rpc :CreateServiceTimeSeries, ::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class
