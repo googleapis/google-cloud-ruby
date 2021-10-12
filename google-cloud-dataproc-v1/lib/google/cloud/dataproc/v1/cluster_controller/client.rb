@@ -202,7 +202,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_cluster(project_id: nil, region: nil, cluster: nil, request_id: nil)
+            # @overload create_cluster(project_id: nil, region: nil, cluster: nil, request_id: nil, action_on_failed_primary_workers: nil)
             #   Pass arguments to `create_cluster` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -215,7 +215,7 @@ module Google
             #   @param cluster [::Google::Cloud::Dataproc::V1::Cluster, ::Hash]
             #     Required. The cluster to create.
             #   @param request_id [::String]
-            #     Optional. A unique id used to identify the request. If the server receives two
+            #     Optional. A unique ID used to identify the request. If the server receives two
             #     [CreateClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateClusterRequest)s
             #     with the same id, then the second request will be ignored and the
             #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the backend
@@ -224,8 +224,10 @@ module Google
             #     It is recommended to always set this value to a
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
             #
-            #     The id must contain only letters (a-z, A-Z), numbers (0-9),
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
             #     underscores (_), and hyphens (-). The maximum length is 40 characters.
+            #   @param action_on_failed_primary_workers [::Google::Cloud::Dataproc::V1::FailureAction]
+            #     Optional. Failure action when primary worker creation fails.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -280,6 +282,8 @@ module Google
             # Updates a cluster in a project. The returned
             # {::Google::Longrunning::Operation#metadata Operation.metadata} will be
             # [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
+            # The cluster must be in a {::Google::Cloud::Dataproc::V1::ClusterStatus::State `RUNNING`} state or an error
+            # is returned.
             #
             # @overload update_cluster(request, options = nil)
             #   Pass arguments to `update_cluster` via a request object, either of type
@@ -368,7 +372,7 @@ module Google
             #      </tbody>
             #      </table>
             #   @param request_id [::String]
-            #     Optional. A unique id used to identify the request. If the server
+            #     Optional. A unique ID used to identify the request. If the server
             #     receives two
             #     [UpdateClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.UpdateClusterRequest)s
             #     with the same id, then the second request will be ignored and the
@@ -378,7 +382,7 @@ module Google
             #     It is recommended to always set this value to a
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
             #
-            #     The id must contain only letters (a-z, A-Z), numbers (0-9),
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
             #     underscores (_), and hyphens (-). The maximum length is 40 characters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -460,7 +464,7 @@ module Google
             #     Optional. Specifying the `cluster_uuid` means the RPC will fail
             #     (with error NOT_FOUND) if a cluster with the specified UUID does not exist.
             #   @param request_id [::String]
-            #     Optional. A unique id used to identify the request. If the server
+            #     Optional. A unique ID used to identify the request. If the server
             #     receives two
             #     [StopClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StopClusterRequest)s
             #     with the same id, then the second request will be ignored and the
@@ -470,7 +474,7 @@ module Google
             #     Recommendation: Set this value to a
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
             #
-            #     The id must contain only letters (a-z, A-Z), numbers (0-9),
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
             #     underscores (_), and hyphens (-). The maximum length is 40 characters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -552,7 +556,7 @@ module Google
             #     Optional. Specifying the `cluster_uuid` means the RPC will fail
             #     (with error NOT_FOUND) if a cluster with the specified UUID does not exist.
             #   @param request_id [::String]
-            #     Optional. A unique id used to identify the request. If the server
+            #     Optional. A unique ID used to identify the request. If the server
             #     receives two
             #     [StartClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StartClusterRequest)s
             #     with the same id, then the second request will be ignored and the
@@ -562,7 +566,7 @@ module Google
             #     Recommendation: Set this value to a
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
             #
-            #     The id must contain only letters (a-z, A-Z), numbers (0-9),
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
             #     underscores (_), and hyphens (-). The maximum length is 40 characters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -646,7 +650,7 @@ module Google
             #     Optional. Specifying the `cluster_uuid` means the RPC should fail
             #     (with error NOT_FOUND) if cluster with specified UUID does not exist.
             #   @param request_id [::String]
-            #     Optional. A unique id used to identify the request. If the server
+            #     Optional. A unique ID used to identify the request. If the server
             #     receives two
             #     [DeleteClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.DeleteClusterRequest)s
             #     with the same id, then the second request will be ignored and the
@@ -656,7 +660,7 @@ module Google
             #     It is recommended to always set this value to a
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
             #
-            #     The id must contain only letters (a-z, A-Z), numbers (0-9),
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
             #     underscores (_), and hyphens (-). The maximum length is 40 characters.
             #
             # @yield [response, operation] Access the result along with the RPC operation

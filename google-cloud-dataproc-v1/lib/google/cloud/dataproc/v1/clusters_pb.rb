@@ -71,6 +71,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :reservation_affinity, :message, 11, "google.cloud.dataproc.v1.ReservationAffinity"
       optional :node_group_affinity, :message, 13, "google.cloud.dataproc.v1.NodeGroupAffinity"
       optional :shielded_instance_config, :message, 14, "google.cloud.dataproc.v1.ShieldedInstanceConfig"
+      optional :confidential_instance_config, :message, 15, "google.cloud.dataproc.v1.ConfidentialInstanceConfig"
     end
     add_enum "google.cloud.dataproc.v1.GceClusterConfig.PrivateIpv6GoogleAccess" do
       value :PRIVATE_IPV6_GOOGLE_ACCESS_UNSPECIFIED, 0
@@ -85,6 +86,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :enable_secure_boot, :bool, 1
       optional :enable_vtpm, :bool, 2
       optional :enable_integrity_monitoring, :bool, 3
+    end
+    add_message "google.cloud.dataproc.v1.ConfidentialInstanceConfig" do
+      optional :enable_confidential_compute, :bool, 1
     end
     add_message "google.cloud.dataproc.v1.InstanceGroupConfig" do
       optional :num_instances, :int32, 1
@@ -131,6 +135,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CREATING, 1
       value :RUNNING, 2
       value :ERROR, 3
+      value :ERROR_DUE_TO_UPDATE, 9
       value :DELETING, 4
       value :UPDATING, 5
       value :STOPPING, 6
@@ -191,6 +196,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :region, :string, 3
       optional :cluster, :message, 2, "google.cloud.dataproc.v1.Cluster"
       optional :request_id, :string, 4
+      optional :action_on_failed_primary_workers, :enum, 5, "google.cloud.dataproc.v1.FailureAction"
     end
     add_message "google.cloud.dataproc.v1.UpdateClusterRequest" do
       optional :project_id, :string, 1
@@ -275,6 +281,7 @@ module Google
         GceClusterConfig::PrivateIpv6GoogleAccess = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.GceClusterConfig.PrivateIpv6GoogleAccess").enummodule
         NodeGroupAffinity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.NodeGroupAffinity").msgclass
         ShieldedInstanceConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ShieldedInstanceConfig").msgclass
+        ConfidentialInstanceConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ConfidentialInstanceConfig").msgclass
         InstanceGroupConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.InstanceGroupConfig").msgclass
         InstanceGroupConfig::Preemptibility = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.InstanceGroupConfig.Preemptibility").enummodule
         ManagedGroupConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ManagedGroupConfig").msgclass

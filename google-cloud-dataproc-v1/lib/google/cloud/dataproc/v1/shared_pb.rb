@@ -3,10 +3,36 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/field_behavior_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dataproc/v1/shared.proto", :syntax => :proto3) do
+    add_message "google.cloud.dataproc.v1.RuntimeConfig" do
+      map :properties, :string, :string, 3
+    end
+    add_message "google.cloud.dataproc.v1.EnvironmentConfig" do
+      optional :execution_config, :message, 1, "google.cloud.dataproc.v1.ExecutionConfig"
+      optional :peripherals_config, :message, 2, "google.cloud.dataproc.v1.PeripheralsConfig"
+    end
+    add_message "google.cloud.dataproc.v1.ExecutionConfig" do
+      optional :service_account, :string, 2
+      repeated :network_tags, :string, 6
+      optional :kms_key, :string, 7
+      oneof :network do
+        optional :network_uri, :string, 4
+        optional :subnetwork_uri, :string, 5
+      end
+    end
+    add_message "google.cloud.dataproc.v1.SparkHistoryServerConfig" do
+      optional :dataproc_cluster, :string, 1
+    end
+    add_message "google.cloud.dataproc.v1.PeripheralsConfig" do
+      optional :metastore_service, :string, 1
+      optional :spark_history_server_config, :message, 2, "google.cloud.dataproc.v1.SparkHistoryServerConfig"
+    end
+    add_message "google.cloud.dataproc.v1.RuntimeInfo" do
+      map :endpoints, :string, :string, 1
+      optional :output_uri, :string, 2
+    end
     add_enum "google.cloud.dataproc.v1.Component" do
       value :COMPONENT_UNSPECIFIED, 0
       value :ANACONDA, 5
@@ -22,6 +48,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :ZEPPELIN, 4
       value :ZOOKEEPER, 8
     end
+    add_enum "google.cloud.dataproc.v1.FailureAction" do
+      value :FAILURE_ACTION_UNSPECIFIED, 0
+      value :NO_ACTION, 1
+      value :DELETE, 2
+    end
   end
 end
 
@@ -29,7 +60,14 @@ module Google
   module Cloud
     module Dataproc
       module V1
+        RuntimeConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.RuntimeConfig").msgclass
+        EnvironmentConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.EnvironmentConfig").msgclass
+        ExecutionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ExecutionConfig").msgclass
+        SparkHistoryServerConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.SparkHistoryServerConfig").msgclass
+        PeripheralsConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.PeripheralsConfig").msgclass
+        RuntimeInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.RuntimeInfo").msgclass
         Component = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.Component").enummodule
+        FailureAction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.FailureAction").enummodule
       end
     end
   end

@@ -477,8 +477,7 @@ module Google
             # Instantiates a template and begins execution.
             #
             # This method is equivalent to executing the sequence
-            # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#create_workflow_template CreateWorkflowTemplate},
-            # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#instantiate_workflow_template InstantiateWorkflowTemplate},
+            # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#create_workflow_template CreateWorkflowTemplate}, {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#instantiate_workflow_template InstantiateWorkflowTemplate},
             # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#delete_workflow_template DeleteWorkflowTemplate}.
             #
             # The returned Operation can be used to track execution of

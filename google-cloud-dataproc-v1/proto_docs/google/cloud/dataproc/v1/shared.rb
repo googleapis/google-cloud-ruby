@@ -21,8 +21,111 @@ module Google
   module Cloud
     module Dataproc
       module V1
+        # Runtime configuration for a workload.
+        # @!attribute [rw] properties
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. A mapping of property names to values, which are used to configure workload
+        #     execution.
+        class RuntimeConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class PropertiesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Environment configuration for a workload.
+        # @!attribute [rw] execution_config
+        #   @return [::Google::Cloud::Dataproc::V1::ExecutionConfig]
+        #     Optional. Execution configuration for a workload.
+        # @!attribute [rw] peripherals_config
+        #   @return [::Google::Cloud::Dataproc::V1::PeripheralsConfig]
+        #     Optional. Peripherals configuration that workload has access to.
+        class EnvironmentConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Execution configuration for a workload.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     Optional. Service account that used to execute workload.
+        # @!attribute [rw] network_uri
+        #   @return [::String]
+        #     Optional. Network URI to connect workload to.
+        # @!attribute [rw] subnetwork_uri
+        #   @return [::String]
+        #     Optional. Subnetwork URI to connect workload to.
+        # @!attribute [rw] network_tags
+        #   @return [::Array<::String>]
+        #     Optional. Tags used for network traffic control.
+        # @!attribute [rw] kms_key
+        #   @return [::String]
+        #     Optional. The Cloud KMS key to use for encryption.
+        class ExecutionConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Spark History Server configuration for the workload.
+        # @!attribute [rw] dataproc_cluster
+        #   @return [::String]
+        #     Optional. Resource name of an existing Dataproc Cluster to act as a Spark History
+        #     Server for the workload.
+        #
+        #     Example:
+        #
+        #     * `projects/[project_id]/regions/[region]/clusters/[cluster_name]`
+        class SparkHistoryServerConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Auxiliary services configuration for a workload.
+        # @!attribute [rw] metastore_service
+        #   @return [::String]
+        #     Optional. Resource name of an existing Dataproc Metastore service.
+        #
+        #     Example:
+        #
+        #     * `projects/[project_id]/locations/[region]/services/[service_id]`
+        # @!attribute [rw] spark_history_server_config
+        #   @return [::Google::Cloud::Dataproc::V1::SparkHistoryServerConfig]
+        #     Optional. The Spark History Server configuration for the workload.
+        class PeripheralsConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Runtime information about workload execution.
+        # @!attribute [r] endpoints
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Output only. Map of remote access endpoints (such as web interfaces and APIs) to their
+        #     URIs.
+        # @!attribute [r] output_uri
+        #   @return [::String]
+        #     Output only. A URI pointing to the location of the stdout and stderr of the workload.
+        class RuntimeInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class EndpointsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Cluster components that can be activated.
-        # Next ID: 16.
         module Component
           # Unspecified component. Specifying this will cause Cluster creation to fail.
           COMPONENT_UNSPECIFIED = 0
@@ -66,6 +169,19 @@ module Google
 
           # The Zookeeper service.
           ZOOKEEPER = 8
+        end
+
+        # Actions in response to failure of a resource associated with a cluster.
+        module FailureAction
+          # When FailureAction is unspecified, failure action defaults to NO_ACTION.
+          FAILURE_ACTION_UNSPECIFIED = 0
+
+          # Take no action on failure to create a cluster resource. NO_ACTION is the
+          # default.
+          NO_ACTION = 1
+
+          # Delete the failed cluster resource.
+          DELETE = 2
         end
       end
     end

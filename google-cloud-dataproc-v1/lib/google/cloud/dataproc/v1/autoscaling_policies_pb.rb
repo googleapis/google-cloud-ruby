@@ -16,6 +16,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 2
       optional :worker_config, :message, 4, "google.cloud.dataproc.v1.InstanceGroupAutoscalingPolicyConfig"
       optional :secondary_worker_config, :message, 5, "google.cloud.dataproc.v1.InstanceGroupAutoscalingPolicyConfig"
+      map :labels, :string, :string, 6
       oneof :algorithm do
         optional :basic_algorithm, :message, 3, "google.cloud.dataproc.v1.BasicAutoscalingAlgorithm"
       end
