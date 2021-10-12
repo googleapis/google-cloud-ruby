@@ -122,6 +122,11 @@
               "methods": [
                 "create_time_series"
               ]
+            },
+            "CreateServiceTimeSeries": {
+              "methods": [
+                "create_service_time_series"
+              ]
             }
           }
         }
