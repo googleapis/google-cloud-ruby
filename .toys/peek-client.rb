@@ -50,7 +50,7 @@ end
 def run_owl_bot
   gemspecs = Dir.glob "*.gemspec", base: output_dir
   error "Unable to find gemspec in #{output_dir}" unless gemspecs.size == 1
-  gem_name = File.basename gemspecs.first
+  gem_name = File.basename gemspecs.first, ".gemspec"
   staging_base_dir = File.join context_directory, "owl-bot-staging"
   staging_dir = File.join staging_base_dir, gem_name
   rm_rf staging_base_dir
