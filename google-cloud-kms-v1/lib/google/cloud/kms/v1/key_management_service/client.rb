@@ -184,6 +184,21 @@ module Google
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
+                default_config.rpcs.mac_sign.timeout = 60.0
+                default_config.rpcs.mac_sign.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.mac_verify.timeout = 60.0
+                default_config.rpcs.mac_verify.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.generate_random_bytes.timeout = 60.0
+                default_config.rpcs.generate_random_bytes.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
                 default_config
               end
               yield @configure if block_given?
