@@ -38,6 +38,9 @@ module Google
         # @!attribute [rw] parent_display_name
         #   @return [::String]
         #     The human readable name of resource's parent.
+        # @!attribute [rw] type
+        #   @return [::String]
+        #     The full resource type of the resource.
         # @!attribute [r] folders
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Folder>]
         #     Output only. Contains a Folder message for each folder in the assets ancestry.
