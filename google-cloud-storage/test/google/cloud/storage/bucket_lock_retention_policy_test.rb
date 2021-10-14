@@ -27,7 +27,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :mock_storage d
       is_locked: true) }
   let(:bucket_retention_policy_hash) { JSON.parse bucket_retention_policy_gapi.to_json }
 
-  let(:bucket_hash) { random_bucket_hash bucket_name }
+  let(:bucket_hash) { random_bucket_hash name: bucket_name }
   let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_hash.to_json }
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
   let(:bucket_user_project) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service, user_project: true }
