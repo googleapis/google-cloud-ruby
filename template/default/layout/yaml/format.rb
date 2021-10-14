@@ -1,3 +1,74 @@
+require "redcarpet"
+require "yard"
+
+class Log
+  # YARD records issues finding links via YARD::Logger#warn
+  def warn str
+    raise str
+  end
+end
+
+class Formatter
+  include YARD::Templates::Helpers::BaseHelper
+  include YARD::Templates::Helpers::HtmlHelper
+
+  attr_accessor :object
+  attr_accessor :options
+  attr_accessor :serializer
+
+  def initialize object, options
+    @original_object = object
+    @object = object
+    @options = options
+    @serializer = options.serializer
+  end
+
+  def log
+    Log.new
+  end
+
+  def parse_links str
+    # resolve_links fails when a link is defined above the object containing the item the link is pointing to
+    objects_list = [@object]
+    objects_list += @object.children
+    objects_list.each do |obj|
+      @object = obj
+      err = nil
+      begin
+        str = resolve_links str
+        return str
+      rescue => e
+        if e.message.match /In file [\s\w\d\`\/\.\:\']*Cannot resolve link to #\w+ from text\:/
+          err = e
+          next
+        else
+          YARD::Logger.instance.warn e.message
+          return str
+        end
+      ensure
+        reset_object
+      end
+      YARD::Logger.instance.warn e.message
+    end
+
+    str
+  end
+
+  def reset_object
+    @object = @original_object
+  end
+end
+
+def markdown str
+  renderer = Redcarpet::Render::HTML.new(render_options = {})
+  redcarpet = Redcarpet::Markdown.new renderer
+  str = redcarpet.render str
+  while str.end_with? "\n"
+    str = str[0..-2]
+  end
+  unparagraph str
+end
+
 def docstring obj
   str = pre_format obj.docstring.to_str
 end
@@ -9,58 +80,111 @@ end
 
 def pre_format str
   str = str.to_s
+  # Parse markdown prior to running resolve_links, which checks for HTML codeblocks
+  if @method && @method.path.to_s == "Google::Cloud::PubSub::Subscription#remove_dead_letter_policy"
+    require "pry"
+    binding.pry
+  end
+  str = markdown str
+  # str = YARD::Templates::Helpers::HtmlHelper.resolve_links str
+  str = Formatter.new(@object, @options).parse_links str
+  # YARD turns {} style links into [] markdown style links. Re-parsing markdown to get HTML links.
+  # str = markdown str
   str = escapes str
-  str = codeblock_space str
-  str = str.gsub("\\\\{", "{").gsub "\\{", "{"
-  str = str.gsub("\\\\}", "}").gsub "\\}", "}"
-  str = codeblock_backtick str
-  str = demote_headers str
-  str = fix_links str
-  str = normalize_links str
+  # str = codeblock_space str
+  # str = str.gsub("\\\\{", "{").gsub "\\{", "{"
+  # str = str.gsub("\\\\}", "}").gsub "\\}", "}"
+  # str = codeblock_backtick str
+  # str = demote_headers str
+  str = fix_googleapis_links str
+  str = fix_object_links str
+  # str = Formatter.resolve_links str
+  
+  # str = normalize_links str
+  str
+end
+
+
+
+def unparagraph str
+  if str.start_with?("<p>") && str.end_with?("</p>")
+    str = str[3..-5]
+  end
   str
 end
 
 def demote_headers str, min = 0
-  out = ""
-  match_list = []
-  i = 0
-  while i < str.size
-    if str[(i - 1)..-1] =~ /\A(#+\s\w+)/
-      match_list << [Regexp.last_match, i - 1]
-      i += Regexp.last_match[0].size
-    else
-      i += 1
-    end
-  end
-  return str if match_list.empty?
+  # out = ""
+  # match_list = []
+  # i = 0
+  # while i < str.size
+  #   if str[(i - 1)..-1] =~ /\A(#+\s\w+)/
+  #     match_list << [Regexp.last_match, i - 1]
+  #     i += Regexp.last_match[0].size
+  #   else
+  #     i += 1
+  #   end
+  # end
+  # return str if match_list.empty?
 
-  prev = 0
-  match_list.each do |entry|
-    match = entry[0][1]
-    i = entry[1]
-    out += str[prev...i]
+  # prev = 0
+  # match_list.each do |entry|
+  #   match = entry[0][1]
+  #   i = entry[1]
+  #   out += str[prev...i]
 
-    if in_codeblock? str, match, i
-      out += match
-      prev = i + match.size
-    else
-      new_header = "#" + match
-      while new_header.split(" ").first.size < min
-        new_header = "#" + new_header 
-      end
-      out += new_header
-      prev = i + match.size
-    end
-  end
+  #   if in_codeblock? str, match, i
+  #     out += match
+  #     prev = i + match.size
+  #   else
+  #     new_header = "#" + match
+  #     while new_header.split(" ").first.size < min
+  #       new_header = "#" + new_header 
+  #     end
+  #     out += new_header
+  #     prev = i + match.size
+  #   end
+  # end
 
-  out += str[prev..-1]
+  # out += str[prev..-1]
 
-  out
+  # out
+  str
 end
 
-def fix_links str
+def fix_googleapis_links str
   str.gsub /http.*googleapis.dev\/ruby\/(google-cloud.*\))/, 'https://cloud.devsite.corp.google.com/ruby/docs/reference/\1'
 end
+
+def fix_object_links str
+  # YARD's resolve_links wraps the links in a span element, which is not needed.
+  # Additionally, the hrefs assume a more typical file structure, and need to be updated
+  regex = /<span class=\'object_link\'><a href=\\\"([^\\\"]*)\\\" title=\\\"([^\\\"]*)\\\"\>([^<]*)<\/a><\/span>/
+  while str.match(regex)
+    m = Regexp.last_match
+    old_link = m[0]
+    file     = m[1]
+    title    = m[2]
+    display  = m[3]
+    url = title.split(" ").first.gsub "::", "-"
+    if url.include? "#"
+      page, anchor = url.split("#")
+      ["!", "?"].each { |sym| anchor = anchor.gsub sym, "_" }
+      anchor = "#{page.gsub "-", "__"}_#{anchor}_instance_" 
+      url = "#{page}##{anchor}"
+    elsif url.include? "."
+      page, anchor = url.split(".")
+      ["!", "?"].each { |sym| anchor = anchor.gsub sym, "_" }
+      anchor = "#{page.gsub "-", "__"}_#{anchor}_class_" 
+      url = "#{page}##{anchor}"
+    end
+    new_link = link "./#{url}", display
+    puts new_link
+    str = str.gsub old_link, new_link
+  end
+  str
+end
+
 
 def normalize_links str
   out = ""

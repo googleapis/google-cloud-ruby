@@ -1,11 +1,13 @@
 def init
   options.serializer = Serializers::FileSystemSerializer.new :extension => "yml"
+  toc_items = []
   options.objects.each do |object|
     next if object.root?
+    toc_items << object
     serialize object
   end
   copy_files
-  toc
+  toc toc_items
 end
 
 def serialize object
@@ -26,14 +28,8 @@ def copy_files
   end
 end
 
-def toc
-  roots = []
-  options.objects.each do |object|
-    next if object.root?
-    roots << object if object.parent.root?
-  end
-
+def toc objects
   Templates::Engine.with_serializer "toc.yml", options.serializer do
-    T('toc').run options.merge(:item => roots)
+    T('toc').run options.merge(:item => objects)
   end
 end

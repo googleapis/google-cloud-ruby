@@ -1,28 +1,18 @@
 def init
-  @roots = options.item
+  @objects = options.item
   sections :toc
 end
 
 def objects
   return @objects_list if @objects_list
 
-  @objects_list = []
-  @roots.each do |root|
-    populate_objects root
-  end
+  @objects_list = @objects
   @objects_list.uniq!
   @objects_list.sort_by! { |obj| obj.path }
-  @objects_list
-end
-
-def populate_objects obj
-  objects << obj
-  children = obj.children.reject { |child| [:method, :constant].include? child.type }
-  unless children.empty?
-    children.each do |child|
-      populate_objects child
-    end
+  @objects_list.reject! do |obj|
+    obj.visibility == :private || obj.tags.any? { |tag| tag.tag_name == "private" }
   end
+  @objects_list
 end
 
 def toc_text

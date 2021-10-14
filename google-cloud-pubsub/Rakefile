@@ -206,3 +206,18 @@ def header str, token = "#"
   puts token * line_length
   puts ""
 end
+
+task :cloudrad do
+  require "fileutils"
+  ENV["CLOUDRAD_GEM_NAME"] = "google-cloud-pubsub"
+  sh "bundle exec yard doc --fail-on-warning --yardopts .yardopts-cloudrad --no-progress"
+  # files = Dir.entries("./doc").reject { |file| [".", ".."].include? file }
+  # files.each do |file|
+  #   FileUtils.cp "./doc/#{file}", "/home/paye/src/doc-templates/testdata/ruby/obj/api/#{file}"
+  # end
+  # Dir.chdir "/home/paye/src/doc-templates/testdata/ruby/" do
+  #   sh "docfx build --debug -t /home/paye/src/doc-templates/third_party/docfx/templates/devsite/"
+  #   File.rename("site/api/toc.yaml", "site/api/_toc.yaml")
+  # end
+end
+
