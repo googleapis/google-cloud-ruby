@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-apis-storage_v1", "~> 0.1"
   gem.add_dependency "googleauth", ">= 0.16.2", "< 2.a"
   gem.add_dependency "digest-crc", "~> 0.4"
-  gem.add_dependency "addressable", "~> 2.5"
+  gem.add_dependency "addressable", "~> 2.8"
   gem.add_dependency "mini_mime", "~> 1.0"
 
   gem.add_development_dependency "google-style", "~> 1.25.1"
