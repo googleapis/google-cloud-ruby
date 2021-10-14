@@ -49,9 +49,27 @@ module Google
         # @!attribute [rw] secondary_worker_config
         #   @return [::Google::Cloud::Dataproc::V1::InstanceGroupAutoscalingPolicyConfig]
         #     Optional. Describes how the autoscaler will operate for secondary workers.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. The labels to associate with this autoscaling policy.
+        #     Label **keys** must contain 1 to 63 characters, and must conform to
+        #     [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt).
+        #     Label **values** may be empty, but, if present, must contain 1 to 63
+        #     characters, and must conform to [RFC
+        #     1035](https://www.ietf.org/rfc/rfc1035.txt). No more than 32 labels can be
+        #     associated with an autoscaling policy.
         class AutoscalingPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Basic algorithm for autoscaling.
