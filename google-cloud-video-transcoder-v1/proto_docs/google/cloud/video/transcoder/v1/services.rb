@@ -75,6 +75,10 @@ module Google
           #   @return [::String]
           #     Required. The name of the job to delete.
           #     Format: `projects/{project}/locations/{location}/jobs/{job}`
+          # @!attribute [rw] allow_missing
+          #   @return [::Boolean]
+          #     If set to true, and the job is not found, the request will succeed but no
+          #     action will be taken on the server.
           class DeleteJobRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -156,6 +160,10 @@ module Google
           #   @return [::String]
           #     Required. The name of the job template to delete.
           #     `projects/{project}/locations/{location}/jobTemplates/{job_template}`
+          # @!attribute [rw] allow_missing
+          #   @return [::Boolean]
+          #     If set to true, and the job template is not found, the request will succeed
+          #     but no action will be taken on the server.
           class DeleteJobTemplateRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
