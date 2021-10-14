@@ -39,17 +39,49 @@ module Google
               # Retrieves the specified [Environment][google.cloud.dialogflow.cx.v3.Environment].
               rpc :GetEnvironment, ::Google::Cloud::Dialogflow::CX::V3::GetEnvironmentRequest, ::Google::Cloud::Dialogflow::CX::V3::Environment
               # Creates an [Environment][google.cloud.dialogflow.cx.v3.Environment] in the specified [Agent][google.cloud.dialogflow.cx.v3.Agent].
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: An empty [Struct
+              #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+              # - `response`: [Environment][google.cloud.dialogflow.cx.v3.Environment]
               rpc :CreateEnvironment, ::Google::Cloud::Dialogflow::CX::V3::CreateEnvironmentRequest, ::Google::Longrunning::Operation
               # Updates the specified [Environment][google.cloud.dialogflow.cx.v3.Environment].
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: An empty [Struct
+              #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+              # - `response`: [Environment][google.cloud.dialogflow.cx.v3.Environment]
               rpc :UpdateEnvironment, ::Google::Cloud::Dialogflow::CX::V3::UpdateEnvironmentRequest, ::Google::Longrunning::Operation
               # Deletes the specified [Environment][google.cloud.dialogflow.cx.v3.Environment].
               rpc :DeleteEnvironment, ::Google::Cloud::Dialogflow::CX::V3::DeleteEnvironmentRequest, ::Google::Protobuf::Empty
               # Looks up the history of the specified [Environment][google.cloud.dialogflow.cx.v3.Environment].
               rpc :LookupEnvironmentHistory, ::Google::Cloud::Dialogflow::CX::V3::LookupEnvironmentHistoryRequest, ::Google::Cloud::Dialogflow::CX::V3::LookupEnvironmentHistoryResponse
               # Kicks off a continuous test under the specified [Environment][google.cloud.dialogflow.cx.v3.Environment].
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: [RunContinuousTestMetadata][google.cloud.dialogflow.cx.v3.RunContinuousTestMetadata]
+              # - `response`: [RunContinuousTestResponse][google.cloud.dialogflow.cx.v3.RunContinuousTestResponse]
               rpc :RunContinuousTest, ::Google::Cloud::Dialogflow::CX::V3::RunContinuousTestRequest, ::Google::Longrunning::Operation
               # Fetches a list of continuous test results for a given environment.
               rpc :ListContinuousTestResults, ::Google::Cloud::Dialogflow::CX::V3::ListContinuousTestResultsRequest, ::Google::Cloud::Dialogflow::CX::V3::ListContinuousTestResultsResponse
+              # Deploys a flow to the specified [Environment][google.cloud.dialogflow.cx.v3.Environment].
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: [DeployFlowMetadata][google.cloud.dialogflow.cx.v3.DeployFlowMetadata]
+              # - `response`: [DeployFlowResponse][google.cloud.dialogflow.cx.v3.DeployFlowResponse]
+              rpc :DeployFlow, ::Google::Cloud::Dialogflow::CX::V3::DeployFlowRequest, ::Google::Longrunning::Operation
             end
 
             Stub = Service.rpc_stub_class

@@ -7,6 +7,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/securitycenter/v1/indicator_pb'
 require 'google/cloud/securitycenter/v1/security_marks_pb'
+require 'google/cloud/securitycenter/v1/vulnerability_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/api/annotations_pb'
@@ -27,6 +28,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :canonical_name, :string, 14
       optional :finding_class, :enum, 17, "google.cloud.securitycenter.v1.Finding.FindingClass"
       optional :indicator, :message, 18, "google.cloud.securitycenter.v1.Indicator"
+      optional :vulnerability, :message, 20, "google.cloud.securitycenter.v1.Vulnerability"
     end
     add_enum "google.cloud.securitycenter.v1.Finding.State" do
       value :STATE_UNSPECIFIED, 0

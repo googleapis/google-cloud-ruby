@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
   let(:bucket_name) { "found-bucket" }
-  let(:bucket_hash) { random_bucket_hash bucket_name }
+  let(:bucket_hash) { random_bucket_hash name: bucket_name }
   let(:bucket_json) { bucket_hash.to_json }
   let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_json }
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
@@ -258,7 +258,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
     mock = Minitest::Mock.new
     mock.expect :get_bucket, bucket_gapi, get_bucket_args(bucket_name, user_project: "test")
     mock.expect :patch_bucket,
-      Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket_name).to_json),
+      Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(name: bucket_name).to_json),
       patch_bucket_args(bucket_name, predefined_acl: "authenticatedRead", user_project: "test")
 
     storage.service.mocked_service = mock
@@ -422,7 +422,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
   def predefined_acl_update acl_role
     mock = Minitest::Mock.new
     mock.expect :patch_bucket,
-      Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket.name).to_json),
+      Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(name: bucket.name).to_json),
       patch_bucket_args(bucket_name, predefined_acl: acl_role)
 
     storage.service.mocked_service = mock

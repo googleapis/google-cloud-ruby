@@ -79,7 +79,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :container, :string, 3
       repeated :elementary_streams, :string, 4
       optional :segment_settings, :message, 5, "google.cloud.video.transcoder.v1.SegmentSettings"
-      optional :encryption, :message, 6, "google.cloud.video.transcoder.v1.Encryption"
     end
     add_message "google.cloud.video.transcoder.v1.Manifest" do
       optional :file_name, :string, 1
@@ -282,25 +281,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :segment_duration, :message, 1, "google.protobuf.Duration"
       optional :individual_segments, :bool, 3
     end
-    add_message "google.cloud.video.transcoder.v1.Encryption" do
-      optional :key, :string, 1
-      optional :iv, :string, 2
-      oneof :encryption_mode do
-        optional :aes_128, :message, 3, "google.cloud.video.transcoder.v1.Encryption.Aes128Encryption"
-        optional :sample_aes, :message, 4, "google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption"
-        optional :mpeg_cenc, :message, 5, "google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption"
-      end
-    end
-    add_message "google.cloud.video.transcoder.v1.Encryption.Aes128Encryption" do
-      optional :key_uri, :string, 1
-    end
-    add_message "google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption" do
-      optional :key_uri, :string, 1
-    end
-    add_message "google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption" do
-      optional :key_id, :string, 1
-      optional :scheme, :string, 2
-    end
   end
 end
 
@@ -347,10 +327,6 @@ module Google
           TextStream = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.TextStream").msgclass
           TextStream::TextMapping = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.TextStream.TextMapping").msgclass
           SegmentSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.SegmentSettings").msgclass
-          Encryption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.Encryption").msgclass
-          Encryption::Aes128Encryption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.Encryption.Aes128Encryption").msgclass
-          Encryption::SampleAesEncryption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.Encryption.SampleAesEncryption").msgclass
-          Encryption::MpegCommonEncryption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.Encryption.MpegCommonEncryption").msgclass
         end
       end
     end

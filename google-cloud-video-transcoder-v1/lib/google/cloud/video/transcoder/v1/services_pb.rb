@@ -27,6 +27,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.video.transcoder.v1.DeleteJobRequest" do
       optional :name, :string, 1
+      optional :allow_missing, :bool, 2
     end
     add_message "google.cloud.video.transcoder.v1.ListJobsResponse" do
       repeated :jobs, :message, 1, "google.cloud.video.transcoder.v1.Job"
@@ -50,6 +51,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.video.transcoder.v1.DeleteJobTemplateRequest" do
       optional :name, :string, 1
+      optional :allow_missing, :bool, 2
     end
     add_message "google.cloud.video.transcoder.v1.ListJobTemplatesResponse" do
       repeated :job_templates, :message, 1, "google.cloud.video.transcoder.v1.JobTemplate"

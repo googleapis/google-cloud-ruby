@@ -70,7 +70,7 @@ class PostObjectConformanceTest < MockStorage
   def self.bucket_test_for description, input, output, index
     define_method("test_bucket_#{index}: #{description}") do
       @test_data = ["bucket", index, description, output.expectedDecodedPolicy]
-      bucket_gapi = Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(input.bucket).to_json
+      bucket_gapi = Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name: input.bucket).to_json
       bucket = Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service
       bucket_bound_hostname = input.bucketBoundHostname unless input.bucketBoundHostname&.empty?
       fields = fields_hash input.fields

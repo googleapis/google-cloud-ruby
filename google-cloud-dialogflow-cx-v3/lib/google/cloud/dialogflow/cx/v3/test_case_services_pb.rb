@@ -46,6 +46,7 @@ module Google
               # Updates the specified test case.
               rpc :UpdateTestCase, ::Google::Cloud::Dialogflow::CX::V3::UpdateTestCaseRequest, ::Google::Cloud::Dialogflow::CX::V3::TestCase
               # Kicks off a test case run.
+              #
               # This method is a [long-running
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
               # The returned `Operation` type has the following method-specific fields:
@@ -54,15 +55,36 @@ module Google
               # - `response`: [RunTestCaseResponse][google.cloud.dialogflow.cx.v3.RunTestCaseResponse]
               rpc :RunTestCase, ::Google::Cloud::Dialogflow::CX::V3::RunTestCaseRequest, ::Google::Longrunning::Operation
               # Kicks off a batch run of test cases.
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: [BatchRunTestCasesMetadata][google.cloud.dialogflow.cx.v3.BatchRunTestCasesMetadata]
+              # - `response`: [BatchRunTestCasesResponse][google.cloud.dialogflow.cx.v3.BatchRunTestCasesResponse]
               rpc :BatchRunTestCases, ::Google::Cloud::Dialogflow::CX::V3::BatchRunTestCasesRequest, ::Google::Longrunning::Operation
               # Calculates the test coverage for an agent.
               rpc :CalculateCoverage, ::Google::Cloud::Dialogflow::CX::V3::CalculateCoverageRequest, ::Google::Cloud::Dialogflow::CX::V3::CalculateCoverageResponse
               # Imports the test cases from a Cloud Storage bucket or a local file. It
               # always creates new test cases and won't overwite any existing ones. The
               # provided ID in the imported test case is neglected.
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: [ImportTestCasesMetadata][google.cloud.dialogflow.cx.v3.ImportTestCasesMetadata]
+              # - `response`: [ImportTestCasesResponse][google.cloud.dialogflow.cx.v3.ImportTestCasesResponse]
               rpc :ImportTestCases, ::Google::Cloud::Dialogflow::CX::V3::ImportTestCasesRequest, ::Google::Longrunning::Operation
               # Exports the test cases under the agent to a Cloud Storage bucket or a local
               # file. Filter can be applied to export a subset of test cases.
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: [ExportTestCasesMetadata][google.cloud.dialogflow.cx.v3.ExportTestCasesMetadata]
+              # - `response`: [ExportTestCasesResponse][google.cloud.dialogflow.cx.v3.ExportTestCasesResponse]
               rpc :ExportTestCases, ::Google::Cloud::Dialogflow::CX::V3::ExportTestCasesRequest, ::Google::Longrunning::Operation
               # Fetches a list of results for a given test case.
               rpc :ListTestCaseResults, ::Google::Cloud::Dialogflow::CX::V3::ListTestCaseResultsRequest, ::Google::Cloud::Dialogflow::CX::V3::ListTestCaseResultsResponse
