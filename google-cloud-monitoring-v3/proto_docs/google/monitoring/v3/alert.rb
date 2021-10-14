@@ -341,8 +341,8 @@ module Google
             # @!attribute [rw] filter
             #   @return [::String]
             #     Required. A logs-based filter. See [Advanced Logs
-            #     Queries](/logging/docs/view/advanced-queries) for how this filter
-            #     should be constructed.
+            #     Queries](https://cloud.google.com/logging/docs/view/advanced-queries)
+            #     for how this filter should be constructed.
             # @!attribute [rw] label_extractors
             #   @return [::Google::Protobuf::Map{::String => ::String}]
             #     Optional. A map from a label key to an extractor expression, which is
@@ -354,7 +354,7 @@ module Google
             #     condition.
             #
             #     Please see [the documentation on logs-based metric
-            #     `valueExtractor`s](/logging/docs/reference/v2/rest/v2/projects.metrics#LogMetric.FIELDS.value_extractor)
+            #     `valueExtractor`s](https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.metrics#LogMetric.FIELDS.value_extractor)
             #     for syntax and examples.
             class LogMatch
               include ::Google::Protobuf::MessageExts

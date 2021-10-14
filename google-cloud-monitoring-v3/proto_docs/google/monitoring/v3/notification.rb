@@ -52,6 +52,10 @@ module Google
         #     The set of labels that must be defined to identify a particular
         #     channel of the corresponding type. Each label includes a
         #     description for how that field should be populated.
+        # @!attribute [rw] supported_tiers
+        #   @return [::Array<::Google::Cloud::Monitoring::V3::ServiceTier>]
+        #     The tiers that support this notification channel; the project service tier
+        #     must be one of the supported_tiers.
         # @!attribute [rw] launch_stage
         #   @return [::Google::Api::LaunchStage]
         #     The product launch stage for channels of this type.
