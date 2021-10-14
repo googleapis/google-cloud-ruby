@@ -304,8 +304,8 @@ module Google
         #     `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
         # @!attribute [rw] file_share
         #   @return [::String]
-        #     Required. Name of the file share in the Cloud Filestore instance that the backup
-        #     is being restored to.
+        #     Required. Name of the file share in the Cloud Filestore instance that the
+        #     backup is being restored to.
         # @!attribute [rw] source_backup
         #   @return [::String]
         #     The resource name of the backup, in the format
@@ -328,9 +328,9 @@ module Google
         # ListInstancesRequest lists instances.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The project and location for which to retrieve instance information,
-        #     in the format `projects/{project_id}/locations/{location}`. In Cloud
-        #     Filestore, locations map to GCP zones, for example **us-west1-b**. To
+        #     Required. The project and location for which to retrieve instance
+        #     information, in the format `projects/{project_id}/locations/{location}`. In
+        #     Cloud Filestore, locations map to GCP zones, for example **us-west1-b**. To
         #     retrieve instance information for all locations, use "-" for the
         #     `{location}` value.
         # @!attribute [rw] page_size
@@ -395,8 +395,8 @@ module Google
         #     Output only. Capacity of the source file share when the backup was created.
         # @!attribute [r] storage_bytes
         #   @return [::Integer]
-        #     Output only. The size of the storage used by the backup. As backups share storage,
-        #     this number is expected to change with backup creation/deletion.
+        #     Output only. The size of the storage used by the backup. As backups share
+        #     storage, this number is expected to change with backup creation/deletion.
         # @!attribute [rw] source_instance
         #   @return [::String]
         #     The resource name of the source Cloud Filestore instance, in the format
@@ -408,13 +408,13 @@ module Google
         #     backup is created from.
         # @!attribute [r] source_instance_tier
         #   @return [::Google::Cloud::Filestore::V1::Instance::Tier]
-        #     Output only. The service tier of the source Cloud Filestore instance that this backup
-        #     is created from.
+        #     Output only. The service tier of the source Cloud Filestore instance that
+        #     this backup is created from.
         # @!attribute [r] download_bytes
         #   @return [::Integer]
-        #     Output only. Amount of bytes that will be downloaded if the backup is restored. This
-        #     may be different than storage bytes, since sequential backups of the same
-        #     disk will share storage.
+        #     Output only. Amount of bytes that will be downloaded if the backup is
+        #     restored. This may be different than storage bytes, since sequential
+        #     backups of the same disk will share storage.
         # @!attribute [r] satisfies_pzs
         #   @return [::Google::Protobuf::BoolValue]
         #     Output only. Reserved for future use.
@@ -490,8 +490,8 @@ module Google
         #     Required. A {::Google::Cloud::Filestore::V1::Backup backup resource}
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Mask of fields to update.  At least one path must be supplied in this
-        #     field.
+        #     Required. Mask of fields to update.  At least one path must be supplied in
+        #     this field.
         class UpdateBackupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -510,11 +510,11 @@ module Google
         # ListBackupsRequest lists backups.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The project and location for which to retrieve backup information,
-        #     in the format `projects/{project_number}/locations/{location}`.
-        #     In Cloud Filestore, backup locations map to GCP regions,
-        #     for example **us-west1**.
-        #     To retrieve backup information for all locations, use "-" for the
+        #     Required. The project and location for which to retrieve backup
+        #     information, in the format
+        #     `projects/{project_number}/locations/{location}`. In Cloud Filestore,
+        #     backup locations map to GCP regions, for example **us-west1**. To retrieve
+        #     backup information for all locations, use "-" for the
         #     `{location}` value.
         # @!attribute [rw] page_size
         #   @return [::Integer]
