@@ -341,7 +341,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :lazy, :mock_storage do
   def predefined_acl_update acl_role
     mock = Minitest::Mock.new
     mock.expect :patch_bucket,
-      Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket.name).to_json),
+      Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(name: bucket.name).to_json),
       patch_bucket_args(bucket_name, predefined_acl: acl_role)
 
     storage.service.mocked_service = mock

@@ -42,10 +42,10 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   let(:generation) { 1234567890 }
   let(:metageneration) { 6 }
   let :bucket_complete_hash do
-    h = random_bucket_hash bucket_name, bucket_url_root,
-                           bucket_location, bucket_storage_class, bucket_versioning,
-                           bucket_logging_bucket, bucket_logging_prefix, bucket_website_main,
-                           bucket_website_404, bucket_cors, bucket_requester_pays, bucket_lifecycle
+    h = random_bucket_hash name: bucket_name, url_root: bucket_url_root,
+                           location: bucket_location, storage_class: bucket_storage_class, versioning: bucket_versioning,
+                           logging_bucket: bucket_logging_bucket, logging_prefix: bucket_logging_prefix, website_main: bucket_website_main,
+                           website_404: bucket_website_404, cors: bucket_cors, requester_pays: bucket_requester_pays, lifecycle: bucket_lifecycle
     h[:labels] = bucket_labels
     h
   end
@@ -1246,9 +1246,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     new_url_root = "https://www.googleapis.com/storage/v2"
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket_name).to_json),
+    mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(name: bucket_name).to_json),
       get_bucket_args(bucket_name)
-    mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket_name, new_url_root).to_json),
+    mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(name: bucket_name, url_root: new_url_root).to_json),
       get_bucket_args(bucket_name)
 
     bucket.service.mocked_service = mock
@@ -1267,9 +1267,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     new_url_root = "https://www.googleapis.com/storage/v2"
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket_name).to_json),
+    mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(name: bucket_name).to_json),
       get_bucket_args(bucket_name, user_project: "test")
-    mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(bucket_name, new_url_root).to_json),
+    mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(name: bucket_name, url_root: new_url_root).to_json),
       get_bucket_args(bucket_name, user_project: "test")
 
     bucket_user_project.service.mocked_service = mock
