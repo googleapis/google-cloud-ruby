@@ -463,6 +463,10 @@ module Google
           #   @return [::String]
           #     If an {::Google::Cloud::Dialogflow::CX::V3::EventInput event} was provided as input, this field will contain
           #     the name of the event.
+          # @!attribute [rw] dtmf
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::DtmfInput]
+          #     If a [DTMF][DTMFInput] was provided as input, this field will contain
+          #     a copy of the [DTMFInput][].
           # @!attribute [rw] language_code
           #   @return [::String]
           #     The language that was triggered during intent detection.

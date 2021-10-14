@@ -39,12 +39,28 @@ module Google
               # Retrieves the specified [Version][google.cloud.dialogflow.cx.v3.Version].
               rpc :GetVersion, ::Google::Cloud::Dialogflow::CX::V3::GetVersionRequest, ::Google::Cloud::Dialogflow::CX::V3::Version
               # Creates a [Version][google.cloud.dialogflow.cx.v3.Version] in the specified [Flow][google.cloud.dialogflow.cx.v3.Flow].
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: [CreateVersionOperationMetadata][google.cloud.dialogflow.cx.v3.CreateVersionOperationMetadata]
+              # - `response`: [Version][google.cloud.dialogflow.cx.v3.Version]
               rpc :CreateVersion, ::Google::Cloud::Dialogflow::CX::V3::CreateVersionRequest, ::Google::Longrunning::Operation
               # Updates the specified [Version][google.cloud.dialogflow.cx.v3.Version].
               rpc :UpdateVersion, ::Google::Cloud::Dialogflow::CX::V3::UpdateVersionRequest, ::Google::Cloud::Dialogflow::CX::V3::Version
               # Deletes the specified [Version][google.cloud.dialogflow.cx.v3.Version].
               rpc :DeleteVersion, ::Google::Cloud::Dialogflow::CX::V3::DeleteVersionRequest, ::Google::Protobuf::Empty
               # Loads resources in the specified version to the draft flow.
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: An empty [Struct
+              #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+              # - `response`: An [Empty
+              #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
               rpc :LoadVersion, ::Google::Cloud::Dialogflow::CX::V3::LoadVersionRequest, ::Google::Longrunning::Operation
             end
 
