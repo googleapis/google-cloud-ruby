@@ -117,6 +117,51 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Information about a single stream that gets data inside the storage system.
+          # @!attribute [r] name
+          #   @return [::String]
+          #     Output only. Name of the stream, in the form
+          #     `projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}`.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::WriteStream::Type]
+          #     Immutable. Type of the stream.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Create time of the stream. For the _default stream, this is the
+          #     creation_time of the table.
+          # @!attribute [r] commit_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Commit time of the stream.
+          #     If a stream is of `COMMITTED` type, then it will have a commit_time same as
+          #     `create_time`. If the stream is of `PENDING` type, empty commit_time
+          #     means it is not committed.
+          # @!attribute [r] table_schema
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::TableSchema]
+          #     Output only. The schema of the destination table. It is only returned in
+          #     `CreateWriteStream` response. Caller should generate data that's
+          #     compatible with this schema to send in initial `AppendRowsRequest`.
+          #     The table schema could go out of date during the life time of the stream.
+          class WriteStream
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Type enum of the stream.
+            module Type
+              # Unknown type.
+              TYPE_UNSPECIFIED = 0
+
+              # Data will commit automatically and appear as soon as the write is
+              # acknowledged.
+              COMMITTED = 1
+
+              # Data is invisible until the stream is committed.
+              PENDING = 2
+
+              # Data is only visible up to the offset to which it was flushed.
+              BUFFERED = 3
+            end
+          end
+
           # Data format for input or output data.
           module DataFormat
             DATA_FORMAT_UNSPECIFIED = 0
