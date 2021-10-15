@@ -69,7 +69,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Estimated stream statistics for a given Stream.
+          # Estimated stream statistics for a given read Stream.
           # @!attribute [rw] progress
           #   @return [::Google::Cloud::Bigquery::Storage::V1::StreamStats::Progress]
           #     Represents the progress of the current stream.
@@ -161,6 +161,249 @@ module Google
           class SplitReadStreamResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for `CreateWriteStream`.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. Reference to the table to which the stream belongs, in the format
+          #     of `projects/{project}/datasets/{dataset}/tables/{table}`.
+          # @!attribute [rw] write_stream
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::WriteStream]
+          #     Required. Stream to be created.
+          class CreateWriteStreamRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for `AppendRows`.
+          #
+          # Due to the nature of AppendRows being a bidirectional streaming RPC, certain
+          # parts of the AppendRowsRequest need only be specified for the first request
+          # sent each time the gRPC network connection is opened/reopened.
+          # @!attribute [rw] write_stream
+          #   @return [::String]
+          #     Required. The write_stream identifies the target of the append operation, and only
+          #     needs to be specified as part of the first request on the gRPC connection.
+          #     If provided for subsequent requests, it must match the value of the first
+          #     request.
+          #
+          #     For explicitly created write streams, the format is:
+          #     `projects/{project}/datasets/{dataset}/tables/{table}/streams/{id}`
+          #
+          #     For the special default stream, the format is:
+          #     `projects/{project}/datasets/{dataset}/tables/{table}/_default`.
+          # @!attribute [rw] offset
+          #   @return [::Google::Protobuf::Int64Value]
+          #     If present, the write is only performed if the next append offset is same
+          #     as the provided value. If not present, the write is performed at the
+          #     current end of stream. Specifying a value for this field is not allowed
+          #     when calling AppendRows for the '_default' stream.
+          # @!attribute [rw] proto_rows
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest::ProtoData]
+          #     Rows in proto format.
+          # @!attribute [rw] trace_id
+          #   @return [::String]
+          #     Id set by client to annotate its identity. Only initial request setting is
+          #     respected.
+          class AppendRowsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # ProtoData contains the data rows and schema when constructing append
+            # requests.
+            # @!attribute [rw] writer_schema
+            #   @return [::Google::Cloud::Bigquery::Storage::V1::ProtoSchema]
+            #     Proto schema used to serialize the data.  This value only needs to be
+            #     provided as part of the first request on a gRPC network connection,
+            #     and will be ignored for subsequent requests on the connection.
+            # @!attribute [rw] rows
+            #   @return [::Google::Cloud::Bigquery::Storage::V1::ProtoRows]
+            #     Serialized row data in protobuf message format.
+            #     Currently, the backend expects the serialized rows to adhere to
+            #     proto2 semantics when appending rows, particularly with respect to
+            #     how default values are encoded.
+            class ProtoData
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Response message for `AppendRows`.
+          # @!attribute [rw] append_result
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::AppendRowsResponse::AppendResult]
+          #     Result if the append is successful.
+          # @!attribute [rw] error
+          #   @return [::Google::Rpc::Status]
+          #     Error returned when problems were encountered.  If present,
+          #     it indicates rows were not accepted into the system.
+          #     Users can retry or continue with other append requests within the
+          #     same connection.
+          #
+          #     Additional information about error signalling:
+          #
+          #     ALREADY_EXISTS: Happens when an append specified an offset, and the
+          #     backend already has received data at this offset.  Typically encountered
+          #     in retry scenarios, and can be ignored.
+          #
+          #     OUT_OF_RANGE: Returned when the specified offset in the stream is beyond
+          #     the current end of the stream.
+          #
+          #     INVALID_ARGUMENT: Indicates a malformed request or data.
+          #
+          #     ABORTED: Request processing is aborted because of prior failures.  The
+          #     request can be retried if previous failure is addressed.
+          #
+          #     INTERNAL: Indicates server side error(s) that can be retried.
+          # @!attribute [rw] updated_schema
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::TableSchema]
+          #     If backend detects a schema update, pass it to user so that user can
+          #     use it to input new type of message. It will be empty when no schema
+          #     updates have occurred.
+          class AppendRowsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # AppendResult is returned for successful append requests.
+            # @!attribute [rw] offset
+            #   @return [::Google::Protobuf::Int64Value]
+            #     The row offset at which the last append occurred. The offset will not be
+            #     set if appending using default streams.
+            class AppendResult
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Request message for `GetWriteStreamRequest`.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Name of the stream to get, in the form of
+          #     `projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}`.
+          class GetWriteStreamRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for `BatchCommitWriteStreams`.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. Parent table that all the streams should belong to, in the form of
+          #     `projects/{project}/datasets/{dataset}/tables/{table}`.
+          # @!attribute [rw] write_streams
+          #   @return [::Array<::String>]
+          #     Required. The group of streams that will be committed atomically.
+          class BatchCommitWriteStreamsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for `BatchCommitWriteStreams`.
+          # @!attribute [rw] commit_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which streams were committed in microseconds granularity.
+          #     This field will only exist when there are no stream errors.
+          #     **Note** if this field is not set, it means the commit was not successful.
+          # @!attribute [rw] stream_errors
+          #   @return [::Array<::Google::Cloud::Bigquery::Storage::V1::StorageError>]
+          #     Stream level error if commit failed. Only streams with error will be in
+          #     the list.
+          #     If empty, there is no error and all streams are committed successfully.
+          #     If non empty, certain streams have errors and ZERO stream is committed due
+          #     to atomicity guarantee.
+          class BatchCommitWriteStreamsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for invoking `FinalizeWriteStream`.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Name of the stream to finalize, in the form of
+          #     `projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}`.
+          class FinalizeWriteStreamRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for `FinalizeWriteStream`.
+          # @!attribute [rw] row_count
+          #   @return [::Integer]
+          #     Number of rows in the finalized stream.
+          class FinalizeWriteStreamResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for `FlushRows`.
+          # @!attribute [rw] write_stream
+          #   @return [::String]
+          #     Required. The stream that is the target of the flush operation.
+          # @!attribute [rw] offset
+          #   @return [::Google::Protobuf::Int64Value]
+          #     Ending offset of the flush operation. Rows before this offset(including
+          #     this offset) will be flushed.
+          class FlushRowsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Respond message for `FlushRows`.
+          # @!attribute [rw] offset
+          #   @return [::Integer]
+          #     The rows before this offset (including this offset) are flushed.
+          class FlushRowsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Structured custom BigQuery Storage error message. The error can be attached
+          # as error details in the returned rpc Status. In particular, the use of error
+          # codes allows more structured error handling, and reduces the need to evaluate
+          # unstructured error text strings.
+          # @!attribute [rw] code
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::StorageError::StorageErrorCode]
+          #     BigQuery Storage specific error code.
+          # @!attribute [rw] entity
+          #   @return [::String]
+          #     Name of the failed entity.
+          # @!attribute [rw] error_message
+          #   @return [::String]
+          #     Message that describes the error.
+          class StorageError
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Error code for `StorageError`.
+            module StorageErrorCode
+              # Default error.
+              STORAGE_ERROR_CODE_UNSPECIFIED = 0
+
+              # Table is not found in the system.
+              TABLE_NOT_FOUND = 1
+
+              # Stream is already committed.
+              STREAM_ALREADY_COMMITTED = 2
+
+              # Stream is not found.
+              STREAM_NOT_FOUND = 3
+
+              # Invalid Stream type.
+              # For example, you try to commit a stream that is not pending.
+              INVALID_STREAM_TYPE = 4
+
+              # Invalid Stream state.
+              # For example, you try to commit a stream that is not finalized or is
+              # garbaged.
+              INVALID_STREAM_STATE = 5
+
+              # Stream is finalized.
+              STREAM_FINALIZED = 6
+
+              # There is a schema mismatch and it is caused by user schema has extra
+              # field than bigquery schema.
+              SCHEMA_MISMATCH_EXTRA_FIELDS = 7
+            end
           end
         end
       end
