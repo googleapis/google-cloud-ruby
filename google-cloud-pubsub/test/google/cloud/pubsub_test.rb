@@ -136,7 +136,7 @@ describe Google::Cloud do
       Google::Cloud.configure.reset!
     end
 
-    it "gets defaults for project_id and keyfile" do
+    it "gets defaults for project_id and credentials" do
       # Clear all environment variables
       ENV.stub :[], nil do
         # Get project_id from Google Compute Engine
@@ -151,7 +151,7 @@ describe Google::Cloud do
       end
     end
 
-    it "uses provided project_id and keyfile" do
+    it "uses provided project_id and credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"
         _(scope).must_equal default_scopes
@@ -226,6 +226,29 @@ describe Google::Cloud do
             _(pubsub.project).must_equal "project-id"
             _(pubsub.service.credentials).must_equal :this_channel_is_insecure
             _(pubsub.service.host).must_equal emulator_host
+          end
+        end
+      end
+    end
+
+    it "allows timeout to be set" do
+      timeout = 123
+
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
+        _(project).must_equal "project-id"
+        _(credentials).must_equal default_credentials
+        _(timeout).must_equal timeout
+        _(host).must_equal default_host
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Get project_id from Google Compute Engine
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          Google::Cloud::PubSub::Credentials.stub :default, default_credentials do
+            Google::Cloud::PubSub::Service.stub :new, stubbed_service do
+              pubsub = Google::Cloud::PubSub.new timeout: timeout
+            end
           end
         end
       end
