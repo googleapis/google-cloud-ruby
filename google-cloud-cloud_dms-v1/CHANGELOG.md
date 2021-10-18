@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.1.3 / 2021-10-18
+
+#### Documentation
+
+* Minor clarification to the NOT_STARTED state documentation
+
 ### 0.1.2 / 2021-08-11
 
 #### Bug Fixes
