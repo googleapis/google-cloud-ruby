@@ -27,7 +27,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. The resource name for the namespace in the format
-        #     'projects/*/locations/*/namespaces/*'.
+        #     `projects/*/locations/*/namespaces/*`.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Resource labels associated with this Namespace.
