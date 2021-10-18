@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.3 / 2021-10-18
+
+#### Documentation
+
+* Recommend use of the analyze_content call over detect_intent
+
 ### 0.11.2 / 2021-09-07
 
 #### Documentation
