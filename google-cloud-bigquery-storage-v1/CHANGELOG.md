@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 / 2021-10-18
+
+#### Features
+
+* Support for the BigQuery Write service
+
 ### 0.7.0 / 2021-09-23
 
 #### Features
