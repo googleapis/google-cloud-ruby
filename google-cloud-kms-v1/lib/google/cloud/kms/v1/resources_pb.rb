@@ -76,6 +76,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :RSA_SIGN_PKCS1_3072_SHA256, 6
       value :RSA_SIGN_PKCS1_4096_SHA256, 7
       value :RSA_SIGN_PKCS1_4096_SHA512, 16
+      value :RSA_SIGN_RAW_PKCS1_2048, 28
+      value :RSA_SIGN_RAW_PKCS1_3072, 29
+      value :RSA_SIGN_RAW_PKCS1_4096, 30
       value :RSA_DECRYPT_OAEP_2048_SHA256, 8
       value :RSA_DECRYPT_OAEP_3072_SHA256, 9
       value :RSA_DECRYPT_OAEP_4096_SHA256, 10
