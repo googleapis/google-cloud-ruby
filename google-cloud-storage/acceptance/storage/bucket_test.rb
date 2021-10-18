@@ -240,4 +240,24 @@ describe Google::Cloud::Storage::Bucket, :storage do
       expect { anonymous_storage.create_bucket bucket_name }.must_raise Google::Cloud::UnauthenticatedError
     end
   end
+
+  it "creates new bucket with rpo ASYNC_TURBO then sets rpo to DEFAULT" do
+    single_use_bucket_name = "single_use_#{bucket_name}"
+
+    _(storage.bucket(single_use_bucket_name)).must_be :nil?
+
+    single_use_bucket = safe_gcs_execute { storage.create_bucket single_use_bucket_name, user_project: true, rpo: "ASYNC_TURBO", location_type: "dual-region" }
+
+    _(single_use_bucket.rpo).must_equal "ASYNC_TURBO"
+
+    single_use_bucket.update do |b|
+      b.rpo = :DEFAULT
+    end
+    _(single_use_bucket.rpo).must_equal "DEFAULT"
+
+    single_use_bucket.files.all &:delete
+    safe_gcs_execute { single_use_bucket.delete }
+
+    _(storage.bucket(single_use_bucket_name)).must_be :nil?
+  end
 end

@@ -1036,6 +1036,62 @@ module Google
         alias public_access_prevention_unspecified? public_access_prevention_inherited?
 
         ##
+        # Recovery Point Objective (RPO) is another metdata of a bucket, it measures how long it takes for a set of
+        # updates to be asynchronously copied to the other region.
+        # Currently, `DEFAULT` and `ASYNC_TURBO` are supported. When set to `ASYNC_TURBO`, Turbo Replication is enabled
+        # for a bucket. `DEFAULT` is used to reset rpo on an existing bucket with rpo set to `ASYNC_TURBO`.
+        # This value can be modified by calling {#rpo=}.
+        #
+        # @return [String, nil] Currently, `DEFAULT` and `ASYNC_TURBO` are supported. Returns `nil` if the bucket has
+        #    no RPO.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.rpo = :DEFAULT
+        #   bucket.rpo #=> "DEFAULT"
+        #
+        def rpo
+          @gapi.rpo
+        end
+
+        ##
+        # Sets the value for Recovery Point Objective (RPO) in the bucket. This value can be queried by calling {#rpo}.
+        #
+        # @param [Symbol, String] new_rpo The bucket's new Recovery Point Objective metadata.
+        #   Currently, `DEFAULT` and `ASYNC_TURBO` are supported. When set to `ASYNC_TURBO`, Turbo Replication
+        #   is enabled for a bucket.
+        #
+        # @example Set RPO to DEFAULT:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.rpo = :DEFAULT
+        #   bucket.rpo #=> "DEFAULT"
+        #
+        # @example Set RPO to ASYNC_TURBO:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.rpo = :ASYNC_TURBO
+        #   bucket.rpo #=> "ASYNC_TURBO"
+        #
+        def rpo= new_rpo
+          @gapi.rpo = new_rpo.to_s
+          patch_gapi! :rpo
+        end
+
+        ##
         # Updates the bucket with changes made in the given block in a single
         # PATCH request. The following attributes may be set: {#cors},
         # {#logging_bucket=}, {#logging_prefix=}, {#versioning=},

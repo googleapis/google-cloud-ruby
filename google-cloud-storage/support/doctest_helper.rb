@@ -422,6 +422,28 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Storage::Bucket#rpo" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, bucket_gapi("my-bucket"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+      mock.expect :patch_bucket, bucket_gapi("my-bucket"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+    end
+  end  
+
+  doctest.before "Google::Cloud::Storage::Bucket#rpo=@Set RPO to DEFAULT:" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, bucket_gapi("my-bucket", rpo: "DEFAULT"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::Bucket#rpo=@Set RPO to ASYNC_TURBO:" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
+      mock.expect :patch_bucket, bucket_gapi("my-bucket", rpo: "ASYNC_TURBO"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Storage::Bucket#uniform_bucket_level_access" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
@@ -1244,8 +1266,8 @@ end
 
 # Fixture helpers
 
-def bucket_gapi name = "my-bucket", public_access_prevention: "enforced"
-  Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name: name, public_access_prevention: public_access_prevention).to_json
+def bucket_gapi name = "my-bucket", public_access_prevention: "enforced", rpo: "DEFAULT"
+  Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name: name, public_access_prevention: public_access_prevention, rpo: rpo).to_json
 end
 
 def list_buckets_gapi count = 2, token = nil
@@ -1282,7 +1304,8 @@ def random_bucket_hash name: "my-bucket",
                        logging_prefix: nil,
                        website_main: nil,
                        website_404: nil,
-                       public_access_prevention: nil
+                       public_access_prevention: nil,
+                       rpo: "DEFAULT"
   versioning_config = { "enabled" => versioning } if versioning
   iam_configuration = { "publicAccessPrevention" => public_access_prevention } if public_access_prevention
   { "kind" => "storage#bucket",
@@ -1302,6 +1325,7 @@ def random_bucket_hash name: "my-bucket",
     "website" => website_hash(website_main, website_404),
     "encryption" => { "defaultKmsKeyName" => kms_key_name },
     "iamConfiguration" => iam_configuration,
+    "rpo" => rpo,
     "etag" => "CAE=" }.delete_if { |_, v| v.nil? }
 end
 
