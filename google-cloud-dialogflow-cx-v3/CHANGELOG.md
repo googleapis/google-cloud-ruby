@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.0 / 2021-10-18
+
+#### Features
+
+* Support for the deployment API
+
 ### 0.1.1 / 2021-08-30
 
 #### Documentation
