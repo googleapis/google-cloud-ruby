@@ -51,7 +51,7 @@ module Google
           return mocked_subscriber if mocked_subscriber
           @subscriber ||= V1::Subscriber::Client.new do |config|
             config.credentials = credentials if credentials
-            config.timeout = timeout if timeout
+            override_client_config_timeouts config if timeout
             config.endpoint = host if host
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::PubSub::VERSION
@@ -64,7 +64,7 @@ module Google
           return mocked_publisher if mocked_publisher
           @publisher ||= V1::Publisher::Client.new do |config|
             config.credentials = credentials if credentials
-            config.timeout = timeout if timeout
+            override_client_config_timeouts config if timeout
             config.endpoint = host if host
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::PubSub::VERSION
@@ -77,7 +77,7 @@ module Google
           return mocked_iam if mocked_iam
           @iam ||= V1::IAMPolicy::Client.new do |config|
             config.credentials = credentials if credentials
-            config.timeout = timeout if timeout
+            override_client_config_timeouts config if timeout
             config.endpoint = host if host
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::PubSub::VERSION
@@ -90,7 +90,7 @@ module Google
           return mocked_schemas if mocked_schemas
           @schemas ||= V1::SchemaService::Client.new do |config|
             config.credentials = credentials if credentials
-            config.timeout = timeout if timeout
+            override_client_config_timeouts config if timeout
             config.endpoint = host if host
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::PubSub::VERSION
@@ -460,6 +460,18 @@ module Google
         end
 
         protected
+
+        # Set the timeout in the client config.
+        # Override the default timeout in each individual RPC config as well, since when they are non-nil, these
+        # defaults have precedence over the top-level config.timeout. See Gapic::CallOptions#apply_defaults.
+        def override_client_config_timeouts config
+          config.timeout = timeout
+          rpc_names = config.rpcs.methods - Object.methods
+          rpc_names.each do |rpc_name|
+            rpc = config.rpcs.send rpc_name
+            rpc.timeout = timeout if rpc.respond_to? :timeout=
+          end
+        end
 
         def a_time? obj
           return false unless obj.respond_to? :to_time

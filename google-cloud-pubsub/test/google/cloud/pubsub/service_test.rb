@@ -21,6 +21,8 @@ describe Google::Cloud::PubSub::Service do
   let(:timeout) { 123 }
   let(:endpoint) { "pubsub.googleapis.com" }
   let(:endpoint_2) { "localhost:4567" }
+
+  # Values below are hardcoded in Service.
   let(:lib_name) { "gccl" }
   let(:lib_version) { Google::Cloud::PubSub::VERSION }
   let(:metadata) { { "google-cloud-resource-prefix": "projects/#{project}" } }
@@ -80,7 +82,7 @@ describe Google::Cloud::PubSub::Service do
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
           _(config.metadata).must_equal metadata
-          assert_config_rpcs_equals subscriber_default_config.rpcs, 16, config.rpcs
+          assert_config_rpcs_equals subscriber_default_config.rpcs, 16, config.rpcs, timeout: timeout
         end
       end
     end
@@ -120,7 +122,7 @@ describe Google::Cloud::PubSub::Service do
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
           _(config.metadata).must_equal metadata
-          assert_config_rpcs_equals publisher_default_config.rpcs, 9, config.rpcs
+          assert_config_rpcs_equals publisher_default_config.rpcs, 9, config.rpcs, timeout: timeout
         end
       end
     end
@@ -160,7 +162,7 @@ describe Google::Cloud::PubSub::Service do
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
           _(config.metadata).must_equal metadata
-          assert_config_rpcs_equals iam_policy_default_config.rpcs, 3, config.rpcs
+          assert_config_rpcs_equals iam_policy_default_config.rpcs, 3, config.rpcs, timeout: timeout
         end
       end
     end
@@ -200,13 +202,14 @@ describe Google::Cloud::PubSub::Service do
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
           _(config.metadata).must_equal metadata
-          assert_config_rpcs_equals schema_service_default_config.rpcs, 6, config.rpcs
+          assert_config_rpcs_equals schema_service_default_config.rpcs, 6, config.rpcs, timeout: timeout
         end
       end
     end
   end
 
-  def assert_config_rpcs_equals expected_rpcs, expected_rpcs_count, actual_rpcs
+  # @param [Numeric, nil] timeout Expected non-default timeout.
+  def assert_config_rpcs_equals expected_rpcs, expected_rpcs_count, actual_rpcs, timeout: nil
     expected_rpc_names = expected_rpcs.methods - Object.methods
     # Explicit sanity check of the number of expected rpcs
     _(expected_rpc_names.count).must_equal expected_rpcs_count
@@ -214,7 +217,8 @@ describe Google::Cloud::PubSub::Service do
     expected_rpc_names.each do |rpc_name|
       expected = expected_rpcs.send rpc_name
       actual = actual_rpcs.send rpc_name
-      assert_equal expected.timeout, actual.timeout, "Unexpected timeout for #{rpc_name}" if expected.timeout
+      expected_timeout = timeout || expected.timeout
+      assert_equal expected_timeout, actual.timeout, "Unexpected timeout for #{rpc_name}" if expected_timeout
       if expected.retry_policy
         assert_equal expected.retry_policy[:initial_delay],
                      actual.retry_policy[:initial_delay],
