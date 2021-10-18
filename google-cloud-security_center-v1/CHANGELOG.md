@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 / 2021-10-18
+
+#### Features
+
+* Added vulnerability fields to findings
+
 ### 0.8.1 / 2021-08-11
 
 #### Bug Fixes
