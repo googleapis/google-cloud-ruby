@@ -290,7 +290,7 @@ module Google
         #     {::Google::Cloud::Retail::V2::Product#name Product.name} is not found, the
         #     inventory update will still be processed and retained for at most 1 day
         #     until the {::Google::Cloud::Retail::V2::Product Product} is created. If set to
-        #     false, an INVALID_ARGUMENT error is returned if the
+        #     false, a NOT_FOUND error is returned if the
         #     {::Google::Cloud::Retail::V2::Product Product} is not found.
         class SetInventoryRequest
           include ::Google::Protobuf::MessageExts
@@ -371,8 +371,8 @@ module Google
         #     If set to true, and the {::Google::Cloud::Retail::V2::Product Product} is not
         #     found, the fulfillment information will still be processed and retained for
         #     at most 1 day and processed once the
-        #     {::Google::Cloud::Retail::V2::Product Product} is created. If set to false, an
-        #     INVALID_ARGUMENT error is returned if the
+        #     {::Google::Cloud::Retail::V2::Product Product} is created. If set to false, a
+        #     NOT_FOUND error is returned if the
         #     {::Google::Cloud::Retail::V2::Product Product} is not found.
         class AddFulfillmentPlacesRequest
           include ::Google::Protobuf::MessageExts
@@ -387,7 +387,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response of the RemoveFulfillmentPlacesRequest.  Currently empty because
+        # Response of the AddFulfillmentPlacesRequest.  Currently empty because
         # there is no meaningful response populated from the [AddFulfillmentPlaces][]
         # method.
         class AddFulfillmentPlacesResponse
@@ -448,8 +448,8 @@ module Google
         #     If set to true, and the {::Google::Cloud::Retail::V2::Product Product} is not
         #     found, the fulfillment information will still be processed and retained for
         #     at most 1 day and processed once the
-        #     {::Google::Cloud::Retail::V2::Product Product} is created. If set to false, an
-        #     INVALID_ARGUMENT error is returned if the
+        #     {::Google::Cloud::Retail::V2::Product Product} is created. If set to false, a
+        #     NOT_FOUND error is returned if the
         #     {::Google::Cloud::Retail::V2::Product Product} is not found.
         class RemoveFulfillmentPlacesRequest
           include ::Google::Protobuf::MessageExts
