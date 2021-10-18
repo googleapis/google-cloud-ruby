@@ -2029,7 +2029,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload asymmetric_sign(name: nil, digest: nil, digest_crc32c: nil)
+            # @overload asymmetric_sign(name: nil, digest: nil, digest_crc32c: nil, data: nil, data_crc32c: nil)
             #   Pass arguments to `asymmetric_sign` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2037,7 +2037,7 @@ module Google
             #   @param name [::String]
             #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for signing.
             #   @param digest [::Google::Cloud::Kms::V1::Digest, ::Hash]
-            #     Required. The digest of the data to sign. The digest must be produced with
+            #     Optional. The digest of the data to sign. The digest must be produced with
             #     the same digest algorithm as specified by the key version's
             #     {::Google::Cloud::Kms::V1::CryptoKeyVersion#algorithm algorithm}.
             #   @param digest_crc32c [::Google::Protobuf::Int64Value, ::Hash]
@@ -2048,6 +2048,24 @@ module Google
             #     fails. If you receive a checksum error, your client should verify that
             #     CRC32C({::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest AsymmetricSignRequest.digest}) is equal to
             #     {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest_crc32c AsymmetricSignRequest.digest_crc32c}, and if so, perform a limited
+            #     number of retries. A persistent mismatch may indicate an issue in your
+            #     computation of the CRC32C checksum.
+            #     Note: This field is defined as int64 for reasons of compatibility across
+            #     different languages. However, it is a non-negative integer, which will
+            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+            #     that support this type.
+            #   @param data [::String]
+            #     Optional. This field will only be honored for RAW_PKCS1 keys.
+            #     The data to sign. A digest is computed over the data that will be signed,
+            #     PKCS #1 padding is applied to the digest directly and then encrypted.
+            #   @param data_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+            #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::AsymmetricSignRequest#data AsymmetricSignRequest.data}. If
+            #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+            #     received {::Google::Cloud::Kms::V1::AsymmetricSignRequest#data AsymmetricSignRequest.data} using this checksum.
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+            #     fails. If you receive a checksum error, your client should verify that
+            #     CRC32C({::Google::Cloud::Kms::V1::AsymmetricSignRequest#data AsymmetricSignRequest.data}) is equal to
+            #     {::Google::Cloud::Kms::V1::AsymmetricSignRequest#data_crc32c AsymmetricSignRequest.data_crc32c}, and if so, perform a limited
             #     number of retries. A persistent mismatch may indicate an issue in your
             #     computation of the CRC32C checksum.
             #     Note: This field is defined as int64 for reasons of compatibility across

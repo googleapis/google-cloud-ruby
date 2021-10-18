@@ -142,6 +142,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :digest, :message, 3, "google.cloud.kms.v1.Digest"
       optional :digest_crc32c, :message, 4, "google.protobuf.Int64Value"
+      optional :data, :bytes, 6
+      optional :data_crc32c, :message, 7, "google.protobuf.Int64Value"
     end
     add_message "google.cloud.kms.v1.AsymmetricDecryptRequest" do
       optional :name, :string, 1
@@ -184,6 +186,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :signature_crc32c, :message, 2, "google.protobuf.Int64Value"
       optional :verified_digest_crc32c, :bool, 3
       optional :name, :string, 4
+      optional :verified_data_crc32c, :bool, 5
       optional :protection_level, :enum, 6, "google.cloud.kms.v1.ProtectionLevel"
     end
     add_message "google.cloud.kms.v1.AsymmetricDecryptResponse" do

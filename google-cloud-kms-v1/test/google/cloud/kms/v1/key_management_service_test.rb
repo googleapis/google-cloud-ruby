@@ -1379,6 +1379,8 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     name = "hello world"
     digest = {}
     digest_crc32c = {}
+    data = "hello world"
+    data_crc32c = {}
 
     asymmetric_sign_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :asymmetric_sign, name
@@ -1386,6 +1388,8 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       assert_equal "hello world", request["name"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::Digest), request["digest"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request["digest_crc32c"]
+      assert_equal "hello world", request["data"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request["data_crc32c"]
       refute_nil options
     end
 
@@ -1396,31 +1400,31 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.asymmetric_sign({ name: name, digest: digest, digest_crc32c: digest_crc32c }) do |response, operation|
+      client.asymmetric_sign({ name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.asymmetric_sign name: name, digest: digest, digest_crc32c: digest_crc32c do |response, operation|
+      client.asymmetric_sign name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.asymmetric_sign ::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c) do |response, operation|
+      client.asymmetric_sign ::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.asymmetric_sign({ name: name, digest: digest, digest_crc32c: digest_crc32c }, grpc_options) do |response, operation|
+      client.asymmetric_sign({ name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.asymmetric_sign(::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c), grpc_options) do |response, operation|
+      client.asymmetric_sign(::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
