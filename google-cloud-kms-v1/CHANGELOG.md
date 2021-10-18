@@ -1,5 +1,12 @@
 # Release History
 
+### 0.9.0 / 2021-10-18
+
+#### Features
+
+* Added OAEP+SHA1 to the list of supported algorithms
+* Support RSA encrypt with SHA-1 digest
+
 ### 0.8.0 / 2021-09-02
 
 #### Features
