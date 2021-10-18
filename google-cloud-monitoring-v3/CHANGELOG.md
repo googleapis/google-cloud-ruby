@@ -1,5 +1,15 @@
 # Release History
 
+### 0.6.0 / 2021-10-18
+
+#### Features
+
+* Support create_service_time_series RPC
+
+#### Documentation
+
+* Fix several broken links
+
 ### 0.5.0 / 2021-08-30
 
 #### Features
