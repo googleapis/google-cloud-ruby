@@ -14,29 +14,29 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::External::ParquetSource do
-  let(:source_uri) { "gs://my-bucket/path/to/file.parquet" }
-  let(:source_format) { "PARQUET" }
+describe Google::Cloud::Bigquery::External::AvroSource do
+  let(:source_uri) { "gs://my-bucket/path/to/*.avro" }
+  let(:source_format) { "AVRO" }
 
-  it "can be used for PARQUET" do
-    table = Google::Cloud::Bigquery::External::ParquetSource.new.tap do |e|
+  it "can be used for AVRO" do
+    table = Google::Cloud::Bigquery::External::AvroSource.new.tap do |e|
       e.gapi.source_uris = [source_uri]
       e.gapi.source_format = source_format
     end
     table_gapi = Google::Apis::BigqueryV2::ExternalDataConfiguration.new(
       source_uris: [source_uri],
       source_format: source_format,
-      parquet_options: Google::Apis::BigqueryV2::ParquetOptions.new
+      avro_options: Google::Apis::BigqueryV2::AvroOptions.new
     )
 
     _(table).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
     _(table.urls).must_equal [source_uri]
-    _(table).must_be :parquet?
+    _(table).must_be :avro?
     _(table.format).must_equal source_format
 
     _(table).wont_be :csv?
     _(table).wont_be :json?
-    _(table).wont_be :avro?
+    _(table).wont_be :parquet?
     _(table).wont_be :backup?
     _(table).wont_be :bigtable?
     _(table).wont_be :sheets?
@@ -44,46 +44,24 @@ describe Google::Cloud::Bigquery::External::ParquetSource do
     _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
-  it "sets enable_list_inference" do
-    table = Google::Cloud::Bigquery::External::ParquetSource.new.tap do |e|
+  it "sets use_avro_logical_types" do
+    table = Google::Cloud::Bigquery::External::AvroSource.new.tap do |e|
       e.gapi.source_uris = [source_uri]
       e.gapi.source_format = source_format
     end
     table_gapi = Google::Apis::BigqueryV2::ExternalDataConfiguration.new(
       source_uris: [source_uri],
       source_format: source_format,
-      parquet_options: Google::Apis::BigqueryV2::ParquetOptions.new(
-        enable_list_inference: true
+      avro_options: Google::Apis::BigqueryV2::AvroOptions.new(
+        use_avro_logical_types: true
       )
     )
 
-    _(table.enable_list_inference).must_be :nil?
+    _(table.use_avro_logical_types).must_be :nil?
 
-    table.enable_list_inference = true
+    table.use_avro_logical_types = true
 
-    _(table.enable_list_inference).must_equal true
-
-    _(table.to_gapi.to_h).must_equal table_gapi.to_h
-  end
-
-  it "sets enum_as_string" do
-    table = Google::Cloud::Bigquery::External::ParquetSource.new.tap do |e|
-      e.gapi.source_uris = [source_uri]
-      e.gapi.source_format = source_format
-    end
-    table_gapi = Google::Apis::BigqueryV2::ExternalDataConfiguration.new(
-      source_uris: [source_uri],
-      source_format: source_format,
-      parquet_options: Google::Apis::BigqueryV2::ParquetOptions.new(
-        enum_as_string: true
-      )
-    )
-
-    _(table.enum_as_string).must_be :nil?
-
-    table.enum_as_string = true
-
-    _(table.enum_as_string).must_equal true
+    _(table.use_avro_logical_types).must_equal true
 
     _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
