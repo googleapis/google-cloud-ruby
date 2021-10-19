@@ -56,6 +56,35 @@ module Google
             # domain was not registered successfully, and you can safely delete the
             # resource and retry registration.
             rpc :RegisterDomain, ::Google::Cloud::Domains::V1beta1::RegisterDomainRequest, ::Google::Longrunning::Operation
+            # Gets parameters needed to transfer a domain name from another registrar to
+            # Cloud Domains. For domains managed by Google Domains, transferring to Cloud
+            # Domains is not supported.
+            #
+            #
+            # Use the returned values to call `TransferDomain`.
+            rpc :RetrieveTransferParameters, ::Google::Cloud::Domains::V1beta1::RetrieveTransferParametersRequest, ::Google::Cloud::Domains::V1beta1::RetrieveTransferParametersResponse
+            # Transfers a domain name from another registrar to Cloud Domains.  For
+            # domains managed by Google Domains, transferring to Cloud Domains is not
+            # supported.
+            #
+            #
+            # Before calling this method, go to the domain's current registrar to unlock
+            # the domain for transfer and retrieve the domain's transfer authorization
+            # code. Then call `RetrieveTransferParameters` to confirm that the domain is
+            # unlocked and to get values needed to build a call to this method.
+            #
+            # A successful call creates a `Registration` resource in state
+            # `TRANSFER_PENDING`. It can take several days to complete the transfer
+            # process. The registrant can often speed up this process by approving the
+            # transfer through the current registrar, either by clicking a link in an
+            # email from the registrar or by visiting the registrar's website.
+            #
+            # A few minutes after transfer approval, the resource transitions to state
+            # `ACTIVE`, indicating that the transfer was successful. If the transfer is
+            # rejected or the request expires without being approved, the resource can
+            # end up in state `TRANSFER_FAILED`. If transfer fails, you can safely delete
+            # the resource and retry the transfer.
+            rpc :TransferDomain, ::Google::Cloud::Domains::V1beta1::TransferDomainRequest, ::Google::Longrunning::Operation
             # Lists the `Registration` resources in a project.
             rpc :ListRegistrations, ::Google::Cloud::Domains::V1beta1::ListRegistrationsRequest, ::Google::Cloud::Domains::V1beta1::ListRegistrationsResponse
             # Gets the details of a `Registration` resource.
@@ -74,27 +103,35 @@ module Google
             # Updates a `Registration`'s contact settings. Some changes require
             # confirmation by the domain's registrant contact .
             rpc :ConfigureContactSettings, ::Google::Cloud::Domains::V1beta1::ConfigureContactSettingsRequest, ::Google::Longrunning::Operation
-            # Exports a `Registration` that you no longer want to use with
-            # Cloud Domains. You can continue to use the domain in
-            # [Google Domains](https://domains.google/) until it expires.
+            # Exports a `Registration` resource, such that it is no longer managed by
+            # Cloud Domains.
             #
-            # If the export is successful:
-            #
-            # * The resource's `state` becomes `EXPORTED`, meaning that it is no longer
-            # managed by Cloud Domains
-            # * Because individual users can own domains in Google Domains, the calling
-            # user becomes the domain's sole owner. Permissions for the domain are
-            # subsequently managed in Google Domains.
-            # * Without further action, the domain does not renew automatically.
-            # The new owner can set up billing in Google Domains to renew the domain
-            # if needed.
+            # When an active domain is successfully exported, you can continue to use the
+            # domain in [Google Domains](https://domains.google/) until it expires. The
+            # calling user becomes the domain's sole owner in Google Domains, and
+            # permissions for the domain are subsequently managed there. The domain does
+            # not renew automatically unless the new owner sets up billing in Google
+            # Domains.
             rpc :ExportRegistration, ::Google::Cloud::Domains::V1beta1::ExportRegistrationRequest, ::Google::Longrunning::Operation
             # Deletes a `Registration` resource.
             #
-            # This method only works on resources in one of the following states:
+            # This method works on any `Registration` resource using [Subscription or
+            # Commitment billing](/domains/pricing#billing-models), provided that the
+            # resource was created at least 1 day in the past.
+            #
+            # For `Registration` resources using
+            # [Monthly billing](/domains/pricing#billing-models), this method works if:
             #
             # * `state` is `EXPORTED` with `expire_time` in the past
             # * `state` is `REGISTRATION_FAILED`
+            # * `state` is `TRANSFER_FAILED`
+            #
+            # When an active registration is successfully deleted, you can continue to
+            # use the domain in [Google Domains](https://domains.google/) until it
+            # expires. The calling user becomes the domain's sole owner in Google
+            # Domains, and permissions for the domain are subsequently managed there. The
+            # domain does not renew automatically unless the new owner sets up billing in
+            # Google Domains.
             rpc :DeleteRegistration, ::Google::Cloud::Domains::V1beta1::DeleteRegistrationRequest, ::Google::Longrunning::Operation
             # Gets the authorization code of the `Registration` for the purpose of
             # transferring the domain to another registrar.
