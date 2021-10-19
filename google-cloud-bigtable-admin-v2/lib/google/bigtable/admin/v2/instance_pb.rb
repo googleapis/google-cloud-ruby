@@ -4,6 +4,8 @@
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/bigtable/admin/v2/common_pb'
+require 'google/protobuf/timestamp_pb'
+require 'google/api/annotations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -14,6 +16,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :state, :enum, 3, "google.bigtable.admin.v2.Instance.State"
       optional :type, :enum, 4, "google.bigtable.admin.v2.Instance.Type"
       map :labels, :string, :string, 5
+      optional :create_time, :message, 7, "google.protobuf.Timestamp"
     end
     add_enum "google.bigtable.admin.v2.Instance.State" do
       value :STATE_NOT_KNOWN, 0
