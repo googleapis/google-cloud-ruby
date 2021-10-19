@@ -121,8 +121,6 @@ module Google
       #   parameter `keyfile` is considered deprecated, but may also be used.)
       # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
-      # * `retries` - (Integer) Number of times to retry requests on server
-      #   error.
       # * `timeout` - (Integer) Default timeout to use in requests.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.
