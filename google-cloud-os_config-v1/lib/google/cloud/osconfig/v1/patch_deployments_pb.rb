@@ -48,6 +48,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :FREQUENCY_UNSPECIFIED, 0
       value :WEEKLY, 1
       value :MONTHLY, 2
+      value :DAILY, 3
     end
     add_message "google.cloud.osconfig.v1.WeeklySchedule" do
       optional :day_of_week, :enum, 1, "google.type.DayOfWeek"
