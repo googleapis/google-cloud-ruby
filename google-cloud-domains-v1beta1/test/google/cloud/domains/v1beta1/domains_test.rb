@@ -240,6 +240,139 @@ class ::Google::Cloud::Domains::V1beta1::Domains::ClientTest < Minitest::Test
     end
   end
 
+  def test_retrieve_transfer_parameters
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Domains::V1beta1::RetrieveTransferParametersResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    domain_name = "hello world"
+    location = "hello world"
+
+    retrieve_transfer_parameters_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :retrieve_transfer_parameters, name
+      assert_kind_of ::Google::Cloud::Domains::V1beta1::RetrieveTransferParametersRequest, request
+      assert_equal "hello world", request["domain_name"]
+      assert_equal "hello world", request["location"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, retrieve_transfer_parameters_client_stub do
+      # Create client
+      client = ::Google::Cloud::Domains::V1beta1::Domains::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.retrieve_transfer_parameters({ domain_name: domain_name, location: location }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.retrieve_transfer_parameters domain_name: domain_name, location: location do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.retrieve_transfer_parameters ::Google::Cloud::Domains::V1beta1::RetrieveTransferParametersRequest.new(domain_name: domain_name, location: location) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.retrieve_transfer_parameters({ domain_name: domain_name, location: location }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.retrieve_transfer_parameters(::Google::Cloud::Domains::V1beta1::RetrieveTransferParametersRequest.new(domain_name: domain_name, location: location), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, retrieve_transfer_parameters_client_stub.call_rpc_count
+    end
+  end
+
+  def test_transfer_domain
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    registration = {}
+    contact_notices = [:CONTACT_NOTICE_UNSPECIFIED]
+    yearly_price = {}
+    authorization_code = {}
+    validate_only = true
+
+    transfer_domain_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :transfer_domain, name
+      assert_kind_of ::Google::Cloud::Domains::V1beta1::TransferDomainRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Domains::V1beta1::Registration), request["registration"]
+      assert_equal [:CONTACT_NOTICE_UNSPECIFIED], request["contact_notices"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Type::Money), request["yearly_price"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Domains::V1beta1::AuthorizationCode), request["authorization_code"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, transfer_domain_client_stub do
+      # Create client
+      client = ::Google::Cloud::Domains::V1beta1::Domains::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.transfer_domain({ parent: parent, registration: registration, contact_notices: contact_notices, yearly_price: yearly_price, authorization_code: authorization_code, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.transfer_domain parent: parent, registration: registration, contact_notices: contact_notices, yearly_price: yearly_price, authorization_code: authorization_code, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.transfer_domain ::Google::Cloud::Domains::V1beta1::TransferDomainRequest.new(parent: parent, registration: registration, contact_notices: contact_notices, yearly_price: yearly_price, authorization_code: authorization_code, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.transfer_domain({ parent: parent, registration: registration, contact_notices: contact_notices, yearly_price: yearly_price, authorization_code: authorization_code, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.transfer_domain(::Google::Cloud::Domains::V1beta1::TransferDomainRequest.new(parent: parent, registration: registration, contact_notices: contact_notices, yearly_price: yearly_price, authorization_code: authorization_code, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, transfer_domain_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_registrations
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Domains::V1beta1::ListRegistrationsResponse.new

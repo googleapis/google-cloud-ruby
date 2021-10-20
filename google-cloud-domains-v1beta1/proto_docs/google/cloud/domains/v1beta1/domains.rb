@@ -24,12 +24,19 @@ module Google
         # The `Registration` resource facilitates managing and configuring domain name
         # registrations.
         #
+        # There are several ways to create a new `Registration` resource:
         #
         # To create a new `Registration` resource, find a suitable domain name by
         # calling the `SearchDomains` method with a query to see available domain name
         # options. After choosing a name, call `RetrieveRegisterParameters` to
         # ensure availability and obtain information like pricing, which is needed to
         # build a call to `RegisterDomain`.
+        #
+        # Another way to create a new `Registration` is to transfer an existing
+        # domain from another registrar. First, go to the current registrar to unlock
+        # the domain for transfer and retrieve the domain's transfer authorization
+        # code. Then call `RetrieveTransferParameters` to confirm that the domain is
+        # unlocked and to get values needed to build a call to `TransferDomain`.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Name of the `Registration` resource, in the format
@@ -74,7 +81,7 @@ module Google
         #     `contact_settings` field that change its `registrant_contact` or `privacy`
         #     fields require email confirmation by the `registrant_contact`
         #     before taking effect. This field is set only if there are pending updates
-        #     to the `contact_settings` that have not yet been confirmed. To confirm the
+        #     to the `contact_settings` that have not been confirmed. To confirm the
         #     changes, the `registrant_contact` must follow the instructions in the
         #     email they receive.
         # @!attribute [r] supported_privacy
@@ -106,6 +113,14 @@ module Google
             # to allow registration to be retried.
             REGISTRATION_FAILED = 2
 
+            # The domain is being transferred from another registrar to Cloud Domains.
+            TRANSFER_PENDING = 3
+
+            # The attempt to transfer the domain from another registrar to
+            # Cloud Domains failed. You can delete resources in this state and retry
+            # the transfer.
+            TRANSFER_FAILED = 4
+
             # The domain is registered and operational. The domain renews automatically
             # as long as it remains in this state.
             ACTIVE = 6
@@ -114,11 +129,11 @@ module Google
             # `issues` field.
             SUSPENDED = 7
 
-            # The domain has been exported from Cloud Domains to
+            # The domain is no longer managed with Cloud Domains. It may have been
+            # transferred to another registrar or exported for management in
             # [Google Domains](https://domains.google/). You can no longer update it
-            # with this API, and information shown about it may be stale. Without further action, domains in this
-            # state expire at their `expire_time`. You can delete the resource
-            # after the `expire_time` has passed.
+            # with this API, and information shown about it may be stale. Domains in
+            # this state are not automatically renewed by Cloud Domains.
             EXPORTED = 8
           end
 
@@ -135,7 +150,7 @@ module Google
             # verify the email address, follow the
             # instructions in the email the `registrant_contact` receives following
             # registration. If you do not complete email verification within
-            # 14 days of registration, the domain is suspended. To resend the
+            # 15 days of registration, the domain is suspended. To resend the
             # verification email, call ConfigureContactSettings and provide the current
             # `registrant_contact.email`.
             UNVERIFIED_EMAIL = 2
@@ -160,8 +175,8 @@ module Google
 
             # The domain is automatically renewed each year .
             #
-            # To disable automatic renewals, export the domain by calling
-            # `ExportRegistration` .
+            # To disable automatic renewals, delete the resource by calling
+            # `DeleteRegistration` or export it by calling `ExportRegistration`.
             AUTOMATIC_RENEWAL = 1
 
             # The domain must be explicitly renewed each year before its
@@ -255,6 +270,12 @@ module Google
               # The algorithm is unspecified.
               ALGORITHM_UNSPECIFIED = 0
 
+              # RSA/MD5. Cannot be used for new deployments.
+              RSAMD5 = 1
+
+              # Diffie-Hellman. Cannot be used for new deployments.
+              DH = 2
+
               # DSA/SHA1. Not recommended for new deployments.
               DSA = 3
 
@@ -290,6 +311,15 @@ module Google
 
               # Ed448.
               ED448 = 16
+
+              # Reserved for Indirect Keys. Cannot be used for new deployments.
+              INDIRECT = 252
+
+              # Private algorithm. Cannot be used for new deployments.
+              PRIVATEDNS = 253
+
+              # Private algorithm OID. Cannot be used for new deployments.
+              PRIVATEOID = 254
             end
 
             # List of hash functions that may have been used to generate a digest of a
@@ -368,8 +398,8 @@ module Google
         #     *Caution: Anyone with access to this email address, phone number,
         #     and/or postal address can take control of the domain.*
         #
-        #     *Warning: For new `Registration`s, the registrant will receive an email
-        #     confirmation that they must complete within 14 days to avoid domain
+        #     *Warning: For new `Registration`s, the registrant receives an email
+        #     confirmation that they must complete within 15 days to avoid domain
         #     suspension.*
         # @!attribute [rw] admin_contact
         #   @return [::Google::Cloud::Domains::V1beta1::ContactSettings::Contact]
@@ -459,7 +489,7 @@ module Google
         # @!attribute [rw] contact_notices
         #   @return [::Array<::Google::Cloud::Domains::V1beta1::ContactNotice>]
         #     The list of contact notices that the caller acknowledges. The notices
-        #     required here depend on the values specified in
+        #     needed here depend on the values specified in
         #     `registration.contact_settings`.
         # @!attribute [rw] yearly_price
         #   @return [::Google::Type::Money]
@@ -468,10 +498,67 @@ module Google
         #     RetrieveRegisterParameters or SearchDomains calls.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     When true, only validation will be performed, without actually registering
+        #     When true, only validation is performed, without actually registering
         #     the domain. Follows:
         #     https://cloud.google.com/apis/design/design_patterns#request_validation
         class RegisterDomainRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for the `RetrieveTransferParameters` method.
+        # @!attribute [rw] domain_name
+        #   @return [::String]
+        #     Required. The domain name. Unicode domain names must be expressed in Punycode format.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Required. The location. Must be in the format `projects/*/locations/*`.
+        class RetrieveTransferParametersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for the `RetrieveTransferParameters` method.
+        # @!attribute [rw] transfer_parameters
+        #   @return [::Google::Cloud::Domains::V1beta1::TransferParameters]
+        #     Parameters to use when calling the `TransferDomain` method.
+        class RetrieveTransferParametersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for the `TransferDomain` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource of the `Registration`. Must be in the
+        #     format `projects/*/locations/*`.
+        # @!attribute [rw] registration
+        #   @return [::Google::Cloud::Domains::V1beta1::Registration]
+        #     Required. The complete `Registration` resource to be created.
+        #
+        #     You can leave `registration.dns_settings` unset to import the
+        #     domain's current DNS configuration from its current registrar. Use this
+        #     option only if you are sure that the domain's current DNS service
+        #     does not cease upon transfer, as is often the case for DNS services
+        #     provided for free by the registrar.
+        # @!attribute [rw] contact_notices
+        #   @return [::Array<::Google::Cloud::Domains::V1beta1::ContactNotice>]
+        #     The list of contact notices that you acknowledge. The notices
+        #     needed here depend on the values specified in
+        #     `registration.contact_settings`.
+        # @!attribute [rw] yearly_price
+        #   @return [::Google::Type::Money]
+        #     Required. Acknowledgement of the price to transfer or renew the domain for one year.
+        #     Call `RetrieveTransferParameters` to obtain the price, which you must
+        #     acknowledge.
+        # @!attribute [rw] authorization_code
+        #   @return [::Google::Cloud::Domains::V1beta1::AuthorizationCode]
+        #     The domain's transfer authorization code. You can obtain this from the
+        #     domain's current registrar.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Validate the request without actually transferring the domain.
+        class TransferDomainRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -541,8 +628,8 @@ module Google
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. The field mask describing which fields to update as a comma-separated list.
-        #     For example, if only the labels are being updated, the `update_mask` would
-        #     be `"labels"`.
+        #     For example, if only the labels are being updated, the `update_mask` is
+        #     `"labels"`.
         class UpdateRegistrationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -560,7 +647,7 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. The field mask describing which fields to update as a comma-separated list.
         #     For example, if only the transfer lock is being updated, the `update_mask`
-        #     would be `"transfer_lock_state"`.
+        #     is `"transfer_lock_state"`.
         class ConfigureManagementSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -578,13 +665,13 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. The field mask describing which fields to update as a comma-separated list.
         #     For example, if only the name servers are being updated for an existing
-        #     Custom DNS configuration, the `update_mask` would be
+        #     Custom DNS configuration, the `update_mask` is
         #     `"custom_dns.name_servers"`.
         #
         #     When changing the DNS provider from one type to another, pass the new
         #     provider's field name as part of the field mask. For example, when changing
         #     from a Google Domains DNS configuration to a Custom DNS configuration, the
-        #     `update_mask` would be `"custom_dns"`. //
+        #     `update_mask` is `"custom_dns"`. //
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Validate the request without actually updating the DNS settings.
@@ -605,11 +692,11 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. The field mask describing which fields to update as a comma-separated list.
         #     For example, if only the registrant contact is being updated, the
-        #     `update_mask` would be `"registrant_contact"`.
+        #     `update_mask` is `"registrant_contact"`.
         # @!attribute [rw] contact_notices
         #   @return [::Array<::Google::Cloud::Domains::V1beta1::ContactNotice>]
         #     The list of contact notices that the caller acknowledges. The notices
-        #     required here depend on the values specified in `contact_settings`.
+        #     needed here depend on the values specified in `contact_settings`.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Validate the request without actually updating the contact settings.
@@ -700,6 +787,32 @@ module Google
             # due to system maintenance at the domain name registry.
             UNKNOWN = 4
           end
+        end
+
+        # Parameters required to transfer a domain from another registrar.
+        # @!attribute [rw] domain_name
+        #   @return [::String]
+        #     The domain name. Unicode domain names are expressed in Punycode format.
+        # @!attribute [rw] current_registrar
+        #   @return [::String]
+        #     The registrar that currently manages the domain.
+        # @!attribute [rw] name_servers
+        #   @return [::Array<::String>]
+        #     The name servers that currently store the configuration of the domain.
+        # @!attribute [rw] transfer_lock_state
+        #   @return [::Google::Cloud::Domains::V1beta1::TransferLockState]
+        #     Indicates whether the domain is protected by a transfer lock. For a
+        #     transfer to succeed, this must show `UNLOCKED`. To unlock a domain,
+        #     go to its current registrar.
+        # @!attribute [rw] supported_privacy
+        #   @return [::Array<::Google::Cloud::Domains::V1beta1::ContactPrivacy>]
+        #     Contact privacy options that the domain supports.
+        # @!attribute [rw] yearly_price
+        #   @return [::Google::Type::Money]
+        #     Price to transfer or renew the domain for one year.
+        class TransferParameters
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Defines an authorization code.
