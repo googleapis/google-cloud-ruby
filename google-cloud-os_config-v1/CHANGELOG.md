@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2021-10-21
+
+#### Features
+
+* Support daily frequency for recurring patch deployments
+
 ### 0.6.0 / 2021-09-07
 
 #### Features
