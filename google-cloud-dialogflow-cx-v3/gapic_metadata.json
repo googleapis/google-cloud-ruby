@@ -186,6 +186,25 @@
         }
       }
     },
+    "Changelogs": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::Changelogs::Client",
+          "rpcs": {
+            "ListChangelogs": {
+              "methods": [
+                "list_changelogs"
+              ]
+            },
+            "GetChangelog": {
+              "methods": [
+                "get_changelog"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Deployments": {
       "clients": {
         "grpc": {
