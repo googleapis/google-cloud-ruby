@@ -31,7 +31,7 @@ library = gapic.ruby_library(
         "ruby-cloud-env-prefix": "DATAPROC",
         "ruby-cloud-wrapper-of": "v1:0.7;v1beta2:0.6",
         "ruby-cloud-product-url": "https://cloud.google.com/dataproc",
-        "ruby-cloud-api-id": "dataproc.googleapis.com"
+        "ruby-cloud-api-id": "dataproc.googleapis.com",
         "ruby-cloud-api-shortname": "dataproc",
         "ruby-cloud-migration-version": "1.0",
     }
