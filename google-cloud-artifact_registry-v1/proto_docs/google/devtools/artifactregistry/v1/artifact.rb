@@ -24,9 +24,9 @@ module Google
         # DockerImage represents a docker artifact.
         # The following fields are returned as untyped metadata in the Version
         # resource, using camelcase keys (i.e. metadata.imageSizeBytes):
-        #   - imageSizeBytes
-        #   - mediaType
-        #   - buildTime
+        # * imageSizeBytes
+        # * mediaType
+        # * buildTime
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. registry_location, project_id, repository_name and image id forms a unique
