@@ -25,6 +25,7 @@ gapic = gcp.GAPICMicrogenerator()
 library = gapic.ruby_library(
     "filestore", "v1",
     proto_path="google/cloud/filestore/v1",
+    extra_proto_files=["google/cloud/common/operation_metadata.proto"],
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-filestore",
         "ruby-cloud-title": "Filestore",
