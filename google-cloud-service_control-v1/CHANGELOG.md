@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.4 / 2021-10-21
+
+#### Documentation
+
+* Some documentation formatting fixes
+
 ### 0.4.3 / 2021-08-11
 
 #### Bug Fixes
