@@ -1,5 +1,12 @@
 # Release History
 
+### 1.37.0 / 2021-10-21
+
+#### Features
+
+* Add support for Avro options to external data sources
+  * Add External::AvroSource
+
 ### 1.36.0 / 2021-09-22
 
 #### Features
