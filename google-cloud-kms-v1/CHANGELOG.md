@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 / 2021-10-21
+
+#### Features
+
+* Support for raw PKCS1 signing keys
+
 ### 0.9.0 / 2021-10-18
 
 #### Features
