@@ -1,187 +1,267 @@
 # Contributing to Google Cloud Firestore
 
-1. **Sign one of the contributor license agreements below.**
-2. Fork the repo, develop and test your code changes.
-3. Send a pull request.
+Thank you for your interest in making a contribution to google-cloud-ruby. Community contributions are an essential part
+of open source, and we want to make contributing easy for you. If you have any suggestions for how to improve this
+guide, please [open an issue](https://github.com/googleapis/google-cloud-ruby/issues) and let use know!
 
-## Contributor License Agreements
+### Code of Conduct
 
-Before we can accept your pull requests you'll need to sign a Contributor
-License Agreement (CLA):
+Please note that this project is covered by a Contributor Code of Conduct. By participating in this project you agree to
+abide by its terms. See [Code of Conduct](CODE_OF_CONDUCT.md) for more information.
 
-- **If you are an individual writing original source code** and **you own the
-  intellectual property**, then you'll need to sign an [individual
-  CLA](https://developers.google.com/open-source/cla/individual).
-- **If you work for a company that wants to allow you to contribute your work**,
-  then you'll need to sign a [corporate
+## Overview
+
+1. [Open an issue](#open-an-issue)
+1. [Sign Contributor License Agreement](#sign-contributor-license-agreement)
+1. [Setup project](#setup-project)
+1. [Run CI](#run-ci)
+1. [Make changes](#make-changes)
+1. [Commit changes](#commit-changes)
+1. [Run CI again](#run-ci-again)
+1. [Submit your pull request](#submit-your-pull-request)
+
+## Open an issue
+
+Pull requests should generally be directed by an existing issue, otherwise you risk working on something that the
+maintainers might not be able to accept into the project. Please take a look through [the existing
+issues](https://github.com/googleapis/google-cloud-ruby/issues), and if you do not see an existing one for your problem
+or feature, please open a new issue using one of the provided templates.
+
+## Sign Contributor License Agreement
+
+Before we can accept your pull requests you'll need to sign a Contributor License Agreement (CLA):
+
+- **If you are an individual writing original source code** and **you own the intellectual property**, then you'll need
+  to sign an [individual CLA](https://developers.google.com/open-source/cla/individual).
+- **If you work for a company that wants to allow you to contribute your work**, then you'll need to sign a [corporate
   CLA](https://developers.google.com/open-source/cla/corporate).
 
-You can sign these electronically (just scroll to the bottom). After that, we'll
-be able to accept your pull requests.
+You can sign these electronically. After that, we'll be able to accept your pull requests.
 
-## Setup
+## Setup project
 
-In order to use the google-cloud-firestore console and run the project's tests,
-there is a small amount of setup:
+In order to make changes, there is a small amount of setup:
 
-1. Install Ruby. google-cloud-firestore requires Ruby 2.5+. You may choose to
-   manage your Ruby and gem installations with [RVM](https://rvm.io/),
-   [rbenv](https://github.com/rbenv/rbenv), or
-   [chruby](https://github.com/postmodern/chruby).
+1. Install a [supported version](google-cloud-firestore.gemspec) (or versions) of Ruby. (You may choose to manage your
+   Ruby and gem installations with [RVM](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv), or
+   [chruby](https://github.com/postmodern/chruby).)
 
-2. Install [Bundler](http://bundler.io/).
+1. Install [Bundler](http://bundler.io/).
 
    ```sh
    $ gem install bundler
    ```
 
-3. Install the top-level project dependencies.
+1. [Fork](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks) the
+   [google-cloud-ruby](https://github.com/googleapis/google-cloud-ruby) repo, clone your fork, and configure the
+   `upstream`
+   [remote](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-for-a-fork_):
+
+   ```bash
+   git clone https://github.com/<your-username>/google-cloud-ruby.git
+   cd google-cloud-ruby
+   git remote add upstream git@github.com:googleapis/google-cloud-ruby.git
+   ```
+
+1. If your fork and clone are not brand new, get the latest changes from `upstream`:
+
+   ```bash
+   git checkout main
+   git pull upstream main
+   ```
+
+1. Install the top-level project dependencies (or update your dependencies in an existing clone):
 
    ```sh
+   $ bundle update
+   ```
+
+1. Install (or update) the library dependencies:
+
+   ```sh
+   $ cd google-cloud-firestore
    $ bundle install
    ```
 
-4. Install the Firestore dependencies.
+1. Create a new topic branch off the `main` branch:
 
-   ```sh
-   $ cd google-cloud-firestore/
-   $ bundle install
+   ```bash
+   git checkout -b <topic-branch>
    ```
 
-## Console
+## Run CI
 
-In order to run code interactively, you can automatically load
-google-cloud-firestore and its dependencies in IRB. This requires that your
-developer environment has already been configured by following the steps
-described in the [Authentication Guide](AUTHENTICATION.md). An IRB console
-can be created with:
+You are now ready to run local CI checks for the library, which you should do **before** you make any changes. Doing so
+ensures that everything is OK with your local environment and the latest dependency versions. You don't want any nasty
+surprises later.
 
-```sh
-$ cd google-cloud-firestore/
-$ bundle exec rake console
-```
-
-## Firestore Tests
-
-Tests are very important part of google-cloud-firestore. All contributions
-should include tests that ensure the contributed code behaves as expected.
-
-To run the unit tests, documentation tests, and code style checks together for a
-package:
+To run the code style checks, documentation tests, and unit tests together, use the `ci` task:
 
 ``` sh
-$ cd google-cloud-firestore/
 $ bundle exec rake ci
 ```
 
-To run the command above, plus all acceptance tests, use `rake ci:acceptance` or
-its handy alias, `rake ci:a`.
+To run the command above, plus all acceptance tests, use `rake ci:acceptance` or its handy alias, `rake ci:a`.
 
-### Firestore Unit Tests
+The bundled rake tasks can be used individually to streamline your workflow when developing or debugging.
 
+| CI check                                      | Command           |
+|-----------------------------------------------|------------------ |
+| [Static code analysis](#Static-code-analysis) | `rake rubocop`    |
+| [Documentation tests](#Documentation-tests)   | `rake doctest`    |
+| [Unit tests](#Unit-tests)                     | `rake test`       |
+| [Acceptance tests](#Acceptance-tests)         | `rake acceptance` |
 
-The project uses the [minitest](https://github.com/seattlerb/minitest) library,
-including [specs](https://github.com/seattlerb/minitest#specs),
-[mocks](https://github.com/seattlerb/minitest#mocks) and
-[minitest-autotest](https://github.com/seattlerb/minitest-autotest).
+The subsections below describe the individual CI checks.
 
-To run the Firestore unit tests:
+### Static code analysis
 
-``` sh
-$ cd google-cloud-firestore/
-$ bundle exec rake test
+This project uses [Rubocop](https://github.com/rubocop/rubocop) with the shared
+[googleapis/ruby-style](https://github.com/googleapis/ruby-style) configuration to ensure that your code adheres to
+Google's Ruby style. The style is is largely based on [The Ruby Style
+Guide](https://github.com/bbatsov/ruby-style-guide) with a few exceptions based on "Seattle.rb style":
+
+* Avoid parentheses when possible, including in method definitions.
+* Use double-quoted strings.
+
+You can check your code against these rules by running Rubocop like so:
+
+```sh
+$ bundle exec rake rubocop
 ```
 
-### Firestore Documentation Tests
+In the rare case that you need to modify the existing Rubocop configuration in order to accommodate your changes, you
+can do so using [.rubocop.yml](.rubocop.yml).
 
-The project tests the code examples in the gem's
-[YARD](https://github.com/lsegal/yard)-based documentation.
+### Documentation tests
 
-The example testing functions in a way that is very similar to unit testing, and
-in fact the library providing it,
-[yard-doctest](https://github.com/p0deje/yard-doctest), is based on the
-project's unit test library, [minitest](https://github.com/seattlerb/minitest).
+When adding a new feature, you should almost always add one or more in-line documentation code examples demonstrating
+the use of the feature, using [YARD](https://github.com/lsegal/yard)'s
+[`@example`](http://www.rubydoc.info/gems/yard/file/docs/Tags.md#example) tag.
 
-To run the Firestore documentation tests:
+The project uses [yard-doctest](https://github.com/p0deje/yard-doctest) to execute each sample as a unit test:
 
 ``` sh
-$ cd google-cloud-firestore/
 $ bundle exec rake doctest
 ```
 
-If you add, remove or modify documentation examples when working on a pull
-request, you may need to update the setup for the tests. The stubs and mocks
-required to run the tests are located in `support/doctest_helper.rb`. Please
-note that much of the setup is matched by the title of the
-[`@example`](http://www.rubydoc.info/gems/yard/file/docs/Tags.md#example) tag.
-If you alter an example's title, you may encounter breaking tests.
+If you add, remove or modify documentation examples, you may need to update the setup for the tests. The stubs and mocks
+required to run the tests are located in [support/doctest_helper.rb](support/doctest_helper.rb). Please note that much
+of the setup is matched by the title of the `@example` tag. If you alter an example's title, you may encounter breaking
+tests.
 
-### Firestore Acceptance Tests
+There are generally no assertions or mock verifications in these tests. They just check that the examples are
+syntactically correct and execute against the source code without error.
 
-The Firestore acceptance tests interact with the live service API. Follow the
-instructions in the [Authentication Guide](AUTHENTICATION.md) for enabling
-the Firestore API. Occasionally, some API features may not yet be generally
-available, making it difficult for some contributors to successfully run the
-entire acceptance test suite. However, please ensure that you do successfully
-run acceptance tests for any code areas covered by your pull request.
+### Unit tests
 
-To run the acceptance tests, first create and configure a project in the Google
-Developers Console, as described in the [Authentication Guide](AUTHENTICATION.md). Be sure to download the JSON KEY file. Make note of the PROJECT_ID and
-the KEYFILE location on your system.
+The project uses the [minitest](https://github.com/seattlerb/minitest) library, including
+[specs](https://github.com/seattlerb/minitest#specs), [mocks](https://github.com/seattlerb/minitest#mocks),
+[minitest-autotest](https://github.com/seattlerb/minitest-autotest), and
+[minitest-focus](https://github.com/seattlerb/minitest-focus).
 
-Before you can run the Firestore acceptance tests, you must first create indexes
-used in the tests.
-
-#### Running the Firestore acceptance tests
-
-To run the Firestore acceptance tests:
+To run the unit tests:
 
 ``` sh
-$ cd google-cloud-firestore/
+$ bundle exec rake test
+```
+
+### Acceptance Tests
+
+The Firestore acceptance tests interact with the live service API. Follow the instructions in the [Authentication
+Guide](AUTHENTICATION.md) for enabling the product API. Occasionally, some API features may not yet be generally
+available, making it difficult for some contributors to successfully run the entire acceptance test suite. However,
+please ensure that you do successfully run acceptance tests for any code areas covered by your pull request.
+
+To run the acceptance tests, first create and configure a project in the Google Developers Console, as described in the
+[Authentication Guide](AUTHENTICATION.md). Be sure to download the JSON KEY file. Make note of the PROJECT_ID and the
+KEYFILE location on your system.
+
+#### Running the acceptance tests
+
+To run the acceptance tests:
+
+``` sh
 $ bundle exec rake acceptance[\\{my-project-id},\\{/path/to/keyfile.json}]
 ```
 
-Or, if you prefer you can store the values in the `GCLOUD_TEST_PROJECT` and
-`GCLOUD_TEST_KEYFILE` environment variables:
+Or, if you prefer you can store the values in the `GCLOUD_TEST_PROJECT` and `GCLOUD_TEST_KEYFILE` environment variables:
 
 ``` sh
-$ cd google-cloud-firestore/
 $ export GCLOUD_TEST_PROJECT=\\{my-project-id}
 $ export GCLOUD_TEST_KEYFILE=\\{/path/to/keyfile.json}
 $ bundle exec rake acceptance
 ```
 
-If you want to use a different project and credentials for acceptance tests, you
-can use the more specific `FIRESTORE_TEST_PROJECT`  and `FIRESTORE_TEST_KEYFILE`
-environment variables:
+If you want to use a different project and credentials for acceptance tests, you can use the more specific
+`FIRESTORE_TEST_PROJECT`  and `FIRESTORE_TEST_KEYFILE` environment variables:
 
 ``` sh
-$ cd google-cloud-firestore/
 $ export FIRESTORE_TEST_PROJECT=\\{my-project-id}
 $ export FIRESTORE_TEST_KEYFILE=\\{/path/to/keyfile.json}
 $ bundle exec rake acceptance
 ```
 
-## Coding Style
+## Make changes
 
-Please follow the established coding style in the library. The style is is
-largely based on [The Ruby Style
-Guide](https://github.com/bbatsov/ruby-style-guide) with a few exceptions based
-on seattle-style:
+All contributions should include tests that ensure the contributed code behaves as expected.
 
-* Avoid parenthesis when possible, including in method definitions.
-* Always use double quotes strings. ([Option
-  B](https://github.com/bbatsov/ruby-style-guide#strings))
+### Console
 
-You can check your code against these rules by running Rubocop like so:
+In order to run code interactively, you can automatically load google-cloud-firestore and its dependencies in IRB. This
+requires that your developer environment has already been configured by following the steps described in the
+[Authentication Guide](AUTHENTICATION.md). An IRB console can be created with:
 
 ```sh
-$ cd google-cloud-firestore/
-$ bundle exec rake rubocop
+$ bundle exec rake console
 ```
 
-## Code of Conduct
+## Commit changes
 
-Please note that this project is released with a Contributor Code of Conduct. By
-participating in this project you agree to abide by its terms. See
-[Code of Conduct](CODE_OF_CONDUCT.md) for more information.
+Commit your changes using [conventional commits](https://www.conventionalcommits.org/) and include the associated GitHub
+issue. Changes in the `samples` directory should receive the `chore` commit type, since these changes should not result
+in a release. Below is an example of a `feat` type commit that will result in a semver `minor` release. Notice how it is
+scoped to the short name of the library, contains a bulleted list of public API changes, and ends with the `closes`
+GitHub keyword. If this is the only new commit in your branch when you open your pull request, the commit body including
+the `closes` phrase will be copied to your PR description. If you have multiple commits, you should copy the body of
+this anchor commit manually to the PR description, so that GitHub will [automatically close the related
+issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue).
+
+```bash
+git commit -am "feat(firestore): Add my new feature
+
+* Add MyClass#my_method
+
+closes: #123"
+```
+
+The messages for any subsequent commits you may add do not necessarily need to follow the conditional commits format, as
+these messages will be manually dropped or added as bullet points to the original message when the PR is merged.
+
+## Run CI again
+
+Repeat the [Run CI](#run-ci) step above and ensure that everything is passing in `rake ci` and `rake acceptance`. Or at least
+that `rake ci` is green and you haven't broken anything new in `rake acceptance`.
+before you open your pull request.
+
+## Submit your pull request
+
+1. Rebase your topic branch on the upstream `main` branch:
+
+   ```bash
+   git pull --rebase upstream main
+   ```
+
+1. Push your topic branch to your fork:
+
+   ```bash
+   git push origin -u
+   ```
+
+1. Open a [pull
+   request](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests)
+   using the first line of your conventional commit as the title, and with the associated GitHub issue in the
+   description. By convention in this project, the assignee of the pull request will be the maintainer who will merge it
+   once it is approved. If you are a maintainer of the project, typically you should assign the pull request to
+   yourself.
+
