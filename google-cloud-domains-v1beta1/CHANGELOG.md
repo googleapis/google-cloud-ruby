@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2021-10-21
+
+#### Features
+
+* Add support for domain transfers
+
 ### 0.2.3 / 2021-08-11
 
 #### Bug Fixes
