@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 / 2021-10-21
+
+#### Features
+
+* Added support for changelogs
+
 ### 0.2.0 / 2021-10-18
 
 #### Features
