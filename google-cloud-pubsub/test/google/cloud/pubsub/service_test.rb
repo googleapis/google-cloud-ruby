@@ -18,7 +18,7 @@ require "gapic/grpc/service_stub"
 describe Google::Cloud::PubSub::Service do
   let(:project) { "test" }
   let(:credentials) { OpenStruct.new(project_id: "project-id") }
-  let(:timeout) { 123 }
+  let(:timeout) { 123.4 }
   let(:endpoint) { "pubsub.googleapis.com" }
   let(:endpoint_2) { "localhost:4567" }
 

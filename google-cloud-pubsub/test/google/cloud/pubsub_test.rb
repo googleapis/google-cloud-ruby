@@ -55,11 +55,11 @@ describe Google::Cloud do
         _(project).must_equal "project-id"
         _(keyfile).must_equal "keyfile-path"
         _(scope).must_equal "http://example.com/scope"
-        _(timeout).must_equal 60
+        _(timeout).must_equal 60.0
         "pubsub-project-object-scoped"
       }
       Google::Cloud.stub :pubsub, stubbed_pubsub do
-        project = gcloud.pubsub scope: "http://example.com/scope", timeout: 60
+        project = gcloud.pubsub scope: "http://example.com/scope", timeout: 60.0
         _(project).must_equal "pubsub-project-object-scoped"
       end
     end
@@ -232,7 +232,7 @@ describe Google::Cloud do
     end
 
     it "allows timeout to be set" do
-      timeout = 123
+      timeout = 123.4
 
       stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
@@ -424,7 +424,7 @@ describe Google::Cloud do
       stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "pubsub-credentials"
-        _(timeout).must_equal 42
+        _(timeout).must_equal 42.0
         OpenStruct.new project: project
       }
 
@@ -434,7 +434,7 @@ describe Google::Cloud do
         Google::Cloud::PubSub.configure do |config|
           config.project = "project-id"
           config.keyfile = "path/to/keyfile.json"
-          config.timeout = 42
+          config.timeout = 42.0
         end
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
@@ -461,7 +461,7 @@ describe Google::Cloud do
       stubbed_service = ->(project, credentials, timeout: nil, host: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "pubsub-credentials"
-        _(timeout).must_equal 42
+        _(timeout).must_equal 42.0
         OpenStruct.new project: project
       }
 
@@ -471,7 +471,7 @@ describe Google::Cloud do
         Google::Cloud::PubSub.configure do |config|
           config.project_id = "project-id"
           config.credentials = "path/to/keyfile.json"
-          config.timeout = 42
+          config.timeout = 42.0
         end
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
