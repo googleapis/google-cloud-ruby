@@ -1,5 +1,15 @@
 # Release History
 
+### 0.6.0 / 2021-10-21
+
+#### Features
+
+* Support for limiting searches to either product or faceted search
+
+#### Documentation
+
+* Some documentation formatting fixes
+
 ### 0.5.1 / 2021-08-26
 
 #### Bug Fixes
