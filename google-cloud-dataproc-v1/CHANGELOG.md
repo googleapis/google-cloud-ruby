@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2021-10-21
+
+#### Features
+
+* Add support for batch workloads
+
 ### 0.6.3 / 2021-08-11
 
 #### Bug Fixes
