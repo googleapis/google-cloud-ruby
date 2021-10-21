@@ -81,10 +81,10 @@ end
 def pre_format str
   str = str.to_s
   # Parse markdown prior to running resolve_links, which checks for HTML codeblocks
-  if @method && @method.path.to_s == "Google::Cloud::PubSub::Subscription#remove_dead_letter_policy"
-    require "pry"
-    binding.pry
-  end
+  # if @method && @method.path.to_s == "Google::Cloud::PubSub::Subscription#remove_dead_letter_policy"
+  #   require "pry"
+  #   binding.pry
+  # end
   str = markdown str
   # str = YARD::Templates::Helpers::HtmlHelper.resolve_links str
   str = Formatter.new(@object, @options).parse_links str
