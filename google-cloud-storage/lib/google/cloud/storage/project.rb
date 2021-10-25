@@ -364,14 +364,23 @@ module Google
         #     b.lifecycle.add_set_storage_class_rule "COLDLINE", age: 10
         #   end
         #
-        def create_bucket bucket_name, acl: nil, default_acl: nil,
-                          location: nil, storage_class: nil,
-                          logging_bucket: nil, logging_prefix: nil,
-                          website_main: nil, website_404: nil, versioning: nil,
-                          requester_pays: nil, user_project: nil
+        def create_bucket bucket_name,
+                          acl: nil,
+                          default_acl: nil,
+                          location: nil,
+                          storage_class: nil,
+                          logging_bucket: nil,
+                          logging_prefix: nil,
+                          website_main: nil,
+                          website_404: nil,
+                          versioning: nil,
+                          requester_pays: nil,
+                          user_project: nil,
+                          location_type: "dual-region"
           params = {
             name: bucket_name,
-            location: location
+            location: location,
+            location_type: location_type
           }.delete_if { |_, v| v.nil? }
           new_bucket = Google::Apis::StorageV1::Bucket.new(**params)
           storage_class = storage_class_for storage_class

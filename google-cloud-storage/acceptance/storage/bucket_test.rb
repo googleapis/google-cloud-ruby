@@ -241,19 +241,19 @@ describe Google::Cloud::Storage::Bucket, :storage do
     end
   end
 
-  it "creates new bucket with rpo ASYNC_TURBO then sets rpo to DEFAULT" do
+  it "creates new bucket with rpo DEFAULT then sets rpo to ASYNC_TURBO" do
     single_use_bucket_name = "single_use_#{bucket_name}"
 
-    _(storage.bucket(single_use_bucket_name)).must_be :nil?
+    # _(storage.bucket(single_use_bucket_name)).must_be :nil?
 
-    single_use_bucket = safe_gcs_execute { storage.create_bucket single_use_bucket_name, user_project: true, rpo: "ASYNC_TURBO", location_type: "dual-region" }
+    single_use_bucket = safe_gcs_execute { storage.create_bucket single_use_bucket_name, location_type: "dual-region" }
 
-    _(single_use_bucket.rpo).must_equal "ASYNC_TURBO"
+    _(single_use_bucket.rpo).must_equal "DEFAULT"
 
     single_use_bucket.update do |b|
-      b.rpo = :DEFAULT
+      b.rpo = :ASYNC_TURBO
     end
-    _(single_use_bucket.rpo).must_equal "DEFAULT"
+    _(single_use_bucket.rpo).must_equal "ASYNC_TURBO"
 
     single_use_bucket.files.all &:delete
     safe_gcs_execute { single_use_bucket.delete }
