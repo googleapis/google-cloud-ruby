@@ -89,7 +89,7 @@ describe "Buckets Snippets" do
         list_buckets
       end
 
-      assert_includes out, "ruby_storage_sample_"
+      assert_includes out, "ruby-storage-samples-"
 
       # get_bucket_metadata
       out, _err = capture_io do
