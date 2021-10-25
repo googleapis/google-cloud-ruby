@@ -55,6 +55,11 @@ module Google
           #       the regular expression: `[\p{Ll}\p{Lo}\p{N}_-]{0,63}`.
           #     * No more than 64 labels can be associated with a given resource.
           #     * Keys and values must both be under 128 bytes.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. A server-assigned timestamp representing when this Instance was created.
+          #     For instances created before this field was added (August 2021), this value
+          #     is `seconds: 0, nanos: 1`.
           class Instance
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

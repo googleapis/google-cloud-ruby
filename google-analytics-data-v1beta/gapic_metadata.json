@@ -39,6 +39,11 @@
               "methods": [
                 "run_realtime_report"
               ]
+            },
+            "CheckCompatibility": {
+              "methods": [
+                "check_compatibility"
+              ]
             }
           }
         }

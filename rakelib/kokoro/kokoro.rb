@@ -125,7 +125,7 @@ class Kokoro < Command
 
   def post
     job_info
-    git_commit = ENV.fetch "KOKORO_GITHUB_COMMIT", "master"
+    git_commit = ENV.fetch "KOKORO_GITHUB_COMMIT", "main"
 
     markdown_files = Dir.glob "**/*.md"
     broken_markdown_links = check_links markdown_files,

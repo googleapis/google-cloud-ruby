@@ -27,7 +27,7 @@ module Google
           # API v1beta1 service for Cloud AI Platform Notebooks.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode

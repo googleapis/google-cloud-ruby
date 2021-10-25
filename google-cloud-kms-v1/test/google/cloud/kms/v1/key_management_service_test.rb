@@ -820,6 +820,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
 
     # Create request parameters for a unary method.
     parent = "hello world"
+    crypto_key_version = "hello world"
     algorithm = :CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED
     import_job = "hello world"
     rsa_aes_wrapped_key = "hello world"
@@ -828,6 +829,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       assert_equal :import_crypto_key_version, name
       assert_kind_of ::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest, request
       assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["crypto_key_version"]
       assert_equal :CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED, request["algorithm"]
       assert_equal "hello world", request["import_job"]
       assert_equal "hello world", request["rsa_aes_wrapped_key"]
@@ -842,31 +844,31 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.import_crypto_key_version({ parent: parent, algorithm: algorithm, import_job: import_job, rsa_aes_wrapped_key: rsa_aes_wrapped_key }) do |response, operation|
+      client.import_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, rsa_aes_wrapped_key: rsa_aes_wrapped_key }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_crypto_key_version parent: parent, algorithm: algorithm, import_job: import_job, rsa_aes_wrapped_key: rsa_aes_wrapped_key do |response, operation|
+      client.import_crypto_key_version parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, rsa_aes_wrapped_key: rsa_aes_wrapped_key do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_crypto_key_version ::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, algorithm: algorithm, import_job: import_job, rsa_aes_wrapped_key: rsa_aes_wrapped_key) do |response, operation|
+      client.import_crypto_key_version ::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, rsa_aes_wrapped_key: rsa_aes_wrapped_key) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_crypto_key_version({ parent: parent, algorithm: algorithm, import_job: import_job, rsa_aes_wrapped_key: rsa_aes_wrapped_key }, grpc_options) do |response, operation|
+      client.import_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, rsa_aes_wrapped_key: rsa_aes_wrapped_key }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_crypto_key_version(::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, algorithm: algorithm, import_job: import_job, rsa_aes_wrapped_key: rsa_aes_wrapped_key), grpc_options) do |response, operation|
+      client.import_crypto_key_version(::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, rsa_aes_wrapped_key: rsa_aes_wrapped_key), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1377,6 +1379,8 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     name = "hello world"
     digest = {}
     digest_crc32c = {}
+    data = "hello world"
+    data_crc32c = {}
 
     asymmetric_sign_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :asymmetric_sign, name
@@ -1384,6 +1388,8 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       assert_equal "hello world", request["name"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Kms::V1::Digest), request["digest"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request["digest_crc32c"]
+      assert_equal "hello world", request["data"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Int64Value), request["data_crc32c"]
       refute_nil options
     end
 
@@ -1394,31 +1400,31 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.asymmetric_sign({ name: name, digest: digest, digest_crc32c: digest_crc32c }) do |response, operation|
+      client.asymmetric_sign({ name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.asymmetric_sign name: name, digest: digest, digest_crc32c: digest_crc32c do |response, operation|
+      client.asymmetric_sign name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.asymmetric_sign ::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c) do |response, operation|
+      client.asymmetric_sign ::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.asymmetric_sign({ name: name, digest: digest, digest_crc32c: digest_crc32c }, grpc_options) do |response, operation|
+      client.asymmetric_sign({ name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.asymmetric_sign(::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c), grpc_options) do |response, operation|
+      client.asymmetric_sign(::Google::Cloud::Kms::V1::AsymmetricSignRequest.new(name: name, digest: digest, digest_crc32c: digest_crc32c, data: data, data_crc32c: data_crc32c), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

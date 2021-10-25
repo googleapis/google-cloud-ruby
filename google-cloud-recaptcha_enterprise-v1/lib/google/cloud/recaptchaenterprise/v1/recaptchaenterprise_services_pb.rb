@@ -27,7 +27,7 @@ module Google
           # Service to determine the likelihood an event is legitimate.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode
@@ -36,7 +36,7 @@ module Google
             # Creates an Assessment of the likelihood an event is legitimate.
             rpc :CreateAssessment, ::Google::Cloud::RecaptchaEnterprise::V1::CreateAssessmentRequest, ::Google::Cloud::RecaptchaEnterprise::V1::Assessment
             # Annotates a previously created Assessment to provide additional information
-            # on whether the event turned out to be authentic or fradulent.
+            # on whether the event turned out to be authentic or fraudulent.
             rpc :AnnotateAssessment, ::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest, ::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentResponse
             # Creates a new reCAPTCHA Enterprise key.
             rpc :CreateKey, ::Google::Cloud::RecaptchaEnterprise::V1::CreateKeyRequest, ::Google::Cloud::RecaptchaEnterprise::V1::Key
@@ -48,6 +48,16 @@ module Google
             rpc :UpdateKey, ::Google::Cloud::RecaptchaEnterprise::V1::UpdateKeyRequest, ::Google::Cloud::RecaptchaEnterprise::V1::Key
             # Deletes the specified key.
             rpc :DeleteKey, ::Google::Cloud::RecaptchaEnterprise::V1::DeleteKeyRequest, ::Google::Protobuf::Empty
+            # Migrates an existing key from reCAPTCHA to reCAPTCHA Enterprise.
+            # Once a key is migrated, it can be used from either product. SiteVerify
+            # requests are billed as CreateAssessment calls. You must be
+            # authenticated as one of the current owners of the reCAPTCHA Site Key, and
+            # your user must have the reCAPTCHA Enterprise Admin IAM role in the
+            # destination project.
+            rpc :MigrateKey, ::Google::Cloud::RecaptchaEnterprise::V1::MigrateKeyRequest, ::Google::Cloud::RecaptchaEnterprise::V1::Key
+            # Get some aggregated metrics for a Key. This data can be used to build
+            # dashboards.
+            rpc :GetMetrics, ::Google::Cloud::RecaptchaEnterprise::V1::GetMetricsRequest, ::Google::Cloud::RecaptchaEnterprise::V1::Metrics
           end
 
           Stub = Service.rpc_stub_class

@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2021-09-09
+
+#### Features
+
+* Various updates for beta
+
 ### 0.2.0 / 2021-06-21
 
 #### Features

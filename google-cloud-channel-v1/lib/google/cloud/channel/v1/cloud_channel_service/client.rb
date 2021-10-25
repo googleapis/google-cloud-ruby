@@ -697,6 +697,113 @@ module Google
             end
 
             ##
+            # Imports a {::Google::Cloud::Channel::V1::Customer Customer} from the Cloud Identity associated with the provided
+            # Cloud Identity ID or domain before a TransferEntitlements call. If a
+            # linked Customer already exists and overwrite_if_exists is true, it will
+            # update that Customer's data.
+            #
+            # Possible error codes:
+            #
+            # * PERMISSION_DENIED: The reseller account making the request is different
+            # from the reseller account in the API request.
+            # * NOT_FOUND: Cloud Identity doesn't exist or was deleted.
+            # * INVALID_ARGUMENT: Required parameters are missing, or the auth_token is
+            # expired or invalid.
+            # * ALREADY_EXISTS: A customer already exists and has conflicting critical
+            # fields. Requires an overwrite.
+            #
+            # Return value:
+            # The {::Google::Cloud::Channel::V1::Customer Customer}.
+            #
+            # @overload import_customer(request, options = nil)
+            #   Pass arguments to `import_customer` via a request object, either of type
+            #   {::Google::Cloud::Channel::V1::ImportCustomerRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Channel::V1::ImportCustomerRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload import_customer(domain: nil, cloud_identity_id: nil, parent: nil, auth_token: nil, overwrite_if_exists: nil, channel_partner_id: nil, customer: nil)
+            #   Pass arguments to `import_customer` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param domain [::String]
+            #     Required. Customer domain.
+            #   @param cloud_identity_id [::String]
+            #     Required. Customer's Cloud Identity ID
+            #   @param parent [::String]
+            #     Required. The resource name of the reseller's account.
+            #     Parent takes the format: accounts/\\{account_id} or
+            #     accounts/\\{account_id}/channelPartnerLinks/\\{channel_partner_id}
+            #   @param auth_token [::String]
+            #     Optional. The super admin of the resold customer generates this token to
+            #     authorize a reseller to access their Cloud Identity and purchase
+            #     entitlements on their behalf. You can omit this token after authorization.
+            #     See https://support.google.com/a/answer/7643790 for more details.
+            #   @param overwrite_if_exists [::Boolean]
+            #     Required. Choose to overwrite an existing customer if found.
+            #     This must be set to true if there is an existing customer with a
+            #     conflicting region code or domain.
+            #   @param channel_partner_id [::String]
+            #     Optional. Cloud Identity ID of a channel partner who will be the direct reseller for
+            #     the customer's order. This field is required for 2-tier transfer scenarios
+            #     and can be provided via the request Parent binding as well.
+            #   @param customer [::String]
+            #     Optional. Specifies the customer that will receive imported Cloud Identity
+            #     information.
+            #     Format: accounts/\\{account_id}/customers/\\{customer_id}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Channel::V1::Customer]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Channel::V1::Customer]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def import_customer request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Channel::V1::ImportCustomerRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.import_customer.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Channel::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.import_customer.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.import_customer.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_channel_service_stub.call_rpc :import_customer, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Creates a Cloud Identity for the given customer using the customer's
             # information, or the information provided here.
             #
@@ -3608,6 +3715,11 @@ module Google
                 #
                 attr_reader :delete_customer
                 ##
+                # RPC-specific configuration for `import_customer`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :import_customer
+                ##
                 # RPC-specific configuration for `provision_cloud_identity`
                 # @return [::Gapic::Config::Method]
                 #
@@ -3762,6 +3874,8 @@ module Google
                   @update_customer = ::Gapic::Config::Method.new update_customer_config
                   delete_customer_config = parent_rpcs.delete_customer if parent_rpcs.respond_to? :delete_customer
                   @delete_customer = ::Gapic::Config::Method.new delete_customer_config
+                  import_customer_config = parent_rpcs.import_customer if parent_rpcs.respond_to? :import_customer
+                  @import_customer = ::Gapic::Config::Method.new import_customer_config
                   provision_cloud_identity_config = parent_rpcs.provision_cloud_identity if parent_rpcs.respond_to? :provision_cloud_identity
                   @provision_cloud_identity = ::Gapic::Config::Method.new provision_cloud_identity_config
                   list_entitlements_config = parent_rpcs.list_entitlements if parent_rpcs.respond_to? :list_entitlements

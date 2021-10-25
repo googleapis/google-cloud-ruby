@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/resourcesettings/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-resource_settings-v1/$1

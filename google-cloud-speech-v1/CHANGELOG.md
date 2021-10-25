@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 / 2021-09-21
+
+#### Features
+
+* Support for transcript output configs
+
 ### 0.5.0 / 2021-08-11
 
 #### Features

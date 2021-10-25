@@ -73,7 +73,11 @@ module Google
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
+                default_config.rpcs.translate_document.timeout = 600.0
+
                 default_config.rpcs.batch_translate_text.timeout = 600.0
+
+                default_config.rpcs.batch_translate_document.timeout = 600.0
 
                 default_config.rpcs.create_glossary.timeout = 600.0
 
@@ -204,7 +208,8 @@ module Google
             #
             #   @param contents [::Array<::String>]
             #     Required. The content of the input in string format.
-            #     We recommend the total content be less than 30k codepoints.
+            #     We recommend the total content be less than 30k codepoints. The max length
+            #     of this field is 1024.
             #     Use BatchTranslateText for larger text.
             #   @param mime_type [::String]
             #     Optional. The format of the source text, for example, "text/html",
@@ -243,14 +248,13 @@ module Google
             #
             #     - General (built-in) models:
             #       `projects/{project-number-or-id}/locations/{location-id}/models/general/nmt`,
-            #       `projects/{project-number-or-id}/locations/{location-id}/models/general/base`
             #
             #
             #     For global (non-regionalized) requests, use `location-id` `global`.
             #     For example,
             #     `projects/{project-number-or-id}/locations/global/models/general/nmt`.
             #
-            #     If missing, the system decides which google base model to use.
+            #     If not provided, the default Google model (NMT) will be used.
             #   @param glossary_config [::Google::Cloud::Translate::V3::TranslateTextGlossaryConfig, ::Hash]
             #     Optional. Glossary to be applied. The glossary must be
             #     within the same region (have the same location-id) as the model, otherwise
@@ -263,7 +267,8 @@ module Google
             #     characters, underscores and dashes. International characters are allowed.
             #     Label values are optional. Label keys must start with a letter.
             #
-            #     See https://cloud.google.com/translate/docs/labels for more information.
+            #     See https://cloud.google.com/translate/docs/advanced/labels for more
+            #     information.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Translate::V3::TranslateTextResponse]
@@ -365,7 +370,8 @@ module Google
             #     characters, underscores and dashes. International characters are allowed.
             #     Label values are optional. Label keys must start with a letter.
             #
-            #     See https://cloud.google.com/translate/docs/labels for more information.
+            #     See https://cloud.google.com/translate/docs/advanced/labels for more
+            #     information.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Translate::V3::DetectLanguageResponse]
@@ -460,11 +466,10 @@ module Google
             #
             #     - General (built-in) models:
             #       `projects/{project-number-or-id}/locations/{location-id}/models/general/nmt`,
-            #       `projects/{project-number-or-id}/locations/{location-id}/models/general/base`
             #
             #
             #     Returns languages supported by the specified model.
-            #     If missing, we get supported languages of Google general base (PBMT) model.
+            #     If missing, we get supported languages of Google general NMT model.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Translate::V3::SupportedLanguages]
@@ -506,6 +511,131 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @translation_service_stub.call_rpc :get_supported_languages, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Translates documents in synchronous mode.
+            #
+            # @overload translate_document(request, options = nil)
+            #   Pass arguments to `translate_document` via a request object, either of type
+            #   {::Google::Cloud::Translate::V3::TranslateDocumentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Translate::V3::TranslateDocumentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload translate_document(parent: nil, source_language_code: nil, target_language_code: nil, document_input_config: nil, document_output_config: nil, model: nil, glossary_config: nil, labels: nil)
+            #   Pass arguments to `translate_document` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Location to make a regional call.
+            #
+            #     Format: `projects/{project-number-or-id}/locations/{location-id}`.
+            #
+            #     For global calls, use `projects/{project-number-or-id}/locations/global` or
+            #     `projects/{project-number-or-id}`.
+            #
+            #     Non-global location is required for requests using AutoML models or custom
+            #     glossaries.
+            #
+            #     Models and glossaries must be within the same region (have the same
+            #     location-id), otherwise an INVALID_ARGUMENT (400) error is returned.
+            #   @param source_language_code [::String]
+            #     Optional. The BCP-47 language code of the input document if known, for
+            #     example, "en-US" or "sr-Latn". Supported language codes are listed in
+            #     Language Support. If the source language isn't specified, the API attempts
+            #     to identify the source language automatically and returns the source
+            #     language within the response. Source language must be specified if the
+            #     request contains a glossary or a custom model.
+            #   @param target_language_code [::String]
+            #     Required. The BCP-47 language code to use for translation of the input
+            #     document, set to one of the language codes listed in Language Support.
+            #   @param document_input_config [::Google::Cloud::Translate::V3::DocumentInputConfig, ::Hash]
+            #     Required. Input configurations.
+            #   @param document_output_config [::Google::Cloud::Translate::V3::DocumentOutputConfig, ::Hash]
+            #     Optional. Output configurations.
+            #     Defines if the output file should be stored within Cloud Storage as well
+            #     as the desired output format. If not provided the translated file will
+            #     only be returned through a byte-stream and its output mime type will be
+            #     the same as the input file's mime type.
+            #   @param model [::String]
+            #     Optional. The `model` type requested for this translation.
+            #
+            #     The format depends on model type:
+            #
+            #     - AutoML Translation models:
+            #       `projects/{project-number-or-id}/locations/{location-id}/models/{model-id}`
+            #
+            #     - General (built-in) models:
+            #       `projects/{project-number-or-id}/locations/{location-id}/models/general/nmt`,
+            #
+            #
+            #     If not provided, the default Google model (NMT) will be used for
+            #     translation.
+            #   @param glossary_config [::Google::Cloud::Translate::V3::TranslateTextGlossaryConfig, ::Hash]
+            #     Optional. Glossary to be applied. The glossary must be within the same
+            #     region (have the same location-id) as the model, otherwise an
+            #     INVALID_ARGUMENT (400) error is returned.
+            #   @param labels [::Hash{::String => ::String}]
+            #     Optional. The labels with user-defined metadata for the request.
+            #
+            #     Label keys and values can be no longer than 63 characters (Unicode
+            #     codepoints), can only contain lowercase letters, numeric characters,
+            #     underscores and dashes. International characters are allowed. Label values
+            #     are optional. Label keys must start with a letter.
+            #
+            #     See https://cloud.google.com/translate/docs/advanced/labels for more
+            #     information.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Translate::V3::TranslateDocumentResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Translate::V3::TranslateDocumentResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def translate_document request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Translate::V3::TranslateDocumentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.translate_document.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Translate::V3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.translate_document.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.translate_document.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @translation_service_stub.call_rpc :translate_document, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -563,14 +693,13 @@ module Google
             #
             #     - General (built-in) models:
             #       `projects/{project-number-or-id}/locations/{location-id}/models/general/nmt`,
-            #       `projects/{project-number-or-id}/locations/{location-id}/models/general/base`
             #
             #
             #     If the map is empty or a specific model is
             #     not requested for a language pair, then default google model (nmt) is used.
             #   @param input_configs [::Array<::Google::Cloud::Translate::V3::InputConfig, ::Hash>]
             #     Required. Input configurations.
-            #     The total number of files matched should be <= 1000.
+            #     The total number of files matched should be <= 100.
             #     The total content size should be <= 100M Unicode codepoints.
             #     The files must use UTF-8 encoding.
             #   @param output_config [::Google::Cloud::Translate::V3::OutputConfig, ::Hash]
@@ -588,7 +717,8 @@ module Google
             #     characters, underscores and dashes. International characters are allowed.
             #     Label values are optional. Label keys must start with a letter.
             #
-            #     See https://cloud.google.com/translate/docs/labels for more information.
+            #     See https://cloud.google.com/translate/docs/advanced/labels for more
+            #     information.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -630,6 +760,134 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @translation_service_stub.call_rpc :batch_translate_text, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Translates a large volume of document in asynchronous batch mode.
+            # This function provides real-time output as the inputs are being processed.
+            # If caller cancels a request, the partial results (for an input file, it's
+            # all or nothing) may still be available on the specified output location.
+            #
+            # This call returns immediately and you can use
+            # google.longrunning.Operation.name to poll the status of the call.
+            #
+            # @overload batch_translate_document(request, options = nil)
+            #   Pass arguments to `batch_translate_document` via a request object, either of type
+            #   {::Google::Cloud::Translate::V3::BatchTranslateDocumentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Translate::V3::BatchTranslateDocumentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload batch_translate_document(parent: nil, source_language_code: nil, target_language_codes: nil, input_configs: nil, output_config: nil, models: nil, glossaries: nil, format_conversions: nil)
+            #   Pass arguments to `batch_translate_document` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Location to make a regional call.
+            #
+            #     Format: `projects/{project-number-or-id}/locations/{location-id}`.
+            #
+            #     The `global` location is not supported for batch translation.
+            #
+            #     Only AutoML Translation models or glossaries within the same region (have
+            #     the same location-id) can be used, otherwise an INVALID_ARGUMENT (400)
+            #     error is returned.
+            #   @param source_language_code [::String]
+            #     Required. The BCP-47 language code of the input document if known, for
+            #     example, "en-US" or "sr-Latn". Supported language codes are listed in
+            #     Language Support (https://cloud.google.com/translate/docs/languages).
+            #   @param target_language_codes [::Array<::String>]
+            #     Required. The BCP-47 language code to use for translation of the input
+            #     document. Specify up to 10 language codes here.
+            #   @param input_configs [::Array<::Google::Cloud::Translate::V3::BatchDocumentInputConfig, ::Hash>]
+            #     Required. Input configurations.
+            #     The total number of files matched should be <= 100.
+            #     The total content size to translate should be <= 100M Unicode codepoints.
+            #     The files must use UTF-8 encoding.
+            #   @param output_config [::Google::Cloud::Translate::V3::BatchDocumentOutputConfig, ::Hash]
+            #     Required. Output configuration.
+            #     If 2 input configs match to the same file (that is, same input path),
+            #     we don't generate output for duplicate inputs.
+            #   @param models [::Hash{::String => ::String}]
+            #     Optional. The models to use for translation. Map's key is target language
+            #     code. Map's value is the model name. Value can be a built-in general model,
+            #     or an AutoML Translation model.
+            #
+            #     The value format depends on model type:
+            #
+            #     - AutoML Translation models:
+            #       `projects/{project-number-or-id}/locations/{location-id}/models/{model-id}`
+            #
+            #     - General (built-in) models:
+            #       `projects/{project-number-or-id}/locations/{location-id}/models/general/nmt`,
+            #
+            #
+            #     If the map is empty or a specific model is
+            #     not requested for a language pair, then default google model (nmt) is used.
+            #   @param glossaries [::Hash{::String => ::Google::Cloud::Translate::V3::TranslateTextGlossaryConfig, ::Hash}]
+            #     Optional. Glossaries to be applied. It's keyed by target language code.
+            #   @param format_conversions [::Hash{::String => ::String}]
+            #     Optional. File format conversion map to be applied to all input files.
+            #     Map's key is the original mime_type. Map's value is the target mime_type of
+            #     translated documents.
+            #
+            #     Supported file format conversion includes:
+            #     - `application/pdf` to
+            #       `application/vnd.openxmlformats-officedocument.wordprocessingml.document`
+            #
+            #     If nothing specified, output files will be in the same format as the
+            #     original file.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def batch_translate_document request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Translate::V3::BatchTranslateDocumentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.batch_translate_document.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Translate::V3::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "parent" => request.parent
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.batch_translate_document.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.batch_translate_document.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @translation_service_stub.call_rpc :batch_translate_document, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
@@ -741,7 +999,20 @@ module Google
             #     The first page is returned if `page_token`is empty or missing.
             #   @param filter [::String]
             #     Optional. Filter specifying constraints of a list operation.
-            #     Filtering is not supported yet, and the parameter currently has no effect.
+            #     Specify the constraint by the format of "key=value", where key must be
+            #     "src" or "tgt", and the value must be a valid language code.
+            #     For multiple restrictions, concatenate them by "AND" (uppercase only),
+            #     such as: "src=en-US AND tgt=zh-CN". Notice that the exact match is used
+            #     here, which means using 'en-US' and 'en' can lead to different results,
+            #     which depends on the language code you used when you create the glossary.
+            #     For the unidirectional glossaries, the "src" and "tgt" add restrictions
+            #     on the source and target language code separately.
+            #     For the equivalent term set glossaries, the "src" and/or "tgt" add
+            #     restrictions on the term set.
+            #     For example: "src=en-US AND tgt=zh-CN" will only pick the unidirectional
+            #     glossaries which exactly match the source language code as "en-US" and the
+            #     target language code "zh-CN", but all equivalent term set glossaries which
+            #     contain "en-US" and "zh-CN" in their language set will be picked.
             #     If missing, no filtering is performed.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1083,10 +1354,20 @@ module Google
                 #
                 attr_reader :get_supported_languages
                 ##
+                # RPC-specific configuration for `translate_document`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :translate_document
+                ##
                 # RPC-specific configuration for `batch_translate_text`
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :batch_translate_text
+                ##
+                # RPC-specific configuration for `batch_translate_document`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :batch_translate_document
                 ##
                 # RPC-specific configuration for `create_glossary`
                 # @return [::Gapic::Config::Method]
@@ -1116,8 +1397,12 @@ module Google
                   @detect_language = ::Gapic::Config::Method.new detect_language_config
                   get_supported_languages_config = parent_rpcs.get_supported_languages if parent_rpcs.respond_to? :get_supported_languages
                   @get_supported_languages = ::Gapic::Config::Method.new get_supported_languages_config
+                  translate_document_config = parent_rpcs.translate_document if parent_rpcs.respond_to? :translate_document
+                  @translate_document = ::Gapic::Config::Method.new translate_document_config
                   batch_translate_text_config = parent_rpcs.batch_translate_text if parent_rpcs.respond_to? :batch_translate_text
                   @batch_translate_text = ::Gapic::Config::Method.new batch_translate_text_config
+                  batch_translate_document_config = parent_rpcs.batch_translate_document if parent_rpcs.respond_to? :batch_translate_document
+                  @batch_translate_document = ::Gapic::Config::Method.new batch_translate_document_config
                   create_glossary_config = parent_rpcs.create_glossary if parent_rpcs.respond_to? :create_glossary
                   @create_glossary = ::Gapic::Config::Method.new create_glossary_config
                   list_glossaries_config = parent_rpcs.list_glossaries if parent_rpcs.respond_to? :list_glossaries

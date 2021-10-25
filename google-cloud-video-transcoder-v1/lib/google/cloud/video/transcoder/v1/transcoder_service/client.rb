@@ -404,7 +404,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload delete_job(name: nil)
+              # @overload delete_job(name: nil, allow_missing: nil)
               #   Pass arguments to `delete_job` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -412,6 +412,9 @@ module Google
               #   @param name [::String]
               #     Required. The name of the job to delete.
               #     Format: `projects/{project}/locations/{location}/jobs/{job}`
+              #   @param allow_missing [::Boolean]
+              #     If set to true, and the job is not found, the request will succeed but no
+              #     action will be taken on the server.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]
@@ -701,7 +704,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload delete_job_template(name: nil)
+              # @overload delete_job_template(name: nil, allow_missing: nil)
               #   Pass arguments to `delete_job_template` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -709,6 +712,9 @@ module Google
               #   @param name [::String]
               #     Required. The name of the job template to delete.
               #     `projects/{project}/locations/{location}/jobTemplates/{job_template}`
+              #   @param allow_missing [::Boolean]
+              #     If set to true, and the job template is not found, the request will succeed
+              #     but no action will be taken on the server.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]

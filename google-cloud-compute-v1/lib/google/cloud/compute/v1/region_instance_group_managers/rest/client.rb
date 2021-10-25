@@ -211,10 +211,10 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def abandon_instances request, options = nil
@@ -241,6 +241,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @region_instance_group_managers_stub.abandon_instances request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -278,10 +279,10 @@ module Google
               #   @param region_instance_group_managers_apply_updates_request_resource [::Google::Cloud::Compute::V1::RegionInstanceGroupManagersApplyUpdatesRequest, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def apply_updates_to_instances request, options = nil
@@ -308,6 +309,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @region_instance_group_managers_stub.apply_updates_to_instances request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -351,10 +353,10 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def create_instances request, options = nil
@@ -381,6 +383,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @region_instance_group_managers_stub.create_instances request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -422,10 +425,10 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def delete request, options = nil
@@ -452,6 +455,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @region_instance_group_managers_stub.delete request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -499,10 +503,10 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def delete_instances request, options = nil
@@ -529,6 +533,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @region_instance_group_managers_stub.delete_instances request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -566,10 +571,10 @@ module Google
               #   @param region_instance_group_manager_delete_instance_config_req_resource [::Google::Cloud::Compute::V1::RegionInstanceGroupManagerDeleteInstanceConfigReq, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def delete_per_instance_configs request, options = nil
@@ -596,6 +601,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @region_instance_group_managers_stub.delete_per_instance_configs request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -704,10 +710,10 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def insert request, options = nil
@@ -734,6 +740,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @region_instance_group_managers_stub.insert request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -1119,10 +1126,10 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def patch request, options = nil
@@ -1149,6 +1156,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @region_instance_group_managers_stub.patch request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -1192,10 +1200,10 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def patch_per_instance_configs request, options = nil
@@ -1222,6 +1230,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @region_instance_group_managers_stub.patch_per_instance_configs request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -1269,10 +1278,10 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def recreate_instances request, options = nil
@@ -1299,6 +1308,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @region_instance_group_managers_stub.recreate_instances request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -1346,10 +1356,10 @@ module Google
               #   @param size [::Integer]
               #     Number of instances that should exist in this instance group manager.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def resize request, options = nil
@@ -1376,6 +1386,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @region_instance_group_managers_stub.resize request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -1419,10 +1430,10 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_instance_template request, options = nil
@@ -1449,6 +1460,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @region_instance_group_managers_stub.set_instance_template request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -1492,10 +1504,10 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_target_pools request, options = nil
@@ -1522,6 +1534,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @region_instance_group_managers_stub.set_target_pools request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -1565,10 +1578,10 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def update_per_instance_configs request, options = nil
@@ -1595,6 +1608,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @region_instance_group_managers_stub.update_per_instance_configs request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end

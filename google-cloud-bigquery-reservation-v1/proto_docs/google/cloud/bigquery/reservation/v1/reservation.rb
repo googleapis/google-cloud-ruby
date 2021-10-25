@@ -41,9 +41,16 @@ module Google
           #     `google.rpc.Code.RESOURCE_EXHAUSTED`.
           # @!attribute [rw] ignore_idle_slots
           #   @return [::Boolean]
-          #     If false, any query using this reservation will use idle slots from other
-          #     reservations within the same admin project. If true, a query using this
-          #     reservation will execute with the slot capacity specified above at most.
+          #     If false, any query or pipeline job using this reservation will use idle
+          #     slots from other reservations within the same admin project. If true, a
+          #     query or pipeline job using this reservation will execute with the slot
+          #     capacity specified in the slot_capacity field at most.
+          # @!attribute [r] creation_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Creation time of the reservation.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Last update time of the reservation.
           class Reservation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -72,6 +79,10 @@ module Google
           # @!attribute [r] state
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment::State]
           #     Output only. State of the commitment.
+          # @!attribute [r] commitment_start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The start of the current commitment period. It is applicable only for
+          #     ACTIVE capacity commitments.
           # @!attribute [r] commitment_end_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. The end of the current commitment period. It is applicable only for ACTIVE
@@ -226,6 +237,13 @@ module Google
           #   @return [::Boolean]
           #     If true, fail the request if another project in the organization has a
           #     capacity commitment.
+          # @!attribute [rw] capacity_commitment_id
+          #   @return [::String]
+          #     The optional capacity commitment ID. Capacity commitment name will be
+          #     generated automatically if this field is empty.
+          #     This field must only contain lower case alphanumeric characters or dash.
+          #     Max length is 64 characters.
+          #     NOTE: this ID won't be kept if the capacity commitment is split or merged.
           class CreateCapacityCommitmentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -275,6 +293,11 @@ module Google
           #   @return [::String]
           #     Required. Resource name of the capacity commitment to delete. E.g.,
           #        `projects/myproject/locations/US/capacityCommitments/123`
+          # @!attribute [rw] force
+          #   @return [::Boolean]
+          #     Can be used to force delete commitments even if assignments exist. Deleting
+          #     commitments with assignments may cause queries to fail if they no longer
+          #     have access to slots.
           class DeleteCapacityCommitmentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -365,6 +388,10 @@ module Google
 
               # Query jobs from the project will use the reservation.
               QUERY = 2
+
+              # BigQuery ML jobs that use services external to BigQuery for model
+              # training. These jobs will not utilize idle slots from other reservations.
+              ML_EXTERNAL = 3
             end
 
             # Assignment will remain in PENDING state if no active capacity commitment is
@@ -393,6 +420,12 @@ module Google
           # @!attribute [rw] assignment
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::Assignment]
           #     Assignment resource to create.
+          # @!attribute [rw] assignment_id
+          #   @return [::String]
+          #     The optional assignment ID. Assignment name will be generated automatically
+          #     if this field is empty.
+          #     This field must only contain lower case alphanumeric characters or dash.
+          #     Max length is 64 characters.
           class CreateAssignmentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -473,6 +506,35 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # The request for
+          # {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#search_all_assignments ReservationService.SearchAllAssignments}.
+          # Note: "bigquery.reservationAssignments.search" permission is required on the
+          # related assignee.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The resource name with location (project name could be the wildcard '-'),
+          #     e.g.:
+          #       `projects/-/locations/US`.
+          # @!attribute [rw] query
+          #   @return [::String]
+          #     Please specify resource name as assignee in the query.
+          #
+          #     Examples:
+          #
+          #     * `assignee=projects/myproject`
+          #     * `assignee=folders/123`
+          #     * `assignee=organizations/456`
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     The maximum number of items to return per page.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     The next_page_token value returned from a previous List request, if any.
+          class SearchAllAssignmentsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The response for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#search_assignments ReservationService.SearchAssignments}.
           # @!attribute [rw] assignments
           #   @return [::Array<::Google::Cloud::Bigquery::Reservation::V1::Assignment>]
@@ -482,6 +544,19 @@ module Google
           #     Token to retrieve the next page of results, or empty if there are no
           #     more results in the list.
           class SearchAssignmentsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The response for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#search_all_assignments ReservationService.SearchAllAssignments}.
+          # @!attribute [rw] assignments
+          #   @return [::Array<::Google::Cloud::Bigquery::Reservation::V1::Assignment>]
+          #     List of assignments visible to the user.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     Token to retrieve the next page of results, or empty if there are no
+          #     more results in the list.
+          class SearchAllAssignmentsResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -514,7 +589,7 @@ module Google
           #   @return [::String]
           #     The resource name of the singleton BI reservation.
           #     Reservation names have the form
-          #     `projects/{project_id}/locations/{location_id}/bireservation`.
+          #     `projects/{project_id}/locations/{location_id}/biReservation`.
           # @!attribute [r] update_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. The last update timestamp of a reservation.
@@ -530,7 +605,7 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Name of the requested reservation, for example:
-          #     `projects/{project_id}/locations/{location_id}/bireservation`
+          #     `projects/{project_id}/locations/{location_id}/biReservation`
           class GetBiReservationRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

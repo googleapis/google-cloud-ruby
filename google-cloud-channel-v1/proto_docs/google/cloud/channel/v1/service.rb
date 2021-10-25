@@ -146,6 +146,44 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#import_customer CloudChannelService.ImportCustomer}
+        # @!attribute [rw] domain
+        #   @return [::String]
+        #     Required. Customer domain.
+        # @!attribute [rw] cloud_identity_id
+        #   @return [::String]
+        #     Required. Customer's Cloud Identity ID
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the reseller's account.
+        #     Parent takes the format: accounts/\\{account_id} or
+        #     accounts/\\{account_id}/channelPartnerLinks/\\{channel_partner_id}
+        # @!attribute [rw] auth_token
+        #   @return [::String]
+        #     Optional. The super admin of the resold customer generates this token to
+        #     authorize a reseller to access their Cloud Identity and purchase
+        #     entitlements on their behalf. You can omit this token after authorization.
+        #     See https://support.google.com/a/answer/7643790 for more details.
+        # @!attribute [rw] overwrite_if_exists
+        #   @return [::Boolean]
+        #     Required. Choose to overwrite an existing customer if found.
+        #     This must be set to true if there is an existing customer with a
+        #     conflicting region code or domain.
+        # @!attribute [rw] channel_partner_id
+        #   @return [::String]
+        #     Optional. Cloud Identity ID of a channel partner who will be the direct reseller for
+        #     the customer's order. This field is required for 2-tier transfer scenarios
+        #     and can be provided via the request Parent binding as well.
+        # @!attribute [rw] customer
+        #   @return [::String]
+        #     Optional. Specifies the customer that will receive imported Cloud Identity
+        #     information.
+        #     Format: accounts/\\{account_id}/customers/\\{customer_id}
+        class ImportCustomerRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#provision_cloud_identity CloudChannelService.ProvisionCloudIdentity}
         # @!attribute [rw] customer
         #   @return [::String]

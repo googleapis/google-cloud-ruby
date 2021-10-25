@@ -41,7 +41,7 @@ module Google
           # * `projects/redpepper-1290/locations/us-central1/instances/my-redis`
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode

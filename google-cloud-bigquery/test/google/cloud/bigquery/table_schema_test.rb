@@ -357,7 +357,9 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
         { name: "first_name", type: "STRING", mode: "REQUIRED", description: nil, fields: [] },
         { name: "countries_lived", type: "RECORD", mode: "REPEATED", description: nil, fields: [
             { name: "cities_lived", type: "RECORD", mode: "REPEATED", description: nil, fields: [
-                { mode: "NULLABLE", name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", fields: [] }
+                { mode: "NULLABLE", name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", fields: [] },
+                { mode: "NULLABLE", name: "my_nested_numeric", type: "NUMERIC", description: nil, fields: [], precision: precision_numeric, scale: scale_numeric },
+                { mode: "NULLABLE", name: "my_nested_bignumeric", type: "BIGNUMERIC", description: nil, fields: [], precision: precision_bignumeric, scale: scale_bignumeric }
               ]
             }
           ]
@@ -378,6 +380,8 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
       schema.record "countries_lived", mode: :repeated do |nested|
         nested.record "cities_lived", mode: :repeated do |nested_2|
           nested_2.integer "rank", description: "An integer value from 1 to 100"
+          nested_2.numeric "my_nested_numeric", precision: precision_numeric, scale: scale_numeric
+          nested_2.bignumeric "my_nested_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
         end
       end
     end

@@ -1,0 +1,43 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "gapic_metadata.json",
+    "google-cloud-bigtable-v2.gemspec",
+    "lib/google-cloud-bigtable-v2.rb",
+    "lib/google/bigtable/v2/bigtable_pb.rb",
+    "lib/google/bigtable/v2/bigtable_services_pb.rb",
+    "lib/google/bigtable/v2/data_pb.rb",
+    "lib/google/cloud/bigtable/v2.rb",
+    "lib/google/cloud/bigtable/v2/bigtable.rb",
+    "lib/google/cloud/bigtable/v2/bigtable/client.rb",
+    "lib/google/cloud/bigtable/v2/bigtable/credentials.rb",
+    "lib/google/cloud/bigtable/v2/bigtable/paths.rb",
+    "lib/google/cloud/bigtable/v2/version.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/bigtable/v2/bigtable.rb",
+    "proto_docs/google/bigtable/v2/data.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "proto_docs/google/protobuf/wrappers.rb",
+    "proto_docs/google/rpc/status.rb",
+    "test/google/cloud/bigtable/v2/bigtable_paths_test.rb",
+    "test/google/cloud/bigtable/v2/bigtable_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    "lib/google/cloud/bigtable/v2/bigtable/helpers.rb",
+    "test/google/cloud/bigtable/v2/bigtable/helpers_test.rb"
+  ]
+}

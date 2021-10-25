@@ -1,5 +1,9 @@
 # Release History
 
+### 1.3.3 / 2021-09-28
+
+* Update versions of gapic clients
+
 ### 1.3.2 / 2021-07-12
 
 #### Documentation

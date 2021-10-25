@@ -310,6 +310,14 @@ module Google
               ##
               # Creates an {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} in the specified {::Google::Cloud::Dialogflow::CX::V3::Agent Agent}.
               #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: An empty [Struct
+              #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}
+              #
               # @overload create_environment(request, options = nil)
               #   Pass arguments to `create_environment` via a request object, either of type
               #   {::Google::Cloud::Dialogflow::CX::V3::CreateEnvironmentRequest} or an equivalent Hash.
@@ -381,6 +389,14 @@ module Google
 
               ##
               # Updates the specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: An empty [Struct
+              #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}
               #
               # @overload update_environment(request, options = nil)
               #   Pass arguments to `update_environment` via a request object, either of type
@@ -599,6 +615,13 @@ module Google
               ##
               # Kicks off a continuous test under the specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
               #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::RunContinuousTestMetadata RunContinuousTestMetadata}
+              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::RunContinuousTestResponse RunContinuousTestResponse}
+              #
               # @overload run_continuous_test(request, options = nil)
               #   Pass arguments to `run_continuous_test` via a request object, either of type
               #   {::Google::Cloud::Dialogflow::CX::V3::RunContinuousTestRequest} or an equivalent Hash.
@@ -735,6 +758,88 @@ module Google
 
                 @environments_stub.call_rpc :list_continuous_test_results, request, options: options do |response, operation|
                   response = ::Gapic::PagedEnumerable.new @environments_stub, :list_continuous_test_results, request, response, operation, options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deploys a flow to the specified {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}.
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::DeployFlowMetadata DeployFlowMetadata}
+              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::DeployFlowResponse DeployFlowResponse}
+              #
+              # @overload deploy_flow(request, options = nil)
+              #   Pass arguments to `deploy_flow` via a request object, either of type
+              #   {::Google::Cloud::Dialogflow::CX::V3::DeployFlowRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dialogflow::CX::V3::DeployFlowRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload deploy_flow(environment: nil, flow_version: nil)
+              #   Pass arguments to `deploy_flow` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param environment [::String]
+              #     Required. The environment to deploy the flow to.
+              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
+              #     environments/<Environment ID>`.
+              #   @param flow_version [::String]
+              #     Required. The flow version to deploy.
+              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
+              #     flows/<Flow ID>/versions/<Version ID>`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              def deploy_flow request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::CX::V3::DeployFlowRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.deploy_flow.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {
+                  "environment" => request.environment
+                }
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.deploy_flow.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.deploy_flow.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @environments_stub.call_rpc :deploy_flow, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
                   return response
                 end
@@ -917,6 +1022,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_continuous_test_results
+                  ##
+                  # RPC-specific configuration for `deploy_flow`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :deploy_flow
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -936,6 +1046,8 @@ module Google
                     @run_continuous_test = ::Gapic::Config::Method.new run_continuous_test_config
                     list_continuous_test_results_config = parent_rpcs.list_continuous_test_results if parent_rpcs.respond_to? :list_continuous_test_results
                     @list_continuous_test_results = ::Gapic::Config::Method.new list_continuous_test_results_config
+                    deploy_flow_config = parent_rpcs.deploy_flow if parent_rpcs.respond_to? :deploy_flow
+                    @deploy_flow = ::Gapic::Config::Method.new deploy_flow_config
 
                     yield self if block_given?
                   end

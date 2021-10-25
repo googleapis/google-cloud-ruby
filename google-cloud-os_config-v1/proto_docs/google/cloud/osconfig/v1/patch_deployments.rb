@@ -130,6 +130,10 @@ module Google
             # Indicates that the frequency should be expressed in terms of
             # months.
             MONTHLY = 2
+
+            # Indicates that the frequency should be expressed in terms of
+            # days.
+            DAILY = 3
           end
         end
 

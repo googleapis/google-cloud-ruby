@@ -21,6 +21,54 @@ module Google
   module Cloud
     module Dataproc
       module V1
+        # Metadata describing the Batch operation.
+        # @!attribute [rw] batch
+        #   @return [::String]
+        #     Name of the batch for the operation.
+        # @!attribute [rw] batch_uuid
+        #   @return [::String]
+        #     Batch UUID for the operation.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the operation was created.
+        # @!attribute [rw] done_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the operation finished.
+        # @!attribute [rw] operation_type
+        #   @return [::Google::Cloud::Dataproc::V1::BatchOperationMetadata::BatchOperationType]
+        #     The operation type.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Short description of the operation.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Labels associated with the operation.
+        # @!attribute [rw] warnings
+        #   @return [::Array<::String>]
+        #     Warnings encountered during operation execution.
+        class BatchOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Operation type for Batch resources
+          module BatchOperationType
+            # Batch operation type is unknown.
+            BATCH_OPERATION_TYPE_UNSPECIFIED = 0
+
+            # Batch operation type.
+            BATCH = 1
+          end
+        end
+
         # The status of the operation.
         # @!attribute [r] state
         #   @return [::Google::Cloud::Dataproc::V1::ClusterOperationStatus::State]

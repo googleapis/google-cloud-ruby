@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-workflows
 checks for credentials are configured on the service Credentials class (such as
-`::Google::Cloud::Workflows::V1beta::Workflows::Credentials`):
+`::Google::Cloud::Workflows::V1::Workflows::Credentials`):
 
 * `WORKFLOWS_CREDENTIALS` - Path to JSON file, or JSON contents
 * `WORKFLOWS_KEYFILE` - Path to JSON file, or JSON contents

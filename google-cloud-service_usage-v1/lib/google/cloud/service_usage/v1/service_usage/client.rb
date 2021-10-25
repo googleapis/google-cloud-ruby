@@ -438,7 +438,7 @@ module Google
             #   @param page_size [::Integer]
             #     Requested size of the next page of data.
             #     Requested page size cannot exceed 200.
-            #      If not set, the default page size is 50.
+            #     If not set, the default page size is 50.
             #   @param page_token [::String]
             #     Token identifying which result to start with, which is returned by a
             #     previous list call.

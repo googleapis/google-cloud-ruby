@@ -1,5 +1,24 @@
 # Release History
 
+### 0.10.0 / 2021-10-21
+
+#### Features
+
+* Support for raw PKCS1 signing keys
+
+### 0.9.0 / 2021-10-18
+
+#### Features
+
+* Added OAEP+SHA1 to the list of supported algorithms
+* Support RSA encrypt with SHA-1 digest
+
+### 0.8.0 / 2021-09-02
+
+#### Features
+
+* Ability to target an existing crypto_key_version for import
+
 ### 0.7.0 / 2021-08-11
 
 #### Features

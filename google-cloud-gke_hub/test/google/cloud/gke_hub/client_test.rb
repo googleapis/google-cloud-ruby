@@ -22,13 +22,13 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::GkeHub::ClientConstructionMinitest < Minitest::Test
-  def test_gke_hub_membership_service
+  def test_gke_hub
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::GkeHub.gke_hub_membership_service do |config|
+      client = Google::Cloud::GkeHub.gke_hub do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client, client
+      assert_kind_of Google::Cloud::GkeHub::V1::GkeHub::Client, client
     end
   end
 end

@@ -184,6 +184,21 @@ module Google
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
+                default_config.rpcs.mac_sign.timeout = 60.0
+                default_config.rpcs.mac_sign.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.mac_verify.timeout = 60.0
+                default_config.rpcs.mac_verify.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.generate_random_bytes.timeout = 60.0
+                default_config.rpcs.generate_random_bytes.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
                 default_config
               end
               yield @configure if block_given?
@@ -1200,11 +1215,12 @@ module Google
             end
 
             ##
-            # Imports a new {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} into an existing {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} using the
-            # wrapped key material provided in the request.
+            # Import wrapped key material into a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}.
             #
-            # The version ID will be assigned the next sequential id within the
-            # {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
+            # All requests must specify a {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}. If a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} is
+            # additionally specified in the request, key material will be reimported into
+            # that version. Otherwise, a new version will be created, and will be
+            # assigned the next sequential id within the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
             #
             # @overload import_crypto_key_version(request, options = nil)
             #   Pass arguments to `import_crypto_key_version` via a request object, either of type
@@ -1216,14 +1232,32 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload import_crypto_key_version(parent: nil, algorithm: nil, import_job: nil, rsa_aes_wrapped_key: nil)
+            # @overload import_crypto_key_version(parent: nil, crypto_key_version: nil, algorithm: nil, import_job: nil, rsa_aes_wrapped_key: nil)
             #   Pass arguments to `import_crypto_key_version` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The {::Google::Cloud::Kms::V1::CryptoKey#name name} of the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} to
-            #     be imported into.
+            #     Required. The {::Google::Cloud::Kms::V1::CryptoKey#name name} of the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} to be imported into.
+            #
+            #     The create permission is only required on this key when creating a new
+            #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}.
+            #   @param crypto_key_version [::String]
+            #     Optional. The optional {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of an existing
+            #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to target for an import operation.
+            #     If this field is not present, a new {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} containing the
+            #     supplied key material is created.
+            #
+            #     If this field is present, the supplied key material is imported into
+            #     the existing {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. To import into an existing
+            #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} must be a child of
+            #     {::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest#parent ImportCryptoKeyVersionRequest.parent}, have been previously created via
+            #     [ImportCryptoKeyVersion][], and be in
+            #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED DESTROYED} or
+            #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::IMPORT_FAILED IMPORT_FAILED}
+            #     state. The key material and algorithm must match the previous
+            #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} exactly if the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} has ever contained
+            #     key material.
             #   @param algorithm [::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm]
             #     Required. The {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm algorithm} of
             #     the key being imported. This does not need to match the
@@ -1603,10 +1637,11 @@ module Google
             # Schedule a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} for destruction.
             #
             # Upon calling this method, {::Google::Cloud::Kms::V1::CryptoKeyVersion#state CryptoKeyVersion.state} will be set to
-            # {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROY_SCHEDULED DESTROY_SCHEDULED}
-            # and {::Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time destroy_time} will be set to a time 24
-            # hours in the future, at which point the {::Google::Cloud::Kms::V1::CryptoKeyVersion#state state}
-            # will be changed to
+            # {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROY_SCHEDULED DESTROY_SCHEDULED},
+            # and {::Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time destroy_time} will be set to the time
+            # {::Google::Cloud::Kms::V1::CryptoKey#destroy_scheduled_duration destroy_scheduled_duration} in the
+            # future. At that time, the {::Google::Cloud::Kms::V1::CryptoKeyVersion#state state} will
+            # automatically change to
             # {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED DESTROYED}, and the key
             # material will be irrevocably destroyed.
             #
@@ -1994,7 +2029,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload asymmetric_sign(name: nil, digest: nil, digest_crc32c: nil)
+            # @overload asymmetric_sign(name: nil, digest: nil, digest_crc32c: nil, data: nil, data_crc32c: nil)
             #   Pass arguments to `asymmetric_sign` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2002,7 +2037,7 @@ module Google
             #   @param name [::String]
             #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for signing.
             #   @param digest [::Google::Cloud::Kms::V1::Digest, ::Hash]
-            #     Required. The digest of the data to sign. The digest must be produced with
+            #     Optional. The digest of the data to sign. The digest must be produced with
             #     the same digest algorithm as specified by the key version's
             #     {::Google::Cloud::Kms::V1::CryptoKeyVersion#algorithm algorithm}.
             #   @param digest_crc32c [::Google::Protobuf::Int64Value, ::Hash]
@@ -2013,6 +2048,24 @@ module Google
             #     fails. If you receive a checksum error, your client should verify that
             #     CRC32C({::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest AsymmetricSignRequest.digest}) is equal to
             #     {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest_crc32c AsymmetricSignRequest.digest_crc32c}, and if so, perform a limited
+            #     number of retries. A persistent mismatch may indicate an issue in your
+            #     computation of the CRC32C checksum.
+            #     Note: This field is defined as int64 for reasons of compatibility across
+            #     different languages. However, it is a non-negative integer, which will
+            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+            #     that support this type.
+            #   @param data [::String]
+            #     Optional. This field will only be honored for RAW_PKCS1 keys.
+            #     The data to sign. A digest is computed over the data that will be signed,
+            #     PKCS #1 padding is applied to the digest directly and then encrypted.
+            #   @param data_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+            #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::AsymmetricSignRequest#data AsymmetricSignRequest.data}. If
+            #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+            #     received {::Google::Cloud::Kms::V1::AsymmetricSignRequest#data AsymmetricSignRequest.data} using this checksum.
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+            #     fails. If you receive a checksum error, your client should verify that
+            #     CRC32C({::Google::Cloud::Kms::V1::AsymmetricSignRequest#data AsymmetricSignRequest.data}) is equal to
+            #     {::Google::Cloud::Kms::V1::AsymmetricSignRequest#data_crc32c AsymmetricSignRequest.data_crc32c}, and if so, perform a limited
             #     number of retries. A persistent mismatch may indicate an issue in your
             #     computation of the CRC32C checksum.
             #     Note: This field is defined as int64 for reasons of compatibility across

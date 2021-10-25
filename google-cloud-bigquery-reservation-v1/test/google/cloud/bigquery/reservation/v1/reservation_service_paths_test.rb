@@ -43,7 +43,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientPath
       end
 
       path = client.bi_reservation_path project: "value0", location: "value1"
-      assert_equal "projects/value0/locations/value1/bireservation", path
+      assert_equal "projects/value0/locations/value1/biReservation", path
     end
   end
 

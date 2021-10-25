@@ -49,8 +49,8 @@ module Google
         # Create a new client object for Executions.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Workflows::Executions::V1beta::Executions::Client](https://googleapis.dev/ruby/google-cloud-workflows-executions-v1beta/latest/Google/Cloud/Workflows/Executions/V1beta/Executions/Client.html)
-        # for version V1beta of the API.
+        # [Google::Cloud::Workflows::Executions::V1::Executions::Client](https://googleapis.dev/ruby/google-cloud-workflows-executions-v1/latest/Google/Cloud/Workflows/Executions/V1/Executions/Client.html)
+        # for version V1 of the API.
         # However, you can specify specify a different API version by passing it in the
         # `version` parameter. If the Executions service is
         # supported by that API version, and the corresponding gem is available, the
@@ -59,13 +59,13 @@ module Google
         # ## About Executions
         #
         # Executions is used to start and manage running instances of
-        # [Workflows][google.cloud.workflows.v1beta.Workflow] called executions.
+        # [Workflows][google.cloud.workflows.v1.Workflow] called executions.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @return [Executions::Client] A client object for the specified version.
         #
-        def self.executions version: :v1beta, &block
+        def self.executions version: :v1, &block
           require "google/cloud/workflows/executions/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Workflows::Executions

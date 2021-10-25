@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-binary_authorization
 checks for credentials are configured on the service Credentials class (such as
-`::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Credentials`):
+`::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Credentials`):
 
 * `BINARY_AUTHORIZATION_CREDENTIALS` - Path to JSON file, or JSON contents
 * `BINARY_AUTHORIZATION_KEYFILE` - Path to JSON file, or JSON contents

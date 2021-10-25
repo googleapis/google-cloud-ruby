@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 / 2021-08-30
+
+#### Features
+
+* Version 1.0 (GA) release of the client
+
 ### 0.1.2 / 2021-07-12
 
 #### Documentation

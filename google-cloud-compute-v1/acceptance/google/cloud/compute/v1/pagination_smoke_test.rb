@@ -3,7 +3,6 @@ require "minitest/autorun"
 require "google/cloud/errors"
 require "google/cloud/compute/v1/accelerator_types"
 
-
 # Tests for pagination in GCE
 class PaginationSmokeTest < Minitest::Test
   def setup

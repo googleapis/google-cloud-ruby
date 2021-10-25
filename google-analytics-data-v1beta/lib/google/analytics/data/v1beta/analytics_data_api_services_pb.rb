@@ -27,7 +27,7 @@ module Google
           # Google Analytics reporting data service.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode
@@ -68,6 +68,17 @@ module Google
             # event data for your property. These reports show events and usage from the
             # last 30 minutes.
             rpc :RunRealtimeReport, ::Google::Analytics::Data::V1beta::RunRealtimeReportRequest, ::Google::Analytics::Data::V1beta::RunRealtimeReportResponse
+            # This compatibility method lists dimensions and metrics that can be added to
+            # a report request and maintain compatibility. This method fails if the
+            # request's dimensions and metrics are incompatible.
+            #
+            # In Google Analytics, reports fail if they request incompatible dimensions
+            # and/or metrics; in that case, you will need to remove dimensions and/or
+            # metrics from the incompatible report until the report is compatible.
+            #
+            # The Realtime and Core reports have different compatibility rules. This
+            # method checks compatibility for Core reports.
+            rpc :CheckCompatibility, ::Google::Analytics::Data::V1beta::CheckCompatibilityRequest, ::Google::Analytics::Data::V1beta::CheckCompatibilityResponse
           end
 
           Stub = Service.rpc_stub_class

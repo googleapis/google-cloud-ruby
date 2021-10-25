@@ -23,13 +23,13 @@ logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICMicrogenerator()
 library = gapic.ruby_library(
-    "assuredworkloads", "v1beta1",
+    "assuredworkloads", "v1",
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-assured_workloads",
         "ruby-cloud-title": "Assured Workloads for Government",
         "ruby-cloud-description": "Assured Workloads for Government secures government workloads and accelerates the path to running compliant workloads on Google Cloud.",
         "ruby-cloud-env-prefix": "ASSURED_WORKLOADS",
-        "ruby-cloud-wrapper-of": "v1beta1:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.0;v1beta1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/assured-workloads/",
         "ruby-cloud-api-id": "assuredworkloads.googleapis.com",
         "ruby-cloud-api-shortname": "assuredworkloads",

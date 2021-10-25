@@ -1,5 +1,9 @@
 # Release History
 
+### 1.0.0 / 2021-09-28
+
+* BREAKING CHANGE: Support version V1 of the service and make it the default
+
 ### 0.2.2 / 2021-07-12
 
 #### Documentation

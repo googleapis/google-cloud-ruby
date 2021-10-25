@@ -115,6 +115,8 @@ module Google
       #   used.)
       # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
+      # * `quota_project` - (String) The project ID for a project that can be
+      #   used by client libraries for quota and billing purposes.
       # * `timeout` - (Integer) Default timeout to use in requests.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.

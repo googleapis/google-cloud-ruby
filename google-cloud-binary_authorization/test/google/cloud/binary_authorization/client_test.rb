@@ -28,7 +28,27 @@ class Google::Cloud::BinaryAuthorization::ClientConstructionMinitest < Minitest:
       client = Google::Cloud::BinaryAuthorization.binauthz_management_service do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client, client
+      assert_kind_of Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client, client
+    end
+  end
+
+  def test_system_policy
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::BinaryAuthorization.system_policy do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::BinaryAuthorization::V1::SystemPolicy::Client, client
+    end
+  end
+
+  def test_validation_helper
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::BinaryAuthorization.validation_helper do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Client, client
     end
   end
 end

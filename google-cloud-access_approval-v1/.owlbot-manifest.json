@@ -1,0 +1,37 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "gapic_metadata.json",
+    "google-cloud-access_approval-v1.gemspec",
+    "lib/google-cloud-access_approval-v1.rb",
+    "lib/google/cloud/access_approval/v1.rb",
+    "lib/google/cloud/access_approval/v1/access_approval.rb",
+    "lib/google/cloud/access_approval/v1/access_approval/client.rb",
+    "lib/google/cloud/access_approval/v1/access_approval/credentials.rb",
+    "lib/google/cloud/access_approval/v1/version.rb",
+    "lib/google/cloud/accessapproval/v1/accessapproval_pb.rb",
+    "lib/google/cloud/accessapproval/v1/accessapproval_services_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/accessapproval/v1/accessapproval.rb",
+    "proto_docs/google/protobuf/empty.rb",
+    "proto_docs/google/protobuf/field_mask.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "test/google/cloud/access_approval/v1/access_approval_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

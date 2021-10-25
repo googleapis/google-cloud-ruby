@@ -419,6 +419,14 @@ module Google
         end
 
         ##
+        # Deletes the job specified by jobId and location (required).
+        def delete_job job_id, location: nil
+          execute do
+            service.delete_job @project, job_id, location: location
+          end
+        end
+
+        ##
         # Returns the query data for the job
         def job_query_results job_id, location: nil, max: nil, token: nil, start: nil, timeout: nil
           # The get operation is considered idempotent

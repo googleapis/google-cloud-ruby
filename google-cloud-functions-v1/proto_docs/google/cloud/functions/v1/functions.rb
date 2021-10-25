@@ -230,9 +230,32 @@ module Google
         # @!attribute [r] url
         #   @return [::String]
         #     Output only. The deployed url for the function.
+        # @!attribute [rw] security_level
+        #   @return [::Google::Cloud::Functions::V1::HttpsTrigger::SecurityLevel]
+        #     The security level for the function.
         class HttpsTrigger
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Available security level settings.
+          #
+          # This controls the methods to enforce security (HTTPS) on a URL.
+          #
+          # If unspecified, SECURE_OPTIONAL will be used.
+          module SecurityLevel
+            # Unspecified.
+            SECURITY_LEVEL_UNSPECIFIED = 0
+
+            # Requests for a URL that match this handler that do not use HTTPS are
+            # automatically redirected to the HTTPS URL with the same path. Query
+            # parameters are reserved for the redirect.
+            SECURE_ALWAYS = 1
+
+            # Both HTTP and HTTPS requests with URLs that match the handler succeed
+            # without redirects. The application can examine the request to determine
+            # which protocol was used and respond accordingly.
+            SECURE_OPTIONAL = 2
+          end
         end
 
         # Describes EventTrigger, used to request events be sent from another

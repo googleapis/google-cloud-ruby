@@ -1,0 +1,50 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "350ca7dae628131771d4ac07d5e460b20eabebf2"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "f47c38882a165e0c79c70e52082e801fa2bb72d8",
+        "internalRef": "394321534"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "datastream",
+        "apiVersion": "v1alpha1",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ],
+  "generatedFiles": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-datastream.gemspec",
+    "lib/google-cloud-datastream.rb",
+    "lib/google/cloud/datastream.rb",
+    "lib/google/cloud/datastream/version.rb",
+    "test/google/cloud/datastream/client_test.rb",
+    "test/google/cloud/datastream/version_test.rb",
+    "test/helper.rb"
+  ]
+}

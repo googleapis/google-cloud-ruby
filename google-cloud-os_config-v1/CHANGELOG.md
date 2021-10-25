@@ -1,5 +1,23 @@
 # Release History
 
+### 0.7.0 / 2021-10-21
+
+#### Features
+
+* Support daily frequency for recurring patch deployments
+
+### 0.6.0 / 2021-09-07
+
+#### Features
+
+* Support OsConfigZonalService including inventory and vulnerability report calls
+
+### 0.5.0 / 2021-08-31
+
+#### Features
+
+* Support Windows applications in the software package inventory
+
 ### 0.4.3 / 2021-08-11
 
 #### Bug Fixes

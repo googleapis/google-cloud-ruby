@@ -281,10 +281,10 @@ module Google
               #   @param subnetwork [::String]
               #     Name of the Subnetwork resource to delete.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def delete request, options = nil
@@ -311,6 +311,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @subnetworks_stub.delete request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -354,10 +355,10 @@ module Google
               #   @param subnetworks_expand_ip_cidr_range_request_resource [::Google::Cloud::Compute::V1::SubnetworksExpandIpCidrRangeRequest, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def expand_ip_cidr_range request, options = nil
@@ -384,6 +385,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @subnetworks_stub.expand_ip_cidr_range request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -557,10 +559,10 @@ module Google
               #   @param subnetwork_resource [::Google::Cloud::Compute::V1::Subnetwork, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def insert request, options = nil
@@ -587,6 +589,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @subnetworks_stub.insert request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -798,10 +801,10 @@ module Google
               #   @param subnetwork_resource [::Google::Cloud::Compute::V1::Subnetwork, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def patch request, options = nil
@@ -828,6 +831,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @subnetworks_stub.patch request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -938,10 +942,10 @@ module Google
               #   @param subnetworks_set_private_ip_google_access_request_resource [::Google::Cloud::Compute::V1::SubnetworksSetPrivateIpGoogleAccessRequest, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_private_ip_google_access request, options = nil
@@ -968,6 +972,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @subnetworks_stub.set_private_ip_google_access request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end

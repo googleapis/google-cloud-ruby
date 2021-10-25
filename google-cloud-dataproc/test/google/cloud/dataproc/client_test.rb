@@ -32,6 +32,16 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_batch_controller
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Dataproc.batch_controller do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Dataproc::V1::BatchController::Client, client
+    end
+  end
+
   def test_cluster_controller
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure

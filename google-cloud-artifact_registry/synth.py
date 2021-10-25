@@ -23,14 +23,14 @@ logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICMicrogenerator()
 library = gapic.ruby_library(
-    "artifactregistry", "v1beta2",
-    proto_path="google/devtools/artifactregistry/v1beta2",
+    "artifactregistry", "v1",
+    proto_path="google/devtools/artifactregistry/v1",
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-artifact_registry",
         "ruby-cloud-title": "Artifact Registry",
         "ruby-cloud-description": "Artifact Registry stores and manages build artifacts in a scalable and integrated service built on Google infrastructure.",
         "ruby-cloud-env-prefix": "ARTIFACT_REGISTRY",
-        "ruby-cloud-wrapper-of": "v1beta2:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.0;v1beta2:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/artifact-registry/",
         "ruby-cloud-api-id": "artifactregistry.googleapis.com",
         "ruby-cloud-api-shortname": "artifactregistry",

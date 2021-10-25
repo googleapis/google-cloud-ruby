@@ -1,0 +1,34 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "gapic_metadata.json",
+    "google-cloud-gke_connect-gateway-v1beta1.gemspec",
+    "lib/google-cloud-gke_connect-gateway-v1beta1.rb",
+    "lib/google/cloud/gke_connect/gateway/v1beta1.rb",
+    "lib/google/cloud/gke_connect/gateway/v1beta1/gateway_service.rb",
+    "lib/google/cloud/gke_connect/gateway/v1beta1/gateway_service/client.rb",
+    "lib/google/cloud/gke_connect/gateway/v1beta1/gateway_service/credentials.rb",
+    "lib/google/cloud/gke_connect/gateway/v1beta1/version.rb",
+    "lib/google/cloud/gkeconnect/gateway/v1beta1/gateway_pb.rb",
+    "lib/google/cloud/gkeconnect/gateway/v1beta1/gateway_services_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/httpbody.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/protobuf/any.rb",
+    "test/google/cloud/gke_connect/gateway/v1beta1/gateway_service_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

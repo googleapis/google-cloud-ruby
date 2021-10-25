@@ -2,4 +2,5 @@ source "https://rubygems.org"
 
 gemspec
 
+gem "google-cloud-assured_workloads-v1", path: "../google-cloud-assured_workloads-v1"
 gem "google-cloud-assured_workloads-v1beta1", path: "../google-cloud-assured_workloads-v1beta1"

@@ -70,6 +70,27 @@ def batch_get_history project_id:, asset_names:
   # [END asset_quickstart_batch_get_assets_history]
 end
 
+def list_assets project_id:
+  # [START asset_quickstart_list_assets]
+  require "google/cloud/asset"
+
+  asset_service = Google::Cloud::Asset.asset_service
+  # project_id = 'YOUR_PROJECT_ID'
+  formatted_parent = asset_service.project_path project: project_id
+
+  content_type = :RESOURCE
+  response = asset_service.list_assets(
+    parent:           formatted_parent,
+    content_type:     content_type
+  )
+
+  # Do things with the result
+  response.page.each do |resource|
+    puts resource
+  end
+  # [END asset_quickstart_list_assets]
+end
+
 def create_feed project_id:, feed_id:, pubsub_topic:, asset_names:
   # [START asset_quickstart_create_feed]
   require "google/cloud/asset"

@@ -127,7 +127,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
   end
 
   def find_bucket_gapi name = nil
-    Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name).to_json
+    Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name: name).to_json
   end
 
   def find_file_gapi bucket=nil, name = nil

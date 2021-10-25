@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2021-08-31
+
+#### Features
+
+* Support translate_document and batch_translate_document RPCs
+
 ### 0.3.3 / 2021-08-11
 
 #### Bug Fixes

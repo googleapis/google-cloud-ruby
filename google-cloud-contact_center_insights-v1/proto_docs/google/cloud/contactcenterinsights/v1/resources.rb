@@ -66,7 +66,7 @@ module Google
         #     Output only. The conversation transcript.
         # @!attribute [rw] medium
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation::Medium]
-        #     Immutable. The conversation medium.
+        #     Immutable. The conversation medium, if unspecified will default to PHONE_CALL.
         # @!attribute [r] duration
         #   @return [::Google::Protobuf::Duration]
         #     Output only. The duration of the conversation.
@@ -110,6 +110,9 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # A segment of a full transcript.
+            # @!attribute [rw] message_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     The time that the message occurred, if provided.
             # @!attribute [rw] text
             #   @return [::String]
             #     The text of this segment.
@@ -134,6 +137,12 @@ module Google
             # @!attribute [rw] segment_participant
             #   @return [::Google::Cloud::ContactCenterInsights::V1::ConversationParticipant]
             #     The participant of this segment.
+            # @!attribute [rw] dialogflow_segment_metadata
+            #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation::Transcript::TranscriptSegment::DialogflowSegmentMetadata]
+            #     CCAI metadata relating to the current transcript segment.
+            # @!attribute [rw] sentiment
+            #   @return [::Google::Cloud::ContactCenterInsights::V1::SentimentData]
+            #     The sentiment for this transcript segment.
             class TranscriptSegment
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -155,6 +164,16 @@ module Google
               #     A confidence estimate between 0.0 and 1.0 of the fidelity of this
               #     word. A default value of 0.0 indicates that the value is unset.
               class WordInfo
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Metadata from Dialogflow relating to the current transcript segment.
+              # @!attribute [rw] smart_reply_allowlist_covered
+              #   @return [::Boolean]
+              #     Whether the transcript segment was covered under the configured smart
+              #     reply allowlist in Agent Assist.
+              class DialogflowSegmentMetadata
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
@@ -181,7 +200,7 @@ module Google
 
           # Possible media for the conversation.
           module Medium
-            # Default value.
+            # Default value, if unspecified will default to PHONE_CALL.
             MEDIUM_UNSPECIFIED = 0
 
             # The format for conversations that took place over the phone.
@@ -670,10 +689,16 @@ module Google
           # Configs for the input data used to create the issue model.
           # @!attribute [rw] medium
           #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation::Medium]
-          #     Required. Medium of conversations used in training data.
+          #     Medium of conversations used in training data. This field is being
+          #     deprecated. To specify the medium to be used in training a new issue
+          #     model, set the `medium` field on `filter`.
           # @!attribute [r] training_conversations_count
           #   @return [::Integer]
           #     Output only. Number of conversations used in training. Output only.
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     A filter to reduce the conversations used for training the model to a
+          #     specific subset.
           class InputDataConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -801,6 +826,9 @@ module Google
         #     The role whose utterances the phrase matcher should be matched
         #     against. If the role is ROLE_UNSPECIFIED it will be matched against any
         #     utterances in the transcript.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The most recent time at which the phrase matcher was updated.
         class PhraseMatcher
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1187,6 +1215,9 @@ module Google
         #     Deprecated. Use `dialogflow_participant_name` instead.
         #     The name of the Dialogflow participant. Format:
         #     projects/\\{project}/locations/\\{location}/conversations/\\{conversation}/participants/\\{participant}
+        # @!attribute [rw] obfuscated_external_user_id
+        #   @return [::String]
+        #     Obfuscated user ID from Dialogflow.
         # @!attribute [rw] role
         #   @return [::Google::Cloud::ContactCenterInsights::V1::ConversationParticipant::Role]
         #     The role of the participant.

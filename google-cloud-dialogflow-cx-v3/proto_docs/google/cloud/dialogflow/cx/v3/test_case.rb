@@ -666,6 +666,7 @@ module Google
 
           # Metadata returned for the {::Google::Cloud::Dialogflow::CX::V3::TestCases::Client#export_test_cases TestCases.ExportTestCases} long running
           # operation.
+          # This message currently has no fields.
           class ExportTestCasesMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

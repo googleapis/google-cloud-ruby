@@ -74,8 +74,8 @@ module Google
         ##
         # The ID of the job.
         #
-        # @return [String] The ID must contain only letters (a-z, A-Z), numbers
-        #   (0-9), underscores (_), or dashes (-). The maximum length is 1,024
+        # @return [String] The ID must contain only letters (`[A-Za-z]`), numbers
+        #   (`[0-9]`), underscores (`_`), or dashes (`-`). The maximum length is 1,024
         #   characters.
         #
         def job_id
@@ -389,6 +389,28 @@ module Google
           ensure_service!
           resp = service.cancel_job job_id, location: location
           @gapi = resp.job
+          true
+        end
+
+        ##
+        # Requests that a job is deleted. This call will return when the job is deleted.
+        #
+        # @return [Boolean] Returns `true` if the job was deleted.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.job "my_job"
+        #
+        #   job.delete
+        #
+        # @!group Lifecycle
+        #
+        def delete
+          ensure_service!
+          service.delete_job job_id, location: location
           true
         end
 

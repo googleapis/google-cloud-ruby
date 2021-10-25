@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/secretmanager/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-secret_manager-v1/$1

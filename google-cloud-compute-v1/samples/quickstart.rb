@@ -79,7 +79,7 @@ def create_instance project:, zone:, instance_name:,
     # Send the insert request.
     operation = client.insert request
     # Wait for the create operation to complete.
-    operation = wait_until_done operation: operation, project: project
+    operation = wait_until_done operation: operation.operation, project: project
 
     if operation.error.nil?
       warn "Warning during creation:", operation.warnings unless operation.warnings.empty?
@@ -162,7 +162,7 @@ def delete_instance project:, zone:, instance_name:
     # Make the request to delete a VM instance.
     operation = client.delete project: project, zone: zone, instance: instance_name
     # Wait for the delete operation to complete.
-    operation = wait_until_done operation: operation, project: project
+    operation = wait_until_done operation: operation.operation, project: project
 
     if operation.error.nil?
       warn "Warning during deletion:", operation.warnings unless operation.warnings.empty?

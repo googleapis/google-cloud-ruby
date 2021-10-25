@@ -29,7 +29,7 @@ library = gapic.ruby_library(
         "ruby-cloud-gem-name": "google-cloud-network_management",
         "ruby-cloud-title": "Network Management",
         "ruby-cloud-description": "The Network Management API provides a collection of network performance monitoring and diagnostic capabilities.",
-        "ruby-cloud-wrapper-of": "v1:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.1",
         "ruby-cloud-product-url": "https://cloud.google.com/network-intelligence-center/docs/connectivity-tests/reference/networkmanagement/rest",
         "ruby-cloud-api-id": "networkmanagement.googleapis.com",
         "ruby-cloud-api-shortname": "networkmanagement",

@@ -4,3 +4,4 @@ gemspec
 
 gem "google-cloud-monitoring-v3", path: "../google-cloud-monitoring-v3"
 gem "google-cloud-monitoring-dashboard-v1", path: "../google-cloud-monitoring-dashboard-v1"
+gem "google-cloud-monitoring-metrics_scope-v1", path: "../google-cloud-monitoring-metrics_scope-v1"

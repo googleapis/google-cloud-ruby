@@ -28,7 +28,7 @@ module Google
           # A Job is a multi-stage computation graph run by the Cloud Dataflow service.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode

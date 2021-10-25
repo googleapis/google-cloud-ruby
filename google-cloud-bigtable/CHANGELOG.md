@@ -1,5 +1,17 @@
 # Release History
 
+### 2.6.4 / 2021-10-21
+
+#### Documentation
+
+* Add documentation for quota_project Configuration attribute
+
+### 2.6.3 / 2021-09-21
+
+#### Documentation
+
+* Fix typo in Emulator guide links
+
 ### 2.6.2 / 2021-08-02
 
 #### Documentation

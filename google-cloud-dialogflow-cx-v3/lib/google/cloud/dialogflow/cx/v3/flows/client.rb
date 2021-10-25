@@ -596,6 +596,15 @@ module Google
               # Trains the specified flow. Note that only the flow in 'draft' environment
               # is trained.
               #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: An empty [Struct
+              #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+              # - `response`: An [Empty
+              #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
+              #
               # Note: You should always train a flow prior to sending it queries. See the
               # [training
               # documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
@@ -818,6 +827,14 @@ module Google
               ##
               # Imports the specified flow to the specified agent from a binary file.
               #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: An empty [Struct
+              #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::ImportFlowResponse ImportFlowResponse}
+              #
               # Note: You should always train a flow prior to sending it queries. See the
               # [training
               # documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
@@ -899,6 +916,14 @@ module Google
 
               ##
               # Exports the specified flow to a binary file.
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: An empty [Struct
+              #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::ExportFlowResponse ExportFlowResponse}
               #
               # Note that resources (e.g. intents, entities, webhooks) that the flow
               # references will also be exported.

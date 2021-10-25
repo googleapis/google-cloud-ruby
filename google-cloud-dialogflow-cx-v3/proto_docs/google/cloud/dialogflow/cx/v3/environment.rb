@@ -52,6 +52,9 @@ module Google
           # @!attribute [r] update_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. Update time of this environment.
+          # @!attribute [rw] test_cases_config
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::Environment::TestCasesConfig]
+          #     The test cases config for continuous tests of this environment.
           class Environment
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -62,6 +65,25 @@ module Google
             #     Required. Format: projects/<Project ID>/locations/<Location ID>/agents/<Agent
             #     ID>/flows/<Flow ID>/versions/<Version ID>.
             class VersionConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The configuration for continuous tests.
+            # @!attribute [rw] test_cases
+            #   @return [::Array<::String>]
+            #     A list of test case names to run. They should be under the same agent.
+            #     Format of each test case name: `projects/<Project ID>/locations/
+            #     <Location ID>/agents/<AgentID>/testCases/<TestCase ID>`
+            # @!attribute [rw] enable_continuous_run
+            #   @return [::Boolean]
+            #     Whether to run test cases in {::Google::Cloud::Dialogflow::CX::V3::Environment::TestCasesConfig#test_cases TestCasesConfig.test_cases} periodically.
+            #     Default false. If set to ture, run once a day.
+            # @!attribute [rw] enable_predeployment_run
+            #   @return [::Boolean]
+            #     Whether to run test cases in {::Google::Cloud::Dialogflow::CX::V3::Environment::TestCasesConfig#test_cases TestCasesConfig.test_cases} before
+            #     deploying a flow version to the environment. Default false.
+            class TestCasesConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -269,6 +291,46 @@ module Google
           #     Token to retrieve the next page of results, or empty if there are no more
           #     results in the list.
           class ListContinuousTestResultsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request message for {::Google::Cloud::Dialogflow::CX::V3::Environments::Client#deploy_flow Environments.DeployFlow}.
+          # @!attribute [rw] environment
+          #   @return [::String]
+          #     Required. The environment to deploy the flow to.
+          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
+          #     environments/<Environment ID>`.
+          # @!attribute [rw] flow_version
+          #   @return [::String]
+          #     Required. The flow version to deploy.
+          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
+          #     flows/<Flow ID>/versions/<Version ID>`.
+          class DeployFlowRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The response message for {::Google::Cloud::Dialogflow::CX::V3::Environments::Client#deploy_flow Environments.DeployFlow}.
+          # @!attribute [rw] environment
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::Environment]
+          #     The updated environment where the flow is deployed.
+          # @!attribute [rw] deployment
+          #   @return [::String]
+          #     The name of the flow version {::Google::Cloud::Dialogflow::CX::V3::Deployment Deployment}.
+          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
+          #     environments/<Environment ID>/deployments/<Deployment ID>`.
+          class DeployFlowResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Metadata returned for the {::Google::Cloud::Dialogflow::CX::V3::Environments::Client#deploy_flow Environments.DeployFlow} long running
+          # operation.
+          # @!attribute [rw] test_errors
+          #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::TestError>]
+          #     Errors of running deployment tests.
+          class DeployFlowMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

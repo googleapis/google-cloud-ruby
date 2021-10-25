@@ -311,6 +311,13 @@ module Google
               ##
               # Creates a {::Google::Cloud::Dialogflow::CX::V3::Version Version} in the specified {::Google::Cloud::Dialogflow::CX::V3::Flow Flow}.
               #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::CreateVersionOperationMetadata CreateVersionOperationMetadata}
+              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::Version Version}
+              #
               # @overload create_version(request, options = nil)
               #   Pass arguments to `create_version` via a request object, either of type
               #   {::Google::Cloud::Dialogflow::CX::V3::CreateVersionRequest} or an equivalent Hash.
@@ -524,6 +531,15 @@ module Google
 
               ##
               # Loads resources in the specified version to the draft flow.
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: An empty [Struct
+              #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+              # - `response`: An [Empty
+              #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
               #
               # @overload load_version(request, options = nil)
               #   Pass arguments to `load_version` via a request object, either of type

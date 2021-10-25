@@ -106,7 +106,10 @@ module Google
           # propagate to all the related components and take effect.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. Resource name of the settings.
+          #     Resource name of the settings.
+          #     Required for the {::Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#update_security_settings SecuritySettingsService.UpdateSecuritySettings} method.
+          #     {::Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#create_security_settings SecuritySettingsService.CreateSecuritySettings} populates the name
+          #     automatically.
           #     Format: `projects/<Project ID>/locations/<Location
           #     ID>/securitySettings/<Security Settings ID>`.
           # @!attribute [rw] display_name

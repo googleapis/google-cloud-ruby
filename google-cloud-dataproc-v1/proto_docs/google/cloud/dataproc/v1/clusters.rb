@@ -22,7 +22,7 @@ module Google
     module Dataproc
       module V1
         # Describes the identifying information, config, and status of
-        # a cluster of Compute Engine instances.
+        # a Dataproc cluster
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. The Google Cloud Platform project ID that the cluster belongs to.
@@ -83,10 +83,10 @@ module Google
         #     ASIA, or EU) for your cluster's staging bucket according to the
         #     Compute Engine zone where your cluster is deployed, and then create
         #     and manage this project-level, per-location bucket (see
-        #     [Dataproc staging
-        #     bucket](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/staging-bucket)).
-        #     **This field requires a Cloud Storage bucket name, not a URI to a Cloud
-        #     Storage bucket.**
+        #     [Dataproc staging and temp
+        #     buckets](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/staging-bucket)).
+        #     **This field requires a Cloud Storage bucket name, not a `gs://...` URI to
+        #     a Cloud Storage bucket.**
         # @!attribute [rw] temp_bucket
         #   @return [::String]
         #     Optional. A Cloud Storage bucket used to store ephemeral cluster and jobs data,
@@ -97,9 +97,11 @@ module Google
         #     Compute Engine zone where your cluster is deployed, and then create
         #     and manage this project-level, per-location bucket. The default bucket has
         #     a TTL of 90 days, but you can use any TTL (or none) if you specify a
-        #     bucket.
-        #     **This field requires a Cloud Storage bucket name, not a URI to a Cloud
-        #     Storage bucket.**
+        #     bucket (see
+        #     [Dataproc staging and temp
+        #     buckets](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/staging-bucket)).
+        #     **This field requires a Cloud Storage bucket name, not a `gs://...` URI to
+        #     a Cloud Storage bucket.**
         # @!attribute [rw] gce_cluster_config
         #   @return [::Google::Cloud::Dataproc::V1::GceClusterConfig]
         #     Optional. The shared Compute Engine config settings for
@@ -107,18 +109,18 @@ module Google
         # @!attribute [rw] master_config
         #   @return [::Google::Cloud::Dataproc::V1::InstanceGroupConfig]
         #     Optional. The Compute Engine config settings for
-        #     the master instance in a cluster.
+        #     the cluster's master instance.
         # @!attribute [rw] worker_config
         #   @return [::Google::Cloud::Dataproc::V1::InstanceGroupConfig]
         #     Optional. The Compute Engine config settings for
-        #     worker instances in a cluster.
+        #     the cluster's worker instances.
         # @!attribute [rw] secondary_worker_config
         #   @return [::Google::Cloud::Dataproc::V1::InstanceGroupConfig]
         #     Optional. The Compute Engine config settings for
-        #     additional worker instances in a cluster.
+        #     a cluster's secondary worker instances
         # @!attribute [rw] software_config
         #   @return [::Google::Cloud::Dataproc::V1::SoftwareConfig]
-        #     Optional. The config settings for software inside the cluster.
+        #     Optional. The config settings for cluster software.
         # @!attribute [rw] initialization_actions
         #   @return [::Array<::Google::Cloud::Dataproc::V1::NodeInitializationAction>]
         #     Optional. Commands to execute on each node after config is
@@ -334,6 +336,10 @@ module Google
         #   @return [::Google::Cloud::Dataproc::V1::ShieldedInstanceConfig]
         #     Optional. Shielded Instance Config for clusters using [Compute Engine Shielded
         #     VMs](https://cloud.google.com/security/shielded-cloud/shielded-vm).
+        # @!attribute [rw] confidential_instance_config
+        #   @return [::Google::Cloud::Dataproc::V1::ConfidentialInstanceConfig]
+        #     Optional. Confidential Instance Config for clusters using [Confidential
+        #     VMs](https://cloud.google.com/compute/confidential-vm/docs).
         class GceClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -402,6 +408,16 @@ module Google
         #   @return [::Boolean]
         #     Optional. Defines whether instances have integrity monitoring enabled.
         class ShieldedInstanceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Confidential Instance Config for clusters using [Confidential
+        # VMs](https://cloud.google.com/compute/confidential-vm/docs)
+        # @!attribute [rw] enable_confidential_compute
+        #   @return [::Boolean]
+        #     Optional. Defines whether the instance should have confidential compute enabled.
+        class ConfidentialInstanceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -628,6 +644,10 @@ module Google
 
             # The cluster encountered an error. It is not ready for use.
             ERROR = 3
+
+            # The cluster has encountered an error while being updated. Jobs can
+            # be submitted to the cluster, but the cluster cannot be updated.
+            ERROR_DUE_TO_UPDATE = 9
 
             # The cluster is being deleted. It cannot be used.
             DELETING = 4
@@ -905,7 +925,7 @@ module Google
         #     Required. The cluster to create.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique id used to identify the request. If the server receives two
+        #     Optional. A unique ID used to identify the request. If the server receives two
         #     [CreateClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateClusterRequest)s
         #     with the same id, then the second request will be ignored and the
         #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the backend
@@ -914,8 +934,11 @@ module Google
         #     It is recommended to always set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
         #
-        #     The id must contain only letters (a-z, A-Z), numbers (0-9),
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
         #     underscores (_), and hyphens (-). The maximum length is 40 characters.
+        # @!attribute [rw] action_on_failed_primary_workers
+        #   @return [::Google::Cloud::Dataproc::V1::FailureAction]
+        #     Optional. Failure action when primary worker creation fails.
         class CreateClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1001,7 +1024,7 @@ module Google
         #      </table>
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique id used to identify the request. If the server
+        #     Optional. A unique ID used to identify the request. If the server
         #     receives two
         #     [UpdateClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.UpdateClusterRequest)s
         #     with the same id, then the second request will be ignored and the
@@ -1011,7 +1034,7 @@ module Google
         #     It is recommended to always set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
         #
-        #     The id must contain only letters (a-z, A-Z), numbers (0-9),
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
         #     underscores (_), and hyphens (-). The maximum length is 40 characters.
         class UpdateClusterRequest
           include ::Google::Protobuf::MessageExts
@@ -1035,7 +1058,7 @@ module Google
         #     (with error NOT_FOUND) if a cluster with the specified UUID does not exist.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique id used to identify the request. If the server
+        #     Optional. A unique ID used to identify the request. If the server
         #     receives two
         #     [StopClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StopClusterRequest)s
         #     with the same id, then the second request will be ignored and the
@@ -1045,7 +1068,7 @@ module Google
         #     Recommendation: Set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
         #
-        #     The id must contain only letters (a-z, A-Z), numbers (0-9),
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
         #     underscores (_), and hyphens (-). The maximum length is 40 characters.
         class StopClusterRequest
           include ::Google::Protobuf::MessageExts
@@ -1069,7 +1092,7 @@ module Google
         #     (with error NOT_FOUND) if a cluster with the specified UUID does not exist.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique id used to identify the request. If the server
+        #     Optional. A unique ID used to identify the request. If the server
         #     receives two
         #     [StartClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StartClusterRequest)s
         #     with the same id, then the second request will be ignored and the
@@ -1079,7 +1102,7 @@ module Google
         #     Recommendation: Set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
         #
-        #     The id must contain only letters (a-z, A-Z), numbers (0-9),
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
         #     underscores (_), and hyphens (-). The maximum length is 40 characters.
         class StartClusterRequest
           include ::Google::Protobuf::MessageExts
@@ -1103,7 +1126,7 @@ module Google
         #     (with error NOT_FOUND) if cluster with specified UUID does not exist.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A unique id used to identify the request. If the server
+        #     Optional. A unique ID used to identify the request. If the server
         #     receives two
         #     [DeleteClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.DeleteClusterRequest)s
         #     with the same id, then the second request will be ignored and the
@@ -1113,7 +1136,7 @@ module Google
         #     It is recommended to always set this value to a
         #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
         #
-        #     The id must contain only letters (a-z, A-Z), numbers (0-9),
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
         #     underscores (_), and hyphens (-). The maximum length is 40 characters.
         class DeleteClusterRequest
           include ::Google::Protobuf::MessageExts

@@ -27,7 +27,7 @@ export GKE_HUB_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/gke_hub"
 
-client = Google::Cloud::GkeHub.gke_hub_membership_service
+client = Google::Cloud::GkeHub.gke_hub
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-gke_hub
 checks for credentials are configured on the service Credentials class (such as
-`::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Credentials`):
+`::Google::Cloud::GkeHub::V1::GkeHub::Credentials`):
 
 * `GKE_HUB_CREDENTIALS` - Path to JSON file, or JSON contents
 * `GKE_HUB_KEYFILE` - Path to JSON file, or JSON contents
@@ -77,7 +77,7 @@ require "google/cloud/gke_hub"
 
 ENV["GKE_HUB_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::GkeHub.gke_hub_membership_service
+client = Google::Cloud::GkeHub.gke_hub
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ it in an environment variable. Either on an individual client initialization:
 ```ruby
 require "google/cloud/gke_hub"
 
-client = Google::Cloud::GkeHub.gke_hub_membership_service do |config|
+client = Google::Cloud::GkeHub.gke_hub do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -102,7 +102,7 @@ Google::Cloud::GkeHub.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::GkeHub.gke_hub_membership_service
+client = Google::Cloud::GkeHub.gke_hub
 ```
 
 ### Cloud SDK

@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2021-08-30
+
+#### Features
+
+* Support returning kubernetes cluster state, and different views of the GameServerCluster
+
 ### 0.3.3 / 2021-08-11
 
 #### Bug Fixes

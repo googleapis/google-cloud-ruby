@@ -30,7 +30,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Cloud OS Config",
         "ruby-cloud-description": "Cloud OS Config provides OS management tools that can be used for patch management, patch compliance, and configuration management on VM instances.",
         "ruby-cloud-env-prefix": "OS_CONFIG",
-        "ruby-cloud-wrapper-of": "v1:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.6",
         "ruby-cloud-product-url": "https://cloud.google.com/compute/docs/manage-os",
         "ruby-cloud-api-id": "osconfig.googleapis.com",
         "ruby-cloud-api-shortname": "osconfig",

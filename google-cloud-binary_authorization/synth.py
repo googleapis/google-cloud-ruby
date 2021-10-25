@@ -23,17 +23,21 @@ logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICMicrogenerator()
 library = gapic.ruby_library(
-    "binaryauthorization", "v1beta1",
+    "binaryauthorization", "v1",
+    extra_proto_files=[
+        "grafeas/v1/attestation.proto",
+        "grafeas/v1/common.proto",
+    ],
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-binary_authorization",
         "ruby-cloud-title": "Binary Authorization",
         "ruby-cloud-description": "Binary Authorization is a service on Google Cloud that provides centralized software supply-chain security for applications that run on Google Kubernetes Engine (GKE) and GKE on-prem.",
         "ruby-cloud-env-prefix": "BINARY_AUTHORIZATION",
-        "ruby-cloud-wrapper-of": "v1beta1:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.0;v1beta1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/binary-authorization/",
         "ruby-cloud-api-id": "binaryauthorization.googleapis.com",
         "ruby-cloud-api-shortname": "binaryauthorization",
-        "ruby-cloud-service-override": "BinauthzManagementServiceV1Beta1=BinauthzManagementService",
+        "ruby-cloud-service-override": "BinauthzManagementServiceV1=BinauthzManagementService;SystemPolicyV1=SystemPolicy;ValidationHelperV1=ValidationHelper",
     }
 )
 

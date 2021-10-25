@@ -27,7 +27,7 @@ module Google
           # V1p1Beta1 APIs for Security Center service.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode

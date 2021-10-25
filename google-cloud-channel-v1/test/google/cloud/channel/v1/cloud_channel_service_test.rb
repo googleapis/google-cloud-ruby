@@ -410,6 +410,75 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientTest < Minitest::
     end
   end
 
+  def test_import_customer
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Channel::V1::Customer.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    domain = "hello world"
+    parent = "hello world"
+    auth_token = "hello world"
+    overwrite_if_exists = true
+    channel_partner_id = "hello world"
+    customer = "hello world"
+
+    import_customer_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :import_customer, name
+      assert_kind_of ::Google::Cloud::Channel::V1::ImportCustomerRequest, request
+      assert_equal "hello world", request["domain"]
+      assert_equal :domain, request.customer_identity
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["auth_token"]
+      assert_equal true, request["overwrite_if_exists"]
+      assert_equal "hello world", request["channel_partner_id"]
+      assert_equal "hello world", request["customer"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, import_customer_client_stub do
+      # Create client
+      client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.import_customer({ domain: domain, parent: parent, auth_token: auth_token, overwrite_if_exists: overwrite_if_exists, channel_partner_id: channel_partner_id, customer: customer }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.import_customer domain: domain, parent: parent, auth_token: auth_token, overwrite_if_exists: overwrite_if_exists, channel_partner_id: channel_partner_id, customer: customer do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.import_customer ::Google::Cloud::Channel::V1::ImportCustomerRequest.new(domain: domain, parent: parent, auth_token: auth_token, overwrite_if_exists: overwrite_if_exists, channel_partner_id: channel_partner_id, customer: customer) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.import_customer({ domain: domain, parent: parent, auth_token: auth_token, overwrite_if_exists: overwrite_if_exists, channel_partner_id: channel_partner_id, customer: customer }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.import_customer(::Google::Cloud::Channel::V1::ImportCustomerRequest.new(domain: domain, parent: parent, auth_token: auth_token, overwrite_if_exists: overwrite_if_exists, channel_partner_id: channel_partner_id, customer: customer), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, import_customer_client_stub.call_rpc_count
+    end
+  end
+
   def test_provision_cloud_identity
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new

@@ -40,9 +40,6 @@ response = client.suggest_queries request
 View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-dataqna-v1alpha/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/bigquery/docs/dataqna/)
-for general usage information.
-
 ## Enabling Logging
 
 To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.

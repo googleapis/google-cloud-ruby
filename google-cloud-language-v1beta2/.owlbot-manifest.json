@@ -1,0 +1,35 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    ".yardopts-cloudrad",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "gapic_metadata.json",
+    "google-cloud-language-v1beta2.gemspec",
+    "lib/google-cloud-language-v1beta2.rb",
+    "lib/google/cloud/language/v1beta2.rb",
+    "lib/google/cloud/language/v1beta2/language_service.rb",
+    "lib/google/cloud/language/v1beta2/language_service/client.rb",
+    "lib/google/cloud/language/v1beta2/language_service/credentials.rb",
+    "lib/google/cloud/language/v1beta2/language_service_pb.rb",
+    "lib/google/cloud/language/v1beta2/language_service_services_pb.rb",
+    "lib/google/cloud/language/v1beta2/version.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/language/v1beta2/language_service.rb",
+    "proto_docs/google/protobuf/timestamp.rb",
+    "test/google/cloud/language/v1beta2/language_service_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

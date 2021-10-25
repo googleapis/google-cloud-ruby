@@ -1,5 +1,5 @@
 --no-private
---title=Google Cloud Compute V1 API
+--title=Google Cloud Compute V1 (BETA) API
 --exclude _pb\.rb$
 --format yaml
 --template-path ../template

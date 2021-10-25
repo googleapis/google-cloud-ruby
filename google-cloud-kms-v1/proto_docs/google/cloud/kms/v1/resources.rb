@@ -249,16 +249,16 @@ module Google
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED DESTROYED}.
         # @!attribute [r] import_job
         #   @return [::String]
-        #     Output only. The name of the {::Google::Cloud::Kms::V1::ImportJob ImportJob} used to import this
+        #     Output only. The name of the {::Google::Cloud::Kms::V1::ImportJob ImportJob} used in the most recent import of this
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. Only present if the underlying key material was
         #     imported.
         # @!attribute [r] import_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time at which this {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}'s key material
-        #     was imported.
+        #     was most recently imported.
         # @!attribute [r] import_failure_reason
         #   @return [::String]
-        #     Output only. The root cause of an import failure. Only present if
+        #     Output only. The root cause of the most recent import failure. Only present if
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion#state state} is
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::IMPORT_FAILED IMPORT_FAILED}.
         # @!attribute [rw] external_protection_level_options
@@ -266,6 +266,11 @@ module Google
         #     ExternalProtectionLevelOptions stores a group of additional fields for
         #     configuring a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} that are specific to the
         #     {::Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL EXTERNAL} protection level.
+        # @!attribute [r] reimport_eligible
+        #   @return [::Boolean]
+        #     Output only. Whether or not this key version is eligible for reimport, by being
+        #     specified as a target in
+        #     {::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest#crypto_key_version ImportCryptoKeyVersionRequest.crypto_key_version}.
         class CryptoKeyVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -341,6 +346,15 @@ module Google
             # RSASSA-PKCS1-v1_5 with a 4096 bit key and a SHA512 digest.
             RSA_SIGN_PKCS1_4096_SHA512 = 16
 
+            # RSASSA-PKCS1-v1_5 signing without encoding, with a 2048 bit key.
+            RSA_SIGN_RAW_PKCS1_2048 = 28
+
+            # RSASSA-PKCS1-v1_5 signing without encoding, with a 3072 bit key.
+            RSA_SIGN_RAW_PKCS1_3072 = 29
+
+            # RSASSA-PKCS1-v1_5 signing without encoding, with a 4096 bit key.
+            RSA_SIGN_RAW_PKCS1_4096 = 30
+
             # RSAES-OAEP 2048 bit key with a SHA256 digest.
             RSA_DECRYPT_OAEP_2048_SHA256 = 8
 
@@ -352,6 +366,15 @@ module Google
 
             # RSAES-OAEP 4096 bit key with a SHA512 digest.
             RSA_DECRYPT_OAEP_4096_SHA512 = 17
+
+            # RSAES-OAEP 2048 bit key with a SHA1 digest.
+            RSA_DECRYPT_OAEP_2048_SHA1 = 37
+
+            # RSAES-OAEP 3072 bit key with a SHA1 digest.
+            RSA_DECRYPT_OAEP_3072_SHA1 = 38
+
+            # RSAES-OAEP 4096 bit key with a SHA1 digest.
+            RSA_DECRYPT_OAEP_4096_SHA1 = 39
 
             # ECDSA on the NIST P-256 curve with a SHA256 digest.
             EC_SIGN_P256_SHA256 = 12
@@ -388,6 +411,10 @@ module Google
             DISABLED = 2
 
             # This version is destroyed, and the key material is no longer stored.
+            # This version may only become {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} again if this version is
+            # {::Google::Cloud::Kms::V1::CryptoKeyVersion#reimport_eligible reimport_eligible} and the original
+            # key material is reimported with a call to
+            # {::Google::Cloud::Kms::V1::KeyManagementService::Client#import_crypto_key_version KeyManagementService.ImportCryptoKeyVersion}.
             DESTROYED = 3
 
             # This version is scheduled for destruction, and will be destroyed soon.

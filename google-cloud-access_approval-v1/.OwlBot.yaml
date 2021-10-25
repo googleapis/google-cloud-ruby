@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/accessapproval/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-access_approval-v1/$1

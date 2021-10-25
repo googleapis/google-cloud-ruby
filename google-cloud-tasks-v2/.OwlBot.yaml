@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/tasks/v2/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-tasks-v2/$1

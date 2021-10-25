@@ -30,7 +30,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Dialogflow CX",
         "ruby-cloud-description": "Dialogflow is an end-to-end, build-once deploy-everywhere development suite for creating conversational interfaces for websites, mobile applications, popular messaging platforms, and IoT devices. You can use it to build interfaces (such as chatbots and conversational IVR) that enable natural and rich interactions between your users and your business. This client is for Dialogflow CX, providing an advanced agent type suitable for large or very complex agents.",
         "ruby-cloud-env-prefix": "DIALOGFLOW",
-        "ruby-cloud-wrapper-of": "v3:0.0",
+        "ruby-cloud-wrapper-of": "v3:0.3",
         "ruby-cloud-product-url": "https://cloud.google.com/dialogflow",
         "ruby-cloud-api-id": "dialogflow.googleapis.com",
         "ruby-cloud-api-shortname": "dialogflow",

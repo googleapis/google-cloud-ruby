@@ -81,6 +81,15 @@ describe "Asset Quickstart" do
     end
   end
 
+  describe "list_assets" do
+    it "lists asset" do
+      out, _err = capture_io do
+        list_assets project_id: project_id
+      end
+      assert out.size.positive?
+    end
+  end
+
   describe "create_feed" do
     after do
       topic.delete

@@ -191,10 +191,10 @@ module Google
               #   @param target_pools_add_health_check_request_resource [::Google::Cloud::Compute::V1::TargetPoolsAddHealthCheckRequest, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def add_health_check request, options = nil
@@ -221,6 +221,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_pools_stub.add_health_check request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -264,10 +265,10 @@ module Google
               #   @param target_pools_add_instance_request_resource [::Google::Cloud::Compute::V1::TargetPoolsAddInstanceRequest, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def add_instance request, options = nil
@@ -294,6 +295,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_pools_stub.add_instance request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -419,10 +421,10 @@ module Google
               #   @param target_pool [::String]
               #     Name of the TargetPool resource to delete.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def delete request, options = nil
@@ -449,6 +451,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_pools_stub.delete request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -622,10 +625,10 @@ module Google
               #   @param target_pool_resource [::Google::Cloud::Compute::V1::TargetPool, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def insert request, options = nil
@@ -652,6 +655,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_pools_stub.insert request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -779,10 +783,10 @@ module Google
               #   @param target_pools_remove_health_check_request_resource [::Google::Cloud::Compute::V1::TargetPoolsRemoveHealthCheckRequest, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def remove_health_check request, options = nil
@@ -809,6 +813,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_pools_stub.remove_health_check request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -852,10 +857,10 @@ module Google
               #   @param target_pools_remove_instance_request_resource [::Google::Cloud::Compute::V1::TargetPoolsRemoveInstanceRequest, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def remove_instance request, options = nil
@@ -882,6 +887,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_pools_stub.remove_instance request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end
@@ -927,10 +933,10 @@ module Google
               #   @param target_reference_resource [::Google::Cloud::Compute::V1::TargetReference, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::Rest::BaseOperation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_backup request, options = nil
@@ -957,6 +963,7 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_pools_stub.set_backup request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
                 end

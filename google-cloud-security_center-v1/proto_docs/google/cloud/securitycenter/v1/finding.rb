@@ -106,6 +106,11 @@ module Google
         #     operating system that, with high confidence, indicates a computer
         #     intrusion.
         #     Reference: https://en.wikipedia.org/wiki/Indicator_of_compromise
+        # @!attribute [rw] vulnerability
+        #   @return [::Google::Cloud::SecurityCenter::V1::Vulnerability]
+        #     Represents vulnerability specific fields like cve, cvss scores etc.
+        #     CVE stands for Common Vulnerabilities and Exposures
+        #     (https://cve.mitre.org/about/)
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

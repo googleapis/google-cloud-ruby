@@ -232,10 +232,16 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
   it "knows its schema precision and scale for numeric and bignumeric fields" do
     _(table.schema.field("age").precision).must_be :nil?
     _(table.schema.field("age").scale).must_be :nil?
+
     _(table.schema.field("my_numeric").precision).must_equal precision_numeric
     _(table.schema.field("my_numeric").scale).must_equal scale_numeric
     _(table.schema.field("my_bignumeric").precision).must_equal precision_bignumeric
     _(table.schema.field("my_bignumeric").scale).must_equal scale_bignumeric
+
+    _(table.schema.field("spells").field("my_nested_numeric").precision).must_equal precision_numeric
+    _(table.schema.field("spells").field("my_nested_numeric").scale).must_equal scale_numeric
+    _(table.schema.field("spells").field("my_nested_bignumeric").precision).must_equal precision_bignumeric
+    _(table.schema.field("spells").field("my_nested_bignumeric").scale).must_equal scale_bignumeric
   end
 
   def assert_rows_equal returned_row, example_row
@@ -279,6 +285,8 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
           end
           spells.bytes "icon", mode: :nullable, max_length: max_length_bytes
           spells.timestamp "last_used", mode: :nullable
+          spells.numeric "my_nested_numeric", mode: :nullable, precision: precision_numeric, scale: scale_numeric
+          spells.bignumeric "my_nested_bignumeric", mode: :nullable, precision: precision_bignumeric, scale: scale_bignumeric
         end
         schema.time "tea_time", mode: :nullable
         schema.date "next_vacation", mode: :nullable
@@ -321,7 +329,9 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
               { name: "Explodey", power: 11.0 }
             ],
             icon: File.open("acceptance/data/kitten-test-data.json", "rb"),
-            last_used: Time.parse("2015-10-31 23:59:56 UTC")
+            last_used: Time.parse("2015-10-31 23:59:56 UTC"),
+            my_nested_numeric: BigDecimal(string_numeric),
+            my_nested_bignumeric: string_bignumeric, # BigDecimal would be rounded, use String instead!
           }
         ],
         tea_time: Google::Cloud::Bigquery::Time.new("15:00:00"),

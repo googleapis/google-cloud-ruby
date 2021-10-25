@@ -24,7 +24,7 @@ gapic = gcp.GAPICMicrogenerator()
 
 # Wrapper for workflows
 library = gapic.ruby_library(
-    "workflows", "v1beta",
+    "workflows", "v1",
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-workflows",
         "ruby-cloud-title": "Workflows",
@@ -40,14 +40,14 @@ s.copy(library, merge=ruby.global_merge)
 
 # Wrapper for workflows-executions
 library2 = gapic.ruby_library(
-    "workflows/executions", "v1beta",
+    "workflows/executions", "v1",
     extra_proto_files=["google/cloud/common_resources.proto"],
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-workflows-executions",
         "ruby-cloud-title": "Workflows Executions",
         "ruby-cloud-description": "Workflows link series of serverless tasks together in an order you define. Combine the power of Google Cloud's APIs, serverless products like Cloud Functions and Cloud Run, and calls to external APIs to create flexible serverless applications. Workflows requires no infrastructure management and scales seamlessly with demand, including scaling down to zero..",
         "ruby-cloud-env-prefix": "WORKFLOWS",
-        "ruby-cloud-wrapper-of": "v1beta:0.0",
+        "ruby-cloud-wrapper-of": "v1:0.0;v1beta:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/workflows/",
         "ruby-cloud-api-id": "workflowexecutions.googleapis.com",
         "ruby-cloud-api-shortname": "workflowexecutions",
@@ -65,10 +65,10 @@ s.replace(
 s.replace(
     "google-cloud-workflows.gemspec",
     '\n  gem.add_dependency "google-cloud-workflows-v1beta", ">= 0.0", "< 2.a"\n\n',
-    '\n  gem.add_dependency "google-cloud-workflows-v1beta", ">= 0.0", "< 2.a"\n  gem.add_dependency "google-cloud-workflows-executions-v1beta", ">= 0.0", "< 2.a"\n\n',
+    '\n  gem.add_dependency "google-cloud-workflows-v1beta", ">= 0.0", "< 2.a"\n  gem.add_dependency "google-cloud-workflows-executions-v1", ">= 0.0", "< 2.a"\n  gem.add_dependency "google-cloud-workflows-executions-v1beta", ">= 0.0", "< 2.a"\n\n',
 )
 s.replace(
     "Gemfile",
     '\ngem "google-cloud-workflows-v1beta", path: "../google-cloud-workflows-v1beta"\n',
-    '\ngem "google-cloud-workflows-v1beta", path: "../google-cloud-workflows-v1beta"\ngem "google-cloud-workflows-executions-v1beta", path: "../google-cloud-workflows-executions-v1beta"\n',
+    '\ngem "google-cloud-workflows-v1beta", path: "../google-cloud-workflows-v1beta"\ngem "google-cloud-workflows-executions-v1", path: "../google-cloud-workflows-executions-v1"\ngem "google-cloud-workflows-executions-v1beta", path: "../google-cloud-workflows-executions-v1beta"\n',
 )

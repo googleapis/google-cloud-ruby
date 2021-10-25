@@ -21,7 +21,19 @@ module Google
   module Cloud
     module OsConfig
       module V1
-        # The inventory details of a VM.
+        # This API resource represents the available inventory data for a
+        # Compute Engine virtual machine (VM) instance at a given point in time.
+        #
+        # You can use this API resource to determine the inventory data of your VM.
+        #
+        # For more information, see [Information provided by OS inventory
+        # management](https://cloud.google.com/compute/docs/instances/os-inventory-management#data-collected).
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The `Inventory` API resource name.
+        #
+        #     Format:
+        #     `projects/{project_number}/locations/{location}/instances/{instance_id}/inventory`
         # @!attribute [rw] os_info
         #   @return [::Google::Cloud::OsConfig::V1::Inventory::OsInfo]
         #     Base level operating system information for the VM.
@@ -31,6 +43,9 @@ module Google
         #     each inventory item.  The identifier is unique to each distinct and
         #     addressable inventory item and will change, when there is a new package
         #     version.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp of the last reported inventory for the VM.
         class Inventory
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -157,6 +172,9 @@ module Google
           # @!attribute [rw] cos_package
           #   @return [::Google::Cloud::OsConfig::V1::Inventory::VersionedPackage]
           #     Details of a COS package.
+          # @!attribute [rw] windows_application
+          #   @return [::Google::Cloud::OsConfig::V1::Inventory::WindowsApplication]
+          #     Details of Windows Application.
           class SoftwarePackage
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -174,6 +192,24 @@ module Google
           #   @return [::String]
           #     The version of the package.
           class VersionedPackage
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Details related to a Zypper Patch.
+          # @!attribute [rw] patch_name
+          #   @return [::String]
+          #     The name of the patch.
+          # @!attribute [rw] category
+          #   @return [::String]
+          #     The category of the patch.
+          # @!attribute [rw] severity
+          #   @return [::String]
+          #     The severity specified for this patch
+          # @!attribute [rw] summary
+          #   @return [::String]
+          #     Any summary information provided about this patch.
+          class ZypperPatch
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -230,24 +266,6 @@ module Google
             end
           end
 
-          # Details related to a Zypper Patch.
-          # @!attribute [rw] patch_name
-          #   @return [::String]
-          #     The name of the patch.
-          # @!attribute [rw] category
-          #   @return [::String]
-          #     The category of the patch.
-          # @!attribute [rw] severity
-          #   @return [::String]
-          #     The severity specified for this patch
-          # @!attribute [rw] summary
-          #   @return [::String]
-          #     Any summary information provided about this patch.
-          class ZypperPatch
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
           # Information related to a Quick Fix Engineering package.
           # Fields are taken from Windows QuickFixEngineering Interface and match
           # the source names:
@@ -269,6 +287,34 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Contains information about a Windows application as retrieved from the
+          # Windows Registry. For more information about these fields, see
+          #
+          # [Windows Installer Properties for the Uninstall
+          # Registry](https://docs.microsoft.com/en-us/windows/win32/msi/uninstall-registry-key){:
+          # class="external" }
+          # @!attribute [rw] display_name
+          #   @return [::String]
+          #     The name of the application or product.
+          # @!attribute [rw] display_version
+          #   @return [::String]
+          #     The version of the product or application in string format.
+          # @!attribute [rw] publisher
+          #   @return [::String]
+          #     The name of the manufacturer for the product or application.
+          # @!attribute [rw] install_date
+          #   @return [::Google::Type::Date]
+          #     The last time this product received service. The value of this property
+          #     is replaced each time a patch is applied or removed from the product or
+          #     the command-line option is used to repair the product.
+          # @!attribute [rw] help_link
+          #   @return [::String]
+          #     The internet address for technical support.
+          class WindowsApplication
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
@@ -277,6 +323,82 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # A request message for getting inventory data for the specified VM.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. API resource name for inventory resource.
+        #
+        #     Format:
+        #     `projects/{project}/locations/{location}/instances/{instance}/inventory`
+        #
+        #     For `{project}`, either `project-number` or `project-id` can be provided.
+        #     For `{instance}`, either Compute Engine  `instance-id` or `instance-name`
+        #     can be provided.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::OsConfig::V1::InventoryView]
+        #     Inventory view indicating what information should be included in the
+        #     inventory resource. If unspecified, the default view is BASIC.
+        class GetInventoryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for listing inventory data for all VMs in the specified
+        # location.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource name.
+        #
+        #     Format: `projects/{project}/locations/{location}/instances/-`
+        #
+        #     For `{project}`, either `project-number` or `project-id` can be provided.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::OsConfig::V1::InventoryView]
+        #     Inventory view indicating what information should be included in the
+        #     inventory resource. If unspecified, the default view is BASIC.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of results to return.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A pagination token returned from a previous call to
+        #     `ListInventories` that indicates where this listing
+        #     should continue from.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     If provided, this field specifies the criteria that must be met by a
+        #     `Inventory` API resource to be included in the response.
+        class ListInventoriesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A response message for listing inventory data for all VMs in a specified
+        # location.
+        # @!attribute [rw] inventories
+        #   @return [::Array<::Google::Cloud::OsConfig::V1::Inventory>]
+        #     List of inventory objects.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     The pagination token to retrieve the next page of inventory objects.
+        class ListInventoriesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The view for inventory objects.
+        module InventoryView
+          # The default value.
+          # The API defaults to the BASIC view.
+          INVENTORY_VIEW_UNSPECIFIED = 0
+
+          # Returns the basic inventory information that includes `os_info`.
+          BASIC = 1
+
+          # Returns all fields.
+          FULL = 2
         end
       end
     end

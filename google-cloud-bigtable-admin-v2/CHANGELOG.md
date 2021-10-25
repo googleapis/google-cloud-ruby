@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.1 / 2021-08-30
+
+#### Documentation
+
+* Fix the links to the corresponding main client library
+
 ### 0.6.0 / 2021-08-20
 
 #### Features

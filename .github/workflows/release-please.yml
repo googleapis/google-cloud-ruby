@@ -33,7 +33,7 @@ jobs:
         run: "gem install --no-document toys && npm install release-please"
       - name: execute
         run: |
-          toys release please --fork \
+          toys release please -v --fork \
             --github-event-name=${{ github.event_name }} \
             --release-type=ruby-yoshi \
             ${{ github.event.inputs.args }} -- ${{ github.event.inputs.gem }}

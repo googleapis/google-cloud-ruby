@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.4 / 2021-09-22
+
+#### Bug Fixes
+
+* Support 1.x versions of the grafeas-v1 dependency
+
 ### 0.4.3 / 2021-08-11
 
 #### Bug Fixes

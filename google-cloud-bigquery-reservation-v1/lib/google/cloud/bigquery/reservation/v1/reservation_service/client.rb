@@ -79,7 +79,7 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.create_reservation.timeout = 60.0
+                  default_config.rpcs.create_reservation.timeout = 300.0
 
                   default_config.rpcs.list_reservations.timeout = 60.0
                   default_config.rpcs.list_reservations.retry_policy = {
@@ -96,9 +96,9 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.update_reservation.timeout = 60.0
+                  default_config.rpcs.update_reservation.timeout = 300.0
 
-                  default_config.rpcs.create_capacity_commitment.timeout = 60.0
+                  default_config.rpcs.create_capacity_commitment.timeout = 300.0
 
                   default_config.rpcs.list_capacity_commitments.timeout = 60.0
                   default_config.rpcs.list_capacity_commitments.retry_policy = {
@@ -115,13 +115,13 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.update_capacity_commitment.timeout = 60.0
+                  default_config.rpcs.update_capacity_commitment.timeout = 300.0
 
-                  default_config.rpcs.split_capacity_commitment.timeout = 60.0
+                  default_config.rpcs.split_capacity_commitment.timeout = 300.0
 
-                  default_config.rpcs.merge_capacity_commitments.timeout = 60.0
+                  default_config.rpcs.merge_capacity_commitments.timeout = 300.0
 
-                  default_config.rpcs.create_assignment.timeout = 60.0
+                  default_config.rpcs.create_assignment.timeout = 300.0
 
                   default_config.rpcs.list_assignments.timeout = 60.0
                   default_config.rpcs.list_assignments.retry_policy = {
@@ -138,14 +138,14 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.move_assignment.timeout = 60.0
+                  default_config.rpcs.move_assignment.timeout = 300.0
 
                   default_config.rpcs.get_bi_reservation.timeout = 60.0
                   default_config.rpcs.get_bi_reservation.retry_policy = {
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.update_bi_reservation.timeout = 60.0
+                  default_config.rpcs.update_bi_reservation.timeout = 300.0
 
                   default_config
                 end
@@ -598,7 +598,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload create_capacity_commitment(parent: nil, capacity_commitment: nil, enforce_single_admin_project_per_org: nil)
+              # @overload create_capacity_commitment(parent: nil, capacity_commitment: nil, enforce_single_admin_project_per_org: nil, capacity_commitment_id: nil)
               #   Pass arguments to `create_capacity_commitment` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -611,6 +611,12 @@ module Google
               #   @param enforce_single_admin_project_per_org [::Boolean]
               #     If true, fail the request if another project in the organization has a
               #     capacity commitment.
+              #   @param capacity_commitment_id [::String]
+              #     The optional capacity commitment ID. Capacity commitment name will be
+              #     generated automatically if this field is empty.
+              #     This field must only contain lower case alphanumeric characters or dash.
+              #     Max length is 64 characters.
+              #     NOTE: this ID won't be kept if the capacity commitment is split or merged.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment]
@@ -817,7 +823,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload delete_capacity_commitment(name: nil)
+              # @overload delete_capacity_commitment(name: nil, force: nil)
               #   Pass arguments to `delete_capacity_commitment` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -825,6 +831,10 @@ module Google
               #   @param name [::String]
               #     Required. Resource name of the capacity commitment to delete. E.g.,
               #        `projects/myproject/locations/US/capacityCommitments/123`
+              #   @param force [::Boolean]
+              #     Can be used to force delete commitments even if assignments exist. Deleting
+              #     commitments with assignments may cause queries to fail if they no longer
+              #     have access to slots.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]
@@ -1133,6 +1143,11 @@ module Google
               #   `project2`) could all be created and mapped to the same or different
               #   reservations.
               #
+              # "None" assignments represent an absence of the assignment. Projects
+              # assigned to None use on-demand pricing. To create a "None" assignment, use
+              # "none" as a reservation_id in the parent. Example parent:
+              # `projects/myproject/locations/US/reservations/none`.
+              #
               # Returns `google.rpc.Code.PERMISSION_DENIED` if user does not have
               # 'bigquery.admin' permissions on the project using the reservation
               # and the project that owns this reservation.
@@ -1150,7 +1165,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload create_assignment(parent: nil, assignment: nil)
+              # @overload create_assignment(parent: nil, assignment: nil, assignment_id: nil)
               #   Pass arguments to `create_assignment` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1160,6 +1175,11 @@ module Google
               #     E.g. `projects/myproject/locations/US/reservations/team1-prod`
               #   @param assignment [::Google::Cloud::Bigquery::Reservation::V1::Assignment, ::Hash]
               #     Assignment resource to create.
+              #   @param assignment_id [::String]
+              #     The optional assignment ID. Assignment name will be generated automatically
+              #     if this field is empty.
+              #     This field must only contain lower case alphanumeric characters or dash.
+              #     Max length is 64 characters.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::Reservation::V1::Assignment]
@@ -1391,7 +1411,7 @@ module Google
               end
 
               ##
-              # Looks up assignments for a specified resource for a particular region.
+              # Deprecated: Looks up assignments for a specified resource for a particular region.
               # If the request is about a project:
               #
               # 1. Assignments created on the project will be returned if they exist.
@@ -1414,6 +1434,8 @@ module Google
               #
               # **Note** "-" cannot be used for projects
               # nor locations.
+              #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
               #
               # @overload search_assignments(request, options = nil)
               #   Pass arguments to `search_assignments` via a request object, either of type
@@ -1488,6 +1510,108 @@ module Google
 
                 @reservation_service_stub.call_rpc :search_assignments, request, options: options do |response, operation|
                   response = ::Gapic::PagedEnumerable.new @reservation_service_stub, :search_assignments, request, response, operation, options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Looks up assignments for a specified resource for a particular region.
+              # If the request is about a project:
+              #
+              # 1. Assignments created on the project will be returned if they exist.
+              # 2. Otherwise assignments created on the closest ancestor will be
+              #    returned.
+              # 3. Assignments for different JobTypes will all be returned.
+              #
+              # The same logic applies if the request is about a folder.
+              #
+              # If the request is about an organization, then assignments created on the
+              # organization will be returned (organization doesn't have ancestors).
+              #
+              # Comparing to ListAssignments, there are some behavior
+              # differences:
+              #
+              # 1. permission on the assignee will be verified in this API.
+              # 2. Hierarchy lookup (project->folder->organization) happens in this API.
+              # 3. Parent here is `projects/*/locations/*`, instead of
+              #    `projects/*/locations/*reservations/*`.
+              #
+              # @overload search_all_assignments(request, options = nil)
+              #   Pass arguments to `search_all_assignments` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::Reservation::V1::SearchAllAssignmentsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::Reservation::V1::SearchAllAssignmentsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload search_all_assignments(parent: nil, query: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `search_all_assignments` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name with location (project name could be the wildcard '-'),
+              #     e.g.:
+              #       `projects/-/locations/US`.
+              #   @param query [::String]
+              #     Please specify resource name as assignee in the query.
+              #
+              #     Examples:
+              #
+              #     * `assignee=projects/myproject`
+              #     * `assignee=folders/123`
+              #     * `assignee=organizations/456`
+              #   @param page_size [::Integer]
+              #     The maximum number of items to return per page.
+              #   @param page_token [::String]
+              #     The next_page_token value returned from a previous List request, if any.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Bigquery::Reservation::V1::Assignment>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Bigquery::Reservation::V1::Assignment>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              def search_all_assignments request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::Reservation::V1::SearchAllAssignmentsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.search_all_assignments.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {
+                  "parent" => request.parent
+                }
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.search_all_assignments.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.search_all_assignments.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @reservation_service_stub.call_rpc :search_all_assignments, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @reservation_service_stub, :search_all_assignments, request, response, operation, options
                   yield response, operation if block_given?
                   return response
                 end
@@ -1592,7 +1716,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. Name of the requested reservation, for example:
-              #     `projects/{project_id}/locations/{location_id}/bireservation`
+              #     `projects/{project_id}/locations/{location_id}/biReservation`
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::Reservation::V1::BiReservation]
@@ -1934,6 +2058,11 @@ module Google
                   #
                   attr_reader :search_assignments
                   ##
+                  # RPC-specific configuration for `search_all_assignments`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :search_all_assignments
+                  ##
                   # RPC-specific configuration for `move_assignment`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1983,6 +2112,8 @@ module Google
                     @delete_assignment = ::Gapic::Config::Method.new delete_assignment_config
                     search_assignments_config = parent_rpcs.search_assignments if parent_rpcs.respond_to? :search_assignments
                     @search_assignments = ::Gapic::Config::Method.new search_assignments_config
+                    search_all_assignments_config = parent_rpcs.search_all_assignments if parent_rpcs.respond_to? :search_all_assignments
+                    @search_all_assignments = ::Gapic::Config::Method.new search_all_assignments_config
                     move_assignment_config = parent_rpcs.move_assignment if parent_rpcs.respond_to? :move_assignment
                     @move_assignment = ::Gapic::Config::Method.new move_assignment_config
                     get_bi_reservation_config = parent_rpcs.get_bi_reservation if parent_rpcs.respond_to? :get_bi_reservation

@@ -45,7 +45,7 @@ module Google
           # distributors and their indirect resellers in a channel.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode
@@ -129,6 +129,24 @@ module Google
             # * FAILED_PRECONDITION: The customer has existing entitlements.
             # * NOT_FOUND: No [Customer][google.cloud.channel.v1.Customer] resource found for the name in the request.
             rpc :DeleteCustomer, ::Google::Cloud::Channel::V1::DeleteCustomerRequest, ::Google::Protobuf::Empty
+            # Imports a [Customer][google.cloud.channel.v1.Customer] from the Cloud Identity associated with the provided
+            # Cloud Identity ID or domain before a TransferEntitlements call. If a
+            # linked Customer already exists and overwrite_if_exists is true, it will
+            # update that Customer's data.
+            #
+            # Possible error codes:
+            #
+            # * PERMISSION_DENIED: The reseller account making the request is different
+            # from the reseller account in the API request.
+            # * NOT_FOUND: Cloud Identity doesn't exist or was deleted.
+            # * INVALID_ARGUMENT: Required parameters are missing, or the auth_token is
+            # expired or invalid.
+            # * ALREADY_EXISTS: A customer already exists and has conflicting critical
+            # fields. Requires an overwrite.
+            #
+            # Return value:
+            # The [Customer][google.cloud.channel.v1.Customer].
+            rpc :ImportCustomer, ::Google::Cloud::Channel::V1::ImportCustomerRequest, ::Google::Cloud::Channel::V1::Customer
             # Creates a Cloud Identity for the given customer using the customer's
             # information, or the information provided here.
             #

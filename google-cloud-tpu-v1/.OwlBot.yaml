@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/tpu/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-tpu-v1/$1

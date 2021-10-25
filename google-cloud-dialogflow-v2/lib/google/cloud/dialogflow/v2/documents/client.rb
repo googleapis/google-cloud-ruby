@@ -310,8 +310,12 @@ module Google
             ##
             # Creates a new document.
             #
-            # Operation <response: {::Google::Cloud::Dialogflow::V2::Document Document},
-            #            metadata: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}>
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
+            # - `response`: {::Google::Cloud::Dialogflow::V2::Document Document}
             #
             # @overload create_document(request, options = nil)
             #   Pass arguments to `create_document` via a request object, either of type
@@ -386,8 +390,13 @@ module Google
             ##
             # Deletes the specified document.
             #
-            # Operation <response: {::Google::Protobuf::Empty google.protobuf.Empty},
-            #            metadata: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}>
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
+            # - `response`: An [Empty
+            #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
             #
             # @overload delete_document(request, options = nil)
             #   Pass arguments to `delete_document` via a request object, either of type
@@ -460,8 +469,12 @@ module Google
             ##
             # Updates the specified document.
             #
-            # Operation <response: {::Google::Cloud::Dialogflow::V2::Document Document},
-            #            metadata: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}>
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
+            # - `response`: {::Google::Cloud::Dialogflow::V2::Document Document}
             #
             # @overload update_document(request, options = nil)
             #   Pass arguments to `update_document` via a request object, either of type
@@ -539,11 +552,15 @@ module Google
             # Note: Even when the content of the document has not changed, there still
             # may be side effects because of internal implementation changes.
             #
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}
+            # - `response`: {::Google::Cloud::Dialogflow::V2::Document Document}
+            #
             # Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
             # only use `projects.knowledgeBases.documents`.
-            #
-            # Operation <response: {::Google::Cloud::Dialogflow::V2::Document Document},
-            #            metadata: {::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata KnowledgeOperationMetadata}>
             #
             # @overload reload_document(request, options = nil)
             #   Pass arguments to `reload_document` via a request object, either of type

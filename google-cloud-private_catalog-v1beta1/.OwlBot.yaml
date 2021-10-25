@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/privatecatalog/v1beta1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-private_catalog-v1beta1/$1

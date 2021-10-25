@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "0351eded13e4bd3b2456ed339250dd92d7bfa455"
+        "sha": "c8646d08a33e98826f5a17c40c0dab6630061dd5"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "2d22118d88946059ab0c3a05588f577a6e82a0c4",
-        "internalRef": "345621354"
+        "sha": "15759865d1c54e3d46429010f7e472fe6c3d3715",
+        "internalRef": "399287285"
       }
     }
   ],
@@ -21,7 +21,7 @@
       "client": {
         "source": "googleapis",
         "apiName": "binaryauthorization",
-        "apiVersion": "v1beta1",
+        "apiVersion": "v1",
         "language": "ruby",
         "generator": "gapic-generator-ruby"
       }
