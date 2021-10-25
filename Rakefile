@@ -130,7 +130,7 @@ end
 require_relative "rakelib/devsite/devsite_builder"
 
 namespace :docs do
-  desc "Builds documentation for all gems on current branch (assumes master)"
+  desc "Builds documentation for all gems on current branch (assumes main)"
   task :build_master do
     DevsiteBuilder.new(__dir__).build_master
   end
@@ -147,7 +147,7 @@ namespace :docs do
     DevsiteBuilder.new(__dir__).rebuild_tag(tag)
   end
 
-  desc "Builds documentation for all tags and current branch (assumes master)"
+  desc "Builds documentation for all tags and current branch (assumes main)"
   task :republish_all do
     DevsiteBuilder.new(__dir__).republish_all
   end
@@ -350,7 +350,7 @@ task :changes, [:gem] do |t, args|
     valid_gems.each do |gem|
       begin
         tag = current_release_tag gem
-        stats = (`git diff --stat #{tag}..master #{gem}`).split("\n")
+        stats = (`git diff --stat #{tag}..main #{gem}`).split("\n")
         if stats.empty?
           puts "#{gem}: no changes"
         else
@@ -368,7 +368,7 @@ namespace :changes do
     valid_gems.each do |gem|
       begin
         tag = current_release_tag gem
-        stats = (`git diff --stat #{tag}..master #{gem}/lib`).split("\n")
+        stats = (`git diff --stat #{tag}..main #{gem}/lib`).split("\n")
         if stats.empty?
           puts "#{gem}: no changes in lib"
         else
@@ -384,14 +384,14 @@ namespace :changes do
   task :diff, [:gem] do |t, args|
     gem = args[:gem]
     tag = current_release_tag gem
-    sh "git diff #{tag}..master #{gem}"
+    sh "git diff #{tag}..main #{gem}"
   end
 
   desc "Print the logs of changes since the last release."
   task :log, [:gem] do |t, args|
     gem = args[:gem]
     tag = current_release_tag gem
-    sh "git log #{tag}..master #{gem}"
+    sh "git log #{tag}..main #{gem}"
   end
 
   desc "Print the stats of changes since the last release."
@@ -402,7 +402,7 @@ namespace :changes do
       begin
         header gem
         tag = current_release_tag gem
-        sh "git diff --stat #{tag}..master #{gem}"
+        sh "git diff --stat #{tag}..main #{gem}"
       rescue => e
         puts e
       end
@@ -417,7 +417,7 @@ namespace :changes do
       begin
         header gem
         tag = current_release_tag gem
-        sh "git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\" --date=relative #{tag}..master #{gem}"
+        sh "git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\" --date=relative #{tag}..main #{gem}"
       rescue => e
         puts e
       end
@@ -431,7 +431,7 @@ namespace :changes do
   end
 
   def oldest_commit_since_release gem, tag
-    commit_dates = (`git log --pretty=format:\"%ad\" --date=relative #{tag}..master #{gem}`).split("\n")
+    commit_dates = (`git log --pretty=format:\"%ad\" --date=relative #{tag}..main #{gem}`).split("\n")
     commit_dates.last
   end
 end
@@ -661,7 +661,7 @@ end
 
 # Returns [gem_name, gem_version]
 def split_tag str
-  return [nil, str] if str == "master" # Support use of "master" even without gem name
+  return [nil, str] if str == "main" # Support use of "main" even without gem name
   fail "'tag' must be in the format <gem>/<version> Actual: #{str}" unless str.include?("/")
   parts = str.split("/")
   fail "'tag' must be in the format <gem>/<version>. Actual: #{str}" unless parts.length == 2
