@@ -2,9 +2,18 @@
 # This is an example yaml file demonstrating fields available for cloudrad
 # Removed the 2nd etc entries from list fields to simplify. All fields more
 # involved than just name/id type info do no escape html, allowing us to format
-# how we want.
+# how we want. 
 
-items: # List of entries to be included on the page, starting with main parent object (class/module)
+# The url tail to a page will just be the file name without the ".yml"
+# So the full link to this page after html generation would look like:
+# subdomain.domain.tld/ruby/docs/reference/google-cloud-vision-v1/latest/class_example
+# because the module is google-cloud-vision-v1 and the filename is class_example.yml
+# Links to the embedded "configure" instance method would append the uid as the anchor,
+# swapping all non-urlsafe characters for "_" i.e.:
+# subdomain.domain.tld/ruby/docs/reference/google-cloud-vision-v1/latest/class_example.html#Google__Cloud__Vision__V1__ImageAnnotator__Client_configure_instance_
+
+# List of entries to be included on the page, starting with main parent object (class/module)
+items:
 
 # The object path. Docfx expects non-file toc entries to line up with a uid
 - uid: "Google::Cloud::Vision::V1::ImageAnnotator::Client"
