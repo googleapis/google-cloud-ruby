@@ -8,6 +8,7 @@ AllCops:
     - "proto_docs/**/*"
     - "test/**/*"
     - "acceptance/**/*"
+    - "samples/acceptance/**/*"
     - "Rakefile"
 
 Layout/LineLength:
