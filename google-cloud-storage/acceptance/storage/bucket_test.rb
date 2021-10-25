@@ -246,7 +246,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
 
     # _(storage.bucket(single_use_bucket_name)).must_be :nil?
 
-    single_use_bucket = safe_gcs_execute { storage.create_bucket single_use_bucket_name, location_type: "dual-region" }
+    single_use_bucket = safe_gcs_execute { storage.create_bucket single_use_bucket_name, location: "ASIA1" }
 
     _(single_use_bucket.rpo).must_equal "DEFAULT"
 

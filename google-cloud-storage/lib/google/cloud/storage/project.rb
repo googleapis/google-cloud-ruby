@@ -375,12 +375,10 @@ module Google
                           website_404: nil,
                           versioning: nil,
                           requester_pays: nil,
-                          user_project: nil,
-                          location_type: "dual-region"
+                          user_project: nil
           params = {
             name: bucket_name,
-            location: location,
-            location_type: location_type
+            location: location
           }.delete_if { |_, v| v.nil? }
           new_bucket = Google::Apis::StorageV1::Bucket.new(**params)
           storage_class = storage_class_for storage_class
