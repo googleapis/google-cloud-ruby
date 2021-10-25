@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2021-10-25
+
+#### Features
+
+* Reports the creation time of instances
+
 ### 0.6.1 / 2021-08-30
 
 #### Documentation
