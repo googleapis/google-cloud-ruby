@@ -1,0 +1,26 @@
+- uid: google-cloud-vision-v1
+  name: google-cloud-vision-v1
+  items:
+  - name: Overview
+    items:
+    - name: Getting started
+      href: index.md # Renamed from README
+    - name: Authenticating the library
+      href: AUTHENTICATION.md
+  # Just a flatly organized list of all the library's classes/modules that
+  # got their own yml files. It is currently kept flat (vs hierarchical like yard default)
+  # due to the width limit of the html toc not indenting for deeper sections of
+  # the object tree, and because currently drop-down entries can't themselves be a page, so
+  # for example the Google::Cloud::Vision::V1 drop down would have to have itself as one of
+  # its entries
+  - uid: Google
+    name: Google
+  - uid: Google::Cloud
+    name: Google::Cloud
+  - uid: Google::Cloud::Vision
+    name: Google::Cloud::Vision
+  - uid: Google::Cloud::Vision::V1
+    name: Google::Cloud::Vision::V1
+  - uid: Google::Cloud::Vision::V1::AddProductToProductSetRequest
+    name: Google::Cloud::Vision::V1::AddProductToProductSetRequest
+
