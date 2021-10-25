@@ -10,7 +10,7 @@
 # because the module is google-cloud-vision-v1 and the filename is class_example.yml
 # Links to the embedded "configure" instance method would append the uid as the anchor,
 # swapping all non-urlsafe characters for "_" i.e.:
-# subdomain.domain.tld/ruby/docs/reference/google-cloud-vision-v1/latest/class_example.html#Google__Cloud__Vision__V1__ImageAnnotator__Client_configure_instance_
+# subdomain.domain.tld/ruby/docs/reference/google-cloud-vision-v1/latest/class_example#Google__Cloud__Vision__V1__ImageAnnotator__Client_configure_instance_
 
 # List of entries to be included on the page, starting with main parent object (class/module)
 items:
