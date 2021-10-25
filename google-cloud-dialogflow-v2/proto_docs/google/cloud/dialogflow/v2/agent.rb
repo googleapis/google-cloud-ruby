@@ -126,13 +126,14 @@ module Google
             # Not specified. This value should never be used.
             TIER_UNSPECIFIED = 0
 
-            # Standard tier.
+            # Trial Edition, previously known as Standard Edition.
             TIER_STANDARD = 1
 
-            # Enterprise tier (Essentials).
+            # Essentials Edition, previously known as Enterprise Essential Edition.
             TIER_ENTERPRISE = 2
 
-            # Enterprise tier (Plus).
+            # Essentials Edition (same as TIER_ENTERPRISE), previously known as
+            # Enterprise Plus Edition.
             TIER_ENTERPRISE_PLUS = 3
           end
         end
