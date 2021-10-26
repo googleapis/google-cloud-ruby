@@ -1011,14 +1011,6 @@ module Google
         end
 
         ##
-        # @deprecated Use {#public_access_prevention_inherited?s} instead.
-        #
-        def public_access_prevention_unspecified?
-          return false unless @gapi.iam_configuration&.public_access_prevention
-          @gapi.iam_configuration.public_access_prevention.to_s == "unspecified"
-        end
-
-        ##
         # Whether the value for Public Access Prevention in the bucket's IAM configuration is `inherited`. The default
         # is `false`. This value can be modified by calling {Bucket#public_access_prevention=}.
         #
@@ -1038,8 +1030,10 @@ module Google
         #
         def public_access_prevention_inherited?
           return false unless @gapi.iam_configuration&.public_access_prevention
-          @gapi.iam_configuration.public_access_prevention.to_s == "inherited"
+          ["inherited", "unspecified"].include? @gapi.iam_configuration.public_access_prevention.to_s
         end
+
+        alias public_access_prevention_unspecified? public_access_prevention_inherited?
 
         ##
         # Updates the bucket with changes made in the given block in a single
