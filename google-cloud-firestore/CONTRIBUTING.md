@@ -13,7 +13,7 @@ abide by its terms. See [Code of Conduct](CODE_OF_CONDUCT.md) for more informati
 
 1. [Open an issue](#open-an-issue)
 1. [Sign Contributor License Agreement](#sign-contributor-license-agreement)
-1. [Setup project](#setup-project)
+1. [Set up environment](#set-up-environment)
 1. [Run CI](#run-ci)
 1. [Make changes](#make-changes)
 1. [Commit changes](#commit-changes)
@@ -38,9 +38,9 @@ Before we can accept your pull requests you'll need to sign a Contributor Licens
 
 You can sign these electronically. After that, we'll be able to accept your pull requests.
 
-## Setup project
+## Set up environment
 
-In order to make changes, there is a small amount of setup:
+To set up your local development environment:
 
 1. Install a [supported version](google-cloud-firestore.gemspec) (or versions) of Ruby. (You may choose to manage your
    Ruby and gem installations with [RVM](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv), or
@@ -88,6 +88,47 @@ In order to make changes, there is a small amount of setup:
    ```bash
    git checkout -b <topic-branch>
    ```
+
+To set up your acceptance test environment:
+
+1. If needed, create a project. In the Google Cloud Console, on the project selector page, select or create a Google
+   Cloud project.
+
+1. Ensure that billing is enabled for your project.
+
+1. Ensure that the Firestore API is enabled for your project. Note that if you have already enabled the Datastore API
+   for your project, you will need to use a different project for Firestore.
+
+1. Follow the instructions for [Creating a Service Account](AUTHENTICATION.md#creating-a-service-account) in
+   `AUTHENTICATION.md`. 
+
+1. Set the `GCLOUD_TEST_KEYFILE` environment variable to the path of the JSON key file that you downloaded in the
+   previous step:
+
+   ``` sh
+   $ export GCLOUD_TEST_KEYFILE=/path/to/keyfile.json
+   ```
+
+   If you are already using the `GCLOUD_TEST_KEYFILE` environment variable, and wish to test this library with a
+   different key file, you may set the `FIRESTORE_TEST_KEYFILE` environment variable instead:
+
+   ``` sh
+   $ export FIRESTORE_TEST_KEYFILE=my-project-id
+   ```
+
+1. Set the `GCLOUD_TEST_PROJECT` environment variable to your Google Cloud project ID:
+
+   ``` sh
+   $ export GCLOUD_TEST_PROJECT=my-project-id
+   ```
+
+   If you are already using the `GCLOUD_TEST_PROJECT` environment variable, and wish to test this library with a
+   different project, you may set the `FIRESTORE_TEST_PROJECT` environment variable instead:
+
+   ``` sh
+   $ export FIRESTORE_TEST_PROJECT=my-project-id
+   ```
+
 
 ## Run CI
 
@@ -186,8 +227,7 @@ want to isolate.
 
 ### Acceptance Tests
 
-The Firestore acceptance tests interact with the live service API. Follow the instructions in the [Authentication
-Guide](AUTHENTICATION.md) for enabling the product API. Occasionally, some API features may not yet be generally
+The Firestore acceptance tests interact with the live service API.  Occasionally, some API features may not yet be generally
 available, making it difficult for some contributors to successfully run the entire acceptance test suite. However,
 please ensure that you do successfully run acceptance tests for any code areas covered by your pull request.
 
@@ -195,28 +235,9 @@ To run the acceptance tests, first create and configure a project in the Google 
 [Authentication Guide](AUTHENTICATION.md). Be sure to download the JSON KEY file. Make note of the PROJECT_ID and the
 KEYFILE location on your system.
 
-#### Running the acceptance tests
-
 To run the acceptance tests:
 
 ``` sh
-$ bundle exec rake acceptance[\\{my-project-id},\\{/path/to/keyfile.json}]
-```
-
-Or, if you prefer you can store the values in the `GCLOUD_TEST_PROJECT` and `GCLOUD_TEST_KEYFILE` environment variables:
-
-``` sh
-$ export GCLOUD_TEST_PROJECT=\\{my-project-id}
-$ export GCLOUD_TEST_KEYFILE=\\{/path/to/keyfile.json}
-$ bundle exec rake acceptance
-```
-
-If you want to use a different project and credentials for acceptance tests, you can use the more specific
-`FIRESTORE_TEST_PROJECT`  and `FIRESTORE_TEST_KEYFILE` environment variables:
-
-``` sh
-$ export FIRESTORE_TEST_PROJECT=\\{my-project-id}
-$ export FIRESTORE_TEST_KEYFILE=\\{/path/to/keyfile.json}
 $ bundle exec rake acceptance
 ```
 
