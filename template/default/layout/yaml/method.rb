@@ -122,7 +122,11 @@ def example_text item, indent = ""
   return "[]" if examples.empty?
 
   examples.each do |example|
-    text << "- \"#{codeblock escapes(example.text)}\""
+    str = codeblock escapes example.text
+    unless example.name.strip.empty?
+      str = "#{escapes example.name}\\n#{str}"
+    end
+    text << "- \"#{str}\""
   end
   text.map { |line| "#{indent}#{line}" }.join "\n"
 end
