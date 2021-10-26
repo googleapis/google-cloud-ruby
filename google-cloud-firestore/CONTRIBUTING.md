@@ -23,7 +23,7 @@ abide by its terms. See [Code of Conduct](CODE_OF_CONDUCT.md) for more informati
 ## Open an issue
 
 Pull requests should generally be directed by an existing issue, otherwise you risk working on something that the
-maintainers might not be able to accept into the project. Please take a look through [the existing
+maintainers might not be able to accept into the project. Please take a look through [the repository
 issues](https://github.com/googleapis/google-cloud-ruby/issues), and if you do not see an existing one for your problem
 or feature, please open a new issue using one of the provided templates.
 
@@ -92,7 +92,7 @@ In order to make changes, there is a small amount of setup:
 ## Run CI
 
 You are now ready to run local CI checks for the library, which you should do **before** you make any changes. Doing so
-ensures that everything is OK with your local environment and the latest dependency versions. You don't want any nasty
+ensures that everything is OK with your local environment and the latest dependency versions. You don't want any
 surprises later.
 
 To run the code style checks, documentation tests, and unit tests together, use the `ci` task:
@@ -101,9 +101,11 @@ To run the code style checks, documentation tests, and unit tests together, use 
 $ bundle exec rake ci
 ```
 
-To run the command above, plus all acceptance tests, use `rake ci:acceptance` or its handy alias, `rake ci:a`.
+To run the command above, plus all acceptance tests, use `rake ci:acceptance` or its handy alias, `rake ci:a`. Keep in
+mind that the acceptance tests typically take much longer to run than the other CI checks.
 
-The bundled rake tasks can be used individually to streamline your workflow when developing or debugging.
+The rake tasks aggregated in the commands above can be run individually to streamline your workflow when developing or
+debugging.
 
 | CI check                                      | Command           |
 |-----------------------------------------------|------------------ |
@@ -116,10 +118,10 @@ The subsections below describe the individual CI checks.
 
 ### Static code analysis
 
-This project uses [Rubocop](https://github.com/rubocop/rubocop) with the shared
-[googleapis/ruby-style](https://github.com/googleapis/ruby-style) configuration to ensure that your code adheres to
-Google's Ruby style. The style is is largely based on [The Ruby Style
-Guide](https://github.com/bbatsov/ruby-style-guide) with a few exceptions based on "Seattle.rb style":
+The project uses [Rubocop](https://github.com/rubocop/rubocop) configured with the shared
+[googleapis/ruby-style](https://github.com/googleapis/ruby-style) rules to ensure that your code adheres to
+Google's Ruby style. The style is largely based on [The Ruby Style
+Guide](https://github.com/bbatsov/ruby-style-guide) with a few exceptions based on Seattle.rb style:
 
 * Avoid parentheses when possible, including in method definitions.
 * Use double-quoted strings.
@@ -130,14 +132,15 @@ You can check your code against these rules by running Rubocop like so:
 $ bundle exec rake rubocop
 ```
 
-In the rare case that you need to modify the existing Rubocop configuration in order to accommodate your changes, you
-can do so using [.rubocop.yml](.rubocop.yml).
+In the rare case that you need to override the existing configuration in order to accommodate your changes, you
+can do so for just this library by updating [.rubocop.yml](.rubocop.yml).
 
 ### Documentation tests
 
 When adding a new feature, you should almost always add one or more in-line documentation code examples demonstrating
 the use of the feature, using [YARD](https://github.com/lsegal/yard)'s
-[`@example`](http://www.rubydoc.info/gems/yard/file/docs/Tags.md#example) tag.
+[`@example`](http://www.rubydoc.info/gems/yard/file/docs/Tags.md#example) tag. Be sure to write a complete, executable
+example that includes the library `require` statement and client initialization.
 
 The project uses [yard-doctest](https://github.com/p0deje/yard-doctest) to execute each sample as a unit test:
 
@@ -145,13 +148,13 @@ The project uses [yard-doctest](https://github.com/p0deje/yard-doctest) to execu
 $ bundle exec rake doctest
 ```
 
-If you add, remove or modify documentation examples, you may need to update the setup for the tests. The stubs and mocks
-required to run the tests are located in [support/doctest_helper.rb](support/doctest_helper.rb). Please note that much
-of the setup is matched by the title of the `@example` tag. If you alter an example's title, you may encounter breaking
-tests.
+If you add, remove or modify documentation examples, you may need to update the setup for the tests. The fixtures, stubs
+and mocks required to run the tests are located in [support/doctest_helper.rb](support/doctest_helper.rb). Please note
+that much of the setup is matched to its corresponding example by the title of the `@example` tag. If you alter an
+example's title, you may encounter breaking tests.
 
 There are generally no assertions or mock verifications in these tests. They just check that the examples are
-syntactically correct and execute against the source code without error.
+syntactically correct and execute against the library source code without error.
 
 ### Unit tests
 
@@ -165,6 +168,21 @@ To run the unit tests:
 ``` sh
 $ bundle exec rake test
 ```
+
+Although the unit tests are intended to run quickly, you may want to isolate one or more of the tests by placing the
+`focus` keyword just above the test declaration. (See [minitest-focus](https://github.com/seattlerb/minitest-focus)
+for details.)
+
+#### Conformance tests
+
+The unit tests for google-cloud-firestore include [generated conformance
+tests](test/google/cloud/firestore/conformance_test.rb) based on specifications that are imported from the `firestore`
+subdirectory in the [googleapis/conformance-tests](https://github.com/googleapis/conformance-tests/) repo. If you need
+execute one or more of these tests in isolation, you can do so by placing the `focus` keyword just above one of the
+calls to `define_method`. This will isolate a subset of the conformance tests. To isolate a single conformance test
+within the subset, insert a conditional statement into the `test_file.tests.each` loop near the bottom of the
+`conformance_test.rb` file. In the conditional, call `next` unless the current test `description` matches the test you
+want to isolate.
 
 ### Acceptance Tests
 
@@ -264,4 +282,6 @@ before you open your pull request.
    description. By convention in this project, the assignee of the pull request will be the maintainer who will merge it
    once it is approved. If you are a maintainer of the project, typically you should assign the pull request to
    yourself.
+
+1. Ensure that the GitHub checks are passing.
 
