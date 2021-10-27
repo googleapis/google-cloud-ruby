@@ -81,7 +81,7 @@ module Google
           #
           # @return [Admin::Database::V1::DatabaseAdmin::Client] A client object of version V1.
           #
-          # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
+          # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize, Metrics/MethodLength
           def self.database_admin project_id: nil,
                                   credentials: nil,
                                   scope: nil,
@@ -126,7 +126,7 @@ module Google
               config.metadata = { "google-cloud-resource-prefix" => "projects/#{project_id}" }
             end
           end
-          # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
+          # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize, Metrics/MethodLength
 
           ##
           # Configure the Google Cloud Spanner Database Admin library.
