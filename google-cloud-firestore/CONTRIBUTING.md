@@ -89,7 +89,7 @@ To set up your local development environment:
    git checkout -b <topic-branch>
    ```
 
-To set up your acceptance test environment:
+To set up your acceptance test credentials:
 
 1. If needed, create a project. In the Google Cloud Console, on the project selector page, select or create a Google
    Cloud project.
@@ -113,7 +113,7 @@ To set up your acceptance test environment:
    different key file, you may set the `FIRESTORE_TEST_KEYFILE` environment variable instead:
 
    ``` sh
-   $ export FIRESTORE_TEST_KEYFILE=my-project-id
+   $ export FIRESTORE_TEST_KEYFILE=/path/to/keyfile.json
    ```
 
 1. Set the `GCLOUD_TEST_PROJECT` environment variable to your Google Cloud project ID:
@@ -127,6 +127,34 @@ To set up your acceptance test environment:
 
    ``` sh
    $ export FIRESTORE_TEST_PROJECT=my-project-id
+   ```
+
+To set up your interactive console credentials:
+
+1. Set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to the path of your service account JSON key file (above):
+
+   ``` sh
+   $ export GOOGLE_APPLICATION_CREDENTIALS=/path/to/keyfile.json
+   ```
+
+   If you are already using the `GOOGLE_APPLICATION_CREDENTIALS` environment variable, and wish to test this library with a
+   different key file, you may set the `FIRESTORE_CREDENTIALS` environment variable instead:
+
+   ``` sh
+   $ export FIRESTORE_CREDENTIALS=/path/to/keyfile.json
+   ```
+
+1. Set the `GOOGLE_CLOUD_PROJECT` environment variable to your Google Cloud project ID:
+
+   ``` sh
+   $ export GOOGLE_CLOUD_PROJECT=my-project-id
+   ```
+
+   If you are already using the `GOOGLE_CLOUD_PROJECT` environment variable, and wish to test this library with a
+   different project, you may set the `FIRESTORE_PROJECT` environment variable instead:
+
+   ``` sh
+   $ export FIRESTORE_PROJECT=my-project-id
    ```
 
 
@@ -143,9 +171,9 @@ $ bundle exec rake ci
 ```
 
 To run the command above, plus all acceptance tests, use `rake ci:acceptance` or its handy alias, `rake ci:a`. Keep in
-mind that the acceptance tests typically take much longer to run than the other CI checks.
+mind that the acceptance tests typically take longer than the other CI checks.
 
-The rake tasks aggregated in the commands above can be run individually to streamline your workflow when developing or
+The Rake tasks aggregated in the commands above can be run individually to streamline your workflow when developing or
 debugging.
 
 | CI check                                      | Command           |
@@ -167,14 +195,14 @@ Guide](https://github.com/bbatsov/ruby-style-guide) with a few exceptions based 
 * Avoid parentheses when possible, including in method definitions.
 * Use double-quoted strings.
 
-You can check your code against these rules by running Rubocop like so:
+You can check your code against these rules by running the Rubocop Rake task:
 
 ```sh
 $ bundle exec rake rubocop
 ```
 
-In the rare case that you need to override the existing configuration in order to accommodate your changes, you
-can do so for just this library by updating [.rubocop.yml](.rubocop.yml).
+In the rare case that you need to override the existing Rubocop configuration for this library in order to accommodate
+your changes, you can do so by updating [.rubocop.yml](.rubocop.yml).
 
 ### Documentation tests
 
@@ -194,7 +222,7 @@ and mocks required to run the tests are located in [support/doctest_helper.rb](s
 that much of the setup is matched to its corresponding example by the title of the `@example` tag. If you alter an
 example's title, you may encounter breaking tests.
 
-There are generally no assertions or mock verifications in these tests. They just check that the examples are
+There are generally no assertions or mock verifications in these tests. They simply check that the examples are
 syntactically correct and execute against the library source code without error.
 
 ### Unit tests
@@ -210,30 +238,41 @@ To run the unit tests:
 $ bundle exec rake test
 ```
 
-Although the unit tests are intended to run quickly, you may want to isolate one or more of the tests by placing the
-`focus` keyword just above the test declaration. (See [minitest-focus](https://github.com/seattlerb/minitest-focus)
-for details.)
+Although the unit tests are intended to run quickly, during development or debugging you may want to isolate one or more
+of the tests by placing the `focus` keyword just above the test declaration. (See
+[minitest-focus](https://github.com/seattlerb/minitest-focus) for details.)
 
 #### Conformance tests
 
-The unit tests for google-cloud-firestore include [generated conformance
-tests](test/google/cloud/firestore/conformance_test.rb) based on specifications that are imported from the `firestore`
-subdirectory in the [googleapis/conformance-tests](https://github.com/googleapis/conformance-tests/) repo. If you need
-execute one or more of these tests in isolation, you can do so by placing the `focus` keyword just above one of the
-calls to `define_method`. This will isolate a subset of the conformance tests. To isolate a single conformance test
-within the subset, insert a conditional statement into the `test_file.tests.each` loop near the bottom of the
-`conformance_test.rb` file. In the conditional, call `next` unless the current test `description` matches the test you
-want to isolate.
+Conformance tests are a subset of the unit test suite. The generated [conformance
+tests](test/google/cloud/firestore/conformance_test.rb) are based on specifications that are imported from the
+`firestore` subdirectory in the [googleapis/conformance-tests](https://github.com/googleapis/conformance-tests/) repo to
+the `conformance` directory. (Currently, the import process involves manually copying the files whenever they are
+changed in their source repo.) You should never change conformance test specifications in this repo.
+
+Because the conformance tests are dynamically generated at run time, working with them is more difficult than working
+with hand-written tests. If you need execute one or more of these tests in isolation, you can do so by placing the
+`focus` keyword just above one of the calls to `define_method`. This will isolate a subset of the conformance tests. To
+isolate a single conformance test within the subset, insert a conditional statement into the `test_file.tests.each` loop
+near the bottom of the `conformance_test.rb` file. In the conditional, call `next` unless the current test `description`
+matches the test you want to isolate.
 
 ### Acceptance Tests
 
-The Firestore acceptance tests interact with the live service API.  Occasionally, some API features may not yet be generally
-available, making it difficult for some contributors to successfully run the entire acceptance test suite. However,
-please ensure that you do successfully run acceptance tests for any code areas covered by your pull request.
+The acceptance tests (a.k.a. integration tests) ensure that the library works correctly against the live service API.
+To configure your Google Cloud project, see [Set up environment](#set-up-environment) above.
 
-To run the acceptance tests, first create and configure a project in the Google Developers Console, as described in the
-[Authentication Guide](AUTHENTICATION.md). Be sure to download the JSON KEY file. Make note of the PROJECT_ID and the
-KEYFILE location on your system.
+**Warning: You may incur charges while running the acceptance tests against your Google Cloud project.**
+
+Like the unit tests, the acceptance tests are based on the [minitest](https://github.com/seattlerb/minitest) library,
+including [specs](https://github.com/seattlerb/minitest#specs) and
+[minitest-focus](https://github.com/seattlerb/minitest-focus). Mocks are not generally used in acceptance tests.
+
+Because the acceptance test suite is often time-consuming to run in its entirety, during development or debugging you
+may want to isolate one or more of the tests by placing the `focus` keyword just above the test declaration. (See
+[minitest-focus](https://github.com/seattlerb/minitest-focus) for details.) Also, some API features may not yet be
+generally available, making it difficult for some contributors to successfully run the entire acceptance test suite.
+However, please ensure that you do successfully run acceptance tests for any code areas covered by your pull request.
 
 To run the acceptance tests:
 
@@ -243,21 +282,42 @@ $ bundle exec rake acceptance
 
 ## Make changes
 
-All contributions should include tests that ensure the contributed code behaves as expected.
+All contributions should include new or updated tests to ensure that the contributed code behaves as expected.
+
+When starting work on a new feature, it often makes sense to begin with a basic acceptance test to ensure that the new
+feature is present in the live service API and is available to your project. To run just the new test, temporarily add
+the `focus` keyword just above the test declaration. (See [minitest-focus](https://github.com/seattlerb/minitest-focus)
+for details.) The acceptance tests have a retry mechanism that can sometimes make it hard to see the correct error when
+things go wrong. To disable retries while debugging errors, temporarily comment out or remove the `run_one_method`
+method definition in [acceptance/firestore_helper.rb](acceptance/firestore_helper.rb).
+
+When you are done developing, be sure to remove any usages of the `focus` keyword from your tests and restore the
+`run_one_method` method definition if you removed it.
 
 ### Console
 
-In order to run code interactively, you can automatically load google-cloud-firestore and its dependencies in IRB. This
-requires that your developer environment has already been configured by following the steps described in the
-[Authentication Guide](AUTHENTICATION.md). An IRB console can be created with:
+The project includes a Rake task that automatically loads `google-cloud-firestore` and its dependencies in IRB. To
+configure your Google Cloud project for IRB, see [Set up environment](#set-up-environment) above.
+
+**Warning: You may incur charges while using the library with your Google Cloud project.**
+
+The preloaded IRB console can be used as follows:
 
 ```sh
 $ bundle exec rake console
+irb(main):001:0> require "google/cloud/firestore"
+=> true
+irb(main):002:0> firestore = Google::Cloud::Firestore.new
+=> #<Google::Cloud::Firestore::Client:0x00007fea21c8b488 @service=Google::Cloud::Firestore::Service(my-project-id)>
+irb(main):003:0> 
 ```
+
+Using the console provides an interactive alternative to acceptance testing that may make it easier to explore usage and
+debug problems.
 
 ## Commit changes
 
-Commit your changes using [conventional commits](https://www.conventionalcommits.org/) and include the associated GitHub
+Commit your changes using [conventional commits](https://www.conventionalcommits.org/). Include the associated GitHub
 issue. Changes in the `samples` directory should receive the `chore` commit type, since these changes should not result
 in a release. Below is an example of a `feat` type commit that will result in a semver `minor` release. Notice how it is
 scoped to the short name of the library, contains a bulleted list of public API changes, and ends with the `closes`
@@ -275,7 +335,8 @@ closes: #123"
 ```
 
 The messages for any subsequent commits you may add do not necessarily need to follow the conditional commits format, as
-these messages will be manually dropped or added as bullet points to the original message when the PR is merged.
+these messages will be manually dropped or added as bullet points to the original message when the PR is squashed and
+merged.
 
 ## Run CI again
 
@@ -304,5 +365,5 @@ before you open your pull request.
    once it is approved. If you are a maintainer of the project, typically you should assign the pull request to
    yourself.
 
-1. Ensure that the GitHub checks are passing.
+1. Ensure that all of the GitHub checks are passing.
 
