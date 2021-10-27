@@ -81,9 +81,17 @@ module Google
           #
           # @return [Admin::Database::V1::DatabaseAdmin::Client] A client object of version V1.
           #
-          def self.new project_id: nil, credentials: nil, scope: nil,
-                       timeout: nil, endpoint: nil, project: nil, keyfile: nil,
-                       emulator_host: nil, lib_name: nil, lib_version: nil
+          # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
+          def self.database_admin project_id: nil,
+                                  credentials: nil,
+                                  scope: nil,
+                                  timeout: nil,
+                                  endpoint: nil,
+                                  project: nil,
+                                  keyfile: nil,
+                                  emulator_host: nil,
+                                  lib_name: nil,
+                                  lib_version: nil
             project_id    ||= project || default_project_id
             scope         ||= configure.scope
             timeout       ||= configure.timeout
@@ -118,6 +126,7 @@ module Google
               config.metadata = { "google-cloud-resource-prefix" => "projects/#{project_id}" }
             end
           end
+          # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
 
           ##
           # Configure the Google Cloud Spanner Database Admin library.

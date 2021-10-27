@@ -27,7 +27,7 @@ class Google::Cloud::Spanner::ClientConstructionMinitest < Minitest::Test
     # Clear all environment variables, except SPANNER_EMULATOR_HOST
     ENV.stub :[], emulator_check do
       Gapic::ServiceStub.stub :new, :stub do
-          client = Google::Cloud::Spanner::Admin::Database.new project_id: "1234"
+          client = Google::Cloud::Spanner::Admin::Database.database_admin project_id: "1234"
           assert_kind_of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client, client
           # TODO: Figure out why this fails.
           # assert_equal :this_channel_is_insecure, client.configure.credentials
