@@ -33,7 +33,7 @@ static :postprocessor_image, "gcr.io/cloud-devrel-public-resources/owlbot-ruby"
 
 def run
   set :bazel_target, default_bazel_target unless bazel_target
-  set :output_dir, default_output_dir unless output_dir
+  set :output_dir, updated_output_dir
   run_bazel
   final_dir = output_dir
   final_dir = run_owl_bot if owl_bot
@@ -44,6 +44,7 @@ end
 def run_bazel
   exec ["bazel", "build", "#{library_path}:#{bazel_target}"], chdir: bazel_base_dir
   rm_rf output_dir
+  mkdir_p File.dirname output_dir
   cp_r generated_dir, output_dir
 end
 
@@ -67,7 +68,7 @@ def run_test dir
 end
 
 def piper_client_dir
-  @piper_client_dir ||= capture("p4 g4d #{piper_client}").strip
+  @piper_client_dir ||= capture(["p4", "g4d", piper_client]).strip
 end
 
 def bazel_base_dir
@@ -87,8 +88,12 @@ def default_bazel_target
   match[1]
 end
 
-def default_output_dir
-  File.join context_directory, "tmp", "owl-bot-staging"
+def updated_output_dir
+  if output_dir
+    File.expand_path output_dir
+  else
+    File.join context_directory, "tmp", "owl-bot-staging"
+  end
 end
 
 def docker_run *args
