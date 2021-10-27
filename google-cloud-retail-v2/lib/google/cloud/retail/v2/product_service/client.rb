@@ -682,7 +682,7 @@ module Google
             #     Unique identifier provided by client, within the ancestor
             #     dataset scope. Ensures idempotency and used for request deduplication.
             #     Server-generated if unspecified. Up to 128 characters long and must match
-            #     the pattern: "[a-zA-Z0-9_]+". This is returned as [Operation.name][] in
+            #     the pattern: `[a-zA-Z0-9_]+`. This is returned as [Operation.name][] in
             #     {::Google::Cloud::Retail::V2::ImportMetadata ImportMetadata}.
             #
             #     Only supported when
@@ -988,7 +988,7 @@ module Google
             #
             #     At least 1 value is required, and a maximum of 2000 values are allowed.
             #     Each value must be a string with a length limit of 10 characters, matching
-            #     the pattern [a-zA-Z0-9_-]+, such as "store1" or "REGION-2". Otherwise, an
+            #     the pattern `[a-zA-Z0-9_-]+`, such as "store1" or "REGION-2". Otherwise, an
             #     INVALID_ARGUMENT error is returned.
             #
             #     If the total number of place IDs exceeds 2000 for this
@@ -1123,7 +1123,7 @@ module Google
             #
             #     At least 1 value is required, and a maximum of 2000 values are allowed.
             #     Each value must be a string with a length limit of 10 characters, matching
-            #     the pattern [a-zA-Z0-9_-]+, such as "store1" or "REGION-2". Otherwise, an
+            #     the pattern `[a-zA-Z0-9_-]+`, such as "store1" or "REGION-2". Otherwise, an
             #     INVALID_ARGUMENT error is returned.
             #   @param remove_time [::Google::Protobuf::Timestamp, ::Hash]
             #     The time when the fulfillment updates are issued, used to prevent

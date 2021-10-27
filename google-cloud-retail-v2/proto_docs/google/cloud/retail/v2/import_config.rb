@@ -150,7 +150,7 @@ module Google
         #     Unique identifier provided by client, within the ancestor
         #     dataset scope. Ensures idempotency and used for request deduplication.
         #     Server-generated if unspecified. Up to 128 characters long and must match
-        #     the pattern: "[a-zA-Z0-9_]+". This is returned as [Operation.name][] in
+        #     the pattern: `[a-zA-Z0-9_]+`. This is returned as [Operation.name][] in
         #     {::Google::Cloud::Retail::V2::ImportMetadata ImportMetadata}.
         #
         #     Only supported when
