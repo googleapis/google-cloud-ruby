@@ -159,11 +159,43 @@ module Google
           # @return [::Google::Cloud::Config] The default configuration used by this library
           #
           def self.configure
-            yield ::Google::Cloud.configure.spanner if block_given?
+            @configure ||= begin
+              namespace = ["Google", "Cloud", "Spanner"]
+              parent_config = while namespace.any?
+                                parent_name = namespace.join "::"
+                                parent_const = const_get parent_name
+                                break parent_const.configure if parent_const.respond_to? :configure
+                                namespace.pop
+                              end
 
-            ::Google::Cloud.configure.spanner
+              default_config = Database::Configuration.new parent_config
+              default_config
+            end
+            yield @configure if block_given?
+            @configure
           end
 
+          ##
+          # Configure the Spanner Admin Database instance.
+          #
+          # The configuration is set to the derived mode, meaning that values can be changed,
+          # but structural changes (adding new fields, etc.) are not allowed. Structural changes
+          # should be made on {Database.configure}.
+          #
+          # See {::Google::Cloud::Spanner::Admin::Database::Configuration}
+          # for a description of the configuration fields.
+          #
+          # @yield [config] Configure the Database client.
+          # @yieldparam config [Database::Configuration]
+          #
+          # @return [Database::Configuration]
+          #
+          def configure
+            yield @config if block_given?
+            @config
+          end
+
+          private
           ##
           # @private Default project.
           def self.default_project_id
@@ -210,6 +242,104 @@ module Google
             value = lib_name.dup
             value << "/#{lib_version}" if lib_version
             value << " gccl"
+          end
+
+          ##
+          # Configuration class for the Spanner Admin Database.
+          #
+          # This class provides control over timeouts, retry behavior,
+          # query options, and other low-level controls.
+          #
+          # Configuration can be applied globally to all clients, or to a single client
+          # on construction.
+          #
+          # @example
+          #
+          #   # Modify the global config, setting the timeout for
+          #   # list_databases to 20 seconds,
+          #   # and all remaining timeouts to 10 seconds.
+          #   ::Google::Cloud::Spanner::Admin::Database.configure do |config|
+          #     config.timeout = 10.0
+          #   end
+          #
+          #   # Apply the above configuration only to a new client.
+          #   client = ::Google::Cloud::Spanner::Admin::Database.new do |config|
+          #     config.timeout = 10.0
+          #   end
+          #
+          # @!attribute [rw] endpoint
+          #   The hostname or hostname:port of the service endpoint.
+          #   Defaults to `"spanner.googleapis.com"`.
+          #   @return [::String]
+          # @!attribute [rw] credentials
+          #   Credentials to send with calls. You may provide any of the following types:
+          #    *  (`String`) The path to a service account key file in JSON format
+          #    *  (`Hash`) A service account key as a Hash
+          #    *  (`Google::Auth::Credentials`) A googleauth credentials object
+          #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+          #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
+          #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+          #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
+          #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
+          #    *  (`nil`) indicating no credentials
+          #   @return [::Object]
+          # @!attribute [rw] scope
+          #   The OAuth scopes
+          #   @return [::Array<::String>]
+          # @!attribute [rw] lib_name
+          #   The library name as recorded in instrumentation and logging
+          #   @return [::String]
+          # @!attribute [rw] lib_version
+          #   The library version as recorded in instrumentation and logging
+          #   @return [::String]
+          # @!attribute [rw] interceptors
+          #   An array of interceptors that are run before calls are executed.
+          #   @return [::Array<::GRPC::ClientInterceptor>]
+          # @!attribute [rw] timeout
+          #   The call timeout in seconds.
+          #   @return [::Numeric]
+          # @!attribute [rw] metadata
+          #   Additional gRPC headers to be sent with the call.
+          #   @return [::Hash{::Symbol=>::String}]
+          # @!attribute [rw] retry_policy
+          #   The retry policy. The value is a hash with the following keys:
+          #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
+          #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
+          #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+          #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
+          #       trigger a retry.
+          #   @return [::Hash]
+          # @!attribute [rw] quota_project
+          #   A separate project against which to charge quota.
+          #   @return [::String]
+          #
+          class Configuration
+            extend ::Gapic::Config
+
+            config_attr :endpoint,      "spanner.googleapis.com", ::String
+            config_attr :credentials,   nil do |value|
+              allowed = [::String, ::Hash, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
+              allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
+              allowed.any? { |klass| klass === value }
+            end
+            config_attr :project_id,    nil, ::String, nil
+            config_attr :scope,         nil, ::String, ::Array, nil
+            config_attr :lib_name,      nil, ::String, nil
+            config_attr :lib_version,   nil, ::String, nil
+            config_attr :interceptors,  nil, ::Array,  nil
+            config_attr :timeout,       nil, ::Numeric,nil
+            config_attr :quota_project, nil, ::String, nil
+            config_attr :emulator_host, nil, ::String, nil
+            config_attr :query_options, nil, ::Hash,   nil
+            config_attr :metadata,      nil, ::Hash,   nil
+            config_attr :retry_policy,  nil, ::Hash,   nil
+
+            # @private
+            def initialize parent_config = nil
+              @parent_config = parent_config unless parent_config.nil?
+
+              yield self if block_given?
+            end
           end
         end
       end
