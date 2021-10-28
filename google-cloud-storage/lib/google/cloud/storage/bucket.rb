@@ -932,11 +932,11 @@ module Google
         end
 
         ##
-        # The value for Public Access Prevention in the bucket's IAM configuration. Currently, `unspecified` and
+        # The value for Public Access Prevention in the bucket's IAM configuration. Currently, `inherited` and
         # `enforced` are supported. When set to `enforced`, Public Access Prevention is enforced in the bucket's IAM
         # configuration. This value can be modified by calling {#public_access_prevention=}.
         #
-        # @return [String, nil] Currently, `unspecified` and `enforced` are supported. Returns `nil` if the bucket has
+        # @return [String, nil] Currently, `inherited` and `enforced` are supported. Returns `nil` if the bucket has
         #    no IAM configuration.
         #
         # @example
@@ -958,7 +958,7 @@ module Google
         # calling {#public_access_prevention}.
         #
         # @param [Symbol, String] new_public_access_prevention The bucket's new Public Access Prevention configuration.
-        #   Currently, `unspecified` and `enforced` are supported. When set to `enforced`, Public Access
+        #   Currently, `inherited` and `enforced` are supported. When set to `enforced`, Public Access
         #   Prevention is enforced in the bucket's IAM configuration.
         #
         # @example Set Public Access Prevention to enforced:
@@ -971,15 +971,15 @@ module Google
         #   bucket.public_access_prevention = :enforced
         #   bucket.public_access_prevention #=> "enforced"
         #
-        # @example Set Public Access Prevention to unspecified:
+        # @example Set Public Access Prevention to inherited:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   bucket.public_access_prevention = :unspecified
-        #   bucket.public_access_prevention #=> "unspecified"
+        #   bucket.public_access_prevention = :inherited
+        #   bucket.public_access_prevention #=> "inherited"
         #
         def public_access_prevention= new_public_access_prevention
           @gapi.iam_configuration ||= API::Bucket::IamConfiguration.new
@@ -1011,11 +1011,11 @@ module Google
         end
 
         ##
-        # Whether the value for Public Access Prevention in the bucket's IAM configuration is `unspecified`. The default
+        # Whether the value for Public Access Prevention in the bucket's IAM configuration is `inherited`. The default
         # is `false`. This value can be modified by calling {Bucket#public_access_prevention=}.
         #
         # @return [Boolean] Returns `false` if the bucket has no IAM configuration or if Public Access Prevention is
-        #   not `unspecified` in the IAM configuration. Returns `true` if Public Access Prevention is `unspecified` in
+        #   not `inherited` in the IAM configuration. Returns `true` if Public Access Prevention is `inherited` in
         #   the IAM configuration.
         #
         # @example
@@ -1025,13 +1025,15 @@ module Google
         #
         #   bucket = storage.bucket "my-bucket"
         #
-        #   bucket.public_access_prevention = :unspecified
-        #   bucket.public_access_prevention_unspecified? # true
+        #   bucket.public_access_prevention = :inherited
+        #   bucket.public_access_prevention_inherited? # true
         #
-        def public_access_prevention_unspecified?
+        def public_access_prevention_inherited?
           return false unless @gapi.iam_configuration&.public_access_prevention
-          @gapi.iam_configuration.public_access_prevention.to_s == "unspecified"
+          ["inherited", "unspecified"].include? @gapi.iam_configuration.public_access_prevention.to_s
         end
+
+        alias public_access_prevention_unspecified? public_access_prevention_inherited?
 
         ##
         # Updates the bucket with changes made in the given block in a single
