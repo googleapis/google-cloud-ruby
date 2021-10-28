@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.4 / 2021-10-28
+
+#### Documentation
+
+* Clarify some of the reference documentation
+
 ### 0.11.3 / 2021-10-18
 
 #### Documentation
