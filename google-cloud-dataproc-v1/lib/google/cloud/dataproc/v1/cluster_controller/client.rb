@@ -254,10 +254,14 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -410,11 +414,17 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region,
-                "cluster_name" => request.cluster_name
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+              if request.cluster_name
+                header_params["cluster_name"] = request.cluster_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -502,11 +512,17 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region,
-                "cluster_name" => request.cluster_name
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+              if request.cluster_name
+                header_params["cluster_name"] = request.cluster_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -594,11 +610,17 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region,
-                "cluster_name" => request.cluster_name
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+              if request.cluster_name
+                header_params["cluster_name"] = request.cluster_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -688,11 +710,17 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region,
-                "cluster_name" => request.cluster_name
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+              if request.cluster_name
+                header_params["cluster_name"] = request.cluster_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -764,11 +792,17 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region,
-                "cluster_name" => request.cluster_name
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+              if request.cluster_name
+                header_params["cluster_name"] = request.cluster_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -861,10 +895,14 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -942,11 +980,17 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region,
-                "cluster_name" => request.cluster_name
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+              if request.cluster_name
+                header_params["cluster_name"] = request.cluster_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

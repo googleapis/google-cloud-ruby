@@ -227,9 +227,11 @@ module Google
                 gapic_version: ::Google::Cloud::Debugger::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "debuggee_id" => request.debuggee_id
-              }
+              header_params = {}
+              if request.debuggee_id
+                header_params["debuggee_id"] = request.debuggee_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -300,10 +302,14 @@ module Google
                 gapic_version: ::Google::Cloud::Debugger::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "debuggee_id" => request.debuggee_id,
-                "breakpoint_id" => request.breakpoint_id
-              }
+              header_params = {}
+              if request.debuggee_id
+                header_params["debuggee_id"] = request.debuggee_id
+              end
+              if request.breakpoint_id
+                header_params["breakpoint_id"] = request.breakpoint_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -374,10 +380,14 @@ module Google
                 gapic_version: ::Google::Cloud::Debugger::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "debuggee_id" => request.debuggee_id,
-                "breakpoint_id" => request.breakpoint_id
-              }
+              header_params = {}
+              if request.debuggee_id
+                header_params["debuggee_id"] = request.debuggee_id
+              end
+              if request.breakpoint_id
+                header_params["breakpoint_id"] = request.breakpoint_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -463,9 +473,11 @@ module Google
                 gapic_version: ::Google::Cloud::Debugger::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "debuggee_id" => request.debuggee_id
-              }
+              header_params = {}
+              if request.debuggee_id
+                header_params["debuggee_id"] = request.debuggee_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

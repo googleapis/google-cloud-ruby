@@ -268,9 +268,11 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -343,9 +345,11 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "topic.name" => request.topic.name
-              }
+              header_params = {}
+              if request.topic&.name
+                header_params["topic.name"] = request.topic.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -415,9 +419,11 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "topic" => request.topic
-              }
+              header_params = {}
+              if request.topic
+                header_params["topic"] = request.topic
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -484,9 +490,11 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "topic" => request.topic
-              }
+              header_params = {}
+              if request.topic
+                header_params["topic"] = request.topic
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -559,9 +567,11 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project" => request.project
-              }
+              header_params = {}
+              if request.project
+                header_params["project"] = request.project
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -635,9 +645,11 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "topic" => request.topic
-              }
+              header_params = {}
+              if request.topic
+                header_params["topic"] = request.topic
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -714,9 +726,11 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "topic" => request.topic
-              }
+              header_params = {}
+              if request.topic
+                header_params["topic"] = request.topic
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -787,9 +801,11 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "topic" => request.topic
-              }
+              header_params = {}
+              if request.topic
+                header_params["topic"] = request.topic
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -859,9 +875,11 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "subscription" => request.subscription
-              }
+              header_params = {}
+              if request.subscription
+                header_params["subscription"] = request.subscription
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

@@ -237,9 +237,11 @@ module Google
                 gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "table_name" => request.table_name
-              }
+              header_params = {}
+              if request.table_name
+                header_params["table_name"] = request.table_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -313,9 +315,11 @@ module Google
                 gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "table_name" => request.table_name
-              }
+              header_params = {}
+              if request.table_name
+                header_params["table_name"] = request.table_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -393,9 +397,11 @@ module Google
                 gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "table_name" => request.table_name
-              }
+              header_params = {}
+              if request.table_name
+                header_params["table_name"] = request.table_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -472,9 +478,11 @@ module Google
                 gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "table_name" => request.table_name
-              }
+              header_params = {}
+              if request.table_name
+                header_params["table_name"] = request.table_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -565,9 +573,11 @@ module Google
                 gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "table_name" => request.table_name
-              }
+              header_params = {}
+              if request.table_name
+                header_params["table_name"] = request.table_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -649,9 +659,11 @@ module Google
                 gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "table_name" => request.table_name
-              }
+              header_params = {}
+              if request.table_name
+                header_params["table_name"] = request.table_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

@@ -285,9 +285,11 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceManagement::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service_name" => request.service_name
-              }
+              header_params = {}
+              if request.service_name
+                header_params["service_name"] = request.service_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -425,9 +427,11 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceManagement::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service_name" => request.service_name
-              }
+              header_params = {}
+              if request.service_name
+                header_params["service_name"] = request.service_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -500,9 +504,11 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceManagement::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service_name" => request.service_name
-              }
+              header_params = {}
+              if request.service_name
+                header_params["service_name"] = request.service_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -576,9 +582,11 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceManagement::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service_name" => request.service_name
-              }
+              header_params = {}
+              if request.service_name
+                header_params["service_name"] = request.service_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -654,10 +662,14 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceManagement::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service_name" => request.service_name,
-                "config_id" => request.config_id
-              }
+              header_params = {}
+              if request.service_name
+                header_params["service_name"] = request.service_name
+              end
+              if request.config_id
+                header_params["config_id"] = request.config_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -733,9 +745,11 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceManagement::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service_name" => request.service_name
-              }
+              header_params = {}
+              if request.service_name
+                header_params["service_name"] = request.service_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -820,9 +834,11 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceManagement::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service_name" => request.service_name
-              }
+              header_params = {}
+              if request.service_name
+                header_params["service_name"] = request.service_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -905,9 +921,11 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceManagement::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service_name" => request.service_name
-              }
+              header_params = {}
+              if request.service_name
+                header_params["service_name"] = request.service_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -977,10 +995,14 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceManagement::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service_name" => request.service_name,
-                "rollout_id" => request.rollout_id
-              }
+              header_params = {}
+              if request.service_name
+                header_params["service_name"] = request.service_name
+              end
+              if request.rollout_id
+                header_params["rollout_id"] = request.rollout_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1062,9 +1084,11 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceManagement::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service_name" => request.service_name
-              }
+              header_params = {}
+              if request.service_name
+                header_params["service_name"] = request.service_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1231,9 +1255,11 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceManagement::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service_name" => request.service_name
-              }
+              header_params = {}
+              if request.service_name
+                header_params["service_name"] = request.service_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1317,9 +1343,11 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceManagement::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service_name" => request.service_name
-              }
+              header_params = {}
+              if request.service_name
+                header_params["service_name"] = request.service_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
