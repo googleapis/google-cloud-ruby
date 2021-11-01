@@ -27,8 +27,7 @@ def run_yard
     rm_rf "doc"
     cmd = [
       "bundle", "exec", "yard", "doc",
-      "--yardopts", ".yardopts-cloudrad",
-      "--fail-on-warning", "--no-progress"
+      "--yardopts", ".yardopts-cloudrad"
     ]
     env = { "CLOUDRAD_GEM_NAME" => effective_gem_name }
     exec cmd, env: env
