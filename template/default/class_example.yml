@@ -1,0 +1,130 @@
+### YamlMime:UniversalReference
+# This is an example yaml file demonstrating fields available for cloudrad
+# Removed the 2nd etc entries from list fields to simplify. All fields more
+# involved than just name/id type info do no escape html, allowing us to format
+# how we want. 
+
+# The url tail to a page will just be the file name without the ".yml"
+# So the full link to this page after html generation would look like:
+# subdomain.domain.tld/ruby/docs/reference/google-cloud-vision-v1/latest/class_example
+# because the module is google-cloud-vision-v1 and the filename is class_example.yml
+# Links to the embedded "configure" instance method would append the uid as the anchor,
+# swapping all non-urlsafe characters for "_" i.e.:
+# subdomain.domain.tld/ruby/docs/reference/google-cloud-vision-v1/latest/class_example#Google__Cloud__Vision__V1__ImageAnnotator__Client_configure_instance_
+
+# List of entries to be included on the page, starting with main parent object (class/module)
+items:
+
+# The object path. Docfx expects non-file toc entries to line up with a uid
+- uid: "Google::Cloud::Vision::V1::ImageAnnotator::Client"
+  children: # List of object paths of the object's children
+    - Google::Cloud::Vision::V1::ImageAnnotator::Client.configure(class) # for methods, specify if class or intance
+    - Google::Cloud::Vision::V1::ImageAnnotator::Client#configure(instance)
+    - Google::Cloud::Vision::V1::ImageAnnotator::Client::Configuration
+
+  # The object path again. Is used by docfx for resolving links (not super 
+  # applicable to us because we do this step ourselves).
+  fullName: Google::Cloud::Vision::V1::ImageAnnotator::Client
+  langs:
+  - ruby
+
+  # The name of the gem. The cloudrad rake task will set this as ENV["CLOUDRAD_GEM_NAME"] before running yard
+  module: google-cloud-vision-v1
+
+  # The name of the object. Other languages use this field, but changing/removing it
+  # doesn't seem to have any affect on our output.
+  id: Client
+
+  # The object docstring. 
+  # Docfx will try to parse any markdown for the summary field using docfx's markdown flavor.
+  # Using \\n (to ouput "\n" in the yaml) makes producing valid yaml with newlines simpler.
+  # Does not escape html, so parsing markdown beforehand is easier than trying to convert to
+  # docfx flavor.
+  summary: "Client for the ImageAnnotator service..."
+  type: "class" # The object's class
+
+  # The object path again. The "name:" value will be used as the text for html headings.
+  name: Google::Cloud::Vision::V1::ImageAnnotator::Client
+  example: [] # Accepts a list of strings to display under the Example header. 
+  inherits:
+  - "Object"
+  includes: 
+  - "<a href=\"./Google-Cloud-Vision-V1-ImageAnnotator-Paths\">Google::Cloud::Vision::V1::ImageAnnotator::Paths</a>"
+  extendedBy: [] # Same format as inherits/includes.
+  includedBy: [] # Same format as inherits/includes.
+
+# Next add the first child object. Order will be preserved in html
+# #'s and .'s get ommited by the urls, so to have working links for instance/class 
+# methods with the same name we specify instance or class after the method name
+- uid: Google::Cloud::Vision::V1::ImageAnnotator::Client#configure(instance)
+  fullName: Google::Cloud::Vision::V1::ImageAnnotator::Client#configure
+  name: "#configure"
+  langs:
+    - ruby
+  module: google-cloud-vision-v1
+  summary: "Configure the ImageAnnotator Client instance..." # Same as summary above
+  type: method
+  example: []
+  syntax:
+    description: "Configure the ImageAnnotator..." # The method docstring
+
+    # The method signature.
+    # It gets put in a <pre class=\"prettyprint lang-rb\"> block during html generation.
+    content: "def configure { |config| ... } => Client::Configuration"
+
+    # Field was added (w/ ruby in mind) to replace the parameters field
+    # with something more similar to default yard output, and also to allow us to have
+    # unescaped html for links, etc. This specific method doesn't have a value here but
+    # if it did it would be formatted like
+    arguments:
+    - description: "<strong>arg_name</strong> (<a href=\"./url\">Lib::Defined::Class</a>, ::Hash) — Description"
+    yields: # Added for ruby. Same general format as arguments w/ default yard as inspiration.
+    - description: "(config) — Configure the Client client."
+    yieldparams: # Added for ruby. Same general format as arguments w/ default yard as inspiration.
+    - description: "<strong>config</strong> (<a href=\"./Google-Cloud-Vision-V1-ImageAnnotator-Client-Configuration\">Client::Configuration</a>)"
+
+    # Added for ruby. Same general format as arguments w/ default yard as inspiration.
+    # Used instead of the return(s) fields to maintain similar format to other method syntax fields,
+    # and to allow unescaped html.
+    returnValues:
+    - description: "(<a href=\"./Google-Cloud-Vision-V1-ImageAnnotator-Client-Configuration\">Client::Configuration</a>)"
+
+    # Added for ruby. Same general format as arguments w/ default yard as inspiration.
+    # This one doesn't have anything here, but would follow format:
+    raises:
+    - description: "(::Class::Of::Error) — explanation."
+
+# Methods with overloads are essentially similar outside of the overloads content
+- uid: Google::Cloud::Vision::V1::ImageAnnotator::Client#batch_annotate_images(instance)
+  fullName: Google::Cloud::Vision::V1::ImageAnnotator::Client#batch_annotate_images
+  name: "#batch_annotate_images"
+  langs:
+    - ruby
+  module: google-cloud-vision-v1
+  id: "#batch_annotate_images"
+  summary: "Run image detection and annotation for a batch of images."
+  type: method
+  example:     
+    - "example text"
+  syntax:
+    description: "Run image detection and annotation for a batch of images."
+    content: "method signature"
+    overloads: # Added for ruby to mimic default yard output
+    - content: "overload 1 signature" # Works the same as syntax:content
+      description: "overload 1 description"
+      example: []
+      arguments: # Uses same, built-for-ruby format as syntax:arguments
+      - description: "<strong>arg</strong> (<a href=\"./url\">::Lib::Defined</a>) — description"
+    - content: "overload 2 signature"
+      description: "overload 2 description"
+      example: []
+      arguments:
+      - description: "<strong>arg</strong> (<a href=\"./url\">::Lib::Defined</a>) — description"
+    yields: # Same as above. These all go outside the overload directly under syntax
+    - description: "(response, operation) — Access the result along with the RPC operation"
+    yieldparams:
+    - description: "<strong>operation</strong> (::GRPC::ActiveCall::Operation)"
+    returnValues:
+    - description: "(<a href=\"./Google-Cloud-Vision-V1-BatchAnnotateImagesResponse\">::Google::Cloud::Vision::V1::BatchAnnotateImagesResponse</a>)"
+    raises:
+    - description: "(::Google::Cloud::Error) — if the RPC is aborted."

@@ -415,10 +415,10 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Storage::Bucket#public_access_prevention=@Set Public Access Prevention to unspecified:" do
+  doctest.before "Google::Cloud::Storage::Bucket#public_access_prevention=@Set Public Access Prevention to inherited:" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi, ["my-bucket", Hash]
-      mock.expect :patch_bucket, bucket_gapi("my-bucket", public_access_prevention: "unspecified"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+      mock.expect :patch_bucket, bucket_gapi("my-bucket", public_access_prevention: "inherited"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
     end
   end
 

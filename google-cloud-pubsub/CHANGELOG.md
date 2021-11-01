@@ -1,5 +1,23 @@
 # Release History
 
+### 2.9.0 / 2021-10-28
+
+#### Features
+
+* Expand timeout type from Integer to Numeric
+  * feat: Expand timeout type from Integer to Numeric. This is backwards-compatible.
+    * Change timeout from Integer to Numeric in Google::Cloud.pubsub
+    * Change timeout from Integer to Numeric in Google::Cloud#pubsub
+    * Change timeout from Integer to Numeric in Google::Cloud::PubSub.configure
+    * Change timeout from Integer to Numeric in Google::Cloud::PubSub.new
+  * fix: Propagate timeout to client RPC configs.
+
+#### Documentation
+
+* Add documentation for quota_project Configuration attribute
+* Fix documentation for PubSub.configure
+  * Remove retries property that does not exist in code.
+
 ### 2.8.1 / 2021-09-22
 
 #### Bug Fixes

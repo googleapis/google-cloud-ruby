@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Dialogflow
       module V2
-        VERSION = "0.11.3"
+        VERSION = "0.11.4"
       end
     end
   end

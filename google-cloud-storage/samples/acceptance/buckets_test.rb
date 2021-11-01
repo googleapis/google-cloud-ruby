@@ -43,7 +43,7 @@ require_relative "../storage_remove_cors_configuration"
 require_relative "../storage_remove_retention_policy"
 require_relative "../storage_set_bucket_default_kms_key"
 require_relative "../storage_set_public_access_prevention_enforced"
-require_relative "../storage_set_public_access_prevention_unspecified"
+require_relative "../storage_set_public_access_prevention_inherited"
 require_relative "../storage_set_retention_policy"
 
 describe "Buckets Snippets" do
@@ -89,7 +89,7 @@ describe "Buckets Snippets" do
         list_buckets
       end
 
-      assert_includes out, "ruby_storage_sample_"
+      assert_includes out, "ruby-storage-samples-"
 
       # get_bucket_metadata
       out, _err = capture_io do
@@ -403,10 +403,10 @@ describe "Buckets Snippets" do
 
   describe "public_access_prevention" do
     it "set_public_access_prevention_enforced, get_public_access_prevention, " \
-       "set_public_access_prevention_unspecified" do
-      bucket.public_access_prevention = :unspecified
+       "set_public_access_prevention_inherited" do
+      bucket.public_access_prevention = :inherited
       bucket.refresh!
-      _(bucket.public_access_prevention).must_equal "unspecified"
+      _(bucket.public_access_prevention).must_equal "inherited"
 
       # set_public_access_prevention_enforced
       assert_output "Public access prevention is set to enforced for #{bucket.name}.\n" do
@@ -422,14 +422,14 @@ describe "Buckets Snippets" do
       end
       _(bucket.public_access_prevention).must_equal "enforced"
 
-      # set_public_access_prevention_unspecified
-      assert_output "Public access prevention is 'unspecified' for #{bucket.name}.\n" do
-        set_public_access_prevention_unspecified bucket_name: bucket.name
+      # set_public_access_prevention_inherited
+      assert_output "Public access prevention is 'inherited' for #{bucket.name}.\n" do
+        set_public_access_prevention_inherited bucket_name: bucket.name
       end
 
       bucket.refresh!
-      _(bucket.public_access_prevention).must_equal "unspecified"
-      bucket.public_access_prevention = :unspecified
+      _(bucket.public_access_prevention).must_equal "inherited"
+      bucket.public_access_prevention = :inherited
     end
   end
 end

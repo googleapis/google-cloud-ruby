@@ -2,6 +2,7 @@
 # source: google/cloud/channel/v1/channel_partner_links.proto
 
 require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/cloud/channel/v1/common_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/api/annotations_pb'
