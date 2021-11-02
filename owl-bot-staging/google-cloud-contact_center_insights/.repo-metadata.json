@@ -1,0 +1,14 @@
+{
+    "api_id": "contactcenterinsights.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-contact_center_insights/latest",
+    "distribution_name": "google-cloud-contact_center_insights",
+    "language": "ruby",
+    "name": "contactcenterinsights",
+    "name_pretty": "Contact Center AI Insights API",
+    "product_documentation": "https://cloud.google.com/contact-center/insights/docs",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Contact Center AI Insights helps users detect and visualize patterns in their contact center data. Understanding conversational data drives business value, improves operational efficiency, and provides a voice for customer feedback.",
+    "ruby-cloud-product-url": "https://cloud.google.com/contact-center/insights/docs",
+    "library_type": "GAPIC_AUTO"
+}
