@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-orchestration-airflow-service-v1", path: "../google-cloud-orchestration-airflow-service-v1"
