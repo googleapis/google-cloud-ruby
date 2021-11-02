@@ -2,11 +2,17 @@ require_relative "./format.rb"
 require_relative "./method.rb"
 
 def init
+  @options = options
+
+  # options.item is set by the serialize method in fulldoc/yaml/setup.rb
   @object = options.item
   @method_list = object_methods @object
   @constants = @object.children.select { |child| child.type == :constant }.sort_by { |child| child.path }
   @references = @object.children.reject { |child| [:method, :constant].include? child.type }
-  @references.reject! do |ref| 
+
+  # the children yaml field is supposed to list all children of the @object that will somewhere appear in documentation.
+  # the references yaml field is for anything under children that wasn't defined within the same yaml page (other classes/modules)
+  @references.reject! do |ref|
     ref.visibility == :private || ref.tags.any? { |tag| tag.tag_name == "private" }
   end
   @object_text = ERB.new(File.read"#{__dir__}/_object.erb").result binding
