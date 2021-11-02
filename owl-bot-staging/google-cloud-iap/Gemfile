@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-iap-v1", path: "../google-cloud-iap-v1"
