@@ -89,6 +89,23 @@ module Google
               "projects/#{project}"
             end
 
+            ##
+            # Create a fully-qualified RelatedAccountGroup resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`
+            #
+            # @param project [String]
+            # @param relatedaccountgroup [String]
+            #
+            # @return [::String]
+            def related_account_group_path project:, relatedaccountgroup:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/relatedaccountgroups/#{relatedaccountgroup}"
+            end
+
             extend self
           end
         end

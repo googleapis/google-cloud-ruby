@@ -20,6 +20,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :annotation, :enum, 2, "google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation"
       repeated :reasons, :enum, 3, "google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason"
+      optional :hashed_account_id, :bytes, 4
     end
     add_enum "google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation" do
       value :ANNOTATION_UNSPECIFIED, 0
@@ -45,6 +46,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :event, :message, 2, "google.cloud.recaptchaenterprise.v1.Event"
       optional :risk_analysis, :message, 3, "google.cloud.recaptchaenterprise.v1.RiskAnalysis"
       optional :token_properties, :message, 4, "google.cloud.recaptchaenterprise.v1.TokenProperties"
+      optional :account_defender_assessment, :message, 6, "google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment"
     end
     add_message "google.cloud.recaptchaenterprise.v1.Event" do
       optional :token, :string, 1
@@ -52,6 +54,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :user_agent, :string, 3
       optional :user_ip_address, :string, 4
       optional :expected_action, :string, 5
+      optional :hashed_account_id, :bytes, 6
     end
     add_message "google.cloud.recaptchaenterprise.v1.RiskAnalysis" do
       optional :score, :float, 1
@@ -80,6 +83,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DUPE, 4
       value :MISSING, 5
       value :BROWSER_ERROR, 6
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment" do
+      repeated :labels, :enum, 1, "google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.AccountDefenderLabel"
+    end
+    add_enum "google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.AccountDefenderLabel" do
+      value :ACCOUNT_DEFENDER_LABEL_UNSPECIFIED, 0
+      value :PROFILE_MATCH, 1
+      value :SUSPICIOUS_LOGIN_ACTIVITY, 2
+      value :SUSPICIOUS_ACCOUNT_CREATION, 3
+      value :RELATED_ACCOUNTS_NUMBER_HIGH, 4
     end
     add_message "google.cloud.recaptchaenterprise.v1.CreateKeyRequest" do
       optional :parent, :string, 1
@@ -177,6 +190,41 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :failed_count, :int64, 3
       optional :passed_count, :int64, 4
     end
+    add_message "google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse" do
+      repeated :related_account_group_memberships, :message, 1, "google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse" do
+      repeated :related_account_groups, :message, 1, "google.cloud.recaptchaenterprise.v1.RelatedAccountGroup"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest" do
+      optional :parent, :string, 1
+      optional :hashed_account_id, :bytes, 2
+      optional :page_size, :int32, 3
+      optional :page_token, :string, 4
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse" do
+      repeated :related_account_group_memberships, :message, 1, "google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership" do
+      optional :name, :string, 1
+      optional :hashed_account_id, :bytes, 2
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.RelatedAccountGroup" do
+      optional :name, :string, 1
+    end
   end
 end
 
@@ -195,6 +243,8 @@ module Google
         RiskAnalysis::ClassificationReason = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.RiskAnalysis.ClassificationReason").enummodule
         TokenProperties = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.TokenProperties").msgclass
         TokenProperties::InvalidReason = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.TokenProperties.InvalidReason").enummodule
+        AccountDefenderAssessment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment").msgclass
+        AccountDefenderAssessment::AccountDefenderLabel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.AccountDefenderLabel").enummodule
         CreateKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.CreateKeyRequest").msgclass
         ListKeysRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.ListKeysRequest").msgclass
         ListKeysResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.ListKeysResponse").msgclass
@@ -215,6 +265,14 @@ module Google
         ScoreDistribution = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.ScoreDistribution").msgclass
         ScoreMetrics = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.ScoreMetrics").msgclass
         ChallengeMetrics = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.ChallengeMetrics").msgclass
+        ListRelatedAccountGroupMembershipsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest").msgclass
+        ListRelatedAccountGroupMembershipsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsResponse").msgclass
+        ListRelatedAccountGroupsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest").msgclass
+        ListRelatedAccountGroupsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsResponse").msgclass
+        SearchRelatedAccountGroupMembershipsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest").msgclass
+        SearchRelatedAccountGroupMembershipsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse").msgclass
+        RelatedAccountGroupMembership = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership").msgclass
+        RelatedAccountGroup = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.RelatedAccountGroup").msgclass
       end
     end
   end

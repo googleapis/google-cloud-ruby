@@ -58,6 +58,12 @@ module Google
             # Get some aggregated metrics for a Key. This data can be used to build
             # dashboards.
             rpc :GetMetrics, ::Google::Cloud::RecaptchaEnterprise::V1::GetMetricsRequest, ::Google::Cloud::RecaptchaEnterprise::V1::Metrics
+            # List groups of related accounts.
+            rpc :ListRelatedAccountGroups, ::Google::Cloud::RecaptchaEnterprise::V1::ListRelatedAccountGroupsRequest, ::Google::Cloud::RecaptchaEnterprise::V1::ListRelatedAccountGroupsResponse
+            # Get the memberships in a group of related accounts.
+            rpc :ListRelatedAccountGroupMemberships, ::Google::Cloud::RecaptchaEnterprise::V1::ListRelatedAccountGroupMembershipsRequest, ::Google::Cloud::RecaptchaEnterprise::V1::ListRelatedAccountGroupMembershipsResponse
+            # Search group memberships related to a given account.
+            rpc :SearchRelatedAccountGroupMemberships, ::Google::Cloud::RecaptchaEnterprise::V1::SearchRelatedAccountGroupMembershipsRequest, ::Google::Cloud::RecaptchaEnterprise::V1::SearchRelatedAccountGroupMembershipsResponse
           end
 
           Stub = Service.rpc_stub_class
