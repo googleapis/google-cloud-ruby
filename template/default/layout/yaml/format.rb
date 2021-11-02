@@ -1,14 +1,14 @@
 require "redcarpet"
 require "yard"
 
-class Log
-  # YARD records issues finding links via YARD::Logger#warn
-  def warn str
-    raise str
-  end
-end
-
 class Formatter
+  class Log
+    # YARD records issues finding links via YARD::Logger#warn
+    def warn str
+      raise str
+    end
+  end
+
   include YARD::Templates::Helpers::BaseHelper
   include YARD::Templates::Helpers::HtmlHelper
 
@@ -24,21 +24,21 @@ class Formatter
   end
 
   def log
-    Log.new
+    @log ||= Log.new
   end
 
   def parse_links str
     # resolve_links fails when a link is defined above the object containing the item the link is pointing to
     objects_list = [@object]
     objects_list += @object.children
+    err = nil
     objects_list.each do |obj|
       @object = obj
-      err = nil
       begin
         str = resolve_links str
         return str
       rescue => e
-        if e.message.match /In file [\s\w\d\`\/\.\:\']*Cannot resolve link to #\w+ from text\:/
+        if e.message.match /In file [\s\w\d`\/\.:']*Cannot resolve link to \S+ from text:/
           err = e
           next
         else
@@ -48,10 +48,43 @@ class Formatter
       ensure
         reset_object
       end
-      YARD::Logger.instance.warn e.message
     end
+    YARD::Logger.instance.warn err.message if err
 
     str
+  end
+
+  alias_method :original_url_for, :url_for
+
+  def url_for obj, anchor = nil, relative = true
+    if obj.is_a? YARD::CodeObjects::Base
+      unless obj.is_a? YARD::CodeObjects::NamespaceObject
+        # If the obj is not a namespace obj make it the anchor.
+        anchor = obj
+        obj = obj.namespace
+      end
+      link = obj.path.sub(/^::/, "").gsub("::", "-")
+      result = link + (anchor ? "#" + urlencode(anchor_for(anchor)) : "")
+      return result
+    end
+
+    original_url_for obj, anchor, relative
+  end
+
+  alias_method :original_link_url, :link_url
+
+  def link_url url, title = nil, params = {}
+    title ||= url
+    title.gsub! "_", "&lowbar;"
+    original_link_url url, title, params
+  end
+
+  def anchor_for obj
+    anchor = obj.path.tr "?!:#\.", "_"
+    if obj.type == :method
+      anchor += obj.scope == :class ? "_class_" : "_instance_"
+    end
+    anchor
   end
 
   def reset_object
@@ -96,8 +129,8 @@ end
 
 def pre_format str
   str = str.to_s
-  # Parse markdown prior to running resolve_links, which checks for HTML codeblocks
-  # use our above defined renderer that only handles code:
+  # TODO: Parse markdown prior to running resolve_links, which checks for HTML
+  # codeblocks using our above defined renderer that only handles code:
   # renderer = OnlyCode.new(render_options = {})
   # str = markdown str, renderer
 

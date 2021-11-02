@@ -124,7 +124,7 @@ def example_text item, indent = ""
   examples.each do |example|
     str = codeblock escapes example.text
     unless example.name.strip.empty?
-      str = "#{escapes example.name}\\n#{str}"
+      str = "#{pre_format example.name}\\n#{str}"
     end
     text << "- \"#{str}\""
   end
