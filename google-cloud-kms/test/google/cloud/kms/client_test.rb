@@ -31,4 +31,14 @@ class Google::Cloud::Kms::ClientConstructionMinitest < Minitest::Test
       assert_kind_of Google::Cloud::Kms::V1::KeyManagementService::Client, client
     end
   end
+
+  def test_iam_policy
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Kms.iam_policy do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Kms::V1::IAMPolicy::Client, client
+    end
+  end
 end
