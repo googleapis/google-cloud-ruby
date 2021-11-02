@@ -19,6 +19,9 @@ end
 flag :branch_name, "--branch=NAME" do
   desc "The branch name"
 end
+flag :source_repo, "--source-repo=PATH" do
+  desc "Path to the googleapis-gen source repo"
+end
 
 OWLBOT_CONFIG_FILE_NAME = ".OwlBot.yaml"
 SYNTH_CONFIG_FILE_NAME = "synth.py"
@@ -97,7 +100,7 @@ end
 
 def proto_path_from_synth_content name, content
   match = %r{proto_path="([^"]+)/v\d\w*"}.match content
-  return match[1] if match
+  return match[1].sub %r{/v\d\w*$}, "" if match
   match = %r{gapic\.ruby_library\(\s*"([^"]+)",}.match content
   return "google/cloud/#{match[1]}" if match
   nil
@@ -134,6 +137,7 @@ end
 
 def run_owlbot names
   cmd = ["owlbot"]
+  cmd << "--source-repo" << source_repo if source_repo
   cmd << "--pull" if pull
   if verbosity < 0
     cmd << "-#{'q' * (-verbosity)}"

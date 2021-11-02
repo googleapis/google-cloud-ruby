@@ -33,6 +33,9 @@ end
 flag :source_repo, "--source-repo=PATH" do
   desc "Path to the googleapis-gen source repo"
 end
+flag :piper_client, "--piper-client=NAME" do
+  desc "Generate by running Bazel from the given piper clinet rather than using googleapis-gen"
+end
 
 OWLBOT_CONFIG_FILE_NAME = ".OwlBot.yaml"
 OWLBOT_CLI_IMAGE = "gcr.io/cloud-devrel-public-resources/owlbot-cli"
@@ -42,6 +45,7 @@ TMP_DIR_NAME = "tmp"
 
 include :exec, e: true
 include :terminal
+include :fileutils
 
 def run
   require "psych"
@@ -56,7 +60,11 @@ def run
   sources = collect_sources gems
 
   pull_images
-  run_owlbot sources
+  if piper_client
+    run_bazel sources
+  else
+    run_owlbot sources
+  end
   verify_staging gems
   results = process_gems gems
   final_output results
@@ -138,6 +146,30 @@ def run_owlbot sources
   docker_run(*cmd)
 end
 
+def run_bazel sources
+  rm_rf STAGING_DIR_NAME
+  mkdir_p STAGING_DIR_NAME
+  sources.each do |name, source|
+    library_path, bazel_target = determine_bazel_target source
+    exec ["bazel", "build", "//#{library_path}:#{bazel_target}"], chdir: bazel_base_dir
+    generated_dir = File.join bazel_base_dir, "bazel-bin", library_path, bazel_target
+    cp_r generated_dir, File.join(STAGING_DIR_NAME, name)
+  end
+end
+
+def determine_bazel_target source_regex
+  postfix = "/[^/]+-ruby/(.*)"
+  error "Unexpected source: #{source_regex}" unless source_regex.end_with? postfix
+  library_path = source_regex[0..(-postfix.size-1)].sub %r{^/}, ""
+  build_file_path = File.join bazel_base_dir, library_path, "BUILD.bazel"
+  error "Unable to find #{build_file_path}" unless File.file? build_file_path
+  build_content = File.read build_file_path
+  match = /ruby_gapic_assembly_pkg\(\n\s+name\s*=\s*"([\w-]+-ruby)",/.match build_content
+  error "Unable to find ruby build rule in #{build_file_path}" unless match
+  bazel_target = match[1]
+  [library_path, bazel_target]
+end
+
 def verify_staging gems
   gems.each do |name|
     staging_dir = File.join STAGING_DIR_NAME, name
@@ -208,6 +240,14 @@ def docker_run *args
     "-w", "/repo"
   ] + args
   exec cmd
+end
+
+def piper_client_dir
+  @piper_client_dir ||= capture(["p4", "g4d", piper_client]).strip
+end
+
+def bazel_base_dir
+  @bazel_base_dir ||= File.join piper_client_dir, "third_party", "googleapis", "stable"
 end
 
 def error str
