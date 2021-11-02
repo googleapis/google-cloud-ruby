@@ -1,0 +1,15 @@
+{
+    "api_id": "bigquerydatatransfer.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer/latest",
+    "distribution_name": "google-cloud-bigquery-data_transfer",
+    "language": "ruby",
+    "name": "bigquerydatatransfer",
+    "name_pretty": "BigQuery Data Transfer Service API",
+    "product_documentation": "https://cloud.google.com/bigquery/transfer",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Schedules queries and transfers external data from SaaS applications to Google BigQuery on a regular basis.",
+    "ruby-cloud-env-prefix": "DATA_TRANSFER",
+    "ruby-cloud-product-url": "https://cloud.google.com/bigquery/transfer",
+    "library_type": "GAPIC_AUTO"
+}
