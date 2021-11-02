@@ -1,0 +1,23 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.lifesciences.v2beta",
+  "libraryPackage": "::Google::Cloud::LifeSciences::V2beta",
+  "services": {
+    "WorkflowsServiceV2Beta": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client",
+          "rpcs": {
+            "RunPipeline": {
+              "methods": [
+                "run_pipeline"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
