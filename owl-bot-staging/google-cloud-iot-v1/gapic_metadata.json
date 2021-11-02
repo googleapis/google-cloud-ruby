@@ -1,0 +1,113 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.iot.v1",
+  "libraryPackage": "::Google::Cloud::Iot::V1",
+  "services": {
+    "DeviceManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Iot::V1::DeviceManager::Client",
+          "rpcs": {
+            "CreateDeviceRegistry": {
+              "methods": [
+                "create_device_registry"
+              ]
+            },
+            "GetDeviceRegistry": {
+              "methods": [
+                "get_device_registry"
+              ]
+            },
+            "UpdateDeviceRegistry": {
+              "methods": [
+                "update_device_registry"
+              ]
+            },
+            "DeleteDeviceRegistry": {
+              "methods": [
+                "delete_device_registry"
+              ]
+            },
+            "ListDeviceRegistries": {
+              "methods": [
+                "list_device_registries"
+              ]
+            },
+            "CreateDevice": {
+              "methods": [
+                "create_device"
+              ]
+            },
+            "GetDevice": {
+              "methods": [
+                "get_device"
+              ]
+            },
+            "UpdateDevice": {
+              "methods": [
+                "update_device"
+              ]
+            },
+            "DeleteDevice": {
+              "methods": [
+                "delete_device"
+              ]
+            },
+            "ListDevices": {
+              "methods": [
+                "list_devices"
+              ]
+            },
+            "ModifyCloudToDeviceConfig": {
+              "methods": [
+                "modify_cloud_to_device_config"
+              ]
+            },
+            "ListDeviceConfigVersions": {
+              "methods": [
+                "list_device_config_versions"
+              ]
+            },
+            "ListDeviceStates": {
+              "methods": [
+                "list_device_states"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            },
+            "SendCommandToDevice": {
+              "methods": [
+                "send_command_to_device"
+              ]
+            },
+            "BindDeviceToGateway": {
+              "methods": [
+                "bind_device_to_gateway"
+              ]
+            },
+            "UnbindDeviceFromGateway": {
+              "methods": [
+                "unbind_device_from_gateway"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
