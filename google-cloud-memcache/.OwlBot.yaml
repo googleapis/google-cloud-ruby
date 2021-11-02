@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/memcache/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-memcache/$1
