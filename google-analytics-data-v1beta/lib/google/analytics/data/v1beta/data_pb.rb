@@ -154,6 +154,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.analytics.data.v1beta.ResponseMetaData" do
       optional :data_loss_from_other_row, :bool, 3
+      proto3_optional :schema_restriction_response, :message, 4, "google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse"
+      proto3_optional :currency_code, :string, 5
+      proto3_optional :time_zone, :string, 6
+      proto3_optional :empty_reason, :string, 7
+    end
+    add_message "google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse" do
+      repeated :active_metric_restrictions, :message, 1, "google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction"
+    end
+    add_message "google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction" do
+      proto3_optional :metric_name, :string, 1
+      repeated :restricted_metric_types, :enum, 2, "google.analytics.data.v1beta.RestrictedMetricType"
     end
     add_message "google.analytics.data.v1beta.DimensionHeader" do
       optional :name, :string, 1
@@ -216,7 +227,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :type, :enum, 5, "google.analytics.data.v1beta.MetricType"
       optional :expression, :string, 6
       optional :custom_definition, :bool, 7
+      repeated :blocked_reasons, :enum, 8, "google.analytics.data.v1beta.MetricMetadata.BlockedReason"
       optional :category, :string, 10
+    end
+    add_enum "google.analytics.data.v1beta.MetricMetadata.BlockedReason" do
+      value :BLOCKED_REASON_UNSPECIFIED, 0
+      value :NO_REVENUE_METRICS, 1
+      value :NO_COST_METRICS, 2
     end
     add_message "google.analytics.data.v1beta.DimensionCompatibility" do
       proto3_optional :dimension_metadata, :message, 1, "google.analytics.data.v1beta.DimensionMetadata"
@@ -247,6 +264,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :TYPE_MILES, 11
       value :TYPE_METERS, 12
       value :TYPE_KILOMETERS, 13
+    end
+    add_enum "google.analytics.data.v1beta.RestrictedMetricType" do
+      value :RESTRICTED_METRIC_TYPE_UNSPECIFIED, 0
+      value :COST_DATA, 1
+      value :REVENUE_DATA, 2
     end
     add_enum "google.analytics.data.v1beta.Compatibility" do
       value :COMPATIBILITY_UNSPECIFIED, 0
@@ -289,6 +311,8 @@ module Google
         CohortsRange::Granularity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.CohortsRange.Granularity").enummodule
         CohortReportSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.CohortReportSettings").msgclass
         ResponseMetaData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.ResponseMetaData").msgclass
+        ResponseMetaData::SchemaRestrictionResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse").msgclass
+        ResponseMetaData::SchemaRestrictionResponse::ActiveMetricRestriction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction").msgclass
         DimensionHeader = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.DimensionHeader").msgclass
         MetricHeader = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.MetricHeader").msgclass
         PivotHeader = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.PivotHeader").msgclass
@@ -301,10 +325,12 @@ module Google
         QuotaStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.QuotaStatus").msgclass
         DimensionMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.DimensionMetadata").msgclass
         MetricMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.MetricMetadata").msgclass
+        MetricMetadata::BlockedReason = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.MetricMetadata.BlockedReason").enummodule
         DimensionCompatibility = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.DimensionCompatibility").msgclass
         MetricCompatibility = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.MetricCompatibility").msgclass
         MetricAggregation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.MetricAggregation").enummodule
         MetricType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.MetricType").enummodule
+        RestrictedMetricType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.RestrictedMetricType").enummodule
         Compatibility = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.data.v1beta.Compatibility").enummodule
       end
     end
