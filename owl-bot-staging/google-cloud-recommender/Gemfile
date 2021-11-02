@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-recommender-v1", path: "../google-cloud-recommender-v1"
