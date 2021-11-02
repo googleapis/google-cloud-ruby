@@ -1,0 +1,6 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-binary_authorization-v1", path: "../google-cloud-binary_authorization-v1"
+gem "google-cloud-binary_authorization-v1beta1", path: "../google-cloud-binary_authorization-v1beta1"
