@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 / 2021-11-02
+
+#### Features
+
+* Add a path helper for partner link resources
+
 ### 0.8.0 / 2021-09-08
 
 #### Features
