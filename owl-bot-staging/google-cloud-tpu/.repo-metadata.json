@@ -1,0 +1,15 @@
+{
+    "api_id": "tpu.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-tpu/latest",
+    "distribution_name": "google-cloud-tpu",
+    "language": "ruby",
+    "name": "tpu",
+    "name_pretty": "Cloud TPU API",
+    "product_documentation": "https://cloud.google.com/tpu/",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Tensor Processing Units (TPUs) are Google's custom-developed application-specific integrated circuits (ASICs) used to accelerate machine learning workloads. Cloud TPUs allow you to access TPUs from Compute Engine, Google Kubernetes Engine and AI Platform.",
+    "ruby-cloud-env-prefix": "CLOUD_TPU",
+    "ruby-cloud-product-url": "https://cloud.google.com/tpu/",
+    "library_type": "GAPIC_AUTO"
+}
