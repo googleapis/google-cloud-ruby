@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-deploy-v1", path: "../google-cloud-deploy-v1"
