@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/networkconnectivity/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-network_connectivity/$1

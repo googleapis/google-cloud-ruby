@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/identity/accesscontextmanager/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-identity-access_context_manager/$1

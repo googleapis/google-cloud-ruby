@@ -75,6 +75,19 @@ def choose_gems
       error "No gemspec found for #{name}"
     end
     content = File.read File.join(context_directory, name, SYNTH_CONFIG_FILE_NAME)
+    unless content.include?("gapic = gcp.GAPICMicrogenerator()\n") &&
+           content.include?("ruby-cloud-wrapper-of")
+      logger.warn "Synth script for #{name} doesn't look like a wrapper"
+      next if auto_gems
+      exit 1
+    end
+    if content.include?("s.replace(") ||
+       content =~ /s\.copy\(.*s\.copy\(/m ||
+       content =~ /gapic\.ruby_library\(.*gapic\.ruby_library\(/m
+      logger.warn "Synth script for #{name} is too complicated"
+      next if auto_gems
+      exit 1
+    end
     proto_path = proto_path_from_synth_content name, content
     unless proto_path
       next if auto_gems
@@ -144,7 +157,6 @@ class OwlBotParams
   def initialize name, proto_base
     @gem_name = name
     @proto_path_base = proto_base
-    @api_version = name.split("-").last
   end
 
   def _binding
