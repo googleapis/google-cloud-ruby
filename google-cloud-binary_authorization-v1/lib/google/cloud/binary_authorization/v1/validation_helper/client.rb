@@ -202,9 +202,11 @@ module Google
                 gapic_version: ::Google::Cloud::BinaryAuthorization::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "attestor" => request.attestor
-              }
+              header_params = {}
+              if request.attestor
+                header_params["attestor"] = request.attestor
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

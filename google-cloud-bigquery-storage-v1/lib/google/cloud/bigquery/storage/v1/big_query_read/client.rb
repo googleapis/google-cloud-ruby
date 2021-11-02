@@ -238,9 +238,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Storage::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "read_session.table" => request.read_session.table
-                }
+                header_params = {}
+                if request.read_session&.table
+                  header_params["read_session.table"] = request.read_session.table
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -316,9 +318,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Storage::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "read_stream" => request.read_stream
-                }
+                header_params = {}
+                if request.read_stream
+                  header_params["read_stream"] = request.read_stream
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -403,9 +407,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Storage::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
