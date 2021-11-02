@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-identity-access_context_manager-v1", path: "../google-identity-access_context_manager-v1"
