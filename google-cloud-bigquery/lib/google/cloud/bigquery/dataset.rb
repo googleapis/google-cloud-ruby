@@ -1244,6 +1244,8 @@ module Google
         #   Flattens all nested and repeated fields in the query results. The
         #   default value is `true`. `large_results` parameter must be `true` if
         #   this is set to `false`.
+        # @param [Integer] maximum_billing_tier Deprecated: Change the billing
+        #   tier to allow high-compute queries.
         # @param [Integer] maximum_bytes_billed Limits the bytes billed for this
         #   job. Queries that will have bytes billed beyond this limit will fail
         #   (without incurring a charge). Optional. If unspecified, this will be
@@ -1294,8 +1296,12 @@ module Google
         #   For additional information on migrating, see: [Migrating to
         #   standard SQL - Differences in user-defined JavaScript
         #   functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#differences_in_user-defined_javascript_functions)
-        # @param [Integer] maximum_billing_tier Deprecated: Change the billing
-        #   tier to allow high-compute queries.
+        # @param [Boolean] create_session If true, creates a new session, where the
+        #   session ID will be a server generated random id. If false, runs query
+        #   with an existing session ID when one is provided in the `session_id`
+        #   param, otherwise runs query in non-session mode. See {Job#session_id}.
+        # @param [String] session_id The ID of an existing session. See also the
+        #   `create_session` param and {Job#session_id}.
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
         #   configuration object for setting additional options for the query.
@@ -1435,16 +1441,52 @@ module Google
         #
         # @!group Data
         #
-        def query_job query, params: nil, types: nil, external: nil, priority: "INTERACTIVE", cache: true, table: nil,
-                      create: nil, write: nil, dryrun: nil, standard_sql: nil, legacy_sql: nil, large_results: nil,
-                      flatten: nil, maximum_billing_tier: nil, maximum_bytes_billed: nil, job_id: nil, prefix: nil,
-                      labels: nil, udfs: nil
+        def query_job query,
+                      params: nil,
+                      types: nil,
+                      external: nil,
+                      priority: "INTERACTIVE",
+                      cache: true,
+                      table: nil,
+                      create: nil,
+                      write: nil,
+                      dryrun: nil,
+                      standard_sql: nil,
+                      legacy_sql: nil,
+                      large_results: nil,
+                      flatten: nil,
+                      maximum_billing_tier: nil,
+                      maximum_bytes_billed: nil,
+                      job_id: nil,
+                      prefix: nil,
+                      labels: nil,
+                      udfs: nil,
+                      create_session: nil,
+                      session_id: nil
           ensure_service!
-          options = { params: params, types: types, external: external, priority: priority, cache: cache, table: table,
-                      create: create, write: write, dryrun: dryrun, standard_sql: standard_sql, legacy_sql: legacy_sql,
-                      large_results: large_results, flatten: flatten, maximum_billing_tier: maximum_billing_tier,
-                      maximum_bytes_billed: maximum_bytes_billed, job_id: job_id, prefix: prefix, labels: labels,
-                      udfs: udfs }
+          options = {
+            params: params,
+            types: types,
+            external: external,
+            priority: priority,
+            cache: cache,
+            table: table,
+            create: create,
+            write: write,
+            dryrun: dryrun,
+            standard_sql: standard_sql,
+            legacy_sql: legacy_sql,
+            large_results: large_results,
+            flatten: flatten,
+            maximum_billing_tier: maximum_billing_tier,
+            maximum_bytes_billed: maximum_bytes_billed,
+            job_id: job_id,
+            prefix: prefix,
+            labels: labels,
+            udfs: udfs,
+            create_session: create_session,
+            session_id: session_id
+          }
 
           updater = QueryJob::Updater.from_options service, query, options
           updater.dataset = self
@@ -1566,6 +1608,8 @@ module Google
         #   When set to false, the values of `large_results` and `flatten` are
         #   ignored; the query will be run as if `large_results` is true and
         #   `flatten` is false. Optional. The default value is false.
+        # @param [String] session_id The ID of an existing session. See the
+        #   `create_session` param in {#query_job} and {Job#session_id}.
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
         #   configuration object for setting additional options for the query.
@@ -1699,10 +1743,25 @@ module Google
         #
         # @!group Data
         #
-        def query query, params: nil, types: nil, external: nil, max: nil, cache: true,
-                  standard_sql: nil, legacy_sql: nil, &block
-          job = query_job query, params: params, types: types, external: external, cache: cache,
-                                 standard_sql: standard_sql, legacy_sql: legacy_sql, &block
+        def query query,
+                  params: nil,
+                  types: nil,
+                  external: nil,
+                  max: nil,
+                  cache: true,
+                  standard_sql: nil,
+                  legacy_sql: nil,
+                  session_id: nil,
+                  &block
+          job = query_job query,
+                          params: params,
+                          types: types,
+                          external: external,
+                          cache: cache,
+                          standard_sql: standard_sql,
+                          legacy_sql: legacy_sql,
+                          session_id: session_id,
+                          &block
           job.wait_until_done!
           ensure_job_succeeded! job
 

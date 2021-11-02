@@ -227,6 +227,16 @@ module Google
         end
 
         ##
+        # The ID of the session if this job is part of one. See the `create_session` param in {Project#query_job} and
+        # {Dataset#query_job}.
+        #
+        # @return [String, nil] The session ID, or `nil` if not associated with a session.
+        #
+        def session_id
+          @gapi.statistics.session_info&.session_id
+        end
+
+        ##
         # The ID of a multi-statement transaction.
         #
         # @return [String, nil] The transaction ID, or `nil` if not associated with a transaction.

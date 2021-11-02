@@ -581,7 +581,7 @@ class MockBigquery < Minitest::Spec
     Google::Apis::BigqueryV2::Routine.from_json json
   end
 
-  def random_job_hash id = "job_9876543210", state = "running", location: "US", transaction_id: nil
+  def random_job_hash id = "job_9876543210", state = "running", location: "US", transaction_id: nil, session_id: nil
     hash = {
       "kind" => "bigquery#job",
       "etag" => "etag",
@@ -628,6 +628,7 @@ class MockBigquery < Minitest::Spec
     }
     hash["jobReference"]["location"] = location if location
     hash["statistics"]["transactionInfo"] = { "transactionId": transaction_id } if transaction_id
+    hash["statistics"]["sessionInfo"] = { "sessionId": session_id } if session_id
     hash
   end
 
@@ -677,8 +678,9 @@ class MockBigquery < Minitest::Spec
                           ddl_operation_performed: nil,
                           deleted_row_count: nil,
                           inserted_row_count: nil,
-                          updated_row_count: nil
-    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_resp_json query, job_id: job_id
+                          updated_row_count: nil,
+                          session_id: nil
+    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_resp_json(query, job_id: job_id, session_id: session_id)
     gapi.statistics.query = statistics_query_gapi target_routine: target_routine,
                                                   target_table: target_table,
                                                   statement_type: statement_type,
@@ -690,7 +692,7 @@ class MockBigquery < Minitest::Spec
     gapi
   end
 
-  def query_job_resp_json query, job_id: "job_9876543210", location: "US"
+  def query_job_resp_json query, job_id: "job_9876543210", location: "US", session_id: nil
     hash = random_job_hash job_id, "done", location: location
     hash["configuration"]["query"] = {
       "query" => query,
@@ -714,6 +716,7 @@ class MockBigquery < Minitest::Spec
       "maximumBillingTier" => nil,
       "maximumBytesBilled" => nil
     }
+    hash["statistics"]["sessionInfo"] = { "sessionId": session_id } if session_id
     hash.to_json
   end
 
@@ -812,8 +815,8 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
-  def query_job_gapi query, parameter_mode: nil, dataset: nil, job_id: "job_9876543210", location: "US", dry_run: nil
-    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_json(query, job_id: job_id, location: location, dry_run: dry_run)
+  def query_job_gapi query, parameter_mode: nil, dataset: nil, job_id: "job_9876543210", location: "US", dry_run: nil, create_session: nil, session_id: nil
+    gapi = Google::Apis::BigqueryV2::Job.from_json query_job_json(query, job_id: job_id, location: location, dry_run: dry_run, create_session: create_session, session_id: session_id)
     gapi.configuration.query.parameter_mode = parameter_mode if parameter_mode
     gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
       dataset_id: dataset, project_id: project
@@ -821,7 +824,7 @@ class MockBigquery < Minitest::Spec
     gapi
   end
 
-  def query_job_json query, job_id: "job_9876543210", location: "US", dry_run: nil
+  def query_job_json query, job_id: "job_9876543210", location: "US", dry_run: nil, create_session: nil, session_id: nil
     hash = {
       "jobReference" => {
         "projectId" => project,
@@ -833,6 +836,7 @@ class MockBigquery < Minitest::Spec
           "defaultDataset" => nil,
           "destinationTable" => nil,
           "createDisposition" => nil,
+          "createSession" => create_session,
           "writeDisposition" => nil,
           "priority" => "INTERACTIVE",
           "allowLargeResults" => nil,
@@ -847,6 +851,7 @@ class MockBigquery < Minitest::Spec
       }
     }
     hash["jobReference"]["location"] = location if location
+    hash["configuration"]["query"]["connectionProperties"] = [{key: "session_id", value: session_id}] if session_id
     hash.to_json
   end
 

@@ -775,6 +775,8 @@ module Google
             updater = QueryJob::Updater.new service, req
             updater.set_params_and_types options[:params], options[:types] if options[:params]
             updater.create = options[:create]
+            updater.create_session = options[:create_session]
+            updater.session_id = options[:session_id] if options[:session_id]
             updater.write = options[:write]
             updater.table = options[:table]
             updater.dryrun = options[:dryrun]
@@ -1016,6 +1018,37 @@ module Google
           # @!group Attributes
           def create= value
             @gapi.configuration.query.create_disposition = Convert.create_disposition value
+          end
+
+          ##
+          # Sets the create_session property. If true, creates a new session,
+          # where session id will be a server generated random id. If false,
+          # runs query with an existing {#session_id=}, otherwise runs query in
+          # non-session mode. The default value is `false`.
+          #
+          # @param [Boolean] value The create_session property. The default
+          # value is `false`.
+          #
+          # @!group Attributes
+          def create_session= value
+            @gapi.configuration.query.create_session = value
+          end
+
+          ##
+          # Sets the session ID for a query run in session mode. See {#create_session=}.
+          #
+          # @param [String] value The session ID. The default value is `nil`.
+          #
+          # @!group Attributes
+          def session_id= value
+            @gapi.configuration.query.connection_properties ||= []
+            prop = @gapi.configuration.query.connection_properties.find { |cp| cp.key == "session_id" }
+            if prop
+              prop.value = value
+            else
+              prop = Google::Apis::BigqueryV2::ConnectionProperty.new key: "session_id", value: value
+              @gapi.configuration.query.connection_properties << prop
+            end
           end
 
           ##
