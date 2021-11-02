@@ -1,0 +1,78 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.area120.tables.v1alpha1",
+  "libraryPackage": "::Google::Area120::Tables::V1alpha1",
+  "services": {
+    "TablesService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Area120::Tables::V1alpha1::TablesService::Client",
+          "rpcs": {
+            "GetTable": {
+              "methods": [
+                "get_table"
+              ]
+            },
+            "ListTables": {
+              "methods": [
+                "list_tables"
+              ]
+            },
+            "GetWorkspace": {
+              "methods": [
+                "get_workspace"
+              ]
+            },
+            "ListWorkspaces": {
+              "methods": [
+                "list_workspaces"
+              ]
+            },
+            "GetRow": {
+              "methods": [
+                "get_row"
+              ]
+            },
+            "ListRows": {
+              "methods": [
+                "list_rows"
+              ]
+            },
+            "CreateRow": {
+              "methods": [
+                "create_row"
+              ]
+            },
+            "BatchCreateRows": {
+              "methods": [
+                "batch_create_rows"
+              ]
+            },
+            "UpdateRow": {
+              "methods": [
+                "update_row"
+              ]
+            },
+            "BatchUpdateRows": {
+              "methods": [
+                "batch_update_rows"
+              ]
+            },
+            "DeleteRow": {
+              "methods": [
+                "delete_row"
+              ]
+            },
+            "BatchDeleteRows": {
+              "methods": [
+                "batch_delete_rows"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
