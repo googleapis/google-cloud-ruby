@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.1 / 2021-11-02
+
+#### Documentation
+
+* Formatting fixes in the reference documentation
+
 ### 0.6.0 / 2021-09-21
 
 #### Features
