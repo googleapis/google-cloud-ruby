@@ -607,8 +607,8 @@ module Google
             #   @param state_metadata [::Hash{::String => ::String}]
             #     State properties to include with this state. Overwrites any existing
             #     `state_metadata`.
-            #     Keys must match the regex /^[a-z0-9][a-z0-9_.-]\\{0,62}$/.
-            #     Values must match the regex /^[a-zA-Z0-9_./-]\\{0,255}$/.
+            #     Keys must match the regex `/^[a-z0-9][a-z0-9_.-]{0,62}$/`.
+            #     Values must match the regex `/^[a-zA-Z0-9_./-]{0,255}$/`.
             #   @param etag [::String]
             #     Required. Fingerprint of the Recommendation. Provides optimistic locking.
             #
@@ -692,8 +692,8 @@ module Google
             #   @param state_metadata [::Hash{::String => ::String}]
             #     State properties to include with this state. Overwrites any existing
             #     `state_metadata`.
-            #     Keys must match the regex /^[a-z0-9][a-z0-9_.-]\\{0,62}$/.
-            #     Values must match the regex /^[a-zA-Z0-9_./-]\\{0,255}$/.
+            #     Keys must match the regex `/^[a-z0-9][a-z0-9_.-]{0,62}$/`.
+            #     Values must match the regex `/^[a-zA-Z0-9_./-]{0,255}$/`.
             #   @param etag [::String]
             #     Required. Fingerprint of the Recommendation. Provides optimistic locking.
             #
@@ -777,8 +777,8 @@ module Google
             #   @param state_metadata [::Hash{::String => ::String}]
             #     State properties to include with this state. Overwrites any existing
             #     `state_metadata`.
-            #     Keys must match the regex /^[a-z0-9][a-z0-9_.-]\\{0,62}$/.
-            #     Values must match the regex /^[a-zA-Z0-9_./-]\\{0,255}$/.
+            #     Keys must match the regex `/^[a-z0-9][a-z0-9_.-]{0,62}$/`.
+            #     Values must match the regex `/^[a-zA-Z0-9_./-]{0,255}$/`.
             #   @param etag [::String]
             #     Required. Fingerprint of the Recommendation. Provides optimistic locking.
             #
