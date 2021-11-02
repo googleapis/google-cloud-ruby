@@ -1,0 +1,12 @@
+--no-private
+--title=Transcoder V1 API
+--exclude _pb\.rb$
+--format yaml
+--template-path ../template
+
+./lib/**/*.rb
+./proto_docs/**/*.rb
+-
+README.md
+LICENSE.md
+AUTHENTICATION.md
