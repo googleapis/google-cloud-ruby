@@ -129,7 +129,18 @@ module Google
           # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize, Metrics/MethodLength
 
           ##
-          # Configure the Google Cloud Spanner Database Admin library.
+          # Configure the Google Cloud Spanner Database Admin library. This configuration can be
+          # applied globally to all clients.
+          #
+          # @example
+          #
+          # Modify the global config, setting the timeout to 10 seconds for all admin databases.
+          #
+          # require "google/cloud/spanner/admin/database"
+          #
+          # ::Google::Cloud::Spanner::Admin::Database.configure do |config|
+          #   config.timeout = 10.0
+          # end
           #
           # The following configuration parameters are supported:
           #
@@ -175,27 +186,6 @@ module Google
             @configure
           end
 
-          ##
-          # Configure the Spanner Admin Database instance.
-          #
-          # The configuration is set to the derived mode, meaning that values can be changed,
-          # but structural changes (adding new fields, etc.) are not allowed. Structural changes
-          # should be made on {Database.configure}.
-          #
-          # See {::Google::Cloud::Spanner::Admin::Database::Configuration}
-          # for a description of the configuration fields.
-          #
-          # @yield [config] Configure the Database client.
-          # @yieldparam config [Database::Configuration]
-          #
-          # @return [Database::Configuration]
-          #
-          def configure
-            yield @config if block_given?
-            @config
-          end
-
-          private
           ##
           # @private Default project.
           def self.default_project_id
@@ -249,23 +239,6 @@ module Google
           #
           # This class provides control over timeouts, retry behavior,
           # query options, and other low-level controls.
-          #
-          # Configuration can be applied globally to all clients, or to a single client
-          # on construction.
-          #
-          # @example
-          #
-          #   # Modify the global config, setting the timeout for
-          #   # list_databases to 20 seconds,
-          #   # and all remaining timeouts to 10 seconds.
-          #   ::Google::Cloud::Spanner::Admin::Database.configure do |config|
-          #     config.timeout = 10.0
-          #   end
-          #
-          #   # Apply the above configuration only to a new client.
-          #   client = ::Google::Cloud::Spanner::Admin::Database.new do |config|
-          #     config.timeout = 10.0
-          #   end
           #
           # @!attribute [rw] endpoint
           #   The hostname or hostname:port of the service endpoint.
@@ -324,15 +297,15 @@ module Google
             end
             config_attr :project_id,    nil, ::String, nil
             config_attr :scope,         nil, ::String, ::Array, nil
-            config_attr :lib_name,      nil, ::String, nil
-            config_attr :lib_version,   nil, ::String, nil
-            config_attr :interceptors,  nil, ::Array,  nil
-            config_attr :timeout,       nil, ::Numeric,nil
-            config_attr :quota_project, nil, ::String, nil
-            config_attr :emulator_host, nil, ::String, nil
-            config_attr :query_options, nil, ::Hash,   nil
-            config_attr :metadata,      nil, ::Hash,   nil
-            config_attr :retry_policy,  nil, ::Hash,   nil
+            config_attr :lib_name,      nil, ::String,  nil
+            config_attr :lib_version,   nil, ::String,  nil
+            config_attr :interceptors,  nil, ::Array,   nil
+            config_attr :timeout,       nil, ::Numeric, nil
+            config_attr :quota_project, nil, ::String,  nil
+            config_attr :emulator_host, nil, ::String,  nil
+            config_attr :query_options, nil, ::Hash,    nil
+            config_attr :metadata,      nil, ::Hash,    nil
+            config_attr :retry_policy,  nil, ::Hash,    nil
 
             # @private
             def initialize parent_config = nil
