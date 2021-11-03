@@ -50,6 +50,7 @@ include :fileutils
 def run
   require "psych"
   require "fileutils"
+  require "tmpdir"
   require "pull_request_generator"
   extend PullRequestGenerator
   ensure_docker
@@ -57,14 +58,11 @@ def run
   set :source_repo, File.expand_path(source_repo) if source_repo
   gems = choose_gems
   Dir.chdir context_directory
-  sources = collect_sources gems
+  gem_info = collect_gem_info gems
 
   pull_images
-  if piper_client
-    run_bazel sources
-  else
-    run_owlbot sources
-  end
+  run_bazel gem_info if piper_client
+  run_owlbot gem_info
   verify_staging gems
   results = process_gems gems
   final_output results
@@ -107,34 +105,78 @@ def pull_images
   exec ["docker", "pull", "#{POSTPROCESSOR_IMAGE}:#{postprocessor_tag}"]
 end
 
-def collect_sources gems
-  sources = {}
+def collect_gem_info gems
+  gem_info = {}
   gems.each do |name|
-    config_path = File.join name, OWLBOT_CONFIG_FILE_NAME
-    error "Gem #{name} has no #{OWLBOT_CONFIG_FILE_NAME}" unless File.file? config_path
-    config = Psych.load_file config_path
-    deep_copy_regexes = config["deep-copy-regex"]
-    error "Expected exactly one deep-copy-regex for gem #{name}" unless deep_copy_regexes.size == 1
-    deep_copy_regex = deep_copy_regexes.first
-    unless deep_copy_regex["dest"] == "/#{STAGING_DIR_NAME}/#{name}/$1"
-      error "Wrong dest deep-copy-regex for gem #{name}"
+    deep_copy_regexes = load_deep_copy_regexes name
+    library_paths = deep_copy_regexes.map { |dcr| extract_library_path dcr["source"] }.uniq
+    bazel_targets = {}
+    library_paths.each do |library_path|
+      bazel_targets[library_path] = determine_bazel_target library_path
     end
-    error "Source missing in deep-copy-regex for gem #{name}" unless deep_copy_regex["source"]
-    sources[name] = deep_copy_regex["source"]
+    gem_info[name] = {
+      deep_copy_regexes: deep_copy_regexes,
+      bazel_targets: bazel_targets
+    }
   end
-  sources
+  gem_info
 end
 
-def run_owlbot sources
+def load_deep_copy_regexes name
+  config_path = File.join name, OWLBOT_CONFIG_FILE_NAME
+  error "Gem #{name} has no #{OWLBOT_CONFIG_FILE_NAME}" unless File.file? config_path
+  config = Psych.load_file config_path
+  config["deep-copy-regex"]
+end
+
+def extract_library_path source_regex
+  separator = "/[^/]+-ruby/"
+  error "Unexpected source: #{source_regex}" unless source_regex.include? separator
+  source_regex.split(separator).first.sub(%r{^/}, "")
+end
+
+def determine_bazel_target library_path
+  build_file_path = File.join bazel_base_dir, library_path, "BUILD.bazel"
+  error "Unable to find #{build_file_path}" unless File.file? build_file_path
+  build_content = File.read build_file_path
+  match = /ruby_gapic_assembly_pkg\(\n\s+name\s*=\s*"([\w-]+-ruby)",/.match build_content
+  error "Unable to find ruby build rule in #{build_file_path}" unless match
+  match[1]
+end
+
+def run_bazel gem_info
+  ensure_source_repo
+  gem_info.each do |name, info|
+    info[:bazel_targets].each do |library_path, bazel_target|
+      exec ["bazel", "build", "//#{library_path}:#{bazel_target}"], chdir: bazel_base_dir
+      generated_dir = File.join bazel_base_dir, "bazel-bin", library_path, bazel_target
+      source_repo_dir = File.join source_repo, library_path, bazel_target
+      rm_rf source_repo_dir
+      mkdir_p File.dirname source_repo_dir
+      cp_r generated_dir, source_repo_dir
+    end
+  end
+end
+
+def ensure_source_repo
+  return if source_repo
+  temp_dir = Dir.mktmpdir
+  at_exit { FileUtils.rm_rf temp_dir }
+  Dir.chdir temp_dir do
+    exec ["git", "init"]
+    exec ["git", "remote", "add", "origin", "https://github.com/googleapis/googleapis-gen.git"]
+    exec ["git", "fetch", "--depth=1", "origin", "HEAD"]
+    exec ["git", "branch", "github-head", "FETCH_HEAD"]
+    exec ["git", "switch", "github-head"]
+  end
+  set :source_repo, temp_dir
+end
+
+def run_owlbot gem_info
   FileUtils.mkdir_p TMP_DIR_NAME
   temp_config = File.join TMP_DIR_NAME, OWLBOT_CONFIG_FILE_NAME
   FileUtils.rm_f temp_config
-  combined_deep_copy_regex = sources.map do |name, source|
-    {
-      "source" => source,
-      "dest" => "/#{STAGING_DIR_NAME}/#{name}/$1"
-    }
-  end
+  combined_deep_copy_regex = gem_info.values.map { |info| info[:deep_copy_regexes] }.flatten
   combined_config = {"deep-copy-regex" => combined_deep_copy_regex}
   File.open temp_config, "w" do |file|
     file.puts Psych.dump combined_config
@@ -144,30 +186,6 @@ def run_owlbot sources
     cmd = ["-v", "#{source_repo}:/googleapis-gen"] + cmd + ["--source-repo", "/googleapis-gen"]
   end
   docker_run(*cmd)
-end
-
-def run_bazel sources
-  rm_rf STAGING_DIR_NAME
-  mkdir_p STAGING_DIR_NAME
-  sources.each do |name, source|
-    library_path, bazel_target = determine_bazel_target source
-    exec ["bazel", "build", "//#{library_path}:#{bazel_target}"], chdir: bazel_base_dir
-    generated_dir = File.join bazel_base_dir, "bazel-bin", library_path, bazel_target
-    cp_r generated_dir, File.join(STAGING_DIR_NAME, name)
-  end
-end
-
-def determine_bazel_target source_regex
-  postfix = "/[^/]+-ruby/(.*)"
-  error "Unexpected source: #{source_regex}" unless source_regex.end_with? postfix
-  library_path = source_regex[0..(-postfix.size-1)].sub %r{^/}, ""
-  build_file_path = File.join bazel_base_dir, library_path, "BUILD.bazel"
-  error "Unable to find #{build_file_path}" unless File.file? build_file_path
-  build_content = File.read build_file_path
-  match = /ruby_gapic_assembly_pkg\(\n\s+name\s*=\s*"([\w-]+-ruby)",/.match build_content
-  error "Unable to find ruby build rule in #{build_file_path}" unless match
-  bazel_target = match[1]
-  [library_path, bazel_target]
 end
 
 def verify_staging gems
