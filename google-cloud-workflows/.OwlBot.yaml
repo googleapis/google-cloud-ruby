@@ -1,0 +1,7 @@
+deep-copy-regex:
+  - source: /google/cloud/workflows/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-workflows/$1
+  - source: /google/cloud/workflows/executions/[^/]+-ruby/lib/google/cloud/workflows/executions\.rb
+    dest: /owl-bot-staging/google-cloud-workflows/lib/google/cloud/workflows/executions.rb
+  - source: /google/cloud/workflows/executions/[^/]+-ruby/test/google/cloud/workflows/executions/client_test\.rb
+    dest: /owl-bot-staging/google-cloud-workflows/test/google/cloud/workflows/executions/client_test.rb

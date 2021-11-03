@@ -1,0 +1,11 @@
+deep-copy-regex:
+  - source: /google/monitoring/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-monitoring/$1
+  - source: /google/monitoring/dashboard/[^/]+-ruby/lib/google/cloud/monitoring/dashboard\.rb
+    dest: /owl-bot-staging/google-cloud-monitoring/lib/google/cloud/monitoring/dashboard.rb
+  - source: /google/monitoring/dashboard/[^/]+-ruby/test/google/cloud/monitoring/dashboard/client_test\.rb
+    dest: /owl-bot-staging/google-cloud-monitoring/test/google/cloud/monitoring/dashboard/client_test.rb
+  - source: /google/monitoring/metricsscope/[^/]+-ruby/lib/google/cloud/monitoring/metrics_scope\.rb
+    dest: /owl-bot-staging/google-cloud-monitoring/lib/google/cloud/monitoring/metrics_scope.rb
+  - source: /google/monitoring/metricsscope/[^/]+-ruby/test/google/cloud/monitoring/metrics_scope/client_test\.rb
+    dest: /owl-bot-staging/google-cloud-monitoring/test/google/cloud/monitoring/metrics_scope/client_test.rb
