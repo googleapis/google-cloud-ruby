@@ -36,6 +36,57 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.osconfig.v1.OsConfigZonalService'
 
+            # Create an OS policy assignment.
+            #
+            # This method also creates the first revision of the OS policy assignment.
+            #
+            # This method returns a long running operation (LRO) that contains the
+            # rollout details. The rollout can be cancelled by cancelling the LRO.
+            #
+            # For more information, see [Method:
+            # projects.locations.osPolicyAssignments.operations.cancel](https://cloud.google.com/compute/docs/osconfig/rest/v1/projects.locations.osPolicyAssignments.operations/cancel).
+            rpc :CreateOSPolicyAssignment, ::Google::Cloud::OsConfig::V1::CreateOSPolicyAssignmentRequest, ::Google::Longrunning::Operation
+            # Update an existing OS policy assignment.
+            #
+            # This method creates a new revision of the OS policy assignment.
+            #
+            # This method returns a long running operation (LRO) that contains the
+            # rollout details. The rollout can be cancelled by cancelling the LRO.
+            #
+            # For more information, see [Method:
+            # projects.locations.osPolicyAssignments.operations.cancel](https://cloud.google.com/compute/docs/osconfig/rest/v1/projects.locations.osPolicyAssignments.operations/cancel).
+            rpc :UpdateOSPolicyAssignment, ::Google::Cloud::OsConfig::V1::UpdateOSPolicyAssignmentRequest, ::Google::Longrunning::Operation
+            # Retrieve an existing OS policy assignment.
+            #
+            # This method always returns the latest revision. In order to retrieve a
+            # previous revision of the assignment, also provide the revision ID in the
+            # `name` parameter.
+            rpc :GetOSPolicyAssignment, ::Google::Cloud::OsConfig::V1::GetOSPolicyAssignmentRequest, ::Google::Cloud::OsConfig::V1::OSPolicyAssignment
+            # List the OS policy assignments under the parent resource.
+            #
+            # For each OS policy assignment, the latest revision is returned.
+            rpc :ListOSPolicyAssignments, ::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentsRequest, ::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentsResponse
+            # List the OS policy assignment revisions for a given OS policy assignment.
+            rpc :ListOSPolicyAssignmentRevisions, ::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentRevisionsRequest, ::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentRevisionsResponse
+            # Delete the OS policy assignment.
+            #
+            # This method creates a new revision of the OS policy assignment.
+            #
+            # This method returns a long running operation (LRO) that contains the
+            # rollout details. The rollout can be cancelled by cancelling the LRO.
+            #
+            # If the LRO completes and is not cancelled, all revisions associated with
+            # the OS policy assignment are deleted.
+            #
+            # For more information, see [Method:
+            # projects.locations.osPolicyAssignments.operations.cancel](https://cloud.google.com/compute/docs/osconfig/rest/v1/projects.locations.osPolicyAssignments.operations/cancel).
+            rpc :DeleteOSPolicyAssignment, ::Google::Cloud::OsConfig::V1::DeleteOSPolicyAssignmentRequest, ::Google::Longrunning::Operation
+            # Get the OS policy asssignment report for the specified Compute Engine VM
+            # instance.
+            rpc :GetOSPolicyAssignmentReport, ::Google::Cloud::OsConfig::V1::GetOSPolicyAssignmentReportRequest, ::Google::Cloud::OsConfig::V1::OSPolicyAssignmentReport
+            # List OS policy asssignment reports for all Compute Engine VM instances in
+            # the specified zone.
+            rpc :ListOSPolicyAssignmentReports, ::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentReportsRequest, ::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentReportsResponse
             # Get inventory data for the specified VM instance. If the VM has no
             # associated inventory, the message `NOT_FOUND` is returned.
             rpc :GetInventory, ::Google::Cloud::OsConfig::V1::GetInventoryRequest, ::Google::Cloud::OsConfig::V1::Inventory
