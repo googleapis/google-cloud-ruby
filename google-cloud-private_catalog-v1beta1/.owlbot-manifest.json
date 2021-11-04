@@ -33,6 +33,10 @@
     "proto_docs/google/protobuf/struct.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
+    "snippets/Gemfile",
+    "snippets/private_catalog/search_catalogs.rb",
+    "snippets/private_catalog/search_products.rb",
+    "snippets/private_catalog/search_versions.rb",
     "test/google/cloud/private_catalog/v1beta1/private_catalog_test.rb",
     "test/helper.rb"
   ],

@@ -242,6 +242,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/access_approval/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage.new
+            #
+            #   # Call the list_approval_requests method.
+            #   result = client.list_approval_requests request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::AccessApproval::V1::ApprovalRequest.
+            #     p response
+            #   end
+            #
             def list_approval_requests request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -312,6 +333,21 @@ module Google
             # @return [::Google::Cloud::AccessApproval::V1::ApprovalRequest]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/access_approval/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage.new
+            #
+            #   # Call the get_approval_request method.
+            #   result = client.get_approval_request request
+            #
+            #   # The returned object is of type Google::Cloud::AccessApproval::V1::ApprovalRequest.
+            #   p result
             #
             def get_approval_request request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -387,6 +423,21 @@ module Google
             # @return [::Google::Cloud::AccessApproval::V1::ApprovalRequest]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/access_approval/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AccessApproval::V1::ApproveApprovalRequestMessage.new
+            #
+            #   # Call the approve_approval_request method.
+            #   result = client.approve_approval_request request
+            #
+            #   # The returned object is of type Google::Cloud::AccessApproval::V1::ApprovalRequest.
+            #   p result
             #
             def approve_approval_request request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -467,6 +518,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/access_approval/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AccessApproval::V1::DismissApprovalRequestMessage.new
+            #
+            #   # Call the dismiss_approval_request method.
+            #   result = client.dismiss_approval_request request
+            #
+            #   # The returned object is of type Google::Cloud::AccessApproval::V1::ApprovalRequest.
+            #   p result
+            #
             def dismiss_approval_request request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -536,6 +602,21 @@ module Google
             # @return [::Google::Cloud::AccessApproval::V1::AccessApprovalSettings]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/access_approval/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AccessApproval::V1::GetAccessApprovalSettingsMessage.new
+            #
+            #   # Call the get_access_approval_settings method.
+            #   result = client.get_access_approval_settings request
+            #
+            #   # The returned object is of type Google::Cloud::AccessApproval::V1::AccessApprovalSettings.
+            #   p result
             #
             def get_access_approval_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -619,6 +700,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/access_approval/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AccessApproval::V1::UpdateAccessApprovalSettingsMessage.new
+            #
+            #   # Call the update_access_approval_settings method.
+            #   result = client.update_access_approval_settings request
+            #
+            #   # The returned object is of type Google::Cloud::AccessApproval::V1::AccessApprovalSettings.
+            #   p result
+            #
             def update_access_approval_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -693,6 +789,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/access_approval/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage.new
+            #
+            #   # Call the delete_access_approval_settings method.
+            #   result = client.delete_access_approval_settings request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_access_approval_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

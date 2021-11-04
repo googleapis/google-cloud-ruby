@@ -202,6 +202,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataflow/v1beta3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataflow::V1beta3::Messages::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataflow::V1beta3::ListJobMessagesRequest.new
+            #
+            #   # Call the list_job_messages method.
+            #   result = client.list_job_messages request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dataflow::V1beta3::JobMessage.
+            #     p response
+            #   end
+            #
             def list_job_messages request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 

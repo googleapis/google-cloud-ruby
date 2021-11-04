@@ -32,6 +32,8 @@
     "proto_docs/google/protobuf/empty.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
+    "snippets/Gemfile",
+    "snippets/video_intelligence_service/annotate_video.rb",
     "test/google/cloud/video_intelligence/v1p1beta1/video_intelligence_service_operations_test.rb",
     "test/google/cloud/video_intelligence/v1p1beta1/video_intelligence_service_test.rb",
     "test/helper.rb"

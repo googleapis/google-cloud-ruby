@@ -221,6 +221,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigquery/storage/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest.new
+              #
+              #   # Call the create_read_session method.
+              #   result = client.create_read_session request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Storage::V1::ReadSession.
+              #   p result
+              #
               def create_read_session request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -300,6 +315,24 @@ module Google
               # @return [::Enumerable<::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse>]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/storage/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest.new
+              #
+              #   # Call the read_rows method.
+              #   result = client.read_rows request
+              #
+              #   # The returned object is a streamed enumerable yielding elements of
+              #   # type ::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse.
+              #   result.each do |response|
+              #     p response
+              #   end
               #
               def read_rows request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -389,6 +422,21 @@ module Google
               # @return [::Google::Cloud::Bigquery::Storage::V1::SplitReadStreamResponse]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/storage/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest.new
+              #
+              #   # Call the split_read_stream method.
+              #   result = client.split_read_stream request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Storage::V1::SplitReadStreamResponse.
+              #   p result
               #
               def split_read_stream request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?

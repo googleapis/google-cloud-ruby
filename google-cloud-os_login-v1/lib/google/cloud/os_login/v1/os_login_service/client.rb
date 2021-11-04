@@ -208,6 +208,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1::DeletePosixAccountRequest.new
+            #
+            #   # Call the delete_posix_account method.
+            #   result = client.delete_posix_account request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_posix_account request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -279,6 +294,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1::DeleteSshPublicKeyRequest.new
+            #
+            #   # Call the delete_ssh_public_key method.
+            #   result = client.delete_ssh_public_key request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_ssh_public_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -355,6 +385,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1::GetLoginProfileRequest.new
+            #
+            #   # Call the get_login_profile method.
+            #   result = client.get_login_profile request
+            #
+            #   # The returned object is of type Google::Cloud::OsLogin::V1::LoginProfile.
+            #   p result
+            #
             def get_login_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -426,6 +471,21 @@ module Google
             # @return [::Google::Cloud::OsLogin::Common::SshPublicKey]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1::GetSshPublicKeyRequest.new
+            #
+            #   # Call the get_ssh_public_key method.
+            #   result = client.get_ssh_public_key request
+            #
+            #   # The returned object is of type Google::Cloud::OsLogin::Common::SshPublicKey.
+            #   p result
             #
             def get_ssh_public_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -503,6 +563,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1::ImportSshPublicKeyRequest.new
+            #
+            #   # Call the import_ssh_public_key method.
+            #   result = client.import_ssh_public_key request
+            #
+            #   # The returned object is of type Google::Cloud::OsLogin::V1::ImportSshPublicKeyResponse.
+            #   p result
+            #
             def import_ssh_public_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -579,6 +654,21 @@ module Google
             # @return [::Google::Cloud::OsLogin::Common::SshPublicKey]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1::UpdateSshPublicKeyRequest.new
+            #
+            #   # Call the update_ssh_public_key method.
+            #   result = client.update_ssh_public_key request
+            #
+            #   # The returned object is of type Google::Cloud::OsLogin::Common::SshPublicKey.
+            #   p result
             #
             def update_ssh_public_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

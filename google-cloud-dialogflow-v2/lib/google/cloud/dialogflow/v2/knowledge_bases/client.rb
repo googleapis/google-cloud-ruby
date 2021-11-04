@@ -184,6 +184,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::ListKnowledgeBasesRequest.new
+            #
+            #   # Call the list_knowledge_bases method.
+            #   result = client.list_knowledge_bases request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dialogflow::V2::KnowledgeBase.
+            #     p response
+            #   end
+            #
             def list_knowledge_bases request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -257,6 +278,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::GetKnowledgeBaseRequest.new
+            #
+            #   # Call the get_knowledge_base method.
+            #   result = client.get_knowledge_base request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::KnowledgeBase.
+            #   p result
+            #
             def get_knowledge_base request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -329,6 +365,21 @@ module Google
             # @return [::Google::Cloud::Dialogflow::V2::KnowledgeBase]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::CreateKnowledgeBaseRequest.new
+            #
+            #   # Call the create_knowledge_base method.
+            #   result = client.create_knowledge_base request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::KnowledgeBase.
+            #   p result
             #
             def create_knowledge_base request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -405,6 +456,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::DeleteKnowledgeBaseRequest.new
+            #
+            #   # Call the delete_knowledge_base method.
+            #   result = client.delete_knowledge_base request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_knowledge_base request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -478,6 +544,21 @@ module Google
             # @return [::Google::Cloud::Dialogflow::V2::KnowledgeBase]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::UpdateKnowledgeBaseRequest.new
+            #
+            #   # Call the update_knowledge_base method.
+            #   result = client.update_knowledge_base request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::KnowledgeBase.
+            #   p result
             #
             def update_knowledge_base request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

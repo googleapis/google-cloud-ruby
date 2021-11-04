@@ -213,6 +213,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1alpha::CreateOSPolicyAssignmentRequest.new
+            #
+            #   # Call the create_os_policy_assignment method.
+            #   result = client.create_os_policy_assignment request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_os_policy_assignment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -294,6 +316,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1alpha::UpdateOSPolicyAssignmentRequest.new
+            #
+            #   # Call the update_os_policy_assignment method.
+            #   result = client.update_os_policy_assignment request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_os_policy_assignment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -371,6 +415,21 @@ module Google
             # @return [::Google::Cloud::OsConfig::V1alpha::OSPolicyAssignment]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1alpha::GetOSPolicyAssignmentRequest.new
+            #
+            #   # Call the get_os_policy_assignment method.
+            #   result = client.get_os_policy_assignment request
+            #
+            #   # The returned object is of type Google::Cloud::OsConfig::V1alpha::OSPolicyAssignment.
+            #   p result
             #
             def get_os_policy_assignment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -450,6 +509,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1alpha::ListOSPolicyAssignmentsRequest.new
+            #
+            #   # Call the list_os_policy_assignments method.
+            #   result = client.list_os_policy_assignments request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::OsConfig::V1alpha::OSPolicyAssignment.
+            #     p response
+            #   end
+            #
             def list_os_policy_assignments request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -526,6 +606,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::OsConfig::V1alpha::OSPolicyAssignment>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1alpha::ListOSPolicyAssignmentRevisionsRequest.new
+            #
+            #   # Call the list_os_policy_assignment_revisions method.
+            #   result = client.list_os_policy_assignment_revisions request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::OsConfig::V1alpha::OSPolicyAssignment.
+            #     p response
+            #   end
             #
             def list_os_policy_assignment_revisions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -609,6 +710,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1alpha::DeleteOSPolicyAssignmentRequest.new
+            #
+            #   # Call the delete_os_policy_assignment method.
+            #   result = client.delete_os_policy_assignment request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_os_policy_assignment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -688,6 +811,21 @@ module Google
             # @return [::Google::Cloud::OsConfig::V1alpha::InstanceOSPoliciesCompliance]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1alpha::GetInstanceOSPoliciesComplianceRequest.new
+            #
+            #   # Call the get_instance_os_policies_compliance method.
+            #   result = client.get_instance_os_policies_compliance request
+            #
+            #   # The returned object is of type Google::Cloud::OsConfig::V1alpha::InstanceOSPoliciesCompliance.
+            #   p result
             #
             def get_instance_os_policies_compliance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -774,6 +912,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1alpha::ListInstanceOSPoliciesCompliancesRequest.new
+            #
+            #   # Call the list_instance_os_policies_compliances method.
+            #   result = client.list_instance_os_policies_compliances request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::OsConfig::V1alpha::InstanceOSPoliciesCompliance.
+            #     p response
+            #   end
+            #
             def list_instance_os_policies_compliances request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -855,6 +1014,21 @@ module Google
             # @return [::Google::Cloud::OsConfig::V1alpha::Inventory]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1alpha::GetInventoryRequest.new
+            #
+            #   # Call the get_inventory method.
+            #   result = client.get_inventory request
+            #
+            #   # The returned object is of type Google::Cloud::OsConfig::V1alpha::Inventory.
+            #   p result
             #
             def get_inventory request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -944,6 +1118,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1alpha::ListInventoriesRequest.new
+            #
+            #   # Call the list_inventories method.
+            #   result = client.list_inventories request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::OsConfig::V1alpha::Inventory.
+            #     p response
+            #   end
+            #
             def list_inventories request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1022,6 +1217,21 @@ module Google
             # @return [::Google::Cloud::OsConfig::V1alpha::VulnerabilityReport]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1alpha::GetVulnerabilityReportRequest.new
+            #
+            #   # Call the get_vulnerability_report method.
+            #   result = client.get_vulnerability_report request
+            #
+            #   # The returned object is of type Google::Cloud::OsConfig::V1alpha::VulnerabilityReport.
+            #   p result
             #
             def get_vulnerability_report request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1107,6 +1317,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::OsConfig::V1alpha::VulnerabilityReport>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1alpha::ListVulnerabilityReportsRequest.new
+            #
+            #   # Call the list_vulnerability_reports method.
+            #   result = client.list_vulnerability_reports request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::OsConfig::V1alpha::VulnerabilityReport.
+            #     p response
+            #   end
             #
             def list_vulnerability_reports request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

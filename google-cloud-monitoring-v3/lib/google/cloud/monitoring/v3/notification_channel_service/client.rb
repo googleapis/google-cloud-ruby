@@ -234,6 +234,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::ListNotificationChannelDescriptorsRequest.new
+            #
+            #   # Call the list_notification_channel_descriptors method.
+            #   result = client.list_notification_channel_descriptors request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Monitoring::V3::NotificationChannelDescriptor.
+            #     p response
+            #   end
+            #
             def list_notification_channel_descriptors request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -307,6 +328,21 @@ module Google
             # @return [::Google::Cloud::Monitoring::V3::NotificationChannelDescriptor]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::GetNotificationChannelDescriptorRequest.new
+            #
+            #   # Call the get_notification_channel_descriptor method.
+            #   result = client.get_notification_channel_descriptor request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::NotificationChannelDescriptor.
+            #   p result
             #
             def get_notification_channel_descriptor request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -409,6 +445,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::ListNotificationChannelsRequest.new
+            #
+            #   # Call the list_notification_channels method.
+            #   result = client.list_notification_channels request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Monitoring::V3::NotificationChannel.
+            #     p response
+            #   end
+            #
             def list_notification_channels request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -485,6 +542,21 @@ module Google
             # @return [::Google::Cloud::Monitoring::V3::NotificationChannel]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::GetNotificationChannelRequest.new
+            #
+            #   # Call the get_notification_channel method.
+            #   result = client.get_notification_channel request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::NotificationChannel.
+            #   p result
             #
             def get_notification_channel request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -567,6 +639,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::CreateNotificationChannelRequest.new
+            #
+            #   # Call the create_notification_channel method.
+            #   result = client.create_notification_channel request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::NotificationChannel.
+            #   p result
+            #
             def create_notification_channel request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -642,6 +729,21 @@ module Google
             # @return [::Google::Cloud::Monitoring::V3::NotificationChannel]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest.new
+            #
+            #   # Call the update_notification_channel method.
+            #   result = client.update_notification_channel request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::NotificationChannel.
+            #   p result
             #
             def update_notification_channel request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -720,6 +822,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::DeleteNotificationChannelRequest.new
+            #
+            #   # Call the delete_notification_channel method.
+            #   result = client.delete_notification_channel request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_notification_channel request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -790,6 +907,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::SendNotificationChannelVerificationCodeRequest.new
+            #
+            #   # Call the send_notification_channel_verification_code method.
+            #   result = client.send_notification_channel_verification_code request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def send_notification_channel_verification_code request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -893,6 +1025,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeRequest.new
+            #
+            #   # Call the get_notification_channel_verification_code method.
+            #   result = client.get_notification_channel_verification_code request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::GetNotificationChannelVerificationCodeResponse.
+            #   p result
+            #
             def get_notification_channel_verification_code request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -972,6 +1119,21 @@ module Google
             # @return [::Google::Cloud::Monitoring::V3::NotificationChannel]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::VerifyNotificationChannelRequest.new
+            #
+            #   # Call the verify_notification_channel method.
+            #   result = client.verify_notification_channel request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::NotificationChannel.
+            #   p result
             #
             def verify_notification_channel request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

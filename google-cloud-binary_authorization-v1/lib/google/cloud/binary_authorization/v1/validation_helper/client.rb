@@ -185,6 +185,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/binary_authorization/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::BinaryAuthorization::V1::ValidateAttestationOccurrenceRequest.new
+            #
+            #   # Call the validate_attestation_occurrence method.
+            #   result = client.validate_attestation_occurrence request
+            #
+            #   # The returned object is of type Google::Cloud::BinaryAuthorization::V1::ValidateAttestationOccurrenceResponse.
+            #   p result
+            #
             def validate_attestation_occurrence request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 

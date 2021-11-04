@@ -210,6 +210,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/service_control/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceControl::V1::ServiceController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceControl::V1::CheckRequest.new
+            #
+            #   # Call the check method.
+            #   result = client.check request
+            #
+            #   # The returned object is of type Google::Cloud::ServiceControl::V1::CheckResponse.
+            #   p result
+            #
             def check request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -316,6 +331,21 @@ module Google
             # @return [::Google::Cloud::ServiceControl::V1::ReportResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/service_control/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceControl::V1::ServiceController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceControl::V1::ReportRequest.new
+            #
+            #   # Call the report method.
+            #   result = client.report request
+            #
+            #   # The returned object is of type Google::Cloud::ServiceControl::V1::ReportResponse.
+            #   p result
             #
             def report request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

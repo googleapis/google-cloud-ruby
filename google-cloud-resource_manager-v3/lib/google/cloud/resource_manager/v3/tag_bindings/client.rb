@@ -208,6 +208,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/resource_manager/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ResourceManager::V3::TagBindings::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ResourceManager::V3::ListTagBindingsRequest.new
+            #
+            #   # Call the list_tag_bindings method.
+            #   result = client.list_tag_bindings request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ResourceManager::V3::TagBinding.
+            #     p response
+            #   end
+            #
             def list_tag_bindings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -275,6 +296,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/resource_manager/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ResourceManager::V3::TagBindings::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ResourceManager::V3::CreateTagBindingRequest.new
+            #
+            #   # Call the create_tag_binding method.
+            #   result = client.create_tag_binding request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_tag_binding request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -339,6 +382,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/resource_manager/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ResourceManager::V3::TagBindings::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ResourceManager::V3::DeleteTagBindingRequest.new
+            #
+            #   # Call the delete_tag_binding method.
+            #   result = client.delete_tag_binding request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def delete_tag_binding request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

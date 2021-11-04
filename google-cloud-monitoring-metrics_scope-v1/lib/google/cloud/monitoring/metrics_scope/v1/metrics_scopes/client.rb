@@ -189,6 +189,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/monitoring/metrics_scope/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Monitoring::MetricsScope::V1::GetMetricsScopeRequest.new
+              #
+              #   # Call the get_metrics_scope method.
+              #   result = client.get_metrics_scope request
+              #
+              #   # The returned object is of type Google::Cloud::Monitoring::MetricsScope::V1::MetricsScope.
+              #   p result
+              #
               def get_metrics_scope request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -263,6 +278,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/monitoring/metrics_scope/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Monitoring::MetricsScope::V1::ListMetricsScopesByMonitoredProjectRequest.new
+              #
+              #   # Call the list_metrics_scopes_by_monitored_project method.
+              #   result = client.list_metrics_scopes_by_monitored_project request
+              #
+              #   # The returned object is of type Google::Cloud::Monitoring::MetricsScope::V1::ListMetricsScopesByMonitoredProjectResponse.
+              #   p result
+              #
               def list_metrics_scopes_by_monitored_project request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -333,6 +363,28 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/monitoring/metrics_scope/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Monitoring::MetricsScope::V1::CreateMonitoredProjectRequest.new
+              #
+              #   # Call the create_monitored_project method.
+              #   result = client.create_monitored_project request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
               #
               def create_monitored_project request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -410,6 +462,28 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/monitoring/metrics_scope/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Monitoring::MetricsScope::V1::DeleteMonitoredProjectRequest.new
+              #
+              #   # Call the delete_monitored_project method.
+              #   result = client.delete_monitored_project request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
               #
               def delete_monitored_project request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?

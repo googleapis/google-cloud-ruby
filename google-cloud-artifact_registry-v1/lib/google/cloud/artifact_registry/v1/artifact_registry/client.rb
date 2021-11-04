@@ -191,6 +191,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::ListDockerImagesRequest.new
+            #
+            #   # Call the list_docker_images method.
+            #   result = client.list_docker_images request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ArtifactRegistry::V1::DockerImage.
+            #     p response
+            #   end
+            #
             def list_docker_images request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -266,6 +287,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::ListRepositoriesRequest.new
+            #
+            #   # Call the list_repositories method.
+            #   result = client.list_repositories request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ArtifactRegistry::V1::Repository.
+            #     p response
+            #   end
+            #
             def list_repositories request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -336,6 +378,21 @@ module Google
             # @return [::Google::Cloud::ArtifactRegistry::V1::Repository]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::GetRepositoryRequest.new
+            #
+            #   # Call the get_repository method.
+            #   result = client.get_repository request
+            #
+            #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1::Repository.
+            #   p result
             #
             def get_repository request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

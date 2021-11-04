@@ -246,6 +246,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iot::V1::CreateDeviceRegistryRequest.new
+            #
+            #   # Call the create_device_registry method.
+            #   result = client.create_device_registry request
+            #
+            #   # The returned object is of type Google::Cloud::Iot::V1::DeviceRegistry.
+            #   p result
+            #
             def create_device_registry request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -316,6 +331,21 @@ module Google
             # @return [::Google::Cloud::Iot::V1::DeviceRegistry]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iot::V1::GetDeviceRegistryRequest.new
+            #
+            #   # Call the get_device_registry method.
+            #   result = client.get_device_registry request
+            #
+            #   # The returned object is of type Google::Cloud::Iot::V1::DeviceRegistry.
+            #   p result
             #
             def get_device_registry request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -395,6 +425,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iot::V1::UpdateDeviceRegistryRequest.new
+            #
+            #   # Call the update_device_registry method.
+            #   result = client.update_device_registry request
+            #
+            #   # The returned object is of type Google::Cloud::Iot::V1::DeviceRegistry.
+            #   p result
+            #
             def update_device_registry request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -465,6 +510,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iot::V1::DeleteDeviceRegistryRequest.new
+            #
+            #   # Call the delete_device_registry method.
+            #   result = client.delete_device_registry request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_device_registry request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -546,6 +606,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iot::V1::ListDeviceRegistriesRequest.new
+            #
+            #   # Call the list_device_registries method.
+            #   result = client.list_device_registries request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Iot::V1::DeviceRegistry.
+            #     p response
+            #   end
+            #
             def list_device_registries request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -623,6 +704,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iot::V1::CreateDeviceRequest.new
+            #
+            #   # Call the create_device method.
+            #   result = client.create_device request
+            #
+            #   # The returned object is of type Google::Cloud::Iot::V1::Device.
+            #   p result
+            #
             def create_device request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -698,6 +794,21 @@ module Google
             # @return [::Google::Cloud::Iot::V1::Device]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iot::V1::GetDeviceRequest.new
+            #
+            #   # Call the get_device method.
+            #   result = client.get_device request
+            #
+            #   # The returned object is of type Google::Cloud::Iot::V1::Device.
+            #   p result
             #
             def get_device request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -777,6 +888,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iot::V1::UpdateDeviceRequest.new
+            #
+            #   # Call the update_device method.
+            #   result = client.update_device request
+            #
+            #   # The returned object is of type Google::Cloud::Iot::V1::Device.
+            #   p result
+            #
             def update_device request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -848,6 +974,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iot::V1::DeleteDeviceRequest.new
+            #
+            #   # Call the delete_device method.
+            #   result = client.delete_device request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_device request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -942,6 +1083,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iot::V1::ListDevicesRequest.new
+            #
+            #   # Call the list_devices method.
+            #   result = client.list_devices request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Iot::V1::Device.
+            #     p response
+            #   end
+            #
             def list_devices request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1025,6 +1187,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iot::V1::ModifyCloudToDeviceConfigRequest.new
+            #
+            #   # Call the modify_cloud_to_device_config method.
+            #   result = client.modify_cloud_to_device_config request
+            #
+            #   # The returned object is of type Google::Cloud::Iot::V1::DeviceConfig.
+            #   p result
+            #
             def modify_cloud_to_device_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1101,6 +1278,21 @@ module Google
             # @return [::Google::Cloud::Iot::V1::ListDeviceConfigVersionsResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iot::V1::ListDeviceConfigVersionsRequest.new
+            #
+            #   # Call the list_device_config_versions method.
+            #   result = client.list_device_config_versions request
+            #
+            #   # The returned object is of type Google::Cloud::Iot::V1::ListDeviceConfigVersionsResponse.
+            #   p result
             #
             def list_device_config_versions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1179,6 +1371,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iot::V1::ListDeviceStatesRequest.new
+            #
+            #   # Call the list_device_states method.
+            #   result = client.list_device_states request
+            #
+            #   # The returned object is of type Google::Cloud::Iot::V1::ListDeviceStatesResponse.
+            #   p result
+            #
             def list_device_states request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1256,6 +1463,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::SetIamPolicyRequest.new
+            #
+            #   # Call the set_iam_policy method.
+            #   result = client.set_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
+            #
             def set_iam_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1331,6 +1553,21 @@ module Google
             # @return [::Google::Iam::V1::Policy]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::GetIamPolicyRequest.new
+            #
+            #   # Call the get_iam_policy method.
+            #   result = client.get_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
             #
             def get_iam_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1409,6 +1646,21 @@ module Google
             # @return [::Google::Iam::V1::TestIamPermissionsResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+            #
+            #   # Call the test_iam_permissions method.
+            #   result = client.test_iam_permissions request
+            #
+            #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+            #   p result
             #
             def test_iam_permissions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1502,6 +1754,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iot::V1::SendCommandToDeviceRequest.new
+            #
+            #   # Call the send_command_to_device method.
+            #   result = client.send_command_to_device request
+            #
+            #   # The returned object is of type Google::Cloud::Iot::V1::SendCommandToDeviceResponse.
+            #   p result
+            #
             def send_command_to_device request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1580,6 +1847,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iot::V1::BindDeviceToGatewayRequest.new
+            #
+            #   # Call the bind_device_to_gateway method.
+            #   result = client.bind_device_to_gateway request
+            #
+            #   # The returned object is of type Google::Cloud::Iot::V1::BindDeviceToGatewayResponse.
+            #   p result
+            #
             def bind_device_to_gateway request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1657,6 +1939,21 @@ module Google
             # @return [::Google::Cloud::Iot::V1::UnbindDeviceFromGatewayResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/iot/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iot::V1::UnbindDeviceFromGatewayRequest.new
+            #
+            #   # Call the unbind_device_from_gateway method.
+            #   result = client.unbind_device_from_gateway request
+            #
+            #   # The returned object is of type Google::Cloud::Iot::V1::UnbindDeviceFromGatewayResponse.
+            #   p result
             #
             def unbind_device_from_gateway request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

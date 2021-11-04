@@ -211,6 +211,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/resource_settings/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ResourceSettings::V1::ListSettingsRequest.new
+            #
+            #   # Call the list_settings method.
+            #   result = client.list_settings request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ResourceSettings::V1::Setting.
+            #     p response
+            #   end
+            #
             def list_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -287,6 +308,21 @@ module Google
             # @return [::Google::Cloud::ResourceSettings::V1::Setting]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/resource_settings/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ResourceSettings::V1::GetSettingRequest.new
+            #
+            #   # Call the get_setting method.
+            #   result = client.get_setting request
+            #
+            #   # The returned object is of type Google::Cloud::ResourceSettings::V1::Setting.
+            #   p result
             #
             def get_setting request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -372,6 +408,21 @@ module Google
             # @return [::Google::Cloud::ResourceSettings::V1::Setting]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/resource_settings/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ResourceSettings::V1::UpdateSettingRequest.new
+            #
+            #   # Call the update_setting method.
+            #   result = client.update_setting request
+            #
+            #   # The returned object is of type Google::Cloud::ResourceSettings::V1::Setting.
+            #   p result
             #
             def update_setting request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

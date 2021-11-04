@@ -276,6 +276,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::CreateInstanceRequest.new
+              #
+              #   # Call the create_instance method.
+              #   result = client.create_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def create_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -347,6 +369,21 @@ module Google
               # @return [::Google::Cloud::Bigtable::Admin::V2::Instance]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::GetInstanceRequest.new
+              #
+              #   # Call the get_instance method.
+              #   result = client.get_instance request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::Instance.
+              #   p result
               #
               def get_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -420,6 +457,21 @@ module Google
               # @return [::Google::Cloud::Bigtable::Admin::V2::ListInstancesResponse]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::ListInstancesRequest.new
+              #
+              #   # Call the list_instances method.
+              #   result = client.list_instances request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::ListInstancesResponse.
+              #   p result
               #
               def list_instances request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -512,6 +564,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::Instance.new
+              #
+              #   # Call the update_instance method.
+              #   result = client.update_instance request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::Instance.
+              #   p result
+              #
               def update_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -586,6 +653,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::PartialUpdateInstanceRequest.new
+              #
+              #   # Call the partial_update_instance method.
+              #   result = client.partial_update_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def partial_update_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -657,6 +746,21 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::DeleteInstanceRequest.new
+              #
+              #   # Call the delete_instance method.
+              #   result = client.delete_instance request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
               #
               def delete_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -737,6 +841,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::CreateClusterRequest.new
+              #
+              #   # Call the create_cluster method.
+              #   result = client.create_cluster request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def create_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -808,6 +934,21 @@ module Google
               # @return [::Google::Cloud::Bigtable::Admin::V2::Cluster]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::GetClusterRequest.new
+              #
+              #   # Call the get_cluster method.
+              #   result = client.get_cluster request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::Cluster.
+              #   p result
               #
               def get_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -883,6 +1024,21 @@ module Google
               # @return [::Google::Cloud::Bigtable::Admin::V2::ListClustersResponse]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::ListClustersRequest.new
+              #
+              #   # Call the list_clusters method.
+              #   result = client.list_clusters request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::ListClustersResponse.
+              #   p result
               #
               def list_clusters request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -967,6 +1123,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::Cluster.new
+              #
+              #   # Call the update_cluster method.
+              #   result = client.update_cluster request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def update_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1038,6 +1216,21 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::DeleteClusterRequest.new
+              #
+              #   # Call the delete_cluster method.
+              #   result = client.delete_cluster request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
               #
               def delete_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1120,6 +1313,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::CreateAppProfileRequest.new
+              #
+              #   # Call the create_app_profile method.
+              #   result = client.create_app_profile request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::AppProfile.
+              #   p result
+              #
               def create_app_profile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1190,6 +1398,21 @@ module Google
               # @return [::Google::Cloud::Bigtable::Admin::V2::AppProfile]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::GetAppProfileRequest.new
+              #
+              #   # Call the get_app_profile method.
+              #   result = client.get_app_profile request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::AppProfile.
+              #   p result
               #
               def get_app_profile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1277,6 +1500,27 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::ListAppProfilesRequest.new
+              #
+              #   # Call the list_app_profiles method.
+              #   result = client.list_app_profiles request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can
+              #   # iterate over all elements by calling #each, and the enumerable
+              #   # will lazily make API calls to fetch subsequent pages. Other
+              #   # methods are also available for managing paging directly.
+              #   result.each do |response|
+              #     # Each element is of type ::Google::Cloud::Bigtable::Admin::V2::AppProfile.
+              #     p response
+              #   end
+              #
               def list_app_profiles request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1353,6 +1597,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::UpdateAppProfileRequest.new
+              #
+              #   # Call the update_app_profile method.
+              #   result = client.update_app_profile request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def update_app_profile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1426,6 +1692,21 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::DeleteAppProfileRequest.new
+              #
+              #   # Call the delete_app_profile method.
+              #   result = client.delete_app_profile request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
               #
               def delete_app_profile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1501,6 +1782,21 @@ module Google
               # @return [::Google::Iam::V1::Policy]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::GetIamPolicyRequest.new
+              #
+              #   # Call the get_iam_policy method.
+              #   result = client.get_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
               #
               def get_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1579,6 +1875,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::SetIamPolicyRequest.new
+              #
+              #   # Call the set_iam_policy method.
+              #   result = client.set_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
               def set_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1654,6 +1965,21 @@ module Google
               # @return [::Google::Iam::V1::TestIamPermissionsResponse]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+              #
+              #   # Call the test_iam_permissions method.
+              #   result = client.test_iam_permissions request
+              #
+              #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+              #   p result
               #
               def test_iam_permissions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?

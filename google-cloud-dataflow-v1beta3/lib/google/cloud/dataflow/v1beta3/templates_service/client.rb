@@ -187,6 +187,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataflow/v1beta3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataflow::V1beta3::TemplatesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataflow::V1beta3::CreateJobFromTemplateRequest.new
+            #
+            #   # Call the create_job_from_template method.
+            #   result = client.create_job_from_template request
+            #
+            #   # The returned object is of type Google::Cloud::Dataflow::V1beta3::Job.
+            #   p result
+            #
             def create_job_from_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -265,6 +280,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataflow/v1beta3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataflow::V1beta3::TemplatesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataflow::V1beta3::LaunchTemplateRequest.new
+            #
+            #   # Call the launch_template method.
+            #   result = client.launch_template request
+            #
+            #   # The returned object is of type Google::Cloud::Dataflow::V1beta3::LaunchTemplateResponse.
+            #   p result
+            #
             def launch_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -336,6 +366,21 @@ module Google
             # @return [::Google::Cloud::Dataflow::V1beta3::GetTemplateResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataflow/v1beta3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataflow::V1beta3::TemplatesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataflow::V1beta3::GetTemplateRequest.new
+            #
+            #   # Call the get_template method.
+            #   result = client.get_template request
+            #
+            #   # The returned object is of type Google::Cloud::Dataflow::V1beta3::GetTemplateResponse.
+            #   p result
             #
             def get_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

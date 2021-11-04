@@ -205,6 +205,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::BatchController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::CreateBatchRequest.new
+            #
+            #   # Call the create_batch method.
+            #   result = client.create_batch request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_batch request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -275,6 +297,21 @@ module Google
             # @return [::Google::Cloud::Dataproc::V1::Batch]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::BatchController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::GetBatchRequest.new
+            #
+            #   # Call the get_batch method.
+            #   result = client.get_batch request
+            #
+            #   # The returned object is of type Google::Cloud::Dataproc::V1::Batch.
+            #   p result
             #
             def get_batch request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -353,6 +390,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::BatchController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::ListBatchesRequest.new
+            #
+            #   # Call the list_batches method.
+            #   result = client.list_batches request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dataproc::V1::Batch.
+            #     p response
+            #   end
+            #
             def list_batches request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -424,6 +482,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::BatchController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::DeleteBatchRequest.new
+            #
+            #   # Call the delete_batch method.
+            #   result = client.delete_batch request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_batch request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

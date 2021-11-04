@@ -27,6 +27,11 @@
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/cloud/webrisk/v1/webrisk.rb",
     "proto_docs/google/protobuf/timestamp.rb",
+    "snippets/Gemfile",
+    "snippets/web_risk_service/compute_threat_list_diff.rb",
+    "snippets/web_risk_service/create_submission.rb",
+    "snippets/web_risk_service/search_hashes.rb",
+    "snippets/web_risk_service/search_uris.rb",
     "test/google/cloud/web_risk/v1/web_risk_service_paths_test.rb",
     "test/google/cloud/web_risk/v1/web_risk_service_test.rb",
     "test/helper.rb"

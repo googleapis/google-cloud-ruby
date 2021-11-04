@@ -302,6 +302,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/vision/v1p3beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Vision::V1p3beta1::CreateProductSetRequest.new
+            #
+            #   # Call the create_product_set method.
+            #   result = client.create_product_set request
+            #
+            #   # The returned object is of type Google::Cloud::Vision::V1p3beta1::ProductSet.
+            #   p result
+            #
             def create_product_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -383,6 +398,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/vision/v1p3beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Vision::V1p3beta1::ListProductSetsRequest.new
+            #
+            #   # Call the list_product_sets method.
+            #   result = client.list_product_sets request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Vision::V1p3beta1::ProductSet.
+            #     p response
+            #   end
+            #
             def list_product_sets request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -460,6 +496,21 @@ module Google
             # @return [::Google::Cloud::Vision::V1p3beta1::ProductSet]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vision/v1p3beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Vision::V1p3beta1::GetProductSetRequest.new
+            #
+            #   # Call the get_product_set method.
+            #   result = client.get_product_set request
+            #
+            #   # The returned object is of type Google::Cloud::Vision::V1p3beta1::ProductSet.
+            #   p result
             #
             def get_product_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -543,6 +594,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/vision/v1p3beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Vision::V1p3beta1::UpdateProductSetRequest.new
+            #
+            #   # Call the update_product_set method.
+            #   result = client.update_product_set request
+            #
+            #   # The returned object is of type Google::Cloud::Vision::V1p3beta1::ProductSet.
+            #   p result
+            #
             def update_product_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -622,6 +688,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vision/v1p3beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Vision::V1p3beta1::DeleteProductSetRequest.new
+            #
+            #   # Call the delete_product_set method.
+            #   result = client.delete_product_set request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_product_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -710,6 +791,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/vision/v1p3beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Vision::V1p3beta1::CreateProductRequest.new
+            #
+            #   # Call the create_product method.
+            #   result = client.create_product request
+            #
+            #   # The returned object is of type Google::Cloud::Vision::V1p3beta1::Product.
+            #   p result
+            #
             def create_product request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -791,6 +887,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/vision/v1p3beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Vision::V1p3beta1::ListProductsRequest.new
+            #
+            #   # Call the list_products method.
+            #   result = client.list_products request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Vision::V1p3beta1::Product.
+            #     p response
+            #   end
+            #
             def list_products request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -868,6 +985,21 @@ module Google
             # @return [::Google::Cloud::Vision::V1p3beta1::Product]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vision/v1p3beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Vision::V1p3beta1::GetProductRequest.new
+            #
+            #   # Call the get_product method.
+            #   result = client.get_product request
+            #
+            #   # The returned object is of type Google::Cloud::Vision::V1p3beta1::Product.
+            #   p result
             #
             def get_product request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -959,6 +1091,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/vision/v1p3beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Vision::V1p3beta1::UpdateProductRequest.new
+            #
+            #   # Call the update_product method.
+            #   result = client.update_product request
+            #
+            #   # The returned object is of type Google::Cloud::Vision::V1p3beta1::Product.
+            #   p result
+            #
             def update_product request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1039,6 +1186,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vision/v1p3beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Vision::V1p3beta1::DeleteProductRequest.new
+            #
+            #   # Call the delete_product method.
+            #   result = client.delete_product request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_product request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1139,6 +1301,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/vision/v1p3beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Vision::V1p3beta1::CreateReferenceImageRequest.new
+            #
+            #   # Call the create_reference_image method.
+            #   result = client.create_reference_image request
+            #
+            #   # The returned object is of type Google::Cloud::Vision::V1p3beta1::ReferenceImage.
+            #   p result
+            #
             def create_reference_image request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1222,6 +1399,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vision/v1p3beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Vision::V1p3beta1::DeleteReferenceImageRequest.new
+            #
+            #   # Call the delete_reference_image method.
+            #   result = client.delete_reference_image request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_reference_image request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1309,6 +1501,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/vision/v1p3beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Vision::V1p3beta1::ListReferenceImagesRequest.new
+            #
+            #   # Call the list_reference_images method.
+            #   result = client.list_reference_images request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Vision::V1p3beta1::ReferenceImage.
+            #     p response
+            #   end
+            #
             def list_reference_images request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1387,6 +1600,21 @@ module Google
             # @return [::Google::Cloud::Vision::V1p3beta1::ReferenceImage]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vision/v1p3beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Vision::V1p3beta1::GetReferenceImageRequest.new
+            #
+            #   # Call the get_reference_image method.
+            #   result = client.get_reference_image request
+            #
+            #   # The returned object is of type Google::Cloud::Vision::V1p3beta1::ReferenceImage.
+            #   p result
             #
             def get_reference_image request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1473,6 +1701,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/vision/v1p3beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Vision::V1p3beta1::AddProductToProductSetRequest.new
+            #
+            #   # Call the add_product_to_product_set method.
+            #   result = client.add_product_to_product_set request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def add_product_to_product_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1554,6 +1797,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vision/v1p3beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Vision::V1p3beta1::RemoveProductFromProductSetRequest.new
+            #
+            #   # Call the remove_product_from_product_set method.
+            #   result = client.remove_product_from_product_set request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def remove_product_from_product_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1637,6 +1895,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Vision::V1p3beta1::Product>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vision/v1p3beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Vision::V1p3beta1::ListProductsInProductSetRequest.new
+            #
+            #   # Call the list_products_in_product_set method.
+            #   result = client.list_products_in_product_set request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Vision::V1p3beta1::Product.
+            #     p response
+            #   end
             #
             def list_products_in_product_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1722,6 +2001,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vision/v1p3beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Vision::V1p3beta1::ImportProductSetsRequest.new
+            #
+            #   # Call the import_product_sets method.
+            #   result = client.import_product_sets request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def import_product_sets request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

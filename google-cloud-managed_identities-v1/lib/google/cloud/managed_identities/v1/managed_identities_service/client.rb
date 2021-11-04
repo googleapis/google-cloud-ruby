@@ -252,6 +252,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::CreateMicrosoftAdDomainRequest.new
+            #
+            #   # Call the create_microsoft_ad_domain method.
+            #   result = client.create_microsoft_ad_domain request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_microsoft_ad_domain request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -323,6 +345,21 @@ module Google
             # @return [::Google::Cloud::ManagedIdentities::V1::ResetAdminPasswordResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::ResetAdminPasswordRequest.new
+            #
+            #   # Call the reset_admin_password method.
+            #   result = client.reset_admin_password request
+            #
+            #   # The returned object is of type Google::Cloud::ManagedIdentities::V1::ResetAdminPasswordResponse.
+            #   p result
             #
             def reset_admin_password request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -413,6 +450,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::ListDomainsRequest.new
+            #
+            #   # Call the list_domains method.
+            #   result = client.list_domains request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ManagedIdentities::V1::Domain.
+            #     p response
+            #   end
+            #
             def list_domains request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -484,6 +542,21 @@ module Google
             # @return [::Google::Cloud::ManagedIdentities::V1::Domain]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::GetDomainRequest.new
+            #
+            #   # Call the get_domain method.
+            #   result = client.get_domain request
+            #
+            #   # The returned object is of type Google::Cloud::ManagedIdentities::V1::Domain.
+            #   p result
             #
             def get_domain request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -563,6 +636,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::UpdateDomainRequest.new
+            #
+            #   # Call the update_domain method.
+            #   result = client.update_domain request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_domain request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -634,6 +729,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::DeleteDomainRequest.new
+            #
+            #   # Call the delete_domain method.
+            #   result = client.delete_domain request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def delete_domain request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -708,6 +825,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::AttachTrustRequest.new
+            #
+            #   # Call the attach_trust method.
+            #   result = client.attach_trust request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def attach_trust request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -787,6 +926,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::ReconfigureTrustRequest.new
+            #
+            #   # Call the reconfigure_trust method.
+            #   result = client.reconfigure_trust request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def reconfigure_trust request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -860,6 +1021,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::DetachTrustRequest.new
+            #
+            #   # Call the detach_trust method.
+            #   result = client.detach_trust request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def detach_trust request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -935,6 +1118,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::ValidateTrustRequest.new
+            #
+            #   # Call the validate_trust method.
+            #   result = client.validate_trust request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def validate_trust request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

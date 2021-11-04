@@ -27,6 +27,11 @@
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/cloud/workflows/executions/v1/executions.rb",
     "proto_docs/google/protobuf/timestamp.rb",
+    "snippets/Gemfile",
+    "snippets/executions/cancel_execution.rb",
+    "snippets/executions/create_execution.rb",
+    "snippets/executions/get_execution.rb",
+    "snippets/executions/list_executions.rb",
     "test/google/cloud/workflows/executions/v1/executions_paths_test.rb",
     "test/google/cloud/workflows/executions/v1/executions_test.rb",
     "test/helper.rb"

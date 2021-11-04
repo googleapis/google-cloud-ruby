@@ -282,6 +282,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::ListClustersRequest.new
+            #
+            #   # Call the list_clusters method.
+            #   result = client.list_clusters request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::ListClustersResponse.
+            #   p result
+            #
             def list_clusters request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -364,6 +379,21 @@ module Google
             # @return [::Google::Cloud::Container::V1beta1::Cluster]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::GetClusterRequest.new
+            #
+            #   # Call the get_cluster method.
+            #   result = client.get_cluster request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Cluster.
+            #   p result
             #
             def get_cluster request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -461,6 +491,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::CreateClusterRequest.new
+            #
+            #   # Call the create_cluster method.
+            #   result = client.create_cluster request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
+            #
             def create_cluster request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -545,6 +590,21 @@ module Google
             # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::UpdateClusterRequest.new
+            #
+            #   # Call the update_cluster method.
+            #   result = client.update_cluster request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
             #
             def update_cluster request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -675,6 +735,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::UpdateNodePoolRequest.new
+            #
+            #   # Call the update_node_pool method.
+            #   result = client.update_node_pool request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
+            #
             def update_node_pool request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -763,6 +838,21 @@ module Google
             # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::SetNodePoolAutoscalingRequest.new
+            #
+            #   # Call the set_node_pool_autoscaling method.
+            #   result = client.set_node_pool_autoscaling request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
             #
             def set_node_pool_autoscaling request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -859,6 +949,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::SetLoggingServiceRequest.new
+            #
+            #   # Call the set_logging_service method.
+            #   result = client.set_logging_service request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
+            #
             def set_logging_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -954,6 +1059,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::SetMonitoringServiceRequest.new
+            #
+            #   # Call the set_monitoring_service method.
+            #   result = client.set_monitoring_service request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
+            #
             def set_monitoring_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1039,6 +1159,21 @@ module Google
             # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::SetAddonsConfigRequest.new
+            #
+            #   # Call the set_addons_config method.
+            #   result = client.set_addons_config request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
             #
             def set_addons_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1136,6 +1271,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::SetLocationsRequest.new
+            #
+            #   # Call the set_locations method.
+            #   result = client.set_locations request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
+            #
             def set_locations request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1230,6 +1380,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::UpdateMasterRequest.new
+            #
+            #   # Call the update_master method.
+            #   result = client.update_master request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
+            #
             def update_master request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1318,6 +1483,21 @@ module Google
             # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::SetMasterAuthRequest.new
+            #
+            #   # Call the set_master_auth method.
+            #   result = client.set_master_auth request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
             #
             def set_master_auth request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1410,6 +1590,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::DeleteClusterRequest.new
+            #
+            #   # Call the delete_cluster method.
+            #   result = client.delete_cluster request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
+            #
             def delete_cluster request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1490,6 +1685,21 @@ module Google
             # @return [::Google::Cloud::Container::V1beta1::ListOperationsResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::ListOperationsRequest.new
+            #
+            #   # Call the list_operations method.
+            #   result = client.list_operations request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::ListOperationsResponse.
+            #   p result
             #
             def list_operations request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1574,6 +1784,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::GetOperationRequest.new
+            #
+            #   # Call the get_operation method.
+            #   result = client.get_operation request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
+            #
             def get_operation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1657,6 +1882,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::CancelOperationRequest.new
+            #
+            #   # Call the cancel_operation method.
+            #   result = client.cancel_operation request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def cancel_operation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1736,6 +1976,21 @@ module Google
             # @return [::Google::Cloud::Container::V1beta1::ServerConfig]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::GetServerConfigRequest.new
+            #
+            #   # Call the get_server_config method.
+            #   result = client.get_server_config request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::ServerConfig.
+            #   p result
             #
             def get_server_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1820,6 +2075,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::ListNodePoolsRequest.new
+            #
+            #   # Call the list_node_pools method.
+            #   result = client.list_node_pools request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::ListNodePoolsResponse.
+            #   p result
+            #
             def list_node_pools request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1893,6 +2163,21 @@ module Google
             # @return [::Google::Cloud::Container::V1beta1::GetJSONWebKeysResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest.new
+            #
+            #   # Call the get_json_web_keys method.
+            #   result = client.get_json_web_keys request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::GetJSONWebKeysResponse.
+            #   p result
             #
             def get_json_web_keys request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1981,6 +2266,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::GetNodePoolRequest.new
+            #
+            #   # Call the get_node_pool method.
+            #   result = client.get_node_pool request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::NodePool.
+            #   p result
+            #
             def get_node_pool request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2066,6 +2366,21 @@ module Google
             # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::CreateNodePoolRequest.new
+            #
+            #   # Call the create_node_pool method.
+            #   result = client.create_node_pool request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
             #
             def create_node_pool request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2153,6 +2468,21 @@ module Google
             # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::DeleteNodePoolRequest.new
+            #
+            #   # Call the delete_node_pool method.
+            #   result = client.delete_node_pool request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
             #
             def delete_node_pool request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2242,6 +2572,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::RollbackNodePoolUpgradeRequest.new
+            #
+            #   # Call the rollback_node_pool_upgrade method.
+            #   result = client.rollback_node_pool_upgrade request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
+            #
             def rollback_node_pool_upgrade request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2330,6 +2675,21 @@ module Google
             # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::SetNodePoolManagementRequest.new
+            #
+            #   # Call the set_node_pool_management method.
+            #   result = client.set_node_pool_management request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
             #
             def set_node_pool_management request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2423,6 +2783,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::SetLabelsRequest.new
+            #
+            #   # Call the set_labels method.
+            #   result = client.set_labels request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
+            #
             def set_labels request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2507,6 +2882,21 @@ module Google
             # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::SetLegacyAbacRequest.new
+            #
+            #   # Call the set_legacy_abac method.
+            #   result = client.set_legacy_abac request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
             #
             def set_legacy_abac request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2593,6 +2983,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::StartIPRotationRequest.new
+            #
+            #   # Call the start_ip_rotation method.
+            #   result = client.start_ip_rotation request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
+            #
             def start_ip_rotation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2675,6 +3080,21 @@ module Google
             # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::CompleteIPRotationRequest.new
+            #
+            #   # Call the complete_ip_rotation method.
+            #   result = client.complete_ip_rotation request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
             #
             def complete_ip_rotation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2767,6 +3187,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::SetNodePoolSizeRequest.new
+            #
+            #   # Call the set_node_pool_size method.
+            #   result = client.set_node_pool_size request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
+            #
             def set_node_pool_size request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2852,6 +3287,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::SetNetworkPolicyRequest.new
+            #
+            #   # Call the set_network_policy method.
+            #   result = client.set_network_policy request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
+            #
             def set_network_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2935,6 +3385,21 @@ module Google
             # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::SetMaintenancePolicyRequest.new
+            #
+            #   # Call the set_maintenance_policy method.
+            #   result = client.set_maintenance_policy request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::Operation.
+            #   p result
             #
             def set_maintenance_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -3020,6 +3485,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::ListUsableSubnetworksRequest.new
+            #
+            #   # Call the list_usable_subnetworks method.
+            #   result = client.list_usable_subnetworks request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Container::V1beta1::UsableSubnetwork.
+            #     p response
+            #   end
+            #
             def list_usable_subnetworks request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3091,6 +3577,21 @@ module Google
             # @return [::Google::Cloud::Container::V1beta1::ListLocationsResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::ListLocationsRequest.new
+            #
+            #   # Call the list_locations method.
+            #   result = client.list_locations request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::ListLocationsResponse.
+            #   p result
             #
             def list_locations request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

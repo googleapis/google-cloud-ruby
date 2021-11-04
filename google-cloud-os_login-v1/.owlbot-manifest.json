@@ -30,6 +30,13 @@
     "proto_docs/google/cloud/oslogin/v1/oslogin.rb",
     "proto_docs/google/protobuf/empty.rb",
     "proto_docs/google/protobuf/field_mask.rb",
+    "snippets/Gemfile",
+    "snippets/os_login_service/delete_posix_account.rb",
+    "snippets/os_login_service/delete_ssh_public_key.rb",
+    "snippets/os_login_service/get_login_profile.rb",
+    "snippets/os_login_service/get_ssh_public_key.rb",
+    "snippets/os_login_service/import_ssh_public_key.rb",
+    "snippets/os_login_service/update_ssh_public_key.rb",
     "test/google/cloud/os_login/v1/os_login_service_paths_test.rb",
     "test/google/cloud/os_login/v1/os_login_service_test.rb",
     "test/helper.rb"

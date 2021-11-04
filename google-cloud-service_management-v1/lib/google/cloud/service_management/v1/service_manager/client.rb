@@ -203,6 +203,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/service_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceManagement::V1::ListServicesRequest.new
+            #
+            #   # Call the list_services method.
+            #   result = client.list_services request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ServiceManagement::V1::ManagedService.
+            #     p response
+            #   end
+            #
             def list_services request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -267,6 +288,21 @@ module Google
             # @return [::Google::Cloud::ServiceManagement::V1::ManagedService]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/service_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceManagement::V1::GetServiceRequest.new
+            #
+            #   # Call the get_service method.
+            #   result = client.get_service request
+            #
+            #   # The returned object is of type Google::Cloud::ServiceManagement::V1::ManagedService.
+            #   p result
             #
             def get_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -341,6 +377,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/service_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceManagement::V1::CreateServiceRequest.new
+            #
+            #   # Call the create_service method.
+            #   result = client.create_service request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -409,6 +467,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/service_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceManagement::V1::DeleteServiceRequest.new
+            #
+            #   # Call the delete_service method.
+            #   result = client.delete_service request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def delete_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -487,6 +567,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/service_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceManagement::V1::UndeleteServiceRequest.new
+            #
+            #   # Call the undelete_service method.
+            #   result = client.undelete_service request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def undelete_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -564,6 +666,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Api::Service>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/service_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceManagement::V1::ListServiceConfigsRequest.new
+            #
+            #   # Call the list_service_configs method.
+            #   result = client.list_service_configs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Api::Service.
+            #     p response
+            #   end
             #
             def list_service_configs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -644,6 +767,21 @@ module Google
             # @return [::Google::Api::Service]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/service_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceManagement::V1::GetServiceConfigRequest.new
+            #
+            #   # Call the get_service_config method.
+            #   result = client.get_service_config request
+            #
+            #   # The returned object is of type Google::Api::Service.
+            #   p result
             #
             def get_service_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -727,6 +865,21 @@ module Google
             # @return [::Google::Api::Service]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/service_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceManagement::V1::CreateServiceConfigRequest.new
+            #
+            #   # Call the create_service_config method.
+            #   result = client.create_service_config request
+            #
+            #   # The returned object is of type Google::Api::Service.
+            #   p result
             #
             def create_service_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -817,6 +970,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/service_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceManagement::V1::SubmitConfigSourceRequest.new
+            #
+            #   # Call the submit_config_source method.
+            #   result = client.submit_config_source request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def submit_config_source request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -904,6 +1079,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/service_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceManagement::V1::ListServiceRolloutsRequest.new
+            #
+            #   # Call the list_service_rollouts method.
+            #   result = client.list_service_rollouts request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ServiceManagement::V1::Rollout.
+            #     p response
+            #   end
+            #
             def list_service_rollouts request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -977,6 +1173,21 @@ module Google
             # @return [::Google::Cloud::ServiceManagement::V1::Rollout]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/service_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceManagement::V1::GetServiceRolloutRequest.new
+            #
+            #   # Call the get_service_rollout method.
+            #   result = client.get_service_rollout request
+            #
+            #   # The returned object is of type Google::Cloud::ServiceManagement::V1::Rollout.
+            #   p result
             #
             def get_service_rollout request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1066,6 +1277,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/service_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceManagement::V1::CreateServiceRolloutRequest.new
+            #
+            #   # Call the create_service_rollout method.
+            #   result = client.create_service_rollout request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def create_service_rollout request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1158,6 +1391,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/service_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceManagement::V1::GenerateConfigReportRequest.new
+            #
+            #   # Call the generate_config_report method.
+            #   result = client.generate_config_report request
+            #
+            #   # The returned object is of type Google::Cloud::ServiceManagement::V1::GenerateConfigReportResponse.
+            #   p result
+            #
             def generate_config_report request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1237,6 +1485,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/service_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceManagement::V1::EnableServiceRequest.new
+            #
+            #   # Call the enable_service method.
+            #   result = client.enable_service request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def enable_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1325,6 +1595,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/service_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceManagement::V1::DisableServiceRequest.new
+            #
+            #   # Call the disable_service method.
+            #   result = client.disable_service request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def disable_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

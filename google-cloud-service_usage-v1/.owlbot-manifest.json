@@ -45,6 +45,13 @@
     "proto_docs/google/protobuf/struct.rb",
     "proto_docs/google/protobuf/type.rb",
     "proto_docs/google/rpc/status.rb",
+    "snippets/Gemfile",
+    "snippets/service_usage/batch_enable_services.rb",
+    "snippets/service_usage/batch_get_services.rb",
+    "snippets/service_usage/disable_service.rb",
+    "snippets/service_usage/enable_service.rb",
+    "snippets/service_usage/get_service.rb",
+    "snippets/service_usage/list_services.rb",
     "test/google/cloud/service_usage/v1/service_usage_operations_test.rb",
     "test/google/cloud/service_usage/v1/service_usage_test.rb",
     "test/helper.rb"

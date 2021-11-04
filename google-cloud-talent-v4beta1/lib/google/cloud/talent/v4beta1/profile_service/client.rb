@@ -232,6 +232,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::ProfileService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::ListProfilesRequest.new
+            #
+            #   # Call the list_profiles method.
+            #   result = client.list_profiles request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Talent::V4beta1::Profile.
+            #     p response
+            #   end
+            #
             def list_profiles request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -308,6 +329,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::ProfileService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::CreateProfileRequest.new
+            #
+            #   # Call the create_profile method.
+            #   result = client.create_profile request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4beta1::Profile.
+            #   p result
+            #
             def create_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -382,6 +418,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::ProfileService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::GetProfileRequest.new
+            #
+            #   # Call the get_profile method.
+            #   result = client.get_profile request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4beta1::Profile.
+            #   p result
+            #
             def get_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -455,6 +506,21 @@ module Google
             # @return [::Google::Cloud::Talent::V4beta1::Profile]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::ProfileService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::UpdateProfileRequest.new
+            #
+            #   # Call the update_profile method.
+            #   result = client.update_profile request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4beta1::Profile.
+            #   p result
             #
             def update_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -531,6 +597,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::ProfileService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::DeleteProfileRequest.new
+            #
+            #   # Call the delete_profile method.
+            #   result = client.delete_profile request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -776,6 +857,21 @@ module Google
             # @return [::Google::Cloud::Talent::V4beta1::SearchProfilesResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::ProfileService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::SearchProfilesRequest.new
+            #
+            #   # Call the search_profiles method.
+            #   result = client.search_profiles request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4beta1::SearchProfilesResponse.
+            #   p result
             #
             def search_profiles request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

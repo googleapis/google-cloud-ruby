@@ -186,6 +186,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::SchemaService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::CreateSchemaRequest.new
+            #
+            #   # Call the create_schema method.
+            #   result = client.create_schema request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Schema.
+            #   p result
+            #
             def create_schema request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -260,6 +275,21 @@ module Google
             # @return [::Google::Cloud::PubSub::V1::Schema]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::SchemaService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::GetSchemaRequest.new
+            #
+            #   # Call the get_schema method.
+            #   result = client.get_schema request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Schema.
+            #   p result
             #
             def get_schema request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -342,6 +372,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::SchemaService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::ListSchemasRequest.new
+            #
+            #   # Call the list_schemas method.
+            #   result = client.list_schemas request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::PubSub::V1::Schema.
+            #     p response
+            #   end
+            #
             def list_schemas request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -413,6 +464,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::SchemaService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::DeleteSchemaRequest.new
+            #
+            #   # Call the delete_schema method.
+            #   result = client.delete_schema request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_schema request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -486,6 +552,21 @@ module Google
             # @return [::Google::Cloud::PubSub::V1::ValidateSchemaResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::SchemaService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::ValidateSchemaRequest.new
+            #
+            #   # Call the validate_schema method.
+            #   result = client.validate_schema request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::ValidateSchemaResponse.
+            #   p result
             #
             def validate_schema request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -567,6 +648,21 @@ module Google
             # @return [::Google::Cloud::PubSub::V1::ValidateMessageResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::SchemaService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::ValidateMessageRequest.new
+            #
+            #   # Call the validate_message method.
+            #   result = client.validate_message request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::ValidateMessageResponse.
+            #   p result
             #
             def validate_message request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

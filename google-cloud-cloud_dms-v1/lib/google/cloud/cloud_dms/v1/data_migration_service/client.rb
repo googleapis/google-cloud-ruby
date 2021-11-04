@@ -248,6 +248,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::ListMigrationJobsRequest.new
+            #
+            #   # Call the list_migration_jobs method.
+            #   result = client.list_migration_jobs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::CloudDMS::V1::MigrationJob.
+            #     p response
+            #   end
+            #
             def list_migration_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -318,6 +339,21 @@ module Google
             # @return [::Google::Cloud::CloudDMS::V1::MigrationJob]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::GetMigrationJobRequest.new
+            #
+            #   # Call the get_migration_job method.
+            #   result = client.get_migration_job request
+            #
+            #   # The returned object is of type Google::Cloud::CloudDMS::V1::MigrationJob.
+            #   p result
             #
             def get_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -403,6 +439,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::CreateMigrationJobRequest.new
+            #
+            #   # Call the create_migration_job method.
+            #   result = client.create_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -484,6 +542,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::UpdateMigrationJobRequest.new
+            #
+            #   # Call the update_migration_job method.
+            #   result = client.update_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def update_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -568,6 +648,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::DeleteMigrationJobRequest.new
+            #
+            #   # Call the delete_migration_job method.
+            #   result = client.delete_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -639,6 +741,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::StartMigrationJobRequest.new
+            #
+            #   # Call the start_migration_job method.
+            #   result = client.start_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def start_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -709,6 +833,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::StopMigrationJobRequest.new
+            #
+            #   # Call the stop_migration_job method.
+            #   result = client.stop_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def stop_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -782,6 +928,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::ResumeMigrationJobRequest.new
+            #
+            #   # Call the resume_migration_job method.
+            #   result = client.resume_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def resume_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -853,6 +1021,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::PromoteMigrationJobRequest.new
+            #
+            #   # Call the promote_migration_job method.
+            #   result = client.promote_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def promote_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -926,6 +1116,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::VerifyMigrationJobRequest.new
+            #
+            #   # Call the verify_migration_job method.
+            #   result = client.verify_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def verify_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -998,6 +1210,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::RestartMigrationJobRequest.new
+            #
+            #   # Call the restart_migration_job method.
+            #   result = client.restart_migration_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def restart_migration_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1078,6 +1312,21 @@ module Google
             # @return [::Google::Cloud::CloudDMS::V1::SshScript]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::GenerateSshScriptRequest.new
+            #
+            #   # Call the generate_ssh_script method.
+            #   result = client.generate_ssh_script request
+            #
+            #   # The returned object is of type Google::Cloud::CloudDMS::V1::SshScript.
+            #   p result
             #
             def generate_ssh_script request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1172,6 +1421,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::ListConnectionProfilesRequest.new
+            #
+            #   # Call the list_connection_profiles method.
+            #   result = client.list_connection_profiles request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::CloudDMS::V1::ConnectionProfile.
+            #     p response
+            #   end
+            #
             def list_connection_profiles request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1242,6 +1512,21 @@ module Google
             # @return [::Google::Cloud::CloudDMS::V1::ConnectionProfile]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::GetConnectionProfileRequest.new
+            #
+            #   # Call the get_connection_profile method.
+            #   result = client.get_connection_profile request
+            #
+            #   # The returned object is of type Google::Cloud::CloudDMS::V1::ConnectionProfile.
+            #   p result
             #
             def get_connection_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1325,6 +1610,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::CreateConnectionProfileRequest.new
+            #
+            #   # Call the create_connection_profile method.
+            #   result = client.create_connection_profile request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_connection_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1406,6 +1713,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::UpdateConnectionProfileRequest.new
+            #
+            #   # Call the update_connection_profile method.
+            #   result = client.update_connection_profile request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def update_connection_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1490,6 +1819,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_dms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudDMS::V1::DeleteConnectionProfileRequest.new
+            #
+            #   # Call the delete_connection_profile method.
+            #   result = client.delete_connection_profile request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def delete_connection_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

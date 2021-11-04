@@ -29,6 +29,8 @@
     "proto_docs/google/cloud/policytroubleshooter/v1/explanations.rb",
     "proto_docs/google/iam/v1/policy.rb",
     "proto_docs/google/type/expr.rb",
+    "snippets/Gemfile",
+    "snippets/iam_checker/troubleshoot_iam_policy.rb",
     "test/google/cloud/policy_troubleshooter/v1/iam_checker_test.rb",
     "test/helper.rb"
   ],

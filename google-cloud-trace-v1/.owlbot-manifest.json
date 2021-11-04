@@ -27,6 +27,10 @@
     "proto_docs/google/devtools/cloudtrace/v1/trace.rb",
     "proto_docs/google/protobuf/empty.rb",
     "proto_docs/google/protobuf/timestamp.rb",
+    "snippets/Gemfile",
+    "snippets/trace_service/get_trace.rb",
+    "snippets/trace_service/list_traces.rb",
+    "snippets/trace_service/patch_traces.rb",
     "test/google/cloud/trace/v1/trace_service_test.rb",
     "test/helper.rb"
   ],

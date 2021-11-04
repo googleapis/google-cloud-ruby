@@ -190,6 +190,28 @@ module Google
                 #
                 # @raise [::Google::Cloud::Error] if the RPC is aborted.
                 #
+                # @example Basic example
+                #   require "google/cloud/orchestration/airflow/service/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Orchestration::Airflow::Service::V1::CreateEnvironmentRequest.new
+                #
+                #   # Call the create_environment method.
+                #   result = client.create_environment request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use this
+                #   # object to check the status of an operation, cancel it, or wait
+                #   # for results. Here is how to block until completion:
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "Error!"
+                #   end
+                #
                 def create_environment request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -261,6 +283,21 @@ module Google
                 # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::Environment]
                 #
                 # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/orchestration/airflow/service/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Orchestration::Airflow::Service::V1::GetEnvironmentRequest.new
+                #
+                #   # Call the get_environment method.
+                #   result = client.get_environment request
+                #
+                #   # The returned object is of type Google::Cloud::Orchestration::Airflow::Service::V1::Environment.
+                #   p result
                 #
                 def get_environment request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
@@ -336,6 +373,27 @@ module Google
                 # @return [::Gapic::PagedEnumerable<::Google::Cloud::Orchestration::Airflow::Service::V1::Environment>]
                 #
                 # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/orchestration/airflow/service/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Orchestration::Airflow::Service::V1::ListEnvironmentsRequest.new
+                #
+                #   # Call the list_environments method.
+                #   result = client.list_environments request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can
+                #   # iterate over all elements by calling #each, and the enumerable
+                #   # will lazily make API calls to fetch subsequent pages. Other
+                #   # methods are also available for managing paging directly.
+                #   result.each do |response|
+                #     # Each element is of type ::Google::Cloud::Orchestration::Airflow::Service::V1::Environment.
+                #     p response
+                #   end
                 #
                 def list_environments request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
@@ -526,6 +584,28 @@ module Google
                 #
                 # @raise [::Google::Cloud::Error] if the RPC is aborted.
                 #
+                # @example Basic example
+                #   require "google/cloud/orchestration/airflow/service/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Orchestration::Airflow::Service::V1::UpdateEnvironmentRequest.new
+                #
+                #   # Call the update_environment method.
+                #   result = client.update_environment request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use this
+                #   # object to check the status of an operation, cancel it, or wait
+                #   # for results. Here is how to block until completion:
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "Error!"
+                #   end
+                #
                 def update_environment request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -597,6 +677,28 @@ module Google
                 # @return [::Gapic::Operation]
                 #
                 # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/orchestration/airflow/service/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Orchestration::Airflow::Service::V1::DeleteEnvironmentRequest.new
+                #
+                #   # Call the delete_environment method.
+                #   result = client.delete_environment request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use this
+                #   # object to check the status of an operation, cancel it, or wait
+                #   # for results. Here is how to block until completion:
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "Error!"
+                #   end
                 #
                 def delete_environment request, options = nil
                   raise ::ArgumentError, "request must be provided" if request.nil?

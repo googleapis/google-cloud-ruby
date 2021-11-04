@@ -208,6 +208,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::ListAccessPoliciesRequest.new
+            #
+            #   # Call the list_access_policies method.
+            #   result = client.list_access_policies request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Identity::AccessContextManager::V1::AccessPolicy.
+            #     p response
+            #   end
+            #
             def list_access_policies request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -273,6 +294,21 @@ module Google
             # @return [::Google::Identity::AccessContextManager::V1::AccessPolicy]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::GetAccessPolicyRequest.new
+            #
+            #   # Call the get_access_policy method.
+            #   result = client.get_access_policy request
+            #
+            #   # The returned object is of type Google::Identity::AccessContextManager::V1::AccessPolicy.
+            #   p result
             #
             def get_access_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -364,6 +400,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::AccessPolicy.new
+            #
+            #   # Call the create_access_policy method.
+            #   result = client.create_access_policy request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_access_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -434,6 +492,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::UpdateAccessPolicyRequest.new
+            #
+            #   # Call the update_access_policy method.
+            #   result = client.update_access_policy request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def update_access_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -511,6 +591,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::DeleteAccessPolicyRequest.new
+            #
+            #   # Call the delete_access_policy method.
+            #   result = client.delete_access_policy request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def delete_access_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -601,6 +703,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::ListAccessLevelsRequest.new
+            #
+            #   # Call the list_access_levels method.
+            #   result = client.list_access_levels request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Identity::AccessContextManager::V1::AccessLevel.
+            #     p response
+            #   end
+            #
             def list_access_levels request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -687,6 +810,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::GetAccessLevelRequest.new
+            #
+            #   # Call the get_access_level method.
+            #   result = client.get_access_level request
+            #
+            #   # The returned object is of type Google::Identity::AccessContextManager::V1::AccessLevel.
+            #   p result
+            #
             def get_access_level request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -772,6 +910,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::CreateAccessLevelRequest.new
+            #
+            #   # Call the create_access_level method.
+            #   result = client.create_access_level request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_access_level request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -856,6 +1016,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::UpdateAccessLevelRequest.new
+            #
+            #   # Call the update_access_level method.
+            #   result = client.update_access_level request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_access_level request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -935,6 +1117,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::DeleteAccessLevelRequest.new
+            #
+            #   # Call the delete_access_level method.
+            #   result = client.delete_access_level request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def delete_access_level request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1042,6 +1246,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::ReplaceAccessLevelsRequest.new
+            #
+            #   # Call the replace_access_levels method.
+            #   result = client.replace_access_levels request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def replace_access_levels request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1127,6 +1353,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::ListServicePerimetersRequest.new
+            #
+            #   # Call the list_service_perimeters method.
+            #   result = client.list_service_perimeters request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Identity::AccessContextManager::V1::ServicePerimeter.
+            #     p response
+            #   end
+            #
             def list_service_perimeters request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1203,6 +1450,21 @@ module Google
             # @return [::Google::Identity::AccessContextManager::V1::ServicePerimeter]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::GetServicePerimeterRequest.new
+            #
+            #   # Call the get_service_perimeter method.
+            #   result = client.get_service_perimeter request
+            #
+            #   # The returned object is of type Google::Identity::AccessContextManager::V1::ServicePerimeter.
+            #   p result
             #
             def get_service_perimeter request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1290,6 +1552,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::CreateServicePerimeterRequest.new
+            #
+            #   # Call the create_service_perimeter method.
+            #   result = client.create_service_perimeter request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_service_perimeter request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1371,6 +1655,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::UpdateServicePerimeterRequest.new
+            #
+            #   # Call the update_service_perimeter method.
+            #   result = client.update_service_perimeter request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_service_perimeter request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1450,6 +1756,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::DeleteServicePerimeterRequest.new
+            #
+            #   # Call the delete_service_perimeter method.
+            #   result = client.delete_service_perimeter request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def delete_service_perimeter request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1553,6 +1881,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::ReplaceServicePerimetersRequest.new
+            #
+            #   # Call the replace_service_perimeters method.
+            #   result = client.replace_service_perimeters request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def replace_service_perimeters request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1652,6 +2002,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::CommitServicePerimetersRequest.new
+            #
+            #   # Call the commit_service_perimeters method.
+            #   result = client.commit_service_perimeters request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def commit_service_perimeters request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1733,6 +2105,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::ListGcpUserAccessBindingsRequest.new
+            #
+            #   # Call the list_gcp_user_access_bindings method.
+            #   result = client.list_gcp_user_access_bindings request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Identity::AccessContextManager::V1::GcpUserAccessBinding.
+            #     p response
+            #   end
+            #
             def list_gcp_user_access_bindings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1805,6 +2198,21 @@ module Google
             # @return [::Google::Identity::AccessContextManager::V1::GcpUserAccessBinding]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::GetGcpUserAccessBindingRequest.new
+            #
+            #   # Call the get_gcp_user_access_binding method.
+            #   result = client.get_gcp_user_access_binding request
+            #
+            #   # The returned object is of type Google::Identity::AccessContextManager::V1::GcpUserAccessBinding.
+            #   p result
             #
             def get_gcp_user_access_binding request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1887,6 +2295,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::CreateGcpUserAccessBindingRequest.new
+            #
+            #   # Call the create_gcp_user_access_binding method.
+            #   result = client.create_gcp_user_access_binding request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def create_gcp_user_access_binding request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1971,6 +2401,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::UpdateGcpUserAccessBindingRequest.new
+            #
+            #   # Call the update_gcp_user_access_binding method.
+            #   result = client.update_gcp_user_access_binding request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_gcp_user_access_binding request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2045,6 +2497,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/identity/access_context_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Identity::AccessContextManager::V1::DeleteGcpUserAccessBindingRequest.new
+            #
+            #   # Call the delete_gcp_user_access_binding method.
+            #   result = client.delete_gcp_user_access_binding request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def delete_gcp_user_access_binding request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

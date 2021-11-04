@@ -32,6 +32,10 @@
     "proto_docs/google/iam/v1/policy.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/type/expr.rb",
+    "snippets/Gemfile",
+    "snippets/artifact_registry/get_repository.rb",
+    "snippets/artifact_registry/list_docker_images.rb",
+    "snippets/artifact_registry/list_repositories.rb",
     "test/google/cloud/artifact_registry/v1/artifact_registry_paths_test.rb",
     "test/google/cloud/artifact_registry/v1/artifact_registry_test.rb",
     "test/helper.rb"

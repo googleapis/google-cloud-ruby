@@ -49,6 +49,10 @@
     "proto_docs/google/protobuf/struct.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
+    "snippets/Gemfile",
+    "snippets/quota_controller/allocate_quota.rb",
+    "snippets/service_controller/check.rb",
+    "snippets/service_controller/report.rb",
     "test/google/cloud/service_control/v1/quota_controller_test.rb",
     "test/google/cloud/service_control/v1/service_controller_test.rb",
     "test/helper.rb"

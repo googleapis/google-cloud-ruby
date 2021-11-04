@@ -223,6 +223,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Billing::V1::GetBillingAccountRequest.new
+            #
+            #   # Call the get_billing_account method.
+            #   result = client.get_billing_account request
+            #
+            #   # The returned object is of type Google::Cloud::Billing::V1::BillingAccount.
+            #   p result
+            #
             def get_billing_account request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -307,6 +322,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Billing::V1::ListBillingAccountsRequest.new
+            #
+            #   # Call the list_billing_accounts method.
+            #   result = client.list_billing_accounts request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Billing::V1::BillingAccount.
+            #     p response
+            #   end
+            #
             def list_billing_accounts request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -379,6 +415,21 @@ module Google
             # @return [::Google::Cloud::Billing::V1::BillingAccount]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Billing::V1::UpdateBillingAccountRequest.new
+            #
+            #   # Call the update_billing_account method.
+            #   result = client.update_billing_account request
+            #
+            #   # The returned object is of type Google::Cloud::Billing::V1::BillingAccount.
+            #   p result
             #
             def update_billing_account request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -462,6 +513,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Billing::V1::CreateBillingAccountRequest.new
+            #
+            #   # Call the create_billing_account method.
+            #   result = client.create_billing_account request
+            #
+            #   # The returned object is of type Google::Cloud::Billing::V1::BillingAccount.
+            #   p result
+            #
             def create_billing_account request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -534,6 +600,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Billing::V1::ProjectBillingInfo>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Billing::V1::ListProjectBillingInfoRequest.new
+            #
+            #   # Call the list_project_billing_info method.
+            #   result = client.list_project_billing_info request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Billing::V1::ProjectBillingInfo.
+            #     p response
+            #   end
             #
             def list_project_billing_info request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -609,6 +696,21 @@ module Google
             # @return [::Google::Cloud::Billing::V1::ProjectBillingInfo]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Billing::V1::GetProjectBillingInfoRequest.new
+            #
+            #   # Call the get_project_billing_info method.
+            #   result = client.get_project_billing_info request
+            #
+            #   # The returned object is of type Google::Cloud::Billing::V1::ProjectBillingInfo.
+            #   p result
             #
             def get_project_billing_info request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -714,6 +816,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest.new
+            #
+            #   # Call the update_project_billing_info method.
+            #   result = client.update_project_billing_info request
+            #
+            #   # The returned object is of type Google::Cloud::Billing::V1::ProjectBillingInfo.
+            #   p result
+            #
             def update_project_billing_info request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -790,6 +907,21 @@ module Google
             # @return [::Google::Iam::V1::Policy]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::GetIamPolicyRequest.new
+            #
+            #   # Call the get_iam_policy method.
+            #   result = client.get_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
             #
             def get_iam_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -871,6 +1003,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::SetIamPolicyRequest.new
+            #
+            #   # Call the set_iam_policy method.
+            #   result = client.set_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
+            #
             def set_iam_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -948,6 +1095,21 @@ module Google
             # @return [::Google::Iam::V1::TestIamPermissionsResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/billing/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+            #
+            #   # Call the test_iam_permissions method.
+            #   result = client.test_iam_permissions request
+            #
+            #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+            #   p result
             #
             def test_iam_permissions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

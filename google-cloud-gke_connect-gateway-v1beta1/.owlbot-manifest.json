@@ -25,6 +25,12 @@
     "proto_docs/google/api/httpbody.rb",
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/protobuf/any.rb",
+    "snippets/Gemfile",
+    "snippets/gateway_service/delete_resource.rb",
+    "snippets/gateway_service/get_resource.rb",
+    "snippets/gateway_service/patch_resource.rb",
+    "snippets/gateway_service/post_resource.rb",
+    "snippets/gateway_service/put_resource.rb",
     "test/google/cloud/gke_connect/gateway/v1beta1/gateway_service_test.rb",
     "test/helper.rb"
   ],

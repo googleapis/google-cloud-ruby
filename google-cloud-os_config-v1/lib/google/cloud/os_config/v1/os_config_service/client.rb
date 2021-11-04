@@ -200,6 +200,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::ExecutePatchJobRequest.new
+            #
+            #   # Call the execute_patch_job method.
+            #   result = client.execute_patch_job request
+            #
+            #   # The returned object is of type Google::Cloud::OsConfig::V1::PatchJob.
+            #   p result
+            #
             def execute_patch_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -271,6 +286,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::GetPatchJobRequest.new
+            #
+            #   # Call the get_patch_job method.
+            #   result = client.get_patch_job request
+            #
+            #   # The returned object is of type Google::Cloud::OsConfig::V1::PatchJob.
+            #   p result
+            #
             def get_patch_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -341,6 +371,21 @@ module Google
             # @return [::Google::Cloud::OsConfig::V1::PatchJob]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::CancelPatchJobRequest.new
+            #
+            #   # Call the cancel_patch_job method.
+            #   result = client.cancel_patch_job request
+            #
+            #   # The returned object is of type Google::Cloud::OsConfig::V1::PatchJob.
+            #   p result
             #
             def cancel_patch_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -420,6 +465,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::OsConfig::V1::PatchJob>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::ListPatchJobsRequest.new
+            #
+            #   # Call the list_patch_jobs method.
+            #   result = client.list_patch_jobs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::OsConfig::V1::PatchJob.
+            #     p response
+            #   end
             #
             def list_patch_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -501,6 +567,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::OsConfig::V1::PatchJobInstanceDetails>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsRequest.new
+            #
+            #   # Call the list_patch_job_instance_details method.
+            #   result = client.list_patch_job_instance_details request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::OsConfig::V1::PatchJobInstanceDetails.
+            #     p response
+            #   end
             #
             def list_patch_job_instance_details request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -584,6 +671,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::CreatePatchDeploymentRequest.new
+            #
+            #   # Call the create_patch_deployment method.
+            #   result = client.create_patch_deployment request
+            #
+            #   # The returned object is of type Google::Cloud::OsConfig::V1::PatchDeployment.
+            #   p result
+            #
             def create_patch_deployment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -654,6 +756,21 @@ module Google
             # @return [::Google::Cloud::OsConfig::V1::PatchDeployment]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::GetPatchDeploymentRequest.new
+            #
+            #   # Call the get_patch_deployment method.
+            #   result = client.get_patch_deployment request
+            #
+            #   # The returned object is of type Google::Cloud::OsConfig::V1::PatchDeployment.
+            #   p result
             #
             def get_patch_deployment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -732,6 +849,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::ListPatchDeploymentsRequest.new
+            #
+            #   # Call the list_patch_deployments method.
+            #   result = client.list_patch_deployments request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::OsConfig::V1::PatchDeployment.
+            #     p response
+            #   end
+            #
             def list_patch_deployments request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -803,6 +941,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::DeletePatchDeploymentRequest.new
+            #
+            #   # Call the delete_patch_deployment method.
+            #   result = client.delete_patch_deployment request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_patch_deployment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

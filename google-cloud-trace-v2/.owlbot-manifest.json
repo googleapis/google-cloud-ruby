@@ -33,6 +33,9 @@
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/protobuf/wrappers.rb",
     "proto_docs/google/rpc/status.rb",
+    "snippets/Gemfile",
+    "snippets/trace_service/batch_write_spans.rb",
+    "snippets/trace_service/create_span.rb",
     "test/google/cloud/trace/v2/trace_service_paths_test.rb",
     "test/google/cloud/trace/v2/trace_service_test.rb",
     "test/helper.rb"

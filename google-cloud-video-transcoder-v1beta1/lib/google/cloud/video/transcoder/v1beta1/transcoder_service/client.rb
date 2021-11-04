@@ -205,6 +205,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/video/transcoder/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Transcoder::V1beta1::CreateJobRequest.new
+              #
+              #   # Call the create_job method.
+              #   result = client.create_job request
+              #
+              #   # The returned object is of type Google::Cloud::Video::Transcoder::V1beta1::Job.
+              #   p result
+              #
               def create_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -280,6 +295,27 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/video/transcoder/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Transcoder::V1beta1::ListJobsRequest.new
+              #
+              #   # Call the list_jobs method.
+              #   result = client.list_jobs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can
+              #   # iterate over all elements by calling #each, and the enumerable
+              #   # will lazily make API calls to fetch subsequent pages. Other
+              #   # methods are also available for managing paging directly.
+              #   result.each do |response|
+              #     # Each element is of type ::Google::Cloud::Video::Transcoder::V1beta1::Job.
+              #     p response
+              #   end
+              #
               def list_jobs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -352,6 +388,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/video/transcoder/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Transcoder::V1beta1::GetJobRequest.new
+              #
+              #   # Call the get_job method.
+              #   result = client.get_job request
+              #
+              #   # The returned object is of type Google::Cloud::Video::Transcoder::V1beta1::Job.
+              #   p result
+              #
               def get_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -422,6 +473,21 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/transcoder/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Transcoder::V1beta1::DeleteJobRequest.new
+              #
+              #   # Call the delete_job method.
+              #   result = client.delete_job request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
               #
               def delete_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -502,6 +568,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/video/transcoder/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Transcoder::V1beta1::CreateJobTemplateRequest.new
+              #
+              #   # Call the create_job_template method.
+              #   result = client.create_job_template request
+              #
+              #   # The returned object is of type Google::Cloud::Video::Transcoder::V1beta1::JobTemplate.
+              #   p result
+              #
               def create_job_template request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -578,6 +659,27 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/video/transcoder/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Transcoder::V1beta1::ListJobTemplatesRequest.new
+              #
+              #   # Call the list_job_templates method.
+              #   result = client.list_job_templates request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can
+              #   # iterate over all elements by calling #each, and the enumerable
+              #   # will lazily make API calls to fetch subsequent pages. Other
+              #   # methods are also available for managing paging directly.
+              #   result.each do |response|
+              #     # Each element is of type ::Google::Cloud::Video::Transcoder::V1beta1::JobTemplate.
+              #     p response
+              #   end
+              #
               def list_job_templates request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -651,6 +753,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/video/transcoder/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Transcoder::V1beta1::GetJobTemplateRequest.new
+              #
+              #   # Call the get_job_template method.
+              #   result = client.get_job_template request
+              #
+              #   # The returned object is of type Google::Cloud::Video::Transcoder::V1beta1::JobTemplate.
+              #   p result
+              #
               def get_job_template request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -721,6 +838,21 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/transcoder/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Transcoder::V1beta1::DeleteJobTemplateRequest.new
+              #
+              #   # Call the delete_job_template method.
+              #   result = client.delete_job_template request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
               #
               def delete_job_template request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?

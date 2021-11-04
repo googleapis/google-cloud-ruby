@@ -217,6 +217,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::ListUptimeCheckConfigsRequest.new
+            #
+            #   # Call the list_uptime_check_configs method.
+            #   result = client.list_uptime_check_configs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Monitoring::V3::UptimeCheckConfig.
+            #     p response
+            #   end
+            #
             def list_uptime_check_configs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -289,6 +310,21 @@ module Google
             # @return [::Google::Cloud::Monitoring::V3::UptimeCheckConfig]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::GetUptimeCheckConfigRequest.new
+            #
+            #   # Call the get_uptime_check_config method.
+            #   result = client.get_uptime_check_config request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::UptimeCheckConfig.
+            #   p result
             #
             def get_uptime_check_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -364,6 +400,21 @@ module Google
             # @return [::Google::Cloud::Monitoring::V3::UptimeCheckConfig]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::CreateUptimeCheckConfigRequest.new
+            #
+            #   # Call the create_uptime_check_config method.
+            #   result = client.create_uptime_check_config request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::UptimeCheckConfig.
+            #   p result
             #
             def create_uptime_check_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -453,6 +504,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::UpdateUptimeCheckConfigRequest.new
+            #
+            #   # Call the update_uptime_check_config method.
+            #   result = client.update_uptime_check_config request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::UptimeCheckConfig.
+            #   p result
+            #
             def update_uptime_check_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -526,6 +592,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::DeleteUptimeCheckConfigRequest.new
+            #
+            #   # Call the delete_uptime_check_config method.
+            #   result = client.delete_uptime_check_config request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_uptime_check_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -605,6 +686,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Monitoring::V3::UptimeCheckIp>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::ListUptimeCheckIpsRequest.new
+            #
+            #   # Call the list_uptime_check_ips method.
+            #   result = client.list_uptime_check_ips request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Monitoring::V3::UptimeCheckIp.
+            #     p response
+            #   end
             #
             def list_uptime_check_ips request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

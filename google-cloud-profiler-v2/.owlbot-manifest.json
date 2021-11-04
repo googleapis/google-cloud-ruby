@@ -26,6 +26,10 @@
     "proto_docs/google/devtools/cloudprofiler/v2/profiler.rb",
     "proto_docs/google/protobuf/duration.rb",
     "proto_docs/google/protobuf/field_mask.rb",
+    "snippets/Gemfile",
+    "snippets/profiler_service/create_offline_profile.rb",
+    "snippets/profiler_service/create_profile.rb",
+    "snippets/profiler_service/update_profile.rb",
     "test/google/cloud/profiler/v2/profiler_service_test.rb",
     "test/helper.rb"
   ],

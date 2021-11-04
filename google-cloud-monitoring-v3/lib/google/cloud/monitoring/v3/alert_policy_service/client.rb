@@ -228,6 +228,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest.new
+            #
+            #   # Call the list_alert_policies method.
+            #   result = client.list_alert_policies request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Monitoring::V3::AlertPolicy.
+            #     p response
+            #   end
+            #
             def list_alert_policies request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -300,6 +321,21 @@ module Google
             # @return [::Google::Cloud::Monitoring::V3::AlertPolicy]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::GetAlertPolicyRequest.new
+            #
+            #   # Call the get_alert_policy method.
+            #   result = client.get_alert_policy request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::AlertPolicy.
+            #   p result
             #
             def get_alert_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -386,6 +422,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::CreateAlertPolicyRequest.new
+            #
+            #   # Call the create_alert_policy method.
+            #   result = client.create_alert_policy request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::AlertPolicy.
+            #   p result
+            #
             def create_alert_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -459,6 +510,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::DeleteAlertPolicyRequest.new
+            #
+            #   # Call the delete_alert_policy method.
+            #   result = client.delete_alert_policy request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_alert_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -557,6 +623,21 @@ module Google
             # @return [::Google::Cloud::Monitoring::V3::AlertPolicy]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::UpdateAlertPolicyRequest.new
+            #
+            #   # Call the update_alert_policy method.
+            #   result = client.update_alert_policy request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::AlertPolicy.
+            #   p result
             #
             def update_alert_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

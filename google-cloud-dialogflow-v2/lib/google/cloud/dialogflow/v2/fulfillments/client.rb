@@ -179,6 +179,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Fulfillments::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::GetFulfillmentRequest.new
+            #
+            #   # Call the get_fulfillment method.
+            #   result = client.get_fulfillment request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Fulfillment.
+            #   p result
+            #
             def get_fulfillment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -251,6 +266,21 @@ module Google
             # @return [::Google::Cloud::Dialogflow::V2::Fulfillment]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Fulfillments::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::UpdateFulfillmentRequest.new
+            #
+            #   # Call the update_fulfillment method.
+            #   result = client.update_fulfillment request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Fulfillment.
+            #   p result
             #
             def update_fulfillment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

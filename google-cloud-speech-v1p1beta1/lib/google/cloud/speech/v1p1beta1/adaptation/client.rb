@@ -185,6 +185,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::CreatePhraseSetRequest.new
+            #
+            #   # Call the create_phrase_set method.
+            #   result = client.create_phrase_set request
+            #
+            #   # The returned object is of type Google::Cloud::Speech::V1p1beta1::PhraseSet.
+            #   p result
+            #
             def create_phrase_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -256,6 +271,21 @@ module Google
             # @return [::Google::Cloud::Speech::V1p1beta1::PhraseSet]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::GetPhraseSetRequest.new
+            #
+            #   # Call the get_phrase_set method.
+            #   result = client.get_phrase_set request
+            #
+            #   # The returned object is of type Google::Cloud::Speech::V1p1beta1::PhraseSet.
+            #   p result
             #
             def get_phrase_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -340,6 +370,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::ListPhraseSetRequest.new
+            #
+            #   # Call the list_phrase_set method.
+            #   result = client.list_phrase_set request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Speech::V1p1beta1::PhraseSet.
+            #     p response
+            #   end
+            #
             def list_phrase_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -417,6 +468,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::UpdatePhraseSetRequest.new
+            #
+            #   # Call the update_phrase_set method.
+            #   result = client.update_phrase_set request
+            #
+            #   # The returned object is of type Google::Cloud::Speech::V1p1beta1::PhraseSet.
+            #   p result
+            #
             def update_phrase_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -488,6 +554,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::DeletePhraseSetRequest.new
+            #
+            #   # Call the delete_phrase_set method.
+            #   result = client.delete_phrase_set request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_phrase_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -569,6 +650,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::CreateCustomClassRequest.new
+            #
+            #   # Call the create_custom_class method.
+            #   result = client.create_custom_class request
+            #
+            #   # The returned object is of type Google::Cloud::Speech::V1p1beta1::CustomClass.
+            #   p result
+            #
             def create_custom_class request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -640,6 +736,21 @@ module Google
             # @return [::Google::Cloud::Speech::V1p1beta1::CustomClass]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::GetCustomClassRequest.new
+            #
+            #   # Call the get_custom_class method.
+            #   result = client.get_custom_class request
+            #
+            #   # The returned object is of type Google::Cloud::Speech::V1p1beta1::CustomClass.
+            #   p result
             #
             def get_custom_class request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -724,6 +835,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::ListCustomClassesRequest.new
+            #
+            #   # Call the list_custom_classes method.
+            #   result = client.list_custom_classes request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Speech::V1p1beta1::CustomClass.
+            #     p response
+            #   end
+            #
             def list_custom_classes request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -801,6 +933,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::UpdateCustomClassRequest.new
+            #
+            #   # Call the update_custom_class method.
+            #   result = client.update_custom_class request
+            #
+            #   # The returned object is of type Google::Cloud::Speech::V1p1beta1::CustomClass.
+            #   p result
+            #
             def update_custom_class request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -872,6 +1019,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::DeleteCustomClassRequest.new
+            #
+            #   # Call the delete_custom_class method.
+            #   result = client.delete_custom_class request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_custom_class request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

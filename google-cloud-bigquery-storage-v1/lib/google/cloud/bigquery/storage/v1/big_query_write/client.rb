@@ -217,6 +217,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigquery/storage/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Storage::V1::CreateWriteStreamRequest.new
+              #
+              #   # Call the create_write_stream method.
+              #   result = client.create_write_stream request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Storage::V1::WriteStream.
+              #   p result
+              #
               def create_write_stream request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -304,6 +319,30 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigquery/storage/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new
+              #
+              #   # Create an input stream
+              #   input = Gapic::StreamInput.new
+              #
+              #   # Call the append_rows method to start streaming.
+              #   output = client.append_rows input
+              #
+              #   # Send requests on the stream. For each request, pass in keyword
+              #   # arguments to set fields. Be sure to close the stream when done.
+              #   input << Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new
+              #   input << Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new
+              #   input.close
+              #
+              #   # Handle streamed responses. These may be interleaved with inputs.
+              #   # Each response is of type ::Google::Cloud::Bigquery::Storage::V1::AppendRowsResponse.
+              #   output.each do |response|
+              #     p response
+              #   end
+              #
               def append_rows request, options = nil
                 unless request.is_a? ::Enumerable
                   raise ::ArgumentError, "request must be an Enumerable" unless request.respond_to? :to_enum
@@ -371,6 +410,21 @@ module Google
               # @return [::Google::Cloud::Bigquery::Storage::V1::WriteStream]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/storage/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Storage::V1::GetWriteStreamRequest.new
+              #
+              #   # Call the get_write_stream method.
+              #   result = client.get_write_stream request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Storage::V1::WriteStream.
+              #   p result
               #
               def get_write_stream request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -443,6 +497,21 @@ module Google
               # @return [::Google::Cloud::Bigquery::Storage::V1::FinalizeWriteStreamResponse]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/storage/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Storage::V1::FinalizeWriteStreamRequest.new
+              #
+              #   # Call the finalize_write_stream method.
+              #   result = client.finalize_write_stream request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Storage::V1::FinalizeWriteStreamResponse.
+              #   p result
               #
               def finalize_write_stream request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -521,6 +590,21 @@ module Google
               # @return [::Google::Cloud::Bigquery::Storage::V1::BatchCommitWriteStreamsResponse]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/storage/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Storage::V1::BatchCommitWriteStreamsRequest.new
+              #
+              #   # Call the batch_commit_write_streams method.
+              #   result = client.batch_commit_write_streams request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Storage::V1::BatchCommitWriteStreamsResponse.
+              #   p result
               #
               def batch_commit_write_streams request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -601,6 +685,21 @@ module Google
               # @return [::Google::Cloud::Bigquery::Storage::V1::FlushRowsResponse]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/storage/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Storage::V1::FlushRowsRequest.new
+              #
+              #   # Call the flush_rows method.
+              #   result = client.flush_rows request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Storage::V1::FlushRowsResponse.
+              #   p result
               #
               def flush_rows request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
