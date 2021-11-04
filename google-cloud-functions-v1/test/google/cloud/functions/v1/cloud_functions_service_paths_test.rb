@@ -35,6 +35,18 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientPathsTest < M
     end
   end
 
+  def test_crypto_key_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.crypto_key_path project: "value0", location: "value1", key_ring: "value2", crypto_key: "value3"
+      assert_equal "projects/value0/locations/value1/keyRings/value2/cryptoKeys/value3", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -44,6 +56,18 @@ class ::Google::Cloud::Functions::V1::CloudFunctionsService::ClientPathsTest < M
 
       path = client.location_path project: "value0", location: "value1"
       assert_equal "projects/value0/locations/value1", path
+    end
+  end
+
+  def test_repository_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Functions::V1::CloudFunctionsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.repository_path project: "value0", location: "value1", repository: "value2"
+      assert_equal "projects/value0/locations/value1/repositories/value2", path
     end
   end
 end
