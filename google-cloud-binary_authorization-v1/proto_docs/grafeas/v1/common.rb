@@ -65,7 +65,7 @@ module Grafeas
     #   @return [::String]
     #     The identifier for the public key that verifies this signature.
     #       * The `public_key_id` is required.
-    #       * The `public_key_id` MUST be an RFC3986 conformant URI.
+    #       * The `public_key_id` SHOULD be an RFC3986 conformant URI.
     #       * When possible, the `public_key_id` SHOULD be an immutable reference,
     #         such as a cryptographic digest.
     #
@@ -85,9 +85,32 @@ module Grafeas
       extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
+    # MUST match
+    # https://github.com/secure-systems-lab/dsse/blob/master/envelope.proto. An
+    # authenticated message of arbitrary type.
+    # @!attribute [rw] payload
+    #   @return [::String]
+    # @!attribute [rw] payload_type
+    #   @return [::String]
+    # @!attribute [rw] signatures
+    #   @return [::Array<::Grafeas::V1::EnvelopeSignature>]
+    class Envelope
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
+    end
+
+    # @!attribute [rw] sig
+    #   @return [::String]
+    # @!attribute [rw] keyid
+    #   @return [::String]
+    class EnvelopeSignature
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
+    end
+
     # Kind represents the kinds of notes supported.
     module NoteKind
-      # Unknown.
+      # Default value. This value is unused.
       NOTE_KIND_UNSPECIFIED = 0
 
       # The note and occurrence represent a package vulnerability.
@@ -113,6 +136,12 @@ module Grafeas
 
       # This represents an available package upgrade.
       UPGRADE = 8
+
+      # This represents a Compliance Note
+      COMPLIANCE = 9
+
+      # This represents a DSSE attestation Note
+      DSSE_ATTESTATION = 10
     end
   end
 end
