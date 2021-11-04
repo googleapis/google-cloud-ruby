@@ -141,6 +141,11 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @operations_client = Operations.new do |config|
+                config.credentials = credentials
+                config.endpoint = @config.endpoint
+              end
+
               @os_config_zonal_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Stub,
                 credentials:  credentials,
@@ -150,7 +155,682 @@ module Google
               )
             end
 
+            ##
+            # Get the associated client for long-running operations.
+            #
+            # @return [::Google::Cloud::OsConfig::V1::OsConfigZonalService::Operations]
+            #
+            attr_reader :operations_client
+
             # Service calls
+
+            ##
+            # Create an OS policy assignment.
+            #
+            # This method also creates the first revision of the OS policy assignment.
+            #
+            # This method returns a long running operation (LRO) that contains the
+            # rollout details. The rollout can be cancelled by cancelling the LRO.
+            #
+            # For more information, see [Method:
+            # projects.locations.osPolicyAssignments.operations.cancel](https://cloud.google.com/compute/docs/osconfig/rest/v1/projects.locations.osPolicyAssignments.operations/cancel).
+            #
+            # @overload create_os_policy_assignment(request, options = nil)
+            #   Pass arguments to `create_os_policy_assignment` via a request object, either of type
+            #   {::Google::Cloud::OsConfig::V1::CreateOSPolicyAssignmentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OsConfig::V1::CreateOSPolicyAssignmentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_os_policy_assignment(parent: nil, os_policy_assignment: nil, os_policy_assignment_id: nil)
+            #   Pass arguments to `create_os_policy_assignment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource name in the form:
+            #     projects/\\{project}/locations/\\{location}
+            #   @param os_policy_assignment [::Google::Cloud::OsConfig::V1::OSPolicyAssignment, ::Hash]
+            #     Required. The OS policy assignment to be created.
+            #   @param os_policy_assignment_id [::String]
+            #     Required. The logical name of the OS policy assignment in the project
+            #     with the following restrictions:
+            #
+            #     * Must contain only lowercase letters, numbers, and hyphens.
+            #     * Must start with a letter.
+            #     * Must be between 1-63 characters.
+            #     * Must end with a number or a letter.
+            #     * Must be unique within the project.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def create_os_policy_assignment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsConfig::V1::CreateOSPolicyAssignmentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_os_policy_assignment.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_os_policy_assignment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_os_policy_assignment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @os_config_zonal_service_stub.call_rpc :create_os_policy_assignment, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Update an existing OS policy assignment.
+            #
+            # This method creates a new revision of the OS policy assignment.
+            #
+            # This method returns a long running operation (LRO) that contains the
+            # rollout details. The rollout can be cancelled by cancelling the LRO.
+            #
+            # For more information, see [Method:
+            # projects.locations.osPolicyAssignments.operations.cancel](https://cloud.google.com/compute/docs/osconfig/rest/v1/projects.locations.osPolicyAssignments.operations/cancel).
+            #
+            # @overload update_os_policy_assignment(request, options = nil)
+            #   Pass arguments to `update_os_policy_assignment` via a request object, either of type
+            #   {::Google::Cloud::OsConfig::V1::UpdateOSPolicyAssignmentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OsConfig::V1::UpdateOSPolicyAssignmentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_os_policy_assignment(os_policy_assignment: nil, update_mask: nil)
+            #   Pass arguments to `update_os_policy_assignment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param os_policy_assignment [::Google::Cloud::OsConfig::V1::OSPolicyAssignment, ::Hash]
+            #     Required. The updated OS policy assignment.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Field mask that controls which fields of the assignment should be
+            #     updated.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def update_os_policy_assignment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsConfig::V1::UpdateOSPolicyAssignmentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_os_policy_assignment.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.os_policy_assignment&.name
+                header_params["os_policy_assignment.name"] = request.os_policy_assignment.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_os_policy_assignment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_os_policy_assignment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @os_config_zonal_service_stub.call_rpc :update_os_policy_assignment, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Retrieve an existing OS policy assignment.
+            #
+            # This method always returns the latest revision. In order to retrieve a
+            # previous revision of the assignment, also provide the revision ID in the
+            # `name` parameter.
+            #
+            # @overload get_os_policy_assignment(request, options = nil)
+            #   Pass arguments to `get_os_policy_assignment` via a request object, either of type
+            #   {::Google::Cloud::OsConfig::V1::GetOSPolicyAssignmentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OsConfig::V1::GetOSPolicyAssignmentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_os_policy_assignment(name: nil)
+            #   Pass arguments to `get_os_policy_assignment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of OS policy assignment.
+            #
+            #     Format:
+            #     `projects/{project}/locations/{location}/osPolicyAssignments/{os_policy_assignment}@{revisionId}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::OsConfig::V1::OSPolicyAssignment]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::OsConfig::V1::OSPolicyAssignment]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def get_os_policy_assignment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsConfig::V1::GetOSPolicyAssignmentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_os_policy_assignment.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_os_policy_assignment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_os_policy_assignment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @os_config_zonal_service_stub.call_rpc :get_os_policy_assignment, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # List the OS policy assignments under the parent resource.
+            #
+            # For each OS policy assignment, the latest revision is returned.
+            #
+            # @overload list_os_policy_assignments(request, options = nil)
+            #   Pass arguments to `list_os_policy_assignments` via a request object, either of type
+            #   {::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_os_policy_assignments(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_os_policy_assignments` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource name.
+            #   @param page_size [::Integer]
+            #     The maximum number of assignments to return.
+            #   @param page_token [::String]
+            #     A pagination token returned from a previous call to
+            #     `ListOSPolicyAssignments` that indicates where this listing should continue
+            #     from.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::OsConfig::V1::OSPolicyAssignment>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::OsConfig::V1::OSPolicyAssignment>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def list_os_policy_assignments request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_os_policy_assignments.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_os_policy_assignments.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_os_policy_assignments.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @os_config_zonal_service_stub.call_rpc :list_os_policy_assignments, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @os_config_zonal_service_stub, :list_os_policy_assignments, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # List the OS policy assignment revisions for a given OS policy assignment.
+            #
+            # @overload list_os_policy_assignment_revisions(request, options = nil)
+            #   Pass arguments to `list_os_policy_assignment_revisions` via a request object, either of type
+            #   {::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentRevisionsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentRevisionsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_os_policy_assignment_revisions(name: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_os_policy_assignment_revisions` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the OS policy assignment to list revisions for.
+            #   @param page_size [::Integer]
+            #     The maximum number of revisions to return.
+            #   @param page_token [::String]
+            #     A pagination token returned from a previous call to
+            #     `ListOSPolicyAssignmentRevisions` that indicates where this listing should
+            #     continue from.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::OsConfig::V1::OSPolicyAssignment>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::OsConfig::V1::OSPolicyAssignment>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def list_os_policy_assignment_revisions request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentRevisionsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_os_policy_assignment_revisions.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_os_policy_assignment_revisions.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_os_policy_assignment_revisions.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @os_config_zonal_service_stub.call_rpc :list_os_policy_assignment_revisions, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @os_config_zonal_service_stub, :list_os_policy_assignment_revisions, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Delete the OS policy assignment.
+            #
+            # This method creates a new revision of the OS policy assignment.
+            #
+            # This method returns a long running operation (LRO) that contains the
+            # rollout details. The rollout can be cancelled by cancelling the LRO.
+            #
+            # If the LRO completes and is not cancelled, all revisions associated with
+            # the OS policy assignment are deleted.
+            #
+            # For more information, see [Method:
+            # projects.locations.osPolicyAssignments.operations.cancel](https://cloud.google.com/compute/docs/osconfig/rest/v1/projects.locations.osPolicyAssignments.operations/cancel).
+            #
+            # @overload delete_os_policy_assignment(request, options = nil)
+            #   Pass arguments to `delete_os_policy_assignment` via a request object, either of type
+            #   {::Google::Cloud::OsConfig::V1::DeleteOSPolicyAssignmentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OsConfig::V1::DeleteOSPolicyAssignmentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_os_policy_assignment(name: nil)
+            #   Pass arguments to `delete_os_policy_assignment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the OS policy assignment to be deleted
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def delete_os_policy_assignment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsConfig::V1::DeleteOSPolicyAssignmentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_os_policy_assignment.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_os_policy_assignment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_os_policy_assignment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @os_config_zonal_service_stub.call_rpc :delete_os_policy_assignment, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Get the OS policy asssignment report for the specified Compute Engine VM
+            # instance.
+            #
+            # @overload get_os_policy_assignment_report(request, options = nil)
+            #   Pass arguments to `get_os_policy_assignment_report` via a request object, either of type
+            #   {::Google::Cloud::OsConfig::V1::GetOSPolicyAssignmentReportRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OsConfig::V1::GetOSPolicyAssignmentReportRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_os_policy_assignment_report(name: nil)
+            #   Pass arguments to `get_os_policy_assignment_report` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. API resource name for OS policy assignment report.
+            #
+            #     Format:
+            #     `/projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/{assignment}/report`
+            #
+            #     For `{project}`, either `project-number` or `project-id` can be provided.
+            #     For `{instance_id}`, either Compute Engine `instance-id` or `instance-name`
+            #     can be provided.
+            #     For `{assignment_id}`, the OSPolicyAssignment id must be provided.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::OsConfig::V1::OSPolicyAssignmentReport]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::OsConfig::V1::OSPolicyAssignmentReport]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def get_os_policy_assignment_report request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsConfig::V1::GetOSPolicyAssignmentReportRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_os_policy_assignment_report.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_os_policy_assignment_report.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_os_policy_assignment_report.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @os_config_zonal_service_stub.call_rpc :get_os_policy_assignment_report, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # List OS policy asssignment reports for all Compute Engine VM instances in
+            # the specified zone.
+            #
+            # @overload list_os_policy_assignment_reports(request, options = nil)
+            #   Pass arguments to `list_os_policy_assignment_reports` via a request object, either of type
+            #   {::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentReportsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentReportsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_os_policy_assignment_reports(parent: nil, page_size: nil, filter: nil, page_token: nil)
+            #   Pass arguments to `list_os_policy_assignment_reports` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource name.
+            #
+            #     Format:
+            #     `projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/{assignment}/reports`
+            #
+            #     For `{project}`, either `project-number` or `project-id` can be provided.
+            #     For `{instance}`, either `instance-name`, `instance-id`, or `-` can be
+            #     provided. If '-' is provided, the response will include
+            #     OSPolicyAssignmentReports for all instances in the project/location.
+            #     For `{assignment}`, either `assignment-id` or `-` can be provided. If '-'
+            #     is provided, the response will include OSPolicyAssignmentReports for all
+            #     OSPolicyAssignments in the project/location.
+            #     Either \\{instance} or \\{assignment} must be `-`.
+            #
+            #     For example:
+            #     `projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/-/reports`
+            #      returns all reports for the instance
+            #     `projects/{project}/locations/{location}/instances/-/osPolicyAssignments/{assignment-id}/reports`
+            #      returns all the reports for the given assignment across all instances.
+            #     `projects/{project}/locations/{location}/instances/-/osPolicyAssignments/-/reports`
+            #      returns all the reports for all assignments across all instances.
+            #   @param page_size [::Integer]
+            #     The maximum number of results to return.
+            #   @param filter [::String]
+            #     If provided, this field specifies the criteria that must be met by the
+            #     `OSPolicyAssignmentReport` API resource that is included in the response.
+            #   @param page_token [::String]
+            #     A pagination token returned from a previous call to the
+            #     `ListOSPolicyAssignmentReports` method that indicates where this listing
+            #     should continue from.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::OsConfig::V1::OSPolicyAssignmentReport>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::OsConfig::V1::OSPolicyAssignmentReport>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            def list_os_policy_assignment_reports request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsConfig::V1::ListOSPolicyAssignmentReportsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_os_policy_assignment_reports.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_os_policy_assignment_reports.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_os_policy_assignment_reports.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @os_config_zonal_service_stub.call_rpc :list_os_policy_assignment_reports, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @os_config_zonal_service_stub, :list_os_policy_assignment_reports, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
 
             ##
             # Get inventory data for the specified VM instance. If the VM has no
@@ -498,17 +1178,17 @@ module Google
             # @example
             #
             #   # Modify the global config, setting the timeout for
-            #   # get_inventory to 20 seconds,
+            #   # create_os_policy_assignment to 20 seconds,
             #   # and all remaining timeouts to 10 seconds.
             #   ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Client.configure do |config|
             #     config.timeout = 10.0
-            #     config.rpcs.get_inventory.timeout = 20.0
+            #     config.rpcs.create_os_policy_assignment.timeout = 20.0
             #   end
             #
             #   # Apply the above configuration only to a new client.
             #   client = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Client.new do |config|
             #     config.timeout = 10.0
-            #     config.rpcs.get_inventory.timeout = 20.0
+            #     config.rpcs.create_os_policy_assignment.timeout = 20.0
             #   end
             #
             # @!attribute [rw] endpoint
@@ -618,6 +1298,46 @@ module Google
               #
               class Rpcs
                 ##
+                # RPC-specific configuration for `create_os_policy_assignment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_os_policy_assignment
+                ##
+                # RPC-specific configuration for `update_os_policy_assignment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_os_policy_assignment
+                ##
+                # RPC-specific configuration for `get_os_policy_assignment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_os_policy_assignment
+                ##
+                # RPC-specific configuration for `list_os_policy_assignments`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_os_policy_assignments
+                ##
+                # RPC-specific configuration for `list_os_policy_assignment_revisions`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_os_policy_assignment_revisions
+                ##
+                # RPC-specific configuration for `delete_os_policy_assignment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_os_policy_assignment
+                ##
+                # RPC-specific configuration for `get_os_policy_assignment_report`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_os_policy_assignment_report
+                ##
+                # RPC-specific configuration for `list_os_policy_assignment_reports`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_os_policy_assignment_reports
+                ##
                 # RPC-specific configuration for `get_inventory`
                 # @return [::Gapic::Config::Method]
                 #
@@ -640,6 +1360,22 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
+                  create_os_policy_assignment_config = parent_rpcs.create_os_policy_assignment if parent_rpcs.respond_to? :create_os_policy_assignment
+                  @create_os_policy_assignment = ::Gapic::Config::Method.new create_os_policy_assignment_config
+                  update_os_policy_assignment_config = parent_rpcs.update_os_policy_assignment if parent_rpcs.respond_to? :update_os_policy_assignment
+                  @update_os_policy_assignment = ::Gapic::Config::Method.new update_os_policy_assignment_config
+                  get_os_policy_assignment_config = parent_rpcs.get_os_policy_assignment if parent_rpcs.respond_to? :get_os_policy_assignment
+                  @get_os_policy_assignment = ::Gapic::Config::Method.new get_os_policy_assignment_config
+                  list_os_policy_assignments_config = parent_rpcs.list_os_policy_assignments if parent_rpcs.respond_to? :list_os_policy_assignments
+                  @list_os_policy_assignments = ::Gapic::Config::Method.new list_os_policy_assignments_config
+                  list_os_policy_assignment_revisions_config = parent_rpcs.list_os_policy_assignment_revisions if parent_rpcs.respond_to? :list_os_policy_assignment_revisions
+                  @list_os_policy_assignment_revisions = ::Gapic::Config::Method.new list_os_policy_assignment_revisions_config
+                  delete_os_policy_assignment_config = parent_rpcs.delete_os_policy_assignment if parent_rpcs.respond_to? :delete_os_policy_assignment
+                  @delete_os_policy_assignment = ::Gapic::Config::Method.new delete_os_policy_assignment_config
+                  get_os_policy_assignment_report_config = parent_rpcs.get_os_policy_assignment_report if parent_rpcs.respond_to? :get_os_policy_assignment_report
+                  @get_os_policy_assignment_report = ::Gapic::Config::Method.new get_os_policy_assignment_report_config
+                  list_os_policy_assignment_reports_config = parent_rpcs.list_os_policy_assignment_reports if parent_rpcs.respond_to? :list_os_policy_assignment_reports
+                  @list_os_policy_assignment_reports = ::Gapic::Config::Method.new list_os_policy_assignment_reports_config
                   get_inventory_config = parent_rpcs.get_inventory if parent_rpcs.respond_to? :get_inventory
                   @get_inventory = ::Gapic::Config::Method.new get_inventory_config
                   list_inventories_config = parent_rpcs.list_inventories if parent_rpcs.respond_to? :list_inventories

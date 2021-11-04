@@ -38,6 +38,18 @@ class ::Google::Cloud::OsConfig::V1::OsConfigZonalService::ClientPathsTest < Min
     end
   end
 
+  def test_instance_os_policy_assignment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.instance_os_policy_assignment_path project: "value0", location: "value1", instance: "value2", assignment: "value3"
+      assert_equal "projects/value0/locations/value1/instances/value2/osPolicyAssignments/value3", path
+    end
+  end
+
   def test_inventory_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -47,6 +59,42 @@ class ::Google::Cloud::OsConfig::V1::OsConfigZonalService::ClientPathsTest < Min
 
       path = client.inventory_path project: "value0", location: "value1", instance: "value2"
       assert_equal "projects/value0/locations/value1/instances/value2/inventory", path
+    end
+  end
+
+  def test_location_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.location_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1", path
+    end
+  end
+
+  def test_os_policy_assignment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.os_policy_assignment_path project: "value0", location: "value1", os_policy_assignment: "value2"
+      assert_equal "projects/value0/locations/value1/osPolicyAssignments/value2", path
+    end
+  end
+
+  def test_os_policy_assignment_report_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::OsConfig::V1::OsConfigZonalService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.os_policy_assignment_report_path project: "value0", location: "value1", instance: "value2", assignment: "value3"
+      assert_equal "projects/value0/locations/value1/instances/value2/osPolicyAssignments/value3/report", path
     end
   end
 

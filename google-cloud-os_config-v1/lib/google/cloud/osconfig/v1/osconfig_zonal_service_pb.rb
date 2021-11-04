@@ -3,9 +3,11 @@
 
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
-require 'google/api/resource_pb'
 require 'google/cloud/osconfig/v1/inventory_pb'
+require 'google/cloud/osconfig/v1/os_policy_assignment_reports_pb'
+require 'google/cloud/osconfig/v1/os_policy_assignments_pb'
 require 'google/cloud/osconfig/v1/vulnerability_pb'
+require 'google/longrunning/operations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do

@@ -24,6 +24,7 @@ require "google/cloud/os_config/v1/version"
 
 require "google/cloud/os_config/v1/os_config_zonal_service/credentials"
 require "google/cloud/os_config/v1/os_config_zonal_service/paths"
+require "google/cloud/os_config/v1/os_config_zonal_service/operations"
 require "google/cloud/os_config/v1/os_config_zonal_service/client"
 
 module Google
