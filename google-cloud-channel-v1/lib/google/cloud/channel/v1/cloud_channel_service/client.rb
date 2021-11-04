@@ -1479,6 +1479,9 @@ module Google
             #     accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
             #   @param parameters [::Array<::Google::Cloud::Channel::V1::Parameter, ::Hash>]
             #     Required. Entitlement parameters to update. You can only change editable parameters.
+            #
+            #     To view the available Parameters for a request, refer to the
+            #     {::Google::Cloud::Channel::V1::Offer#parameter_definitions Offer.parameter_definitions} from the desired offer.
             #   @param request_id [::String]
             #     Optional. You can specify an optional unique request ID, and if you need to retry
             #     your request, the server will know to ignore the request if it's complete.
@@ -1699,7 +1702,8 @@ module Google
             #     Required. New Offer.
             #     Format: accounts/\\{account_id}/offers/\\{offer_id}.
             #   @param parameters [::Array<::Google::Cloud::Channel::V1::Parameter, ::Hash>]
-            #     Optional. Parameters needed to purchase the Offer.
+            #     Optional. Parameters needed to purchase the Offer. To view the available Parameters
+            #     refer to the {::Google::Cloud::Channel::V1::Offer#parameter_definitions Offer.parameter_definitions} from the desired offer.
             #   @param purchase_order_id [::String]
             #     Optional. Purchase order id provided by the reseller.
             #   @param request_id [::String]
