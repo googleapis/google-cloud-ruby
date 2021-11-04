@@ -63,9 +63,21 @@ module Google
         #     Settings for speech transcription.
         # @!attribute [rw] language_code
         #   @return [::String]
-        #     Language which represents the conversationProfile.
-        #     If unspecified, the default language code en-us applies. Users need to
-        #     create a ConversationProfile for each language they want to support.
+        #     Language code for the conversation profile. If not specified, the language
+        #     is en-US. Language at ConversationProfile should be set for all non en-US
+        #     languages.
+        #     This should be a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+        #     language tag. Example: "en-US".
+        # @!attribute [rw] time_zone
+        #   @return [::String]
+        #     The time zone of this conversational profile from the
+        #     [time zone database](https://www.iana.org/time-zones), e.g.,
+        #     America/New_York, Europe/Paris. Defaults to America/New_York.
+        # @!attribute [rw] security_settings
+        #   @return [::String]
+        #     Name of the CX SecuritySettings reference for the agent.
+        #     Format: `projects/<Project ID>/locations/<Location
+        #     ID>/securitySettings/<Security Settings ID>`.
         class ConversationProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -162,11 +174,16 @@ module Google
         #     Number>@gcp-sa-dialogflow.iam.gserviceaccount.com` the `Dialogflow API
         #     Service Agent` role in this project.
         #
-        #     Format: `projects/<Project ID>/locations/<Location
+        #     - For ES agents, use format: `projects/<Project ID>/locations/<Location
         #     ID>/agent/environments/<Environment ID or '-'>`. If environment is not
         #     specified, the default `draft` environment is used. Refer to
         #     [DetectIntentRequest](/dialogflow/docs/reference/rpc/google.cloud.dialogflow.v2#google.cloud.dialogflow.v2.DetectIntentRequest)
         #     for more details.
+        #
+        #     - For CX agents, use format `projects/<Project ID>/locations/<Location
+        #     ID>/agents/<Agent ID>/environments/<Environment ID
+        #     or '-'>`. If environment is not specified, the default `draft` environment
+        #     is used.
         class AutomatedAgentConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -289,7 +306,7 @@ module Google
           #     If this field is not set, it defaults to 0.0, which means that all
           #     suggestions are returned.
           #
-          #     Supported features: ARTICLE_SUGGESTION.
+          #     Supported features: ARTICLE_SUGGESTION, FAQ, SMART_REPLY, SMART_COMPOSE.
           # @!attribute [rw] context_filter_settings
           #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionQueryConfig::ContextFilterSettings]
           #     Determines how recent conversation context is filtered when generating
@@ -471,13 +488,13 @@ module Google
 
           # Format of cloud pub/sub message.
           module MessageFormat
-            # If it is unspeified, PROTO will be used.
+            # If it is unspecified, PROTO will be used.
             MESSAGE_FORMAT_UNSPECIFIED = 0
 
-            # Pubsub message will be serialized proto.
+            # Pub/Sub message will be serialized proto.
             PROTO = 1
 
-            # Pubsub message will be json.
+            # Pub/Sub message will be json.
             JSON = 2
           end
         end
