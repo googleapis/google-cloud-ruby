@@ -32,7 +32,7 @@ module Grafeas
     # Details of a build occurrence.
     # @!attribute [rw] provenance
     #   @return [::Grafeas::V1::BuildProvenance]
-    #     Required. The actual provenance for the build.
+    #     The actual provenance for the build.
     # @!attribute [rw] provenance_bytes
     #   @return [::String]
     #     Serialized JSON representation of the provenance, used in generating the
@@ -46,6 +46,16 @@ module Grafeas
     #     The serialized form is captured both to avoid ambiguity in how the
     #     provenance is marshalled to json as well to prevent incompatibilities with
     #     future changes.
+    # @!attribute [rw] intoto_provenance
+    #   @return [::Grafeas::V1::InTotoProvenance]
+    #     Deprecated. See InTotoStatement for the replacement.
+    #     In-toto Provenance representation as defined in spec.
+    # @!attribute [rw] intoto_statement
+    #   @return [::Grafeas::V1::InTotoStatement]
+    #     In-toto Statement representation as defined in spec.
+    #     The intoto_statement can contain any type of provenance. The serialized
+    #     payload of the statement can be stored and signed in the Occurrence's
+    #     envelope.
     class BuildOccurrence
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
