@@ -109,15 +109,14 @@ def collect_gem_info gems
   gem_info = {}
   gems.each do |name|
     deep_copy_regexes = load_deep_copy_regexes name
+    gem_info[name] = { deep_copy_regexes: deep_copy_regexes }
+    next unless piper_client
     library_paths = deep_copy_regexes.map { |dcr| extract_library_path dcr["source"] }.uniq
     bazel_targets = {}
     library_paths.each do |library_path|
       bazel_targets[library_path] = determine_bazel_target library_path
     end
-    gem_info[name] = {
-      deep_copy_regexes: deep_copy_regexes,
-      bazel_targets: bazel_targets
-    }
+    gem_info[name][:bazel_targets] = bazel_targets
   end
   gem_info
 end
