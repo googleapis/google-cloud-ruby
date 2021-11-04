@@ -47,6 +47,13 @@ module Google
         # @!attribute [rw] reasons
         #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Reason>]
         #     Optional. Optional reasons for the annotation that will be assigned to the Event.
+        # @!attribute [rw] hashed_account_id
+        #   @return [::String]
+        #     Optional. Optional unique stable hashed user identifier to apply to the assessment.
+        #     This is an alternative to setting the hashed_account_id in
+        #     CreateAssessment, for example when the account identifier is not yet known
+        #     in the initial request. It is recommended that the identifier is hashed
+        #     using hmac-sha256 with stable secret.
         class AnnotateAssessmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -127,6 +134,10 @@ module Google
         # @!attribute [r] token_properties
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TokenProperties]
         #     Output only. Properties of the provided event token.
+        # @!attribute [rw] account_defender_assessment
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AccountDefenderAssessment]
+        #     Assessment returned by Account Defender when a hashed_account_id is
+        #     provided.
         class Assessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -152,6 +163,10 @@ module Google
         #     Optional. The expected action for this type of event. This should be the same action
         #     provided at token generation time on client-side platforms already
         #     integrated with recaptcha enterprise.
+        # @!attribute [rw] hashed_account_id
+        #   @return [::String]
+        #     Optional. Optional unique stable hashed user identifier for the request. The
+        #     identifier should ideally be hashed using sha256 with stable secret.
         class Event
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -240,6 +255,37 @@ module Google
             # A retriable error (such as network failure) occurred on the browser.
             # Could easily be simulated by an attacker.
             BROWSER_ERROR = 6
+          end
+        end
+
+        # Account Defender risk assessment.
+        # @!attribute [rw] labels
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AccountDefenderAssessment::AccountDefenderLabel>]
+        #     Labels for this request.
+        class AccountDefenderAssessment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Labels returned by Account Defender for this request.
+          module AccountDefenderLabel
+            # Default unspecified type.
+            ACCOUNT_DEFENDER_LABEL_UNSPECIFIED = 0
+
+            # The request matches a known good profile for the user.
+            PROFILE_MATCH = 1
+
+            # The request is potentially a suspicious login event and should be further
+            # verified either via multi-factor authentication or another system.
+            SUSPICIOUS_LOGIN_ACTIVITY = 2
+
+            # The request matched a profile that previously had suspicious account
+            # creation behavior. This could mean this is a fake account.
+            SUSPICIOUS_ACCOUNT_CREATION = 3
+
+            # The account in the request has a high number of related accounts. It does
+            # not necessarily imply that the account is bad but could require
+            # investigating.
+            RELATED_ACCOUNTS_NUMBER_HIGH = 4
           end
         end
 
@@ -425,11 +471,11 @@ module Google
             # challenge depending on risk and trust factors.
             TESTING_CHALLENGE_UNSPECIFIED = 0
 
-            # Challenge requests for this key will always return a nocaptcha, which
+            # Challenge requests for this key always return a nocaptcha, which
             # does not require a solution.
             NOCAPTCHA = 1
 
-            # Challenge requests for this key will always return an unsolvable
+            # Challenge requests for this key always return an unsolvable
             # challenge.
             UNSOLVABLE_CHALLENGE = 2
           end
@@ -447,8 +493,8 @@ module Google
         #     Examples: 'example.com' or 'subdomain.example.com'
         # @!attribute [rw] allow_amp_traffic
         #   @return [::Boolean]
-        #     Required. Whether this key can be used on AMP (Accelerated Mobile Pages) websites.
-        #     This can only be set for the SCORE integration type.
+        #     If set to true, the key can be used on AMP (Accelerated Mobile Pages)
+        #     websites. This is supported only for the SCORE integration type.
         # @!attribute [rw] integration_type
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WebKeySettings::IntegrationType]
         #     Required. Describes how this key is integrated with the website.
@@ -501,7 +547,7 @@ module Google
         # Settings specific to keys that can be used by Android apps.
         # @!attribute [rw] allow_all_package_names
         #   @return [::Boolean]
-        #     If set to true, it means allowed_package_names will not be enforced.
+        #     If set to true, allowed_package_names are not enforced.
         # @!attribute [rw] allowed_package_names
         #   @return [::Array<::String>]
         #     Android package names of apps allowed to use the key.
@@ -514,7 +560,7 @@ module Google
         # Settings specific to keys that can be used by iOS apps.
         # @!attribute [rw] allow_all_bundle_ids
         #   @return [::Boolean]
-        #     If set to true, it means allowed_bundle_ids will not be enforced.
+        #     If set to true, allowed_bundle_ids are not enforced.
         # @!attribute [rw] allowed_bundle_ids
         #   @return [::Array<::String>]
         #     iOS bundle ids of apps allowed to use the key.
@@ -585,6 +631,148 @@ module Google
         #     submitted challenge solutions that were correct and resulted in
         #     verification.
         class ChallengeMetrics
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message to list memberships in a related account group.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name for the related account group in the format
+        #     `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of accounts to return. The service may return fewer than
+        #     this value.
+        #     If unspecified, at most 50 accounts will be returned.
+        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListRelatedAccountGroupMemberships`
+        #     call.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListRelatedAccountGroupMemberships` must match the call that provided the
+        #     page token.
+        class ListRelatedAccountGroupMembershipsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response to a `ListRelatedAccountGroupMemberships` call.
+        # @!attribute [rw] related_account_group_memberships
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::RelatedAccountGroupMembership>]
+        #     The memberships listed by the query.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListRelatedAccountGroupMembershipsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message to list related account groups.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the project to list related account groups from, in the format
+        #     "projects/\\{project}".
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of groups to return. The service may return fewer than
+        #     this value.
+        #     If unspecified, at most 50 groups will be returned.
+        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListRelatedAccountGroups` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListRelatedAccountGroups` must match the call that provided the page
+        #     token.
+        class ListRelatedAccountGroupsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response to a `ListRelatedAccountGroups` call.
+        # @!attribute [rw] related_account_groups
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::RelatedAccountGroup>]
+        #     The groups of related accounts listed by the query.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListRelatedAccountGroupsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message to search related account group memberships.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the project to search related account group memberships from,
+        #     in the format "projects/\\{project}".
+        # @!attribute [rw] hashed_account_id
+        #   @return [::String]
+        #     Optional. The unique stable hashed user identifier we should search connections to.
+        #     The identifier should correspond to a `hashed_account_id` provided in a
+        #     previous CreateAssessment or AnnotateAssessment call.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of groups to return. The service may return fewer than
+        #     this value.
+        #     If unspecified, at most 50 groups will be returned.
+        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous
+        #     `SearchRelatedAccountGroupMemberships` call. Provide this to retrieve the
+        #     subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `SearchRelatedAccountGroupMemberships` must match the call that provided
+        #     the page token.
+        class SearchRelatedAccountGroupMembershipsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response to a `SearchRelatedAccountGroupMemberships` call.
+        # @!attribute [rw] related_account_group_memberships
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::RelatedAccountGroupMembership>]
+        #     The queried memberships.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class SearchRelatedAccountGroupMembershipsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A membership in a group of related accounts.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name for this membership in the format
+        #     `projects/{project}/relatedaccountgroups/{relatedaccountgroup}/memberships/{membership}`.
+        # @!attribute [rw] hashed_account_id
+        #   @return [::String]
+        #     The unique stable hashed user identifier of the member. The identifier
+        #     corresponds to a `hashed_account_id` provided in a previous
+        #     CreateAssessment or AnnotateAssessment call.
+        class RelatedAccountGroupMembership
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A group of related accounts.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name for the related account group in the format
+        #     `projects/{project}/relatedaccountgroups/{related_account_group}`.
+        class RelatedAccountGroup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
