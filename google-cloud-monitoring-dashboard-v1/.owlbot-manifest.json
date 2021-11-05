@@ -52,6 +52,12 @@
     "proto_docs/google/protobuf/empty.rb",
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",
+    "snippets/Gemfile",
+    "snippets/dashboards_service/create_dashboard.rb",
+    "snippets/dashboards_service/delete_dashboard.rb",
+    "snippets/dashboards_service/get_dashboard.rb",
+    "snippets/dashboards_service/list_dashboards.rb",
+    "snippets/dashboards_service/update_dashboard.rb",
     "test/google/cloud/monitoring/dashboard/v1/dashboards_service_paths_test.rb",
     "test/google/cloud/monitoring/dashboard/v1/dashboards_service_test.rb",
     "test/helper.rb"

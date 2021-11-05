@@ -213,6 +213,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recommendation_engine/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecommendationEngine::V1beta1::WriteUserEventRequest.new
+            #
+            #   # Call the write_user_event method.
+            #   result = client.write_user_event request
+            #
+            #   # The returned object is of type Google::Cloud::RecommendationEngine::V1beta1::UserEvent.
+            #   p result
+            #
             def write_user_event request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -298,6 +313,21 @@ module Google
             # @return [::Google::Api::HttpBody]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/recommendation_engine/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecommendationEngine::V1beta1::CollectUserEventRequest.new
+            #
+            #   # Call the collect_user_event method.
+            #   result = client.collect_user_event request
+            #
+            #   # The returned object is of type Google::Api::HttpBody.
+            #   p result
             #
             def collect_user_event request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -408,6 +438,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recommendation_engine/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecommendationEngine::V1beta1::ListUserEventsRequest.new
+            #
+            #   # Call the list_user_events method.
+            #   result = client.list_user_events request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::RecommendationEngine::V1beta1::UserEvent.
+            #     p response
+            #   end
+            #
             def list_user_events request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -507,6 +558,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recommendation_engine/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecommendationEngine::V1beta1::PurgeUserEventsRequest.new
+            #
+            #   # Call the purge_user_events method.
+            #   result = client.purge_user_events request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def purge_user_events request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -595,6 +668,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/recommendation_engine/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecommendationEngine::V1beta1::ImportUserEventsRequest.new
+            #
+            #   # Call the import_user_events method.
+            #   result = client.import_user_events request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def import_user_events request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

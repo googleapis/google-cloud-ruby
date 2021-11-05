@@ -174,6 +174,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/binary_authorization/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::BinaryAuthorization::V1::SystemPolicy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::BinaryAuthorization::V1::GetSystemPolicyRequest.new
+            #
+            #   # Call the get_system_policy method.
+            #   result = client.get_system_policy request
+            #
+            #   # The returned object is of type Google::Cloud::BinaryAuthorization::V1::Policy.
+            #   p result
+            #
             def get_system_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 

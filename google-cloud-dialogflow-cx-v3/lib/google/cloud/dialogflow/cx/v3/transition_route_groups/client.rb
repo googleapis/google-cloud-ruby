@@ -200,6 +200,27 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::ListTransitionRouteGroupsRequest.new
+              #
+              #   # Call the list_transition_route_groups method.
+              #   result = client.list_transition_route_groups request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can
+              #   # iterate over all elements by calling #each, and the enumerable
+              #   # will lazily make API calls to fetch subsequent pages. Other
+              #   # methods are also available for managing paging directly.
+              #   result.each do |response|
+              #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup.
+              #     p response
+              #   end
+              #
               def list_transition_route_groups request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -285,6 +306,21 @@ module Google
               # @return [::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::GetTransitionRouteGroupRequest.new
+              #
+              #   # Call the get_transition_route_group method.
+              #   result = client.get_transition_route_group request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup.
+              #   p result
               #
               def get_transition_route_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -376,6 +412,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::CreateTransitionRouteGroupRequest.new
+              #
+              #   # Call the create_transition_route_group method.
+              #   result = client.create_transition_route_group request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup.
+              #   p result
+              #
               def create_transition_route_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -464,6 +515,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::UpdateTransitionRouteGroupRequest.new
+              #
+              #   # Call the update_transition_route_group method.
+              #   result = client.update_transition_route_group request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup.
+              #   p result
+              #
               def update_transition_route_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -547,6 +613,21 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::DeleteTransitionRouteGroupRequest.new
+              #
+              #   # Call the delete_transition_route_group method.
+              #   result = client.delete_transition_route_group request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
               #
               def delete_transition_route_group request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?

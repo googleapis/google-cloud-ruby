@@ -187,6 +187,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Environments::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest.new
+            #
+            #   # Call the list_environments method.
+            #   result = client.list_environments request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dialogflow::V2::Environment.
+            #     p response
+            #   end
+            #
             def list_environments request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -265,6 +286,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Environments::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::GetEnvironmentRequest.new
+            #
+            #   # Call the get_environment method.
+            #   result = client.get_environment request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Environment.
+            #   p result
+            #
             def get_environment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -342,6 +378,21 @@ module Google
             # @return [::Google::Cloud::Dialogflow::V2::Environment]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Environments::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::CreateEnvironmentRequest.new
+            #
+            #   # Call the create_environment method.
+            #   result = client.create_environment request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Environment.
+            #   p result
             #
             def create_environment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -431,6 +482,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Environments::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::UpdateEnvironmentRequest.new
+            #
+            #   # Call the update_environment method.
+            #   result = client.update_environment request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Environment.
+            #   p result
+            #
             def update_environment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -507,6 +573,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Environments::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::DeleteEnvironmentRequest.new
+            #
+            #   # Call the delete_environment method.
+            #   result = client.delete_environment request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_environment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -589,6 +670,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dialogflow::V2::EnvironmentHistory::Entry>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Environments::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::GetEnvironmentHistoryRequest.new
+            #
+            #   # Call the get_environment_history method.
+            #   result = client.get_environment_history request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dialogflow::V2::EnvironmentHistory::Entry.
+            #     p response
+            #   end
             #
             def get_environment_history request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

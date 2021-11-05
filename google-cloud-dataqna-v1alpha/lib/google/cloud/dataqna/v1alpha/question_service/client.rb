@@ -201,6 +201,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataqna/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataQnA::V1alpha::GetQuestionRequest.new
+            #
+            #   # Call the get_question method.
+            #   result = client.get_question request
+            #
+            #   # The returned object is of type Google::Cloud::DataQnA::V1alpha::Question.
+            #   p result
+            #
             def get_question request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -273,6 +288,21 @@ module Google
             # @return [::Google::Cloud::DataQnA::V1alpha::Question]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataqna/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataQnA::V1alpha::CreateQuestionRequest.new
+            #
+            #   # Call the create_question method.
+            #   result = client.create_question request
+            #
+            #   # The returned object is of type Google::Cloud::DataQnA::V1alpha::Question.
+            #   p result
             #
             def create_question request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -347,6 +377,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataqna/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataQnA::V1alpha::ExecuteQuestionRequest.new
+            #
+            #   # Call the execute_question method.
+            #   result = client.execute_question request
+            #
+            #   # The returned object is of type Google::Cloud::DataQnA::V1alpha::Question.
+            #   p result
+            #
             def execute_question request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -418,6 +463,21 @@ module Google
             # @return [::Google::Cloud::DataQnA::V1alpha::UserFeedback]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataqna/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataQnA::V1alpha::GetUserFeedbackRequest.new
+            #
+            #   # Call the get_user_feedback method.
+            #   result = client.get_user_feedback request
+            #
+            #   # The returned object is of type Google::Cloud::DataQnA::V1alpha::UserFeedback.
+            #   p result
             #
             def get_user_feedback request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -494,6 +554,21 @@ module Google
             # @return [::Google::Cloud::DataQnA::V1alpha::UserFeedback]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataqna/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataQnA::V1alpha::UpdateUserFeedbackRequest.new
+            #
+            #   # Call the update_user_feedback method.
+            #   result = client.update_user_feedback request
+            #
+            #   # The returned object is of type Google::Cloud::DataQnA::V1alpha::UserFeedback.
+            #   p result
             #
             def update_user_feedback request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

@@ -357,6 +357,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::Subscription.new
+            #
+            #   # Call the create_subscription method.
+            #   result = client.create_subscription request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Subscription.
+            #   p result
+            #
             def create_subscription request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -427,6 +442,21 @@ module Google
             # @return [::Google::Cloud::PubSub::V1::Subscription]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::GetSubscriptionRequest.new
+            #
+            #   # Call the get_subscription method.
+            #   result = client.get_subscription request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Subscription.
+            #   p result
             #
             def get_subscription request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -501,6 +531,21 @@ module Google
             # @return [::Google::Cloud::PubSub::V1::Subscription]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::UpdateSubscriptionRequest.new
+            #
+            #   # Call the update_subscription method.
+            #   result = client.update_subscription request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Subscription.
+            #   p result
             #
             def update_subscription request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -579,6 +624,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::ListSubscriptionsRequest.new
+            #
+            #   # Call the list_subscriptions method.
+            #   result = client.list_subscriptions request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::PubSub::V1::Subscription.
+            #     p response
+            #   end
+            #
             def list_subscriptions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -654,6 +720,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::DeleteSubscriptionRequest.new
+            #
+            #   # Call the delete_subscription method.
+            #   result = client.delete_subscription request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_subscription request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -741,6 +822,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::ModifyAckDeadlineRequest.new
+            #
+            #   # Call the modify_ack_deadline method.
+            #   result = client.modify_ack_deadline request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def modify_ack_deadline request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -821,6 +917,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::AcknowledgeRequest.new
+            #
+            #   # Call the acknowledge method.
+            #   result = client.acknowledge request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def acknowledge request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -907,6 +1018,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::PullRequest.new
+            #
+            #   # Call the pull method.
+            #   result = client.pull request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::PullResponse.
+            #   p result
+            #
             def pull request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -969,6 +1095,30 @@ module Google
             # @return [::Enumerable<::Google::Cloud::PubSub::V1::StreamingPullResponse>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create an input stream
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the streaming_pull method to start streaming.
+            #   output = client.streaming_pull input
+            #
+            #   # Send requests on the stream. For each request, pass in keyword
+            #   # arguments to set fields. Be sure to close the stream when done.
+            #   input << Google::Cloud::PubSub::V1::StreamingPullRequest.new
+            #   input << Google::Cloud::PubSub::V1::StreamingPullRequest.new
+            #   input.close
+            #
+            #   # Handle streamed responses. These may be interleaved with inputs.
+            #   # Each response is of type ::Google::Cloud::PubSub::V1::StreamingPullResponse.
+            #   output.each do |response|
+            #     p response
+            #   end
             #
             def streaming_pull request, options = nil
               unless request.is_a? ::Enumerable
@@ -1050,6 +1200,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::ModifyPushConfigRequest.new
+            #
+            #   # Call the modify_push_config method.
+            #   result = client.modify_push_config request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def modify_push_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1124,6 +1289,21 @@ module Google
             # @return [::Google::Cloud::PubSub::V1::Snapshot]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::GetSnapshotRequest.new
+            #
+            #   # Call the get_snapshot method.
+            #   result = client.get_snapshot request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Snapshot.
+            #   p result
             #
             def get_snapshot request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1205,6 +1385,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::PubSub::V1::Snapshot>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::ListSnapshotsRequest.new
+            #
+            #   # Call the list_snapshots method.
+            #   result = client.list_snapshots request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::PubSub::V1::Snapshot.
+            #     p response
+            #   end
             #
             def list_snapshots request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1310,6 +1511,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::CreateSnapshotRequest.new
+            #
+            #   # Call the create_snapshot method.
+            #   result = client.create_snapshot request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Snapshot.
+            #   p result
+            #
             def create_snapshot request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1387,6 +1603,21 @@ module Google
             # @return [::Google::Cloud::PubSub::V1::Snapshot]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::UpdateSnapshotRequest.new
+            #
+            #   # Call the update_snapshot method.
+            #   result = client.update_snapshot request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Snapshot.
+            #   p result
             #
             def update_snapshot request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1466,6 +1697,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::DeleteSnapshotRequest.new
+            #
+            #   # Call the delete_snapshot method.
+            #   result = client.delete_snapshot request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_snapshot request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1558,6 +1804,21 @@ module Google
             # @return [::Google::Cloud::PubSub::V1::SeekResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::SeekRequest.new
+            #
+            #   # Call the seek method.
+            #   result = client.seek request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::SeekResponse.
+            #   p result
             #
             def seek request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

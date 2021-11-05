@@ -209,6 +209,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Conversations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::CreateConversationRequest.new
+            #
+            #   # Call the create_conversation method.
+            #   result = client.create_conversation request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Conversation.
+            #   p result
+            #
             def create_conversation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -303,6 +318,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Conversations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::ListConversationsRequest.new
+            #
+            #   # Call the list_conversations method.
+            #   result = client.list_conversations request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dialogflow::V2::Conversation.
+            #     p response
+            #   end
+            #
             def list_conversations request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -376,6 +412,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Conversations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::GetConversationRequest.new
+            #
+            #   # Call the get_conversation method.
+            #   result = client.get_conversation request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Conversation.
+            #   p result
+            #
             def get_conversation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -448,6 +499,21 @@ module Google
             # @return [::Google::Cloud::Dialogflow::V2::Conversation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Conversations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::CompleteConversationRequest.new
+            #
+            #   # Call the complete_conversation method.
+            #   result = client.complete_conversation request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Conversation.
+            #   p result
             #
             def complete_conversation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -538,6 +604,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dialogflow::V2::Message>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Conversations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::ListMessagesRequest.new
+            #
+            #   # Call the list_messages method.
+            #   result = client.list_messages request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dialogflow::V2::Message.
+            #     p response
+            #   end
             #
             def list_messages request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

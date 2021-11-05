@@ -34,6 +34,13 @@
     "proto_docs/google/protobuf/empty.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
+    "snippets/Gemfile",
+    "snippets/datastore_admin/create_index.rb",
+    "snippets/datastore_admin/delete_index.rb",
+    "snippets/datastore_admin/export_entities.rb",
+    "snippets/datastore_admin/get_index.rb",
+    "snippets/datastore_admin/import_entities.rb",
+    "snippets/datastore_admin/list_indexes.rb",
     "test/google/cloud/datastore/admin/v1/datastore_admin_operations_test.rb",
     "test/google/cloud/datastore/admin/v1/datastore_admin_test.rb",
     "test/helper.rb"

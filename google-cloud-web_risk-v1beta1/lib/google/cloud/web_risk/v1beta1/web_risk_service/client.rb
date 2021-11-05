@@ -192,6 +192,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/web_risk/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest.new
+            #
+            #   # Call the compute_threat_list_diff method.
+            #   result = client.compute_threat_list_diff request
+            #
+            #   # The returned object is of type Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffResponse.
+            #   p result
+            #
             def compute_threat_list_diff request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -255,6 +270,21 @@ module Google
             # @return [::Google::Cloud::WebRisk::V1beta1::SearchUrisResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/web_risk/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebRisk::V1beta1::SearchUrisRequest.new
+            #
+            #   # Call the search_uris method.
+            #   result = client.search_uris request
+            #
+            #   # The returned object is of type Google::Cloud::WebRisk::V1beta1::SearchUrisResponse.
+            #   p result
             #
             def search_uris request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -324,6 +354,21 @@ module Google
             # @return [::Google::Cloud::WebRisk::V1beta1::SearchHashesResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/web_risk/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebRisk::V1beta1::SearchHashesRequest.new
+            #
+            #   # Call the search_hashes method.
+            #   result = client.search_hashes request
+            #
+            #   # The returned object is of type Google::Cloud::WebRisk::V1beta1::SearchHashesResponse.
+            #   p result
             #
             def search_hashes request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

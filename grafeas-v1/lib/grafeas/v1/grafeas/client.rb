@@ -228,6 +228,21 @@ module Grafeas
         #
         # @raise [::Google::Cloud::Error] if the RPC is aborted.
         #
+        # @example Basic example
+        #   require "grafeas/v1"
+        #
+        #   # Create a client object. The client can be reused for multiple calls.
+        #   client = Grafeas::V1::Grafeas::Client.new
+        #
+        #   # Create a request. To set request fields, pass in keyword arguments.
+        #   request = Grafeas::V1::GetOccurrenceRequest.new
+        #
+        #   # Call the get_occurrence method.
+        #   result = client.get_occurrence request
+        #
+        #   # The returned object is of type Grafeas::V1::Occurrence.
+        #   p result
+        #
         def get_occurrence request, options = nil
           raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -306,6 +321,27 @@ module Grafeas
         #
         # @raise [::Google::Cloud::Error] if the RPC is aborted.
         #
+        # @example Basic example
+        #   require "grafeas/v1"
+        #
+        #   # Create a client object. The client can be reused for multiple calls.
+        #   client = Grafeas::V1::Grafeas::Client.new
+        #
+        #   # Create a request. To set request fields, pass in keyword arguments.
+        #   request = Grafeas::V1::ListOccurrencesRequest.new
+        #
+        #   # Call the list_occurrences method.
+        #   result = client.list_occurrences request
+        #
+        #   # The returned object is of type Gapic::PagedEnumerable. You can
+        #   # iterate over all elements by calling #each, and the enumerable
+        #   # will lazily make API calls to fetch subsequent pages. Other
+        #   # methods are also available for managing paging directly.
+        #   result.each do |response|
+        #     # Each element is of type ::Grafeas::V1::Occurrence.
+        #     p response
+        #   end
+        #
         def list_occurrences request, options = nil
           raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -380,6 +416,21 @@ module Grafeas
         #
         # @raise [::Google::Cloud::Error] if the RPC is aborted.
         #
+        # @example Basic example
+        #   require "grafeas/v1"
+        #
+        #   # Create a client object. The client can be reused for multiple calls.
+        #   client = Grafeas::V1::Grafeas::Client.new
+        #
+        #   # Create a request. To set request fields, pass in keyword arguments.
+        #   request = Grafeas::V1::DeleteOccurrenceRequest.new
+        #
+        #   # Call the delete_occurrence method.
+        #   result = client.delete_occurrence request
+        #
+        #   # The returned object is of type Google::Protobuf::Empty.
+        #   p result
+        #
         def delete_occurrence request, options = nil
           raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -453,6 +504,21 @@ module Grafeas
         #
         # @raise [::Google::Cloud::Error] if the RPC is aborted.
         #
+        # @example Basic example
+        #   require "grafeas/v1"
+        #
+        #   # Create a client object. The client can be reused for multiple calls.
+        #   client = Grafeas::V1::Grafeas::Client.new
+        #
+        #   # Create a request. To set request fields, pass in keyword arguments.
+        #   request = Grafeas::V1::CreateOccurrenceRequest.new
+        #
+        #   # Call the create_occurrence method.
+        #   result = client.create_occurrence request
+        #
+        #   # The returned object is of type Grafeas::V1::Occurrence.
+        #   p result
+        #
         def create_occurrence request, options = nil
           raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -525,6 +591,21 @@ module Grafeas
         # @return [::Grafeas::V1::BatchCreateOccurrencesResponse]
         #
         # @raise [::Google::Cloud::Error] if the RPC is aborted.
+        #
+        # @example Basic example
+        #   require "grafeas/v1"
+        #
+        #   # Create a client object. The client can be reused for multiple calls.
+        #   client = Grafeas::V1::Grafeas::Client.new
+        #
+        #   # Create a request. To set request fields, pass in keyword arguments.
+        #   request = Grafeas::V1::BatchCreateOccurrencesRequest.new
+        #
+        #   # Call the batch_create_occurrences method.
+        #   result = client.batch_create_occurrences request
+        #
+        #   # The returned object is of type Grafeas::V1::BatchCreateOccurrencesResponse.
+        #   p result
         #
         def batch_create_occurrences request, options = nil
           raise ::ArgumentError, "request must be provided" if request.nil?
@@ -601,6 +682,21 @@ module Grafeas
         #
         # @raise [::Google::Cloud::Error] if the RPC is aborted.
         #
+        # @example Basic example
+        #   require "grafeas/v1"
+        #
+        #   # Create a client object. The client can be reused for multiple calls.
+        #   client = Grafeas::V1::Grafeas::Client.new
+        #
+        #   # Create a request. To set request fields, pass in keyword arguments.
+        #   request = Grafeas::V1::UpdateOccurrenceRequest.new
+        #
+        #   # Call the update_occurrence method.
+        #   result = client.update_occurrence request
+        #
+        #   # The returned object is of type Grafeas::V1::Occurrence.
+        #   p result
+        #
         def update_occurrence request, options = nil
           raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -673,6 +769,21 @@ module Grafeas
         #
         # @raise [::Google::Cloud::Error] if the RPC is aborted.
         #
+        # @example Basic example
+        #   require "grafeas/v1"
+        #
+        #   # Create a client object. The client can be reused for multiple calls.
+        #   client = Grafeas::V1::Grafeas::Client.new
+        #
+        #   # Create a request. To set request fields, pass in keyword arguments.
+        #   request = Grafeas::V1::GetOccurrenceNoteRequest.new
+        #
+        #   # Call the get_occurrence_note method.
+        #   result = client.get_occurrence_note request
+        #
+        #   # The returned object is of type Grafeas::V1::Note.
+        #   p result
+        #
         def get_occurrence_note request, options = nil
           raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -743,6 +854,21 @@ module Grafeas
         # @return [::Grafeas::V1::Note]
         #
         # @raise [::Google::Cloud::Error] if the RPC is aborted.
+        #
+        # @example Basic example
+        #   require "grafeas/v1"
+        #
+        #   # Create a client object. The client can be reused for multiple calls.
+        #   client = Grafeas::V1::Grafeas::Client.new
+        #
+        #   # Create a request. To set request fields, pass in keyword arguments.
+        #   request = Grafeas::V1::GetNoteRequest.new
+        #
+        #   # Call the get_note method.
+        #   result = client.get_note request
+        #
+        #   # The returned object is of type Grafeas::V1::Note.
+        #   p result
         #
         def get_note request, options = nil
           raise ::ArgumentError, "request must be provided" if request.nil?
@@ -822,6 +948,27 @@ module Grafeas
         #
         # @raise [::Google::Cloud::Error] if the RPC is aborted.
         #
+        # @example Basic example
+        #   require "grafeas/v1"
+        #
+        #   # Create a client object. The client can be reused for multiple calls.
+        #   client = Grafeas::V1::Grafeas::Client.new
+        #
+        #   # Create a request. To set request fields, pass in keyword arguments.
+        #   request = Grafeas::V1::ListNotesRequest.new
+        #
+        #   # Call the list_notes method.
+        #   result = client.list_notes request
+        #
+        #   # The returned object is of type Gapic::PagedEnumerable. You can
+        #   # iterate over all elements by calling #each, and the enumerable
+        #   # will lazily make API calls to fetch subsequent pages. Other
+        #   # methods are also available for managing paging directly.
+        #   result.each do |response|
+        #     # Each element is of type ::Grafeas::V1::Note.
+        #     p response
+        #   end
+        #
         def list_notes request, options = nil
           raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -893,6 +1040,21 @@ module Grafeas
         # @return [::Google::Protobuf::Empty]
         #
         # @raise [::Google::Cloud::Error] if the RPC is aborted.
+        #
+        # @example Basic example
+        #   require "grafeas/v1"
+        #
+        #   # Create a client object. The client can be reused for multiple calls.
+        #   client = Grafeas::V1::Grafeas::Client.new
+        #
+        #   # Create a request. To set request fields, pass in keyword arguments.
+        #   request = Grafeas::V1::DeleteNoteRequest.new
+        #
+        #   # Call the delete_note method.
+        #   result = client.delete_note request
+        #
+        #   # The returned object is of type Google::Protobuf::Empty.
+        #   p result
         #
         def delete_note request, options = nil
           raise ::ArgumentError, "request must be provided" if request.nil?
@@ -969,6 +1131,21 @@ module Grafeas
         #
         # @raise [::Google::Cloud::Error] if the RPC is aborted.
         #
+        # @example Basic example
+        #   require "grafeas/v1"
+        #
+        #   # Create a client object. The client can be reused for multiple calls.
+        #   client = Grafeas::V1::Grafeas::Client.new
+        #
+        #   # Create a request. To set request fields, pass in keyword arguments.
+        #   request = Grafeas::V1::CreateNoteRequest.new
+        #
+        #   # Call the create_note method.
+        #   result = client.create_note request
+        #
+        #   # The returned object is of type Grafeas::V1::Note.
+        #   p result
+        #
         def create_note request, options = nil
           raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1041,6 +1218,21 @@ module Grafeas
         # @return [::Grafeas::V1::BatchCreateNotesResponse]
         #
         # @raise [::Google::Cloud::Error] if the RPC is aborted.
+        #
+        # @example Basic example
+        #   require "grafeas/v1"
+        #
+        #   # Create a client object. The client can be reused for multiple calls.
+        #   client = Grafeas::V1::Grafeas::Client.new
+        #
+        #   # Create a request. To set request fields, pass in keyword arguments.
+        #   request = Grafeas::V1::BatchCreateNotesRequest.new
+        #
+        #   # Call the batch_create_notes method.
+        #   result = client.batch_create_notes request
+        #
+        #   # The returned object is of type Grafeas::V1::BatchCreateNotesResponse.
+        #   p result
         #
         def batch_create_notes request, options = nil
           raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1116,6 +1308,21 @@ module Grafeas
         # @return [::Grafeas::V1::Note]
         #
         # @raise [::Google::Cloud::Error] if the RPC is aborted.
+        #
+        # @example Basic example
+        #   require "grafeas/v1"
+        #
+        #   # Create a client object. The client can be reused for multiple calls.
+        #   client = Grafeas::V1::Grafeas::Client.new
+        #
+        #   # Create a request. To set request fields, pass in keyword arguments.
+        #   request = Grafeas::V1::UpdateNoteRequest.new
+        #
+        #   # Call the update_note method.
+        #   result = client.update_note request
+        #
+        #   # The returned object is of type Grafeas::V1::Note.
+        #   p result
         #
         def update_note request, options = nil
           raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1195,6 +1402,27 @@ module Grafeas
         # @return [::Gapic::PagedEnumerable<::Grafeas::V1::Occurrence>]
         #
         # @raise [::Google::Cloud::Error] if the RPC is aborted.
+        #
+        # @example Basic example
+        #   require "grafeas/v1"
+        #
+        #   # Create a client object. The client can be reused for multiple calls.
+        #   client = Grafeas::V1::Grafeas::Client.new
+        #
+        #   # Create a request. To set request fields, pass in keyword arguments.
+        #   request = Grafeas::V1::ListNoteOccurrencesRequest.new
+        #
+        #   # Call the list_note_occurrences method.
+        #   result = client.list_note_occurrences request
+        #
+        #   # The returned object is of type Gapic::PagedEnumerable. You can
+        #   # iterate over all elements by calling #each, and the enumerable
+        #   # will lazily make API calls to fetch subsequent pages. Other
+        #   # methods are also available for managing paging directly.
+        #   result.each do |response|
+        #     # Each element is of type ::Grafeas::V1::Occurrence.
+        #     p response
+        #   end
         #
         def list_note_occurrences request, options = nil
           raise ::ArgumentError, "request must be provided" if request.nil?

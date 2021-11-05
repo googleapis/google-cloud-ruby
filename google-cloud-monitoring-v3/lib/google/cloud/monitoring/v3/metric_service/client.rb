@@ -224,6 +224,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::MetricService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::ListMonitoredResourceDescriptorsRequest.new
+            #
+            #   # Call the list_monitored_resource_descriptors method.
+            #   result = client.list_monitored_resource_descriptors request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Api::MonitoredResourceDescriptor.
+            #     p response
+            #   end
+            #
             def list_monitored_resource_descriptors request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -299,6 +320,21 @@ module Google
             # @return [::Google::Api::MonitoredResourceDescriptor]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::MetricService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::GetMonitoredResourceDescriptorRequest.new
+            #
+            #   # Call the get_monitored_resource_descriptor method.
+            #   result = client.get_monitored_resource_descriptor request
+            #
+            #   # The returned object is of type Google::Api::MonitoredResourceDescriptor.
+            #   p result
             #
             def get_monitored_resource_descriptor request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -388,6 +424,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::MetricService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::ListMetricDescriptorsRequest.new
+            #
+            #   # Call the list_metric_descriptors method.
+            #   result = client.list_metric_descriptors request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Api::MetricDescriptor.
+            #     p response
+            #   end
+            #
             def list_metric_descriptors request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -463,6 +520,21 @@ module Google
             # @return [::Google::Api::MetricDescriptor]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::MetricService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::GetMetricDescriptorRequest.new
+            #
+            #   # Call the get_metric_descriptor method.
+            #   result = client.get_metric_descriptor request
+            #
+            #   # The returned object is of type Google::Api::MetricDescriptor.
+            #   p result
             #
             def get_metric_descriptor request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -544,6 +616,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::MetricService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::CreateMetricDescriptorRequest.new
+            #
+            #   # Call the create_metric_descriptor method.
+            #   result = client.create_metric_descriptor request
+            #
+            #   # The returned object is of type Google::Api::MetricDescriptor.
+            #   p result
+            #
             def create_metric_descriptor request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -620,6 +707,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::MetricService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::DeleteMetricDescriptorRequest.new
+            #
+            #   # Call the delete_metric_descriptor method.
+            #   result = client.delete_metric_descriptor request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_metric_descriptor request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -732,6 +834,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::MetricService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::ListTimeSeriesRequest.new
+            #
+            #   # Call the list_time_series method.
+            #   result = client.list_time_series request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Monitoring::V3::TimeSeries.
+            #     p response
+            #   end
+            #
             def list_time_series request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -816,6 +939,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::MetricService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest.new
+            #
+            #   # Call the create_time_series method.
+            #   result = client.create_time_series request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def create_time_series request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -905,6 +1043,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::MetricService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest.new
+            #
+            #   # Call the create_service_time_series method.
+            #   result = client.create_service_time_series request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def create_service_time_series request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

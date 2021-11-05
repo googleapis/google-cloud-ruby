@@ -244,6 +244,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Sessions::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::DetectIntentRequest.new
+            #
+            #   # Call the detect_intent method.
+            #   result = client.detect_intent request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::DetectIntentResponse.
+            #   p result
+            #
             def detect_intent request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -313,6 +328,30 @@ module Google
             # @return [::Enumerable<::Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Sessions::Client.new
+            #
+            #   # Create an input stream
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the streaming_detect_intent method to start streaming.
+            #   output = client.streaming_detect_intent input
+            #
+            #   # Send requests on the stream. For each request, pass in keyword
+            #   # arguments to set fields. Be sure to close the stream when done.
+            #   input << Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest.new
+            #   input << Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest.new
+            #   input.close
+            #
+            #   # Handle streamed responses. These may be interleaved with inputs.
+            #   # Each response is of type ::Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse.
+            #   output.each do |response|
+            #     p response
+            #   end
             #
             def streaming_detect_intent request, options = nil
               unless request.is_a? ::Enumerable

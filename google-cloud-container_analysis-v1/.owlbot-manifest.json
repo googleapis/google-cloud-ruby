@@ -35,6 +35,11 @@
     "proto_docs/grafeas/v1/cvss.rb",
     "proto_docs/grafeas/v1/package.rb",
     "proto_docs/grafeas/v1/vulnerability.rb",
+    "snippets/Gemfile",
+    "snippets/container_analysis/get_iam_policy.rb",
+    "snippets/container_analysis/get_vulnerability_occurrences_summary.rb",
+    "snippets/container_analysis/set_iam_policy.rb",
+    "snippets/container_analysis/test_iam_permissions.rb",
     "test/google/cloud/container_analysis/v1/container_analysis_paths_test.rb",
     "test/google/cloud/container_analysis/v1/container_analysis_test.rb",
     "test/helper.rb"

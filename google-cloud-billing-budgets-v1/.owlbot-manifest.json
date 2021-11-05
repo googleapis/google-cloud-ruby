@@ -33,6 +33,12 @@
     "proto_docs/google/protobuf/struct.rb",
     "proto_docs/google/type/date.rb",
     "proto_docs/google/type/money.rb",
+    "snippets/Gemfile",
+    "snippets/budget_service/create_budget.rb",
+    "snippets/budget_service/delete_budget.rb",
+    "snippets/budget_service/get_budget.rb",
+    "snippets/budget_service/list_budgets.rb",
+    "snippets/budget_service/update_budget.rb",
     "test/google/cloud/billing/budgets/v1/budget_service_paths_test.rb",
     "test/google/cloud/billing/budgets/v1/budget_service_test.rb",
     "test/helper.rb"

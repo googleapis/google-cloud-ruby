@@ -189,6 +189,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::Firewall::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::ListIngressRulesRequest.new
+            #
+            #   # Call the list_ingress_rules method.
+            #   result = client.list_ingress_rules request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::AppEngine::V1::FirewallRule.
+            #     p response
+            #   end
+            #
             def list_ingress_rules request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -266,6 +287,21 @@ module Google
             # @return [::Google::Cloud::AppEngine::V1::BatchUpdateIngressRulesResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::Firewall::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::BatchUpdateIngressRulesRequest.new
+            #
+            #   # Call the batch_update_ingress_rules method.
+            #   result = client.batch_update_ingress_rules request
+            #
+            #   # The returned object is of type Google::Cloud::AppEngine::V1::BatchUpdateIngressRulesResponse.
+            #   p result
             #
             def batch_update_ingress_rules request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -349,6 +385,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::Firewall::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::CreateIngressRuleRequest.new
+            #
+            #   # Call the create_ingress_rule method.
+            #   result = client.create_ingress_rule request
+            #
+            #   # The returned object is of type Google::Cloud::AppEngine::V1::FirewallRule.
+            #   p result
+            #
             def create_ingress_rule request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -419,6 +470,21 @@ module Google
             # @return [::Google::Cloud::AppEngine::V1::FirewallRule]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::Firewall::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::GetIngressRuleRequest.new
+            #
+            #   # Call the get_ingress_rule method.
+            #   result = client.get_ingress_rule request
+            #
+            #   # The returned object is of type Google::Cloud::AppEngine::V1::FirewallRule.
+            #   p result
             #
             def get_ingress_rule request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -495,6 +561,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::Firewall::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::UpdateIngressRuleRequest.new
+            #
+            #   # Call the update_ingress_rule method.
+            #   result = client.update_ingress_rule request
+            #
+            #   # The returned object is of type Google::Cloud::AppEngine::V1::FirewallRule.
+            #   p result
+            #
             def update_ingress_rule request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -565,6 +646,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::Firewall::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::DeleteIngressRuleRequest.new
+            #
+            #   # Call the delete_ingress_rule method.
+            #   result = client.delete_ingress_rule request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_ingress_rule request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

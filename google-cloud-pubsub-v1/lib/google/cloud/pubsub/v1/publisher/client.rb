@@ -251,6 +251,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Publisher::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::Topic.new
+            #
+            #   # Call the create_topic method.
+            #   result = client.create_topic request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Topic.
+            #   p result
+            #
             def create_topic request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -328,6 +343,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Publisher::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::UpdateTopicRequest.new
+            #
+            #   # Call the update_topic method.
+            #   result = client.update_topic request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Topic.
+            #   p result
+            #
             def update_topic request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -402,6 +432,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Publisher::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::PublishRequest.new
+            #
+            #   # Call the publish method.
+            #   result = client.publish request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::PublishResponse.
+            #   p result
+            #
             def publish request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -472,6 +517,21 @@ module Google
             # @return [::Google::Cloud::PubSub::V1::Topic]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Publisher::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::GetTopicRequest.new
+            #
+            #   # Call the get_topic method.
+            #   result = client.get_topic request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Topic.
+            #   p result
             #
             def get_topic request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -550,6 +610,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Publisher::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::ListTopicsRequest.new
+            #
+            #   # Call the list_topics method.
+            #   result = client.list_topics request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::PubSub::V1::Topic.
+            #     p response
+            #   end
+            #
             def list_topics request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -627,6 +708,21 @@ module Google
             # @return [::Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Publisher::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::ListTopicSubscriptionsRequest.new
+            #
+            #   # Call the list_topic_subscriptions method.
+            #   result = client.list_topic_subscriptions request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.
+            #   p result
             #
             def list_topic_subscriptions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -709,6 +805,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Publisher::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::ListTopicSnapshotsRequest.new
+            #
+            #   # Call the list_topic_snapshots method.
+            #   result = client.list_topic_snapshots request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::ListTopicSnapshotsResponse.
+            #   p result
+            #
             def list_topic_snapshots request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -784,6 +895,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Publisher::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::DeleteTopicRequest.new
+            #
+            #   # Call the delete_topic method.
+            #   result = client.delete_topic request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_topic request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -857,6 +983,21 @@ module Google
             # @return [::Google::Cloud::PubSub::V1::DetachSubscriptionResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Publisher::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::DetachSubscriptionRequest.new
+            #
+            #   # Call the detach_subscription method.
+            #   result = client.detach_subscription request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::DetachSubscriptionResponse.
+            #   p result
             #
             def detach_subscription request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

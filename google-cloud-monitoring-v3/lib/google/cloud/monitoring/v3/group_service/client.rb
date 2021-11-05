@@ -244,6 +244,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::GroupService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::ListGroupsRequest.new
+            #
+            #   # Call the list_groups method.
+            #   result = client.list_groups request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Monitoring::V3::Group.
+            #     p response
+            #   end
+            #
             def list_groups request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -316,6 +337,21 @@ module Google
             # @return [::Google::Cloud::Monitoring::V3::Group]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::GroupService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::GetGroupRequest.new
+            #
+            #   # Call the get_group method.
+            #   result = client.get_group request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::Group.
+            #   p result
             #
             def get_group request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -395,6 +431,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::GroupService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::CreateGroupRequest.new
+            #
+            #   # Call the create_group method.
+            #   result = client.create_group request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::Group.
+            #   p result
+            #
             def create_group request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -468,6 +519,21 @@ module Google
             # @return [::Google::Cloud::Monitoring::V3::Group]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::GroupService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::UpdateGroupRequest.new
+            #
+            #   # Call the update_group method.
+            #   result = client.update_group request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::Group.
+            #   p result
             #
             def update_group request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -544,6 +610,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::GroupService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::DeleteGroupRequest.new
+            #
+            #   # Call the delete_group method.
+            #   result = client.delete_group request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_group request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -636,6 +717,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Api::MonitoredResource>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::GroupService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::ListGroupMembersRequest.new
+            #
+            #   # Call the list_group_members method.
+            #   result = client.list_group_members request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Api::MonitoredResource.
+            #     p response
+            #   end
             #
             def list_group_members request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

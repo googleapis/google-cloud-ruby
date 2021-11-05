@@ -184,6 +184,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::ListConversationProfilesRequest.new
+            #
+            #   # Call the list_conversation_profiles method.
+            #   result = client.list_conversation_profiles request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dialogflow::V2::ConversationProfile.
+            #     p response
+            #   end
+            #
             def list_conversation_profiles request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -256,6 +277,21 @@ module Google
             # @return [::Google::Cloud::Dialogflow::V2::ConversationProfile]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::GetConversationProfileRequest.new
+            #
+            #   # Call the get_conversation_profile method.
+            #   result = client.get_conversation_profile request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::ConversationProfile.
+            #   p result
             #
             def get_conversation_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -334,6 +370,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::CreateConversationProfileRequest.new
+            #
+            #   # Call the create_conversation_profile method.
+            #   result = client.create_conversation_profile request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::ConversationProfile.
+            #   p result
+            #
             def create_conversation_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -410,6 +461,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::UpdateConversationProfileRequest.new
+            #
+            #   # Call the update_conversation_profile method.
+            #   result = client.update_conversation_profile request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::ConversationProfile.
+            #   p result
+            #
             def update_conversation_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -481,6 +547,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::DeleteConversationProfileRequest.new
+            #
+            #   # Call the delete_conversation_profile method.
+            #   result = client.delete_conversation_profile request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_conversation_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

@@ -212,6 +212,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/assured_workloads/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AssuredWorkloads::V1beta1::CreateWorkloadRequest.new
+            #
+            #   # Call the create_workload method.
+            #   result = client.create_workload request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_workload request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -291,6 +313,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/assured_workloads/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AssuredWorkloads::V1beta1::UpdateWorkloadRequest.new
+            #
+            #   # Call the update_workload method.
+            #   result = client.update_workload request
+            #
+            #   # The returned object is of type Google::Cloud::AssuredWorkloads::V1beta1::Workload.
+            #   p result
+            #
             def update_workload request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -368,6 +405,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/assured_workloads/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AssuredWorkloads::V1beta1::DeleteWorkloadRequest.new
+            #
+            #   # Call the delete_workload method.
+            #   result = client.delete_workload request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_workload request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -441,6 +493,21 @@ module Google
             # @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/assured_workloads/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AssuredWorkloads::V1beta1::GetWorkloadRequest.new
+            #
+            #   # Call the get_workload method.
+            #   result = client.get_workload request
+            #
+            #   # The returned object is of type Google::Cloud::AssuredWorkloads::V1beta1::Workload.
+            #   p result
             #
             def get_workload request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -521,6 +588,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::AssuredWorkloads::V1beta1::Workload>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/assured_workloads/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AssuredWorkloads::V1beta1::ListWorkloadsRequest.new
+            #
+            #   # Call the list_workloads method.
+            #   result = client.list_workloads request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::AssuredWorkloads::V1beta1::Workload.
+            #     p response
+            #   end
             #
             def list_workloads request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

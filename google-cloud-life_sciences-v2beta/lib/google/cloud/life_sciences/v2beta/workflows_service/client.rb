@@ -216,6 +216,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/life_sciences/v2beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::LifeSciences::V2beta::RunPipelineRequest.new
+            #
+            #   # Call the run_pipeline method.
+            #   result = client.run_pipeline request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def run_pipeline request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 

@@ -186,6 +186,27 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Deployments::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::ListDeploymentsRequest.new
+              #
+              #   # Call the list_deployments method.
+              #   result = client.list_deployments request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can
+              #   # iterate over all elements by calling #each, and the enumerable
+              #   # will lazily make API calls to fetch subsequent pages. Other
+              #   # methods are also available for managing paging directly.
+              #   result.each do |response|
+              #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::Deployment.
+              #     p response
+              #   end
+              #
               def list_deployments request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -258,6 +279,21 @@ module Google
               # @return [::Google::Cloud::Dialogflow::CX::V3::Deployment]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Deployments::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::GetDeploymentRequest.new
+              #
+              #   # Call the get_deployment method.
+              #   result = client.get_deployment request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Deployment.
+              #   p result
               #
               def get_deployment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?

@@ -185,6 +185,27 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::ListWebhooksRequest.new
+              #
+              #   # Call the list_webhooks method.
+              #   result = client.list_webhooks request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can
+              #   # iterate over all elements by calling #each, and the enumerable
+              #   # will lazily make API calls to fetch subsequent pages. Other
+              #   # methods are also available for managing paging directly.
+              #   result.each do |response|
+              #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::Webhook.
+              #     p response
+              #   end
+              #
               def list_webhooks request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -257,6 +278,21 @@ module Google
               # @return [::Google::Cloud::Dialogflow::CX::V3::Webhook]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::GetWebhookRequest.new
+              #
+              #   # Call the get_webhook method.
+              #   result = client.get_webhook request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Webhook.
+              #   p result
               #
               def get_webhook request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -331,6 +367,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::CreateWebhookRequest.new
+              #
+              #   # Call the create_webhook method.
+              #   result = client.create_webhook request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Webhook.
+              #   p result
+              #
               def create_webhook request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -403,6 +454,21 @@ module Google
               # @return [::Google::Cloud::Dialogflow::CX::V3::Webhook]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::UpdateWebhookRequest.new
+              #
+              #   # Call the update_webhook method.
+              #   result = client.update_webhook request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Webhook.
+              #   p result
               #
               def update_webhook request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -485,6 +551,21 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Webhooks::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::DeleteWebhookRequest.new
+              #
+              #   # Call the delete_webhook method.
+              #   result = client.delete_webhook request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
               #
               def delete_webhook request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?

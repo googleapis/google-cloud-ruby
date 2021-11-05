@@ -193,6 +193,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tpu/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tpu::V1::Tpu::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tpu::V1::ListNodesRequest.new
+            #
+            #   # Call the list_nodes method.
+            #   result = client.list_nodes request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Tpu::V1::Node.
+            #     p response
+            #   end
+            #
             def list_nodes request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -263,6 +284,21 @@ module Google
             # @return [::Google::Cloud::Tpu::V1::Node]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/tpu/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tpu::V1::Tpu::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tpu::V1::GetNodeRequest.new
+            #
+            #   # Call the get_node method.
+            #   result = client.get_node request
+            #
+            #   # The returned object is of type Google::Cloud::Tpu::V1::Node.
+            #   p result
             #
             def get_node request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -338,6 +374,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tpu/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tpu::V1::Tpu::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tpu::V1::CreateNodeRequest.new
+            #
+            #   # Call the create_node method.
+            #   result = client.create_node request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_node request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -408,6 +466,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/tpu/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tpu::V1::Tpu::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tpu::V1::DeleteNodeRequest.new
+            #
+            #   # Call the delete_node method.
+            #   result = client.delete_node request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def delete_node request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -482,6 +562,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tpu/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tpu::V1::Tpu::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tpu::V1::ReimageNodeRequest.new
+            #
+            #   # Call the reimage_node method.
+            #   result = client.reimage_node request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def reimage_node request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -553,6 +655,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tpu/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tpu::V1::Tpu::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tpu::V1::StopNodeRequest.new
+            #
+            #   # Call the stop_node method.
+            #   result = client.stop_node request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def stop_node request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -623,6 +747,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/tpu/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tpu::V1::Tpu::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tpu::V1::StartNodeRequest.new
+            #
+            #   # Call the start_node method.
+            #   result = client.start_node request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def start_node request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -703,6 +849,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tpu/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tpu::V1::Tpu::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tpu::V1::ListTensorFlowVersionsRequest.new
+            #
+            #   # Call the list_tensor_flow_versions method.
+            #   result = client.list_tensor_flow_versions request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Tpu::V1::TensorFlowVersion.
+            #     p response
+            #   end
+            #
             def list_tensor_flow_versions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -773,6 +940,21 @@ module Google
             # @return [::Google::Cloud::Tpu::V1::TensorFlowVersion]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/tpu/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tpu::V1::Tpu::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tpu::V1::GetTensorFlowVersionRequest.new
+            #
+            #   # Call the get_tensor_flow_version method.
+            #   result = client.get_tensor_flow_version request
+            #
+            #   # The returned object is of type Google::Cloud::Tpu::V1::TensorFlowVersion.
+            #   p result
             #
             def get_tensor_flow_version request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -852,6 +1034,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tpu/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tpu::V1::Tpu::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tpu::V1::ListAcceleratorTypesRequest.new
+            #
+            #   # Call the list_accelerator_types method.
+            #   result = client.list_accelerator_types request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Tpu::V1::AcceleratorType.
+            #     p response
+            #   end
+            #
             def list_accelerator_types request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -922,6 +1125,21 @@ module Google
             # @return [::Google::Cloud::Tpu::V1::AcceleratorType]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/tpu/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tpu::V1::Tpu::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tpu::V1::GetAcceleratorTypeRequest.new
+            #
+            #   # Call the get_accelerator_type method.
+            #   result = client.get_accelerator_type request
+            #
+            #   # The returned object is of type Google::Cloud::Tpu::V1::AcceleratorType.
+            #   p result
             #
             def get_accelerator_type request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

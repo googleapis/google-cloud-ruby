@@ -33,6 +33,10 @@
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/protobuf/wrappers.rb",
     "proto_docs/google/rpc/status.rb",
+    "snippets/Gemfile",
+    "snippets/speech/long_running_recognize.rb",
+    "snippets/speech/recognize.rb",
+    "snippets/speech/streaming_recognize.rb",
     "test/google/cloud/speech/v1/speech_operations_test.rb",
     "test/google/cloud/speech/v1/speech_test.rb",
     "test/helper.rb"

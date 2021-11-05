@@ -266,6 +266,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::ListDeliveryPipelinesRequest.new
+            #
+            #   # Call the list_delivery_pipelines method.
+            #   result = client.list_delivery_pipelines request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Deploy::V1::DeliveryPipeline.
+            #     p response
+            #   end
+            #
             def list_delivery_pipelines request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -337,6 +358,21 @@ module Google
             # @return [::Google::Cloud::Deploy::V1::DeliveryPipeline]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::GetDeliveryPipelineRequest.new
+            #
+            #   # Call the get_delivery_pipeline method.
+            #   result = client.get_delivery_pipeline request
+            #
+            #   # The returned object is of type Google::Cloud::Deploy::V1::DeliveryPipeline.
+            #   p result
             #
             def get_delivery_pipeline request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -429,6 +465,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::CreateDeliveryPipelineRequest.new
+            #
+            #   # Call the create_delivery_pipeline method.
+            #   result = client.create_delivery_pipeline request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def create_delivery_pipeline request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -526,6 +584,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::UpdateDeliveryPipelineRequest.new
+            #
+            #   # Call the update_delivery_pipeline method.
+            #   result = client.update_delivery_pipeline request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def update_delivery_pipeline request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -627,6 +707,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::DeleteDeliveryPipelineRequest.new
+            #
+            #   # Call the delete_delivery_pipeline method.
+            #   result = client.delete_delivery_pipeline request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_delivery_pipeline request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -714,6 +816,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::ListTargetsRequest.new
+            #
+            #   # Call the list_targets method.
+            #   result = client.list_targets request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Deploy::V1::Target.
+            #     p response
+            #   end
+            #
             def list_targets request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -785,6 +908,21 @@ module Google
             # @return [::Google::Cloud::Deploy::V1::Target]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::GetTargetRequest.new
+            #
+            #   # Call the get_target method.
+            #   result = client.get_target request
+            #
+            #   # The returned object is of type Google::Cloud::Deploy::V1::Target.
+            #   p result
             #
             def get_target request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -878,6 +1016,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::CreateTargetRequest.new
+            #
+            #   # Call the create_target method.
+            #   result = client.create_target request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def create_target request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -976,6 +1136,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::UpdateTargetRequest.new
+            #
+            #   # Call the update_target method.
+            #   result = client.update_target request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_target request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1072,6 +1254,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::DeleteTargetRequest.new
+            #
+            #   # Call the delete_target method.
+            #   result = client.delete_target request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_target request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1158,6 +1362,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::ListReleasesRequest.new
+            #
+            #   # Call the list_releases method.
+            #   result = client.list_releases request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Deploy::V1::Release.
+            #     p response
+            #   end
+            #
             def list_releases request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1229,6 +1454,21 @@ module Google
             # @return [::Google::Cloud::Deploy::V1::Release]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::GetReleaseRequest.new
+            #
+            #   # Call the get_release method.
+            #   result = client.get_release request
+            #
+            #   # The returned object is of type Google::Cloud::Deploy::V1::Release.
+            #   p result
             #
             def get_release request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1323,6 +1563,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::CreateReleaseRequest.new
+            #
+            #   # Call the create_release method.
+            #   result = client.create_release request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_release request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1397,6 +1659,21 @@ module Google
             # @return [::Google::Cloud::Deploy::V1::ApproveRolloutResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::ApproveRolloutRequest.new
+            #
+            #   # Call the approve_rollout method.
+            #   result = client.approve_rollout request
+            #
+            #   # The returned object is of type Google::Cloud::Deploy::V1::ApproveRolloutResponse.
+            #   p result
             #
             def approve_rollout request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1483,6 +1760,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::ListRolloutsRequest.new
+            #
+            #   # Call the list_rollouts method.
+            #   result = client.list_rollouts request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Deploy::V1::Rollout.
+            #     p response
+            #   end
+            #
             def list_rollouts request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1554,6 +1852,21 @@ module Google
             # @return [::Google::Cloud::Deploy::V1::Rollout]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::GetRolloutRequest.new
+            #
+            #   # Call the get_rollout method.
+            #   result = client.get_rollout request
+            #
+            #   # The returned object is of type Google::Cloud::Deploy::V1::Rollout.
+            #   p result
             #
             def get_rollout request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1648,6 +1961,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::CreateRolloutRequest.new
+            #
+            #   # Call the create_rollout method.
+            #   result = client.create_rollout request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_rollout request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1718,6 +2053,21 @@ module Google
             # @return [::Google::Cloud::Deploy::V1::Config]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::GetConfigRequest.new
+            #
+            #   # Call the get_config method.
+            #   result = client.get_config request
+            #
+            #   # The returned object is of type Google::Cloud::Deploy::V1::Config.
+            #   p result
             #
             def get_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

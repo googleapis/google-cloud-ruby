@@ -208,6 +208,27 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Pages::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::ListPagesRequest.new
+              #
+              #   # Call the list_pages method.
+              #   result = client.list_pages request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can
+              #   # iterate over all elements by calling #each, and the enumerable
+              #   # will lazily make API calls to fetch subsequent pages. Other
+              #   # methods are also available for managing paging directly.
+              #   result.each do |response|
+              #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::Page.
+              #     p response
+              #   end
+              #
               def list_pages request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -302,6 +323,21 @@ module Google
               # @return [::Google::Cloud::Dialogflow::CX::V3::Page]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Pages::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::GetPageRequest.new
+              #
+              #   # Call the get_page method.
+              #   result = client.get_page request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Page.
+              #   p result
               #
               def get_page request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -402,6 +438,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Pages::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::CreatePageRequest.new
+              #
+              #   # Call the create_page method.
+              #   result = client.create_page request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Page.
+              #   p result
+              #
               def create_page request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -500,6 +551,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Pages::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::UpdatePageRequest.new
+              #
+              #   # Call the update_page method.
+              #   result = client.update_page request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Page.
+              #   p result
+              #
               def update_page request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -586,6 +652,21 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Pages::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::DeletePageRequest.new
+              #
+              #   # Call the delete_page method.
+              #   result = client.delete_page request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
               #
               def delete_page request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?

@@ -26,6 +26,8 @@
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/cloud/phishingprotection/v1beta1/phishingprotection.rb",
+    "snippets/Gemfile",
+    "snippets/phishing_protection_service/report_phishing.rb",
     "test/google/cloud/phishing_protection/v1beta1/phishing_protection_service_paths_test.rb",
     "test/google/cloud/phishing_protection/v1beta1/phishing_protection_service_test.rb",
     "test/helper.rb"

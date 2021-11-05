@@ -195,6 +195,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/storage_transfer/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageTransfer::V1::GetGoogleServiceAccountRequest.new
+            #
+            #   # Call the get_google_service_account method.
+            #   result = client.get_google_service_account request
+            #
+            #   # The returned object is of type Google::Cloud::StorageTransfer::V1::GoogleServiceAccount.
+            #   p result
+            #
             def get_google_service_account request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -264,6 +279,21 @@ module Google
             # @return [::Google::Cloud::StorageTransfer::V1::TransferJob]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_transfer/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageTransfer::V1::CreateTransferJobRequest.new
+            #
+            #   # Call the create_transfer_job method.
+            #   result = client.create_transfer_job request
+            #
+            #   # The returned object is of type Google::Cloud::StorageTransfer::V1::TransferJob.
+            #   p result
             #
             def create_transfer_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -360,6 +390,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/storage_transfer/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageTransfer::V1::UpdateTransferJobRequest.new
+            #
+            #   # Call the update_transfer_job method.
+            #   result = client.update_transfer_job request
+            #
+            #   # The returned object is of type Google::Cloud::StorageTransfer::V1::TransferJob.
+            #   p result
+            #
             def update_transfer_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -433,6 +478,21 @@ module Google
             # @return [::Google::Cloud::StorageTransfer::V1::TransferJob]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_transfer/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageTransfer::V1::GetTransferJobRequest.new
+            #
+            #   # Call the get_transfer_job method.
+            #   result = client.get_transfer_job request
+            #
+            #   # The returned object is of type Google::Cloud::StorageTransfer::V1::TransferJob.
+            #   p result
             #
             def get_transfer_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -519,6 +579,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/storage_transfer/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageTransfer::V1::ListTransferJobsRequest.new
+            #
+            #   # Call the list_transfer_jobs method.
+            #   result = client.list_transfer_jobs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::StorageTransfer::V1::TransferJob.
+            #     p response
+            #   end
+            #
             def list_transfer_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -581,6 +662,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_transfer/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageTransfer::V1::PauseTransferOperationRequest.new
+            #
+            #   # Call the pause_transfer_operation method.
+            #   result = client.pause_transfer_operation request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def pause_transfer_operation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -651,6 +747,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_transfer/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageTransfer::V1::ResumeTransferOperationRequest.new
+            #
+            #   # Call the resume_transfer_operation method.
+            #   result = client.resume_transfer_operation request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def resume_transfer_operation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -726,6 +837,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_transfer/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageTransfer::V1::RunTransferJobRequest.new
+            #
+            #   # Call the run_transfer_job method.
+            #   result = client.run_transfer_job request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def run_transfer_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

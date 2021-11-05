@@ -191,6 +191,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::SearchDomainsRequest.new
+            #
+            #   # Call the search_domains method.
+            #   result = client.search_domains request
+            #
+            #   # The returned object is of type Google::Cloud::Domains::V1beta1::SearchDomainsResponse.
+            #   p result
+            #
             def search_domains request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -263,6 +278,21 @@ module Google
             # @return [::Google::Cloud::Domains::V1beta1::RetrieveRegisterParametersResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::RetrieveRegisterParametersRequest.new
+            #
+            #   # Call the retrieve_register_parameters method.
+            #   result = client.retrieve_register_parameters request
+            #
+            #   # The returned object is of type Google::Cloud::Domains::V1beta1::RetrieveRegisterParametersResponse.
+            #   p result
             #
             def retrieve_register_parameters request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -364,6 +394,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::RegisterDomainRequest.new
+            #
+            #   # Call the register_domain method.
+            #   result = client.register_domain request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def register_domain request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -441,6 +493,21 @@ module Google
             # @return [::Google::Cloud::Domains::V1beta1::RetrieveTransferParametersResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::RetrieveTransferParametersRequest.new
+            #
+            #   # Call the retrieve_transfer_parameters method.
+            #   result = client.retrieve_transfer_parameters request
+            #
+            #   # The returned object is of type Google::Cloud::Domains::V1beta1::RetrieveTransferParametersResponse.
+            #   p result
             #
             def retrieve_transfer_parameters request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -554,6 +621,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::TransferDomainRequest.new
+            #
+            #   # Call the transfer_domain method.
+            #   result = client.transfer_domain request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def transfer_domain request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -648,6 +737,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::ListRegistrationsRequest.new
+            #
+            #   # Call the list_registrations method.
+            #   result = client.list_registrations request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Domains::V1beta1::Registration.
+            #     p response
+            #   end
+            #
             def list_registrations request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -719,6 +829,21 @@ module Google
             # @return [::Google::Cloud::Domains::V1beta1::Registration]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::GetRegistrationRequest.new
+            #
+            #   # Call the get_registration method.
+            #   result = client.get_registration request
+            #
+            #   # The returned object is of type Google::Cloud::Domains::V1beta1::Registration.
+            #   p result
             #
             def get_registration request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -799,6 +924,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::UpdateRegistrationRequest.new
+            #
+            #   # Call the update_registration method.
+            #   result = client.update_registration request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_registration request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -876,6 +1023,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::ConfigureManagementSettingsRequest.new
+            #
+            #   # Call the configure_management_settings method.
+            #   result = client.configure_management_settings request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def configure_management_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -963,6 +1132,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::ConfigureDnsSettingsRequest.new
+            #
+            #   # Call the configure_dns_settings method.
+            #   result = client.configure_dns_settings request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def configure_dns_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1047,6 +1238,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::ConfigureContactSettingsRequest.new
+            #
+            #   # Call the configure_contact_settings method.
+            #   result = client.configure_contact_settings request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def configure_contact_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1126,6 +1339,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::ExportRegistrationRequest.new
+            #
+            #   # Call the export_registration method.
+            #   result = client.export_registration request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def export_registration request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1217,6 +1452,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::DeleteRegistrationRequest.new
+            #
+            #   # Call the delete_registration method.
+            #   result = client.delete_registration request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_registration request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1293,6 +1550,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::RetrieveAuthorizationCodeRequest.new
+            #
+            #   # Call the retrieve_authorization_code method.
+            #   result = client.retrieve_authorization_code request
+            #
+            #   # The returned object is of type Google::Cloud::Domains::V1beta1::AuthorizationCode.
+            #   p result
+            #
             def retrieve_authorization_code request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1366,6 +1638,21 @@ module Google
             # @return [::Google::Cloud::Domains::V1beta1::AuthorizationCode]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::ResetAuthorizationCodeRequest.new
+            #
+            #   # Call the reset_authorization_code method.
+            #   result = client.reset_authorization_code request
+            #
+            #   # The returned object is of type Google::Cloud::Domains::V1beta1::AuthorizationCode.
+            #   p result
             #
             def reset_authorization_code request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

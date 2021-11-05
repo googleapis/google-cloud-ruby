@@ -182,6 +182,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/policy_troubleshooter/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PolicyTroubleshooter::V1::IamChecker::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PolicyTroubleshooter::V1::TroubleshootIamPolicyRequest.new
+            #
+            #   # Call the troubleshoot_iam_policy method.
+            #   result = client.troubleshoot_iam_policy request
+            #
+            #   # The returned object is of type Google::Cloud::PolicyTroubleshooter::V1::TroubleshootIamPolicyResponse.
+            #   p result
+            #
             def troubleshoot_iam_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 

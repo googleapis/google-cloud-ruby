@@ -199,6 +199,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::CreateConversationRequest.new
+            #
+            #   # Call the create_conversation method.
+            #   result = client.create_conversation request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::Conversation.
+            #   p result
+            #
             def create_conversation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -271,6 +286,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::UpdateConversationRequest.new
+            #
+            #   # Call the update_conversation method.
+            #   result = client.update_conversation request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::Conversation.
+            #   p result
+            #
             def update_conversation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -342,6 +372,21 @@ module Google
             # @return [::Google::Cloud::ContactCenterInsights::V1::Conversation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::GetConversationRequest.new
+            #
+            #   # Call the get_conversation method.
+            #   result = client.get_conversation request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::Conversation.
+            #   p result
             #
             def get_conversation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -427,6 +472,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::ListConversationsRequest.new
+            #
+            #   # Call the list_conversations method.
+            #   result = client.list_conversations request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ContactCenterInsights::V1::Conversation.
+            #     p response
+            #   end
+            #
             def list_conversations request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -502,6 +568,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::DeleteConversationRequest.new
+            #
+            #   # Call the delete_conversation method.
+            #   result = client.delete_conversation request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_conversation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -575,6 +656,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRequest.new
+            #
+            #   # Call the create_analysis method.
+            #   result = client.create_analysis request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_analysis request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -645,6 +748,21 @@ module Google
             # @return [::Google::Cloud::ContactCenterInsights::V1::Analysis]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::GetAnalysisRequest.new
+            #
+            #   # Call the get_analysis method.
+            #   result = client.get_analysis request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::Analysis.
+            #   p result
             #
             def get_analysis request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -728,6 +846,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::ListAnalysesRequest.new
+            #
+            #   # Call the list_analyses method.
+            #   result = client.list_analyses request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ContactCenterInsights::V1::Analysis.
+            #     p response
+            #   end
+            #
             def list_analyses request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -798,6 +937,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRequest.new
+            #
+            #   # Call the delete_analysis method.
+            #   result = client.delete_analysis request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_analysis request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -878,6 +1032,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::ExportInsightsDataRequest.new
+            #
+            #   # Call the export_insights_data method.
+            #   result = client.export_insights_data request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def export_insights_data request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -950,6 +1126,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::CreateIssueModelRequest.new
+            #
+            #   # Call the create_issue_model method.
+            #   result = client.create_issue_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def create_issue_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1024,6 +1222,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::UpdateIssueModelRequest.new
+            #
+            #   # Call the update_issue_model method.
+            #   result = client.update_issue_model request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::IssueModel.
+            #   p result
+            #
             def update_issue_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1093,6 +1306,21 @@ module Google
             # @return [::Google::Cloud::ContactCenterInsights::V1::IssueModel]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::GetIssueModelRequest.new
+            #
+            #   # Call the get_issue_model method.
+            #   result = client.get_issue_model request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::IssueModel.
+            #   p result
             #
             def get_issue_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1164,6 +1392,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::ListIssueModelsRequest.new
+            #
+            #   # Call the list_issue_models method.
+            #   result = client.list_issue_models request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::ListIssueModelsResponse.
+            #   p result
+            #
             def list_issue_models request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1233,6 +1476,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::DeleteIssueModelRequest.new
+            #
+            #   # Call the delete_issue_model method.
+            #   result = client.delete_issue_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def delete_issue_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1306,6 +1571,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::DeployIssueModelRequest.new
+            #
+            #   # Call the deploy_issue_model method.
+            #   result = client.deploy_issue_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def deploy_issue_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1378,6 +1665,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::UndeployIssueModelRequest.new
+            #
+            #   # Call the undeploy_issue_model method.
+            #   result = client.undeploy_issue_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def undeploy_issue_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1449,6 +1758,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::GetIssueRequest.new
+            #
+            #   # Call the get_issue method.
+            #   result = client.get_issue request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::Issue.
+            #   p result
+            #
             def get_issue request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1518,6 +1842,21 @@ module Google
             # @return [::Google::Cloud::ContactCenterInsights::V1::ListIssuesResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::ListIssuesRequest.new
+            #
+            #   # Call the list_issues method.
+            #   result = client.list_issues request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::ListIssuesResponse.
+            #   p result
             #
             def list_issues request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1591,6 +1930,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::UpdateIssueRequest.new
+            #
+            #   # Call the update_issue method.
+            #   result = client.update_issue request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::Issue.
+            #   p result
+            #
             def update_issue request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1660,6 +2014,21 @@ module Google
             # @return [::Google::Cloud::ContactCenterInsights::V1::CalculateIssueModelStatsResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::CalculateIssueModelStatsRequest.new
+            #
+            #   # Call the calculate_issue_model_stats method.
+            #   result = client.calculate_issue_model_stats request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::CalculateIssueModelStatsResponse.
+            #   p result
             #
             def calculate_issue_model_stats request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1736,6 +2105,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::CreatePhraseMatcherRequest.new
+            #
+            #   # Call the create_phrase_matcher method.
+            #   result = client.create_phrase_matcher request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::PhraseMatcher.
+            #   p result
+            #
             def create_phrase_matcher request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1805,6 +2189,21 @@ module Google
             # @return [::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::GetPhraseMatcherRequest.new
+            #
+            #   # Call the get_phrase_matcher method.
+            #   result = client.get_phrase_matcher request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::PhraseMatcher.
+            #   p result
             #
             def get_phrase_matcher request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1888,6 +2287,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::ListPhraseMatchersRequest.new
+            #
+            #   # Call the list_phrase_matchers method.
+            #   result = client.list_phrase_matchers request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher.
+            #     p response
+            #   end
+            #
             def list_phrase_matchers request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1958,6 +2378,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::DeletePhraseMatcherRequest.new
+            #
+            #   # Call the delete_phrase_matcher method.
+            #   result = client.delete_phrase_matcher request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_phrase_matcher request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2032,6 +2467,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::CalculateStatsRequest.new
+            #
+            #   # Call the calculate_stats method.
+            #   result = client.calculate_stats request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::CalculateStatsResponse.
+            #   p result
+            #
             def calculate_stats request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2101,6 +2551,21 @@ module Google
             # @return [::Google::Cloud::ContactCenterInsights::V1::Settings]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::GetSettingsRequest.new
+            #
+            #   # Call the get_settings method.
+            #   result = client.get_settings request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::Settings.
+            #   p result
             #
             def get_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2173,6 +2638,21 @@ module Google
             # @return [::Google::Cloud::ContactCenterInsights::V1::Settings]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::UpdateSettingsRequest.new
+            #
+            #   # Call the update_settings method.
+            #   result = client.update_settings request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::Settings.
+            #   p result
             #
             def update_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

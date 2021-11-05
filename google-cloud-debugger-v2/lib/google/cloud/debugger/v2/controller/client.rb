@@ -213,6 +213,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/debugger/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Debugger::V2::Controller::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Debugger::V2::RegisterDebuggeeRequest.new
+            #
+            #   # Call the register_debuggee method.
+            #   result = client.register_debuggee request
+            #
+            #   # The returned object is of type Google::Cloud::Debugger::V2::RegisterDebuggeeResponse.
+            #   p result
+            #
             def register_debuggee request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -299,6 +314,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/debugger/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Debugger::V2::Controller::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Debugger::V2::ListActiveBreakpointsRequest.new
+            #
+            #   # Call the list_active_breakpoints method.
+            #   result = client.list_active_breakpoints request
+            #
+            #   # The returned object is of type Google::Cloud::Debugger::V2::ListActiveBreakpointsResponse.
+            #   p result
+            #
             def list_active_breakpoints request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -379,6 +409,21 @@ module Google
             # @return [::Google::Cloud::Debugger::V2::UpdateActiveBreakpointResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/debugger/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Debugger::V2::Controller::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Debugger::V2::UpdateActiveBreakpointRequest.new
+            #
+            #   # Call the update_active_breakpoint method.
+            #   result = client.update_active_breakpoint request
+            #
+            #   # The returned object is of type Google::Cloud::Debugger::V2::UpdateActiveBreakpointResponse.
+            #   p result
             #
             def update_active_breakpoint request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

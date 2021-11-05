@@ -176,6 +176,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/iap/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iap::V1::ListBrandsRequest.new
+            #
+            #   # Call the list_brands method.
+            #   result = client.list_brands request
+            #
+            #   # The returned object is of type Google::Cloud::Iap::V1::ListBrandsResponse.
+            #   p result
+            #
             def list_brands request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -255,6 +270,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/iap/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iap::V1::CreateBrandRequest.new
+            #
+            #   # Call the create_brand method.
+            #   result = client.create_brand request
+            #
+            #   # The returned object is of type Google::Cloud::Iap::V1::Brand.
+            #   p result
+            #
             def create_brand request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -325,6 +355,21 @@ module Google
             # @return [::Google::Cloud::Iap::V1::Brand]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/iap/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iap::V1::GetBrandRequest.new
+            #
+            #   # Call the get_brand method.
+            #   result = client.get_brand request
+            #
+            #   # The returned object is of type Google::Cloud::Iap::V1::Brand.
+            #   p result
             #
             def get_brand request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -402,6 +447,21 @@ module Google
             # @return [::Google::Cloud::Iap::V1::IdentityAwareProxyClient]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/iap/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iap::V1::CreateIdentityAwareProxyClientRequest.new
+            #
+            #   # Call the create_identity_aware_proxy_client method.
+            #   result = client.create_identity_aware_proxy_client request
+            #
+            #   # The returned object is of type Google::Cloud::Iap::V1::IdentityAwareProxyClient.
+            #   p result
             #
             def create_identity_aware_proxy_client request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -486,6 +546,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/iap/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iap::V1::ListIdentityAwareProxyClientsRequest.new
+            #
+            #   # Call the list_identity_aware_proxy_clients method.
+            #   result = client.list_identity_aware_proxy_clients request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Iap::V1::IdentityAwareProxyClient.
+            #     p response
+            #   end
+            #
             def list_identity_aware_proxy_clients request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -560,6 +641,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/iap/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iap::V1::GetIdentityAwareProxyClientRequest.new
+            #
+            #   # Call the get_identity_aware_proxy_client method.
+            #   result = client.get_identity_aware_proxy_client request
+            #
+            #   # The returned object is of type Google::Cloud::Iap::V1::IdentityAwareProxyClient.
+            #   p result
+            #
             def get_identity_aware_proxy_client request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -632,6 +728,21 @@ module Google
             # @return [::Google::Cloud::Iap::V1::IdentityAwareProxyClient]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/iap/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iap::V1::ResetIdentityAwareProxyClientSecretRequest.new
+            #
+            #   # Call the reset_identity_aware_proxy_client_secret method.
+            #   result = client.reset_identity_aware_proxy_client_secret request
+            #
+            #   # The returned object is of type Google::Cloud::Iap::V1::IdentityAwareProxyClient.
+            #   p result
             #
             def reset_identity_aware_proxy_client_secret request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -706,6 +817,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/iap/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iap::V1::DeleteIdentityAwareProxyClientRequest.new
+            #
+            #   # Call the delete_identity_aware_proxy_client method.
+            #   result = client.delete_identity_aware_proxy_client request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_identity_aware_proxy_client request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
