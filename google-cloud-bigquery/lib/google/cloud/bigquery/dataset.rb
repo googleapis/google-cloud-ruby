@@ -1393,8 +1393,9 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = bigquery.query_job "CREATE TABLE my_table (x INT64)"
+        #   job = dataset.query_job "CREATE TABLE my_table (x INT64)"
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -1405,8 +1406,9 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = bigquery.query_job "UPDATE my_table " \
+        #   job = dataset.query_job "UPDATE my_table " \
         #                            "SET x = x + 1 " \
         #                            "WHERE x IS NOT NULL"
         #
@@ -1414,6 +1416,19 @@ module Google
         #   if !job.failed?
         #     puts job.num_dml_affected_rows
         #   end
+        #
+        # @example Run query in a session:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   job = dataset.query_job "CREATE TEMPORARY TABLE temptable AS SELECT 17 as foo", create_session: true
+        #
+        #   job.wait_until_done!
+        #
+        #   session_id = job.session_id
+        #   data = dataset.query "SELECT * FROM temptable", session_id: session_id
         #
         # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"
@@ -1701,8 +1716,9 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = bigquery.query "CREATE TABLE my_table (x INT64)"
+        #   data = dataset.query "CREATE TABLE my_table (x INT64)"
         #
         #   table_ref = data.ddl_target_table # Or ddl_target_routine for CREATE/DROP FUNCTION/PROCEDURE
         #
@@ -1710,12 +1726,24 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = bigquery.query "UPDATE my_table " \
-        #                         "SET x = x + 1 " \
-        #                         "WHERE x IS NOT NULL"
+        #   data = dataset.query "UPDATE my_table SET x = x + 1 WHERE x IS NOT NULL"
         #
         #   puts data.num_dml_affected_rows
+        #
+        # @example Run query in a session:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   job = dataset.query_job "CREATE TEMPORARY TABLE temptable AS SELECT 17 as foo", create_session: true
+        #
+        #   job.wait_until_done!
+        #
+        #   session_id = job.session_id
+        #   data = dataset.query "SELECT * FROM temptable", session_id: session_id
         #
         # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"
