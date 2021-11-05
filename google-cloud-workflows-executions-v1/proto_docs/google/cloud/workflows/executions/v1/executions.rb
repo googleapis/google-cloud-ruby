@@ -42,6 +42,10 @@ module Google
           #   @return [::String]
           #     Input parameters of the execution represented as a JSON string.
           #     The size limit is 32KB.
+          #
+          #     *Note*: If you are using the REST API directly to run your workflow, you
+          #     must escape any JSON string value of `argument`. Example:
+          #     `'{"argument":"{\"firstName\":\"FIRST\",\"lastName\":\"LAST\"}"}'`
           # @!attribute [r] result
           #   @return [::String]
           #     Output only. Output of the execution represented as a JSON string. The
@@ -54,23 +58,71 @@ module Google
           # @!attribute [r] workflow_revision_id
           #   @return [::String]
           #     Output only. Revision of the workflow this execution is using.
+          # @!attribute [rw] call_log_level
+          #   @return [::Google::Cloud::Workflows::Executions::V1::Execution::CallLogLevel]
+          #     The call logging level associated to this execution.
           class Execution
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
+            # A single stack element (frame) where an error occurred.
+            # @!attribute [rw] step
+            #   @return [::String]
+            #     The step the error occurred at.
+            # @!attribute [rw] routine
+            #   @return [::String]
+            #     The routine where the error occurred.
+            # @!attribute [rw] position
+            #   @return [::Google::Cloud::Workflows::Executions::V1::Execution::StackTraceElement::Position]
+            #     The source position information of the stack trace element.
+            class StackTraceElement
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Position contains source position information about the stack trace
+              # element such as line number, column number and length of the code block
+              # in bytes.
+              # @!attribute [rw] line
+              #   @return [::Integer]
+              #     The source code line number the current instruction was generated from.
+              # @!attribute [rw] column
+              #   @return [::Integer]
+              #     The source code column position (of the line) the current instruction
+              #     was generated from.
+              # @!attribute [rw] length
+              #   @return [::Integer]
+              #     The number of bytes of source code making up this stack trace element.
+              class Position
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+
+            # A collection of stack elements (frames) where an error occurred.
+            # @!attribute [rw] elements
+            #   @return [::Array<::Google::Cloud::Workflows::Executions::V1::Execution::StackTraceElement>]
+            #     An array of stack elements.
+            class StackTrace
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
             # Error describes why the execution was abnormally terminated.
             # @!attribute [rw] payload
             #   @return [::String]
-            #     Error payload returned by the execution, represented as a JSON string.
+            #     Error message and data returned represented as a JSON string.
             # @!attribute [rw] context
             #   @return [::String]
-            #     Human readable error context, helpful for debugging purposes.
+            #     Human-readable stack trace string.
+            # @!attribute [rw] stack_trace
+            #   @return [::Google::Cloud::Workflows::Executions::V1::Execution::StackTrace]
+            #     Stack trace with detailed information of where error was generated.
             class Error
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # Describes the current state of the execution. More states may be added
+            # Describes the current state of the execution. More states might be added
             # in the future.
             module State
               # Invalid state.
@@ -87,6 +139,20 @@ module Google
 
               # The execution was stopped intentionally.
               CANCELLED = 4
+            end
+
+            # Describes the level of platform logging to apply to calls and call
+            # responses during workflow executions.
+            module CallLogLevel
+              # No call logging specified.
+              CALL_LOG_LEVEL_UNSPECIFIED = 0
+
+              # Log all call steps within workflows, all call returns, and all exceptions
+              # raised.
+              LOG_ALL_CALLS = 1
+
+              # Log only exceptions that are raised from call steps within workflows.
+              LOG_ERRORS_ONLY = 2
             end
           end
 
