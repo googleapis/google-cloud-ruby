@@ -135,6 +135,11 @@
                 "delete_phrase_matcher"
               ]
             },
+            "UpdatePhraseMatcher": {
+              "methods": [
+                "update_phrase_matcher"
+              ]
+            },
             "CalculateStats": {
               "methods": [
                 "calculate_stats"
