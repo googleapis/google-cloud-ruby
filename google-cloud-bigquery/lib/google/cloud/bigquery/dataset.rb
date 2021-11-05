@@ -1377,8 +1377,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = dataset.query_job "SELECT name FROM my_table " \
-        #                           "WHERE id IN UNNEST(@ids)",
+        #   job = dataset.query_job "SELECT name FROM my_table WHERE id IN UNNEST(@ids)",
         #                           params: { ids: [] },
         #                           types: { ids: [:INT64] }
         #
@@ -1408,9 +1407,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = dataset.query_job "UPDATE my_table " \
-        #                            "SET x = x + 1 " \
-        #                            "WHERE x IS NOT NULL"
+        #   job = dataset.query_job "UPDATE my_table SET x = x + 1 WHERE x IS NOT NULL"
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -1700,8 +1697,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = dataset.query "SELECT name FROM my_table " \
-        #                        "WHERE id IN UNNEST(@ids)",
+        #   data = dataset.query "SELECT name FROM my_table WHERE id IN UNNEST(@ids)",
         #                        params: { ids: [] },
         #                        types: { ids: [:INT64] }
         #

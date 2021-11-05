@@ -474,8 +474,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job "SELECT name FROM " \
-        #                            "`my_project.my_dataset.my_table`"
+        #   job = bigquery.query_job "SELECT name FROM `my_project.my_dataset.my_table`"
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -489,8 +488,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job "SELECT name FROM " \
-        #                            " [my_project:my_dataset.my_table]",
+        #   job = bigquery.query_job "SELECT name FROM [my_project:my_dataset.my_table]",
         #                            legacy_sql: true
         #
         #   job.wait_until_done!
@@ -505,9 +503,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job "SELECT name FROM " \
-        #                            "`my_dataset.my_table` " \
-        #                            "WHERE id = ?",
+        #   job = bigquery.query_job "SELECT name FROM `my_dataset.my_table` WHERE id = ?",
         #                            params: [1]
         #
         #   job.wait_until_done!
@@ -522,9 +518,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job "SELECT name FROM " \
-        #                            "`my_dataset.my_table` " \
-        #                            "WHERE id = @id",
+        #   job = bigquery.query_job "SELECT name FROM `my_dataset.my_table` WHERE id = @id",
         #                            params: { id: 1 }
         #
         #   job.wait_until_done!
@@ -539,9 +533,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job "SELECT name FROM " \
-        #                            "`my_dataset.my_table` " \
-        #                            "WHERE id IN UNNEST(@ids)",
+        #   job = bigquery.query_job "SELECT name FROM `my_dataset.my_table` WHERE id IN UNNEST(@ids)",
         #                            params: { ids: [] },
         #                            types: { ids: [:INT64] }
         #
@@ -557,9 +549,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job "CREATE TABLE " \
-        #                            "`my_dataset.my_table` " \
-        #                            "(x INT64)"
+        #   job = bigquery.query_job "CREATE TABLE`my_dataset.my_table` (x INT64)"
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -571,10 +561,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job "UPDATE " \
-        #                            "`my_dataset.my_table` " \
-        #                            "SET x = x + 1 " \
-        #                            "WHERE x IS NOT NULL"
+        #   job = bigquery.query_job "UPDATE `my_dataset.my_table` SET x = x + 1 WHERE x IS NOT NULL"
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -829,9 +816,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   data = bigquery.query "SELECT name " \
-        #                         "FROM `my_dataset.my_table` " \
-        #                         "WHERE id = ?",
+        #   data = bigquery.query "SELECT name FROM `my_dataset.my_table` WHERE id = ?",
         #                         params: [1]
         #
         #   # Iterate over the first page of results
@@ -846,9 +831,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   data = bigquery.query "SELECT name " \
-        #                         "FROM `my_dataset.my_table` " \
-        #                         "WHERE id = @id",
+        #   data = bigquery.query "SELECT name FROM `my_dataset.my_table` WHERE id = @id",
         #                         params: { id: 1 }
         #
         #   # Iterate over the first page of results
@@ -863,9 +846,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   data = bigquery.query "SELECT name FROM " \
-        #                         "`my_dataset.my_table` " \
-        #                         "WHERE id IN UNNEST(@ids)",
+        #   data = bigquery.query "SELECT name FROM `my_dataset.my_table` WHERE id IN UNNEST(@ids)",
         #                         params: { ids: [] },
         #                         types: { ids: [:INT64] }
         #
@@ -890,9 +871,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   data = bigquery.query "UPDATE `my_dataset.my_table` " \
-        #                         "SET x = x + 1 " \
-        #                         "WHERE x IS NOT NULL"
+        #   data = bigquery.query "UPDATE `my_dataset.my_table` SET x = x + 1 WHERE x IS NOT NULL"
         #
         #   puts data.num_dml_affected_rows
         #
@@ -1392,9 +1371,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   fourpm = bigquery.time 16, 0, 0
-        #   data = bigquery.query "SELECT name " \
-        #                         "FROM `my_dataset.my_table`" \
-        #                         "WHERE time_of_date = @time",
+        #   data = bigquery.query "SELECT name FROM `my_dataset.my_table` WHERE time_of_date = @time",
         #                         params: { time: fourpm }
         #
         #   # Iterate over the first page of results
@@ -1410,9 +1387,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   precise_time = bigquery.time 16, 35, 15.376541
-        #   data = bigquery.query "SELECT name " \
-        #                         "FROM `my_dataset.my_table`" \
-        #                         "WHERE time_of_date >= @time",
+        #   data = bigquery.query "SELECT name FROM `my_dataset.my_table` WHERE time_of_date >= @time",
         #                         params: { time: precise_time }
         #
         #   # Iterate over the first page of results
