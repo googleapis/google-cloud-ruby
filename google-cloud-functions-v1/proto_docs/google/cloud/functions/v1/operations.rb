@@ -43,6 +43,15 @@ module Google
         #   @return [::String]
         #     The Cloud Build ID of the function created or updated by an API call.
         #     This field is only populated for Create and Update operations.
+        # @!attribute [rw] source_token
+        #   @return [::String]
+        #     An identifier for Firebase function sources. Disclaimer: This field is only
+        #     supported for Firebase function deployments.
+        # @!attribute [rw] build_name
+        #   @return [::String]
+        #     The Cloud Build Name of the function deployment.
+        #     This field is only populated for Create and Update operations.
+        #     `projects/<project-number>/locations/<region>/builds/<build-id>`.
         class OperationMetadataV1
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
