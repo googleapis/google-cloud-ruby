@@ -86,6 +86,8 @@ module Google
             rpc :ListPhraseMatchers, ::Google::Cloud::ContactCenterInsights::V1::ListPhraseMatchersRequest, ::Google::Cloud::ContactCenterInsights::V1::ListPhraseMatchersResponse
             # Deletes a phrase matcher.
             rpc :DeletePhraseMatcher, ::Google::Cloud::ContactCenterInsights::V1::DeletePhraseMatcherRequest, ::Google::Protobuf::Empty
+            # Updates a phrase matcher.
+            rpc :UpdatePhraseMatcher, ::Google::Cloud::ContactCenterInsights::V1::UpdatePhraseMatcherRequest, ::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher
             # Gets conversation statistics.
             rpc :CalculateStats, ::Google::Cloud::ContactCenterInsights::V1::CalculateStatsRequest, ::Google::Cloud::ContactCenterInsights::V1::CalculateStatsResponse
             # Gets project-level settings.

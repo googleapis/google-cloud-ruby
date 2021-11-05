@@ -1589,6 +1589,66 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
     end
   end
 
+  def test_update_phrase_matcher
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    phrase_matcher = {}
+    update_mask = {}
+
+    update_phrase_matcher_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_phrase_matcher, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::UpdatePhraseMatcherRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher), request["phrase_matcher"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_phrase_matcher_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_phrase_matcher({ phrase_matcher: phrase_matcher, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_phrase_matcher phrase_matcher: phrase_matcher, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_phrase_matcher ::Google::Cloud::ContactCenterInsights::V1::UpdatePhraseMatcherRequest.new(phrase_matcher: phrase_matcher, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_phrase_matcher({ phrase_matcher: phrase_matcher, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_phrase_matcher(::Google::Cloud::ContactCenterInsights::V1::UpdatePhraseMatcherRequest.new(phrase_matcher: phrase_matcher, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_phrase_matcher_client_stub.call_rpc_count
+    end
+  end
+
   def test_calculate_stats
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::ContactCenterInsights::V1::CalculateStatsResponse.new
