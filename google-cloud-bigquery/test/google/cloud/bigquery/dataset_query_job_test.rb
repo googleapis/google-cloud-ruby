@@ -360,6 +360,27 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     _(job.session_id).must_equal session_id
   end
 
+  it "queries the data with create_session in block" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query, create_session: true
+    job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
+      project_id: project,
+      dataset_id: dataset_id
+    )
+    job_resp_gapi = query_job_resp_gapi query, session_id: session_id
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+
+    job = dataset.query_job query do |j|
+      j.create_session = true
+    end
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.session_id).must_equal session_id
+  end
+
   it "queries the data with session_id option" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
@@ -373,6 +394,29 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
     job = dataset.query_job query, session_id: session_id
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.session_id).must_equal session_id
+  end
+
+  it "queries the data with session_id in block" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query, session_id: session_id
+    job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
+      project_id: project,
+      dataset_id: dataset_id
+    )
+    job_resp_gapi = query_job_resp_gapi query, session_id: session_id
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+
+    job = dataset.query_job query do |j|
+      j.session_id = session_id
+      j.session_id = nil
+      j.session_id = session_id
+    end
     mock.verify
 
     _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
