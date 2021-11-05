@@ -15,6 +15,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :version_id, :int64, 4
       optional :update_time, :message, 5, "google.protobuf.Timestamp"
       optional :build_id, :string, 6
+      optional :source_token, :string, 7
+      optional :build_name, :string, 8
     end
     add_enum "google.cloud.functions.v1.OperationType" do
       value :OPERATION_UNSPECIFIED, 0

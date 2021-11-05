@@ -28,12 +28,21 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :version_id, :int64, 14
       map :labels, :string, :string, 15
       map :environment_variables, :string, :string, 17
+      map :build_environment_variables, :string, :string, 28
       optional :network, :string, 18
       optional :max_instances, :int32, 20
+      optional :min_instances, :int32, 32
       optional :vpc_connector, :string, 22
       optional :vpc_connector_egress_settings, :enum, 23, "google.cloud.functions.v1.CloudFunction.VpcConnectorEgressSettings"
       optional :ingress_settings, :enum, 24, "google.cloud.functions.v1.CloudFunction.IngressSettings"
+      optional :kms_key_name, :string, 25
+      optional :build_worker_pool, :string, 26
       optional :build_id, :string, 27
+      optional :build_name, :string, 33
+      repeated :secret_environment_variables, :message, 29, "google.cloud.functions.v1.SecretEnvVar"
+      repeated :secret_volumes, :message, 30, "google.cloud.functions.v1.SecretVolume"
+      optional :source_token, :string, 31
+      optional :docker_repository, :string, 34
       oneof :source_code do
         optional :source_archive_url, :string, 3
         optional :source_repository, :message, 4, "google.cloud.functions.v1.SourceRepository"
@@ -80,6 +89,22 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       end
     end
     add_message "google.cloud.functions.v1.FailurePolicy.Retry" do
+    end
+    add_message "google.cloud.functions.v1.SecretEnvVar" do
+      optional :key, :string, 1
+      optional :project_id, :string, 2
+      optional :secret, :string, 3
+      optional :version, :string, 4
+    end
+    add_message "google.cloud.functions.v1.SecretVolume" do
+      optional :mount_path, :string, 1
+      optional :project_id, :string, 2
+      optional :secret, :string, 3
+      repeated :versions, :message, 4, "google.cloud.functions.v1.SecretVolume.SecretVersion"
+    end
+    add_message "google.cloud.functions.v1.SecretVolume.SecretVersion" do
+      optional :version, :string, 1
+      optional :path, :string, 2
     end
     add_message "google.cloud.functions.v1.CreateFunctionRequest" do
       optional :location, :string, 1
@@ -151,6 +176,9 @@ module Google
         EventTrigger = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.EventTrigger").msgclass
         FailurePolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.FailurePolicy").msgclass
         FailurePolicy::Retry = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.FailurePolicy.Retry").msgclass
+        SecretEnvVar = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.SecretEnvVar").msgclass
+        SecretVolume = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.SecretVolume").msgclass
+        SecretVolume::SecretVersion = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.SecretVolume.SecretVersion").msgclass
         CreateFunctionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.CreateFunctionRequest").msgclass
         UpdateFunctionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.UpdateFunctionRequest").msgclass
         GetFunctionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.GetFunctionRequest").msgclass
