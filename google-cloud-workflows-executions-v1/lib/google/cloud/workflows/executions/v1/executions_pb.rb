@@ -19,10 +19,25 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :result, :string, 6
       optional :error, :message, 7, "google.cloud.workflows.executions.v1.Execution.Error"
       optional :workflow_revision_id, :string, 8
+      optional :call_log_level, :enum, 9, "google.cloud.workflows.executions.v1.Execution.CallLogLevel"
+    end
+    add_message "google.cloud.workflows.executions.v1.Execution.StackTraceElement" do
+      optional :step, :string, 1
+      optional :routine, :string, 2
+      optional :position, :message, 3, "google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position"
+    end
+    add_message "google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position" do
+      optional :line, :int64, 1
+      optional :column, :int64, 2
+      optional :length, :int64, 3
+    end
+    add_message "google.cloud.workflows.executions.v1.Execution.StackTrace" do
+      repeated :elements, :message, 1, "google.cloud.workflows.executions.v1.Execution.StackTraceElement"
     end
     add_message "google.cloud.workflows.executions.v1.Execution.Error" do
       optional :payload, :string, 1
       optional :context, :string, 2
+      optional :stack_trace, :message, 3, "google.cloud.workflows.executions.v1.Execution.StackTrace"
     end
     add_enum "google.cloud.workflows.executions.v1.Execution.State" do
       value :STATE_UNSPECIFIED, 0
@@ -30,6 +45,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :SUCCEEDED, 2
       value :FAILED, 3
       value :CANCELLED, 4
+    end
+    add_enum "google.cloud.workflows.executions.v1.Execution.CallLogLevel" do
+      value :CALL_LOG_LEVEL_UNSPECIFIED, 0
+      value :LOG_ALL_CALLS, 1
+      value :LOG_ERRORS_ONLY, 2
     end
     add_message "google.cloud.workflows.executions.v1.ListExecutionsRequest" do
       optional :parent, :string, 1
@@ -66,8 +86,12 @@ module Google
       module Executions
         module V1
           Execution = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.workflows.executions.v1.Execution").msgclass
+          Execution::StackTraceElement = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.workflows.executions.v1.Execution.StackTraceElement").msgclass
+          Execution::StackTraceElement::Position = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position").msgclass
+          Execution::StackTrace = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.workflows.executions.v1.Execution.StackTrace").msgclass
           Execution::Error = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.workflows.executions.v1.Execution.Error").msgclass
           Execution::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.workflows.executions.v1.Execution.State").enummodule
+          Execution::CallLogLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.workflows.executions.v1.Execution.CallLogLevel").enummodule
           ListExecutionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.workflows.executions.v1.ListExecutionsRequest").msgclass
           ListExecutionsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.workflows.executions.v1.ListExecutionsResponse").msgclass
           CreateExecutionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.workflows.executions.v1.CreateExecutionRequest").msgclass
