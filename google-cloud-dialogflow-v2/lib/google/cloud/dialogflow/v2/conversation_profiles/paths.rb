@@ -61,6 +61,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified CXSecuritySettings resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/securitySettings/{security_settings}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param security_settings [String]
+            #
+            # @return [::String]
+            def cx_security_settings_path project:, location:, security_settings:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/securitySettings/#{security_settings}"
+            end
+
+            ##
             # Create a fully-qualified ConversationModel resource string.
             #
             # The resource will be in the following format:
