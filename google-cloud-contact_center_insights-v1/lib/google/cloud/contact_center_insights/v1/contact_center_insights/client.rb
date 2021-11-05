@@ -2090,10 +2090,10 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource of the phrase matcher. Required. The location to create
-            #     a phrase matcher for.
-            #     Format: `projects/<Project ID>/locations/<Location ID>` or
-            #     `projects/<Project Number>/locations/<Location ID>`
+            #     Required. The parent resource of the phrase matcher. Required. The location
+            #     to create a phrase matcher for. Format: `projects/<Project
+            #     ID>/locations/<Location ID>` or `projects/<Project
+            #     Number>/locations/<Location ID>`
             #   @param phrase_matcher [::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher, ::Hash]
             #     Required. The phrase matcher resource to create.
             #
@@ -2428,6 +2428,93 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @contact_center_insights_stub.call_rpc :delete_phrase_matcher, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a phrase matcher.
+            #
+            # @overload update_phrase_matcher(request, options = nil)
+            #   Pass arguments to `update_phrase_matcher` via a request object, either of type
+            #   {::Google::Cloud::ContactCenterInsights::V1::UpdatePhraseMatcherRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ContactCenterInsights::V1::UpdatePhraseMatcherRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_phrase_matcher(phrase_matcher: nil, update_mask: nil)
+            #   Pass arguments to `update_phrase_matcher` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param phrase_matcher [::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher, ::Hash]
+            #     Required. The new values for the phrase matcher.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The list of fields to be updated.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::UpdatePhraseMatcherRequest.new
+            #
+            #   # Call the update_phrase_matcher method.
+            #   result = client.update_phrase_matcher request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::PhraseMatcher.
+            #   p result
+            #
+            def update_phrase_matcher request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::UpdatePhraseMatcherRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_phrase_matcher.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.phrase_matcher&.name
+                header_params["phrase_matcher.name"] = request.phrase_matcher.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_phrase_matcher.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_phrase_matcher.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @contact_center_insights_stub.call_rpc :update_phrase_matcher, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -2956,6 +3043,11 @@ module Google
                 #
                 attr_reader :delete_phrase_matcher
                 ##
+                # RPC-specific configuration for `update_phrase_matcher`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_phrase_matcher
+                ##
                 # RPC-specific configuration for `calculate_stats`
                 # @return [::Gapic::Config::Method]
                 #
@@ -3023,6 +3115,8 @@ module Google
                   @list_phrase_matchers = ::Gapic::Config::Method.new list_phrase_matchers_config
                   delete_phrase_matcher_config = parent_rpcs.delete_phrase_matcher if parent_rpcs.respond_to? :delete_phrase_matcher
                   @delete_phrase_matcher = ::Gapic::Config::Method.new delete_phrase_matcher_config
+                  update_phrase_matcher_config = parent_rpcs.update_phrase_matcher if parent_rpcs.respond_to? :update_phrase_matcher
+                  @update_phrase_matcher = ::Gapic::Config::Method.new update_phrase_matcher_config
                   calculate_stats_config = parent_rpcs.calculate_stats if parent_rpcs.respond_to? :calculate_stats
                   @calculate_stats = ::Gapic::Config::Method.new calculate_stats_config
                   get_settings_config = parent_rpcs.get_settings if parent_rpcs.respond_to? :get_settings

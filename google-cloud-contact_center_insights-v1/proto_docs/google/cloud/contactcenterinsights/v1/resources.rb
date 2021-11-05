@@ -771,6 +771,9 @@ module Google
           # @!attribute [rw] labeled_conversations_count
           #   @return [::Integer]
           #     Number of conversations attached to the issue at this point in time.
+          # @!attribute [rw] display_name
+          #   @return [::String]
+          #     Display name of the issue.
           class IssueStats
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
