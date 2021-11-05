@@ -225,6 +225,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.contactcenterinsights.v1.IssueModelLabelStats.IssueStats" do
       optional :issue, :string, 1
       optional :labeled_conversations_count, :int64, 2
+      optional :display_name, :string, 3
     end
     add_message "google.cloud.contactcenterinsights.v1.PhraseMatcher" do
       optional :name, :string, 1

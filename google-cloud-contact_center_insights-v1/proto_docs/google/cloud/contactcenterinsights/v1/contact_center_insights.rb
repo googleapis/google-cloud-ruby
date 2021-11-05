@@ -60,6 +60,11 @@ module Google
         #     `projects/<Project ID>/locations/<Location ID>/issueModels/<Issue Model
         #     ID>/issues/<Issue ID>`
         #     Deprecated, use `issue_matches_stats` field instead.
+        # @!attribute [rw] issue_matches_stats
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::ContactCenterInsights::V1::IssueModelLabelStats::IssueStats}]
+        #     A map associating each issue resource name with its respective number of
+        #     matches in the set of conversations. Key has the format:
+        #     `projects/<ProjectID>/locations/<LocationID>/issueModels/<IssueModelID>/issues/<IssueID>`
         # @!attribute [rw] conversation_count_time_series
         #   @return [::Google::Cloud::ContactCenterInsights::V1::CalculateStatsResponse::TimeSeries]
         #     A time series representing the count of conversations created over time
@@ -117,6 +122,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::Integer]
           class IssueMatchesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::ContactCenterInsights::V1::IssueModelLabelStats::IssueStats]
+          class IssueMatchesStatsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -331,9 +345,9 @@ module Google
           #     the resource project will be used.
           # @!attribute [rw] dataset
           #   @return [::String]
-          #     Required. The name of the BigQuery dataset that the snapshot result should be
-          #     exported to. If this dataset does not exist, the export call returns an
-          #     INVALID_ARGUMENT error.
+          #     Required. The name of the BigQuery dataset that the snapshot result
+          #     should be exported to. If this dataset does not exist, the export call
+          #     returns an INVALID_ARGUMENT error.
           # @!attribute [rw] table
           #   @return [::String]
           #     The BigQuery table name to which the insights data should be written.
@@ -581,10 +595,10 @@ module Google
         # Request to create a phrase matcher.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource of the phrase matcher. Required. The location to create
-        #     a phrase matcher for.
-        #     Format: `projects/<Project ID>/locations/<Location ID>` or
-        #     `projects/<Project Number>/locations/<Location ID>`
+        #     Required. The parent resource of the phrase matcher. Required. The location
+        #     to create a phrase matcher for. Format: `projects/<Project
+        #     ID>/locations/<Location ID>` or `projects/<Project
+        #     Number>/locations/<Location ID>`
         # @!attribute [rw] phrase_matcher
         #   @return [::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher]
         #     Required. The phrase matcher resource to create.
@@ -644,6 +658,18 @@ module Google
         #   @return [::String]
         #     Required. The name of the phrase matcher to delete.
         class DeletePhraseMatcherRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to update a phrase matcher.
+        # @!attribute [rw] phrase_matcher
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher]
+        #     Required. The new values for the phrase matcher.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     The list of fields to be updated.
+        class UpdatePhraseMatcherRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

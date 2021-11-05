@@ -64,6 +64,7 @@
     "snippets/contact_center_insights/update_conversation.rb",
     "snippets/contact_center_insights/update_issue.rb",
     "snippets/contact_center_insights/update_issue_model.rb",
+    "snippets/contact_center_insights/update_phrase_matcher.rb",
     "snippets/contact_center_insights/update_settings.rb",
     "test/google/cloud/contact_center_insights/v1/contact_center_insights_operations_test.rb",
     "test/google/cloud/contact_center_insights/v1/contact_center_insights_paths_test.rb",

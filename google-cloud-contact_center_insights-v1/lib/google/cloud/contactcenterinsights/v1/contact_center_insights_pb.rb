@@ -27,6 +27,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :smart_highlighter_matches, :string, :int32, 4
       map :custom_highlighter_matches, :string, :int32, 5
       map :issue_matches, :string, :int32, 6
+      map :issue_matches_stats, :string, :message, 8, "google.cloud.contactcenterinsights.v1.IssueModelLabelStats.IssueStats"
       optional :conversation_count_time_series, :message, 7, "google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries"
     end
     add_message "google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries" do
@@ -200,6 +201,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest" do
       optional :name, :string, 1
     end
+    add_message "google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest" do
+      optional :phrase_matcher, :message, 1, "google.cloud.contactcenterinsights.v1.PhraseMatcher"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
     add_message "google.cloud.contactcenterinsights.v1.GetSettingsRequest" do
       optional :name, :string, 1
     end
@@ -264,6 +269,7 @@ module Google
         ListPhraseMatchersResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ListPhraseMatchersResponse").msgclass
         GetPhraseMatcherRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.GetPhraseMatcherRequest").msgclass
         DeletePhraseMatcherRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.DeletePhraseMatcherRequest").msgclass
+        UpdatePhraseMatcherRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest").msgclass
         GetSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.GetSettingsRequest").msgclass
         UpdateSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.UpdateSettingsRequest").msgclass
         ConversationView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ConversationView").enummodule
