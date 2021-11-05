@@ -410,6 +410,7 @@ module Google
             #     included in the query, the it will return results that match any of the
             #     fields. Some eligible fields are:
             #
+            #     ```
             #     | Field                   | Description                                  |
             #     |-------------------------|----------------------------------------------|
             #     | displayName, name       | Filters by displayName.                      |
@@ -422,6 +423,7 @@ module Google
             #     | labels                  | Filters by label name or value.              |
             #     | labels.<key> (where *key* is the name of a label) | Filters by label
             #     name. |
+            #     ```
             #
             #     Search expressions are case insensitive.
             #
