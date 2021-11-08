@@ -1,5 +1,15 @@
 # Release History
 
+### 0.8.0 / 2021-11-08
+
+#### Features
+
+* Support for OS policy assignments
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
 ### 0.7.0 / 2021-10-21
 
 #### Features
