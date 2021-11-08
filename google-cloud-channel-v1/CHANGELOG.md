@@ -1,5 +1,12 @@
 # Release History
 
+### 0.9.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+* Clarifications in the documentation for entitlement parameters
+
 ### 0.9.0 / 2021-11-02
 
 #### Features
