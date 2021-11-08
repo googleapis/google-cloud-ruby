@@ -1,5 +1,15 @@
 # Release History
 
+### 0.6.0 / 2021-11-08
+
+#### Features
+
+* Support related account groups and account defender assessments
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
 ### 0.5.0 / 2021-09-21
 
 #### Features
