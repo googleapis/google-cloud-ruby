@@ -402,8 +402,12 @@ module Google
         #   Flattens all nested and repeated fields in the query results. The
         #   default value is `true`. `large_results` parameter must be `true` if
         #   this is set to `false`.
-        # @param [Integer] maximum_billing_tier Deprecated: Change the billing
-        #   tier to allow high-compute queries.
+        # @param [Integer] maximum_billing_tier Limits the billing tier for this
+        #   job. Queries that have resource usage beyond this tier will fail
+        #   (without incurring a charge). WARNING: The billed byte amount can be
+        #   multiplied by an amount up to this number! Most users should not need
+        #   to alter this setting, and we recommend that you avoid introducing new
+        #   uses of it. Deprecated.
         # @param [Integer] maximum_bytes_billed Limits the bytes billed for this
         #   job. Queries that will have bytes billed beyond this limit will fail
         #   (without incurring a charge). Optional. If unspecified, this will be
