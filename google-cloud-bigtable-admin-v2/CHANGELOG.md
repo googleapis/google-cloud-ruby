@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
 ### 0.7.0 / 2021-10-25
 
 #### Features
