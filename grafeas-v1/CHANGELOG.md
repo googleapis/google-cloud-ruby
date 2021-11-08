@@ -1,5 +1,15 @@
 # Release History
 
+### 0.3.0 / 2021-11-08
+
+#### Features
+
+* Support compliance and in-toto attestation
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
 ### 0.2.2 / 2021-08-11
 
 #### Bug Fixes
