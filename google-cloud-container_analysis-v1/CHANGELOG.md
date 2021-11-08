@@ -1,5 +1,12 @@
 # Release History
 
+### 0.4.5 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+* Include grafeas compliance and in-toto attestation
+
 ### 0.4.4 / 2021-09-22
 
 #### Bug Fixes
