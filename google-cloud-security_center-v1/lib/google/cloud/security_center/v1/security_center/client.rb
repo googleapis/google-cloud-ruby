@@ -1697,6 +1697,7 @@ module Google
             #       * resource.project_display_name: `=`, `:`
             #       * resource.type: `=`, `:`
             #       * resource.folders.resource_folder: `=`, `:`
+            #       * resource.display_name: `=`, `:`
             #   @param order_by [::String]
             #     Expression that defines what fields and order to use for sorting. The
             #     string value should follow SQL syntax: comma separated list of fields. For

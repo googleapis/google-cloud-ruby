@@ -46,6 +46,9 @@ module Google
         #     Output only. Contains a Folder message for each folder in the assets ancestry.
         #     The first folder is the deepest nested folder, and the last folder is the
         #     folder directly under the Organization.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     The human readable name of the resource.
         class Resource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
