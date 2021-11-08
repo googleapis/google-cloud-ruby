@@ -1304,6 +1304,7 @@ module Google
         #   session ID will be a server generated random id. If false, runs query
         #   with an existing session ID when one is provided in the `session_id`
         #   param, otherwise runs query in non-session mode. See {Job#session_id}.
+        #   The default value is false.
         # @param [String] session_id The ID of an existing session. See also the
         #   `create_session` param and {Job#session_id}.
         # @yield [job] a job configuration object
