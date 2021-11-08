@@ -133,6 +133,10 @@ module Google
             # The resource name comes from the source Google Cloud Platform service.
             rpc :LookupEntry, ::Google::Cloud::DataCatalog::V1::LookupEntryRequest, ::Google::Cloud::DataCatalog::V1::Entry
             # Lists entries.
+            #
+            # Note: Currently, this method can list only custom entries.
+            # To get a list of both custom and automatically created entries, use
+            # [SearchCatalog][google.cloud.datacatalog.v1.DataCatalog.SearchCatalog].
             rpc :ListEntries, ::Google::Cloud::DataCatalog::V1::ListEntriesRequest, ::Google::Cloud::DataCatalog::V1::ListEntriesResponse
             # Creates a tag template.
             #

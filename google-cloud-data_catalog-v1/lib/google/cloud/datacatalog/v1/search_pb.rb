@@ -15,6 +15,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :linked_resource, :string, 4
       optional :modify_time, :message, 7, "google.protobuf.Timestamp"
       optional :fully_qualified_name, :string, 10
+      optional :display_name, :string, 12
+      optional :description, :string, 13
       oneof :system do
         optional :integrated_system, :enum, 8, "google.cloud.datacatalog.v1.IntegratedSystem"
         optional :user_specified_system, :string, 9

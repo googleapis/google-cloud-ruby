@@ -83,6 +83,9 @@ module Google
         # @!attribute [r] shard_count
         #   @return [::Integer]
         #     Output only. Total number of shards.
+        # @!attribute [r] latest_shard_resource
+        #   @return [::String]
+        #     Output only. BigQuery resource name of the latest shard.
         class BigQueryDateShardedSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

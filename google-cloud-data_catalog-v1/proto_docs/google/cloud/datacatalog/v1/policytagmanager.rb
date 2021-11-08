@@ -105,8 +105,7 @@ module Google
         #   @return [::String]
         #     Output only. Resource name of this policy tag in the URL format.
         #
-        #     The policy tag manager generates unique taxonomy IDs and policy tag IDs.<br
-        #     /><br />
+        #     The policy tag manager generates unique taxonomy IDs and policy tag IDs.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. User-defined name of this policy tag.
@@ -228,8 +227,7 @@ module Google
         # {::Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#create_policy_tag CreatePolicyTag}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Resource name of the taxonomy that the policy tag will belong to.<br /><br
-        #     />
+        #     Required. Resource name of the taxonomy that the policy tag will belong to.
         # @!attribute [rw] policy_tag
         #   @return [::Google::Cloud::DataCatalog::V1::PolicyTag]
         #     The policy tag to create.
