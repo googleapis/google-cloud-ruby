@@ -536,6 +536,7 @@ module Google
             #      *   `labels`
             #      *   `memorySizeGb`
             #      *   `redisConfig`
+            #      *   `replica_count`
             #   @param instance [::Google::Cloud::Redis::V1::Instance, ::Hash]
             #     Required. Update description.
             #     Only fields specified in update_mask are updated.
@@ -917,7 +918,7 @@ module Google
             end
 
             ##
-            # Initiates a failover of the master node to current replica node for a
+            # Initiates a failover of the primary node to current replica node for a
             # specific STANDARD tier Cloud Memorystore for Redis instance.
             #
             # @overload failover_instance(request, options = nil)
