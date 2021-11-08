@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.1.2 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
 ### 0.1.1 / 2021-08-25
 
 #### Bug Fixes
