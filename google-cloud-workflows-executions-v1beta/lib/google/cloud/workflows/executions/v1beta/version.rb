@@ -22,7 +22,7 @@ module Google
     module Workflows
       module Executions
         module V1beta
-          VERSION = "0.3.4"
+          VERSION = "0.3.5"
         end
       end
     end
