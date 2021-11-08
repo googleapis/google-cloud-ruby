@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.5.0 / 2021-11-08
+
+#### Features
+
+* Support for the update_phrase_matcher call
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
 ### 0.4.0 / 2021-10-18
 
 #### Features
