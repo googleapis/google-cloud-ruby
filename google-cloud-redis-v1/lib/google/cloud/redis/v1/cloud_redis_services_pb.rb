@@ -97,7 +97,7 @@ module Google
             # The returned operation is automatically deleted after a few hours, so
             # there is no need to call DeleteOperation.
             rpc :ExportInstance, ::Google::Cloud::Redis::V1::ExportInstanceRequest, ::Google::Longrunning::Operation
-            # Initiates a failover of the master node to current replica node for a
+            # Initiates a failover of the primary node to current replica node for a
             # specific STANDARD tier Cloud Memorystore for Redis instance.
             rpc :FailoverInstance, ::Google::Cloud::Redis::V1::FailoverInstanceRequest, ::Google::Longrunning::Operation
             # Deletes a specific Redis instance.  Instance stops serving and data is

@@ -21,6 +21,18 @@ module Google
   module Cloud
     module Redis
       module V1
+        # Node specific properties.
+        # @!attribute [r] id
+        #   @return [::String]
+        #     Output only. Node identifying string. e.g. 'node-0', 'node-1'
+        # @!attribute [r] zone
+        #   @return [::String]
+        #     Output only. Location of the node.
+        class NodeInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A Google Cloud Redis instance.
         # @!attribute [rw] name
         #   @return [::String]
@@ -42,15 +54,17 @@ module Google
         # @!attribute [rw] location_id
         #   @return [::String]
         #     Optional. The zone where the instance will be provisioned. If not provided,
-        #     the service will choose a zone for the instance. For STANDARD_HA tier,
-        #     instances will be created across two zones for protection against zonal
-        #     failures. If {::Google::Cloud::Redis::V1::Instance#alternative_location_id alternative_location_id} is also provided, it must be
-        #     different from {::Google::Cloud::Redis::V1::Instance#location_id location_id}.
+        #     the service will choose a zone from the specified region for the instance.
+        #     For standard tier, additional nodes will be added across multiple zones for
+        #     protection against zonal failures. If specified, at least one node will be
+        #     provisioned in this zone.
         # @!attribute [rw] alternative_location_id
         #   @return [::String]
-        #     Optional. Only applicable to STANDARD_HA tier which protects the instance
-        #     against zonal failures by provisioning it across two zones. If provided, it
-        #     must be a different zone from the one provided in {::Google::Cloud::Redis::V1::Instance#location_id location_id}.
+        #     Optional. If specified, at least one node will be provisioned in this zone
+        #     in addition to the zone specified in location_id. Only applicable to
+        #     standard tier. If provided, it must be a different zone from the one
+        #     provided in [location_id]. Additional nodes beyond the first 2 will be
+        #     placed in zones selected by the service.
         # @!attribute [rw] redis_version
         #   @return [::String]
         #     Optional. The version of Redis software.
@@ -60,12 +74,17 @@ module Google
         #      *   `REDIS_3_2` for Redis 3.2 compatibility
         #      *   `REDIS_4_0` for Redis 4.0 compatibility (default)
         #      *   `REDIS_5_0` for Redis 5.0 compatibility
+        #      *   `REDIS_6_X` for Redis 6.x compatibility
         # @!attribute [rw] reserved_ip_range
         #   @return [::String]
-        #     Optional. The CIDR range of internal addresses that are reserved for this
-        #     instance. If not provided, the service will choose an unused /29 block,
-        #     for example, 10.0.0.0/29 or 192.168.0.0/29. Ranges must be unique
-        #     and non-overlapping with existing subnets in an authorized network.
+        #     Optional. For DIRECT_PEERING mode, the CIDR range of internal addresses
+        #     that are reserved for this instance. Range must
+        #     be unique and non-overlapping with existing subnets in an authorized
+        #     network. For PRIVATE_SERVICE_ACCESS mode, the name of one allocated IP
+        #     address ranges associated with this private service access connection.
+        #     If not provided, the service will choose an unused /29 block, for
+        #     example, 10.0.0.0/29 or 192.168.0.0/29.  For READ_REPLICAS_ENABLED
+        #     the default block size is /28.
         # @!attribute [r] host
         #   @return [::String]
         #     Output only. Hostname or IP address of the exposed Redis endpoint used by
@@ -75,11 +94,9 @@ module Google
         #     Output only. The port number of the exposed Redis endpoint.
         # @!attribute [r] current_location_id
         #   @return [::String]
-        #     Output only. The current zone where the Redis endpoint is placed. For Basic
-        #     Tier instances, this will always be the same as the {::Google::Cloud::Redis::V1::Instance#location_id location_id}
-        #     provided by the user at creation time. For Standard Tier instances,
-        #     this can be either {::Google::Cloud::Redis::V1::Instance#location_id location_id} or {::Google::Cloud::Redis::V1::Instance#alternative_location_id alternative_location_id} and can
-        #     change after a failover event.
+        #     Output only. The current zone where the Redis primary node is located. In
+        #     basic tier, this will always be the same as [location_id]. In
+        #     standard tier, this can be the zone of any node in the instance.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the instance was created.
@@ -135,6 +152,27 @@ module Google
         #   @return [::Google::Cloud::Redis::V1::Instance::ConnectMode]
         #     Optional. The network connect mode of the Redis instance.
         #     If not provided, the connect mode defaults to DIRECT_PEERING.
+        # @!attribute [rw] replica_count
+        #   @return [::Integer]
+        #     Optional. The number of replica nodes. Valid range for standard tier
+        #     is [1-5] and defaults to 1. Valid value for basic tier is 0 and defaults
+        #     to 0.
+        # @!attribute [r] nodes
+        #   @return [::Array<::Google::Cloud::Redis::V1::NodeInfo>]
+        #     Output only. Info per node.
+        # @!attribute [r] read_endpoint
+        #   @return [::String]
+        #     Output only. Hostname or IP address of the exposed readonly Redis
+        #     endpoint. Standard tier only. Targets all healthy replica nodes in
+        #     instance. Replication is asynchronous and replica nodes will exhibit some
+        #     lag behind the primary. Write requests must target 'host'.
+        # @!attribute [r] read_endpoint_port
+        #   @return [::Integer]
+        #     Output only. The port number of the exposed readonly redis
+        #     endpoint. Standard tier only. Write requests should target 'port'.
+        # @!attribute [rw] read_replicas_mode
+        #   @return [::Google::Cloud::Redis::V1::Instance::ReadReplicasMode]
+        #     Optional. Read replica mode.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -214,6 +252,21 @@ module Google
             # Google Cloud services, including Memorystore.
             PRIVATE_SERVICE_ACCESS = 2
           end
+
+          # Read replicas mode.
+          module ReadReplicasMode
+            # If not set, Memorystore Redis backend will pick the mode based on other fields in
+            # the request.
+            READ_REPLICAS_MODE_UNSPECIFIED = 0
+
+            # If disabled, read endpoint will not be provided and the instance cannot
+            # scale up or down the number of replicas.
+            READ_REPLICAS_DISABLED = 1
+
+            # If enabled, read endpoint will be provided and the instance can scale
+            # up and down the number of replicas.
+            READ_REPLICAS_ENABLED = 2
+          end
         end
 
         # Request for {::Google::Cloud::Redis::V1::CloudRedis::Client#list_instances ListInstances}.
@@ -248,11 +301,12 @@ module Google
         #
         #     If the `location_id` in the parent field of the request is "-", all regions
         #     available to the project are queried, and the results aggregated.
-        #     If in such an aggregated query a location is unavailable, a dummy Redis
-        #     entry is included in the response with the `name` field set to a value of
-        #     the form `projects/{project_id}/locations/{location_id}/instances/`- and
-        #     the `status` field set to ERROR and `status_message` field set to "location
-        #     not available for ListInstances".
+        #     If in such an aggregated query a location is unavailable, a placeholder
+        #     Redis entry is included in the response with the `name` field set to a
+        #     value of the form
+        #     `projects/{project_id}/locations/{location_id}/instances/`- and the
+        #     `status` field set to ERROR and `status_message` field set to "location not
+        #     available for ListInstances".
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     Token to retrieve the next page of results, or empty if there are no more
@@ -311,6 +365,7 @@ module Google
         #      *   `labels`
         #      *   `memorySizeGb`
         #      *   `redisConfig`
+        #      *   `replica_count`
         # @!attribute [rw] instance
         #   @return [::Google::Cloud::Redis::V1::Instance]
         #     Required. Update description.
@@ -432,7 +487,7 @@ module Google
 
             # Instance failover will be protected with data loss control. More
             # specifically, the failover will only be performed if the current
-            # replication offset diff between master and replica is under a certain
+            # replication offset diff between primary and replica is under a certain
             # threshold.
             LIMITED_DATA_LOSS = 1
 
