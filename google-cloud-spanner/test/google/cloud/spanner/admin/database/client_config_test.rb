@@ -29,28 +29,7 @@ describe Google::Cloud::Spanner::Admin::Database do
   let(:found_credentials) { "{}" }
 
   after do
-    Google::Cloud::Spanner.configure.reset!
-  end
-
-  it "inherits config from parent" do
-    # Clear all environment variables
-    ENV.stub :[], nil do
-      # Set new configuration
-      Google::Cloud::Spanner.configure do |config|
-        config.project_id = project_id
-        config.keyfile = keyfile_path
-        config.timeout = default_timeout
-      end
-
-      File.stub :file?, true, [keyfile_path] do
-        File.stub :read, found_credentials, [keyfile_path] do
-          Google::Cloud::Spanner::Credentials.stub :new, default_credentials do
-            client = Google::Cloud::Spanner::Admin::Database.database_admin
-            _(client.configure.timeout).must_equal default_timeout
-          end
-        end
-      end
-    end
+    Google::Cloud.configure.reset!
   end
 
   it "can override config for itself and sub classes" do
