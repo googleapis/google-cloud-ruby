@@ -1,5 +1,11 @@
 # Release History
 
+### 2.10.1 / 2021-11-09
+
+#### Documentation
+
+* Add documentation for quota_project Configuration attribute
+
 ### 2.10.0 / 2021-08-24
 
 #### Features
