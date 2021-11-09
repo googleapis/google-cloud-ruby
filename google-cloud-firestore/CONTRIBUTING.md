@@ -40,6 +40,11 @@ You can sign these electronically. After that, we'll be able to accept your pull
 
 ## Set up environment
 
+Before you start on a pull request, you will need to prepare your work environment for development, acceptance testing
+and the interactive console.
+
+### Local development setup
+
 To set up your local development environment:
 
 1. Install a [supported version](google-cloud-firestore.gemspec) (or versions) of Ruby. (You may choose to manage your
@@ -88,6 +93,8 @@ To set up your local development environment:
    git checkout -b <topic-branch>
    ```
 
+### Acceptance tests setup
+
 To set up your acceptance test credentials:
 
 1. If needed, create a Google Cloud project. In the Google Cloud Console, on the project selector page, select or create
@@ -127,6 +134,8 @@ To set up your acceptance test credentials:
    ``` sh
    $ export FIRESTORE_TEST_PROJECT=my-project-id
    ```
+
+### Interactive console setup
 
 To set up your interactive console credentials:
 
@@ -267,7 +276,7 @@ matches the test you want to isolate.
 ### Acceptance Tests
 
 The acceptance tests (a.k.a. integration tests) ensure that the library works correctly against the live service API.
-To configure your Google Cloud project, see [Set up environment](#set-up-environment) above.
+To configure your Google Cloud project, see [Acceptance tests setup](#acceptance-tests-setup) above.
 
 **Warning: You may incur charges while running the acceptance tests against your Google Cloud project.**
 
@@ -308,7 +317,7 @@ When you are done developing, be sure to remove any usages of the `focus` keywor
 ### Console
 
 The project includes a Rake task that automatically loads `google-cloud-firestore` and its dependencies in IRB. To
-configure your Google Cloud project for IRB, see [Set up environment](#set-up-environment) above.
+configure your Google Cloud project for IRB, see [Interactive console setup](#interactive-console-setup) above.
 
 **Warning: You may incur charges while using the library with your Google Cloud project.**
 
