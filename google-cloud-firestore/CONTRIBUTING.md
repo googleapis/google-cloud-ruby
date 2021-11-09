@@ -2,7 +2,7 @@
 
 Thank you for your interest in making a contribution to google-cloud-ruby. Community contributions are an essential part
 of open source, and we want to make contributing easy for you. If you have any suggestions for how to improve this
-guide, please [open an issue](https://github.com/googleapis/google-cloud-ruby/issues) and let use know!
+guide, please [open an issue](https://github.com/googleapis/google-cloud-ruby/issues) and let us know!
 
 ### Code of Conduct
 
