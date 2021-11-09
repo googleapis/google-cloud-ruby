@@ -40,7 +40,7 @@ module Google
           # * As such, Redis instances are resources of the form:
           #   `/projects/{project_id}/locations/{location_id}/instances/{instance_id}`
           #
-          # Note that location_id must be refering to a GCP `region`; for example:
+          # Note that location_id must be referring to a GCP `region`; for example:
           # * `projects/redpepper-1290/locations/us-central1/instances/my-redis`
           #
           class Client
@@ -228,7 +228,8 @@ module Google
             #     to determine if there are more instances left to be queried.
             #   @param page_token [::String]
             #     The `next_page_token` value returned from a previous
-            #     {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#list_instances ListInstances} request, if any.
+            #     {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#list_instances ListInstances}
+            #     request, if any.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Redis::V1beta1::Instance>]
@@ -396,7 +397,7 @@ module Google
             #
             # The creation is executed asynchronously and callers may check the returned
             # operation to track its progress. Once the operation is completed the Redis
-            # instance will be fully functional. Completed longrunning.Operation will
+            # instance will be fully functional. The completed longrunning.Operation will
             # contain the new instance object in the response field.
             #
             # The returned operation is automatically deleted after a few hours, so there
@@ -536,6 +537,7 @@ module Google
             #      *   `labels`
             #      *   `memorySizeGb`
             #      *   `redisConfig`
+            #      *   `replica_count`
             #   @param instance [::Google::Cloud::Redis::V1beta1::Instance, ::Hash]
             #     Required. Update description.
             #     Only fields specified in update_mask are updated.
@@ -917,7 +919,7 @@ module Google
             end
 
             ##
-            # Initiates a failover of the master node to current replica node for a
+            # Initiates a failover of the primary node to current replica node for a
             # specific STANDARD tier Cloud Memorystore for Redis instance.
             #
             # @overload failover_instance(request, options = nil)
