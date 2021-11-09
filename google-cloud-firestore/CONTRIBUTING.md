@@ -24,8 +24,8 @@ abide by its terms. See [Code of Conduct](CODE_OF_CONDUCT.md) for more informati
 
 Pull requests should generally be directed by an existing issue, otherwise you risk working on something that the
 maintainers might not be able to accept into the project. Please take a look through [the repository
-issues](https://github.com/googleapis/google-cloud-ruby/issues), and if you do not see an existing issue for your
-problem or feature, please open one using one of the provided templates.
+issues](https://github.com/googleapis/google-cloud-ruby/issues?q=is%3Aissue+label%3A%22api%3A+firestore%22), and if you
+do not see an existing issue for your problem or feature, please open one using one of the provided templates.
 
 ## Sign Contributor License Agreement
 
@@ -55,7 +55,7 @@ To set up your local development environment:
 1. [Fork](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks) the
    [google-cloud-ruby](https://github.com/googleapis/google-cloud-ruby) repo, clone your fork, and configure the
    `upstream`
-   [remote](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-for-a-fork_):
+   [remote](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/configuring-a-remote-for-a-fork):
 
    ```bash
    git clone https://github.com/<your-username>/google-cloud-ruby.git
@@ -70,16 +70,15 @@ To set up your local development environment:
    git pull upstream main
    ```
 
-1. Install the top-level project dependencies (or update your dependencies in an existing clone):
+1. Change to the library's sub-directory in the repo:
 
    ```sh
-   $ bundle update
+   $ cd google-cloud-firestore
    ```
 
 1. Install (or update) the library dependencies:
 
    ```sh
-   $ cd google-cloud-firestore
    $ bundle update
    ```
 
@@ -165,6 +164,12 @@ You are now ready to run local CI checks for the library, which you should do **
 ensures that everything is OK with your local environment and the latest dependency versions. You don't want any
 surprises later.
 
+If you haven't already done so, change to the library's sub-directory in the repo:
+
+```sh
+$ cd google-cloud-firestore
+```
+
 To run the code style checks, documentation tests, and unit tests together, use the `ci` task:
 
 ``` sh
@@ -229,7 +234,7 @@ syntactically correct and execute against the library source code without error.
 ### Unit tests
 
 The project uses the [minitest](https://github.com/seattlerb/minitest) library, including
-[specs](https://github.com/seattlerb/minitest#specs), [mocks](https://github.com/seattlerb/minitest#mocks),
+[specs](https://github.com/seattlerb/minitest#specs-), [mocks](https://github.com/seattlerb/minitest#mocks-),
 [minitest-autotest](https://github.com/seattlerb/minitest-autotest), and
 [minitest-focus](https://github.com/seattlerb/minitest-focus).
 
@@ -266,7 +271,7 @@ To configure your Google Cloud project, see [Set up environment](#set-up-environ
 **Warning: You may incur charges while running the acceptance tests against your Google Cloud project.**
 
 Like the unit tests, the acceptance tests are based on the [minitest](https://github.com/seattlerb/minitest) library,
-including [specs](https://github.com/seattlerb/minitest#specs) and
+including [specs](https://github.com/seattlerb/minitest#specs-) and
 [minitest-focus](https://github.com/seattlerb/minitest-focus). Mocks are not generally used in acceptance tests.
 
 Because the acceptance test suite is often time-consuming to run in its entirety, during development or debugging you
@@ -306,6 +311,12 @@ configure your Google Cloud project for IRB, see [Set up environment](#set-up-en
 
 **Warning: You may incur charges while using the library with your Google Cloud project.**
 
+If you haven't already done so, change to the library's sub-directory in the repo:
+
+```sh
+$ cd google-cloud-firestore
+```
+
 The preloaded IRB console can be used as follows:
 
 ```sh
@@ -343,6 +354,13 @@ as these messages will be manually dropped or added as bullet points to the orig
 merged.
 
 ## Run CI again
+
+
+1. If you haven't already done so, change to the library's sub-directory in the repo:
+
+   ```sh
+   $ cd google-cloud-firestore
+   ```
 
 1. Rebase your topic branch on the upstream `main` branch:
 
