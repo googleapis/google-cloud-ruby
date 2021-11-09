@@ -29,7 +29,7 @@ describe Google::Cloud::Spanner::Admin::Database do
   let(:found_credentials) { "{}" }
 
   after do
-    Google::Cloud.configure.reset!
+    Google::Cloud::Spanner.configure.reset!
   end
 
   it "inherits config from parent" do
