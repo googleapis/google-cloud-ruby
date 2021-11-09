@@ -1,5 +1,11 @@
 # Release History
 
+### 2.2.0 / 2021-11-09
+
+#### Features
+
+* Add a factory method for the IAM client
+
 ### 2.1.2 / 2021-07-12
 
 #### Documentation
