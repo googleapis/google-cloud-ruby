@@ -16,6 +16,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent_display_name, :string, 5
       optional :type, :string, 6
       repeated :folders, :message, 7, "google.cloud.securitycenter.v1.Folder"
+      optional :display_name, :string, 8
     end
   end
 end
