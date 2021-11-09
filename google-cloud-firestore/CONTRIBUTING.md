@@ -177,7 +177,8 @@ $ bundle exec rake ci
 ```
 
 To run the command above, plus all acceptance tests, use `rake ci:acceptance` or its handy alias, `rake ci:a`. Keep in
-mind that the acceptance tests typically take longer than the other CI checks.
+mind that the acceptance tests typically take longer than the other CI checks and require authentication credentials.
+See the [Acceptance tests](#Acceptance-tests) section below for more information.
 
 The Rake tasks aggregated in the commands above can be run individually to streamline your workflow when developing or
 debugging.
