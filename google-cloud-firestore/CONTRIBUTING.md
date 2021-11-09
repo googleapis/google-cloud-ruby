@@ -40,8 +40,8 @@ You can sign these electronically. After that, we'll be able to accept your pull
 
 ## Set up environment
 
-Before you start on a pull request, you will need to prepare your work environment for development, acceptance testing
-and the interactive console.
+Before you start on a pull request, you should prepare your work environment for development, acceptance testing and the
+interactive console (optional).
 
 ### Local development setup
 
@@ -135,7 +135,7 @@ To set up your acceptance test credentials:
    $ export FIRESTORE_TEST_PROJECT=my-project-id
    ```
 
-### Interactive console setup
+### Interactive console setup (optional)
 
 To set up your interactive console credentials:
 
@@ -317,7 +317,7 @@ When you are done developing, be sure to remove any usages of the `focus` keywor
 ### Console
 
 The project includes a Rake task that automatically loads `google-cloud-firestore` and its dependencies in IRB. To
-configure your Google Cloud project for IRB, see [Interactive console setup](#interactive-console-setup) above.
+configure your Google Cloud project for IRB, see [Interactive console setup](#interactive-console-setup-optional) above.
 
 **Warning: You may incur charges while using the library with your Google Cloud project.**
 
