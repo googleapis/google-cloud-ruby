@@ -2598,7 +2598,7 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The FieldMask to use when updating the settings resource.
             #
-            #      If empty all mutable fields will be updated.
+            #     If empty all mutable fields will be updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings]
