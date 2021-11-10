@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,17 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""This script is used to synthesize generated parts of this library."""
+# Temporary: omit the snippets directory.
+# Snippets are currently not working correctly for Ruby DIREGAPICs.
+# When that gets fixed, remove this line.
+FileUtils.rm_rf File.join(OwlBot.staging_dir, "snippets")
 
-import synthtool as s
-import synthtool.gcp as gcp
-import synthtool.languages.ruby as ruby
-import logging
-
-
-logging.basicConfig(level=logging.DEBUG)
-
-gapic = gcp.GAPICBazel()
-library = gapic.ruby_library(service="compute", version="v1", diregapic=True)
-
-s.copy(library, merge=ruby.global_merge)
+OwlBot.move_files
