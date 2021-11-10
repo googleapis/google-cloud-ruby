@@ -228,7 +228,8 @@ module Google
             #   @param query [::String]
             #     Optional. The query string with a minimum of 3 characters and specific syntax.
             #     For more information, see
-            #     [Data Catalog search syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference).
+            #     [Data Catalog search
+            #     syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference).
             #
             #     An empty query string returns all data assets (in the specified scope)
             #     that you have access to.
@@ -1348,6 +1349,10 @@ module Google
             ##
             # Lists entries.
             #
+            # Note: Currently, this method can list only custom entries.
+            # To get a list of both custom and automatically created entries, use
+            # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#search_catalog SearchCatalog}.
+            #
             # @overload list_entries(request, options = nil)
             #   Pass arguments to `list_entries` via a request object, either of type
             #   {::Google::Cloud::DataCatalog::V1::ListEntriesRequest} or an equivalent Hash.
@@ -1665,11 +1670,16 @@ module Google
             #     Required. The template to update. The `name` field must be set.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Names of fields whose values to overwrite on a tag template. Currently,
-            #     only `display_name` can be overwritten.
+            #     only `display_name` and `is_publicly_readable` can be overwritten.
             #
             #     If this parameter is absent or empty, all modifiable fields
             #     are overwritten. If such fields are non-required and omitted in the
             #     request body, their values are emptied.
+            #
+            #     Note: Updating the `is_publicly_readable` field may require up to 12
+            #     hours to take effect in search results. Additionally, it also requires
+            #     the `tagTemplates.getIamPolicy` and `tagTemplates.setIamPolicy`
+            #     permissions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::TagTemplate]
@@ -2063,7 +2073,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the tag template.
+            #     Required. The name of the tag template field.
             #   @param new_tag_template_field_id [::String]
             #     Required. The new ID of this tag template field. For example, `my_new_field`.
             #
@@ -2318,9 +2328,9 @@ module Google
             # Creates a tag and assigns it to:
             #
             # * An {::Google::Cloud::DataCatalog::V1::Entry Entry} if the method name is
-            #   ``projects.locations.entryGroups.entries.tags.create``.
+            #   `projects.locations.entryGroups.entries.tags.create`.
             # * Or {::Google::Cloud::DataCatalog::V1::EntryGroup EntryGroup}if the method
-            #   name is ``projects.locations.entryGroups.tags.create``.
+            #   name is `projects.locations.entryGroups.tags.create`.
             #
             # Note: The project identified by the `parent` parameter for the [tag]
             # (https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.entryGroups.entries.tags/create#path-parameters)

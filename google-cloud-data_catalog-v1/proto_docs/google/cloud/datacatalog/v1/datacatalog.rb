@@ -34,7 +34,8 @@ module Google
         #   @return [::String]
         #     Optional. The query string with a minimum of 3 characters and specific syntax.
         #     For more information, see
-        #     [Data Catalog search syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference).
+        #     [Data Catalog search
+        #     syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference).
         #
         #     An empty query string returns all data assets (in the specified scope)
         #     that you have access to.
@@ -115,7 +116,7 @@ module Google
           #     explicit permissions on them to view them. For example, if you are the
           #     owner.
           #
-          #     Other scope fields, for example, ``include_org_ids``,
+          #     Other scope fields, for example, `include_org_ids`,
           #     still restrict the returned public tag templates and at least one of
           #     them is required.
           class Scope
@@ -424,6 +425,7 @@ module Google
         #     and read-only afterwards. Can be used for search and lookup of the entries.
         #
         #
+        #
         #     FQNs take two forms:
         #
         #     * For non-regionalized resources:
@@ -729,11 +731,16 @@ module Google
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Names of fields whose values to overwrite on a tag template. Currently,
-        #     only `display_name` can be overwritten.
+        #     only `display_name` and `is_publicly_readable` can be overwritten.
         #
         #     If this parameter is absent or empty, all modifiable fields
         #     are overwritten. If such fields are non-required and omitted in the
         #     request body, their values are emptied.
+        #
+        #     Note: Updating the `is_publicly_readable` field may require up to 12
+        #     hours to take effect in search results. Additionally, it also requires
+        #     the `tagTemplates.getIamPolicy` and `tagTemplates.setIamPolicy`
+        #     permissions.
         class UpdateTagTemplateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -860,7 +867,7 @@ module Google
         # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#rename_tag_template_field RenameTagTemplateField}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the tag template.
+        #     Required. The name of the tag template field.
         # @!attribute [rw] new_tag_template_field_id
         #   @return [::String]
         #     Required. The new ID of this tag template field. For example, `my_new_field`.

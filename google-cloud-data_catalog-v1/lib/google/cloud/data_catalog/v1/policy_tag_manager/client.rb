@@ -627,8 +627,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of the taxonomy that the policy tag will belong to.<br /><br
-            #     />
+            #     Required. Resource name of the taxonomy that the policy tag will belong to.
             #   @param policy_tag [::Google::Cloud::DataCatalog::V1::PolicyTag, ::Hash]
             #     The policy tag to create.
             #

@@ -24,6 +24,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :dataset, :string, 1
       optional :table_prefix, :string, 2
       optional :shard_count, :int64, 3
+      optional :latest_shard_resource, :string, 4
     end
     add_enum "google.cloud.datacatalog.v1.TableSourceType" do
       value :TABLE_SOURCE_TYPE_UNSPECIFIED, 0
