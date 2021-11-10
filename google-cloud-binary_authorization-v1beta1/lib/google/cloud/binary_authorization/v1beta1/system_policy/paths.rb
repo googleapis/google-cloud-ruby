@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,26 +21,9 @@ module Google
   module Cloud
     module BinaryAuthorization
       module V1beta1
-        module BinauthzManagementService
-          # Path helper methods for the BinauthzManagementService API.
+        module SystemPolicy
+          # Path helper methods for the SystemPolicy API.
           module Paths
-            ##
-            # Create a fully-qualified Attestor resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/attestors/{attestor}`
-            #
-            # @param project [String]
-            # @param attestor [String]
-            #
-            # @return [::String]
-            def attestor_path project:, attestor:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-
-              "projects/#{project}/attestors/#{attestor}"
-            end
-
             ##
             # Create a fully-qualified Policy resource string.
             #
@@ -72,20 +55,6 @@ module Google
               resource = resources[args.keys.sort.join(":")]
               raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
-            end
-
-            ##
-            # Create a fully-qualified Project resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}`
-            #
-            # @param project [String]
-            #
-            # @return [::String]
-            def project_path project:
-              "projects/#{project}"
             end
 
             extend self

@@ -21,8 +21,7 @@ module Google
   module Cloud
     module BinaryAuthorization
       module V1beta1
-        # A {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} for container
-        # image binary authorization.
+        # A {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} for Binary Authorization.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name, in the format `projects/*/policy`. There is
@@ -50,6 +49,21 @@ module Google
         #     (e.g. us-central1).
         #     For `clusterId` syntax restrictions see
         #     https://cloud.google.com/container-engine/reference/rest/v1/projects.zones.clusters.
+        # @!attribute [rw] kubernetes_namespace_admission_rules
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule}]
+        #     Optional. Per-kubernetes-namespace admission rules. K8s namespace spec format:
+        #       `[a-z.-]+`, e.g. `some-namespace`
+        # @!attribute [rw] kubernetes_service_account_admission_rules
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule}]
+        #     Optional. Per-kubernetes-service-account admission rules. Service account
+        #     spec format: `namespace:serviceaccount`. e.g. `test-ns:default`
+        # @!attribute [rw] istio_service_identity_admission_rules
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule}]
+        #     Optional. Per-istio-service-identity admission rules. Istio service
+        #     identity spec format:
+        #     `spiffe://<domain>/ns/<namespace>/sa/<serviceaccount>` or
+        #     `<domain>/ns/<namespace>/sa/<serviceaccount>`
+        #     e.g. `spiffe://example.com/ns/test-ns/sa/default`
         # @!attribute [rw] default_admission_rule
         #   @return [::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule]
         #     Required. Default admission rule for a cluster without a per-cluster, per-
@@ -70,6 +84,33 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule]
+          class KubernetesNamespaceAdmissionRulesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule]
+          class KubernetesServiceAccountAdmissionRulesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule]
+          class IstioServiceIdentityAdmissionRulesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           module GlobalPolicyEvaluationMode
             # Not specified: DISABLE is assumed.
             GLOBAL_POLICY_EVALUATION_MODE_UNSPECIFIED = 0
@@ -82,28 +123,28 @@ module Google
           end
         end
 
-        # An [admission allowlist
-        # pattern][google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern]
-        # exempts images from checks by [admission
-        # rules][google.cloud.binaryauthorization.v1beta1.AdmissionRule].
+        # An {::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionWhitelistPattern admission allowlist pattern} exempts images
+        # from checks by {::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule admission rules}.
         # @!attribute [rw] name_pattern
         #   @return [::String]
-        #     An image name pattern to allow, in the form `registry/path/to/image`.
+        #     An image name pattern to allowlist, in the form `registry/path/to/image`.
         #     This supports a trailing `*` as a wildcard, but this is allowed only in
-        #     text after the `registry/` part.
+        #     text after the `registry/` part. `*` wildcard does not match `/`, i.e.,
+        #     `gcr.io/nginx*` matches `gcr.io/nginx@latest`, but it does not match
+        #     `gcr.io/nginx/image`. This also supports a trailing `**` wildcard which
+        #     matches subdirectories, i.e., `gcr.io/nginx**` matches
+        #     `gcr.io/nginx/image`.
         class AdmissionWhitelistPattern
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # An {::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule admission rule}
-        # specifies either that all container images used in a pod creation request
-        # must be attested to by one or more
-        # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors}, that all pod
-        # creations will be allowed, or that all pod creations will be denied.
+        # An {::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule admission rule} specifies either that all container images
+        # used in a pod creation request must be attested to by one or more
+        # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors}, that all pod creations will be allowed, or that all
+        # pod creations will be denied.
         #
-        # Images matching an [admission allowlist
-        # pattern][google.cloud.binaryauthorization.v1beta1.AdmissionWhitelistPattern]
+        # Images matching an {::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionWhitelistPattern admission allowlist pattern}
         # are exempted from admission rules and will never block a pod creation.
         # @!attribute [rw] evaluation_mode
         #   @return [::Google::Cloud::BinaryAuthorization::V1beta1::AdmissionRule::EvaluationMode]
@@ -133,7 +174,7 @@ module Google
             ALWAYS_ALLOW = 1
 
             # This rule allows a pod creation if all the attestors listed in
-            # 'require_attestations_by' have valid attestations for all of the
+            # `require_attestations_by` have valid attestations for all of the
             # images in the pod spec.
             REQUIRE_ATTESTATION = 2
 
@@ -156,9 +197,9 @@ module Google
           end
         end
 
-        # An {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} that attests
-        # to container image artifacts. An existing attestor cannot be modified except
-        # where indicated.
+        # An {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} that attests to container image
+        # artifacts. An existing attestor cannot be modified except where
+        # indicated.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name, in the format:
@@ -178,9 +219,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # An [user owned drydock
-        # note][google.cloud.binaryauthorization.v1beta1.UserOwnedDrydockNote]
-        # references a Drydock ATTESTATION_AUTHORITY Note created by the user.
+        # An {::Google::Cloud::BinaryAuthorization::V1beta1::UserOwnedDrydockNote user owned drydock note} references a Drydock
+        # ATTESTATION_AUTHORITY Note created by the user.
         # @!attribute [rw] note_reference
         #   @return [::String]
         #     Required. The Drydock resource name of a ATTESTATION_AUTHORITY Note,
@@ -273,17 +313,25 @@ module Google
             # ECDSA on the NIST P-256 curve with a SHA256 digest.
             ECDSA_P256_SHA256 = 9
 
+            # ECDSA on the NIST P-256 curve with a SHA256 digest.
+            EC_SIGN_P256_SHA256 = 9
+
             # ECDSA on the NIST P-384 curve with a SHA384 digest.
             ECDSA_P384_SHA384 = 10
 
+            # ECDSA on the NIST P-384 curve with a SHA384 digest.
+            EC_SIGN_P384_SHA384 = 10
+
             # ECDSA on the NIST P-521 curve with a SHA512 digest.
             ECDSA_P521_SHA512 = 11
+
+            # ECDSA on the NIST P-521 curve with a SHA512 digest.
+            EC_SIGN_P521_SHA512 = 11
           end
         end
 
-        # An [attestor public
-        # key][google.cloud.binaryauthorization.v1beta1.AttestorPublicKey] that will be
-        # used to verify attestations signed by this attestor.
+        # An {::Google::Cloud::BinaryAuthorization::V1beta1::AttestorPublicKey attestor public key} that will be used to verify
+        # attestations signed by this attestor.
         # @!attribute [rw] comment
         #   @return [::String]
         #     Optional. A descriptive comment. This field may be updated.
