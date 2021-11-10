@@ -30,8 +30,11 @@ end
 flag :commit_message, "--message=MESSAGE" do
   desc "The conventional commit message"
 end
-flag :source_repo, "--source-repo=PATH" do
+flag :source_path, "--source-path=PATH" do
   desc "Path to the googleapis-gen source repo"
+end
+flag :protos_path, "--protos-path=PATH" do
+  desc "Path to the googleapis protos repo or third_party directory"
 end
 flag :piper_client, "--piper-client=NAME" do
   desc "Generate by running Bazel from the given piper clinet rather than using googleapis-gen"
@@ -55,13 +58,13 @@ def run
   extend PullRequestGenerator
   ensure_docker
 
-  set :source_repo, File.expand_path(source_repo) if source_repo
+  set :source_path, File.expand_path(source_path) if source_path
   gems = choose_gems
   Dir.chdir context_directory
   gem_info = collect_gem_info gems
 
   pull_images
-  run_bazel gem_info if piper_client
+  run_bazel gem_info if piper_client || protos_path
   run_owlbot gem_info
   verify_staging gems
   results = process_gems gems
@@ -110,7 +113,7 @@ def collect_gem_info gems
   gems.each do |name|
     deep_copy_regexes = load_deep_copy_regexes name
     gem_info[name] = { deep_copy_regexes: deep_copy_regexes }
-    next unless piper_client
+    next unless piper_client || protos_path
     library_paths = deep_copy_regexes.map { |dcr| extract_library_path dcr["source"] }.uniq
     bazel_targets = {}
     library_paths.each do |library_path|
@@ -144,21 +147,21 @@ def determine_bazel_target library_path
 end
 
 def run_bazel gem_info
-  ensure_source_repo
+  ensure_source_path
   gem_info.each do |name, info|
     info[:bazel_targets].each do |library_path, bazel_target|
       exec ["bazel", "build", "//#{library_path}:#{bazel_target}"], chdir: bazel_base_dir
       generated_dir = File.join bazel_base_dir, "bazel-bin", library_path, bazel_target
-      source_repo_dir = File.join source_repo, library_path, bazel_target
-      rm_rf source_repo_dir
-      mkdir_p File.dirname source_repo_dir
-      cp_r generated_dir, source_repo_dir
+      source_dir = File.join source_path, library_path, bazel_target
+      rm_rf source_dir
+      mkdir_p File.dirname source_dir
+      cp_r generated_dir, source_dir
     end
   end
 end
 
-def ensure_source_repo
-  return if source_repo
+def ensure_source_path
+  return if source_path
   temp_dir = Dir.mktmpdir
   at_exit { FileUtils.rm_rf temp_dir }
   Dir.chdir temp_dir do
@@ -168,7 +171,7 @@ def ensure_source_repo
     exec ["git", "branch", "github-head", "FETCH_HEAD"]
     exec ["git", "switch", "github-head"]
   end
-  set :source_repo, temp_dir
+  set :source_path, temp_dir
 end
 
 def run_owlbot gem_info
@@ -181,8 +184,8 @@ def run_owlbot gem_info
     file.puts Psych.dump combined_config
   end
   cmd = ["#{OWLBOT_CLI_IMAGE}:#{owlbot_cli_tag}", "copy-code", "--config-file", temp_config]
-  if source_repo
-    cmd = ["-v", "#{source_repo}:/googleapis-gen"] + cmd + ["--source-repo", "/googleapis-gen"]
+  if source_path
+    cmd = ["-v", "#{source_path}:/googleapis-gen"] + cmd + ["--source-repo", "/googleapis-gen"]
   end
   docker_run(*cmd)
 end
@@ -259,12 +262,16 @@ def docker_run *args
   exec cmd
 end
 
-def piper_client_dir
-  @piper_client_dir ||= capture(["p4", "g4d", piper_client]).strip
-end
-
 def bazel_base_dir
-  @bazel_base_dir ||= File.join piper_client_dir, "third_party", "googleapis", "stable"
+  @bazel_base_dir ||=
+    if piper_client
+      piper_client_dir = capture(["p4", "g4d", piper_client]).strip
+      File.join piper_client_dir, "third_party", "googleapis", "stable"
+    elsif protos_path
+      File.expand_path protos_path
+    else
+      error "No protos directory"
+    end
 end
 
 def error str
