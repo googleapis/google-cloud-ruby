@@ -21,8 +21,8 @@ module Google
   module Cloud
     module NetworkConnectivity
       module V1
-        # A hub is essentially a collection of spokes. A single hub can contain spokes
-        # from multiple regions. However, all of a hub's spokes must be associated with
+        # A hub is a collection of spokes. A single hub can contain spokes from
+        # multiple regions. However, all of a hub's spokes must be associated with
         # resources that reside in the same VPC network.
         # @!attribute [rw] name
         #   @return [::String]
@@ -73,11 +73,11 @@ module Google
           end
         end
 
-        # RoutingsVPC contains information about a VPC network that is associated with
+        # RoutingVPC contains information about the VPC network that is associated with
         # a hub's spokes.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     The URI of a VPC network.
+        #     The URI of the VPC network.
         class RoutingVPC
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -113,7 +113,7 @@ module Google
         #     An optional description of the spoke.
         # @!attribute [rw] hub
         #   @return [::String]
-        #     Immutable. The URI of the hub that this spoke is attached to.
+        #     Immutable. The name of the hub that this spoke is attached to.
         # @!attribute [rw] linked_vpn_tunnels
         #   @return [::Google::Cloud::NetworkConnectivity::V1::LinkedVpnTunnels]
         #     VPN tunnels that are associated with the spoke.
@@ -197,7 +197,7 @@ module Google
         #     Required. The parent resource.
         # @!attribute [rw] hub_id
         #   @return [::String]
-        #     Optional. A unique identifier for the hub.
+        #     Required. A unique identifier for the hub.
         # @!attribute [rw] hub
         #   @return [::Google::Cloud::NetworkConnectivity::V1::Hub]
         #     Required. The initial values for a new hub.
@@ -331,7 +331,7 @@ module Google
         #     Required. The parent resource.
         # @!attribute [rw] spoke_id
         #   @return [::String]
-        #     Optional. Unique id for the spoke to create.
+        #     Required. Unique id for the spoke to create.
         # @!attribute [rw] spoke
         #   @return [::Google::Cloud::NetworkConnectivity::V1::Spoke]
         #     Required. The initial values for a new spoke.

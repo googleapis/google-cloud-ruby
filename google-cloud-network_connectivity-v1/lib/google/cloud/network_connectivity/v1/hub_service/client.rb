@@ -381,7 +381,7 @@ module Google
             #   @param parent [::String]
             #     Required. The parent resource.
             #   @param hub_id [::String]
-            #     Optional. A unique identifier for the hub.
+            #     Required. A unique identifier for the hub.
             #   @param hub [::Google::Cloud::NetworkConnectivity::V1::Hub, ::Hash]
             #     Required. The initial values for a new hub.
             #   @param request_id [::String]
@@ -900,7 +900,7 @@ module Google
             #   @param parent [::String]
             #     Required. The parent resource.
             #   @param spoke_id [::String]
-            #     Optional. Unique id for the spoke to create.
+            #     Required. Unique id for the spoke to create.
             #   @param spoke [::Google::Cloud::NetworkConnectivity::V1::Spoke, ::Hash]
             #     Required. The initial values for a new spoke.
             #   @param request_id [::String]
