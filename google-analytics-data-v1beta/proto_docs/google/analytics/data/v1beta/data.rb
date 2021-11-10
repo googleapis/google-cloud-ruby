@@ -94,7 +94,7 @@ module Google
         #     would like within the allowed character set. For example if a
         #     `dimensionExpression` concatenates `country` and `city`, you could call
         #     that dimension `countryAndCity`. Dimension names that you choose must match
-        #     the regular expression "^[a-zA-Z0-9_]$".
+        #     the regular expression `^[a-zA-Z0-9_]$`.
         #
         #     Dimensions are referenced by `name` in `dimensionFilter`, `orderBys`,
         #     `dimensionExpression`, and `pivots`.
@@ -168,7 +168,7 @@ module Google
         #     within the allowed character set. For example if `expression` is
         #     `screenPageViews/sessions`, you could call that metric's name =
         #     `viewsPerSession`. Metric names that you choose must match the regular
-        #     expression "^[a-zA-Z0-9_]$".
+        #     expression `^[a-zA-Z0-9_]$`.
         #
         #     Metrics are referenced by `name` in `metricFilter`, `orderBys`, and metric
         #     `expression`.
