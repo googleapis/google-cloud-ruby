@@ -133,6 +133,10 @@ module Google
             # The resource name comes from the source Google Cloud Platform service.
             rpc :LookupEntry, ::Google::Cloud::DataCatalog::V1::LookupEntryRequest, ::Google::Cloud::DataCatalog::V1::Entry
             # Lists entries.
+            #
+            # Note: Currently, this method can list only custom entries.
+            # To get a list of both custom and automatically created entries, use
+            # [SearchCatalog][google.cloud.datacatalog.v1.DataCatalog.SearchCatalog].
             rpc :ListEntries, ::Google::Cloud::DataCatalog::V1::ListEntriesRequest, ::Google::Cloud::DataCatalog::V1::ListEntriesResponse
             # Creates a tag template.
             #
@@ -194,9 +198,9 @@ module Google
             # Creates a tag and assigns it to:
             #
             # * An [Entry][google.cloud.datacatalog.v1.Entry] if the method name is
-            #   ``projects.locations.entryGroups.entries.tags.create``.
+            #   `projects.locations.entryGroups.entries.tags.create`.
             # * Or [EntryGroup][google.cloud.datacatalog.v1.EntryGroup]if the method
-            #   name is ``projects.locations.entryGroups.tags.create``.
+            #   name is `projects.locations.entryGroups.tags.create`.
             #
             # Note: The project identified by the `parent` parameter for the [tag]
             # (https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.entryGroups.entries.tags/create#path-parameters)

@@ -83,6 +83,13 @@ module Google
         #     Example for a DPMS table:
         #
         #     `dataproc_metastore:PROJECT_ID.LOCATION_ID.INSTANCE_ID.DATABASE_ID.TABLE_ID`
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     The display name of the result.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Entry description that can consist of several sentences or paragraphs that
+        #     describe entry contents.
         class SearchCatalogResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
