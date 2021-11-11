@@ -32,7 +32,7 @@ def method_signature
   return_text = ""
 
   unless return_types.empty?
-    return_text += " => "
+    return_text += " -> "
     return_text += return_types.join ", "
   end
 
@@ -47,8 +47,8 @@ def method_signature
     text += "def "
     text += "self." if sign == "."
     text += @method.name.to_s
+    text += "("
     unless @method.parameters.empty?
-      text += "("
       params = @method.parameters.map do |param|
         entry = param[0]
         if param[1]
@@ -61,8 +61,8 @@ def method_signature
         entry
       end
       text += params.join ", "
-      text += ")"
     end
+    text += ")"
     text += block_text
     text += return_text
   else

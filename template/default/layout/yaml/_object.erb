@@ -5,7 +5,7 @@
   - ruby
   module: <%= ENV["CLOUDRAD_GEM_NAME"] %>
   id: <%= @object.name %>
-  summary: "<%= pre_format @object.docstring %>"
+  summary: "<%= pre_format @object.docstring, min_header: 2, toplevel_header: true %>"
   type: "<%= @object.type %>"
   name: <%= @object.path %>
   example: <%= example_text @object, "    " %>

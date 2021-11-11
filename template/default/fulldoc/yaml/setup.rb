@@ -24,10 +24,27 @@ end
 def copy_files
   # copy markdown files into the yard output folder
   options.files.each do |file|
-    if file.path == "README"
-      FileUtils.cp file.filename, "#{options.serializer.basepath}/index.md"
-    else
-      FileUtils.cp file.filename, "#{options.serializer.basepath}/#{file.filename}"
+    dest_filename = file.path == "README" ? "index.md" : file.filename
+    File.open "#{options.serializer.basepath}/#{dest_filename}", "w" do |dest|
+      in_code_state = 0
+      File.readlines(file.filename).each do |line|
+        case in_code_state
+        when 0
+          if line.strip == "```ruby"
+            in_code_state = 1
+            next
+          end
+        when 1
+          line = "<pre class=\"prettyprint lang-rb\">#{line}"
+          in_code_state = 2
+        when 2
+          if line.strip == "```"
+            in_code_state = 0
+            line = "</pre>\n"
+          end
+        end
+        dest.puts line
+      end
     end
   end
 end
