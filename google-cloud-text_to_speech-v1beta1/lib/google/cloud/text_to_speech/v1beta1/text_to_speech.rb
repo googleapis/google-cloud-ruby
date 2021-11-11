@@ -23,6 +23,7 @@ require "gapic/config/method"
 require "google/cloud/text_to_speech/v1beta1/version"
 
 require "google/cloud/text_to_speech/v1beta1/text_to_speech/credentials"
+require "google/cloud/text_to_speech/v1beta1/text_to_speech/paths"
 require "google/cloud/text_to_speech/v1beta1/text_to_speech/client"
 
 module Google
