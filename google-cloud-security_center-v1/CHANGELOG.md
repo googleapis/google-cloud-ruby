@@ -4,7 +4,7 @@
 
 #### Features
 
-* Added fields display_name and reource type.
+* Added fields display_name and resource type.
 
 ### 0.9.1 / 2021-11-08
 
