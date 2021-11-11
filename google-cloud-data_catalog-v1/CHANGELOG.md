@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 / 2021-11-11
+
+#### Features
+
+* Return the latest BigQuery shard resource in a table, and the display name and description for search catalog results
+
 ### 0.8.3 / 2021-11-08
 
 #### Documentation
