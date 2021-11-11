@@ -5,11 +5,11 @@
     - ruby
   module: <%= ENV["CLOUDRAD_GEM_NAME"] %>
   id: "<%= @method.path[@method.path.size - (@method.name.size + 1)..-1] %>"
-  summary: "<%= demote_headers pre_format(@method.docstring), 4 %>"
+  summary: "<%= pre_format @method.docstring, min_header: 4 %>"
   type: <%= @method.type %>
   example: <%= example_text @method, "    " %>
   syntax:
-    description: "<%= demote_headers pre_format(@method.docstring), 4 %>"
+    description: "<%= pre_format @method.docstring, min_header: 4 %>"
     content: "<%= method_signature %>"
 <%= param_text %>
 <%= yield_text %>

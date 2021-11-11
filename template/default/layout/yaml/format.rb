@@ -92,25 +92,29 @@ class Formatter
   end
 end
 
-# TODO: create version of Redcarpet::Render::HTML
-# where only code blocking does anything something like
-# class OnlyCode < Redcarpet::Render::HTML
-#   def block_code code, language
-#     super code, language
-#   end
-  
-#   def codespan(code)
-#     super code
-#   end
+class RADCarpetHTML < Redcarpet::Render::HTML
+  def initialize render_options = {}, min_header: nil, toplevel_header: false
+    super render_options
+    @min_header = min_header
+    @toplevel_header = toplevel_header
+  end
 
-#   def block_quote(quote)
-#     nil
-#   end
-#   ...
-# end
+  def header text, header_level
+    if @min_header
+      if @toplevel_header
+        header_level += @min_header - 1
+      else
+        header_level = 2 if header_level == 1
+        header_level += @min_header - 2
+      end
+    end
+    header_level = 5 if header_level > 5
+    "<h#{header_level}>#{text}</h#{header_level}>\n"
+  end
+end
 
 def markdown str, renderer
-  redcarpet = Redcarpet::Markdown.new renderer
+  redcarpet = Redcarpet::Markdown.new renderer, no_intra_emphasis: true, lax_spacing: true
   str = redcarpet.render str
   while str.end_with? "\n"
     str = str[0..-2]
@@ -119,7 +123,7 @@ def markdown str, renderer
 end
 
 def docstring obj
-  str = pre_format obj.docstring.to_str
+  str = pre_format obj.docstring.to_str, min_header: 4
 end
 
 def escapes str
@@ -127,29 +131,13 @@ def escapes str
   str.gsub /(?!\\)\n/, '\n'
 end
 
-def pre_format str
+def pre_format str, min_header: nil, toplevel_header: false
   str = str.to_s
-  # TODO: Parse markdown prior to running resolve_links, which checks for HTML
-  # codeblocks using our above defined renderer that only handles code:
-  # renderer = OnlyCode.new(render_options = {})
-  # str = markdown str, renderer
-
-  # now that codeblocks have been identifed, parse_links
-  str = Formatter.new(@object, @options).parse_links str
-
-  # now that the codeblocks have been formatted, and the links have been identified, demote remaining headers
-  str = demote_headers str
-
-  # YARD turns {} style links into [] markdown style links. Re-parsing markdown to get HTML links and other formatting
-  renderer = Redcarpet::Render::HTML.new(render_options = {})
+  renderer = RADCarpetHTML.new min_header: min_header, toplevel_header: toplevel_header
   str = markdown str, renderer
-
+  str = Formatter.new(@object, @options).parse_links str
   str = escapes str
   str = fix_googleapis_links str
-
-  # I don't think this is still necessary, but leaving it in case I'm missing something
-  # str = fix_object_links str
-  
   str
 end
 
@@ -160,76 +148,8 @@ def unparagraph str
   str
 end
 
-def demote_headers str, min = 0
-  out = ""
-  match_list = []
-  i = 0
-  while i < str.size
-    if str[(i - 1)..-1] =~ /\A(#+\s\w+)/
-      match_list << [Regexp.last_match, i - 1]
-      i += Regexp.last_match[0].size
-    else
-      i += 1
-    end
-  end
-  return str if match_list.empty?
-
-  prev = 0
-  match_list.each do |entry|
-    match = entry[0][1]
-    i = entry[1]
-    out += str[prev...i]
-
-    if in_codeblock? str, match, i
-      out += match
-      prev = i + match.size
-    else
-      new_header = "#" + match
-      while new_header.split(" ").first.size < min
-        new_header = "#" + new_header 
-      end
-      out += new_header
-      prev = i + match.size
-    end
-  end
-
-  out += str[prev..-1]
-
-  out
-  str
-end
-
 def fix_googleapis_links str
   str.gsub /http.*googleapis.dev\/ruby\/(google-cloud.*\))/, 'https://cloud.devsite.corp.google.com/ruby/docs/reference/\1'
-end
-
-def fix_object_links str
-  # YARD's resolve_links wraps the links in a span element, which is not needed.
-  # Additionally, the hrefs assume a more typical file structure, and need to be updated
-  regex = /<span class=\'object_link\'><a href=\\\"([^\\\"]*)\\\" title=\\\"([^\\\"]*)\\\"\>([^<]*)<\/a><\/span>/
-  while str.match(regex)
-    m = Regexp.last_match
-    old_link = m[0]
-    file     = m[1]
-    title    = m[2]
-    display  = m[3]
-    url = title.split(" ").first.gsub "::", "-"
-    if url.include? "#"
-      page, anchor = url.split("#")
-      ["!", "?"].each { |sym| anchor = anchor.gsub sym, "_" }
-      anchor = "#{page.gsub "-", "__"}_#{anchor}_instance_" 
-      url = "#{page}##{anchor}"
-    elsif url.include? "."
-      page, anchor = url.split(".")
-      ["!", "?"].each { |sym| anchor = anchor.gsub sym, "_" }
-      anchor = "#{page.gsub "-", "__"}_#{anchor}_class_" 
-      url = "#{page}##{anchor}"
-    end
-    new_link = link "./#{url}", display
-    puts new_link
-    str = str.gsub old_link, new_link
-  end
-  str
 end
 
 def link_objects str
