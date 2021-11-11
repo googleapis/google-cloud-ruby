@@ -534,7 +534,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload analyze_content(participant: nil, text_input: nil, event_input: nil, reply_audio_config: nil, query_params: nil, request_id: nil)
+            # @overload analyze_content(participant: nil, text_input: nil, event_input: nil, reply_audio_config: nil, query_params: nil, assist_query_params: nil, request_id: nil)
             #   Pass arguments to `analyze_content` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -555,6 +555,8 @@ module Google
             #     is disabled.
             #   @param query_params [::Google::Cloud::Dialogflow::V2::QueryParameters, ::Hash]
             #     Parameters for a Dialogflow virtual-agent query.
+            #   @param assist_query_params [::Google::Cloud::Dialogflow::V2::AssistQueryParameters, ::Hash]
+            #     Parameters for a human assist query.
             #   @param request_id [::String]
             #     A unique identifier for this request. Restricted to 36 ASCII characters.
             #     A random UUID is recommended.
@@ -638,7 +640,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload suggest_articles(parent: nil, latest_message: nil, context_size: nil)
+            # @overload suggest_articles(parent: nil, latest_message: nil, context_size: nil, assist_query_params: nil)
             #   Pass arguments to `suggest_articles` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -655,8 +657,11 @@ module Google
             #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
             #   @param context_size [::Integer]
             #     Max number of messages prior to and including
-            #     {::Google::Cloud::Dialogflow::V2::SuggestArticlesRequest#latest_message latest_message} to use as context
-            #     when compiling the suggestion. By default 20 and at most 50.
+            #     {::Google::Cloud::Dialogflow::V2::SuggestArticlesRequest#latest_message latest_message}
+            #     to use as context when compiling the suggestion. By default 20 and at
+            #     most 50.
+            #   @param assist_query_params [::Google::Cloud::Dialogflow::V2::AssistQueryParameters, ::Hash]
+            #     Parameters for a human assist query.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dialogflow::V2::SuggestArticlesResponse]
@@ -736,7 +741,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload suggest_faq_answers(parent: nil, latest_message: nil, context_size: nil)
+            # @overload suggest_faq_answers(parent: nil, latest_message: nil, context_size: nil, assist_query_params: nil)
             #   Pass arguments to `suggest_faq_answers` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -755,6 +760,8 @@ module Google
             #     Max number of messages prior to and including
             #     [latest_message] to use as context when compiling the
             #     suggestion. By default 20 and at most 50.
+            #   @param assist_query_params [::Google::Cloud::Dialogflow::V2::AssistQueryParameters, ::Hash]
+            #     Parameters for a human assist query.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersResponse]

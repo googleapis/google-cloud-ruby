@@ -21,6 +21,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :role, :enum, 2, "google.cloud.dialogflow.v2.Participant.Role"
       optional :sip_recording_media_label, :string, 6
+      map :documents_metadata_filters, :string, :string, 8
     end
     add_enum "google.cloud.dialogflow.v2.Participant.Role" do
       value :ROLE_UNSPECIFIED, 0
@@ -61,6 +62,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :participant, :string, 1
       optional :reply_audio_config, :message, 5, "google.cloud.dialogflow.v2.OutputAudioConfig"
       optional :query_params, :message, 9, "google.cloud.dialogflow.v2.QueryParameters"
+      optional :assist_query_params, :message, 14, "google.cloud.dialogflow.v2.AssistQueryParameters"
       optional :request_id, :string, 11
       oneof :input do
         optional :text_input, :message, 6, "google.cloud.dialogflow.v2.TextInput"
@@ -83,6 +85,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :latest_message, :string, 2
       optional :context_size, :int32, 3
+      optional :assist_query_params, :message, 4, "google.cloud.dialogflow.v2.AssistQueryParameters"
     end
     add_message "google.cloud.dialogflow.v2.SuggestArticlesResponse" do
       repeated :article_answers, :message, 1, "google.cloud.dialogflow.v2.ArticleAnswer"
@@ -93,6 +96,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :latest_message, :string, 2
       optional :context_size, :int32, 3
+      optional :assist_query_params, :message, 4, "google.cloud.dialogflow.v2.AssistQueryParameters"
     end
     add_message "google.cloud.dialogflow.v2.SuggestFaqAnswersResponse" do
       repeated :faq_answers, :message, 1, "google.cloud.dialogflow.v2.FaqAnswer"
@@ -145,6 +149,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :parts, :message, 1, "google.cloud.dialogflow.v2.AnnotatedMessagePart"
       optional :contain_entities, :bool, 2
     end
+    add_message "google.cloud.dialogflow.v2.AssistQueryParameters" do
+      map :documents_metadata_filters, :string, :string, 1
+    end
   end
 end
 
@@ -175,6 +182,7 @@ module Google
         SuggestionResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SuggestionResult").msgclass
         AnnotatedMessagePart = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.AnnotatedMessagePart").msgclass
         MessageAnnotation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.MessageAnnotation").msgclass
+        AssistQueryParameters = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.AssistQueryParameters").msgclass
       end
     end
   end
