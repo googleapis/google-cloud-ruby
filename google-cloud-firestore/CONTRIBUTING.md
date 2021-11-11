@@ -206,7 +206,7 @@ The subsections below describe the individual CI checks.
 The project uses [Rubocop](https://github.com/rubocop/rubocop) configured with the shared
 [googleapis/ruby-style](https://github.com/googleapis/ruby-style) rules to ensure that your code adheres to
 Google's Ruby style. The style is largely based on [The Ruby Style
-Guide](https://github.com/bbatsov/ruby-style-guide) with a few exceptions based on Seattle.rb style:
+Guide](https://github.com/bbatsov/ruby-style-guide) with a few exceptions:
 
 * Avoid parentheses when possible, including in method definitions.
 * Use double-quoted strings.
