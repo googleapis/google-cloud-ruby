@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 / 2021-11-11
+
+#### Features
+
+* Added fields display_name and resource type.
+
 ### 0.9.1 / 2021-11-08
 
 #### Documentation
