@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.2 / 2021-11-11
+
+#### Documentation
+
+* Improved reference documentation formatting
+
 ### 0.4.1 / 2021-11-08
 
 #### Documentation
