@@ -22,6 +22,20 @@ def method_id
   @method.path
 end
 
+def canonical_method
+  @canonical_methods ||= {}
+  @canonical_methods[@method] ||= begin
+    found_method = nil
+    if @method.is_alias?
+      orig_name = @method.namespace.aliases[@method]
+      found_method = @method.namespace.meths(all: true).find do |meth|
+        meth.name == orig_name && meth.scope == @method.scope
+      end if orig_name
+    end
+    found_method || @method
+  end
+end
+
 def method_signature
   sign = @method.path[@method.path.size - @method.name.to_s.size - 1]
   text = ""
@@ -48,8 +62,8 @@ def method_signature
     text += "self." if sign == "."
     text += @method.name.to_s
     text += "("
-    unless @method.parameters.empty?
-      params = @method.parameters.map do |param|
+    unless canonical_method.parameters.empty?
+      params = canonical_method.parameters.map do |param|
         entry = param[0]
         if param[1]
           if entry.end_with? ":"
@@ -76,11 +90,42 @@ def method_signature
   text
 end
 
+def alias_text
+  text = []
+  unless canonical_method == @method
+    item = link object_url(canonical_method), short_method_name(canonical_method)
+    text << "    aliasof: \"#{item}\""
+  end
+  aliases = @method.aliases
+  if aliases.empty?
+    text << "    aliases: []"
+  else
+    text << "    aliases:"
+    aliases.each do |meth|
+      item = link object_url(meth), short_method_name(meth)
+      text << "    - description: \"#{item}\""
+    end
+  end
+  text.join("\n")
+end
+
+def short_method_name method
+  case method.scope
+  when :instance
+    "##{method.name}"
+  when :class
+    ".#{method.name}"
+  else
+    method.name.to_s
+  end
+end
+
 def param_text
   text = []
   overloads = @method.tags.select { |tag| tag.tag_name == "overload" }
   if overloads.empty?
-    params = @method.tags.select { |tag| tag.tag_name == "param" }
+    param_tag = @method.writer? ? "return" : "param"
+    params = @method.tags.select { |tag| tag.tag_name == param_tag }
     text << arg_text(@method, params, "    ")
   else
     text << "    overloads:"
@@ -101,10 +146,12 @@ def arg_text method, params, indent
 
   text = ["arguments:"]
   params.each do |arg|
-    entry = "- description: \"#{bold arg.name}"
+    name = arg.name
+    name = "value" if name.nil? || name.empty?
+    entry = "- description: \"#{bold name}"
     types = arg.types.map { |type| link_objects type }
     entry += " (#{types.join ", "})" unless types.empty?
-    default_value ||= method.parameters.select { |n| n[0] == "#{arg.name}:" }.last
+    default_value ||= canonical_method.parameters.select { |n| n[0] == "#{name}:" }.last
     if default_value && default_value.last
       defaults = "(defaults to: #{default_value.last})"
       entry += " #{italic defaults}"
