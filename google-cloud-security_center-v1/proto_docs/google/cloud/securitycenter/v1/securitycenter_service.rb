@@ -21,6 +21,54 @@ module Google
   module Cloud
     module SecurityCenter
       module V1
+        # Request message for bulk findings update.
+        #
+        # Note:
+        #     1. If multiple bulk update requests match the same resource, the order in
+        # which they get executed is not defined.
+        #     2. Once a bulk operation is started, there is no way to stop it.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, at which bulk action needs to be applied. Its format is
+        #     "organizations/[organization_id]", "folders/[folder_id]",
+        #     "projects/[project_id]".
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Expression that identifies findings that should be updated.
+        #     The expression is a list of zero or more restrictions combined
+        #     via logical operators `AND` and `OR`. Parentheses are supported, and `OR`
+        #     has higher precedence than `AND`.
+        #
+        #     Restrictions have the form `<field> <operator> <value>` and may have a
+        #     `-` character in front of them to indicate negation. The fields map to
+        #     those defined in the corresponding resource.
+        #
+        #     The supported operators are:
+        #
+        #     * `=` for all value types.
+        #     * `>`, `<`, `>=`, `<=` for integer values.
+        #     * `:`, meaning substring matching, for strings.
+        #
+        #     The supported value types are:
+        #
+        #     * string literals in quotes.
+        #     * integer literals without quotes.
+        #     * boolean literals `true` and `false` without quotes.
+        # @!attribute [rw] mute_annotation
+        #   @return [::String]
+        #     This can be a mute configuration name or any identifier for mute/unmute
+        #     of findings based on the filter.
+        class BulkMuteFindingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response to a BulkMute request. Contains the LRO information.
+        class BulkMuteFindingsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for creating a finding.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -36,6 +84,26 @@ module Google
         #     Required. The Finding being created. The name and security_marks will be ignored as
         #     they are both output only fields on this resource.
         class CreateFindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for creating a mute config.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Resource name of the new mute configs's parent. Its format is
+        #     "organizations/[organization_id]", "folders/[folder_id]", or
+        #     "projects/[project_id]".
+        # @!attribute [rw] mute_config
+        #   @return [::Google::Cloud::SecurityCenter::V1::MuteConfig]
+        #     Required. The mute config being created.
+        # @!attribute [rw] mute_config_id
+        #   @return [::String]
+        #     Required. Unique identifier provided by the client within the parent scope.
+        #     It must consist of lower case letters, numbers, and hyphen, with the first
+        #     character a letter, the last a letter or a number, and a 63 character
+        #     maximum.
+        class CreateMuteConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -74,12 +142,36 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for deleting a mute config.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the mute config to delete. Its format is
+        #     organizations/\\{organization}/muteConfigs/\\{config_id},
+        #     folders/\\{folder}/muteConfigs/\\{config_id}, or
+        #     projects/\\{project}/muteConfigs/\\{config_id}
+        class DeleteMuteConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for deleting a notification config.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the notification config to delete. Its format is
         #     "organizations/[organization_id]/notificationConfigs/[config_id]".
         class DeleteNotificationConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for retrieving a mute config.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the mute config to retrieve. Its format is
+        #     organizations/\\{organization}/muteConfigs/\\{config_id},
+        #     folders/\\{folder}/muteConfigs/\\{config_id}, or
+        #     projects/\\{project}/muteConfigs/\\{config_id}
+        class GetMuteConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -456,6 +548,44 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Request message for listing  mute configs at a given scope e.g. organization,
+        # folder or project.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent, which owns the collection of mute configs. Its format is
+        #     "organizations/[organization_id]", "folders/[folder_id]",
+        #     "projects/[project_id]".
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of configs to return. The service may return fewer than
+        #     this value.
+        #     If unspecified, at most 10 configs will be returned.
+        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListMuteConfigs` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListMuteConfigs` must
+        #     match the call that provided the page token.
+        class ListMuteConfigsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for listing mute configs.
+        # @!attribute [rw] mute_configs
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::MuteConfig>]
+        #     The mute configs from the specified parent.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListMuteConfigsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for listing notification configs.
@@ -981,6 +1111,23 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for updating a finding's mute status.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The relative resource name of the finding. See:
+        #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
+        #     Example:
+        #     "organizations/\\{organization_id}/sources/\\{source_id}/finding/\\{finding_id}",
+        #     "folders/\\{folder_id}/sources/\\{source_id}/finding/\\{finding_id}",
+        #     "projects/\\{project_id}/sources/\\{source_id}/finding/\\{finding_id}".
+        # @!attribute [rw] mute
+        #   @return [::Google::Cloud::SecurityCenter::V1::Finding::Mute]
+        #     Required. The desired state of the Mute.
+        class SetMuteRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for running asset discovery for an organization.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -1010,6 +1157,19 @@ module Google
         #     be added/updated by using "source_properties.<property key>" in the field
         #     mask.
         class UpdateFindingRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for updating a mute config.
+        # @!attribute [rw] mute_config
+        #   @return [::Google::Cloud::SecurityCenter::V1::MuteConfig]
+        #     Required. The mute config being updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     The list of fields to be updated.
+        #     If empty all mutable fields will be updated.
+        class UpdateMuteConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

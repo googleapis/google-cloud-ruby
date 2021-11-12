@@ -33,17 +33,27 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.securitycenter.v1.SecurityCenter'
 
+            # Kicks off an LRO to bulk mute findings for a parent based on a filter. The
+            # parent can be either an organization, folder or project. The findings
+            # matched by the filter will be muted after the LRO is done.
+            rpc :BulkMuteFindings, ::Google::Cloud::SecurityCenter::V1::BulkMuteFindingsRequest, ::Google::Longrunning::Operation
             # Creates a source.
             rpc :CreateSource, ::Google::Cloud::SecurityCenter::V1::CreateSourceRequest, ::Google::Cloud::SecurityCenter::V1::Source
             # Creates a finding. The corresponding source must exist for finding creation
             # to succeed.
             rpc :CreateFinding, ::Google::Cloud::SecurityCenter::V1::CreateFindingRequest, ::Google::Cloud::SecurityCenter::V1::Finding
+            # Creates a mute config.
+            rpc :CreateMuteConfig, ::Google::Cloud::SecurityCenter::V1::CreateMuteConfigRequest, ::Google::Cloud::SecurityCenter::V1::MuteConfig
             # Creates a notification config.
             rpc :CreateNotificationConfig, ::Google::Cloud::SecurityCenter::V1::CreateNotificationConfigRequest, ::Google::Cloud::SecurityCenter::V1::NotificationConfig
+            # Deletes an existing mute config.
+            rpc :DeleteMuteConfig, ::Google::Cloud::SecurityCenter::V1::DeleteMuteConfigRequest, ::Google::Protobuf::Empty
             # Deletes a notification config.
             rpc :DeleteNotificationConfig, ::Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest, ::Google::Protobuf::Empty
             # Gets the access control policy on the specified Source.
             rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
+            # Gets a mute config.
+            rpc :GetMuteConfig, ::Google::Cloud::SecurityCenter::V1::GetMuteConfigRequest, ::Google::Cloud::SecurityCenter::V1::MuteConfig
             # Gets a notification config.
             rpc :GetNotificationConfig, ::Google::Cloud::SecurityCenter::V1::GetNotificationConfigRequest, ::Google::Cloud::SecurityCenter::V1::NotificationConfig
             # Gets the settings for an organization.
@@ -68,6 +78,8 @@ module Google
             # To list across all sources provide a `-` as the source id.
             # Example: /v1/organizations/{organization_id}/sources/-/findings
             rpc :ListFindings, ::Google::Cloud::SecurityCenter::V1::ListFindingsRequest, ::Google::Cloud::SecurityCenter::V1::ListFindingsResponse
+            # Lists mute configs.
+            rpc :ListMuteConfigs, ::Google::Cloud::SecurityCenter::V1::ListMuteConfigsRequest, ::Google::Cloud::SecurityCenter::V1::ListMuteConfigsResponse
             # Lists notification configs.
             rpc :ListNotificationConfigs, ::Google::Cloud::SecurityCenter::V1::ListNotificationConfigsRequest, ::Google::Cloud::SecurityCenter::V1::ListNotificationConfigsResponse
             # Lists all sources belonging to an organization.
@@ -81,6 +93,8 @@ module Google
             rpc :RunAssetDiscovery, ::Google::Cloud::SecurityCenter::V1::RunAssetDiscoveryRequest, ::Google::Longrunning::Operation
             # Updates the state of a finding.
             rpc :SetFindingState, ::Google::Cloud::SecurityCenter::V1::SetFindingStateRequest, ::Google::Cloud::SecurityCenter::V1::Finding
+            # Updates the mute state of a finding.
+            rpc :SetMute, ::Google::Cloud::SecurityCenter::V1::SetMuteRequest, ::Google::Cloud::SecurityCenter::V1::Finding
             # Sets the access control policy on the specified Source.
             rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Returns the permissions that a caller has on the specified source.
@@ -88,6 +102,8 @@ module Google
             # Creates or updates a finding. The corresponding source must exist for a
             # finding creation to succeed.
             rpc :UpdateFinding, ::Google::Cloud::SecurityCenter::V1::UpdateFindingRequest, ::Google::Cloud::SecurityCenter::V1::Finding
+            # Updates a mute config.
+            rpc :UpdateMuteConfig, ::Google::Cloud::SecurityCenter::V1::UpdateMuteConfigRequest, ::Google::Cloud::SecurityCenter::V1::MuteConfig
             #
             # Updates a notification config. The following update
             # fields are allowed: description, pubsub_topic, streaming_config.filter

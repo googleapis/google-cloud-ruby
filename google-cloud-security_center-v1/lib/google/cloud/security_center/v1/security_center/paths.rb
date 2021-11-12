@@ -97,6 +97,58 @@ module Google
             end
 
             ##
+            # Create a fully-qualified MuteConfig resource string.
+            #
+            # @overload mute_config_path(organization:, mute_config:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/muteConfigs/{mute_config}`
+            #
+            #   @param organization [String]
+            #   @param mute_config [String]
+            #
+            # @overload mute_config_path(folder:, mute_config:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/muteConfigs/{mute_config}`
+            #
+            #   @param folder [String]
+            #   @param mute_config [String]
+            #
+            # @overload mute_config_path(project:, mute_config:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/muteConfigs/{mute_config}`
+            #
+            #   @param project [String]
+            #   @param mute_config [String]
+            #
+            # @return [::String]
+            def mute_config_path **args
+              resources = {
+                "mute_config:organization" => (proc do |organization:, mute_config:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+                  "organizations/#{organization}/muteConfigs/#{mute_config}"
+                end),
+                "folder:mute_config" => (proc do |folder:, mute_config:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+
+                  "folders/#{folder}/muteConfigs/#{mute_config}"
+                end),
+                "mute_config:project" => (proc do |project:, mute_config:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/muteConfigs/#{mute_config}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified NotificationConfig resource string.
             #
             # The resource will be in the following format:
