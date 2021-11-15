@@ -15,4 +15,5 @@
 # limitations under the License.
 
 load_git remote: "https://github.com/googleapis/ruby-common-tools.git",
-         path: "toys/release"
+         path: "toys/release",
+         update: true

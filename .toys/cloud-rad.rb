@@ -25,12 +25,11 @@ end
 def run_yard
   Dir.chdir effective_gem_name do
     rm_rf "doc"
-    cmd = [
-      "bundle", "exec", "yard", "doc",
-      "--yardopts", ".yardopts-cloudrad"
-    ]
-    env = { "CLOUDRAD_GEM_NAME" => effective_gem_name }
-    exec cmd, env: env
+    rm_rf ".yardoc"
+    cmd = ["release", "build-rad", "--gem-name", effective_gem_name]
+    cmd << "-#{'q' * (-verbosity)}" if verbosity < 0
+    cmd << "-#{'v' * verbosity}" if verbosity > 0
+    exec_tool cmd
   end
 end
 
@@ -98,7 +97,7 @@ end
 
 def validate_gem_name name
   error "gem name not provided" unless name
-  path = File.join name, ".yardopts-cloudrad"
+  path = File.join name, ".yardopts"
   error "no #{path} file" unless File.file? path
   name
 end
