@@ -66,6 +66,7 @@
     "snippets/bigtable_instance_admin/list_app_profiles.rb",
     "snippets/bigtable_instance_admin/list_clusters.rb",
     "snippets/bigtable_instance_admin/list_instances.rb",
+    "snippets/bigtable_instance_admin/partial_update_cluster.rb",
     "snippets/bigtable_instance_admin/partial_update_instance.rb",
     "snippets/bigtable_instance_admin/set_iam_policy.rb",
     "snippets/bigtable_instance_admin/test_iam_permissions.rb",
