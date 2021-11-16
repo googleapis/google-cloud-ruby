@@ -26,9 +26,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 10, "google.protobuf.Timestamp"
       optional :severity, :enum, 12, "google.cloud.securitycenter.v1.Finding.Severity"
       optional :canonical_name, :string, 14
+      optional :mute, :enum, 15, "google.cloud.securitycenter.v1.Finding.Mute"
       optional :finding_class, :enum, 17, "google.cloud.securitycenter.v1.Finding.FindingClass"
       optional :indicator, :message, 18, "google.cloud.securitycenter.v1.Indicator"
       optional :vulnerability, :message, 20, "google.cloud.securitycenter.v1.Vulnerability"
+      optional :mute_update_time, :message, 21, "google.protobuf.Timestamp"
+      optional :mute_initiator, :string, 28
     end
     add_enum "google.cloud.securitycenter.v1.Finding.State" do
       value :STATE_UNSPECIFIED, 0
@@ -41,6 +44,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :HIGH, 2
       value :MEDIUM, 3
       value :LOW, 4
+    end
+    add_enum "google.cloud.securitycenter.v1.Finding.Mute" do
+      value :MUTE_UNSPECIFIED, 0
+      value :MUTED, 1
+      value :UNMUTED, 2
+      value :UNDEFINED, 4
     end
     add_enum "google.cloud.securitycenter.v1.Finding.FindingClass" do
       value :FINDING_CLASS_UNSPECIFIED, 0
@@ -59,6 +68,7 @@ module Google
         Finding = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.Finding").msgclass
         Finding::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.Finding.State").enummodule
         Finding::Severity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.Finding.Severity").enummodule
+        Finding::Mute = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.Finding.Mute").enummodule
         Finding::FindingClass = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.Finding.FindingClass").enummodule
       end
     end

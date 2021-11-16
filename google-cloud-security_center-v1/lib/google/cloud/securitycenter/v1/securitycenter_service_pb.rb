@@ -9,6 +9,7 @@ require 'google/api/resource_pb'
 require 'google/cloud/securitycenter/v1/asset_pb'
 require 'google/cloud/securitycenter/v1/finding_pb'
 require 'google/cloud/securitycenter/v1/folder_pb'
+require 'google/cloud/securitycenter/v1/mute_config_pb'
 require 'google/cloud/securitycenter/v1/notification_config_pb'
 require 'google/cloud/securitycenter/v1/organization_settings_pb'
 require 'google/cloud/securitycenter/v1/security_marks_pb'
@@ -25,10 +26,22 @@ require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/securitycenter/v1/securitycenter_service.proto", :syntax => :proto3) do
+    add_message "google.cloud.securitycenter.v1.BulkMuteFindingsRequest" do
+      optional :parent, :string, 1
+      optional :filter, :string, 2
+      optional :mute_annotation, :string, 3
+    end
+    add_message "google.cloud.securitycenter.v1.BulkMuteFindingsResponse" do
+    end
     add_message "google.cloud.securitycenter.v1.CreateFindingRequest" do
       optional :parent, :string, 1
       optional :finding_id, :string, 2
       optional :finding, :message, 3, "google.cloud.securitycenter.v1.Finding"
+    end
+    add_message "google.cloud.securitycenter.v1.CreateMuteConfigRequest" do
+      optional :parent, :string, 1
+      optional :mute_config, :message, 2, "google.cloud.securitycenter.v1.MuteConfig"
+      optional :mute_config_id, :string, 3
     end
     add_message "google.cloud.securitycenter.v1.CreateNotificationConfigRequest" do
       optional :parent, :string, 1
@@ -39,7 +52,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :source, :message, 2, "google.cloud.securitycenter.v1.Source"
     end
+    add_message "google.cloud.securitycenter.v1.DeleteMuteConfigRequest" do
+      optional :name, :string, 1
+    end
     add_message "google.cloud.securitycenter.v1.DeleteNotificationConfigRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.securitycenter.v1.GetMuteConfigRequest" do
       optional :name, :string, 1
     end
     add_message "google.cloud.securitycenter.v1.GetNotificationConfigRequest" do
@@ -84,6 +103,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.securitycenter.v1.GroupResult" do
       map :properties, :string, :message, 1, "google.protobuf.Value"
       optional :count, :int64, 2
+    end
+    add_message "google.cloud.securitycenter.v1.ListMuteConfigsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.cloud.securitycenter.v1.ListMuteConfigsResponse" do
+      repeated :mute_configs, :message, 1, "google.cloud.securitycenter.v1.MuteConfig"
+      optional :next_page_token, :string, 2
     end
     add_message "google.cloud.securitycenter.v1.ListNotificationConfigsRequest" do
       optional :parent, :string, 1
@@ -172,11 +200,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :state, :enum, 2, "google.cloud.securitycenter.v1.Finding.State"
       optional :start_time, :message, 3, "google.protobuf.Timestamp"
     end
+    add_message "google.cloud.securitycenter.v1.SetMuteRequest" do
+      optional :name, :string, 1
+      optional :mute, :enum, 2, "google.cloud.securitycenter.v1.Finding.Mute"
+    end
     add_message "google.cloud.securitycenter.v1.RunAssetDiscoveryRequest" do
       optional :parent, :string, 1
     end
     add_message "google.cloud.securitycenter.v1.UpdateFindingRequest" do
       optional :finding, :message, 1, "google.cloud.securitycenter.v1.Finding"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.cloud.securitycenter.v1.UpdateMuteConfigRequest" do
+      optional :mute_config, :message, 1, "google.cloud.securitycenter.v1.MuteConfig"
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
     end
     add_message "google.cloud.securitycenter.v1.UpdateNotificationConfigRequest" do
@@ -203,10 +239,15 @@ module Google
   module Cloud
     module SecurityCenter
       module V1
+        BulkMuteFindingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.BulkMuteFindingsRequest").msgclass
+        BulkMuteFindingsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.BulkMuteFindingsResponse").msgclass
         CreateFindingRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.CreateFindingRequest").msgclass
+        CreateMuteConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.CreateMuteConfigRequest").msgclass
         CreateNotificationConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.CreateNotificationConfigRequest").msgclass
         CreateSourceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.CreateSourceRequest").msgclass
+        DeleteMuteConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.DeleteMuteConfigRequest").msgclass
         DeleteNotificationConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.DeleteNotificationConfigRequest").msgclass
+        GetMuteConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.GetMuteConfigRequest").msgclass
         GetNotificationConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.GetNotificationConfigRequest").msgclass
         GetOrganizationSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.GetOrganizationSettingsRequest").msgclass
         GetSourceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.GetSourceRequest").msgclass
@@ -215,6 +256,8 @@ module Google
         GroupFindingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.GroupFindingsRequest").msgclass
         GroupFindingsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.GroupFindingsResponse").msgclass
         GroupResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.GroupResult").msgclass
+        ListMuteConfigsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.ListMuteConfigsRequest").msgclass
+        ListMuteConfigsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.ListMuteConfigsResponse").msgclass
         ListNotificationConfigsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.ListNotificationConfigsRequest").msgclass
         ListNotificationConfigsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.ListNotificationConfigsResponse").msgclass
         ListSourcesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.ListSourcesRequest").msgclass
@@ -229,8 +272,10 @@ module Google
         ListFindingsResponse::ListFindingsResult::Resource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult.Resource").msgclass
         ListFindingsResponse::ListFindingsResult::StateChange = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult.StateChange").enummodule
         SetFindingStateRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.SetFindingStateRequest").msgclass
+        SetMuteRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.SetMuteRequest").msgclass
         RunAssetDiscoveryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.RunAssetDiscoveryRequest").msgclass
         UpdateFindingRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.UpdateFindingRequest").msgclass
+        UpdateMuteConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.UpdateMuteConfigRequest").msgclass
         UpdateNotificationConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.UpdateNotificationConfigRequest").msgclass
         UpdateOrganizationSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.UpdateOrganizationSettingsRequest").msgclass
         UpdateSourceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.UpdateSourceRequest").msgclass
