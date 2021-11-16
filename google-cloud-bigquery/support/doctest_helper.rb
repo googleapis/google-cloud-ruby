@@ -253,7 +253,16 @@ YARD::Doctest.configure do |doctest|
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
-      mock.expect :get_job_query_results, query_data_gapi(token: nil), ["my-project", "1234567890", Hash]
+      mock.expect :list_table_data, table_data_gapi(token: nil).to_json, ["my-project", "target_dataset_id", "target_table_id", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Dataset#query@Run query in a session:" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
+      mock.expect :get_job, query_job_gapi, ["my-project", "1234567890", Hash]
+      mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
       mock.expect :list_table_data, table_data_gapi(token: nil).to_json, ["my-project", "target_dataset_id", "target_table_id", Hash]
     end
   end
@@ -266,7 +275,16 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
       mock.expect :get_job, query_job_gapi, ["my-project", "1234567890", Hash]
-      mock.expect :get_job_query_results, query_data_gapi, ["my-project", "1234567890", Hash]
+      mock.expect :list_table_data, table_data_gapi(token: nil).to_json, ["my-project", "target_dataset_id", "target_table_id", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Dataset#query_job@Run query in a session:" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
+      mock.expect :get_job, query_job_gapi, ["my-project", "1234567890", Hash]
+      mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
       mock.expect :list_table_data, table_data_gapi(token: nil).to_json, ["my-project", "target_dataset_id", "target_table_id", Hash]
     end
   end

@@ -69,6 +69,25 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
     _(rows[2]).must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Explodey", spells_properties_power: 11.0 })
   end
 
+  it "queries in session mode" do
+    job = bigquery.query_job "CREATE TEMPORARY TABLE temptable AS SELECT 17 as foo", dataset: dataset, create_session: true
+    job.wait_until_done!
+    _(job).wont_be :failed?
+    _(job.session_id).wont_be :nil?
+
+    job_2 = bigquery.query_job "SELECT * FROM temptable", dataset: dataset, session_id: job.session_id
+    job_2.wait_until_done!
+    _(job_2).wont_be :failed?
+    _(job_2.session_id).wont_be :nil?
+    _(job_2.session_id).must_equal job.session_id
+    _(job_2.data.first).wont_be :nil?
+    _(job_2.data.first[:foo]).must_equal 17
+
+    data = bigquery.query "SELECT * FROM temptable", dataset: dataset, session_id: job.session_id
+    _(data.first).wont_be :nil?
+    _(data.first[:foo]).must_equal 17
+  end
+
   it "modifies a nested schema via field" do
     empty_table_id = "#{table_id}_empty"
     empty_table = dataset.table empty_table_id

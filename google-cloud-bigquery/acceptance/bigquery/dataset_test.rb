@@ -541,4 +541,23 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
 
     assert_data table.data(max: 1)
   end
+
+  it "queries in session mode" do
+    job = dataset.query_job "CREATE TEMPORARY TABLE temptable AS SELECT 17 as foo", create_session: true
+    job.wait_until_done!
+    _(job).wont_be :failed?
+    _(job.session_id).wont_be :nil?
+
+    job_2 = dataset.query_job "SELECT * FROM temptable", session_id: job.session_id
+    job_2.wait_until_done!
+    _(job_2).wont_be :failed?
+    _(job_2.session_id).wont_be :nil?
+    _(job_2.session_id).must_equal job.session_id
+    _(job_2.data.first).wont_be :nil?
+    _(job_2.data.first[:foo]).must_equal 17
+
+    data = dataset.query "SELECT * FROM temptable", session_id: job.session_id
+    _(data.first).wont_be :nil?
+    _(data.first[:foo]).must_equal 17
+  end
 end
