@@ -62,13 +62,8 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.list_voices.timeout = 600.0
-                default_config.rpcs.list_voices.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
-                }
-
-                default_config.rpcs.synthesize_speech.timeout = 600.0
-                default_config.rpcs.synthesize_speech.retry_policy = {
+                default_config.timeout = 300.0
+                default_config.retry_policy = {
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
