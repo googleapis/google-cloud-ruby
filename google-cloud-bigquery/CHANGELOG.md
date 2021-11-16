@@ -1,5 +1,18 @@
 # Release History
 
+### 1.38.0 / 2021-11-16
+
+#### Features
+
+* Add session support
+  * Add create_session and session_id params to Project#query_job
+  * Add create_session and session_id params to Dataset#query_job
+  * Add session_id param to Project#query
+  * Add session_id param to Dataset#query
+  * Add Job#session_id
+  * Add QueryJob::Updater#create_session=
+  * Add QueryJob::Updater#session_id=
+
 ### 1.37.0 / 2021-10-21
 
 #### Features
