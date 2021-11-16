@@ -143,6 +143,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :TYPE_UNSPECIFIED, 0
       value :ARTICLE_SUGGESTION, 1
       value :FAQ, 2
+      value :SMART_REPLY, 3
     end
   end
 end

@@ -304,6 +304,7 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
     text_input = {}
     reply_audio_config = {}
     query_params = {}
+    assist_query_params = {}
     request_id = "hello world"
 
     analyze_content_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
@@ -314,6 +315,7 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
       assert_equal :text_input, request.input
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::OutputAudioConfig), request["reply_audio_config"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::QueryParameters), request["query_params"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::AssistQueryParameters), request["assist_query_params"]
       assert_equal "hello world", request["request_id"]
       refute_nil options
     end
@@ -325,31 +327,31 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.analyze_content({ participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, request_id: request_id }) do |response, operation|
+      client.analyze_content({ participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.analyze_content participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, request_id: request_id do |response, operation|
+      client.analyze_content participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.analyze_content ::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest.new(participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, request_id: request_id) do |response, operation|
+      client.analyze_content ::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest.new(participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.analyze_content({ participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, request_id: request_id }, grpc_options) do |response, operation|
+      client.analyze_content({ participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.analyze_content(::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest.new(participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, request_id: request_id), grpc_options) do |response, operation|
+      client.analyze_content(::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest.new(participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -370,6 +372,7 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
     parent = "hello world"
     latest_message = "hello world"
     context_size = 42
+    assist_query_params = {}
 
     suggest_articles_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :suggest_articles, name
@@ -377,6 +380,7 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
       assert_equal "hello world", request["parent"]
       assert_equal "hello world", request["latest_message"]
       assert_equal 42, request["context_size"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::AssistQueryParameters), request["assist_query_params"]
       refute_nil options
     end
 
@@ -387,31 +391,31 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.suggest_articles({ parent: parent, latest_message: latest_message, context_size: context_size }) do |response, operation|
+      client.suggest_articles({ parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.suggest_articles parent: parent, latest_message: latest_message, context_size: context_size do |response, operation|
+      client.suggest_articles parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.suggest_articles ::Google::Cloud::Dialogflow::V2::SuggestArticlesRequest.new(parent: parent, latest_message: latest_message, context_size: context_size) do |response, operation|
+      client.suggest_articles ::Google::Cloud::Dialogflow::V2::SuggestArticlesRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.suggest_articles({ parent: parent, latest_message: latest_message, context_size: context_size }, grpc_options) do |response, operation|
+      client.suggest_articles({ parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.suggest_articles(::Google::Cloud::Dialogflow::V2::SuggestArticlesRequest.new(parent: parent, latest_message: latest_message, context_size: context_size), grpc_options) do |response, operation|
+      client.suggest_articles(::Google::Cloud::Dialogflow::V2::SuggestArticlesRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -432,6 +436,7 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
     parent = "hello world"
     latest_message = "hello world"
     context_size = 42
+    assist_query_params = {}
 
     suggest_faq_answers_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :suggest_faq_answers, name
@@ -439,6 +444,7 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
       assert_equal "hello world", request["parent"]
       assert_equal "hello world", request["latest_message"]
       assert_equal 42, request["context_size"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::AssistQueryParameters), request["assist_query_params"]
       refute_nil options
     end
 
@@ -449,31 +455,31 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.suggest_faq_answers({ parent: parent, latest_message: latest_message, context_size: context_size }) do |response, operation|
+      client.suggest_faq_answers({ parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.suggest_faq_answers parent: parent, latest_message: latest_message, context_size: context_size do |response, operation|
+      client.suggest_faq_answers parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.suggest_faq_answers ::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersRequest.new(parent: parent, latest_message: latest_message, context_size: context_size) do |response, operation|
+      client.suggest_faq_answers ::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.suggest_faq_answers({ parent: parent, latest_message: latest_message, context_size: context_size }, grpc_options) do |response, operation|
+      client.suggest_faq_answers({ parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.suggest_faq_answers(::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersRequest.new(parent: parent, latest_message: latest_message, context_size: context_size), grpc_options) do |response, operation|
+      client.suggest_faq_answers(::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersRequest.new(parent: parent, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

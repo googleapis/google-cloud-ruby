@@ -531,6 +531,9 @@ module Google
 
             # Run FAQ model.
             FAQ = 2
+
+            # Run smart reply model.
+            SMART_REPLY = 3
           end
         end
       end
