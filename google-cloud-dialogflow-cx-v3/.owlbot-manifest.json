@@ -241,6 +241,7 @@
     "snippets/transition_route_groups/get_transition_route_group.rb",
     "snippets/transition_route_groups/list_transition_route_groups.rb",
     "snippets/transition_route_groups/update_transition_route_group.rb",
+    "snippets/versions/compare_versions.rb",
     "snippets/versions/create_version.rb",
     "snippets/versions/delete_version.rb",
     "snippets/versions/get_version.rb",
