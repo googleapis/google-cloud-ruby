@@ -57,6 +57,23 @@ def grant_sts_permissions project_id:, bucket_name:
     end
 end
 
+def delete_transfer_job project_id:, job_name:
+  client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+
+  transfer_job = {
+    name: job_name,
+    status: :DELETED
+  }
+
+  delete_request = {
+    job_name: job_name,
+    project_id: project_id,
+    transfer_job: transfer_job
+  }
+
+  client.update_transfer_job delete_request
+end
+
 def random_bucket_name
   t = Time.now.utc.iso8601.gsub ":", "-"
   "ruby-storagetransfer-samples-test-#{t}-#{SecureRandom.hex 4}".downcase

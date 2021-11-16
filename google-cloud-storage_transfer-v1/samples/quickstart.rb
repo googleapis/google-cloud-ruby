@@ -15,31 +15,34 @@
 # [START storagetransfer_quickstart]
 
 def quickstart project_id:, gcs_source_bucket:, gcs_sink_bucket:
-	# Your Google Cloud Project ID
-    # project_id = "your-project_id"
+  # Your Google Cloud Project ID
+  # project_id = "your-project_id"
 
-    # The name of the source GCS bucket to transfer objects from
-    #gcs_source_bucket = "your-source-gcs-source-bucket"
+  # The name of the source GCS bucket to transfer objects from
+  # gcs_source_bucket = "your-source-gcs-source-bucket"
 
-    # The name of the  GCS bucket to transfer  objects to
-    # gcs_sink_bucket = "your-sink-gcs-bucket"
+  # The name of the  GCS bucket to transfer  objects to
+  # gcs_sink_bucket = "your-sink-gcs-bucket"
 
-    require "google/cloud/storage_transfer/v1"
+  require "google/cloud/storage_transfer/v1"
 
-    transfer_job = { project_id: project_id,
-                     transfer_spec: { gcs_data_source: {bucket_name: gcs_source_bucket},
-                                       gcs_data_sink:  {bucket_name: gcs_sink_bucket}
-                                   },
+  transfer_job = { project_id: project_id,
+                   transfer_spec: { gcs_data_source: { bucket_name: gcs_source_bucket },
+                                     gcs_data_sink:  { bucket_name: gcs_sink_bucket } },
 
-                     status: :ENABLED
-                 }
+                   status: :ENABLED }
 
-    client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+  client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
 
-    response = client.create_transfer_job transfer_job: transfer_job
+  response = client.create_transfer_job transfer_job: transfer_job
 
-    puts "Created transfer job between two GCS buckets:"
-    puts response
+  run_request = {
+    project_id: project_id,
+      job_name: response.name
+  }
+  client.run_transfer_job run_request
+
+  puts "Created and ran transfer job between #{gcs_source_bucket} and #{gcs_sink_bucket} with name #{response.name}"
 end
 # [END storagetransfer_quickstart]
 
