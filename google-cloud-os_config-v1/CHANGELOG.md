@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 / 2021-11-17
+
+#### Features
+
+* Return the list of items affected by a vulnerability
+
 ### 0.8.0 / 2021-11-08
 
 #### Features
