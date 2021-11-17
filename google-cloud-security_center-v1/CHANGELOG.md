@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.0 / 2021-11-17
+
+#### Features
+
+* Support for mute configs
+
 ### 0.10.0 / 2021-11-11
 
 #### Features
