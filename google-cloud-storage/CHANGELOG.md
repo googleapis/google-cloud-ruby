@@ -1,5 +1,21 @@
 # Release History
 
+### 1.35.0 / 2021-11-17
+
+#### Features
+
+* changed PAP unspecified to inherited ([#14141](https://www.github.com/googleapis/google-cloud-ruby/issues/14141))
+  * samples: changed PAP unspecified to inherited
+  * Adding the right path of inherited sample.
+  * Samples test case fix.
+  * Deprecating method public_access_prevention_unspecified?
+  * Addressing review comments.
+* support for more client timeout options
+
+#### Bug Fixes
+
+* Update dependency on the addressable gem to 2.8 to remediate a vulnerability
+
 ### 1.34.1 / 2021-07-08
 
 #### Documentation
