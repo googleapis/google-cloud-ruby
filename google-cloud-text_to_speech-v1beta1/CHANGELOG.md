@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2021-11-17
+
+#### Features
+
+* Added custom voice configuration
+
 ### 0.6.4 / 2021-11-08
 
 #### Documentation
