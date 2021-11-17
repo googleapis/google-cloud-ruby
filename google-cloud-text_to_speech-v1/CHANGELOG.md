@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.5 / 2021-11-17
+
+#### Documentation
+
+* Improved reference documentation formatting
+
 ### 0.4.4 / 2021-11-08
 
 #### Documentation
