@@ -4,6 +4,7 @@
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -58,6 +59,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :LINEAR16, 1
       value :MP3, 2
       value :OGG_OPUS, 3
+      value :MULAW, 5
+      value :ALAW, 6
     end
   end
 end
