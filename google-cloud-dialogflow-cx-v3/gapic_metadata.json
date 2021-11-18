@@ -624,6 +624,11 @@
               "methods": [
                 "load_version"
               ]
+            },
+            "CompareVersions": {
+              "methods": [
+                "compare_versions"
+              ]
             }
           }
         }

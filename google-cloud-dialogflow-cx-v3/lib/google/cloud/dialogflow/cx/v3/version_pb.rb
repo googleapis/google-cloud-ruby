@@ -63,6 +63,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :allow_override_agent_resources, :bool, 2
     end
+    add_message "google.cloud.dialogflow.cx.v3.CompareVersionsRequest" do
+      optional :base_version, :string, 1
+      optional :target_version, :string, 2
+      optional :language_code, :string, 3
+    end
+    add_message "google.cloud.dialogflow.cx.v3.CompareVersionsResponse" do
+      optional :base_version_content_json, :string, 1
+      optional :target_version_content_json, :string, 2
+      optional :compare_time, :message, 3, "google.protobuf.Timestamp"
+    end
   end
 end
 
@@ -81,6 +91,8 @@ module Google
           UpdateVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.UpdateVersionRequest").msgclass
           DeleteVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.DeleteVersionRequest").msgclass
           LoadVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.LoadVersionRequest").msgclass
+          CompareVersionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.CompareVersionsRequest").msgclass
+          CompareVersionsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.CompareVersionsResponse").msgclass
         end
       end
     end

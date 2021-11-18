@@ -29,6 +29,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :username, :string, 2
       optional :password, :string, 3
       map :request_headers, :string, :string, 4
+      repeated :allowed_ca_certs, :bytes, 5
     end
     add_message "google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig" do
       optional :service, :string, 1

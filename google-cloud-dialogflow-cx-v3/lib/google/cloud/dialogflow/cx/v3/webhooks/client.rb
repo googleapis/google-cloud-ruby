@@ -540,9 +540,10 @@ module Google
               #     *  If `force` is set to false, an error will be returned with message
               #        indicating the referenced resources.
               #     *  If `force` is set to true, Dialogflow will remove the webhook, as well
-              #        as any references to the webhook (i.e. {::Google::Cloud::Dialogflow::CX::V3::Fulfillment#webhook Webhook}
-              #        and {::Google::Cloud::Dialogflow::CX::V3::Fulfillment#tag tag}in fulfillments that point to this webhook
-              #        will be removed).
+              #        as any references to the webhook (i.e.
+              #        {::Google::Cloud::Dialogflow::CX::V3::Fulfillment#webhook Webhook} and
+              #        {::Google::Cloud::Dialogflow::CX::V3::Fulfillment#tag tag}in fulfillments that
+              #        point to this webhook will be removed).
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]
