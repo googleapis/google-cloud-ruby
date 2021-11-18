@@ -17,27 +17,26 @@ require_relative "../quickstart"
 
 describe "Storage Transfer Service Quickstart" do
   let(:project) { Google::Cloud::Storage.new }
-  let(:source_bucket) {create_bucket_helper random_bucket_name}
-  let(:sink_bucket) {create_bucket_helper random_bucket_name}
+  let(:source_bucket) { create_bucket_helper random_bucket_name }
+  let(:sink_bucket) { create_bucket_helper random_bucket_name }
 
   after do
-  	delete_bucket_helper source_bucket.name
-	delete_bucket_helper sink_bucket.name
+    delete_bucket_helper source_bucket.name
+    delete_bucket_helper sink_bucket.name
   end
 
   it "creates a transfer job" do
-  	grant_sts_permissions project_id: project.project_id, bucket_name: source_bucket.name
-	grant_sts_permissions project_id: project.project_id, bucket_name: sink_bucket.name
-      out, _err = capture_io do
-      	retry_resource_exhaustion do
-		  quickstart project_id: project.project_id, gcs_source_bucket:source_bucket.name, gcs_sink_bucket: sink_bucket.name
-		end
+    grant_sts_permissions project_id: project.project_id, bucket_name: source_bucket.name
+    grant_sts_permissions project_id: project.project_id, bucket_name: sink_bucket.name
+    out, _err = capture_io do
+      retry_resource_exhaustion do
+        quickstart project_id: project.project_id, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name
       end
+    end
 
-	assert_includes out, "transferJobs"
-	job_name = out.scan(/transferJobs\/\d+/)[0]
+    assert_includes out, "transferJobs"
+    job_name = out.scan(%r{transferJobs/\d+})[0]
 
-	delete_transfer_job project_id: project.project_id, job_name: job_name
-	end
-
+    delete_transfer_job project_id: project.project_id, job_name: job_name
+  end
 end

@@ -19,42 +19,42 @@ require "minitest/focus"
 require "minitest/hooks/default"
 
 def grant_sts_permissions project_id:, bucket_name:
-	client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
-    request = {project_id: project_id}
-    response = client.get_google_service_account request
-    email = response.account_email
+  client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+  request = { project_id: project_id }
+  response = client.get_google_service_account request
+  email = response.account_email
 
-    storage = Google::Cloud::Storage.new
-    bucket = storage.bucket bucket_name
+  storage = Google::Cloud::Storage.new
+  bucket = storage.bucket bucket_name
 
-    object_viewer = "roles/storage.objectViewer"
-    bucket_reader ="roles/storage.legacyBucketReader"
-    bucket_writer = "roles/storage.legacyBucketWriter"
-    member = "serviceAccount:" + email
+  object_viewer = "roles/storage.objectViewer"
+  bucket_reader = "roles/storage.legacyBucketReader"
+  bucket_writer = "roles/storage.legacyBucketWriter"
+  member = "serviceAccount:#{email}"
 
-    bucket.policy requested_policy_version: 3 do |policy|
-      policy.version = 3
-      policy.bindings.insert(
-        role:      object_viewer,
-        members:   member
-      )
-     end
+  bucket.policy requested_policy_version: 3 do |policy|
+    policy.version = 3
+    policy.bindings.insert(
+      role:      object_viewer,
+      members:   member
+    )
+  end
 
-    bucket.policy requested_policy_version: 3 do |policy|
-      policy.version = 3
-      policy.bindings.insert(
-        role:      bucket_reader,
-        members:   member
-      )
-    end
+  bucket.policy requested_policy_version: 3 do |policy|
+    policy.version = 3
+    policy.bindings.insert(
+      role:      bucket_reader,
+      members:   member
+    )
+  end
 
-    bucket.policy requested_policy_version: 3 do |policy|
-      policy.version = 3
-      policy.bindings.insert(
-        role:      bucket_writer,
-        members:   member
-      )
-    end
+  bucket.policy requested_policy_version: 3 do |policy|
+    policy.version = 3
+    policy.bindings.insert(
+      role:      bucket_writer,
+      members:   member
+    )
+  end
 end
 
 def delete_transfer_job project_id:, job_name:
