@@ -80,6 +80,17 @@ module Google
               ordering_key: ordering_key
             )
           end
+
+          def span_attributes topic_name, msg
+            {
+              "messaging.system" => "pubsub",
+              "messaging.destination" => topic_name,
+              "messaging.destination_kind" => "topic",
+              "messaging.message_id" => msg.message_id,
+              "messaging.message_payload_size_bytes" => msg.to_proto.bytesize,
+              "pubsub.ordering_key" => msg.ordering_key
+            }
+          end
         end
 
         extend ClassMethods

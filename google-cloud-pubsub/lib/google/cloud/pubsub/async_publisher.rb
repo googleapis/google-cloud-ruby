@@ -21,6 +21,7 @@ require "google/cloud/pubsub/async_publisher/batch"
 require "google/cloud/pubsub/publish_result"
 require "google/cloud/pubsub/service"
 require "google/cloud/pubsub/convert"
+require "opentelemetry"
 
 module Google
   module Cloud
@@ -105,6 +106,7 @@ module Google
           @cond = new_cond
           @flow_controller = FlowController.new(**@flow_control)
           @thread = Thread.new { run_background }
+          @tracer = OpenTelemetry.tracer_provider.tracer "Google::Cloud::PubSub", Google::Cloud::PubSub::VERSION
         end
 
         ##
@@ -133,33 +135,55 @@ module Google
         #
         def publish data = nil, attributes = nil, ordering_key: nil, **extra_attrs, &callback
           msg = Convert.pubsub_message data, attributes, ordering_key, extra_attrs
-          begin
-            @flow_controller.acquire msg.to_proto.bytesize
-          rescue FlowControlLimitError => e
-            stop_publish ordering_key, e if ordering_key
-            raise
-          end
+          span_attrs = Convert.span_attributes topic_name, msg
+          span = @tracer.start_span "#{topic_name} send",
+                                    attributes: span_attrs,
+                                    kind: OpenTelemetry::Trace::SpanKind::PRODUCER
 
-          synchronize do
-            raise AsyncPublisherStopped if @stopped
-            raise OrderedMessagesDisabled if !@ordered && !msg.ordering_key.empty? # default is empty string
+          # TODO: message size in this span will be incorrect after propagation, below.
+          @tracer.in_span "#{topic_name} add to batch",
+                          attributes: span_attrs,
+                          kind: OpenTelemetry::Trace::SpanKind::PRODUCER do
+            propagate_span_in_message span, msg
+            begin
+              @flow_controller.acquire msg.to_proto.bytesize
+            rescue FlowControlLimitError => e
+              stop_publish ordering_key, e if ordering_key
+              raise
+            end
 
-            batch = resolve_batch_for_message msg
-            if batch.canceled?
-              @flow_controller.release msg.to_proto.bytesize
-              raise OrderingKeyError, batch.ordering_key
+            synchronize do
+              raise AsyncPublisherStopped if @stopped
+              raise OrderedMessagesDisabled if !@ordered && !msg.ordering_key.empty? # default is empty string
+
+              batch = resolve_batch_for_message msg
+              if batch.canceled?
+                @flow_controller.release msg.to_proto.bytesize
+                raise OrderingKeyError, batch.ordering_key
+              end
+              batch_action = batch.add msg, callback, span
+              if batch_action == :full
+                publish_batches!
+              elsif @published_at.nil?
+                # Set initial time to now to start the background counter
+                @published_at = Time.now
+              end
+              @cond.signal
             end
-            batch_action = batch.add msg, callback
-            if batch_action == :full
-              publish_batches!
-            elsif @published_at.nil?
-              # Set initial time to now to start the background counter
-              @published_at = Time.now
-            end
-            @cond.signal
           end
 
           nil
+        end
+
+        def propagate_span_in_message span, msg
+          # TODO: How do we keep traceparent out of the pubsub message unless OTEL is being used?
+          # Ensure body executes only conditional on active tracing.
+          return unless span.context.valid?
+          # Add span context to pubsub message attributes.
+          propagator = OpenTelemetry::Trace::Propagation::TraceContext.text_map_propagator
+          propagator.inject msg, setter: TextMapSetter.new
+          # Update the message size in the span attributes after adding span context to message attributes.
+          span.set_attribute "messaging.message_payload_size_bytes", msg.to_proto.bytesize
         end
 
         ##
@@ -296,6 +320,14 @@ module Google
 
         protected
 
+        # Open Telemetry type used by TraceContext#inject to write "traceparent" context into the message attributes.
+        class TextMapSetter
+          # Writes key into a message protobuf.
+          def set msg, key, value
+            msg.attributes[key] = value
+          end
+        end
+
         def run_background
           synchronize do
             until @stopped
@@ -342,6 +374,7 @@ module Google
         end
 
         def publish_batches! stop: nil
+          # @tracer.in_span "#{name} add to batch" do
           @batches.reject! { |_ordering_key, batch| batch.empty? }
           @batches.each_value do |batch|
             ready = batch.publish! stop: stop
@@ -355,9 +388,9 @@ module Google
           # TODO: raise unless @publish_thread_pool.running?
           return unless @publish_thread_pool.running?
 
-          Concurrent::Promises.future_on(
-            @publish_thread_pool, topic_name, batch
-          ) { |t, b| publish_batch_sync t, b }
+          Concurrent::Promises.future_on @publish_thread_pool, topic_name, batch do |t, b|
+            publish_batch_sync t, b
+          end
         end
 
         # rubocop:disable Metrics/AbcSize
@@ -373,11 +406,12 @@ module Google
               grpc = @service.publish topic_name, items.map(&:msg)
               items.zip Array(grpc.message_ids) do |item, id|
                 @flow_controller.release item.bytesize
-                next unless item.callback
-
-                item.msg.message_id = id
-                publish_result = PublishResult.from_grpc item.msg
-                execute_callback_async item.callback, publish_result
+                if item.callback
+                  item.msg.message_id = id
+                  publish_result = PublishResult.from_grpc item.msg
+                  execute_callback_async item.callback, publish_result
+                end
+                item.span.finish
               end
             end
 

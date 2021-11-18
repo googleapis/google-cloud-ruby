@@ -15,7 +15,7 @@
 require "helper"
 
 describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub do
-  let(:topic_name) { "topic-name-goes-here" }
+  let(:topic_name) { topic_path "topic-name-goes-here" }
   let(:fixture_file_path) { File.expand_path File.join __dir__, "../../../../conformance/ordered_messages.json" }
   let(:fixture) { JSON.parse File.read(fixture_file_path), symbolize_names: true }
   let(:fixture_expected_hash) { Hash[fixture[:expected].map { |exp| [exp[:key],  exp[:messages]] }] }

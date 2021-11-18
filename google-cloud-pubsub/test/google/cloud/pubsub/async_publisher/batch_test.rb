@@ -36,38 +36,38 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
 
     msg = pubsub_message "hello world", {}, ""
 
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
 
     assert_equal false, batch.publishing?
     assert_equal true, batch.publish!
     assert_equal true, batch.publishing?
 
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
 
     assert_equal true, batch.publishing?
     assert_equal 10, batch.rebalance!.count
     assert_equal false, batch.reset!
     assert_equal false, batch.publishing?
 
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
 
     assert_equal false, batch.publishing?
     assert_equal true, batch.publish!
@@ -76,41 +76,41 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
     assert_equal false, batch.reset!
     assert_equal false, batch.publishing?
 
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
 
     assert_equal false, batch.publishing?
     assert_equal true, batch.publish!
@@ -124,18 +124,18 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
     assert_equal true, batch.reset!
     assert_equal true, batch.publishing?
 
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
 
     assert_equal true, batch.publishing?
     assert_equal false, batch.stopping?
@@ -165,38 +165,38 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
 
     msg = pubsub_message "hello world", {}, ""
 
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
 
     assert_equal false, batch.publishing?
     assert_equal true, batch.publish!
     assert_equal true, batch.publishing?
 
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
 
     assert_equal true, batch.publishing?
     assert_equal 10, batch.rebalance!.count
     assert_equal false, batch.reset!
     assert_equal false, batch.publishing?
 
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
 
     assert_equal false, batch.publishing?
     assert_equal true, batch.publish!
@@ -205,41 +205,41 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
     assert_equal false, batch.reset!
     assert_equal false, batch.publishing?
 
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
 
     assert_equal false, batch.publishing?
     assert_equal true, batch.publish!
@@ -253,18 +253,18 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
     assert_equal true, batch.reset!
     assert_equal true, batch.publishing?
 
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
-    assert_equal :queued, batch.add(msg.dup, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
+    assert_equal :queued, batch.add(msg.dup, nil, nil)
 
     assert_equal true, batch.publishing?
     assert_equal false, batch.stopping?
@@ -299,7 +299,7 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
     assert_equal true, batch.stopping?
 
     assert_raises Google::Cloud::PubSub::AsyncPublisherStopped do
-      batch.add(msg.dup, nil)
+      batch.add(msg.dup, nil, nil)
     end
   end
 
@@ -312,21 +312,21 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
 
     refute batch.canceled?
 
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :added, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
-    assert_equal :full, batch.add(msg.dup, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :added, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
+    assert_equal :full, batch.add(msg.dup, nil, nil)
 
     canceled_items = batch.cancel!
 
@@ -344,7 +344,7 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
       msg = pubsub_message "hello world", {}, ""
 
       assert_equal true, batch.empty?
-      batch.add(msg.dup, nil)
+      batch.add(msg.dup, nil, nil)
       assert_equal false, batch.empty?
     end
 
@@ -357,7 +357,7 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
 
       assert_equal false, batch.publishing?
       assert_equal true, batch.empty?
-      batch.add(msg.dup, nil)
+      batch.add(msg.dup, nil, nil)
       batch.publish!
       assert_equal true, batch.publishing?
       assert_equal false, batch.empty?

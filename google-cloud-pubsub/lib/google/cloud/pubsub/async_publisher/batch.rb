@@ -62,18 +62,18 @@ module Google
           #   * `:full` - Batch is full and ready to be published, and the
           #     message is queued.
           #
-          def add msg, callback
+          def add msg, callback, span
             synchronize do
               raise AsyncPublisherStopped if @stopping
               raise OrderingKeyError, @ordering_key if @canceled
 
               if @publishing
-                queue_add msg, callback
+                queue_add msg, callback, span
                 :queued
-              elsif try_add msg, callback
+              elsif try_add msg, callback, span
                 :added
               else
-                queue_add msg, callback
+                queue_add msg, callback, span
                 :full
               end
             end
@@ -141,7 +141,7 @@ module Google
 
               until @queue.empty?
                 item = @queue.first
-                if try_add item.msg, item.callback
+                if try_add item.msg, item.callback, item.span
                   @queue.shift
                   next
                 end
@@ -180,7 +180,7 @@ module Google
 
               until @queue.empty?
                 item = @queue.first
-                added = try_add item.msg, item.callback
+                added = try_add item.msg, item.callback, item.span
                 break unless added
                 @queue.shift
               end
@@ -257,16 +257,16 @@ module Google
 
           protected
 
-          def items_add msg, callback
-            item = Item.new msg, callback
+          def items_add msg, callback, span
+            item = Item.new msg, callback, span
             @items << item
             @total_message_bytes += item.bytesize + 2
           end
 
-          def try_add msg, callback
+          def try_add msg, callback, span
             if @items.empty?
               # Always add when empty, even if bytesize is bigger than total
-              items_add msg, callback
+              items_add msg, callback, span
               return true
             end
             new_message_count = total_message_count + 1
@@ -275,12 +275,12 @@ module Google
                new_message_bytes >= @publisher.max_bytes
               return false
             end
-            items_add msg, callback
+            items_add msg, callback, span
             true
           end
 
-          def queue_add msg, callback
-            item = Item.new msg, callback
+          def queue_add msg, callback, span
+            item = Item.new msg, callback, span
             @queue << item
           end
 
@@ -292,7 +292,7 @@ module Google
             @total_message_bytes
           end
 
-          Item = Struct.new :msg, :callback do
+          Item = Struct.new :msg, :callback, :span do
             def bytesize
               msg.to_proto.bytesize
             end

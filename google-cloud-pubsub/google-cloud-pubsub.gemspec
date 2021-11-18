@@ -21,6 +21,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "concurrent-ruby", "~> 1.1"
   gem.add_dependency "google-cloud-core", "~> 1.5"
   gem.add_dependency "google-cloud-pubsub-v1", "~> 0.0"
+  gem.add_dependency "opentelemetry-sdk", "~> 1.0"
 
   gem.add_development_dependency "autotest-suffix", "~> 1.1"
   gem.add_development_dependency "avro", "~> 1.10"
