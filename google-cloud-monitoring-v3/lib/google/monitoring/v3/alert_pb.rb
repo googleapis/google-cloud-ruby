@@ -73,6 +73,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.monitoring.v3.AlertPolicy.AlertStrategy" do
       optional :notification_rate_limit, :message, 1, "google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit"
+      optional :auto_close, :message, 3, "google.protobuf.Duration"
     end
     add_message "google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit" do
       optional :period, :message, 1, "google.protobuf.Duration"

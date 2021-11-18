@@ -409,6 +409,10 @@ module Google
           #     Required for alert policies with a `LogMatch` condition.
           #
           #     This limit is not implemented for alert policies that are not log-based.
+          # @!attribute [rw] auto_close
+          #   @return [::Google::Protobuf::Duration]
+          #     If an alert policy that was active has no data for this long, any open
+          #     incidents will close
           class AlertStrategy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
