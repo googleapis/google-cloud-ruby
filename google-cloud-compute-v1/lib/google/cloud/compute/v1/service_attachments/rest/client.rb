@@ -64,6 +64,36 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
+                  default_config.rpcs.aggregated_list.timeout = 600.0
+                  default_config.rpcs.aggregated_list.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.delete.timeout = 600.0
+
+                  default_config.rpcs.get.timeout = 600.0
+                  default_config.rpcs.get.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.get_iam_policy.timeout = 600.0
+                  default_config.rpcs.get_iam_policy.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.insert.timeout = 600.0
+
+                  default_config.rpcs.list.timeout = 600.0
+                  default_config.rpcs.list.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.patch.timeout = 600.0
+
+                  default_config.rpcs.set_iam_policy.timeout = 600.0
+
+                  default_config.rpcs.test_iam_permissions.timeout = 600.0
+
                   default_config
                 end
                 yield @configure if block_given?
