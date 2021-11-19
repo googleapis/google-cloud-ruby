@@ -962,6 +962,11 @@ module Google
           #   @return [::Float]
           #     Percentage of conversations created using Dialogflow runtime integration
           #     to analyze automatically, between [0, 100].
+          # @!attribute [rw] disable_issue_modeling
+          #   @return [::Boolean]
+          #     Whether to disable issue model inference during analysis.
+          #     By default issue modeling will be included in analysis if there is an
+          #     active issue model for the project.
           class AnalysisConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
