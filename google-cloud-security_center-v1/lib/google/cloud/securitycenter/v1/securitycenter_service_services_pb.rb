@@ -99,6 +99,8 @@ module Google
             rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Returns the permissions that a caller has on the specified source.
             rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
+            # Updates external system. This is for a given finding.
+            rpc :UpdateExternalSystem, ::Google::Cloud::SecurityCenter::V1::UpdateExternalSystemRequest, ::Google::Cloud::SecurityCenter::V1::ExternalSystem
             # Creates or updates a finding. The corresponding source must exist for a
             # finding creation to succeed.
             rpc :UpdateFinding, ::Google::Cloud::SecurityCenter::V1::UpdateFindingRequest, ::Google::Cloud::SecurityCenter::V1::Finding
