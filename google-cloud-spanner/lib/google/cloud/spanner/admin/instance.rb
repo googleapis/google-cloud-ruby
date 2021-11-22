@@ -14,6 +14,7 @@
 
 require "google-cloud-spanner"
 require "google/cloud/config"
+require "gapic/config"
 
 module Google
   module Cloud
