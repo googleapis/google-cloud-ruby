@@ -13,7 +13,6 @@
 # limitations under the License.
 
 # [START storagetransfer_quickstart]
-
 def quickstart project_id:, gcs_source_bucket:, gcs_sink_bucket:
   # Your Google Cloud Project ID
   # project_id = "your-project_id"
@@ -21,29 +20,38 @@ def quickstart project_id:, gcs_source_bucket:, gcs_sink_bucket:
   # The name of the source GCS bucket to transfer objects from
   # gcs_source_bucket = "your-source-gcs-source-bucket"
 
-  # The name of the  GCS bucket to transfer  objects to
+  # The name of the  GCS bucket to transfer objects to
   # gcs_sink_bucket = "your-sink-gcs-bucket"
 
-  require "google/cloud/storage_transfer/v1"
+  require "google/cloud/storage_transfer"
 
-  transfer_job = { project_id: project_id,
-                   transfer_spec: { gcs_data_source: { bucket_name: gcs_source_bucket },
-                                     gcs_data_sink:  { bucket_name: gcs_sink_bucket } },
+    transfer_job = {
+      project_id: project_id,
+      transfer_spec: {
+        gcs_data_source: {
+          bucket_name: gcs_source_bucket
+        },
+        gcs_data_sink: {
+          bucket_name: gcs_sink_bucket
+        }
+      },
+      status: :ENABLED
+    }
 
-                   status: :ENABLED }
+  client = Google::Cloud::StorageTransfer.storage_transfer_service
 
-  client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
-
-  response = client.create_transfer_job transfer_job: transfer_job
+  transfer_job_response = client.create_transfer_job transfer_job: transfer_job
 
   run_request = {
     project_id: project_id,
-      job_name: response.name
+    job_name: transfer_job_response.name
   }
   client.run_transfer_job run_request
 
-  puts "Created and ran transfer job between #{gcs_source_bucket} and #{gcs_sink_bucket} with name #{response.name}"
+  puts "Created and ran transfer job between #{gcs_source_bucket} and #{gcs_sink_bucket} with name #{transfer_job_response.name}"
 end
 # [END storagetransfer_quickstart]
 
-quickstart project_id: ARGV.shift, gcs_source_bucket: ARGV.shift, gcs_sink_bucket: ARGV.shift if $PROGRAM_NAME == __FILE__
+if $PROGRAM_NAME == __FILE__
+  quickstart project_id: ARGV.shift, gcs_source_bucket: ARGV.shift, gcs_sink_bucket: ARGV.shift
+end

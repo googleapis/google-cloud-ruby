@@ -13,13 +13,13 @@
 # limitations under the License.
 
 require "google/cloud/storage"
-require "google/cloud/storage_transfer/v1"
+require "google/cloud/storage_transfer"
 require "minitest/autorun"
 require "minitest/focus"
 require "minitest/hooks/default"
 
 def grant_sts_permissions project_id:, bucket_name:
-  client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+  client = Google::Cloud::StorageTransfer.storage_transfer_service
   request = { project_id: project_id }
   response = client.get_google_service_account request
   email = response.account_email
@@ -58,7 +58,7 @@ def grant_sts_permissions project_id:, bucket_name:
 end
 
 def delete_transfer_job project_id:, job_name:
-  client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+  client = Google::Cloud::StorageTransfer.storage_transfer_service
 
   transfer_job = {
     name: job_name,
