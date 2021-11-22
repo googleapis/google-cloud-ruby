@@ -15,8 +15,7 @@ sure to [open an issue](../CONTRIBUTING.md#open-an-issue) for discussion before 
 
 ## Set up environment
 
-Before you start on a pull request, you should prepare your work environment for development, acceptance testing and the
-interactive console (optional).
+Before you start on a pull request, you should prepare your work environment.
 
 ### Local development setup
 
@@ -50,6 +49,12 @@ To set up your local development environment:
    git pull upstream main
    ```
 
+1. Create a new topic branch off of the `main` branch:
+
+   ```bash
+   git checkout -b <topic-branch>
+   ```
+
 1. Change to the library's sub-directory in the repo:
 
    ```sh
@@ -62,10 +67,16 @@ To set up your local development environment:
    $ bundle update
    ```
 
-1. Create a new topic branch off of the `main` branch:
+1. Change to the library samples sub-directory:
 
-   ```bash
-   git checkout -b <topic-branch>
+   ```sh
+   $ cd google-cloud-firestore/samples
+   ```
+
+1. Install (or update) the library samples dependencies:
+
+   ```sh
+   $ bundle update
    ```
 
 ### Acceptance tests setup
@@ -122,12 +133,19 @@ If you haven't already done so, change to the library's sub-directory in the rep
 $ cd google-cloud-firestore
 ```
 
-Note: Do not change to the `google-cloud-firestore/samples` directory.
+Note: Do not change to the `google-cloud-firestore/samples` directory. If you are already in the samples directory,
+move up to the library directory:
 
-| CI check                                      | Command           |
-|-----------------------------------------------|------------------ |
-| [Static code analysis](#Static-code-analysis) | `rake rubocop`    |
-| [Acceptance tests](#Acceptance-tests)         | `rake samples`    |
+```sh
+$ cd ../google-cloud-firestore
+```
+
+There are two rake commands that must be run separately to fulfill the CI checks.
+
+| CI check                                      | Command        |
+|-----------------------------------------------|--------------- |
+| [Static code analysis](#Static-code-analysis) | `rake rubocop` |
+| [Acceptance tests](#Acceptance-tests)         | `rake samples` |
 
 The subsections below describe the individual CI checks.
 
@@ -141,14 +159,15 @@ Guide](https://github.com/bbatsov/ruby-style-guide) with a few exceptions:
 * Avoid parentheses when possible, including in method definitions.
 * Use double-quoted strings.
 
-You can check your code against these rules by running the Rubocop Rake task:
+You can check your code against these rules by running the Rubocop Rake task in the the `google-cloud-firestore`
+directory:
 
 ```sh
 $ bundle exec rake rubocop
 ```
 
 In the rare case that you need to override the existing Rubocop configuration for the samples in order to accommodate
-your changes, you can do so by updating [.rubocop.yml](.rubocop.yml).
+your changes, you can do so by updating [.rubocop.yml](.rubocop.yml) in the samples directory.
 
 ### Acceptance Tests
 
@@ -157,21 +176,29 @@ To configure your Google Cloud project, see [Acceptance tests setup](#acceptance
 
 **Warning: You may incur charges while running the acceptance tests against your Google Cloud project.**
 
-Like the unit tests, the acceptance tests are based on the [minitest](https://github.com/seattlerb/minitest) library,
-including [specs](https://github.com/seattlerb/minitest#specs-) and
-[minitest-focus](https://github.com/seattlerb/minitest-focus). Mocks are not generally used in acceptance tests.
+The acceptance tests are based on the [minitest](https://github.com/seattlerb/minitest) library, including
+[specs](https://github.com/seattlerb/minitest#specs-) and [minitest-focus](https://github.com/seattlerb/minitest-focus).
+Mocks are not generally used in acceptance tests. Because the acceptance test suite is often time-consuming to run in
+its entirety, during development or debugging you may want to isolate one or more of the tests by placing the `focus`
+keyword just above the test declaration. (See [minitest-focus](https://github.com/seattlerb/minitest-focus) for
+details.)
 
-Because the acceptance test suite is often time-consuming to run in its entirety, during development or debugging you
-may want to isolate one or more of the tests by placing the `focus` keyword just above the test declaration. (See
-[minitest-focus](https://github.com/seattlerb/minitest-focus) for details.)
-
-To run the acceptance tests:
+To run the acceptance tests, run the following command in the `google-cloud-firestore` directory:
 
 ``` sh
 $ bundle exec rake samples
 ```
 
-This task will run `bundle update` in the `google-cloud-firestore/samples` directory before running the tests.
+Even though you invoke the `samples` rake task in the `google-cloud-firestore` directory rather than the
+`google-cloud-firestore/samples` directory, the task creates a new Bundler environment that isolates the
+`google-cloud-firestore/samples` directory from its parent. The task then runs `bundle update` in the
+`google-cloud-firestore/samples` directory before running the tests. By default, this environment loads the latest
+*published* version of the `google-cloud-firestore` gem. If your samples depend on changes to source code in your local
+`google-cloud-firestore` directory, run this command in the `google-cloud-firestore` directory:
+
+``` sh
+$ bundle exec rake samples:master
+```
 
 There may be tests that usually pass but fail occasionally due to issues like eventual consistency. However, please
 ensure that you do successfully run acceptance tests for any samples covered by your pull request.
@@ -189,7 +216,7 @@ remove any usages of the `focus` keyword from your tests.
 Commit your changes using [conventional commits](https://www.conventionalcommits.org/), making sure to include the
 associated GitHub issue number. Below is an example of the `chore` type commit that should be used with samples changes
 to avoid triggering a library release. Notice how it is scoped to the short name of the library, contains a bulleted
-list of public API changes, and ends with the `closes` GitHub keyword. If this is the only new commit in your branch
+list of region tag changes, and ends with the `closes` GitHub keyword. If this is the only new commit in your branch
 when you open your pull request, the commit body including the `closes` phrase will be copied to your PR description. If
 you have multiple commits, you should copy the body of this anchor commit manually to the PR description, so that GitHub
 will [automatically close the related
