@@ -25,18 +25,18 @@ def quickstart project_id:, gcs_source_bucket:, gcs_sink_bucket:
 
   require "google/cloud/storage_transfer"
 
-    transfer_job = {
-      project_id: project_id,
-      transfer_spec: {
-        gcs_data_source: {
-          bucket_name: gcs_source_bucket
-        },
-        gcs_data_sink: {
-          bucket_name: gcs_sink_bucket
-        }
+  transfer_job = {
+    project_id: project_id,
+    transfer_spec: {
+      gcs_data_source: {
+        bucket_name: gcs_source_bucket
       },
-      status: :ENABLED
-    }
+      gcs_data_sink: {
+        bucket_name: gcs_sink_bucket
+      }
+    },
+    status: :ENABLED
+  }
 
   client = Google::Cloud::StorageTransfer.storage_transfer_service
 
