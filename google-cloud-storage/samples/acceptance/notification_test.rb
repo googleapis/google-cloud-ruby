@@ -17,53 +17,50 @@ require_relative "helper"
 require_relative "../storage_print_pubsub_bucket_notification"
 
 describe "Buckets Notification Snippets" do
+  let(:storage_client) { Google::Cloud::Storage.new }
+  let(:bucket) { @bucket }
+  let(:topic) { @topic }
 
-    let(:storage_client)   { Google::Cloud::Storage.new }
-    let(:bucket) { @bucket }
-    let(:topic) { @topic }
-  
+  before :all do
+    @bucket = create_bucket_helper random_bucket_name
+    pubsub = Google::Cloud::Pubsub.new
+    @topic = pubsub.create_topic random_topic_name
+    topic.policy do |p|
+      p.add "roles/pubsub.publisher",
+            "serviceAccount:#{storage_client.service_account_email}"
+    end
+  end
+
+  after :all do
+    delete_bucket_helper @bucket.name
+    topic.delete
+  end
+
+  describe "Get notification details" do
+    let(:notification) { @notification }
+
     before :all do
-        @bucket = create_bucket_helper random_bucket_name
-        pubsub = Google::Cloud::Pubsub.new
-        @topic = pubsub.create_topic random_topic_name
-        topic.policy do |p|
-            p.add "roles/pubsub.publisher",
-                    "serviceAccount:#{storage_client.service_account_email}"
-        end
+      @notification = bucket.create_notification topic.name
     end
-  
+
     after :all do
-        delete_bucket_helper @bucket.name
-        topic.delete
+      notification.delete
     end
 
-    describe "Get notification details" do
+    it "Print Notification" do
+      expected_output = "Notification ID: #{notification.id}" + "\n" \
+                         "Topic Name: #{notification.topic}" + "\n" \
+                         "Event Types: #{notification.event_types}" + "\n" \
+                         "Kind of Notification: #{notification.kind}" + "\n" \
+                         "Custom Attributes: #{notification.custom_attrs}" + "\n" \
+                         "Payload Format: #{notification.payload}" + "\n" \
+                         "Blob Name Prefix: #{notification.prefix}" + "\n" \
+                         "Self Link: #{notification.api_url}\n"
 
-        let(:notification) { @notification }
-
-        before :all do
-            @notification = bucket.create_notification topic.name
-        end
-        
-        after :all do
-            notification.delete
-        end
-
-        it "Print Notification" do
-            expected_output =  "Notification ID: #{notification.id}" + "\n" +
-                                "Topic Name: #{notification.topic}" + "\n" +
-                                "Event Types: #{notification.event_types}" + "\n" +
-                                "Kind of Notification: #{notification.kind}" + "\n" +
-                                "Custom Attributes: #{notification.custom_attrs}" + "\n" +
-                                "Payload Format: #{notification.payload}" + "\n" +
-                                "Blob Name Prefix: #{notification.prefix}" + "\n" +
-                                "Self Link: #{notification.api_url}\n"
-
-            assert_output expected_output do
-                print_pubsub_bucket_notification bucket_name: bucket.name, 
-                                                 notification_id:notification.id
-            end
-
-        end
+      assert_output expected_output do
+        print_pubsub_bucket_notification bucket_name: bucket.name,
+                                         notification_id: notification.id
+      end
     end
-end    
+  end
+end
