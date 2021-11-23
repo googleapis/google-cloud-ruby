@@ -13,6 +13,7 @@
 # limitations under the License.
 
 def print_bucket_acl bucket_name:
+  # [START print_bucket_acl]
   # [START storage_print_bucket_acl]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
@@ -36,9 +37,11 @@ def print_bucket_acl bucket_name:
     puts "READER #{reader}"
   end
   # [END storage_print_bucket_acl]
+  # [END print_bucket_acl]
 end
 
 def print_bucket_acl_for_user bucket_name:, email:
+  # [START print_bucket_acl_for_user]
   # [START storage_print_bucket_acl_for_user]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
@@ -54,9 +57,11 @@ def print_bucket_acl_for_user bucket_name:, email:
   puts "WRITER" if bucket.acl.writers.include? email
   puts "READER" if bucket.acl.readers.include? email
   # [END storage_print_bucket_acl_for_user]
+  # [END print_bucket_acl_for_user]
 end
 
 def add_bucket_owner bucket_name:, email:
+  # [START add_bucket_owner]
   # [START storage_add_bucket_owner]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
@@ -71,9 +76,11 @@ def add_bucket_owner bucket_name:, email:
 
   puts "Added OWNER permission for #{email} to #{bucket_name}"
   # [END storage_add_bucket_owner]
+  # [END add_bucket_owner]
 end
 
 def remove_bucket_acl bucket_name:, email:
+  # [START remove_bucket_acl]
   # [START storage_remove_bucket_owner]
   # project_id  = "Your Google Cloud project ID"
   # The ID of your GCS bucket
@@ -89,9 +96,11 @@ def remove_bucket_acl bucket_name:, email:
 
   puts "Removed ACL permissions for #{email} from #{bucket_name}"
   # [END storage_remove_bucket_owner]
+  # [END remove_bucket_acl]
 end
 
 def add_bucket_default_owner bucket_name:, email:
+  # [START add_bucket_default_owner]
   # [START storage_add_bucket_default_owner]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
@@ -106,9 +115,11 @@ def add_bucket_default_owner bucket_name:, email:
 
   puts "Added default OWNER permission for #{email} to #{bucket_name}"
   # [END storage_add_bucket_default_owner]
+  # [END add_bucket_default_owner]
 end
 
 def remove_bucket_default_acl bucket_name:, email:
+  # [START remove_bucket_default_acl]
   # [START storage_remove_bucket_default_owner]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
@@ -123,9 +134,11 @@ def remove_bucket_default_acl bucket_name:, email:
 
   puts "Removed default ACL permissions for #{email} from #{bucket_name}"
   # [END storage_remove_bucket_default_owner]
+  # [END remove_bucket_default_acl]
 end
 
 def print_file_acl bucket_name:, file_name:
+  # [START print_file_acl]
   # [START storage_print_file_acl]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
@@ -148,9 +161,11 @@ def print_file_acl bucket_name:, file_name:
     puts "READER #{reader}"
   end
   # [END storage_print_file_acl]
+  # [END print_file_acl]
 end
 
 def print_file_acl_for_user bucket_name:, file_name:, email:
+  # [START print_file_acl_for_user]
   # [START storage_print_file_acl_for_user]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
@@ -167,9 +182,11 @@ def print_file_acl_for_user bucket_name:, file_name:, email:
   puts "OWNER"  if file.acl.owners.include?  email
   puts "READER" if file.acl.readers.include? email
   # [END storage_print_file_acl_for_user]
+  # [END print_file_acl_for_user]
 end
 
 def add_file_owner bucket_name:, file_name:, email:
+  # [START add_file_owner]
   # [START storage_add_file_owner]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
@@ -186,9 +203,11 @@ def add_file_owner bucket_name:, file_name:, email:
 
   puts "Added OWNER permission for #{email} to #{file_name}"
   # [END storage_add_file_owner]
+  # [END add_file_owner]
 end
 
 def remove_file_acl bucket_name:, file_name:, email:
+  # [START remove_file_acl]
   # [START storage_remove_file_owner]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
@@ -205,6 +224,7 @@ def remove_file_acl bucket_name:, file_name:, email:
 
   puts "Removed ACL permissions for #{email} from #{file_name}"
   # [END storage_remove_file_owner]
+  # [END remove_file_acl]
 end
 
 def run_sample arguments
