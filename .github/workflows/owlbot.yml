@@ -6,6 +6,9 @@ on:
       gems:
         description: "List of gems, or --all for all gems"
         required: true
+      flags:
+        description: "Extra flags to pass to toys owlbot"
+        required: false
 
 jobs:
   OwlBot:
@@ -27,4 +30,4 @@ jobs:
         gem install --no-document toys
     - name: OwlBot
       run: |
-        toys owlbot -v --pull --remote=origin ${{ github.event.inputs.gems }}
+        toys owlbot -v --pull --remote=origin ${{ github.event.inputs.flags }} ${{ github.event.inputs.gems }}
