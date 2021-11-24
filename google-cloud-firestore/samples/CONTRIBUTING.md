@@ -91,7 +91,7 @@ To set up your acceptance test credentials:
 1. Ensure that the Firestore API is enabled for your project. Note that if you have already enabled the Datastore API
    for your project, you will need to use a different project for Firestore.
 
-1. Follow the instructions for [Creating a Service Account](AUTHENTICATION.md#creating-a-service-account) in
+1. Follow the instructions for [Creating a Service Account](../AUTHENTICATION.md#creating-a-service-account) in
    `AUTHENTICATION.md`, including downloading and securely storing a JSON key file. 
 
 1. Set the `GCLOUD_TEST_KEYFILE` environment variable to the path of the JSON key file that you downloaded in the
@@ -214,12 +214,12 @@ remove any usages of the `focus` keyword from your tests.
 ## Commit changes
 
 Commit your changes using [conventional commits](https://www.conventionalcommits.org/), making sure to include the
-associated GitHub issue number. Below is an example of the `chore` type commit that should be used with samples changes
-to avoid triggering a library release. Notice how it is scoped to the short name of the library, contains a bulleted
-list of region tag changes, and ends with the `closes` GitHub keyword. If this is the only new commit in your branch
-when you open your pull request, the commit body including the `closes` phrase will be copied to your PR description. If
-you have multiple commits, you should copy the body of this anchor commit manually to the PR description, so that GitHub
-will [automatically close the related
+associated GitHub issue number. Please use `chore` as the commit type for all samples changes to prevent them from
+triggering a library release. Notice how the example message below is scoped to the short name of the library, contains
+a bulleted list of region tag changes, and ends with the `closes` GitHub keyword. If this is the only new commit in your
+branch when you open your pull request, the commit body including the `closes` phrase will be copied to your PR
+description. If you have multiple commits, you should copy the body of this anchor commit manually to the PR
+description, so that GitHub will [automatically close the related
 issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue).
 
 ```bash
