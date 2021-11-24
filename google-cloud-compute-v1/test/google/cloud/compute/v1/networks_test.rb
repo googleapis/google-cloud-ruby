@@ -428,7 +428,7 @@ class ::Google::Cloud::Compute::V1::Networks::ClientTest < Minitest::Test
     call_options = {}
 
     # Create request parameters for a unary method.
-    direction = :UNDEFINED_DIRECTION
+    direction = "hello world"
     filter = "hello world"
     max_results = 42
     network = "hello world"
