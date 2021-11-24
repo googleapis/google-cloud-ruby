@@ -3,6 +3,7 @@
 
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/securitycenter/v1/external_system_pb'
 require 'google/cloud/securitycenter/v1/indicator_pb'
 require 'google/cloud/securitycenter/v1/security_marks_pb'
 require 'google/cloud/securitycenter/v1/vulnerability_pb'
@@ -31,6 +32,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :indicator, :message, 18, "google.cloud.securitycenter.v1.Indicator"
       optional :vulnerability, :message, 20, "google.cloud.securitycenter.v1.Vulnerability"
       optional :mute_update_time, :message, 21, "google.protobuf.Timestamp"
+      map :external_systems, :string, :message, 22, "google.cloud.securitycenter.v1.ExternalSystem"
       optional :mute_initiator, :string, 28
     end
     add_enum "google.cloud.securitycenter.v1.Finding.State" do

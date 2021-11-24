@@ -2998,6 +2998,95 @@ module Google
             end
 
             ##
+            # Updates external system. This is for a given finding.
+            #
+            # @overload update_external_system(request, options = nil)
+            #   Pass arguments to `update_external_system` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::UpdateExternalSystemRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::UpdateExternalSystemRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_external_system(external_system: nil, update_mask: nil)
+            #   Pass arguments to `update_external_system` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param external_system [::Google::Cloud::SecurityCenter::V1::ExternalSystem, ::Hash]
+            #     Required. The external system resource to update.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The FieldMask to use when updating the external system resource.
+            #
+            #     If empty all mutable fields will be updated.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1::ExternalSystem]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::SecurityCenter::V1::ExternalSystem]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::UpdateExternalSystemRequest.new
+            #
+            #   # Call the update_external_system method.
+            #   result = client.update_external_system request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::ExternalSystem.
+            #   p result
+            #
+            def update_external_system request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::UpdateExternalSystemRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_external_system.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.external_system&.name
+                header_params["external_system.name"] = request.external_system.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_external_system.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_external_system.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :update_external_system, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Creates or updates a finding. The corresponding source must exist for a
             # finding creation to succeed.
             #
@@ -3803,6 +3892,11 @@ module Google
                 #
                 attr_reader :test_iam_permissions
                 ##
+                # RPC-specific configuration for `update_external_system`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_external_system
+                ##
                 # RPC-specific configuration for `update_finding`
                 # @return [::Gapic::Config::Method]
                 #
@@ -3883,6 +3977,8 @@ module Google
                   @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
                   test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                   @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+                  update_external_system_config = parent_rpcs.update_external_system if parent_rpcs.respond_to? :update_external_system
+                  @update_external_system = ::Gapic::Config::Method.new update_external_system_config
                   update_finding_config = parent_rpcs.update_finding if parent_rpcs.respond_to? :update_finding
                   @update_finding = ::Gapic::Config::Method.new update_finding_config
                   update_mute_config_config = parent_rpcs.update_mute_config if parent_rpcs.respond_to? :update_mute_config

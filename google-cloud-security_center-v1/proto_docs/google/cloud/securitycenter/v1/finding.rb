@@ -118,6 +118,10 @@ module Google
         # @!attribute [r] mute_update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The most recent time this finding was muted or unmuted.
+        # @!attribute [r] external_systems
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::SecurityCenter::V1::ExternalSystem}]
+        #     Output only. Third party SIEM/SOAR fields within SCC, contains external system
+        #     information and external system finding fields.
         # @!attribute [rw] mute_initiator
         #   @return [::String]
         #     First known as mute_annotation. Records additional information about the
@@ -132,6 +136,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::Google::Protobuf::Value]
           class SourcePropertiesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::SecurityCenter::V1::ExternalSystem]
+          class ExternalSystemsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
