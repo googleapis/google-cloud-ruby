@@ -27,7 +27,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   end
   let(:local_file) { File.new files[:logo][:path] }
 
-  let(:user_val) { "user-blowmage@gmail.com" }
+  let(:user_val) { "user-test@example.com" }
 
   after do
     # always reset the uniform_bucket_level_access and public_access_prevention
