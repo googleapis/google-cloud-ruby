@@ -127,25 +127,18 @@ You are now ready to run local CI checks for the samples, which you should do **
 ensures that everything is OK with your local environment and the latest dependency versions. You don't want any
 surprises later.
 
-If you haven't already done so, change to the library's sub-directory in the repo:
+If you haven't already done so, change to the library samples sub-directory in the repo:
 
 ```sh
-$ cd google-cloud-firestore
-```
-
-Note: Do not change to the `google-cloud-firestore/samples` directory. If you are already in the samples directory,
-move up to the library directory:
-
-```sh
-$ cd ../google-cloud-firestore
+$ cd google-cloud-firestore/samples
 ```
 
 There are two rake commands that must be run separately to fulfill the CI checks.
 
-| CI check                                      | Command        |
-|-----------------------------------------------|--------------- |
-| [Static code analysis](#Static-code-analysis) | `rake rubocop` |
-| [Acceptance tests](#Acceptance-tests)         | `rake samples` |
+| CI check                                      | Command     |
+|-----------------------------------------------|------------ |
+| [Static code analysis](#Static-code-analysis) | `rubocop`   |
+| [Acceptance tests](#Acceptance-tests)         | `rake test` |
 
 The subsections below describe the individual CI checks.
 
@@ -159,11 +152,11 @@ Guide](https://github.com/bbatsov/ruby-style-guide) with a few exceptions:
 * Avoid parentheses when possible, including in method definitions.
 * Use double-quoted strings.
 
-You can check your code against these rules by running the Rubocop Rake task in the the `google-cloud-firestore`
+You can check your code against these rules by running the Rubocop executable in the `google-cloud-firestore/samples`
 directory:
 
 ```sh
-$ bundle exec rake rubocop
+$ bundle exec rubocop
 ```
 
 In the rare case that you need to override the existing Rubocop configuration for the samples in order to accommodate
@@ -183,21 +176,20 @@ its entirety, during development or debugging you may want to isolate one or mor
 keyword just above the test declaration. (See [minitest-focus](https://github.com/seattlerb/minitest-focus) for
 details.)
 
-To run the acceptance tests, run the following command in the `google-cloud-firestore` directory:
+To run the acceptance tests, run the following command in the `google-cloud-firestore/samples` directory:
 
 ``` sh
-$ bundle exec rake samples
+$ bundle exec rake test
 ```
 
-Even though you invoke the `samples` rake task in the `google-cloud-firestore` directory rather than the
-`google-cloud-firestore/samples` directory, the task creates a new Bundler environment that isolates the
-`google-cloud-firestore/samples` directory from its parent. The task then runs `bundle update` in the
-`google-cloud-firestore/samples` directory before running the tests. By default, this environment loads the latest
-*published* version of the `google-cloud-firestore` gem. If your samples depend on changes to source code in your local
-`google-cloud-firestore` directory, run this command in the `google-cloud-firestore` directory:
+By default, the Gemfile loads the latest *published* version of the `google-cloud-firestore` gem. If your samples depend
+on changes to source code in your local `google-cloud-firestore` directory, set the `GOOGLE_CLOUD_SAMPLES_TEST`
+environment variable and re-run `bundle update`:
 
 ``` sh
-$ bundle exec rake samples:master
+$ export GOOGLE_CLOUD_SAMPLES_TEST=master
+$ bundle update
+$ bundle exec rake test
 ```
 
 There may be tests that usually pass but fail occasionally due to issues like eventual consistency. However, please
@@ -238,10 +230,10 @@ merged.
 ## Run CI again
 
 
-1. If you haven't already done so, change to the library's sub-directory in the repo:
+1. If you haven't already done so, change to the library samples sub-directory in the repo:
 
    ```sh
-   $ cd google-cloud-firestore
+   $ cd google-cloud-firestore/samples
    ```
 
 1. Rebase your topic branch on the upstream `main` branch:
@@ -250,19 +242,19 @@ merged.
    git pull --rebase upstream main
    ```
 
-1. Run the `rubocop` task:
+1. Run the `rubocop` executable:
 
    ``` sh
-   $ bundle exec rake rubocop
+   $ bundle exec rubocop
    ```
 
-1. Run the `samples` task:
+1. Run the `test` task:
 
    ``` sh
-   $ bundle exec rake samples
+   $ bundle exec rake test
    ```
 
-Ensure that everything is passing in `rake rubocop` and `rake samples` before you open your pull request.
+Ensure that everything is passing in `rubocop` and `rake test` before you open your pull request.
 
 ## Submit your pull request
 
