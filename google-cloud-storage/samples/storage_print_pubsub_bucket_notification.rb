@@ -13,6 +13,8 @@
 # limitations under the License.
 
 # [START storage_print_pubsub_bucket_notification]
+require "google/cloud/storage"
+
 def print_pubsub_bucket_notification bucket_name:, notification_id:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
@@ -20,7 +22,6 @@ def print_pubsub_bucket_notification bucket_name:, notification_id:
   # The ID of your notification configured for the bucket
   # notification_id = "your-notification-id"
 
-  require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
   bucket  = storage.bucket bucket_name

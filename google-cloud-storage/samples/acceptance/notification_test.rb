@@ -48,14 +48,16 @@ describe "Buckets Notification Snippets" do
     end
 
     it "Print Notification" do
-      expected_output = "Notification ID: #{notification.id}" + "\n" \
-                         "Topic Name: #{notification.topic}" + "\n" \
-                         "Event Types: #{notification.event_types}" + "\n" \
-                         "Kind of Notification: #{notification.kind}" + "\n" \
-                         "Custom Attributes: #{notification.custom_attrs}" + "\n" \
-                         "Payload Format: #{notification.payload}" + "\n" \
-                         "Blob Name Prefix: #{notification.prefix}" + "\n" \
-                         "Self Link: #{notification.api_url}\n"
+      expected_output = <<~OUTPUT
+        Notification ID: #{notification.id}
+        Topic Name: #{notification.topic}
+        Event Types: #{notification.event_types}
+        Kind of Notification: #{notification.kind}
+        Custom Attributes: #{notification.custom_attrs}
+        Payload Format: #{notification.payload}
+        Blob Name Prefix: #{notification.prefix}
+        Self Link: #{notification.api_url}
+      OUTPUT
 
       assert_output expected_output do
         print_pubsub_bucket_notification bucket_name: bucket.name,
