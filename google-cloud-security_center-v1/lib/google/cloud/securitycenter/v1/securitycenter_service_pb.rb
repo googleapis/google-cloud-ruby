@@ -7,6 +7,7 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/securitycenter/v1/asset_pb'
+require 'google/cloud/securitycenter/v1/external_system_pb'
 require 'google/cloud/securitycenter/v1/finding_pb'
 require 'google/cloud/securitycenter/v1/folder_pb'
 require 'google/cloud/securitycenter/v1/mute_config_pb'
@@ -207,6 +208,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.securitycenter.v1.RunAssetDiscoveryRequest" do
       optional :parent, :string, 1
     end
+    add_message "google.cloud.securitycenter.v1.UpdateExternalSystemRequest" do
+      optional :external_system, :message, 1, "google.cloud.securitycenter.v1.ExternalSystem"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
     add_message "google.cloud.securitycenter.v1.UpdateFindingRequest" do
       optional :finding, :message, 1, "google.cloud.securitycenter.v1.Finding"
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
@@ -274,6 +279,7 @@ module Google
         SetFindingStateRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.SetFindingStateRequest").msgclass
         SetMuteRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.SetMuteRequest").msgclass
         RunAssetDiscoveryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.RunAssetDiscoveryRequest").msgclass
+        UpdateExternalSystemRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.UpdateExternalSystemRequest").msgclass
         UpdateFindingRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.UpdateFindingRequest").msgclass
         UpdateMuteConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.UpdateMuteConfigRequest").msgclass
         UpdateNotificationConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.UpdateNotificationConfigRequest").msgclass

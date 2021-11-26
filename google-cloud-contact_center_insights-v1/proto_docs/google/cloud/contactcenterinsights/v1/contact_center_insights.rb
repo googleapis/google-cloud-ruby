@@ -57,14 +57,13 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::Integer}]
         #     A map associating each issue resource name with its respective number of
         #     matches in the set of conversations. Key has the format:
-        #     `projects/<Project ID>/locations/<Location ID>/issueModels/<Issue Model
-        #     ID>/issues/<Issue ID>`
+        #     `projects/<Project-ID>/locations/<Location-ID>/issueModels/<Issue-Model-ID>/issues/<Issue-ID>`
         #     Deprecated, use `issue_matches_stats` field instead.
         # @!attribute [rw] issue_matches_stats
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::ContactCenterInsights::V1::IssueModelLabelStats::IssueStats}]
         #     A map associating each issue resource name with its respective number of
         #     matches in the set of conversations. Key has the format:
-        #     `projects/<ProjectID>/locations/<LocationID>/issueModels/<IssueModelID>/issues/<IssueID>`
+        #     `projects/<Project-ID>/locations/<Location-ID>/issueModels/<Issue-Model-ID>/issues/<Issue-ID>`
         # @!attribute [rw] conversation_count_time_series
         #   @return [::Google::Cloud::ContactCenterInsights::V1::CalculateStatsResponse::TimeSeries]
         #     A time series representing the count of conversations created over time
@@ -164,8 +163,8 @@ module Google
         #     component of the conversation's resource name. If no ID is specified, a
         #     server-generated ID will be used.
         #
-        #     This value should be 4-32 characters and must match the regular
-        #     expression /^[a-z0-9-]\\{4,32}$/. Valid characters are /[a-z][0-9]-/
+        #     This value should be 4-64 characters and must match the regular
+        #     expression `^[a-z0-9-]{4,64}$`. Valid characters are `[a-z][0-9]-`
         class CreateConversationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -345,9 +344,9 @@ module Google
           #     the resource project will be used.
           # @!attribute [rw] dataset
           #   @return [::String]
-          #     Required. The name of the BigQuery dataset that the snapshot result
-          #     should be exported to. If this dataset does not exist, the export call
-          #     returns an INVALID_ARGUMENT error.
+          #     Required. The name of the BigQuery dataset that the snapshot result should be
+          #     exported to. If this dataset does not exist, the export call returns an
+          #     INVALID_ARGUMENT error.
           # @!attribute [rw] table
           #   @return [::String]
           #     The BigQuery table name to which the insights data should be written.
@@ -595,10 +594,10 @@ module Google
         # Request to create a phrase matcher.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource of the phrase matcher. Required. The location
-        #     to create a phrase matcher for. Format: `projects/<Project
-        #     ID>/locations/<Location ID>` or `projects/<Project
-        #     Number>/locations/<Location ID>`
+        #     Required. The parent resource of the phrase matcher. Required. The location to create
+        #     a phrase matcher for.
+        #     Format: `projects/<Project ID>/locations/<Location ID>` or
+        #     `projects/<Project Number>/locations/<Location ID>`
         # @!attribute [rw] phrase_matcher
         #   @return [::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher]
         #     Required. The phrase matcher resource to create.

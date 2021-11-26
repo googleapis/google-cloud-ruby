@@ -188,8 +188,8 @@ module Google
             #     component of the conversation's resource name. If no ID is specified, a
             #     server-generated ID will be used.
             #
-            #     This value should be 4-32 characters and must match the regular
-            #     expression /^[a-z0-9-]\\{4,32}$/. Valid characters are /[a-z][0-9]-/
+            #     This value should be 4-64 characters and must match the regular
+            #     expression `^[a-z0-9-]{4,64}$`. Valid characters are `[a-z][0-9]-`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ContactCenterInsights::V1::Conversation]
@@ -2090,10 +2090,10 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource of the phrase matcher. Required. The location
-            #     to create a phrase matcher for. Format: `projects/<Project
-            #     ID>/locations/<Location ID>` or `projects/<Project
-            #     Number>/locations/<Location ID>`
+            #     Required. The parent resource of the phrase matcher. Required. The location to create
+            #     a phrase matcher for.
+            #     Format: `projects/<Project ID>/locations/<Location ID>` or
+            #     `projects/<Project Number>/locations/<Location ID>`
             #   @param phrase_matcher [::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher, ::Hash]
             #     Required. The phrase matcher resource to create.
             #

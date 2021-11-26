@@ -1138,6 +1138,20 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for updating a ExternalSystem resource.
+        # @!attribute [rw] external_system
+        #   @return [::Google::Cloud::SecurityCenter::V1::ExternalSystem]
+        #     Required. The external system resource to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     The FieldMask to use when updating the external system resource.
+        #
+        #     If empty all mutable fields will be updated.
+        class UpdateExternalSystemRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for updating or creating a finding.
         # @!attribute [rw] finding
         #   @return [::Google::Cloud::SecurityCenter::V1::Finding]

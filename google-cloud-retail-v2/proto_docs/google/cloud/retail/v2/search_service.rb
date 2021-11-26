@@ -157,7 +157,10 @@ module Google
         #     * price
         #     * originalPrice
         #     * discount
+        #     * variantId
         #     * inventory(place_id,price)
+        #     * inventory(place_id,attributes.key), where key is any key in the
+        #       [Product.inventories.attributes][] map.
         #     * attributes.key, where key is any key in the
         #       {::Google::Cloud::Retail::V2::Product#attributes Product.attributes} map.
         #     * pickupInStore.id, where id is any
@@ -319,6 +322,7 @@ module Google
             #         * "customFulfillment3"
             #         * "customFulfillment4"
             #         * "customFulfillment5"
+            #         * "inventory(place_id,attributes.key)"
             #
             #     * numerical_field =
             #         * "price"
@@ -327,6 +331,7 @@ module Google
             #         * "ratingCount"
             #         * "attributes.key"
             #         * "inventory(place_id,price)"
+            #         * "inventory(place_id,attributes.key)"
             # @!attribute [rw] intervals
             #   @return [::Array<::Google::Cloud::Retail::V2::Interval>]
             #     Set only if values should be bucketized into intervals. Must be set

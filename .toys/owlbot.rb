@@ -39,6 +39,12 @@ end
 flag :piper_client, "--piper-client=NAME" do
   desc "Generate by running Bazel from the given piper clinet rather than using googleapis-gen"
 end
+flag :combined_prs do
+  desc "Combine all changes into a single pull request"
+end
+flag :enable_tests, "--test" do
+  desc "Run CI on each library"
+end
 
 OWLBOT_CONFIG_FILE_NAME = ".OwlBot.yaml"
 OWLBOT_CLI_IMAGE = "gcr.io/cloud-devrel-public-resources/owlbot-cli"
@@ -202,6 +208,14 @@ def process_gems gems
   temp_staging_dir = File.join TMP_DIR_NAME, STAGING_DIR_NAME
   FileUtils.rm_rf temp_staging_dir
   FileUtils.mv STAGING_DIR_NAME, temp_staging_dir
+  if combined_prs
+    process_gems_combined_pr gems, temp_staging_dir
+  else
+    process_gems_separate_prs gems, temp_staging_dir
+  end
+end
+
+def process_gems_separate_prs gems, temp_staging_dir
   results = {}
   gems.each_with_index do |name, index|
     timestamp = Time.now.utc.strftime("%Y%m%d-%H%M%S")
@@ -211,14 +225,28 @@ def process_gems gems
                                    git_remote: git_remote,
                                    branch_name: branch_name,
                                    commit_message: message do
-      FileUtils.mkdir_p STAGING_DIR_NAME
-      FileUtils.mv File.join(temp_staging_dir, name), File.join(STAGING_DIR_NAME, name)
-      docker_run "#{POSTPROCESSOR_IMAGE}:#{postprocessor_tag}", "--gem", name
+      process_single_gem name, temp_staging_dir
     end
     puts "Results for #{name} (#{index}/#{gems.size})..."
     results[name] = output_result name, result, :bold
   end
   results
+end
+
+def process_gems_combined_pr gems, temp_staging_dir
+  timestamp = Time.now.utc.strftime("%Y%m%d-%H%M%S")
+  branch_name = "owlbot/all-#{timestamp}"
+  message = build_commit_message "all gems"
+  result = generate_pull_request gem_name: name,
+                                 git_remote: git_remote,
+                                 branch_name: branch_name,
+                                 commit_message: message do
+    gems.each_with_index do |name, index|
+      process_single_gem name, temp_staging_dir
+      puts "Completed #{name} (#{index}/#{gems.size})..."
+    end
+  end
+  output_result "all gems", result, :bold
 end
 
 def build_commit_message name
@@ -229,11 +257,27 @@ def build_commit_message name
   "[CHANGE ME] OwlBot on-demand for #{name}"
 end
 
+def process_single_gem name, temp_staging_dir
+  FileUtils.mkdir_p STAGING_DIR_NAME
+  FileUtils.mv File.join(temp_staging_dir, name), File.join(STAGING_DIR_NAME, name)
+  docker_run "#{POSTPROCESSOR_IMAGE}:#{postprocessor_tag}", "--gem", name
+  if enable_tests
+    Dir.chdir name do
+      exec ["bundle", "install"]
+      exec ["bundle", "exec", "rake", "ci"]
+    end
+  end
+end
+
 def final_output results
   puts
   puts "Final results:", :bold
-  results.each do |name, result|
-    output_result name, result
+  if results.is_a? Hash
+    results.each do |name, result|
+      output_result name, result
+    end
+  else
+    output_result "all gems", results
   end
 end
 

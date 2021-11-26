@@ -1,4 +1,4 @@
-desc "Run cloud-rad"
+desc "Run cloud-rad locally for testing"
 
 remaining_args :gem_names
 
@@ -121,22 +121,22 @@ def validate_gem_name name
 end
 
 def effective_doc_templates_path
-  @effective_doc_templates_path ||= begin
-    File.expand_path doc_templates_path, @original_working_directory
-  end if doc_templates_path
-  @effective_doc_templates_path ||= begin
-    require "tmpdir"
-    src_path = git_cache.find "https://github.com/googleapis/doc-templates.git", update: true
-    tmp_dir = Dir.mktmpdir
-    templates_dir = File.join tmp_dir, "doc-templates"
-    if keep_temp_dir
-      logger.warn "Copying into directory: #{templates_dir}"
+  @effective_doc_templates_path ||=
+    if doc_templates_path
+      File.expand_path doc_templates_path, @original_working_directory
     else
-      at_exit { FileUtils.rm_rf tmp_dir }
+      require "tmpdir"
+      src_path = git_cache.find "https://github.com/googleapis/doc-templates.git", update: true
+      tmp_dir = Dir.mktmpdir
+      templates_dir = File.join tmp_dir, "doc-templates"
+      if keep_temp_dir
+        logger.warn "Copying into directory: #{templates_dir}"
+      else
+        at_exit { FileUtils.rm_rf tmp_dir }
+      end
+      cp_r src_path, templates_dir
+      templates_dir
     end
-    cp_r src_path, templates_dir
-    templates_dir
-  end
 end
 
 def doc_templates_ruby_path
