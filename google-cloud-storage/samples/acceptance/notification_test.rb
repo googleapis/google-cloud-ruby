@@ -15,6 +15,7 @@
 require "google/cloud/pubsub"
 require_relative "helper"
 require_relative "../storage_print_pubsub_bucket_notification"
+require_relative "../storage_list_bucket_notifications"
 
 describe "Buckets Notification Snippets" do
   let(:storage_client) { Google::Cloud::Storage.new }
@@ -62,6 +63,13 @@ describe "Buckets Notification Snippets" do
       assert_output expected_output do
         print_pubsub_bucket_notification bucket_name: bucket.name,
                                          notification_id: notification.id
+      end
+    end
+
+    it "List Notifications for a bucket" do
+      expected_output = "Notification ID: #{notification.id}\n"
+      assert_output expected_output do
+        list_bucket_notifications bucket_name: bucket.name
       end
     end
   end
