@@ -17,6 +17,7 @@ require_relative "helper"
 require_relative "../storage_print_pubsub_bucket_notification"
 require_relative "../storage_list_bucket_notifications"
 require_relative "../storage_create_bucket_notifications"
+require_relative "../storage_delete_bucket_notification"
 
 describe "Buckets Notification Snippets" do
   let(:storage_client) { Google::Cloud::Storage.new }
@@ -39,10 +40,7 @@ describe "Buckets Notification Snippets" do
   end
 
   describe "Notification Lifecycle" do
-    after do
-      bucket.notifications.first.delete
-    end
-
+    
     it "Create Notification" do
       actual_output, _err = capture_io do 
         create_bucket_notifications bucket_name: bucket.name,
@@ -53,6 +51,19 @@ describe "Buckets Notification Snippets" do
       expected_output = "Successfully created notification with ID #{notification.id} for bucket #{bucket.name}\n"
 
       assert_equal(expected_output, actual_output)
+
+      bucket.notifications.first.delete
+    end
+
+    it "Delete Notification" do
+      notification = bucket.create_notification topic.name
+      
+      assert_output "Successfully deleted notification with ID #{notification.id} for bucket #{bucket.name}\n" do 
+        delete_bucket_notification bucket_name: bucket.name,
+                                    notification_id: notification.id
+      end
+
+      assert_empty bucket.notifications
     end
   end
 
