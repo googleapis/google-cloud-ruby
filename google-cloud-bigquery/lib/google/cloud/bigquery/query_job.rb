@@ -250,6 +250,8 @@ module Google
         # The type of query statement, if valid. Possible values (new values
         # might be added in the future):
         #
+        # * "ALTER_TABLE": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
         # * "CREATE_MODEL": DDL statement, see [Using Data Definition Language
         #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
         # * "CREATE_TABLE": DDL statement, see [Using Data Definition Language
@@ -296,6 +298,7 @@ module Google
         #
         def ddl?
           [
+            "ALTER_TABLE",
             "CREATE_MODEL",
             "CREATE_TABLE",
             "CREATE_TABLE_AS_SELECT",
