@@ -11,7 +11,7 @@ sure to [open an issue](../CONTRIBUTING.md#open-an-issue) for discussion before 
 1. [Make changes](#make-changes)
 1. [Commit changes](#commit-changes)
 1. [Run CI again](#run-ci-again)
-1. [Submit your pull request](#submit-your-pull-request)
+1. [Open your pull request](#open-your-pull-request)
 
 ## Set up environment
 
@@ -101,8 +101,8 @@ To set up your acceptance test credentials:
    $ export GCLOUD_TEST_KEYFILE=/path/to/keyfile.json
    ```
 
-   If you are already using the `GCLOUD_TEST_KEYFILE` environment variable, and wish to test the samples with a
-   different key file, you may set the `FIRESTORE_TEST_KEYFILE` environment variable instead:
+   If you are already using the `GCLOUD_TEST_KEYFILE` environment variable, and want to test the samples with a
+   different key file, you can set the `FIRESTORE_TEST_KEYFILE` environment variable instead:
 
    ``` sh
    $ export FIRESTORE_TEST_KEYFILE=/path/to/keyfile.json
@@ -114,8 +114,8 @@ To set up your acceptance test credentials:
    $ export GCLOUD_TEST_PROJECT=my-project-id
    ```
 
-   If you are already using the `GCLOUD_TEST_PROJECT` environment variable, and wish to test the samples with a
-   different project, you may set the `FIRESTORE_TEST_PROJECT` environment variable instead:
+   If you are already using the `GCLOUD_TEST_PROJECT` environment variable, and want to test the samples with a
+   different project, you can set the `FIRESTORE_TEST_PROJECT` environment variable instead:
 
    ``` sh
    $ export FIRESTORE_TEST_PROJECT=my-project-id
@@ -256,7 +256,7 @@ merged.
 
 Ensure that everything is passing in `rubocop` and `rake test` before you open your pull request.
 
-## Submit your pull request
+## Open your pull request
 
 1. Rebase your topic branch on the upstream `main` branch:
 
