@@ -276,8 +276,16 @@ module Google
         #   data.ddl? #=> true
         #
         def ddl?
-          ["CREATE_MODEL", "CREATE_TABLE", "CREATE_TABLE_AS_SELECT", "CREATE_VIEW", "\n", "DROP_MODEL", "DROP_TABLE",
-           "DROP_VIEW"].include? statement_type
+          [
+            "CREATE_MODEL",
+            "CREATE_TABLE",
+            "CREATE_TABLE_AS_SELECT",
+            "CREATE_VIEW",
+            "\n",
+            "DROP_MODEL",
+            "DROP_TABLE",
+            "DROP_VIEW"
+          ].include? statement_type
         end
 
         ##
