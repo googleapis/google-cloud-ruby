@@ -21,7 +21,7 @@ Before you start on a pull request, you should prepare your work environment.
 
 To set up your local development environment:
 
-1. Install a [supported version](google-cloud-firestore.gemspec) (or versions) of Ruby. (You may choose to manage your
+1. Install a [supported version](../google-cloud-firestore.gemspec) (or versions) of Ruby. (You may choose to manage your
    Ruby and gem installations with [RVM](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv), or
    [chruby](https://github.com/postmodern/chruby).)
 
@@ -137,8 +137,8 @@ There are two rake commands that must be run separately to fulfill the CI checks
 
 | CI check                                      | Command     |
 |-----------------------------------------------|------------ |
-| [Static code analysis](#Static-code-analysis) | `rubocop`   |
-| [Acceptance tests](#Acceptance-tests)         | `rake test` |
+| [Static code analysis](#static-code-analysis) | `rubocop`   |
+| [Acceptance tests](#acceptance-tests)         | `rake test` |
 
 The subsections below describe the individual CI checks.
 
