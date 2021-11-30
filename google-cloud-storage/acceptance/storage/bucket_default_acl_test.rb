@@ -20,7 +20,7 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :storage do
     storage.bucket(bucket_name) ||
     safe_gcs_execute { storage.create_bucket(bucket_name) }
   end
-  let(:user_val) { "user-blowmage@gmail.com" }
+  let(:user_val) { "user-test@example.com" }
 
   before do
     # always reset the bucket permissions
@@ -28,7 +28,7 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :storage do
   end
 
   it "adds a reader" do
-    user_val = "user-blowmage@gmail.com"
+    user_val = "user-test@example.com"
     _(bucket.default_acl.readers).wont_include user_val
     bucket.default_acl.add_reader user_val
     _(bucket.default_acl.readers).must_include user_val
@@ -39,7 +39,7 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :storage do
   end
 
   it "adds an owner" do
-    user_val = "user-blowmage@gmail.com"
+    user_val = "user-test@example.com"
     _(bucket.default_acl.owners).wont_include user_val
     bucket.default_acl.add_owner user_val
     _(bucket.default_acl.owners).must_include user_val
