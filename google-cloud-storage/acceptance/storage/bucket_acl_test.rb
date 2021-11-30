@@ -20,7 +20,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :storage do
     storage.bucket(bucket_name) ||
     safe_gcs_execute { storage.create_bucket(bucket_name) }
   end
-  let(:user_val) { "user-blowmage@gmail.com" }
+  let(:user_val) { "user-test@example.com" }
 
   before do
     # always reset the bucket permissions

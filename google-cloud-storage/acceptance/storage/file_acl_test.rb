@@ -27,7 +27,7 @@ describe Google::Cloud::Storage::File, :acl, :storage do
   end
   let(:local_file) { File.new files[:logo][:path] }
 
-  let(:user_val) { "user-blowmage@gmail.com" }
+  let(:user_val) { "user-test@example.com" }
 
   before do
     # always create the bucket and set default acl to auth
@@ -40,7 +40,7 @@ describe Google::Cloud::Storage::File, :acl, :storage do
 
   it "adds a reader" do
     file = bucket.create_file local_file, "ReaderTest.png"
-    user_val = "user-blowmage@gmail.com"
+    user_val = "user-test@example.com"
     _(file.acl.readers).wont_include user_val
     file.acl.add_reader user_val
     _(file.acl.readers).must_include user_val
@@ -52,7 +52,7 @@ describe Google::Cloud::Storage::File, :acl, :storage do
 
   it "adds an owner" do
     file = bucket.create_file local_file, "OwnerTest.png"
-    user_val = "user-blowmage@gmail.com"
+    user_val = "user-test@example.com"
     _(file.acl.owners).wont_include user_val
     file.acl.add_owner user_val
     _(file.acl.owners).must_include user_val
