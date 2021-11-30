@@ -40,27 +40,26 @@ describe "Buckets Notification Snippets" do
   end
 
   describe "Notification Lifecycle" do
-    
     it "Create Notification" do
-      actual_output, _err = capture_io do 
+      actual_output, _err = capture_io do
         create_bucket_notifications bucket_name: bucket.name,
                                     topic_name: topic.name
       end
-      
+
       notification = bucket.notifications.first
       expected_output = "Successfully created notification with ID #{notification.id} for bucket #{bucket.name}\n"
 
-      assert_equal(expected_output, actual_output)
+      assert_equal expected_output, actual_output
 
       bucket.notifications.first.delete
     end
 
     it "Delete Notification" do
       notification = bucket.create_notification topic.name
-      
-      assert_output "Successfully deleted notification with ID #{notification.id} for bucket #{bucket.name}\n" do 
+
+      assert_output "Successfully deleted notification with ID #{notification.id} for bucket #{bucket.name}\n" do
         delete_bucket_notification bucket_name: bucket.name,
-                                    notification_id: notification.id
+                                   notification_id: notification.id
       end
 
       assert_empty bucket.notifications
