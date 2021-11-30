@@ -63,11 +63,12 @@ end
 
 def backfill_one gem_name, gem_version
   puts "#{gem_name} #{gem_version}", :bold
-  exec ["git", "switch", "-d", "#{gem_name}/v#{gem_version}"]
+  cur_branch = capture(["git", "rev-parse", "--abbrev-ref", "HEAD"]).strip
+  exec ["git", "checkout", "--detach", "#{gem_name}/v#{gem_version}"]
   begin
     cli.run "release", "perform", "--force-republish", "--enable-rad", gem_name, verbosity: verbosity
   ensure
-    exec ["git", "switch", "-"]
+    exec ["git", "checkout", cur_branch] unless cur_branch == "HEAD"
   end
 end
 
