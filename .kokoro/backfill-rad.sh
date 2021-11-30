@@ -11,4 +11,4 @@ python3 -m pip install git+https://github.com/googleapis/releasetool
 python3 -m pip install gcp-docuploader
 gem install --no-document toys
 
-toys rad backfill -v < /dev/null
+toys rad backfill -v $RELEASE_PACKAGE < /dev/null
