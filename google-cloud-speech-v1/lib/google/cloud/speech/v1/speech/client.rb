@@ -30,6 +30,8 @@ module Google
           # Service that implements Google Cloud Speech API.
           #
           class Client
+            include Paths
+
             # @private
             attr_reader :speech_stub
 
