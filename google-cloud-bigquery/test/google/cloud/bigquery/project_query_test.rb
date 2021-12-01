@@ -16,7 +16,8 @@ require "helper"
 
 describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
   let(:query) { "SELECT name, age, score, active FROM `some_project.some_dataset.users`" }
-  let(:ddl_query) { "CREATE TABLE `my_dataset.my_table` (x INT64)" }
+  let(:ddl_create_query) { "CREATE TABLE `my_dataset.my_table` (x INT64)" }
+  let(:ddl_alter_query) { "ALTER TABLE `my_dataset.my_table` ADD COLUMN y STRING" }
   let(:dml_delete_query) { "DELETE `my_dataset.my_table` WHERE x = 103" }
   let(:dml_insert_query) { "INSERT `my_dataset.my_table` (x) VALUES(101),(102)" }
   let(:dml_update_query) { "UPDATE `my_dataset.my_table` SET x = x + 1 WHERE x IS NOT NULL" }
@@ -65,15 +66,15 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
     _(data[2][:active]).must_be :nil?
   end
 
-  it "executes a DDL statement" do
+  it "executes a DDL CREATE TABLE statement" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    job_gapi = query_job_gapi ddl_query, location: nil
-    resp_gapi = query_job_resp_gapi ddl_query, job_id: job_id, target_routine: true, target_table: true, statement_type: "CREATE_TABLE", ddl_operation_performed: "CREATE"
+    job_gapi = query_job_gapi ddl_create_query, location: nil
+    resp_gapi = query_job_resp_gapi ddl_create_query, job_id: job_id, target_routine: true, target_table: true, statement_type: "CREATE_TABLE", ddl_operation_performed: "CREATE"
     mock.expect :insert_job, resp_gapi, [project, job_gapi]
 
-    data = bigquery.query ddl_query
+    data = bigquery.query ddl_create_query
     mock.verify
     # data.must_be_kind_of Google::Cloud::Bigquery::Data
     _(data.class).must_equal Google::Cloud::Bigquery::Data
@@ -84,6 +85,34 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
     _(data.ddl?).must_equal true
     _(data.dml?).must_equal false
     _(data.ddl_operation_performed).must_equal "CREATE"
+    _(data.ddl_target_table).wont_be :nil?
+    _(data.num_dml_affected_rows).must_be :nil?
+    _(data.deleted_row_count).must_be :nil?
+    _(data.inserted_row_count).must_be :nil?
+    _(data.updated_row_count).must_be :nil?
+    # in real life this example does not create a routine, but test the attribute here anyway
+    _(data.ddl_target_routine).wont_be :nil?
+  end
+
+  it "executes a DDL ALTER TABLE statement" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi ddl_alter_query, location: nil
+    resp_gapi = query_job_resp_gapi ddl_alter_query, job_id: job_id, target_routine: true, target_table: true, statement_type: "ALTER_TABLE", ddl_operation_performed: nil
+    mock.expect :insert_job, resp_gapi, [project, job_gapi]
+
+    data = bigquery.query ddl_alter_query
+    mock.verify
+    # data.must_be_kind_of Google::Cloud::Bigquery::Data
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
+    _(data.count).must_equal 0
+    _(data.total).must_be :nil?
+
+    _(data.statement_type).must_equal "ALTER_TABLE"
+    _(data.ddl?).must_equal true
+    _(data.dml?).must_equal false
+    _(data.ddl_operation_performed).must_be :nil? # Incorrect? See https://github.com/googleapis/google-cloud-ruby/issues/16097
     _(data.ddl_target_table).wont_be :nil?
     _(data.num_dml_affected_rows).must_be :nil?
     _(data.deleted_row_count).must_be :nil?

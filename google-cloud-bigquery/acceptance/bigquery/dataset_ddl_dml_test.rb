@@ -30,7 +30,6 @@ describe Google::Cloud::Bigquery::Dataset, :ddl_dml, :bigquery do
     create_job = dataset.query_job "CREATE TABLE #{table_id} (x INT64)"
     create_job.wait_until_done!
     _(create_job).wont_be :failed?
-
     _(create_job.statement_type).must_equal "CREATE_TABLE"
     _(create_job.ddl_operation_performed).must_equal "CREATE"
     assert_table_ref create_job.ddl_target_table, dataset_id, table_id
@@ -38,6 +37,17 @@ describe Google::Cloud::Bigquery::Dataset, :ddl_dml, :bigquery do
     _(create_job.deleted_row_count).must_be :nil?
     _(create_job.inserted_row_count).must_be :nil?
     _(create_job.updated_row_count).must_be :nil?
+
+    alter_job = dataset.query_job "ALTER TABLE #{table_id} ADD COLUMN y STRING"
+    alter_job.wait_until_done!
+    _(alter_job).wont_be :failed?
+    _(alter_job.statement_type).must_equal "ALTER_TABLE"
+    # _(alter_job.ddl_operation_performed).must_equal "ALTER" # Fails with nil value. See https://github.com/googleapis/google-cloud-ruby/issues/16097#issuecomment-983961475
+    assert_table_ref alter_job.ddl_target_table, dataset_id, table_id
+    _(alter_job.num_dml_affected_rows).must_be :nil?
+    _(alter_job.deleted_row_count).must_be :nil?
+    _(alter_job.inserted_row_count).must_be :nil?
+    _(alter_job.updated_row_count).must_be :nil?
 
     insert_job = dataset.query_job "INSERT #{table_id} (x) VALUES(101),(102)"
     insert_job.wait_until_done!
@@ -104,6 +114,23 @@ describe Google::Cloud::Bigquery::Dataset, :ddl_dml, :bigquery do
     _(create_data.all).must_be_kind_of Enumerator
     _(create_data.count).must_equal 0
     _(create_data.to_a).must_equal []
+
+    alter_data = dataset.query "ALTER TABLE #{table_id_2} ADD COLUMN y STRING"
+    assert_table_ref alter_data.ddl_target_table, dataset_id, table_id_2
+    _(alter_data.statement_type).must_equal "ALTER_TABLE"
+    # _(alter_data.ddl?).must_equal true # Fails with false value. See https://github.com/googleapis/google-cloud-ruby/issues/16097
+    # _(alter_data.dml?).must_equal false # Fails with true value. See https://github.com/googleapis/google-cloud-ruby/issues/16097
+    # _(alter_data.ddl_operation_performed).must_equal "ALTER" # Fails with nil value. See https://github.com/googleapis/google-cloud-ruby/issues/16097#issuecomment-983961475
+    _(alter_data.num_dml_affected_rows).must_be :nil?
+    _(alter_data.deleted_row_count).must_be :nil?
+    _(alter_data.inserted_row_count).must_be :nil?
+    _(alter_data.updated_row_count).must_be :nil?
+    _(alter_data.total).must_equal 0
+    _(alter_data.next?).must_equal false
+    _(alter_data.next).must_be :nil?
+    _(alter_data.all).must_be_kind_of Enumerator
+    _(alter_data.count).must_equal 0
+    _(alter_data.to_a).must_equal []
 
     insert_data = dataset.query "INSERT #{table_id_2} (x) VALUES(101),(102)"
     _(insert_data.ddl_target_table).must_be :nil?
