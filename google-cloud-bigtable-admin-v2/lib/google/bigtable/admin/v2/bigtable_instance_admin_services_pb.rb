@@ -37,6 +37,12 @@ module Google
               self.service_name = 'google.bigtable.admin.v2.BigtableInstanceAdmin'
 
               # Create an instance within a project.
+              #
+              # Note that exactly one of Cluster.serve_nodes and
+              # Cluster.cluster_config.cluster_autoscaling_config can be set. If
+              # serve_nodes is set to non-zero, then the cluster is manually scaled. If
+              # cluster_config.cluster_autoscaling_config is non-empty, then autoscaling is
+              # enabled.
               rpc :CreateInstance, ::Google::Cloud::Bigtable::Admin::V2::CreateInstanceRequest, ::Google::Longrunning::Operation
               # Gets information about an instance.
               rpc :GetInstance, ::Google::Cloud::Bigtable::Admin::V2::GetInstanceRequest, ::Google::Cloud::Bigtable::Admin::V2::Instance
@@ -52,13 +58,36 @@ module Google
               # Delete an instance from a project.
               rpc :DeleteInstance, ::Google::Cloud::Bigtable::Admin::V2::DeleteInstanceRequest, ::Google::Protobuf::Empty
               # Creates a cluster within an instance.
+              #
+              # Note that exactly one of Cluster.serve_nodes and
+              # Cluster.cluster_config.cluster_autoscaling_config can be set. If
+              # serve_nodes is set to non-zero, then the cluster is manually scaled. If
+              # cluster_config.cluster_autoscaling_config is non-empty, then autoscaling is
+              # enabled.
               rpc :CreateCluster, ::Google::Cloud::Bigtable::Admin::V2::CreateClusterRequest, ::Google::Longrunning::Operation
               # Gets information about a cluster.
               rpc :GetCluster, ::Google::Cloud::Bigtable::Admin::V2::GetClusterRequest, ::Google::Cloud::Bigtable::Admin::V2::Cluster
               # Lists information about clusters in an instance.
               rpc :ListClusters, ::Google::Cloud::Bigtable::Admin::V2::ListClustersRequest, ::Google::Cloud::Bigtable::Admin::V2::ListClustersResponse
               # Updates a cluster within an instance.
+              #
+              # Note that UpdateCluster does not support updating
+              # cluster_config.cluster_autoscaling_config. In order to update it, you
+              # must use PartialUpdateCluster.
               rpc :UpdateCluster, ::Google::Cloud::Bigtable::Admin::V2::Cluster, ::Google::Longrunning::Operation
+              # Partially updates a cluster within a project. This method is the preferred
+              # way to update a Cluster.
+              #
+              # To enable and update autoscaling, set
+              # cluster_config.cluster_autoscaling_config. When autoscaling is enabled,
+              # serve_nodes is treated as an OUTPUT_ONLY field, meaning that updates to it
+              # are ignored. Note that an update cannot simultaneously set serve_nodes to
+              # non-zero and cluster_config.cluster_autoscaling_config to non-empty, and
+              # also specify both in the update_mask.
+              #
+              # To disable autoscaling, clear cluster_config.cluster_autoscaling_config,
+              # and explicitly set a serve_node count via the update_mask.
+              rpc :PartialUpdateCluster, ::Google::Cloud::Bigtable::Admin::V2::PartialUpdateClusterRequest, ::Google::Longrunning::Operation
               # Deletes a cluster from an instance.
               rpc :DeleteCluster, ::Google::Cloud::Bigtable::Admin::V2::DeleteClusterRequest, ::Google::Protobuf::Empty
               # Creates an app profile within an instance.
