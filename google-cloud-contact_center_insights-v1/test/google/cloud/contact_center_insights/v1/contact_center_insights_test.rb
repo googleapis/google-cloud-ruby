@@ -622,6 +622,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
     parent = "hello world"
     filter = "hello world"
     kms_key = "hello world"
+    write_disposition = :WRITE_DISPOSITION_UNSPECIFIED
 
     export_insights_data_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :export_insights_data, name
@@ -631,6 +632,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
       assert_equal "hello world", request["parent"]
       assert_equal "hello world", request["filter"]
       assert_equal "hello world", request["kms_key"]
+      assert_equal :WRITE_DISPOSITION_UNSPECIFIED, request["write_disposition"]
       refute_nil options
     end
 
@@ -641,35 +643,35 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
       end
 
       # Use hash object
-      client.export_insights_data({ big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key }) do |response, operation|
+      client.export_insights_data({ big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key, write_disposition: write_disposition }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_insights_data big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key do |response, operation|
+      client.export_insights_data big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key, write_disposition: write_disposition do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_insights_data ::Google::Cloud::ContactCenterInsights::V1::ExportInsightsDataRequest.new(big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key) do |response, operation|
+      client.export_insights_data ::Google::Cloud::ContactCenterInsights::V1::ExportInsightsDataRequest.new(big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key, write_disposition: write_disposition) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_insights_data({ big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key }, grpc_options) do |response, operation|
+      client.export_insights_data({ big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key, write_disposition: write_disposition }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_insights_data(::Google::Cloud::ContactCenterInsights::V1::ExportInsightsDataRequest.new(big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key), grpc_options) do |response, operation|
+      client.export_insights_data(::Google::Cloud::ContactCenterInsights::V1::ExportInsightsDataRequest.new(big_query_destination: big_query_destination, parent: parent, filter: filter, kms_key: kms_key, write_disposition: write_disposition), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

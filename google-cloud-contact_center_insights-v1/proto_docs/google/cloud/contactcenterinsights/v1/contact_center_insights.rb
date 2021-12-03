@@ -332,6 +332,9 @@ module Google
         #     A fully qualified KMS key name for BigQuery tables protected by CMEK.
         #     Format:
         #     projects/\\{project}/locations/\\{location}/keyRings/\\{keyring}/cryptoKeys/\\{key}/cryptoKeyVersions/\\{version}
+        # @!attribute [rw] write_disposition
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::ExportInsightsDataRequest::WriteDisposition]
+        #     Options for what to do if the destination table already exists.
         class ExportInsightsDataRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -355,6 +358,19 @@ module Google
           class BigQueryDestination
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Specifies the action that occurs if the destination table already exists.
+          module WriteDisposition
+            # Write disposition is not specified. Defaults to WRITE_TRUNCATE.
+            WRITE_DISPOSITION_UNSPECIFIED = 0
+
+            # If the table already exists, BigQuery will overwrite the table data and
+            # use the schema from the load.
+            WRITE_TRUNCATE = 1
+
+            # If the table already exists, BigQuery will append data to the table.
+            WRITE_APPEND = 2
           end
         end
 
