@@ -441,7 +441,7 @@ module Google
                 uri = "/compute/v1/locations/global/firewallPolicies"
                 body = request_pb.firewall_policy_resource.to_json
                 query_string_params = {}
-                query_string_params["parentId"] = request_pb.parent_id.to_s if request_pb.has_parent_id?
+                query_string_params["parentId"] = request_pb.parent_id.to_s
                 query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
@@ -582,7 +582,7 @@ module Google
                 uri = "/compute/v1/locations/global/firewallPolicies/#{request_pb.firewall_policy}/move"
                 body = nil
                 query_string_params = {}
-                query_string_params["parentId"] = request_pb.parent_id.to_s if request_pb.has_parent_id?
+                query_string_params["parentId"] = request_pb.parent_id.to_s
                 query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
