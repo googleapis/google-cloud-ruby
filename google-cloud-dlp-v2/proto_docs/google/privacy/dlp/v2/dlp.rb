@@ -130,7 +130,8 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Configuration to control the number of findings returned.
+          # Configuration to control the number of findings returned. Cannot be set if
+          # de-identification is requested.
           # @!attribute [rw] max_findings_per_item
           #   @return [::Integer]
           #     Max number of findings that will be returned for each item scanned.
@@ -178,7 +179,9 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The type of data being sent for inspection.
+          # The type of data being sent for inspection. To learn more, see
+          # [Supported file
+          # types](https://cloud.google.com/dlp/docs/supported-file-types).
           module BytesType
             # Unused
             BYTES_TYPE_UNSPECIFIED = 0
@@ -235,9 +238,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Structured content to inspect. Up to 50,000 `Value`s per request allowed.
-        # See https://cloud.google.com/dlp/docs/inspecting-text#inspecting_a_table to
-        # learn more.
+        # Structured content to inspect. Up to 50,000 `Value`s per request allowed. See
+        # https://cloud.google.com/dlp/docs/inspecting-structured-text#inspecting_a_table
+        # to learn more.
         # @!attribute [rw] headers
         #   @return [::Array<::Google::Cloud::Dlp::V2::FieldId>]
         #     Headers of the table.
@@ -333,6 +336,9 @@ module Google
         # @!attribute [rw] job_name
         #   @return [::String]
         #     The job that stored the finding.
+        # @!attribute [rw] finding_id
+        #   @return [::String]
+        #     The unique finding id.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -914,7 +920,7 @@ module Google
         #     The configuration used for this job.
         # @!attribute [rw] result
         #   @return [::Google::Cloud::Dlp::V2::InspectDataSourceDetails::Result]
-        #     A summary of the outcome of this inspect job.
+        #     A summary of the outcome of this inspection job.
         class InspectDataSourceDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -946,9 +952,6 @@ module Google
           # @!attribute [rw] hybrid_stats
           #   @return [::Google::Cloud::Dlp::V2::HybridInspectStatistics]
           #     Statistics related to the processing of hybrid inspect.
-          #     Early access feature is in a pre-release state and might change or have
-          #     limited support. For more information, see
-          #     https://cloud.google.com/products#product-launch-stages.
           class Result
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1755,7 +1758,7 @@ module Google
         # A rule for transforming a value.
         # @!attribute [rw] replace_config
         #   @return [::Google::Cloud::Dlp::V2::ReplaceValueConfig]
-        #     Replace
+        #     Replace with a specified value.
         # @!attribute [rw] redact_config
         #   @return [::Google::Cloud::Dlp::V2::RedactConfig]
         #     Redact
@@ -1786,6 +1789,9 @@ module Google
         # @!attribute [rw] crypto_deterministic_config
         #   @return [::Google::Cloud::Dlp::V2::CryptoDeterministicConfig]
         #     Deterministic Crypto
+        # @!attribute [rw] replace_dictionary_config
+        #   @return [::Google::Cloud::Dlp::V2::ReplaceDictionaryConfig]
+        #     Replace with a value randomly drawn (with replacement) from a dictionary.
         class PrimitiveTransformation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1845,7 +1851,9 @@ module Google
         # Uses AES-SIV based on the RFC https://tools.ietf.org/html/rfc5297.
         # @!attribute [rw] crypto_key
         #   @return [::Google::Cloud::Dlp::V2::CryptoKey]
-        #     The key used by the encryption function.
+        #     The key used by the encryption function. For deterministic encryption
+        #     using AES-SIV, the provided key is internally expanded to 64 bytes prior to
+        #     use.
         # @!attribute [rw] surrogate_info_type
         #   @return [::Google::Cloud::Dlp::V2::InfoType]
         #     The custom info type to annotate the surrogate with.
@@ -1910,6 +1918,17 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::Value]
         #     Value to replace it with.
         class ReplaceValueConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Replace each input value with a value randomly selected from the dictionary.
+        # @!attribute [rw] word_list
+        #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Dictionary::WordList]
+        #     A list of words to select from for random replacement. The
+        #     [limits](https://cloud.google.com/dlp/limits) page contains details about
+        #     the size limits of dictionaries.
+        class ReplaceDictionaryConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -2003,8 +2022,8 @@ module Google
         # the user for simple bucketing strategies.
         #
         # The transformed value will be a hyphenated string of
-        # \\{lower_bound}-\\{upper_bound}, i.e if lower_bound = 10 and upper_bound = 20
-        # all values that are within this bucket will be replaced with "10-20".
+        # \\{lower_bound}-\\{upper_bound}. For example, if lower_bound = 10 and upper_bound
+        # = 20, all values that are within this bucket will be replaced with "10-20".
         #
         # This can be used on data of type: double, long.
         #
@@ -2176,10 +2195,11 @@ module Google
         end
 
         # This is a data encryption key (DEK) (as opposed to
-        # a key encryption key (KEK) stored by KMS).
-        # When using KMS to wrap/unwrap DEKs, be sure to set an appropriate
-        # IAM policy on the KMS CryptoKey (KEK) to ensure an attacker cannot
-        # unwrap the data crypto key.
+        # a key encryption key (KEK) stored by Cloud Key Management Service
+        # (Cloud KMS).
+        # When using Cloud KMS to wrap or unwrap a DEK, be sure to set an appropriate
+        # IAM policy on the KEK to ensure an attacker cannot
+        # unwrap the DEK.
         # @!attribute [rw] transient
         #   @return [::Google::Cloud::Dlp::V2::TransientCryptoKey]
         #     Transient crypto key
@@ -2188,7 +2208,7 @@ module Google
         #     Unwrapped crypto key
         # @!attribute [rw] kms_wrapped
         #   @return [::Google::Cloud::Dlp::V2::KmsWrappedCryptoKey]
-        #     Kms wrapped key
+        #     Key wrapped using Cloud KMS
         class CryptoKey
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2220,10 +2240,16 @@ module Google
         end
 
         # Include to use an existing data crypto key wrapped by KMS.
-        # The wrapped key must be a 128/192/256 bit key.
+        # The wrapped key must be a 128-, 192-, or 256-bit key.
         # Authorization requires the following IAM permissions when sending a request
-        # to perform a crypto transformation using a kms-wrapped crypto key:
+        # to perform a crypto transformation using a KMS-wrapped crypto key:
         # dlp.kms.encrypt
+        #
+        # For more information, see [Creating a wrapped key]
+        # (https://cloud.google.com/dlp/docs/create-wrapped-key).
+        #
+        # Note: When you use Cloud KMS for cryptographic operations,
+        # [charges apply](https://cloud.google.com/kms/pricing).
         # @!attribute [rw] wrapped_key
         #   @return [::String]
         #     Required. The wrapped data crypto key.
@@ -2295,6 +2321,9 @@ module Google
         # @!attribute [rw] fields
         #   @return [::Array<::Google::Cloud::Dlp::V2::FieldId>]
         #     Required. Input field(s) to apply the transformation to.
+        #     When you have columns that reference their position within a list,
+        #     omit the index from the FieldId. FieldId name matching ignores the index.
+        #     For example, instead of "contact.nums[0].type", use "contact.nums.type".
         # @!attribute [rw] condition
         #   @return [::Google::Cloud::Dlp::V2::RecordCondition]
         #     Only apply the transformation if the condition evaluates to true for the
@@ -2489,7 +2518,7 @@ module Google
           end
         end
 
-        # Schedule for triggeredJobs.
+        # Schedule for inspect job triggers.
         # @!attribute [rw] recurrence_period_duration
         #   @return [::Google::Protobuf::Duration]
         #     With this option a job is started a regular periodic basis. For
@@ -2566,7 +2595,7 @@ module Google
         #     Output only. The last update timestamp of an inspectTemplate.
         # @!attribute [rw] deidentify_config
         #   @return [::Google::Cloud::Dlp::V2::DeidentifyConfig]
-        #     ///////////// // The core content of the template  // ///////////////
+        #     The core content of the template.
         class DeidentifyTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2635,9 +2664,6 @@ module Google
           # @!attribute [rw] manual
           #   @return [::Google::Cloud::Dlp::V2::Manual]
           #     For use with hybrid jobs. Jobs must be manually created and finished.
-          #     Early access feature is in a pre-release state and might change or have
-          #     limited support. For more information, see
-          #     https://cloud.google.com/products#product-launch-stages.
           class Trigger
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2730,11 +2756,11 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Publish findings of a DlpJob to Cloud Data Catalog. Labels summarizing the
+          # Publish findings of a DlpJob to Data Catalog. Labels summarizing the
           # results of the DlpJob will be applied to the entry for the resource scanned
-          # in Cloud Data Catalog. Any labels previously written by another DlpJob will
+          # in Data Catalog. Any labels previously written by another DlpJob will
           # be deleted. InfoType naming patterns are strictly enforced when using this
-          # feature. Note that the findings will be persisted in Cloud Data Catalog
+          # feature. Note that the findings will be persisted in Data Catalog
           # storage and are governed by Data Catalog service-specific policy, see
           # https://cloud.google.com/terms/service-terms
           # Only a single instance of this action can be specified and only allowed if
@@ -3003,10 +3029,11 @@ module Google
         #         parent=projects/example-project/locations/europe-west3
         # @!attribute [rw] inspect_job
         #   @return [::Google::Cloud::Dlp::V2::InspectJobConfig]
-        #     Set to control what and how to inspect.
+        #     An inspection job scans a storage repository for InfoTypes.
         # @!attribute [rw] risk_job
         #   @return [::Google::Cloud::Dlp::V2::RiskAnalysisJobConfig]
-        #     Set to choose what metric to calculate.
+        #     A risk analysis job calculates re-identification risk metrics for a
+        #     BigQuery table.
         # @!attribute [rw] job_id
         #   @return [::String]
         #     The job id can contain uppercase and lowercase letters,
@@ -3075,7 +3102,7 @@ module Google
         #     * Restrictions can be combined by `AND` or `OR` logical operators. A
         #     sequence of restrictions implicitly uses `AND`.
         #     * A restriction has the form of `{field} {operator} {value}`.
-        #     * Supported fields/values for inspect jobs:
+        #     * Supported fields/values for inspect triggers:
         #         - `status` - HEALTHY|PAUSED|CANCELLED
         #         - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
         #         - 'last_run_time` - RFC 3339 formatted timestamp, surrounded by
@@ -3091,6 +3118,9 @@ module Google
         #     * last_run_time > \"2017-12-12T00:00:00+00:00\"
         #
         #     The length of this field should be no more than 500 characters.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Dlp::V2::DlpJobType]
+        #     The type of jobs. Will use `DlpJobType.INSPECT` if not set.
         # @!attribute [rw] location_id
         #   @return [::String]
         #     Deprecated. This field has no effect.
@@ -3939,7 +3969,7 @@ module Google
 
         # An enum to represent the various types of DLP jobs.
         module DlpJobType
-          # Unused
+          # Defaults to INSPECT_JOB.
           DLP_JOB_TYPE_UNSPECIFIED = 0
 
           # The job inspected Google Cloud for sensitive data.

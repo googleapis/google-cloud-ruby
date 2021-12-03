@@ -2121,9 +2121,6 @@ module Google
             # Inspect hybrid content and store findings to a trigger. The inspection
             # will be processed asynchronously. To review the findings monitor the
             # jobs within the trigger.
-            # Early access feature is in a pre-release state and might change or have
-            # limited support. For more information, see
-            # https://cloud.google.com/products#product-launch-stages.
             #
             # @overload hybrid_inspect_job_trigger(request, options = nil)
             #   Pass arguments to `hybrid_inspect_job_trigger` via a request object, either of type
@@ -2311,7 +2308,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_job_triggers(parent: nil, page_token: nil, page_size: nil, order_by: nil, filter: nil, location_id: nil)
+            # @overload list_job_triggers(parent: nil, page_token: nil, page_size: nil, order_by: nil, filter: nil, type: nil, location_id: nil)
             #   Pass arguments to `list_job_triggers` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2364,7 +2361,7 @@ module Google
             #     * Restrictions can be combined by `AND` or `OR` logical operators. A
             #     sequence of restrictions implicitly uses `AND`.
             #     * A restriction has the form of `{field} {operator} {value}`.
-            #     * Supported fields/values for inspect jobs:
+            #     * Supported fields/values for inspect triggers:
             #         - `status` - HEALTHY|PAUSED|CANCELLED
             #         - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
             #         - 'last_run_time` - RFC 3339 formatted timestamp, surrounded by
@@ -2380,6 +2377,8 @@ module Google
             #     * last_run_time > \"2017-12-12T00:00:00+00:00\"
             #
             #     The length of this field should be no more than 500 characters.
+            #   @param type [::Google::Cloud::Dlp::V2::DlpJobType]
+            #     The type of jobs. Will use `DlpJobType.INSPECT` if not set.
             #   @param location_id [::String]
             #     Deprecated. This field has no effect.
             #
@@ -2670,9 +2669,10 @@ module Google
             #
             #         parent=projects/example-project/locations/europe-west3
             #   @param inspect_job [::Google::Cloud::Dlp::V2::InspectJobConfig, ::Hash]
-            #     Set to control what and how to inspect.
+            #     An inspection job scans a storage repository for InfoTypes.
             #   @param risk_job [::Google::Cloud::Dlp::V2::RiskAnalysisJobConfig, ::Hash]
-            #     Set to choose what metric to calculate.
+            #     A risk analysis job calculates re-identification risk metrics for a
+            #     BigQuery table.
             #   @param job_id [::String]
             #     The job id can contain uppercase and lowercase letters,
             #     numbers, and hyphens; that is, it must match the regular
@@ -3697,11 +3697,8 @@ module Google
 
             ##
             # Inspect hybrid content and store findings to a job.
-            # To review the findings inspect the job. Inspection will occur
+            # To review the findings, inspect the job. Inspection will occur
             # asynchronously.
-            # Early access feature is in a pre-release state and might change or have
-            # limited support. For more information, see
-            # https://cloud.google.com/products#product-launch-stages.
             #
             # @overload hybrid_inspect_dlp_job(request, options = nil)
             #   Pass arguments to `hybrid_inspect_dlp_job` via a request object, either of type
@@ -3791,9 +3788,6 @@ module Google
             ##
             # Finish a running hybrid DlpJob. Triggers the finalization steps and running
             # of any enabled actions that have not yet run.
-            # Early access feature is in a pre-release state and might change or have
-            # limited support. For more information, see
-            # https://cloud.google.com/products#product-launch-stages.
             #
             # @overload finish_dlp_job(request, options = nil)
             #   Pass arguments to `finish_dlp_job` via a request object, either of type
