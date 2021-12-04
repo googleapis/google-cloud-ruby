@@ -18,6 +18,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :end_interaction, :message, 11, "google.cloud.dialogflow.cx.v3.ResponseMessage.EndInteraction"
         optional :play_audio, :message, 12, "google.cloud.dialogflow.cx.v3.ResponseMessage.PlayAudio"
         optional :mixed_audio, :message, 13, "google.cloud.dialogflow.cx.v3.ResponseMessage.MixedAudio"
+        optional :telephony_transfer_call, :message, 18, "google.cloud.dialogflow.cx.v3.ResponseMessage.TelephonyTransferCall"
       end
     end
     add_message "google.cloud.dialogflow.cx.v3.ResponseMessage.Text" do
@@ -53,6 +54,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :uri, :string, 2
       end
     end
+    add_message "google.cloud.dialogflow.cx.v3.ResponseMessage.TelephonyTransferCall" do
+      oneof :endpoint do
+        optional :phone_number, :string, 1
+      end
+    end
   end
 end
 
@@ -70,6 +76,7 @@ module Google
           ResponseMessage::PlayAudio = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.ResponseMessage.PlayAudio").msgclass
           ResponseMessage::MixedAudio = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.ResponseMessage.MixedAudio").msgclass
           ResponseMessage::MixedAudio::Segment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.ResponseMessage.MixedAudio.Segment").msgclass
+          ResponseMessage::TelephonyTransferCall = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.ResponseMessage.TelephonyTransferCall").msgclass
         end
       end
     end

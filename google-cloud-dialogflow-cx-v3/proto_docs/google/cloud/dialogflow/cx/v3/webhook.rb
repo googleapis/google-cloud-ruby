@@ -29,12 +29,10 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     The unique identifier of the webhook.
-          #     Required for the
-          #     {::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#update_webhook Webhooks.UpdateWebhook}
-          #     method.
-          #     {::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#create_webhook Webhooks.CreateWebhook}
-          #     populates the name automatically. Format: `projects/<Project
-          #     ID>/locations/<Location ID>/agents/<Agent ID>/webhooks/<Webhook ID>`.
+          #     Required for the {::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#update_webhook Webhooks.UpdateWebhook} method.
+          #     {::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#create_webhook Webhooks.CreateWebhook} populates the name automatically.
+          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+          #     ID>/webhooks/<Webhook ID>`.
           # @!attribute [rw] display_name
           #   @return [::String]
           #     Required. The human-readable name of the webhook, unique within the agent.
@@ -60,8 +58,7 @@ module Google
             # Represents configuration for a generic web service.
             # @!attribute [rw] uri
             #   @return [::String]
-            #     Required. The webhook URI for receiving POST requests. It must use https
-            #     protocol.
+            #     Required. The webhook URI for receiving POST requests. It must use https protocol.
             # @!attribute [rw] username
             #   @return [::String]
             #     The user name for HTTP Basic authentication.
@@ -74,17 +71,17 @@ module Google
             #     requests.
             # @!attribute [rw] allowed_ca_certs
             #   @return [::Array<::String>]
-            #     Optional. Specifies a list of allowed custom CA certificates (in DER
-            #     format) for HTTPS verification. This overrides the default SSL trust
-            #     store. If this is empty or unspecified, Dialogflow will use Google's
-            #     default trust store to verify certificates. N.B. Make sure the HTTPS
-            #     server certificates are signed with "subject alt name". For instance a
-            #     certificate can be self-signed using the following command,
-            #
-            #         openssl x509 -req -days 200 -in example.com.csr \
-            #           -signkey example.com.key \
-            #           -out example.com.crt \
-            #           -extfile <(printf "\nsubjectAltName='DNS:www.example.com'")
+            #     Optional. Specifies a list of allowed custom CA certificates (in DER format) for
+            #     HTTPS verification. This overrides the default SSL trust store. If this
+            #     is empty or unspecified, Dialogflow will use Google's default trust store
+            #     to verify certificates.
+            #     N.B. Make sure the HTTPS server certificates are signed with "subject alt
+            #     name". For instance a certificate can be self-signed using the following
+            #     command,
+            #        openssl x509 -req -days 200 -in example.com.csr \
+            #          -signkey example.com.key \
+            #          -out example.com.crt \
+            #          -extfile <(printf "\nsubjectAltName='DNS:www.example.com'")
             class GenericWebService
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -118,8 +115,7 @@ module Google
             end
           end
 
-          # The request message for
-          # {::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#list_webhooks Webhooks.ListWebhooks}.
+          # The request message for {::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#list_webhooks Webhooks.ListWebhooks}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The agent to list all webhooks for.
@@ -136,8 +132,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The response message for
-          # {::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#list_webhooks Webhooks.ListWebhooks}.
+          # The response message for {::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#list_webhooks Webhooks.ListWebhooks}.
           # @!attribute [rw] webhooks
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::Webhook>]
           #     The list of webhooks. There will be a maximum number of items returned
@@ -151,8 +146,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request message for
-          # {::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#get_webhook Webhooks.GetWebhook}.
+          # The request message for {::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#get_webhook Webhooks.GetWebhook}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the webhook.
@@ -163,8 +157,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request message for
-          # {::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#create_webhook Webhooks.CreateWebhook}.
+          # The request message for {::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#create_webhook Webhooks.CreateWebhook}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The agent to create a webhook for.
@@ -177,8 +170,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request message for
-          # {::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#update_webhook Webhooks.UpdateWebhook}.
+          # The request message for {::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#update_webhook Webhooks.UpdateWebhook}.
           # @!attribute [rw] webhook
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Webhook]
           #     Required. The webhook to update.
@@ -191,8 +183,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request message for
-          # {::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#delete_webhook Webhooks.DeleteWebhook}.
+          # The request message for {::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#delete_webhook Webhooks.DeleteWebhook}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the webhook to delete.
@@ -206,10 +197,9 @@ module Google
           #     *  If `force` is set to false, an error will be returned with message
           #        indicating the referenced resources.
           #     *  If `force` is set to true, Dialogflow will remove the webhook, as well
-          #        as any references to the webhook (i.e.
-          #        {::Google::Cloud::Dialogflow::CX::V3::Fulfillment#webhook Webhook} and
-          #        {::Google::Cloud::Dialogflow::CX::V3::Fulfillment#tag tag}in fulfillments that
-          #        point to this webhook will be removed).
+          #        as any references to the webhook (i.e. {::Google::Cloud::Dialogflow::CX::V3::Fulfillment#webhook Webhook}
+          #        and {::Google::Cloud::Dialogflow::CX::V3::Fulfillment#tag tag}in fulfillments that point to this webhook
+          #        will be removed).
           class DeleteWebhookRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -219,28 +209,26 @@ module Google
           # and the field names will be presented in camel cases.
           # @!attribute [rw] detect_intent_response_id
           #   @return [::String]
-          #     Always present. The unique identifier of the
-          #     {::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse DetectIntentResponse}
-          #     that will be returned to the API caller.
+          #     Always present. The unique identifier of the {::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse DetectIntentResponse} that
+          #     will be returned to the API caller.
           # @!attribute [rw] text
           #   @return [::String]
-          #     If {::Google::Cloud::Dialogflow::CX::V3::TextInput natural language text} was
-          #     provided as input, this field will contain a copy of the text.
+          #     If {::Google::Cloud::Dialogflow::CX::V3::TextInput natural language text} was provided as input, this field
+          #     will contain a copy of the text.
           # @!attribute [rw] trigger_intent
           #   @return [::String]
-          #     If an {::Google::Cloud::Dialogflow::CX::V3::IntentInput intent} was provided as
-          #     input, this field will contain a copy of the intent identifier. Format:
-          #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+          #     If an {::Google::Cloud::Dialogflow::CX::V3::IntentInput intent} was provided as input, this field will
+          #     contain a copy of the intent identifier.
+          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
           #     ID>/intents/<Intent ID>`.
           # @!attribute [rw] transcript
           #   @return [::String]
-          #     If [natural language speech
-          #     audio][google.cloud.dialogflow.cx.v3.AudioInput] was provided as input,
+          #     If {::Google::Cloud::Dialogflow::CX::V3::AudioInput natural language speech audio} was provided as input,
           #     this field will contain the transcript for the audio.
           # @!attribute [rw] trigger_event
           #   @return [::String]
-          #     If an {::Google::Cloud::Dialogflow::CX::V3::EventInput event} was provided as
-          #     input, this field will contain the name of the event.
+          #     If an {::Google::Cloud::Dialogflow::CX::V3::EventInput event} was provided as input, this field will contain
+          #     the name of the event.
           # @!attribute [rw] language_code
           #   @return [::String]
           #     The language code specified in the [original
@@ -265,8 +253,7 @@ module Google
           #     {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse#fulfillment_response WebhookResponse.fulfillment_response};
           # @!attribute [rw] payload
           #   @return [::Google::Protobuf::Struct]
-          #     Custom data set in
-          #     {::Google::Cloud::Dialogflow::CX::V3::QueryParameters#payload QueryParameters.payload}.
+          #     Custom data set in {::Google::Cloud::Dialogflow::CX::V3::QueryParameters#payload QueryParameters.payload}.
           # @!attribute [rw] sentiment_analysis_result
           #   @return [::Google::Cloud::Dialogflow::CX::V3::WebhookRequest::SentimentAnalysisResult]
           #     The sentiment analysis result of the current user request. The field is
@@ -294,8 +281,7 @@ module Google
             #     ID>/intents/<Intent ID>`.
             # @!attribute [rw] display_name
             #   @return [::String]
-            #     Always present. The display name of the last matched
-            #     {::Google::Cloud::Dialogflow::CX::V3::Intent intent}.
+            #     Always present. The display name of the last matched {::Google::Cloud::Dialogflow::CX::V3::Intent intent}.
             # @!attribute [rw] parameters
             #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dialogflow::CX::V3::WebhookRequest::IntentInfo::IntentParameterValue}]
             #     Parameters identified as a result of intent matching. This is a map of
@@ -364,8 +350,7 @@ module Google
           #     if it does not intend to modify session status.
           # @!attribute [rw] payload
           #   @return [::Google::Protobuf::Struct]
-          #     Value to append directly to
-          #     {::Google::Cloud::Dialogflow::CX::V3::QueryResult#webhook_payloads QueryResult.webhook_payloads}.
+          #     Value to append directly to {::Google::Cloud::Dialogflow::CX::V3::QueryResult#webhook_payloads QueryResult.webhook_payloads}.
           # @!attribute [rw] target_page
           #   @return [::String]
           #     The target page to transition to.
@@ -410,17 +395,13 @@ module Google
           # Represents page information communicated to and from the webhook.
           # @!attribute [rw] current_page
           #   @return [::String]
-          #     Always present for
-          #     {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest}. Ignored for
-          #     {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}. The
-          #     unique identifier of the current page. Format: `projects/<Project
-          #     ID>/locations/<Location ID>/agents/<Agent ID>/flows/<Flow ID>/pages/<Page
-          #     ID>`.
+          #     Always present for {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest}. Ignored for {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}.
+          #     The unique identifier of the current page.
+          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+          #     ID>/flows/<Flow ID>/pages/<Page ID>`.
           # @!attribute [rw] form_info
           #   @return [::Google::Cloud::Dialogflow::CX::V3::PageInfo::FormInfo]
-          #     Optional for both
-          #     {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest} and
-          #     {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}.
+          #     Optional for both {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest} and {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}.
           #     Information about the form.
           class PageInfo
             include ::Google::Protobuf::MessageExts
@@ -429,11 +410,9 @@ module Google
             # Represents form information.
             # @!attribute [rw] parameter_info
             #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::PageInfo::FormInfo::ParameterInfo>]
-            #     Optional for both
-            #     {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest} and
-            #     {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}. The
-            #     parameters contained in the form. Note that the webhook cannot add or
-            #     remove any form parameter.
+            #     Optional for both {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest} and {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}.
+            #     The parameters contained in the form. Note that the webhook cannot add
+            #     or remove any form parameter.
             class FormInfo
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -441,42 +420,31 @@ module Google
               # Represents parameter information.
               # @!attribute [rw] display_name
               #   @return [::String]
-              #     Always present for
-              #     {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest}.
-              #     Required for
+              #     Always present for {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest}. Required for
               #     {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}.
               #     The human-readable name of the parameter, unique within the form. This
               #     field cannot be modified by the webhook.
               # @!attribute [rw] required
               #   @return [::Boolean]
-              #     Optional for both
-              #     {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest} and
-              #     {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}.
+              #     Optional for both {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest} and {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}.
               #     Indicates whether the parameter is required. Optional parameters will
               #     not trigger prompts; however, they are filled if the user specifies
               #     them. Required parameters must be filled before form filling concludes.
               # @!attribute [rw] state
               #   @return [::Google::Cloud::Dialogflow::CX::V3::PageInfo::FormInfo::ParameterInfo::ParameterState]
-              #     Always present for
-              #     {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest}.
-              #     Required for
-              #     {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}. The
-              #     state of the parameter. This field can be set to
-              #     {::Google::Cloud::Dialogflow::CX::V3::PageInfo::FormInfo::ParameterInfo::ParameterState::INVALID INVALID}
-              #     by the webhook to invalidate the parameter; other values set by the
+              #     Always present for {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest}. Required for
+              #     {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}. The state of the parameter. This field can be set
+              #     to {::Google::Cloud::Dialogflow::CX::V3::PageInfo::FormInfo::ParameterInfo::ParameterState::INVALID INVALID} by
+              #     the webhook to invalidate the parameter; other values set by the
               #     webhook will be ignored.
               # @!attribute [rw] value
               #   @return [::Google::Protobuf::Value]
-              #     Optional for both
-              #     {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest} and
-              #     {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}. The
-              #     value of the parameter. This field can be set by the webhook to change
-              #     the parameter value.
+              #     Optional for both {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest} and {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}.
+              #     The value of the parameter. This field can be set by the webhook to
+              #     change the parameter value.
               # @!attribute [rw] just_collected
               #   @return [::Boolean]
-              #     Optional for
-              #     {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest}. Ignored
-              #     for {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}.
+              #     Optional for {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest}. Ignored for {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}.
               #     Indicates if the parameter value was just collected on the last
               #     conversation turn.
               class ParameterInfo
@@ -506,11 +474,8 @@ module Google
           # Represents session information communicated to and from the webhook.
           # @!attribute [rw] session
           #   @return [::String]
-          #     Always present for
-          #     {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest}. Ignored for
-          #     {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}. The
-          #     unique identifier of the
-          #     {::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest#session session}. This
+          #     Always present for {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest}. Ignored for {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}.
+          #     The unique identifier of the {::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest#session session}. This
           #     field can be used by the webhook to identify a session.
           #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
           #     ID>/sessions/<Session ID>` or `projects/<Project ID>/locations/<Location
@@ -518,14 +483,12 @@ module Google
           #     if environment is specified.
           # @!attribute [rw] parameters
           #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]
-          #     Optional for
-          #     {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest}. Optional
-          #     for {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}. All
-          #     parameters collected from forms and intents during the session. Parameters
-          #     can be created, updated, or removed by the webhook. To remove a parameter
-          #     from the session, the webhook should explicitly set the parameter value to
-          #     null in {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}.
-          #     The map is keyed by parameters' display names.
+          #     Optional for {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest}. Optional for {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}.
+          #     All parameters collected from forms and intents during the session.
+          #     Parameters can be created, updated, or removed by the webhook. To remove a
+          #     parameter from the session, the webhook should explicitly set the parameter
+          #     value to null in {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}. The map is keyed by parameters'
+          #     display names.
           class SessionInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
