@@ -81,6 +81,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :request_time, :message, 2, "google.protobuf.Timestamp"
       optional :finish_time, :message, 3, "google.protobuf.Timestamp"
     end
+    add_message "google.bigtable.admin.v2.PartialUpdateClusterMetadata" do
+      optional :request_time, :message, 1, "google.protobuf.Timestamp"
+      optional :finish_time, :message, 2, "google.protobuf.Timestamp"
+      optional :original_request, :message, 3, "google.bigtable.admin.v2.PartialUpdateClusterRequest"
+    end
+    add_message "google.bigtable.admin.v2.PartialUpdateClusterRequest" do
+      optional :cluster, :message, 1, "google.bigtable.admin.v2.Cluster"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
     add_message "google.bigtable.admin.v2.CreateAppProfileRequest" do
       optional :parent, :string, 1
       optional :app_profile_id, :string, 2
@@ -134,6 +143,8 @@ module Google
           UpdateInstanceMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateInstanceMetadata").msgclass
           CreateClusterMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateClusterMetadata").msgclass
           UpdateClusterMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateClusterMetadata").msgclass
+          PartialUpdateClusterMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.PartialUpdateClusterMetadata").msgclass
+          PartialUpdateClusterRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.PartialUpdateClusterRequest").msgclass
           CreateAppProfileRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateAppProfileRequest").msgclass
           GetAppProfileRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetAppProfileRequest").msgclass
           ListAppProfilesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListAppProfilesRequest").msgclass
