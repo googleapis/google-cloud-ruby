@@ -398,7 +398,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
       _(data.dml?).must_equal false
     end
 
-    it "knows its DDL \n statement type" do
+    it "knows its DDL \\n statement type" do
       gapi = query_job_resp_gapi "query is ignored", statement_type: "\n"
       data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
 
