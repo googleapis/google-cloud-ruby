@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2021-12-06
+
+#### Features
+
+* Support for auto-closing incidents
+
 ### 0.6.1 / 2021-11-08
 
 #### Documentation
