@@ -134,6 +134,8 @@ module Google
 
                   default_config.rpcs.reset.timeout = 600.0
 
+                  default_config.rpcs.send_diagnostic_interrupt.timeout = 600.0
+
                   default_config.rpcs.set_deletion_protection.timeout = 600.0
 
                   default_config.rpcs.set_disk_auto_delete.timeout = 600.0

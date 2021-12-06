@@ -257,6 +257,34 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # The metadata for the Operation returned by PartialUpdateCluster.
+          # @!attribute [rw] request_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which the original request was received.
+          # @!attribute [rw] finish_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which the operation failed or was completed successfully.
+          # @!attribute [rw] original_request
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::PartialUpdateClusterRequest]
+          #     The original request for PartialUpdateCluster.
+          class PartialUpdateClusterMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for BigtableInstanceAdmin.PartialUpdateCluster.
+          # @!attribute [rw] cluster
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::Cluster]
+          #     Required. The Cluster which contains the partial updates to be applied, subject to
+          #     the update_mask.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Required. The subset of Cluster fields which should be replaced.
+          class PartialUpdateClusterRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Request message for BigtableInstanceAdmin.CreateAppProfile.
           # @!attribute [rw] parent
           #   @return [::String]
