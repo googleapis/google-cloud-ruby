@@ -1,0 +1,233 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.vmmigration.v1",
+  "libraryPackage": "::Google::Cloud::VMMigration::V1",
+  "services": {
+    "VmMigration": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::VMMigration::V1::VMMigration::Client",
+          "rpcs": {
+            "ListSources": {
+              "methods": [
+                "list_sources"
+              ]
+            },
+            "GetSource": {
+              "methods": [
+                "get_source"
+              ]
+            },
+            "CreateSource": {
+              "methods": [
+                "create_source"
+              ]
+            },
+            "UpdateSource": {
+              "methods": [
+                "update_source"
+              ]
+            },
+            "DeleteSource": {
+              "methods": [
+                "delete_source"
+              ]
+            },
+            "FetchInventory": {
+              "methods": [
+                "fetch_inventory"
+              ]
+            },
+            "ListUtilizationReports": {
+              "methods": [
+                "list_utilization_reports"
+              ]
+            },
+            "GetUtilizationReport": {
+              "methods": [
+                "get_utilization_report"
+              ]
+            },
+            "CreateUtilizationReport": {
+              "methods": [
+                "create_utilization_report"
+              ]
+            },
+            "DeleteUtilizationReport": {
+              "methods": [
+                "delete_utilization_report"
+              ]
+            },
+            "ListDatacenterConnectors": {
+              "methods": [
+                "list_datacenter_connectors"
+              ]
+            },
+            "GetDatacenterConnector": {
+              "methods": [
+                "get_datacenter_connector"
+              ]
+            },
+            "CreateDatacenterConnector": {
+              "methods": [
+                "create_datacenter_connector"
+              ]
+            },
+            "DeleteDatacenterConnector": {
+              "methods": [
+                "delete_datacenter_connector"
+              ]
+            },
+            "CreateMigratingVm": {
+              "methods": [
+                "create_migrating_vm"
+              ]
+            },
+            "ListMigratingVms": {
+              "methods": [
+                "list_migrating_vms"
+              ]
+            },
+            "GetMigratingVm": {
+              "methods": [
+                "get_migrating_vm"
+              ]
+            },
+            "UpdateMigratingVm": {
+              "methods": [
+                "update_migrating_vm"
+              ]
+            },
+            "DeleteMigratingVm": {
+              "methods": [
+                "delete_migrating_vm"
+              ]
+            },
+            "StartMigration": {
+              "methods": [
+                "start_migration"
+              ]
+            },
+            "ResumeMigration": {
+              "methods": [
+                "resume_migration"
+              ]
+            },
+            "PauseMigration": {
+              "methods": [
+                "pause_migration"
+              ]
+            },
+            "FinalizeMigration": {
+              "methods": [
+                "finalize_migration"
+              ]
+            },
+            "CreateCloneJob": {
+              "methods": [
+                "create_clone_job"
+              ]
+            },
+            "CancelCloneJob": {
+              "methods": [
+                "cancel_clone_job"
+              ]
+            },
+            "ListCloneJobs": {
+              "methods": [
+                "list_clone_jobs"
+              ]
+            },
+            "GetCloneJob": {
+              "methods": [
+                "get_clone_job"
+              ]
+            },
+            "CreateCutoverJob": {
+              "methods": [
+                "create_cutover_job"
+              ]
+            },
+            "CancelCutoverJob": {
+              "methods": [
+                "cancel_cutover_job"
+              ]
+            },
+            "ListCutoverJobs": {
+              "methods": [
+                "list_cutover_jobs"
+              ]
+            },
+            "GetCutoverJob": {
+              "methods": [
+                "get_cutover_job"
+              ]
+            },
+            "ListGroups": {
+              "methods": [
+                "list_groups"
+              ]
+            },
+            "GetGroup": {
+              "methods": [
+                "get_group"
+              ]
+            },
+            "CreateGroup": {
+              "methods": [
+                "create_group"
+              ]
+            },
+            "UpdateGroup": {
+              "methods": [
+                "update_group"
+              ]
+            },
+            "DeleteGroup": {
+              "methods": [
+                "delete_group"
+              ]
+            },
+            "AddGroupMigration": {
+              "methods": [
+                "add_group_migration"
+              ]
+            },
+            "RemoveGroupMigration": {
+              "methods": [
+                "remove_group_migration"
+              ]
+            },
+            "ListTargetProjects": {
+              "methods": [
+                "list_target_projects"
+              ]
+            },
+            "GetTargetProject": {
+              "methods": [
+                "get_target_project"
+              ]
+            },
+            "CreateTargetProject": {
+              "methods": [
+                "create_target_project"
+              ]
+            },
+            "UpdateTargetProject": {
+              "methods": [
+                "update_target_project"
+              ]
+            },
+            "DeleteTargetProject": {
+              "methods": [
+                "delete_target_project"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
