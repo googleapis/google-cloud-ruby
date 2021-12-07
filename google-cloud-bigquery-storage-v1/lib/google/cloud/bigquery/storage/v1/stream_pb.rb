@@ -44,12 +44,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       optional :commit_time, :message, 4, "google.protobuf.Timestamp"
       optional :table_schema, :message, 5, "google.cloud.bigquery.storage.v1.TableSchema"
+      optional :write_mode, :enum, 7, "google.cloud.bigquery.storage.v1.WriteStream.WriteMode"
     end
     add_enum "google.cloud.bigquery.storage.v1.WriteStream.Type" do
       value :TYPE_UNSPECIFIED, 0
       value :COMMITTED, 1
       value :PENDING, 2
       value :BUFFERED, 3
+    end
+    add_enum "google.cloud.bigquery.storage.v1.WriteStream.WriteMode" do
+      value :WRITE_MODE_UNSPECIFIED, 0
+      value :INSERT, 1
     end
     add_enum "google.cloud.bigquery.storage.v1.DataFormat" do
       value :DATA_FORMAT_UNSPECIFIED, 0
@@ -70,6 +75,7 @@ module Google
           ReadStream = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.ReadStream").msgclass
           WriteStream = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.WriteStream").msgclass
           WriteStream::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.WriteStream.Type").enummodule
+          WriteStream::WriteMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.WriteStream.WriteMode").enummodule
           DataFormat = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.DataFormat").enummodule
         end
       end
