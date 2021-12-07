@@ -32,6 +32,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason" do
       value :REASON_UNSPECIFIED, 0
       value :CHARGEBACK, 1
+      value :CHARGEBACK_FRAUD, 8
+      value :CHARGEBACK_DISPUTE, 9
       value :PAYMENT_HEURISTICS, 2
       value :INITIATED_TWO_FACTOR, 7
       value :PASSED_TWO_FACTOR, 3
