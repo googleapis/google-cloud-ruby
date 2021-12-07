@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # DO NOT EDIT: Unless you're fixing a P0/P1 and/or a security issue. This class
-# is frozen to all new features from `google-cloud-spanner/v3.0` onwards.
+# is frozen to all new features from `google-cloud-spanner/v2.11.0` onwards.
 
 
 require "delegate"
@@ -27,7 +27,7 @@ module Google
         # values.
         #
         # @deprecated Use the result of
-        # {Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_databases}
+        # {Google::Cloud::Spanner::Admin::Database#database_admin.list_databases}
         # instead.
         class List < DelegateClass(::Array)
           ##

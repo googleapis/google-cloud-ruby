@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # DO NOT EDIT: Unless you're fixing a P0/P1 and/or a security issue. This class
-# is frozen to all new features from `google-cloud-spanner/v3.0` onwards.
+# is frozen to all new features from `google-cloud-spanner/v2.11.0` onwards.
 
 
 require "google/cloud/spanner/instance/config/list"

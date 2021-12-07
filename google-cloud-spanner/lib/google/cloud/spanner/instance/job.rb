@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # DO NOT EDIT: Unless you're fixing a P0/P1 and/or a security issue. This class
-# is frozen to all new features from `google-cloud-spanner/v3.0` onwards.
+# is frozen to all new features from `google-cloud-spanner/v2.11.0` onwards.
 
 
 require "google/cloud/spanner/status"
@@ -35,7 +35,7 @@ module Google
         #   Long-running Operation
         #
         # @deprecated Use the long-running operation returned by
-        # {Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#create_instance}
+        # {Google::Cloud::Spanner::Admin::Instance#instance_admin.create_instance}
         # instead.
         #
         # @example

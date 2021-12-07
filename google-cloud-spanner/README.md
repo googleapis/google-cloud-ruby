@@ -11,20 +11,20 @@
 
 ## NOTICE: Freezing development of `Database`, `Instance` and `Backup` classes.
 
-From `google-cloud-spanner/v3.0` onwards, **new features for mananging
+From `google-cloud-spanner/v2.11.0` onwards, **new features for mananging
 databases, instances and backups will only be available through the
 [google-cloud-spanner-admin-instance-v1](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-spanner-admin-instance-v1)
 and
 [google-cloud-spanner-admin-database-v1](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-spanner-admin-database-v1)
 packages**. The
-`[Database](https://github.com/googleapis/google-cloud-ruby/blob/master/google-cloud-spanner/lib/google/cloud/spanner/database.rb)`,
+[`Database`](https://github.com/googleapis/google-cloud-ruby/blob/master/google-cloud-spanner/lib/google/cloud/spanner/database.rb),
 
-`[Instance](https://github.com/googleapis/google-cloud-ruby/blob/master/google-cloud-spanner/lib/google/cloud/spanner/instance.rb)` and
-`[Backup](https://github.com/googleapis/google-cloud-ruby/blob/master/google-cloud-spanner/lib/google/cloud/spanner/backup.rb)`
+[`Instance`](https://github.com/googleapis/google-cloud-ruby/blob/master/google-cloud-spanner/lib/google/cloud/spanner/instance.rb) and
+[`Backup`](https://github.com/googleapis/google-cloud-ruby/blob/master/google-cloud-spanner/lib/google/cloud/spanner/backup.rb)
 classes in
 [google-cloud-spanner](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-spanner)
 and methods related to database and instance management in the
-`[Project](https://github.com/googleapis/google-cloud-ruby/blob/master/google-cloud-spanner/lib/google/cloud/spanner/project.rb)`
+[`Project`](https://github.com/googleapis/google-cloud-ruby/blob/master/google-cloud-spanner/lib/google/cloud/spanner/project.rb)
 class,
 will no longer be updated to support new features. Please refer to the [FAQ](#faq-for-freezing-development-of-database-and-instance-classes)
 for further details.
@@ -87,13 +87,13 @@ end
 
 Yes, these classes and methods can continue to be used for the forseeable
 future, even in production applications. P0/P1 bug fixes and security patches
-for up to 1 year will be provided after `google-cloud-spanner/v3.0` is released.
+for up to 1 year will be provided after `google-cloud-spanner/v2.11.0` is released.
 
 ### When should I use the `google-cloud-spanner-admin-instance-v1` and `google-cloud-spanner-admin-database-v1` packages?
 
 Only when your application needs to use Cloud Spanner features for managing
-databases and instances that are released after `google-cloud-spanner/v3.0`. You
-may continue to use the existing `Database`, `Instance` and `Backup` classes
+databases and instances that are released after `google-cloud-spanner/v2.11.0`.
+You may continue to use the existing `Database`, `Instance` and `Backup` classes
 from `google-cloud-spanner`, and the methods from the `Project` class for all
 existing usages in your code for managing databases, instances and backups.
 
@@ -139,9 +139,7 @@ instances will include code samples on how to use the feature through
 `google-cloud-spanner-admin-instance-v1` or
 `google-cloud-spanner-admin-database-v1` in the documentation.
 
-Some code samples that use `google-cloud-spanner-admin-instance-v1` and
-`google-cloud-spanner-admin-database-v1` to manage instances and databases can
-also be found in
+Code samples on how to manage instances and databases can also be found in
 [OVERVIEW](https://github.com/googleapis/google-cloud-ruby/blob/master/google-cloud-spanner/OVERVIEW.md).
 
 ## Supported Ruby Versions

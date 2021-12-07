@@ -23,25 +23,28 @@ create an instance, you choose where your data is stored and how many nodes are
 used for your data. (For more information, see [Configuration
 Guide](https://googleapis.dev/ruby/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION.html).
 
-Use {Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#create_instance
-Client#create_instance}
-to create an instance:
+Use {Google::Cloud::Spanner::Admin::Instance#instance_admin
+Client#create_instance} to create an instance:
 
 ```ruby
 require "google/cloud/spanner"
 
 instance_admin_client = \
-  Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new
+  Google::Cloud::Spanner::Admin::Instance.instance_admin project_id: "my-project"
 
 project_path = \
   instance_admin_client.project_path project: "my-project"
 config_path = \
   instance_admin_client.instance_config_path project: "my-project",
   instance_config: "regional-us-central1"
+instance_path = \
+  instance_admin_client.instance_path project: "my-project",
+  instance: "my-instance"
 
 job = instance_admin_client.create_instance parent: project_path,
   instance_id: "my-instance",
   instance: Google::Cloud::Spanner::Admin::Instance::V1::Instance.new({
+    name: instance_path
     display_name: "My Instance",
     config: config_path,
     node_count: 5,
@@ -58,14 +61,14 @@ Now that you have created an instance, you can create a database. Cloud
 Spanner databases hold the tables and indexes that allow you to read and
 write data. You may create multiple databases in an instance.
 
-Use {Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_database Client#create_database}
-to create a database:
+Use {Google::Cloud::Spanner::Admin::Database#database_admin
+Client#create_database} to create a database:
 
 ```ruby
 require "google/cloud/spanner"
 
 db_admin_client = \
-  Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
+  Google::Cloud::Spanner::Admin::Database.database_admin project_id: "my-project"
 
 instance_path = \
   db_admin_client.instance_path project: "my-project", instance: "my-instance"
@@ -84,14 +87,15 @@ continues to serve traffic. Schema updates do not require taking the
 database offline and they do not lock entire tables or columns; you can
 continue writing data to the database during the schema update.
 
-Use {Google::Cloud::Spanner::Database#update Database#update} to execute one or
-more statements in Cloud Spanner's Data Definition Language (DDL):
+Use {Google::Cloud::Spanner::Admin::Database#database_admin
+Client#update_database_ddl} to execute one or more statements in Cloud Spanner's
+Data Definition Language (DDL):
 
 ```ruby
 require "google/cloud/spanner"
 
 db_admin_client = \
-  Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
+  Google::Cloud::Spanner::Admin::Database.database_admin project_id: "my-project"
 
 db_path = db_admin_client.database_path project: "my-project",
                                         instance: "my-instance",
@@ -114,8 +118,8 @@ database = job.results
 
 ## Creating clients
 
-In order to read and/or write data, you must create a database client. You can
-think of a client as a database connection: All of your interactions with Cloud
+In order to read and/or write data, you must create a data client. You can think
+of a client as a database connection: All of your interactions with Cloud
 Spanner data must go through a client. Typically you create a client when your
 application starts up, then you re-use that client to read, write, and execute
 transactions.
@@ -296,14 +300,14 @@ end
 
 ## Deleting databases
 
-Use {Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#drop Client#drop}
-to delete a database:
+Use {Google::Cloud::Spanner::Admin::Database#database_admin
+Client#drop_database} to delete a database:
 
 ```ruby
 require "google/cloud/spanner"
 
 db_admin_client = \
-  Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
+  Google::Cloud::Spanner::Admin::Database.database_admin project_id: "my-project"
 
 db_path = db_admin_client.database_path project: "my-project",
                                         instance: "my-instance",
@@ -315,14 +319,16 @@ db_admin_client.drop_database database: db_path
 
 When you delete an instance, all databases within it are automatically deleted.
 (If you only delete databases and not your instance, you will still incur
-charges for the instance.) Use {Google::Cloud::Spanner::Instance#delete
-Instance#delete} to delete an instance:
+charges for the instance.)
+
+Use {Google::Cloud::Spanner::Admin::Instance#instance_admin
+Client#delete_instance} to delete an instance:
 
 ```ruby
 require "google/cloud/spanner"
 
 instance_admin_client = \
-  Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new
+  Google::Cloud::Spanner::Admin::Instance.instance_admin project_id: "my-project"
 
 instance_path = \
   instance_admin_client.instance_path project: "my-project",
