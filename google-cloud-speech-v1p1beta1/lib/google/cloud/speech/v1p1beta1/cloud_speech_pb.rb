@@ -172,6 +172,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.speech.v1p1beta1.SpeechRecognitionResult" do
       repeated :alternatives, :message, 1, "google.cloud.speech.v1p1beta1.SpeechRecognitionAlternative"
       optional :channel_tag, :int32, 2
+      optional :result_end_time, :message, 4, "google.protobuf.Duration"
       optional :language_code, :string, 5
     end
     add_message "google.cloud.speech.v1p1beta1.SpeechRecognitionAlternative" do
