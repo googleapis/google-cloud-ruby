@@ -1,5 +1,11 @@
 # Release History
 
+### 0.12.0 / 2021-12-07
+
+#### Features
+
+* Speech recognition results include the end time relative to the start of the audio clip
+
 ### 0.11.1 / 2021-11-08
 
 #### Documentation
