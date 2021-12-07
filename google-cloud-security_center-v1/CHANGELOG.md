@@ -1,5 +1,16 @@
 # Release History
 
+### 0.11.0 / 2021-12-07
+
+#### Features
+
+* Support for mute configs
+* Support for updating a finding with external system metadata
+
+#### Documentation
+
+* Formatting fixes in the reference docs
+
 ### 0.10.0 / 2021-11-11
 
 #### Features
