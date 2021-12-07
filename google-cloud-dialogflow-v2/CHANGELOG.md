@@ -1,5 +1,11 @@
 # Release History
 
+### 0.12.0 / 2021-12-07
+
+#### Features
+
+* Support for document metadata filters and human assist query parameters
+
 ### 0.11.5 / 2021-11-08
 
 #### Documentation
