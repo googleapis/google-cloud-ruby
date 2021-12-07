@@ -598,7 +598,6 @@
     "samples/acceptance/quickstart_test.rb",
     "samples/default_values.rb",
     "samples/pagination.rb",
-    "samples/quickstart.rb",
-    "test/google/cloud/compute/v1/misc_test.rb"
+    "samples/quickstart.rb"
   ]
 }
