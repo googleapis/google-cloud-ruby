@@ -141,6 +141,9 @@ module Google
           #     `CreateWriteStream` response. Caller should generate data that's
           #     compatible with this schema to send in initial `AppendRowsRequest`.
           #     The table schema could go out of date during the life time of the stream.
+          # @!attribute [rw] write_mode
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::WriteStream::WriteMode]
+          #     Immutable. Mode of the stream.
           class WriteStream
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -159,6 +162,16 @@ module Google
 
               # Data is only visible up to the offset to which it was flushed.
               BUFFERED = 3
+            end
+
+            # Mode enum of the stream.
+            module WriteMode
+              # Unknown type.
+              WRITE_MODE_UNSPECIFIED = 0
+
+              # Insert new records into the table.
+              # It is the default value if customers do not specify it.
+              INSERT = 1
             end
           end
 
