@@ -95,6 +95,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :filter, :string, 3
       optional :kms_key, :string, 4
+      optional :write_disposition, :enum, 5, "google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.WriteDisposition"
       oneof :destination do
         optional :big_query_destination, :message, 2, "google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.BigQueryDestination"
       end
@@ -103,6 +104,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :project_id, :string, 3
       optional :dataset, :string, 1
       optional :table, :string, 2
+    end
+    add_enum "google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.WriteDisposition" do
+      value :WRITE_DISPOSITION_UNSPECIFIED, 0
+      value :WRITE_TRUNCATE, 1
+      value :WRITE_APPEND, 2
     end
     add_message "google.cloud.contactcenterinsights.v1.ExportInsightsDataMetadata" do
       optional :create_time, :message, 1, "google.protobuf.Timestamp"
@@ -242,6 +248,7 @@ module Google
         DeleteAnalysisRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.DeleteAnalysisRequest").msgclass
         ExportInsightsDataRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest").msgclass
         ExportInsightsDataRequest::BigQueryDestination = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.BigQueryDestination").msgclass
+        ExportInsightsDataRequest::WriteDisposition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.WriteDisposition").enummodule
         ExportInsightsDataMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ExportInsightsDataMetadata").msgclass
         ExportInsightsDataResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ExportInsightsDataResponse").msgclass
         CreateIssueModelRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.CreateIssueModelRequest").msgclass

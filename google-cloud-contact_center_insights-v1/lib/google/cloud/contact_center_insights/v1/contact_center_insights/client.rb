@@ -1007,7 +1007,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload export_insights_data(big_query_destination: nil, parent: nil, filter: nil, kms_key: nil)
+            # @overload export_insights_data(big_query_destination: nil, parent: nil, filter: nil, kms_key: nil, write_disposition: nil)
             #   Pass arguments to `export_insights_data` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1023,6 +1023,8 @@ module Google
             #     A fully qualified KMS key name for BigQuery tables protected by CMEK.
             #     Format:
             #     projects/\\{project}/locations/\\{location}/keyRings/\\{keyring}/cryptoKeys/\\{key}/cryptoKeyVersions/\\{version}
+            #   @param write_disposition [::Google::Cloud::ContactCenterInsights::V1::ExportInsightsDataRequest::WriteDisposition]
+            #     Options for what to do if the destination table already exists.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
