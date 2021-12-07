@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.4.0 / 2021-12-07
+
+#### Features
+
+* Inform the client when a phone call should be transferred to a third-party endpoint
+* Support for the compare_versions call
+
 ### 0.3.1 / 2021-11-08
 
 #### Documentation
