@@ -4,13 +4,12 @@
 
 #### Features
 
-* Various additional features
-  * Support for alternative language codes
-  * Support for speech adaptation
-  * Support for word confidence
-  * Support for spoken punctuation and spoken emojis
-  * Support for the WEBM_OPUS encoding
-  * Support for hint boosts
+* Support for alternative language codes
+* Support for speech adaptation
+* Support for word confidence
+* Support for spoken punctuation and spoken emojis
+* Support for the WEBM_OPUS encoding
+* Support for hint boosts
 
 ### 0.6.1 / 2021-11-08
 
