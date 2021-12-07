@@ -1,5 +1,15 @@
 # Release History
 
+### 0.8.0 / 2021-12-07
+
+#### Features
+
+* Support for cluster autoscaling and partial updates
+
+#### Bug Fixes
+
+* Use the correct backend hostname by default
+
 ### 0.7.1 / 2021-11-08
 
 #### Documentation
