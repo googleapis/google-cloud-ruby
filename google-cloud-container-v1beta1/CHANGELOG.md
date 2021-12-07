@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.2 / 2021-12-07
+
+#### Documentation
+
+* Formatting fixes in the reference docs
+
 ### 0.8.1 / 2021-11-08
 
 #### Documentation
