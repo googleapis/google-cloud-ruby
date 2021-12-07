@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2021-12-07
+
+#### Features
+
+* Support the CHARGEBACK_FRAUD and CHARGEBACK_DISPUTE annotation reasons
+
 ### 0.6.0 / 2021-11-08
 
 #### Features
