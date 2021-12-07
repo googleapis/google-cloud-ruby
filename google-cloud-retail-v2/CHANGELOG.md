@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.3 / 2021-12-07
+
+#### Bug Fixes
+
+* Update the timeout for import_user_events
+
 ### 0.6.2 / 2021-11-08
 
 #### Documentation
