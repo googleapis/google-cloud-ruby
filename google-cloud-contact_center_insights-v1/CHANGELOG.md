@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.6.0 / 2021-12-07
+
+#### Features
+
+* Support setting a write disposition when exporting insights data
+
+#### Documentation
+
+* Fixed some formatting issues in the reference documentation
+
 ### 0.5.0 / 2021-11-08
 
 #### Features
