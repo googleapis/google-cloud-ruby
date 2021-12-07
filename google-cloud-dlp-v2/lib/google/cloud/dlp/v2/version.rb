@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Dlp
       module V2
-        VERSION = "0.7.4"
+        VERSION = "0.8.0"
       end
     end
   end
