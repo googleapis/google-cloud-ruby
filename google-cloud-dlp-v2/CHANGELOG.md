@@ -4,12 +4,11 @@
 
 #### Features
 
-* Various updates
-  * Deidentify supports replacement dictionaries
-  * Support setting the type of job when listing triggers
-  * Findings include a unique finding ID
-  * Support for InfoType versioning
-  * Support for BigQuery inspect template inclusion lists
+* Deidentify supports replacement dictionaries
+* Support setting the type of job when listing triggers
+* Findings include a unique finding ID
+* Support for InfoType versioning
+* Support for BigQuery inspect template inclusion lists
 
 ### 0.7.4 / 2021-11-08
 
