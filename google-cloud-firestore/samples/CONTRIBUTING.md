@@ -70,7 +70,7 @@ To set up your local development environment:
 1. Change to the library samples sub-directory:
 
    ```sh
-   $ cd google-cloud-firestore/samples
+   $ cd samples
    ```
 
 1. Install (or update) the library samples dependencies:
