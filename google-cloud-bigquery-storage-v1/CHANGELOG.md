@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 / 2021-12-08
+
+#### Features
+
+* Added write mode support
+
 ### 0.8.1 / 2021-11-08
 
 #### Documentation
