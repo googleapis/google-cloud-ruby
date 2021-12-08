@@ -30,7 +30,7 @@ def upload_file bucket_name:, local_file_path:, file_name: nil
 
   file = bucket.create_file local_file_path, file_name
 
-  puts "Uploaded #{local_file_path} as #{file.name} in bucket #{bucket_name}"
+  puts "Uploaded #{local_file_path} as #{file_name} in bucket #{bucket_name}"
 end
 # [END storage_upload_file]
 
