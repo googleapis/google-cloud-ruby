@@ -1,5 +1,12 @@
 # Release History
 
+### 0.5.0 / 2021-12-08
+
+#### Bug Fixes
+
+* BREAKING CHANGE: A number of fields have changed from enumerations to strings
+* BREAKING CHANGE: Renamed IPProtocol to IPProtocolEnum
+
 ### 0.4.0 / 2021-11-11
 
 #### Features
