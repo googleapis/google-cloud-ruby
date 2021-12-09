@@ -22,8 +22,8 @@ Before you start on a pull request, you should prepare your work environment.
 To set up your local development environment:
 
 1. Install a [supported version](../google-cloud-bigquery.gemspec) (or versions) of Ruby. (You may choose to manage your
-   Ruby and gem installations with [RVM](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv), or
-   [chruby](https://github.com/postmodern/chruby).)
+   Ruby and gem installations with [RVM](https://rvm.io/), [rbenv](https://github.com/rbenv/rbenv),
+   [chruby](https://github.com/postmodern/chruby) or a similar tool.)
 
 1. Install [Bundler](http://bundler.io/).
 
