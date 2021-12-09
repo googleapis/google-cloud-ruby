@@ -33,7 +33,7 @@ module Google
         # {Google::Cloud::Spanner::Project#instance_config}.
         #
         # @deprecated Use
-        # {Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::InstanceConfig}
+        # {Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig}
         # instead.
         #
         # @example

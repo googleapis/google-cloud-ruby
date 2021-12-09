@@ -35,7 +35,7 @@ module Google
         #   Long-running Operation
         #
         # @deprecated Use the long-running operation returned by
-        # {Google::Cloud::Spanner::Admin::Instance#instance_admin.create_instance}
+        # {Google::Cloud::Spanner::Admin::Instance#instance_admin Client#create_instance}
         # instead.
         #
         # @example

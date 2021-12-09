@@ -107,7 +107,7 @@ module Google
         #   instances. (See {Google::Cloud::Spanner::Instance::List})
         #
         # @deprecated Use
-        # {Google::Cloud::Spanner::Admin::Instance#instance_admin.list_instances}
+        # {Google::Cloud::Spanner::Admin::Instance#instance_admin Client#list_instances}
         # instead.
         #
         # @example
@@ -145,7 +145,7 @@ module Google
         #   if the instance does not exist.
         #
         # @deprecated Use
-        # {Google::Cloud::Spanner::Admin::Instance#instance_admin.get_instance}
+        # {Google::Cloud::Spanner::Admin::Instance#instance_admin Client#get_instance}
         # instead.
         #
         # @example
@@ -209,7 +209,7 @@ module Google
         # @raise [ArgumentError] if both processing_units or nodes are specified.
         #
         # @deprecated Use
-        # {Google::Cloud::Spanner::Admin::Instance#instance_admin.create_instance}
+        # {Google::Cloud::Spanner::Admin::Instance#instance_admin Client#create_instance}
         # instead.
         #
         # @example
@@ -279,7 +279,7 @@ module Google
         #   {Google::Cloud::Spanner::Instance::Config::List})
         #
         # @deprecated Use
-        # {Google::Cloud::Spanner::Admin::Instance#instance_admin.list_instance_configs}
+        # {Google::Cloud::Spanner::Admin::Instance#instance_admin Client#list_instance_configs}
         # instead.
         #
         # @example
@@ -320,7 +320,7 @@ module Google
         #   exist.
         #
         # @deprecated Use
-        # {Google::Cloud::Spanner::Admin::Instance#instance_admin.get_instance_config}
+        # {Google::Cloud::Spanner::Admin::Instance#instance_admin Client#get_instance_config}
         # instead.
         #
         # @example
@@ -356,7 +356,7 @@ module Google
         #   databases. (See {Google::Cloud::Spanner::Database::List})
         #
         # @deprecated Use
-        # {Google::Cloud::Spanner::Admin::Database#database_admin.list_databases}
+        # {Google::Cloud::Spanner::Admin::Database#database_admin Client#list_databases}
         # instead.
         #
         # @example
@@ -395,7 +395,7 @@ module Google
         #   if the database does not exist.
         #
         # @deprecated Use
-        # {Google::Cloud::Spanner::Admin::Database#database_admin.get_database}
+        # {Google::Cloud::Spanner::Admin::Database#database_admin Client#get_database}
         # instead.
         #
         # @example
@@ -446,7 +446,7 @@ module Google
         #   asynchronous processing of a database create operation.
         #
         # @deprecated Use
-        # {Google::Cloud::Spanner::Admin::Database#database_admin.create_database}
+        # {Google::Cloud::Spanner::Admin::Database#database_admin Client#create_database}
         # instead.
         #
         # @example
@@ -662,7 +662,7 @@ module Google
         end
 
         # @deprecated Use
-        # {Google::Cloud::Spanner::Admin::Database#database_admin.database_path}
+        # {Google::Cloud::Spanner::Admin::Database#database_admin Client#database_path}
         # instead.
         def database_path instance_id, database_id
           Admin::Database::V1::DatabaseAdminClient.database_path(

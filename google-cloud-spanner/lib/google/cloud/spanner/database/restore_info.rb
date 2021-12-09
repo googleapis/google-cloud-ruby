@@ -23,8 +23,7 @@ module Google
     module Spanner
       class Database
         # @deprecated Use
-        # {Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Database::RestoreInfo}
-        # instead.
+        # {Google::Cloud::Spanner::Admin::Database::V1::RestoreInfo} instead.
         class RestoreInfo
           ##
           # @private Creates a new Database::RestoreInfo instance.

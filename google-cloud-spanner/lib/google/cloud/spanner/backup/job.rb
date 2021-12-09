@@ -36,7 +36,7 @@ module Google
         #   Long-running Operation
         #
         # @deprecated Use the long-running operation returned by
-        # {Google::Cloud::Spanner::Admin::Database#database_admin.create_backup}
+        # {Google::Cloud::Spanner::Admin::Database#database_admin Client#create_backup}
         # instead.
         #
         # @example

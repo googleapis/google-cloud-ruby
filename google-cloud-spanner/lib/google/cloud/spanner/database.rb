@@ -28,7 +28,7 @@ module Google
       ##
       # # Database
       #
-      # NOTE: From `google-cloud-spanner/v2.11.0` onwards, **new features for
+      # NOTE: From `google-cloud-spanner/v2.11.0` onwards, new features for
       # mananging databases will only be available through the
       # [google-cloud-spanner-admin-database-v1](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-spanner-admin-database-v1)
       # client. See the

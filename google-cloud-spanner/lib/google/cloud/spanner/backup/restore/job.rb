@@ -36,7 +36,7 @@ module Google
           #   Long-running Operation
           #
           # @deprecated Use the long-running operation returned by
-          # {Google::Cloud::Spanner::Admin::Database#database_admin.restore_database}
+          # {Google::Cloud::Spanner::Admin::Database#database_admin Client#restore_database}
           # instead.
           #
           # @example

@@ -27,7 +27,7 @@ module Google
         # values.
         #
         # @deprecated Use the result of
-        # {Google::Cloud::Spanner::Admin::Database#database_admin.list_databases}
+        # {Google::Cloud::Spanner::Admin::Database#database_admin Client#list_databases}
         # instead.
         class List < DelegateClass(::Array)
           ##

@@ -30,7 +30,7 @@ module Google
           # operations.
           #
           # @deprecated Use the result of
-          # {Google::Cloud::Spanner::Admin::Database#database_admin.list_database_operations}
+          # {Google::Cloud::Spanner::Admin::Database#database_admin Client#list_database_operations}
           # instead.
           #
           class List < DelegateClass(::Array)

@@ -27,7 +27,7 @@ module Google
         # values.
         #
         # @deprecated Use the result of
-        # {Google::Cloud::Spanner::Admin::Instance#instance_admin.list_instances}
+        # {Google::Cloud::Spanner::Admin::Instance#instance_admin Client#list_instances}
         # instead.
         class List < DelegateClass(::Array)
           ##

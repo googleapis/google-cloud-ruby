@@ -29,7 +29,7 @@ module Google
         # additional values.
         #
         # @deprecated Use the result of
-        # {Google::Cloud::Spanner::Admin::Database#database_admin.list_backups}
+        # {Google::Cloud::Spanner::Admin::Database#database_admin Client#list_backups}
         # instead.
         #
         class List < DelegateClass(::Array)
