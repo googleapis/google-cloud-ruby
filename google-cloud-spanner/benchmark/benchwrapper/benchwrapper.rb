@@ -40,8 +40,16 @@ class ServerImpl < SpannerBench::SpannerBenchWrapper::Service
   end
 
   def insert(insert_query, _call)
+    rows = insert_query.singers.map do |singer| 
+      {
+        SingerId: singer.id,
+        FirstName: singer.first_name,
+        LastName: singer.last_name
+      }
+    end
+    
     @client.commit do |c|
-      c.insert "Singers", insert_query.singers.map { |singer| {SingerId: singer.id, FirstName: singer.first_name, LastName: singer.last_name} }
+      c.insert "Singers", rows 
     end
     EmptyResponse.new
   end
