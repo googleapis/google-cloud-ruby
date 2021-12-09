@@ -52,6 +52,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :provisioned_resources_parent, :string, 13
       optional :kms_settings, :message, 14, "google.cloud.assuredworkloads.v1.Workload.KMSSettings"
       repeated :resource_settings, :message, 15, "google.cloud.assuredworkloads.v1.Workload.ResourceSettings"
+      optional :kaj_enrollment_state, :enum, 17, "google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState"
+      optional :enable_sovereign_controls, :bool, 18
+      optional :saa_enrollment_response, :message, 20, "google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse"
     end
     add_message "google.cloud.assuredworkloads.v1.Workload.ResourceInfo" do
       optional :resource_id, :int64, 1
@@ -72,6 +75,22 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :resource_type, :enum, 2, "google.cloud.assuredworkloads.v1.Workload.ResourceInfo.ResourceType"
       optional :display_name, :string, 3
     end
+    add_message "google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse" do
+      proto3_optional :setup_status, :enum, 1, "google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupState"
+      repeated :setup_errors, :enum, 2, "google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupError"
+    end
+    add_enum "google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupState" do
+      value :SETUP_STATE_UNSPECIFIED, 0
+      value :STATUS_PENDING, 1
+      value :STATUS_COMPLETE, 2
+    end
+    add_enum "google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupError" do
+      value :SETUP_ERROR_UNSPECIFIED, 0
+      value :ERROR_INVALID_BASE_SETUP, 1
+      value :ERROR_MISSING_EXTERNAL_SIGNING_KEY, 2
+      value :ERROR_NOT_ALL_SERVICES_ENROLLED, 3
+      value :ERROR_SETUP_CHECK_FAILED, 4
+    end
     add_enum "google.cloud.assuredworkloads.v1.Workload.ComplianceRegime" do
       value :COMPLIANCE_REGIME_UNSPECIFIED, 0
       value :IL4, 1
@@ -83,6 +102,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :HITRUST, 7
       value :EU_REGIONS_AND_SUPPORT, 8
       value :CA_REGIONS_AND_SUPPORT, 9
+    end
+    add_enum "google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState" do
+      value :KAJ_ENROLLMENT_STATE_UNSPECIFIED, 0
+      value :KAJ_ENROLLMENT_STATE_PENDING, 1
+      value :KAJ_ENROLLMENT_STATE_COMPLETE, 2
     end
     add_message "google.cloud.assuredworkloads.v1.CreateWorkloadOperationMetadata" do
       optional :create_time, :message, 1, "google.protobuf.Timestamp"
@@ -108,7 +132,11 @@ module Google
         Workload::ResourceInfo::ResourceType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Workload.ResourceInfo.ResourceType").enummodule
         Workload::KMSSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Workload.KMSSettings").msgclass
         Workload::ResourceSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Workload.ResourceSettings").msgclass
+        Workload::SaaEnrollmentResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse").msgclass
+        Workload::SaaEnrollmentResponse::SetupState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupState").enummodule
+        Workload::SaaEnrollmentResponse::SetupError = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupError").enummodule
         Workload::ComplianceRegime = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Workload.ComplianceRegime").enummodule
+        Workload::KajEnrollmentState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState").enummodule
         CreateWorkloadOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.CreateWorkloadOperationMetadata").msgclass
       end
     end
