@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# DO NOT EDIT: Unless you're fixing a P0/P1 and/or a security issue. This class
+# is frozen to all new features from `google-cloud-spanner/v2.11.0` onwards.
+
 
 require "google/cloud/spanner/instance/config/list"
 
@@ -28,6 +31,10 @@ module Google
         #
         # See {Google::Cloud::Spanner::Project#instance_configs} and
         # {Google::Cloud::Spanner::Project#instance_config}.
+        #
+        # @deprecated Use
+        # {Google::Cloud::Spanner::Admin::Instance::V1::InstanceConfig}
+        # instead.
         #
         # @example
         #   require "google/cloud/spanner"

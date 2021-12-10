@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# DO NOT EDIT: Unless you're fixing a P0/P1 and/or a security issue. This class
+# is frozen to all new features from `google-cloud-spanner/v2.11.0` onwards.
+
 
 require "google/cloud/spanner/backup/job"
 require "google/cloud/spanner/backup/list"
@@ -23,11 +26,22 @@ module Google
       ##
       # # Backup
       #
+      # NOTE: From `google-cloud-spanner/v2.11.0` onwards, new features for
+      # mananging backups will only be available through the
+      # [google-cloud-spanner-admin-database-v1](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-spanner-admin-database-v1)
+      # client. See the
+      # [README](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-spanner#google-cloud-spanner)
+      # for further details.
+      #
       # A backup is a representation of Cloud Spanner database backup.
       #
       # See {Google::Cloud::Spanner::Instance#backups},
       # {Google::Cloud::Spanner::Instance#backup}, and
       # {Google::Cloud::Spanner::Database#create_backup}.
+      #
+      # @deprecated Use
+      # {Google::Cloud::Spanner::Admin::Database#database_admin}
+      # instead.
       #
       # @example
       #   require "google/cloud"

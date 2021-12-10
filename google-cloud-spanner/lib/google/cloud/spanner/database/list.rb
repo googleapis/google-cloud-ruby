@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# DO NOT EDIT: Unless you're fixing a P0/P1 and/or a security issue. This class
+# is frozen to all new features from `google-cloud-spanner/v2.11.0` onwards.
+
 
 require "delegate"
 
@@ -22,6 +25,10 @@ module Google
         ##
         # Database::List is a special case Array with additional
         # values.
+        #
+        # @deprecated Use the result of
+        # {Google::Cloud::Spanner::Admin::Database#database_admin Client#list_databases}
+        # instead.
         class List < DelegateClass(::Array)
           ##
           # If not empty, indicates that there are more records that match
