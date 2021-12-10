@@ -1,5 +1,12 @@
 # Release History
 
+### 1.38.1 / 2021-12-10
+
+#### Documentation
+
+* Update CONTRIBUTING.md
+  * Add samples/CONTRIBUTING.md
+
 ### 1.38.0 / 2021-11-16
 
 #### Features
