@@ -29,28 +29,36 @@ include SpannerBench
 class ServerImpl < SpannerBench::SpannerBenchWrapper::Service
   def initialize()    
     @spanner = Google::Cloud::Spanner.new project: "someproject"
-    @client = spanner.client "someinstance", "somedatabase"
+    @client = @spanner.client "someinstance", "somedatabase"
   end
 
   def read(read_query, _call)
-    client.execute(read_query.Query).rows.each do |row|
+    @client.execute(read_query.query).rows.each do |row|
       # Just iterate over all rows.
     end
     EmptyResponse.new
   end
 
   def insert(insert_query, _call)
-    client.commit do |c|
-      c.insert "sometable", insert_query.users.map { |user| {name: user.name, age: user.age} }
+    rows = insert_query.singers.map do |singer| 
+      {
+        SingerId: singer.id,
+        FirstName: singer.first_name,
+        LastName: singer.last_name
+      }
+    end
+    
+    @client.commit do |c|
+      c.insert "Singers", rows 
     end
     EmptyResponse.new
   end
 
   def update(update_query, _call)
     row_counts = nil
-    client.transaction do |transaction|
+    @client.transaction do |transaction|
       row_counts = transaction.batch_update do |b|
-        update_query.Queries.each do |query|
+        update_query.queries.each do |query|
           b.batch_update query
         end
       end
