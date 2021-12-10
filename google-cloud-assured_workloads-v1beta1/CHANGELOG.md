@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 / 2021-12-10
+
+#### Features
+
+* EU Regions and Support With Sovereign Controls
+
 ### 0.8.1 / 2021-11-08
 
 #### Documentation
