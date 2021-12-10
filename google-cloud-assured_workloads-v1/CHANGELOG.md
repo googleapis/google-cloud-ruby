@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.0 / 2021-12-10
+
+#### Features
+
+* EU Regions and Support With Sovereign Controls
+
 ### 0.1.1 / 2021-11-08
 
 #### Documentation
