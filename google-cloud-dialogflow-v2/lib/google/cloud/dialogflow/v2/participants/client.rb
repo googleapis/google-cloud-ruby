@@ -657,9 +657,8 @@ module Google
             #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
             #   @param context_size [::Integer]
             #     Max number of messages prior to and including
-            #     {::Google::Cloud::Dialogflow::V2::SuggestArticlesRequest#latest_message latest_message}
-            #     to use as context when compiling the suggestion. By default 20 and at
-            #     most 50.
+            #     {::Google::Cloud::Dialogflow::V2::SuggestArticlesRequest#latest_message latest_message} to use as context
+            #     when compiling the suggestion. By default 20 and at most 50.
             #   @param assist_query_params [::Google::Cloud::Dialogflow::V2::AssistQueryParameters, ::Hash]
             #     Parameters for a human assist query.
             #
