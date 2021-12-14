@@ -38,7 +38,7 @@ describe Google::Cloud::PubSub, :async, :pubsub do
     }
   end
   let(:topic_flow_control) { retrieve_topic "#{$topic_prefix}-async#{nonce}", async: async_flow_control }
-
+focus
   it "publishes and pulls asyncronously" do
     events = sub.pull
     _(events).must_be :empty?
@@ -53,7 +53,7 @@ describe Google::Cloud::PubSub, :async, :pubsub do
     while publish_result.nil?
       fail "publish has failed" if unpublished_retries >= 5
       unpublished_retries += 1
-      puts "the async publish has not completed yet. sleeping for #{unpublished_retries*unpublished_retries} second(s) and retrying."
+      # puts "the async publish has not completed yet. sleeping for #{unpublished_retries*unpublished_retries} second(s) and retrying."
       sleep unpublished_retries*unpublished_retries
     end
     _(publish_result).wont_be :nil?
@@ -71,7 +71,7 @@ describe Google::Cloud::PubSub, :async, :pubsub do
     while received_message.nil?
       fail "published message was never received has failed" if subscription_retries >= 10
       subscription_retries += 1
-      puts "received_message has not been received. sleeping for #{subscription_retries} second(s) and retrying."
+      # puts "received_message has not been received. sleeping for #{subscription_retries} second(s) and retrying."
       sleep subscription_retries
     end
     _(received_message).wont_be :nil?

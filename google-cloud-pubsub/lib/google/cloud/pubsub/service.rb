@@ -19,6 +19,7 @@ require "google/cloud/pubsub/convert"
 require "google/cloud/pubsub/version"
 require "google/cloud/pubsub/v1"
 require "securerandom"
+require "grpc"
 
 module Google
   module Cloud
@@ -56,6 +57,7 @@ module Google
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::PubSub::VERSION
             config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
+            config.interceptors = [MyInterceptor.new("MySubscriberInterceptor")]
           end
         end
         attr_accessor :mocked_subscriber
@@ -69,6 +71,7 @@ module Google
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::PubSub::VERSION
             config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
+            config.interceptors = [MyInterceptor.new("MyPublisherInterceptor")]
           end
         end
         attr_accessor :mocked_publisher
@@ -488,6 +491,48 @@ module Google
           end
           policy
         end
+      end
+    end
+
+    class MyInterceptor < GRPC::ClientInterceptor
+      attr_reader :name
+
+      def initialize name
+        @name = name
+      end
+
+      def request_response(request:, call:, method:, metadata:)
+        logger.info "[#{name}] Sending unary request/response to #{method}"
+        metadata['request_id'] = generate_request_id
+        yield
+      end
+
+      def client_streamer(requests:, call:, method:, metadata:)
+        logger.info "[#{name}] Sending client streamer to #{method}"
+        metadata['request_id'] = generate_request_id
+        yield
+      end
+
+      def server_streamer(request:, call:, method:, metadata:)
+        logger.info "[#{name}] Sending server streamer to #{method}"
+        metadata['request_id'] = generate_request_id
+        yield
+      end
+
+      def bidi_streamer(requests:, call:, method:, metadata:)
+        logger.info "[#{name}] Sending bidi streamer to #{method}"
+        metadata['request_id'] = generate_request_id
+        yield
+      end
+
+      private
+
+      def logger
+        @logger ||= Logger.new(STDOUT)
+      end
+
+      def generate_request_id
+        SecureRandom.uuid
       end
     end
 

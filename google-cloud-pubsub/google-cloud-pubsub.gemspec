@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.5"
 
+  gem.add_dependency "grpc", "<= 1.41.1"
   gem.add_dependency "concurrent-ruby", "~> 1.1"
   gem.add_dependency "google-cloud-core", "~> 1.5"
   gem.add_dependency "google-cloud-pubsub-v1", "~> 0.0"
